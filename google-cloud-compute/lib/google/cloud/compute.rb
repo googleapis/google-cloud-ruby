@@ -47,7 +47,7 @@ module Google
       # Create a new client object for AcceleratorTypes.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::AcceleratorTypes::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/AcceleratorTypes/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::AcceleratorTypes::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-AcceleratorTypes-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the AcceleratorTypes service is
@@ -79,7 +79,7 @@ module Google
       # Create a new client object for Addresses.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::Addresses::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/Addresses/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::Addresses::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-Addresses-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Addresses service is
@@ -109,7 +109,7 @@ module Google
       # Create a new client object for Autoscalers.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::Autoscalers::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/Autoscalers/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::Autoscalers::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-Autoscalers-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Autoscalers service is
@@ -139,7 +139,7 @@ module Google
       # Create a new client object for BackendBuckets.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::BackendBuckets::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/BackendBuckets/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::BackendBuckets::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-BackendBuckets-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the BackendBuckets service is
@@ -169,7 +169,7 @@ module Google
       # Create a new client object for BackendServices.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::BackendServices::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/BackendServices/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::BackendServices::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-BackendServices-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the BackendServices service is
@@ -199,7 +199,7 @@ module Google
       # Create a new client object for DiskTypes.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::DiskTypes::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/DiskTypes/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::DiskTypes::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-DiskTypes-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the DiskTypes service is
@@ -229,7 +229,7 @@ module Google
       # Create a new client object for Disks.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::Disks::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/Disks/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::Disks::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-Disks-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Disks service is
@@ -259,7 +259,7 @@ module Google
       # Create a new client object for ExternalVpnGateways.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::ExternalVpnGateways::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/ExternalVpnGateways/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::ExternalVpnGateways::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-ExternalVpnGateways-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the ExternalVpnGateways service is
@@ -289,7 +289,7 @@ module Google
       # Create a new client object for FirewallPolicies.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::FirewallPolicies::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/FirewallPolicies/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::FirewallPolicies::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-FirewallPolicies-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the FirewallPolicies service is
@@ -319,7 +319,7 @@ module Google
       # Create a new client object for Firewalls.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::Firewalls::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/Firewalls/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::Firewalls::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-Firewalls-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Firewalls service is
@@ -349,7 +349,7 @@ module Google
       # Create a new client object for ForwardingRules.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::ForwardingRules::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/ForwardingRules/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::ForwardingRules::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-ForwardingRules-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the ForwardingRules service is
@@ -379,7 +379,7 @@ module Google
       # Create a new client object for GlobalAddresses.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::GlobalAddresses::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/GlobalAddresses/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::GlobalAddresses::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-GlobalAddresses-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the GlobalAddresses service is
@@ -409,7 +409,7 @@ module Google
       # Create a new client object for GlobalForwardingRules.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::GlobalForwardingRules::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/GlobalForwardingRules/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::GlobalForwardingRules::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-GlobalForwardingRules-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the GlobalForwardingRules service is
@@ -439,7 +439,7 @@ module Google
       # Create a new client object for GlobalNetworkEndpointGroups.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::GlobalNetworkEndpointGroups::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/GlobalNetworkEndpointGroups/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::GlobalNetworkEndpointGroups::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-GlobalNetworkEndpointGroups-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the GlobalNetworkEndpointGroups service is
@@ -469,7 +469,7 @@ module Google
       # Create a new client object for GlobalOperations.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::GlobalOperations::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/GlobalOperations/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::GlobalOperations::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-GlobalOperations-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the GlobalOperations service is
@@ -499,7 +499,7 @@ module Google
       # Create a new client object for GlobalOrganizationOperations.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/GlobalOrganizationOperations/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-GlobalOrganizationOperations-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the GlobalOrganizationOperations service is
@@ -529,7 +529,7 @@ module Google
       # Create a new client object for GlobalPublicDelegatedPrefixes.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::GlobalPublicDelegatedPrefixes::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/GlobalPublicDelegatedPrefixes/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::GlobalPublicDelegatedPrefixes::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-GlobalPublicDelegatedPrefixes-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the GlobalPublicDelegatedPrefixes service is
@@ -559,7 +559,7 @@ module Google
       # Create a new client object for HealthChecks.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::HealthChecks::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/HealthChecks/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::HealthChecks::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-HealthChecks-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the HealthChecks service is
@@ -589,7 +589,7 @@ module Google
       # Create a new client object for ImageFamilyViews.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::ImageFamilyViews::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/ImageFamilyViews/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::ImageFamilyViews::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-ImageFamilyViews-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the ImageFamilyViews service is
@@ -619,7 +619,7 @@ module Google
       # Create a new client object for Images.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::Images::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/Images/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::Images::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-Images-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Images service is
@@ -649,7 +649,7 @@ module Google
       # Create a new client object for InstanceGroupManagers.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/InstanceGroupManagers/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-InstanceGroupManagers-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the InstanceGroupManagers service is
@@ -679,7 +679,7 @@ module Google
       # Create a new client object for InstanceGroups.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::InstanceGroups::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/InstanceGroups/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::InstanceGroups::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-InstanceGroups-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the InstanceGroups service is
@@ -709,7 +709,7 @@ module Google
       # Create a new client object for InstanceTemplates.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::InstanceTemplates::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/InstanceTemplates/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::InstanceTemplates::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-InstanceTemplates-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the InstanceTemplates service is
@@ -739,7 +739,7 @@ module Google
       # Create a new client object for Instances.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::Instances::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/Instances/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::Instances::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-Instances-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Instances service is
@@ -769,7 +769,7 @@ module Google
       # Create a new client object for InterconnectAttachments.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::InterconnectAttachments::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/InterconnectAttachments/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::InterconnectAttachments::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-InterconnectAttachments-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the InterconnectAttachments service is
@@ -799,7 +799,7 @@ module Google
       # Create a new client object for InterconnectLocations.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::InterconnectLocations::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/InterconnectLocations/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::InterconnectLocations::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-InterconnectLocations-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the InterconnectLocations service is
@@ -829,7 +829,7 @@ module Google
       # Create a new client object for Interconnects.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::Interconnects::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/Interconnects/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::Interconnects::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-Interconnects-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Interconnects service is
@@ -859,7 +859,7 @@ module Google
       # Create a new client object for LicenseCodes.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::LicenseCodes::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/LicenseCodes/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::LicenseCodes::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-LicenseCodes-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the LicenseCodes service is
@@ -889,7 +889,7 @@ module Google
       # Create a new client object for Licenses.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::Licenses::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/Licenses/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::Licenses::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-Licenses-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Licenses service is
@@ -919,7 +919,7 @@ module Google
       # Create a new client object for MachineImages.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::MachineImages::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/MachineImages/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::MachineImages::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-MachineImages-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the MachineImages service is
@@ -949,7 +949,7 @@ module Google
       # Create a new client object for MachineTypes.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::MachineTypes::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/MachineTypes/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::MachineTypes::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-MachineTypes-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the MachineTypes service is
@@ -979,7 +979,7 @@ module Google
       # Create a new client object for NetworkAttachments.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::NetworkAttachments::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/NetworkAttachments/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::NetworkAttachments::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-NetworkAttachments-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the NetworkAttachments service is
@@ -1009,7 +1009,7 @@ module Google
       # Create a new client object for NetworkEdgeSecurityServices.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::NetworkEdgeSecurityServices::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/NetworkEdgeSecurityServices/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::NetworkEdgeSecurityServices::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-NetworkEdgeSecurityServices-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the NetworkEdgeSecurityServices service is
@@ -1039,7 +1039,7 @@ module Google
       # Create a new client object for NetworkEndpointGroups.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::NetworkEndpointGroups::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/NetworkEndpointGroups/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::NetworkEndpointGroups::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-NetworkEndpointGroups-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the NetworkEndpointGroups service is
@@ -1069,7 +1069,7 @@ module Google
       # Create a new client object for NetworkFirewallPolicies.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::NetworkFirewallPolicies::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/NetworkFirewallPolicies/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::NetworkFirewallPolicies::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-NetworkFirewallPolicies-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the NetworkFirewallPolicies service is
@@ -1099,7 +1099,7 @@ module Google
       # Create a new client object for Networks.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::Networks::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/Networks/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::Networks::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-Networks-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Networks service is
@@ -1129,7 +1129,7 @@ module Google
       # Create a new client object for NodeGroups.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::NodeGroups::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/NodeGroups/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::NodeGroups::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-NodeGroups-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the NodeGroups service is
@@ -1159,7 +1159,7 @@ module Google
       # Create a new client object for NodeTemplates.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::NodeTemplates::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/NodeTemplates/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::NodeTemplates::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-NodeTemplates-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the NodeTemplates service is
@@ -1189,7 +1189,7 @@ module Google
       # Create a new client object for NodeTypes.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::NodeTypes::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/NodeTypes/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::NodeTypes::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-NodeTypes-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the NodeTypes service is
@@ -1219,7 +1219,7 @@ module Google
       # Create a new client object for PacketMirrorings.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::PacketMirrorings::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/PacketMirrorings/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::PacketMirrorings::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-PacketMirrorings-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the PacketMirrorings service is
@@ -1249,7 +1249,7 @@ module Google
       # Create a new client object for Projects.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::Projects::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/Projects/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::Projects::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-Projects-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Projects service is
@@ -1279,7 +1279,7 @@ module Google
       # Create a new client object for PublicAdvertisedPrefixes.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::PublicAdvertisedPrefixes::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/PublicAdvertisedPrefixes/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::PublicAdvertisedPrefixes::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-PublicAdvertisedPrefixes-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the PublicAdvertisedPrefixes service is
@@ -1309,7 +1309,7 @@ module Google
       # Create a new client object for PublicDelegatedPrefixes.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::PublicDelegatedPrefixes::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/PublicDelegatedPrefixes/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::PublicDelegatedPrefixes::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-PublicDelegatedPrefixes-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the PublicDelegatedPrefixes service is
@@ -1339,7 +1339,7 @@ module Google
       # Create a new client object for RegionAutoscalers.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::RegionAutoscalers::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/RegionAutoscalers/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::RegionAutoscalers::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-RegionAutoscalers-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the RegionAutoscalers service is
@@ -1369,7 +1369,7 @@ module Google
       # Create a new client object for RegionBackendServices.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::RegionBackendServices::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/RegionBackendServices/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::RegionBackendServices::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-RegionBackendServices-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the RegionBackendServices service is
@@ -1399,7 +1399,7 @@ module Google
       # Create a new client object for RegionCommitments.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::RegionCommitments::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/RegionCommitments/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::RegionCommitments::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-RegionCommitments-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the RegionCommitments service is
@@ -1429,7 +1429,7 @@ module Google
       # Create a new client object for RegionDiskTypes.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::RegionDiskTypes::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/RegionDiskTypes/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::RegionDiskTypes::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-RegionDiskTypes-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the RegionDiskTypes service is
@@ -1459,7 +1459,7 @@ module Google
       # Create a new client object for RegionDisks.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::RegionDisks::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/RegionDisks/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::RegionDisks::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-RegionDisks-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the RegionDisks service is
@@ -1489,7 +1489,7 @@ module Google
       # Create a new client object for RegionHealthCheckServices.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::RegionHealthCheckServices::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/RegionHealthCheckServices/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::RegionHealthCheckServices::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-RegionHealthCheckServices-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the RegionHealthCheckServices service is
@@ -1519,7 +1519,7 @@ module Google
       # Create a new client object for RegionHealthChecks.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::RegionHealthChecks::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/RegionHealthChecks/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::RegionHealthChecks::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-RegionHealthChecks-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the RegionHealthChecks service is
@@ -1549,7 +1549,7 @@ module Google
       # Create a new client object for RegionInstanceGroupManagers.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/RegionInstanceGroupManagers/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-RegionInstanceGroupManagers-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the RegionInstanceGroupManagers service is
@@ -1579,7 +1579,7 @@ module Google
       # Create a new client object for RegionInstanceGroups.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::RegionInstanceGroups::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/RegionInstanceGroups/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::RegionInstanceGroups::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-RegionInstanceGroups-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the RegionInstanceGroups service is
@@ -1606,10 +1606,40 @@ module Google
       end
 
       ##
+      # Create a new client object for RegionInstanceTemplates.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Compute::V1::RegionInstanceTemplates::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-RegionInstanceTemplates-Rest-Client)
+      # for a REST client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the RegionInstanceTemplates service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # ## About RegionInstanceTemplates
+      #
+      # The RegionInstanceTemplates API.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.region_instance_templates version: :v1, &block
+        require "google/cloud/compute/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Compute
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::Compute.const_get(package_name).const_get(:RegionInstanceTemplates)
+        service_module.const_get(:Rest).const_get(:Client).new(&block)
+      end
+
+      ##
       # Create a new client object for RegionInstances.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::RegionInstances::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/RegionInstances/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::RegionInstances::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-RegionInstances-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the RegionInstances service is
@@ -1639,7 +1669,7 @@ module Google
       # Create a new client object for RegionNetworkEndpointGroups.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::RegionNetworkEndpointGroups::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/RegionNetworkEndpointGroups/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::RegionNetworkEndpointGroups::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-RegionNetworkEndpointGroups-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the RegionNetworkEndpointGroups service is
@@ -1669,7 +1699,7 @@ module Google
       # Create a new client object for RegionNetworkFirewallPolicies.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::RegionNetworkFirewallPolicies::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/RegionNetworkFirewallPolicies/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::RegionNetworkFirewallPolicies::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-RegionNetworkFirewallPolicies-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the RegionNetworkFirewallPolicies service is
@@ -1699,7 +1729,7 @@ module Google
       # Create a new client object for RegionNotificationEndpoints.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::RegionNotificationEndpoints::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/RegionNotificationEndpoints/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::RegionNotificationEndpoints::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-RegionNotificationEndpoints-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the RegionNotificationEndpoints service is
@@ -1729,7 +1759,7 @@ module Google
       # Create a new client object for RegionOperations.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::RegionOperations::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/RegionOperations/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::RegionOperations::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-RegionOperations-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the RegionOperations service is
@@ -1759,7 +1789,7 @@ module Google
       # Create a new client object for RegionSecurityPolicies.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::RegionSecurityPolicies::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/RegionSecurityPolicies/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::RegionSecurityPolicies::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-RegionSecurityPolicies-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the RegionSecurityPolicies service is
@@ -1789,7 +1819,7 @@ module Google
       # Create a new client object for RegionSslCertificates.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::RegionSslCertificates::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/RegionSslCertificates/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::RegionSslCertificates::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-RegionSslCertificates-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the RegionSslCertificates service is
@@ -1819,7 +1849,7 @@ module Google
       # Create a new client object for RegionSslPolicies.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::RegionSslPolicies::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/RegionSslPolicies/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::RegionSslPolicies::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-RegionSslPolicies-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the RegionSslPolicies service is
@@ -1849,7 +1879,7 @@ module Google
       # Create a new client object for RegionTargetHttpProxies.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::RegionTargetHttpProxies::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/RegionTargetHttpProxies/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::RegionTargetHttpProxies::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-RegionTargetHttpProxies-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the RegionTargetHttpProxies service is
@@ -1879,7 +1909,7 @@ module Google
       # Create a new client object for RegionTargetHttpsProxies.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::RegionTargetHttpsProxies::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/RegionTargetHttpsProxies/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::RegionTargetHttpsProxies::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-RegionTargetHttpsProxies-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the RegionTargetHttpsProxies service is
@@ -1909,7 +1939,7 @@ module Google
       # Create a new client object for RegionTargetTcpProxies.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::RegionTargetTcpProxies::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/RegionTargetTcpProxies/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::RegionTargetTcpProxies::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-RegionTargetTcpProxies-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the RegionTargetTcpProxies service is
@@ -1939,7 +1969,7 @@ module Google
       # Create a new client object for RegionUrlMaps.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::RegionUrlMaps::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/RegionUrlMaps/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::RegionUrlMaps::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-RegionUrlMaps-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the RegionUrlMaps service is
@@ -1969,7 +1999,7 @@ module Google
       # Create a new client object for Regions.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::Regions::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/Regions/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::Regions::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-Regions-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Regions service is
@@ -1999,7 +2029,7 @@ module Google
       # Create a new client object for Reservations.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::Reservations::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/Reservations/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::Reservations::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-Reservations-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Reservations service is
@@ -2029,7 +2059,7 @@ module Google
       # Create a new client object for ResourcePolicies.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::ResourcePolicies::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/ResourcePolicies/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::ResourcePolicies::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-ResourcePolicies-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the ResourcePolicies service is
@@ -2059,7 +2089,7 @@ module Google
       # Create a new client object for Routers.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::Routers::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/Routers/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::Routers::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-Routers-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Routers service is
@@ -2089,7 +2119,7 @@ module Google
       # Create a new client object for Routes.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::Routes::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/Routes/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::Routes::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-Routes-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Routes service is
@@ -2119,7 +2149,7 @@ module Google
       # Create a new client object for SecurityPolicies.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::SecurityPolicies::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/SecurityPolicies/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::SecurityPolicies::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-SecurityPolicies-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the SecurityPolicies service is
@@ -2149,7 +2179,7 @@ module Google
       # Create a new client object for ServiceAttachments.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::ServiceAttachments::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/ServiceAttachments/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::ServiceAttachments::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-ServiceAttachments-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the ServiceAttachments service is
@@ -2179,7 +2209,7 @@ module Google
       # Create a new client object for Snapshots.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::Snapshots::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/Snapshots/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::Snapshots::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-Snapshots-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Snapshots service is
@@ -2209,7 +2239,7 @@ module Google
       # Create a new client object for SslCertificates.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::SslCertificates::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/SslCertificates/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::SslCertificates::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-SslCertificates-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the SslCertificates service is
@@ -2239,7 +2269,7 @@ module Google
       # Create a new client object for SslPolicies.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::SslPolicies::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/SslPolicies/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::SslPolicies::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-SslPolicies-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the SslPolicies service is
@@ -2269,7 +2299,7 @@ module Google
       # Create a new client object for Subnetworks.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::Subnetworks::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/Subnetworks/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::Subnetworks::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-Subnetworks-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Subnetworks service is
@@ -2299,7 +2329,7 @@ module Google
       # Create a new client object for TargetGrpcProxies.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::TargetGrpcProxies::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/TargetGrpcProxies/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::TargetGrpcProxies::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-TargetGrpcProxies-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the TargetGrpcProxies service is
@@ -2329,7 +2359,7 @@ module Google
       # Create a new client object for TargetHttpProxies.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::TargetHttpProxies::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/TargetHttpProxies/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::TargetHttpProxies::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-TargetHttpProxies-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the TargetHttpProxies service is
@@ -2359,7 +2389,7 @@ module Google
       # Create a new client object for TargetHttpsProxies.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::TargetHttpsProxies::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/TargetHttpsProxies/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::TargetHttpsProxies::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-TargetHttpsProxies-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the TargetHttpsProxies service is
@@ -2389,7 +2419,7 @@ module Google
       # Create a new client object for TargetInstances.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::TargetInstances::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/TargetInstances/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::TargetInstances::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-TargetInstances-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the TargetInstances service is
@@ -2419,7 +2449,7 @@ module Google
       # Create a new client object for TargetPools.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::TargetPools::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/TargetPools/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::TargetPools::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-TargetPools-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the TargetPools service is
@@ -2449,7 +2479,7 @@ module Google
       # Create a new client object for TargetSslProxies.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::TargetSslProxies::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/TargetSslProxies/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::TargetSslProxies::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-TargetSslProxies-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the TargetSslProxies service is
@@ -2479,7 +2509,7 @@ module Google
       # Create a new client object for TargetTcpProxies.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::TargetTcpProxies::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/TargetTcpProxies/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::TargetTcpProxies::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-TargetTcpProxies-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the TargetTcpProxies service is
@@ -2509,7 +2539,7 @@ module Google
       # Create a new client object for TargetVpnGateways.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::TargetVpnGateways::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/TargetVpnGateways/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::TargetVpnGateways::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-TargetVpnGateways-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the TargetVpnGateways service is
@@ -2539,7 +2569,7 @@ module Google
       # Create a new client object for UrlMaps.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::UrlMaps::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/UrlMaps/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::UrlMaps::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-UrlMaps-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the UrlMaps service is
@@ -2569,7 +2599,7 @@ module Google
       # Create a new client object for VpnGateways.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::VpnGateways::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/VpnGateways/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::VpnGateways::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-VpnGateways-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the VpnGateways service is
@@ -2599,7 +2629,7 @@ module Google
       # Create a new client object for VpnTunnels.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::VpnTunnels::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/VpnTunnels/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::VpnTunnels::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-VpnTunnels-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the VpnTunnels service is
@@ -2629,7 +2659,7 @@ module Google
       # Create a new client object for ZoneOperations.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::ZoneOperations::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/ZoneOperations/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::ZoneOperations::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-ZoneOperations-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the ZoneOperations service is
@@ -2659,7 +2689,7 @@ module Google
       # Create a new client object for Zones.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Compute::V1::Zones::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/Zones/Rest/Client.html)
+      # [Google::Cloud::Compute::V1::Zones::Rest::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest/Google-Cloud-Compute-V1-Zones-Rest-Client)
       # for a REST client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Zones service is

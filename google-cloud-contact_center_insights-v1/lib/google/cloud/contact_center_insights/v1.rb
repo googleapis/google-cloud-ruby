@@ -30,6 +30,11 @@ module Google
       #     require "google/cloud/contact_center_insights/v1"
       #     client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/contact_center_insights/v1"
+      #     client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Rest::Client.new
+      #
       module V1
       end
     end

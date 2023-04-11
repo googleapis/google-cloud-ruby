@@ -30,6 +30,11 @@ module Google
       #     require "google/cloud/security_center/v1"
       #     client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/security_center/v1"
+      #     client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Rest::Client.new
+      #
       module V1
       end
     end

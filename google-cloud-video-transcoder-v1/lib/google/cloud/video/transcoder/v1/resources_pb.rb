@@ -280,6 +280,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :channel_layout, :string, 4
       repeated :mapping, :message, 5, "google.cloud.video.transcoder.v1.AudioStream.AudioMapping"
       optional :sample_rate_hertz, :int32, 6
+      optional :language_code, :string, 7
+      optional :display_name, :string, 8
     end
     add_message "google.cloud.video.transcoder.v1.AudioStream.AudioMapping" do
       optional :atom_key, :string, 1
@@ -291,7 +293,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.video.transcoder.v1.TextStream" do
       optional :codec, :string, 1
+      optional :language_code, :string, 2
       repeated :mapping, :message, 3, "google.cloud.video.transcoder.v1.TextStream.TextMapping"
+      optional :display_name, :string, 4
     end
     add_message "google.cloud.video.transcoder.v1.TextStream.TextMapping" do
       optional :atom_key, :string, 1

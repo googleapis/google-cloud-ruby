@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-apigee_connect-v1",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "apigeeconnect_v1_generated_ConnectionService_ListConnections_sync",
-      "title": "Snippet for list_connections in ConnectionService",
-      "description": "Basic snippet for list_connections in ConnectionService",
+      "title": "Snippet for the list_connections call in the ConnectionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApigeeConnect::V1::ConnectionService::Client#list_connections. It may require modification in order to execute successfully.",
       "file": "connection_service/list_connections.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "apigeeconnect_v1_generated_Tether_Egress_sync",
-      "title": "Snippet for egress in Tether",
-      "description": "Basic snippet for egress in Tether",
+      "title": "Snippet for the egress call in the Tether service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApigeeConnect::V1::Tether::Client#egress. It may require modification in order to execute successfully.",
       "file": "tether/egress.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 47,
+          "end": 50,
           "type": "FULL"
         }
       ]

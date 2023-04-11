@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-apigee_registry-v1",
-    "version": "0.3.1",
+    "version": "0.4.0",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "apigeeregistry_v1_generated_Provisioning_CreateInstance_sync",
-      "title": "Snippet for create_instance in Provisioning",
-      "description": "Basic snippet for create_instance in Provisioning",
+      "title": "Snippet for the create_instance call in the Provisioning service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApigeeRegistry::V1::Provisioning::Client#create_instance. It may require modification in order to execute successfully.",
       "file": "provisioning/create_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "apigeeregistry_v1_generated_Provisioning_DeleteInstance_sync",
-      "title": "Snippet for delete_instance in Provisioning",
-      "description": "Basic snippet for delete_instance in Provisioning",
+      "title": "Snippet for the delete_instance call in the Provisioning service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApigeeRegistry::V1::Provisioning::Client#delete_instance. It may require modification in order to execute successfully.",
       "file": "provisioning/delete_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "apigeeregistry_v1_generated_Provisioning_GetInstance_sync",
-      "title": "Snippet for get_instance in Provisioning",
-      "description": "Basic snippet for get_instance in Provisioning",
+      "title": "Snippet for the get_instance call in the Provisioning service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApigeeRegistry::V1::Provisioning::Client#get_instance. It may require modification in order to execute successfully.",
       "file": "provisioning/get_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "apigeeregistry_v1_generated_Registry_ListApis_sync",
-      "title": "Snippet for list_apis in Registry",
-      "description": "Basic snippet for list_apis in Registry",
+      "title": "Snippet for the list_apis call in the Registry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApigeeRegistry::V1::Registry::Client#list_apis. It may require modification in order to execute successfully.",
       "file": "registry/list_apis.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "apigeeregistry_v1_generated_Registry_GetApi_sync",
-      "title": "Snippet for get_api in Registry",
-      "description": "Basic snippet for get_api in Registry",
+      "title": "Snippet for the get_api call in the Registry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApigeeRegistry::V1::Registry::Client#get_api. It may require modification in order to execute successfully.",
       "file": "registry/get_api.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "apigeeregistry_v1_generated_Registry_CreateApi_sync",
-      "title": "Snippet for create_api in Registry",
-      "description": "Basic snippet for create_api in Registry",
+      "title": "Snippet for the create_api call in the Registry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApigeeRegistry::V1::Registry::Client#create_api. It may require modification in order to execute successfully.",
       "file": "registry/create_api.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "apigeeregistry_v1_generated_Registry_UpdateApi_sync",
-      "title": "Snippet for update_api in Registry",
-      "description": "Basic snippet for update_api in Registry",
+      "title": "Snippet for the update_api call in the Registry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApigeeRegistry::V1::Registry::Client#update_api. It may require modification in order to execute successfully.",
       "file": "registry/update_api.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "apigeeregistry_v1_generated_Registry_DeleteApi_sync",
-      "title": "Snippet for delete_api in Registry",
-      "description": "Basic snippet for delete_api in Registry",
+      "title": "Snippet for the delete_api call in the Registry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApigeeRegistry::V1::Registry::Client#delete_api. It may require modification in order to execute successfully.",
       "file": "registry/delete_api.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "apigeeregistry_v1_generated_Registry_ListApiVersions_sync",
-      "title": "Snippet for list_api_versions in Registry",
-      "description": "Basic snippet for list_api_versions in Registry",
+      "title": "Snippet for the list_api_versions call in the Registry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApigeeRegistry::V1::Registry::Client#list_api_versions. It may require modification in order to execute successfully.",
       "file": "registry/list_api_versions.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,15 +366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "apigeeregistry_v1_generated_Registry_GetApiVersion_sync",
-      "title": "Snippet for get_api_version in Registry",
-      "description": "Basic snippet for get_api_version in Registry",
+      "title": "Snippet for the get_api_version call in the Registry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApigeeRegistry::V1::Registry::Client#get_api_version. It may require modification in order to execute successfully.",
       "file": "registry/get_api_version.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,15 +406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "apigeeregistry_v1_generated_Registry_CreateApiVersion_sync",
-      "title": "Snippet for create_api_version in Registry",
-      "description": "Basic snippet for create_api_version in Registry",
+      "title": "Snippet for the create_api_version call in the Registry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApigeeRegistry::V1::Registry::Client#create_api_version. It may require modification in order to execute successfully.",
       "file": "registry/create_api_version.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,15 +446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "apigeeregistry_v1_generated_Registry_UpdateApiVersion_sync",
-      "title": "Snippet for update_api_version in Registry",
-      "description": "Basic snippet for update_api_version in Registry",
+      "title": "Snippet for the update_api_version call in the Registry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApigeeRegistry::V1::Registry::Client#update_api_version. It may require modification in order to execute successfully.",
       "file": "registry/update_api_version.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,15 +486,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "apigeeregistry_v1_generated_Registry_DeleteApiVersion_sync",
-      "title": "Snippet for delete_api_version in Registry",
-      "description": "Basic snippet for delete_api_version in Registry",
+      "title": "Snippet for the delete_api_version call in the Registry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApigeeRegistry::V1::Registry::Client#delete_api_version. It may require modification in order to execute successfully.",
       "file": "registry/delete_api_version.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,15 +526,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "apigeeregistry_v1_generated_Registry_ListApiSpecs_sync",
-      "title": "Snippet for list_api_specs in Registry",
-      "description": "Basic snippet for list_api_specs in Registry",
+      "title": "Snippet for the list_api_specs call in the Registry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApigeeRegistry::V1::Registry::Client#list_api_specs. It may require modification in order to execute successfully.",
       "file": "registry/list_api_specs.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,15 +566,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "apigeeregistry_v1_generated_Registry_GetApiSpec_sync",
-      "title": "Snippet for get_api_spec in Registry",
-      "description": "Basic snippet for get_api_spec in Registry",
+      "title": "Snippet for the get_api_spec call in the Registry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApigeeRegistry::V1::Registry::Client#get_api_spec. It may require modification in order to execute successfully.",
       "file": "registry/get_api_spec.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,15 +606,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "apigeeregistry_v1_generated_Registry_GetApiSpecContents_sync",
-      "title": "Snippet for get_api_spec_contents in Registry",
-      "description": "Basic snippet for get_api_spec_contents in Registry",
+      "title": "Snippet for the get_api_spec_contents call in the Registry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApigeeRegistry::V1::Registry::Client#get_api_spec_contents. It may require modification in order to execute successfully.",
       "file": "registry/get_api_spec_contents.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,15 +646,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "apigeeregistry_v1_generated_Registry_CreateApiSpec_sync",
-      "title": "Snippet for create_api_spec in Registry",
-      "description": "Basic snippet for create_api_spec in Registry",
+      "title": "Snippet for the create_api_spec call in the Registry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApigeeRegistry::V1::Registry::Client#create_api_spec. It may require modification in order to execute successfully.",
       "file": "registry/create_api_spec.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,15 +686,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "apigeeregistry_v1_generated_Registry_UpdateApiSpec_sync",
-      "title": "Snippet for update_api_spec in Registry",
-      "description": "Basic snippet for update_api_spec in Registry",
+      "title": "Snippet for the update_api_spec call in the Registry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApigeeRegistry::V1::Registry::Client#update_api_spec. It may require modification in order to execute successfully.",
       "file": "registry/update_api_spec.rb",
       "language": "RUBY",
       "client_method": {
@@ -726,15 +726,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "apigeeregistry_v1_generated_Registry_DeleteApiSpec_sync",
-      "title": "Snippet for delete_api_spec in Registry",
-      "description": "Basic snippet for delete_api_spec in Registry",
+      "title": "Snippet for the delete_api_spec call in the Registry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApigeeRegistry::V1::Registry::Client#delete_api_spec. It may require modification in order to execute successfully.",
       "file": "registry/delete_api_spec.rb",
       "language": "RUBY",
       "client_method": {
@@ -766,15 +766,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "apigeeregistry_v1_generated_Registry_TagApiSpecRevision_sync",
-      "title": "Snippet for tag_api_spec_revision in Registry",
-      "description": "Basic snippet for tag_api_spec_revision in Registry",
+      "title": "Snippet for the tag_api_spec_revision call in the Registry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApigeeRegistry::V1::Registry::Client#tag_api_spec_revision. It may require modification in order to execute successfully.",
       "file": "registry/tag_api_spec_revision.rb",
       "language": "RUBY",
       "client_method": {
@@ -806,15 +806,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "apigeeregistry_v1_generated_Registry_ListApiSpecRevisions_sync",
-      "title": "Snippet for list_api_spec_revisions in Registry",
-      "description": "Basic snippet for list_api_spec_revisions in Registry",
+      "title": "Snippet for the list_api_spec_revisions call in the Registry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApigeeRegistry::V1::Registry::Client#list_api_spec_revisions. It may require modification in order to execute successfully.",
       "file": "registry/list_api_spec_revisions.rb",
       "language": "RUBY",
       "client_method": {
@@ -846,15 +846,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "apigeeregistry_v1_generated_Registry_RollbackApiSpec_sync",
-      "title": "Snippet for rollback_api_spec in Registry",
-      "description": "Basic snippet for rollback_api_spec in Registry",
+      "title": "Snippet for the rollback_api_spec call in the Registry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApigeeRegistry::V1::Registry::Client#rollback_api_spec. It may require modification in order to execute successfully.",
       "file": "registry/rollback_api_spec.rb",
       "language": "RUBY",
       "client_method": {
@@ -886,15 +886,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "apigeeregistry_v1_generated_Registry_DeleteApiSpecRevision_sync",
-      "title": "Snippet for delete_api_spec_revision in Registry",
-      "description": "Basic snippet for delete_api_spec_revision in Registry",
+      "title": "Snippet for the delete_api_spec_revision call in the Registry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApigeeRegistry::V1::Registry::Client#delete_api_spec_revision. It may require modification in order to execute successfully.",
       "file": "registry/delete_api_spec_revision.rb",
       "language": "RUBY",
       "client_method": {
@@ -926,15 +926,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "apigeeregistry_v1_generated_Registry_ListApiDeployments_sync",
-      "title": "Snippet for list_api_deployments in Registry",
-      "description": "Basic snippet for list_api_deployments in Registry",
+      "title": "Snippet for the list_api_deployments call in the Registry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApigeeRegistry::V1::Registry::Client#list_api_deployments. It may require modification in order to execute successfully.",
       "file": "registry/list_api_deployments.rb",
       "language": "RUBY",
       "client_method": {
@@ -966,15 +966,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "apigeeregistry_v1_generated_Registry_GetApiDeployment_sync",
-      "title": "Snippet for get_api_deployment in Registry",
-      "description": "Basic snippet for get_api_deployment in Registry",
+      "title": "Snippet for the get_api_deployment call in the Registry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApigeeRegistry::V1::Registry::Client#get_api_deployment. It may require modification in order to execute successfully.",
       "file": "registry/get_api_deployment.rb",
       "language": "RUBY",
       "client_method": {
@@ -1006,15 +1006,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "apigeeregistry_v1_generated_Registry_CreateApiDeployment_sync",
-      "title": "Snippet for create_api_deployment in Registry",
-      "description": "Basic snippet for create_api_deployment in Registry",
+      "title": "Snippet for the create_api_deployment call in the Registry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApigeeRegistry::V1::Registry::Client#create_api_deployment. It may require modification in order to execute successfully.",
       "file": "registry/create_api_deployment.rb",
       "language": "RUBY",
       "client_method": {
@@ -1046,15 +1046,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "apigeeregistry_v1_generated_Registry_UpdateApiDeployment_sync",
-      "title": "Snippet for update_api_deployment in Registry",
-      "description": "Basic snippet for update_api_deployment in Registry",
+      "title": "Snippet for the update_api_deployment call in the Registry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApigeeRegistry::V1::Registry::Client#update_api_deployment. It may require modification in order to execute successfully.",
       "file": "registry/update_api_deployment.rb",
       "language": "RUBY",
       "client_method": {
@@ -1086,15 +1086,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "apigeeregistry_v1_generated_Registry_DeleteApiDeployment_sync",
-      "title": "Snippet for delete_api_deployment in Registry",
-      "description": "Basic snippet for delete_api_deployment in Registry",
+      "title": "Snippet for the delete_api_deployment call in the Registry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApigeeRegistry::V1::Registry::Client#delete_api_deployment. It may require modification in order to execute successfully.",
       "file": "registry/delete_api_deployment.rb",
       "language": "RUBY",
       "client_method": {
@@ -1126,15 +1126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "apigeeregistry_v1_generated_Registry_TagApiDeploymentRevision_sync",
-      "title": "Snippet for tag_api_deployment_revision in Registry",
-      "description": "Basic snippet for tag_api_deployment_revision in Registry",
+      "title": "Snippet for the tag_api_deployment_revision call in the Registry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApigeeRegistry::V1::Registry::Client#tag_api_deployment_revision. It may require modification in order to execute successfully.",
       "file": "registry/tag_api_deployment_revision.rb",
       "language": "RUBY",
       "client_method": {
@@ -1166,15 +1166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "apigeeregistry_v1_generated_Registry_ListApiDeploymentRevisions_sync",
-      "title": "Snippet for list_api_deployment_revisions in Registry",
-      "description": "Basic snippet for list_api_deployment_revisions in Registry",
+      "title": "Snippet for the list_api_deployment_revisions call in the Registry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApigeeRegistry::V1::Registry::Client#list_api_deployment_revisions. It may require modification in order to execute successfully.",
       "file": "registry/list_api_deployment_revisions.rb",
       "language": "RUBY",
       "client_method": {
@@ -1206,15 +1206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "apigeeregistry_v1_generated_Registry_RollbackApiDeployment_sync",
-      "title": "Snippet for rollback_api_deployment in Registry",
-      "description": "Basic snippet for rollback_api_deployment in Registry",
+      "title": "Snippet for the rollback_api_deployment call in the Registry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApigeeRegistry::V1::Registry::Client#rollback_api_deployment. It may require modification in order to execute successfully.",
       "file": "registry/rollback_api_deployment.rb",
       "language": "RUBY",
       "client_method": {
@@ -1246,15 +1246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "apigeeregistry_v1_generated_Registry_DeleteApiDeploymentRevision_sync",
-      "title": "Snippet for delete_api_deployment_revision in Registry",
-      "description": "Basic snippet for delete_api_deployment_revision in Registry",
+      "title": "Snippet for the delete_api_deployment_revision call in the Registry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApigeeRegistry::V1::Registry::Client#delete_api_deployment_revision. It may require modification in order to execute successfully.",
       "file": "registry/delete_api_deployment_revision.rb",
       "language": "RUBY",
       "client_method": {
@@ -1286,15 +1286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "apigeeregistry_v1_generated_Registry_ListArtifacts_sync",
-      "title": "Snippet for list_artifacts in Registry",
-      "description": "Basic snippet for list_artifacts in Registry",
+      "title": "Snippet for the list_artifacts call in the Registry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApigeeRegistry::V1::Registry::Client#list_artifacts. It may require modification in order to execute successfully.",
       "file": "registry/list_artifacts.rb",
       "language": "RUBY",
       "client_method": {
@@ -1326,15 +1326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "apigeeregistry_v1_generated_Registry_GetArtifact_sync",
-      "title": "Snippet for get_artifact in Registry",
-      "description": "Basic snippet for get_artifact in Registry",
+      "title": "Snippet for the get_artifact call in the Registry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApigeeRegistry::V1::Registry::Client#get_artifact. It may require modification in order to execute successfully.",
       "file": "registry/get_artifact.rb",
       "language": "RUBY",
       "client_method": {
@@ -1366,15 +1366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "apigeeregistry_v1_generated_Registry_GetArtifactContents_sync",
-      "title": "Snippet for get_artifact_contents in Registry",
-      "description": "Basic snippet for get_artifact_contents in Registry",
+      "title": "Snippet for the get_artifact_contents call in the Registry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApigeeRegistry::V1::Registry::Client#get_artifact_contents. It may require modification in order to execute successfully.",
       "file": "registry/get_artifact_contents.rb",
       "language": "RUBY",
       "client_method": {
@@ -1406,15 +1406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "apigeeregistry_v1_generated_Registry_CreateArtifact_sync",
-      "title": "Snippet for create_artifact in Registry",
-      "description": "Basic snippet for create_artifact in Registry",
+      "title": "Snippet for the create_artifact call in the Registry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApigeeRegistry::V1::Registry::Client#create_artifact. It may require modification in order to execute successfully.",
       "file": "registry/create_artifact.rb",
       "language": "RUBY",
       "client_method": {
@@ -1446,15 +1446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "apigeeregistry_v1_generated_Registry_ReplaceArtifact_sync",
-      "title": "Snippet for replace_artifact in Registry",
-      "description": "Basic snippet for replace_artifact in Registry",
+      "title": "Snippet for the replace_artifact call in the Registry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApigeeRegistry::V1::Registry::Client#replace_artifact. It may require modification in order to execute successfully.",
       "file": "registry/replace_artifact.rb",
       "language": "RUBY",
       "client_method": {
@@ -1486,15 +1486,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "apigeeregistry_v1_generated_Registry_DeleteArtifact_sync",
-      "title": "Snippet for delete_artifact in Registry",
-      "description": "Basic snippet for delete_artifact in Registry",
+      "title": "Snippet for the delete_artifact call in the Registry service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ApigeeRegistry::V1::Registry::Client#delete_artifact. It may require modification in order to execute successfully.",
       "file": "registry/delete_artifact.rb",
       "language": "RUBY",
       "client_method": {
@@ -1526,7 +1526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]

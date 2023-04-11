@@ -20,8 +20,11 @@
 require "google/cloud/vm_migration/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::VMMigration::V1::VMMigration::Client#get_datacenter_connector
+# Snippet for the get_datacenter_connector call in the VMMigration service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::VMMigration::V1::VMMigration::Client#get_datacenter_connector.
+# It may require modification in order to execute successfully.
 #
 def get_datacenter_connector
   # Create a client object. The client can be reused for multiple calls.

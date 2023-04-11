@@ -20,8 +20,11 @@
 require "google/cloud/iap/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Client#get_iap_settings
+# Snippet for the get_iap_settings call in the IdentityAwareProxyAdminService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Client#get_iap_settings.
+# It may require modification in order to execute successfully.
 #
 def get_iap_settings
   # Create a client object. The client can be reused for multiple calls.

@@ -26,6 +26,7 @@ require "google/cloud/shell/v1/cloud_shell_service/credentials"
 require "google/cloud/shell/v1/cloud_shell_service/paths"
 require "google/cloud/shell/v1/cloud_shell_service/operations"
 require "google/cloud/shell/v1/cloud_shell_service/client"
+require "google/cloud/shell/v1/cloud_shell_service/rest"
 
 module Google
   module Cloud
@@ -44,6 +45,11 @@ module Google
         #
         #     require "google/cloud/shell/v1/cloud_shell_service"
         #     client = ::Google::Cloud::Shell::V1::CloudShellService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/shell/v1/cloud_shell_service/rest"
+        #     client = ::Google::Cloud::Shell::V1::CloudShellService::Rest::Client.new
         #
         module CloudShellService
         end

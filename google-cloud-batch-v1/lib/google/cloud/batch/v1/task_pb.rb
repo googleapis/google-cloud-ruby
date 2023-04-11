@@ -20,6 +20,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :description, :string, 1
       optional :event_time, :message, 2, "google.protobuf.Timestamp"
       optional :task_execution, :message, 4, "google.cloud.batch.v1.TaskExecution"
+      optional :task_state, :enum, 5, "google.cloud.batch.v1.TaskStatus.State"
     end
     add_message "google.cloud.batch.v1.TaskExecution" do
       optional :exit_code, :int32, 1

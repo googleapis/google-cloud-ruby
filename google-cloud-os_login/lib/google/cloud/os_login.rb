@@ -48,12 +48,14 @@ module Google
       # Create a new client object for OsLoginService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::OsLogin::V1::OsLoginService::Client](https://googleapis.dev/ruby/google-cloud-os_login-v1/latest/Google/Cloud/OsLogin/V1/OsLoginService/Client.html)
+      # [Google::Cloud::OsLogin::V1::OsLoginService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-os_login-v1/latest/Google-Cloud-OsLogin-V1-OsLoginService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the OsLoginService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About OsLoginService
       #
@@ -64,9 +66,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.os_login_service version: :v1, &block
+      def self.os_login_service version: :v1, transport: :grpc, &block
         require "google/cloud/os_login/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::OsLogin
@@ -74,6 +77,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::OsLogin.const_get(package_name).const_get(:OsLoginService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 

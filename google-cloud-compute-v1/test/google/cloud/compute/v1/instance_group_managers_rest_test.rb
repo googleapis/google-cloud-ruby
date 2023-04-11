@@ -91,27 +91,27 @@ class ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ClientTest < Mi
 
         # Use hash object
         client.abandon_instances({ instance_group_manager: instance_group_manager, instance_group_managers_abandon_instances_request_resource: instance_group_managers_abandon_instances_request_resource, project: project, request_id: request_id, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.abandon_instances instance_group_manager: instance_group_manager, instance_group_managers_abandon_instances_request_resource: instance_group_managers_abandon_instances_request_resource, project: project, request_id: request_id, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.abandon_instances ::Google::Cloud::Compute::V1::AbandonInstancesInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, instance_group_managers_abandon_instances_request_resource: instance_group_managers_abandon_instances_request_resource, project: project, request_id: request_id, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.abandon_instances({ instance_group_manager: instance_group_manager, instance_group_managers_abandon_instances_request_resource: instance_group_managers_abandon_instances_request_resource, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.abandon_instances(::Google::Cloud::Compute::V1::AbandonInstancesInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, instance_group_managers_abandon_instances_request_resource: instance_group_managers_abandon_instances_request_resource, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -151,27 +151,27 @@ class ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ClientTest < Mi
 
         # Use hash object
         client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListInstanceGroupManagersRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListInstanceGroupManagersRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -208,27 +208,27 @@ class ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ClientTest < Mi
 
         # Use hash object
         client.apply_updates_to_instances({ instance_group_manager: instance_group_manager, instance_group_managers_apply_updates_request_resource: instance_group_managers_apply_updates_request_resource, project: project, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.apply_updates_to_instances instance_group_manager: instance_group_manager, instance_group_managers_apply_updates_request_resource: instance_group_managers_apply_updates_request_resource, project: project, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.apply_updates_to_instances ::Google::Cloud::Compute::V1::ApplyUpdatesToInstancesInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, instance_group_managers_apply_updates_request_resource: instance_group_managers_apply_updates_request_resource, project: project, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.apply_updates_to_instances({ instance_group_manager: instance_group_manager, instance_group_managers_apply_updates_request_resource: instance_group_managers_apply_updates_request_resource, project: project, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.apply_updates_to_instances(::Google::Cloud::Compute::V1::ApplyUpdatesToInstancesInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, instance_group_managers_apply_updates_request_resource: instance_group_managers_apply_updates_request_resource, project: project, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -266,27 +266,27 @@ class ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ClientTest < Mi
 
         # Use hash object
         client.create_instances({ instance_group_manager: instance_group_manager, instance_group_managers_create_instances_request_resource: instance_group_managers_create_instances_request_resource, project: project, request_id: request_id, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.create_instances instance_group_manager: instance_group_manager, instance_group_managers_create_instances_request_resource: instance_group_managers_create_instances_request_resource, project: project, request_id: request_id, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.create_instances ::Google::Cloud::Compute::V1::CreateInstancesInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, instance_group_managers_create_instances_request_resource: instance_group_managers_create_instances_request_resource, project: project, request_id: request_id, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.create_instances({ instance_group_manager: instance_group_manager, instance_group_managers_create_instances_request_resource: instance_group_managers_create_instances_request_resource, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.create_instances(::Google::Cloud::Compute::V1::CreateInstancesInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, instance_group_managers_create_instances_request_resource: instance_group_managers_create_instances_request_resource, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -323,27 +323,27 @@ class ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ClientTest < Mi
 
         # Use hash object
         client.delete({ instance_group_manager: instance_group_manager, project: project, request_id: request_id, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.delete instance_group_manager: instance_group_manager, project: project, request_id: request_id, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.delete ::Google::Cloud::Compute::V1::DeleteInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, request_id: request_id, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.delete({ instance_group_manager: instance_group_manager, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.delete(::Google::Cloud::Compute::V1::DeleteInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -381,27 +381,27 @@ class ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ClientTest < Mi
 
         # Use hash object
         client.delete_instances({ instance_group_manager: instance_group_manager, instance_group_managers_delete_instances_request_resource: instance_group_managers_delete_instances_request_resource, project: project, request_id: request_id, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.delete_instances instance_group_manager: instance_group_manager, instance_group_managers_delete_instances_request_resource: instance_group_managers_delete_instances_request_resource, project: project, request_id: request_id, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.delete_instances ::Google::Cloud::Compute::V1::DeleteInstancesInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, instance_group_managers_delete_instances_request_resource: instance_group_managers_delete_instances_request_resource, project: project, request_id: request_id, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.delete_instances({ instance_group_manager: instance_group_manager, instance_group_managers_delete_instances_request_resource: instance_group_managers_delete_instances_request_resource, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.delete_instances(::Google::Cloud::Compute::V1::DeleteInstancesInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, instance_group_managers_delete_instances_request_resource: instance_group_managers_delete_instances_request_resource, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -438,27 +438,27 @@ class ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ClientTest < Mi
 
         # Use hash object
         client.delete_per_instance_configs({ instance_group_manager: instance_group_manager, instance_group_managers_delete_per_instance_configs_req_resource: instance_group_managers_delete_per_instance_configs_req_resource, project: project, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.delete_per_instance_configs instance_group_manager: instance_group_manager, instance_group_managers_delete_per_instance_configs_req_resource: instance_group_managers_delete_per_instance_configs_req_resource, project: project, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.delete_per_instance_configs ::Google::Cloud::Compute::V1::DeletePerInstanceConfigsInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, instance_group_managers_delete_per_instance_configs_req_resource: instance_group_managers_delete_per_instance_configs_req_resource, project: project, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.delete_per_instance_configs({ instance_group_manager: instance_group_manager, instance_group_managers_delete_per_instance_configs_req_resource: instance_group_managers_delete_per_instance_configs_req_resource, project: project, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.delete_per_instance_configs(::Google::Cloud::Compute::V1::DeletePerInstanceConfigsInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, instance_group_managers_delete_per_instance_configs_req_resource: instance_group_managers_delete_per_instance_configs_req_resource, project: project, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -494,27 +494,27 @@ class ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ClientTest < Mi
 
         # Use hash object
         client.get({ instance_group_manager: instance_group_manager, project: project, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.get instance_group_manager: instance_group_manager, project: project, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.get ::Google::Cloud::Compute::V1::GetInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.get({ instance_group_manager: instance_group_manager, project: project, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.get(::Google::Cloud::Compute::V1::GetInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -551,27 +551,27 @@ class ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ClientTest < Mi
 
         # Use hash object
         client.insert({ instance_group_manager_resource: instance_group_manager_resource, project: project, request_id: request_id, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.insert instance_group_manager_resource: instance_group_manager_resource, project: project, request_id: request_id, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.insert ::Google::Cloud::Compute::V1::InsertInstanceGroupManagerRequest.new(instance_group_manager_resource: instance_group_manager_resource, project: project, request_id: request_id, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.insert({ instance_group_manager_resource: instance_group_manager_resource, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.insert(::Google::Cloud::Compute::V1::InsertInstanceGroupManagerRequest.new(instance_group_manager_resource: instance_group_manager_resource, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -611,27 +611,27 @@ class ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ClientTest < Mi
 
         # Use hash object
         client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.list ::Google::Cloud::Compute::V1::ListInstanceGroupManagersRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.list(::Google::Cloud::Compute::V1::ListInstanceGroupManagersRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -672,27 +672,27 @@ class ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ClientTest < Mi
 
         # Use hash object
         client.list_errors({ filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.list_errors filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.list_errors ::Google::Cloud::Compute::V1::ListErrorsInstanceGroupManagersRequest.new(filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.list_errors({ filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.list_errors(::Google::Cloud::Compute::V1::ListErrorsInstanceGroupManagersRequest.new(filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -733,27 +733,27 @@ class ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ClientTest < Mi
 
         # Use hash object
         client.list_managed_instances({ filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.list_managed_instances filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.list_managed_instances ::Google::Cloud::Compute::V1::ListManagedInstancesInstanceGroupManagersRequest.new(filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.list_managed_instances({ filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.list_managed_instances(::Google::Cloud::Compute::V1::ListManagedInstancesInstanceGroupManagersRequest.new(filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -794,27 +794,27 @@ class ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ClientTest < Mi
 
         # Use hash object
         client.list_per_instance_configs({ filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.list_per_instance_configs filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.list_per_instance_configs ::Google::Cloud::Compute::V1::ListPerInstanceConfigsInstanceGroupManagersRequest.new(filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.list_per_instance_configs({ filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.list_per_instance_configs(::Google::Cloud::Compute::V1::ListPerInstanceConfigsInstanceGroupManagersRequest.new(filter: filter, instance_group_manager: instance_group_manager, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -852,27 +852,27 @@ class ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ClientTest < Mi
 
         # Use hash object
         client.patch({ instance_group_manager: instance_group_manager, instance_group_manager_resource: instance_group_manager_resource, project: project, request_id: request_id, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.patch instance_group_manager: instance_group_manager, instance_group_manager_resource: instance_group_manager_resource, project: project, request_id: request_id, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.patch ::Google::Cloud::Compute::V1::PatchInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, instance_group_manager_resource: instance_group_manager_resource, project: project, request_id: request_id, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.patch({ instance_group_manager: instance_group_manager, instance_group_manager_resource: instance_group_manager_resource, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.patch(::Google::Cloud::Compute::V1::PatchInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, instance_group_manager_resource: instance_group_manager_resource, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -910,27 +910,27 @@ class ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ClientTest < Mi
 
         # Use hash object
         client.patch_per_instance_configs({ instance_group_manager: instance_group_manager, instance_group_managers_patch_per_instance_configs_req_resource: instance_group_managers_patch_per_instance_configs_req_resource, project: project, request_id: request_id, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.patch_per_instance_configs instance_group_manager: instance_group_manager, instance_group_managers_patch_per_instance_configs_req_resource: instance_group_managers_patch_per_instance_configs_req_resource, project: project, request_id: request_id, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.patch_per_instance_configs ::Google::Cloud::Compute::V1::PatchPerInstanceConfigsInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, instance_group_managers_patch_per_instance_configs_req_resource: instance_group_managers_patch_per_instance_configs_req_resource, project: project, request_id: request_id, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.patch_per_instance_configs({ instance_group_manager: instance_group_manager, instance_group_managers_patch_per_instance_configs_req_resource: instance_group_managers_patch_per_instance_configs_req_resource, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.patch_per_instance_configs(::Google::Cloud::Compute::V1::PatchPerInstanceConfigsInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, instance_group_managers_patch_per_instance_configs_req_resource: instance_group_managers_patch_per_instance_configs_req_resource, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -968,27 +968,27 @@ class ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ClientTest < Mi
 
         # Use hash object
         client.recreate_instances({ instance_group_manager: instance_group_manager, instance_group_managers_recreate_instances_request_resource: instance_group_managers_recreate_instances_request_resource, project: project, request_id: request_id, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.recreate_instances instance_group_manager: instance_group_manager, instance_group_managers_recreate_instances_request_resource: instance_group_managers_recreate_instances_request_resource, project: project, request_id: request_id, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.recreate_instances ::Google::Cloud::Compute::V1::RecreateInstancesInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, instance_group_managers_recreate_instances_request_resource: instance_group_managers_recreate_instances_request_resource, project: project, request_id: request_id, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.recreate_instances({ instance_group_manager: instance_group_manager, instance_group_managers_recreate_instances_request_resource: instance_group_managers_recreate_instances_request_resource, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.recreate_instances(::Google::Cloud::Compute::V1::RecreateInstancesInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, instance_group_managers_recreate_instances_request_resource: instance_group_managers_recreate_instances_request_resource, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -1026,27 +1026,27 @@ class ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ClientTest < Mi
 
         # Use hash object
         client.resize({ instance_group_manager: instance_group_manager, project: project, request_id: request_id, size: size, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.resize instance_group_manager: instance_group_manager, project: project, request_id: request_id, size: size, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.resize ::Google::Cloud::Compute::V1::ResizeInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, request_id: request_id, size: size, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.resize({ instance_group_manager: instance_group_manager, project: project, request_id: request_id, size: size, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.resize(::Google::Cloud::Compute::V1::ResizeInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, project: project, request_id: request_id, size: size, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -1084,27 +1084,27 @@ class ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ClientTest < Mi
 
         # Use hash object
         client.set_instance_template({ instance_group_manager: instance_group_manager, instance_group_managers_set_instance_template_request_resource: instance_group_managers_set_instance_template_request_resource, project: project, request_id: request_id, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.set_instance_template instance_group_manager: instance_group_manager, instance_group_managers_set_instance_template_request_resource: instance_group_managers_set_instance_template_request_resource, project: project, request_id: request_id, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.set_instance_template ::Google::Cloud::Compute::V1::SetInstanceTemplateInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, instance_group_managers_set_instance_template_request_resource: instance_group_managers_set_instance_template_request_resource, project: project, request_id: request_id, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.set_instance_template({ instance_group_manager: instance_group_manager, instance_group_managers_set_instance_template_request_resource: instance_group_managers_set_instance_template_request_resource, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.set_instance_template(::Google::Cloud::Compute::V1::SetInstanceTemplateInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, instance_group_managers_set_instance_template_request_resource: instance_group_managers_set_instance_template_request_resource, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -1142,27 +1142,27 @@ class ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ClientTest < Mi
 
         # Use hash object
         client.set_target_pools({ instance_group_manager: instance_group_manager, instance_group_managers_set_target_pools_request_resource: instance_group_managers_set_target_pools_request_resource, project: project, request_id: request_id, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.set_target_pools instance_group_manager: instance_group_manager, instance_group_managers_set_target_pools_request_resource: instance_group_managers_set_target_pools_request_resource, project: project, request_id: request_id, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.set_target_pools ::Google::Cloud::Compute::V1::SetTargetPoolsInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, instance_group_managers_set_target_pools_request_resource: instance_group_managers_set_target_pools_request_resource, project: project, request_id: request_id, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.set_target_pools({ instance_group_manager: instance_group_manager, instance_group_managers_set_target_pools_request_resource: instance_group_managers_set_target_pools_request_resource, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.set_target_pools(::Google::Cloud::Compute::V1::SetTargetPoolsInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, instance_group_managers_set_target_pools_request_resource: instance_group_managers_set_target_pools_request_resource, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -1200,27 +1200,27 @@ class ::Google::Cloud::Compute::V1::InstanceGroupManagers::Rest::ClientTest < Mi
 
         # Use hash object
         client.update_per_instance_configs({ instance_group_manager: instance_group_manager, instance_group_managers_update_per_instance_configs_req_resource: instance_group_managers_update_per_instance_configs_req_resource, project: project, request_id: request_id, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.update_per_instance_configs instance_group_manager: instance_group_manager, instance_group_managers_update_per_instance_configs_req_resource: instance_group_managers_update_per_instance_configs_req_resource, project: project, request_id: request_id, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.update_per_instance_configs ::Google::Cloud::Compute::V1::UpdatePerInstanceConfigsInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, instance_group_managers_update_per_instance_configs_req_resource: instance_group_managers_update_per_instance_configs_req_resource, project: project, request_id: request_id, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.update_per_instance_configs({ instance_group_manager: instance_group_manager, instance_group_managers_update_per_instance_configs_req_resource: instance_group_managers_update_per_instance_configs_req_resource, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.update_per_instance_configs(::Google::Cloud::Compute::V1::UpdatePerInstanceConfigsInstanceGroupManagerRequest.new(instance_group_manager: instance_group_manager, instance_group_managers_update_per_instance_configs_req_resource: instance_group_managers_update_per_instance_configs_req_resource, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls

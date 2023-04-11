@@ -20,8 +20,11 @@
 require "google/cloud/language/v1beta2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Language::V1beta2::LanguageService::Client#analyze_syntax
+# Snippet for the analyze_syntax call in the LanguageService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Language::V1beta2::LanguageService::Client#analyze_syntax. It
+# may require modification in order to execute successfully.
 #
 def analyze_syntax
   # Create a client object. The client can be reused for multiple calls.

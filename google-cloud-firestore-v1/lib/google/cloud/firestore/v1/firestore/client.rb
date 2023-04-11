@@ -34,8 +34,8 @@ module Google
           # document database that simplifies storing, syncing, and querying data for
           # your mobile, web, and IoT apps at global scale. Its client libraries provide
           # live synchronization and offline support, while its security features and
-          # integrations with Firebase and Google Cloud Platform (GCP) accelerate
-          # building truly serverless apps.
+          # integrations with Firebase and Google Cloud Platform accelerate building
+          # truly serverless apps.
           #
           class Client
             # @private
@@ -358,36 +358,56 @@ module Google
             #     Required. The parent resource name. In the format:
             #     `projects/{project_id}/databases/{database_id}/documents` or
             #     `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
+            #
             #     For example:
             #     `projects/my-project/databases/my-database/documents` or
             #     `projects/my-project/databases/my-database/documents/chatrooms/my-chatroom`
             #   @param collection_id [::String]
-            #     Required. The collection ID, relative to `parent`, to list. For example: `chatrooms`
-            #     or `messages`.
+            #     Optional. The collection ID, relative to `parent`, to list.
+            #
+            #     For example: `chatrooms` or `messages`.
+            #
+            #     This is optional, and when not provided, Firestore will list documents
+            #     from all collections under the provided `parent`.
             #   @param page_size [::Integer]
-            #     The maximum number of documents to return.
+            #     Optional. The maximum number of documents to return in a single response.
+            #
+            #     Firestore may return fewer than this value.
             #   @param page_token [::String]
-            #     The `next_page_token` value returned from a previous List request, if any.
+            #     Optional. A page token, received from a previous `ListDocuments` response.
+            #
+            #     Provide this to retrieve the subsequent page. When paginating, all other
+            #     parameters (with the exception of `page_size`) must match the values set
+            #     in the request that generated the page token.
             #   @param order_by [::String]
-            #     The order to sort results by. For example: `priority desc, name`.
+            #     Optional. The optional ordering of the documents to return.
+            #
+            #     For example: `priority desc, __name__ desc`.
+            #
+            #     This mirrors the {::Google::Cloud::Firestore::V1::StructuredQuery#order_by `ORDER BY`}
+            #     used in Firestore queries but in a string representation. When absent,
+            #     documents are ordered based on `__name__ ASC`.
             #   @param mask [::Google::Cloud::Firestore::V1::DocumentMask, ::Hash]
-            #     The fields to return. If not set, returns all fields.
+            #     Optional. The fields to return. If not set, returns all fields.
             #
             #     If a document has a field that is not present in this mask, that field
             #     will not be returned in the response.
             #   @param transaction [::String]
-            #     Reads documents in a transaction.
+            #     Perform the read as part of an already active transaction.
             #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
-            #     Reads documents as they were at the given time.
+            #     Perform the read at the provided time.
+            #
             #     This may not be older than 270 seconds.
             #   @param show_missing [::Boolean]
-            #     If the list should show missing documents. A missing document is a
-            #     document that does not exist but has sub-documents. These documents will
-            #     be returned with a key but will not have fields, {::Google::Cloud::Firestore::V1::Document#create_time Document.create_time},
-            #     or {::Google::Cloud::Firestore::V1::Document#update_time Document.update_time} set.
+            #     If the list should show missing documents.
             #
-            #     Requests with `show_missing` may not specify `where` or
-            #     `order_by`.
+            #     A document is missing if it does not exist, but there are sub-documents
+            #     nested underneath it. When true, such missing documents will be returned
+            #     with a key but will not have fields,
+            #     {::Google::Cloud::Firestore::V1::Document#create_time `create_time`}, or
+            #     {::Google::Cloud::Firestore::V1::Document#update_time `update_time`} set.
+            #
+            #     Requests with `show_missing` may not specify `where` or `order_by`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Firestore::V1::Document>]
@@ -409,13 +429,11 @@ module Google
             #   # Call the list_documents method.
             #   result = client.list_documents request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Firestore::V1::Document.
-            #     p response
+            #     p item
             #   end
             #
             def list_documents request, options = nil
@@ -716,13 +734,13 @@ module Google
             #   # Create a request. To set request fields, pass in keyword arguments.
             #   request = Google::Cloud::Firestore::V1::BatchGetDocumentsRequest.new
             #
-            #   # Call the batch_get_documents method.
-            #   result = client.batch_get_documents request
+            #   # Call the batch_get_documents method to start streaming.
+            #   output = client.batch_get_documents request
             #
-            #   # The returned object is a streamed enumerable yielding elements of
-            #   # type ::Google::Cloud::Firestore::V1::BatchGetDocumentsResponse.
-            #   result.each do |response|
-            #     p response
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::Firestore::V1::BatchGetDocumentsResponse
+            #   output.each do |current_response|
+            #     p current_response
             #   end
             #
             def batch_get_documents request, options = nil
@@ -1092,13 +1110,13 @@ module Google
             #   # Create a request. To set request fields, pass in keyword arguments.
             #   request = Google::Cloud::Firestore::V1::RunQueryRequest.new
             #
-            #   # Call the run_query method.
-            #   result = client.run_query request
+            #   # Call the run_query method to start streaming.
+            #   output = client.run_query request
             #
-            #   # The returned object is a streamed enumerable yielding elements of
-            #   # type ::Google::Cloud::Firestore::V1::RunQueryResponse.
-            #   result.each do |response|
-            #     p response
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::Firestore::V1::RunQueryResponse
+            #   output.each do |current_response|
+            #     p current_response
             #   end
             #
             def run_query request, options = nil
@@ -1145,8 +1163,9 @@ module Google
             ##
             # Runs an aggregation query.
             #
-            # Rather than producing {::Google::Cloud::Firestore::V1::Document Document} results like {::Google::Cloud::Firestore::V1::Firestore::Client#run_query Firestore.RunQuery},
-            # this API allows running an aggregation to produce a series of
+            # Rather than producing {::Google::Cloud::Firestore::V1::Document Document} results like
+            # {::Google::Cloud::Firestore::V1::Firestore::Client#run_query Firestore.RunQuery}, this API
+            # allows running an aggregation to produce a series of
             # {::Google::Cloud::Firestore::V1::AggregationResult AggregationResult} server-side.
             #
             # High-Level Example:
@@ -1213,13 +1232,13 @@ module Google
             #   # Create a request. To set request fields, pass in keyword arguments.
             #   request = Google::Cloud::Firestore::V1::RunAggregationQueryRequest.new
             #
-            #   # Call the run_aggregation_query method.
-            #   result = client.run_aggregation_query request
+            #   # Call the run_aggregation_query method to start streaming.
+            #   output = client.run_aggregation_query request
             #
-            #   # The returned object is a streamed enumerable yielding elements of
-            #   # type ::Google::Cloud::Firestore::V1::RunAggregationQueryResponse.
-            #   result.each do |response|
-            #     p response
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::Firestore::V1::RunAggregationQueryResponse
+            #   output.each do |current_response|
+            #     p current_response
             #   end
             #
             def run_aggregation_query request, options = nil
@@ -1348,13 +1367,11 @@ module Google
             #   # Call the partition_query method.
             #   result = client.partition_query request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Firestore::V1::Cursor.
-            #     p response
+            #     p item
             #   end
             #
             def partition_query request, options = nil
@@ -1400,7 +1417,8 @@ module Google
             end
 
             ##
-            # Streams batches of document updates and deletes, in order.
+            # Streams batches of document updates and deletes, in order. This method is
+            # only available via the gRPC API (not REST).
             #
             # @param request [::Gapic::StreamInput, ::Enumerable<::Google::Cloud::Firestore::V1::WriteRequest, ::Hash>]
             #   An enumerable of {::Google::Cloud::Firestore::V1::WriteRequest} instances.
@@ -1421,22 +1439,22 @@ module Google
             #   # Create a client object. The client can be reused for multiple calls.
             #   client = Google::Cloud::Firestore::V1::Firestore::Client.new
             #
-            #   # Create an input stream
+            #   # Create an input stream.
             #   input = Gapic::StreamInput.new
             #
             #   # Call the write method to start streaming.
             #   output = client.write input
             #
-            #   # Send requests on the stream. For each request, pass in keyword
-            #   # arguments to set fields. Be sure to close the stream when done.
+            #   # Send requests on the stream. For each request object, set fields by
+            #   # passing keyword arguments. Be sure to close the stream when done.
             #   input << Google::Cloud::Firestore::V1::WriteRequest.new
             #   input << Google::Cloud::Firestore::V1::WriteRequest.new
             #   input.close
             #
-            #   # Handle streamed responses. These may be interleaved with inputs.
-            #   # Each response is of type ::Google::Cloud::Firestore::V1::WriteResponse.
-            #   output.each do |response|
-            #     p response
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::Firestore::V1::WriteResponse
+            #   output.each do |current_response|
+            #     p current_response
             #   end
             #
             def write request, options = nil
@@ -1478,7 +1496,8 @@ module Google
             end
 
             ##
-            # Listens to changes.
+            # Listens to changes. This method is only available via the gRPC API (not
+            # REST).
             #
             # @param request [::Gapic::StreamInput, ::Enumerable<::Google::Cloud::Firestore::V1::ListenRequest, ::Hash>]
             #   An enumerable of {::Google::Cloud::Firestore::V1::ListenRequest} instances.
@@ -1499,22 +1518,22 @@ module Google
             #   # Create a client object. The client can be reused for multiple calls.
             #   client = Google::Cloud::Firestore::V1::Firestore::Client.new
             #
-            #   # Create an input stream
+            #   # Create an input stream.
             #   input = Gapic::StreamInput.new
             #
             #   # Call the listen method to start streaming.
             #   output = client.listen input
             #
-            #   # Send requests on the stream. For each request, pass in keyword
-            #   # arguments to set fields. Be sure to close the stream when done.
+            #   # Send requests on the stream. For each request object, set fields by
+            #   # passing keyword arguments. Be sure to close the stream when done.
             #   input << Google::Cloud::Firestore::V1::ListenRequest.new
             #   input << Google::Cloud::Firestore::V1::ListenRequest.new
             #   input.close
             #
-            #   # Handle streamed responses. These may be interleaved with inputs.
-            #   # Each response is of type ::Google::Cloud::Firestore::V1::ListenResponse.
-            #   output.each do |response|
-            #     p response
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::Firestore::V1::ListenResponse
+            #   output.each do |current_response|
+            #     p current_response
             #   end
             #
             def listen request, options = nil
@@ -1657,7 +1676,8 @@ module Google
             # The BatchWrite method does not apply the write operations atomically
             # and can apply them out of order. Method does not allow more than one write
             # per document. Each write succeeds or fails independently. See the
-            # {::Google::Cloud::Firestore::V1::BatchWriteResponse BatchWriteResponse} for the success status of each write.
+            # {::Google::Cloud::Firestore::V1::BatchWriteResponse BatchWriteResponse} for the
+            # success status of each write.
             #
             # If you require an atomically applied set of writes, use
             # {::Google::Cloud::Firestore::V1::Firestore::Client#commit Commit} instead.
@@ -1776,7 +1796,8 @@ module Google
             #     `projects/{project_id}/databases/{database_id}/documents` or
             #     `projects/{project_id}/databases/{database_id}/documents/chatrooms/{chatroom_id}`
             #   @param collection_id [::String]
-            #     Required. The collection ID, relative to `parent`, to list. For example: `chatrooms`.
+            #     Required. The collection ID, relative to `parent`, to list. For example:
+            #     `chatrooms`.
             #   @param document_id [::String]
             #     The client-assigned document ID to use for this document.
             #
@@ -1894,9 +1915,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials

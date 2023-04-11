@@ -21,6 +21,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :device_type, :string, 4
       optional :dataset, :string, 6
       optional :max_suggestions, :int32, 5
+      optional :entity, :string, 10
     end
     add_message "google.cloud.retail.v2.CompleteQueryResponse" do
       repeated :completion_results, :message, 1, "google.cloud.retail.v2.CompleteQueryResponse.CompletionResult"

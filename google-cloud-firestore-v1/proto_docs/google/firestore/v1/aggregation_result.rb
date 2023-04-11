@@ -30,7 +30,8 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Firestore::V1::Value}]
         #     The result of the aggregation functions, ex: `COUNT(*) AS total_docs`.
         #
-        #     The key is the {::Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation#alias alias}
+        #     The key is the
+        #     {::Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation#alias alias}
         #     assigned to the aggregation function on input and the size of this map
         #     equals the number of aggregation functions in the query.
         class AggregationResult

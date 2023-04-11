@@ -20,25 +20,44 @@ require "helper"
 require "google/cloud/vision"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Cloud::Vision::ClientConstructionMinitest < Minitest::Test
   def test_product_search_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Vision.product_search do |config|
+      client = Google::Cloud::Vision.product_search transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Vision::V1::ProductSearch::Client, client
     end
   end
 
+  def test_product_search_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Vision.product_search transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Vision::V1::ProductSearch::Rest::Client, client
+    end
+  end
+
   def test_image_annotator_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Vision.image_annotator do |config|
+      client = Google::Cloud::Vision.image_annotator transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Vision::V1::ImageAnnotator::Client, client
+    end
+  end
+
+  def test_image_annotator_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Vision.image_annotator transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Vision::V1::ImageAnnotator::Rest::Client, client
     end
   end
 end

@@ -1,5 +1,17 @@
 # Release History
 
+### 0.15.0 (2023-03-15)
+
+#### Features
+
+* Provide default logging option to BuildOptions ([#20891](https://github.com/googleapis/google-cloud-ruby/issues/20891)) 
+
+### 0.14.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20625](https://github.com/googleapis/google-cloud-ruby/issues/20625)) 
+
 ### 0.13.0 (2022-11-01)
 
 #### Features

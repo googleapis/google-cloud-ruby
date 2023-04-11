@@ -1,5 +1,17 @@
 # Changelog
 
+### 0.7.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20625](https://github.com/googleapis/google-cloud-ruby/issues/20625)) 
+
+### 0.6.1 (2023-02-03)
+
+#### Documentation
+
+* Improve to DataScan API documentation ([#20105](https://github.com/googleapis/google-cloud-ruby/issues/20105)) 
+
 ### 0.6.0 (2023-01-05)
 
 #### Features

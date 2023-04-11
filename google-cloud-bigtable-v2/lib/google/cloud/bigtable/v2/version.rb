@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Bigtable
       module V2
-        VERSION = "0.7.1"
+        VERSION = "0.9.0"
       end
     end
   end

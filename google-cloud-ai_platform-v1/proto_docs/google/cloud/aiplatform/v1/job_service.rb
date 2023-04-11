@@ -366,6 +366,172 @@ module Google
         end
 
         # Request message for
+        # {::Google::Cloud::AIPlatform::V1::JobService::Client#create_nas_job JobService.CreateNasJob}.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the Location to create the NasJob in.
+        #     Format: `projects/{project}/locations/{location}`
+        # @!attribute [rw] nas_job
+        #   @return [::Google::Cloud::AIPlatform::V1::NasJob]
+        #     Required. The NasJob to create.
+        class CreateNasJobRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::JobService::Client#get_nas_job JobService.GetNasJob}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the NasJob resource.
+        #     Format:
+        #     `projects/{project}/locations/{location}/nasJobs/{nas_job}`
+        class GetNasJobRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::JobService::Client#list_nas_jobs JobService.ListNasJobs}.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the Location to list the NasJobs
+        #     from. Format: `projects/{project}/locations/{location}`
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     The standard list filter.
+        #
+        #     Supported fields:
+        #
+        #       * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+        #       * `state` supports `=`, `!=` comparisons.
+        #       * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+        #         `create_time` must be in RFC 3339 format.
+        #       * `labels` supports general map functions that is:
+        #         `labels.key=value` - key:value equality
+        #         `labels.key:* - key existence
+        #
+        #     Some examples of using the filter are:
+        #
+        #       * `state="JOB_STATE_SUCCEEDED" AND display_name:"my_job_*"`
+        #       * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
+        #       * `NOT display_name="my_job"`
+        #       * `create_time>"2021-05-18T00:00:00Z"`
+        #       * `labels.keyA=valueA`
+        #       * `labels.keyB:*`
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The standard list page size.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     The standard list page token.
+        #     Typically obtained via
+        #     {::Google::Cloud::AIPlatform::V1::ListNasJobsResponse#next_page_token ListNasJobsResponse.next_page_token}
+        #     of the previous
+        #     {::Google::Cloud::AIPlatform::V1::JobService::Client#list_nas_jobs JobService.ListNasJobs}
+        #     call.
+        # @!attribute [rw] read_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Mask specifying which fields to read.
+        class ListNasJobsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::JobService::Client#list_nas_jobs JobService.ListNasJobs}
+        # @!attribute [rw] nas_jobs
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::NasJob>]
+        #     List of NasJobs in the requested page.
+        #     {::Google::Cloud::AIPlatform::V1::NasJob#nas_job_output NasJob.nas_job_output}
+        #     of the jobs will not be returned.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token to retrieve the next page of results.
+        #     Pass to
+        #     {::Google::Cloud::AIPlatform::V1::ListNasJobsRequest#page_token ListNasJobsRequest.page_token}
+        #     to obtain that page.
+        class ListNasJobsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::JobService::Client#delete_nas_job JobService.DeleteNasJob}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the NasJob resource to be deleted.
+        #     Format:
+        #     `projects/{project}/locations/{location}/nasJobs/{nas_job}`
+        class DeleteNasJobRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::JobService::Client#cancel_nas_job JobService.CancelNasJob}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the NasJob to cancel.
+        #     Format:
+        #     `projects/{project}/locations/{location}/nasJobs/{nas_job}`
+        class CancelNasJobRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::JobService::Client#get_nas_trial_detail JobService.GetNasTrialDetail}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the NasTrialDetail resource.
+        #     Format:
+        #     `projects/{project}/locations/{location}/nasJobs/{nas_job}/nasTrialDetails/{nas_trial_detail}`
+        class GetNasTrialDetailRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::JobService::Client#list_nas_trial_details JobService.ListNasTrialDetails}.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The name of the NasJob resource.
+        #     Format:
+        #     `projects/{project}/locations/{location}/nasJobs/{nas_job}`
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The standard list page size.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     The standard list page token.
+        #     Typically obtained via
+        #     {::Google::Cloud::AIPlatform::V1::ListNasTrialDetailsResponse#next_page_token ListNasTrialDetailsResponse.next_page_token}
+        #     of the previous
+        #     {::Google::Cloud::AIPlatform::V1::JobService::Client#list_nas_trial_details JobService.ListNasTrialDetails}
+        #     call.
+        class ListNasTrialDetailsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::JobService::Client#list_nas_trial_details JobService.ListNasTrialDetails}
+        # @!attribute [rw] nas_trial_details
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::NasTrialDetail>]
+        #     List of top NasTrials in the requested page.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token to retrieve the next page of results.
+        #     Pass to
+        #     {::Google::Cloud::AIPlatform::V1::ListNasTrialDetailsRequest#page_token ListNasTrialDetailsRequest.page_token}
+        #     to obtain that page.
+        class ListNasTrialDetailsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
         # {::Google::Cloud::AIPlatform::V1::JobService::Client#create_batch_prediction_job JobService.CreateBatchPredictionJob}.
         # @!attribute [rw] parent
         #   @return [::String]

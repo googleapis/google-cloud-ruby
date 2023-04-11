@@ -1,5 +1,44 @@
 # Release History
 
+### 0.22.0 (2023-03-23)
+
+#### Features
+
+* Add support for ImportProcessorVersion ([#20946](https://github.com/googleapis/google-cloud-ruby/issues/20946)) 
+
+### 0.21.0 (2023-03-09)
+
+#### Features
+
+* Support hints for the OCR model ([#20764](https://github.com/googleapis/google-cloud-ruby/issues/20764)) 
+* Support OCR image quality scores 
+* Support symbol level OCR information 
+
+### 0.20.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20626](https://github.com/googleapis/google-cloud-ruby/issues/20626)) 
+
+### 0.19.0 (2023-02-13)
+
+#### Features
+
+* Support for ProcessorVersion#latest_evaluation ([#20134](https://github.com/googleapis/google-cloud-ruby/issues/20134)) 
+* Support for the UPDATE OperationType 
+
+### 0.18.0 (2023-01-28)
+
+#### Features
+
+* Add field advanced_ocr_options in OcrConfig ([#20083](https://github.com/googleapis/google-cloud-ruby/issues/20083)) 
+
+### 0.17.0 (2023-01-19)
+
+#### Features
+
+* Support for the get_processor_type RPC ([#20032](https://github.com/googleapis/google-cloud-ruby/issues/20032)) 
+
 ### 0.16.0 (2022-12-15)
 
 #### Features

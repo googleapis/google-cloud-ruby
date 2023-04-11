@@ -20,8 +20,11 @@
 require "google/cloud/gke_hub/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client#get_membership
+# Snippet for the get_membership call in the GkeHubMembershipService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client#get_membership.
+# It may require modification in order to execute successfully.
 #
 def get_membership
   # Create a client object. The client can be reused for multiple calls.

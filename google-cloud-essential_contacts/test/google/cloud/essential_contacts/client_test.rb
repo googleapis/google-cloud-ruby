@@ -20,15 +20,25 @@ require "helper"
 require "google/cloud/essential_contacts"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Cloud::EssentialContacts::ClientConstructionMinitest < Minitest::Test
   def test_essential_contacts_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::EssentialContacts.essential_contacts_service do |config|
+      client = Google::Cloud::EssentialContacts.essential_contacts_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::EssentialContacts::V1::EssentialContactsService::Client, client
+    end
+  end
+
+  def test_essential_contacts_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::EssentialContacts.essential_contacts_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::EssentialContacts::V1::EssentialContactsService::Rest::Client, client
     end
   end
 end

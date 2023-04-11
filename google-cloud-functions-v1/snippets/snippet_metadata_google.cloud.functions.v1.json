@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-functions-v1",
-    "version": "0.8.0",
+    "version": "0.9.0",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "cloudfunctions_v1_generated_CloudFunctionsService_ListFunctions_sync",
-      "title": "Snippet for list_functions in CloudFunctionsService",
-      "description": "Basic snippet for list_functions in CloudFunctionsService",
+      "title": "Snippet for the list_functions call in the CloudFunctionsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Functions::V1::CloudFunctionsService::Client#list_functions. It may require modification in order to execute successfully.",
       "file": "cloud_functions_service/list_functions.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudfunctions_v1_generated_CloudFunctionsService_GetFunction_sync",
-      "title": "Snippet for get_function in CloudFunctionsService",
-      "description": "Basic snippet for get_function in CloudFunctionsService",
+      "title": "Snippet for the get_function call in the CloudFunctionsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Functions::V1::CloudFunctionsService::Client#get_function. It may require modification in order to execute successfully.",
       "file": "cloud_functions_service/get_function.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudfunctions_v1_generated_CloudFunctionsService_CreateFunction_sync",
-      "title": "Snippet for create_function in CloudFunctionsService",
-      "description": "Basic snippet for create_function in CloudFunctionsService",
+      "title": "Snippet for the create_function call in the CloudFunctionsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Functions::V1::CloudFunctionsService::Client#create_function. It may require modification in order to execute successfully.",
       "file": "cloud_functions_service/create_function.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudfunctions_v1_generated_CloudFunctionsService_UpdateFunction_sync",
-      "title": "Snippet for update_function in CloudFunctionsService",
-      "description": "Basic snippet for update_function in CloudFunctionsService",
+      "title": "Snippet for the update_function call in the CloudFunctionsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Functions::V1::CloudFunctionsService::Client#update_function. It may require modification in order to execute successfully.",
       "file": "cloud_functions_service/update_function.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudfunctions_v1_generated_CloudFunctionsService_DeleteFunction_sync",
-      "title": "Snippet for delete_function in CloudFunctionsService",
-      "description": "Basic snippet for delete_function in CloudFunctionsService",
+      "title": "Snippet for the delete_function call in the CloudFunctionsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Functions::V1::CloudFunctionsService::Client#delete_function. It may require modification in order to execute successfully.",
       "file": "cloud_functions_service/delete_function.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudfunctions_v1_generated_CloudFunctionsService_CallFunction_sync",
-      "title": "Snippet for call_function in CloudFunctionsService",
-      "description": "Basic snippet for call_function in CloudFunctionsService",
+      "title": "Snippet for the call_function call in the CloudFunctionsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Functions::V1::CloudFunctionsService::Client#call_function. It may require modification in order to execute successfully.",
       "file": "cloud_functions_service/call_function.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudfunctions_v1_generated_CloudFunctionsService_GenerateUploadUrl_sync",
-      "title": "Snippet for generate_upload_url in CloudFunctionsService",
-      "description": "Basic snippet for generate_upload_url in CloudFunctionsService",
+      "title": "Snippet for the generate_upload_url call in the CloudFunctionsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Functions::V1::CloudFunctionsService::Client#generate_upload_url. It may require modification in order to execute successfully.",
       "file": "cloud_functions_service/generate_upload_url.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudfunctions_v1_generated_CloudFunctionsService_GenerateDownloadUrl_sync",
-      "title": "Snippet for generate_download_url in CloudFunctionsService",
-      "description": "Basic snippet for generate_download_url in CloudFunctionsService",
+      "title": "Snippet for the generate_download_url call in the CloudFunctionsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Functions::V1::CloudFunctionsService::Client#generate_download_url. It may require modification in order to execute successfully.",
       "file": "cloud_functions_service/generate_download_url.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudfunctions_v1_generated_CloudFunctionsService_SetIamPolicy_sync",
-      "title": "Snippet for set_iam_policy in CloudFunctionsService",
-      "description": "Basic snippet for set_iam_policy in CloudFunctionsService",
+      "title": "Snippet for the set_iam_policy call in the CloudFunctionsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Functions::V1::CloudFunctionsService::Client#set_iam_policy. It may require modification in order to execute successfully.",
       "file": "cloud_functions_service/set_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,15 +366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudfunctions_v1_generated_CloudFunctionsService_GetIamPolicy_sync",
-      "title": "Snippet for get_iam_policy in CloudFunctionsService",
-      "description": "Basic snippet for get_iam_policy in CloudFunctionsService",
+      "title": "Snippet for the get_iam_policy call in the CloudFunctionsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Functions::V1::CloudFunctionsService::Client#get_iam_policy. It may require modification in order to execute successfully.",
       "file": "cloud_functions_service/get_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,15 +406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudfunctions_v1_generated_CloudFunctionsService_TestIamPermissions_sync",
-      "title": "Snippet for test_iam_permissions in CloudFunctionsService",
-      "description": "Basic snippet for test_iam_permissions in CloudFunctionsService",
+      "title": "Snippet for the test_iam_permissions call in the CloudFunctionsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Functions::V1::CloudFunctionsService::Client#test_iam_permissions. It may require modification in order to execute successfully.",
       "file": "cloud_functions_service/test_iam_permissions.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,7 +446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]

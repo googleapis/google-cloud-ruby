@@ -1608,6 +1608,9 @@ module Google
         #
         #     Using a global volume in a build with only one step is not valid as
         #     it is indicative of a build request with an incorrect configuration.
+        # @!attribute [rw] default_logs_bucket_behavior
+        #   @return [::Google::Cloud::Build::V1::BuildOptions::DefaultLogsBucketBehavior]
+        #     Option to specify how default logs buckets are setup.
         class BuildOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1703,6 +1706,17 @@ module Google
 
             # Turn off all logging. No build logs will be captured.
             NONE = 4
+          end
+
+          # Default GCS log bucket behavior options.
+          module DefaultLogsBucketBehavior
+            # Unspecified.
+            DEFAULT_LOGS_BUCKET_BEHAVIOR_UNSPECIFIED = 0
+
+            # Bucket is located in user-owned project in the same region as the
+            # build. The builder service account must have access to create and write
+            # to GCS buckets in the build project.
+            REGIONAL_USER_OWNED_BUCKET = 1
           end
         end
 

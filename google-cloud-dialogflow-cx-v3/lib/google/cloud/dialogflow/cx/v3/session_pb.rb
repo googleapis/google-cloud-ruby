@@ -147,6 +147,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :session, :string, 1
       optional :query_params, :message, 2, "google.cloud.dialogflow.cx.v3.QueryParameters"
       optional :query_input, :message, 3, "google.cloud.dialogflow.cx.v3.QueryInput"
+      optional :persist_parameter_changes, :bool, 5
     end
     add_message "google.cloud.dialogflow.cx.v3.MatchIntentResponse" do
       repeated :matches, :message, 4, "google.cloud.dialogflow.cx.v3.Match"

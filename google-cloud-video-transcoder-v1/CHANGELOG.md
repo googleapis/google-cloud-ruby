@@ -1,5 +1,17 @@
 # Changelog
 
+### 0.7.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20630](https://github.com/googleapis/google-cloud-ruby/issues/20630)) 
+
+### 0.6.0 (2023-03-03)
+
+#### Features
+
+* add support for language_code for audio stream, display_name for audio and text stream. ([#20585](https://github.com/googleapis/google-cloud-ruby/issues/20585)) 
+
 ### 0.5.0 (2022-12-09)
 
 #### Features

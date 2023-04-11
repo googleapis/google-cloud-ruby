@@ -25,6 +25,7 @@ require "google/cloud/talent/v4beta1/version"
 require "google/cloud/talent/v4beta1/event_service/credentials"
 require "google/cloud/talent/v4beta1/event_service/paths"
 require "google/cloud/talent/v4beta1/event_service/client"
+require "google/cloud/talent/v4beta1/event_service/rest"
 
 module Google
   module Cloud
@@ -37,6 +38,11 @@ module Google
         #
         #     require "google/cloud/talent/v4beta1/event_service"
         #     client = ::Google::Cloud::Talent::V4beta1::EventService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/talent/v4beta1/event_service/rest"
+        #     client = ::Google::Cloud::Talent::V4beta1::EventService::Rest::Client.new
         #
         module EventService
         end

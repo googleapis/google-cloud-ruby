@@ -260,7 +260,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload annotate_assessment(name: nil, annotation: nil, reasons: nil, hashed_account_id: nil)
+            # @overload annotate_assessment(name: nil, annotation: nil, reasons: nil, hashed_account_id: nil, transaction_event: nil)
             #   Pass arguments to `annotate_assessment` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -281,6 +281,9 @@ module Google
             #     CreateAssessment, for example when the account identifier is not yet known
             #     in the initial request. It is recommended that the identifier is hashed
             #     using hmac-sha256 with stable secret.
+            #   @param transaction_event [::Google::Cloud::RecaptchaEnterprise::V1::TransactionEvent, ::Hash]
+            #     Optional. If the assessment is part of a payment transaction, provide
+            #     details on payment lifecycle events that occur in the transaction.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentResponse]
@@ -482,13 +485,11 @@ module Google
             #   # Call the list_keys method.
             #   result = client.list_keys request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::RecaptchaEnterprise::V1::Key.
-            #     p response
+            #     p item
             #   end
             #
             def list_keys request, options = nil
@@ -1121,13 +1122,11 @@ module Google
             #   # Call the list_related_account_groups method.
             #   result = client.list_related_account_groups request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::RecaptchaEnterprise::V1::RelatedAccountGroup.
-            #     p response
+            #     p item
             #   end
             #
             def list_related_account_groups request, options = nil
@@ -1225,13 +1224,11 @@ module Google
             #   # Call the list_related_account_group_memberships method.
             #   result = client.list_related_account_group_memberships request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::RecaptchaEnterprise::V1::RelatedAccountGroupMembership.
-            #     p response
+            #     p item
             #   end
             #
             def list_related_account_group_memberships request, options = nil
@@ -1335,13 +1332,11 @@ module Google
             #   # Call the search_related_account_group_memberships method.
             #   result = client.search_related_account_group_memberships request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::RecaptchaEnterprise::V1::RelatedAccountGroupMembership.
-            #     p response
+            #     p item
             #   end
             #
             def search_related_account_group_memberships request, options = nil
@@ -1424,9 +1419,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials

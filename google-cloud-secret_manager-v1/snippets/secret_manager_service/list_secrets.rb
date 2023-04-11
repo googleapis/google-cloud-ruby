@@ -20,8 +20,11 @@
 require "google/cloud/secret_manager/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::SecretManager::V1::SecretManagerService::Client#list_secrets
+# Snippet for the list_secrets call in the SecretManagerService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::SecretManager::V1::SecretManagerService::Client#list_secrets.
+# It may require modification in order to execute successfully.
 #
 def list_secrets
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_secrets
   # Call the list_secrets method.
   result = client.list_secrets request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::SecretManager::V1::Secret.
-    p response
+    p item
   end
 end
 # [END secretmanager_v1_generated_SecretManagerService_ListSecrets_sync]

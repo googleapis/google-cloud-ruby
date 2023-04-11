@@ -27,12 +27,12 @@ module Google
         #     Optional. Version of the batch runtime.
         # @!attribute [rw] container_image
         #   @return [::String]
-        #     Optional. Optional custom container image for the job runtime environment. If
-        #     not specified, a default container image will be used.
+        #     Optional. Optional custom container image for the job runtime environment.
+        #     If not specified, a default container image will be used.
         # @!attribute [rw] properties
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Optional. A mapping of property names to values, which are used to configure workload
-        #     execution.
+        #     Optional. A mapping of property names to values, which are used to
+        #     configure workload execution.
         class RuntimeConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -75,6 +75,28 @@ module Google
         # @!attribute [rw] kms_key
         #   @return [::String]
         #     Optional. The Cloud KMS key to use for encryption.
+        # @!attribute [rw] ttl
+        #   @return [::Google::Protobuf::Duration]
+        #     Optional. The duration after which the workload will be terminated.
+        #     When the workload passes this ttl, it will be unconditionally killed
+        #     without waiting for ongoing work to finish.
+        #     Minimum value is 10 minutes; maximum value is 14 days (see JSON
+        #     representation of
+        #     [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json)).
+        #     If both ttl and idle_ttl are specified, the conditions are treated as
+        #     and OR: the workload will be terminated when it has been idle for idle_ttl
+        #     or when the ttl has passed, whichever comes first.
+        #     If ttl is not specified for a session, it defaults to 24h.
+        # @!attribute [rw] staging_bucket
+        #   @return [::String]
+        #     Optional. A Cloud Storage bucket used to stage workload dependencies,
+        #     config files, and store workload output and other ephemeral data, such as
+        #     Spark history files. If you do not specify a staging bucket, Cloud Dataproc
+        #     will determine a Cloud Storage location according to the region where your
+        #     workload is running, and then create and manage project-level, per-location
+        #     staging and temporary buckets.
+        #     **This field requires a Cloud Storage bucket name, not a `gs://...` URI to
+        #     a Cloud Storage bucket.**
         class ExecutionConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -83,8 +105,8 @@ module Google
         # Spark History Server configuration for the workload.
         # @!attribute [rw] dataproc_cluster
         #   @return [::String]
-        #     Optional. Resource name of an existing Dataproc Cluster to act as a Spark History
-        #     Server for the workload.
+        #     Optional. Resource name of an existing Dataproc Cluster to act as a Spark
+        #     History Server for the workload.
         #
         #     Example:
         #
@@ -113,14 +135,23 @@ module Google
         # Runtime information about workload execution.
         # @!attribute [r] endpoints
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Output only. Map of remote access endpoints (such as web interfaces and APIs) to their
-        #     URIs.
+        #     Output only. Map of remote access endpoints (such as web interfaces and
+        #     APIs) to their URIs.
         # @!attribute [r] output_uri
         #   @return [::String]
-        #     Output only. A URI pointing to the location of the stdout and stderr of the workload.
+        #     Output only. A URI pointing to the location of the stdout and stderr of the
+        #     workload.
         # @!attribute [r] diagnostic_output_uri
         #   @return [::String]
         #     Output only. A URI pointing to the location of the diagnostics tarball.
+        # @!attribute [r] approximate_usage
+        #   @return [::Google::Cloud::Dataproc::V1::UsageMetrics]
+        #     Output only. Approximate workload resource usage calculated after workload
+        #     finishes (see [Dataproc Serverless pricing]
+        #     (https://cloud.google.com/dataproc-serverless/pricing)).
+        # @!attribute [r] current_usage
+        #   @return [::Google::Cloud::Dataproc::V1::UsageSnapshot]
+        #     Output only. Snapshot of current workload resource usage.
         class RuntimeInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -135,19 +166,56 @@ module Google
           end
         end
 
+        # Usage metrics represent approximate total resources consumed by a workload.
+        # @!attribute [rw] milli_dcu_seconds
+        #   @return [::Integer]
+        #     Optional. DCU (Dataproc Compute Units) usage in (`milliDCU` x `seconds`)
+        #     (see [Dataproc Serverless pricing]
+        #     (https://cloud.google.com/dataproc-serverless/pricing)).
+        # @!attribute [rw] shuffle_storage_gb_seconds
+        #   @return [::Integer]
+        #     Optional. Shuffle storage usage in (`GB` x `seconds`) (see
+        #     [Dataproc Serverless pricing]
+        #     (https://cloud.google.com/dataproc-serverless/pricing)).
+        class UsageMetrics
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The usage snaphot represents the resources consumed by a workload at a
+        # specified time.
+        # @!attribute [rw] milli_dcu
+        #   @return [::Integer]
+        #     Optional. Milli (one-thousandth) Dataproc Compute Units (DCUs) (see
+        #     [Dataproc Serverless pricing]
+        #     (https://cloud.google.com/dataproc-serverless/pricing)).
+        # @!attribute [rw] shuffle_storage_gb
+        #   @return [::Integer]
+        #     Optional. Shuffle Storage in gigabytes (GB). (see [Dataproc Serverless
+        #     pricing] (https://cloud.google.com/dataproc-serverless/pricing))
+        # @!attribute [rw] snapshot_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Optional. The timestamp of the usage snapshot.
+        class UsageSnapshot
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The cluster's GKE config.
         # @!attribute [rw] gke_cluster_target
         #   @return [::String]
-        #     Optional. A target GKE cluster to deploy to. It must be in the same project and
-        #     region as the Dataproc cluster (the GKE cluster can be zonal or regional).
-        #     Format: 'projects/\\{project}/locations/\\{location}/clusters/\\{cluster_id}'
+        #     Optional. A target GKE cluster to deploy to. It must be in the same project
+        #     and region as the Dataproc cluster (the GKE cluster can be zonal or
+        #     regional). Format:
+        #     'projects/\\{project}/locations/\\{location}/clusters/\\{cluster_id}'
         # @!attribute [rw] node_pool_target
         #   @return [::Array<::Google::Cloud::Dataproc::V1::GkeNodePoolTarget>]
-        #     Optional. GKE NodePools where workloads will be scheduled. At least one node pool
-        #     must be assigned the 'default' role. Each role can be given to only a
-        #     single NodePoolTarget. All NodePools must have the same location settings.
-        #     If a nodePoolTarget is not specified, Dataproc constructs a default
-        #     nodePoolTarget.
+        #     Optional. GKE node pools where workloads will be scheduled. At least one
+        #     node pool must be assigned the `DEFAULT`
+        #     {::Google::Cloud::Dataproc::V1::GkeNodePoolTarget::Role GkeNodePoolTarget.Role}.
+        #     If a `GkeNodePoolTarget` is not specified, Dataproc constructs a `DEFAULT`
+        #     `GkeNodePoolTarget`. Each role can be given to only one
+        #     `GkeNodePoolTarget`. All node pools must have the same location settings.
         class GkeClusterConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -156,16 +224,17 @@ module Google
         # The configuration for running the Dataproc cluster on Kubernetes.
         # @!attribute [rw] kubernetes_namespace
         #   @return [::String]
-        #     Optional. A namespace within the Kubernetes cluster to deploy into. If this namespace
-        #     does not exist, it is created. If it exists, Dataproc
-        #     verifies that another Dataproc VirtualCluster is not installed
-        #     into it. If not specified, the name of the Dataproc Cluster is used.
+        #     Optional. A namespace within the Kubernetes cluster to deploy into. If this
+        #     namespace does not exist, it is created. If it exists, Dataproc verifies
+        #     that another Dataproc VirtualCluster is not installed into it. If not
+        #     specified, the name of the Dataproc Cluster is used.
         # @!attribute [rw] gke_cluster_config
         #   @return [::Google::Cloud::Dataproc::V1::GkeClusterConfig]
         #     Required. The configuration for running the Dataproc cluster on GKE.
         # @!attribute [rw] kubernetes_software_config
         #   @return [::Google::Cloud::Dataproc::V1::KubernetesSoftwareConfig]
-        #     Optional. The software configuration for this Dataproc cluster running on Kubernetes.
+        #     Optional. The software configuration for this Dataproc cluster running on
+        #     Kubernetes.
         class KubernetesClusterConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -213,55 +282,62 @@ module Google
           end
         end
 
-        # GKE NodePools that Dataproc workloads run on.
+        # GKE node pools that Dataproc workloads run on.
         # @!attribute [rw] node_pool
         #   @return [::String]
-        #     Required. The target GKE NodePool.
+        #     Required. The target GKE node pool.
         #     Format:
         #     'projects/\\{project}/locations/\\{location}/clusters/\\{cluster}/nodePools/\\{node_pool}'
         # @!attribute [rw] roles
         #   @return [::Array<::Google::Cloud::Dataproc::V1::GkeNodePoolTarget::Role>]
-        #     Required. The types of role for a GKE NodePool
+        #     Required. The roles associated with the GKE node pool.
         # @!attribute [rw] node_pool_config
         #   @return [::Google::Cloud::Dataproc::V1::GkeNodePoolConfig]
-        #     Optional. The configuration for the GKE NodePool.
+        #     Input only. The configuration for the GKE node pool.
         #
-        #     If specified, Dataproc attempts to create a NodePool with the
+        #     If specified, Dataproc attempts to create a node pool with the
         #     specified shape. If one with the same name already exists, it is
         #     verified against all specified fields. If a field differs, the
         #     virtual cluster creation will fail.
         #
-        #     If omitted, any NodePool with the specified name is used. If a
-        #     NodePool with the specified name does not exist, Dataproc create a NodePool
-        #     with default values.
+        #     If omitted, any node pool with the specified name is used. If a
+        #     node pool with the specified name does not exist, Dataproc create a
+        #     node pool with default values.
+        #
+        #     This is an input only field. It will not be returned by the API.
         class GkeNodePoolTarget
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # `Role` specifies whose tasks will run on the NodePool. The roles can be
-          # specific to workloads. Exactly one GkeNodePoolTarget within the
-          # VirtualCluster must have 'default' role, which is used to run all workloads
-          # that are not associated with a NodePool.
+          # `Role` specifies the tasks that will run on the node pool. Roles can be
+          # specific to workloads. Exactly one
+          # {::Google::Cloud::Dataproc::V1::GkeNodePoolTarget GkeNodePoolTarget} within the
+          # virtual cluster must have the `DEFAULT` role, which is used to run all
+          # workloads that are not associated with a node pool.
           module Role
             # Role is unspecified.
             ROLE_UNSPECIFIED = 0
 
-            # Any roles that are not directly assigned to a NodePool run on the
-            # `default` role's NodePool.
+            # At least one node pool must have the `DEFAULT` role.
+            # Work assigned to a role that is not associated with a node pool
+            # is assigned to the node pool with the `DEFAULT` role. For example,
+            # work assigned to the `CONTROLLER` role will be assigned to the node pool
+            # with the `DEFAULT` role if no node pool has the `CONTROLLER` role.
             DEFAULT = 1
 
-            # Run controllers and webhooks.
+            # Run work associated with the Dataproc control plane (for example,
+            # controllers and webhooks). Very low resource requirements.
             CONTROLLER = 2
 
-            # Run spark driver.
+            # Run work associated with a Spark driver of a job.
             SPARK_DRIVER = 3
 
-            # Run spark executors.
+            # Run work associated with a Spark executor of a job.
             SPARK_EXECUTOR = 4
           end
         end
 
-        # The configuration of a GKE NodePool used by a [Dataproc-on-GKE
+        # The configuration of a GKE node pool used by a [Dataproc-on-GKE
         # cluster](https://cloud.google.com/dataproc/docs/concepts/jobs/dataproc-gke#create-a-dataproc-on-gke-cluster).
         # @!attribute [rw] config
         #   @return [::Google::Cloud::Dataproc::V1::GkeNodePoolConfig::GkeNodeConfig]
@@ -270,16 +346,19 @@ module Google
         #   @return [::Array<::String>]
         #     Optional. The list of Compute Engine
         #     [zones](https://cloud.google.com/compute/docs/zones#available) where
-        #     NodePool's nodes will be located.
+        #     node pool nodes associated with a Dataproc on GKE virtual cluster
+        #     will be located.
         #
-        #     **Note:** Currently, only one zone may be specified.
+        #     **Note:** All node pools associated with a virtual cluster
+        #     must be located in the same region as the virtual cluster, and they must
+        #     be located in the same zone within that region.
         #
-        #     If a location is not specified during NodePool creation, Dataproc will
-        #     choose a location.
+        #     If a location is not specified during node pool creation, Dataproc on GKE
+        #     will choose the zone.
         # @!attribute [rw] autoscaling
         #   @return [::Google::Cloud::Dataproc::V1::GkeNodePoolConfig::GkeNodePoolAutoscalingConfig]
-        #     Optional. The autoscaler configuration for this NodePool. The autoscaler is enabled
-        #     only when a valid configuration is present.
+        #     Optional. The autoscaler configuration for this node pool. The autoscaler
+        #     is enabled only when a valid configuration is present.
         class GkeNodePoolConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -289,15 +368,23 @@ module Google
           #   @return [::String]
           #     Optional. The name of a Compute Engine [machine
           #     type](https://cloud.google.com/compute/docs/machine-types).
-          # @!attribute [rw] preemptible
-          #   @return [::Boolean]
-          #     Optional. Whether the nodes are created as [preemptible VM
-          #     instances](https://cloud.google.com/compute/docs/instances/preemptible).
           # @!attribute [rw] local_ssd_count
           #   @return [::Integer]
-          #     Optional. The number of local SSD disks to attach to the node, which is limited by
-          #     the maximum number of disks allowable per zone (see [Adding Local
-          #     SSDs](https://cloud.google.com/compute/docs/disks/local-ssd)).
+          #     Optional. The number of local SSD disks to attach to the node, which is
+          #     limited by the maximum number of disks allowable per zone (see [Adding
+          #     Local SSDs](https://cloud.google.com/compute/docs/disks/local-ssd)).
+          # @!attribute [rw] preemptible
+          #   @return [::Boolean]
+          #     Optional. Whether the nodes are created as legacy [preemptible VM
+          #     instances] (https://cloud.google.com/compute/docs/instances/preemptible).
+          #     Also see
+          #     {::Google::Cloud::Dataproc::V1::GkeNodePoolConfig::GkeNodeConfig#spot Spot}
+          #     VMs, preemptible VM instances without a maximum lifetime. Legacy and Spot
+          #     preemptible nodes cannot be used in a node pool with the `CONTROLLER`
+          #     [role]
+          #     (/dataproc/docs/reference/rest/v1/projects.regions.clusters#role)
+          #     or in the DEFAULT node pool if the CONTROLLER role is not assigned (the
+          #     DEFAULT node pool will assume the CONTROLLER role).
           # @!attribute [rw] accelerators
           #   @return [::Array<::Google::Cloud::Dataproc::V1::GkeNodePoolConfig::GkeNodePoolAcceleratorConfig>]
           #     Optional. A list of [hardware
@@ -310,19 +397,43 @@ module Google
           #     to be used by this instance. The instance may be scheduled on the
           #     specified or a newer CPU platform. Specify the friendly names of CPU
           #     platforms, such as "Intel Haswell"` or Intel Sandy Bridge".
+          # @!attribute [rw] boot_disk_kms_key
+          #   @return [::String]
+          #     Optional. The [Customer Managed Encryption Key (CMEK)]
+          #     (https://cloud.google.com/kubernetes-engine/docs/how-to/using-cmek)
+          #     used to encrypt the boot disk attached to each node in the node pool.
+          #     Specify the key using the following format:
+          #     <code>projects/<var>KEY_PROJECT_ID</var>/locations/<var>LOCATION</var>/keyRings/<var>RING_NAME</var>/cryptoKeys/<var>KEY_NAME</var></code>.
+          # @!attribute [rw] spot
+          #   @return [::Boolean]
+          #     Optional. Whether the nodes are created as [Spot VM instances]
+          #     (https://cloud.google.com/compute/docs/instances/spot).
+          #     Spot VMs are the latest update to legacy
+          #     [preemptible
+          #     VMs][google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig.preemptible].
+          #     Spot VMs do not have a maximum lifetime. Legacy and Spot preemptible
+          #     nodes cannot be used in a node pool with the `CONTROLLER`
+          #     [role](/dataproc/docs/reference/rest/v1/projects.regions.clusters#role)
+          #     or in the DEFAULT node pool if the CONTROLLER role is not assigned (the
+          #     DEFAULT node pool will assume the CONTROLLER role).
           class GkeNodeConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # A GkeNodeConfigAcceleratorConfig represents a Hardware Accelerator request
-          # for a NodePool.
+          # for a node pool.
           # @!attribute [rw] accelerator_count
           #   @return [::Integer]
           #     The number of accelerator cards exposed to an instance.
           # @!attribute [rw] accelerator_type
           #   @return [::String]
           #     The accelerator type resource namename (see GPUs on Compute Engine).
+          # @!attribute [rw] gpu_partition_size
+          #   @return [::String]
+          #     Size of partitions to create on the GPU. Valid values are described in
+          #     the NVIDIA [mig user
+          #     guide](https://docs.nvidia.com/datacenter/tesla/mig-user-guide/#partitioning).
           class GkeNodePoolAcceleratorConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -332,11 +443,12 @@ module Google
           # adjust the size of the node pool to the current cluster usage.
           # @!attribute [rw] min_node_count
           #   @return [::Integer]
-          #     The minimum number of nodes in the NodePool. Must be >= 0 and <=
+          #     The minimum number of nodes in the node pool. Must be >= 0 and <=
           #     max_node_count.
           # @!attribute [rw] max_node_count
           #   @return [::Integer]
-          #     The maximum number of nodes in the NodePool. Must be >= min_node_count.
+          #     The maximum number of nodes in the node pool. Must be >= min_node_count,
+          #     and must be > 0.
           #     **Note:** Quota must be sufficient to scale up the cluster.
           class GkeNodePoolAutoscalingConfig
             include ::Google::Protobuf::MessageExts
@@ -371,11 +483,17 @@ module Google
           # The Hive Web HCatalog (the REST service for accessing HCatalog).
           HIVE_WEBHCAT = 3
 
+          # Hudi.
+          HUDI = 18
+
           # The Jupyter Notebook.
           JUPYTER = 1
 
           # The Presto query engine.
           PRESTO = 6
+
+          # The Trino query engine.
+          TRINO = 17
 
           # The Ranger service.
           RANGER = 12

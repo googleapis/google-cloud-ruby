@@ -20,8 +20,11 @@
 require "google/cloud/dataqna/v1alpha"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::DataQnA::V1alpha::QuestionService::Client#execute_question
+# Snippet for the execute_question call in the QuestionService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::DataQnA::V1alpha::QuestionService::Client#execute_question. It
+# may require modification in order to execute successfully.
 #
 def execute_question
   # Create a client object. The client can be reused for multiple calls.

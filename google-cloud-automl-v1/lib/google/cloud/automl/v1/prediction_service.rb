@@ -26,6 +26,7 @@ require "google/cloud/automl/v1/prediction_service/credentials"
 require "google/cloud/automl/v1/prediction_service/paths"
 require "google/cloud/automl/v1/prediction_service/operations"
 require "google/cloud/automl/v1/prediction_service/client"
+require "google/cloud/automl/v1/prediction_service/rest"
 
 module Google
   module Cloud
@@ -41,6 +42,11 @@ module Google
         #
         #     require "google/cloud/automl/v1/prediction_service"
         #     client = ::Google::Cloud::AutoML::V1::PredictionService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/automl/v1/prediction_service/rest"
+        #     client = ::Google::Cloud::AutoML::V1::PredictionService::Rest::Client.new
         #
         module PredictionService
         end

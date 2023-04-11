@@ -19,6 +19,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :max_length, :int64, 7
       optional :precision, :int64, 8
       optional :scale, :int64, 9
+      optional :default_value_expression, :string, 10
     end
     add_enum "google.cloud.bigquery.storage.v1.TableFieldSchema.Type" do
       value :TYPE_UNSPECIFIED, 0

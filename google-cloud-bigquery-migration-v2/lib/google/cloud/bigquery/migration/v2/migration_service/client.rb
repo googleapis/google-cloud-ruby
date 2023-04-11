@@ -393,13 +393,11 @@ module Google
               #   # Call the list_migration_workflows method.
               #   result = client.list_migration_workflows request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Bigquery::Migration::V2::MigrationWorkflow.
-              #     p response
+              #     p item
               #   end
               #
               def list_migration_workflows request, options = nil
@@ -731,18 +729,18 @@ module Google
               #   @param read_mask [::Google::Protobuf::FieldMask, ::Hash]
               #     Optional. The list of fields to be retrieved.
               #   @param page_size [::Integer]
-              #     Optional. The maximum number of migration tasks to return. The service may return
-              #     fewer than this number.
+              #     Optional. The maximum number of migration tasks to return. The service may
+              #     return fewer than this number.
               #   @param page_token [::String]
-              #     Optional. A page token, received from previous `ListMigrationSubtasks` call.
-              #     Provide this to retrieve the subsequent page.
+              #     Optional. A page token, received from previous `ListMigrationSubtasks`
+              #     call. Provide this to retrieve the subsequent page.
               #
               #     When paginating, all other parameters provided to `ListMigrationSubtasks`
               #     must match the call that provided the page token.
               #   @param filter [::String]
-              #     Optional. The filter to apply. This can be used to get the subtasks of a specific
-              #     tasks in a workflow, e.g. `migration_task = "ab012"` where `"ab012"` is the
-              #     task ID (not the name in the named map).
+              #     Optional. The filter to apply. This can be used to get the subtasks of a
+              #     specific tasks in a workflow, e.g. `migration_task = "ab012"` where
+              #     `"ab012"` is the task ID (not the name in the named map).
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Bigquery::Migration::V2::MigrationSubtask>]
@@ -764,13 +762,11 @@ module Google
               #   # Call the list_migration_subtasks method.
               #   result = client.list_migration_subtasks request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Bigquery::Migration::V2::MigrationSubtask.
-              #     p response
+              #     p item
               #   end
               #
               def list_migration_subtasks request, options = nil
@@ -853,9 +849,9 @@ module Google
               #    *  (`String`) The path to a service account key file in JSON format
               #    *  (`Hash`) A service account key as a Hash
               #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-              #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+              #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
               #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-              #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+              #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
               #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
               #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
               #    *  (`nil`) indicating no credentials

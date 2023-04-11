@@ -27,11 +27,13 @@ module Google
           ##
           # Client for the TraceService service.
           #
-          # This file describes an API for collecting and viewing traces and spans
-          # within a trace.  A Trace is a collection of spans corresponding to a single
-          # operation or set of operations for an application. A span is an individual
-          # timed event which forms a node of the trace tree. A single trace may
-          # contain span(s) from multiple services.
+          # Service for collecting and viewing traces and spans within a trace.
+          #
+          # A trace is a collection of spans corresponding to a single
+          # operation or a set of operations in an application.
+          #
+          # A span is an individual timed event which forms a node of the trace tree.
+          # A single trace can contain spans from multiple services.
           #
           class Client
             include Paths
@@ -69,6 +71,9 @@ module Google
                 default_config = Client::Configuration.new parent_config
 
                 default_config.rpcs.batch_write_spans.timeout = 120.0
+                default_config.rpcs.batch_write_spans.retry_policy = {
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 2, retry_codes: [14, 4]
+                }
 
                 default_config.rpcs.create_span.timeout = 120.0
                 default_config.rpcs.create_span.retry_policy = {
@@ -156,7 +161,7 @@ module Google
             # Service calls
 
             ##
-            # Sends new spans to new or existing traces. You cannot update
+            # Batch writes new spans to new or existing traces. You cannot update
             # existing spans.
             #
             # @overload batch_write_spans(request, options = nil)
@@ -179,7 +184,7 @@ module Google
             #     `projects/[PROJECT_ID]`.
             #   @param spans [::Array<::Google::Cloud::Trace::V2::Span, ::Hash>]
             #     Required. A list of new spans. The span names must not match existing
-            #     spans, or the results are undefined.
+            #     spans, otherwise the results are undefined.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]
@@ -266,34 +271,38 @@ module Google
             #   @param name [::String]
             #     Required. The resource name of the span in the following format:
             #
-            #         projects/[PROJECT_ID]/traces/[TRACE_ID]/spans/[SPAN_ID]
+            #      * `projects/[PROJECT_ID]/traces/[TRACE_ID]/spans/[SPAN_ID]`
             #
-            #     [TRACE_ID] is a unique identifier for a trace within a project;
-            #     it is a 32-character hexadecimal encoding of a 16-byte array.
+            #     `[TRACE_ID]` is a unique identifier for a trace within a project;
+            #     it is a 32-character hexadecimal encoding of a 16-byte array. It should
+            #     not be zero.
             #
-            #     [SPAN_ID] is a unique identifier for a span within a trace; it
-            #     is a 16-character hexadecimal encoding of an 8-byte array.
+            #     `[SPAN_ID]` is a unique identifier for a span within a trace; it
+            #     is a 16-character hexadecimal encoding of an 8-byte array. It should not
+            #     be zero.
+            #     .
             #   @param span_id [::String]
-            #     Required. The [SPAN_ID] portion of the span's resource name.
+            #     Required. The `[SPAN_ID]` portion of the span's resource name.
             #   @param parent_span_id [::String]
-            #     The [SPAN_ID] of this span's parent span. If this is a root span,
+            #     The `[SPAN_ID]` of this span's parent span. If this is a root span,
             #     then this field must be empty.
             #   @param display_name [::Google::Cloud::Trace::V2::TruncatableString, ::Hash]
             #     Required. A description of the span's operation (up to 128 bytes).
-            #     Stackdriver Trace displays the description in the
-            #     Google Cloud Platform Console.
+            #     Cloud Trace displays the description in the
+            #     Cloud console.
             #     For example, the display name can be a qualified method name or a file name
             #     and a line number where the operation is called. A best practice is to use
             #     the same display name within an application and at the same call point.
             #     This makes it easier to correlate spans in different traces.
             #   @param start_time [::Google::Protobuf::Timestamp, ::Hash]
-            #     Required. The start time of the span. On the client side, this is the time kept by
-            #     the local machine where the span execution starts. On the server side, this
-            #     is the time when the server's application handler starts running.
+            #     Required. The start time of the span. On the client side, this is the time
+            #     kept by the local machine where the span execution starts. On the server
+            #     side, this is the time when the server's application handler starts
+            #     running.
             #   @param end_time [::Google::Protobuf::Timestamp, ::Hash]
-            #     Required. The end time of the span. On the client side, this is the time kept by
-            #     the local machine where the span execution ends. On the server side, this
-            #     is the time when the server application handler stops running.
+            #     Required. The end time of the span. On the client side, this is the time
+            #     kept by the local machine where the span execution ends. On the server
+            #     side, this is the time when the server application handler stops running.
             #   @param attributes [::Google::Cloud::Trace::V2::Span::Attributes, ::Hash]
             #     A set of attributes on the span. You can have up to 32 attributes per
             #     span.
@@ -309,15 +318,14 @@ module Google
             #   @param same_process_as_parent_span [::Google::Protobuf::BoolValue, ::Hash]
             #     Optional. Set this parameter to indicate whether this span is in
             #     the same process as its parent. If you do not set this parameter,
-            #     Stackdriver Trace is unable to take advantage of this helpful
-            #     information.
+            #     Trace is unable to take advantage of this helpful information.
             #   @param child_span_count [::Google::Protobuf::Int32Value, ::Hash]
             #     Optional. The number of child spans that were generated while this span
             #     was active. If set, allows implementation to detect missing child spans.
             #   @param span_kind [::Google::Cloud::Trace::V2::Span::SpanKind]
-            #     Optional. Distinguishes between spans generated in a particular context. For example,
-            #     two spans with the same name may be distinguished using `CLIENT` (caller)
-            #     and `SERVER` (callee) to identify an RPC call.
+            #     Optional. Distinguishes between spans generated in a particular context.
+            #     For example, two spans with the same name may be distinguished using
+            #     `CLIENT` (caller) and `SERVER` (callee) to identify an RPC call.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Trace::V2::Span]
@@ -421,9 +429,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials

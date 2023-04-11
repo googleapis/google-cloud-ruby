@@ -20,8 +20,11 @@
 require "google/cloud/container/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Container::V1beta1::ClusterManager::Client#delete_node_pool
+# Snippet for the delete_node_pool call in the ClusterManager service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Container::V1beta1::ClusterManager::Client#delete_node_pool. It
+# may require modification in order to execute successfully.
 #
 def delete_node_pool
   # Create a client object. The client can be reused for multiple calls.

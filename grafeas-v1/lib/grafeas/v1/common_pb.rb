@@ -45,6 +45,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :UPGRADE, 8
       value :COMPLIANCE, 9
       value :DSSE_ATTESTATION, 10
+      value :VULNERABILITY_ASSESSMENT, 11
     end
   end
 end

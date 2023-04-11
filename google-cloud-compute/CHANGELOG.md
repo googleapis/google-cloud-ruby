@@ -1,5 +1,21 @@
 # Changelog
 
+### 1.1.0 (2023-03-23)
+
+#### Features
+
+* Added support for the RegionInstanceTemplates client ([#20916](https://github.com/googleapis/google-cloud-ruby/issues/20916)) 
+
+### 1.0.0 (2023-02-15)
+
+### ⚠ BREAKING CHANGES
+
+* Calling an RPC with a block yields a TransportOperation rather than a Faraday object
+
+#### Features
+
+* Calling an RPC with a block yields a TransportOperation rather than a Faraday object 
+
 ### 0.6.0 (2023-01-12)
 
 #### Features

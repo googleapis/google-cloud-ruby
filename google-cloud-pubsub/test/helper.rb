@@ -90,9 +90,9 @@ class AsyncPublisherStub
     @messages = []
   end
 
-  def publish topic:, messages:
-    @messages << messages
-    message_ids = Array.new(messages.count) { |i| "msg#{i}" }
+  def publish request, options=nil
+    @messages << request[:messages]
+    message_ids = Array.new(request[:messages].count) { |i| "msg#{i}" }
     Google::Cloud::PubSub::V1::PublishResponse.new({ message_ids: message_ids })
   end
 

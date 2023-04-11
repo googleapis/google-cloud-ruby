@@ -194,6 +194,46 @@ module Google
             end
 
             ##
+            # Create a fully-qualified NasJob resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/nasJobs/{nas_job}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param nas_job [String]
+            #
+            # @return [::String]
+            def nas_job_path project:, location:, nas_job:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/nasJobs/#{nas_job}"
+            end
+
+            ##
+            # Create a fully-qualified NasTrialDetail resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/nasJobs/{nas_job}/nasTrialDetails/{nas_trial_detail}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param nas_job [String]
+            # @param nas_trial_detail [String]
+            #
+            # @return [::String]
+            def nas_trial_detail_path project:, location:, nas_job:, nas_trial_detail:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "nas_job cannot contain /" if nas_job.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/nasJobs/#{nas_job}/nasTrialDetails/#{nas_trial_detail}"
+            end
+
+            ##
             # Create a fully-qualified Network resource string.
             #
             # The resource will be in the following format:

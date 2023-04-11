@@ -141,7 +141,7 @@ module Google
 
               until @queue.empty?
                 item = @queue.first
-                if try_add item.msg, item.callback
+                if try_add item.msg, item.callback, item.create_time
                   @queue.shift
                   next
                 end
@@ -178,12 +178,7 @@ module Google
                 return false
               end
 
-              until @queue.empty?
-                item = @queue.first
-                added = try_add item.msg, item.callback
-                break unless added
-                @queue.shift
-              end
+              refill_items
 
               return false unless @publishing
               if @items.empty?
@@ -191,6 +186,7 @@ module Google
                 return false
               else
                 return true if stopping?
+                return true if interval_met?(@items.first.create_time) || batch_full_by_count?
                 if @queue.empty?
                   @publishing = false
                   return false
@@ -255,18 +251,39 @@ module Google
             end
           end
 
+          def total_message_bytes
+            @total_message_bytes
+          end
+
           protected
 
-          def items_add msg, callback
-            item = Item.new msg, callback
+          def interval_met? create_time
+            Time.now - create_time > @publisher.interval
+          end
+
+          def batch_full_by_count?
+            total_message_count == @publisher.max_messages
+          end
+
+          def refill_items
+            until @queue.empty?
+              item = @queue.first
+              added = try_add item.msg, item.callback, item.create_time
+              break unless added
+              @queue.shift
+            end
+          end
+
+          def items_add msg, callback, create_time
+            item = Item.new msg, callback, (create_time || Time.now)
             @items << item
             @total_message_bytes += item.bytesize + 2
           end
 
-          def try_add msg, callback
+          def try_add msg, callback, create_time = nil
             if @items.empty?
               # Always add when empty, even if bytesize is bigger than total
-              items_add msg, callback
+              items_add msg, callback, create_time
               return true
             end
             new_message_count = total_message_count + 1
@@ -275,12 +292,12 @@ module Google
                new_message_bytes >= @publisher.max_bytes
               return false
             end
-            items_add msg, callback
+            items_add msg, callback, create_time
             true
           end
 
           def queue_add msg, callback
-            item = Item.new msg, callback
+            item = Item.new msg, callback, Time.now
             @queue << item
           end
 
@@ -288,11 +305,7 @@ module Google
             @items.count
           end
 
-          def total_message_bytes
-            @total_message_bytes
-          end
-
-          Item = Struct.new :msg, :callback do
+          Item = Struct.new :msg, :callback, :create_time do
             def bytesize
               msg.to_proto.bytesize
             end

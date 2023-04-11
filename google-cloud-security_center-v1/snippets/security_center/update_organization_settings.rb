@@ -20,8 +20,11 @@
 require "google/cloud/security_center/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#update_organization_settings
+# Snippet for the update_organization_settings call in the SecurityCenter service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#update_organization_settings.
+# It may require modification in order to execute successfully.
 #
 def update_organization_settings
   # Create a client object. The client can be reused for multiple calls.

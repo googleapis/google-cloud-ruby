@@ -25,6 +25,7 @@ require "google/cloud/monitoring/dashboard/v1/version"
 require "google/cloud/monitoring/dashboard/v1/dashboards_service/credentials"
 require "google/cloud/monitoring/dashboard/v1/dashboards_service/paths"
 require "google/cloud/monitoring/dashboard/v1/dashboards_service/client"
+require "google/cloud/monitoring/dashboard/v1/dashboards_service/rest"
 
 module Google
   module Cloud
@@ -39,6 +40,11 @@ module Google
           #
           #     require "google/cloud/monitoring/dashboard/v1/dashboards_service"
           #     client = ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client.new
+          #
+          # @example Load this service and instantiate a REST client
+          #
+          #     require "google/cloud/monitoring/dashboard/v1/dashboards_service/rest"
+          #     client = ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Rest::Client.new
           #
           module DashboardsService
           end

@@ -17,6 +17,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :CLOUD_PUBSUB, 2
       value :DATAPROC_METASTORE, 3
       value :DATAPLEX, 4
+      value :CLOUD_SQL, 8
+      value :LOOKER, 9
+    end
+    add_enum "google.cloud.datacatalog.v1.ManagingSystem" do
+      value :MANAGING_SYSTEM_UNSPECIFIED, 0
+      value :MANAGING_SYSTEM_DATAPLEX, 1
+      value :MANAGING_SYSTEM_OTHER, 2
     end
   end
 end
@@ -27,6 +34,7 @@ module Google
       module V1
         PersonalDetails = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.PersonalDetails").msgclass
         IntegratedSystem = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.IntegratedSystem").enummodule
+        ManagingSystem = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.ManagingSystem").enummodule
       end
     end
   end

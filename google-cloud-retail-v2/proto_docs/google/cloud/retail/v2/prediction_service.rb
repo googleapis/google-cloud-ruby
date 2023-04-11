@@ -101,6 +101,9 @@ module Google
         #      * (colors: ANY("Red", "Blue")) AND NOT (categories: ANY("Phones"))
         #      * (availability: ANY("IN_STOCK")) AND
         #        (colors: ANY("Red") OR categories: ANY("Phones"))
+        #
+        #     For more information, see
+        #     [Filter recommendations](https://cloud.google.com/retail/docs/filter-recs).
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
         #     Use validate only mode for this prediction query. If set to true, a

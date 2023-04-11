@@ -20,8 +20,11 @@
 require "google/cloud/api_gateway/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::ApiGateway::V1::ApiGatewayService::Client#get_api
+# Snippet for the get_api call in the ApiGatewayService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::ApiGateway::V1::ApiGatewayService::Client#get_api. It may
+# require modification in order to execute successfully.
 #
 def get_api
   # Create a client object. The client can be reused for multiple calls.

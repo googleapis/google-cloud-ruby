@@ -30,6 +30,11 @@ module Google
       #     require "google/cloud/network_security/v1beta1"
       #     client = ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/network_security/v1beta1"
+      #     client = ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::Client.new
+      #
       module V1beta1
       end
     end

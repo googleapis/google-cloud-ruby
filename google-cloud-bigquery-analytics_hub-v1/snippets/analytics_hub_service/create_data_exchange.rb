@@ -20,8 +20,11 @@
 require "google/cloud/bigquery/analytics_hub/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#create_data_exchange
+# Snippet for the create_data_exchange call in the AnalyticsHubService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#create_data_exchange.
+# It may require modification in order to execute successfully.
 #
 def create_data_exchange
   # Create a client object. The client can be reused for multiple calls.

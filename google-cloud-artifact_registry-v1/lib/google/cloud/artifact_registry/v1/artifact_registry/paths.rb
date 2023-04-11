@@ -46,6 +46,27 @@ module Google
             end
 
             ##
+            # Create a fully-qualified File resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/repositories/{repository}/files/{file}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param repository [String]
+            # @param file [String]
+            #
+            # @return [::String]
+            def file_path project:, location:, repository:, file:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "repository cannot contain /" if repository.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/repositories/#{repository}/files/#{file}"
+            end
+
+            ##
             # Create a fully-qualified Location resource string.
             #
             # The resource will be in the following format:
@@ -63,6 +84,69 @@ module Google
             end
 
             ##
+            # Create a fully-qualified MavenArtifact resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/repositories/{repository}/mavenArtifacts/{maven_artifact}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param repository [String]
+            # @param maven_artifact [String]
+            #
+            # @return [::String]
+            def maven_artifact_path project:, location:, repository:, maven_artifact:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "repository cannot contain /" if repository.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/repositories/#{repository}/mavenArtifacts/#{maven_artifact}"
+            end
+
+            ##
+            # Create a fully-qualified NpmPackage resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/repositories/{repository}/npmPackages/{npm_package}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param repository [String]
+            # @param npm_package [String]
+            #
+            # @return [::String]
+            def npm_package_path project:, location:, repository:, npm_package:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "repository cannot contain /" if repository.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/repositories/#{repository}/npmPackages/#{npm_package}"
+            end
+
+            ##
+            # Create a fully-qualified Package resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/repositories/{repository}/packages/{package}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param repository [String]
+            # @param package [String]
+            #
+            # @return [::String]
+            def package_path project:, location:, repository:, package:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "repository cannot contain /" if repository.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/repositories/#{repository}/packages/#{package}"
+            end
+
+            ##
             # Create a fully-qualified ProjectSettings resource string.
             #
             # The resource will be in the following format:
@@ -74,6 +158,27 @@ module Google
             # @return [::String]
             def project_settings_path project:
               "projects/#{project}/projectSettings"
+            end
+
+            ##
+            # Create a fully-qualified PythonPackage resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/repositories/{repository}/pythonPackages/{python_package}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param repository [String]
+            # @param python_package [String]
+            #
+            # @return [::String]
+            def python_package_path project:, location:, repository:, python_package:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "repository cannot contain /" if repository.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/repositories/#{repository}/pythonPackages/#{python_package}"
             end
 
             ##
@@ -116,6 +221,23 @@ module Google
               raise ::ArgumentError, "package cannot contain /" if package.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/repositories/#{repository}/packages/#{package}/tags/#{tag}"
+            end
+
+            ##
+            # Create a fully-qualified VpcscConfig resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/vpcscConfig`
+            #
+            # @param project [String]
+            # @param location [String]
+            #
+            # @return [::String]
+            def vpcsc_config_path project:, location:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/vpcscConfig"
             end
 
             extend self

@@ -20,8 +20,11 @@
 require "google/cloud/network_connectivity/v1alpha1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Client#create_spoke
+# Snippet for the create_spoke call in the HubService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Client#create_spoke.
+# It may require modification in order to execute successfully.
 #
 def create_spoke
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def create_spoke
   # Call the create_spoke method.
   result = client.create_spoke request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END networkconnectivity_v1alpha1_generated_HubService_CreateSpoke_sync]

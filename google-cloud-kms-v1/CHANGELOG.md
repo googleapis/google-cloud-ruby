@@ -1,5 +1,26 @@
 # Release History
 
+### 0.18.1 (2023-03-29)
+
+#### Documentation
+
+* Link to documentation describing support for other hash algorithms ([#21018](https://github.com/googleapis/google-cloud-ruby/issues/21018)) 
+
+### 0.18.0 (2023-03-08)
+
+#### Features
+
+* Report reasons for failures of generation and external destruction 
+* Support for controlling who can perform control plane operations on EKM. 
+* Support for RPCs managing the singleton EKM config ([#20616](https://github.com/googleapis/google-cloud-ruby/issues/20616)) 
+* Support for the EKM crypto space path. 
+
+### 0.17.0 (2023-02-17)
+
+#### Features
+
+* Added support for REST transport ([#20443](https://github.com/googleapis/google-cloud-ruby/issues/20443)) 
+
 ### 0.16.0 (2022-12-09)
 
 #### Features

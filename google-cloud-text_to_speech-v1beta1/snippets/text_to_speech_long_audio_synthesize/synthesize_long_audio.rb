@@ -20,8 +20,11 @@
 require "google/cloud/text_to_speech/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::TextToSpeech::V1beta1::TextToSpeechLongAudioSynthesize::Client#synthesize_long_audio
+# Snippet for the synthesize_long_audio call in the TextToSpeechLongAudioSynthesize service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::TextToSpeech::V1beta1::TextToSpeechLongAudioSynthesize::Client#synthesize_long_audio.
+# It may require modification in order to execute successfully.
 #
 def synthesize_long_audio
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def synthesize_long_audio
   # Call the synthesize_long_audio method.
   result = client.synthesize_long_audio request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END texttospeech_v1beta1_generated_TextToSpeechLongAudioSynthesize_SynthesizeLongAudio_sync]

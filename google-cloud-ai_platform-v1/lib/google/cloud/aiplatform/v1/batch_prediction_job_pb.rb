@@ -46,6 +46,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :update_time, :message, 18, "google.protobuf.Timestamp"
       map :labels, :string, :string, 19
       optional :encryption_spec, :message, 24, "google.cloud.aiplatform.v1.EncryptionSpec"
+      optional :disable_container_logging, :bool, 34
     end
     add_message "google.cloud.aiplatform.v1.BatchPredictionJob.InputConfig" do
       optional :instances_format, :string, 1

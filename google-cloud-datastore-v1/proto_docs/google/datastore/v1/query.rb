@@ -30,17 +30,23 @@ module Google
         #     The version of the entity, a strictly positive number that monotonically
         #     increases with changes to the entity.
         #
-        #     This field is set for {::Google::Cloud::Datastore::V1::EntityResult::ResultType::FULL `FULL`} entity
-        #     results.
+        #     This field is set for
+        #     {::Google::Cloud::Datastore::V1::EntityResult::ResultType::FULL `FULL`} entity results.
         #
-        #     For {::Google::Cloud::Datastore::V1::LookupResponse#missing missing} entities in `LookupResponse`, this
-        #     is the version of the snapshot that was used to look up the entity, and it
-        #     is always set except for eventually consistent reads.
+        #     For {::Google::Cloud::Datastore::V1::LookupResponse#missing missing} entities in
+        #     `LookupResponse`, this is the version of the snapshot that was used to look
+        #     up the entity, and it is always set except for eventually consistent reads.
+        # @!attribute [rw] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time at which the entity was created.
+        #     This field is set for
+        #     {::Google::Cloud::Datastore::V1::EntityResult::ResultType::FULL `FULL`} entity results.
+        #     If this entity is missing, this field will not be set.
         # @!attribute [rw] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The time at which the entity was last changed.
-        #     This field is set for {::Google::Cloud::Datastore::V1::EntityResult::ResultType::FULL `FULL`} entity
-        #     results.
+        #     This field is set for
+        #     {::Google::Cloud::Datastore::V1::EntityResult::ResultType::FULL `FULL`} entity results.
         #     If this entity is missing, this field will not be set.
         # @!attribute [rw] cursor
         #   @return [::String]
@@ -89,6 +95,11 @@ module Google
         #     The properties to make distinct. The query results will contain the first
         #     result for each distinct combination of values for the given properties
         #     (if empty, all results are returned).
+        #
+        #     Requires:
+        #
+        #     * If `order` is specified, the set of distinct on properties must appear
+        #     before the non-distinct on properties in `order`.
         # @!attribute [rw] start_cursor
         #   @return [::String]
         #     A starting point for the query results. Query cursors are
@@ -116,13 +127,15 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Datastore query for running an aggregation over a {::Google::Cloud::Datastore::V1::Query Query}.
+        # Datastore query for running an aggregation over a
+        # {::Google::Cloud::Datastore::V1::Query Query}.
         # @!attribute [rw] nested_query
         #   @return [::Google::Cloud::Datastore::V1::Query]
         #     Nested query for aggregation
         # @!attribute [rw] aggregations
         #   @return [::Array<::Google::Cloud::Datastore::V1::AggregationQuery::Aggregation>]
-        #     Optional. Series of aggregations to apply over the results of the `nested_query`.
+        #     Optional. Series of aggregations to apply over the results of the
+        #     `nested_query`.
         #
         #     Requires:
         #
@@ -131,13 +144,14 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Defines a aggregation that produces a single result.
+          # Defines an aggregation that produces a single result.
           # @!attribute [rw] count
           #   @return [::Google::Cloud::Datastore::V1::AggregationQuery::Aggregation::Count]
           #     Count aggregator.
           # @!attribute [rw] alias
           #   @return [::String]
-          #     Optional. Optional name of the property to store the result of the aggregation.
+          #     Optional. Optional name of the property to store the result of the
+          #     aggregation.
           #
           #     If not provided, Datastore will pick a default name following the format
           #     `property_<incremental_id++>`. For example:
@@ -147,7 +161,7 @@ module Google
           #       COUNT_UP_TO(1) AS count_up_to_1,
           #       COUNT_UP_TO(2),
           #       COUNT_UP_TO(3) AS count_up_to_3,
-          #       COUNT_UP_TO(4)
+          #       COUNT(*)
           #     OVER (
           #       ...
           #     );
@@ -160,7 +174,7 @@ module Google
           #       COUNT_UP_TO(1) AS count_up_to_1,
           #       COUNT_UP_TO(2) AS property_1,
           #       COUNT_UP_TO(3) AS count_up_to_3,
-          #       COUNT_UP_TO(4) AS property_2
+          #       COUNT(*) AS property_2
           #     OVER (
           #       ...
           #     );
@@ -169,7 +183,8 @@ module Google
           #     Requires:
           #
           #     * Must be unique across all aggregation aliases.
-          #     * Conform to {::Google::Cloud::Datastore::V1::Entity#properties entity property name} limitations.
+          #     * Conform to [entity property
+          #     name][google.datastore.v1.Entity.properties] limitations.
           class Aggregation
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -180,10 +195,11 @@ module Google
             # so it does not require a field reference.
             # @!attribute [rw] up_to
             #   @return [::Google::Protobuf::Int64Value]
-            #     Optional. Optional constraint on the maximum number of entities to count.
+            #     Optional. Optional constraint on the maximum number of entities to
+            #     count.
             #
             #     This provides a way to set an upper bound on the number of entities
-            #     to scan, limiting latency and cost.
+            #     to scan, limiting latency, and cost.
             #
             #     Unspecified is interpreted as no bound.
             #
@@ -292,6 +308,9 @@ module Google
 
             # The results are required to satisfy each of the combined filters.
             AND = 1
+
+            # Documents are required to satisfy at least one of the combined filters.
+            OR = 2
           end
         end
 
@@ -366,6 +385,7 @@ module Google
             # Requires:
             #
             # * That `value` is an entity key.
+            # * No other `HAS_ANCESTOR` is in the same query.
             HAS_ANCESTOR = 11
 
             # The value of the `property` is not in the given array.

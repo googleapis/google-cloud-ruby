@@ -48,12 +48,14 @@ module Google
       # Create a new client object for BinauthzManagementService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::BinaryAuthorization::V1::BinauthzManagementService::Client](https://googleapis.dev/ruby/google-cloud-binary_authorization-v1/latest/Google/Cloud/BinaryAuthorization/V1/BinauthzManagementService/Client.html)
+      # [Google::Cloud::BinaryAuthorization::V1::BinauthzManagementService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-binary_authorization-v1/latest/Google-Cloud-BinaryAuthorization-V1-BinauthzManagementService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the BinauthzManagementService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About BinauthzManagementService
       #
@@ -67,9 +69,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.binauthz_management_service version: :v1, &block
+      def self.binauthz_management_service version: :v1, transport: :grpc, &block
         require "google/cloud/binary_authorization/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::BinaryAuthorization
@@ -77,6 +80,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::BinaryAuthorization.const_get(package_name).const_get(:BinauthzManagementService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -84,12 +88,14 @@ module Google
       # Create a new client object for SystemPolicy.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::BinaryAuthorization::V1::SystemPolicy::Client](https://googleapis.dev/ruby/google-cloud-binary_authorization-v1/latest/Google/Cloud/BinaryAuthorization/V1/SystemPolicy/Client.html)
+      # [Google::Cloud::BinaryAuthorization::V1::SystemPolicy::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-binary_authorization-v1/latest/Google-Cloud-BinaryAuthorization-V1-SystemPolicy-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the SystemPolicy service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About SystemPolicy
       #
@@ -97,9 +103,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.system_policy version: :v1, &block
+      def self.system_policy version: :v1, transport: :grpc, &block
         require "google/cloud/binary_authorization/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::BinaryAuthorization
@@ -107,6 +114,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::BinaryAuthorization.const_get(package_name).const_get(:SystemPolicy)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -114,12 +122,14 @@ module Google
       # Create a new client object for ValidationHelper.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::BinaryAuthorization::V1::ValidationHelper::Client](https://googleapis.dev/ruby/google-cloud-binary_authorization-v1/latest/Google/Cloud/BinaryAuthorization/V1/ValidationHelper/Client.html)
+      # [Google::Cloud::BinaryAuthorization::V1::ValidationHelper::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-binary_authorization-v1/latest/Google-Cloud-BinaryAuthorization-V1-ValidationHelper-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the ValidationHelper service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About ValidationHelper
       #
@@ -127,9 +137,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.validation_helper version: :v1, &block
+      def self.validation_helper version: :v1, transport: :grpc, &block
         require "google/cloud/binary_authorization/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::BinaryAuthorization
@@ -137,6 +148,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::BinaryAuthorization.const_get(package_name).const_get(:ValidationHelper)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 

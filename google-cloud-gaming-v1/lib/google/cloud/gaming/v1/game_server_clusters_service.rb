@@ -26,6 +26,7 @@ require "google/cloud/gaming/v1/game_server_clusters_service/credentials"
 require "google/cloud/gaming/v1/game_server_clusters_service/paths"
 require "google/cloud/gaming/v1/game_server_clusters_service/operations"
 require "google/cloud/gaming/v1/game_server_clusters_service/client"
+require "google/cloud/gaming/v1/game_server_clusters_service/rest"
 
 module Google
   module Cloud
@@ -39,6 +40,11 @@ module Google
         #
         #     require "google/cloud/gaming/v1/game_server_clusters_service"
         #     client = ::Google::Cloud::Gaming::V1::GameServerClustersService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/gaming/v1/game_server_clusters_service/rest"
+        #     client = ::Google::Cloud::Gaming::V1::GameServerClustersService::Rest::Client.new
         #
         module GameServerClustersService
         end

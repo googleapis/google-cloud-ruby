@@ -30,6 +30,11 @@ module Google
       #     require "google/analytics/data/v1beta"
       #     client = ::Google::Analytics::Data::V1beta::AnalyticsData::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/analytics/data/v1beta"
+      #     client = ::Google::Analytics::Data::V1beta::AnalyticsData::Rest::Client.new
+      #
       module V1beta
       end
     end

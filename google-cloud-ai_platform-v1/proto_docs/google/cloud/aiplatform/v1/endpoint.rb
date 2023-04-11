@@ -78,7 +78,7 @@ module Google
         #     this key.
         # @!attribute [rw] network
         #   @return [::String]
-        #     The full name of the Google Compute Engine
+        #     Optional. The full name of the Google Compute Engine
         #     [network](https://cloud.google.com//compute/docs/networks-and-firewalls#networks)
         #     to which the Endpoint should be peered.
         #
@@ -156,7 +156,11 @@ module Google
         #     Endpoint.
         #
         #     The resource name may contain version id or version alias to specify the
-        #     version, if no version is specified, the default version will be deployed.
+        #     version.
+        #      Example: `projects/{project}/locations/{location}/models/{model}@2`
+        #                  or
+        #                `projects/{project}/locations/{location}/models/{model}@golden`
+        #     if no version is specified, the default version will be deployed.
         # @!attribute [r] model_version_id
         #   @return [::String]
         #     Output only. The version ID of the model that is deployed.
@@ -206,6 +210,8 @@ module Google
         #     User can disable container logging by setting this flag to true.
         # @!attribute [rw] enable_access_logging
         #   @return [::Boolean]
+        #     If true, online prediction access logs are sent to StackDriver
+        #     Logging.
         #     These logs are like standard server access logs, containing
         #     information like timestamp and latency for each prediction request.
         #

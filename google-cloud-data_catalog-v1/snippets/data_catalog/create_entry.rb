@@ -20,8 +20,11 @@
 require "google/cloud/data_catalog/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::DataCatalog::V1::DataCatalog::Client#create_entry
+# Snippet for the create_entry call in the DataCatalog service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::DataCatalog::V1::DataCatalog::Client#create_entry. It may
+# require modification in order to execute successfully.
 #
 def create_entry
   # Create a client object. The client can be reused for multiple calls.

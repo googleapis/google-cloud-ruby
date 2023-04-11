@@ -20,8 +20,11 @@
 require "google/cloud/document_ai/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#process_document
+# Snippet for the process_document call in the DocumentProcessorService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#process_document.
+# It may require modification in order to execute successfully.
 #
 def process_document
   # Create a client object. The client can be reused for multiple calls.

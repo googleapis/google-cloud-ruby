@@ -20,8 +20,11 @@
 require "google/cloud/ai_platform/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::AIPlatform::V1::PipelineService::Client#get_training_pipeline
+# Snippet for the get_training_pipeline call in the PipelineService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::PipelineService::Client#get_training_pipeline.
+# It may require modification in order to execute successfully.
 #
 def get_training_pipeline
   # Create a client object. The client can be reused for multiple calls.

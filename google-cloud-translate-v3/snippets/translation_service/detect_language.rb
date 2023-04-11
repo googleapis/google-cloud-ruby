@@ -20,8 +20,11 @@
 require "google/cloud/translate/v3"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Translate::V3::TranslationService::Client#detect_language
+# Snippet for the detect_language call in the TranslationService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Translate::V3::TranslationService::Client#detect_language. It
+# may require modification in order to execute successfully.
 #
 def detect_language
   # Create a client object. The client can be reused for multiple calls.

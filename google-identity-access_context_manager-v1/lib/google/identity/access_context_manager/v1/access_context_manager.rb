@@ -26,6 +26,7 @@ require "google/identity/access_context_manager/v1/access_context_manager/creden
 require "google/identity/access_context_manager/v1/access_context_manager/paths"
 require "google/identity/access_context_manager/v1/access_context_manager/operations"
 require "google/identity/access_context_manager/v1/access_context_manager/client"
+require "google/identity/access_context_manager/v1/access_context_manager/rest"
 
 module Google
   module Identity
@@ -48,6 +49,11 @@ module Google
         #
         #     require "google/identity/access_context_manager/v1/access_context_manager"
         #     client = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/identity/access_context_manager/v1/access_context_manager/rest"
+        #     client = ::Google::Identity::AccessContextManager::V1::AccessContextManager::Rest::Client.new
         #
         module AccessContextManager
         end

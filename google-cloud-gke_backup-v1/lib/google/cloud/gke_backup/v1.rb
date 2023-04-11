@@ -30,6 +30,11 @@ module Google
       #     require "google/cloud/gke_backup/v1"
       #     client = ::Google::Cloud::GkeBackup::V1::BackupForGKE::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/gke_backup/v1"
+      #     client = ::Google::Cloud::GkeBackup::V1::BackupForGKE::Rest::Client.new
+      #
       module V1
       end
     end

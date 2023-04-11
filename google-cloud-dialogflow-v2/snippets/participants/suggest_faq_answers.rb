@@ -20,8 +20,11 @@
 require "google/cloud/dialogflow/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dialogflow::V2::Participants::Client#suggest_faq_answers
+# Snippet for the suggest_faq_answers call in the Participants service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dialogflow::V2::Participants::Client#suggest_faq_answers. It
+# may require modification in order to execute successfully.
 #
 def suggest_faq_answers
   # Create a client object. The client can be reused for multiple calls.

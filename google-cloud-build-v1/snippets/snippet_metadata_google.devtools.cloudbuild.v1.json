@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-build-v1",
-    "version": "0.13.0",
+    "version": "0.15.0",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "cloudbuild_v1_generated_CloudBuild_CreateBuild_sync",
-      "title": "Snippet for create_build in CloudBuild",
-      "description": "Basic snippet for create_build in CloudBuild",
+      "title": "Snippet for the create_build call in the CloudBuild service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V1::CloudBuild::Client#create_build. It may require modification in order to execute successfully.",
       "file": "cloud_build/create_build.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudbuild_v1_generated_CloudBuild_GetBuild_sync",
-      "title": "Snippet for get_build in CloudBuild",
-      "description": "Basic snippet for get_build in CloudBuild",
+      "title": "Snippet for the get_build call in the CloudBuild service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V1::CloudBuild::Client#get_build. It may require modification in order to execute successfully.",
       "file": "cloud_build/get_build.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudbuild_v1_generated_CloudBuild_ListBuilds_sync",
-      "title": "Snippet for list_builds in CloudBuild",
-      "description": "Basic snippet for list_builds in CloudBuild",
+      "title": "Snippet for the list_builds call in the CloudBuild service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V1::CloudBuild::Client#list_builds. It may require modification in order to execute successfully.",
       "file": "cloud_build/list_builds.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudbuild_v1_generated_CloudBuild_CancelBuild_sync",
-      "title": "Snippet for cancel_build in CloudBuild",
-      "description": "Basic snippet for cancel_build in CloudBuild",
+      "title": "Snippet for the cancel_build call in the CloudBuild service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V1::CloudBuild::Client#cancel_build. It may require modification in order to execute successfully.",
       "file": "cloud_build/cancel_build.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudbuild_v1_generated_CloudBuild_RetryBuild_sync",
-      "title": "Snippet for retry_build in CloudBuild",
-      "description": "Basic snippet for retry_build in CloudBuild",
+      "title": "Snippet for the retry_build call in the CloudBuild service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V1::CloudBuild::Client#retry_build. It may require modification in order to execute successfully.",
       "file": "cloud_build/retry_build.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudbuild_v1_generated_CloudBuild_ApproveBuild_sync",
-      "title": "Snippet for approve_build in CloudBuild",
-      "description": "Basic snippet for approve_build in CloudBuild",
+      "title": "Snippet for the approve_build call in the CloudBuild service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V1::CloudBuild::Client#approve_build. It may require modification in order to execute successfully.",
       "file": "cloud_build/approve_build.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudbuild_v1_generated_CloudBuild_CreateBuildTrigger_sync",
-      "title": "Snippet for create_build_trigger in CloudBuild",
-      "description": "Basic snippet for create_build_trigger in CloudBuild",
+      "title": "Snippet for the create_build_trigger call in the CloudBuild service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V1::CloudBuild::Client#create_build_trigger. It may require modification in order to execute successfully.",
       "file": "cloud_build/create_build_trigger.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudbuild_v1_generated_CloudBuild_GetBuildTrigger_sync",
-      "title": "Snippet for get_build_trigger in CloudBuild",
-      "description": "Basic snippet for get_build_trigger in CloudBuild",
+      "title": "Snippet for the get_build_trigger call in the CloudBuild service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V1::CloudBuild::Client#get_build_trigger. It may require modification in order to execute successfully.",
       "file": "cloud_build/get_build_trigger.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudbuild_v1_generated_CloudBuild_ListBuildTriggers_sync",
-      "title": "Snippet for list_build_triggers in CloudBuild",
-      "description": "Basic snippet for list_build_triggers in CloudBuild",
+      "title": "Snippet for the list_build_triggers call in the CloudBuild service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V1::CloudBuild::Client#list_build_triggers. It may require modification in order to execute successfully.",
       "file": "cloud_build/list_build_triggers.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,15 +366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudbuild_v1_generated_CloudBuild_DeleteBuildTrigger_sync",
-      "title": "Snippet for delete_build_trigger in CloudBuild",
-      "description": "Basic snippet for delete_build_trigger in CloudBuild",
+      "title": "Snippet for the delete_build_trigger call in the CloudBuild service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V1::CloudBuild::Client#delete_build_trigger. It may require modification in order to execute successfully.",
       "file": "cloud_build/delete_build_trigger.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,15 +406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudbuild_v1_generated_CloudBuild_UpdateBuildTrigger_sync",
-      "title": "Snippet for update_build_trigger in CloudBuild",
-      "description": "Basic snippet for update_build_trigger in CloudBuild",
+      "title": "Snippet for the update_build_trigger call in the CloudBuild service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V1::CloudBuild::Client#update_build_trigger. It may require modification in order to execute successfully.",
       "file": "cloud_build/update_build_trigger.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,15 +446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudbuild_v1_generated_CloudBuild_RunBuildTrigger_sync",
-      "title": "Snippet for run_build_trigger in CloudBuild",
-      "description": "Basic snippet for run_build_trigger in CloudBuild",
+      "title": "Snippet for the run_build_trigger call in the CloudBuild service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V1::CloudBuild::Client#run_build_trigger. It may require modification in order to execute successfully.",
       "file": "cloud_build/run_build_trigger.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,15 +486,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudbuild_v1_generated_CloudBuild_ReceiveTriggerWebhook_sync",
-      "title": "Snippet for receive_trigger_webhook in CloudBuild",
-      "description": "Basic snippet for receive_trigger_webhook in CloudBuild",
+      "title": "Snippet for the receive_trigger_webhook call in the CloudBuild service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V1::CloudBuild::Client#receive_trigger_webhook. It may require modification in order to execute successfully.",
       "file": "cloud_build/receive_trigger_webhook.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,15 +526,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudbuild_v1_generated_CloudBuild_CreateWorkerPool_sync",
-      "title": "Snippet for create_worker_pool in CloudBuild",
-      "description": "Basic snippet for create_worker_pool in CloudBuild",
+      "title": "Snippet for the create_worker_pool call in the CloudBuild service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V1::CloudBuild::Client#create_worker_pool. It may require modification in order to execute successfully.",
       "file": "cloud_build/create_worker_pool.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,15 +566,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudbuild_v1_generated_CloudBuild_GetWorkerPool_sync",
-      "title": "Snippet for get_worker_pool in CloudBuild",
-      "description": "Basic snippet for get_worker_pool in CloudBuild",
+      "title": "Snippet for the get_worker_pool call in the CloudBuild service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V1::CloudBuild::Client#get_worker_pool. It may require modification in order to execute successfully.",
       "file": "cloud_build/get_worker_pool.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,15 +606,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudbuild_v1_generated_CloudBuild_DeleteWorkerPool_sync",
-      "title": "Snippet for delete_worker_pool in CloudBuild",
-      "description": "Basic snippet for delete_worker_pool in CloudBuild",
+      "title": "Snippet for the delete_worker_pool call in the CloudBuild service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V1::CloudBuild::Client#delete_worker_pool. It may require modification in order to execute successfully.",
       "file": "cloud_build/delete_worker_pool.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,15 +646,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudbuild_v1_generated_CloudBuild_UpdateWorkerPool_sync",
-      "title": "Snippet for update_worker_pool in CloudBuild",
-      "description": "Basic snippet for update_worker_pool in CloudBuild",
+      "title": "Snippet for the update_worker_pool call in the CloudBuild service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V1::CloudBuild::Client#update_worker_pool. It may require modification in order to execute successfully.",
       "file": "cloud_build/update_worker_pool.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,15 +686,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudbuild_v1_generated_CloudBuild_ListWorkerPools_sync",
-      "title": "Snippet for list_worker_pools in CloudBuild",
-      "description": "Basic snippet for list_worker_pools in CloudBuild",
+      "title": "Snippet for the list_worker_pools call in the CloudBuild service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V1::CloudBuild::Client#list_worker_pools. It may require modification in order to execute successfully.",
       "file": "cloud_build/list_worker_pools.rb",
       "language": "RUBY",
       "client_method": {
@@ -726,7 +726,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]

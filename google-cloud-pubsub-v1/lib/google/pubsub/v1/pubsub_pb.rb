@@ -214,10 +214,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :ack_ids, :string, 1
       repeated :invalid_ack_ids, :string, 2
       repeated :unordered_ack_ids, :string, 3
+      repeated :temporary_failed_ack_ids, :string, 4
     end
     add_message "google.pubsub.v1.StreamingPullResponse.ModifyAckDeadlineConfirmation" do
       repeated :ack_ids, :string, 1
       repeated :invalid_ack_ids, :string, 2
+      repeated :temporary_failed_ack_ids, :string, 3
     end
     add_message "google.pubsub.v1.StreamingPullResponse.SubscriptionProperties" do
       optional :exactly_once_delivery_enabled, :bool, 1

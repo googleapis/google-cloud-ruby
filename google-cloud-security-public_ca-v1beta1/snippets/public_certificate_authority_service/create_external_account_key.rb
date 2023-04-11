@@ -20,8 +20,11 @@
 require "google/cloud/security/public_ca/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Security::PublicCA::V1beta1::PublicCertificateAuthorityService::Client#create_external_account_key
+# Snippet for the create_external_account_key call in the PublicCertificateAuthorityService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Security::PublicCA::V1beta1::PublicCertificateAuthorityService::Client#create_external_account_key.
+# It may require modification in order to execute successfully.
 #
 def create_external_account_key
   # Create a client object. The client can be reused for multiple calls.

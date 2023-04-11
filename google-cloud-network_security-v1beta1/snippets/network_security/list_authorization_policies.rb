@@ -20,8 +20,11 @@
 require "google/cloud/network_security/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client#list_authorization_policies
+# Snippet for the list_authorization_policies call in the NetworkSecurity service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client#list_authorization_policies.
+# It may require modification in order to execute successfully.
 #
 def list_authorization_policies
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_authorization_policies
   # Call the list_authorization_policies method.
   result = client.list_authorization_policies request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::NetworkSecurity::V1beta1::AuthorizationPolicy.
-    p response
+    p item
   end
 end
 # [END networksecurity_v1beta1_generated_NetworkSecurity_ListAuthorizationPolicies_sync]

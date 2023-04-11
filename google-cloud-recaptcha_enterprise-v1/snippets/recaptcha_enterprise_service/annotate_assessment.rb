@@ -20,8 +20,11 @@
 require "google/cloud/recaptcha_enterprise/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#annotate_assessment
+# Snippet for the annotate_assessment call in the RecaptchaEnterpriseService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#annotate_assessment.
+# It may require modification in order to execute successfully.
 #
 def annotate_assessment
   # Create a client object. The client can be reused for multiple calls.

@@ -352,8 +352,8 @@ module Google
         # @!attribute [rw] tokens_per_hour
         #   @return [::Google::Analytics::Admin::V1alpha::AccessQuotaStatus]
         #     Properties can use 50,000 tokens per hour. An API request consumes a single
-        #     number of tokens, and that number is deducted from both the hourly and
-        #     daily quotas.
+        #     number of tokens, and that number is deducted from all of the hourly,
+        #     daily, and per project hourly quotas.
         # @!attribute [rw] concurrent_requests
         #   @return [::Google::Analytics::Admin::V1alpha::AccessQuotaStatus]
         #     Properties can use up to 50 concurrent requests.
@@ -361,6 +361,12 @@ module Google
         #   @return [::Google::Analytics::Admin::V1alpha::AccessQuotaStatus]
         #     Properties and cloud project pairs can have up to 50 server errors per
         #     hour.
+        # @!attribute [rw] tokens_per_project_per_hour
+        #   @return [::Google::Analytics::Admin::V1alpha::AccessQuotaStatus]
+        #     Properties can use up to 25% of their tokens per project per hour. This
+        #     amounts to Analytics 360 Properties can use 12,500 tokens per project per
+        #     hour. An API request consumes a single number of tokens, and that number is
+        #     deducted from all of the hourly, daily, and per project hourly quotas.
         class AccessQuota
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

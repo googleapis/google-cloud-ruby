@@ -20,8 +20,11 @@
 require "google/cloud/automl/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::AutoML::V1::PredictionService::Client#predict
+# Snippet for the predict call in the PredictionService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::AutoML::V1::PredictionService::Client#predict. It may require
+# modification in order to execute successfully.
 #
 def predict
   # Create a client object. The client can be reused for multiple calls.

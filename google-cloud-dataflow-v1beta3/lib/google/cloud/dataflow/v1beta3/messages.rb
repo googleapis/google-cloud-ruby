@@ -24,6 +24,7 @@ require "google/cloud/dataflow/v1beta3/version"
 
 require "google/cloud/dataflow/v1beta3/messages/credentials"
 require "google/cloud/dataflow/v1beta3/messages/client"
+require "google/cloud/dataflow/v1beta3/messages/rest"
 
 module Google
   module Cloud
@@ -37,6 +38,11 @@ module Google
         #
         #     require "google/cloud/dataflow/v1beta3/messages"
         #     client = ::Google::Cloud::Dataflow::V1beta3::Messages::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/dataflow/v1beta3/messages/rest"
+        #     client = ::Google::Cloud::Dataflow::V1beta3::Messages::Rest::Client.new
         #
         module Messages
         end

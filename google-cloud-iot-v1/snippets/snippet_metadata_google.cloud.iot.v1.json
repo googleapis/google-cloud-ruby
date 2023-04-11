@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-iot-v1",
-    "version": "0.5.0",
+    "version": "0.6.0",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "cloudiot_v1_generated_DeviceManager_CreateDeviceRegistry_sync",
-      "title": "Snippet for create_device_registry in DeviceManager",
-      "description": "Basic snippet for create_device_registry in DeviceManager",
+      "title": "Snippet for the create_device_registry call in the DeviceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Iot::V1::DeviceManager::Client#create_device_registry. It may require modification in order to execute successfully.",
       "file": "device_manager/create_device_registry.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudiot_v1_generated_DeviceManager_GetDeviceRegistry_sync",
-      "title": "Snippet for get_device_registry in DeviceManager",
-      "description": "Basic snippet for get_device_registry in DeviceManager",
+      "title": "Snippet for the get_device_registry call in the DeviceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Iot::V1::DeviceManager::Client#get_device_registry. It may require modification in order to execute successfully.",
       "file": "device_manager/get_device_registry.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudiot_v1_generated_DeviceManager_UpdateDeviceRegistry_sync",
-      "title": "Snippet for update_device_registry in DeviceManager",
-      "description": "Basic snippet for update_device_registry in DeviceManager",
+      "title": "Snippet for the update_device_registry call in the DeviceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Iot::V1::DeviceManager::Client#update_device_registry. It may require modification in order to execute successfully.",
       "file": "device_manager/update_device_registry.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudiot_v1_generated_DeviceManager_DeleteDeviceRegistry_sync",
-      "title": "Snippet for delete_device_registry in DeviceManager",
-      "description": "Basic snippet for delete_device_registry in DeviceManager",
+      "title": "Snippet for the delete_device_registry call in the DeviceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Iot::V1::DeviceManager::Client#delete_device_registry. It may require modification in order to execute successfully.",
       "file": "device_manager/delete_device_registry.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudiot_v1_generated_DeviceManager_ListDeviceRegistries_sync",
-      "title": "Snippet for list_device_registries in DeviceManager",
-      "description": "Basic snippet for list_device_registries in DeviceManager",
+      "title": "Snippet for the list_device_registries call in the DeviceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Iot::V1::DeviceManager::Client#list_device_registries. It may require modification in order to execute successfully.",
       "file": "device_manager/list_device_registries.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudiot_v1_generated_DeviceManager_CreateDevice_sync",
-      "title": "Snippet for create_device in DeviceManager",
-      "description": "Basic snippet for create_device in DeviceManager",
+      "title": "Snippet for the create_device call in the DeviceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Iot::V1::DeviceManager::Client#create_device. It may require modification in order to execute successfully.",
       "file": "device_manager/create_device.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudiot_v1_generated_DeviceManager_GetDevice_sync",
-      "title": "Snippet for get_device in DeviceManager",
-      "description": "Basic snippet for get_device in DeviceManager",
+      "title": "Snippet for the get_device call in the DeviceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Iot::V1::DeviceManager::Client#get_device. It may require modification in order to execute successfully.",
       "file": "device_manager/get_device.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudiot_v1_generated_DeviceManager_UpdateDevice_sync",
-      "title": "Snippet for update_device in DeviceManager",
-      "description": "Basic snippet for update_device in DeviceManager",
+      "title": "Snippet for the update_device call in the DeviceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Iot::V1::DeviceManager::Client#update_device. It may require modification in order to execute successfully.",
       "file": "device_manager/update_device.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudiot_v1_generated_DeviceManager_DeleteDevice_sync",
-      "title": "Snippet for delete_device in DeviceManager",
-      "description": "Basic snippet for delete_device in DeviceManager",
+      "title": "Snippet for the delete_device call in the DeviceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Iot::V1::DeviceManager::Client#delete_device. It may require modification in order to execute successfully.",
       "file": "device_manager/delete_device.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,15 +366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudiot_v1_generated_DeviceManager_ListDevices_sync",
-      "title": "Snippet for list_devices in DeviceManager",
-      "description": "Basic snippet for list_devices in DeviceManager",
+      "title": "Snippet for the list_devices call in the DeviceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Iot::V1::DeviceManager::Client#list_devices. It may require modification in order to execute successfully.",
       "file": "device_manager/list_devices.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,15 +406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudiot_v1_generated_DeviceManager_ModifyCloudToDeviceConfig_sync",
-      "title": "Snippet for modify_cloud_to_device_config in DeviceManager",
-      "description": "Basic snippet for modify_cloud_to_device_config in DeviceManager",
+      "title": "Snippet for the modify_cloud_to_device_config call in the DeviceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Iot::V1::DeviceManager::Client#modify_cloud_to_device_config. It may require modification in order to execute successfully.",
       "file": "device_manager/modify_cloud_to_device_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,15 +446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudiot_v1_generated_DeviceManager_ListDeviceConfigVersions_sync",
-      "title": "Snippet for list_device_config_versions in DeviceManager",
-      "description": "Basic snippet for list_device_config_versions in DeviceManager",
+      "title": "Snippet for the list_device_config_versions call in the DeviceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Iot::V1::DeviceManager::Client#list_device_config_versions. It may require modification in order to execute successfully.",
       "file": "device_manager/list_device_config_versions.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,15 +486,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudiot_v1_generated_DeviceManager_ListDeviceStates_sync",
-      "title": "Snippet for list_device_states in DeviceManager",
-      "description": "Basic snippet for list_device_states in DeviceManager",
+      "title": "Snippet for the list_device_states call in the DeviceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Iot::V1::DeviceManager::Client#list_device_states. It may require modification in order to execute successfully.",
       "file": "device_manager/list_device_states.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,15 +526,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudiot_v1_generated_DeviceManager_SetIamPolicy_sync",
-      "title": "Snippet for set_iam_policy in DeviceManager",
-      "description": "Basic snippet for set_iam_policy in DeviceManager",
+      "title": "Snippet for the set_iam_policy call in the DeviceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Iot::V1::DeviceManager::Client#set_iam_policy. It may require modification in order to execute successfully.",
       "file": "device_manager/set_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,15 +566,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudiot_v1_generated_DeviceManager_GetIamPolicy_sync",
-      "title": "Snippet for get_iam_policy in DeviceManager",
-      "description": "Basic snippet for get_iam_policy in DeviceManager",
+      "title": "Snippet for the get_iam_policy call in the DeviceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Iot::V1::DeviceManager::Client#get_iam_policy. It may require modification in order to execute successfully.",
       "file": "device_manager/get_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,15 +606,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudiot_v1_generated_DeviceManager_TestIamPermissions_sync",
-      "title": "Snippet for test_iam_permissions in DeviceManager",
-      "description": "Basic snippet for test_iam_permissions in DeviceManager",
+      "title": "Snippet for the test_iam_permissions call in the DeviceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Iot::V1::DeviceManager::Client#test_iam_permissions. It may require modification in order to execute successfully.",
       "file": "device_manager/test_iam_permissions.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,15 +646,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudiot_v1_generated_DeviceManager_SendCommandToDevice_sync",
-      "title": "Snippet for send_command_to_device in DeviceManager",
-      "description": "Basic snippet for send_command_to_device in DeviceManager",
+      "title": "Snippet for the send_command_to_device call in the DeviceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Iot::V1::DeviceManager::Client#send_command_to_device. It may require modification in order to execute successfully.",
       "file": "device_manager/send_command_to_device.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,15 +686,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudiot_v1_generated_DeviceManager_BindDeviceToGateway_sync",
-      "title": "Snippet for bind_device_to_gateway in DeviceManager",
-      "description": "Basic snippet for bind_device_to_gateway in DeviceManager",
+      "title": "Snippet for the bind_device_to_gateway call in the DeviceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Iot::V1::DeviceManager::Client#bind_device_to_gateway. It may require modification in order to execute successfully.",
       "file": "device_manager/bind_device_to_gateway.rb",
       "language": "RUBY",
       "client_method": {
@@ -726,15 +726,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudiot_v1_generated_DeviceManager_UnbindDeviceFromGateway_sync",
-      "title": "Snippet for unbind_device_from_gateway in DeviceManager",
-      "description": "Basic snippet for unbind_device_from_gateway in DeviceManager",
+      "title": "Snippet for the unbind_device_from_gateway call in the DeviceManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Iot::V1::DeviceManager::Client#unbind_device_from_gateway. It may require modification in order to execute successfully.",
       "file": "device_manager/unbind_device_from_gateway.rb",
       "language": "RUBY",
       "client_method": {
@@ -766,7 +766,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]

@@ -26,6 +26,7 @@ require "google/cloud/certificate_manager/v1/certificate_manager/credentials"
 require "google/cloud/certificate_manager/v1/certificate_manager/paths"
 require "google/cloud/certificate_manager/v1/certificate_manager/operations"
 require "google/cloud/certificate_manager/v1/certificate_manager/client"
+require "google/cloud/certificate_manager/v1/certificate_manager/rest"
 
 module Google
   module Cloud
@@ -45,15 +46,15 @@ module Google
         #
         # The Certificates Manager service exposes the following resources:
         #
-        # * `Certificate` which describes a single TLS certificate.
-        # * `CertificateMap` which describes a collection of certificates that can be
+        # * `Certificate` that describes a single TLS certificate.
+        # * `CertificateMap` that describes a collection of certificates that can be
         # attached to a target resource.
-        # * `CertificateMapEntry` which describes a single configuration entry that
+        # * `CertificateMapEntry` that describes a single configuration entry that
         # consists of a SNI and a group of certificates. It's a subresource of
         # CertificateMap.
         #
         # Certificate, CertificateMap and CertificateMapEntry IDs
-        # have to match "^[a-z0-9-]\\{1,63}$" regexp, which means that
+        # have to fully match the regexp `[a-z0-9-]{1,63}`. In other words,
         # - only lower case letters, digits, and hyphen are allowed
         # - length of the resource ID has to be in [1,63] range.
         #
@@ -63,6 +64,11 @@ module Google
         #
         #     require "google/cloud/certificate_manager/v1/certificate_manager"
         #     client = ::Google::Cloud::CertificateManager::V1::CertificateManager::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/certificate_manager/v1/certificate_manager/rest"
+        #     client = ::Google::Cloud::CertificateManager::V1::CertificateManager::Rest::Client.new
         #
         module CertificateManager
         end

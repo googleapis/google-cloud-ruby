@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-network_security-v1beta1",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "networksecurity_v1beta1_generated_NetworkSecurity_ListAuthorizationPolicies_sync",
-      "title": "Snippet for list_authorization_policies in NetworkSecurity",
-      "description": "Basic snippet for list_authorization_policies in NetworkSecurity",
+      "title": "Snippet for the list_authorization_policies call in the NetworkSecurity service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client#list_authorization_policies. It may require modification in order to execute successfully.",
       "file": "network_security/list_authorization_policies.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "networksecurity_v1beta1_generated_NetworkSecurity_GetAuthorizationPolicy_sync",
-      "title": "Snippet for get_authorization_policy in NetworkSecurity",
-      "description": "Basic snippet for get_authorization_policy in NetworkSecurity",
+      "title": "Snippet for the get_authorization_policy call in the NetworkSecurity service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client#get_authorization_policy. It may require modification in order to execute successfully.",
       "file": "network_security/get_authorization_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "networksecurity_v1beta1_generated_NetworkSecurity_CreateAuthorizationPolicy_sync",
-      "title": "Snippet for create_authorization_policy in NetworkSecurity",
-      "description": "Basic snippet for create_authorization_policy in NetworkSecurity",
+      "title": "Snippet for the create_authorization_policy call in the NetworkSecurity service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client#create_authorization_policy. It may require modification in order to execute successfully.",
       "file": "network_security/create_authorization_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "networksecurity_v1beta1_generated_NetworkSecurity_UpdateAuthorizationPolicy_sync",
-      "title": "Snippet for update_authorization_policy in NetworkSecurity",
-      "description": "Basic snippet for update_authorization_policy in NetworkSecurity",
+      "title": "Snippet for the update_authorization_policy call in the NetworkSecurity service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client#update_authorization_policy. It may require modification in order to execute successfully.",
       "file": "network_security/update_authorization_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "networksecurity_v1beta1_generated_NetworkSecurity_DeleteAuthorizationPolicy_sync",
-      "title": "Snippet for delete_authorization_policy in NetworkSecurity",
-      "description": "Basic snippet for delete_authorization_policy in NetworkSecurity",
+      "title": "Snippet for the delete_authorization_policy call in the NetworkSecurity service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client#delete_authorization_policy. It may require modification in order to execute successfully.",
       "file": "network_security/delete_authorization_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "networksecurity_v1beta1_generated_NetworkSecurity_ListServerTlsPolicies_sync",
-      "title": "Snippet for list_server_tls_policies in NetworkSecurity",
-      "description": "Basic snippet for list_server_tls_policies in NetworkSecurity",
+      "title": "Snippet for the list_server_tls_policies call in the NetworkSecurity service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client#list_server_tls_policies. It may require modification in order to execute successfully.",
       "file": "network_security/list_server_tls_policies.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "networksecurity_v1beta1_generated_NetworkSecurity_GetServerTlsPolicy_sync",
-      "title": "Snippet for get_server_tls_policy in NetworkSecurity",
-      "description": "Basic snippet for get_server_tls_policy in NetworkSecurity",
+      "title": "Snippet for the get_server_tls_policy call in the NetworkSecurity service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client#get_server_tls_policy. It may require modification in order to execute successfully.",
       "file": "network_security/get_server_tls_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "networksecurity_v1beta1_generated_NetworkSecurity_CreateServerTlsPolicy_sync",
-      "title": "Snippet for create_server_tls_policy in NetworkSecurity",
-      "description": "Basic snippet for create_server_tls_policy in NetworkSecurity",
+      "title": "Snippet for the create_server_tls_policy call in the NetworkSecurity service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client#create_server_tls_policy. It may require modification in order to execute successfully.",
       "file": "network_security/create_server_tls_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "networksecurity_v1beta1_generated_NetworkSecurity_UpdateServerTlsPolicy_sync",
-      "title": "Snippet for update_server_tls_policy in NetworkSecurity",
-      "description": "Basic snippet for update_server_tls_policy in NetworkSecurity",
+      "title": "Snippet for the update_server_tls_policy call in the NetworkSecurity service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client#update_server_tls_policy. It may require modification in order to execute successfully.",
       "file": "network_security/update_server_tls_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,15 +366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "networksecurity_v1beta1_generated_NetworkSecurity_DeleteServerTlsPolicy_sync",
-      "title": "Snippet for delete_server_tls_policy in NetworkSecurity",
-      "description": "Basic snippet for delete_server_tls_policy in NetworkSecurity",
+      "title": "Snippet for the delete_server_tls_policy call in the NetworkSecurity service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client#delete_server_tls_policy. It may require modification in order to execute successfully.",
       "file": "network_security/delete_server_tls_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,15 +406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "networksecurity_v1beta1_generated_NetworkSecurity_ListClientTlsPolicies_sync",
-      "title": "Snippet for list_client_tls_policies in NetworkSecurity",
-      "description": "Basic snippet for list_client_tls_policies in NetworkSecurity",
+      "title": "Snippet for the list_client_tls_policies call in the NetworkSecurity service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client#list_client_tls_policies. It may require modification in order to execute successfully.",
       "file": "network_security/list_client_tls_policies.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,15 +446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "networksecurity_v1beta1_generated_NetworkSecurity_GetClientTlsPolicy_sync",
-      "title": "Snippet for get_client_tls_policy in NetworkSecurity",
-      "description": "Basic snippet for get_client_tls_policy in NetworkSecurity",
+      "title": "Snippet for the get_client_tls_policy call in the NetworkSecurity service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client#get_client_tls_policy. It may require modification in order to execute successfully.",
       "file": "network_security/get_client_tls_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,15 +486,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "networksecurity_v1beta1_generated_NetworkSecurity_CreateClientTlsPolicy_sync",
-      "title": "Snippet for create_client_tls_policy in NetworkSecurity",
-      "description": "Basic snippet for create_client_tls_policy in NetworkSecurity",
+      "title": "Snippet for the create_client_tls_policy call in the NetworkSecurity service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client#create_client_tls_policy. It may require modification in order to execute successfully.",
       "file": "network_security/create_client_tls_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,15 +526,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "networksecurity_v1beta1_generated_NetworkSecurity_UpdateClientTlsPolicy_sync",
-      "title": "Snippet for update_client_tls_policy in NetworkSecurity",
-      "description": "Basic snippet for update_client_tls_policy in NetworkSecurity",
+      "title": "Snippet for the update_client_tls_policy call in the NetworkSecurity service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client#update_client_tls_policy. It may require modification in order to execute successfully.",
       "file": "network_security/update_client_tls_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,15 +566,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "networksecurity_v1beta1_generated_NetworkSecurity_DeleteClientTlsPolicy_sync",
-      "title": "Snippet for delete_client_tls_policy in NetworkSecurity",
-      "description": "Basic snippet for delete_client_tls_policy in NetworkSecurity",
+      "title": "Snippet for the delete_client_tls_policy call in the NetworkSecurity service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client#delete_client_tls_policy. It may require modification in order to execute successfully.",
       "file": "network_security/delete_client_tls_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,7 +606,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]

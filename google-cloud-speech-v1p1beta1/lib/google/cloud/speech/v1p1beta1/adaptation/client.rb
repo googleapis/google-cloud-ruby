@@ -165,9 +165,10 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent resource where this phrase set will be created. Format:
+            #     Required. The parent resource where this phrase set will be created.
+            #     Format:
             #
-            #     `projects/{project}/locations/{location}/phraseSets`
+            #     `projects/{project}/locations/{location}`
             #
             #     Speech-to-Text supports three locations: `global`, `us` (US North America),
             #     and `eu` (Europe). If you are calling the `speech.googleapis.com`
@@ -400,13 +401,11 @@ module Google
             #   # Call the list_phrase_set method.
             #   result = client.list_phrase_set request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Speech::V1p1beta1::PhraseSet.
-            #     p response
+            #     p item
             #   end
             #
             def list_phrase_set request, options = nil
@@ -655,7 +654,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent resource where this custom class will be created. Format:
+            #     Required. The parent resource where this custom class will be created.
+            #     Format:
             #
             #     `projects/{project}/locations/{location}/customClasses`
             #
@@ -884,13 +884,11 @@ module Google
             #   # Call the list_custom_classes method.
             #   result = client.list_custom_classes request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Speech::V1p1beta1::CustomClass.
-            #     p response
+            #     p item
             #   end
             #
             def list_custom_classes request, options = nil
@@ -1164,9 +1162,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials

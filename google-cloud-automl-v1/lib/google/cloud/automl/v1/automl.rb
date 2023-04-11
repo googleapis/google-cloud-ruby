@@ -26,6 +26,7 @@ require "google/cloud/automl/v1/automl/credentials"
 require "google/cloud/automl/v1/automl/paths"
 require "google/cloud/automl/v1/automl/operations"
 require "google/cloud/automl/v1/automl/client"
+require "google/cloud/automl/v1/automl/rest"
 
 module Google
   module Cloud
@@ -51,6 +52,11 @@ module Google
         #
         #     require "google/cloud/automl/v1/automl"
         #     client = ::Google::Cloud::AutoML::V1::AutoML::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/automl/v1/automl/rest"
+        #     client = ::Google::Cloud::AutoML::V1::AutoML::Rest::Client.new
         #
         module AutoML
         end

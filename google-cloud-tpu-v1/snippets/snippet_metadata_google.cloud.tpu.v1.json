@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "tpu_v1_generated_Tpu_ListNodes_sync",
-      "title": "Snippet for list_nodes in Tpu",
-      "description": "Basic snippet for list_nodes in Tpu",
+      "title": "Snippet for the list_nodes call in the Tpu service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tpu::V1::Tpu::Client#list_nodes. It may require modification in order to execute successfully.",
       "file": "tpu/list_nodes.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "tpu_v1_generated_Tpu_GetNode_sync",
-      "title": "Snippet for get_node in Tpu",
-      "description": "Basic snippet for get_node in Tpu",
+      "title": "Snippet for the get_node call in the Tpu service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tpu::V1::Tpu::Client#get_node. It may require modification in order to execute successfully.",
       "file": "tpu/get_node.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "tpu_v1_generated_Tpu_CreateNode_sync",
-      "title": "Snippet for create_node in Tpu",
-      "description": "Basic snippet for create_node in Tpu",
+      "title": "Snippet for the create_node call in the Tpu service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tpu::V1::Tpu::Client#create_node. It may require modification in order to execute successfully.",
       "file": "tpu/create_node.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "tpu_v1_generated_Tpu_DeleteNode_sync",
-      "title": "Snippet for delete_node in Tpu",
-      "description": "Basic snippet for delete_node in Tpu",
+      "title": "Snippet for the delete_node call in the Tpu service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tpu::V1::Tpu::Client#delete_node. It may require modification in order to execute successfully.",
       "file": "tpu/delete_node.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "tpu_v1_generated_Tpu_ReimageNode_sync",
-      "title": "Snippet for reimage_node in Tpu",
-      "description": "Basic snippet for reimage_node in Tpu",
+      "title": "Snippet for the reimage_node call in the Tpu service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tpu::V1::Tpu::Client#reimage_node. It may require modification in order to execute successfully.",
       "file": "tpu/reimage_node.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "tpu_v1_generated_Tpu_StopNode_sync",
-      "title": "Snippet for stop_node in Tpu",
-      "description": "Basic snippet for stop_node in Tpu",
+      "title": "Snippet for the stop_node call in the Tpu service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tpu::V1::Tpu::Client#stop_node. It may require modification in order to execute successfully.",
       "file": "tpu/stop_node.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "tpu_v1_generated_Tpu_StartNode_sync",
-      "title": "Snippet for start_node in Tpu",
-      "description": "Basic snippet for start_node in Tpu",
+      "title": "Snippet for the start_node call in the Tpu service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tpu::V1::Tpu::Client#start_node. It may require modification in order to execute successfully.",
       "file": "tpu/start_node.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "tpu_v1_generated_Tpu_ListTensorFlowVersions_sync",
-      "title": "Snippet for list_tensor_flow_versions in Tpu",
-      "description": "Basic snippet for list_tensor_flow_versions in Tpu",
+      "title": "Snippet for the list_tensor_flow_versions call in the Tpu service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tpu::V1::Tpu::Client#list_tensor_flow_versions. It may require modification in order to execute successfully.",
       "file": "tpu/list_tensor_flow_versions.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "tpu_v1_generated_Tpu_GetTensorFlowVersion_sync",
-      "title": "Snippet for get_tensor_flow_version in Tpu",
-      "description": "Basic snippet for get_tensor_flow_version in Tpu",
+      "title": "Snippet for the get_tensor_flow_version call in the Tpu service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tpu::V1::Tpu::Client#get_tensor_flow_version. It may require modification in order to execute successfully.",
       "file": "tpu/get_tensor_flow_version.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,15 +366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "tpu_v1_generated_Tpu_ListAcceleratorTypes_sync",
-      "title": "Snippet for list_accelerator_types in Tpu",
-      "description": "Basic snippet for list_accelerator_types in Tpu",
+      "title": "Snippet for the list_accelerator_types call in the Tpu service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tpu::V1::Tpu::Client#list_accelerator_types. It may require modification in order to execute successfully.",
       "file": "tpu/list_accelerator_types.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,15 +406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "tpu_v1_generated_Tpu_GetAcceleratorType_sync",
-      "title": "Snippet for get_accelerator_type in Tpu",
-      "description": "Basic snippet for get_accelerator_type in Tpu",
+      "title": "Snippet for the get_accelerator_type call in the Tpu service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Tpu::V1::Tpu::Client#get_accelerator_type. It may require modification in order to execute successfully.",
       "file": "tpu/get_accelerator_type.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,7 +446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]

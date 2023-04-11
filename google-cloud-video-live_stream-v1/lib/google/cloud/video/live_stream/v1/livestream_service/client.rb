@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/video/livestream/v1/service_pb"
+require "google/cloud/location"
 
 module Google
   module Cloud
@@ -194,6 +195,12 @@ module Google
                   config.endpoint = @config.endpoint
                 end
 
+                @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @config.endpoint
+                end
+
                 @livestream_service_stub = ::Gapic::ServiceStub.new(
                   ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Stub,
                   credentials:  credentials,
@@ -209,6 +216,13 @@ module Google
               # @return [::Google::Cloud::Video::LiveStream::V1::LivestreamService::Operations]
               #
               attr_reader :operations_client
+
+              ##
+              # Get the associated client for mix-in of the Locations.
+              #
+              # @return [Google::Cloud::Location::Locations::Client]
+              #
+              attr_reader :location_client
 
               # Service calls
 
@@ -275,14 +289,14 @@ module Google
               #   # Call the create_channel method.
               #   result = client.create_channel request
               #
-              #   # The returned object is of type Gapic::Operation. You can use this
-              #   # object to check the status of an operation, cancel it, or wait
-              #   # for results. Here is how to block until completion:
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
               #   result.wait_until_done! timeout: 60
               #   if result.response?
               #     p result.response
               #   else
-              #     puts "Error!"
+              #     puts "No response received."
               #   end
               #
               def create_channel request, options = nil
@@ -352,8 +366,8 @@ module Google
               #     The maximum number of items to return. If unspecified, server
               #     will pick an appropriate default. Server may return fewer items than
               #     requested. A caller should only rely on response's
-              #     {::Google::Cloud::Video::LiveStream::V1::ListChannelsResponse#next_page_token next_page_token} to
-              #     determine if there are more items left to be queried.
+              #     {::Google::Cloud::Video::LiveStream::V1::ListChannelsResponse#next_page_token next_page_token}
+              #     to determine if there are more items left to be queried.
               #   @param page_token [::String]
               #     The next_page_token value returned from a previous List request, if any.
               #   @param filter [::String]
@@ -382,13 +396,11 @@ module Google
               #   # Call the list_channels method.
               #   result = client.list_channels request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Video::LiveStream::V1::Channel.
-              #     p response
+              #     p item
               #   end
               #
               def list_channels request, options = nil
@@ -580,14 +592,14 @@ module Google
               #   # Call the delete_channel method.
               #   result = client.delete_channel request
               #
-              #   # The returned object is of type Gapic::Operation. You can use this
-              #   # object to check the status of an operation, cancel it, or wait
-              #   # for results. Here is how to block until completion:
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
               #   result.wait_until_done! timeout: 60
               #   if result.response?
               #     p result.response
               #   else
-              #     puts "Error!"
+              #     puts "No response received."
               #   end
               #
               def delete_channel request, options = nil
@@ -655,14 +667,22 @@ module Google
               #     resource by the update. You can only update the following fields:
               #
               #     * [`inputAttachments`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#inputattachment)
+              #     * [`inputConfig`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#inputconfig)
               #     * [`output`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#output)
-              #     * [`elementaryStreams`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#ElementaryStream)
+              #     * [`elementaryStreams`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#elementarystream)
               #     * [`muxStreams`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#muxstream)
-              #     * [`manifests`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#Manifest)
-              #     * [`spritesheets`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#spritesheet)
+              #     * [`manifests`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#manifest)
+              #     * [`spriteSheets`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#spritesheet)
+              #     * [`logConfig`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#logconfig)
+              #     * [`timecodeConfig`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#timecodeconfig)
+              #     * [`encryptions`](https://cloud.google.com/livestream/docs/reference/rest/v1/projects.locations.channels#encryption)
               #
               #     The fields specified in the update_mask are relative to the resource, not
               #     the full request. A field will be overwritten if it is in the mask.
+              #
+              #     If the mask is not present, then each field from the list above is updated
+              #     if the field appears in the request payload. To unset a field, add the
+              #     field to the update mask and remove it from the request payload.
               #   @param channel [::Google::Cloud::Video::LiveStream::V1::Channel, ::Hash]
               #     Required. The channel resource to be updated.
               #   @param request_id [::String]
@@ -700,14 +720,14 @@ module Google
               #   # Call the update_channel method.
               #   result = client.update_channel request
               #
-              #   # The returned object is of type Gapic::Operation. You can use this
-              #   # object to check the status of an operation, cancel it, or wait
-              #   # for results. Here is how to block until completion:
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
               #   result.wait_until_done! timeout: 60
               #   if result.response?
               #     p result.response
               #   else
-              #     puts "Error!"
+              #     puts "No response received."
               #   end
               #
               def update_channel request, options = nil
@@ -809,14 +829,14 @@ module Google
               #   # Call the start_channel method.
               #   result = client.start_channel request
               #
-              #   # The returned object is of type Gapic::Operation. You can use this
-              #   # object to check the status of an operation, cancel it, or wait
-              #   # for results. Here is how to block until completion:
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
               #   result.wait_until_done! timeout: 60
               #   if result.response?
               #     p result.response
               #   else
-              #     puts "Error!"
+              #     puts "No response received."
               #   end
               #
               def start_channel request, options = nil
@@ -918,14 +938,14 @@ module Google
               #   # Call the stop_channel method.
               #   result = client.stop_channel request
               #
-              #   # The returned object is of type Gapic::Operation. You can use this
-              #   # object to check the status of an operation, cancel it, or wait
-              #   # for results. Here is how to block until completion:
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
               #   result.wait_until_done! timeout: 60
               #   if result.response?
               #     p result.response
               #   else
-              #     puts "Error!"
+              #     puts "No response received."
               #   end
               #
               def stop_channel request, options = nil
@@ -1032,14 +1052,14 @@ module Google
               #   # Call the create_input method.
               #   result = client.create_input request
               #
-              #   # The returned object is of type Gapic::Operation. You can use this
-              #   # object to check the status of an operation, cancel it, or wait
-              #   # for results. Here is how to block until completion:
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
               #   result.wait_until_done! timeout: 60
               #   if result.response?
               #     p result.response
               #   else
-              #     puts "Error!"
+              #     puts "No response received."
               #   end
               #
               def create_input request, options = nil
@@ -1109,8 +1129,8 @@ module Google
               #     The maximum number of items to return. If unspecified, server
               #     will pick an appropriate default. Server may return fewer items than
               #     requested. A caller should only rely on response's
-              #     {::Google::Cloud::Video::LiveStream::V1::ListInputsResponse#next_page_token next_page_token} to
-              #     determine if there are more items left to be queried.
+              #     {::Google::Cloud::Video::LiveStream::V1::ListInputsResponse#next_page_token next_page_token}
+              #     to determine if there are more items left to be queried.
               #   @param page_token [::String]
               #     The next_page_token value returned from a previous List request, if any.
               #   @param filter [::String]
@@ -1139,13 +1159,11 @@ module Google
               #   # Call the list_inputs method.
               #   result = client.list_inputs request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Video::LiveStream::V1::Input.
-              #     p response
+              #     p item
               #   end
               #
               def list_inputs request, options = nil
@@ -1332,14 +1350,14 @@ module Google
               #   # Call the delete_input method.
               #   result = client.delete_input request
               #
-              #   # The returned object is of type Gapic::Operation. You can use this
-              #   # object to check the status of an operation, cancel it, or wait
-              #   # for results. Here is how to block until completion:
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
               #   result.wait_until_done! timeout: 60
               #   if result.response?
               #     p result.response
               #   else
-              #     puts "Error!"
+              #     puts "No response received."
               #   end
               #
               def delete_input request, options = nil
@@ -1411,6 +1429,10 @@ module Google
               #
               #     The fields specified in the update_mask are relative to the resource, not
               #     the full request. A field will be overwritten if it is in the mask.
+              #
+              #     If the mask is not present, then each field from the list above is updated
+              #     if the field appears in the request payload. To unset a field, add the
+              #     field to the update mask and remove it from the request payload.
               #   @param input [::Google::Cloud::Video::LiveStream::V1::Input, ::Hash]
               #     Required. The input resource to be updated.
               #   @param request_id [::String]
@@ -1448,14 +1470,14 @@ module Google
               #   # Call the update_input method.
               #   result = client.update_input request
               #
-              #   # The returned object is of type Gapic::Operation. You can use this
-              #   # object to check the status of an operation, cancel it, or wait
-              #   # for results. Here is how to block until completion:
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
               #   result.wait_until_done! timeout: 60
               #   if result.response?
               #     p result.response
               #   else
-              #     puts "Error!"
+              #     puts "No response received."
               #   end
               #
               def update_input request, options = nil
@@ -1631,8 +1653,8 @@ module Google
               #     The maximum number of items to return. If unspecified, server
               #     will pick an appropriate default. Server may return fewer items than
               #     requested. A caller should only rely on response's
-              #     {::Google::Cloud::Video::LiveStream::V1::ListEventsResponse#next_page_token next_page_token} to
-              #     determine if there are more items left to be queried.
+              #     {::Google::Cloud::Video::LiveStream::V1::ListEventsResponse#next_page_token next_page_token}
+              #     to determine if there are more items left to be queried.
               #   @param page_token [::String]
               #     The next_page_token value returned from a previous List request, if any.
               #   @param filter [::String]
@@ -1661,13 +1683,11 @@ module Google
               #   # Call the list_events method.
               #   result = client.list_events request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Video::LiveStream::V1::Event.
-              #     p response
+              #     p item
               #   end
               #
               def list_events request, options = nil
@@ -1936,9 +1956,9 @@ module Google
               #    *  (`String`) The path to a service account key file in JSON format
               #    *  (`Hash`) A service account key as a Hash
               #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-              #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+              #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
               #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-              #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+              #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
               #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
               #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
               #    *  (`nil`) indicating no credentials

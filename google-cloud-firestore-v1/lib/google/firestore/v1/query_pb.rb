@@ -37,6 +37,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_enum "google.firestore.v1.StructuredQuery.CompositeFilter.Operator" do
       value :OPERATOR_UNSPECIFIED, 0
       value :AND, 1
+      value :OR, 2
     end
     add_message "google.firestore.v1.StructuredQuery.FieldFilter" do
       optional :field, :message, 1, "google.firestore.v1.StructuredQuery.FieldReference"

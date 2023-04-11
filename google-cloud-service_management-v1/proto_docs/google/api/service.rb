@@ -74,10 +74,10 @@ module Google
     # @!attribute [rw] apis
     #   @return [::Array<::Google::Protobuf::Api>]
     #     A list of API interfaces exported by this service. Only the `name` field
-    #     of the {::Google::Protobuf::Api google.protobuf.Api} needs to be provided by the configuration
-    #     author, as the remaining fields will be derived from the IDL during the
-    #     normalization process. It is an error to specify an API interface here
-    #     which cannot be resolved against the associated IDL files.
+    #     of the {::Google::Protobuf::Api google.protobuf.Api} needs to be provided by
+    #     the configuration author, as the remaining fields will be derived from the
+    #     IDL during the normalization process. It is an error to specify an API
+    #     interface here which cannot be resolved against the associated IDL files.
     # @!attribute [rw] types
     #   @return [::Array<::Google::Protobuf::Type>]
     #     A list of all proto message types included in this API service.
@@ -135,7 +135,8 @@ module Google
     # @!attribute [rw] monitored_resources
     #   @return [::Array<::Google::Api::MonitoredResourceDescriptor>]
     #     Defines the monitored resources used by this service. This is required
-    #     by the {::Google::Api::Service#monitoring Service.monitoring} and {::Google::Api::Service#logging Service.logging} configurations.
+    #     by the {::Google::Api::Service#monitoring Service.monitoring} and
+    #     {::Google::Api::Service#logging Service.logging} configurations.
     # @!attribute [rw] billing
     #   @return [::Google::Api::Billing]
     #     Billing configuration.

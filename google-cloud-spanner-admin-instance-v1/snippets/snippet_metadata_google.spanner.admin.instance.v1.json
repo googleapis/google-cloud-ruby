@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-spanner-admin-instance-v1",
-    "version": "0.8.0",
+    "version": "0.9.0",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "spanner_v1_generated_InstanceAdmin_ListInstanceConfigs_sync",
-      "title": "Snippet for list_instance_configs in InstanceAdmin",
-      "description": "Basic snippet for list_instance_configs in InstanceAdmin",
+      "title": "Snippet for the list_instance_configs call in the InstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#list_instance_configs. It may require modification in order to execute successfully.",
       "file": "instance_admin/list_instance_configs.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "spanner_v1_generated_InstanceAdmin_GetInstanceConfig_sync",
-      "title": "Snippet for get_instance_config in InstanceAdmin",
-      "description": "Basic snippet for get_instance_config in InstanceAdmin",
+      "title": "Snippet for the get_instance_config call in the InstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#get_instance_config. It may require modification in order to execute successfully.",
       "file": "instance_admin/get_instance_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "spanner_v1_generated_InstanceAdmin_CreateInstanceConfig_sync",
-      "title": "Snippet for create_instance_config in InstanceAdmin",
-      "description": "Basic snippet for create_instance_config in InstanceAdmin",
+      "title": "Snippet for the create_instance_config call in the InstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#create_instance_config. It may require modification in order to execute successfully.",
       "file": "instance_admin/create_instance_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "spanner_v1_generated_InstanceAdmin_UpdateInstanceConfig_sync",
-      "title": "Snippet for update_instance_config in InstanceAdmin",
-      "description": "Basic snippet for update_instance_config in InstanceAdmin",
+      "title": "Snippet for the update_instance_config call in the InstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#update_instance_config. It may require modification in order to execute successfully.",
       "file": "instance_admin/update_instance_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "spanner_v1_generated_InstanceAdmin_DeleteInstanceConfig_sync",
-      "title": "Snippet for delete_instance_config in InstanceAdmin",
-      "description": "Basic snippet for delete_instance_config in InstanceAdmin",
+      "title": "Snippet for the delete_instance_config call in the InstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#delete_instance_config. It may require modification in order to execute successfully.",
       "file": "instance_admin/delete_instance_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "spanner_v1_generated_InstanceAdmin_ListInstanceConfigOperations_sync",
-      "title": "Snippet for list_instance_config_operations in InstanceAdmin",
-      "description": "Basic snippet for list_instance_config_operations in InstanceAdmin",
+      "title": "Snippet for the list_instance_config_operations call in the InstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#list_instance_config_operations. It may require modification in order to execute successfully.",
       "file": "instance_admin/list_instance_config_operations.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "spanner_v1_generated_InstanceAdmin_ListInstances_sync",
-      "title": "Snippet for list_instances in InstanceAdmin",
-      "description": "Basic snippet for list_instances in InstanceAdmin",
+      "title": "Snippet for the list_instances call in the InstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#list_instances. It may require modification in order to execute successfully.",
       "file": "instance_admin/list_instances.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "spanner_v1_generated_InstanceAdmin_GetInstance_sync",
-      "title": "Snippet for get_instance in InstanceAdmin",
-      "description": "Basic snippet for get_instance in InstanceAdmin",
+      "title": "Snippet for the get_instance call in the InstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#get_instance. It may require modification in order to execute successfully.",
       "file": "instance_admin/get_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "spanner_v1_generated_InstanceAdmin_CreateInstance_sync",
-      "title": "Snippet for create_instance in InstanceAdmin",
-      "description": "Basic snippet for create_instance in InstanceAdmin",
+      "title": "Snippet for the create_instance call in the InstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#create_instance. It may require modification in order to execute successfully.",
       "file": "instance_admin/create_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,15 +366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "spanner_v1_generated_InstanceAdmin_UpdateInstance_sync",
-      "title": "Snippet for update_instance in InstanceAdmin",
-      "description": "Basic snippet for update_instance in InstanceAdmin",
+      "title": "Snippet for the update_instance call in the InstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#update_instance. It may require modification in order to execute successfully.",
       "file": "instance_admin/update_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,15 +406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "spanner_v1_generated_InstanceAdmin_DeleteInstance_sync",
-      "title": "Snippet for delete_instance in InstanceAdmin",
-      "description": "Basic snippet for delete_instance in InstanceAdmin",
+      "title": "Snippet for the delete_instance call in the InstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#delete_instance. It may require modification in order to execute successfully.",
       "file": "instance_admin/delete_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,15 +446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "spanner_v1_generated_InstanceAdmin_SetIamPolicy_sync",
-      "title": "Snippet for set_iam_policy in InstanceAdmin",
-      "description": "Basic snippet for set_iam_policy in InstanceAdmin",
+      "title": "Snippet for the set_iam_policy call in the InstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#set_iam_policy. It may require modification in order to execute successfully.",
       "file": "instance_admin/set_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,15 +486,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "spanner_v1_generated_InstanceAdmin_GetIamPolicy_sync",
-      "title": "Snippet for get_iam_policy in InstanceAdmin",
-      "description": "Basic snippet for get_iam_policy in InstanceAdmin",
+      "title": "Snippet for the get_iam_policy call in the InstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#get_iam_policy. It may require modification in order to execute successfully.",
       "file": "instance_admin/get_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,15 +526,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "spanner_v1_generated_InstanceAdmin_TestIamPermissions_sync",
-      "title": "Snippet for test_iam_permissions in InstanceAdmin",
-      "description": "Basic snippet for test_iam_permissions in InstanceAdmin",
+      "title": "Snippet for the test_iam_permissions call in the InstanceAdmin service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#test_iam_permissions. It may require modification in order to execute successfully.",
       "file": "instance_admin/test_iam_permissions.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,7 +566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]

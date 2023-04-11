@@ -218,7 +218,9 @@ module Google
         # @!attribute [rw] image_type
         #   @return [::String]
         #     The image type to use for this node. Note that for a given image type,
-        #     the latest version of it will be used.
+        #     the latest version of it will be used. Please see
+        #     https://cloud.google.com/kubernetes-engine/docs/concepts/node-images for
+        #     available image types.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     The map of Kubernetes labels (key/value pairs) to be applied to each node.
@@ -444,6 +446,20 @@ module Google
         # @!attribute [rw] network_performance_config
         #   @return [::Google::Cloud::Container::V1beta1::NodeNetworkConfig::NetworkPerformanceConfig]
         #     Network bandwidth tier configuration.
+        # @!attribute [rw] pod_cidr_overprovision_config
+        #   @return [::Google::Cloud::Container::V1beta1::PodCIDROverprovisionConfig]
+        #     [PRIVATE FIELD]
+        #     Pod CIDR size overprovisioning config for the nodepool.
+        #
+        #     Pod CIDR size per node depends on max_pods_per_node. By default, the value
+        #     of max_pods_per_node is rounded off to next power of 2 and we then double
+        #     that to get the size of pod CIDR block per node.
+        #     Example: max_pods_per_node of 30 would result in 64 IPs (/26).
+        #
+        #     This config can disable the doubling of IPs (we still round off to next
+        #     power of 2)
+        #     Example: max_pods_per_node of 30 will result in 32 IPs (/27) when
+        #     overprovisioning is disabled.
         class NodeNetworkConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -602,7 +618,7 @@ module Google
           end
         end
 
-        # Kubernetes taint is comprised of three fields: key, value, and effect. Effect
+        # Kubernetes taint is composed of three fields: key, value, and effect. Effect
         # can only be one of three types:  NoSchedule, PreferNoSchedule or NoExecute.
         #
         # See
@@ -1061,6 +1077,17 @@ module Google
           end
         end
 
+        # [PRIVATE FIELD]
+        # Config for pod CIDR size overprovisioning.
+        # @!attribute [rw] disable
+        #   @return [::Boolean]
+        #     Whether Pod CIDR overprovisioning is disabled.
+        #     Note: Pod CIDR overprovisioning is enabled by default.
+        class PodCIDROverprovisionConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Configuration for controlling how IPs are allocated in the cluster.
         # @!attribute [rw] use_ip_aliases
         #   @return [::Boolean]
@@ -1199,6 +1226,20 @@ module Google
         # @!attribute [rw] ipv6_access_type
         #   @return [::Google::Cloud::Container::V1beta1::IPAllocationPolicy::IPv6AccessType]
         #     The ipv6 access type (internal or external) when create_subnetwork is true
+        # @!attribute [rw] pod_cidr_overprovision_config
+        #   @return [::Google::Cloud::Container::V1beta1::PodCIDROverprovisionConfig]
+        #     [PRIVATE FIELD]
+        #     Pod CIDR size overprovisioning config for the cluster.
+        #
+        #     Pod CIDR size per node depends on max_pods_per_node. By default, the value
+        #     of max_pods_per_node is doubled and then rounded off to next power of 2 to
+        #     get the size of pod CIDR block per node.
+        #     Example: max_pods_per_node of 30 would result in 64 IPs (/26).
+        #
+        #     This config can disable the doubling of IPs (we still round off to next
+        #     power of 2)
+        #     Example: max_pods_per_node of 30 will result in 32 IPs (/27) when
+        #     overprovisioning is disabled.
         # @!attribute [r] subnet_ipv6_cidr_block
         #   @return [::String]
         #     Output only. [Output only] The subnet's IPv6 CIDR block used by nodes and
@@ -1206,6 +1247,12 @@ module Google
         # @!attribute [r] services_ipv6_cidr_block
         #   @return [::String]
         #     Output only. [Output only] The services IPv6 CIDR block for the cluster.
+        # @!attribute [r] additional_pod_ranges_config
+        #   @return [::Google::Cloud::Container::V1beta1::AdditionalPodRangesConfig]
+        #     Output only. [Output only] The additional pod ranges that are added to the
+        #     cluster. These pod ranges can be used by new node pools to allocate pod IPs
+        #     automatically. Once the range is removed it will not show up in
+        #     IPAllocationPolicy.
         class IPAllocationPolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1667,6 +1714,9 @@ module Google
         #     This checksum is computed by the server based on the value of cluster
         #     fields, and may be sent on update requests to ensure the client has an
         #     up-to-date value before proceeding.
+        # @!attribute [rw] fleet
+        #   @return [::Google::Cloud::Container::V1beta1::Fleet]
+        #     Fleet information for the cluster.
         class Cluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2008,7 +2058,23 @@ module Google
         #     The desired stack type of the cluster.
         #     If a stack type is provided and does not match the current stack type of
         #     the cluster, update will attempt to change the stack type to the new type.
+        # @!attribute [rw] additional_pod_ranges_config
+        #   @return [::Google::Cloud::Container::V1beta1::AdditionalPodRangesConfig]
+        #     The additional pod ranges to be added to the cluster. These pod ranges
+        #     can be used by node pools to allocate pod IPs.
+        # @!attribute [rw] removed_additional_pod_ranges_config
+        #   @return [::Google::Cloud::Container::V1beta1::AdditionalPodRangesConfig]
+        #     The additional pod ranges that are to be removed from the cluster.
+        #     The pod ranges specified here must have been specified earlier in the
+        #     'additional_pod_ranges_config' argument.
         class ClusterUpdate
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # AdditionalPodRangesConfig is the configuration for additional pod secondary
+        # ranges supporting the ClusterUpdate message.
+        class AdditionalPodRangesConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -2304,7 +2370,9 @@ module Google
         #     - "-": picks the Kubernetes master version
         # @!attribute [rw] image_type
         #   @return [::String]
-        #     Required. The desired image type for the node pool.
+        #     Required. The desired image type for the node pool. Please see
+        #     https://cloud.google.com/kubernetes-engine/docs/concepts/node-images for
+        #     available image types.
         # @!attribute [rw] locations
         #   @return [::Array<::String>]
         #     The desired list of Google Compute Engine
@@ -3102,7 +3170,9 @@ module Google
         #     [Output only] Server-defined URL for the resource.
         # @!attribute [rw] version
         #   @return [::String]
-        #     The version of the Kubernetes of this node.
+        #     The version of Kubernetes running on this NodePool's nodes. If unspecified,
+        #     it defaults as described
+        #     [here](https://cloud.google.com/kubernetes-engine/versioning#specifying_node_version).
         # @!attribute [rw] instance_group_urls
         #   @return [::Array<::String>]
         #     [Output only] The resource URLs of the [managed instance
@@ -3691,8 +3761,7 @@ module Google
         #     information, read [how to specify min CPU
         #     platform](https://cloud.google.com/compute/docs/instances/specify-min-cpu-platform).
         #     This field is deprecated, min_cpu_platform should be specified using
-        #     https://cloud.google.com/requested-min-cpu-platform label selector on the
-        #     pod.
+        #     `cloud.google.com/requested-min-cpu-platform` label selector on the pod.
         #     To unset the min cpu platform field pass "automatic"
         #     as field value.
         # @!attribute [rw] disk_size_gb
@@ -3720,7 +3789,9 @@ module Google
         #     https://cloud.google.com/compute/docs/disks/customer-managed-encryption
         # @!attribute [rw] image_type
         #   @return [::String]
-        #     The image type to use for NAP created node.
+        #     The image type to use for NAP created node. Please see
+        #     https://cloud.google.com/kubernetes-engine/docs/concepts/node-images for
+        #     available image types.
         class AutoprovisioningNodePoolDefaults
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -5082,6 +5153,26 @@ module Google
           end
         end
 
+        # Fleet is the fleet configuration for the cluster.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     The Fleet host project(project ID or project number) where this cluster
+        #     will be registered to. This field cannot be changed after the cluster has
+        #     been registered.
+        # @!attribute [rw] membership
+        #   @return [::String]
+        #     [Output only] The full resource name of the registered fleet membership of
+        #     the cluster, in the format
+        #     `//gkehub.googleapis.com/projects/*/locations/*/memberships/*`.
+        # @!attribute [rw] pre_registered
+        #   @return [::Boolean]
+        #     [Output only] Whether the cluster has been registered through the fleet
+        #     API.
+        class Fleet
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # PrivateIPv6GoogleAccess controls whether and how the pods can communicate
         # with Google Services through gRPC over IPv6.
         module PrivateIPv6GoogleAccess
@@ -5094,7 +5185,7 @@ module Google
           # Enables private IPv6 access to Google Services from GKE
           PRIVATE_IPV6_GOOGLE_ACCESS_TO_GOOGLE = 2
 
-          # Enables priate IPv6 access to and from Google Services
+          # Enables private IPv6 access to and from Google Services
           PRIVATE_IPV6_GOOGLE_ACCESS_BIDIRECTIONAL = 3
         end
 
@@ -5113,7 +5204,8 @@ module Google
 
         # Strategy used for node pool update.
         module NodePoolUpdateStrategy
-          # Default value.
+          # Default value if unset. GKE internally defaults the update strategy to
+          # SURGE for unspecified strategies.
           NODE_POOL_UPDATE_STRATEGY_UNSPECIFIED = 0
 
           # blue-green upgrade.

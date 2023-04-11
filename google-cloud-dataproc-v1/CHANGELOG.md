@@ -1,5 +1,34 @@
 # Release History
 
+### 0.17.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20625](https://github.com/googleapis/google-cloud-ruby/issues/20625)) 
+
+### 0.16.0 (2023-02-23)
+
+#### Features
+
+* ClusterOperationMetadata includes child operation IDs 
+* Expose approximate and current batches resources usage 
+* Include a mixin client for IAM policies 
+* Include boot disk KMS key in GkeNodeConfig 
+* Include GPU partition size in GkeNodePoolAcceleratorConfig 
+* Include spot flag in GkeNodeConfig 
+* Support batch TTL 
+* Support custom staging bucket for batches 
+* Support filtering and ordering in list_batches API 
+* Support for the HIVEMETASTORE metric source 
+* Support Hudi and Trino components ([#20497](https://github.com/googleapis/google-cloud-ruby/issues/20497)) 
+* Support Trino jobs on 2.1+ image clusters 
+
+### 0.15.0 (2023-01-24)
+
+#### Features
+
+* Support for the SPOT preemptibility option ([#20045](https://github.com/googleapis/google-cloud-ruby/issues/20045)) 
+
 ### 0.14.0 (2022-12-14)
 
 #### Features

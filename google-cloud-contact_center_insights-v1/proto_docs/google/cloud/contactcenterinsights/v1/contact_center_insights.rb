@@ -173,6 +173,52 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request to upload a conversation.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource of the conversation.
+        # @!attribute [rw] conversation
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::Conversation]
+        #     Required. The conversation resource to create.
+        # @!attribute [rw] conversation_id
+        #   @return [::String]
+        #     Optional. A unique ID for the new conversation. This ID will become the
+        #     final component of the conversation's resource name. If no ID is specified,
+        #     a server-generated ID will be used.
+        #
+        #     This value should be 4-64 characters and must match the regular
+        #     expression `^[a-z0-9-]{4,64}$`. Valid characters are `[a-z][0-9]-`
+        # @!attribute [rw] redaction_config
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::RedactionConfig]
+        #     Optional. DLP settings for transcript redaction. Optional, will default to
+        #     the config specified in Settings.
+        class UploadConversationRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The metadata for an UploadConversation operation.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time the operation was created.
+        # @!attribute [r] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time the operation finished running.
+        # @!attribute [r] request
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::UploadConversationRequest]
+        #     Output only. The original request.
+        # @!attribute [r] analysis_operation
+        #   @return [::String]
+        #     Output only. The operation name for a successfully created analysis
+        #     operation, if any.
+        # @!attribute [r] applied_redaction_config
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::RedactionConfig]
+        #     Output only. The redaction config applied to the uploaded conversation.
+        class UploadConversationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request to list conversations.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -310,11 +356,35 @@ module Google
         #     Output only. The original request for ingest.
         # @!attribute [r] partial_errors
         #   @return [::Array<::Google::Rpc::Status>]
-        #     Output only. Partial errors during ingest operation that might cause the operation
-        #     output to be incomplete.
+        #     Output only. Partial errors during ingest operation that might cause the
+        #     operation output to be incomplete.
+        # @!attribute [r] ingest_conversations_stats
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::IngestConversationsMetadata::IngestConversationsStats]
+        #     Output only. Statistics for IngestConversations operation.
         class IngestConversationsMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Statistics for IngestConversations operation.
+          # @!attribute [r] processed_object_count
+          #   @return [::Integer]
+          #     Output only. The number of objects processed during the ingest operation.
+          # @!attribute [r] duplicates_skipped_count
+          #   @return [::Integer]
+          #     Output only. The number of objects skipped because another conversation
+          #     with the same transcript uri had already been ingested.
+          # @!attribute [r] successful_ingest_count
+          #   @return [::Integer]
+          #     Output only. The number of new conversations added during this ingest
+          #     operation.
+          # @!attribute [r] failed_ingest_count
+          #   @return [::Integer]
+          #     Output only. The number of objects which were unable to be ingested due
+          #     to errors. The errors are populated in the partial_errors field.
+          class IngestConversationsStats
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # The response to an IngestConversations operation.
@@ -478,9 +548,9 @@ module Google
           #     the resource project will be used.
           # @!attribute [rw] dataset
           #   @return [::String]
-          #     Required. The name of the BigQuery dataset that the snapshot result should be
-          #     exported to. If this dataset does not exist, the export call returns an
-          #     INVALID_ARGUMENT error.
+          #     Required. The name of the BigQuery dataset that the snapshot result
+          #     should be exported to. If this dataset does not exist, the export call
+          #     returns an INVALID_ARGUMENT error.
           # @!attribute [rw] table
           #   @return [::String]
           #     The BigQuery table name to which the insights data should be written.
@@ -750,10 +820,10 @@ module Google
         # Request to create a phrase matcher.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent resource of the phrase matcher. Required. The location to create
-        #     a phrase matcher for.
-        #     Format: `projects/<Project ID>/locations/<Location ID>` or
-        #     `projects/<Project Number>/locations/<Location ID>`
+        #     Required. The parent resource of the phrase matcher. Required. The location
+        #     to create a phrase matcher for. Format: `projects/<Project
+        #     ID>/locations/<Location ID>` or `projects/<Project
+        #     Number>/locations/<Location ID>`
         # @!attribute [rw] phrase_matcher
         #   @return [::Google::Cloud::ContactCenterInsights::V1::PhraseMatcher]
         #     Required. The phrase matcher resource to create.

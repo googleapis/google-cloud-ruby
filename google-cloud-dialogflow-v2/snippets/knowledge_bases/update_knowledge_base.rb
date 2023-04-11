@@ -20,8 +20,11 @@
 require "google/cloud/dialogflow/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dialogflow::V2::KnowledgeBases::Client#update_knowledge_base
+# Snippet for the update_knowledge_base call in the KnowledgeBases service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dialogflow::V2::KnowledgeBases::Client#update_knowledge_base.
+# It may require modification in order to execute successfully.
 #
 def update_knowledge_base
   # Create a client object. The client can be reused for multiple calls.

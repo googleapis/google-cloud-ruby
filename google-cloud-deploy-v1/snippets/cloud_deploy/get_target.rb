@@ -20,8 +20,11 @@
 require "google/cloud/deploy/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Deploy::V1::CloudDeploy::Client#get_target
+# Snippet for the get_target call in the CloudDeploy service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Deploy::V1::CloudDeploy::Client#get_target. It may require
+# modification in order to execute successfully.
 #
 def get_target
   # Create a client object. The client can be reused for multiple calls.

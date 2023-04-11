@@ -177,6 +177,9 @@ module Google
         #     which are named with the corresponding annotations' schema title. Inside
         #     these sub directories, a schema.yaml will be created to describe the
         #     output format.
+        # @!attribute [rw] fraction_split
+        #   @return [::Google::Cloud::AIPlatform::V1::ExportFractionSplit]
+        #     Split based on fractions defining the size of each set.
         # @!attribute [rw] annotations_filter
         #   @return [::String]
         #     A filter on Annotations of the Dataset. Only Annotations on to-be-exported
@@ -184,6 +187,26 @@ module Google
         #     be exported. The filter syntax is the same as in
         #     {::Google::Cloud::AIPlatform::V1::DatasetService::Client#list_annotations ListAnnotations}.
         class ExportDataConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Assigns the input data to training, validation, and test sets as per the
+        # given fractions. Any of `training_fraction`, `validation_fraction` and
+        # `test_fraction` may optionally be provided, they must sum to up to 1. If the
+        # provided ones sum to less than 1, the remainder is assigned to sets as
+        # decided by Vertex AI. If none of the fractions are set, by default roughly
+        # 80% of data is used for training, 10% for validation, and 10% for test.
+        # @!attribute [rw] training_fraction
+        #   @return [::Float]
+        #     The fraction of the input data that is to be used to train the Model.
+        # @!attribute [rw] validation_fraction
+        #   @return [::Float]
+        #     The fraction of the input data that is to be used to validate the Model.
+        # @!attribute [rw] test_fraction
+        #   @return [::Float]
+        #     The fraction of the input data that is to be used to evaluate the Model.
+        class ExportFractionSplit
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

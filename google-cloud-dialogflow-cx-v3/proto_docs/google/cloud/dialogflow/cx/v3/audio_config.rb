@@ -185,6 +185,26 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Settings related to speech generating.
+          # @!attribute [rw] synthesize_speech_configs
+          #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Dialogflow::CX::V3::SynthesizeSpeechConfig}]
+          #     Configuration of how speech should be synthesized, mapping from
+          #     language (https://dialogflow.com/docs/reference/language) to
+          #     SynthesizeSpeechConfig.
+          class TextToSpeechSettings
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::Google::Cloud::Dialogflow::CX::V3::SynthesizeSpeechConfig]
+            class SynthesizeSpeechConfigsEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+
           # Audio encoding of the audio content sent in the conversational query request.
           # Refer to the
           # [Cloud Speech API

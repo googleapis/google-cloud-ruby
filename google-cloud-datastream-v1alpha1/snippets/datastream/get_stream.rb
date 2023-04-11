@@ -20,8 +20,11 @@
 require "google/cloud/datastream/v1alpha1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Datastream::V1alpha1::Datastream::Client#get_stream
+# Snippet for the get_stream call in the Datastream service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Datastream::V1alpha1::Datastream::Client#get_stream. It may
+# require modification in order to execute successfully.
 #
 def get_stream
   # Create a client object. The client can be reused for multiple calls.

@@ -1,5 +1,23 @@
 # Changelog
 
+### 0.5.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20625](https://github.com/googleapis/google-cloud-ruby/issues/20625)) 
+
+### 0.4.2 (2023-03-01)
+
+#### Documentation
+
+* Corrected max number of certificates in a Certificate Map Entry ([#20572](https://github.com/googleapis/google-cloud-ruby/issues/20572)) 
+
+### 0.4.1 (2023-01-26)
+
+#### Documentation
+
+* Minor reference doc formatting fixes ([#20068](https://github.com/googleapis/google-cloud-ruby/issues/20068)) 
+
 ### 0.4.0 (2022-10-03)
 
 #### Features

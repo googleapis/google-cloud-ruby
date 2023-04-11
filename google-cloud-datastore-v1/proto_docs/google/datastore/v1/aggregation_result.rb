@@ -30,9 +30,10 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Datastore::V1::Value}]
         #     The result of the aggregation functions, ex: `COUNT(*) AS total_entities`.
         #
-        #     The key is the {::Google::Cloud::Datastore::V1::AggregationQuery::Aggregation#alias alias}
-        #     assigned to the aggregation function on input and the size of this map
-        #     equals the number of aggregation functions in the query.
+        #     The key is the
+        #     {::Google::Cloud::Datastore::V1::AggregationQuery::Aggregation#alias alias} assigned to
+        #     the aggregation function on input and the size of this map equals the
+        #     number of aggregation functions in the query.
         class AggregationResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-ids-v1",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "ids_v1_generated_IDS_ListEndpoints_sync",
-      "title": "Snippet for list_endpoints in IDS",
-      "description": "Basic snippet for list_endpoints in IDS",
+      "title": "Snippet for the list_endpoints call in the IDS service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::IDS::V1::IDS::Client#list_endpoints. It may require modification in order to execute successfully.",
       "file": "ids/list_endpoints.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "ids_v1_generated_IDS_GetEndpoint_sync",
-      "title": "Snippet for get_endpoint in IDS",
-      "description": "Basic snippet for get_endpoint in IDS",
+      "title": "Snippet for the get_endpoint call in the IDS service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::IDS::V1::IDS::Client#get_endpoint. It may require modification in order to execute successfully.",
       "file": "ids/get_endpoint.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "ids_v1_generated_IDS_CreateEndpoint_sync",
-      "title": "Snippet for create_endpoint in IDS",
-      "description": "Basic snippet for create_endpoint in IDS",
+      "title": "Snippet for the create_endpoint call in the IDS service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::IDS::V1::IDS::Client#create_endpoint. It may require modification in order to execute successfully.",
       "file": "ids/create_endpoint.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "ids_v1_generated_IDS_DeleteEndpoint_sync",
-      "title": "Snippet for delete_endpoint in IDS",
-      "description": "Basic snippet for delete_endpoint in IDS",
+      "title": "Snippet for the delete_endpoint call in the IDS service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::IDS::V1::IDS::Client#delete_endpoint. It may require modification in order to execute successfully.",
       "file": "ids/delete_endpoint.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]

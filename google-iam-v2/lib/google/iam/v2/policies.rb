@@ -25,6 +25,7 @@ require "google/iam/v2/version"
 require "google/iam/v2/policies/credentials"
 require "google/iam/v2/policies/operations"
 require "google/iam/v2/policies/client"
+require "google/iam/v2/policies/rest"
 
 module Google
   module Iam
@@ -36,6 +37,11 @@ module Google
       #
       #     require "google/iam/v2/policies"
       #     client = ::Google::Iam::V2::Policies::Client.new
+      #
+      # @example Load this service and instantiate a REST client
+      #
+      #     require "google/iam/v2/policies/rest"
+      #     client = ::Google::Iam::V2::Policies::Rest::Client.new
       #
       module Policies
       end

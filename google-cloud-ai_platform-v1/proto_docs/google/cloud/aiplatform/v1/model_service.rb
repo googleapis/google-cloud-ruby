@@ -403,6 +403,64 @@ module Google
         end
 
         # Request message for
+        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#copy_model ModelService.CopyModel}.
+        # @!attribute [rw] model_id
+        #   @return [::String]
+        #     Optional. Copy source_model into a new Model with this ID. The ID will
+        #     become the final component of the model resource name.
+        #
+        #     This value may be up to 63 characters, and valid characters are
+        #     `[a-z0-9_-]`. The first character cannot be a number or hyphen.
+        # @!attribute [rw] parent_model
+        #   @return [::String]
+        #     Optional. Specify this field to copy source_model into this existing
+        #     Model as a new version. Format:
+        #     `projects/{project}/locations/{location}/models/{model}`
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the Location into which to copy the Model.
+        #     Format: `projects/{project}/locations/{location}`
+        # @!attribute [rw] source_model
+        #   @return [::String]
+        #     Required. The resource name of the Model to copy. That Model must be in the
+        #     same Project. Format:
+        #     `projects/{project}/locations/{location}/models/{model}`
+        # @!attribute [rw] encryption_spec
+        #   @return [::Google::Cloud::AIPlatform::V1::EncryptionSpec]
+        #     Customer-managed encryption key options. If this is set,
+        #     then the Model copy will be encrypted with the provided encryption key.
+        class CopyModelRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Details of
+        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#copy_model ModelService.CopyModel}
+        # operation.
+        # @!attribute [rw] generic_metadata
+        #   @return [::Google::Cloud::AIPlatform::V1::GenericOperationMetadata]
+        #     The common part of the operation metadata.
+        class CopyModelOperationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message of
+        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#copy_model ModelService.CopyModel}
+        # operation.
+        # @!attribute [rw] model
+        #   @return [::String]
+        #     The name of the copied Model resource.
+        #     Format: `projects/{project}/locations/{location}/models/{model}`
+        # @!attribute [r] model_version_id
+        #   @return [::String]
+        #     Output only. The version ID of the model that is copied.
+        class CopyModelResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
         # {::Google::Cloud::AIPlatform::V1::ModelService::Client#import_model_evaluation ModelService.ImportModelEvaluation}
         # @!attribute [rw] parent
         #   @return [::String]
@@ -438,6 +496,31 @@ module Google
         #     Output only. List of imported
         #     {::Google::Cloud::AIPlatform::V1::ModelEvaluationSlice#name ModelEvaluationSlice.name}.
         class BatchImportModelEvaluationSlicesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#batch_import_evaluated_annotations ModelService.BatchImportEvaluatedAnnotations}
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The name of the parent ModelEvaluationSlice resource.
+        #     Format:
+        #     `projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}/slices/{slice}`
+        # @!attribute [rw] evaluated_annotations
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::EvaluatedAnnotation>]
+        #     Required. Evaluated annotations resource to be imported.
+        class BatchImportEvaluatedAnnotationsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#batch_import_evaluated_annotations ModelService.BatchImportEvaluatedAnnotations}
+        # @!attribute [r] imported_evaluated_annotations_count
+        #   @return [::Integer]
+        #     Output only. Number of EvaluatedAnnotations imported.
+        class BatchImportEvaluatedAnnotationsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

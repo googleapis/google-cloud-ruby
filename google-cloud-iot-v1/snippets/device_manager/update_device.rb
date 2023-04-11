@@ -20,8 +20,11 @@
 require "google/cloud/iot/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Iot::V1::DeviceManager::Client#update_device
+# Snippet for the update_device call in the DeviceManager service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Iot::V1::DeviceManager::Client#update_device. It may require
+# modification in order to execute successfully.
 #
 def update_device
   # Create a client object. The client can be reused for multiple calls.

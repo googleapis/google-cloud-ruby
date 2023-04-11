@@ -24,7 +24,9 @@ require "google/cloud/data_catalog/v1/version"
 
 require "google/cloud/data_catalog/v1/data_catalog/credentials"
 require "google/cloud/data_catalog/v1/data_catalog/paths"
+require "google/cloud/data_catalog/v1/data_catalog/operations"
 require "google/cloud/data_catalog/v1/data_catalog/client"
+require "google/cloud/data_catalog/v1/data_catalog/rest"
 
 module Google
   module Cloud
@@ -38,6 +40,11 @@ module Google
         #
         #     require "google/cloud/data_catalog/v1/data_catalog"
         #     client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/data_catalog/v1/data_catalog/rest"
+        #     client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new
         #
         module DataCatalog
         end

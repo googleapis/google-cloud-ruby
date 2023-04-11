@@ -30,6 +30,11 @@ module Google
       #     require "google/cloud/service_management/v1"
       #     client = ::Google::Cloud::ServiceManagement::V1::ServiceManager::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/service_management/v1"
+      #     client = ::Google::Cloud::ServiceManagement::V1::ServiceManager::Rest::Client.new
+      #
       module V1
       end
     end

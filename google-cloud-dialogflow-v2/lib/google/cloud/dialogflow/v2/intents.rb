@@ -26,6 +26,7 @@ require "google/cloud/dialogflow/v2/intents/credentials"
 require "google/cloud/dialogflow/v2/intents/paths"
 require "google/cloud/dialogflow/v2/intents/operations"
 require "google/cloud/dialogflow/v2/intents/client"
+require "google/cloud/dialogflow/v2/intents/rest"
 
 module Google
   module Cloud
@@ -38,6 +39,11 @@ module Google
         #
         #     require "google/cloud/dialogflow/v2/intents"
         #     client = ::Google::Cloud::Dialogflow::V2::Intents::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/dialogflow/v2/intents/rest"
+        #     client = ::Google::Cloud::Dialogflow::V2::Intents::Rest::Client.new
         #
         module Intents
         end

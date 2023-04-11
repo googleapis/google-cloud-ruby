@@ -30,6 +30,11 @@ module Google
       #     require "google/cloud/dataform/v1beta1"
       #     client = ::Google::Cloud::Dataform::V1beta1::Dataform::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/dataform/v1beta1"
+      #     client = ::Google::Cloud::Dataform::V1beta1::Dataform::Rest::Client.new
+      #
       module V1beta1
       end
     end

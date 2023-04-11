@@ -20,8 +20,11 @@
 require "google/cloud/iap/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client#list_brands
+# Snippet for the list_brands call in the IdentityAwareProxyOAuthService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client#list_brands. It
+# may require modification in order to execute successfully.
 #
 def list_brands
   # Create a client object. The client can be reused for multiple calls.

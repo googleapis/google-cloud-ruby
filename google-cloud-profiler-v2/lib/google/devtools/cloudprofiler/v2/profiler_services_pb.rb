@@ -51,6 +51,7 @@ module Google
             # status. To a gRPC client, the extension will be return as a
             # binary-serialized proto in the trailing metadata item named
             # "google.rpc.retryinfo-bin".
+            #
             rpc :CreateProfile, ::Google::Cloud::Profiler::V2::CreateProfileRequest, ::Google::Cloud::Profiler::V2::Profile
             # CreateOfflineProfile creates a new profile resource in the offline mode.
             # The client provides the profile to create along with the profile bytes, the

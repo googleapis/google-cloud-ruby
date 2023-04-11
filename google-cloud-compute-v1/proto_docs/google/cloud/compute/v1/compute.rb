@@ -194,7 +194,7 @@ module Google
         # An access configuration attached to an instance's network interface. Only one access config per instance is supported.
         # @!attribute [rw] external_ipv6
         #   @return [::String]
-        #     The first IPv6 address of the external IPv6 range associated with this instance, prefix length is stored in externalIpv6PrefixLength in ipv6AccessConfig. The field is output only, an IPv6 address from a subnetwork associated with the instance will be allocated dynamically.
+        #     The first IPv6 address of the external IPv6 range associated with this instance, prefix length is stored in externalIpv6PrefixLength in ipv6AccessConfig. To use a static external IP address, it must be unused and in the same region as the instance's zone. If not specified, Google Cloud will automatically assign an external IPv6 address from the instance's subnetwork.
         # @!attribute [rw] external_ipv6_prefix_length
         #   @return [::Integer]
         #     The prefix length of the external IPv6 range.
@@ -231,16 +231,16 @@ module Google
             UNDEFINED_NETWORK_TIER = 0
 
             # Public internet quality with fixed bandwidth.
-            FIXED_STANDARD = 310464328
+            FIXED_STANDARD = 310_464_328
 
             # High quality, Google-grade network tier, support for all networking products.
-            PREMIUM = 399530551
+            PREMIUM = 399_530_551
 
             # Public internet quality, only limited support for other networking products.
-            STANDARD = 484642493
+            STANDARD = 484_642_493
 
             # (Output only) Temporary tier for FIXED_STANDARD when fixed standard tier is expired or not configured.
-            STANDARD_OVERRIDES_FIXED_STANDARD = 465847234
+            STANDARD_OVERRIDES_FIXED_STANDARD = 465_847_234
           end
 
           # The type of configuration. The default and only option is ONE_TO_ONE_NAT.
@@ -248,9 +248,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
 
-            DIRECT_IPV6 = 4397213
+            DIRECT_IPV6 = 4_397_213
 
-            ONE_TO_ONE_NAT = 84090205
+            ONE_TO_ONE_NAT = 84_090_205
           end
         end
 
@@ -697,12 +697,12 @@ module Google
             UNDEFINED_ADDRESS_TYPE = 0
 
             # A publicly visible external IP address.
-            EXTERNAL = 35607499
+            EXTERNAL = 35_607_499
 
             # A private network IP address, for use with an Instance or Internal Load Balancer forwarding rule.
-            INTERNAL = 279295677
+            INTERNAL = 279_295_677
 
-            UNSPECIFIED_TYPE = 53933922
+            UNSPECIFIED_TYPE = 53_933_922
           end
 
           # The IP version that will be used by this address. Valid options are IPV4 or IPV6. This can only be specified for a global address.
@@ -710,11 +710,11 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_IP_VERSION = 0
 
-            IPV4 = 2254341
+            IPV4 = 2_254_341
 
-            IPV6 = 2254343
+            IPV6 = 2_254_343
 
-            UNSPECIFIED_VERSION = 21850000
+            UNSPECIFIED_VERSION = 21_850_000
           end
 
           # The endpoint type of this address, which should be VM or NETLB. This is used for deciding which type of endpoint this address can be used after the external IPv6 address reservation.
@@ -723,7 +723,7 @@ module Google
             UNDEFINED_IPV6_ENDPOINT_TYPE = 0
 
             # Reserved IPv6 address can be used on network load balancer.
-            NETLB = 74173363
+            NETLB = 74_173_363
 
             # Reserved IPv6 address can be used on VM.
             VM = 2743
@@ -735,16 +735,16 @@ module Google
             UNDEFINED_NETWORK_TIER = 0
 
             # Public internet quality with fixed bandwidth.
-            FIXED_STANDARD = 310464328
+            FIXED_STANDARD = 310_464_328
 
             # High quality, Google-grade network tier, support for all networking products.
-            PREMIUM = 399530551
+            PREMIUM = 399_530_551
 
             # Public internet quality, only limited support for other networking products.
-            STANDARD = 484642493
+            STANDARD = 484_642_493
 
             # (Output only) Temporary tier for FIXED_STANDARD when fixed standard tier is expired or not configured.
-            STANDARD_OVERRIDES_FIXED_STANDARD = 465847234
+            STANDARD_OVERRIDES_FIXED_STANDARD = 465_847_234
           end
 
           # The purpose of this resource, which can be one of the following values: - GCE_ENDPOINT for addresses that are used by VM instances, alias IP ranges, load balancers, and similar resources. - DNS_RESOLVER for a DNS resolver address in a subnetwork for a Cloud DNS inbound forwarder IP addresses (regional internal IP address in a subnet of a VPC network) - VPC_PEERING for global internal IP addresses used for private services access allocated ranges. - NAT_AUTO for the regional external IP addresses used by Cloud NAT when allocating addresses using automatic NAT IP address allocation. - IPSEC_INTERCONNECT for addresses created from a private IP range that are reserved for a VLAN attachment in an *HA VPN over Cloud Interconnect* configuration. These addresses are regional resources. - `SHARED_LOADBALANCER_VIP` for an internal IP address that is assigned to multiple internal forwarding rules. - `PRIVATE_SERVICE_CONNECT` for a private network address that is used to configure Private Service Connect. Only global internal addresses can use this purpose.
@@ -753,28 +753,28 @@ module Google
             UNDEFINED_PURPOSE = 0
 
             # DNS resolver address in the subnetwork.
-            DNS_RESOLVER = 476114556
+            DNS_RESOLVER = 476_114_556
 
             # VM internal/alias IP, Internal LB service IP, etc.
-            GCE_ENDPOINT = 230515243
+            GCE_ENDPOINT = 230_515_243
 
-            # A regional internal IP address range reserved for the VLAN attachment that is used in HA VPN over Cloud Interconnect. This regional internal IP address range must not overlap with any IP address range of subnet/route in the VPC network and its peering networks. After the VLAN attachment is created with the reserved IP address range, when creating a new VPN gateway, its interface IP address is allocated from the associated VLAN attachment���s IP address range.
-            IPSEC_INTERCONNECT = 340437251
+            # A regional internal IP address range reserved for the VLAN attachment that is used in HA VPN over Cloud Interconnect. This regional internal IP address range must not overlap with any IP address range of subnet/route in the VPC network and its peering networks. After the VLAN attachment is created with the reserved IP address range, when creating a new VPN gateway, its interface IP address is allocated from the associated VLAN attachment’s IP address range.
+            IPSEC_INTERCONNECT = 340_437_251
 
             # External IP automatically reserved for Cloud NAT.
-            NAT_AUTO = 163666477
+            NAT_AUTO = 163_666_477
 
             # A private network IP address that can be used to configure Private Service Connect. This purpose can be specified only for GLOBAL addresses of Type INTERNAL
-            PRIVATE_SERVICE_CONNECT = 48134724
+            PRIVATE_SERVICE_CONNECT = 48_134_724
 
             # A regional internal IP address range reserved for Serverless.
-            SERVERLESS = 270492508
+            SERVERLESS = 270_492_508
 
             # A private network IP address that can be shared by multiple Internal Load Balancer forwarding rules.
-            SHARED_LOADBALANCER_VIP = 294447572
+            SHARED_LOADBALANCER_VIP = 294_447_572
 
             # IP range for peer networks.
-            VPC_PEERING = 400800170
+            VPC_PEERING = 400_800_170
           end
 
           # [Output Only] The status of the address, which can be one of RESERVING, RESERVED, or IN_USE. An address that is RESERVING is currently in the process of being reserved. A RESERVED address is currently reserved and available to use. An IN_USE address is currently being used by another resource and is not available.
@@ -783,13 +783,13 @@ module Google
             UNDEFINED_STATUS = 0
 
             # Address is being used by another resource and is not available.
-            IN_USE = 17393485
+            IN_USE = 17_393_485
 
             # Address is reserved and available to use.
-            RESERVED = 432241448
+            RESERVED = 432_241_448
 
             # Address is being reserved.
-            RESERVING = 514587225
+            RESERVING = 514_587_225
           end
         end
 
@@ -1174,6 +1174,33 @@ module Google
         #   @return [::Boolean]
         #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class AggregatedListInstanceGroupsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for InstanceTemplates.AggregatedList. See the method description for details.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:` operator can be used with string fields to match substrings. For non-string fields it is equivalent to the `=` operator. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`.
+        # @!attribute [rw] include_all_scopes
+        #   @return [::Boolean]
+        #     Indicates whether every visible scope for each scope type (zone, region, global) should be included in the response. For new resource types added after this field, the flag has no effect as new resource types will always include every visible scope for each scope type in response. For resource types which predate this field, if this flag is omitted or false, only scopes of the scope types where the resource type is expected to be found will be included.
+        # @!attribute [rw] max_results
+        #   @return [::Integer]
+        #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Name of the project scoping this request.
+        # @!attribute [rw] return_partial_success
+        #   @return [::Boolean]
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        class AggregatedListInstanceTemplatesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1973,6 +2000,24 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # [Output Only] Contains output only fields.
+        # @!attribute [rw] specific_sku_allocation
+        #   @return [::Google::Cloud::Compute::V1::AllocationResourceStatusSpecificSKUAllocation]
+        #     Allocation Properties of this reservation.
+        class AllocationResourceStatus
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Contains Properties set for the reservation.
+        # @!attribute [rw] source_instance_template_id
+        #   @return [::String]
+        #     ID of the instance template used to populate reservation properties.
+        class AllocationResourceStatusSpecificSKUAllocation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # @!attribute [rw] disk_size_gb
         #   @return [::Integer]
         #     Specifies the size of the disk in base-2 GB.
@@ -1989,9 +2034,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_INTERFACE = 0
 
-            NVME = 2408800
+            NVME = 2_408_800
 
-            SCSI = 2539686
+            SCSI = 2_539_686
           end
         end
 
@@ -2029,6 +2074,9 @@ module Google
         # @!attribute [rw] instance_properties
         #   @return [::Google::Cloud::Compute::V1::AllocationSpecificSKUAllocationReservedInstanceProperties]
         #     The instance properties for the reservation.
+        # @!attribute [rw] source_instance_template
+        #   @return [::String]
+        #     Specifies the instance template to create the reservation. If you use this field, you must exclude the instanceProperties field. This field is optional, and it can be a full or partial URL. For example, the following are all valid URLs to an instance template: - https://www.googleapis.com/compute/v1/projects/project /global/instanceTemplates/instanceTemplate - projects/project/global/instanceTemplates/instanceTemplate - global/instanceTemplates/instanceTemplate
         class AllocationSpecificSKUReservation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2210,13 +2258,13 @@ module Google
             UNDEFINED_ARCHITECTURE = 0
 
             # Default value indicating Architecture is not set.
-            ARCHITECTURE_UNSPECIFIED = 394750507
+            ARCHITECTURE_UNSPECIFIED = 394_750_507
 
             # Machines with architecture ARM64
-            ARM64 = 62547450
+            ARM64 = 62_547_450
 
             # Machines with architecture X86_64
-            X86_64 = 425300551
+            X86_64 = 425_300_551
           end
 
           # Specifies the disk interface to use for attaching this disk, which is either SCSI or NVME. For most machine types, the default is SCSI. Local SSDs can use either NVME or SCSI. In certain configurations, persistent disks can use NVMe. For more information, see About persistent disks.
@@ -2224,9 +2272,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_INTERFACE = 0
 
-            NVME = 2408800
+            NVME = 2_408_800
 
-            SCSI = 2539686
+            SCSI = 2_539_686
           end
 
           # The mode in which to attach this disk, either READ_WRITE or READ_ONLY. If not specified, the default is to attach the disk in READ_WRITE mode.
@@ -2235,10 +2283,10 @@ module Google
             UNDEFINED_MODE = 0
 
             # Attaches this disk in read-only mode. Multiple virtual machines can use a disk in read-only mode at a time.
-            READ_ONLY = 91950261
+            READ_ONLY = 91_950_261
 
             # *[Default]* Attaches this disk in read-write mode. Only one virtual machine at a time can be attached to a disk in read-write mode.
-            READ_WRITE = 173607894
+            READ_WRITE = 173_607_894
           end
 
           # Specifies the type of the disk, either SCRATCH or PERSISTENT. If not specified, the default is PERSISTENT.
@@ -2246,9 +2294,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
 
-            PERSISTENT = 460683927
+            PERSISTENT = 460_683_927
 
-            SCRATCH = 496778970
+            SCRATCH = 496_778_970
           end
         end
 
@@ -2328,13 +2376,13 @@ module Google
             UNDEFINED_ARCHITECTURE = 0
 
             # Default value indicating Architecture is not set.
-            ARCHITECTURE_UNSPECIFIED = 394750507
+            ARCHITECTURE_UNSPECIFIED = 394_750_507
 
             # Machines with architecture ARM64
-            ARM64 = 62547450
+            ARM64 = 62_547_450
 
             # Machines with architecture X86_64
-            X86_64 = 425300551
+            X86_64 = 425_300_551
           end
 
           # Specifies which action to take on instance update with this disk. Default is to use the existing disk.
@@ -2343,13 +2391,13 @@ module Google
             UNDEFINED_ON_UPDATE_ACTION = 0
 
             # Always recreate the disk.
-            RECREATE_DISK = 494767853
+            RECREATE_DISK = 494_767_853
 
             # Recreate the disk if source (image, snapshot) of this disk is different from source of existing disk.
-            RECREATE_DISK_IF_SOURCE_CHANGED = 398099712
+            RECREATE_DISK_IF_SOURCE_CHANGED = 398_099_712
 
             # Use the existing disk, this is the default behaviour.
-            USE_EXISTING_DISK = 232682233
+            USE_EXISTING_DISK = 232_682_233
           end
         end
 
@@ -2389,16 +2437,16 @@ module Google
             UNDEFINED_LOG_TYPE = 0
 
             # Admin reads. Example: CloudIAM getIamPolicy
-            ADMIN_READ = 128951462
+            ADMIN_READ = 128_951_462
 
             # Data reads. Example: CloudSQL Users list
-            DATA_READ = 305224971
+            DATA_READ = 305_224_971
 
             # Data writes. Example: CloudSQL Users create
-            DATA_WRITE = 340181738
+            DATA_WRITE = 340_181_738
 
             # Default case. Should never be this.
-            LOG_TYPE_UNSPECIFIED = 154527053
+            LOG_TYPE_UNSPECIFIED = 154_527_053
           end
         end
 
@@ -2417,19 +2465,19 @@ module Google
             UNDEFINED_PERMISSION_TYPE = 0
 
             # This is deprecated and has no effect. Do not use.
-            ADMIN_READ = 128951462
+            ADMIN_READ = 128_951_462
 
             # This is deprecated and has no effect. Do not use.
-            ADMIN_WRITE = 244412079
+            ADMIN_WRITE = 244_412_079
 
             # This is deprecated and has no effect. Do not use.
-            DATA_READ = 305224971
+            DATA_READ = 305_224_971
 
             # This is deprecated and has no effect. Do not use.
-            DATA_WRITE = 340181738
+            DATA_WRITE = 340_181_738
 
             # This is deprecated and has no effect. Do not use.
-            PERMISSION_TYPE_UNSPECIFIED = 440313346
+            PERMISSION_TYPE_UNSPECIFIED = 440_313_346
           end
         end
 
@@ -2496,16 +2544,16 @@ module Google
             UNDEFINED_STATUS = 0
 
             # Configuration is acknowledged to be effective
-            ACTIVE = 314733318
+            ACTIVE = 314_733_318
 
             # Configuration is being deleted
-            DELETING = 528602024
+            DELETING = 528_602_024
 
             # Configuration has errors. Actionable for users.
-            ERROR = 66247144
+            ERROR = 66_247_144
 
             # Autoscaler backend hasn't read new/updated configuration
-            PENDING = 35394935
+            PENDING = 35_394_935
           end
         end
 
@@ -2585,63 +2633,63 @@ module Google
             UNDEFINED_TYPE = 0
 
             # All instances in the instance group are unhealthy (not in RUNNING state).
-            ALL_INSTANCES_UNHEALTHY = 404965477
+            ALL_INSTANCES_UNHEALTHY = 404_965_477
 
             # There is no backend service attached to the instance group.
-            BACKEND_SERVICE_DOES_NOT_EXIST = 191417626
+            BACKEND_SERVICE_DOES_NOT_EXIST = 191_417_626
 
             # Autoscaler recommends a size greater than maxNumReplicas.
-            CAPPED_AT_MAX_NUM_REPLICAS = 518617
+            CAPPED_AT_MAX_NUM_REPLICAS = 518_617
 
             # The custom metric samples are not exported often enough to be a credible base for autoscaling.
-            CUSTOM_METRIC_DATA_POINTS_TOO_SPARSE = 328964659
+            CUSTOM_METRIC_DATA_POINTS_TOO_SPARSE = 328_964_659
 
             # The custom metric that was specified does not exist or does not have the necessary labels.
-            CUSTOM_METRIC_INVALID = 204430550
+            CUSTOM_METRIC_INVALID = 204_430_550
 
             # The minNumReplicas is equal to maxNumReplicas. This means the autoscaler cannot add or remove instances from the instance group.
-            MIN_EQUALS_MAX = 2821361
+            MIN_EQUALS_MAX = 2_821_361
 
             # The autoscaler did not receive any data from the custom metric configured for autoscaling.
-            MISSING_CUSTOM_METRIC_DATA_POINTS = 94885086
+            MISSING_CUSTOM_METRIC_DATA_POINTS = 94_885_086
 
             # The autoscaler is configured to scale based on a load balancing signal but the instance group has not received any requests from the load balancer.
-            MISSING_LOAD_BALANCING_DATA_POINTS = 509858898
+            MISSING_LOAD_BALANCING_DATA_POINTS = 509_858_898
 
             # Autoscaling is turned off. The number of instances in the group won't change automatically. The autoscaling configuration is preserved.
-            MODE_OFF = 164169907
+            MODE_OFF = 164_169_907
 
             # Autoscaling is in the "Autoscale only scale out" mode. Instances in the group will be only added.
-            MODE_ONLY_SCALE_OUT = 3840994
+            MODE_ONLY_SCALE_OUT = 3_840_994
 
             # Autoscaling is in the "Autoscale only out" mode. Instances in the group will be only added.
-            MODE_ONLY_UP = 100969842
+            MODE_ONLY_UP = 100_969_842
 
             # The instance group cannot be autoscaled because it has more than one backend service attached to it.
-            MORE_THAN_ONE_BACKEND_SERVICE = 151922141
+            MORE_THAN_ONE_BACKEND_SERVICE = 151_922_141
 
             # There is insufficient quota for the necessary resources, such as CPU or number of instances.
-            NOT_ENOUGH_QUOTA_AVAILABLE = 403101631
+            NOT_ENOUGH_QUOTA_AVAILABLE = 403_101_631
 
             # Showed only for regional autoscalers: there is a resource stockout in the chosen region.
-            REGION_RESOURCE_STOCKOUT = 528622846
+            REGION_RESOURCE_STOCKOUT = 528_622_846
 
             # The target to be scaled does not exist.
-            SCALING_TARGET_DOES_NOT_EXIST = 122636699
+            SCALING_TARGET_DOES_NOT_EXIST = 122_636_699
 
             # For some scaling schedules minRequiredReplicas is greater than maxNumReplicas. Autoscaler always recommends at most maxNumReplicas instances.
-            SCHEDULED_INSTANCES_GREATER_THAN_AUTOSCALER_MAX = 29275586
+            SCHEDULED_INSTANCES_GREATER_THAN_AUTOSCALER_MAX = 29_275_586
 
             # For some scaling schedules minRequiredReplicas is less than minNumReplicas. Autoscaler always recommends at least minNumReplicas instances.
-            SCHEDULED_INSTANCES_LESS_THAN_AUTOSCALER_MIN = 398287669
+            SCHEDULED_INSTANCES_LESS_THAN_AUTOSCALER_MIN = 398_287_669
 
-            UNKNOWN = 433141802
+            UNKNOWN = 433_141_802
 
             # Autoscaling does not work with an HTTP/S load balancer that has been configured for maxRate.
-            UNSUPPORTED_MAX_RATE_LOAD_BALANCING_CONFIGURATION = 330845009
+            UNSUPPORTED_MAX_RATE_LOAD_BALANCING_CONFIGURATION = 330_845_009
 
             # For zonal autoscalers: there is a resource stockout in the chosen zone. For regional autoscalers: in at least one of the zones you're using there is a resource stockout.
-            ZONE_RESOURCE_STOCKOUT = 210200502
+            ZONE_RESOURCE_STOCKOUT = 210_200_502
           end
         end
 
@@ -2703,16 +2751,16 @@ module Google
             UNDEFINED_MODE = 0
 
             # Do not automatically scale the MIG in or out. The recommended_size field contains the size of MIG that would be set if the actuation mode was enabled.
-            OFF = 78159
+            OFF = 78_159
 
             # Automatically scale the MIG in and out according to the policy.
             ON = 2527
 
             # Automatically create VMs according to the policy, but do not scale the MIG in.
-            ONLY_SCALE_OUT = 152713670
+            ONLY_SCALE_OUT = 152_713_670
 
             # Automatically create VMs according to the policy, but do not scale the MIG in.
-            ONLY_UP = 478095374
+            ONLY_UP = 478_095_374
           end
         end
 
@@ -2734,10 +2782,10 @@ module Google
             UNDEFINED_PREDICTIVE_METHOD = 0
 
             # No predictive method is used. The autoscaler scales the group to meet current demand based on real-time metrics
-            NONE = 2402104
+            NONE = 2_402_104
 
             # Predictive autoscaling improves availability by monitoring daily and weekly load patterns and scaling out ahead of anticipated demand.
-            OPTIMIZE_AVAILABILITY = 11629437
+            OPTIMIZE_AVAILABILITY = 11_629_437
           end
         end
 
@@ -2768,13 +2816,13 @@ module Google
             UNDEFINED_UTILIZATION_TARGET_TYPE = 0
 
             # Sets the utilization target value for a cumulative or delta metric, expressed as the rate of growth per minute.
-            DELTA_PER_MINUTE = 87432861
+            DELTA_PER_MINUTE = 87_432_861
 
             # Sets the utilization target value for a cumulative or delta metric, expressed as the rate of growth per second.
-            DELTA_PER_SECOND = 255180029
+            DELTA_PER_SECOND = 255_180_029
 
             # Sets the utilization target value for a gauge metric. The autoscaler will collect the average utilization of the virtual machines from the last couple of minutes, and compare the value to the utilization target value to perform autoscaling.
-            GAUGE = 67590361
+            GAUGE = 67_590_361
           end
         end
 
@@ -2817,7 +2865,7 @@ module Google
         #     The start timestamps of time intervals when this scaling schedule is to provide a scaling signal. This field uses the extended cron format (with an optional year field). The expression can describe a single timestamp if the optional year is set, in which case the scaling schedule runs once. The schedule is interpreted with respect to time_zone. This field is required. Note: These timestamps only describe when autoscaler starts providing the scaling signal. The VMs need additional time to become serving.
         # @!attribute [rw] time_zone
         #   @return [::String]
-        #     The time zone to use when interpreting the schedule. The value of this field must be a time zone name from the tz database: http://en.wikipedia.org/wiki/Tz_database. This field is assigned a default value of ���UTC��� if left empty.
+        #     The time zone to use when interpreting the schedule. The value of this field must be a time zone name from the tz database: http://en.wikipedia.org/wiki/Tz_database. This field is assigned a default value of “UTC” if left empty.
         class AutoscalingPolicyScalingSchedule
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2871,13 +2919,13 @@ module Google
             UNDEFINED_BALANCING_MODE = 0
 
             # Balance based on the number of simultaneous connections.
-            CONNECTION = 246311646
+            CONNECTION = 246_311_646
 
             # Balance based on requests per second (RPS).
-            RATE = 2508000
+            RATE = 2_508_000
 
             # Balance based on the backend utilization.
-            UTILIZATION = 157008386
+            UTILIZATION = 157_008_386
           end
         end
 
@@ -2929,10 +2977,10 @@ module Google
             UNDEFINED_COMPRESSION_MODE = 0
 
             # Automatically uses the best compression based on the Accept-Encoding header sent by the client.
-            AUTOMATIC = 165298699
+            AUTOMATIC = 165_298_699
 
             # Disables compression. Existing compressed responses cached by Cloud CDN will not be served to clients.
-            DISABLED = 516696700
+            DISABLED = 516_696_700
           end
         end
 
@@ -2984,15 +3032,15 @@ module Google
             UNDEFINED_CACHE_MODE = 0
 
             # Automatically cache static content, including common image formats, media (video and audio), and web assets (JavaScript and CSS). Requests and responses that are marked as uncacheable, as well as dynamic content (including HTML), will not be cached.
-            CACHE_ALL_STATIC = 355027945
+            CACHE_ALL_STATIC = 355_027_945
 
             # Cache all content, ignoring any "private", "no-store" or "no-cache" directives in Cache-Control response headers. Warning: this may result in Cloud CDN caching private, per-user (user identifiable) content.
-            FORCE_CACHE_ALL = 486026928
+            FORCE_CACHE_ALL = 486_026_928
 
-            INVALID_CACHE_MODE = 381295560
+            INVALID_CACHE_MODE = 381_295_560
 
             # Requires the origin to set valid caching headers to cache content. Responses without these headers will not be cached at Google's edge, and will require a full trip to the origin on every request, potentially impacting performance and increasing load on the origin server.
-            USE_ORIGIN_HEADERS = 55380261
+            USE_ORIGIN_HEADERS = 55_380_261
           end
         end
 
@@ -3119,7 +3167,7 @@ module Google
         #     Check the LoadBalancingScheme enum for the list of possible values.
         # @!attribute [rw] locality_lb_policies
         #   @return [::Array<::Google::Cloud::Compute::V1::BackendServiceLocalityLoadBalancingPolicyConfig>]
-        #     A list of locality load balancing policies to be used in order of preference. Either the policy or the customPolicy field should be set. Overrides any value set in the localityLbPolicy field. localityLbPolicies is only supported when the BackendService is referenced by a URL Map that is referenced by a target gRPC proxy that has the validateForProxyless field set to true.
+        #     A list of locality load-balancing policies to be used in order of preference. When you use localityLbPolicies, you must set at least one value for either the localityLbPolicies[].policy or the localityLbPolicies[].customPolicy field. localityLbPolicies overrides any value set in the localityLbPolicy field. For an example of how to use this field, see Define a list of preferred policies. Caution: This field and its children are intended for use in a service mesh that includes gRPC clients only. Envoy proxies can't use backend services that have this configuration.
         # @!attribute [rw] locality_lb_policy
         #   @return [::String]
         #     The load balancing algorithm used within the scope of the locality. The possible values are: - ROUND_ROBIN: This is a simple policy in which each healthy backend is selected in round robin order. This is the default. - LEAST_REQUEST: An O(1) algorithm which selects two random healthy hosts and picks the host which has fewer active requests. - RING_HASH: The ring/modulo hash load balancer implements consistent hashing to backends. The algorithm has the property that the addition/removal of a host from a set of N hosts only affects 1/N of the requests. - RANDOM: The load balancer selects a random healthy host. - ORIGINAL_DESTINATION: Backend host is selected based on the client connection metadata, i.e., connections are opened to the same address as the destination address of the incoming connection before the connection was redirected to the load balancer. - MAGLEV: used as a drop in replacement for the ring hash load balancer. Maglev is not as stable as ring hash but has faster table lookup build times and host selection times. For more information about Maglev, see https://ai.google/research/pubs/pub44824 This field is applicable to either: - A regional backend service with the service_protocol set to HTTP, HTTPS, or HTTP2, and load_balancing_scheme set to INTERNAL_MANAGED. - A global backend service with the load_balancing_scheme set to INTERNAL_SELF_MANAGED. If sessionAffinity is not NONE, and this field is not set to MAGLEV or RING_HASH, session affinity settings will not take effect. Only ROUND_ROBIN and RING_HASH are supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
@@ -3183,10 +3231,10 @@ module Google
             UNDEFINED_COMPRESSION_MODE = 0
 
             # Automatically uses the best compression based on the Accept-Encoding header sent by the client.
-            AUTOMATIC = 165298699
+            AUTOMATIC = 165_298_699
 
             # Disables compression. Existing compressed responses cached by Cloud CDN will not be served to clients.
-            DISABLED = 516696700
+            DISABLED = 516_696_700
           end
 
           # Specifies the load balancer type. A backend service created for one type of load balancer cannot be used with another. For more information, refer to Choosing a load balancer.
@@ -3195,21 +3243,21 @@ module Google
             UNDEFINED_LOAD_BALANCING_SCHEME = 0
 
             # Signifies that this will be used for external HTTP(S), SSL Proxy, TCP Proxy, or Network Load Balancing
-            EXTERNAL = 35607499
+            EXTERNAL = 35_607_499
 
             # Signifies that this will be used for External Managed HTTP(S) Load Balancing.
-            EXTERNAL_MANAGED = 512006923
+            EXTERNAL_MANAGED = 512_006_923
 
             # Signifies that this will be used for Internal TCP/UDP Load Balancing.
-            INTERNAL = 279295677
+            INTERNAL = 279_295_677
 
             # Signifies that this will be used for Internal HTTP(S) Load Balancing.
-            INTERNAL_MANAGED = 37350397
+            INTERNAL_MANAGED = 37_350_397
 
             # Signifies that this will be used by Traffic Director.
-            INTERNAL_SELF_MANAGED = 236211150
+            INTERNAL_SELF_MANAGED = 236_211_150
 
-            INVALID_LOAD_BALANCING_SCHEME = 275352060
+            INVALID_LOAD_BALANCING_SCHEME = 275_352_060
           end
 
           # The load balancing algorithm used within the scope of the locality. The possible values are: - ROUND_ROBIN: This is a simple policy in which each healthy backend is selected in round robin order. This is the default. - LEAST_REQUEST: An O(1) algorithm which selects two random healthy hosts and picks the host which has fewer active requests. - RING_HASH: The ring/modulo hash load balancer implements consistent hashing to backends. The algorithm has the property that the addition/removal of a host from a set of N hosts only affects 1/N of the requests. - RANDOM: The load balancer selects a random healthy host. - ORIGINAL_DESTINATION: Backend host is selected based on the client connection metadata, i.e., connections are opened to the same address as the destination address of the incoming connection before the connection was redirected to the load balancer. - MAGLEV: used as a drop in replacement for the ring hash load balancer. Maglev is not as stable as ring hash but has faster table lookup build times and host selection times. For more information about Maglev, see https://ai.google/research/pubs/pub44824 This field is applicable to either: - A regional backend service with the service_protocol set to HTTP, HTTPS, or HTTP2, and load_balancing_scheme set to INTERNAL_MANAGED. - A global backend service with the load_balancing_scheme set to INTERNAL_SELF_MANAGED. If sessionAffinity is not NONE, and this field is not set to MAGLEV or RING_HASH, session affinity settings will not take effect. Only ROUND_ROBIN and RING_HASH are supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
@@ -3217,25 +3265,28 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_LOCALITY_LB_POLICY = 0
 
-            INVALID_LB_POLICY = 323318707
+            INVALID_LB_POLICY = 323_318_707
 
             # An O(1) algorithm which selects two random healthy hosts and picks the host which has fewer active requests.
-            LEAST_REQUEST = 46604921
+            LEAST_REQUEST = 46_604_921
 
             # This algorithm implements consistent hashing to backends. Maglev can be used as a drop in replacement for the ring hash load balancer. Maglev is not as stable as ring hash but has faster table lookup build times and host selection times. For more information about Maglev, see https://ai.google/research/pubs/pub44824
-            MAGLEV = 119180266
+            MAGLEV = 119_180_266
 
             # Backend host is selected based on the client connection metadata, i.e., connections are opened to the same address as the destination address of the incoming connection before the connection was redirected to the load balancer.
-            ORIGINAL_DESTINATION = 166297216
+            ORIGINAL_DESTINATION = 166_297_216
 
             # The load balancer selects a random healthy host.
-            RANDOM = 262527171
+            RANDOM = 262_527_171
 
             # The ring/modulo hash load balancer implements consistent hashing to backends. The algorithm has the property that the addition/removal of a host from a set of N hosts only affects 1/N of the requests.
-            RING_HASH = 432795069
+            RING_HASH = 432_795_069
 
             # This is a simple policy in which each healthy backend is selected in round robin order. This is the default.
-            ROUND_ROBIN = 153895801
+            ROUND_ROBIN = 153_895_801
+
+            # Per-instance weighted Load Balancing via health check reported weights. If set, the Backend Service must configure a non legacy HTTP-based Health Check, and health check replies are expected to contain non-standard HTTP response header field X-Load-Balancing-Endpoint-Weight to specify the per-instance weights. If set, Load Balancing is weighted based on the per-instance weights reported in the last processed health check replies, as long as every instance either reported a valid weight or had UNAVAILABLE_WEIGHT. Otherwise, Load Balancing remains equal-weight. This option is only supported in Network Load Balancing.
+            WEIGHTED_MAGLEV = 254_930_962
           end
 
           # The protocol this BackendService uses to communicate with backends. Possible values are HTTP, HTTPS, HTTP2, TCP, SSL, UDP or GRPC. depending on the chosen load balancer or Traffic Director configuration. Refer to the documentation for the load balancers or for Traffic Director for more information. Must be set to GRPC when the backend service is referenced by a URL map that is bound to target gRPC proxy.
@@ -3244,26 +3295,26 @@ module Google
             UNDEFINED_PROTOCOL = 0
 
             # gRPC (available for Traffic Director).
-            GRPC = 2196510
+            GRPC = 2_196_510
 
-            HTTP = 2228360
+            HTTP = 2_228_360
 
             # HTTP/2 with SSL.
-            HTTP2 = 69079210
+            HTTP2 = 69_079_210
 
-            HTTPS = 69079243
+            HTTPS = 69_079_243
 
             # TCP proxying with SSL.
-            SSL = 82412
+            SSL = 82_412
 
             # TCP proxying or TCP pass-through.
-            TCP = 82881
+            TCP = 82_881
 
             # UDP.
-            UDP = 83873
+            UDP = 83_873
 
             # If a Backend Service has UNSPECIFIED as its protocol, it can be used with any L3/L4 Forwarding Rules.
-            UNSPECIFIED = 526786327
+            UNSPECIFIED = 526_786_327
           end
 
           # Type of session affinity to use. The default is NONE. Only NONE and HEADER_FIELD are supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true. For more details, see: [Session Affinity](https://cloud.google.com/load-balancing/docs/backend-service#session_affinity).
@@ -3272,28 +3323,28 @@ module Google
             UNDEFINED_SESSION_AFFINITY = 0
 
             # 2-tuple hash on packet's source and destination IP addresses. Connections from the same source IP address to the same destination IP address will be served by the same backend VM while that VM remains healthy.
-            CLIENT_IP = 345665051
+            CLIENT_IP = 345_665_051
 
             # 1-tuple hash only on packet's source IP address. Connections from the same source IP address will be served by the same backend VM while that VM remains healthy. This option can only be used for Internal TCP/UDP Load Balancing.
-            CLIENT_IP_NO_DESTINATION = 106122516
+            CLIENT_IP_NO_DESTINATION = 106_122_516
 
             # 5-tuple hash on packet's source and destination IP addresses, IP protocol, and source and destination ports. Connections for the same IP protocol from the same source IP address and port to the same destination IP address and port will be served by the same backend VM while that VM remains healthy. This option cannot be used for HTTP(S) load balancing.
-            CLIENT_IP_PORT_PROTO = 221722926
+            CLIENT_IP_PORT_PROTO = 221_722_926
 
             # 3-tuple hash on packet's source and destination IP addresses, and IP protocol. Connections for the same IP protocol from the same source IP address to the same destination IP address will be served by the same backend VM while that VM remains healthy. This option cannot be used for HTTP(S) load balancing.
-            CLIENT_IP_PROTO = 25322148
+            CLIENT_IP_PROTO = 25_322_148
 
             # Hash based on a cookie generated by the L7 loadbalancer. Only valid for HTTP(S) load balancing.
-            GENERATED_COOKIE = 370321204
+            GENERATED_COOKIE = 370_321_204
 
             # The hash is based on a user specified header field.
-            HEADER_FIELD = 200737960
+            HEADER_FIELD = 200_737_960
 
             # The hash is based on a user provided cookie.
-            HTTP_COOKIE = 494981627
+            HTTP_COOKIE = 494_981_627
 
             # No session affinity. Connections from the same client IP may go to any instance in the pool.
-            NONE = 2402104
+            NONE = 2_402_104
           end
         end
 
@@ -3381,15 +3432,15 @@ module Google
             UNDEFINED_CACHE_MODE = 0
 
             # Automatically cache static content, including common image formats, media (video and audio), and web assets (JavaScript and CSS). Requests and responses that are marked as uncacheable, as well as dynamic content (including HTML), will not be cached.
-            CACHE_ALL_STATIC = 355027945
+            CACHE_ALL_STATIC = 355_027_945
 
             # Cache all content, ignoring any "private", "no-store" or "no-cache" directives in Cache-Control response headers. Warning: this may result in Cloud CDN caching private, per-user (user identifiable) content.
-            FORCE_CACHE_ALL = 486026928
+            FORCE_CACHE_ALL = 486_026_928
 
-            INVALID_CACHE_MODE = 381295560
+            INVALID_CACHE_MODE = 381_295_560
 
             # Requires the origin to set valid caching headers to cache content. Responses without these headers will not be cached at Google's edge, and will require a full trip to the origin on every request, potentially impacting performance and increasing load on the origin server.
-            USE_ORIGIN_HEADERS = 55380261
+            USE_ORIGIN_HEADERS = 55_380_261
           end
         end
 
@@ -3438,11 +3489,11 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_CONNECTION_PERSISTENCE_ON_UNHEALTHY_BACKENDS = 0
 
-            ALWAYS_PERSIST = 38400900
+            ALWAYS_PERSIST = 38_400_900
 
-            DEFAULT_FOR_PROTOCOL = 145265356
+            DEFAULT_FOR_PROTOCOL = 145_265_356
 
-            NEVER_PERSIST = 138646241
+            NEVER_PERSIST = 138_646_241
           end
 
           # Specifies the key used for connection tracking. There are two options: - PER_CONNECTION: This is the default mode. The Connection Tracking is performed as per the Connection Key (default Hash Method) for the specific protocol. - PER_SESSION: The Connection Tracking is performed as per the configured Session Affinity. It matches the configured Session Affinity. For more details, see [Tracking Mode for Network Load Balancing](https://cloud.google.com/load-balancing/docs/network/networklb-backend-service#tracking-mode) and [Tracking Mode for Internal TCP/UDP Load Balancing](https://cloud.google.com/load-balancing/docs/internal#tracking-mode).
@@ -3450,11 +3501,11 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_TRACKING_MODE = 0
 
-            INVALID_TRACKING_MODE = 49234371
+            INVALID_TRACKING_MODE = 49_234_371
 
-            PER_CONNECTION = 85162848
+            PER_CONNECTION = 85_162_848
 
-            PER_SESSION = 182099252
+            PER_SESSION = 182_099_252
           end
         end
 
@@ -3554,7 +3605,7 @@ module Google
         #     An optional, arbitrary JSON object with configuration data, understood by a locally installed custom policy implementation.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Identifies the custom policy. The value should match the type the custom implementation is registered with on the gRPC clients. It should follow protocol buffer message naming conventions and include the full path (e.g. myorg.CustomLbPolicy). The maximum length is 256 characters. Note that specifying the same custom policy more than once for a backend is not a valid configuration and will be rejected.
+        #     Identifies the custom policy. The value should match the name of a custom implementation registered on the gRPC clients. It should follow protocol buffer message naming conventions and include the full path (for example, myorg.CustomLbPolicy). The maximum length is 256 characters. Do not specify the same custom policy more than once for a backend. If you do, the configuration is rejected. For an example of how to use this field, see Use a custom policy.
         class BackendServiceLocalityLoadBalancingPolicyConfigCustomPolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3563,36 +3614,39 @@ module Google
         # The configuration for a built-in load balancing policy.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The name of a locality load balancer policy to be used. The value should be one of the predefined ones as supported by localityLbPolicy, although at the moment only ROUND_ROBIN is supported. This field should only be populated when the customPolicy field is not used. Note that specifying the same policy more than once for a backend is not a valid configuration and will be rejected.
+        #     The name of a locality load-balancing policy. Valid values include ROUND_ROBIN and, for Java clients, LEAST_REQUEST. For information about these values, see the description of localityLbPolicy. Do not specify the same policy more than once for a backend. If you do, the configuration is rejected.
         #     Check the Name enum for the list of possible values.
         class BackendServiceLocalityLoadBalancingPolicyConfigPolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # The name of a locality load balancer policy to be used. The value should be one of the predefined ones as supported by localityLbPolicy, although at the moment only ROUND_ROBIN is supported. This field should only be populated when the customPolicy field is not used. Note that specifying the same policy more than once for a backend is not a valid configuration and will be rejected.
+          # The name of a locality load-balancing policy. Valid values include ROUND_ROBIN and, for Java clients, LEAST_REQUEST. For information about these values, see the description of localityLbPolicy. Do not specify the same policy more than once for a backend. If you do, the configuration is rejected.
           module Name
             # A value indicating that the enum field is not set.
             UNDEFINED_NAME = 0
 
-            INVALID_LB_POLICY = 323318707
+            INVALID_LB_POLICY = 323_318_707
 
             # An O(1) algorithm which selects two random healthy hosts and picks the host which has fewer active requests.
-            LEAST_REQUEST = 46604921
+            LEAST_REQUEST = 46_604_921
 
             # This algorithm implements consistent hashing to backends. Maglev can be used as a drop in replacement for the ring hash load balancer. Maglev is not as stable as ring hash but has faster table lookup build times and host selection times. For more information about Maglev, see https://ai.google/research/pubs/pub44824
-            MAGLEV = 119180266
+            MAGLEV = 119_180_266
 
             # Backend host is selected based on the client connection metadata, i.e., connections are opened to the same address as the destination address of the incoming connection before the connection was redirected to the load balancer.
-            ORIGINAL_DESTINATION = 166297216
+            ORIGINAL_DESTINATION = 166_297_216
 
             # The load balancer selects a random healthy host.
-            RANDOM = 262527171
+            RANDOM = 262_527_171
 
             # The ring/modulo hash load balancer implements consistent hashing to backends. The algorithm has the property that the addition/removal of a host from a set of N hosts only affects 1/N of the requests.
-            RING_HASH = 432795069
+            RING_HASH = 432_795_069
 
             # This is a simple policy in which each healthy backend is selected in round robin order. This is the default.
-            ROUND_ROBIN = 153895801
+            ROUND_ROBIN = 153_895_801
+
+            # Per-instance weighted Load Balancing via health check reported weights. If set, the Backend Service must configure a non legacy HTTP-based Health Check, and health check replies are expected to contain non-standard HTTP response header field X-Load-Balancing-Endpoint-Weight to specify the per-instance weights. If set, Load Balancing is weighted based on the per-instance weights reported in the last processed health check replies, as long as every instance either reported a valid weight or had UNAVAILABLE_WEIGHT. Otherwise, Load Balancing remains equal-weight. This option is only supported in Network Load Balancing.
+            WEIGHTED_MAGLEV = 254_930_962
           end
         end
 
@@ -3600,12 +3654,34 @@ module Google
         # @!attribute [rw] enable
         #   @return [::Boolean]
         #     Denotes whether to enable logging for the load balancer traffic served by this backend service. The default value is false.
+        # @!attribute [rw] optional_fields
+        #   @return [::Array<::String>]
+        #     This field can only be specified if logging is enabled for this backend service and "logConfig.optionalMode" was set to CUSTOM. Contains a list of optional fields you want to include in the logs. For example: serverInstance, serverGkeDetails.cluster, serverGkeDetails.pod.podNamespace
+        # @!attribute [rw] optional_mode
+        #   @return [::String]
+        #     This field can only be specified if logging is enabled for this backend service. Configures whether all, none or a subset of optional fields should be added to the reported logs. One of [INCLUDE_ALL_OPTIONAL, EXCLUDE_ALL_OPTIONAL, CUSTOM]. Default is EXCLUDE_ALL_OPTIONAL.
+        #     Check the OptionalMode enum for the list of possible values.
         # @!attribute [rw] sample_rate
         #   @return [::Float]
         #     This field can only be specified if logging is enabled for this backend service. The value of the field must be in [0, 1]. This configures the sampling rate of requests to the load balancer where 1.0 means all logged requests are reported and 0.0 means no logged requests are reported. The default value is 1.0.
         class BackendServiceLogConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # This field can only be specified if logging is enabled for this backend service. Configures whether all, none or a subset of optional fields should be added to the reported logs. One of [INCLUDE_ALL_OPTIONAL, EXCLUDE_ALL_OPTIONAL, CUSTOM]. Default is EXCLUDE_ALL_OPTIONAL.
+          module OptionalMode
+            # A value indicating that the enum field is not set.
+            UNDEFINED_OPTIONAL_MODE = 0
+
+            # A subset of optional fields.
+            CUSTOM = 388_595_569
+
+            # None optional fields.
+            EXCLUDE_ALL_OPTIONAL = 168_636_099
+
+            # All optional fields.
+            INCLUDE_ALL_OPTIONAL = 535_606_965
+          end
         end
 
         # @!attribute [rw] backend_service
@@ -3685,25 +3761,25 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_DIAGNOSTIC = 0
 
-            ADMINISTRATIVELY_DOWN = 121685798
+            ADMINISTRATIVELY_DOWN = 121_685_798
 
-            CONCATENATED_PATH_DOWN = 26186892
+            CONCATENATED_PATH_DOWN = 26_186_892
 
-            CONTROL_DETECTION_TIME_EXPIRED = 135478383
+            CONTROL_DETECTION_TIME_EXPIRED = 135_478_383
 
-            DIAGNOSTIC_UNSPECIFIED = 58720895
+            DIAGNOSTIC_UNSPECIFIED = 58_720_895
 
-            ECHO_FUNCTION_FAILED = 220687466
+            ECHO_FUNCTION_FAILED = 220_687_466
 
-            FORWARDING_PLANE_RESET = 19715882
+            FORWARDING_PLANE_RESET = 19_715_882
 
-            NEIGHBOR_SIGNALED_SESSION_DOWN = 374226742
+            NEIGHBOR_SIGNALED_SESSION_DOWN = 374_226_742
 
-            NO_DIAGNOSTIC = 222503141
+            NO_DIAGNOSTIC = 222_503_141
 
-            PATH_DOWN = 290605180
+            PATH_DOWN = 290_605_180
 
-            REVERSE_CONCATENATED_PATH_DOWN = 479337129
+            REVERSE_CONCATENATED_PATH_DOWN = 479_337_129
           end
 
           # The current BFD session state as seen by the transmitting system. These states are specified in section 4.1 of RFC5880
@@ -3711,13 +3787,13 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_STATE = 0
 
-            ADMIN_DOWN = 128544690
+            ADMIN_DOWN = 128_544_690
 
-            DOWN = 2104482
+            DOWN = 2_104_482
 
-            INIT = 2252048
+            INIT = 2_252_048
 
-            STATE_UNSPECIFIED = 470755401
+            STATE_UNSPECIFIED = 470_755_401
 
             UP = 2715
           end
@@ -3766,11 +3842,11 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_BFD_SESSION_INITIALIZATION_MODE = 0
 
-            ACTIVE = 314733318
+            ACTIVE = 314_733_318
 
-            DISABLED = 516696700
+            DISABLED = 516_696_700
 
-            PASSIVE = 462813959
+            PASSIVE = 462_813_959
           end
 
           # The diagnostic code specifies the local system's reason for the last change in session state. This allows remote systems to determine the reason that the previous session failed, for example. These diagnostic codes are specified in section 4.1 of RFC5880
@@ -3778,25 +3854,25 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_LOCAL_DIAGNOSTIC = 0
 
-            ADMINISTRATIVELY_DOWN = 121685798
+            ADMINISTRATIVELY_DOWN = 121_685_798
 
-            CONCATENATED_PATH_DOWN = 26186892
+            CONCATENATED_PATH_DOWN = 26_186_892
 
-            CONTROL_DETECTION_TIME_EXPIRED = 135478383
+            CONTROL_DETECTION_TIME_EXPIRED = 135_478_383
 
-            DIAGNOSTIC_UNSPECIFIED = 58720895
+            DIAGNOSTIC_UNSPECIFIED = 58_720_895
 
-            ECHO_FUNCTION_FAILED = 220687466
+            ECHO_FUNCTION_FAILED = 220_687_466
 
-            FORWARDING_PLANE_RESET = 19715882
+            FORWARDING_PLANE_RESET = 19_715_882
 
-            NEIGHBOR_SIGNALED_SESSION_DOWN = 374226742
+            NEIGHBOR_SIGNALED_SESSION_DOWN = 374_226_742
 
-            NO_DIAGNOSTIC = 222503141
+            NO_DIAGNOSTIC = 222_503_141
 
-            PATH_DOWN = 290605180
+            PATH_DOWN = 290_605_180
 
-            REVERSE_CONCATENATED_PATH_DOWN = 479337129
+            REVERSE_CONCATENATED_PATH_DOWN = 479_337_129
           end
 
           # The current BFD session state as seen by the transmitting system. These states are specified in section 4.1 of RFC5880
@@ -3804,13 +3880,13 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_LOCAL_STATE = 0
 
-            ADMIN_DOWN = 128544690
+            ADMIN_DOWN = 128_544_690
 
-            DOWN = 2104482
+            DOWN = 2_104_482
 
-            INIT = 2252048
+            INIT = 2_252_048
 
-            STATE_UNSPECIFIED = 470755401
+            STATE_UNSPECIFIED = 470_755_401
 
             UP = 2715
           end
@@ -3842,7 +3918,7 @@ module Google
         #     The condition that is associated with this binding. If the condition evaluates to `true`, then this binding applies to the current request. If the condition evaluates to `false`, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the principals in this binding. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
         # @!attribute [rw] members
         #   @return [::Array<::String>]
-        #     Specifies the principals requesting access for a Google Cloud resource. `members` can have the following values: * `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account. * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@example.com` . * `serviceAccount:{emailid}`: An email address that represents a Google service account. For example, `my-other-app@appspot.gserviceaccount.com`. * `serviceAccount:{projectid}.svc.id.goog[{namespace}/{kubernetes-sa}]`: An identifier for a [Kubernetes service account](https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts). For example, `my-project.svc.id.goog[my-namespace/my-kubernetes-sa]`. * `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`. * `deleted:user:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a user that has been recently deleted. For example, `alice@example.com?uid=123456789012345678901`. If the user is recovered, this value reverts to `user:{emailid}` and the recovered user retains the role in the binding. * `deleted:serviceAccount:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901`. If the service account is undeleted, this value reverts to `serviceAccount:{emailid}` and the undeleted service account retains the role in the binding. * `deleted:group:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, `admins@example.com?uid=123456789012345678901`. If the group is recovered, this value reverts to `group:{emailid}` and the recovered group retains the role in the binding. * `domain:{domain}`: The G Suite domain (primary) that represents all the users of that domain. For example, `google.com` or `example.com`.
+        #     Specifies the principals requesting access for a Google Cloud resource. `members` can have the following values: * `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account. * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account. Does not include identities that come from external identity providers (IdPs) through identity federation. * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@example.com` . * `serviceAccount:{emailid}`: An email address that represents a Google service account. For example, `my-other-app@appspot.gserviceaccount.com`. * `serviceAccount:{projectid}.svc.id.goog[{namespace}/{kubernetes-sa}]`: An identifier for a [Kubernetes service account](https://cloud.google.com/kubernetes-engine/docs/how-to/kubernetes-service-accounts). For example, `my-project.svc.id.goog[my-namespace/my-kubernetes-sa]`. * `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`. * `domain:{domain}`: The G Suite domain (primary) that represents all the users of that domain. For example, `google.com` or `example.com`. * `deleted:user:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a user that has been recently deleted. For example, `alice@example.com?uid=123456789012345678901`. If the user is recovered, this value reverts to `user:{emailid}` and the recovered user retains the role in the binding. * `deleted:serviceAccount:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901`. If the service account is undeleted, this value reverts to `serviceAccount:{emailid}` and the undeleted service account retains the role in the binding. * `deleted:group:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, `admins@example.com?uid=123456789012345678901`. If the group is recovered, this value reverts to `group:{emailid}` and the recovered group retains the role in the binding.
         # @!attribute [rw] role
         #   @return [::String]
         #     Role that is assigned to the list of `members`, or principals. For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
@@ -4118,11 +4194,11 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_CATEGORY = 0
 
-            CATEGORY_UNSPECIFIED = 509189462
+            CATEGORY_UNSPECIFIED = 509_189_462
 
-            LICENSE = 347869217
+            LICENSE = 347_869_217
 
-            MACHINE = 469553191
+            MACHINE = 469_553_191
           end
 
           # The plan for this commitment, which determines duration and discount rate. The currently supported plans are TWELVE_MONTH (1 year), and THIRTY_SIX_MONTH (3 years).
@@ -4130,11 +4206,11 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_PLAN = 0
 
-            INVALID = 530283991
+            INVALID = 530_283_991
 
-            THIRTY_SIX_MONTH = 266295942
+            THIRTY_SIX_MONTH = 266_295_942
 
-            TWELVE_MONTH = 173083962
+            TWELVE_MONTH = 173_083_962
           end
 
           # [Output Only] Status of the commitment with regards to eventual expiration (each commitment has an end date defined). One of the following values: NOT_YET_ACTIVE, ACTIVE, EXPIRED.
@@ -4142,15 +4218,16 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
-            ACTIVE = 314733318
+            ACTIVE = 314_733_318
 
-            CANCELLED = 41957681
+            # Deprecate CANCELED status. Will use separate status to differentiate cancel by mergeCud or manual cancellation.
+            CANCELLED = 41_957_681
 
-            CREATING = 455564985
+            CREATING = 455_564_985
 
-            EXPIRED = 482489093
+            EXPIRED = 482_489_093
 
-            NOT_YET_ACTIVE = 20607337
+            NOT_YET_ACTIVE = 20_607_337
           end
 
           # The type of commitment, which affects the discount rate and the eligible resources. Type MEMORY_OPTIMIZED specifies a commitment that will only apply to memory optimized machines. Type ACCELERATOR_OPTIMIZED specifies a commitment that will only apply to accelerator optimized machines.
@@ -4158,27 +4235,29 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
 
-            ACCELERATOR_OPTIMIZED = 280848403
+            ACCELERATOR_OPTIMIZED = 280_848_403
 
-            COMPUTE_OPTIMIZED = 158349023
+            COMPUTE_OPTIMIZED = 158_349_023
 
-            COMPUTE_OPTIMIZED_C2D = 383246453
+            COMPUTE_OPTIMIZED_C2D = 383_246_453
 
-            GENERAL_PURPOSE = 299793543
+            COMPUTE_OPTIMIZED_C3 = 428_004_784
 
-            GENERAL_PURPOSE_E2 = 301911877
+            GENERAL_PURPOSE = 299_793_543
 
-            GENERAL_PURPOSE_N2 = 301912156
+            GENERAL_PURPOSE_E2 = 301_911_877
 
-            GENERAL_PURPOSE_N2D = 232471400
+            GENERAL_PURPOSE_N2 = 301_912_156
 
-            GENERAL_PURPOSE_T2D = 232477166
+            GENERAL_PURPOSE_N2D = 232_471_400
 
-            MEMORY_OPTIMIZED = 281753417
+            GENERAL_PURPOSE_T2D = 232_477_166
 
-            MEMORY_OPTIMIZED_M3 = 276301372
+            MEMORY_OPTIMIZED = 281_753_417
 
-            TYPE_UNSPECIFIED = 437714322
+            MEMORY_OPTIMIZED_M3 = 276_301_372
+
+            TYPE_UNSPECIFIED = 437_714_322
           end
         end
 
@@ -4283,25 +4362,25 @@ module Google
             UNDEFINED_IAM = 0
 
             # This is deprecated and has no effect. Do not use.
-            APPROVER = 357258949
+            APPROVER = 357_258_949
 
             # This is deprecated and has no effect. Do not use.
-            ATTRIBUTION = 232465503
+            ATTRIBUTION = 232_465_503
 
             # This is deprecated and has no effect. Do not use.
-            AUTHORITY = 504108835
+            AUTHORITY = 504_108_835
 
             # This is deprecated and has no effect. Do not use.
-            CREDENTIALS_TYPE = 348222141
+            CREDENTIALS_TYPE = 348_222_141
 
             # This is deprecated and has no effect. Do not use.
-            CREDS_ASSERTION = 332343272
+            CREDS_ASSERTION = 332_343_272
 
             # This is deprecated and has no effect. Do not use.
-            JUSTIFICATION_TYPE = 206147719
+            JUSTIFICATION_TYPE = 206_147_719
 
             # This is deprecated and has no effect. Do not use.
-            SECURITY_REALM = 526269616
+            SECURITY_REALM = 526_269_616
           end
 
           # This is deprecated and has no effect. Do not use.
@@ -4310,22 +4389,22 @@ module Google
             UNDEFINED_OP = 0
 
             # This is deprecated and has no effect. Do not use.
-            DISCHARGED = 266338274
+            DISCHARGED = 266_338_274
 
             # This is deprecated and has no effect. Do not use.
-            EQUALS = 442201023
+            EQUALS = 442_201_023
 
             # This is deprecated and has no effect. Do not use.
             IN = 2341
 
             # This is deprecated and has no effect. Do not use.
-            NOT_EQUALS = 19718859
+            NOT_EQUALS = 19_718_859
 
             # This is deprecated and has no effect. Do not use.
-            NOT_IN = 161144369
+            NOT_IN = 161_144_369
 
             # This is deprecated and has no effect. Do not use.
-            NO_OP = 74481951
+            NO_OP = 74_481_951
           end
 
           # This is deprecated and has no effect. Do not use.
@@ -4339,13 +4418,13 @@ module Google
             IP = 2343
 
             # This is deprecated and has no effect. Do not use.
-            NAME = 2388619
+            NAME = 2_388_619
 
             # This is deprecated and has no effect. Do not use.
-            REGION = 266017524
+            REGION = 266_017_524
 
             # This is deprecated and has no effect. Do not use.
-            SERVICE = 17781397
+            SERVICE = 17_781_397
           end
         end
 
@@ -5360,6 +5439,24 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for RegionInstanceTemplates.Delete. See the method description for details.
+        # @!attribute [rw] instance_template
+        #   @return [::String]
+        #     The name of the instance template to delete.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The name of the region for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        class DeleteRegionInstanceTemplateRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for RegionNetworkEndpointGroups.Delete. See the method description for details.
         # @!attribute [rw] network_endpoint_group
         #   @return [::String]
@@ -6018,13 +6115,13 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_STATE = 0
 
-            ACTIVE = 314733318
+            ACTIVE = 314_733_318
 
-            DELETED = 120962041
+            DELETED = 120_962_041
 
-            DEPRECATED = 463360435
+            DEPRECATED = 463_360_435
 
-            OBSOLETE = 66532761
+            OBSOLETE = 66_532_761
           end
         end
 
@@ -6251,13 +6348,13 @@ module Google
             UNDEFINED_ARCHITECTURE = 0
 
             # Default value indicating Architecture is not set.
-            ARCHITECTURE_UNSPECIFIED = 394750507
+            ARCHITECTURE_UNSPECIFIED = 394_750_507
 
             # Machines with architecture ARM64
-            ARM64 = 62547450
+            ARM64 = 62_547_450
 
             # Machines with architecture X86_64
-            X86_64 = 425300551
+            X86_64 = 425_300_551
           end
 
           # [Output Only] The status of disk creation. - CREATING: Disk is provisioning. - RESTORING: Source data is being copied into the disk. - FAILED: Disk creation failed. - READY: Disk is ready for use. - DELETING: Disk is deleting.
@@ -6266,19 +6363,19 @@ module Google
             UNDEFINED_STATUS = 0
 
             # Disk is provisioning
-            CREATING = 455564985
+            CREATING = 455_564_985
 
             # Disk is deleting.
-            DELETING = 528602024
+            DELETING = 528_602_024
 
             # Disk creation failed.
-            FAILED = 455706685
+            FAILED = 455_706_685
 
             # Disk is ready for use.
-            READY = 77848963
+            READY = 77_848_963
 
             # Source data is being copied into the disk.
-            RESTORING = 404263851
+            RESTORING = 404_263_851
           end
         end
 
@@ -6341,25 +6438,25 @@ module Google
             UNDEFINED_INSTANTIATE_FROM = 0
 
             # Attach the existing disk in read-only mode. The request will fail if the disk was attached in read-write mode on the source instance. Applicable to: read-only disks.
-            ATTACH_READ_ONLY = 513775419
+            ATTACH_READ_ONLY = 513_775_419
 
             # Create a blank disk. The disk will be created unformatted. Applicable to: additional read-write disks, local SSDs.
-            BLANK = 63281460
+            BLANK = 63_281_460
 
             # Use the custom image specified in the custom_image field. Applicable to: boot disk, additional read-write disks.
-            CUSTOM_IMAGE = 196311789
+            CUSTOM_IMAGE = 196_311_789
 
             # Use the default instantiation option for the corresponding type of disk. For boot disk and any other R/W disks, new custom images will be created from each disk. For read-only disks, they will be attached in read-only mode. Local SSD disks will be created as blank volumes.
-            DEFAULT = 115302945
+            DEFAULT = 115_302_945
 
             # Do not include the disk in the instance template. Applicable to: additional read-write disks, local SSDs, read-only disks.
-            DO_NOT_INCLUDE = 104218952
+            DO_NOT_INCLUDE = 104_218_952
 
             # Use the same source image used for creation of the source instance's corresponding disk. The request will fail if the source VM's disk was created from a snapshot. Applicable to: boot disk, additional read-write disks.
-            SOURCE_IMAGE = 62631959
+            SOURCE_IMAGE = 62_631_959
 
             # Use the same source image family used for creation of the source instance's corresponding disk. The request will fail if the source image of the source disk does not belong to any image family. Applicable to: boot disk, additional read-write disks.
-            SOURCE_IMAGE_FAMILY = 76850316
+            SOURCE_IMAGE_FAMILY = 76_850_316
           end
         end
 
@@ -6586,13 +6683,13 @@ module Google
             UNDEFINED_TARGET_SHAPE = 0
 
             # The group picks zones for creating VM instances to fulfill the requested number of VMs within present resource constraints and to maximize utilization of unused zonal reservations. Recommended for batch workloads that do not require high availability.
-            ANY = 64972
+            ANY = 64_972
 
             # The group prioritizes acquisition of resources, scheduling VMs in zones where resources are available while distributing VMs as evenly as possible across selected zones to minimize the impact of zonal failure. Recommended for highly available serving workloads.
-            BALANCED = 468409608
+            BALANCED = 468_409_608
 
             # The group schedules VM instance creation and deletion to achieve and maintain an even number of managed instances across the selected zones. The distribution is even when the number of managed instances does not differ by more than 1 between any two zones. Recommended for highly available serving workloads.
-            EVEN = 2140442
+            EVEN = 2_140_442
           end
         end
 
@@ -6732,13 +6829,13 @@ module Google
             UNDEFINED_TYPE = 0
 
             # For routes exported from local network.
-            DYNAMIC_PEERING_ROUTE = 469794858
+            DYNAMIC_PEERING_ROUTE = 469_794_858
 
             # The peering route.
-            STATIC_PEERING_ROUTE = 473407545
+            STATIC_PEERING_ROUTE = 473_407_545
 
             # The peering route corresponding to subnetwork range.
-            SUBNET_PEERING_ROUTE = 465782504
+            SUBNET_PEERING_ROUTE = 465_782_504
           end
         end
 
@@ -6855,13 +6952,13 @@ module Google
             UNDEFINED_REDUNDANCY_TYPE = 0
 
             # The external VPN gateway has four public IP addresses; at the time of writing this API, the AWS virtual private gateway is an example which has four public IP addresses for high availability connections; there should be two VPN connections in the AWS virtual private gateway , each AWS VPN connection has two public IP addresses; please make sure to put two public IP addresses from one AWS VPN connection into interfaces 0 and 1 of this external VPN gateway, and put the other two public IP addresses from another AWS VPN connection into interfaces 2 and 3 of this external VPN gateway. When displaying highly available configuration status for the VPN tunnels connected to FOUR_IPS_REDUNDANCY external VPN gateway, Google will always detect whether interfaces 0 and 1 are connected on one interface of HA Cloud VPN gateway, and detect whether interfaces 2 and 3 are connected to another interface of the HA Cloud VPN gateway.
-            FOUR_IPS_REDUNDANCY = 520087913
+            FOUR_IPS_REDUNDANCY = 520_087_913
 
             # The external VPN gateway has only one public IP address which internally provide redundancy or failover.
-            SINGLE_IP_INTERNALLY_REDUNDANT = 133914873
+            SINGLE_IP_INTERNALLY_REDUNDANT = 133_914_873
 
             # The external VPN gateway has two public IP addresses which are redundant with each other, the following two types of setup on your on-premises side would have this type of redundancy: (1) Two separate on-premises gateways, each with one public IP address, the two on-premises gateways are redundant with each other. (2) A single on-premise gateway with two public IP addresses that are redundant with eatch other.
-            TWO_IPS_REDUNDANCY = 367049635
+            TWO_IPS_REDUNDANCY = 367_049_635
           end
         end
 
@@ -6919,11 +7016,11 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_FILE_TYPE = 0
 
-            BIN = 65767
+            BIN = 65_767
 
-            UNDEFINED = 137851184
+            UNDEFINED = 137_851_184
 
-            X509 = 2674086
+            X509 = 2_674_086
           end
         end
 
@@ -6996,10 +7093,10 @@ module Google
             UNDEFINED_DIRECTION = 0
 
             # Indicates that firewall should apply to outgoing traffic.
-            EGRESS = 432880501
+            EGRESS = 432_880_501
 
             # Indicates that firewall should apply to incoming traffic.
-            INGRESS = 516931221
+            INGRESS = 516_931_221
           end
         end
 
@@ -7044,9 +7141,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_METADATA = 0
 
-            EXCLUDE_ALL_METADATA = 334519954
+            EXCLUDE_ALL_METADATA = 334_519_954
 
-            INCLUDE_ALL_METADATA = 164619908
+            INCLUDE_ALL_METADATA = 164_619_908
           end
         end
 
@@ -7155,7 +7252,7 @@ module Google
         # Represents a rule that describes one or more match conditions along with the action to be taken when traffic matches this condition (allow or deny).
         # @!attribute [rw] action
         #   @return [::String]
-        #     The Action to perform when the client connection triggers the rule. Can currently be either "allow" or "deny()" where valid values for status are 403, 404, and 502.
+        #     The Action to perform when the client connection triggers the rule. Valid actions are "allow", "deny" and "goto_next".
         # @!attribute [rw] description
         #   @return [::String]
         #     An optional description for this resource.
@@ -7202,9 +7299,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_DIRECTION = 0
 
-            EGRESS = 432880501
+            EGRESS = 432_880_501
 
-            INGRESS = 516931221
+            INGRESS = 516_931_221
           end
         end
 
@@ -7253,9 +7350,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_STATE = 0
 
-            EFFECTIVE = 244201863
+            EFFECTIVE = 244_201_863
 
-            INEFFECTIVE = 304458242
+            INEFFECTIVE = 304_458_242
           end
         end
 
@@ -7291,6 +7388,9 @@ module Google
         # @!attribute [rw] backend_service
         #   @return [::String]
         #     Identifies the backend service to which the forwarding rule sends traffic. Required for Internal TCP/UDP Load Balancing and Network Load Balancing; must be omitted for all other load balancer types.
+        # @!attribute [rw] base_forwarding_rule
+        #   @return [::String]
+        #     [Output Only] The URL for the corresponding base Forwarding Rule. By base Forwarding Rule, we mean the Forwarding Rule that has the same IP address, protocol, and port settings with the current Forwarding Rule, but without sourceIPRanges specified. Always empty if the current Forwarding Rule does not have sourceIPRanges specified.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
         #     [Output Only] Creation timestamp in RFC3339 text format.
@@ -7366,12 +7466,15 @@ module Google
         # @!attribute [rw] service_name
         #   @return [::String]
         #     [Output Only] The internal fully qualified service name for this Forwarding Rule. This field is only used for internal load balancing.
+        # @!attribute [rw] source_ip_ranges
+        #   @return [::Array<::String>]
+        #     If not empty, this Forwarding Rule will only forward the traffic when the source IP address matches one of the IP addresses or CIDR ranges set here. Note that a Forwarding Rule can only have up to 64 source IP ranges, and this field can only be used with a regional Forwarding Rule whose scheme is EXTERNAL. Each source_ip_range entry should be either an IP address (for example, 1.2.3.4) or a CIDR range (for example, 1.2.3.0/24).
         # @!attribute [rw] subnetwork
         #   @return [::String]
         #     This field identifies the subnetwork that the load balanced IP should belong to for this Forwarding Rule, used in internal load balancing and network load balancing with IPv6. If the network specified is in auto subnet mode, this field is optional. However, a subnetwork must be specified if the network is in custom subnet mode or when creating external forwarding rule with IPv6.
         # @!attribute [rw] target
         #   @return [::String]
-        #     The URL of the target resource to receive the matched traffic. For regional forwarding rules, this target must be in the same region as the forwarding rule. For global forwarding rules, this target must be a global load balancing resource. The forwarded traffic must be of a type appropriate to the target object. For more information, see the "Target" column in [Port specifications](https://cloud.google.com/load-balancing/docs/forwarding-rule-concepts#ip_address_specifications). For Private Service Connect forwarding rules that forward traffic to Google APIs, provide the name of a supported Google API bundle: - vpc-sc - APIs that support VPC Service Controls. - all-apis - All supported Google APIs.
+        #     The URL of the target resource to receive the matched traffic. For regional forwarding rules, this target must be in the same region as the forwarding rule. For global forwarding rules, this target must be a global load balancing resource. The forwarded traffic must be of a type appropriate to the target object. - For load balancers, see the "Target" column in [Port specifications](https://cloud.google.com/load-balancing/docs/forwarding-rule-concepts#ip_address_specifications). - For Private Service Connect forwarding rules that forward traffic to Google APIs, provide the name of a supported Google API bundle: - vpc-sc - APIs that support VPC Service Controls. - all-apis - All supported Google APIs. - For Private Service Connect forwarding rules that forward traffic to managed services, the target must be a service attachment.
         class ForwardingRule
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -7392,17 +7495,17 @@ module Google
 
             AH = 2087
 
-            ESP = 68962
+            ESP = 68_962
 
-            ICMP = 2241597
+            ICMP = 2_241_597
 
-            L3_DEFAULT = 48151369
+            L3_DEFAULT = 48_151_369
 
-            SCTP = 2539724
+            SCTP = 2_539_724
 
-            TCP = 82881
+            TCP = 82_881
 
-            UDP = 83873
+            UDP = 83_873
           end
 
           # The IP Version that will be used by this forwarding rule. Valid options are IPV4 or IPV6.
@@ -7410,11 +7513,11 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_IP_VERSION = 0
 
-            IPV4 = 2254341
+            IPV4 = 2_254_341
 
-            IPV6 = 2254343
+            IPV6 = 2_254_343
 
-            UNSPECIFIED_VERSION = 21850000
+            UNSPECIFIED_VERSION = 21_850_000
           end
 
           # Specifies the forwarding rule type. For more information about forwarding rules, refer to Forwarding rule concepts.
@@ -7422,17 +7525,17 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_LOAD_BALANCING_SCHEME = 0
 
-            EXTERNAL = 35607499
+            EXTERNAL = 35_607_499
 
-            EXTERNAL_MANAGED = 512006923
+            EXTERNAL_MANAGED = 512_006_923
 
-            INTERNAL = 279295677
+            INTERNAL = 279_295_677
 
-            INTERNAL_MANAGED = 37350397
+            INTERNAL_MANAGED = 37_350_397
 
-            INTERNAL_SELF_MANAGED = 236211150
+            INTERNAL_SELF_MANAGED = 236_211_150
 
-            INVALID = 530283991
+            INVALID = 530_283_991
           end
 
           # This signifies the networking tier used for configuring this load balancer and can only take the following values: PREMIUM, STANDARD. For regional ForwardingRule, the valid values are PREMIUM and STANDARD. For GlobalForwardingRule, the valid value is PREMIUM. If this field is not specified, it is assumed to be PREMIUM. If IPAddress is specified, this value must be equal to the networkTier of the Address.
@@ -7441,16 +7544,16 @@ module Google
             UNDEFINED_NETWORK_TIER = 0
 
             # Public internet quality with fixed bandwidth.
-            FIXED_STANDARD = 310464328
+            FIXED_STANDARD = 310_464_328
 
             # High quality, Google-grade network tier, support for all networking products.
-            PREMIUM = 399530551
+            PREMIUM = 399_530_551
 
             # Public internet quality, only limited support for other networking products.
-            STANDARD = 484642493
+            STANDARD = 484_642_493
 
             # (Output only) Temporary tier for FIXED_STANDARD when fixed standard tier is expired or not configured.
-            STANDARD_OVERRIDES_FIXED_STANDARD = 465847234
+            STANDARD_OVERRIDES_FIXED_STANDARD = 465_847_234
           end
 
           module PscConnectionStatus
@@ -7458,21 +7561,21 @@ module Google
             UNDEFINED_PSC_CONNECTION_STATUS = 0
 
             # The connection has been accepted by the producer.
-            ACCEPTED = 246714279
+            ACCEPTED = 246_714_279
 
             # The connection has been closed by the producer and will not serve traffic going forward.
-            CLOSED = 380163436
+            CLOSED = 380_163_436
 
             # The connection has been accepted by the producer, but the producer needs to take further action before the forwarding rule can serve traffic.
-            NEEDS_ATTENTION = 344491452
+            NEEDS_ATTENTION = 344_491_452
 
             # The connection is pending acceptance by the producer.
-            PENDING = 35394935
+            PENDING = 35_394_935
 
             # The connection has been rejected by the producer.
-            REJECTED = 174130302
+            REJECTED = 174_130_302
 
-            STATUS_UNSPECIFIED = 42133066
+            STATUS_UNSPECIFIED = 42_133_066
           end
         end
 
@@ -7591,13 +7694,13 @@ module Google
             UNDEFINED_PORT_SPECIFICATION = 0
 
             # The port number in the health check's port is used for health checking. Applies to network endpoint group and instance group backends.
-            USE_FIXED_PORT = 190235748
+            USE_FIXED_PORT = 190_235_748
 
             # Not supported.
-            USE_NAMED_PORT = 349300671
+            USE_NAMED_PORT = 349_300_671
 
             # For network endpoint group backends, the health check uses the port number specified on each endpoint in the network endpoint group. For instance group backends, the health check uses the port number specified for the backend service's named port defined in the instance group's named ports.
-            USE_SERVING_PORT = 362637516
+            USE_SERVING_PORT = 362_637_516
           end
         end
 
@@ -7856,7 +7959,7 @@ module Google
         #     Name of the image family to search for.
         # @!attribute [rw] project
         #   @return [::String]
-        #     Project ID for this request.
+        #     The image project that the image belongs to. For example, to get a CentOS image, specify centos-cloud as the image project.
         class GetFromFamilyImageRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -8853,6 +8956,21 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for RegionInstanceTemplates.Get. See the method description for details.
+        # @!attribute [rw] instance_template
+        #   @return [::String]
+        #     The name of the instance template.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The name of the region for this request.
+        class GetRegionInstanceTemplateRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for RegionNetworkEndpointGroups.Get. See the method description for details.
         # @!attribute [rw] network_endpoint_group
         #   @return [::String]
@@ -9627,32 +9745,36 @@ module Google
         # Guest OS features.
         # @!attribute [rw] type
         #   @return [::String]
-        #     The ID of a supported feature. To add multiple values, use commas to separate values. Set to one or more of the following values: - VIRTIO_SCSI_MULTIQUEUE - WINDOWS - MULTI_IP_SUBNET - UEFI_COMPATIBLE - GVNIC - SEV_CAPABLE - SUSPEND_RESUME_COMPATIBLE - SEV_SNP_CAPABLE For more information, see Enabling guest operating system features.
+        #     The ID of a supported feature. To add multiple values, use commas to separate values. Set to one or more of the following values: - VIRTIO_SCSI_MULTIQUEUE - WINDOWS - MULTI_IP_SUBNET - UEFI_COMPATIBLE - GVNIC - SEV_CAPABLE - SUSPEND_RESUME_COMPATIBLE - SEV_SNP_CAPABLE - TDX_CAPABLE For more information, see Enabling guest operating system features.
         #     Check the Type enum for the list of possible values.
         class GuestOsFeature
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # The ID of a supported feature. To add multiple values, use commas to separate values. Set to one or more of the following values: - VIRTIO_SCSI_MULTIQUEUE - WINDOWS - MULTI_IP_SUBNET - UEFI_COMPATIBLE - GVNIC - SEV_CAPABLE - SUSPEND_RESUME_COMPATIBLE - SEV_SNP_CAPABLE For more information, see Enabling guest operating system features.
+          # The ID of a supported feature. To add multiple values, use commas to separate values. Set to one or more of the following values: - VIRTIO_SCSI_MULTIQUEUE - WINDOWS - MULTI_IP_SUBNET - UEFI_COMPATIBLE - GVNIC - SEV_CAPABLE - SUSPEND_RESUME_COMPATIBLE - SEV_SNP_CAPABLE - TDX_CAPABLE For more information, see Enabling guest operating system features.
           module Type
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
 
-            FEATURE_TYPE_UNSPECIFIED = 531767259
+            FEATURE_TYPE_UNSPECIFIED = 531_767_259
 
-            GVNIC = 68209305
+            GVNIC = 68_209_305
 
-            MULTI_IP_SUBNET = 151776719
+            MULTI_IP_SUBNET = 151_776_719
 
-            SECURE_BOOT = 376811194
+            SECURE_BOOT = 376_811_194
 
-            SEV_CAPABLE = 87083793
+            SEV_CAPABLE = 87_083_793
 
-            UEFI_COMPATIBLE = 195865408
+            SEV_LIVE_MIGRATABLE = 392_039_820
 
-            VIRTIO_SCSI_MULTIQUEUE = 201597069
+            SEV_SNP_CAPABLE = 426_919
 
-            WINDOWS = 456863331
+            UEFI_COMPATIBLE = 195_865_408
+
+            VIRTIO_SCSI_MULTIQUEUE = 201_597_069
+
+            WINDOWS = 456_863_331
           end
         end
 
@@ -9689,13 +9811,13 @@ module Google
             UNDEFINED_PORT_SPECIFICATION = 0
 
             # The port number in the health check's port is used for health checking. Applies to network endpoint group and instance group backends.
-            USE_FIXED_PORT = 190235748
+            USE_FIXED_PORT = 190_235_748
 
             # Not supported.
-            USE_NAMED_PORT = 349300671
+            USE_NAMED_PORT = 349_300_671
 
             # For network endpoint group backends, the health check uses the port number specified on each endpoint in the network endpoint group. For instance group backends, the health check uses the port number specified for the backend service's named port defined in the instance group's named ports.
-            USE_SERVING_PORT = 362637516
+            USE_SERVING_PORT = 362_637_516
           end
 
           # Specifies the type of proxy header to append before sending data to the backend, either NONE or PROXY_V1. The default is NONE.
@@ -9703,9 +9825,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_PROXY_HEADER = 0
 
-            NONE = 2402104
+            NONE = 2_402_104
 
-            PROXY_V1 = 334352940
+            PROXY_V1 = 334_352_940
           end
         end
 
@@ -9742,13 +9864,13 @@ module Google
             UNDEFINED_PORT_SPECIFICATION = 0
 
             # The port number in the health check's port is used for health checking. Applies to network endpoint group and instance group backends.
-            USE_FIXED_PORT = 190235748
+            USE_FIXED_PORT = 190_235_748
 
             # Not supported.
-            USE_NAMED_PORT = 349300671
+            USE_NAMED_PORT = 349_300_671
 
             # For network endpoint group backends, the health check uses the port number specified on each endpoint in the network endpoint group. For instance group backends, the health check uses the port number specified for the backend service's named port defined in the instance group's named ports.
-            USE_SERVING_PORT = 362637516
+            USE_SERVING_PORT = 362_637_516
           end
 
           # Specifies the type of proxy header to append before sending data to the backend, either NONE or PROXY_V1. The default is NONE.
@@ -9756,9 +9878,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_PROXY_HEADER = 0
 
-            NONE = 2402104
+            NONE = 2_402_104
 
-            PROXY_V1 = 334352940
+            PROXY_V1 = 334_352_940
           end
         end
 
@@ -9795,13 +9917,13 @@ module Google
             UNDEFINED_PORT_SPECIFICATION = 0
 
             # The port number in the health check's port is used for health checking. Applies to network endpoint group and instance group backends.
-            USE_FIXED_PORT = 190235748
+            USE_FIXED_PORT = 190_235_748
 
             # Not supported.
-            USE_NAMED_PORT = 349300671
+            USE_NAMED_PORT = 349_300_671
 
             # For network endpoint group backends, the health check uses the port number specified on each endpoint in the network endpoint group. For instance group backends, the health check uses the port number specified for the backend service's named port defined in the instance group's named ports.
-            USE_SERVING_PORT = 362637516
+            USE_SERVING_PORT = 362_637_516
           end
 
           # Specifies the type of proxy header to append before sending data to the backend, either NONE or PROXY_V1. The default is NONE.
@@ -9809,9 +9931,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_PROXY_HEADER = 0
 
-            NONE = 2402104
+            NONE = 2_402_104
 
-            PROXY_V1 = 334352940
+            PROXY_V1 = 334_352_940
           end
         end
 
@@ -9877,19 +9999,19 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
 
-            GRPC = 2196510
+            GRPC = 2_196_510
 
-            HTTP = 2228360
+            HTTP = 2_228_360
 
-            HTTP2 = 69079210
+            HTTP2 = 69_079_210
 
-            HTTPS = 69079243
+            HTTPS = 69_079_243
 
-            INVALID = 530283991
+            INVALID = 530_283_991
 
-            SSL = 82412
+            SSL = 82_412
 
-            TCP = 82881
+            TCP = 82_881
           end
         end
 
@@ -9982,10 +10104,10 @@ module Google
             UNDEFINED_HEALTH_STATUS_AGGREGATION_POLICY = 0
 
             # If any backend's health check reports UNHEALTHY, then UNHEALTHY is the HealthState of the entire health check service. If all backend's are healthy, the HealthState of the health check service is HEALTHY.
-            AND = 64951
+            AND = 64_951
 
             # An EndpointHealth message is returned for each backend in the health check service.
-            NO_AGGREGATION = 426445124
+            NO_AGGREGATION = 426_445_124
           end
         end
 
@@ -10111,9 +10233,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_HEALTH_STATE = 0
 
-            HEALTHY = 439801213
+            HEALTHY = 439_801_213
 
-            UNHEALTHY = 462118084
+            UNHEALTHY = 462_118_084
           end
 
           module WeightError
@@ -10121,16 +10243,16 @@ module Google
             UNDEFINED_WEIGHT_ERROR = 0
 
             # The response to a Health Check probe had the HTTP response header field X-Load-Balancing-Endpoint-Weight, but its content was invalid (i.e., not a non-negative single-precision floating-point number in decimal string representation).
-            INVALID_WEIGHT = 383698400
+            INVALID_WEIGHT = 383_698_400
 
             # The response to a Health Check probe did not have the HTTP response header field X-Load-Balancing-Endpoint-Weight.
-            MISSING_WEIGHT = 384027537
+            MISSING_WEIGHT = 384_027_537
 
             # This is the value when the accompanied health status is either TIMEOUT (i.e.,the Health Check probe was not able to get a response in time) or UNKNOWN. For the latter, it should be typically because there has not been sufficient time to parse and report the weight for a new backend (which is with 0.0.0.0 ip address). However, it can be also due to an outage case for which the health status is explicitly reset to UNKNOWN.
-            UNAVAILABLE_WEIGHT = 439464295
+            UNAVAILABLE_WEIGHT = 439_464_295
 
             # This is the default value when WeightReportMode is DISABLE, and is also the initial value when WeightReportMode has just updated to ENABLE or DRY_RUN and there has not been sufficient time to parse and report the backend weight.
-            WEIGHT_NONE = 502428831
+            WEIGHT_NONE = 502_428_831
           end
         end
 
@@ -10159,13 +10281,17 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_HEALTH_STATE = 0
 
-            DRAINING = 480455402
+            # Endpoint is being drained.
+            DRAINING = 480_455_402
 
-            HEALTHY = 439801213
+            # Endpoint is healthy.
+            HEALTHY = 439_801_213
 
-            UNHEALTHY = 462118084
+            # Endpoint is unhealthy.
+            UNHEALTHY = 462_118_084
 
-            UNKNOWN = 433141802
+            # Health status of the endpoint is unknown.
+            UNKNOWN = 433_141_802
           end
         end
 
@@ -10352,19 +10478,19 @@ module Google
             UNDEFINED_REDIRECT_RESPONSE_CODE = 0
 
             # Http Status Code 302 - Found.
-            FOUND = 67084130
+            FOUND = 67_084_130
 
             # Http Status Code 301 - Moved Permanently.
-            MOVED_PERMANENTLY_DEFAULT = 386698449
+            MOVED_PERMANENTLY_DEFAULT = 386_698_449
 
             # Http Status Code 308 - Permanent Redirect maintaining HTTP method.
-            PERMANENT_REDIRECT = 382006381
+            PERMANENT_REDIRECT = 382_006_381
 
             # Http Status Code 303 - See Other.
-            SEE_OTHER = 445380580
+            SEE_OTHER = 445_380_580
 
             # Http Status Code 307 - Temporary Redirect maintaining HTTP method.
-            TEMPORARY_REDIRECT = 489550378
+            TEMPORARY_REDIRECT = 489_550_378
           end
         end
 
@@ -10488,7 +10614,7 @@ module Google
         #     Size of the image when restored onto a persistent disk (in GB).
         # @!attribute [rw] family
         #   @return [::String]
-        #     The name of the image family to which this image belongs. You can create disks by specifying an image family instead of a specific image name. The image family always returns its latest image that is not deprecated. The name of the image family must comply with RFC1035.
+        #     The name of the image family to which this image belongs. The image family name can be from a publicly managed image family provided by Compute Engine, or from a custom image family you create. For example, centos-stream-9 is a publicly available image family. For more information, see Image family best practices. When creating disks, you can specify an image family instead of a specific image name. The image family always returns its latest image that is not deprecated. The name of the image family must comply with RFC1035.
         # @!attribute [rw] guest_os_features
         #   @return [::Array<::Google::Cloud::Compute::V1::GuestOsFeature>]
         #     A list of features to enable on the guest operating system. Applicable only for bootable images. To see a list of available options, see the guestOSfeatures[].type parameter.
@@ -10585,13 +10711,13 @@ module Google
             UNDEFINED_ARCHITECTURE = 0
 
             # Default value indicating Architecture is not set.
-            ARCHITECTURE_UNSPECIFIED = 394750507
+            ARCHITECTURE_UNSPECIFIED = 394_750_507
 
             # Machines with architecture ARM64
-            ARM64 = 62547450
+            ARM64 = 62_547_450
 
             # Machines with architecture X86_64
-            X86_64 = 425300551
+            X86_64 = 425_300_551
           end
 
           # The type of the image used to create this disk. The default and only valid value is RAW.
@@ -10599,7 +10725,7 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_SOURCE_TYPE = 0
 
-            RAW = 80904
+            RAW = 80_904
           end
 
           # [Output Only] The status of the image. An image can be used to create other resources, such as instances, only after the image has been successfully created and the status is set to READY. Possible values are FAILED, PENDING, or READY.
@@ -10608,16 +10734,16 @@ module Google
             UNDEFINED_STATUS = 0
 
             # Image is deleting.
-            DELETING = 528602024
+            DELETING = 528_602_024
 
             # Image creation failed due to an error.
-            FAILED = 455706685
+            FAILED = 455_706_685
 
             # Image hasn't been created as yet.
-            PENDING = 35394935
+            PENDING = 35_394_935
 
             # Image has been successfully created.
-            READY = 77848963
+            READY = 77_848_963
           end
         end
 
@@ -11364,6 +11490,24 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for RegionInstanceTemplates.Insert. See the method description for details.
+        # @!attribute [rw] instance_template_resource
+        #   @return [::Google::Cloud::Compute::V1::InstanceTemplate]
+        #     The body resource for this request
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The name of the region for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        class InsertRegionInstanceTemplateRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for RegionNetworkEndpointGroups.Insert. See the method description for details.
         # @!attribute [rw] network_endpoint_group_resource
         #   @return [::Google::Cloud::Compute::V1::NetworkEndpointGroup]
@@ -12046,13 +12190,13 @@ module Google
             UNDEFINED_KEY_REVOCATION_ACTION_TYPE = 0
 
             # Default value. This value is unused.
-            KEY_REVOCATION_ACTION_TYPE_UNSPECIFIED = 467110106
+            KEY_REVOCATION_ACTION_TYPE_UNSPECIFIED = 467_110_106
 
             # Indicates user chose no operation.
-            NONE = 2402104
+            NONE = 2_402_104
 
             # Indicates user chose to opt for VM shutdown on key revocation.
-            STOP = 2555906
+            STOP = 2_555_906
           end
 
           # The private IPv6 google access type for the VM. If not specified, use INHERIT_FROM_SUBNETWORK as default.
@@ -12061,13 +12205,13 @@ module Google
             UNDEFINED_PRIVATE_IPV6_GOOGLE_ACCESS = 0
 
             # Bidirectional private IPv6 access to/from Google services. If specified, the subnetwork who is attached to the instance's default network interface will be assigned an internal IPv6 prefix if it doesn't have before.
-            ENABLE_BIDIRECTIONAL_ACCESS_TO_GOOGLE = 427975994
+            ENABLE_BIDIRECTIONAL_ACCESS_TO_GOOGLE = 427_975_994
 
             # Outbound private IPv6 access from VMs in this subnet to Google services. If specified, the subnetwork who is attached to the instance's default network interface will be assigned an internal IPv6 prefix if it doesn't have before.
-            ENABLE_OUTBOUND_VM_ACCESS_TO_GOOGLE = 288210263
+            ENABLE_OUTBOUND_VM_ACCESS_TO_GOOGLE = 288_210_263
 
             # Each network interface inherits PrivateIpv6GoogleAccess from its subnetwork.
-            INHERIT_FROM_SUBNETWORK = 530256959
+            INHERIT_FROM_SUBNETWORK = 530_256_959
           end
 
           # [Output Only] The status of the instance. One of the following values: PROVISIONING, STAGING, RUNNING, STOPPING, SUSPENDING, SUSPENDED, REPAIRING, and TERMINATED. For more information about the status of the instance, see Instance life cycle.
@@ -12076,34 +12220,34 @@ module Google
             UNDEFINED_STATUS = 0
 
             # The Nanny is halted and we are performing tear down tasks like network deprogramming, releasing quota, IP, tearing down disks etc.
-            DEPROVISIONING = 428935662
+            DEPROVISIONING = 428_935_662
 
             # Resources are being allocated for the instance.
-            PROVISIONING = 290896621
+            PROVISIONING = 290_896_621
 
             # The instance is in repair.
-            REPAIRING = 413483285
+            REPAIRING = 413_483_285
 
             # The instance is running.
-            RUNNING = 121282975
+            RUNNING = 121_282_975
 
             # All required resources have been allocated and the instance is being started.
-            STAGING = 431072283
+            STAGING = 431_072_283
 
             # The instance has stopped successfully.
-            STOPPED = 444276141
+            STOPPED = 444_276_141
 
             # The instance is currently stopping (either being deleted or killed).
-            STOPPING = 350791796
+            STOPPING = 350_791_796
 
             # The instance has suspended.
-            SUSPENDED = 51223995
+            SUSPENDED = 51_223_995
 
             # The instance is suspending.
-            SUSPENDING = 514206246
+            SUSPENDING = 514_206_246
 
             # The instance has stopped (either by explicit action or underlying failure).
-            TERMINATED = 250018339
+            TERMINATED = 250_018_339
           end
         end
 
@@ -12355,10 +12499,10 @@ module Google
             UNDEFINED_LIST_MANAGED_INSTANCES_RESULTS = 0
 
             # (Default) Pagination is disabled for the group's listManagedInstances API method. maxResults and pageToken query parameters are ignored and all instances are returned in a single response.
-            PAGELESS = 32183464
+            PAGELESS = 32_183_464
 
             # Pagination is enabled for the group's listManagedInstances API method. maxResults and pageToken query parameters are respected.
-            PAGINATED = 40190637
+            PAGINATED = 40_190_637
           end
         end
 
@@ -12587,10 +12731,10 @@ module Google
             UNDEFINED_REPLACEMENT_METHOD = 0
 
             # Instances will be recreated (with the same name)
-            RECREATE = 522644719
+            RECREATE = 522_644_719
 
             # Default option: instances will be deleted and created (with a new name)
-            SUBSTITUTE = 280924314
+            SUBSTITUTE = 280_924_314
           end
 
           # The type of update process. You can specify either PROACTIVE so that the instance group manager proactively executes actions in order to bring instances to their target versions or OPPORTUNISTIC so that no action is proactively executed but the update will be performed as part of other actions (for example, resizes or recreateInstances calls).
@@ -12601,7 +12745,7 @@ module Google
             UNDEFINED_TYPE = 0
 
             # No action is being proactively performed in order to bring this IGM to its target version distribution (regardless of whether this distribution is expressed using instanceTemplate or versions field).
-            OPPORTUNISTIC = 429530089
+            OPPORTUNISTIC = 429_530_089
           end
         end
 
@@ -12630,7 +12774,7 @@ module Google
         # InstanceGroupManagers.applyUpdatesToInstances
         # @!attribute [rw] all_instances
         #   @return [::Boolean]
-        #     Flag to update all instances instead of specified list of ���instances���. If the flag is set to true then the instances may not be specified in the request.
+        #     Flag to update all instances instead of specified list of “instances”. If the flag is set to true then the instances may not be specified in the request.
         # @!attribute [rw] instances
         #   @return [::Array<::String>]
         #     The list of URLs of one or more instances for which you want to apply updates. Each URL can be a full URL or a partial URL, such as zones/[ZONE]/instances/[INSTANCE_NAME].
@@ -12835,10 +12979,10 @@ module Google
             UNDEFINED_INSTANCE_STATE = 0
 
             # Includes all instances in the generated list regardless of their state.
-            ALL = 64897
+            ALL = 64_897
 
             # Includes instances in the generated list only if they have a RUNNING state.
-            RUNNING = 121282975
+            RUNNING = 121_282_975
           end
         end
 
@@ -12954,43 +13098,43 @@ module Google
             UNDEFINED_ACTION = 0
 
             # The managed instance group is abandoning this instance. The instance will be removed from the instance group and from any target pools that are associated with this group.
-            ABANDONING = 388244813
+            ABANDONING = 388_244_813
 
             # The managed instance group is creating this instance. If the group fails to create this instance, it will try again until it is successful.
-            CREATING = 455564985
+            CREATING = 455_564_985
 
             # The managed instance group is attempting to create this instance only once. If the group fails to create this instance, it does not try again and the group's targetSize value is decreased.
-            CREATING_WITHOUT_RETRIES = 428843785
+            CREATING_WITHOUT_RETRIES = 428_843_785
 
             # The managed instance group is permanently deleting this instance.
-            DELETING = 528602024
+            DELETING = 528_602_024
 
             # The managed instance group has not scheduled any actions for this instance.
-            NONE = 2402104
+            NONE = 2_402_104
 
             # The managed instance group is recreating this instance.
-            RECREATING = 287278572
+            RECREATING = 287_278_572
 
             # The managed instance group is applying configuration changes to the instance without stopping it. For example, the group can update the target pool list for an instance without stopping that instance.
-            REFRESHING = 163266343
+            REFRESHING = 163_266_343
 
             # The managed instance group is restarting this instance.
-            RESTARTING = 320534387
+            RESTARTING = 320_534_387
 
             # The managed instance group is resuming this instance.
-            RESUMING = 446856618
+            RESUMING = 446_856_618
 
             # The managed instance group is starting this instance.
-            STARTING = 488820800
+            STARTING = 488_820_800
 
             # The managed instance group is stopping this instance.
-            STOPPING = 350791796
+            STOPPING = 350_791_796
 
             # The managed instance group is suspending this instance.
-            SUSPENDING = 514206246
+            SUSPENDING = 514_206_246
 
             # The managed instance group is verifying this already created instance. Verification happens every time the instance is (re)created or restarted and consists of: 1. Waiting until health check specified as part of this managed instance group's autohealing policy reports HEALTHY. Note: Applies only if autohealing policy has a health check specified 2. Waiting for addition verification steps performed as post-instance creation (subject to future extensions).
-            VERIFYING = 16982185
+            VERIFYING = 16_982_185
           end
         end
 
@@ -13127,13 +13271,13 @@ module Google
             UNDEFINED_KEY_REVOCATION_ACTION_TYPE = 0
 
             # Default value. This value is unused.
-            KEY_REVOCATION_ACTION_TYPE_UNSPECIFIED = 467110106
+            KEY_REVOCATION_ACTION_TYPE_UNSPECIFIED = 467_110_106
 
             # Indicates user chose no operation.
-            NONE = 2402104
+            NONE = 2_402_104
 
             # Indicates user chose to opt for VM shutdown on key revocation.
-            STOP = 2555906
+            STOP = 2_555_906
           end
 
           # The private IPv6 google access type for VMs. If not specified, use INHERIT_FROM_SUBNETWORK as default. Note that for MachineImage, this is not supported yet.
@@ -13142,13 +13286,13 @@ module Google
             UNDEFINED_PRIVATE_IPV6_GOOGLE_ACCESS = 0
 
             # Bidirectional private IPv6 access to/from Google services. If specified, the subnetwork who is attached to the instance's default network interface will be assigned an internal IPv6 prefix if it doesn't have before.
-            ENABLE_BIDIRECTIONAL_ACCESS_TO_GOOGLE = 427975994
+            ENABLE_BIDIRECTIONAL_ACCESS_TO_GOOGLE = 427_975_994
 
             # Outbound private IPv6 access from VMs in this subnet to Google services. If specified, the subnetwork who is attached to the instance's default network interface will be assigned an internal IPv6 prefix if it doesn't have before.
-            ENABLE_OUTBOUND_VM_ACCESS_TO_GOOGLE = 288210263
+            ENABLE_OUTBOUND_VM_ACCESS_TO_GOOGLE = 288_210_263
 
             # Each network interface inherits PrivateIpv6GoogleAccess from its subnetwork.
-            INHERIT_FROM_SUBNETWORK = 530256959
+            INHERIT_FROM_SUBNETWORK = 530_256_959
           end
         end
 
@@ -13179,6 +13323,9 @@ module Google
         # @!attribute [rw] properties
         #   @return [::Google::Cloud::Compute::V1::InstanceProperties]
         #     The instance properties for this instance template.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     [Output Only] URL of the region where the instance template resides. Only applicable for regional resources.
         # @!attribute [rw] self_link
         #   @return [::String]
         #     [Output Only] The URL for this instance template. The server defines this URL.
@@ -13191,6 +13338,39 @@ module Google
         class InstanceTemplate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Contains a list of InstanceTemplatesScopedList.
+        # @!attribute [rw] id
+        #   @return [::String]
+        #     [Output Only] Unique identifier for the resource; defined by the server.
+        # @!attribute [rw] items
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Compute::V1::InstanceTemplatesScopedList}]
+        #     A list of InstanceTemplatesScopedList resources.
+        # @!attribute [rw] kind
+        #   @return [::String]
+        #     Type of resource.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     [Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.
+        # @!attribute [rw] self_link
+        #   @return [::String]
+        #     [Output Only] Server-defined URL for this resource.
+        # @!attribute [rw] warning
+        #   @return [::Google::Cloud::Compute::V1::Warning]
+        #     [Output Only] Informational warning message.
+        class InstanceTemplateAggregatedList
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Compute::V1::InstanceTemplatesScopedList]
+          class ItemsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # A list of instance templates.
@@ -13217,6 +13397,17 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # @!attribute [rw] instance_templates
+        #   @return [::Array<::Google::Cloud::Compute::V1::InstanceTemplate>]
+        #     [Output Only] A list of instance templates that are contained within the specified project and zone.
+        # @!attribute [rw] warning
+        #   @return [::Google::Cloud::Compute::V1::Warning]
+        #     [Output Only] An informational warning that replaces the list of instance templates when the list is empty.
+        class InstanceTemplatesScopedList
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # @!attribute [rw] instance
         #   @return [::String]
         #     [Output Only] The URL of the instance.
@@ -13237,34 +13428,34 @@ module Google
             UNDEFINED_STATUS = 0
 
             # The Nanny is halted and we are performing tear down tasks like network deprogramming, releasing quota, IP, tearing down disks etc.
-            DEPROVISIONING = 428935662
+            DEPROVISIONING = 428_935_662
 
             # Resources are being allocated for the instance.
-            PROVISIONING = 290896621
+            PROVISIONING = 290_896_621
 
             # The instance is in repair.
-            REPAIRING = 413483285
+            REPAIRING = 413_483_285
 
             # The instance is running.
-            RUNNING = 121282975
+            RUNNING = 121_282_975
 
             # All required resources have been allocated and the instance is being started.
-            STAGING = 431072283
+            STAGING = 431_072_283
 
             # The instance has stopped successfully.
-            STOPPED = 444276141
+            STOPPED = 444_276_141
 
             # The instance is currently stopping (either being deleted or killed).
-            STOPPING = 350791796
+            STOPPING = 350_791_796
 
             # The instance has suspended.
-            SUSPENDED = 51223995
+            SUSPENDED = 51_223_995
 
             # The instance is suspending.
-            SUSPENDING = 514206246
+            SUSPENDING = 514_206_246
 
             # The instance has stopped (either by explicit action or underlying failure).
-            TERMINATED = 250018339
+            TERMINATED = 250_018_339
           end
         end
 
@@ -13312,13 +13503,13 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
 
-            HIERARCHY = 69902869
+            HIERARCHY = 69_902_869
 
-            NETWORK = 413984270
+            NETWORK = 413_984_270
 
-            NETWORK_REGIONAL = 190804272
+            NETWORK_REGIONAL = 190_804_272
 
-            UNSPECIFIED = 526786327
+            UNSPECIFIED = 526_786_327
           end
         end
 
@@ -13380,6 +13571,17 @@ module Google
         #   @return [::String]
         #     Minimum cpu/platform this instance should be started at.
         class InstancesSetMinCpuPlatformRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] current_name
+        #   @return [::String]
+        #     The current name of this resource, used to prevent conflicts. Provide the latest name when making a request to change name.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     The name to be applied to the instance. Needs to be RFC 1035 compliant.
+        class InstancesSetNameRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -13465,7 +13667,7 @@ module Google
         #     Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
         # @!attribute [rw] noc_contact_email
         #   @return [::String]
-        #     Email address to contact the customer NOC for operations and maintenance notifications regarding this Interconnect. If specified, this will be used for notifications in addition to all other forms described, such as Stackdriver logs alerting and Cloud Notifications.
+        #     Email address to contact the customer NOC for operations and maintenance notifications regarding this Interconnect. If specified, this will be used for notifications in addition to all other forms described, such as Cloud Monitoring logs alerting and Cloud Notifications. This field is required for users who sign up for Cloud Interconnect using workforce identity federation.
         # @!attribute [rw] operational_status
         #   @return [::String]
         #     [Output Only] The current status of this Interconnect's functionality, which can take one of the following values: - OS_ACTIVE: A valid Interconnect, which is turned up and is ready to use. Attachments may be provisioned on this Interconnect. - OS_UNPROVISIONED: An Interconnect that has not completed turnup. No attachments may be provisioned on this Interconnect. - OS_UNDER_MAINTENANCE: An Interconnect that is undergoing internal maintenance. No attachments may be provisioned or updated on this Interconnect.
@@ -13481,7 +13683,7 @@ module Google
         #     Target number of physical links in the link bundle, as requested by the customer.
         # @!attribute [rw] satisfies_pzs
         #   @return [::Boolean]
-        #     [Output Only] Set to true if the resource satisfies the zone separation organization policy constraints and false otherwise. Defaults to false if the field is not present.
+        #     [Output Only] Reserved for future use.
         # @!attribute [rw] self_link
         #   @return [::String]
         #     [Output Only] Server-defined URL for the resource.
@@ -13499,13 +13701,13 @@ module Google
             UNDEFINED_INTERCONNECT_TYPE = 0
 
             # A dedicated physical interconnection with the customer.
-            DEDICATED = 258411983
+            DEDICATED = 258_411_983
 
             # [Deprecated] A private, physical interconnection with the customer.
-            IT_PRIVATE = 335677007
+            IT_PRIVATE = 335_677_007
 
             # A partner-managed interconnection shared between customers via partner.
-            PARTNER = 461924520
+            PARTNER = 461_924_520
           end
 
           # Type of link requested, which can take one of the following values: - LINK_TYPE_ETHERNET_10G_LR: A 10G Ethernet with LR optics - LINK_TYPE_ETHERNET_100G_LR: A 100G Ethernet with LR optics. Note that this field indicates the speed of each of the links in the bundle, not the speed of the entire bundle.
@@ -13514,10 +13716,10 @@ module Google
             UNDEFINED_LINK_TYPE = 0
 
             # 100G Ethernet, LR Optics.
-            LINK_TYPE_ETHERNET_100G_LR = 337672551
+            LINK_TYPE_ETHERNET_100G_LR = 337_672_551
 
             # 10G Ethernet, LR Optics. [(rate_bps) = 10000000000];
-            LINK_TYPE_ETHERNET_10G_LR = 236739749
+            LINK_TYPE_ETHERNET_10G_LR = 236_739_749
           end
 
           # [Output Only] The current status of this Interconnect's functionality, which can take one of the following values: - OS_ACTIVE: A valid Interconnect, which is turned up and is ready to use. Attachments may be provisioned on this Interconnect. - OS_UNPROVISIONED: An Interconnect that has not completed turnup. No attachments may be provisioned on this Interconnect. - OS_UNDER_MAINTENANCE: An Interconnect that is undergoing internal maintenance. No attachments may be provisioned or updated on this Interconnect.
@@ -13526,10 +13728,10 @@ module Google
             UNDEFINED_OPERATIONAL_STATUS = 0
 
             # The interconnect is valid, turned up, and ready to use. Attachments may be provisioned on this interconnect.
-            OS_ACTIVE = 55721409
+            OS_ACTIVE = 55_721_409
 
             # The interconnect has not completed turnup. No attachments may be provisioned on this interconnect.
-            OS_UNPROVISIONED = 239771840
+            OS_UNPROVISIONED = 239_771_840
           end
 
           # [Output Only] The current state of Interconnect functionality, which can take one of the following values: - ACTIVE: The Interconnect is valid, turned up and ready to use. Attachments may be provisioned on this Interconnect. - UNPROVISIONED: The Interconnect has not completed turnup. No attachments may be provisioned on this Interconnect. - UNDER_MAINTENANCE: The Interconnect is undergoing internal maintenance. No attachments may be provisioned or updated on this Interconnect.
@@ -13538,10 +13740,10 @@ module Google
             UNDEFINED_STATE = 0
 
             # The interconnect is valid, turned up, and ready to use. Attachments may be provisioned on this interconnect.
-            ACTIVE = 314733318
+            ACTIVE = 314_733_318
 
             # The interconnect has not completed turnup. No attachments may be provisioned on this interconnect.
-            UNPROVISIONED = 517333979
+            UNPROVISIONED = 517_333_979
           end
         end
 
@@ -13639,7 +13841,7 @@ module Google
         #     URL of the Cloud Router to be used for dynamic routing. This router must be in the same region as this InterconnectAttachment. The InterconnectAttachment will automatically connect the Interconnect to the network & region within which the Cloud Router is configured.
         # @!attribute [rw] satisfies_pzs
         #   @return [::Boolean]
-        #     [Output Only] Set to true if the resource satisfies the zone separation organization policy constraints and false otherwise. Defaults to false if the field is not present.
+        #     [Output Only] Reserved for future use.
         # @!attribute [rw] self_link
         #   @return [::String]
         #     [Output Only] Server-defined URL for the resource.
@@ -13657,7 +13859,7 @@ module Google
         #     Check the Type enum for the list of possible values.
         # @!attribute [rw] vlan_tag8021q
         #   @return [::Integer]
-        #     The IEEE 802.1Q VLAN tag for this attachment, in the range 2-4094. Only specified at creation time.
+        #     The IEEE 802.1Q VLAN tag for this attachment, in the range 2-4093. Only specified at creation time.
         class InterconnectAttachment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -13668,40 +13870,40 @@ module Google
             UNDEFINED_BANDWIDTH = 0
 
             # 100 Mbit/s
-            BPS_100M = 49547958
+            BPS_100M = 49_547_958
 
             # 10 Gbit/s
-            BPS_10G = 278693006
+            BPS_10G = 278_693_006
 
             # 1 Gbit/s
-            BPS_1G = 355358448
+            BPS_1G = 355_358_448
 
             # 200 Mbit/s
-            BPS_200M = 49577749
+            BPS_200M = 49_577_749
 
             # 20 Gbit/s
-            BPS_20G = 278693967
+            BPS_20G = 278_693_967
 
             # 2 Gbit/s
-            BPS_2G = 355358479
+            BPS_2G = 355_358_479
 
             # 300 Mbit/s
-            BPS_300M = 49607540
+            BPS_300M = 49_607_540
 
             # 400 Mbit/s
-            BPS_400M = 49637331
+            BPS_400M = 49_637_331
 
             # 500 Mbit/s
-            BPS_500M = 49667122
+            BPS_500M = 49_667_122
 
             # 50 Gbit/s
-            BPS_50G = 278696850
+            BPS_50G = 278_696_850
 
             # 50 Mbit/s
-            BPS_50M = 278696856
+            BPS_50M = 278_696_856
 
             # 5 Gbit/s
-            BPS_5G = 355358572
+            BPS_5G = 355_358_572
           end
 
           # Desired availability domain for the attachment. Only available for type PARTNER, at creation time, and can take one of the following values: - AVAILABILITY_DOMAIN_ANY - AVAILABILITY_DOMAIN_1 - AVAILABILITY_DOMAIN_2 For improved reliability, customers should configure a pair of attachments, one per availability domain. The selected availability domain will be provided to the Partner via the pairing key, so that the provisioned circuit will lie in the specified domain. If not specified, the value will default to AVAILABILITY_DOMAIN_ANY.
@@ -13709,11 +13911,11 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_EDGE_AVAILABILITY_DOMAIN = 0
 
-            AVAILABILITY_DOMAIN_1 = 349552090
+            AVAILABILITY_DOMAIN_1 = 349_552_090
 
-            AVAILABILITY_DOMAIN_2 = 349552091
+            AVAILABILITY_DOMAIN_2 = 349_552_091
 
-            AVAILABILITY_DOMAIN_ANY = 375256373
+            AVAILABILITY_DOMAIN_ANY = 375_256_373
           end
 
           # Indicates the user-supplied encryption option of this VLAN attachment (interconnectAttachment). Can only be specified at attachment creation for PARTNER or DEDICATED attachments. Possible values are: - NONE - This is the default value, which means that the VLAN attachment carries unencrypted traffic. VMs are able to send traffic to, or receive traffic from, such a VLAN attachment. - IPSEC - The VLAN attachment carries only encrypted traffic that is encrypted by an IPsec device, such as an HA VPN gateway or third-party IPsec VPN. VMs cannot directly send traffic to, or receive traffic from, such a VLAN attachment. To use *HA VPN over Cloud Interconnect*, the VLAN attachment must be created with this option.
@@ -13722,10 +13924,10 @@ module Google
             UNDEFINED_ENCRYPTION = 0
 
             # The interconnect attachment will carry only encrypted traffic that is encrypted by an IPsec device such as HA VPN gateway; VMs cannot directly send traffic to or receive traffic from such an interconnect attachment. To use HA VPN over Cloud Interconnect, the interconnect attachment must be created with this option.
-            IPSEC = 69882282
+            IPSEC = 69_882_282
 
             # This is the default value, which means the Interconnect Attachment will carry unencrypted traffic. VMs will be able to send traffic to or receive traffic from such interconnect attachment.
-            NONE = 2402104
+            NONE = 2_402_104
           end
 
           # [Output Only] The current status of whether or not this interconnect attachment is functional, which can take one of the following values: - OS_ACTIVE: The attachment has been turned up and is ready to use. - OS_UNPROVISIONED: The attachment is not ready to use yet, because turnup is not complete.
@@ -13734,10 +13936,10 @@ module Google
             UNDEFINED_OPERATIONAL_STATUS = 0
 
             # Indicates that attachment has been turned up and is ready to use.
-            OS_ACTIVE = 55721409
+            OS_ACTIVE = 55_721_409
 
             # Indicates that attachment is not ready to use yet, because turnup is not complete.
-            OS_UNPROVISIONED = 239771840
+            OS_UNPROVISIONED = 239_771_840
           end
 
           # The stack type for this interconnect attachment to identify whether the IPv6 feature is enabled or not. If not specified, IPV4_ONLY will be used. This field can be both set at interconnect attachments creation and update interconnect attachment operations.
@@ -13746,10 +13948,10 @@ module Google
             UNDEFINED_STACK_TYPE = 0
 
             # The interconnect attachment can have both IPv4 and IPv6 addresses.
-            IPV4_IPV6 = 22197249
+            IPV4_IPV6 = 22_197_249
 
             # The interconnect attachment will only be assigned IPv4 addresses.
-            IPV4_ONLY = 22373798
+            IPV4_ONLY = 22_373_798
           end
 
           # [Output Only] The current state of this attachment's functionality. Enum values ACTIVE and UNPROVISIONED are shared by DEDICATED/PRIVATE, PARTNER, and PARTNER_PROVIDER interconnect attachments, while enum values PENDING_PARTNER, PARTNER_REQUEST_RECEIVED, and PENDING_CUSTOMER are used for only PARTNER and PARTNER_PROVIDER interconnect attachments. This state can take one of the following values: - ACTIVE: The attachment has been turned up and is ready to use. - UNPROVISIONED: The attachment is not ready to use yet, because turnup is not complete. - PENDING_PARTNER: A newly-created PARTNER attachment that has not yet been configured on the Partner side. - PARTNER_REQUEST_RECEIVED: A PARTNER attachment is in the process of provisioning after a PARTNER_PROVIDER attachment was created that references it. - PENDING_CUSTOMER: A PARTNER or PARTNER_PROVIDER attachment that is waiting for a customer to activate it. - DEFUNCT: The attachment was deleted externally and is no longer functional. This could be because the associated Interconnect was removed, or because the other side of a Partner attachment was deleted.
@@ -13758,24 +13960,24 @@ module Google
             UNDEFINED_STATE = 0
 
             # Indicates that attachment has been turned up and is ready to use.
-            ACTIVE = 314733318
+            ACTIVE = 314_733_318
 
             # The attachment was deleted externally and is no longer functional. This could be because the associated Interconnect was wiped out, or because the other side of a Partner attachment was deleted.
-            DEFUNCT = 115891759
+            DEFUNCT = 115_891_759
 
             # A PARTNER attachment is in the process of provisioning after a PARTNER_PROVIDER attachment was created that references it.
-            PARTNER_REQUEST_RECEIVED = 513587304
+            PARTNER_REQUEST_RECEIVED = 513_587_304
 
             # PARTNER or PARTNER_PROVIDER attachment that is waiting for the customer to activate.
-            PENDING_CUSTOMER = 167494054
+            PENDING_CUSTOMER = 167_494_054
 
             # A newly created PARTNER attachment that has not yet been configured on the Partner side.
-            PENDING_PARTNER = 387890656
+            PENDING_PARTNER = 387_890_656
 
-            STATE_UNSPECIFIED = 470755401
+            STATE_UNSPECIFIED = 470_755_401
 
             # Indicates that attachment is not ready to use yet, because turnup is not complete.
-            UNPROVISIONED = 517333979
+            UNPROVISIONED = 517_333_979
           end
 
           # The type of interconnect attachment this is, which can take one of the following values: - DEDICATED: an attachment to a Dedicated Interconnect. - PARTNER: an attachment to a Partner Interconnect, created by the customer. - PARTNER_PROVIDER: an attachment to a Partner Interconnect, created by the partner.
@@ -13784,13 +13986,13 @@ module Google
             UNDEFINED_TYPE = 0
 
             # Attachment to a dedicated interconnect.
-            DEDICATED = 258411983
+            DEDICATED = 258_411_983
 
             # Attachment to a partner interconnect, created by the customer.
-            PARTNER = 461924520
+            PARTNER = 461_924_520
 
             # Attachment to a partner interconnect, created by the partner.
-            PARTNER_PROVIDER = 483261352
+            PARTNER_PROVIDER = 483_261_352
           end
         end
 
@@ -13931,10 +14133,10 @@ module Google
             UNDEFINED_BUNDLE_AGGREGATION_TYPE = 0
 
             # LACP is enabled.
-            BUNDLE_AGGREGATION_TYPE_LACP = 27758925
+            BUNDLE_AGGREGATION_TYPE_LACP = 27_758_925
 
             # LACP is disabled.
-            BUNDLE_AGGREGATION_TYPE_STATIC = 50678873
+            BUNDLE_AGGREGATION_TYPE_STATIC = 50_678_873
           end
 
           # The operational status of the bundle interface.
@@ -13943,10 +14145,10 @@ module Google
             UNDEFINED_BUNDLE_OPERATIONAL_STATUS = 0
 
             # If bundleAggregationType is LACP: LACP is not established and/or all links in the bundle have DOWN operational status. If bundleAggregationType is STATIC: one or more links in the bundle has DOWN operational status.
-            BUNDLE_OPERATIONAL_STATUS_DOWN = 453842693
+            BUNDLE_OPERATIONAL_STATUS_DOWN = 453_842_693
 
             # If bundleAggregationType is LACP: LACP is established and at least one link in the bundle has UP operational status. If bundleAggregationType is STATIC: all links in the bundle (typically just one) have UP operational status.
-            BUNDLE_OPERATIONAL_STATUS_UP = 161366462
+            BUNDLE_OPERATIONAL_STATUS_UP = 161_366_462
           end
         end
 
@@ -13982,10 +14184,10 @@ module Google
             UNDEFINED_STATE = 0
 
             # The link is configured and active within the bundle.
-            ACTIVE = 314733318
+            ACTIVE = 314_733_318
 
             # The link is not configured within the bundle, this means the rest of the object should be empty.
-            DETACHED = 216562546
+            DETACHED = 216_562_546
           end
         end
 
@@ -14006,16 +14208,16 @@ module Google
             UNDEFINED_STATE = 0
 
             # The value has crossed above the high alarm threshold.
-            HIGH_ALARM = 305363284
+            HIGH_ALARM = 305_363_284
 
             # The value of the current optical power has crossed above the high warning threshold.
-            HIGH_WARNING = 220984799
+            HIGH_WARNING = 220_984_799
 
             # The value of the current optical power has crossed below the low alarm threshold.
-            LOW_ALARM = 316659046
+            LOW_ALARM = 316_659_046
 
             # The value of the current optical power has crossed below the low warning threshold.
-            LOW_WARNING = 338793841
+            LOW_WARNING = 338_793_841
 
             # The value of the current optical power has not crossed a warning threshold.
             OK = 2524
@@ -14053,10 +14255,10 @@ module Google
             UNDEFINED_OPERATIONAL_STATUS = 0
 
             # The interface is unable to communicate with the remote end.
-            LINK_OPERATIONAL_STATUS_DOWN = 281653885
+            LINK_OPERATIONAL_STATUS_DOWN = 281_653_885
 
             # The interface has low level communication with the remote end.
-            LINK_OPERATIONAL_STATUS_UP = 305879862
+            LINK_OPERATIONAL_STATUS_UP = 305_879_862
           end
         end
 
@@ -14134,7 +14336,7 @@ module Google
         #     Check the Status enum for the list of possible values.
         # @!attribute [rw] supports_pzs
         #   @return [::Boolean]
-        #     [Output Only] Set to true for locations that support physical zone separation. Defaults to false if the field is not present.
+        #     [Output Only] Reserved for future use.
         class InterconnectLocation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -14144,25 +14346,25 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_CONTINENT = 0
 
-            AFRICA = 317443706
+            AFRICA = 317_443_706
 
-            ASIA_PAC = 119782269
+            ASIA_PAC = 119_782_269
 
-            C_AFRICA = 71993846
+            C_AFRICA = 71_993_846
 
-            C_ASIA_PAC = 465668089
+            C_ASIA_PAC = 465_668_089
 
-            C_EUROPE = 200369438
+            C_EUROPE = 200_369_438
 
-            C_NORTH_AMERICA = 275697048
+            C_NORTH_AMERICA = 275_697_048
 
-            C_SOUTH_AMERICA = 397149792
+            C_SOUTH_AMERICA = 397_149_792
 
-            EUROPE = 445819298
+            EUROPE = 445_819_298
 
-            NORTH_AMERICA = 448015508
+            NORTH_AMERICA = 448_015_508
 
-            SOUTH_AMERICA = 32597340
+            SOUTH_AMERICA = 32_597_340
           end
 
           # [Output Only] The status of this InterconnectLocation, which can take one of the following values: - CLOSED: The InterconnectLocation is closed and is unavailable for provisioning new Interconnects. - AVAILABLE: The InterconnectLocation is available for provisioning new Interconnects.
@@ -14171,10 +14373,10 @@ module Google
             UNDEFINED_STATUS = 0
 
             # The InterconnectLocation is available for provisioning new Interconnects.
-            AVAILABLE = 442079913
+            AVAILABLE = 442_079_913
 
             # The InterconnectLocation is closed for provisioning new Interconnects.
-            CLOSED = 380163436
+            CLOSED = 380_163_436
           end
         end
 
@@ -14223,16 +14425,16 @@ module Google
             UNDEFINED_LOCATION_PRESENCE = 0
 
             # This region is not in any common network presence with this InterconnectLocation.
-            GLOBAL = 494663587
+            GLOBAL = 494_663_587
 
             # This region shares the same regional network presence as this InterconnectLocation.
-            LOCAL_REGION = 403535464
+            LOCAL_REGION = 403_535_464
 
             # [Deprecated] This region is not in any common network presence with this InterconnectLocation.
-            LP_GLOBAL = 429584062
+            LP_GLOBAL = 429_584_062
 
             # [Deprecated] This region shares the same regional network presence as this InterconnectLocation.
-            LP_LOCAL_REGION = 488598851
+            LP_LOCAL_REGION = 488_598_851
           end
         end
 
@@ -14274,16 +14476,16 @@ module Google
             UNDEFINED_ISSUE_TYPE = 0
 
             # [Deprecated] The Interconnect may be completely out of service for some or all of the specified window.
-            IT_OUTAGE = 175779973
+            IT_OUTAGE = 175_779_973
 
             # [Deprecated] Some circuits comprising the Interconnect will be out of service during the expected window. The interconnect as a whole should remain up, albeit with reduced bandwidth.
-            IT_PARTIAL_OUTAGE = 92103971
+            IT_PARTIAL_OUTAGE = 92_103_971
 
             # The Interconnect may be completely out of service for some or all of the specified window.
-            OUTAGE = 195285745
+            OUTAGE = 195_285_745
 
             # Some circuits comprising the Interconnect will be out of service during the expected window. The interconnect as a whole should remain up, albeit with reduced bandwidth.
-            PARTIAL_OUTAGE = 147053455
+            PARTIAL_OUTAGE = 147_053_455
           end
 
           # The party that generated this notification, which can take the following value: - GOOGLE: this notification as generated by Google. Note that the value of NSRC_GOOGLE has been deprecated in favor of GOOGLE.
@@ -14292,10 +14494,10 @@ module Google
             UNDEFINED_SOURCE = 0
 
             # This notification was generated by Google.
-            GOOGLE = 497439289
+            GOOGLE = 497_439_289
 
             # [Deprecated] This notification was generated by Google.
-            NSRC_GOOGLE = 510574562
+            NSRC_GOOGLE = 510_574_562
           end
 
           # State of this notification, which can take one of the following values: - ACTIVE: This outage notification is active. The event could be in the past, present, or future. See start_time and end_time for scheduling. - CANCELLED: The outage associated with this notification was cancelled before the outage was due to start. - COMPLETED: The outage associated with this notification is complete. Note that the versions of this enum prefixed with "NS_" have been deprecated in favor of the unprefixed values.
@@ -14304,19 +14506,19 @@ module Google
             UNDEFINED_STATE = 0
 
             # This outage notification is active. The event could be in the future, present, or past. See start_time and end_time for scheduling.
-            ACTIVE = 314733318
+            ACTIVE = 314_733_318
 
             # The outage associated with this notification was cancelled before the outage was due to start.
-            CANCELLED = 41957681
+            CANCELLED = 41_957_681
 
             # The outage associated with this notification is complete.
-            COMPLETED = 309921323
+            COMPLETED = 309_921_323
 
             # [Deprecated] This outage notification is active. The event could be in the future, present, or past. See start_time and end_time for scheduling.
-            NS_ACTIVE = 252563136
+            NS_ACTIVE = 252_563_136
 
             # [Deprecated] The outage associated with this notification was canceled before the outage was due to start.
-            NS_CANCELED = 506579411
+            NS_CANCELED = 506_579_411
           end
         end
 
@@ -14432,18 +14634,18 @@ module Google
             UNDEFINED_STATE = 0
 
             # Machines are not allowed to attach boot disks with this License Code. Requests to create new resources with this license will be rejected.
-            DISABLED = 516696700
+            DISABLED = 516_696_700
 
             # Use is allowed for anyone with USE_READ_ONLY access to this License Code.
-            ENABLED = 182130465
+            ENABLED = 182_130_465
 
             # Use of this license is limited to a project whitelist.
-            RESTRICTED = 261551195
+            RESTRICTED = 261_551_195
 
-            STATE_UNSPECIFIED = 470755401
+            STATE_UNSPECIFIED = 470_755_401
 
             # Reserved state.
-            TERMINATED = 250018339
+            TERMINATED = 250_018_339
           end
         end
 
@@ -14846,7 +15048,7 @@ module Google
         #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
         # @!attribute [rw] parent_id
         #   @return [::String]
-        #     Parent ID for this request.
+        #     Parent ID for this request. The ID can be either be "folders/[FOLDER_ID]" if the parent is a folder or "organizations/[ORGANIZATION_ID]" if the parent is an organization.
         # @!attribute [rw] return_partial_success
         #   @return [::Boolean]
         #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
@@ -15821,10 +16023,10 @@ module Google
             UNDEFINED_DIRECTION = 0
 
             # For routes exported from peer network.
-            INCOMING = 338552870
+            INCOMING = 338_552_870
 
             # For routes exported from local network.
-            OUTGOING = 307438444
+            OUTGOING = 307_438_444
           end
         end
 
@@ -16232,6 +16434,33 @@ module Google
         #   @return [::Boolean]
         #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListRegionInstanceGroupsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionInstanceTemplates.List. See the method description for details.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:` operator can be used with string fields to match substrings. For non-string fields it is equivalent to the `=` operator. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`.
+        # @!attribute [rw] max_results
+        #   @return [::Integer]
+        #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The name of the regions for this request.
+        # @!attribute [rw] return_partial_success
+        #   @return [::Boolean]
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        class ListRegionInstanceTemplatesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -17246,13 +17475,13 @@ module Google
             UNDEFINED_TARGET_SHAPE = 0
 
             # GCE picks zones for creating VM instances to fulfill the requested number of VMs within present resource constraints and to maximize utilization of unused zonal reservations. Recommended for batch workloads that do not require high availability.
-            ANY = 64972
+            ANY = 64_972
 
             # GCE always selects a single zone for all the VMs, optimizing for resource quotas, available reservations and general capacity. Recommended for batch workloads that cannot tollerate distribution over multiple zones. This the default shape in Bulk Insert and Capacity Advisor APIs.
-            ANY_SINGLE_ZONE = 61100880
+            ANY_SINGLE_ZONE = 61_100_880
 
             # GCE prioritizes acquisition of resources, scheduling VMs in zones where resources are available while distributing VMs as evenly as possible across allowed zones to minimize the impact of zonal failure. Recommended for highly available serving workloads.
-            BALANCED = 468409608
+            BALANCED = 468_409_608
           end
         end
 
@@ -17273,13 +17502,13 @@ module Google
             UNDEFINED_PREFERENCE = 0
 
             # Location is allowed for use.
-            ALLOW = 62368553
+            ALLOW = 62_368_553
 
             # Location is prohibited.
-            DENY = 2094604
+            DENY = 2_094_604
 
             # Default value, unused.
-            PREFERENCE_UNSPECIFIED = 496219571
+            PREFERENCE_UNSPECIFIED = 496_219_571
           end
         end
 
@@ -17325,13 +17554,13 @@ module Google
             UNDEFINED_LOG_NAME = 0
 
             # This is deprecated and has no effect. Do not use.
-            ADMIN_ACTIVITY = 427503135
+            ADMIN_ACTIVITY = 427_503_135
 
             # This is deprecated and has no effect. Do not use.
-            DATA_ACCESS = 238070681
+            DATA_ACCESS = 238_070_681
 
             # This is deprecated and has no effect. Do not use.
-            UNSPECIFIED_LOG_NAME = 410515182
+            UNSPECIFIED_LOG_NAME = 410_515_182
           end
         end
 
@@ -17377,10 +17606,10 @@ module Google
             UNDEFINED_LOG_MODE = 0
 
             # This is deprecated and has no effect. Do not use.
-            LOG_FAIL_CLOSED = 360469778
+            LOG_FAIL_CLOSED = 360_469_778
 
             # This is deprecated and has no effect. Do not use.
-            LOG_MODE_UNSPECIFIED = 88160822
+            LOG_MODE_UNSPECIFIED = 88_160_822
           end
         end
 
@@ -17446,15 +17675,15 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
-            CREATING = 455564985
+            CREATING = 455_564_985
 
-            DELETING = 528602024
+            DELETING = 528_602_024
 
-            INVALID = 530283991
+            INVALID = 530_283_991
 
-            READY = 77848963
+            READY = 77_848_963
 
-            UPLOADING = 267603489
+            UPLOADING = 267_603_489
           end
         end
 
@@ -17649,37 +17878,37 @@ module Google
             UNDEFINED_CURRENT_ACTION = 0
 
             # The managed instance group is abandoning this instance. The instance will be removed from the instance group and from any target pools that are associated with this group.
-            ABANDONING = 388244813
+            ABANDONING = 388_244_813
 
             # The managed instance group is creating this instance. If the group fails to create this instance, it will try again until it is successful.
-            CREATING = 455564985
+            CREATING = 455_564_985
 
             # The managed instance group is attempting to create this instance only once. If the group fails to create this instance, it does not try again and the group's targetSize value is decreased.
-            CREATING_WITHOUT_RETRIES = 428843785
+            CREATING_WITHOUT_RETRIES = 428_843_785
 
             # The managed instance group is permanently deleting this instance.
-            DELETING = 528602024
+            DELETING = 528_602_024
 
             # The managed instance group has not scheduled any actions for this instance.
-            NONE = 2402104
+            NONE = 2_402_104
 
             # The managed instance group is recreating this instance.
-            RECREATING = 287278572
+            RECREATING = 287_278_572
 
             # The managed instance group is applying configuration changes to the instance without stopping it. For example, the group can update the target pool list for an instance without stopping that instance.
-            REFRESHING = 163266343
+            REFRESHING = 163_266_343
 
             # The managed instance group is restarting this instance.
-            RESTARTING = 320534387
+            RESTARTING = 320_534_387
 
             # The managed instance group is resuming this instance.
-            RESUMING = 446856618
+            RESUMING = 446_856_618
 
             # The managed instance group is starting this instance.
-            STARTING = 488820800
+            STARTING = 488_820_800
 
             # The managed instance group is verifying this already created instance. Verification happens every time the instance is (re)created or restarted and consists of: 1. Waiting until health check specified as part of this managed instance group's autohealing policy reports HEALTHY. Note: Applies only if autohealing policy has a health check specified 2. Waiting for addition verification steps performed as post-instance creation (subject to future extensions).
-            VERIFYING = 16982185
+            VERIFYING = 16_982_185
           end
 
           # [Output Only] The status of the instance. This field is empty when the instance does not exist.
@@ -17691,32 +17920,32 @@ module Google
             UNDEFINED_INSTANCE_STATUS = 0
 
             # The Nanny is halted and we are performing tear down tasks like network deprogramming, releasing quota, IP, tearing down disks etc.
-            DEPROVISIONING = 428935662
+            DEPROVISIONING = 428_935_662
 
             # Resources are being allocated for the instance.
-            PROVISIONING = 290896621
+            PROVISIONING = 290_896_621
 
             # The instance is in repair.
-            REPAIRING = 413483285
+            REPAIRING = 413_483_285
 
             # The instance is running.
-            RUNNING = 121282975
+            RUNNING = 121_282_975
 
             # All required resources have been allocated and the instance is being started.
-            STAGING = 431072283
+            STAGING = 431_072_283
 
             # The instance has stopped successfully.
-            STOPPED = 444276141
+            STOPPED = 444_276_141
 
-            STOPPING = 350791796
+            STOPPING = 350_791_796
 
             # The instance has suspended.
-            SUSPENDED = 51223995
+            SUSPENDED = 51_223_995
 
-            SUSPENDING = 514206246
+            SUSPENDING = 514_206_246
 
             # The instance has stopped (either by explicit action or underlying failure).
-            TERMINATED = 250018339
+            TERMINATED = 250_018_339
           end
         end
 
@@ -17737,19 +17966,19 @@ module Google
             UNDEFINED_DETAILED_HEALTH_STATE = 0
 
             # The instance is being drained. The existing connections to the instance have time to complete, but the new ones are being refused.
-            DRAINING = 480455402
+            DRAINING = 480_455_402
 
             # The instance is reachable i.e. a connection to the application health checking endpoint can be established, and conforms to the requirements defined by the health check.
-            HEALTHY = 439801213
+            HEALTHY = 439_801_213
 
             # The instance is unreachable i.e. a connection to the application health checking endpoint cannot be established, or the server does not respond within the specified timeout.
-            TIMEOUT = 477813057
+            TIMEOUT = 477_813_057
 
             # The instance is reachable, but does not conform to the requirements defined by the health check.
-            UNHEALTHY = 462118084
+            UNHEALTHY = 462_118_084
 
             # The health checking system is aware of the instance but its health is not known at the moment.
-            UNKNOWN = 433141802
+            UNKNOWN = 433_141_802
           end
         end
 
@@ -17805,13 +18034,13 @@ module Google
             UNDEFINED_FILTER_MATCH_CRITERIA = 0
 
             # Specifies that all filterLabels must match for the metadataFilter to be considered a match.
-            MATCH_ALL = 180663271
+            MATCH_ALL = 180_663_271
 
             # Specifies that any filterLabel must match for the metadataFilter to be considered a match.
-            MATCH_ANY = 180663346
+            MATCH_ANY = 180_663_346
 
             # Indicates that the match criteria was not set. A metadataFilter must never be created with this value.
-            NOT_SET = 163646646
+            NOT_SET = 163_646_646
           end
         end
 
@@ -17848,7 +18077,7 @@ module Google
         #     Name of the firewall policy to update.
         # @!attribute [rw] parent_id
         #   @return [::String]
-        #     The new parent of the firewall policy.
+        #     The new parent of the firewall policy. The ID can be either be "folders/[FOLDER_ID]" if the parent is a folder or "organizations/[ORGANIZATION_ID]" if the parent is an organization.
         # @!attribute [rw] request_id
         #   @return [::String]
         #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
@@ -17949,9 +18178,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_NETWORK_FIREWALL_POLICY_ENFORCEMENT_ORDER = 0
 
-            AFTER_CLASSIC_FIREWALL = 154582608
+            AFTER_CLASSIC_FIREWALL = 154_582_608
 
-            BEFORE_CLASSIC_FIREWALL = 338458349
+            BEFORE_CLASSIC_FIREWALL = 338_458_349
           end
         end
 
@@ -18010,11 +18239,11 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_CONNECTION_PREFERENCE = 0
 
-            ACCEPT_AUTOMATIC = 75250580
+            ACCEPT_AUTOMATIC = 75_250_580
 
-            ACCEPT_MANUAL = 373061341
+            ACCEPT_MANUAL = 373_061_341
 
-            INVALID = 530283991
+            INVALID = 530_283_991
           end
         end
 
@@ -18077,21 +18306,21 @@ module Google
             UNDEFINED_STATUS = 0
 
             # The consumer allows traffic from the producer to reach its VPC.
-            ACCEPTED = 246714279
+            ACCEPTED = 246_714_279
 
             # The consumer network attachment no longer exists.
-            CLOSED = 380163436
+            CLOSED = 380_163_436
 
             # The consumer needs to take further action before traffic can be served.
-            NEEDS_ATTENTION = 344491452
+            NEEDS_ATTENTION = 344_491_452
 
             # The consumer neither allows nor prohibits traffic from the producer to reach its VPC.
-            PENDING = 35394935
+            PENDING = 35_394_935
 
             # The consumer prohibits traffic from the producer to reach its VPC.
-            REJECTED = 174130302
+            REJECTED = 174_130_302
 
-            STATUS_UNSPECIFIED = 42133066
+            STATUS_UNSPECIFIED = 42_133_066
           end
         end
 
@@ -18319,25 +18548,25 @@ module Google
             UNDEFINED_NETWORK_ENDPOINT_TYPE = 0
 
             # The network endpoint is represented by an IP address.
-            GCE_VM_IP = 401880793
+            GCE_VM_IP = 401_880_793
 
             # The network endpoint is represented by IP address and port pair.
-            GCE_VM_IP_PORT = 501838375
+            GCE_VM_IP_PORT = 501_838_375
 
             # The network endpoint is represented by fully qualified domain name and port.
-            INTERNET_FQDN_PORT = 404154477
+            INTERNET_FQDN_PORT = 404_154_477
 
             # The network endpoint is represented by an internet IP address and port.
-            INTERNET_IP_PORT = 477719963
+            INTERNET_IP_PORT = 477_719_963
 
             # The network endpoint is represented by an IP address and port. The endpoint belongs to a VM or pod running in a customer's on-premises.
-            NON_GCP_PRIVATE_IP_PORT = 336447968
+            NON_GCP_PRIVATE_IP_PORT = 336_447_968
 
             # The network endpoint is either public Google APIs or services exposed by other GCP Project with a Service Attachment. The connection is set up by private service connect
-            PRIVATE_SERVICE_CONNECT = 48134724
+            PRIVATE_SERVICE_CONNECT = 48_134_724
 
             # The network endpoint is handled by specified serverless infrastructure.
-            SERVERLESS = 270492508
+            SERVERLESS = 270_492_508
           end
         end
 
@@ -18462,21 +18691,21 @@ module Google
             UNDEFINED_PSC_CONNECTION_STATUS = 0
 
             # The connection has been accepted by the producer.
-            ACCEPTED = 246714279
+            ACCEPTED = 246_714_279
 
             # The connection has been closed by the producer and will not serve traffic going forward.
-            CLOSED = 380163436
+            CLOSED = 380_163_436
 
             # The connection has been accepted by the producer, but the producer needs to take further action before the forwarding rule can serve traffic.
-            NEEDS_ATTENTION = 344491452
+            NEEDS_ATTENTION = 344_491_452
 
             # The connection is pending acceptance by the producer.
-            PENDING = 35394935
+            PENDING = 35_394_935
 
             # The connection has been rejected by the producer.
-            REJECTED = 174130302
+            REJECTED = 174_130_302
 
-            STATUS_UNSPECIFIED = 42133066
+            STATUS_UNSPECIFIED = 42_133_066
           end
         end
 
@@ -18510,10 +18739,10 @@ module Google
             UNDEFINED_HEALTH_STATUS = 0
 
             # Show the health status for each network endpoint. Impacts latency of the call.
-            SHOW = 2544381
+            SHOW = 2_544_381
 
             # Health status for network endpoints will not be provided.
-            SKIP = 2547071
+            SKIP = 2_547_071
           end
         end
 
@@ -18581,7 +18810,7 @@ module Google
         #     Check the Ipv6AccessType enum for the list of possible values.
         # @!attribute [rw] ipv6_address
         #   @return [::String]
-        #     An IPv6 internal network address for this network interface.
+        #     An IPv6 internal network address for this network interface. To use a static internal IP address, it must be unused and in the same region as the instance's zone. If not specified, Google Cloud will automatically assign an internal IPv6 address from the instance's subnetwork.
         # @!attribute [rw] kind
         #   @return [::String]
         #     [Output Only] Type of the resource. Always compute#networkInterface for network interfaces.
@@ -18591,6 +18820,9 @@ module Google
         # @!attribute [rw] network
         #   @return [::String]
         #     URL of the VPC network resource for this instance. When creating an instance, if neither the network nor the subnetwork is specified, the default network global/networks/default is used. If the selected project doesn't have the default network, you must specify a network or subnet. If the network is not specified but the subnetwork is specified, the network is inferred. If you specify this property, you can specify the network as a full or partial URL. For example, the following are all valid URLs: - https://www.googleapis.com/compute/v1/projects/project/global/networks/ network - projects/project/global/networks/network - global/networks/default
+        # @!attribute [rw] network_attachment
+        #   @return [::String]
+        #     The URL of the network attachment that this interface should connect to in the following format: projects/\\{project_number}/regions/\\{region_name}/networkAttachments/\\{network_attachment_name}.
         # @!attribute [rw] network_i_p
         #   @return [::String]
         #     An IPv4 internal IP address to assign to the instance for this network interface. If not specified by the user, an unused internal IP is assigned by the system.
@@ -18618,12 +18850,12 @@ module Google
             UNDEFINED_IPV6_ACCESS_TYPE = 0
 
             # This network interface can have external IPv6.
-            EXTERNAL = 35607499
+            EXTERNAL = 35_607_499
 
             # This network interface can have internal IPv6.
-            INTERNAL = 279295677
+            INTERNAL = 279_295_677
 
-            UNSPECIFIED_IPV6_ACCESS_TYPE = 313080613
+            UNSPECIFIED_IPV6_ACCESS_TYPE = 313_080_613
           end
 
           # The type of vNIC to be used on this interface. This may be gVNIC or VirtioNet.
@@ -18632,13 +18864,13 @@ module Google
             UNDEFINED_NIC_TYPE = 0
 
             # GVNIC
-            GVNIC = 68209305
+            GVNIC = 68_209_305
 
             # No type specified.
-            UNSPECIFIED_NIC_TYPE = 67411801
+            UNSPECIFIED_NIC_TYPE = 67_411_801
 
             # VIRTIO
-            VIRTIO_NET = 452123481
+            VIRTIO_NET = 452_123_481
           end
 
           # The stack type for this network interface to identify whether the IPv6 feature is enabled or not. If not specified, IPV4_ONLY will be used. This field can be both set at instance creation and update network interface operations.
@@ -18647,12 +18879,12 @@ module Google
             UNDEFINED_STACK_TYPE = 0
 
             # The network interface can have both IPv4 and IPv6 addresses.
-            IPV4_IPV6 = 22197249
+            IPV4_IPV6 = 22_197_249
 
             # The network interface will be assigned IPv4 address.
-            IPV4_ONLY = 22373798
+            IPV4_ONLY = 22_373_798
 
-            UNSPECIFIED_STACK_TYPE = 298084569
+            UNSPECIFIED_STACK_TYPE = 298_084_569
           end
         end
 
@@ -18729,10 +18961,10 @@ module Google
             UNDEFINED_STACK_TYPE = 0
 
             # This Peering will allow IPv4 traffic and routes to be exchanged. Additionally if the matching peering is IPV4_IPV6, IPv6 traffic and routes will be exchanged as well.
-            IPV4_IPV6 = 22197249
+            IPV4_IPV6 = 22_197_249
 
             # This Peering will only allow IPv4 traffic and routes to be exchanged, even if the matching peering is IPV4_IPV6.
-            IPV4_ONLY = 22373798
+            IPV4_ONLY = 22_373_798
           end
 
           # [Output Only] State for the peering, either `ACTIVE` or `INACTIVE`. The peering is `ACTIVE` when there's a matching configuration in the peer network.
@@ -18741,10 +18973,10 @@ module Google
             UNDEFINED_STATE = 0
 
             # Matching configuration exists on the peer.
-            ACTIVE = 314733318
+            ACTIVE = 314_733_318
 
             # There is no matching configuration on the peer, including the case when peer does not exist.
-            INACTIVE = 270421099
+            INACTIVE = 270_421_099
           end
         end
 
@@ -18760,9 +18992,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_TOTAL_EGRESS_BANDWIDTH_TIER = 0
 
-            DEFAULT = 115302945
+            DEFAULT = 115_302_945
 
-            TIER_1 = 326919444
+            TIER_1 = 326_919_444
           end
         end
 
@@ -18780,9 +19012,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_ROUTING_MODE = 0
 
-            GLOBAL = 494663587
+            GLOBAL = 494_663_587
 
-            REGIONAL = 92288543
+            REGIONAL = 92_288_543
           end
         end
 
@@ -18839,11 +19071,11 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
 
-            HIERARCHY = 69902869
+            HIERARCHY = 69_902_869
 
-            NETWORK = 413984270
+            NETWORK = 413_984_270
 
-            UNSPECIFIED = 526786327
+            UNSPECIFIED = 526_786_327
           end
         end
 
@@ -18920,28 +19152,28 @@ module Google
             UNDEFINED_MAINTENANCE_POLICY = 0
 
             # Allow the node and corresponding instances to retain default maintenance behavior.
-            DEFAULT = 115302945
+            DEFAULT = 115_302_945
 
-            MAINTENANCE_POLICY_UNSPECIFIED = 72964182
+            MAINTENANCE_POLICY_UNSPECIFIED = 72_964_182
 
             # When maintenance must be done on a node, the instances on that node will be moved to other nodes in the group. Instances with onHostMaintenance = MIGRATE will live migrate to their destinations while instances with onHostMaintenance = TERMINATE will terminate and then restart on their destination nodes if automaticRestart = true.
-            MIGRATE_WITHIN_NODE_GROUP = 153483394
+            MIGRATE_WITHIN_NODE_GROUP = 153_483_394
 
             # Instances in this group will restart on the same node when maintenance has completed. Instances must have onHostMaintenance = TERMINATE, and they will only restart if automaticRestart = true.
-            RESTART_IN_PLACE = 228647325
+            RESTART_IN_PLACE = 228_647_325
           end
 
           module Status
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
-            CREATING = 455564985
+            CREATING = 455_564_985
 
-            DELETING = 528602024
+            DELETING = 528_602_024
 
-            INVALID = 530283991
+            INVALID = 530_283_991
 
-            READY = 77848963
+            READY = 77_848_963
           end
         end
 
@@ -18999,16 +19231,16 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_MODE = 0
 
-            MODE_UNSPECIFIED = 371348091
+            MODE_UNSPECIFIED = 371_348_091
 
             # Autoscaling is disabled.
-            OFF = 78159
+            OFF = 78_159
 
             # Autocaling is fully enabled.
             ON = 2527
 
             # Autoscaling will only scale out and will not remove nodes.
-            ONLY_SCALE_OUT = 152713670
+            ONLY_SCALE_OUT = 152_713_670
           end
         end
 
@@ -19097,26 +19329,26 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_CPU_OVERCOMMIT_TYPE = 0
 
-            CPU_OVERCOMMIT_TYPE_UNSPECIFIED = 520665615
+            CPU_OVERCOMMIT_TYPE_UNSPECIFIED = 520_665_615
 
-            ENABLED = 182130465
+            ENABLED = 182_130_465
 
-            NONE = 2402104
+            NONE = 2_402_104
           end
 
           module Status
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
-            CREATING = 455564985
+            CREATING = 455_564_985
 
-            DELETING = 528602024
+            DELETING = 528_602_024
 
-            INVALID = 530283991
+            INVALID = 530_283_991
 
-            READY = 77848963
+            READY = 77_848_963
 
-            REPAIRING = 413483285
+            REPAIRING = 413_483_285
           end
         end
 
@@ -19178,6 +19410,14 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # @!attribute [rw] nodes
+        #   @return [::Array<::String>]
+        #     Names of the nodes to go under maintenance simulation.
+        class NodeGroupsSimulateMaintenanceEventRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Represent a sole-tenant Node Template resource. You can use a template to define properties for nodes in a node group. For more information, read Creating node groups and instances.
         # @!attribute [rw] accelerators
         #   @return [::Array<::Google::Cloud::Compute::V1::AcceleratorConfig>]
@@ -19210,7 +19450,7 @@ module Google
         #     The node type to use for nodes group that are created from this template.
         # @!attribute [rw] node_type_flexibility
         #   @return [::Google::Cloud::Compute::V1::NodeTemplateNodeTypeFlexibility]
-        #     The flexible properties of the desired node type. Node groups that use this node template will create nodes of a type that matches these properties. This field is mutually exclusive with the node_type property; you can only define one or the other, but not both.
+        #     Do not use. Instead, use the node_type property.
         # @!attribute [rw] region
         #   @return [::String]
         #     [Output Only] The name of the region where the node template resides, such as us-central1.
@@ -19245,11 +19485,11 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_CPU_OVERCOMMIT_TYPE = 0
 
-            CPU_OVERCOMMIT_TYPE_UNSPECIFIED = 520665615
+            CPU_OVERCOMMIT_TYPE_UNSPECIFIED = 520_665_615
 
-            ENABLED = 182130465
+            ENABLED = 182_130_465
 
-            NONE = 2402104
+            NONE = 2_402_104
           end
 
           # [Output Only] The status of the node template. One of the following values: CREATING, READY, and DELETING.
@@ -19258,16 +19498,16 @@ module Google
             UNDEFINED_STATUS = 0
 
             # Resources are being allocated.
-            CREATING = 455564985
+            CREATING = 455_564_985
 
             # The node template is currently being deleted.
-            DELETING = 528602024
+            DELETING = 528_602_024
 
             # Invalid status.
-            INVALID = 530283991
+            INVALID = 530_283_991
 
             # The node template is ready.
-            READY = 77848963
+            READY = 77_848_963
           end
         end
 
@@ -19620,11 +19860,11 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
-            DONE = 2104194
+            DONE = 2_104_194
 
-            PENDING = 35394935
+            PENDING = 35_394_935
 
-            RUNNING = 121282975
+            RUNNING = 121_282_975
           end
         end
 
@@ -19767,14 +20007,14 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_DURATION = 0
 
-            DURATION_UNSPECIFIED = 529071340
+            DURATION_UNSPECIFIED = 529_071_340
 
-            HOUR = 2223588
+            HOUR = 2_223_588
 
             # From BfdSession object creation time.
-            MAX = 76100
+            MAX = 76_100
 
-            MINUTE = 126786068
+            MINUTE = 126_786_068
           end
 
           # The type of packets for which inter-packet intervals were computed.
@@ -19783,15 +20023,15 @@ module Google
             UNDEFINED_TYPE = 0
 
             # Only applies to Echo packets. This shows the intervals between sending and receiving the same packet.
-            LOOPBACK = 356174219
+            LOOPBACK = 356_174_219
 
             # Intervals between received packets.
-            RECEIVE = 189660867
+            RECEIVE = 189_660_867
 
             # Intervals between transmitted packets.
-            TRANSMIT = 452903600
+            TRANSMIT = 452_903_600
 
-            TYPE_UNSPECIFIED = 437714322
+            TYPE_UNSPECIFIED = 437_714_322
           end
         end
 
@@ -19845,9 +20085,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_ENABLE = 0
 
-            FALSE = 66658563
+            FALSE = 66_658_563
 
-            TRUE = 2583950
+            TRUE = 2_583_950
           end
         end
 
@@ -19907,13 +20147,13 @@ module Google
             UNDEFINED_DIRECTION = 0
 
             # Default, both directions are mirrored.
-            BOTH = 2044801
+            BOTH = 2_044_801
 
             # Only egress traffic is mirrored.
-            EGRESS = 432880501
+            EGRESS = 432_880_501
 
             # Only ingress traffic is mirrored.
-            INGRESS = 516931221
+            INGRESS = 516_931_221
           end
         end
 
@@ -20977,22 +21217,22 @@ module Google
             UNDEFINED_STATUS = 0
 
             # The per-instance configuration is being applied to the instance, but is not yet effective, possibly waiting for the instance to, for example, REFRESH.
-            APPLYING = 352003508
+            APPLYING = 352_003_508
 
             # The per-instance configuration deletion is being applied on the instance, possibly waiting for the instance to, for example, REFRESH.
-            DELETING = 528602024
+            DELETING = 528_602_024
 
             # The per-instance configuration is effective on the instance, meaning that all disks, ips and metadata specified in this configuration are attached or set on the instance.
-            EFFECTIVE = 244201863
+            EFFECTIVE = 244_201_863
 
             # *[Default]* The default status, when no per-instance configuration exists.
-            NONE = 2402104
+            NONE = 2_402_104
 
             # The per-instance configuration is set on an instance but not been applied yet.
-            UNAPPLIED = 483935140
+            UNAPPLIED = 483_935_140
 
             # The per-instance configuration has been deleted, but the deletion is not yet applied.
-            UNAPPLIED_DELETION = 313956873
+            UNAPPLIED_DELETION = 313_956_873
           end
         end
 
@@ -21077,9 +21317,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_AUTO_DELETE = 0
 
-            NEVER = 74175084
+            NEVER = 74_175_084
 
-            ON_PERMANENT_INSTANCE_DELETION = 95727719
+            ON_PERMANENT_INSTANCE_DELETION = 95_727_719
           end
 
           # The mode in which to attach this disk, either READ_WRITE or READ_ONLY. If not specified, the default is to attach the disk in READ_WRITE mode.
@@ -21088,10 +21328,10 @@ module Google
             UNDEFINED_MODE = 0
 
             # Attaches this disk in read-only mode. Multiple VM instances can use a disk in READ_ONLY mode at a time.
-            READ_ONLY = 91950261
+            READ_ONLY = 91_950_261
 
             # *[Default]* Attaches this disk in READ_WRITE mode. Only one VM instance at a time can be attached to a disk in READ_WRITE mode.
-            READ_WRITE = 173607894
+            READ_WRITE = 173_607_894
           end
         end
 
@@ -21169,16 +21409,16 @@ module Google
             UNDEFINED_DEFAULT_NETWORK_TIER = 0
 
             # Public internet quality with fixed bandwidth.
-            FIXED_STANDARD = 310464328
+            FIXED_STANDARD = 310_464_328
 
             # High quality, Google-grade network tier, support for all networking products.
-            PREMIUM = 399530551
+            PREMIUM = 399_530_551
 
             # Public internet quality, only limited support for other networking products.
-            STANDARD = 484642493
+            STANDARD = 484_642_493
 
             # (Output only) Temporary tier for FIXED_STANDARD when fixed standard tier is expired or not configured.
-            STANDARD_OVERRIDES_FIXED_STANDARD = 465847234
+            STANDARD_OVERRIDES_FIXED_STANDARD = 465_847_234
           end
 
           # [Output Only] Default internal DNS setting used by VMs running in this project.
@@ -21186,13 +21426,13 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_VM_DNS_SETTING = 0
 
-            GLOBAL_DEFAULT = 345419141
+            GLOBAL_DEFAULT = 345_419_141
 
-            UNSPECIFIED_VM_DNS_SETTING = 35691930
+            UNSPECIFIED_VM_DNS_SETTING = 35_691_930
 
-            ZONAL_DEFAULT = 368475782
+            ZONAL_DEFAULT = 368_475_782
 
-            ZONAL_ONLY = 521198951
+            ZONAL_ONLY = 521_198_951
           end
 
           # [Output Only] The role this project has in a shared VPC configuration. Currently, only projects with the host role, which is specified by the value HOST, are differentiated.
@@ -21200,9 +21440,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_XPN_PROJECT_STATUS = 0
 
-            HOST = 2223528
+            HOST = 2_223_528
 
-            UNSPECIFIED_XPN_PROJECT_STATUS = 340393257
+            UNSPECIFIED_XPN_PROJECT_STATUS = 340_393_257
           end
         end
 
@@ -21258,16 +21498,16 @@ module Google
             UNDEFINED_NETWORK_TIER = 0
 
             # Public internet quality with fixed bandwidth.
-            FIXED_STANDARD = 310464328
+            FIXED_STANDARD = 310_464_328
 
             # High quality, Google-grade network tier, support for all networking products.
-            PREMIUM = 399530551
+            PREMIUM = 399_530_551
 
             # Public internet quality, only limited support for other networking products.
-            STANDARD = 484642493
+            STANDARD = 484_642_493
 
             # (Output only) Temporary tier for FIXED_STANDARD when fixed standard tier is expired or not configured.
-            STANDARD_OVERRIDES_FIXED_STANDARD = 465847234
+            STANDARD_OVERRIDES_FIXED_STANDARD = 465_847_234
           end
         end
 
@@ -21319,25 +21559,25 @@ module Google
             UNDEFINED_STATUS = 0
 
             # RPKI validation is complete.
-            INITIAL = 518841124
+            INITIAL = 518_841_124
 
             # The prefix is fully configured.
-            PREFIX_CONFIGURATION_COMPLETE = 480889551
+            PREFIX_CONFIGURATION_COMPLETE = 480_889_551
 
             # The prefix is being configured.
-            PREFIX_CONFIGURATION_IN_PROGRESS = 378550961
+            PREFIX_CONFIGURATION_IN_PROGRESS = 378_550_961
 
             # The prefix is being removed.
-            PREFIX_REMOVAL_IN_PROGRESS = 284375783
+            PREFIX_REMOVAL_IN_PROGRESS = 284_375_783
 
             # User has configured the PTR.
-            PTR_CONFIGURED = 513497167
+            PTR_CONFIGURED = 513_497_167
 
             # Reverse DNS lookup failed.
-            REVERSE_DNS_LOOKUP_FAILED = 295755183
+            REVERSE_DNS_LOOKUP_FAILED = 295_755_183
 
             # Reverse DNS lookup is successful.
-            VALIDATED = 66197998
+            VALIDATED = 66_197_998
           end
         end
 
@@ -21436,16 +21676,16 @@ module Google
             UNDEFINED_STATUS = 0
 
             # The public delegated prefix is active.
-            ANNOUNCED = 365103355
+            ANNOUNCED = 365_103_355
 
             # The public delegated prefix is being deprovsioned.
-            DELETING = 528602024
+            DELETING = 528_602_024
 
             # The public delegated prefix is being initialized and addresses cannot be created yet.
-            INITIALIZING = 306588749
+            INITIALIZING = 306_588_749
 
             # The public delegated prefix is currently withdrawn but ready to be announced.
-            READY_TO_ANNOUNCE = 64641265
+            READY_TO_ANNOUNCE = 64_641_265
           end
         end
 
@@ -21539,9 +21779,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
-            ACTIVE = 314733318
+            ACTIVE = 314_733_318
 
-            INACTIVE = 270421099
+            INACTIVE = 270_421_099
           end
         end
 
@@ -21579,289 +21819,291 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_METRIC = 0
 
-            A2_CPUS = 153206585
+            A2_CPUS = 153_206_585
 
-            AFFINITY_GROUPS = 108303563
+            AFFINITY_GROUPS = 108_303_563
 
-            AUTOSCALERS = 471248988
+            AUTOSCALERS = 471_248_988
 
-            BACKEND_BUCKETS = 137626846
+            BACKEND_BUCKETS = 137_626_846
 
-            BACKEND_SERVICES = 269623753
+            BACKEND_SERVICES = 269_623_753
 
-            C2D_CPUS = 508182517
+            C2D_CPUS = 508_182_517
 
-            C2_CPUS = 317601211
+            C2_CPUS = 317_601_211
 
-            C3_CPUS = 346230362
+            C3_CPUS = 346_230_362
 
-            COMMITMENTS = 456141790
+            COMMITMENTS = 456_141_790
 
-            COMMITTED_A2_CPUS = 59330902
+            COMMITTED_A2_CPUS = 59_330_902
 
-            COMMITTED_C2D_CPUS = 282390904
+            COMMITTED_C2D_CPUS = 282_390_904
 
-            COMMITTED_C2_CPUS = 223725528
+            COMMITTED_C2_CPUS = 223_725_528
 
-            COMMITTED_C3_CPUS = 252354679
+            COMMITTED_C3_CPUS = 252_354_679
 
-            COMMITTED_CPUS = 292394702
+            COMMITTED_CPUS = 292_394_702
 
-            COMMITTED_E2_CPUS = 388120154
+            COMMITTED_E2_CPUS = 388_120_154
 
-            COMMITTED_LICENSES = 357606869
+            COMMITTED_LICENSES = 357_606_869
 
-            COMMITTED_LOCAL_SSD_TOTAL_GB = 308393480
+            COMMITTED_LOCAL_SSD_TOTAL_GB = 308_393_480
 
-            COMMITTED_M3_CPUS = 585985
+            COMMITTED_M3_CPUS = 585_985
 
-            COMMITTED_MEMORY_OPTIMIZED_CPUS = 489057886
+            COMMITTED_MEMORY_OPTIMIZED_CPUS = 489_057_886
 
-            COMMITTED_N2A_CPUS = 40064304
+            COMMITTED_N2A_CPUS = 40_064_304
 
-            COMMITTED_N2D_CPUS = 125951757
+            COMMITTED_N2D_CPUS = 125_951_757
 
-            COMMITTED_N2_CPUS = 322589603
+            COMMITTED_N2_CPUS = 322_589_603
 
-            COMMITTED_NVIDIA_A100_80GB_GPUS = 464326565
+            COMMITTED_NVIDIA_A100_80GB_GPUS = 464_326_565
 
-            COMMITTED_NVIDIA_A100_GPUS = 375799445
+            COMMITTED_NVIDIA_A100_GPUS = 375_799_445
 
-            COMMITTED_NVIDIA_K80_GPUS = 3857188
+            COMMITTED_NVIDIA_K80_GPUS = 3_857_188
 
-            COMMITTED_NVIDIA_P100_GPUS = 107528100
+            COMMITTED_NVIDIA_P100_GPUS = 107_528_100
 
-            COMMITTED_NVIDIA_P4_GPUS = 347952897
+            COMMITTED_NVIDIA_P4_GPUS = 347_952_897
 
-            COMMITTED_NVIDIA_T4_GPUS = 139871237
+            COMMITTED_NVIDIA_T4_GPUS = 139_871_237
 
-            COMMITTED_NVIDIA_V100_GPUS = 219562
+            COMMITTED_NVIDIA_V100_GPUS = 219_562
 
-            COMMITTED_T2A_CPUS = 296378986
+            COMMITTED_T2A_CPUS = 296_378_986
 
-            COMMITTED_T2D_CPUS = 382266439
+            COMMITTED_T2D_CPUS = 382_266_439
 
             # Guest CPUs
-            CPUS = 2075595
+            CPUS = 2_075_595
 
-            CPUS_ALL_REGIONS = 470911149
+            CPUS_ALL_REGIONS = 470_911_149
 
-            DISKS_TOTAL_GB = 353520543
+            DISKS_TOTAL_GB = 353_520_543
 
-            E2_CPUS = 481995837
+            E2_CPUS = 481_995_837
 
-            EXTERNAL_MANAGED_FORWARDING_RULES = 150790089
+            EXTERNAL_MANAGED_FORWARDING_RULES = 150_790_089
 
-            EXTERNAL_NETWORK_LB_FORWARDING_RULES = 374298265
+            EXTERNAL_NETWORK_LB_FORWARDING_RULES = 374_298_265
 
-            EXTERNAL_PROTOCOL_FORWARDING_RULES = 63478888
+            EXTERNAL_PROTOCOL_FORWARDING_RULES = 63_478_888
 
-            EXTERNAL_VPN_GATEWAYS = 272457134
+            EXTERNAL_VPN_GATEWAYS = 272_457_134
 
-            FIREWALLS = 374485843
+            FIREWALLS = 374_485_843
 
-            FORWARDING_RULES = 432668949
+            FORWARDING_RULES = 432_668_949
 
-            GLOBAL_EXTERNAL_MANAGED_BACKEND_SERVICES = 164566753
+            GLOBAL_EXTERNAL_MANAGED_BACKEND_SERVICES = 164_566_753
 
-            GLOBAL_EXTERNAL_MANAGED_FORWARDING_RULES = 327611949
+            GLOBAL_EXTERNAL_MANAGED_FORWARDING_RULES = 327_611_949
 
-            GLOBAL_EXTERNAL_PROXY_LB_BACKEND_SERVICES = 400256169
+            GLOBAL_EXTERNAL_PROXY_LB_BACKEND_SERVICES = 400_256_169
 
-            GLOBAL_INTERNAL_ADDRESSES = 42738332
+            GLOBAL_INTERNAL_ADDRESSES = 42_738_332
 
-            GLOBAL_INTERNAL_MANAGED_BACKEND_SERVICES = 256608303
+            GLOBAL_INTERNAL_MANAGED_BACKEND_SERVICES = 256_608_303
 
-            GLOBAL_INTERNAL_TRAFFIC_DIRECTOR_BACKEND_SERVICES = 323514196
+            GLOBAL_INTERNAL_TRAFFIC_DIRECTOR_BACKEND_SERVICES = 323_514_196
 
-            GPUS_ALL_REGIONS = 39387177
+            GPUS_ALL_REGIONS = 39_387_177
 
-            HEALTH_CHECKS = 289347502
+            HEALTH_CHECKS = 289_347_502
 
-            IMAGES = 15562360
+            IMAGES = 15_562_360
 
-            INSTANCES = 131337822
+            INSTANCES = 131_337_822
 
-            INSTANCE_GROUPS = 355919038
+            INSTANCE_GROUPS = 355_919_038
 
-            INSTANCE_GROUP_MANAGERS = 101798192
+            INSTANCE_GROUP_MANAGERS = 101_798_192
 
-            INSTANCE_TEMPLATES = 226188271
+            INSTANCE_TEMPLATES = 226_188_271
 
-            INTERCONNECTS = 415204741
+            INTERCONNECTS = 415_204_741
 
-            INTERCONNECT_ATTACHMENTS_PER_REGION = 159968086
+            INTERCONNECT_ATTACHMENTS_PER_REGION = 159_968_086
 
-            INTERCONNECT_ATTACHMENTS_TOTAL_MBPS = 425090419
+            INTERCONNECT_ATTACHMENTS_TOTAL_MBPS = 425_090_419
 
-            INTERCONNECT_TOTAL_GBPS = 285341866
+            INTERCONNECT_TOTAL_GBPS = 285_341_866
 
-            INTERNAL_ADDRESSES = 197899392
+            INTERNAL_ADDRESSES = 197_899_392
 
-            INTERNAL_TRAFFIC_DIRECTOR_FORWARDING_RULES = 266433668
+            INTERNAL_TRAFFIC_DIRECTOR_FORWARDING_RULES = 266_433_668
 
-            IN_PLACE_SNAPSHOTS = 151359133
+            IN_PLACE_SNAPSHOTS = 151_359_133
 
-            IN_USE_ADDRESSES = 402125072
+            IN_USE_ADDRESSES = 402_125_072
 
-            IN_USE_BACKUP_SCHEDULES = 32786705
+            IN_USE_BACKUP_SCHEDULES = 32_786_705
 
-            IN_USE_SNAPSHOT_SCHEDULES = 462104083
+            IN_USE_SNAPSHOT_SCHEDULES = 462_104_083
 
-            LOCAL_SSD_TOTAL_GB = 330878021
+            LOCAL_SSD_TOTAL_GB = 330_878_021
 
-            M1_CPUS = 37203366
+            M1_CPUS = 37_203_366
 
-            M2_CPUS = 65832517
+            M2_CPUS = 65_832_517
 
-            M3_CPUS = 94461668
+            M3_CPUS = 94_461_668
 
-            MACHINE_IMAGES = 446986640
+            MACHINE_IMAGES = 446_986_640
 
-            N2A_CPUS = 265855917
+            N2A_CPUS = 265_855_917
 
-            N2D_CPUS = 351743370
+            N2D_CPUS = 351_743_370
 
-            N2_CPUS = 416465286
+            N2_CPUS = 416_465_286
 
-            NETWORKS = 485481477
+            NETWORKS = 485_481_477
 
-            NETWORK_ENDPOINT_GROUPS = 102144909
+            NETWORK_ATTACHMENTS = 149_028_575
 
-            NETWORK_FIREWALL_POLICIES = 101117374
+            NETWORK_ENDPOINT_GROUPS = 102_144_909
 
-            NODE_GROUPS = 24624817
+            NETWORK_FIREWALL_POLICIES = 101_117_374
 
-            NODE_TEMPLATES = 474896668
+            NODE_GROUPS = 24_624_817
 
-            NVIDIA_A100_80GB_GPUS = 286389320
+            NODE_TEMPLATES = 474_896_668
 
-            NVIDIA_A100_GPUS = 504872978
+            NVIDIA_A100_80GB_GPUS = 286_389_320
 
-            NVIDIA_K80_GPUS = 163886599
+            NVIDIA_A100_GPUS = 504_872_978
 
-            NVIDIA_P100_GPUS = 236601633
+            NVIDIA_K80_GPUS = 163_886_599
 
-            NVIDIA_P100_VWS_GPUS = 213970574
+            NVIDIA_P100_GPUS = 236_601_633
 
-            NVIDIA_P4_GPUS = 283841470
+            NVIDIA_P100_VWS_GPUS = 213_970_574
 
-            NVIDIA_P4_VWS_GPUS = 528296619
+            NVIDIA_P4_GPUS = 283_841_470
 
-            NVIDIA_T4_GPUS = 75759810
+            NVIDIA_P4_VWS_GPUS = 528_296_619
 
-            NVIDIA_T4_VWS_GPUS = 319813039
+            NVIDIA_T4_GPUS = 75_759_810
 
-            NVIDIA_V100_GPUS = 129293095
+            NVIDIA_T4_VWS_GPUS = 319_813_039
 
-            PACKET_MIRRORINGS = 15578407
+            NVIDIA_V100_GPUS = 129_293_095
 
-            PD_EXTREME_TOTAL_PROVISIONED_IOPS = 69593965
+            PACKET_MIRRORINGS = 15_578_407
 
-            PREEMPTIBLE_CPUS = 251184841
+            PD_EXTREME_TOTAL_PROVISIONED_IOPS = 69_593_965
 
-            PREEMPTIBLE_LOCAL_SSD_GB = 260819336
+            PREEMPTIBLE_CPUS = 251_184_841
 
-            PREEMPTIBLE_NVIDIA_A100_80GB_GPUS = 151942410
+            PREEMPTIBLE_LOCAL_SSD_GB = 260_819_336
 
-            PREEMPTIBLE_NVIDIA_A100_GPUS = 68832784
+            PREEMPTIBLE_NVIDIA_A100_80GB_GPUS = 151_942_410
 
-            PREEMPTIBLE_NVIDIA_K80_GPUS = 374960201
+            PREEMPTIBLE_NVIDIA_A100_GPUS = 68_832_784
 
-            PREEMPTIBLE_NVIDIA_P100_GPUS = 337432351
+            PREEMPTIBLE_NVIDIA_K80_GPUS = 374_960_201
 
-            PREEMPTIBLE_NVIDIA_P100_VWS_GPUS = 313544076
+            PREEMPTIBLE_NVIDIA_P100_GPUS = 337_432_351
 
-            PREEMPTIBLE_NVIDIA_P4_GPUS = 429197628
+            PREEMPTIBLE_NVIDIA_P100_VWS_GPUS = 313_544_076
 
-            PREEMPTIBLE_NVIDIA_P4_VWS_GPUS = 252981545
+            PREEMPTIBLE_NVIDIA_P4_GPUS = 429_197_628
 
-            PREEMPTIBLE_NVIDIA_T4_GPUS = 221115968
+            PREEMPTIBLE_NVIDIA_P4_VWS_GPUS = 252_981_545
 
-            PREEMPTIBLE_NVIDIA_T4_VWS_GPUS = 44497965
+            PREEMPTIBLE_NVIDIA_T4_GPUS = 221_115_968
 
-            PREEMPTIBLE_NVIDIA_V100_GPUS = 230123813
+            PREEMPTIBLE_NVIDIA_T4_VWS_GPUS = 44_497_965
 
-            PSC_ILB_CONSUMER_FORWARDING_RULES_PER_PRODUCER_NETWORK = 231164291
+            PREEMPTIBLE_NVIDIA_V100_GPUS = 230_123_813
 
-            PSC_INTERNAL_LB_FORWARDING_RULES = 169005435
+            PSC_ILB_CONSUMER_FORWARDING_RULES_PER_PRODUCER_NETWORK = 231_164_291
 
-            PUBLIC_ADVERTISED_PREFIXES = 471371980
+            PSC_INTERNAL_LB_FORWARDING_RULES = 169_005_435
 
-            PUBLIC_DELEGATED_PREFIXES = 532465974
+            PUBLIC_ADVERTISED_PREFIXES = 471_371_980
 
-            REGIONAL_AUTOSCALERS = 29363772
+            PUBLIC_DELEGATED_PREFIXES = 532_465_974
 
-            REGIONAL_EXTERNAL_MANAGED_BACKEND_SERVICES = 4240989
+            REGIONAL_AUTOSCALERS = 29_363_772
 
-            REGIONAL_EXTERNAL_NETWORK_LB_BACKEND_SERVICES = 409564525
+            REGIONAL_EXTERNAL_MANAGED_BACKEND_SERVICES = 4_240_989
 
-            REGIONAL_INSTANCE_GROUP_MANAGERS = 37543696
+            REGIONAL_EXTERNAL_NETWORK_LB_BACKEND_SERVICES = 409_564_525
 
-            REGIONAL_INTERNAL_LB_BACKEND_SERVICES = 137983760
+            REGIONAL_INSTANCE_GROUP_MANAGERS = 37_543_696
 
-            REGIONAL_INTERNAL_MANAGED_BACKEND_SERVICES = 96282539
+            REGIONAL_INTERNAL_LB_BACKEND_SERVICES = 137_983_760
 
-            RESERVATIONS = 32644647
+            REGIONAL_INTERNAL_MANAGED_BACKEND_SERVICES = 96_282_539
 
-            RESOURCE_POLICIES = 83955297
+            RESERVATIONS = 32_644_647
 
-            ROUTERS = 493018666
+            RESOURCE_POLICIES = 83_955_297
 
-            ROUTES = 275680074
+            ROUTERS = 493_018_666
 
-            SECURITY_POLICIES = 189518703
+            ROUTES = 275_680_074
 
-            SECURITY_POLICIES_PER_REGION = 249041734
+            SECURITY_POLICIES = 189_518_703
 
-            SECURITY_POLICY_CEVAL_RULES = 470815689
+            SECURITY_POLICIES_PER_REGION = 249_041_734
 
-            SECURITY_POLICY_RULES = 203549225
+            SECURITY_POLICY_CEVAL_RULES = 470_815_689
 
-            SECURITY_POLICY_RULES_PER_REGION = 126510156
+            SECURITY_POLICY_RULES = 203_549_225
 
-            SERVICE_ATTACHMENTS = 471521510
+            SECURITY_POLICY_RULES_PER_REGION = 126_510_156
+
+            SERVICE_ATTACHMENTS = 471_521_510
 
             # The total number of snapshots allowed for a single project.
-            SNAPSHOTS = 343405327
+            SNAPSHOTS = 343_405_327
 
-            SSD_TOTAL_GB = 161732561
+            SSD_TOTAL_GB = 161_732_561
 
-            SSL_CERTIFICATES = 378372399
+            SSL_CERTIFICATES = 378_372_399
 
-            STATIC_ADDRESSES = 93624049
+            STATIC_ADDRESSES = 93_624_049
 
-            STATIC_BYOIP_ADDRESSES = 275809649
+            STATIC_BYOIP_ADDRESSES = 275_809_649
 
-            STATIC_EXTERNAL_IPV6_ADDRESS_RANGES = 472346774
+            STATIC_EXTERNAL_IPV6_ADDRESS_RANGES = 472_346_774
 
-            SUBNETWORKS = 421330469
+            SUBNETWORKS = 421_330_469
 
-            T2A_CPUS = 522170599
+            T2A_CPUS = 522_170_599
 
-            T2D_CPUS = 71187140
+            T2D_CPUS = 71_187_140
 
-            TARGET_HTTPS_PROXIES = 219522506
+            TARGET_HTTPS_PROXIES = 219_522_506
 
-            TARGET_HTTP_PROXIES = 164117155
+            TARGET_HTTP_PROXIES = 164_117_155
 
-            TARGET_INSTANCES = 284519728
+            TARGET_INSTANCES = 284_519_728
 
-            TARGET_POOLS = 348261257
+            TARGET_POOLS = 348_261_257
 
-            TARGET_SSL_PROXIES = 159216235
+            TARGET_SSL_PROXIES = 159_216_235
 
-            TARGET_TCP_PROXIES = 182243136
+            TARGET_TCP_PROXIES = 182_243_136
 
-            TARGET_VPN_GATEWAYS = 75029928
+            TARGET_VPN_GATEWAYS = 75_029_928
 
-            URL_MAPS = 378660743
+            URL_MAPS = 378_660_743
 
-            VPN_GATEWAYS = 35620282
+            VPN_GATEWAYS = 35_620_282
 
-            VPN_TUNNELS = 104327296
+            VPN_TUNNELS = 104_327_296
 
-            XPN_SERVICE_PROJECTS = 95191981
+            XPN_SERVICE_PROJECTS = 95_191_981
           end
         end
 
@@ -21912,7 +22154,7 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_CONTAINER_TYPE = 0
 
-            TAR = 82821
+            TAR = 82_821
           end
         end
 
@@ -22020,7 +22262,7 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
-            DOWN = 2104482
+            DOWN = 2_104_482
 
             UP = 2715
           end
@@ -22183,7 +22425,7 @@ module Google
         # RegionInstanceGroupManagers.applyUpdatesToInstances
         # @!attribute [rw] all_instances
         #   @return [::Boolean]
-        #     Flag to update all instances instead of specified list of ���instances���. If the flag is set to true then the instances may not be specified in the request.
+        #     Flag to update all instances instead of specified list of “instances”. If the flag is set to true then the instances may not be specified in the request.
         # @!attribute [rw] instances
         #   @return [::Array<::String>]
         #     The list of URLs of one or more instances for which you want to apply updates. Each URL can be a full URL or a partial URL, such as zones/[ZONE]/instances/[INSTANCE_NAME].
@@ -22345,10 +22587,10 @@ module Google
             UNDEFINED_INSTANCE_STATE = 0
 
             # Matches any status of the instances, running, non-running and others.
-            ALL = 64897
+            ALL = 64_897
 
             # Instance is in RUNNING state if it is running.
-            RUNNING = 121282975
+            RUNNING = 121_282_975
           end
         end
 
@@ -22420,13 +22662,13 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
 
-            HIERARCHY = 69902869
+            HIERARCHY = 69_902_869
 
-            NETWORK = 413984270
+            NETWORK = 413_984_270
 
-            NETWORK_REGIONAL = 190804272
+            NETWORK_REGIONAL = 190_804_272
 
-            UNSPECIFIED = 526786327
+            UNSPECIFIED = 526_786_327
           end
         end
 
@@ -22778,6 +23020,9 @@ module Google
         # @!attribute [rw] resource_policies
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Resource policies to be added to this reservation. The key is defined by user, and the value is resource policy url. This is to define placement policy with reservation.
+        # @!attribute [rw] resource_status
+        #   @return [::Google::Cloud::Compute::V1::AllocationResourceStatus]
+        #     [Output Only] Status information for Reservation resource.
         # @!attribute [rw] satisfies_pzs
         #   @return [::Boolean]
         #     [Output Only] Reserved for future use.
@@ -22819,18 +23064,18 @@ module Google
             UNDEFINED_STATUS = 0
 
             # Resources are being allocated for the reservation.
-            CREATING = 455564985
+            CREATING = 455_564_985
 
             # Reservation is currently being deleted.
-            DELETING = 528602024
+            DELETING = 528_602_024
 
-            INVALID = 530283991
+            INVALID = 530_283_991
 
             # Reservation has allocated all its resources.
-            READY = 77848963
+            READY = 77_848_963
 
             # Reservation is currently being resized.
-            UPDATING = 494614342
+            UPDATING = 494_614_342
           end
         end
 
@@ -22855,15 +23100,15 @@ module Google
             UNDEFINED_CONSUME_RESERVATION_TYPE = 0
 
             # Consume any allocation available.
-            ANY_RESERVATION = 200008121
+            ANY_RESERVATION = 200_008_121
 
             # Do not consume from any allocated capacity.
-            NO_RESERVATION = 169322030
+            NO_RESERVATION = 169_322_030
 
             # Must consume from a specific reservation. Must specify key value fields for specifying the reservations.
-            SPECIFIC_RESERVATION = 229889055
+            SPECIFIC_RESERVATION = 229_889_055
 
-            UNSPECIFIED = 526786327
+            UNSPECIFIED = 526_786_327
           end
         end
 
@@ -23088,15 +23333,15 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
 
-            ACCELERATOR = 429815371
+            ACCELERATOR = 429_815_371
 
-            LOCAL_SSD = 508934896
+            LOCAL_SSD = 508_934_896
 
-            MEMORY = 123056385
+            MEMORY = 123_056_385
 
-            UNSPECIFIED = 526786327
+            UNSPECIFIED = 526_786_327
 
-            VCPU = 2628978
+            VCPU = 2_628_978
           end
         end
 
@@ -23165,18 +23410,18 @@ module Google
             UNDEFINED_STATUS = 0
 
             # Resource policy is being created.
-            CREATING = 455564985
+            CREATING = 455_564_985
 
             # Resource policy is being deleted.
-            DELETING = 528602024
+            DELETING = 528_602_024
 
             # Resource policy is expired and will not run again.
-            EXPIRED = 482489093
+            EXPIRED = 482_489_093
 
-            INVALID = 530283991
+            INVALID = 530_283_991
 
             # Resource policy is ready to be used.
-            READY = 77848963
+            READY = 77_848_963
           end
         end
 
@@ -23253,9 +23498,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_COLLOCATION = 0
 
-            COLLOCATED = 103257554
+            COLLOCATED = 103_257_554
 
-            UNSPECIFIED_COLLOCATION = 464308205
+            UNSPECIFIED_COLLOCATION = 464_308_205
           end
         end
 
@@ -23283,7 +23528,7 @@ module Google
         #     The start time of the schedule. The timestamp is an RFC3339 string.
         # @!attribute [rw] time_zone
         #   @return [::String]
-        #     Specifies the time zone to be used in interpreting Schedule.schedule. The value of this field must be a time zone name from the tz database: http://en.wikipedia.org/wiki/Tz_database.
+        #     Specifies the time zone to be used in interpreting Schedule.schedule. The value of this field must be a time zone name from the tz database: https://wikipedia.org/wiki/Tz_database.
         # @!attribute [rw] vm_start_schedule
         #   @return [::Google::Cloud::Compute::V1::ResourcePolicyInstanceSchedulePolicySchedule]
         #     Specifies the schedule for starting instances.
@@ -23381,11 +23626,11 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_ON_SOURCE_DISK_DELETE = 0
 
-            APPLY_RETENTION_POLICY = 535071332
+            APPLY_RETENTION_POLICY = 535_071_332
 
-            KEEP_AUTO_SNAPSHOTS = 258925689
+            KEEP_AUTO_SNAPSHOTS = 258_925_689
 
-            UNSPECIFIED_ON_SOURCE_DISK_DELETE = 239140769
+            UNSPECIFIED_ON_SOURCE_DISK_DELETE = 239_140_769
           end
         end
 
@@ -23456,21 +23701,21 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_DAY = 0
 
-            FRIDAY = 471398751
+            FRIDAY = 471_398_751
 
-            INVALID = 530283991
+            INVALID = 530_283_991
 
-            MONDAY = 132310288
+            MONDAY = 132_310_288
 
-            SATURDAY = 279037881
+            SATURDAY = 279_037_881
 
-            SUNDAY = 309626320
+            SUNDAY = 309_626_320
 
-            THURSDAY = 207198682
+            THURSDAY = 207_198_682
 
-            TUESDAY = 277509677
+            TUESDAY = 277_509_677
 
-            WEDNESDAY = 422029110
+            WEDNESDAY = 422_029_110
           end
         end
 
@@ -23577,16 +23822,16 @@ module Google
             UNDEFINED_ROUTE_STATUS = 0
 
             # This route is processed and active.
-            ACTIVE = 314733318
+            ACTIVE = 314_733_318
 
             # The route is dropped due to the VPC exceeding the dynamic route limit. For dynamic route limit, please refer to the Learned route example
-            DROPPED = 496235424
+            DROPPED = 496_235_424
 
             # This route is processed but inactive due to failure from the backend. The backend may have rejected the route
-            INACTIVE = 270421099
+            INACTIVE = 270_421_099
 
             # This route is being processed internally. The status will change once processed.
-            PENDING = 35394935
+            PENDING = 35_394_935
           end
 
           # [Output Only] The type of this route, which can be one of the following values: - 'TRANSIT' for a transit route that this router learned from another Cloud Router and will readvertise to one of its BGP peers - 'SUBNET' for a route from a subnet of the VPC - 'BGP' for a route learned from a BGP peer of this router - 'STATIC' for a static route
@@ -23594,13 +23839,13 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_ROUTE_TYPE = 0
 
-            BGP = 65707
+            BGP = 65_707
 
-            STATIC = 308331118
+            STATIC = 308_331_118
 
-            SUBNET = 309278557
+            SUBNET = 309_278_557
 
-            TRANSIT = 187793843
+            TRANSIT = 187_793_843
           end
         end
 
@@ -23620,13 +23865,13 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_PATH_SEGMENT_TYPE = 0
 
-            AS_CONFED_SEQUENCE = 222152624
+            AS_CONFED_SEQUENCE = 222_152_624
 
-            AS_CONFED_SET = 374040307
+            AS_CONFED_SET = 374_040_307
 
-            AS_SEQUENCE = 106735918
+            AS_SEQUENCE = 106_735_918
 
-            AS_SET = 329846453
+            AS_SET = 329_846_453
           end
         end
 
@@ -23776,9 +24021,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_ADVERTISE_MODE = 0
 
-            CUSTOM = 388595569
+            CUSTOM = 388_595_569
 
-            DEFAULT = 115302945
+            DEFAULT = 115_302_945
           end
 
           module AdvertisedGroups
@@ -23786,7 +24031,7 @@ module Google
             UNDEFINED_ADVERTISED_GROUPS = 0
 
             # Advertise all available subnets (including peer VPC subnets).
-            ALL_SUBNETS = 3622872
+            ALL_SUBNETS = 3_622_872
           end
         end
 
@@ -23796,7 +24041,7 @@ module Google
         #     Check the AdvertiseMode enum for the list of possible values.
         # @!attribute [rw] advertised_groups
         #   @return [::Array<::String>]
-        #     User-specified list of prefix groups to advertise in custom mode, which can take one of the following options: - ALL_SUBNETS: Advertises all available subnets, including peer VPC subnets. - ALL_VPC_SUBNETS: Advertises the router's own VPC subnets. Note that this field can only be populated if advertise_mode is CUSTOM and overrides the list defined for the router (in the "bgp" message). These groups are advertised in addition to any specified prefixes. Leave this field blank to advertise no custom groups.
+        #     User-specified list of prefix groups to advertise in custom mode, which currently supports the following option: - ALL_SUBNETS: Advertises all of the router's own VPC subnets. This excludes any routes learned for subnets that use VPC Network Peering. Note that this field can only be populated if advertise_mode is CUSTOM and overrides the list defined for the router (in the "bgp" message). These groups are advertised in addition to any specified prefixes. Leave this field blank to advertise no custom groups.
         #     Check the AdvertisedGroups enum for the list of possible values.
         # @!attribute [rw] advertised_ip_ranges
         #   @return [::Array<::Google::Cloud::Compute::V1::RouterAdvertisedIpRange>]
@@ -23854,9 +24099,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_ADVERTISE_MODE = 0
 
-            CUSTOM = 388595569
+            CUSTOM = 388_595_569
 
-            DEFAULT = 115302945
+            DEFAULT = 115_302_945
           end
 
           module AdvertisedGroups
@@ -23864,7 +24109,7 @@ module Google
             UNDEFINED_ADVERTISED_GROUPS = 0
 
             # Advertise all available subnets (including peer VPC subnets).
-            ALL_SUBNETS = 3622872
+            ALL_SUBNETS = 3_622_872
           end
 
           # The status of the BGP peer connection. If set to FALSE, any active session with the peer is terminated and all associated routing information is removed. If set to TRUE, the peer connection can be established with routing information. The default is TRUE.
@@ -23872,9 +24117,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_ENABLE = 0
 
-            FALSE = 66658563
+            FALSE = 66_658_563
 
-            TRUE = 2583950
+            TRUE = 2_583_950
           end
 
           # [Output Only] The resource that configures and manages this BGP peer. - MANAGED_BY_USER is the default value and can be managed by you or other users - MANAGED_BY_ATTACHMENT is a BGP peer that is configured and managed by Cloud Interconnect, specifically by an InterconnectAttachment of type PARTNER. Google automatically creates, updates, and deletes this type of BGP peer when the PARTNER InterconnectAttachment is created, updated, or deleted.
@@ -23883,10 +24128,10 @@ module Google
             UNDEFINED_MANAGEMENT_TYPE = 0
 
             # The BGP peer is automatically created for PARTNER type InterconnectAttachment; Google will automatically create/delete this BGP peer when the PARTNER InterconnectAttachment is created/deleted, and Google will update the ipAddress and peerIpAddress when the PARTNER InterconnectAttachment is provisioned. This type of BGP peer cannot be created or deleted, but can be modified for all fields except for name, ipAddress and peerIpAddress.
-            MANAGED_BY_ATTACHMENT = 458926411
+            MANAGED_BY_ATTACHMENT = 458_926_411
 
             # Default value, the BGP peer is manually created and managed by user.
-            MANAGED_BY_USER = 317294067
+            MANAGED_BY_USER = 317_294_067
           end
         end
 
@@ -23912,11 +24157,11 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_SESSION_INITIALIZATION_MODE = 0
 
-            ACTIVE = 314733318
+            ACTIVE = 314_733_318
 
-            DISABLED = 516696700
+            DISABLED = 516_696_700
 
-            PASSIVE = 462813959
+            PASSIVE = 462_813_959
           end
         end
 
@@ -23955,10 +24200,10 @@ module Google
             UNDEFINED_MANAGEMENT_TYPE = 0
 
             # The interface is automatically created for PARTNER type InterconnectAttachment, Google will automatically create/update/delete this interface when the PARTNER InterconnectAttachment is created/provisioned/deleted. This type of interface cannot be manually managed by user.
-            MANAGED_BY_ATTACHMENT = 458926411
+            MANAGED_BY_ATTACHMENT = 458_926_411
 
             # Default value, the interface is manually created and managed by user.
-            MANAGED_BY_USER = 317294067
+            MANAGED_BY_USER = 317_294_067
           end
         end
 
@@ -24064,10 +24309,10 @@ module Google
             UNDEFINED_ENDPOINT_TYPES = 0
 
             # This is used for Secure Web Gateway endpoints.
-            ENDPOINT_TYPE_SWG = 159344456
+            ENDPOINT_TYPE_SWG = 159_344_456
 
             # This is the default.
-            ENDPOINT_TYPE_VM = 57095474
+            ENDPOINT_TYPE_VM = 57_095_474
           end
 
           # Specify the NatIpAllocateOption, which can take one of the following values: - MANUAL_ONLY: Uses only Nat IP addresses provided by customers. When there are not enough specified Nat IPs, the Nat service fails for new VMs. - AUTO_ONLY: Nat IPs are allocated by Google Cloud Platform; customers can't specify any Nat IPs. When choosing AUTO_ONLY, then nat_ip should be empty.
@@ -24076,10 +24321,10 @@ module Google
             UNDEFINED_NAT_IP_ALLOCATE_OPTION = 0
 
             # Nat IPs are allocated by GCP; customers can not specify any Nat IPs.
-            AUTO_ONLY = 182333500
+            AUTO_ONLY = 182_333_500
 
             # Only use Nat IPs provided by customers. When specified Nat IPs are not enough then the Nat service fails for new VMs.
-            MANUAL_ONLY = 261251205
+            MANUAL_ONLY = 261_251_205
           end
 
           # Specify the Nat option, which can take one of the following values: - ALL_SUBNETWORKS_ALL_IP_RANGES: All of the IP ranges in every Subnetwork are allowed to Nat. - ALL_SUBNETWORKS_ALL_PRIMARY_IP_RANGES: All of the primary IP ranges in every Subnetwork are allowed to Nat. - LIST_OF_SUBNETWORKS: A list of Subnetworks are allowed to Nat (specified in the field subnetwork below) The default is SUBNETWORK_IP_RANGE_TO_NAT_OPTION_UNSPECIFIED. Note that if this field contains ALL_SUBNETWORKS_ALL_IP_RANGES or ALL_SUBNETWORKS_ALL_PRIMARY_IP_RANGES, then there should not be any other Router.Nat section in any Router for this network in this region.
@@ -24088,13 +24333,13 @@ module Google
             UNDEFINED_SOURCE_SUBNETWORK_IP_RANGES_TO_NAT = 0
 
             # All the IP ranges in every Subnetwork are allowed to Nat.
-            ALL_SUBNETWORKS_ALL_IP_RANGES = 179964376
+            ALL_SUBNETWORKS_ALL_IP_RANGES = 179_964_376
 
             # All the primary IP ranges in every Subnetwork are allowed to Nat.
-            ALL_SUBNETWORKS_ALL_PRIMARY_IP_RANGES = 185573819
+            ALL_SUBNETWORKS_ALL_PRIMARY_IP_RANGES = 185_573_819
 
             # A list of Subnetworks are allowed to Nat (specified in the field subnetwork below)
-            LIST_OF_SUBNETWORKS = 517542270
+            LIST_OF_SUBNETWORKS = 517_542_270
           end
         end
 
@@ -24116,13 +24361,13 @@ module Google
             UNDEFINED_FILTER = 0
 
             # Export logs for all (successful and unsuccessful) connections.
-            ALL = 64897
+            ALL = 64_897
 
             # Export logs for connection failures only.
-            ERRORS_ONLY = 307484672
+            ERRORS_ONLY = 307_484_672
 
             # Export logs for successful connections only.
-            TRANSLATIONS_ONLY = 357212649
+            TRANSLATIONS_ONLY = 357_212_649
           end
         end
 
@@ -24175,13 +24420,13 @@ module Google
             UNDEFINED_SOURCE_IP_RANGES_TO_NAT = 0
 
             # The primary and all the secondary ranges are allowed to Nat.
-            ALL_IP_RANGES = 35608496
+            ALL_IP_RANGES = 35_608_496
 
             # A list of secondary ranges are allowed to Nat.
-            LIST_OF_SECONDARY_IP_RANGES = 192289308
+            LIST_OF_SECONDARY_IP_RANGES = 192_289_308
 
             # The primary range is allowed to Nat.
-            PRIMARY_IP_RANGE = 297109954
+            PRIMARY_IP_RANGE = 297_109_954
           end
         end
 
@@ -24264,9 +24509,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
-            DOWN = 2104482
+            DOWN = 2_104_482
 
-            UNKNOWN = 433141802
+            UNKNOWN = 433_141_802
 
             UP = 2715
           end
@@ -24277,9 +24522,9 @@ module Google
             UNDEFINED_STATUS_REASON = 0
 
             # Indicates internal problems with configuration of MD5 authentication. This particular reason can only be returned when md5AuthEnabled is true and status is DOWN.
-            MD5_AUTH_INTERNAL_PROBLEM = 140462259
+            MD5_AUTH_INTERNAL_PROBLEM = 140_462_259
 
-            STATUS_REASON_UNSPECIFIED = 394331913
+            STATUS_REASON_UNSPECIFIED = 394_331_913
           end
         end
 
@@ -24399,22 +24644,22 @@ module Google
             UNDEFINED_ACTION = 0
 
             # This is deprecated and has no effect. Do not use.
-            ALLOW = 62368553
+            ALLOW = 62_368_553
 
             # This is deprecated and has no effect. Do not use.
-            ALLOW_WITH_LOG = 76034177
+            ALLOW_WITH_LOG = 76_034_177
 
             # This is deprecated and has no effect. Do not use.
-            DENY = 2094604
+            DENY = 2_094_604
 
             # This is deprecated and has no effect. Do not use.
-            DENY_WITH_LOG = 351433982
+            DENY_WITH_LOG = 351_433_982
 
             # This is deprecated and has no effect. Do not use.
-            LOG = 75556
+            LOG = 75_556
 
             # This is deprecated and has no effect. Do not use.
-            NO_ACTION = 260643444
+            NO_ACTION = 260_643_444
           end
         end
 
@@ -24448,13 +24693,13 @@ module Google
             UNDEFINED_PORT_SPECIFICATION = 0
 
             # The port number in the health check's port is used for health checking. Applies to network endpoint group and instance group backends.
-            USE_FIXED_PORT = 190235748
+            USE_FIXED_PORT = 190_235_748
 
             # Not supported.
-            USE_NAMED_PORT = 349300671
+            USE_NAMED_PORT = 349_300_671
 
             # For network endpoint group backends, the health check uses the port number specified on each endpoint in the network endpoint group. For instance group backends, the health check uses the port number specified for the backend service's named port defined in the instance group's named ports.
-            USE_SERVING_PORT = 362637516
+            USE_SERVING_PORT = 362_637_516
           end
 
           # Specifies the type of proxy header to append before sending data to the backend, either NONE or PROXY_V1. The default is NONE.
@@ -24462,9 +24707,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_PROXY_HEADER = 0
 
-            NONE = 2402104
+            NONE = 2_402_104
 
-            PROXY_V1 = 334352940
+            PROXY_V1 = 334_352_940
           end
         end
 
@@ -24530,9 +24775,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_INTERFACE = 0
 
-            NVME = 2408800
+            NVME = 2_408_800
 
-            SCSI = 2539686
+            SCSI = 2_539_686
           end
 
           # The mode in which this disk is attached to the source instance, either READ_WRITE or READ_ONLY.
@@ -24541,10 +24786,10 @@ module Google
             UNDEFINED_MODE = 0
 
             # Attaches this disk in read-only mode. Multiple virtual machines can use a disk in read-only mode at a time.
-            READ_ONLY = 91950261
+            READ_ONLY = 91_950_261
 
             # *[Default]* Attaches this disk in read-write mode. Only one virtual machine at a time can be attached to a disk in read-write mode.
-            READ_WRITE = 173607894
+            READ_WRITE = 173_607_894
           end
 
           # [Output Only] An indicator whether storageBytes is in a stable state or it is being adjusted as a result of shared storage reallocation. This status can either be UPDATING, meaning the size of the snapshot is being updated, or UP_TO_DATE, meaning the size of the snapshot is up-to-date.
@@ -24552,9 +24797,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_STORAGE_BYTES_STATUS = 0
 
-            UPDATING = 494614342
+            UPDATING = 494_614_342
 
-            UP_TO_DATE = 101306702
+            UP_TO_DATE = 101_306_702
           end
 
           # Specifies the type of the attached disk, either SCRATCH or PERSISTENT.
@@ -24562,9 +24807,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
 
-            PERSISTENT = 460683927
+            PERSISTENT = 460_683_927
 
-            SCRATCH = 496778970
+            SCRATCH = 496_778_970
           end
         end
 
@@ -24596,13 +24841,13 @@ module Google
             UNDEFINED_ARCHITECTURE = 0
 
             # Default value indicating Architecture is not set.
-            ARCHITECTURE_UNSPECIFIED = 394750507
+            ARCHITECTURE_UNSPECIFIED = 394_750_507
 
             # Machines with architecture ARM64
-            ARM64 = 62547450
+            ARM64 = 62_547_450
 
             # Machines with architecture X86_64
-            X86_64 = 425300551
+            X86_64 = 425_300_551
           end
 
           # [Output Only] An indicator whether storageBytes is in a stable state or it is being adjusted as a result of shared storage reallocation. This status can either be UPDATING, meaning the size of the snapshot is being updated, or UP_TO_DATE, meaning the size of the snapshot is up-to-date.
@@ -24610,9 +24855,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_STORAGE_BYTES_STATUS = 0
 
-            UPDATING = 494614342
+            UPDATING = 494_614_342
 
-            UP_TO_DATE = 101306702
+            UP_TO_DATE = 101_306_702
           end
         end
 
@@ -24636,16 +24881,16 @@ module Google
             UNDEFINED_STATE = 0
 
             # The current autoscaling recommendation is influenced by this scaling schedule.
-            ACTIVE = 314733318
+            ACTIVE = 314_733_318
 
             # This scaling schedule has been disabled by the user.
-            DISABLED = 516696700
+            DISABLED = 516_696_700
 
             # This scaling schedule will never become active again.
-            OBSOLETE = 66532761
+            OBSOLETE = 66_532_761
 
             # The current autoscaling recommendation is not influenced by this scaling schedule.
-            READY = 77848963
+            READY = 77_848_963
           end
         end
 
@@ -24687,13 +24932,13 @@ module Google
             UNDEFINED_INSTANCE_TERMINATION_ACTION = 0
 
             # Delete the VM.
-            DELETE = 402225579
+            DELETE = 402_225_579
 
             # Default value. This value is unused.
-            INSTANCE_TERMINATION_ACTION_UNSPECIFIED = 92954803
+            INSTANCE_TERMINATION_ACTION_UNSPECIFIED = 92_954_803
 
             # Stop the VM without storing in-memory content. default action.
-            STOP = 2555906
+            STOP = 2_555_906
           end
 
           # Defines the maintenance behavior for this instance. For standard instances, the default behavior is MIGRATE. For preemptible instances, the default and only possible behavior is TERMINATE. For more information, see Set VM host maintenance policy.
@@ -24702,10 +24947,10 @@ module Google
             UNDEFINED_ON_HOST_MAINTENANCE = 0
 
             # *[Default]* Allows Compute Engine to automatically migrate instances out of the way of maintenance events.
-            MIGRATE = 165699979
+            MIGRATE = 165_699_979
 
             # Tells Compute Engine to terminate and (optionally) restart the instance away from the maintenance activity. If you would like your instance to be restarted, set the automaticRestart flag to true. Your instance may be restarted more than once, and it may be restarted outside the window of maintenance events.
-            TERMINATE = 527617601
+            TERMINATE = 527_617_601
           end
 
           # Specifies the provisioning model of the instance.
@@ -24714,10 +24959,10 @@ module Google
             UNDEFINED_PROVISIONING_MODEL = 0
 
             # Heavily discounted, no guaranteed runtime.
-            SPOT = 2552066
+            SPOT = 2_552_066
 
             # Standard provisioning with user controlled runtime, no discounts.
-            STANDARD = 484642493
+            STANDARD = 484_642_493
           end
         end
 
@@ -24745,9 +24990,9 @@ module Google
             IN = 2341
 
             # Requires Compute Engine to avoid certain nodes.
-            NOT_IN = 161144369
+            NOT_IN = 161_144_369
 
-            OPERATOR_UNSPECIFIED = 128892924
+            OPERATOR_UNSPECIFIED = 128_892_924
           end
         end
 
@@ -24871,22 +25116,22 @@ module Google
         #     [Output Only] Server-defined URL for the resource.
         # @!attribute [rw] type
         #   @return [::String]
-        #     The type indicates the intended use of the security policy. - CLOUD_ARMOR: Cloud Armor backend security policies can be configured to filter incoming HTTP requests targeting backend services. They filter requests before they hit the origin servers. - CLOUD_ARMOR_EDGE: Cloud Armor edge security policies can be configured to filter incoming HTTP requests targeting backend services (including Cloud CDN-enabled) as well as backend buckets (Cloud Storage). They filter requests before the request is served from Google's cache. - CLOUD_ARMOR_INTERNAL_SERVICE: Cloud Armor internal service policies can be configured to filter HTTP requests targeting services managed by Traffic Director in a service mesh. They filter requests before the request is served from the application. This field can be set only at resource creation time.
+        #     The type indicates the intended use of the security policy. - CLOUD_ARMOR: Cloud Armor backend security policies can be configured to filter incoming HTTP requests targeting backend services. They filter requests before they hit the origin servers. - CLOUD_ARMOR_EDGE: Cloud Armor edge security policies can be configured to filter incoming HTTP requests targeting backend services (including Cloud CDN-enabled) as well as backend buckets (Cloud Storage). They filter requests before the request is served from Google's cache. - CLOUD_ARMOR_INTERNAL_SERVICE: Cloud Armor internal service policies can be configured to filter HTTP requests targeting services managed by Traffic Director in a service mesh. They filter requests before the request is served from the application. - CLOUD_ARMOR_NETWORK: Cloud Armor network policies can be configured to filter packets targeting network load balancing resources such as backend services, target pools, target instances, and instances with external IPs. They filter requests before the request is served from the application. This field can be set only at resource creation time.
         #     Check the Type enum for the list of possible values.
         class SecurityPolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # The type indicates the intended use of the security policy. - CLOUD_ARMOR: Cloud Armor backend security policies can be configured to filter incoming HTTP requests targeting backend services. They filter requests before they hit the origin servers. - CLOUD_ARMOR_EDGE: Cloud Armor edge security policies can be configured to filter incoming HTTP requests targeting backend services (including Cloud CDN-enabled) as well as backend buckets (Cloud Storage). They filter requests before the request is served from Google's cache. - CLOUD_ARMOR_INTERNAL_SERVICE: Cloud Armor internal service policies can be configured to filter HTTP requests targeting services managed by Traffic Director in a service mesh. They filter requests before the request is served from the application. This field can be set only at resource creation time.
+          # The type indicates the intended use of the security policy. - CLOUD_ARMOR: Cloud Armor backend security policies can be configured to filter incoming HTTP requests targeting backend services. They filter requests before they hit the origin servers. - CLOUD_ARMOR_EDGE: Cloud Armor edge security policies can be configured to filter incoming HTTP requests targeting backend services (including Cloud CDN-enabled) as well as backend buckets (Cloud Storage). They filter requests before the request is served from Google's cache. - CLOUD_ARMOR_INTERNAL_SERVICE: Cloud Armor internal service policies can be configured to filter HTTP requests targeting services managed by Traffic Director in a service mesh. They filter requests before the request is served from the application. - CLOUD_ARMOR_NETWORK: Cloud Armor network policies can be configured to filter packets targeting network load balancing resources such as backend services, target pools, target instances, and instances with external IPs. They filter requests before the request is served from the application. This field can be set only at resource creation time.
           module Type
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
 
-            CLOUD_ARMOR = 260640373
+            CLOUD_ARMOR = 260_640_373
 
-            CLOUD_ARMOR_EDGE = 250728775
+            CLOUD_ARMOR_EDGE = 250_728_775
 
-            CLOUD_ARMOR_NETWORK = 488527428
+            CLOUD_ARMOR_NETWORK = 488_527_428
           end
         end
 
@@ -24916,9 +25161,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_RULE_VISIBILITY = 0
 
-            PREMIUM = 399530551
+            PREMIUM = 399_530_551
 
-            STANDARD = 484642493
+            STANDARD = 484_642_493
           end
         end
 
@@ -24940,18 +25185,18 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_JSON_PARSING = 0
 
-            DISABLED = 516696700
+            DISABLED = 516_696_700
 
-            STANDARD = 484642493
+            STANDARD = 484_642_493
           end
 
           module LogLevel
             # A value indicating that the enum field is not set.
             UNDEFINED_LOG_LEVEL = 0
 
-            NORMAL = 161067239
+            NORMAL = 161_067_239
 
-            VERBOSE = 532219234
+            VERBOSE = 532_219_234
           end
         end
 
@@ -24975,9 +25220,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_DDOS_PROTECTION = 0
 
-            ADVANCED = 63789090
+            ADVANCED = 63_789_090
 
-            STANDARD = 484642493
+            STANDARD = 484_642_493
           end
         end
 
@@ -25019,7 +25264,7 @@ module Google
         # Represents a rule that describes one or more match conditions along with the action to be taken when traffic matches this condition (allow or deny).
         # @!attribute [rw] action
         #   @return [::String]
-        #     The Action to perform when the rule is matched. The following are the valid actions: - allow: allow access to target. - deny(): deny access to target, returns the HTTP response code specified (valid values are 403, 404, and 502). - rate_based_ban: limit client traffic to the configured threshold and ban the client if the traffic exceeds the threshold. Configure parameters for this action in RateLimitOptions. Requires rate_limit_options to be set. - redirect: redirect to a different target. This can either be an internal reCAPTCHA redirect, or an external URL-based redirect via a 302 response. Parameters for this action can be configured via redirectOptions. - throttle: limit client traffic to the configured threshold. Configure parameters for this action in rateLimitOptions. Requires rate_limit_options to be set for this.
+        #     The Action to perform when the rule is matched. The following are the valid actions: - allow: allow access to target. - deny(STATUS): deny access to target, returns the HTTP response code specified. Valid values for `STATUS` are 403, 404, and 502. - rate_based_ban: limit client traffic to the configured threshold and ban the client if the traffic exceeds the threshold. Configure parameters for this action in RateLimitOptions. Requires rate_limit_options to be set. - redirect: redirect to a different target. This can either be an internal reCAPTCHA redirect, or an external URL-based redirect via a 302 response. Parameters for this action can be configured via redirectOptions. - throttle: limit client traffic to the configured threshold. Configure parameters for this action in rateLimitOptions. Requires rate_limit_options to be set for this.
         # @!attribute [rw] description
         #   @return [::String]
         #     An optional description of this resource. Provide this property when you create the resource.
@@ -25032,6 +25277,9 @@ module Google
         # @!attribute [rw] match
         #   @return [::Google::Cloud::Compute::V1::SecurityPolicyRuleMatcher]
         #     A match condition that incoming traffic is evaluated against. If it evaluates to true, the corresponding 'action' is enforced.
+        # @!attribute [rw] preconfigured_waf_config
+        #   @return [::Google::Cloud::Compute::V1::SecurityPolicyRulePreconfiguredWafConfig]
+        #     Preconfigured WAF configuration to be applied for the rule. If the rule does not evaluate preconfigured WAF rules, i.e., if evaluatePreconfiguredWaf() is not used, this field will have no effect.
         # @!attribute [rw] preview
         #   @return [::Boolean]
         #     If set to true, the specified action is not enforced.
@@ -25089,7 +25337,7 @@ module Google
             UNDEFINED_VERSIONED_EXPR = 0
 
             # Matches the source IP address of a request to the IP ranges supplied in config.
-            SRC_IPS_V1 = 70925961
+            SRC_IPS_V1 = 70_925_961
           end
         end
 
@@ -25099,6 +25347,70 @@ module Google
         class SecurityPolicyRuleMatcherConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] exclusions
+        #   @return [::Array<::Google::Cloud::Compute::V1::SecurityPolicyRulePreconfiguredWafConfigExclusion>]
+        #     A list of exclusions to apply during preconfigured WAF evaluation.
+        class SecurityPolicyRulePreconfiguredWafConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] request_cookies_to_exclude
+        #   @return [::Array<::Google::Cloud::Compute::V1::SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams>]
+        #     A list of request cookie names whose value will be excluded from inspection during preconfigured WAF evaluation.
+        # @!attribute [rw] request_headers_to_exclude
+        #   @return [::Array<::Google::Cloud::Compute::V1::SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams>]
+        #     A list of request header names whose value will be excluded from inspection during preconfigured WAF evaluation.
+        # @!attribute [rw] request_query_params_to_exclude
+        #   @return [::Array<::Google::Cloud::Compute::V1::SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams>]
+        #     A list of request query parameter names whose value will be excluded from inspection during preconfigured WAF evaluation. Note that the parameter can be in the query string or in the POST body.
+        # @!attribute [rw] request_uris_to_exclude
+        #   @return [::Array<::Google::Cloud::Compute::V1::SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams>]
+        #     A list of request URIs from the request line to be excluded from inspection during preconfigured WAF evaluation. When specifying this field, the query or fragment part should be excluded.
+        # @!attribute [rw] target_rule_ids
+        #   @return [::Array<::String>]
+        #     A list of target rule IDs under the WAF rule set to apply the preconfigured WAF exclusion. If omitted, it refers to all the rule IDs under the WAF rule set.
+        # @!attribute [rw] target_rule_set
+        #   @return [::String]
+        #     Target WAF rule set to apply the preconfigured WAF exclusion.
+        class SecurityPolicyRulePreconfiguredWafConfigExclusion
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] op
+        #   @return [::String]
+        #     The match operator for the field.
+        #     Check the Op enum for the list of possible values.
+        # @!attribute [rw] val
+        #   @return [::String]
+        #     The value of the field.
+        class SecurityPolicyRulePreconfiguredWafConfigExclusionFieldParams
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The match operator for the field.
+          module Op
+            # A value indicating that the enum field is not set.
+            UNDEFINED_OP = 0
+
+            # The operator matches if the field value contains the specified value.
+            CONTAINS = 215_180_831
+
+            # The operator matches if the field value ends with the specified value.
+            ENDS_WITH = 490_402_221
+
+            # The operator matches if the field value equals the specified value.
+            EQUALS = 442_201_023
+
+            # The operator matches if the field value is any value.
+            EQUALS_ANY = 337_226_060
+
+            # The operator matches if the field value starts with the specified value.
+            STARTS_WITH = 139_505_652
+          end
         end
 
         # @!attribute [rw] ban_duration_sec
@@ -25119,7 +25431,7 @@ module Google
         #     Rate limit key name applicable only for the following key types: HTTP_HEADER -- Name of the HTTP header whose value is taken as the key value. HTTP_COOKIE -- Name of the HTTP cookie whose value is taken as the key value.
         # @!attribute [rw] exceed_action
         #   @return [::String]
-        #     Action to take for requests that are above the configured rate limit threshold, to either deny with a specified HTTP response code, or redirect to a different endpoint. Valid options are "deny(status)", where valid values for status are 403, 404, 429, and 502, and "redirect" where the redirect parameters come from exceedRedirectOptions below.
+        #     Action to take for requests that are above the configured rate limit threshold, to either deny with a specified HTTP response code, or redirect to a different endpoint. Valid options are `deny(STATUS)`, where valid values for `STATUS` are 403, 404, 429, and 502, and `redirect`, where the redirect parameters come from `exceedRedirectOptions` below.
         # @!attribute [rw] exceed_redirect_options
         #   @return [::Google::Cloud::Compute::V1::SecurityPolicyRuleRedirectOptions]
         #     Parameters defining the redirect action that is used as the exceed action. Cannot be specified if the exceed action is not redirect.
@@ -25135,21 +25447,21 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_ENFORCE_ON_KEY = 0
 
-            ALL = 64897
+            ALL = 64_897
 
-            HTTP_COOKIE = 494981627
+            HTTP_COOKIE = 494_981_627
 
-            HTTP_HEADER = 91597348
+            HTTP_HEADER = 91_597_348
 
-            HTTP_PATH = 311503228
+            HTTP_PATH = 311_503_228
 
             IP = 2343
 
-            REGION_CODE = 79559768
+            REGION_CODE = 79_559_768
 
-            SNI = 82254
+            SNI = 82_254
 
-            XFF_IP = 438707118
+            XFF_IP = 438_707_118
           end
         end
 
@@ -25180,9 +25492,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
 
-            EXTERNAL_302 = 395733761
+            EXTERNAL_302 = 395_733_761
 
-            GOOGLE_RECAPTCHA = 518803009
+            GOOGLE_RECAPTCHA = 518_803_009
           end
         end
 
@@ -25253,12 +25565,12 @@ module Google
             UNDEFINED_TYPE = 0
 
             # Node may associate with any physical server over its lifetime.
-            RESTART_NODE_ON_ANY_SERVER = 502950985
+            RESTART_NODE_ON_ANY_SERVER = 502_950_985
 
             # Node may associate with minimal physical servers over its lifetime.
-            RESTART_NODE_ON_MINIMAL_SERVERS = 204166495
+            RESTART_NODE_ON_MINIMAL_SERVERS = 204_166_495
 
-            SERVER_BINDING_TYPE_UNSPECIFIED = 180825512
+            SERVER_BINDING_TYPE_UNSPECIFIED = 180_825_512
           end
         end
 
@@ -25339,11 +25651,11 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_CONNECTION_PREFERENCE = 0
 
-            ACCEPT_AUTOMATIC = 75250580
+            ACCEPT_AUTOMATIC = 75_250_580
 
-            ACCEPT_MANUAL = 373061341
+            ACCEPT_MANUAL = 373_061_341
 
-            CONNECTION_PREFERENCE_UNSPECIFIED = 34590772
+            CONNECTION_PREFERENCE_UNSPECIFIED = 34_590_772
           end
         end
 
@@ -25404,21 +25716,21 @@ module Google
             UNDEFINED_STATUS = 0
 
             # The connection has been accepted by the producer.
-            ACCEPTED = 246714279
+            ACCEPTED = 246_714_279
 
             # The connection has been closed by the producer.
-            CLOSED = 380163436
+            CLOSED = 380_163_436
 
             # The connection has been accepted by the producer, but the producer needs to take further action before the forwarding rule can serve traffic.
-            NEEDS_ATTENTION = 344491452
+            NEEDS_ATTENTION = 344_491_452
 
             # The connection is pending acceptance by the producer.
-            PENDING = 35394935
+            PENDING = 35_394_935
 
             # The consumer is still connected but not using the connection.
-            REJECTED = 174130302
+            REJECTED = 174_130_302
 
-            STATUS_UNSPECIFIED = 42133066
+            STATUS_UNSPECIFIED = 42_133_066
           end
         end
 
@@ -26430,6 +26742,27 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for Instances.SetName. See the method description for details.
+        # @!attribute [rw] instance
+        #   @return [::String]
+        #     The instance name for this request.
+        # @!attribute [rw] instances_set_name_request_resource
+        #   @return [::Google::Cloud::Compute::V1::InstancesSetNameRequest]
+        #     The body resource for this request
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     The name of the zone for this request.
+        class SetNameInstanceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for InstanceGroups.SetNamedPorts. See the method description for details.
         # @!attribute [rw] instance_group
         #   @return [::String]
@@ -26964,16 +27297,16 @@ module Google
             UNDEFINED_SHARE_TYPE = 0
 
             # Default value.
-            LOCAL = 72607563
+            LOCAL = 72_607_563
 
             # Shared-reservation is open to entire Organization
-            ORGANIZATION = 274978099
+            ORGANIZATION = 274_978_099
 
             # Default value. This value is unused.
-            SHARE_TYPE_UNSPECIFIED = 494771730
+            SHARE_TYPE_UNSPECIFIED = 494_771_730
 
             # Shared-reservation is open to specific projects
-            SPECIFIC_PROJECTS = 347838695
+            SPECIFIC_PROJECTS = 347_838_695
           end
         end
 
@@ -27060,6 +27393,27 @@ module Google
         #   @return [::String]
         #     The name of the zone for this request.
         class SimulateMaintenanceEventInstanceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for NodeGroups.SimulateMaintenanceEvent. See the method description for details.
+        # @!attribute [rw] node_group
+        #   @return [::String]
+        #     Name of the NodeGroup resource whose nodes will go under maintenance simulation.
+        # @!attribute [rw] node_groups_simulate_maintenance_event_request_resource
+        #   @return [::Google::Cloud::Compute::V1::NodeGroupsSimulateMaintenanceEventRequest]
+        #     The body resource for this request
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     The name of the zone for this request.
+        class SimulateMaintenanceEventNodeGroupRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -27175,13 +27529,13 @@ module Google
             UNDEFINED_ARCHITECTURE = 0
 
             # Default value indicating Architecture is not set.
-            ARCHITECTURE_UNSPECIFIED = 394750507
+            ARCHITECTURE_UNSPECIFIED = 394_750_507
 
             # Machines with architecture ARM64
-            ARM64 = 62547450
+            ARM64 = 62_547_450
 
             # Machines with architecture X86_64
-            X86_64 = 425300551
+            X86_64 = 425_300_551
           end
 
           # Indicates the type of the snapshot.
@@ -27189,9 +27543,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_SNAPSHOT_TYPE = 0
 
-            ARCHIVE = 506752162
+            ARCHIVE = 506_752_162
 
-            STANDARD = 484642493
+            STANDARD = 484_642_493
           end
 
           # [Output Only] The status of the snapshot. This can be CREATING, DELETING, FAILED, READY, or UPLOADING.
@@ -27200,19 +27554,19 @@ module Google
             UNDEFINED_STATUS = 0
 
             # Snapshot creation is in progress.
-            CREATING = 455564985
+            CREATING = 455_564_985
 
             # Snapshot is currently being deleted.
-            DELETING = 528602024
+            DELETING = 528_602_024
 
             # Snapshot creation failed.
-            FAILED = 455706685
+            FAILED = 455_706_685
 
             # Snapshot has been created successfully.
-            READY = 77848963
+            READY = 77_848_963
 
             # Snapshot is being uploaded.
-            UPLOADING = 267603489
+            UPLOADING = 267_603_489
           end
 
           # [Output Only] An indicator whether storageBytes is in a stable state or it is being adjusted as a result of shared storage reallocation. This status can either be UPDATING, meaning the size of the snapshot is being updated, or UP_TO_DATE, meaning the size of the snapshot is up-to-date.
@@ -27220,9 +27574,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_STORAGE_BYTES_STATUS = 0
 
-            UPDATING = 494614342
+            UPDATING = 494_614_342
 
-            UP_TO_DATE = 101306702
+            UP_TO_DATE = 101_306_702
           end
         end
 
@@ -27264,7 +27618,7 @@ module Google
         # A specification of the parameters to use when creating the instance template from a source instance.
         # @!attribute [rw] disk_configs
         #   @return [::Array<::Google::Cloud::Compute::V1::DiskInstantiationConfig>]
-        #     Attached disks configuration. If not provided, defaults are applied: For boot disk and any other R/W disks, new custom images will be created from each disk. For read-only disks, they will be attached in read-only mode. Local SSD disks will be created as blank volumes.
+        #     Attached disks configuration. If not provided, defaults are applied: For boot disk and any other R/W disks, the source images for each disk will be used. For read-only disks, they will be attached in read-only mode. Local SSD disks will be created as blank volumes.
         class SourceInstanceParams
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -27333,13 +27687,13 @@ module Google
             UNDEFINED_KEY_REVOCATION_ACTION_TYPE = 0
 
             # Default value. This value is unused.
-            KEY_REVOCATION_ACTION_TYPE_UNSPECIFIED = 467110106
+            KEY_REVOCATION_ACTION_TYPE_UNSPECIFIED = 467_110_106
 
             # Indicates user chose no operation.
-            NONE = 2402104
+            NONE = 2_402_104
 
             # Indicates user chose to opt for VM shutdown on key revocation.
-            STOP = 2555906
+            STOP = 2_555_906
           end
         end
 
@@ -27397,12 +27751,12 @@ module Google
             UNDEFINED_TYPE = 0
 
             # Google-managed SSLCertificate.
-            MANAGED = 479501183
+            MANAGED = 479_501_183
 
             # Certificate uploaded by user.
-            SELF_MANAGED = 434437516
+            SELF_MANAGED = 434_437_516
 
-            TYPE_UNSPECIFIED = 437714322
+            TYPE_UNSPECIFIED = 437_714_322
           end
         end
 
@@ -27495,21 +27849,21 @@ module Google
             UNDEFINED_STATUS = 0
 
             # The certificate management is working, and a certificate has been provisioned.
-            ACTIVE = 314733318
+            ACTIVE = 314_733_318
 
-            MANAGED_CERTIFICATE_STATUS_UNSPECIFIED = 474800850
+            MANAGED_CERTIFICATE_STATUS_UNSPECIFIED = 474_800_850
 
             # The certificate management is working. GCP will attempt to provision the first certificate.
-            PROVISIONING = 290896621
+            PROVISIONING = 290_896_621
 
             # Certificate provisioning failed due to an issue with the DNS or load balancing configuration. For details of which domain failed, consult domain_status field.
-            PROVISIONING_FAILED = 76813775
+            PROVISIONING_FAILED = 76_813_775
 
             # Certificate provisioning failed due to an issue with the DNS or load balancing configuration. It won't be retried. To try again delete and create a new managed SslCertificate resource. For details of which domain failed, consult domain_status field.
-            PROVISIONING_FAILED_PERMANENTLY = 275036203
+            PROVISIONING_FAILED_PERMANENTLY = 275_036_203
 
             # Renewal of the certificate has failed due to an issue with the DNS or load balancing configuration. The existing cert is still serving; however, it will expire shortly. To provision a renewed certificate, delete and create a new managed SslCertificate resource. For details on which domain failed, consult domain_status field.
-            RENEWAL_FAILED = 434659076
+            RENEWAL_FAILED = 434_659_076
           end
         end
 
@@ -27666,13 +28020,13 @@ module Google
             UNDEFINED_MIN_TLS_VERSION = 0
 
             # TLS 1.0
-            TLS_1_0 = 33116734
+            TLS_1_0 = 33_116_734
 
             # TLS 1.1
-            TLS_1_1 = 33116735
+            TLS_1_1 = 33_116_735
 
             # TLS 1.2
-            TLS_1_2 = 33116736
+            TLS_1_2 = 33_116_736
           end
 
           # Profile specifies the set of SSL features that can be used by the load balancer when negotiating SSL with clients. This can be one of COMPATIBLE, MODERN, RESTRICTED, or CUSTOM. If using CUSTOM, the set of SSL features to enable must be specified in the customFeatures field.
@@ -27681,16 +28035,16 @@ module Google
             UNDEFINED_PROFILE = 0
 
             # Compatible profile. Allows the broadset set of clients, even those which support only out-of-date SSL features to negotiate with the load balancer.
-            COMPATIBLE = 179357396
+            COMPATIBLE = 179_357_396
 
             # Custom profile. Allow only the set of allowed SSL features specified in the customFeatures field.
-            CUSTOM = 388595569
+            CUSTOM = 388_595_569
 
             # Modern profile. Supports a wide set of SSL features, allowing modern clients to negotiate SSL with the load balancer.
-            MODERN = 132013855
+            MODERN = 132_013_855
 
             # Restricted profile. Supports a reduced set of SSL features, intended to meet stricter compliance requirements.
-            RESTRICTED = 261551195
+            RESTRICTED = 261_551_195
           end
         end
 
@@ -27779,9 +28133,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_AUTO_DELETE = 0
 
-            NEVER = 74175084
+            NEVER = 74_175_084
 
-            ON_PERMANENT_INSTANCE_DELETION = 95727719
+            ON_PERMANENT_INSTANCE_DELETION = 95_727_719
           end
         end
 
@@ -27895,12 +28249,12 @@ module Google
             UNDEFINED_IPV6_ACCESS_TYPE = 0
 
             # VMs on this subnet will be assigned IPv6 addresses that are accessible via the Internet, as well as the VPC network.
-            EXTERNAL = 35607499
+            EXTERNAL = 35_607_499
 
             # VMs on this subnet will be assigned IPv6 addresses that are only accessible over the VPC network.
-            INTERNAL = 279295677
+            INTERNAL = 279_295_677
 
-            UNSPECIFIED_IPV6_ACCESS_TYPE = 313080613
+            UNSPECIFIED_IPV6_ACCESS_TYPE = 313_080_613
           end
 
           # This field is for internal use. This field can be both set at resource creation time and updated using patch.
@@ -27909,13 +28263,13 @@ module Google
             UNDEFINED_PRIVATE_IPV6_GOOGLE_ACCESS = 0
 
             # Disable private IPv6 access to/from Google services.
-            DISABLE_GOOGLE_ACCESS = 450958579
+            DISABLE_GOOGLE_ACCESS = 450_958_579
 
             # Bidirectional private IPv6 access to/from Google services.
-            ENABLE_BIDIRECTIONAL_ACCESS_TO_GOOGLE = 427975994
+            ENABLE_BIDIRECTIONAL_ACCESS_TO_GOOGLE = 427_975_994
 
             # Outbound private IPv6 access from VMs in this subnet to Google services.
-            ENABLE_OUTBOUND_VM_ACCESS_TO_GOOGLE = 288210263
+            ENABLE_OUTBOUND_VM_ACCESS_TO_GOOGLE = 288_210_263
           end
 
           # The purpose of the resource. This field can be either PRIVATE_RFC_1918 or INTERNAL_HTTPS_LOAD_BALANCER. A subnetwork with purpose set to INTERNAL_HTTPS_LOAD_BALANCER is a user-created subnetwork that is reserved for Internal HTTP(S) Load Balancing. If unspecified, the purpose defaults to PRIVATE_RFC_1918. The enableFlowLogs field isn't supported with the purpose field set to INTERNAL_HTTPS_LOAD_BALANCER.
@@ -27924,19 +28278,19 @@ module Google
             UNDEFINED_PURPOSE = 0
 
             # Subnet reserved for Internal HTTP(S) Load Balancing.
-            INTERNAL_HTTPS_LOAD_BALANCER = 248748889
+            INTERNAL_HTTPS_LOAD_BALANCER = 248_748_889
 
             # Regular user created or automatically created subnet.
-            PRIVATE = 403485027
+            PRIVATE = 403_485_027
 
             # Regular user created or automatically created subnet.
-            PRIVATE_RFC_1918 = 254902107
+            PRIVATE_RFC_1918 = 254_902_107
 
             # Subnetworks created for Private Service Connect in the producer network.
-            PRIVATE_SERVICE_CONNECT = 48134724
+            PRIVATE_SERVICE_CONNECT = 48_134_724
 
             # Subnetwork used for Regional Internal/External HTTP(S) Load Balancing.
-            REGIONAL_MANAGED_PROXY = 153049966
+            REGIONAL_MANAGED_PROXY = 153_049_966
           end
 
           # The role of subnetwork. Currently, this field is only used when purpose = INTERNAL_HTTPS_LOAD_BALANCER. The value can be set to ACTIVE or BACKUP. An ACTIVE subnetwork is one that is currently being used for Internal HTTP(S) Load Balancing. A BACKUP subnetwork is one that is ready to be promoted to ACTIVE or is currently draining. This field can be updated with a patch request.
@@ -27945,10 +28299,10 @@ module Google
             UNDEFINED_ROLE = 0
 
             # The ACTIVE subnet that is currently used.
-            ACTIVE = 314733318
+            ACTIVE = 314_733_318
 
             # The BACKUP subnet that could be promoted to ACTIVE.
-            BACKUP = 341010882
+            BACKUP = 341_010_882
           end
 
           # The stack type for the subnet. If set to IPV4_ONLY, new VMs in the subnet are assigned IPv4 addresses only. If set to IPV4_IPV6, new VMs in the subnet can be assigned both IPv4 and IPv6 addresses. If not specified, IPV4_ONLY is used. This field can be both set at resource creation time and updated using patch.
@@ -27957,12 +28311,12 @@ module Google
             UNDEFINED_STACK_TYPE = 0
 
             # New VMs in this subnet can have both IPv4 and IPv6 addresses.
-            IPV4_IPV6 = 22197249
+            IPV4_IPV6 = 22_197_249
 
             # New VMs in this subnet will only be assigned IPv4 addresses.
-            IPV4_ONLY = 22373798
+            IPV4_ONLY = 22_373_798
 
-            UNSPECIFIED_STACK_TYPE = 298084569
+            UNSPECIFIED_STACK_TYPE = 298_084_569
           end
 
           # [Output Only] The state of the subnetwork, which can be one of the following values: READY: Subnetwork is created and ready to use DRAINING: only applicable to subnetworks that have the purpose set to INTERNAL_HTTPS_LOAD_BALANCER and indicates that connections to the load balancer are being drained. A subnetwork that is draining cannot be used or modified until it reaches a status of READY
@@ -27971,10 +28325,10 @@ module Google
             UNDEFINED_STATE = 0
 
             # Subnetwork is being drained.
-            DRAINING = 480455402
+            DRAINING = 480_455_402
 
             # Subnetwork is ready for use.
-            READY = 77848963
+            READY = 77_848_963
           end
         end
 
@@ -28067,17 +28421,17 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_AGGREGATION_INTERVAL = 0
 
-            INTERVAL_10_MIN = 487155916
+            INTERVAL_10_MIN = 487_155_916
 
-            INTERVAL_15_MIN = 491773521
+            INTERVAL_15_MIN = 491_773_521
 
-            INTERVAL_1_MIN = 69052714
+            INTERVAL_1_MIN = 69_052_714
 
-            INTERVAL_30_SEC = 7548937
+            INTERVAL_30_SEC = 7_548_937
 
-            INTERVAL_5_MIN = 72746798
+            INTERVAL_5_MIN = 72_746_798
 
-            INTERVAL_5_SEC = 72752429
+            INTERVAL_5_SEC = 72_752_429
           end
 
           # Can only be specified if VPC flow logs for this subnetwork is enabled. Configures whether all, none or a subset of metadata fields should be added to the reported VPC flow logs. Default is EXCLUDE_ALL_METADATA.
@@ -28085,11 +28439,11 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_METADATA = 0
 
-            CUSTOM_METADATA = 62450749
+            CUSTOM_METADATA = 62_450_749
 
-            EXCLUDE_ALL_METADATA = 334519954
+            EXCLUDE_ALL_METADATA = 334_519_954
 
-            INCLUDE_ALL_METADATA = 164619908
+            INCLUDE_ALL_METADATA = 164_619_908
           end
         end
 
@@ -28145,10 +28499,10 @@ module Google
             UNDEFINED_POLICY = 0
 
             # Subsetting based on consistent hashing. For Traffic Director, the number of backends per backend group (the subset size) is based on the `subset_size` parameter. For Internal HTTP(S) load balancing, the number of backends per backend group (the subset size) is dynamically adjusted in two cases: - As the number of proxy instances participating in Internal HTTP(S) load balancing increases, the subset size decreases. - When the total number of backends in a network exceeds the capacity of a single proxy instance, subset sizes are reduced automatically for each service that has backend subsetting enabled.
-            CONSISTENT_HASH_SUBSETTING = 108989492
+            CONSISTENT_HASH_SUBSETTING = 108_989_492
 
             # No Subsetting. Clients may open connections and send traffic to all backends of this backend service. This can lead to performance issues if there is substantial imbalance in the count of clients and backends.
-            NONE = 2402104
+            NONE = 2_402_104
           end
         end
 
@@ -28218,13 +28572,13 @@ module Google
             UNDEFINED_PORT_SPECIFICATION = 0
 
             # The port number in the health check's port is used for health checking. Applies to network endpoint group and instance group backends.
-            USE_FIXED_PORT = 190235748
+            USE_FIXED_PORT = 190_235_748
 
             # Not supported.
-            USE_NAMED_PORT = 349300671
+            USE_NAMED_PORT = 349_300_671
 
             # For network endpoint group backends, the health check uses the port number specified on each endpoint in the network endpoint group. For instance group backends, the health check uses the port number specified for the backend service's named port defined in the instance group's named ports.
-            USE_SERVING_PORT = 362637516
+            USE_SERVING_PORT = 362_637_516
           end
 
           # Specifies the type of proxy header to append before sending data to the backend, either NONE or PROXY_V1. The default is NONE.
@@ -28232,9 +28586,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_PROXY_HEADER = 0
 
-            NONE = 2402104
+            NONE = 2_402_104
 
-            PROXY_V1 = 334352940
+            PROXY_V1 = 334_352_940
           end
         end
 
@@ -28445,13 +28799,13 @@ module Google
             UNDEFINED_QUIC_OVERRIDE = 0
 
             # The load balancer will not attempt to negotiate QUIC with clients.
-            DISABLE = 241807048
+            DISABLE = 241_807_048
 
             # The load balancer will attempt to negotiate QUIC with clients.
-            ENABLE = 438835587
+            ENABLE = 438_835_587
 
             # No overrides to the default QUIC policy. This option is implicit if no QUIC override has been specified in the request.
-            NONE = 2402104
+            NONE = 2_402_104
           end
         end
 
@@ -28523,13 +28877,13 @@ module Google
             UNDEFINED_QUIC_OVERRIDE = 0
 
             # The load balancer will not attempt to negotiate QUIC with clients.
-            DISABLE = 241807048
+            DISABLE = 241_807_048
 
             # The load balancer will attempt to negotiate QUIC with clients.
-            ENABLE = 438835587
+            ENABLE = 438_835_587
 
             # No overrides to the default QUIC policy. This option is implicit if no QUIC override has been specified in the request.
-            NONE = 2402104
+            NONE = 2_402_104
           end
         end
 
@@ -28634,7 +28988,7 @@ module Google
             UNDEFINED_NAT_POLICY = 0
 
             # No NAT performed.
-            NO_NAT = 161455491
+            NO_NAT = 161_455_491
           end
         end
 
@@ -28756,28 +29110,28 @@ module Google
             UNDEFINED_SESSION_AFFINITY = 0
 
             # 2-tuple hash on packet's source and destination IP addresses. Connections from the same source IP address to the same destination IP address will be served by the same backend VM while that VM remains healthy.
-            CLIENT_IP = 345665051
+            CLIENT_IP = 345_665_051
 
             # 1-tuple hash only on packet's source IP address. Connections from the same source IP address will be served by the same backend VM while that VM remains healthy. This option can only be used for Internal TCP/UDP Load Balancing.
-            CLIENT_IP_NO_DESTINATION = 106122516
+            CLIENT_IP_NO_DESTINATION = 106_122_516
 
             # 5-tuple hash on packet's source and destination IP addresses, IP protocol, and source and destination ports. Connections for the same IP protocol from the same source IP address and port to the same destination IP address and port will be served by the same backend VM while that VM remains healthy. This option cannot be used for HTTP(S) load balancing.
-            CLIENT_IP_PORT_PROTO = 221722926
+            CLIENT_IP_PORT_PROTO = 221_722_926
 
             # 3-tuple hash on packet's source and destination IP addresses, and IP protocol. Connections for the same IP protocol from the same source IP address to the same destination IP address will be served by the same backend VM while that VM remains healthy. This option cannot be used for HTTP(S) load balancing.
-            CLIENT_IP_PROTO = 25322148
+            CLIENT_IP_PROTO = 25_322_148
 
             # Hash based on a cookie generated by the L7 loadbalancer. Only valid for HTTP(S) load balancing.
-            GENERATED_COOKIE = 370321204
+            GENERATED_COOKIE = 370_321_204
 
             # The hash is based on a user specified header field.
-            HEADER_FIELD = 200737960
+            HEADER_FIELD = 200_737_960
 
             # The hash is based on a user provided cookie.
-            HTTP_COOKIE = 494981627
+            HTTP_COOKIE = 494_981_627
 
             # No session affinity. Connections from the same client IP may go to any instance in the pool.
-            NONE = 2402104
+            NONE = 2_402_104
           end
         end
 
@@ -28929,9 +29283,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_PROXY_HEADER = 0
 
-            NONE = 2402104
+            NONE = 2_402_104
 
-            PROXY_V1 = 334352940
+            PROXY_V1 = 334_352_940
           end
         end
 
@@ -28987,9 +29341,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_PROXY_HEADER = 0
 
-            NONE = 2402104
+            NONE = 2_402_104
 
-            PROXY_V1 = 334352940
+            PROXY_V1 = 334_352_940
           end
         end
 
@@ -29049,9 +29403,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_PROXY_HEADER = 0
 
-            NONE = 2402104
+            NONE = 2_402_104
 
-            PROXY_V1 = 334352940
+            PROXY_V1 = 334_352_940
           end
         end
 
@@ -29096,9 +29450,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_PROXY_HEADER = 0
 
-            NONE = 2402104
+            NONE = 2_402_104
 
-            PROXY_V1 = 334352940
+            PROXY_V1 = 334_352_940
           end
         end
 
@@ -29205,13 +29559,13 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
-            CREATING = 455564985
+            CREATING = 455_564_985
 
-            DELETING = 528602024
+            DELETING = 528_602_024
 
-            FAILED = 455706685
+            FAILED = 455_706_685
 
-            READY = 77848963
+            READY = 77_848_963
           end
         end
 
@@ -29807,6 +30161,32 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for Disks.Update. See the method description for details.
+        # @!attribute [rw] disk
+        #   @return [::String]
+        #     The disk name for this request.
+        # @!attribute [rw] disk_resource
+        #   @return [::Google::Cloud::Compute::V1::Disk]
+        #     The body resource for this request
+        # @!attribute [rw] paths
+        #   @return [::String]
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] update_mask
+        #   @return [::String]
+        #     update_mask indicates fields to be updated as part of this request.
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     The name of the zone for this request.
+        class UpdateDiskRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for Instances.UpdateDisplayDevice. See the method description for details.
         # @!attribute [rw] display_device_resource
         #   @return [::Google::Cloud::Compute::V1::DisplayDevice]
@@ -30063,6 +30443,32 @@ module Google
         #   @return [::String]
         #     update_mask indicates fields to be updated as part of this request.
         class UpdateRegionCommitmentRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionDisks.Update. See the method description for details.
+        # @!attribute [rw] disk
+        #   @return [::String]
+        #     The disk name for this request.
+        # @!attribute [rw] disk_resource
+        #   @return [::Google::Cloud::Compute::V1::Disk]
+        #     The body resource for this request
+        # @!attribute [rw] paths
+        #   @return [::String]
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The name of the region for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] update_mask
+        #   @return [::String]
+        #     update_mask indicates fields to be updated as part of this request.
+        class UpdateRegionDiskRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -30395,13 +30801,13 @@ module Google
             UNDEFINED_LOAD_BALANCING_SCHEMES = 0
 
             # Signifies that this will be used for Classic L7 External Load Balancing.
-            EXTERNAL = 35607499
+            EXTERNAL = 35_607_499
 
             # Signifies that this will be used for Envoy-based L7 External Load Balancing.
-            EXTERNAL_MANAGED = 512006923
+            EXTERNAL_MANAGED = 512_006_923
 
             # If unspecified, the validation will try to infer the scheme from the backend service resources this Url map references. If the inferrence is not possible, EXTERNAL will be used as the default type.
-            LOAD_BALANCING_SCHEME_UNSPECIFIED = 526507452
+            LOAD_BALANCING_SCHEME_UNSPECIFIED = 526_507_452
           end
         end
 
@@ -30469,10 +30875,10 @@ module Google
             UNDEFINED_IPV6_ACCESS_TYPE = 0
 
             # VMs on this subnet will be assigned IPv6 addresses that are accessible via the Internet, as well as the VPC network.
-            EXTERNAL = 35607499
+            EXTERNAL = 35_607_499
 
             # VMs on this subnet will be assigned IPv6 addresses that are only accessible over the VPC network.
-            INTERNAL = 279295677
+            INTERNAL = 279_295_677
           end
 
           # The purpose of the resource. This field can be either PRIVATE_RFC_1918 or INTERNAL_HTTPS_LOAD_BALANCER. A subnetwork with purpose set to INTERNAL_HTTPS_LOAD_BALANCER is a user-created subnetwork that is reserved for Internal HTTP(S) Load Balancing. If unspecified, the purpose defaults to PRIVATE_RFC_1918. The enableFlowLogs field isn't supported with the purpose field set to INTERNAL_HTTPS_LOAD_BALANCER.
@@ -30481,19 +30887,19 @@ module Google
             UNDEFINED_PURPOSE = 0
 
             # Subnet reserved for Internal HTTP(S) Load Balancing.
-            INTERNAL_HTTPS_LOAD_BALANCER = 248748889
+            INTERNAL_HTTPS_LOAD_BALANCER = 248_748_889
 
             # Regular user created or automatically created subnet.
-            PRIVATE = 403485027
+            PRIVATE = 403_485_027
 
             # Regular user created or automatically created subnet.
-            PRIVATE_RFC_1918 = 254902107
+            PRIVATE_RFC_1918 = 254_902_107
 
             # Subnetworks created for Private Service Connect in the producer network.
-            PRIVATE_SERVICE_CONNECT = 48134724
+            PRIVATE_SERVICE_CONNECT = 48_134_724
 
             # Subnetwork used for Regional Internal/External HTTP(S) Load Balancing.
-            REGIONAL_MANAGED_PROXY = 153049966
+            REGIONAL_MANAGED_PROXY = 153_049_966
           end
 
           # The role of subnetwork. Currently, this field is only used when purpose = INTERNAL_HTTPS_LOAD_BALANCER. The value can be set to ACTIVE or BACKUP. An ACTIVE subnetwork is one that is currently being used for Internal HTTP(S) Load Balancing. A BACKUP subnetwork is one that is ready to be promoted to ACTIVE or is currently draining. This field can be updated with a patch request.
@@ -30502,10 +30908,10 @@ module Google
             UNDEFINED_ROLE = 0
 
             # The ACTIVE subnet that is currently used.
-            ACTIVE = 314733318
+            ACTIVE = 314_733_318
 
             # The BACKUP subnet that could be promoted to ACTIVE.
-            BACKUP = 341010882
+            BACKUP = 341_010_882
           end
 
           # The stack type for the subnet. If set to IPV4_ONLY, new VMs in the subnet are assigned IPv4 addresses only. If set to IPV4_IPV6, new VMs in the subnet can be assigned both IPv4 and IPv6 addresses. If not specified, IPV4_ONLY is used. This field can be both set at resource creation time and updated using patch.
@@ -30514,10 +30920,10 @@ module Google
             UNDEFINED_STACK_TYPE = 0
 
             # New VMs in this subnet can have both IPv4 and IPv6 addresses.
-            IPV4_IPV6 = 22197249
+            IPV4_IPV6 = 22_197_249
 
             # New VMs in this subnet will only be assigned IPv4 addresses.
-            IPV4_ONLY = 22373798
+            IPV4_ONLY = 22_373_798
           end
         end
 
@@ -30699,7 +31105,7 @@ module Google
         #     [Output Only] Type of resource. Always compute#vpnGateway for VPN gateways.
         # @!attribute [rw] label_fingerprint
         #   @return [::String]
-        #     A fingerprint for the labels being applied to this VpnGateway, which is essentially a hash of the labels set used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update labels. You must always provide an up-to-date fingerprint hash in order to update or change labels, otherwise the request will fail with error 412 conditionNotMet. To see the latest fingerprint, make a get() request to retrieve an VpnGateway.
+        #     A fingerprint for the labels being applied to this VpnGateway, which is essentially a hash of the labels set used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update labels. You must always provide an up-to-date fingerprint hash in order to update or change labels, otherwise the request will fail with error 412 conditionNotMet. To see the latest fingerprint, make a get() request to retrieve a VpnGateway.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Labels for this resource. These can only be added or modified by the setLabels method. Each label key/value pair must comply with RFC1035. Label values may be empty.
@@ -30741,10 +31147,10 @@ module Google
             UNDEFINED_STACK_TYPE = 0
 
             # Enable VPN gateway with both IPv4 and IPv6 protocols.
-            IPV4_IPV6 = 22197249
+            IPV4_IPV6 = 22_197_249
 
             # Enable VPN gateway with only IPv4 protocol.
-            IPV4_ONLY = 22373798
+            IPV4_ONLY = 22_373_798
           end
         end
 
@@ -30834,10 +31240,10 @@ module Google
             UNDEFINED_STATE = 0
 
             # VPN tunnels are configured with adequate redundancy from Cloud VPN gateway to the peer VPN gateway. For both GCP-to-non-GCP and GCP-to-GCP connections, the adequate redundancy is a pre-requirement for users to get 99.99% availability on GCP side; please note that for any connection, end-to-end 99.99% availability is subject to proper configuration on the peer VPN gateway.
-            CONNECTION_REDUNDANCY_MET = 505242907
+            CONNECTION_REDUNDANCY_MET = 505_242_907
 
             # VPN tunnels are not configured with adequate redundancy from the Cloud VPN gateway to the peer gateway
-            CONNECTION_REDUNDANCY_NOT_MET = 511863311
+            CONNECTION_REDUNDANCY_NOT_MET = 511_863_311
           end
 
           # Indicates the reason why the VPN connection does not meet the high availability redundancy criteria/requirement. Valid values is INCOMPLETE_TUNNELS_COVERAGE.
@@ -30845,7 +31251,7 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_UNSATISFIED_REASON = 0
 
-            INCOMPLETE_TUNNELS_COVERAGE = 55917437
+            INCOMPLETE_TUNNELS_COVERAGE = 55_917_437
           end
         end
 
@@ -30993,43 +31399,43 @@ module Google
             UNDEFINED_STATUS = 0
 
             # Cloud VPN is in the process of allocating all required resources (specifically, a borg task).
-            ALLOCATING_RESOURCES = 320922816
+            ALLOCATING_RESOURCES = 320_922_816
 
             # Auth error (e.g. bad shared secret).
-            AUTHORIZATION_ERROR = 23580290
+            AUTHORIZATION_ERROR = 23_580_290
 
             # Resources is being deallocated for the VPN tunnel.
-            DEPROVISIONING = 428935662
+            DEPROVISIONING = 428_935_662
 
             # Secure session is successfully established with peer VPN.
-            ESTABLISHED = 88852344
+            ESTABLISHED = 88_852_344
 
             # Tunnel creation has failed and the tunnel is not ready to be used.
-            FAILED = 455706685
+            FAILED = 455_706_685
 
             # Successful first handshake with peer VPN.
-            FIRST_HANDSHAKE = 191393000
+            FIRST_HANDSHAKE = 191_393_000
 
             # Handshake failed.
-            NEGOTIATION_FAILURE = 360325868
+            NEGOTIATION_FAILURE = 360_325_868
 
             # Deprecated, replaced by NO_INCOMING_PACKETS
-            NETWORK_ERROR = 193912951
+            NETWORK_ERROR = 193_912_951
 
             # No incoming packets from peer
-            NO_INCOMING_PACKETS = 119983216
+            NO_INCOMING_PACKETS = 119_983_216
 
             # Resource is being allocated for the VPN tunnel.
-            PROVISIONING = 290896621
+            PROVISIONING = 290_896_621
 
             # Tunnel configuration was rejected, can be result of being denylisted.
-            REJECTED = 174130302
+            REJECTED = 174_130_302
 
             # Tunnel is stopped due to its Forwarding Rules being deleted.
-            STOPPED = 444276141
+            STOPPED = 444_276_141
 
             # Waiting to receive all VPN-related configs from user. Network, TargetVpnGateway, VpnTunnel, ForwardingRule and Route resources are needed to setup VPN tunnel.
-            WAITING_FOR_FULL_CONFIG = 41640522
+            WAITING_FOR_FULL_CONFIG = 41_640_522
           end
         end
 
@@ -31120,6 +31526,9 @@ module Google
         # @!attribute [rw] id
         #   @return [::String]
         #     Expression ID should uniquely identify the origin of the expression. E.g. owasp-crs-v020901-id973337 identifies Owasp core rule set version 2.9.1 rule id 973337. The ID could be used to determine the individual attack definition that has been detected. It could also be used to exclude it from the policy in case of false positive. required
+        # @!attribute [rw] sensitivity
+        #   @return [::Integer]
+        #     The sensitivity value associated with the WAF rule ID. This corresponds to the ModSecurity paranoia level, ranging from 1 to 4. 0 is reserved for opt-in only rules.
         class WafExpressionSetExpression
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -31188,85 +31597,85 @@ module Google
             UNDEFINED_CODE = 0
 
             # Warning about failed cleanup of transient changes made by a failed operation.
-            CLEANUP_FAILED = 150308440
+            CLEANUP_FAILED = 150_308_440
 
             # A link to a deprecated resource was created.
-            DEPRECATED_RESOURCE_USED = 391835586
+            DEPRECATED_RESOURCE_USED = 391_835_586
 
             # When deploying and at least one of the resources has a type marked as deprecated
-            DEPRECATED_TYPE_USED = 346526230
+            DEPRECATED_TYPE_USED = 346_526_230
 
             # The user created a boot disk that is larger than image size.
-            DISK_SIZE_LARGER_THAN_IMAGE_SIZE = 369442967
+            DISK_SIZE_LARGER_THAN_IMAGE_SIZE = 369_442_967
 
             # When deploying and at least one of the resources has a type marked as experimental
-            EXPERIMENTAL_TYPE_USED = 451954443
+            EXPERIMENTAL_TYPE_USED = 451_954_443
 
             # Warning that is present in an external api call
-            EXTERNAL_API_WARNING = 175546307
+            EXTERNAL_API_WARNING = 175_546_307
 
             # Warning that value of a field has been overridden. Deprecated unused field.
-            FIELD_VALUE_OVERRIDEN = 329669423
+            FIELD_VALUE_OVERRIDEN = 329_669_423
 
             # The operation involved use of an injected kernel, which is deprecated.
-            INJECTED_KERNELS_DEPRECATED = 417377419
+            INJECTED_KERNELS_DEPRECATED = 417_377_419
 
             # A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP/HTTPS/HTTP2.
-            INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB = 401542606
+            INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB = 401_542_606
 
             # When deploying a deployment with a exceedingly large number of resources
-            LARGE_DEPLOYMENT_WARNING = 481440678
+            LARGE_DEPLOYMENT_WARNING = 481_440_678
 
             # A resource depends on a missing type
-            MISSING_TYPE_DEPENDENCY = 344505463
+            MISSING_TYPE_DEPENDENCY = 344_505_463
 
             # The route's nextHopIp address is not assigned to an instance on the network.
-            NEXT_HOP_ADDRESS_NOT_ASSIGNED = 324964999
+            NEXT_HOP_ADDRESS_NOT_ASSIGNED = 324_964_999
 
             # The route's next hop instance cannot ip forward.
-            NEXT_HOP_CANNOT_IP_FORWARD = 383382887
+            NEXT_HOP_CANNOT_IP_FORWARD = 383_382_887
 
             # The route's nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
-            NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE = 146748434
+            NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE = 146_748_434
 
             # The route's nextHopInstance URL refers to an instance that does not exist.
-            NEXT_HOP_INSTANCE_NOT_FOUND = 464250446
+            NEXT_HOP_INSTANCE_NOT_FOUND = 464_250_446
 
             # The route's nextHopInstance URL refers to an instance that is not on the same network as the route.
-            NEXT_HOP_INSTANCE_NOT_ON_NETWORK = 243758146
+            NEXT_HOP_INSTANCE_NOT_ON_NETWORK = 243_758_146
 
             # The route's next hop instance does not have a status of RUNNING.
-            NEXT_HOP_NOT_RUNNING = 417081265
+            NEXT_HOP_NOT_RUNNING = 417_081_265
 
             # Error which is not critical. We decided to continue the process despite the mentioned error.
-            NOT_CRITICAL_ERROR = 105763924
+            NOT_CRITICAL_ERROR = 105_763_924
 
             # No results are present on a particular list page.
-            NO_RESULTS_ON_PAGE = 30036744
+            NO_RESULTS_ON_PAGE = 30_036_744
 
             # Success is reported, but some results may be missing due to errors
-            PARTIAL_SUCCESS = 39966469
+            PARTIAL_SUCCESS = 39_966_469
 
             # The user attempted to use a resource that requires a TOS they have not accepted.
-            REQUIRED_TOS_AGREEMENT = 3745539
+            REQUIRED_TOS_AGREEMENT = 3_745_539
 
             # Warning that a resource is in use.
-            RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING = 496728641
+            RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING = 496_728_641
 
             # One or more of the resources set to auto-delete could not be deleted because they were in use.
-            RESOURCE_NOT_DELETED = 168598460
+            RESOURCE_NOT_DELETED = 168_598_460
 
             # When a resource schema validation is ignored.
-            SCHEMA_VALIDATION_IGNORED = 275245642
+            SCHEMA_VALIDATION_IGNORED = 275_245_642
 
             # Instance template used in instance group manager is valid as such, but its application does not make a lot of sense, because it allows only single instance in instance group.
-            SINGLE_INSTANCE_PROPERTY_TEMPLATE = 268305617
+            SINGLE_INSTANCE_PROPERTY_TEMPLATE = 268_305_617
 
             # When undeclared properties in the schema are present
-            UNDECLARED_PROPERTIES = 390513439
+            UNDECLARED_PROPERTIES = 390_513_439
 
             # A given scope cannot be reached.
-            UNREACHABLE = 13328052
+            UNREACHABLE = 13_328_052
           end
         end
 
@@ -31290,85 +31699,85 @@ module Google
             UNDEFINED_CODE = 0
 
             # Warning about failed cleanup of transient changes made by a failed operation.
-            CLEANUP_FAILED = 150308440
+            CLEANUP_FAILED = 150_308_440
 
             # A link to a deprecated resource was created.
-            DEPRECATED_RESOURCE_USED = 391835586
+            DEPRECATED_RESOURCE_USED = 391_835_586
 
             # When deploying and at least one of the resources has a type marked as deprecated
-            DEPRECATED_TYPE_USED = 346526230
+            DEPRECATED_TYPE_USED = 346_526_230
 
             # The user created a boot disk that is larger than image size.
-            DISK_SIZE_LARGER_THAN_IMAGE_SIZE = 369442967
+            DISK_SIZE_LARGER_THAN_IMAGE_SIZE = 369_442_967
 
             # When deploying and at least one of the resources has a type marked as experimental
-            EXPERIMENTAL_TYPE_USED = 451954443
+            EXPERIMENTAL_TYPE_USED = 451_954_443
 
             # Warning that is present in an external api call
-            EXTERNAL_API_WARNING = 175546307
+            EXTERNAL_API_WARNING = 175_546_307
 
             # Warning that value of a field has been overridden. Deprecated unused field.
-            FIELD_VALUE_OVERRIDEN = 329669423
+            FIELD_VALUE_OVERRIDEN = 329_669_423
 
             # The operation involved use of an injected kernel, which is deprecated.
-            INJECTED_KERNELS_DEPRECATED = 417377419
+            INJECTED_KERNELS_DEPRECATED = 417_377_419
 
             # A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP/HTTPS/HTTP2.
-            INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB = 401542606
+            INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB = 401_542_606
 
             # When deploying a deployment with a exceedingly large number of resources
-            LARGE_DEPLOYMENT_WARNING = 481440678
+            LARGE_DEPLOYMENT_WARNING = 481_440_678
 
             # A resource depends on a missing type
-            MISSING_TYPE_DEPENDENCY = 344505463
+            MISSING_TYPE_DEPENDENCY = 344_505_463
 
             # The route's nextHopIp address is not assigned to an instance on the network.
-            NEXT_HOP_ADDRESS_NOT_ASSIGNED = 324964999
+            NEXT_HOP_ADDRESS_NOT_ASSIGNED = 324_964_999
 
             # The route's next hop instance cannot ip forward.
-            NEXT_HOP_CANNOT_IP_FORWARD = 383382887
+            NEXT_HOP_CANNOT_IP_FORWARD = 383_382_887
 
             # The route's nextHopInstance URL refers to an instance that does not have an ipv6 interface on the same network as the route.
-            NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE = 146748434
+            NEXT_HOP_INSTANCE_HAS_NO_IPV6_INTERFACE = 146_748_434
 
             # The route's nextHopInstance URL refers to an instance that does not exist.
-            NEXT_HOP_INSTANCE_NOT_FOUND = 464250446
+            NEXT_HOP_INSTANCE_NOT_FOUND = 464_250_446
 
             # The route's nextHopInstance URL refers to an instance that is not on the same network as the route.
-            NEXT_HOP_INSTANCE_NOT_ON_NETWORK = 243758146
+            NEXT_HOP_INSTANCE_NOT_ON_NETWORK = 243_758_146
 
             # The route's next hop instance does not have a status of RUNNING.
-            NEXT_HOP_NOT_RUNNING = 417081265
+            NEXT_HOP_NOT_RUNNING = 417_081_265
 
             # Error which is not critical. We decided to continue the process despite the mentioned error.
-            NOT_CRITICAL_ERROR = 105763924
+            NOT_CRITICAL_ERROR = 105_763_924
 
             # No results are present on a particular list page.
-            NO_RESULTS_ON_PAGE = 30036744
+            NO_RESULTS_ON_PAGE = 30_036_744
 
             # Success is reported, but some results may be missing due to errors
-            PARTIAL_SUCCESS = 39966469
+            PARTIAL_SUCCESS = 39_966_469
 
             # The user attempted to use a resource that requires a TOS they have not accepted.
-            REQUIRED_TOS_AGREEMENT = 3745539
+            REQUIRED_TOS_AGREEMENT = 3_745_539
 
             # Warning that a resource is in use.
-            RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING = 496728641
+            RESOURCE_IN_USE_BY_OTHER_RESOURCE_WARNING = 496_728_641
 
             # One or more of the resources set to auto-delete could not be deleted because they were in use.
-            RESOURCE_NOT_DELETED = 168598460
+            RESOURCE_NOT_DELETED = 168_598_460
 
             # When a resource schema validation is ignored.
-            SCHEMA_VALIDATION_IGNORED = 275245642
+            SCHEMA_VALIDATION_IGNORED = 275_245_642
 
             # Instance template used in instance group manager is valid as such, but its application does not make a lot of sense, because it allows only single instance in instance group.
-            SINGLE_INSTANCE_PROPERTY_TEMPLATE = 268305617
+            SINGLE_INSTANCE_PROPERTY_TEMPLATE = 268_305_617
 
             # When undeclared properties in the schema are present
-            UNDECLARED_PROPERTIES = 390513439
+            UNDECLARED_PROPERTIES = 390_513_439
 
             # A given scope cannot be reached.
-            UNREACHABLE = 13328052
+            UNREACHABLE = 13_328_052
           end
         end
 
@@ -31427,9 +31836,9 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
 
-            PROJECT = 408671993
+            PROJECT = 408_671_993
 
-            XPN_RESOURCE_TYPE_UNSPECIFIED = 151607034
+            XPN_RESOURCE_TYPE_UNSPECIFIED = 151_607_034
           end
         end
 
@@ -31477,7 +31886,7 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
-            DOWN = 2104482
+            DOWN = 2_104_482
 
             UP = 2715
           end

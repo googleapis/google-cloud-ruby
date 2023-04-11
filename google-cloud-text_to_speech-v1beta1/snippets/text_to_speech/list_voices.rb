@@ -20,8 +20,11 @@
 require "google/cloud/text_to_speech/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Client#list_voices
+# Snippet for the list_voices call in the TextToSpeech service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Client#list_voices. It may
+# require modification in order to execute successfully.
 #
 def list_voices
   # Create a client object. The client can be reused for multiple calls.

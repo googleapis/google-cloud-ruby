@@ -26,6 +26,7 @@ require "google/cloud/vmware_engine/v1/vmware_engine/credentials"
 require "google/cloud/vmware_engine/v1/vmware_engine/paths"
 require "google/cloud/vmware_engine/v1/vmware_engine/operations"
 require "google/cloud/vmware_engine/v1/vmware_engine/client"
+require "google/cloud/vmware_engine/v1/vmware_engine/rest"
 
 module Google
   module Cloud
@@ -38,6 +39,11 @@ module Google
         #
         #     require "google/cloud/vmware_engine/v1/vmware_engine"
         #     client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/vmware_engine/v1/vmware_engine/rest"
+        #     client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
         #
         module VmwareEngine
         end

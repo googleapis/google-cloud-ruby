@@ -48,12 +48,14 @@ module Google
       # Create a new client object for ArtifactRegistry.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client](https://googleapis.dev/ruby/google-cloud-artifact_registry-v1/latest/Google/Cloud/ArtifactRegistry/V1/ArtifactRegistry/Client.html)
+      # [Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-artifact_registry-v1/latest/Google-Cloud-ArtifactRegistry-V1-ArtifactRegistry-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the ArtifactRegistry service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About ArtifactRegistry
       #
@@ -73,9 +75,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.artifact_registry version: :v1, &block
+      def self.artifact_registry version: :v1, transport: :grpc, &block
         require "google/cloud/artifact_registry/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::ArtifactRegistry
@@ -83,6 +86,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::ArtifactRegistry.const_get(package_name).const_get(:ArtifactRegistry)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 

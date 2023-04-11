@@ -1,5 +1,23 @@
 # Release History
 
+### 2.15.2 (2023-03-19)
+
+#### Bug Fixes
+
+* make batch handle publish interval ([#20913](https://github.com/googleapis/google-cloud-ruby/issues/20913)) 
+
+### 2.15.1 (2023-02-23)
+
+#### Documentation
+
+* Correct default value for streams ([#20485](https://github.com/googleapis/google-cloud-ruby/issues/20485)) 
+
+### 2.15.0 (2023-01-22)
+
+#### Features
+
+* support publisher compression ([#19910](https://github.com/googleapis/google-cloud-ruby/issues/19910)) 
+
 ### 2.14.0 (2023-01-12)
 
 #### Features

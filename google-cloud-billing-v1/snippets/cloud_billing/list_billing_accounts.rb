@@ -20,8 +20,11 @@
 require "google/cloud/billing/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Billing::V1::CloudBilling::Client#list_billing_accounts
+# Snippet for the list_billing_accounts call in the CloudBilling service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Billing::V1::CloudBilling::Client#list_billing_accounts. It may
+# require modification in order to execute successfully.
 #
 def list_billing_accounts
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_billing_accounts
   # Call the list_billing_accounts method.
   result = client.list_billing_accounts request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::Billing::V1::BillingAccount.
-    p response
+    p item
   end
 end
 # [END cloudbilling_v1_generated_CloudBilling_ListBillingAccounts_sync]

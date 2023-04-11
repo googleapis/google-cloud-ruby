@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-monitoring-dashboard-v1",
-    "version": "0.10.0",
+    "version": "0.11.0",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "monitoring_v1_generated_DashboardsService_CreateDashboard_sync",
-      "title": "Snippet for create_dashboard in DashboardsService",
-      "description": "Basic snippet for create_dashboard in DashboardsService",
+      "title": "Snippet for the create_dashboard call in the DashboardsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client#create_dashboard. It may require modification in order to execute successfully.",
       "file": "dashboards_service/create_dashboard.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v1_generated_DashboardsService_ListDashboards_sync",
-      "title": "Snippet for list_dashboards in DashboardsService",
-      "description": "Basic snippet for list_dashboards in DashboardsService",
+      "title": "Snippet for the list_dashboards call in the DashboardsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client#list_dashboards. It may require modification in order to execute successfully.",
       "file": "dashboards_service/list_dashboards.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v1_generated_DashboardsService_GetDashboard_sync",
-      "title": "Snippet for get_dashboard in DashboardsService",
-      "description": "Basic snippet for get_dashboard in DashboardsService",
+      "title": "Snippet for the get_dashboard call in the DashboardsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client#get_dashboard. It may require modification in order to execute successfully.",
       "file": "dashboards_service/get_dashboard.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v1_generated_DashboardsService_DeleteDashboard_sync",
-      "title": "Snippet for delete_dashboard in DashboardsService",
-      "description": "Basic snippet for delete_dashboard in DashboardsService",
+      "title": "Snippet for the delete_dashboard call in the DashboardsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client#delete_dashboard. It may require modification in order to execute successfully.",
       "file": "dashboards_service/delete_dashboard.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "monitoring_v1_generated_DashboardsService_UpdateDashboard_sync",
-      "title": "Snippet for update_dashboard in DashboardsService",
-      "description": "Basic snippet for update_dashboard in DashboardsService",
+      "title": "Snippet for the update_dashboard call in the DashboardsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client#update_dashboard. It may require modification in order to execute successfully.",
       "file": "dashboards_service/update_dashboard.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]

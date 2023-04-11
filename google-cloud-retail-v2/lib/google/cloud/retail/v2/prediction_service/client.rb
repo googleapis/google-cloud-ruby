@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/retail/v2/prediction_service_pb"
+require "google/cloud/location"
 
 module Google
   module Cloud
@@ -138,6 +139,12 @@ module Google
               @quota_project_id = @config.quota_project
               @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
               @prediction_service_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::Retail::V2::PredictionService::Stub,
                 credentials:  credentials,
@@ -146,6 +153,13 @@ module Google
                 interceptors: @config.interceptors
               )
             end
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
 
             # Service calls
 
@@ -241,6 +255,9 @@ module Google
             #      * (colors: ANY("Red", "Blue")) AND NOT (categories: ANY("Phones"))
             #      * (availability: ANY("IN_STOCK")) AND
             #        (colors: ANY("Red") OR categories: ANY("Phones"))
+            #
+            #     For more information, see
+            #     [Filter recommendations](https://cloud.google.com/retail/docs/filter-recs).
             #   @param validate_only [::Boolean]
             #     Use validate only mode for this prediction query. If set to true, a
             #     dummy model will be used that returns arbitrary products.
@@ -395,9 +412,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials

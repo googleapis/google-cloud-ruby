@@ -20,8 +20,11 @@
 require "google/cloud/service_control/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::ServiceControl::V1::ServiceController::Client#check
+# Snippet for the check call in the ServiceController service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::ServiceControl::V1::ServiceController::Client#check. It may
+# require modification in order to execute successfully.
 #
 def check
   # Create a client object. The client can be reused for multiple calls.

@@ -341,6 +341,17 @@ module Google
         #     Output only. The root cause of the most recent import failure. Only present
         #     if {::Google::Cloud::Kms::V1::CryptoKeyVersion#state state} is
         #     {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::IMPORT_FAILED IMPORT_FAILED}.
+        # @!attribute [r] generation_failure_reason
+        #   @return [::String]
+        #     Output only. The root cause of the most recent generation failure. Only
+        #     present if {::Google::Cloud::Kms::V1::CryptoKeyVersion#state state} is
+        #     {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::GENERATION_FAILED GENERATION_FAILED}.
+        # @!attribute [r] external_destruction_failure_reason
+        #   @return [::String]
+        #     Output only. The root cause of the most recent external destruction
+        #     failure. Only present if
+        #     {::Google::Cloud::Kms::V1::CryptoKeyVersion#state state} is
+        #     {::Google::Cloud::Kms::V1::CryptoKeyVersion::CryptoKeyVersionState::EXTERNAL_DESTRUCTION_FAILED EXTERNAL_DESTRUCTION_FAILED}.
         # @!attribute [rw] external_protection_level_options
         #   @return [::Google::Cloud::Kms::V1::ExternalProtectionLevelOptions]
         #     ExternalProtectionLevelOptions stores a group of additional fields for
@@ -465,13 +476,19 @@ module Google
             RSA_DECRYPT_OAEP_4096_SHA1 = 39
 
             # ECDSA on the NIST P-256 curve with a SHA256 digest.
+            # Other hash functions can also be used:
+            # https://cloud.google.com/kms/docs/create-validate-signatures#ecdsa_support_for_other_hash_algorithms
             EC_SIGN_P256_SHA256 = 12
 
             # ECDSA on the NIST P-384 curve with a SHA384 digest.
+            # Other hash functions can also be used:
+            # https://cloud.google.com/kms/docs/create-validate-signatures#ecdsa_support_for_other_hash_algorithms
             EC_SIGN_P384_SHA384 = 13
 
             # ECDSA on the non-NIST secp256k1 curve. This curve is only supported for
             # HSM protection level.
+            # Other hash functions can also be used:
+            # https://cloud.google.com/kms/docs/create-validate-signatures#ecdsa_support_for_other_hash_algorithms
             EC_SIGN_SECP256K1_SHA256 = 31
 
             # HMAC-SHA256 signing with a 256 bit key.
@@ -544,6 +561,23 @@ module Google
             # Additional details can be found in
             # {::Google::Cloud::Kms::V1::CryptoKeyVersion#import_failure_reason CryptoKeyVersion.import_failure_reason}.
             IMPORT_FAILED = 7
+
+            # This version was not generated successfully. It may not be used, enabled,
+            # disabled, or destroyed. Additional details can be found in
+            # {::Google::Cloud::Kms::V1::CryptoKeyVersion#generation_failure_reason CryptoKeyVersion.generation_failure_reason}.
+            GENERATION_FAILED = 8
+
+            # This version was destroyed, and it may not be used or enabled again.
+            # Cloud KMS is waiting for the corresponding key material residing in an
+            # external key manager to be destroyed.
+            PENDING_EXTERNAL_DESTRUCTION = 9
+
+            # This version was destroyed, and it may not be used or enabled again.
+            # However, Cloud KMS could not confirm that the corresponding key material
+            # residing in an external key manager was destroyed. Additional details can
+            # be found in
+            # {::Google::Cloud::Kms::V1::CryptoKeyVersion#external_destruction_failure_reason CryptoKeyVersion.external_destruction_failure_reason}.
+            EXTERNAL_DESTRUCTION_FAILED = 10
           end
 
           # A view for {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion}s.

@@ -8,10 +8,12 @@ require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/dialogflow/cx/v3/advanced_settings_pb'
+require 'google/cloud/dialogflow/cx/v3/audio_config_pb'
 require 'google/cloud/dialogflow/cx/v3/flow_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
+require 'google/protobuf/struct_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/dialogflow/cx/v3/agent.proto", :syntax => :proto3) do
@@ -33,6 +35,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :enable_spell_correction, :bool, 20
       optional :locked, :bool, 27
       optional :advanced_settings, :message, 22, "google.cloud.dialogflow.cx.v3.AdvancedSettings"
+      optional :text_to_speech_settings, :message, 31, "google.cloud.dialogflow.cx.v3.TextToSpeechSettings"
     end
     add_message "google.cloud.dialogflow.cx.v3.ListAgentsRequest" do
       optional :parent, :string, 1
@@ -66,6 +69,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_enum "google.cloud.dialogflow.cx.v3.ExportAgentRequest.DataFormat" do
       value :DATA_FORMAT_UNSPECIFIED, 0
       value :BLOB, 1
+      value :JSON_PACKAGE, 4
     end
     add_message "google.cloud.dialogflow.cx.v3.ExportAgentResponse" do
       oneof :agent do

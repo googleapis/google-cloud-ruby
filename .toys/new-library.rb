@@ -27,10 +27,10 @@ end
 flag :source_path, "--source-path=PATH" do
   desc "Path to the googleapis-gen source repo"
 end
-flag :pull do
+flag :pull, "--[no-]pull" do
   desc "Pull the latest owlbot images before running"
 end
-flag :interactive, "--interactive", "-i" do
+flag :interactive, "--[no-]interactive", "-i" do
   desc "Run in interactive mode, including editing of the .owlbot.rb file"
 end
 flag :editor do
@@ -43,9 +43,15 @@ end
 flag :git_remote, "--remote NAME" do
   desc "The name of the git remote to use as the pull request head. If omitted, does not open a pull request."
 end
-flag :enable_tests, "--test" do
+flag :enable_tests, "--[no-]test" do
   desc "Run CI on the newly-created library"
 end
+flag :bootstrap_releases, "--[no-]bootstrap-releases" do
+  desc "Also add release-please configuration for the newly-created library"
+end
+
+static :config_name, "release-please-config.json"
+static :manifest_name, ".release-please-manifest.json"
 
 include :exec, e: true
 include :fileutils
@@ -64,6 +70,7 @@ def run
     write_owlbot_config
     write_owlbot_script
     call_owlbot
+    create_release_please_configs if bootstrap_releases
     test_library if enable_tests
   end
 end
@@ -116,6 +123,39 @@ def call_owlbot
   cmd << "--source-path" << source_path if source_path
   cmd << "--piper-client" << piper_client if piper_client
   exec_tool cmd
+end
+
+def create_release_please_configs
+  manifest = JSON.parse File.read manifest_name
+  manifest[gem_name] = "0.0.1"
+  manifest = add_fillers(manifest).sort.to_h
+  File.write manifest_name, "#{JSON.pretty_generate manifest}\n"
+
+  config = JSON.parse File.read config_name
+  config["packages"][gem_name] = {
+    "component" => gem_name,
+    "version_file" => gem_version_file
+  }
+  config["packages"] = config["packages"].sort.to_h
+  File.write config_name, "#{JSON.pretty_generate config}\n"
+end
+
+def gem_version_file
+  @gem_version_file ||= begin
+    version_path = gem_name.tr "-", "/"
+    version_file = File.join "lib", version_path, "version.rb"
+    version_file_full = File.join gem_name, version_file
+    raise "Unable to find #{version_file_full}" unless File.file? version_file_full
+    version_file
+  end
+  @gem_version_file
+end
+
+def add_fillers manifest
+  manifest.keys.each do |key|
+    manifest["#{key}+FILLER"] = "0.0.0" unless key.end_with? "+FILLER"
+  end
+  manifest
 end
 
 def test_library

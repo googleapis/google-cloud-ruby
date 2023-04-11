@@ -93,27 +93,27 @@ class ::Google::Cloud::Compute::V1::UrlMaps::Rest::ClientTest < Minitest::Test
 
         # Use hash object
         client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListUrlMapsRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListUrlMapsRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -149,27 +149,27 @@ class ::Google::Cloud::Compute::V1::UrlMaps::Rest::ClientTest < Minitest::Test
 
         # Use hash object
         client.delete({ project: project, request_id: request_id, url_map: url_map }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.delete project: project, request_id: request_id, url_map: url_map do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.delete ::Google::Cloud::Compute::V1::DeleteUrlMapRequest.new(project: project, request_id: request_id, url_map: url_map) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.delete({ project: project, request_id: request_id, url_map: url_map }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.delete(::Google::Cloud::Compute::V1::DeleteUrlMapRequest.new(project: project, request_id: request_id, url_map: url_map), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -204,27 +204,27 @@ class ::Google::Cloud::Compute::V1::UrlMaps::Rest::ClientTest < Minitest::Test
 
         # Use hash object
         client.get({ project: project, url_map: url_map }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.get project: project, url_map: url_map do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.get ::Google::Cloud::Compute::V1::GetUrlMapRequest.new(project: project, url_map: url_map) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.get({ project: project, url_map: url_map }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.get(::Google::Cloud::Compute::V1::GetUrlMapRequest.new(project: project, url_map: url_map), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -260,27 +260,27 @@ class ::Google::Cloud::Compute::V1::UrlMaps::Rest::ClientTest < Minitest::Test
 
         # Use hash object
         client.insert({ project: project, request_id: request_id, url_map_resource: url_map_resource }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.insert project: project, request_id: request_id, url_map_resource: url_map_resource do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.insert ::Google::Cloud::Compute::V1::InsertUrlMapRequest.new(project: project, request_id: request_id, url_map_resource: url_map_resource) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.insert({ project: project, request_id: request_id, url_map_resource: url_map_resource }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.insert(::Google::Cloud::Compute::V1::InsertUrlMapRequest.new(project: project, request_id: request_id, url_map_resource: url_map_resource), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -317,27 +317,27 @@ class ::Google::Cloud::Compute::V1::UrlMaps::Rest::ClientTest < Minitest::Test
 
         # Use hash object
         client.invalidate_cache({ cache_invalidation_rule_resource: cache_invalidation_rule_resource, project: project, request_id: request_id, url_map: url_map }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.invalidate_cache cache_invalidation_rule_resource: cache_invalidation_rule_resource, project: project, request_id: request_id, url_map: url_map do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.invalidate_cache ::Google::Cloud::Compute::V1::InvalidateCacheUrlMapRequest.new(cache_invalidation_rule_resource: cache_invalidation_rule_resource, project: project, request_id: request_id, url_map: url_map) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.invalidate_cache({ cache_invalidation_rule_resource: cache_invalidation_rule_resource, project: project, request_id: request_id, url_map: url_map }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.invalidate_cache(::Google::Cloud::Compute::V1::InvalidateCacheUrlMapRequest.new(cache_invalidation_rule_resource: cache_invalidation_rule_resource, project: project, request_id: request_id, url_map: url_map), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -376,27 +376,27 @@ class ::Google::Cloud::Compute::V1::UrlMaps::Rest::ClientTest < Minitest::Test
 
         # Use hash object
         client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.list ::Google::Cloud::Compute::V1::ListUrlMapsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.list(::Google::Cloud::Compute::V1::ListUrlMapsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -433,27 +433,27 @@ class ::Google::Cloud::Compute::V1::UrlMaps::Rest::ClientTest < Minitest::Test
 
         # Use hash object
         client.patch({ project: project, request_id: request_id, url_map: url_map, url_map_resource: url_map_resource }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.patch project: project, request_id: request_id, url_map: url_map, url_map_resource: url_map_resource do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.patch ::Google::Cloud::Compute::V1::PatchUrlMapRequest.new(project: project, request_id: request_id, url_map: url_map, url_map_resource: url_map_resource) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.patch({ project: project, request_id: request_id, url_map: url_map, url_map_resource: url_map_resource }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.patch(::Google::Cloud::Compute::V1::PatchUrlMapRequest.new(project: project, request_id: request_id, url_map: url_map, url_map_resource: url_map_resource), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -490,27 +490,27 @@ class ::Google::Cloud::Compute::V1::UrlMaps::Rest::ClientTest < Minitest::Test
 
         # Use hash object
         client.update({ project: project, request_id: request_id, url_map: url_map, url_map_resource: url_map_resource }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.update project: project, request_id: request_id, url_map: url_map, url_map_resource: url_map_resource do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.update ::Google::Cloud::Compute::V1::UpdateUrlMapRequest.new(project: project, request_id: request_id, url_map: url_map, url_map_resource: url_map_resource) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.update({ project: project, request_id: request_id, url_map: url_map, url_map_resource: url_map_resource }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.update(::Google::Cloud::Compute::V1::UpdateUrlMapRequest.new(project: project, request_id: request_id, url_map: url_map, url_map_resource: url_map_resource), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -546,27 +546,27 @@ class ::Google::Cloud::Compute::V1::UrlMaps::Rest::ClientTest < Minitest::Test
 
         # Use hash object
         client.validate({ project: project, url_map: url_map, url_maps_validate_request_resource: url_maps_validate_request_resource }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.validate project: project, url_map: url_map, url_maps_validate_request_resource: url_maps_validate_request_resource do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.validate ::Google::Cloud::Compute::V1::ValidateUrlMapRequest.new(project: project, url_map: url_map, url_maps_validate_request_resource: url_maps_validate_request_resource) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.validate({ project: project, url_map: url_map, url_maps_validate_request_resource: url_maps_validate_request_resource }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.validate(::Google::Cloud::Compute::V1::ValidateUrlMapRequest.new(project: project, url_map: url_map, url_maps_validate_request_resource: url_maps_validate_request_resource), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls

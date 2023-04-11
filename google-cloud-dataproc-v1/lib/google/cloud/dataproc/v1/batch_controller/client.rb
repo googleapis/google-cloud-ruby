@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/dataproc/v1/batches_pb"
+require "google/iam/v1"
 
 module Google
   module Cloud
@@ -139,6 +140,12 @@ module Google
                 config.endpoint = @config.endpoint
               end
 
+              @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
               @batch_controller_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::Dataproc::V1::BatchController::Stub,
                 credentials:  credentials,
@@ -154,6 +161,13 @@ module Google
             # @return [::Google::Cloud::Dataproc::V1::BatchController::Operations]
             #
             attr_reader :operations_client
+
+            ##
+            # Get the associated client for mix-in of the IAMPolicy.
+            #
+            # @return [Google::Iam::V1::IAMPolicy::Client]
+            #
+            attr_reader :iam_policy_client
 
             # Service calls
 
@@ -180,8 +194,8 @@ module Google
             #   @param batch [::Google::Cloud::Dataproc::V1::Batch, ::Hash]
             #     Required. The batch to create.
             #   @param batch_id [::String]
-            #     Optional. The ID to use for the batch, which will become the final component of
-            #     the batch's resource name.
+            #     Optional. The ID to use for the batch, which will become the final
+            #     component of the batch's resource name.
             #
             #     This value must be 4-63 characters. Valid characters are `/[a-z][0-9]-/`.
             #   @param request_id [::String]
@@ -218,14 +232,14 @@ module Google
             #   # Call the create_batch method.
             #   result = client.create_batch request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_batch request, options = nil
@@ -289,7 +303,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the batch to retrieve.
+            #     Required. The fully qualified name of the batch to retrieve
+            #     in the format
+            #     "projects/PROJECT_ID/locations/DATAPROC_REGION/batches/BATCH_ID"
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Dataproc::V1::Batch]
@@ -368,7 +384,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_batches(parent: nil, page_size: nil, page_token: nil)
+            # @overload list_batches(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
             #   Pass arguments to `list_batches` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -382,6 +398,26 @@ module Google
             #   @param page_token [::String]
             #     Optional. A page token received from a previous `ListBatches` call.
             #     Provide this token to retrieve the subsequent page.
+            #   @param filter [::String]
+            #     Optional. A filter for the batches to return in the response.
+            #
+            #     A filter is a logical expression constraining the values of various fields
+            #     in each batch resource. Filters are case sensitive, and may contain
+            #     multiple clauses combined with logical operators (AND/OR).
+            #     Supported fields are `batch_id`, `batch_uuid`, `state`, and `create_time`.
+            #
+            #     e.g. `state = RUNNING and create_time < "2023-01-01T00:00:00Z"`
+            #     filters for batches in state RUNNING that were created before 2023-01-01
+            #
+            #     See https://google.aip.dev/assets/misc/ebnf-filtering.txt for a detailed
+            #     description of the filter syntax and a list of supported comparisons.
+            #   @param order_by [::String]
+            #     Optional. Field(s) on which to sort the list of batches.
+            #
+            #     Currently the only supported sort orders are unspecified (empty) and
+            #     `create_time desc` to sort by most recently created batches first.
+            #
+            #     See https://google.aip.dev/132#ordering for more details.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Dataproc::V1::Batch>]
@@ -403,13 +439,11 @@ module Google
             #   # Call the list_batches method.
             #   result = client.list_batches request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Dataproc::V1::Batch.
-            #     p response
+            #     p item
             #   end
             #
             def list_batches request, options = nil
@@ -474,7 +508,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the batch resource to delete.
+            #     Required. The fully qualified name of the batch to retrieve
+            #     in the format
+            #     "projects/PROJECT_ID/locations/DATAPROC_REGION/batches/BATCH_ID"
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]
@@ -578,9 +614,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials

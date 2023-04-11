@@ -42,8 +42,8 @@ module Google
             #     Output only. The time the operation was submitted to the server.
             # @!attribute [rw] end_time
             #   @return [::Google::Protobuf::Timestamp]
-            #     Output only. The time when the operation terminated, regardless of its success.
-            #     This field is unset if the operation is still ongoing.
+            #     Output only. The time when the operation terminated, regardless of its
+            #     success. This field is unset if the operation is still ongoing.
             class OperationMetadata
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods

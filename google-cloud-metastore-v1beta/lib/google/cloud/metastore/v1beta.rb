@@ -31,6 +31,11 @@ module Google
       #     require "google/cloud/metastore/v1beta"
       #     client = ::Google::Cloud::Metastore::V1beta::DataprocMetastore::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/metastore/v1beta"
+      #     client = ::Google::Cloud::Metastore::V1beta::DataprocMetastore::Rest::Client.new
+      #
       module V1beta
       end
     end

@@ -48,7 +48,7 @@ module Google
       # Create a new client object for RecaptchaEnterpriseService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client](https://googleapis.dev/ruby/google-cloud-recaptcha_enterprise-v1/latest/Google/Cloud/RecaptchaEnterprise/V1/RecaptchaEnterpriseService/Client.html)
+      # [Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-recaptcha_enterprise-v1/latest/Google-Cloud-RecaptchaEnterprise-V1-RecaptchaEnterpriseService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the RecaptchaEnterpriseService service is

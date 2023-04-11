@@ -18,6 +18,10 @@
     "lib/google/cloud/bigquery/data_policies/v1/data_policy_service/client.rb",
     "lib/google/cloud/bigquery/data_policies/v1/data_policy_service/credentials.rb",
     "lib/google/cloud/bigquery/data_policies/v1/data_policy_service/paths.rb",
+    "lib/google/cloud/bigquery/data_policies/v1/data_policy_service/rest.rb",
+    "lib/google/cloud/bigquery/data_policies/v1/data_policy_service/rest/client.rb",
+    "lib/google/cloud/bigquery/data_policies/v1/data_policy_service/rest/service_stub.rb",
+    "lib/google/cloud/bigquery/data_policies/v1/rest.rb",
     "lib/google/cloud/bigquery/data_policies/v1/version.rb",
     "lib/google/cloud/bigquery/datapolicies/v1/datapolicy_pb.rb",
     "lib/google/cloud/bigquery/datapolicies/v1/datapolicy_services_pb.rb",
@@ -46,6 +50,7 @@
     "snippets/data_policy_service/update_data_policy.rb",
     "snippets/snippet_metadata_google.cloud.bigquery.datapolicies.v1.json",
     "test/google/cloud/bigquery/data_policies/v1/data_policy_service_paths_test.rb",
+    "test/google/cloud/bigquery/data_policies/v1/data_policy_service_rest_test.rb",
     "test/google/cloud/bigquery/data_policies/v1/data_policy_service_test.rb",
     "test/helper.rb"
   ],

@@ -26,6 +26,7 @@ require "google/cloud/datastream/v1alpha1/datastream/credentials"
 require "google/cloud/datastream/v1alpha1/datastream/paths"
 require "google/cloud/datastream/v1alpha1/datastream/operations"
 require "google/cloud/datastream/v1alpha1/datastream/client"
+require "google/cloud/datastream/v1alpha1/datastream/rest"
 
 module Google
   module Cloud
@@ -38,6 +39,11 @@ module Google
         #
         #     require "google/cloud/datastream/v1alpha1/datastream"
         #     client = ::Google::Cloud::Datastream::V1alpha1::Datastream::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/datastream/v1alpha1/datastream/rest"
+        #     client = ::Google::Cloud::Datastream::V1alpha1::Datastream::Rest::Client.new
         #
         module Datastream
         end

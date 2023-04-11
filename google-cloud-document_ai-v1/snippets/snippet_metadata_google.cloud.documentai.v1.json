@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-document_ai-v1",
-    "version": "0.8.0",
+    "version": "0.11.0",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "documentai_v1_generated_DocumentProcessorService_ProcessDocument_sync",
-      "title": "Snippet for process_document in DocumentProcessorService",
-      "description": "Basic snippet for process_document in DocumentProcessorService",
+      "title": "Snippet for the process_document call in the DocumentProcessorService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#process_document. It may require modification in order to execute successfully.",
       "file": "document_processor_service/process_document.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "documentai_v1_generated_DocumentProcessorService_BatchProcessDocuments_sync",
-      "title": "Snippet for batch_process_documents in DocumentProcessorService",
-      "description": "Basic snippet for batch_process_documents in DocumentProcessorService",
+      "title": "Snippet for the batch_process_documents call in the DocumentProcessorService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#batch_process_documents. It may require modification in order to execute successfully.",
       "file": "document_processor_service/batch_process_documents.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "documentai_v1_generated_DocumentProcessorService_FetchProcessorTypes_sync",
-      "title": "Snippet for fetch_processor_types in DocumentProcessorService",
-      "description": "Basic snippet for fetch_processor_types in DocumentProcessorService",
+      "title": "Snippet for the fetch_processor_types call in the DocumentProcessorService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#fetch_processor_types. It may require modification in order to execute successfully.",
       "file": "document_processor_service/fetch_processor_types.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "documentai_v1_generated_DocumentProcessorService_ListProcessorTypes_sync",
-      "title": "Snippet for list_processor_types in DocumentProcessorService",
-      "description": "Basic snippet for list_processor_types in DocumentProcessorService",
+      "title": "Snippet for the list_processor_types call in the DocumentProcessorService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#list_processor_types. It may require modification in order to execute successfully.",
       "file": "document_processor_service/list_processor_types.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "documentai_v1_generated_DocumentProcessorService_GetProcessorType_sync",
-      "title": "Snippet for get_processor_type in DocumentProcessorService",
-      "description": "Basic snippet for get_processor_type in DocumentProcessorService",
+      "title": "Snippet for the get_processor_type call in the DocumentProcessorService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#get_processor_type. It may require modification in order to execute successfully.",
       "file": "document_processor_service/get_processor_type.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "documentai_v1_generated_DocumentProcessorService_ListProcessors_sync",
-      "title": "Snippet for list_processors in DocumentProcessorService",
-      "description": "Basic snippet for list_processors in DocumentProcessorService",
+      "title": "Snippet for the list_processors call in the DocumentProcessorService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#list_processors. It may require modification in order to execute successfully.",
       "file": "document_processor_service/list_processors.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "documentai_v1_generated_DocumentProcessorService_GetProcessor_sync",
-      "title": "Snippet for get_processor in DocumentProcessorService",
-      "description": "Basic snippet for get_processor in DocumentProcessorService",
+      "title": "Snippet for the get_processor call in the DocumentProcessorService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#get_processor. It may require modification in order to execute successfully.",
       "file": "document_processor_service/get_processor.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,55 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "documentai_v1_generated_DocumentProcessorService_TrainProcessorVersion_sync",
+      "title": "Snippet for the train_processor_version call in the DocumentProcessorService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#train_processor_version. It may require modification in order to execute successfully.",
+      "file": "document_processor_service/train_processor_version.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "train_processor_version",
+        "full_name": "::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#train_processor_version",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DocumentAI::V1::TrainProcessorVersionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DocumentProcessorService::Client",
+          "full_name": "::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client"
+        },
+        "method": {
+          "short_name": "TrainProcessorVersion",
+          "full_name": "google.cloud.documentai.v1.DocumentProcessorService.TrainProcessorVersion",
+          "service": {
+            "short_name": "DocumentProcessorService",
+            "full_name": "google.cloud.documentai.v1.DocumentProcessorService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "documentai_v1_generated_DocumentProcessorService_GetProcessorVersion_sync",
-      "title": "Snippet for get_processor_version in DocumentProcessorService",
-      "description": "Basic snippet for get_processor_version in DocumentProcessorService",
+      "title": "Snippet for the get_processor_version call in the DocumentProcessorService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#get_processor_version. It may require modification in order to execute successfully.",
       "file": "document_processor_service/get_processor_version.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "documentai_v1_generated_DocumentProcessorService_ListProcessorVersions_sync",
-      "title": "Snippet for list_processor_versions in DocumentProcessorService",
-      "description": "Basic snippet for list_processor_versions in DocumentProcessorService",
+      "title": "Snippet for the list_processor_versions call in the DocumentProcessorService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#list_processor_versions. It may require modification in order to execute successfully.",
       "file": "document_processor_service/list_processor_versions.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,15 +406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "documentai_v1_generated_DocumentProcessorService_DeleteProcessorVersion_sync",
-      "title": "Snippet for delete_processor_version in DocumentProcessorService",
-      "description": "Basic snippet for delete_processor_version in DocumentProcessorService",
+      "title": "Snippet for the delete_processor_version call in the DocumentProcessorService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#delete_processor_version. It may require modification in order to execute successfully.",
       "file": "document_processor_service/delete_processor_version.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,15 +446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "documentai_v1_generated_DocumentProcessorService_DeployProcessorVersion_sync",
-      "title": "Snippet for deploy_processor_version in DocumentProcessorService",
-      "description": "Basic snippet for deploy_processor_version in DocumentProcessorService",
+      "title": "Snippet for the deploy_processor_version call in the DocumentProcessorService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#deploy_processor_version. It may require modification in order to execute successfully.",
       "file": "document_processor_service/deploy_processor_version.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,15 +486,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "documentai_v1_generated_DocumentProcessorService_UndeployProcessorVersion_sync",
-      "title": "Snippet for undeploy_processor_version in DocumentProcessorService",
-      "description": "Basic snippet for undeploy_processor_version in DocumentProcessorService",
+      "title": "Snippet for the undeploy_processor_version call in the DocumentProcessorService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#undeploy_processor_version. It may require modification in order to execute successfully.",
       "file": "document_processor_service/undeploy_processor_version.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,15 +526,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "documentai_v1_generated_DocumentProcessorService_CreateProcessor_sync",
-      "title": "Snippet for create_processor in DocumentProcessorService",
-      "description": "Basic snippet for create_processor in DocumentProcessorService",
+      "title": "Snippet for the create_processor call in the DocumentProcessorService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#create_processor. It may require modification in order to execute successfully.",
       "file": "document_processor_service/create_processor.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,15 +566,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "documentai_v1_generated_DocumentProcessorService_DeleteProcessor_sync",
-      "title": "Snippet for delete_processor in DocumentProcessorService",
-      "description": "Basic snippet for delete_processor in DocumentProcessorService",
+      "title": "Snippet for the delete_processor call in the DocumentProcessorService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#delete_processor. It may require modification in order to execute successfully.",
       "file": "document_processor_service/delete_processor.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,15 +606,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "documentai_v1_generated_DocumentProcessorService_EnableProcessor_sync",
-      "title": "Snippet for enable_processor in DocumentProcessorService",
-      "description": "Basic snippet for enable_processor in DocumentProcessorService",
+      "title": "Snippet for the enable_processor call in the DocumentProcessorService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#enable_processor. It may require modification in order to execute successfully.",
       "file": "document_processor_service/enable_processor.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,15 +646,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "documentai_v1_generated_DocumentProcessorService_DisableProcessor_sync",
-      "title": "Snippet for disable_processor in DocumentProcessorService",
-      "description": "Basic snippet for disable_processor in DocumentProcessorService",
+      "title": "Snippet for the disable_processor call in the DocumentProcessorService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#disable_processor. It may require modification in order to execute successfully.",
       "file": "document_processor_service/disable_processor.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,15 +686,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "documentai_v1_generated_DocumentProcessorService_SetDefaultProcessorVersion_sync",
-      "title": "Snippet for set_default_processor_version in DocumentProcessorService",
-      "description": "Basic snippet for set_default_processor_version in DocumentProcessorService",
+      "title": "Snippet for the set_default_processor_version call in the DocumentProcessorService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#set_default_processor_version. It may require modification in order to execute successfully.",
       "file": "document_processor_service/set_default_processor_version.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,15 +726,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "documentai_v1_generated_DocumentProcessorService_ReviewDocument_sync",
-      "title": "Snippet for review_document in DocumentProcessorService",
-      "description": "Basic snippet for review_document in DocumentProcessorService",
+      "title": "Snippet for the review_document call in the DocumentProcessorService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#review_document. It may require modification in order to execute successfully.",
       "file": "document_processor_service/review_document.rb",
       "language": "RUBY",
       "client_method": {
@@ -715,6 +755,126 @@
         "method": {
           "short_name": "ReviewDocument",
           "full_name": "google.cloud.documentai.v1.DocumentProcessorService.ReviewDocument",
+          "service": {
+            "short_name": "DocumentProcessorService",
+            "full_name": "google.cloud.documentai.v1.DocumentProcessorService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "documentai_v1_generated_DocumentProcessorService_EvaluateProcessorVersion_sync",
+      "title": "Snippet for the evaluate_processor_version call in the DocumentProcessorService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#evaluate_processor_version. It may require modification in order to execute successfully.",
+      "file": "document_processor_service/evaluate_processor_version.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "evaluate_processor_version",
+        "full_name": "::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#evaluate_processor_version",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DocumentAI::V1::EvaluateProcessorVersionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DocumentProcessorService::Client",
+          "full_name": "::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client"
+        },
+        "method": {
+          "short_name": "EvaluateProcessorVersion",
+          "full_name": "google.cloud.documentai.v1.DocumentProcessorService.EvaluateProcessorVersion",
+          "service": {
+            "short_name": "DocumentProcessorService",
+            "full_name": "google.cloud.documentai.v1.DocumentProcessorService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "documentai_v1_generated_DocumentProcessorService_GetEvaluation_sync",
+      "title": "Snippet for the get_evaluation call in the DocumentProcessorService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#get_evaluation. It may require modification in order to execute successfully.",
+      "file": "document_processor_service/get_evaluation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_evaluation",
+        "full_name": "::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#get_evaluation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DocumentAI::V1::GetEvaluationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DocumentAI::V1::Evaluation",
+        "client": {
+          "short_name": "DocumentProcessorService::Client",
+          "full_name": "::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client"
+        },
+        "method": {
+          "short_name": "GetEvaluation",
+          "full_name": "google.cloud.documentai.v1.DocumentProcessorService.GetEvaluation",
+          "service": {
+            "short_name": "DocumentProcessorService",
+            "full_name": "google.cloud.documentai.v1.DocumentProcessorService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "documentai_v1_generated_DocumentProcessorService_ListEvaluations_sync",
+      "title": "Snippet for the list_evaluations call in the DocumentProcessorService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#list_evaluations. It may require modification in order to execute successfully.",
+      "file": "document_processor_service/list_evaluations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_evaluations",
+        "full_name": "::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#list_evaluations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DocumentAI::V1::ListEvaluationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DocumentAI::V1::ListEvaluationsResponse",
+        "client": {
+          "short_name": "DocumentProcessorService::Client",
+          "full_name": "::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client"
+        },
+        "method": {
+          "short_name": "ListEvaluations",
+          "full_name": "google.cloud.documentai.v1.DocumentProcessorService.ListEvaluations",
           "service": {
             "short_name": "DocumentProcessorService",
             "full_name": "google.cloud.documentai.v1.DocumentProcessorService"

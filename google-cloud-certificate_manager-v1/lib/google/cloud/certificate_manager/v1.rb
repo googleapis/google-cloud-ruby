@@ -30,6 +30,11 @@ module Google
       #     require "google/cloud/certificate_manager/v1"
       #     client = ::Google::Cloud::CertificateManager::V1::CertificateManager::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/certificate_manager/v1"
+      #     client = ::Google::Cloud::CertificateManager::V1::CertificateManager::Rest::Client.new
+      #
       module V1
       end
     end

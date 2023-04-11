@@ -20,8 +20,11 @@
 require "google/cloud/talent/v4beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Talent::V4beta1::TenantService::Client#list_tenants
+# Snippet for the list_tenants call in the TenantService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Talent::V4beta1::TenantService::Client#list_tenants. It may
+# require modification in order to execute successfully.
 #
 def list_tenants
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_tenants
   # Call the list_tenants method.
   result = client.list_tenants request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::Talent::V4beta1::Tenant.
-    p response
+    p item
   end
 end
 # [END jobs_v4beta1_generated_TenantService_ListTenants_sync]

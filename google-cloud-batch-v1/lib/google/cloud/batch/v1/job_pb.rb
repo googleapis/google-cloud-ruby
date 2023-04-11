@@ -43,6 +43,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :machine_type, :string, 1
       optional :provisioning_model, :enum, 2, "google.cloud.batch.v1.AllocationPolicy.ProvisioningModel"
       optional :task_pack, :int64, 3
+      optional :boot_disk, :message, 4, "google.cloud.batch.v1.AllocationPolicy.Disk"
     end
     add_message "google.cloud.batch.v1.JobStatus.TaskGroupStatus" do
       map :counts, :string, :int64, 1
@@ -107,6 +108,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :min_cpu_platform, :string, 3
       optional :provisioning_model, :enum, 4, "google.cloud.batch.v1.AllocationPolicy.ProvisioningModel"
       repeated :accelerators, :message, 5, "google.cloud.batch.v1.AllocationPolicy.Accelerator"
+      optional :boot_disk, :message, 8, "google.cloud.batch.v1.AllocationPolicy.Disk"
       repeated :disks, :message, 6, "google.cloud.batch.v1.AllocationPolicy.AttachedDisk"
     end
     add_message "google.cloud.batch.v1.AllocationPolicy.InstancePolicyOrTemplate" do
@@ -142,6 +144,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.batch.v1.ServiceAccount" do
       optional :email, :string, 1
+      repeated :scopes, :string, 2
     end
   end
 end

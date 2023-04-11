@@ -31,6 +31,11 @@ module Google
         #     require "google/cloud/video/live_stream/v1"
         #     client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client.new
         #
+        # @example Load this package, including all its services, and instantiate a REST client
+        #
+        #     require "google/cloud/video/live_stream/v1"
+        #     client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Rest::Client.new
+        #
         module V1
         end
       end

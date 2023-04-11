@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-error_reporting-v1beta1",
-    "version": "0.5.0",
+    "version": "0.6.0",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "clouderrorreporting_v1beta1_generated_ErrorGroupService_GetGroup_sync",
-      "title": "Snippet for get_group in ErrorGroupService",
-      "description": "Basic snippet for get_group in ErrorGroupService",
+      "title": "Snippet for the get_group call in the ErrorGroupService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ErrorReporting::V1beta1::ErrorGroupService::Client#get_group. It may require modification in order to execute successfully.",
       "file": "error_group_service/get_group.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "clouderrorreporting_v1beta1_generated_ErrorGroupService_UpdateGroup_sync",
-      "title": "Snippet for update_group in ErrorGroupService",
-      "description": "Basic snippet for update_group in ErrorGroupService",
+      "title": "Snippet for the update_group call in the ErrorGroupService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ErrorReporting::V1beta1::ErrorGroupService::Client#update_group. It may require modification in order to execute successfully.",
       "file": "error_group_service/update_group.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "clouderrorreporting_v1beta1_generated_ErrorStatsService_ListGroupStats_sync",
-      "title": "Snippet for list_group_stats in ErrorStatsService",
-      "description": "Basic snippet for list_group_stats in ErrorStatsService",
+      "title": "Snippet for the list_group_stats call in the ErrorStatsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::Client#list_group_stats. It may require modification in order to execute successfully.",
       "file": "error_stats_service/list_group_stats.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "clouderrorreporting_v1beta1_generated_ErrorStatsService_ListEvents_sync",
-      "title": "Snippet for list_events in ErrorStatsService",
-      "description": "Basic snippet for list_events in ErrorStatsService",
+      "title": "Snippet for the list_events call in the ErrorStatsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::Client#list_events. It may require modification in order to execute successfully.",
       "file": "error_stats_service/list_events.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "clouderrorreporting_v1beta1_generated_ErrorStatsService_DeleteEvents_sync",
-      "title": "Snippet for delete_events in ErrorStatsService",
-      "description": "Basic snippet for delete_events in ErrorStatsService",
+      "title": "Snippet for the delete_events call in the ErrorStatsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::Client#delete_events. It may require modification in order to execute successfully.",
       "file": "error_stats_service/delete_events.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "clouderrorreporting_v1beta1_generated_ReportErrorsService_ReportErrorEvent_sync",
-      "title": "Snippet for report_error_event in ReportErrorsService",
-      "description": "Basic snippet for report_error_event in ReportErrorsService",
+      "title": "Snippet for the report_error_event call in the ReportErrorsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ErrorReporting::V1beta1::ReportErrorsService::Client#report_error_event. It may require modification in order to execute successfully.",
       "file": "report_errors_service/report_error_event.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,7 +246,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]

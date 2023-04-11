@@ -20,8 +20,11 @@
 require "google/cloud/app_engine/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::AppEngine::V1::DomainMappings::Client#get_domain_mapping
+# Snippet for the get_domain_mapping call in the DomainMappings service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::AppEngine::V1::DomainMappings::Client#get_domain_mapping. It
+# may require modification in order to execute successfully.
 #
 def get_domain_mapping
   # Create a client object. The client can be reused for multiple calls.

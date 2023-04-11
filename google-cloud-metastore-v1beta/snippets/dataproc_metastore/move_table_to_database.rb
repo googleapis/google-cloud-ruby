@@ -20,8 +20,11 @@
 require "google/cloud/metastore/v1beta"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#move_table_to_database
+# Snippet for the move_table_to_database call in the DataprocMetastore service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#move_table_to_database.
+# It may require modification in order to execute successfully.
 #
 def move_table_to_database
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def move_table_to_database
   # Call the move_table_to_database method.
   result = client.move_table_to_database request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END metastore_v1beta_generated_DataprocMetastore_MoveTableToDatabase_sync]

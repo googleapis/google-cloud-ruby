@@ -230,7 +230,7 @@ module Google
             #   @param solving_mode [::Google::Cloud::Optimization::V1::OptimizeToursRequest::SolvingMode]
             #     By default, the solving mode is `DEFAULT_SOLVE` (0).
             #   @param max_validation_errors [::Integer]
-            #     Truncates the number of validation errors returned. Those errors are
+            #     Truncates the number of validation errors returned. These errors are
             #     typically attached to an INVALID_ARGUMENT error payload as a BadRequest
             #     error detail (https://cloud.google.com/apis/design/errors#error_details),
             #     unless solving_mode=VALIDATE_ONLY: see the
@@ -395,7 +395,8 @@ module Google
             #     Label that may be used to identify this request, reported back in the
             #     {::Google::Cloud::Optimization::V1::OptimizeToursResponse#request_label OptimizeToursResponse.request_label}.
             #   @param populate_travel_step_polylines [::Boolean]
-            #     Deprecated: Use [OptimizeToursRequest.populate_transition_polylines][]
+            #     Deprecated: Use
+            #     {::Google::Cloud::Optimization::V1::OptimizeToursRequest#populate_transition_polylines OptimizeToursRequest.populate_transition_polylines}
             #     instead. If true, polylines will be populated in response
             #     {::Google::Cloud::Optimization::V1::ShipmentRoute#transitions ShipmentRoute.transitions}.
             #     Note that in this case, the polylines will also be populated in the
@@ -522,14 +523,14 @@ module Google
             #   # Call the batch_optimize_tours method.
             #   result = client.batch_optimize_tours request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def batch_optimize_tours request, options = nil
@@ -612,9 +613,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials

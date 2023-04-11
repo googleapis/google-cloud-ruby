@@ -360,15 +360,20 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param tenant [::Google::Cloud::Talent::V4beta1::Tenant, ::Hash]
-            #     Required. The tenant resource to replace the current resource in the system.
+            #     Required. The tenant resource to replace the current resource in the
+            #     system.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Strongly recommended for the best service experience.
             #
-            #     If {::Google::Cloud::Talent::V4beta1::UpdateTenantRequest#update_mask update_mask} is provided, only the specified fields in
-            #     {::Google::Cloud::Talent::V4beta1::UpdateTenantRequest#tenant tenant} are updated. Otherwise all the fields are updated.
+            #     If
+            #     {::Google::Cloud::Talent::V4beta1::UpdateTenantRequest#update_mask update_mask}
+            #     is provided, only the specified fields in
+            #     {::Google::Cloud::Talent::V4beta1::UpdateTenantRequest#tenant tenant} are
+            #     updated. Otherwise all the fields are updated.
             #
             #     A field mask to specify the tenant fields to be updated. Only
-            #     top level fields of {::Google::Cloud::Talent::V4beta1::Tenant Tenant} are supported.
+            #     top level fields of {::Google::Cloud::Talent::V4beta1::Tenant Tenant} are
+            #     supported.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Talent::V4beta1::Tenant]
@@ -571,13 +576,11 @@ module Google
             #   # Call the list_tenants method.
             #   result = client.list_tenants request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Talent::V4beta1::Tenant.
-            #     p response
+            #     p item
             #   end
             #
             def list_tenants request, options = nil
@@ -660,9 +663,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials

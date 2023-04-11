@@ -69,13 +69,14 @@ module Google
       # @!attribute [rw] monitored_resource
       #   @return [::String]
       #     The monitored resource type. The type must be defined in the
-      #     {::Google::Api::Service#monitored_resources Service.monitored_resources} section.
+      #     {::Google::Api::Service#monitored_resources Service.monitored_resources}
+      #     section.
       # @!attribute [rw] logs
       #   @return [::Array<::String>]
       #     Names of the logs to be sent to this destination. Each name must
-      #     be defined in the {::Google::Api::Service#logs Service.logs} section. If the log name is
-      #     not a domain scoped name, it will be automatically prefixed with
-      #     the service name followed by "/".
+      #     be defined in the {::Google::Api::Service#logs Service.logs} section. If the
+      #     log name is not a domain scoped name, it will be automatically prefixed
+      #     with the service name followed by "/".
       class LoggingDestination
         include ::Google::Protobuf::MessageExts
         extend ::Google::Protobuf::MessageExts::ClassMethods

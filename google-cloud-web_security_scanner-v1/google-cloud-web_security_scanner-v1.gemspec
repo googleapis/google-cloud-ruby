@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
   gem.description   = "Web Security Scanner scans your Compute and App Engine apps for common web vulnerabilities. Note that google-cloud-web_security_scanner-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-web_security_scanner instead. See the readme for more details."
-  gem.summary       = "API Client library for the Web Security Scanner V1 API"
+  gem.summary       = "Scans your Compute and App Engine apps for common web vulnerabilities."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
@@ -23,10 +23,10 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 2.6"
 
-  gem.add_dependency "gapic-common", ">= 0.16.0", "< 2.a"
+  gem.add_dependency "gapic-common", ">= 0.18.0", "< 2.a"
   gem.add_dependency "google-cloud-errors", "~> 1.0"
 
-  gem.add_development_dependency "google-style", "~> 1.26.1"
+  gem.add_development_dependency "google-style", "~> 1.26.3"
   gem.add_development_dependency "minitest", "~> 5.16"
   gem.add_development_dependency "minitest-focus", "~> 1.1"
   gem.add_development_dependency "minitest-rg", "~> 5.2"

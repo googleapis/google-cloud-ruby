@@ -12,6 +12,7 @@ require 'google/cloud/aiplatform/v1/custom_job_pb'
 require 'google/cloud/aiplatform/v1/data_labeling_job_pb'
 require 'google/cloud/aiplatform/v1/hyperparameter_tuning_job_pb'
 require 'google/cloud/aiplatform/v1/model_deployment_monitoring_job_pb'
+require 'google/cloud/aiplatform/v1/nas_job_pb'
 require 'google/cloud/aiplatform/v1/operation_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/empty_pb'
@@ -92,6 +93,42 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.aiplatform.v1.CancelHyperparameterTuningJobRequest" do
       optional :name, :string, 1
+    end
+    add_message "google.cloud.aiplatform.v1.CreateNasJobRequest" do
+      optional :parent, :string, 1
+      optional :nas_job, :message, 2, "google.cloud.aiplatform.v1.NasJob"
+    end
+    add_message "google.cloud.aiplatform.v1.GetNasJobRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.cloud.aiplatform.v1.ListNasJobsRequest" do
+      optional :parent, :string, 1
+      optional :filter, :string, 2
+      optional :page_size, :int32, 3
+      optional :page_token, :string, 4
+      optional :read_mask, :message, 5, "google.protobuf.FieldMask"
+    end
+    add_message "google.cloud.aiplatform.v1.ListNasJobsResponse" do
+      repeated :nas_jobs, :message, 1, "google.cloud.aiplatform.v1.NasJob"
+      optional :next_page_token, :string, 2
+    end
+    add_message "google.cloud.aiplatform.v1.DeleteNasJobRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.cloud.aiplatform.v1.CancelNasJobRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.cloud.aiplatform.v1.GetNasTrialDetailRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.cloud.aiplatform.v1.ListNasTrialDetailsRequest" do
+      optional :parent, :string, 1
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
+    end
+    add_message "google.cloud.aiplatform.v1.ListNasTrialDetailsResponse" do
+      repeated :nas_trial_details, :message, 1, "google.cloud.aiplatform.v1.NasTrialDetail"
+      optional :next_page_token, :string, 2
     end
     add_message "google.cloud.aiplatform.v1.CreateBatchPredictionJobRequest" do
       optional :parent, :string, 1
@@ -194,6 +231,15 @@ module Google
         ListHyperparameterTuningJobsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ListHyperparameterTuningJobsResponse").msgclass
         DeleteHyperparameterTuningJobRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.DeleteHyperparameterTuningJobRequest").msgclass
         CancelHyperparameterTuningJobRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.CancelHyperparameterTuningJobRequest").msgclass
+        CreateNasJobRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.CreateNasJobRequest").msgclass
+        GetNasJobRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.GetNasJobRequest").msgclass
+        ListNasJobsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ListNasJobsRequest").msgclass
+        ListNasJobsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ListNasJobsResponse").msgclass
+        DeleteNasJobRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.DeleteNasJobRequest").msgclass
+        CancelNasJobRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.CancelNasJobRequest").msgclass
+        GetNasTrialDetailRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.GetNasTrialDetailRequest").msgclass
+        ListNasTrialDetailsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ListNasTrialDetailsRequest").msgclass
+        ListNasTrialDetailsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ListNasTrialDetailsResponse").msgclass
         CreateBatchPredictionJobRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.CreateBatchPredictionJobRequest").msgclass
         GetBatchPredictionJobRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.GetBatchPredictionJobRequest").msgclass
         ListBatchPredictionJobsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ListBatchPredictionJobsRequest").msgclass

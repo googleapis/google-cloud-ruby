@@ -20,8 +20,11 @@
 require "google/cloud/monitoring/v3"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client#list_services
+# Snippet for the list_services call in the ServiceMonitoringService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client#list_services.
+# It may require modification in order to execute successfully.
 #
 def list_services
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_services
   # Call the list_services method.
   result = client.list_services request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::Monitoring::V3::Service.
-    p response
+    p item
   end
 end
 # [END monitoring_v3_generated_ServiceMonitoringService_ListServices_sync]

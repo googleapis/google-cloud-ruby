@@ -10,6 +10,8 @@ require 'google/api/resource_pb'
 require 'google/api/routing_pb'
 require 'google/bigtable/v2/data_pb'
 require 'google/bigtable/v2/request_stats_pb'
+require 'google/protobuf/duration_pb'
+require 'google/protobuf/timestamp_pb'
 require 'google/protobuf/wrappers_pb'
 require 'google/rpc/status_pb'
 
@@ -104,6 +106,66 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.bigtable.v2.ReadModifyWriteRowResponse" do
       optional :row, :message, 1, "google.bigtable.v2.Row"
     end
+    add_message "google.bigtable.v2.GenerateInitialChangeStreamPartitionsRequest" do
+      optional :table_name, :string, 1
+      optional :app_profile_id, :string, 2
+    end
+    add_message "google.bigtable.v2.GenerateInitialChangeStreamPartitionsResponse" do
+      optional :partition, :message, 1, "google.bigtable.v2.StreamPartition"
+    end
+    add_message "google.bigtable.v2.ReadChangeStreamRequest" do
+      optional :table_name, :string, 1
+      optional :app_profile_id, :string, 2
+      optional :partition, :message, 3, "google.bigtable.v2.StreamPartition"
+      optional :end_time, :message, 5, "google.protobuf.Timestamp"
+      optional :heartbeat_duration, :message, 7, "google.protobuf.Duration"
+      oneof :start_from do
+        optional :start_time, :message, 4, "google.protobuf.Timestamp"
+        optional :continuation_tokens, :message, 6, "google.bigtable.v2.StreamContinuationTokens"
+      end
+    end
+    add_message "google.bigtable.v2.ReadChangeStreamResponse" do
+      oneof :stream_record do
+        optional :data_change, :message, 1, "google.bigtable.v2.ReadChangeStreamResponse.DataChange"
+        optional :heartbeat, :message, 2, "google.bigtable.v2.ReadChangeStreamResponse.Heartbeat"
+        optional :close_stream, :message, 3, "google.bigtable.v2.ReadChangeStreamResponse.CloseStream"
+      end
+    end
+    add_message "google.bigtable.v2.ReadChangeStreamResponse.MutationChunk" do
+      optional :chunk_info, :message, 1, "google.bigtable.v2.ReadChangeStreamResponse.MutationChunk.ChunkInfo"
+      optional :mutation, :message, 2, "google.bigtable.v2.Mutation"
+    end
+    add_message "google.bigtable.v2.ReadChangeStreamResponse.MutationChunk.ChunkInfo" do
+      optional :chunked_value_size, :int32, 1
+      optional :chunked_value_offset, :int32, 2
+      optional :last_chunk, :bool, 3
+    end
+    add_message "google.bigtable.v2.ReadChangeStreamResponse.DataChange" do
+      optional :type, :enum, 1, "google.bigtable.v2.ReadChangeStreamResponse.DataChange.Type"
+      optional :source_cluster_id, :string, 2
+      optional :row_key, :bytes, 3
+      optional :commit_timestamp, :message, 4, "google.protobuf.Timestamp"
+      optional :tiebreaker, :int32, 5
+      repeated :chunks, :message, 6, "google.bigtable.v2.ReadChangeStreamResponse.MutationChunk"
+      optional :done, :bool, 8
+      optional :token, :string, 9
+      optional :estimated_low_watermark, :message, 10, "google.protobuf.Timestamp"
+    end
+    add_enum "google.bigtable.v2.ReadChangeStreamResponse.DataChange.Type" do
+      value :TYPE_UNSPECIFIED, 0
+      value :USER, 1
+      value :GARBAGE_COLLECTION, 2
+      value :CONTINUATION, 3
+    end
+    add_message "google.bigtable.v2.ReadChangeStreamResponse.Heartbeat" do
+      optional :continuation_token, :message, 1, "google.bigtable.v2.StreamContinuationToken"
+      optional :estimated_low_watermark, :message, 2, "google.protobuf.Timestamp"
+    end
+    add_message "google.bigtable.v2.ReadChangeStreamResponse.CloseStream" do
+      optional :status, :message, 1, "google.rpc.Status"
+      repeated :continuation_tokens, :message, 2, "google.bigtable.v2.StreamContinuationToken"
+      repeated :new_partitions, :message, 3, "google.bigtable.v2.StreamPartition"
+    end
   end
 end
 
@@ -129,6 +191,16 @@ module Google
         PingAndWarmResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.PingAndWarmResponse").msgclass
         ReadModifyWriteRowRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.ReadModifyWriteRowRequest").msgclass
         ReadModifyWriteRowResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.ReadModifyWriteRowResponse").msgclass
+        GenerateInitialChangeStreamPartitionsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.GenerateInitialChangeStreamPartitionsRequest").msgclass
+        GenerateInitialChangeStreamPartitionsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.GenerateInitialChangeStreamPartitionsResponse").msgclass
+        ReadChangeStreamRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.ReadChangeStreamRequest").msgclass
+        ReadChangeStreamResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.ReadChangeStreamResponse").msgclass
+        ReadChangeStreamResponse::MutationChunk = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.ReadChangeStreamResponse.MutationChunk").msgclass
+        ReadChangeStreamResponse::MutationChunk::ChunkInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.ReadChangeStreamResponse.MutationChunk.ChunkInfo").msgclass
+        ReadChangeStreamResponse::DataChange = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.ReadChangeStreamResponse.DataChange").msgclass
+        ReadChangeStreamResponse::DataChange::Type = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.ReadChangeStreamResponse.DataChange.Type").enummodule
+        ReadChangeStreamResponse::Heartbeat = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.ReadChangeStreamResponse.Heartbeat").msgclass
+        ReadChangeStreamResponse::CloseStream = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.ReadChangeStreamResponse.CloseStream").msgclass
       end
     end
   end

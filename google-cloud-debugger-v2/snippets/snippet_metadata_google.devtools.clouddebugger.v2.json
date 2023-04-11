@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-debugger-v2",
-    "version": "0.4.0",
+    "version": "0.5.0",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "clouddebugger_v2_generated_Controller_RegisterDebuggee_sync",
-      "title": "Snippet for register_debuggee in Controller",
-      "description": "Basic snippet for register_debuggee in Controller",
+      "title": "Snippet for the register_debuggee call in the Controller service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Debugger::V2::Controller::Client#register_debuggee. It may require modification in order to execute successfully.",
       "file": "controller/register_debuggee.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "clouddebugger_v2_generated_Controller_ListActiveBreakpoints_sync",
-      "title": "Snippet for list_active_breakpoints in Controller",
-      "description": "Basic snippet for list_active_breakpoints in Controller",
+      "title": "Snippet for the list_active_breakpoints call in the Controller service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Debugger::V2::Controller::Client#list_active_breakpoints. It may require modification in order to execute successfully.",
       "file": "controller/list_active_breakpoints.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "clouddebugger_v2_generated_Controller_UpdateActiveBreakpoint_sync",
-      "title": "Snippet for update_active_breakpoint in Controller",
-      "description": "Basic snippet for update_active_breakpoint in Controller",
+      "title": "Snippet for the update_active_breakpoint call in the Controller service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Debugger::V2::Controller::Client#update_active_breakpoint. It may require modification in order to execute successfully.",
       "file": "controller/update_active_breakpoint.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "clouddebugger_v2_generated_Debugger_SetBreakpoint_sync",
-      "title": "Snippet for set_breakpoint in Debugger",
-      "description": "Basic snippet for set_breakpoint in Debugger",
+      "title": "Snippet for the set_breakpoint call in the Debugger service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Debugger::V2::Debugger::Client#set_breakpoint. It may require modification in order to execute successfully.",
       "file": "debugger/set_breakpoint.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "clouddebugger_v2_generated_Debugger_GetBreakpoint_sync",
-      "title": "Snippet for get_breakpoint in Debugger",
-      "description": "Basic snippet for get_breakpoint in Debugger",
+      "title": "Snippet for the get_breakpoint call in the Debugger service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Debugger::V2::Debugger::Client#get_breakpoint. It may require modification in order to execute successfully.",
       "file": "debugger/get_breakpoint.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "clouddebugger_v2_generated_Debugger_DeleteBreakpoint_sync",
-      "title": "Snippet for delete_breakpoint in Debugger",
-      "description": "Basic snippet for delete_breakpoint in Debugger",
+      "title": "Snippet for the delete_breakpoint call in the Debugger service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Debugger::V2::Debugger::Client#delete_breakpoint. It may require modification in order to execute successfully.",
       "file": "debugger/delete_breakpoint.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "clouddebugger_v2_generated_Debugger_ListBreakpoints_sync",
-      "title": "Snippet for list_breakpoints in Debugger",
-      "description": "Basic snippet for list_breakpoints in Debugger",
+      "title": "Snippet for the list_breakpoints call in the Debugger service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Debugger::V2::Debugger::Client#list_breakpoints. It may require modification in order to execute successfully.",
       "file": "debugger/list_breakpoints.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "clouddebugger_v2_generated_Debugger_ListDebuggees_sync",
-      "title": "Snippet for list_debuggees in Debugger",
-      "description": "Basic snippet for list_debuggees in Debugger",
+      "title": "Snippet for the list_debuggees call in the Debugger service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Debugger::V2::Debugger::Client#list_debuggees. It may require modification in order to execute successfully.",
       "file": "debugger/list_debuggees.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,7 +326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]

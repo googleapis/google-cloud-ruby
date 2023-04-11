@@ -26,9 +26,19 @@ module Google
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     KRM-style labels for the resource.
+        #
+        #     <p>Cloud Run API v2 does not support labels with `run.googleapis.com`,
+        #     `cloud.googleapis.com`, `serving.knative.dev`, or `autoscaling.knative.dev`
+        #     namespaces, and they will be rejected. All system labels in v1 now have a
+        #     corresponding field in v2 ExecutionTemplate.
         # @!attribute [rw] annotations
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     KRM-style annotations for the resource.
+        #
+        #     <p>Cloud Run API v2 does not support annotations with `run.googleapis.com`,
+        #     `cloud.googleapis.com`, `serving.knative.dev`, or `autoscaling.knative.dev`
+        #     namespaces, and they will be rejected. All system annotations in v1 now
+        #     have a corresponding field in v2 ExecutionTemplate.
         # @!attribute [rw] parallelism
         #   @return [::Integer]
         #     Specifies the maximum desired number of tasks the execution should run at
@@ -47,7 +57,8 @@ module Google
         #     https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/
         # @!attribute [rw] template
         #   @return [::Google::Cloud::Run::V2::TaskTemplate]
-        #     Required. Describes the task(s) that will be created when executing an execution.
+        #     Required. Describes the task(s) that will be created when executing an
+        #     execution.
         class ExecutionTemplate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

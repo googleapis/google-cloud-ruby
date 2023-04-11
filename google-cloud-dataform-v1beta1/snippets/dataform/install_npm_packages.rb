@@ -20,8 +20,11 @@
 require "google/cloud/dataform/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dataform::V1beta1::Dataform::Client#install_npm_packages
+# Snippet for the install_npm_packages call in the Dataform service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dataform::V1beta1::Dataform::Client#install_npm_packages. It
+# may require modification in order to execute successfully.
 #
 def install_npm_packages
   # Create a client object. The client can be reused for multiple calls.

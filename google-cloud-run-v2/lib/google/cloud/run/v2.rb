@@ -34,6 +34,11 @@ module Google
       #     require "google/cloud/run/v2"
       #     client = ::Google::Cloud::Run::V2::Executions::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/run/v2"
+      #     client = ::Google::Cloud::Run::V2::Executions::Rest::Client.new
+      #
       module V2
       end
     end

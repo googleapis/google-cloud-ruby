@@ -20,8 +20,11 @@
 require "google/cloud/apigee_registry/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::ApigeeRegistry::V1::Registry::Client#delete_api_deployment_revision
+# Snippet for the delete_api_deployment_revision call in the Registry service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::ApigeeRegistry::V1::Registry::Client#delete_api_deployment_revision.
+# It may require modification in order to execute successfully.
 #
 def delete_api_deployment_revision
   # Create a client object. The client can be reused for multiple calls.

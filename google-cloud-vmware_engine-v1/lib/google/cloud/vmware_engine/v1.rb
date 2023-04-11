@@ -30,6 +30,11 @@ module Google
       #     require "google/cloud/vmware_engine/v1"
       #     client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/vmware_engine/v1"
+      #     client = ::Google::Cloud::VmwareEngine::V1::VmwareEngine::Rest::Client.new
+      #
       module V1
       end
     end

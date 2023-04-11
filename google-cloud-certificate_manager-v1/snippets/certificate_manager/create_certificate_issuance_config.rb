@@ -20,8 +20,11 @@
 require "google/cloud/certificate_manager/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::CertificateManager::V1::CertificateManager::Client#create_certificate_issuance_config
+# Snippet for the create_certificate_issuance_config call in the CertificateManager service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::CertificateManager::V1::CertificateManager::Client#create_certificate_issuance_config.
+# It may require modification in order to execute successfully.
 #
 def create_certificate_issuance_config
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def create_certificate_issuance_config
   # Call the create_certificate_issuance_config method.
   result = client.create_certificate_issuance_config request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END certificatemanager_v1_generated_CertificateManager_CreateCertificateIssuanceConfig_sync]

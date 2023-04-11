@@ -78,6 +78,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :seqno, :int64, 9
       optional :query_options, :message, 10, "google.spanner.v1.ExecuteSqlRequest.QueryOptions"
       optional :request_options, :message, 11, "google.spanner.v1.RequestOptions"
+      optional :data_boost_enabled, :bool, 16
     end
     add_message "google.spanner.v1.ExecuteSqlRequest.QueryOptions" do
       optional :optimizer_version, :string, 1
@@ -143,6 +144,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :resume_token, :bytes, 9
       optional :partition_token, :bytes, 10
       optional :request_options, :message, 11, "google.spanner.v1.RequestOptions"
+      optional :data_boost_enabled, :bool, 15
     end
     add_message "google.spanner.v1.BeginTransactionRequest" do
       optional :session, :string, 1

@@ -36,6 +36,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :personalization_spec, :message, 32, "google.cloud.retail.v2.SearchRequest.PersonalizationSpec"
       map :labels, :string, :string, 34
       proto3_optional :spell_correction_spec, :message, 35, "google.cloud.retail.v2.SearchRequest.SpellCorrectionSpec"
+      optional :entity, :string, 38
     end
     add_message "google.cloud.retail.v2.SearchRequest.FacetSpec" do
       optional :facet_key, :message, 1, "google.cloud.retail.v2.SearchRequest.FacetSpec.FacetKey"
@@ -111,6 +112,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :redirect_uri, :string, 10
       repeated :applied_controls, :string, 12
       repeated :invalid_condition_boost_specs, :message, 14, "google.cloud.retail.v2.SearchRequest.BoostSpec.ConditionBoostSpec"
+      repeated :experiment_info, :message, 17, "google.cloud.retail.v2.ExperimentInfo"
     end
     add_message "google.cloud.retail.v2.SearchResponse.SearchResult" do
       optional :id, :string, 1
@@ -138,6 +140,16 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :expanded_query, :bool, 1
       optional :pinned_result_count, :int64, 2
     end
+    add_message "google.cloud.retail.v2.ExperimentInfo" do
+      optional :experiment, :string, 1
+      oneof :experiment_metadata do
+        optional :serving_config_experiment, :message, 2, "google.cloud.retail.v2.ExperimentInfo.ServingConfigExperiment"
+      end
+    end
+    add_message "google.cloud.retail.v2.ExperimentInfo.ServingConfigExperiment" do
+      optional :original_serving_config, :string, 1
+      optional :experiment_serving_config, :string, 2
+    end
   end
 end
 
@@ -164,6 +176,8 @@ module Google
         SearchResponse::Facet = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.SearchResponse.Facet").msgclass
         SearchResponse::Facet::FacetValue = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.SearchResponse.Facet.FacetValue").msgclass
         SearchResponse::QueryExpansionInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.SearchResponse.QueryExpansionInfo").msgclass
+        ExperimentInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.ExperimentInfo").msgclass
+        ExperimentInfo::ServingConfigExperiment = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.ExperimentInfo.ServingConfigExperiment").msgclass
       end
     end
   end

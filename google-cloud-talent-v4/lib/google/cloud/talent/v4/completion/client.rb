@@ -195,9 +195,11 @@ module Google
             #     "projects/\\{project_id}/tenants/\\{tenant_id}/companies/\\{company_id}", for
             #     example, "projects/foo/tenants/bar/companies/baz".
             #   @param scope [::Google::Cloud::Talent::V4::CompleteQueryRequest::CompletionScope]
-            #     The scope of the completion. The defaults is {::Google::Cloud::Talent::V4::CompleteQueryRequest::CompletionScope::PUBLIC CompletionScope.PUBLIC}.
+            #     The scope of the completion. The defaults is
+            #     {::Google::Cloud::Talent::V4::CompleteQueryRequest::CompletionScope::PUBLIC CompletionScope.PUBLIC}.
             #   @param type [::Google::Cloud::Talent::V4::CompleteQueryRequest::CompletionType]
-            #     The completion topic. The default is {::Google::Cloud::Talent::V4::CompleteQueryRequest::CompletionType::COMBINED CompletionType.COMBINED}.
+            #     The completion topic. The default is
+            #     {::Google::Cloud::Talent::V4::CompleteQueryRequest::CompletionType::COMBINED CompletionType.COMBINED}.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Talent::V4::CompleteQueryResponse]
@@ -301,9 +303,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials

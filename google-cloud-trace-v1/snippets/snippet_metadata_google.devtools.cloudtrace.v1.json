@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-trace-v1",
-    "version": "0.4.0",
+    "version": "0.5.0",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "cloudtrace_v1_generated_TraceService_ListTraces_sync",
-      "title": "Snippet for list_traces in TraceService",
-      "description": "Basic snippet for list_traces in TraceService",
+      "title": "Snippet for the list_traces call in the TraceService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Trace::V1::TraceService::Client#list_traces. It may require modification in order to execute successfully.",
       "file": "trace_service/list_traces.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudtrace_v1_generated_TraceService_GetTrace_sync",
-      "title": "Snippet for get_trace in TraceService",
-      "description": "Basic snippet for get_trace in TraceService",
+      "title": "Snippet for the get_trace call in the TraceService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Trace::V1::TraceService::Client#get_trace. It may require modification in order to execute successfully.",
       "file": "trace_service/get_trace.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudtrace_v1_generated_TraceService_PatchTraces_sync",
-      "title": "Snippet for patch_traces in TraceService",
-      "description": "Basic snippet for patch_traces in TraceService",
+      "title": "Snippet for the patch_traces call in the TraceService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Trace::V1::TraceService::Client#patch_traces. It may require modification in order to execute successfully.",
       "file": "trace_service/patch_traces.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]

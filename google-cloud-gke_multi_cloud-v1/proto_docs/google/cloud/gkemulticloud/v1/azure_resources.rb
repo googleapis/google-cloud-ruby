@@ -30,7 +30,7 @@ module Google
         #     `projects/<project-number>/locations/<region>/azureClusters/<cluster-id>`.
         #
         #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-        #     for more details on GCP resource names.
+        #     for more details on Google Cloud Platform resource names.
         # @!attribute [rw] description
         #   @return [::String]
         #     Optional. A human readable description of this cluster.
@@ -50,13 +50,13 @@ module Google
         #     `/subscriptions/<subscription-id>/resourceGroups/<resource-group-name>`
         # @!attribute [rw] azure_client
         #   @return [::String]
-        #     Required. Name of the
+        #     Optional. Name of the
         #     {::Google::Cloud::GkeMultiCloud::V1::AzureClient AzureClient} that contains
         #     authentication configuration for how the Anthos Multi-Cloud API connects to
         #     Azure APIs.
         #
-        #     The `AzureClient` resource must reside on the same GCP project and region
-        #     as the `AzureCluster`.
+        #     The `AzureClient` resource must reside on the same Google Cloud Platform
+        #     project and region as the `AzureCluster`.
         #
         #     `AzureClient` names are formatted as
         #     `projects/<project-number>/locations/<region>/azureClients/<client-id>`.
@@ -72,6 +72,9 @@ module Google
         # @!attribute [rw] authorization
         #   @return [::Google::Cloud::GkeMultiCloud::V1::AzureAuthorization]
         #     Required. Configuration related to the cluster RBAC settings.
+        # @!attribute [rw] azure_services_authentication
+        #   @return [::Google::Cloud::GkeMultiCloud::V1::AzureServicesAuthentication]
+        #     Optional. Authentication configuration for management of Azure resources.
         # @!attribute [r] state
         #   @return [::Google::Cloud::GkeMultiCloud::V1::AzureCluster::State]
         #     Output only. The current state of the cluster.
@@ -419,6 +422,9 @@ module Google
         # @!attribute [rw] application_id
         #   @return [::String]
         #     Required. The Azure Active Directory Application ID.
+        # @!attribute [r] reconciling
+        #   @return [::Boolean]
+        #     Output only. If set, there are currently pending changes to the client.
         # @!attribute [rw] annotations
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. Annotations on the resource.
@@ -439,6 +445,9 @@ module Google
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time at which this resource was created.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time at which this client was last updated.
         class AzureClient
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -463,6 +472,18 @@ module Google
         #     For more info on RBAC, see
         #     https://kubernetes.io/docs/reference/access-authn-authz/rbac/#user-facing-roles
         class AzureAuthorization
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Authentication configuration for the management of Azure resources.
+        # @!attribute [rw] tenant_id
+        #   @return [::String]
+        #     Required. The Azure Active Directory Tenant ID.
+        # @!attribute [rw] application_id
+        #   @return [::String]
+        #     Required. The Azure Active Directory Application ID.
+        class AzureServicesAuthentication
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -685,7 +706,7 @@ module Google
         #     `projects/<project-number>/locations/<region>/azureServerConfig`.
         #
         #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-        #     for more details on GCP resource names.
+        #     for more details on Google Cloud Platform resource names.
         # @!attribute [rw] valid_versions
         #   @return [::Array<::Google::Cloud::GkeMultiCloud::V1::AzureK8sVersionInfo>]
         #     List of valid Kubernetes versions.

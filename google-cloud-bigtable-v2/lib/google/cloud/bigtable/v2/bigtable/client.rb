@@ -79,6 +79,10 @@ module Google
 
                 default_config.rpcs.read_modify_write_row.timeout = 20.0
 
+                default_config.rpcs.generate_initial_change_stream_partitions.timeout = 60.0
+
+                default_config.rpcs.read_change_stream.timeout = 43_200.0
+
                 default_config
               end
               yield @configure if block_given?
@@ -217,13 +221,13 @@ module Google
             #   # Create a request. To set request fields, pass in keyword arguments.
             #   request = Google::Cloud::Bigtable::V2::ReadRowsRequest.new
             #
-            #   # Call the read_rows method.
-            #   result = client.read_rows request
+            #   # Call the read_rows method to start streaming.
+            #   output = client.read_rows request
             #
-            #   # The returned object is a streamed enumerable yielding elements of
-            #   # type ::Google::Cloud::Bigtable::V2::ReadRowsResponse.
-            #   result.each do |response|
-            #     p response
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::Bigtable::V2::ReadRowsResponse
+            #   output.each do |current_response|
+            #     p current_response
             #   end
             #
             def read_rows request, options = nil
@@ -317,13 +321,13 @@ module Google
             #   # Create a request. To set request fields, pass in keyword arguments.
             #   request = Google::Cloud::Bigtable::V2::SampleRowKeysRequest.new
             #
-            #   # Call the sample_row_keys method.
-            #   result = client.sample_row_keys request
+            #   # Call the sample_row_keys method to start streaming.
+            #   output = client.sample_row_keys request
             #
-            #   # The returned object is a streamed enumerable yielding elements of
-            #   # type ::Google::Cloud::Bigtable::V2::SampleRowKeysResponse.
-            #   result.each do |response|
-            #     p response
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::Bigtable::V2::SampleRowKeysResponse
+            #   output.each do |current_response|
+            #     p current_response
             #   end
             #
             def sample_row_keys request, options = nil
@@ -391,8 +395,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param table_name [::String]
-            #     Required. The unique name of the table to which the mutation should be applied.
-            #     Values are of the form
+            #     Required. The unique name of the table to which the mutation should be
+            #     applied. Values are of the form
             #     `projects/<project>/instances/<instance>/tables/<table>`.
             #   @param app_profile_id [::String]
             #     This value specifies routing for replication. If not specified, the
@@ -400,9 +404,9 @@ module Google
             #   @param row_key [::String]
             #     Required. The key of the row to which the mutation should be applied.
             #   @param mutations [::Array<::Google::Cloud::Bigtable::V2::Mutation, ::Hash>]
-            #     Required. Changes to be atomically applied to the specified row. Entries are applied
-            #     in order, meaning that earlier mutations can be masked by later ones.
-            #     Must contain at least one entry and at most 100000.
+            #     Required. Changes to be atomically applied to the specified row. Entries
+            #     are applied in order, meaning that earlier mutations can be masked by later
+            #     ones. Must contain at least one entry and at most 100000.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Bigtable::V2::MutateRowResponse]
@@ -493,7 +497,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param table_name [::String]
-            #     Required. The unique name of the table to which the mutations should be applied.
+            #     Required. The unique name of the table to which the mutations should be
+            #     applied.
             #   @param app_profile_id [::String]
             #     This value specifies routing for replication. If not specified, the
             #     "default" application profile will be used.
@@ -521,13 +526,13 @@ module Google
             #   # Create a request. To set request fields, pass in keyword arguments.
             #   request = Google::Cloud::Bigtable::V2::MutateRowsRequest.new
             #
-            #   # Call the mutate_rows method.
-            #   result = client.mutate_rows request
+            #   # Call the mutate_rows method to start streaming.
+            #   output = client.mutate_rows request
             #
-            #   # The returned object is a streamed enumerable yielding elements of
-            #   # type ::Google::Cloud::Bigtable::V2::MutateRowsResponse.
-            #   result.each do |response|
-            #     p response
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::Bigtable::V2::MutateRowsResponse
+            #   output.each do |current_response|
+            #     p current_response
             #   end
             #
             def mutate_rows request, options = nil
@@ -594,15 +599,15 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param table_name [::String]
-            #     Required. The unique name of the table to which the conditional mutation should be
-            #     applied.
-            #     Values are of the form
+            #     Required. The unique name of the table to which the conditional mutation
+            #     should be applied. Values are of the form
             #     `projects/<project>/instances/<instance>/tables/<table>`.
             #   @param app_profile_id [::String]
             #     This value specifies routing for replication. If not specified, the
             #     "default" application profile will be used.
             #   @param row_key [::String]
-            #     Required. The key of the row to which the conditional mutation should be applied.
+            #     Required. The key of the row to which the conditional mutation should be
+            #     applied.
             #   @param predicate_filter [::Google::Cloud::Bigtable::V2::RowFilter, ::Hash]
             #     The filter to be applied to the contents of the specified row. Depending
             #     on whether or not any results are yielded, either `true_mutations` or
@@ -709,8 +714,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The unique name of the instance to check permissions for as well as
-            #     respond. Values are of the form `projects/<project>/instances/<instance>`.
+            #     Required. The unique name of the instance to check permissions for as well
+            #     as respond. Values are of the form
+            #     `projects/<project>/instances/<instance>`.
             #   @param app_profile_id [::String]
             #     This value specifies routing for replication. If not specified, the
             #     "default" application profile will be used.
@@ -806,19 +812,19 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param table_name [::String]
-            #     Required. The unique name of the table to which the read/modify/write rules should be
-            #     applied.
-            #     Values are of the form
+            #     Required. The unique name of the table to which the read/modify/write rules
+            #     should be applied. Values are of the form
             #     `projects/<project>/instances/<instance>/tables/<table>`.
             #   @param app_profile_id [::String]
             #     This value specifies routing for replication. If not specified, the
             #     "default" application profile will be used.
             #   @param row_key [::String]
-            #     Required. The key of the row to which the read/modify/write rules should be applied.
+            #     Required. The key of the row to which the read/modify/write rules should be
+            #     applied.
             #   @param rules [::Array<::Google::Cloud::Bigtable::V2::ReadModifyWriteRule, ::Hash>]
-            #     Required. Rules specifying how the specified row's contents are to be transformed
-            #     into writes. Entries are applied in order, meaning that earlier rules will
-            #     affect the results of later ones.
+            #     Required. Rules specifying how the specified row's contents are to be
+            #     transformed into writes. Entries are applied in order, meaning that earlier
+            #     rules will affect the results of later ones.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Bigtable::V2::ReadModifyWriteRowResponse]
@@ -889,6 +895,227 @@ module Google
             end
 
             ##
+            # NOTE: This API is intended to be used by Apache Beam BigtableIO.
+            # Returns the current list of partitions that make up the table's
+            # change stream. The union of partitions will cover the entire keyspace.
+            # Partitions can be read with `ReadChangeStream`.
+            #
+            # @overload generate_initial_change_stream_partitions(request, options = nil)
+            #   Pass arguments to `generate_initial_change_stream_partitions` via a request object, either of type
+            #   {::Google::Cloud::Bigtable::V2::GenerateInitialChangeStreamPartitionsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Bigtable::V2::GenerateInitialChangeStreamPartitionsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload generate_initial_change_stream_partitions(table_name: nil, app_profile_id: nil)
+            #   Pass arguments to `generate_initial_change_stream_partitions` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param table_name [::String]
+            #     Required. The unique name of the table from which to get change stream
+            #     partitions. Values are of the form
+            #     `projects/<project>/instances/<instance>/tables/<table>`.
+            #     Change streaming must be enabled on the table.
+            #   @param app_profile_id [::String]
+            #     This value specifies routing for replication. If not specified, the
+            #     "default" application profile will be used.
+            #     Single cluster routing must be configured on the profile.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Enumerable<::Google::Cloud::Bigtable::V2::GenerateInitialChangeStreamPartitionsResponse>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Enumerable<::Google::Cloud::Bigtable::V2::GenerateInitialChangeStreamPartitionsResponse>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/bigtable/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Bigtable::V2::Bigtable::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Bigtable::V2::GenerateInitialChangeStreamPartitionsRequest.new
+            #
+            #   # Call the generate_initial_change_stream_partitions method to start streaming.
+            #   output = client.generate_initial_change_stream_partitions request
+            #
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::Bigtable::V2::GenerateInitialChangeStreamPartitionsResponse
+            #   output.each do |current_response|
+            #     p current_response
+            #   end
+            #
+            def generate_initial_change_stream_partitions request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigtable::V2::GenerateInitialChangeStreamPartitionsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.generate_initial_change_stream_partitions.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Bigtable::V2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.table_name
+                header_params["table_name"] = request.table_name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.generate_initial_change_stream_partitions.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.generate_initial_change_stream_partitions.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @bigtable_stub.call_rpc :generate_initial_change_stream_partitions, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # NOTE: This API is intended to be used by Apache Beam BigtableIO.
+            # Reads changes from a table's change stream. Changes will
+            # reflect both user-initiated mutations and mutations that are caused by
+            # garbage collection.
+            #
+            # @overload read_change_stream(request, options = nil)
+            #   Pass arguments to `read_change_stream` via a request object, either of type
+            #   {::Google::Cloud::Bigtable::V2::ReadChangeStreamRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Bigtable::V2::ReadChangeStreamRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload read_change_stream(table_name: nil, app_profile_id: nil, partition: nil, start_time: nil, continuation_tokens: nil, end_time: nil, heartbeat_duration: nil)
+            #   Pass arguments to `read_change_stream` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param table_name [::String]
+            #     Required. The unique name of the table from which to read a change stream.
+            #     Values are of the form
+            #     `projects/<project>/instances/<instance>/tables/<table>`.
+            #     Change streaming must be enabled on the table.
+            #   @param app_profile_id [::String]
+            #     This value specifies routing for replication. If not specified, the
+            #     "default" application profile will be used.
+            #     Single cluster routing must be configured on the profile.
+            #   @param partition [::Google::Cloud::Bigtable::V2::StreamPartition, ::Hash]
+            #     The partition to read changes from.
+            #   @param start_time [::Google::Protobuf::Timestamp, ::Hash]
+            #     Start reading the stream at the specified timestamp. This timestamp must
+            #     be within the change stream retention period, less than or equal to the
+            #     current time, and after change stream creation, whichever is greater.
+            #     This value is inclusive and will be truncated to microsecond granularity.
+            #   @param continuation_tokens [::Google::Cloud::Bigtable::V2::StreamContinuationTokens, ::Hash]
+            #     Tokens that describe how to resume reading a stream where reading
+            #     previously left off. If specified, changes will be read starting at the
+            #     the position. Tokens are delivered on the stream as part of `Heartbeat`
+            #     and `CloseStream` messages.
+            #
+            #     If a single token is provided, the token’s partition must exactly match
+            #     the request’s partition. If multiple tokens are provided, as in the case
+            #     of a partition merge, the union of the token partitions must exactly
+            #     cover the request’s partition. Otherwise, INVALID_ARGUMENT will be
+            #     returned.
+            #   @param end_time [::Google::Protobuf::Timestamp, ::Hash]
+            #     If specified, OK will be returned when the stream advances beyond
+            #     this time. Otherwise, changes will be continuously delivered on the stream.
+            #     This value is inclusive and will be truncated to microsecond granularity.
+            #   @param heartbeat_duration [::Google::Protobuf::Duration, ::Hash]
+            #     If specified, the duration between `Heartbeat` messages on the stream.
+            #     Otherwise, defaults to 5 seconds.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Enumerable<::Google::Cloud::Bigtable::V2::ReadChangeStreamResponse>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Enumerable<::Google::Cloud::Bigtable::V2::ReadChangeStreamResponse>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/bigtable/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Bigtable::V2::Bigtable::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Bigtable::V2::ReadChangeStreamRequest.new
+            #
+            #   # Call the read_change_stream method to start streaming.
+            #   output = client.read_change_stream request
+            #
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::Bigtable::V2::ReadChangeStreamResponse
+            #   output.each do |current_response|
+            #     p current_response
+            #   end
+            #
+            def read_change_stream request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigtable::V2::ReadChangeStreamRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.read_change_stream.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Bigtable::V2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.table_name
+                header_params["table_name"] = request.table_name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.read_change_stream.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.read_change_stream.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @bigtable_stub.call_rpc :read_change_stream, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the Bigtable API.
             #
             # This class represents the configuration for Bigtable,
@@ -926,9 +1153,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -1058,6 +1285,16 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :read_modify_write_row
+                ##
+                # RPC-specific configuration for `generate_initial_change_stream_partitions`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :generate_initial_change_stream_partitions
+                ##
+                # RPC-specific configuration for `read_change_stream`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :read_change_stream
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -1075,6 +1312,10 @@ module Google
                   @ping_and_warm = ::Gapic::Config::Method.new ping_and_warm_config
                   read_modify_write_row_config = parent_rpcs.read_modify_write_row if parent_rpcs.respond_to? :read_modify_write_row
                   @read_modify_write_row = ::Gapic::Config::Method.new read_modify_write_row_config
+                  generate_initial_change_stream_partitions_config = parent_rpcs.generate_initial_change_stream_partitions if parent_rpcs.respond_to? :generate_initial_change_stream_partitions
+                  @generate_initial_change_stream_partitions = ::Gapic::Config::Method.new generate_initial_change_stream_partitions_config
+                  read_change_stream_config = parent_rpcs.read_change_stream if parent_rpcs.respond_to? :read_change_stream
+                  @read_change_stream = ::Gapic::Config::Method.new read_change_stream_config
 
                   yield self if block_given?
                 end

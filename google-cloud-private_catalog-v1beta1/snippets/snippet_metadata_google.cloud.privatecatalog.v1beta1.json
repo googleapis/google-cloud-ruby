@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-private_catalog-v1beta1",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "cloudprivatecatalog_v1beta1_generated_PrivateCatalog_SearchCatalogs_sync",
-      "title": "Snippet for search_catalogs in PrivateCatalog",
-      "description": "Basic snippet for search_catalogs in PrivateCatalog",
+      "title": "Snippet for the search_catalogs call in the PrivateCatalog service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::Client#search_catalogs. It may require modification in order to execute successfully.",
       "file": "private_catalog/search_catalogs.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudprivatecatalog_v1beta1_generated_PrivateCatalog_SearchProducts_sync",
-      "title": "Snippet for search_products in PrivateCatalog",
-      "description": "Basic snippet for search_products in PrivateCatalog",
+      "title": "Snippet for the search_products call in the PrivateCatalog service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::Client#search_products. It may require modification in order to execute successfully.",
       "file": "private_catalog/search_products.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudprivatecatalog_v1beta1_generated_PrivateCatalog_SearchVersions_sync",
-      "title": "Snippet for search_versions in PrivateCatalog",
-      "description": "Basic snippet for search_versions in PrivateCatalog",
+      "title": "Snippet for the search_versions call in the PrivateCatalog service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::Client#search_versions. It may require modification in order to execute successfully.",
       "file": "private_catalog/search_versions.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]

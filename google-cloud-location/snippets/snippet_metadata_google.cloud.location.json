@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-location",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "location_v0_generated_Locations_ListLocations_sync",
-      "title": "Snippet for list_locations in Locations",
-      "description": "Basic snippet for list_locations in Locations",
+      "title": "Snippet for the list_locations call in the Locations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Location::Locations::Client#list_locations. It may require modification in order to execute successfully.",
       "file": "locations/list_locations.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "location_v0_generated_Locations_GetLocation_sync",
-      "title": "Snippet for get_location in Locations",
-      "description": "Basic snippet for get_location in Locations",
+      "title": "Snippet for the get_location call in the Locations service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Location::Locations::Client#get_location. It may require modification in order to execute successfully.",
       "file": "locations/get_location.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,7 +86,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]

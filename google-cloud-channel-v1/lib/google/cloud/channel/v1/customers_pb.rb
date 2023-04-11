@@ -24,6 +24,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :language_code, :string, 10
       optional :cloud_identity_info, :message, 12, "google.cloud.channel.v1.CloudIdentityInfo"
       optional :channel_partner_id, :string, 13
+      optional :correlation_id, :string, 14
     end
     add_message "google.cloud.channel.v1.ContactInfo" do
       optional :first_name, :string, 1

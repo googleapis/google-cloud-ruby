@@ -7,12 +7,15 @@ require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
+require 'google/cloud/aiplatform/v1/encryption_spec_pb'
+require 'google/cloud/aiplatform/v1/evaluated_annotation_pb'
 require 'google/cloud/aiplatform/v1/io_pb'
 require 'google/cloud/aiplatform/v1/model_pb'
 require 'google/cloud/aiplatform/v1/model_evaluation_pb'
 require 'google/cloud/aiplatform/v1/model_evaluation_slice_pb'
 require 'google/cloud/aiplatform/v1/operation_pb'
 require 'google/longrunning/operations_pb'
+require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
@@ -91,6 +94,22 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.aiplatform.v1.ExportModelResponse" do
     end
+    add_message "google.cloud.aiplatform.v1.CopyModelRequest" do
+      optional :parent, :string, 1
+      optional :source_model, :string, 2
+      optional :encryption_spec, :message, 3, "google.cloud.aiplatform.v1.EncryptionSpec"
+      oneof :destination_model do
+        optional :model_id, :string, 4
+        optional :parent_model, :string, 5
+      end
+    end
+    add_message "google.cloud.aiplatform.v1.CopyModelOperationMetadata" do
+      optional :generic_metadata, :message, 1, "google.cloud.aiplatform.v1.GenericOperationMetadata"
+    end
+    add_message "google.cloud.aiplatform.v1.CopyModelResponse" do
+      optional :model, :string, 1
+      optional :model_version_id, :string, 2
+    end
     add_message "google.cloud.aiplatform.v1.ImportModelEvaluationRequest" do
       optional :parent, :string, 1
       optional :model_evaluation, :message, 2, "google.cloud.aiplatform.v1.ModelEvaluation"
@@ -101,6 +120,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.aiplatform.v1.BatchImportModelEvaluationSlicesResponse" do
       repeated :imported_model_evaluation_slices, :string, 1
+    end
+    add_message "google.cloud.aiplatform.v1.BatchImportEvaluatedAnnotationsRequest" do
+      optional :parent, :string, 1
+      repeated :evaluated_annotations, :message, 2, "google.cloud.aiplatform.v1.EvaluatedAnnotation"
+    end
+    add_message "google.cloud.aiplatform.v1.BatchImportEvaluatedAnnotationsResponse" do
+      optional :imported_evaluated_annotations_count, :int32, 1
     end
     add_message "google.cloud.aiplatform.v1.GetModelEvaluationRequest" do
       optional :name, :string, 1
@@ -154,9 +180,14 @@ module Google
         ExportModelOperationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ExportModelOperationMetadata").msgclass
         ExportModelOperationMetadata::OutputInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ExportModelOperationMetadata.OutputInfo").msgclass
         ExportModelResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ExportModelResponse").msgclass
+        CopyModelRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.CopyModelRequest").msgclass
+        CopyModelOperationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.CopyModelOperationMetadata").msgclass
+        CopyModelResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.CopyModelResponse").msgclass
         ImportModelEvaluationRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ImportModelEvaluationRequest").msgclass
         BatchImportModelEvaluationSlicesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.BatchImportModelEvaluationSlicesRequest").msgclass
         BatchImportModelEvaluationSlicesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.BatchImportModelEvaluationSlicesResponse").msgclass
+        BatchImportEvaluatedAnnotationsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.BatchImportEvaluatedAnnotationsRequest").msgclass
+        BatchImportEvaluatedAnnotationsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.BatchImportEvaluatedAnnotationsResponse").msgclass
         GetModelEvaluationRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.GetModelEvaluationRequest").msgclass
         ListModelEvaluationsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ListModelEvaluationsRequest").msgclass
         ListModelEvaluationsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ListModelEvaluationsResponse").msgclass

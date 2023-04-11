@@ -25,6 +25,7 @@ require "google/cloud/tasks/v2beta3/version"
 require "google/cloud/tasks/v2beta3/cloud_tasks/credentials"
 require "google/cloud/tasks/v2beta3/cloud_tasks/paths"
 require "google/cloud/tasks/v2beta3/cloud_tasks/client"
+require "google/cloud/tasks/v2beta3/cloud_tasks/rest"
 
 module Google
   module Cloud
@@ -38,6 +39,11 @@ module Google
         #
         #     require "google/cloud/tasks/v2beta3/cloud_tasks"
         #     client = ::Google::Cloud::Tasks::V2beta3::CloudTasks::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/tasks/v2beta3/cloud_tasks/rest"
+        #     client = ::Google::Cloud::Tasks::V2beta3::CloudTasks::Rest::Client.new
         #
         module CloudTasks
         end

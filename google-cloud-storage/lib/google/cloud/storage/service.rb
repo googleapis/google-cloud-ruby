@@ -794,6 +794,18 @@ module Google
           "#{self.class}(#{@project})"
         end
 
+        ##
+        # Add custom Google extension headers to the requests that use the signed URLs.
+        def add_custom_headers headers
+          @service.request_options.header.merge! headers
+        end
+
+        ##
+        # Add custom Google extension header to the requests that use the signed URLs.
+        def add_custom_header header_name, header_value
+          @service.request_options.header[header_name] = header_value
+        end
+
         protected
 
         def user_project user_project

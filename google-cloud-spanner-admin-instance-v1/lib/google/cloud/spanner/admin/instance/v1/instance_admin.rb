@@ -26,6 +26,7 @@ require "google/cloud/spanner/admin/instance/v1/instance_admin/credentials"
 require "google/cloud/spanner/admin/instance/v1/instance_admin/paths"
 require "google/cloud/spanner/admin/instance/v1/instance_admin/operations"
 require "google/cloud/spanner/admin/instance/v1/instance_admin/client"
+require "google/cloud/spanner/admin/instance/v1/instance_admin/rest"
 
 module Google
   module Cloud
@@ -60,6 +61,11 @@ module Google
             #
             #     require "google/cloud/spanner/admin/instance/v1/instance_admin"
             #     client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new
+            #
+            # @example Load this service and instantiate a REST client
+            #
+            #     require "google/cloud/spanner/admin/instance/v1/instance_admin/rest"
+            #     client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new
             #
             module InstanceAdmin
             end

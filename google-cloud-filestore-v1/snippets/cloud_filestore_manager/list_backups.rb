@@ -20,8 +20,11 @@
 require "google/cloud/filestore/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Filestore::V1::CloudFilestoreManager::Client#list_backups
+# Snippet for the list_backups call in the CloudFilestoreManager service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Filestore::V1::CloudFilestoreManager::Client#list_backups. It
+# may require modification in order to execute successfully.
 #
 def list_backups
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_backups
   # Call the list_backups method.
   result = client.list_backups request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::Filestore::V1::Backup.
-    p response
+    p item
   end
 end
 # [END file_v1_generated_CloudFilestoreManager_ListBackups_sync]

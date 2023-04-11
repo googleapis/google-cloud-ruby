@@ -20,8 +20,11 @@
 require "google/cloud/video/stitcher/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client#update_cdn_key
+# Snippet for the update_cdn_key call in the VideoStitcherService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client#update_cdn_key.
+# It may require modification in order to execute successfully.
 #
 def update_cdn_key
   # Create a client object. The client can be reused for multiple calls.

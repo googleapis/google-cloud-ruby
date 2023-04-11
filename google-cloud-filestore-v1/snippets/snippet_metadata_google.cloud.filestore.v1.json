@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-filestore-v1",
-    "version": "0.2.0",
+    "version": "0.4.0",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "file_v1_generated_CloudFilestoreManager_ListInstances_sync",
-      "title": "Snippet for list_instances in CloudFilestoreManager",
-      "description": "Basic snippet for list_instances in CloudFilestoreManager",
+      "title": "Snippet for the list_instances call in the CloudFilestoreManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Filestore::V1::CloudFilestoreManager::Client#list_instances. It may require modification in order to execute successfully.",
       "file": "cloud_filestore_manager/list_instances.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "file_v1_generated_CloudFilestoreManager_GetInstance_sync",
-      "title": "Snippet for get_instance in CloudFilestoreManager",
-      "description": "Basic snippet for get_instance in CloudFilestoreManager",
+      "title": "Snippet for the get_instance call in the CloudFilestoreManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Filestore::V1::CloudFilestoreManager::Client#get_instance. It may require modification in order to execute successfully.",
       "file": "cloud_filestore_manager/get_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "file_v1_generated_CloudFilestoreManager_CreateInstance_sync",
-      "title": "Snippet for create_instance in CloudFilestoreManager",
-      "description": "Basic snippet for create_instance in CloudFilestoreManager",
+      "title": "Snippet for the create_instance call in the CloudFilestoreManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Filestore::V1::CloudFilestoreManager::Client#create_instance. It may require modification in order to execute successfully.",
       "file": "cloud_filestore_manager/create_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "file_v1_generated_CloudFilestoreManager_UpdateInstance_sync",
-      "title": "Snippet for update_instance in CloudFilestoreManager",
-      "description": "Basic snippet for update_instance in CloudFilestoreManager",
+      "title": "Snippet for the update_instance call in the CloudFilestoreManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Filestore::V1::CloudFilestoreManager::Client#update_instance. It may require modification in order to execute successfully.",
       "file": "cloud_filestore_manager/update_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "file_v1_generated_CloudFilestoreManager_RestoreInstance_sync",
-      "title": "Snippet for restore_instance in CloudFilestoreManager",
-      "description": "Basic snippet for restore_instance in CloudFilestoreManager",
+      "title": "Snippet for the restore_instance call in the CloudFilestoreManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Filestore::V1::CloudFilestoreManager::Client#restore_instance. It may require modification in order to execute successfully.",
       "file": "cloud_filestore_manager/restore_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "file_v1_generated_CloudFilestoreManager_DeleteInstance_sync",
-      "title": "Snippet for delete_instance in CloudFilestoreManager",
-      "description": "Basic snippet for delete_instance in CloudFilestoreManager",
+      "title": "Snippet for the delete_instance call in the CloudFilestoreManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Filestore::V1::CloudFilestoreManager::Client#delete_instance. It may require modification in order to execute successfully.",
       "file": "cloud_filestore_manager/delete_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,215 @@
       "segments": [
         {
           "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "file_v1_generated_CloudFilestoreManager_ListSnapshots_sync",
+      "title": "Snippet for the list_snapshots call in the CloudFilestoreManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Filestore::V1::CloudFilestoreManager::Client#list_snapshots. It may require modification in order to execute successfully.",
+      "file": "cloud_filestore_manager/list_snapshots.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_snapshots",
+        "full_name": "::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client#list_snapshots",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Filestore::V1::ListSnapshotsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Filestore::V1::ListSnapshotsResponse",
+        "client": {
+          "short_name": "CloudFilestoreManager::Client",
+          "full_name": "::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client"
+        },
+        "method": {
+          "short_name": "ListSnapshots",
+          "full_name": "google.cloud.filestore.v1.CloudFilestoreManager.ListSnapshots",
+          "service": {
+            "short_name": "CloudFilestoreManager",
+            "full_name": "google.cloud.filestore.v1.CloudFilestoreManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
           "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
+      "region_tag": "file_v1_generated_CloudFilestoreManager_GetSnapshot_sync",
+      "title": "Snippet for the get_snapshot call in the CloudFilestoreManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Filestore::V1::CloudFilestoreManager::Client#get_snapshot. It may require modification in order to execute successfully.",
+      "file": "cloud_filestore_manager/get_snapshot.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_snapshot",
+        "full_name": "::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client#get_snapshot",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Filestore::V1::GetSnapshotRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Filestore::V1::Snapshot",
+        "client": {
+          "short_name": "CloudFilestoreManager::Client",
+          "full_name": "::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client"
+        },
+        "method": {
+          "short_name": "GetSnapshot",
+          "full_name": "google.cloud.filestore.v1.CloudFilestoreManager.GetSnapshot",
+          "service": {
+            "short_name": "CloudFilestoreManager",
+            "full_name": "google.cloud.filestore.v1.CloudFilestoreManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "file_v1_generated_CloudFilestoreManager_CreateSnapshot_sync",
+      "title": "Snippet for the create_snapshot call in the CloudFilestoreManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Filestore::V1::CloudFilestoreManager::Client#create_snapshot. It may require modification in order to execute successfully.",
+      "file": "cloud_filestore_manager/create_snapshot.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_snapshot",
+        "full_name": "::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client#create_snapshot",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Filestore::V1::CreateSnapshotRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudFilestoreManager::Client",
+          "full_name": "::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client"
+        },
+        "method": {
+          "short_name": "CreateSnapshot",
+          "full_name": "google.cloud.filestore.v1.CloudFilestoreManager.CreateSnapshot",
+          "service": {
+            "short_name": "CloudFilestoreManager",
+            "full_name": "google.cloud.filestore.v1.CloudFilestoreManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "file_v1_generated_CloudFilestoreManager_DeleteSnapshot_sync",
+      "title": "Snippet for the delete_snapshot call in the CloudFilestoreManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Filestore::V1::CloudFilestoreManager::Client#delete_snapshot. It may require modification in order to execute successfully.",
+      "file": "cloud_filestore_manager/delete_snapshot.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_snapshot",
+        "full_name": "::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client#delete_snapshot",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Filestore::V1::DeleteSnapshotRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudFilestoreManager::Client",
+          "full_name": "::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client"
+        },
+        "method": {
+          "short_name": "DeleteSnapshot",
+          "full_name": "google.cloud.filestore.v1.CloudFilestoreManager.DeleteSnapshot",
+          "service": {
+            "short_name": "CloudFilestoreManager",
+            "full_name": "google.cloud.filestore.v1.CloudFilestoreManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "file_v1_generated_CloudFilestoreManager_UpdateSnapshot_sync",
+      "title": "Snippet for the update_snapshot call in the CloudFilestoreManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Filestore::V1::CloudFilestoreManager::Client#update_snapshot. It may require modification in order to execute successfully.",
+      "file": "cloud_filestore_manager/update_snapshot.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_snapshot",
+        "full_name": "::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client#update_snapshot",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Filestore::V1::UpdateSnapshotRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudFilestoreManager::Client",
+          "full_name": "::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client"
+        },
+        "method": {
+          "short_name": "UpdateSnapshot",
+          "full_name": "google.cloud.filestore.v1.CloudFilestoreManager.UpdateSnapshot",
+          "service": {
+            "short_name": "CloudFilestoreManager",
+            "full_name": "google.cloud.filestore.v1.CloudFilestoreManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "file_v1_generated_CloudFilestoreManager_ListBackups_sync",
-      "title": "Snippet for list_backups in CloudFilestoreManager",
-      "description": "Basic snippet for list_backups in CloudFilestoreManager",
+      "title": "Snippet for the list_backups call in the CloudFilestoreManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Filestore::V1::CloudFilestoreManager::Client#list_backups. It may require modification in order to execute successfully.",
       "file": "cloud_filestore_manager/list_backups.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +486,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "file_v1_generated_CloudFilestoreManager_GetBackup_sync",
-      "title": "Snippet for get_backup in CloudFilestoreManager",
-      "description": "Basic snippet for get_backup in CloudFilestoreManager",
+      "title": "Snippet for the get_backup call in the CloudFilestoreManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Filestore::V1::CloudFilestoreManager::Client#get_backup. It may require modification in order to execute successfully.",
       "file": "cloud_filestore_manager/get_backup.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +526,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "file_v1_generated_CloudFilestoreManager_CreateBackup_sync",
-      "title": "Snippet for create_backup in CloudFilestoreManager",
-      "description": "Basic snippet for create_backup in CloudFilestoreManager",
+      "title": "Snippet for the create_backup call in the CloudFilestoreManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Filestore::V1::CloudFilestoreManager::Client#create_backup. It may require modification in order to execute successfully.",
       "file": "cloud_filestore_manager/create_backup.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,15 +566,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "file_v1_generated_CloudFilestoreManager_DeleteBackup_sync",
-      "title": "Snippet for delete_backup in CloudFilestoreManager",
-      "description": "Basic snippet for delete_backup in CloudFilestoreManager",
+      "title": "Snippet for the delete_backup call in the CloudFilestoreManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Filestore::V1::CloudFilestoreManager::Client#delete_backup. It may require modification in order to execute successfully.",
       "file": "cloud_filestore_manager/delete_backup.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,15 +606,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "file_v1_generated_CloudFilestoreManager_UpdateBackup_sync",
-      "title": "Snippet for update_backup in CloudFilestoreManager",
-      "description": "Basic snippet for update_backup in CloudFilestoreManager",
+      "title": "Snippet for the update_backup call in the CloudFilestoreManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Filestore::V1::CloudFilestoreManager::Client#update_backup. It may require modification in order to execute successfully.",
       "file": "cloud_filestore_manager/update_backup.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,7 +646,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]

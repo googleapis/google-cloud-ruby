@@ -20,25 +20,44 @@ require "helper"
 require "google/cloud/os_config"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Cloud::OsConfig::ClientConstructionMinitest < Minitest::Test
   def test_os_config_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::OsConfig.os_config_service do |config|
+      client = Google::Cloud::OsConfig.os_config_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::OsConfig::V1::OsConfigService::Client, client
     end
   end
 
+  def test_os_config_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::OsConfig.os_config_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::OsConfig::V1::OsConfigService::Rest::Client, client
+    end
+  end
+
   def test_os_config_zonal_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::OsConfig.os_config_zonal_service do |config|
+      client = Google::Cloud::OsConfig.os_config_zonal_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::OsConfig::V1::OsConfigZonalService::Client, client
+    end
+  end
+
+  def test_os_config_zonal_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::OsConfig.os_config_zonal_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::OsConfig::V1::OsConfigZonalService::Rest::Client, client
     end
   end
 end

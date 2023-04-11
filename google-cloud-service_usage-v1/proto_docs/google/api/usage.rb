@@ -81,7 +81,8 @@ module Google
     #     Selects the methods to which this rule applies. Use '*' to indicate all
     #     methods in all APIs.
     #
-    #     Refer to {::Google::Api::DocumentationRule#selector selector} for syntax details.
+    #     Refer to {::Google::Api::DocumentationRule#selector selector} for syntax
+    #     details.
     # @!attribute [rw] allow_unregistered_calls
     #   @return [::Boolean]
     #     If true, the selected method allows unregistered calls, e.g. calls

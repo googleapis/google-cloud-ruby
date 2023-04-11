@@ -20,8 +20,11 @@
 require "google/cloud/bigtable/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Bigtable::V2::Bigtable::Client#read_rows
+# Snippet for the read_rows call in the Bigtable service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Bigtable::V2::Bigtable::Client#read_rows. It may require
+# modification in order to execute successfully.
 #
 def read_rows
   # Create a client object. The client can be reused for multiple calls.
@@ -30,13 +33,13 @@ def read_rows
   # Create a request. To set request fields, pass in keyword arguments.
   request = Google::Cloud::Bigtable::V2::ReadRowsRequest.new
 
-  # Call the read_rows method.
-  result = client.read_rows request
+  # Call the read_rows method to start streaming.
+  output = client.read_rows request
 
-  # The returned object is a streamed enumerable yielding elements of
-  # type ::Google::Cloud::Bigtable::V2::ReadRowsResponse.
-  result.each do |response|
-    p response
+  # The returned object is a streamed enumerable yielding elements of type
+  # ::Google::Cloud::Bigtable::V2::ReadRowsResponse
+  output.each do |current_response|
+    p current_response
   end
 end
 # [END bigtable_v2_generated_Bigtable_ReadRows_sync]

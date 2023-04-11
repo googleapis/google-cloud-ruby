@@ -20,8 +20,11 @@
 require "google/cloud/language/v1beta2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Language::V1beta2::LanguageService::Client#analyze_entity_sentiment
+# Snippet for the analyze_entity_sentiment call in the LanguageService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Language::V1beta2::LanguageService::Client#analyze_entity_sentiment.
+# It may require modification in order to execute successfully.
 #
 def analyze_entity_sentiment
   # Create a client object. The client can be reused for multiple calls.

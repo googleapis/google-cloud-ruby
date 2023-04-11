@@ -20,15 +20,25 @@ require "helper"
 require "google/cloud/notebooks"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Cloud::Notebooks::ClientConstructionMinitest < Minitest::Test
   def test_notebook_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Notebooks.notebook_service do |config|
+      client = Google::Cloud::Notebooks.notebook_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Notebooks::V1::NotebookService::Client, client
+    end
+  end
+
+  def test_notebook_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Notebooks.notebook_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Notebooks::V1::NotebookService::Rest::Client, client
     end
   end
 end

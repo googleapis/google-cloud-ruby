@@ -20,8 +20,11 @@
 require "google/cloud/iap/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client#reset_identity_aware_proxy_client_secret
+# Snippet for the reset_identity_aware_proxy_client_secret call in the IdentityAwareProxyOAuthService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client#reset_identity_aware_proxy_client_secret.
+# It may require modification in order to execute successfully.
 #
 def reset_identity_aware_proxy_client_secret
   # Create a client object. The client can be reused for multiple calls.

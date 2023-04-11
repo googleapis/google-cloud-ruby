@@ -72,6 +72,10 @@ module Google
         #   @return [::String]
         #     Cloud Identity ID of the customer's channel partner.
         #     Populated only if a channel partner exists for this customer.
+        # @!attribute [rw] correlation_id
+        #   @return [::String]
+        #     Optional. External CRM ID for the customer.
+        #     Populated only if a CRM ID exists for this customer.
         class Customer
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

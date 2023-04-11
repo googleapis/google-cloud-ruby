@@ -286,14 +286,14 @@ module Google
             #   # Call the create_azure_client method.
             #   result = client.create_azure_client request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_azure_client request, options = nil
@@ -459,7 +459,7 @@ module Google
             #     Location names are formatted as `projects/<project-id>/locations/<region>`.
             #
             #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-            #     for more details on GCP resource names.
+            #     for more details on Google Cloud Platform resource names.
             #   @param page_size [::Integer]
             #     The maximum number of items to return.
             #
@@ -493,13 +493,11 @@ module Google
             #   # Call the list_azure_clients method.
             #   result = client.list_azure_clients request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::GkeMultiCloud::V1::AzureClient.
-            #     p response
+            #     p item
             #   end
             #
             def list_azure_clients request, options = nil
@@ -610,14 +608,14 @@ module Google
             #   # Call the delete_azure_client method.
             #   result = client.delete_azure_client request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_azure_client request, options = nil
@@ -664,7 +662,7 @@ module Google
 
             ##
             # Creates a new {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster}
-            # resource on a given GCP project and region.
+            # resource on a given Google Cloud Platform project and region.
             #
             # If successful, the response contains a newly created
             # {::Google::Longrunning::Operation Operation} resource that can be
@@ -730,14 +728,14 @@ module Google
             #   # Call the create_azure_cluster method.
             #   result = client.create_azure_cluster request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_azure_cluster request, options = nil
@@ -817,6 +815,9 @@ module Google
             #      *   `annotations`.
             #      *   `authorization.admin_users`.
             #      *   `control_plane.root_volume.size_gib`.
+            #      *   `azure_services_authentication`.
+            #      *   `azure_services_authentication.tenant_id`.
+            #      *   `azure_services_authentication.application_id`.
             #      *   `control_plane.proxy_config`.
             #      *   `control_plane.proxy_config.resource_group_id`.
             #      *   `control_plane.proxy_config.secret_id`.
@@ -844,14 +845,14 @@ module Google
             #   # Call the update_azure_cluster method.
             #   result = client.update_azure_cluster request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_azure_cluster request, options = nil
@@ -924,7 +925,7 @@ module Google
             #     `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`.
             #
             #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-            #     for more details on GCP resource names.
+            #     for more details on Google Cloud Platform resource names.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::GkeMultiCloud::V1::AzureCluster]
@@ -1016,7 +1017,7 @@ module Google
             #     Location names are formatted as `projects/<project-id>/locations/<region>`.
             #
             #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-            #     for more details on GCP resource names.
+            #     for more details on Google Cloud Platform resource names.
             #   @param page_size [::Integer]
             #     The maximum number of items to return.
             #
@@ -1050,13 +1051,11 @@ module Google
             #   # Call the list_azure_clusters method.
             #   result = client.list_azure_clusters request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::GkeMultiCloud::V1::AzureCluster.
-            #     p response
+            #     p item
             #   end
             #
             def list_azure_clusters request, options = nil
@@ -1135,7 +1134,7 @@ module Google
             #     `projects/<project-id>/locations/<region>/azureClusters/<cluster-id>`.
             #
             #     See [Resource Names](https://cloud.google.com/apis/design/resource_names)
-            #     for more details on GCP resource names.
+            #     for more details on Google Cloud Platform resource names.
             #   @param allow_missing [::Boolean]
             #     If set to true, and the
             #     {::Google::Cloud::GkeMultiCloud::V1::AzureCluster AzureCluster} resource is not
@@ -1174,14 +1173,14 @@ module Google
             #   # Call the delete_azure_cluster method.
             #   result = client.delete_azure_cluster request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_azure_cluster request, options = nil
@@ -1389,14 +1388,14 @@ module Google
             #   # Call the create_azure_node_pool method.
             #   result = client.create_azure_node_pool request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_azure_node_pool request, options = nil
@@ -1495,14 +1494,14 @@ module Google
             #   # Call the update_azure_node_pool method.
             #   result = client.update_azure_node_pool request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_azure_node_pool request, options = nil
@@ -1703,13 +1702,11 @@ module Google
             #   # Call the list_azure_node_pools method.
             #   result = client.list_azure_node_pools request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::GkeMultiCloud::V1::AzureNodePool.
-            #     p response
+            #     p item
             #   end
             #
             def list_azure_node_pools request, options = nil
@@ -1826,14 +1823,14 @@ module Google
             #   # Call the delete_azure_node_pool method.
             #   result = client.delete_azure_node_pool request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_azure_node_pool request, options = nil
@@ -2010,9 +2007,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials

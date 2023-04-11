@@ -48,7 +48,7 @@ module Google
       # Create a new client object for Tpu.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Tpu::V1::Tpu::Client](https://googleapis.dev/ruby/google-cloud-tpu-v1/latest/Google/Cloud/Tpu/V1/Tpu/Client.html)
+      # [Google::Cloud::Tpu::V1::Tpu::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-tpu-v1/latest/Google-Cloud-Tpu-V1-Tpu-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Tpu service is

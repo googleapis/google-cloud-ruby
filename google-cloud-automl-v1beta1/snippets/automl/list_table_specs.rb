@@ -20,8 +20,11 @@
 require "google/cloud/automl/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::AutoML::V1beta1::AutoML::Client#list_table_specs
+# Snippet for the list_table_specs call in the AutoML service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::AutoML::V1beta1::AutoML::Client#list_table_specs. It may
+# require modification in order to execute successfully.
 #
 def list_table_specs
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_table_specs
   # Call the list_table_specs method.
   result = client.list_table_specs request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::AutoML::V1beta1::TableSpec.
-    p response
+    p item
   end
 end
 # [END automl_v1beta1_generated_AutoML_ListTableSpecs_sync]

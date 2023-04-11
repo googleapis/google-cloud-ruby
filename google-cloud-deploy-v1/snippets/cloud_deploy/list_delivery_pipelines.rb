@@ -20,8 +20,11 @@
 require "google/cloud/deploy/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Deploy::V1::CloudDeploy::Client#list_delivery_pipelines
+# Snippet for the list_delivery_pipelines call in the CloudDeploy service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Deploy::V1::CloudDeploy::Client#list_delivery_pipelines. It may
+# require modification in order to execute successfully.
 #
 def list_delivery_pipelines
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_delivery_pipelines
   # Call the list_delivery_pipelines method.
   result = client.list_delivery_pipelines request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::Deploy::V1::DeliveryPipeline.
-    p response
+    p item
   end
 end
 # [END clouddeploy_v1_generated_CloudDeploy_ListDeliveryPipelines_sync]

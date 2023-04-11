@@ -45,6 +45,11 @@
                 "get_processor"
               ]
             },
+            "TrainProcessorVersion": {
+              "methods": [
+                "train_processor_version"
+              ]
+            },
             "GetProcessorVersion": {
               "methods": [
                 "get_processor_version"
@@ -98,6 +103,21 @@
             "ReviewDocument": {
               "methods": [
                 "review_document"
+              ]
+            },
+            "EvaluateProcessorVersion": {
+              "methods": [
+                "evaluate_processor_version"
+              ]
+            },
+            "GetEvaluation": {
+              "methods": [
+                "get_evaluation"
+              ]
+            },
+            "ListEvaluations": {
+              "methods": [
+                "list_evaluations"
               ]
             }
           }

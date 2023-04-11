@@ -25,6 +25,7 @@ require "google/cloud/retail/v2/version"
 require "google/cloud/retail/v2/control_service/credentials"
 require "google/cloud/retail/v2/control_service/paths"
 require "google/cloud/retail/v2/control_service/client"
+require "google/cloud/retail/v2/control_service/rest"
 
 module Google
   module Cloud
@@ -37,6 +38,11 @@ module Google
         #
         #     require "google/cloud/retail/v2/control_service"
         #     client = ::Google::Cloud::Retail::V2::ControlService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/retail/v2/control_service/rest"
+        #     client = ::Google::Cloud::Retail::V2::ControlService::Rest::Client.new
         #
         module ControlService
         end

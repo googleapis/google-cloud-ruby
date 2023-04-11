@@ -25,6 +25,7 @@ require "google/cloud/recaptcha_enterprise/v1beta1/version"
 require "google/cloud/recaptcha_enterprise/v1beta1/recaptcha_enterprise_service/credentials"
 require "google/cloud/recaptcha_enterprise/v1beta1/recaptcha_enterprise_service/paths"
 require "google/cloud/recaptcha_enterprise/v1beta1/recaptcha_enterprise_service/client"
+require "google/cloud/recaptcha_enterprise/v1beta1/recaptcha_enterprise_service/rest"
 
 module Google
   module Cloud
@@ -37,6 +38,11 @@ module Google
         #
         #     require "google/cloud/recaptcha_enterprise/v1beta1/recaptcha_enterprise_service"
         #     client = ::Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/recaptcha_enterprise/v1beta1/recaptcha_enterprise_service/rest"
+        #     client = ::Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService::Rest::Client.new
         #
         module RecaptchaEnterpriseService
         end

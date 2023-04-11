@@ -69,7 +69,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :zone_uri, :string, 1
       optional :network_uri, :string, 2
       optional :subnetwork_uri, :string, 6
-      optional :internal_ip_only, :bool, 7
+      proto3_optional :internal_ip_only, :bool, 7
       optional :private_ipv6_google_access, :enum, 12, "google.cloud.dataproc.v1.GceClusterConfig.PrivateIpv6GoogleAccess"
       optional :service_account, :string, 8
       repeated :service_account_scopes, :string, 3
@@ -90,9 +90,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :node_group_uri, :string, 1
     end
     add_message "google.cloud.dataproc.v1.ShieldedInstanceConfig" do
-      optional :enable_secure_boot, :bool, 1
-      optional :enable_vtpm, :bool, 2
-      optional :enable_integrity_monitoring, :bool, 3
+      proto3_optional :enable_secure_boot, :bool, 1
+      proto3_optional :enable_vtpm, :bool, 2
+      proto3_optional :enable_integrity_monitoring, :bool, 3
     end
     add_message "google.cloud.dataproc.v1.ConfidentialInstanceConfig" do
       optional :enable_confidential_compute, :bool, 1
@@ -113,6 +113,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :PREEMPTIBILITY_UNSPECIFIED, 0
       value :NON_PREEMPTIBLE, 1
       value :PREEMPTIBLE, 2
+      value :SPOT, 3
     end
     add_message "google.cloud.dataproc.v1.ManagedGroupConfig" do
       optional :instance_template_name, :string, 1
@@ -209,6 +210,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.dataproc.v1.MetastoreConfig" do
       optional :dataproc_metastore_service, :string, 1
     end
+    add_message "google.cloud.dataproc.v1.ClusterMetrics" do
+      map :hdfs_metrics, :string, :int64, 1
+      map :yarn_metrics, :string, :int64, 2
+    end
     add_message "google.cloud.dataproc.v1.DataprocMetricConfig" do
       repeated :metrics, :message, 1, "google.cloud.dataproc.v1.DataprocMetricConfig.Metric"
     end
@@ -224,10 +229,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :YARN, 4
       value :SPARK_HISTORY_SERVER, 5
       value :HIVESERVER2, 6
-    end
-    add_message "google.cloud.dataproc.v1.ClusterMetrics" do
-      map :hdfs_metrics, :string, :int64, 1
-      map :yarn_metrics, :string, :int64, 2
+      value :HIVEMETASTORE, 7
     end
     add_message "google.cloud.dataproc.v1.CreateClusterRequest" do
       optional :project_id, :string, 1
@@ -338,10 +340,10 @@ module Google
         SoftwareConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.SoftwareConfig").msgclass
         LifecycleConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.LifecycleConfig").msgclass
         MetastoreConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.MetastoreConfig").msgclass
+        ClusterMetrics = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.ClusterMetrics").msgclass
         DataprocMetricConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.DataprocMetricConfig").msgclass
         DataprocMetricConfig::Metric = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.DataprocMetricConfig.Metric").msgclass
         DataprocMetricConfig::MetricSource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.DataprocMetricConfig.MetricSource").enummodule
-        ClusterMetrics = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.ClusterMetrics").msgclass
         CreateClusterRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.CreateClusterRequest").msgclass
         UpdateClusterRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.UpdateClusterRequest").msgclass
         StopClusterRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.StopClusterRequest").msgclass

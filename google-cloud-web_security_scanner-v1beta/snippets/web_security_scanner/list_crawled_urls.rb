@@ -20,8 +20,11 @@
 require "google/cloud/web_security_scanner/v1beta"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client#list_crawled_urls
+# Snippet for the list_crawled_urls call in the WebSecurityScanner service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client#list_crawled_urls.
+# It may require modification in order to execute successfully.
 #
 def list_crawled_urls
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_crawled_urls
   # Call the list_crawled_urls method.
   result = client.list_crawled_urls request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::WebSecurityScanner::V1beta::CrawledUrl.
-    p response
+    p item
   end
 end
 # [END websecurityscanner_v1beta_generated_WebSecurityScanner_ListCrawledUrls_sync]

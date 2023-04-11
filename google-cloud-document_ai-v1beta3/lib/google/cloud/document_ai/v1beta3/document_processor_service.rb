@@ -26,6 +26,7 @@ require "google/cloud/document_ai/v1beta3/document_processor_service/credentials
 require "google/cloud/document_ai/v1beta3/document_processor_service/paths"
 require "google/cloud/document_ai/v1beta3/document_processor_service/operations"
 require "google/cloud/document_ai/v1beta3/document_processor_service/client"
+require "google/cloud/document_ai/v1beta3/document_processor_service/rest"
 
 module Google
   module Cloud
@@ -41,6 +42,11 @@ module Google
         #
         #     require "google/cloud/document_ai/v1beta3/document_processor_service"
         #     client = ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/document_ai/v1beta3/document_processor_service/rest"
+        #     client = ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Rest::Client.new
         #
         module DocumentProcessorService
         end

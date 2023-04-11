@@ -24,6 +24,7 @@ require "google/cloud/dataflow/v1beta3/version"
 
 require "google/cloud/dataflow/v1beta3/metrics/credentials"
 require "google/cloud/dataflow/v1beta3/metrics/client"
+require "google/cloud/dataflow/v1beta3/metrics/rest"
 
 module Google
   module Cloud
@@ -37,6 +38,11 @@ module Google
         #
         #     require "google/cloud/dataflow/v1beta3/metrics"
         #     client = ::Google::Cloud::Dataflow::V1beta3::Metrics::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/dataflow/v1beta3/metrics/rest"
+        #     client = ::Google::Cloud::Dataflow::V1beta3::Metrics::Rest::Client.new
         #
         module Metrics
         end

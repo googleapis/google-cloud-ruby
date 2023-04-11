@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/retail/v2/product_service_pb"
+require "google/cloud/location"
 
 module Google
   module Cloud
@@ -150,6 +151,12 @@ module Google
                 config.endpoint = @config.endpoint
               end
 
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
               @product_service_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::Retail::V2::ProductService::Stub,
                 credentials:  credentials,
@@ -165,6 +172,13 @@ module Google
             # @return [::Google::Cloud::Retail::V2::ProductService::Operations]
             #
             attr_reader :operations_client
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
 
             # Service calls
 
@@ -478,13 +492,11 @@ module Google
             #   # Call the list_products method.
             #   result = client.list_products request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Retail::V2::Product.
-            #     p response
+            #     p item
             #   end
             #
             def list_products request, options = nil
@@ -821,14 +833,14 @@ module Google
             #   # Call the import_products method.
             #   result = client.import_products request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def import_products request, options = nil
@@ -923,9 +935,6 @@ module Google
             # {::Google::Longrunning::Operation Operation}s associated with the stale
             # updates are not marked as {::Google::Longrunning::Operation#done done} until
             # they are obsolete.
-            #
-            # This feature is only available for users who have Retail Search enabled.
-            # Enable Retail Search on Cloud Console before using this feature.
             #
             # @overload set_inventory(request, options = nil)
             #   Pass arguments to `set_inventory` via a request object, either of type
@@ -1041,14 +1050,14 @@ module Google
             #   # Call the set_inventory method.
             #   result = client.set_inventory request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def set_inventory request, options = nil
@@ -1094,6 +1103,14 @@ module Google
             end
 
             ##
+            # It is recommended to use the
+            # {::Google::Cloud::Retail::V2::ProductService::Client#add_local_inventories ProductService.AddLocalInventories}
+            # method instead of
+            # {::Google::Cloud::Retail::V2::ProductService::Client#add_fulfillment_places ProductService.AddFulfillmentPlaces}.
+            # {::Google::Cloud::Retail::V2::ProductService::Client#add_local_inventories ProductService.AddLocalInventories}
+            # achieves the same results but provides more fine-grained control over
+            # ingesting local inventory data.
+            #
             # Incrementally adds place IDs to
             # {::Google::Cloud::Retail::V2::FulfillmentInfo#place_ids Product.fulfillment_info.place_ids}.
             #
@@ -1115,9 +1132,6 @@ module Google
             # {::Google::Longrunning::Operation Operation}s associated with the stale
             # updates will not be marked as {::Google::Longrunning::Operation#done done}
             # until being obsolete.
-            #
-            # This feature is only available for users who have Retail Search enabled.
-            # Enable Retail Search on Cloud Console before using this feature.
             #
             # @overload add_fulfillment_places(request, options = nil)
             #   Pass arguments to `add_fulfillment_places` via a request object, either of type
@@ -1211,14 +1225,14 @@ module Google
             #   # Call the add_fulfillment_places method.
             #   result = client.add_fulfillment_places request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def add_fulfillment_places request, options = nil
@@ -1264,6 +1278,14 @@ module Google
             end
 
             ##
+            # It is recommended to use the
+            # {::Google::Cloud::Retail::V2::ProductService::Client#remove_local_inventories ProductService.RemoveLocalInventories}
+            # method instead of
+            # {::Google::Cloud::Retail::V2::ProductService::Client#remove_fulfillment_places ProductService.RemoveFulfillmentPlaces}.
+            # {::Google::Cloud::Retail::V2::ProductService::Client#remove_local_inventories ProductService.RemoveLocalInventories}
+            # achieves the same results but provides more fine-grained control over
+            # ingesting local inventory data.
+            #
             # Incrementally removes place IDs from a
             # {::Google::Cloud::Retail::V2::FulfillmentInfo#place_ids Product.fulfillment_info.place_ids}.
             #
@@ -1285,9 +1307,6 @@ module Google
             # {::Google::Longrunning::Operation Operation}s associated with the stale
             # updates will not be marked as {::Google::Longrunning::Operation#done done}
             # until being obsolete.
-            #
-            # This feature is only available for users who have Retail Search enabled.
-            # Enable Retail Search on Cloud Console before using this feature.
             #
             # @overload remove_fulfillment_places(request, options = nil)
             #   Pass arguments to `remove_fulfillment_places` via a request object, either of type
@@ -1376,14 +1395,14 @@ module Google
             #   # Call the remove_fulfillment_places method.
             #   result = client.remove_fulfillment_places request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def remove_fulfillment_places request, options = nil
@@ -1457,9 +1476,6 @@ module Google
             # {::Google::Longrunning::Operation Operation}s associated with the stale
             # updates will not be marked as {::Google::Longrunning::Operation#done done}
             # until being obsolete.
-            #
-            # This feature is only available for users who have Retail Search enabled.
-            # Enable Retail Search on Cloud Console before using this feature.
             #
             # @overload add_local_inventories(request, options = nil)
             #   Pass arguments to `add_local_inventories` via a request object, either of type
@@ -1535,14 +1551,14 @@ module Google
             #   # Call the add_local_inventories method.
             #   result = client.add_local_inventories request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def add_local_inventories request, options = nil
@@ -1615,9 +1631,6 @@ module Google
             # updates will not be marked as {::Google::Longrunning::Operation#done done}
             # until being obsolete.
             #
-            # This feature is only available for users who have Retail Search enabled.
-            # Enable Retail Search on Cloud Console before using this feature.
-            #
             # @overload remove_local_inventories(request, options = nil)
             #   Pass arguments to `remove_local_inventories` via a request object, either of type
             #   {::Google::Cloud::Retail::V2::RemoveLocalInventoriesRequest} or an equivalent Hash.
@@ -1676,14 +1689,14 @@ module Google
             #   # Call the remove_local_inventories method.
             #   result = client.remove_local_inventories request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def remove_local_inventories request, options = nil
@@ -1766,9 +1779,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials

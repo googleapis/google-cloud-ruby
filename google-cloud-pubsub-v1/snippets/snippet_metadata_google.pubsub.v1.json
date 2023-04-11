@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-pubsub-v1",
-    "version": "0.13.0",
+    "version": "0.15.1",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "pubsub_v1_generated_SchemaService_CreateSchema_sync",
-      "title": "Snippet for create_schema in SchemaService",
-      "description": "Basic snippet for create_schema in SchemaService",
+      "title": "Snippet for the create_schema call in the SchemaService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::SchemaService::Client#create_schema. It may require modification in order to execute successfully.",
       "file": "schema_service/create_schema.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "pubsub_v1_generated_SchemaService_GetSchema_sync",
-      "title": "Snippet for get_schema in SchemaService",
-      "description": "Basic snippet for get_schema in SchemaService",
+      "title": "Snippet for the get_schema call in the SchemaService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::SchemaService::Client#get_schema. It may require modification in order to execute successfully.",
       "file": "schema_service/get_schema.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "pubsub_v1_generated_SchemaService_ListSchemas_sync",
-      "title": "Snippet for list_schemas in SchemaService",
-      "description": "Basic snippet for list_schemas in SchemaService",
+      "title": "Snippet for the list_schemas call in the SchemaService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::SchemaService::Client#list_schemas. It may require modification in order to execute successfully.",
       "file": "schema_service/list_schemas.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "pubsub_v1_generated_SchemaService_ListSchemaRevisions_sync",
-      "title": "Snippet for list_schema_revisions in SchemaService",
-      "description": "Basic snippet for list_schema_revisions in SchemaService",
+      "title": "Snippet for the list_schema_revisions call in the SchemaService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::SchemaService::Client#list_schema_revisions. It may require modification in order to execute successfully.",
       "file": "schema_service/list_schema_revisions.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "pubsub_v1_generated_SchemaService_CommitSchema_sync",
-      "title": "Snippet for commit_schema in SchemaService",
-      "description": "Basic snippet for commit_schema in SchemaService",
+      "title": "Snippet for the commit_schema call in the SchemaService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::SchemaService::Client#commit_schema. It may require modification in order to execute successfully.",
       "file": "schema_service/commit_schema.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "pubsub_v1_generated_SchemaService_RollbackSchema_sync",
-      "title": "Snippet for rollback_schema in SchemaService",
-      "description": "Basic snippet for rollback_schema in SchemaService",
+      "title": "Snippet for the rollback_schema call in the SchemaService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::SchemaService::Client#rollback_schema. It may require modification in order to execute successfully.",
       "file": "schema_service/rollback_schema.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "pubsub_v1_generated_SchemaService_DeleteSchemaRevision_sync",
-      "title": "Snippet for delete_schema_revision in SchemaService",
-      "description": "Basic snippet for delete_schema_revision in SchemaService",
+      "title": "Snippet for the delete_schema_revision call in the SchemaService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::SchemaService::Client#delete_schema_revision. It may require modification in order to execute successfully.",
       "file": "schema_service/delete_schema_revision.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "pubsub_v1_generated_SchemaService_DeleteSchema_sync",
-      "title": "Snippet for delete_schema in SchemaService",
-      "description": "Basic snippet for delete_schema in SchemaService",
+      "title": "Snippet for the delete_schema call in the SchemaService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::SchemaService::Client#delete_schema. It may require modification in order to execute successfully.",
       "file": "schema_service/delete_schema.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "pubsub_v1_generated_SchemaService_ValidateSchema_sync",
-      "title": "Snippet for validate_schema in SchemaService",
-      "description": "Basic snippet for validate_schema in SchemaService",
+      "title": "Snippet for the validate_schema call in the SchemaService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::SchemaService::Client#validate_schema. It may require modification in order to execute successfully.",
       "file": "schema_service/validate_schema.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,15 +366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "pubsub_v1_generated_SchemaService_ValidateMessage_sync",
-      "title": "Snippet for validate_message in SchemaService",
-      "description": "Basic snippet for validate_message in SchemaService",
+      "title": "Snippet for the validate_message call in the SchemaService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::SchemaService::Client#validate_message. It may require modification in order to execute successfully.",
       "file": "schema_service/validate_message.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,15 +406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "pubsub_v1_generated_Publisher_CreateTopic_sync",
-      "title": "Snippet for create_topic in Publisher",
-      "description": "Basic snippet for create_topic in Publisher",
+      "title": "Snippet for the create_topic call in the Publisher service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Publisher::Client#create_topic. It may require modification in order to execute successfully.",
       "file": "publisher/create_topic.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,15 +446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "pubsub_v1_generated_Publisher_UpdateTopic_sync",
-      "title": "Snippet for update_topic in Publisher",
-      "description": "Basic snippet for update_topic in Publisher",
+      "title": "Snippet for the update_topic call in the Publisher service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Publisher::Client#update_topic. It may require modification in order to execute successfully.",
       "file": "publisher/update_topic.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,15 +486,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "pubsub_v1_generated_Publisher_Publish_sync",
-      "title": "Snippet for publish in Publisher",
-      "description": "Basic snippet for publish in Publisher",
+      "title": "Snippet for the publish call in the Publisher service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Publisher::Client#publish. It may require modification in order to execute successfully.",
       "file": "publisher/publish.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,15 +526,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "pubsub_v1_generated_Publisher_GetTopic_sync",
-      "title": "Snippet for get_topic in Publisher",
-      "description": "Basic snippet for get_topic in Publisher",
+      "title": "Snippet for the get_topic call in the Publisher service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Publisher::Client#get_topic. It may require modification in order to execute successfully.",
       "file": "publisher/get_topic.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,15 +566,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "pubsub_v1_generated_Publisher_ListTopics_sync",
-      "title": "Snippet for list_topics in Publisher",
-      "description": "Basic snippet for list_topics in Publisher",
+      "title": "Snippet for the list_topics call in the Publisher service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Publisher::Client#list_topics. It may require modification in order to execute successfully.",
       "file": "publisher/list_topics.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,15 +606,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "pubsub_v1_generated_Publisher_ListTopicSubscriptions_sync",
-      "title": "Snippet for list_topic_subscriptions in Publisher",
-      "description": "Basic snippet for list_topic_subscriptions in Publisher",
+      "title": "Snippet for the list_topic_subscriptions call in the Publisher service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Publisher::Client#list_topic_subscriptions. It may require modification in order to execute successfully.",
       "file": "publisher/list_topic_subscriptions.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,15 +646,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "pubsub_v1_generated_Publisher_ListTopicSnapshots_sync",
-      "title": "Snippet for list_topic_snapshots in Publisher",
-      "description": "Basic snippet for list_topic_snapshots in Publisher",
+      "title": "Snippet for the list_topic_snapshots call in the Publisher service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Publisher::Client#list_topic_snapshots. It may require modification in order to execute successfully.",
       "file": "publisher/list_topic_snapshots.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,15 +686,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "pubsub_v1_generated_Publisher_DeleteTopic_sync",
-      "title": "Snippet for delete_topic in Publisher",
-      "description": "Basic snippet for delete_topic in Publisher",
+      "title": "Snippet for the delete_topic call in the Publisher service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Publisher::Client#delete_topic. It may require modification in order to execute successfully.",
       "file": "publisher/delete_topic.rb",
       "language": "RUBY",
       "client_method": {
@@ -726,15 +726,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "pubsub_v1_generated_Publisher_DetachSubscription_sync",
-      "title": "Snippet for detach_subscription in Publisher",
-      "description": "Basic snippet for detach_subscription in Publisher",
+      "title": "Snippet for the detach_subscription call in the Publisher service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Publisher::Client#detach_subscription. It may require modification in order to execute successfully.",
       "file": "publisher/detach_subscription.rb",
       "language": "RUBY",
       "client_method": {
@@ -766,15 +766,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "pubsub_v1_generated_Subscriber_CreateSubscription_sync",
-      "title": "Snippet for create_subscription in Subscriber",
-      "description": "Basic snippet for create_subscription in Subscriber",
+      "title": "Snippet for the create_subscription call in the Subscriber service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Subscriber::Client#create_subscription. It may require modification in order to execute successfully.",
       "file": "subscriber/create_subscription.rb",
       "language": "RUBY",
       "client_method": {
@@ -806,15 +806,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "pubsub_v1_generated_Subscriber_GetSubscription_sync",
-      "title": "Snippet for get_subscription in Subscriber",
-      "description": "Basic snippet for get_subscription in Subscriber",
+      "title": "Snippet for the get_subscription call in the Subscriber service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Subscriber::Client#get_subscription. It may require modification in order to execute successfully.",
       "file": "subscriber/get_subscription.rb",
       "language": "RUBY",
       "client_method": {
@@ -846,15 +846,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "pubsub_v1_generated_Subscriber_UpdateSubscription_sync",
-      "title": "Snippet for update_subscription in Subscriber",
-      "description": "Basic snippet for update_subscription in Subscriber",
+      "title": "Snippet for the update_subscription call in the Subscriber service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Subscriber::Client#update_subscription. It may require modification in order to execute successfully.",
       "file": "subscriber/update_subscription.rb",
       "language": "RUBY",
       "client_method": {
@@ -886,15 +886,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "pubsub_v1_generated_Subscriber_ListSubscriptions_sync",
-      "title": "Snippet for list_subscriptions in Subscriber",
-      "description": "Basic snippet for list_subscriptions in Subscriber",
+      "title": "Snippet for the list_subscriptions call in the Subscriber service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Subscriber::Client#list_subscriptions. It may require modification in order to execute successfully.",
       "file": "subscriber/list_subscriptions.rb",
       "language": "RUBY",
       "client_method": {
@@ -926,15 +926,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "pubsub_v1_generated_Subscriber_DeleteSubscription_sync",
-      "title": "Snippet for delete_subscription in Subscriber",
-      "description": "Basic snippet for delete_subscription in Subscriber",
+      "title": "Snippet for the delete_subscription call in the Subscriber service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Subscriber::Client#delete_subscription. It may require modification in order to execute successfully.",
       "file": "subscriber/delete_subscription.rb",
       "language": "RUBY",
       "client_method": {
@@ -966,15 +966,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "pubsub_v1_generated_Subscriber_ModifyAckDeadline_sync",
-      "title": "Snippet for modify_ack_deadline in Subscriber",
-      "description": "Basic snippet for modify_ack_deadline in Subscriber",
+      "title": "Snippet for the modify_ack_deadline call in the Subscriber service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Subscriber::Client#modify_ack_deadline. It may require modification in order to execute successfully.",
       "file": "subscriber/modify_ack_deadline.rb",
       "language": "RUBY",
       "client_method": {
@@ -1006,15 +1006,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "pubsub_v1_generated_Subscriber_Acknowledge_sync",
-      "title": "Snippet for acknowledge in Subscriber",
-      "description": "Basic snippet for acknowledge in Subscriber",
+      "title": "Snippet for the acknowledge call in the Subscriber service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Subscriber::Client#acknowledge. It may require modification in order to execute successfully.",
       "file": "subscriber/acknowledge.rb",
       "language": "RUBY",
       "client_method": {
@@ -1046,15 +1046,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "pubsub_v1_generated_Subscriber_Pull_sync",
-      "title": "Snippet for pull in Subscriber",
-      "description": "Basic snippet for pull in Subscriber",
+      "title": "Snippet for the pull call in the Subscriber service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Subscriber::Client#pull. It may require modification in order to execute successfully.",
       "file": "subscriber/pull.rb",
       "language": "RUBY",
       "client_method": {
@@ -1086,15 +1086,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "pubsub_v1_generated_Subscriber_StreamingPull_sync",
-      "title": "Snippet for streaming_pull in Subscriber",
-      "description": "Basic snippet for streaming_pull in Subscriber",
+      "title": "Snippet for the streaming_pull call in the Subscriber service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Subscriber::Client#streaming_pull. It may require modification in order to execute successfully.",
       "file": "subscriber/streaming_pull.rb",
       "language": "RUBY",
       "client_method": {
@@ -1126,15 +1126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 47,
+          "end": 50,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "pubsub_v1_generated_Subscriber_ModifyPushConfig_sync",
-      "title": "Snippet for modify_push_config in Subscriber",
-      "description": "Basic snippet for modify_push_config in Subscriber",
+      "title": "Snippet for the modify_push_config call in the Subscriber service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Subscriber::Client#modify_push_config. It may require modification in order to execute successfully.",
       "file": "subscriber/modify_push_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -1166,15 +1166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "pubsub_v1_generated_Subscriber_GetSnapshot_sync",
-      "title": "Snippet for get_snapshot in Subscriber",
-      "description": "Basic snippet for get_snapshot in Subscriber",
+      "title": "Snippet for the get_snapshot call in the Subscriber service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Subscriber::Client#get_snapshot. It may require modification in order to execute successfully.",
       "file": "subscriber/get_snapshot.rb",
       "language": "RUBY",
       "client_method": {
@@ -1206,15 +1206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "pubsub_v1_generated_Subscriber_ListSnapshots_sync",
-      "title": "Snippet for list_snapshots in Subscriber",
-      "description": "Basic snippet for list_snapshots in Subscriber",
+      "title": "Snippet for the list_snapshots call in the Subscriber service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Subscriber::Client#list_snapshots. It may require modification in order to execute successfully.",
       "file": "subscriber/list_snapshots.rb",
       "language": "RUBY",
       "client_method": {
@@ -1246,15 +1246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "pubsub_v1_generated_Subscriber_CreateSnapshot_sync",
-      "title": "Snippet for create_snapshot in Subscriber",
-      "description": "Basic snippet for create_snapshot in Subscriber",
+      "title": "Snippet for the create_snapshot call in the Subscriber service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Subscriber::Client#create_snapshot. It may require modification in order to execute successfully.",
       "file": "subscriber/create_snapshot.rb",
       "language": "RUBY",
       "client_method": {
@@ -1286,15 +1286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "pubsub_v1_generated_Subscriber_UpdateSnapshot_sync",
-      "title": "Snippet for update_snapshot in Subscriber",
-      "description": "Basic snippet for update_snapshot in Subscriber",
+      "title": "Snippet for the update_snapshot call in the Subscriber service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Subscriber::Client#update_snapshot. It may require modification in order to execute successfully.",
       "file": "subscriber/update_snapshot.rb",
       "language": "RUBY",
       "client_method": {
@@ -1326,15 +1326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "pubsub_v1_generated_Subscriber_DeleteSnapshot_sync",
-      "title": "Snippet for delete_snapshot in Subscriber",
-      "description": "Basic snippet for delete_snapshot in Subscriber",
+      "title": "Snippet for the delete_snapshot call in the Subscriber service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Subscriber::Client#delete_snapshot. It may require modification in order to execute successfully.",
       "file": "subscriber/delete_snapshot.rb",
       "language": "RUBY",
       "client_method": {
@@ -1366,15 +1366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "pubsub_v1_generated_Subscriber_Seek_sync",
-      "title": "Snippet for seek in Subscriber",
-      "description": "Basic snippet for seek in Subscriber",
+      "title": "Snippet for the seek call in the Subscriber service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::PubSub::V1::Subscriber::Client#seek. It may require modification in order to execute successfully.",
       "file": "subscriber/seek.rb",
       "language": "RUBY",
       "client_method": {
@@ -1406,7 +1406,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]

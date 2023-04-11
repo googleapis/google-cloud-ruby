@@ -1,7 +1,7 @@
 {
     "api_id": "area120tables.googleapis.com",
     "api_shortname": "area120tables",
-    "client_documentation": "https://googleapis.dev/ruby/google-area120-tables/latest",
+    "client_documentation": "https://rubydoc.info/gems/google-area120-tables",
     "distribution_name": "google-area120-tables",
     "is_cloud": false,
     "language": "ruby",

@@ -49,9 +49,9 @@ module Google
             # @param bindings_override [::Array<::Gapic::Rest::GrpcTranscoder::HttpBinding>, nil]
             #   Binding overrides for the transcoding. Only used internally.
             #
-            # @yield [result, response] Access the result along with the Faraday response object
+            # @yield [result, operation] Access the result along with the TransportOperation object
             # @yieldparam result [::Google::Cloud::Location::ListLocationsResponse]
-            # @yieldparam response [::Faraday::Response]
+            # @yieldparam operation [::Gapic::Rest::TransportOperation]
             #
             # @return [::Google::Cloud::Location::ListLocationsResponse]
             #   A result object deserialized from the server's reply
@@ -72,9 +72,10 @@ module Google
                 params:  query_string_params,
                 options: options
               )
+              operation = ::Gapic::Rest::TransportOperation.new response
               result = ::Google::Cloud::Location::ListLocationsResponse.decode_json response.body, ignore_unknown_fields: true
 
-              yield result, response if block_given?
+              yield result, operation if block_given?
               result
             end
 
@@ -88,9 +89,9 @@ module Google
             # @param bindings_override [::Array<::Gapic::Rest::GrpcTranscoder::HttpBinding>, nil]
             #   Binding overrides for the transcoding. Only used internally.
             #
-            # @yield [result, response] Access the result along with the Faraday response object
+            # @yield [result, operation] Access the result along with the TransportOperation object
             # @yieldparam result [::Google::Cloud::Location::Location]
-            # @yieldparam response [::Faraday::Response]
+            # @yieldparam operation [::Gapic::Rest::TransportOperation]
             #
             # @return [::Google::Cloud::Location::Location]
             #   A result object deserialized from the server's reply
@@ -111,9 +112,10 @@ module Google
                 params:  query_string_params,
                 options: options
               )
+              operation = ::Gapic::Rest::TransportOperation.new response
               result = ::Google::Cloud::Location::Location.decode_json response.body, ignore_unknown_fields: true
 
-              yield result, response if block_given?
+              yield result, operation if block_given?
               result
             end
 

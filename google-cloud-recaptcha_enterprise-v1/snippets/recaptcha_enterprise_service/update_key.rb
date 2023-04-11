@@ -20,8 +20,11 @@
 require "google/cloud/recaptcha_enterprise/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#update_key
+# Snippet for the update_key call in the RecaptchaEnterpriseService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#update_key.
+# It may require modification in order to execute successfully.
 #
 def update_key
   # Create a client object. The client can be reused for multiple calls.

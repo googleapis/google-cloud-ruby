@@ -35,7 +35,8 @@ module Google
     #   @return [::String]
     #     Selects the methods to which this rule applies.
     #
-    #     Refer to {::Google::Api::DocumentationRule#selector selector} for syntax details.
+    #     Refer to {::Google::Api::DocumentationRule#selector selector} for syntax
+    #     details.
     # @!attribute [rw] address
     #   @return [::String]
     #     The address of the API backend.
@@ -105,9 +106,21 @@ module Google
     #     See
     #     https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml#alpn-protocol-ids
     #     for more details on the supported values.
+    # @!attribute [rw] overrides_by_request_protocol
+    #   @return [::Google::Protobuf::Map{::String => ::Google::Api::BackendRule}]
+    #     The map between request protocol and the backend address.
     class BackendRule
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
+
+      # @!attribute [rw] key
+      #   @return [::String]
+      # @!attribute [rw] value
+      #   @return [::Google::Api::BackendRule]
+      class OverridesByRequestProtocolEntry
+        include ::Google::Protobuf::MessageExts
+        extend ::Google::Protobuf::MessageExts::ClassMethods
+      end
 
       # Path Translation specifies how to combine the backend address with the
       # request path in order to produce the appropriate forwarding URL for the

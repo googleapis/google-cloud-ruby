@@ -20,8 +20,11 @@
 require "google/iam/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Iam::V2::Policies::Client#get_policy
+# Snippet for the get_policy call in the Policies service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Iam::V2::Policies::Client#get_policy. It may require modification in
+# order to execute successfully.
 #
 def get_policy
   # Create a client object. The client can be reused for multiple calls.

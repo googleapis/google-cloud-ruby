@@ -28,7 +28,7 @@ module Google
             ##
             # Client for the ReservationService service.
             #
-            # This API allows users to manage their flat-rate BigQuery reservations.
+            # This API allows users to manage their BigQuery reservations.
             #
             # A reservation provides computational resource guarantees, in the form of
             # [slots](https://cloud.google.com/bigquery/docs/slots), to users. A slot is a
@@ -365,13 +365,11 @@ module Google
               #   # Call the list_reservations method.
               #   result = client.list_reservations request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Bigquery::Reservation::V1::Reservation.
-              #     p response
+              #     p item
               #   end
               #
               def list_reservations request, options = nil
@@ -820,13 +818,11 @@ module Google
               #   # Call the list_capacity_commitments method.
               #   result = client.list_capacity_commitments request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Bigquery::Reservation::V1::CapacityCommitment.
-              #     p response
+              #     p item
               #   end
               #
               def list_capacity_commitments request, options = nil
@@ -1533,13 +1529,11 @@ module Google
               #   # Call the list_assignments method.
               #   result = client.list_assignments request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Bigquery::Reservation::V1::Assignment.
-              #     p response
+              #     p item
               #   end
               #
               def list_assignments request, options = nil
@@ -1727,8 +1721,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The resource name of the admin project(containing project and location),
-              #     e.g.:
+              #     Required. The resource name of the admin project(containing project and
+              #     location), e.g.:
               #       `projects/myproject/locations/US`.
               #   @param query [::String]
               #     Please specify resource name as assignee in the query.
@@ -1763,13 +1757,11 @@ module Google
               #   # Call the search_assignments method.
               #   result = client.search_assignments request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Bigquery::Reservation::V1::Assignment.
-              #     p response
+              #     p item
               #   end
               #
               def search_assignments request, options = nil
@@ -1852,8 +1844,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The resource name with location (project name could be the wildcard '-'),
-              #     e.g.:
+              #     Required. The resource name with location (project name could be the
+              #     wildcard '-'), e.g.:
               #       `projects/-/locations/US`.
               #   @param query [::String]
               #     Please specify resource name as assignee in the query.
@@ -1888,13 +1880,11 @@ module Google
               #   # Call the search_all_assignments method.
               #   result = client.search_all_assignments request
               #
-              #   # The returned object is of type Gapic::PagedEnumerable. You can
-              #   # iterate over all elements by calling #each, and the enumerable
-              #   # will lazily make API calls to fetch subsequent pages. Other
-              #   # methods are also available for managing paging directly.
-              #   result.each do |response|
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
               #     # Each element is of type ::Google::Cloud::Bigquery::Reservation::V1::Assignment.
-              #     p response
+              #     p item
               #   end
               #
               def search_all_assignments request, options = nil
@@ -1956,7 +1946,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload move_assignment(name: nil, destination_id: nil)
+              # @overload move_assignment(name: nil, destination_id: nil, assignment_id: nil)
               #   Pass arguments to `move_assignment` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1968,6 +1958,12 @@ module Google
               #   @param destination_id [::String]
               #     The new reservation ID, e.g.:
               #       `projects/myotherproject/locations/US/reservations/team2-prod`
+              #   @param assignment_id [::String]
+              #     The optional assignment ID. A new assignment name is generated if this
+              #     field is empty.
+              #
+              #     This field can contain only lowercase alphanumeric characters or dashes.
+              #     Max length is 64 characters.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Bigquery::Reservation::V1::Assignment]
@@ -2340,9 +2336,9 @@ module Google
               #    *  (`String`) The path to a service account key file in JSON format
               #    *  (`Hash`) A service account key as a Hash
               #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-              #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+              #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
               #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-              #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+              #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
               #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
               #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
               #    *  (`nil`) indicating no credentials

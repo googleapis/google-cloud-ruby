@@ -45,8 +45,8 @@ module Google
           #     500 characters. If exceeded, the request is rejected.
           # @!attribute [rw] version_configs
           #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::Environment::VersionConfig>]
-          #     Required. A list of configurations for flow versions. You should include
-          #     version configs for all flows that are reachable from [`Start
+          #     A list of configurations for flow versions. You should include version
+          #     configs for all flows that are reachable from [`Start
           #     Flow`][Agent.start_flow] in the agent. Otherwise, an error will be
           #     returned.
           # @!attribute [r] update_time

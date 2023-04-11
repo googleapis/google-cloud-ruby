@@ -20,15 +20,25 @@ require "helper"
 require "google/cloud/shell"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Cloud::Shell::ClientConstructionMinitest < Minitest::Test
   def test_cloud_shell_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Shell.cloud_shell_service do |config|
+      client = Google::Cloud::Shell.cloud_shell_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Shell::V1::CloudShellService::Client, client
+    end
+  end
+
+  def test_cloud_shell_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Shell.cloud_shell_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Shell::V1::CloudShellService::Rest::Client, client
     end
   end
 end

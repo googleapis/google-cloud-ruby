@@ -20,8 +20,11 @@
 require "google/cloud/notebooks/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Notebooks::V1::ManagedNotebookService::Client#refresh_runtime_token_internal
+# Snippet for the refresh_runtime_token_internal call in the ManagedNotebookService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Notebooks::V1::ManagedNotebookService::Client#refresh_runtime_token_internal.
+# It may require modification in order to execute successfully.
 #
 def refresh_runtime_token_internal
   # Create a client object. The client can be reused for multiple calls.

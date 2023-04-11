@@ -31,6 +31,11 @@ module Google
       #     require "google/cloud/vision/v1p4beta1"
       #     client = ::Google::Cloud::Vision::V1p4beta1::ProductSearch::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/vision/v1p4beta1"
+      #     client = ::Google::Cloud::Vision::V1p4beta1::ProductSearch::Rest::Client.new
+      #
       module V1p4beta1
       end
     end

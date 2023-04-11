@@ -30,6 +30,11 @@ module Google
       #     require "google/cloud/policy_troubleshooter/v1"
       #     client = ::Google::Cloud::PolicyTroubleshooter::V1::IamChecker::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/policy_troubleshooter/v1"
+      #     client = ::Google::Cloud::PolicyTroubleshooter::V1::IamChecker::Rest::Client.new
+      #
       module V1
       end
     end

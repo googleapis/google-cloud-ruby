@@ -20,8 +20,11 @@
 require "google/cloud/dataflow/v1beta3"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dataflow::V1beta3::TemplatesService::Client#create_job_from_template
+# Snippet for the create_job_from_template call in the TemplatesService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dataflow::V1beta3::TemplatesService::Client#create_job_from_template.
+# It may require modification in order to execute successfully.
 #
 def create_job_from_template
   # Create a client object. The client can be reused for multiple calls.

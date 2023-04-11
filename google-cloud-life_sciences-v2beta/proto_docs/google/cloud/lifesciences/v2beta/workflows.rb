@@ -117,9 +117,9 @@ module Google
         #     and cannot start with a hyphen.
         # @!attribute [rw] image_uri
         #   @return [::String]
-        #     Required. The URI to pull the container image from. Note that all images referenced
-        #     by actions in the pipeline are pulled before the first action runs. If
-        #     multiple actions reference the same image, it is only pulled once,
+        #     Required. The URI to pull the container image from. Note that all images
+        #     referenced by actions in the pipeline are pulled before the first action
+        #     runs. If multiple actions reference the same image, it is only pulled once,
         #     ensuring that the same image is used for all actions in a single pipeline.
         #
         #     The image URI can be either a complete host and image specification (e.g.,
@@ -130,7 +130,8 @@ module Google
         #     If the specified image is not public, the service account specified for
         #     the Virtual Machine must have access to pull the images from GCR, or
         #     appropriate credentials must be specified in the
-        #     {::Google::Cloud::LifeSciences::V2beta::Action#credentials google.cloud.lifesciences.v2beta.Action.credentials} field.
+        #     {::Google::Cloud::LifeSciences::V2beta::Action#credentials google.cloud.lifesciences.v2beta.Action.credentials}
+        #     field.
         # @!attribute [rw] commands
         #   @return [::Array<::String>]
         #     If specified, overrides the `CMD` specified in the container. If the
@@ -143,7 +144,8 @@ module Google
         # @!attribute [rw] environment
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     The environment to pass into the container. This environment is merged
-        #     with values specified in the {::Google::Cloud::LifeSciences::V2beta::Pipeline google.cloud.lifesciences.v2beta.Pipeline}
+        #     with values specified in the
+        #     {::Google::Cloud::LifeSciences::V2beta::Pipeline google.cloud.lifesciences.v2beta.Pipeline}
         #     message, overwriting any duplicate values.
         #
         #     In addition to the values passed here, a few other values are
@@ -162,8 +164,8 @@ module Google
         #   @return [::Google::Cloud::LifeSciences::V2beta::Secret]
         #     The encrypted environment to pass into the container. This environment is
         #     merged with values specified in the
-        #     {::Google::Cloud::LifeSciences::V2beta::Pipeline google.cloud.lifesciences.v2beta.Pipeline} message, overwriting any
-        #     duplicate values.
+        #     {::Google::Cloud::LifeSciences::V2beta::Pipeline google.cloud.lifesciences.v2beta.Pipeline}
+        #     message, overwriting any duplicate values.
         #
         #     The secret must decrypt to a JSON-encoded dictionary where key-value pairs
         #     serve as environment variable names and their values. The decoded
@@ -353,11 +355,11 @@ module Google
         # Carries information about a Compute Engine VM resource.
         # @!attribute [rw] machine_type
         #   @return [::String]
-        #     Required. The machine type of the virtual machine to create. Must be the short name
-        #     of a standard machine type (such as "n1-standard-1") or a custom machine
-        #     type (such as "custom-1-4096", where "1" indicates the number of vCPUs and
-        #     "4096" indicates the memory in MB). See
-        #     [Creating an instance with a custom machine
+        #     Required. The machine type of the virtual machine to create. Must be the
+        #     short name of a standard machine type (such as "n1-standard-1") or a custom
+        #     machine type (such as "custom-1-4096", where "1" indicates the number of
+        #     vCPUs and "4096" indicates the memory in MB). See [Creating an instance
+        #     with a custom machine
         #     type](https://cloud.google.com/compute/docs/instances/creating-instance-with-custom-machine-type#create)
         #     for more specifications on creating a custom machine type.
         # @!attribute [rw] preemptible
@@ -685,34 +687,44 @@ module Google
         #     information in the `details` field.
         # @!attribute [rw] delayed
         #   @return [::Google::Cloud::LifeSciences::V2beta::DelayedEvent]
-        #     See {::Google::Cloud::LifeSciences::V2beta::DelayedEvent google.cloud.lifesciences.v2beta.DelayedEvent}.
+        #     See
+        #     {::Google::Cloud::LifeSciences::V2beta::DelayedEvent google.cloud.lifesciences.v2beta.DelayedEvent}.
         # @!attribute [rw] worker_assigned
         #   @return [::Google::Cloud::LifeSciences::V2beta::WorkerAssignedEvent]
-        #     See {::Google::Cloud::LifeSciences::V2beta::WorkerAssignedEvent google.cloud.lifesciences.v2beta.WorkerAssignedEvent}.
+        #     See
+        #     {::Google::Cloud::LifeSciences::V2beta::WorkerAssignedEvent google.cloud.lifesciences.v2beta.WorkerAssignedEvent}.
         # @!attribute [rw] worker_released
         #   @return [::Google::Cloud::LifeSciences::V2beta::WorkerReleasedEvent]
-        #     See {::Google::Cloud::LifeSciences::V2beta::WorkerReleasedEvent google.cloud.lifesciences.v2beta.WorkerReleasedEvent}.
+        #     See
+        #     {::Google::Cloud::LifeSciences::V2beta::WorkerReleasedEvent google.cloud.lifesciences.v2beta.WorkerReleasedEvent}.
         # @!attribute [rw] pull_started
         #   @return [::Google::Cloud::LifeSciences::V2beta::PullStartedEvent]
-        #     See {::Google::Cloud::LifeSciences::V2beta::PullStartedEvent google.cloud.lifesciences.v2beta.PullStartedEvent}.
+        #     See
+        #     {::Google::Cloud::LifeSciences::V2beta::PullStartedEvent google.cloud.lifesciences.v2beta.PullStartedEvent}.
         # @!attribute [rw] pull_stopped
         #   @return [::Google::Cloud::LifeSciences::V2beta::PullStoppedEvent]
-        #     See {::Google::Cloud::LifeSciences::V2beta::PullStoppedEvent google.cloud.lifesciences.v2beta.PullStoppedEvent}.
+        #     See
+        #     {::Google::Cloud::LifeSciences::V2beta::PullStoppedEvent google.cloud.lifesciences.v2beta.PullStoppedEvent}.
         # @!attribute [rw] container_started
         #   @return [::Google::Cloud::LifeSciences::V2beta::ContainerStartedEvent]
-        #     See {::Google::Cloud::LifeSciences::V2beta::ContainerStartedEvent google.cloud.lifesciences.v2beta.ContainerStartedEvent}.
+        #     See
+        #     {::Google::Cloud::LifeSciences::V2beta::ContainerStartedEvent google.cloud.lifesciences.v2beta.ContainerStartedEvent}.
         # @!attribute [rw] container_stopped
         #   @return [::Google::Cloud::LifeSciences::V2beta::ContainerStoppedEvent]
-        #     See {::Google::Cloud::LifeSciences::V2beta::ContainerStoppedEvent google.cloud.lifesciences.v2beta.ContainerStoppedEvent}.
+        #     See
+        #     {::Google::Cloud::LifeSciences::V2beta::ContainerStoppedEvent google.cloud.lifesciences.v2beta.ContainerStoppedEvent}.
         # @!attribute [rw] container_killed
         #   @return [::Google::Cloud::LifeSciences::V2beta::ContainerKilledEvent]
-        #     See {::Google::Cloud::LifeSciences::V2beta::ContainerKilledEvent google.cloud.lifesciences.v2beta.ContainerKilledEvent}.
+        #     See
+        #     {::Google::Cloud::LifeSciences::V2beta::ContainerKilledEvent google.cloud.lifesciences.v2beta.ContainerKilledEvent}.
         # @!attribute [rw] unexpected_exit_status
         #   @return [::Google::Cloud::LifeSciences::V2beta::UnexpectedExitStatusEvent]
-        #     See {::Google::Cloud::LifeSciences::V2beta::UnexpectedExitStatusEvent google.cloud.lifesciences.v2beta.UnexpectedExitStatusEvent}.
+        #     See
+        #     {::Google::Cloud::LifeSciences::V2beta::UnexpectedExitStatusEvent google.cloud.lifesciences.v2beta.UnexpectedExitStatusEvent}.
         # @!attribute [rw] failed
         #   @return [::Google::Cloud::LifeSciences::V2beta::FailedEvent]
-        #     See {::Google::Cloud::LifeSciences::V2beta::FailedEvent google.cloud.lifesciences.v2beta.FailedEvent}.
+        #     See
+        #     {::Google::Cloud::LifeSciences::V2beta::FailedEvent google.cloud.lifesciences.v2beta.FailedEvent}.
         class Event
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

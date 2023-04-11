@@ -3,6 +3,7 @@
 
 require 'google/protobuf'
 
+require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/protobuf/timestamp_pb'
 
@@ -24,6 +25,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :create_time, :message, 5, "google.protobuf.Timestamp"
       optional :update_time, :message, 6, "google.protobuf.Timestamp"
       optional :owner, :string, 7
+      optional :fetch_time, :message, 8, "google.protobuf.Timestamp"
     end
     add_message "google.devtools.artifactregistry.v1.ListFilesRequest" do
       optional :parent, :string, 1

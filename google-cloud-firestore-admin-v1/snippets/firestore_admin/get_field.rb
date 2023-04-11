@@ -20,8 +20,11 @@
 require "google/cloud/firestore/admin/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#get_field
+# Snippet for the get_field call in the FirestoreAdmin service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#get_field. It may
+# require modification in order to execute successfully.
 #
 def get_field
   # Create a client object. The client can be reused for multiple calls.

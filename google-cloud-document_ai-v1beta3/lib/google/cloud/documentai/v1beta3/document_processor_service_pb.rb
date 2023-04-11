@@ -279,6 +279,18 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :evaluations, :message, 1, "google.cloud.documentai.v1beta3.Evaluation"
       optional :next_page_token, :string, 2
     end
+    add_message "google.cloud.documentai.v1beta3.ImportProcessorVersionRequest" do
+      optional :parent, :string, 1
+      oneof :source do
+        optional :processor_version_source, :string, 2
+      end
+    end
+    add_message "google.cloud.documentai.v1beta3.ImportProcessorVersionResponse" do
+      optional :processor_version, :string, 1
+    end
+    add_message "google.cloud.documentai.v1beta3.ImportProcessorVersionMetadata" do
+      optional :common_metadata, :message, 1, "google.cloud.documentai.v1beta3.CommonOperationMetadata"
+    end
   end
 end
 
@@ -346,6 +358,9 @@ module Google
         GetEvaluationRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.GetEvaluationRequest").msgclass
         ListEvaluationsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.ListEvaluationsRequest").msgclass
         ListEvaluationsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.ListEvaluationsResponse").msgclass
+        ImportProcessorVersionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.ImportProcessorVersionRequest").msgclass
+        ImportProcessorVersionResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.ImportProcessorVersionResponse").msgclass
+        ImportProcessorVersionMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1beta3.ImportProcessorVersionMetadata").msgclass
       end
     end
   end

@@ -1,5 +1,28 @@
 # Release History
 
+### 0.15.0 (2023-03-23)
+
+#### Features
+
+* Add support for  a ReconcileTags() API method 
+* Add support for entries associated with Looker and CloudSQL 
+* Add support for field proto_reference_documentation_uri to proto reference documentation. 
+* Add support for new ImportEntries() API, including format of the dump 
+* Add support for overrides_by_request_protocol to backend.proto ([#20901](https://github.com/googleapis/google-cloud-ruby/issues/20901)) 
+* Add support for SERVICE_NOT_VISIBLE and GCP_SUSPENDED into error reason 
+
+### 0.14.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20625](https://github.com/googleapis/google-cloud-ruby/issues/20625)) 
+
+### 0.13.0 (2023-02-17)
+
+#### Features
+
+* Include the iam_policy mixin client ([#20454](https://github.com/googleapis/google-cloud-ruby/issues/20454)) 
+
 ### 0.12.1 (2022-11-09)
 
 #### Documentation

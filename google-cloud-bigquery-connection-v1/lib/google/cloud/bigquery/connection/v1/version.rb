@@ -22,7 +22,7 @@ module Google
     module Bigquery
       module Connection
         module V1
-          VERSION = "0.10.0"
+          VERSION = "0.13.0"
         end
       end
     end

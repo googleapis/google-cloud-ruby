@@ -55,7 +55,7 @@ module Google
         #      Allowed values are:
         #
         #     * `no-price-reranking`
-        #     * `low-price-raranking`
+        #     * `low-price-reranking`
         #     * `medium-price-reranking`
         #     * `high-price-reranking`
         #
@@ -194,8 +194,8 @@ module Google
         #     [SOLUTION_TYPE_RECOMMENDATION][google.cloud.retail.v2main.SolutionType.SOLUTION_TYPE_RECOMMENDATION].
         # @!attribute [rw] diversity_type
         #   @return [::Google::Cloud::Retail::V2::ServingConfig::DiversityType]
-        #     What kind of diversity to use - data driven or rule based. If unset,
-        #     the server behavior defaults to
+        #     What kind of diversity to use - data driven or rule based. If unset, the
+        #     server behavior defaults to
         #     {::Google::Cloud::Retail::V2::ServingConfig::DiversityType::RULE_BASED_DIVERSITY RULE_BASED_DIVERSITY}.
         # @!attribute [rw] enable_category_filter_level
         #   @return [::String]

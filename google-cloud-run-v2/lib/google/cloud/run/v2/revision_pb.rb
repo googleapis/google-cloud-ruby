@@ -57,6 +57,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :volumes, :message, 18, "google.cloud.run.v2.Volume"
       optional :execution_environment, :enum, 20, "google.cloud.run.v2.ExecutionEnvironment"
       optional :encryption_key, :string, 21
+      optional :encryption_key_revocation_action, :enum, 23, "google.cloud.run.v2.EncryptionKeyRevocationAction"
+      optional :encryption_key_shutdown_duration, :message, 24, "google.protobuf.Duration"
       optional :reconciling, :bool, 30
       repeated :conditions, :message, 31, "google.cloud.run.v2.Condition"
       optional :observed_generation, :int64, 32

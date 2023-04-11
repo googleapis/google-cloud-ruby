@@ -223,9 +223,31 @@ module Google
           # @!attribute [rw] goal
           #   @return [::Google::Cloud::AIPlatform::V1::StudySpec::MetricSpec::GoalType]
           #     Required. The optimization goal of the metric.
+          # @!attribute [rw] safety_config
+          #   @return [::Google::Cloud::AIPlatform::V1::StudySpec::MetricSpec::SafetyMetricConfig]
+          #     Used for safe search. In the case, the metric will be a safety
+          #     metric. You must provide a separate metric for objective metric.
           class MetricSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Used in safe optimization to specify threshold levels and risk tolerance.
+            # @!attribute [rw] safety_threshold
+            #   @return [::Float]
+            #     Safety threshold (boundary value between safe and unsafe). NOTE that if
+            #     you leave SafetyMetricConfig unset, a default value of 0 will be used.
+            # @!attribute [rw] desired_min_safe_trials_fraction
+            #   @return [::Float]
+            #     Desired minimum fraction of safe trials (over total number of trials)
+            #     that should be targeted by the algorithm at any time during the
+            #     study (best effort). This should be between 0.0 and 1.0 and a value of
+            #     0.0 means that there is no minimum and an algorithm proceeds without
+            #     targeting any specific fraction. A value of 1.0 means that the
+            #     algorithm attempts to only Suggest safe Trials.
+            class SafetyMetricConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
 
             # The available types of optimization goals.
             module GoalType

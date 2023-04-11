@@ -8,7 +8,7 @@
     "name": "compute",
     "name_pretty": "Google Cloud Compute API",
     "product_documentation": "https://cloud.google.com/compute/",
-    "release_level": "preview",
+    "release_level": "stable",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "google-cloud-compute is the official client library for the Google Cloud Compute API.",

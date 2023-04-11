@@ -96,8 +96,9 @@ module Google
         #     Output only. The unique name of this Revision.
         # @!attribute [r] uid
         #   @return [::String]
-        #     Output only. Server assigned unique identifier for the Revision. The value is a UUID4
-        #     string and guaranteed to remain unchanged until the resource is deleted.
+        #     Output only. Server assigned unique identifier for the Revision. The value
+        #     is a UUID4 string and guaranteed to remain unchanged until the resource is
+        #     deleted.
         # @!attribute [r] generation
         #   @return [::Integer]
         #     Output only. A number that monotonically increases every time the user
@@ -110,9 +111,6 @@ module Google
         #     environment, state, etc. For more information, visit
         #     https://cloud.google.com/resource-manager/docs/creating-managing-labels or
         #     https://cloud.google.com/run/docs/configuring/labels
-        #     Cloud Run will populate some labels with 'run.googleapis.com' or
-        #     'serving.knative.dev' namespaces. Those labels are read-only, and user
-        #     changes will not be preserved.
         # @!attribute [rw] annotations
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     KRM-style annotations for the resource.
@@ -173,20 +171,28 @@ module Google
         #     A reference to a customer managed encryption key (CMEK) to use to encrypt
         #     this container image. For more information, go to
         #     https://cloud.google.com/run/docs/securing/using-cmek
+        # @!attribute [rw] encryption_key_revocation_action
+        #   @return [::Google::Cloud::Run::V2::EncryptionKeyRevocationAction]
+        #     The action to take if the encryption key is revoked.
+        # @!attribute [rw] encryption_key_shutdown_duration
+        #   @return [::Google::Protobuf::Duration]
+        #     If encryption_key_revocation_action is SHUTDOWN, the duration before
+        #     shutting down all instances. The minimum increment is 1 hour.
         # @!attribute [r] reconciling
         #   @return [::Boolean]
-        #     Output only. Indicates whether the resource's reconciliation is still in progress.
-        #     See comments in `Service.reconciling` for additional information on
-        #     reconciliation process in Cloud Run.
+        #     Output only. Indicates whether the resource's reconciliation is still in
+        #     progress. See comments in `Service.reconciling` for additional information
+        #     on reconciliation process in Cloud Run.
         # @!attribute [r] conditions
         #   @return [::Array<::Google::Cloud::Run::V2::Condition>]
-        #     Output only. The Condition of this Revision, containing its readiness status, and
-        #     detailed error information in case it did not reach a serving state.
+        #     Output only. The Condition of this Revision, containing its readiness
+        #     status, and detailed error information in case it did not reach a serving
+        #     state.
         # @!attribute [r] observed_generation
         #   @return [::Integer]
-        #     Output only. The generation of this Revision currently serving traffic. See comments in
-        #     `reconciling` for additional information on reconciliation process in Cloud
-        #     Run.
+        #     Output only. The generation of this Revision currently serving traffic. See
+        #     comments in `reconciling` for additional information on reconciliation
+        #     process in Cloud Run.
         # @!attribute [r] log_uri
         #   @return [::String]
         #     Output only. The Google Console URI to obtain logs for the Revision.

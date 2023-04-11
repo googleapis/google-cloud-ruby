@@ -23,7 +23,9 @@ require "gapic/config/method"
 require "google/cloud/profiler/v2/version"
 
 require "google/cloud/profiler/v2/profiler_service/credentials"
+require "google/cloud/profiler/v2/profiler_service/paths"
 require "google/cloud/profiler/v2/profiler_service/client"
+require "google/cloud/profiler/v2/profiler_service/rest"
 
 module Google
   module Cloud
@@ -41,6 +43,11 @@ module Google
         #
         #     require "google/cloud/profiler/v2/profiler_service"
         #     client = ::Google::Cloud::Profiler::V2::ProfilerService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/profiler/v2/profiler_service/rest"
+        #     client = ::Google::Cloud::Profiler::V2::ProfilerService::Rest::Client.new
         #
         module ProfilerService
         end

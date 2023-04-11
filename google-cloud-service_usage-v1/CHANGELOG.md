@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.2.1 (2023-03-05)
+
+#### Bug Fixes
+
+* Remove spurious header parameters when calling list_operations ([#20599](https://github.com/googleapis/google-cloud-ruby/issues/20599)) 
+#### Documentation
+
+* Updates to gem descriptions 
+
 ### 0.2.0 (2022-07-08)
 
 #### Features

@@ -39,6 +39,26 @@ describe "Query", :firestore_acceptance do
     _(result_snp[:foo]).must_equal "bar"
   end
 
+  it "run query with read time argument" do
+    rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
+    results = []
+    results_1 = []
+
+    rand_query_col.add({foo: "bar", bar: "foo"})
+
+    sleep(1)
+    read_time = Time.now
+    sleep(1)
+
+    rand_query_col.add({foo: "bar", bar: "foo"})
+
+    rand_query_col.where(:foo, :==, :bar).get(read_time: read_time) { |doc| results << doc }
+    rand_query_col.where(:foo, :==, :bar).get { |doc| results_1 << doc }
+
+    _(results.count).must_equal 1
+    _(results_1.count).must_equal 2
+  end
+
   it "has where method with !=" do
     rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
     rand_query_col.add({foo: "bar", bar: "foo"})

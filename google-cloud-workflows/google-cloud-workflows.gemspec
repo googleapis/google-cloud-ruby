@@ -23,8 +23,8 @@ Gem::Specification.new do |gem|
   gem.required_ruby_version = ">= 2.6"
 
   gem.add_dependency "google-cloud-core", "~> 1.6"
-  gem.add_dependency "google-cloud-workflows-v1", ">= 0.0", "< 2.a"
-  gem.add_dependency "google-cloud-workflows-v1beta", ">= 0.0", "< 2.a"
+  gem.add_dependency "google-cloud-workflows-v1", ">= 0.3", "< 2.a"
+  gem.add_dependency "google-cloud-workflows-v1beta", ">= 0.5", "< 2.a"
   gem.add_dependency "google-cloud-workflows-executions-v1", ">= 0.0", "< 2.a"
   gem.add_dependency "google-cloud-workflows-executions-v1beta", ">= 0.0", "< 2.a"
 

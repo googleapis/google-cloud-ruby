@@ -22,6 +22,16 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::GkeMultiCloud::ClientConstructionMinitest < Minitest::Test
+  def test_attached_clusters_grpc
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::GkeMultiCloud.attached_clusters do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client, client
+    end
+  end
+
   def test_aws_clusters_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure

@@ -20,8 +20,11 @@
 require "google/cloud/language/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Language::V1::LanguageService::Client#analyze_entities
+# Snippet for the analyze_entities call in the LanguageService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Language::V1::LanguageService::Client#analyze_entities. It may
+# require modification in order to execute successfully.
 #
 def analyze_entities
   # Create a client object. The client can be reused for multiple calls.

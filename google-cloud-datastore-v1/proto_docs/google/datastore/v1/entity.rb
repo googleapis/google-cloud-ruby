@@ -39,7 +39,8 @@ module Google
         #
         # Foreign partition IDs (in which the project ID does
         # not match the context project ID ) are discouraged.
-        # Reads and writes of foreign partition IDs may fail if the project is not in an active state.
+        # Reads and writes of foreign partition IDs may fail if the project is not in
+        # an active state.
         # @!attribute [rw] project_id
         #   @return [::String]
         #     The ID of the project to which the entities belong.
@@ -160,8 +161,8 @@ module Google
         # @!attribute [rw] string_value
         #   @return [::String]
         #     A UTF-8 encoded string value.
-        #     When `exclude_from_indexes` is false (it is indexed) , may have at most 1500 bytes.
-        #     Otherwise, may be set to at most 1,000,000 bytes.
+        #     When `exclude_from_indexes` is false (it is indexed) , may have at most
+        #     1500 bytes. Otherwise, may be set to at most 1,000,000 bytes.
         # @!attribute [rw] blob_value
         #   @return [::String]
         #     A blob value.
@@ -215,8 +216,8 @@ module Google
         #     The map's keys are property names.
         #     A property name matching regex `__.*__` is reserved.
         #     A reserved property name is forbidden in certain documented contexts.
-        #     The name must not contain more than 500 characters.
-        #     The name cannot be `""`.
+        #     The map keys, represented as UTF-8, must not exceed 1,500 bytes and cannot
+        #     be empty.
         class Entity
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

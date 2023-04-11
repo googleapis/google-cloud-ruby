@@ -48,12 +48,14 @@ module Google
       # Create a new client object for CompanyService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Talent::V4::CompanyService::Client](https://googleapis.dev/ruby/google-cloud-talent-v4/latest/Google/Cloud/Talent/V4/CompanyService/Client.html)
+      # [Google::Cloud::Talent::V4::CompanyService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-talent-v4/latest/Google-Cloud-Talent-V4-CompanyService-Client)
       # for a gRPC client for version V4 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the CompanyService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About CompanyService
       #
@@ -61,9 +63,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v4`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.company_service version: :v4, &block
+      def self.company_service version: :v4, transport: :grpc, &block
         require "google/cloud/talent/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Talent
@@ -71,6 +74,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::Talent.const_get(package_name).const_get(:CompanyService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -78,12 +82,14 @@ module Google
       # Create a new client object for Completion.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Talent::V4::Completion::Client](https://googleapis.dev/ruby/google-cloud-talent-v4/latest/Google/Cloud/Talent/V4/Completion/Client.html)
+      # [Google::Cloud::Talent::V4::Completion::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-talent-v4/latest/Google-Cloud-Talent-V4-Completion-Client)
       # for a gRPC client for version V4 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the Completion service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About Completion
       #
@@ -91,9 +97,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v4`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.completion version: :v4, &block
+      def self.completion version: :v4, transport: :grpc, &block
         require "google/cloud/talent/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Talent
@@ -101,6 +108,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::Talent.const_get(package_name).const_get(:Completion)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -108,12 +116,14 @@ module Google
       # Create a new client object for EventService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Talent::V4::EventService::Client](https://googleapis.dev/ruby/google-cloud-talent-v4/latest/Google/Cloud/Talent/V4/EventService/Client.html)
+      # [Google::Cloud::Talent::V4::EventService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-talent-v4/latest/Google-Cloud-Talent-V4-EventService-Client)
       # for a gRPC client for version V4 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the EventService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About EventService
       #
@@ -121,9 +131,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v4`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.event_service version: :v4, &block
+      def self.event_service version: :v4, transport: :grpc, &block
         require "google/cloud/talent/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Talent
@@ -131,6 +142,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::Talent.const_get(package_name).const_get(:EventService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -138,12 +150,14 @@ module Google
       # Create a new client object for JobService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Talent::V4::JobService::Client](https://googleapis.dev/ruby/google-cloud-talent-v4/latest/Google/Cloud/Talent/V4/JobService/Client.html)
+      # [Google::Cloud::Talent::V4::JobService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-talent-v4/latest/Google-Cloud-Talent-V4-JobService-Client)
       # for a gRPC client for version V4 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the JobService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About JobService
       #
@@ -151,9 +165,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v4`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.job_service version: :v4, &block
+      def self.job_service version: :v4, transport: :grpc, &block
         require "google/cloud/talent/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Talent
@@ -161,6 +176,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::Talent.const_get(package_name).const_get(:JobService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -168,12 +184,14 @@ module Google
       # Create a new client object for TenantService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Talent::V4::TenantService::Client](https://googleapis.dev/ruby/google-cloud-talent-v4/latest/Google/Cloud/Talent/V4/TenantService/Client.html)
+      # [Google::Cloud::Talent::V4::TenantService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-talent-v4/latest/Google-Cloud-Talent-V4-TenantService-Client)
       # for a gRPC client for version V4 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the TenantService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About TenantService
       #
@@ -181,9 +199,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v4`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.tenant_service version: :v4, &block
+      def self.tenant_service version: :v4, transport: :grpc, &block
         require "google/cloud/talent/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Talent
@@ -191,6 +210,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::Talent.const_get(package_name).const_get(:TenantService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 

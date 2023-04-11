@@ -20,8 +20,11 @@
 require "google/cloud/dataproc/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dataproc::V1::BatchController::Client#get_batch
+# Snippet for the get_batch call in the BatchController service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dataproc::V1::BatchController::Client#get_batch. It may require
+# modification in order to execute successfully.
 #
 def get_batch
   # Create a client object. The client can be reused for multiple calls.

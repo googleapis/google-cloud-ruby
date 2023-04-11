@@ -26,6 +26,7 @@ require "google/cloud/dialogflow/cx/v3/flows/credentials"
 require "google/cloud/dialogflow/cx/v3/flows/paths"
 require "google/cloud/dialogflow/cx/v3/flows/operations"
 require "google/cloud/dialogflow/cx/v3/flows/client"
+require "google/cloud/dialogflow/cx/v3/flows/rest"
 
 module Google
   module Cloud
@@ -39,6 +40,11 @@ module Google
           #
           #     require "google/cloud/dialogflow/cx/v3/flows"
           #     client = ::Google::Cloud::Dialogflow::CX::V3::Flows::Client.new
+          #
+          # @example Load this service and instantiate a REST client
+          #
+          #     require "google/cloud/dialogflow/cx/v3/flows/rest"
+          #     client = ::Google::Cloud::Dialogflow::CX::V3::Flows::Rest::Client.new
           #
           module Flows
           end

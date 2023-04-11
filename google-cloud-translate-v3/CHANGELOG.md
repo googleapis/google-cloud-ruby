@@ -1,5 +1,20 @@
 # Release History
 
+### 0.6.0 (2023-02-22)
+
+#### Features
+
+* Added display_name field to Glossary 
+* Support for removing the shadow text for native PDF translation 
+* Support translating only native PDF pages 
+* Support user-customized attribution flag ([#20490](https://github.com/googleapis/google-cloud-ruby/issues/20490)) 
+
+### 0.5.2 (2023-02-17)
+
+#### Bug Fixes
+
+* Fixed routing headers sent with long-running operation calls ([#20453](https://github.com/googleapis/google-cloud-ruby/issues/20453)) 
+
 ### 0.5.1 (2022-12-09)
 
 #### Documentation

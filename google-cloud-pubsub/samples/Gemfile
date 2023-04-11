@@ -36,4 +36,5 @@ group :test do
   gem "minitest-hooks", "~> 1.5"
   gem "rack-test"
   gem "rake"
+  gem "toys-core"
 end

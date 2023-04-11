@@ -20,8 +20,11 @@
 require "google/cloud/gaming/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Gaming::V1::RealmsService::Client#get_realm
+# Snippet for the get_realm call in the RealmsService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Gaming::V1::RealmsService::Client#get_realm. It may require
+# modification in order to execute successfully.
 #
 def get_realm
   # Create a client object. The client can be reused for multiple calls.

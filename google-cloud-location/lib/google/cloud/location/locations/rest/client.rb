@@ -160,9 +160,9 @@ module Google
             #     The standard list page size.
             #   @param page_token [::String]
             #     The standard list page token.
-            # @yield [result, response] Access the result along with the Faraday response object
+            # @yield [result, operation] Access the result along with the TransportOperation object
             # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Location::Location>]
-            # @yieldparam response [::Faraday::Response]
+            # @yieldparam operation [::Gapic::Rest::TransportOperation]
             #
             # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Location::Location>]
             #
@@ -196,9 +196,9 @@ module Google
 
               bindings_override = @config.bindings_override["google.cloud.location.Locations.ListLocations"]
 
-              @locations_stub.list_locations request, options, bindings_override: bindings_override do |result, response|
+              @locations_stub.list_locations request, options, bindings_override: bindings_override do |result, operation|
                 result = ::Gapic::Rest::PagedEnumerable.new @locations_stub, :list_locations, "locations", request, result, options
-                yield result, response if block_given?
+                yield result, operation if block_given?
                 return result
               end
             rescue ::Gapic::Rest::Error => e
@@ -225,9 +225,9 @@ module Google
             #
             #   @param name [::String]
             #     Resource name for the location.
-            # @yield [result, response] Access the result along with the Faraday response object
+            # @yield [result, operation] Access the result along with the TransportOperation object
             # @yieldparam result [::Google::Cloud::Location::Location]
-            # @yieldparam response [::Faraday::Response]
+            # @yieldparam operation [::Gapic::Rest::TransportOperation]
             #
             # @return [::Google::Cloud::Location::Location]
             #
@@ -261,8 +261,8 @@ module Google
 
               bindings_override = @config.bindings_override["google.cloud.location.Locations.GetLocation"]
 
-              @locations_stub.get_location request, options, bindings_override: bindings_override do |result, response|
-                yield result, response if block_given?
+              @locations_stub.get_location request, options, bindings_override: bindings_override do |result, operation|
+                yield result, operation if block_given?
                 return result
               end
             rescue ::Gapic::Rest::Error => e
@@ -307,9 +307,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`nil`) indicating no credentials
             #   @return [::Object]
             # @!attribute [rw] scope

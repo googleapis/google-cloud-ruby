@@ -20,8 +20,11 @@
 require "google/cloud/recommender/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Recommender::V1::Recommender::Client#get_insight
+# Snippet for the get_insight call in the Recommender service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Recommender::V1::Recommender::Client#get_insight. It may
+# require modification in order to execute successfully.
 #
 def get_insight
   # Create a client object. The client can be reused for multiple calls.

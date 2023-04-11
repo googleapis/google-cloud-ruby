@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-gsuite_add_ons-v1",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "gsuiteaddons_v1_generated_GSuiteAddOns_GetAuthorization_sync",
-      "title": "Snippet for get_authorization in GSuiteAddOns",
-      "description": "Basic snippet for get_authorization in GSuiteAddOns",
+      "title": "Snippet for the get_authorization call in the GSuiteAddOns service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client#get_authorization. It may require modification in order to execute successfully.",
       "file": "gsuite_add_ons/get_authorization.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gsuiteaddons_v1_generated_GSuiteAddOns_CreateDeployment_sync",
-      "title": "Snippet for create_deployment in GSuiteAddOns",
-      "description": "Basic snippet for create_deployment in GSuiteAddOns",
+      "title": "Snippet for the create_deployment call in the GSuiteAddOns service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client#create_deployment. It may require modification in order to execute successfully.",
       "file": "gsuite_add_ons/create_deployment.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gsuiteaddons_v1_generated_GSuiteAddOns_ReplaceDeployment_sync",
-      "title": "Snippet for replace_deployment in GSuiteAddOns",
-      "description": "Basic snippet for replace_deployment in GSuiteAddOns",
+      "title": "Snippet for the replace_deployment call in the GSuiteAddOns service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client#replace_deployment. It may require modification in order to execute successfully.",
       "file": "gsuite_add_ons/replace_deployment.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gsuiteaddons_v1_generated_GSuiteAddOns_GetDeployment_sync",
-      "title": "Snippet for get_deployment in GSuiteAddOns",
-      "description": "Basic snippet for get_deployment in GSuiteAddOns",
+      "title": "Snippet for the get_deployment call in the GSuiteAddOns service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client#get_deployment. It may require modification in order to execute successfully.",
       "file": "gsuite_add_ons/get_deployment.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gsuiteaddons_v1_generated_GSuiteAddOns_ListDeployments_sync",
-      "title": "Snippet for list_deployments in GSuiteAddOns",
-      "description": "Basic snippet for list_deployments in GSuiteAddOns",
+      "title": "Snippet for the list_deployments call in the GSuiteAddOns service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client#list_deployments. It may require modification in order to execute successfully.",
       "file": "gsuite_add_ons/list_deployments.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gsuiteaddons_v1_generated_GSuiteAddOns_DeleteDeployment_sync",
-      "title": "Snippet for delete_deployment in GSuiteAddOns",
-      "description": "Basic snippet for delete_deployment in GSuiteAddOns",
+      "title": "Snippet for the delete_deployment call in the GSuiteAddOns service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client#delete_deployment. It may require modification in order to execute successfully.",
       "file": "gsuite_add_ons/delete_deployment.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gsuiteaddons_v1_generated_GSuiteAddOns_InstallDeployment_sync",
-      "title": "Snippet for install_deployment in GSuiteAddOns",
-      "description": "Basic snippet for install_deployment in GSuiteAddOns",
+      "title": "Snippet for the install_deployment call in the GSuiteAddOns service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client#install_deployment. It may require modification in order to execute successfully.",
       "file": "gsuite_add_ons/install_deployment.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gsuiteaddons_v1_generated_GSuiteAddOns_UninstallDeployment_sync",
-      "title": "Snippet for uninstall_deployment in GSuiteAddOns",
-      "description": "Basic snippet for uninstall_deployment in GSuiteAddOns",
+      "title": "Snippet for the uninstall_deployment call in the GSuiteAddOns service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client#uninstall_deployment. It may require modification in order to execute successfully.",
       "file": "gsuite_add_ons/uninstall_deployment.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gsuiteaddons_v1_generated_GSuiteAddOns_GetInstallStatus_sync",
-      "title": "Snippet for get_install_status in GSuiteAddOns",
-      "description": "Basic snippet for get_install_status in GSuiteAddOns",
+      "title": "Snippet for the get_install_status call in the GSuiteAddOns service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client#get_install_status. It may require modification in order to execute successfully.",
       "file": "gsuite_add_ons/get_install_status.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,7 +366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]

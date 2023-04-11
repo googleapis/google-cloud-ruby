@@ -20,8 +20,11 @@
 require "google/cloud/monitoring/v3"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Monitoring::V3::NotificationChannelService::Client#get_notification_channel_descriptor
+# Snippet for the get_notification_channel_descriptor call in the NotificationChannelService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Monitoring::V3::NotificationChannelService::Client#get_notification_channel_descriptor.
+# It may require modification in order to execute successfully.
 #
 def get_notification_channel_descriptor
   # Create a client object. The client can be reused for multiple calls.

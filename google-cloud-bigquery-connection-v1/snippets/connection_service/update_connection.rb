@@ -20,8 +20,11 @@
 require "google/cloud/bigquery/connection/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client#update_connection
+# Snippet for the update_connection call in the ConnectionService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client#update_connection.
+# It may require modification in order to execute successfully.
 #
 def update_connection
   # Create a client object. The client can be reused for multiple calls.

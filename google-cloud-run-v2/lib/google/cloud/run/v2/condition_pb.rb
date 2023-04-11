@@ -62,6 +62,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :ACTIVE_REVISION_LIMIT_REACHED, 9
       value :NO_DEPLOYMENT, 10
       value :HEALTH_CHECK_SKIPPED, 11
+      value :MIN_INSTANCES_WARMING, 12
     end
     add_enum "google.cloud.run.v2.Condition.ExecutionReason" do
       value :EXECUTION_REASON_UNDEFINED, 0

@@ -20,8 +20,11 @@
 require "google/cloud/firestore/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Firestore::V1::Firestore::Client#list_collection_ids
+# Snippet for the list_collection_ids call in the Firestore service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Firestore::V1::Firestore::Client#list_collection_ids. It may
+# require modification in order to execute successfully.
 #
 def list_collection_ids
   # Create a client object. The client can be reused for multiple calls.

@@ -1,5 +1,35 @@
 # Release History
 
+### 0.15.1 (2023-02-23)
+
+#### Documentation
+
+* Minor updates ([#20492](https://github.com/googleapis/google-cloud-ruby/issues/20492)) 
+
+### 0.15.0 (2023-02-17)
+
+#### Features
+
+* ModifyAckDeadlineConfirmation includes a list of ack IDs that failed with temporary issues ([#20445](https://github.com/googleapis/google-cloud-ruby/issues/20445)) 
+#### Bug Fixes
+
+* Make INTERNAL a retryable error for the pull RPC 
+
+### 0.14.0 (2023-02-16)
+
+#### Features
+
+* AcknowledgeConfirmation includes a list of ack IDs that failed with temporary issues ([#20431](https://github.com/googleapis/google-cloud-ruby/issues/20431)) 
+#### Documentation
+
+* Various fixes and clarifications in reference documentation 
+
+### 0.13.1 (2023-02-13)
+
+#### Documentation
+
+* Deprecated the revision_id parameter to commit_schema_revision and delete_schema_revision ([#20139](https://github.com/googleapis/google-cloud-ruby/issues/20139)) 
+
 ### 0.13.0 (2023-01-12)
 
 #### Features

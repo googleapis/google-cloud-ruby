@@ -20,8 +20,11 @@
 require "google/cloud/dataplex/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dataplex::V1::DataplexService::Client#get_task
+# Snippet for the get_task call in the DataplexService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dataplex::V1::DataplexService::Client#get_task. It may require
+# modification in order to execute successfully.
 #
 def get_task
   # Create a client object. The client can be reused for multiple calls.

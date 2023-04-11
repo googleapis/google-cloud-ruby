@@ -88,27 +88,27 @@ class ::Google::Cloud::Compute::V1::Projects::Rest::ClientTest < Minitest::Test
 
         # Use hash object
         client.disable_xpn_host({ project: project, request_id: request_id }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.disable_xpn_host project: project, request_id: request_id do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.disable_xpn_host ::Google::Cloud::Compute::V1::DisableXpnHostProjectRequest.new(project: project, request_id: request_id) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.disable_xpn_host({ project: project, request_id: request_id }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.disable_xpn_host(::Google::Cloud::Compute::V1::DisableXpnHostProjectRequest.new(project: project, request_id: request_id), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -144,27 +144,27 @@ class ::Google::Cloud::Compute::V1::Projects::Rest::ClientTest < Minitest::Test
 
         # Use hash object
         client.disable_xpn_resource({ project: project, projects_disable_xpn_resource_request_resource: projects_disable_xpn_resource_request_resource, request_id: request_id }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.disable_xpn_resource project: project, projects_disable_xpn_resource_request_resource: projects_disable_xpn_resource_request_resource, request_id: request_id do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.disable_xpn_resource ::Google::Cloud::Compute::V1::DisableXpnResourceProjectRequest.new(project: project, projects_disable_xpn_resource_request_resource: projects_disable_xpn_resource_request_resource, request_id: request_id) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.disable_xpn_resource({ project: project, projects_disable_xpn_resource_request_resource: projects_disable_xpn_resource_request_resource, request_id: request_id }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.disable_xpn_resource(::Google::Cloud::Compute::V1::DisableXpnResourceProjectRequest.new(project: project, projects_disable_xpn_resource_request_resource: projects_disable_xpn_resource_request_resource, request_id: request_id), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -199,27 +199,27 @@ class ::Google::Cloud::Compute::V1::Projects::Rest::ClientTest < Minitest::Test
 
         # Use hash object
         client.enable_xpn_host({ project: project, request_id: request_id }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.enable_xpn_host project: project, request_id: request_id do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.enable_xpn_host ::Google::Cloud::Compute::V1::EnableXpnHostProjectRequest.new(project: project, request_id: request_id) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.enable_xpn_host({ project: project, request_id: request_id }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.enable_xpn_host(::Google::Cloud::Compute::V1::EnableXpnHostProjectRequest.new(project: project, request_id: request_id), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -255,27 +255,27 @@ class ::Google::Cloud::Compute::V1::Projects::Rest::ClientTest < Minitest::Test
 
         # Use hash object
         client.enable_xpn_resource({ project: project, projects_enable_xpn_resource_request_resource: projects_enable_xpn_resource_request_resource, request_id: request_id }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.enable_xpn_resource project: project, projects_enable_xpn_resource_request_resource: projects_enable_xpn_resource_request_resource, request_id: request_id do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.enable_xpn_resource ::Google::Cloud::Compute::V1::EnableXpnResourceProjectRequest.new(project: project, projects_enable_xpn_resource_request_resource: projects_enable_xpn_resource_request_resource, request_id: request_id) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.enable_xpn_resource({ project: project, projects_enable_xpn_resource_request_resource: projects_enable_xpn_resource_request_resource, request_id: request_id }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.enable_xpn_resource(::Google::Cloud::Compute::V1::EnableXpnResourceProjectRequest.new(project: project, projects_enable_xpn_resource_request_resource: projects_enable_xpn_resource_request_resource, request_id: request_id), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -309,27 +309,27 @@ class ::Google::Cloud::Compute::V1::Projects::Rest::ClientTest < Minitest::Test
 
         # Use hash object
         client.get({ project: project }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.get project: project do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.get ::Google::Cloud::Compute::V1::GetProjectRequest.new(project: project) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.get({ project: project }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.get(::Google::Cloud::Compute::V1::GetProjectRequest.new(project: project), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -363,27 +363,27 @@ class ::Google::Cloud::Compute::V1::Projects::Rest::ClientTest < Minitest::Test
 
         # Use hash object
         client.get_xpn_host({ project: project }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.get_xpn_host project: project do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.get_xpn_host ::Google::Cloud::Compute::V1::GetXpnHostProjectRequest.new(project: project) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.get_xpn_host({ project: project }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.get_xpn_host(::Google::Cloud::Compute::V1::GetXpnHostProjectRequest.new(project: project), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -422,27 +422,27 @@ class ::Google::Cloud::Compute::V1::Projects::Rest::ClientTest < Minitest::Test
 
         # Use hash object
         client.get_xpn_resources({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.get_xpn_resources filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.get_xpn_resources ::Google::Cloud::Compute::V1::GetXpnResourcesProjectsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.get_xpn_resources({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.get_xpn_resources(::Google::Cloud::Compute::V1::GetXpnResourcesProjectsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -482,27 +482,27 @@ class ::Google::Cloud::Compute::V1::Projects::Rest::ClientTest < Minitest::Test
 
         # Use hash object
         client.list_xpn_hosts({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, projects_list_xpn_hosts_request_resource: projects_list_xpn_hosts_request_resource, return_partial_success: return_partial_success }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.list_xpn_hosts filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, projects_list_xpn_hosts_request_resource: projects_list_xpn_hosts_request_resource, return_partial_success: return_partial_success do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.list_xpn_hosts ::Google::Cloud::Compute::V1::ListXpnHostsProjectsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, projects_list_xpn_hosts_request_resource: projects_list_xpn_hosts_request_resource, return_partial_success: return_partial_success) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.list_xpn_hosts({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, projects_list_xpn_hosts_request_resource: projects_list_xpn_hosts_request_resource, return_partial_success: return_partial_success }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.list_xpn_hosts(::Google::Cloud::Compute::V1::ListXpnHostsProjectsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, projects_list_xpn_hosts_request_resource: projects_list_xpn_hosts_request_resource, return_partial_success: return_partial_success), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -538,27 +538,27 @@ class ::Google::Cloud::Compute::V1::Projects::Rest::ClientTest < Minitest::Test
 
         # Use hash object
         client.move_disk({ disk_move_request_resource: disk_move_request_resource, project: project, request_id: request_id }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.move_disk disk_move_request_resource: disk_move_request_resource, project: project, request_id: request_id do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.move_disk ::Google::Cloud::Compute::V1::MoveDiskProjectRequest.new(disk_move_request_resource: disk_move_request_resource, project: project, request_id: request_id) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.move_disk({ disk_move_request_resource: disk_move_request_resource, project: project, request_id: request_id }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.move_disk(::Google::Cloud::Compute::V1::MoveDiskProjectRequest.new(disk_move_request_resource: disk_move_request_resource, project: project, request_id: request_id), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -594,27 +594,27 @@ class ::Google::Cloud::Compute::V1::Projects::Rest::ClientTest < Minitest::Test
 
         # Use hash object
         client.move_instance({ instance_move_request_resource: instance_move_request_resource, project: project, request_id: request_id }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.move_instance instance_move_request_resource: instance_move_request_resource, project: project, request_id: request_id do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.move_instance ::Google::Cloud::Compute::V1::MoveInstanceProjectRequest.new(instance_move_request_resource: instance_move_request_resource, project: project, request_id: request_id) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.move_instance({ instance_move_request_resource: instance_move_request_resource, project: project, request_id: request_id }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.move_instance(::Google::Cloud::Compute::V1::MoveInstanceProjectRequest.new(instance_move_request_resource: instance_move_request_resource, project: project, request_id: request_id), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -650,27 +650,27 @@ class ::Google::Cloud::Compute::V1::Projects::Rest::ClientTest < Minitest::Test
 
         # Use hash object
         client.set_common_instance_metadata({ metadata_resource: metadata_resource, project: project, request_id: request_id }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.set_common_instance_metadata metadata_resource: metadata_resource, project: project, request_id: request_id do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.set_common_instance_metadata ::Google::Cloud::Compute::V1::SetCommonInstanceMetadataProjectRequest.new(metadata_resource: metadata_resource, project: project, request_id: request_id) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.set_common_instance_metadata({ metadata_resource: metadata_resource, project: project, request_id: request_id }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.set_common_instance_metadata(::Google::Cloud::Compute::V1::SetCommonInstanceMetadataProjectRequest.new(metadata_resource: metadata_resource, project: project, request_id: request_id), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -700,33 +700,33 @@ class ::Google::Cloud::Compute::V1::Projects::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Compute::V1::Projects::Rest::ServiceStub.stub :transcode_set_default_network_tier_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, set_default_network_tier_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::Projects::Rest::Client.new do  |config|
+        client = ::Google::Cloud::Compute::V1::Projects::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
         client.set_default_network_tier({ project: project, projects_set_default_network_tier_request_resource: projects_set_default_network_tier_request_resource, request_id: request_id }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.set_default_network_tier project: project, projects_set_default_network_tier_request_resource: projects_set_default_network_tier_request_resource, request_id: request_id do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.set_default_network_tier ::Google::Cloud::Compute::V1::SetDefaultNetworkTierProjectRequest.new(project: project, projects_set_default_network_tier_request_resource: projects_set_default_network_tier_request_resource, request_id: request_id) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.set_default_network_tier({ project: project, projects_set_default_network_tier_request_resource: projects_set_default_network_tier_request_resource, request_id: request_id }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.set_default_network_tier(::Google::Cloud::Compute::V1::SetDefaultNetworkTierProjectRequest.new(project: project, projects_set_default_network_tier_request_resource: projects_set_default_network_tier_request_resource, request_id: request_id), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -762,27 +762,27 @@ class ::Google::Cloud::Compute::V1::Projects::Rest::ClientTest < Minitest::Test
 
         # Use hash object
         client.set_usage_export_bucket({ project: project, request_id: request_id, usage_export_location_resource: usage_export_location_resource }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.set_usage_export_bucket project: project, request_id: request_id, usage_export_location_resource: usage_export_location_resource do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.set_usage_export_bucket ::Google::Cloud::Compute::V1::SetUsageExportBucketProjectRequest.new(project: project, request_id: request_id, usage_export_location_resource: usage_export_location_resource) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.set_usage_export_bucket({ project: project, request_id: request_id, usage_export_location_resource: usage_export_location_resource }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.set_usage_export_bucket(::Google::Cloud::Compute::V1::SetUsageExportBucketProjectRequest.new(project: project, request_id: request_id, usage_export_location_resource: usage_export_location_resource), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls

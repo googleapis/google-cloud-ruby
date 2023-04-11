@@ -49,6 +49,9 @@ module Google
 
           # TPU v3.
           TPU_V3 = 7
+
+          # TPU v4.
+          TPU_V4_POD = 10
         end
       end
     end

@@ -250,7 +250,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload annotate_assessment(name: nil, annotation: nil, reasons: nil, hashed_account_id: nil)
+            # @overload annotate_assessment(name: nil, annotation: nil, reasons: nil, hashed_account_id: nil, transaction_event: nil)
             #   Pass arguments to `annotate_assessment` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -259,17 +259,21 @@ module Google
             #     Required. The resource name of the Assessment, in the format
             #     "projects/\\{project_number}/assessments/\\{assessment_id}".
             #   @param annotation [::Google::Cloud::RecaptchaEnterprise::V1beta1::AnnotateAssessmentRequest::Annotation]
-            #     Optional. The annotation that will be assigned to the Event. This field can be left
-            #     empty to provide reasons that apply to an event without concluding whether
-            #     the event is legitimate or fraudulent.
+            #     Optional. The annotation that will be assigned to the Event. This field can
+            #     be left empty to provide reasons that apply to an event without concluding
+            #     whether the event is legitimate or fraudulent.
             #   @param reasons [::Array<::Google::Cloud::RecaptchaEnterprise::V1beta1::AnnotateAssessmentRequest::Reason>]
-            #     Optional. Optional reasons for the annotation that will be assigned to the Event.
+            #     Optional. Optional reasons for the annotation that will be assigned to the
+            #     Event.
             #   @param hashed_account_id [::String]
-            #     Optional. Optional unique stable hashed user identifier to apply to the assessment.
-            #     This is an alternative to setting the hashed_account_id in
+            #     Optional. Optional unique stable hashed user identifier to apply to the
+            #     assessment. This is an alternative to setting the hashed_account_id in
             #     CreateAssessment, for example when the account identifier is not yet known
             #     in the initial request. It is recommended that the identifier is hashed
             #     using hmac-sha256 with stable secret.
+            #   @param transaction_event [::Google::Cloud::RecaptchaEnterprise::V1beta1::TransactionEvent, ::Hash]
+            #     Optional. If the assessment is part of a payment transaction, provide
+            #     details on payment lifecycle events that occur in the transaction.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::RecaptchaEnterprise::V1beta1::AnnotateAssessmentResponse]
@@ -373,9 +377,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials

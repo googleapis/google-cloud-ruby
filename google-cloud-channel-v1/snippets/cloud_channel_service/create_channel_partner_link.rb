@@ -20,8 +20,11 @@
 require "google/cloud/channel/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Channel::V1::CloudChannelService::Client#create_channel_partner_link
+# Snippet for the create_channel_partner_link call in the CloudChannelService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Channel::V1::CloudChannelService::Client#create_channel_partner_link.
+# It may require modification in order to execute successfully.
 #
 def create_channel_partner_link
   # Create a client object. The client can be reused for multiple calls.

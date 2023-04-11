@@ -48,7 +48,7 @@ module Google
       # Create a new client object for ContainerAnalysis.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::ContainerAnalysis::V1::ContainerAnalysis::Client](https://googleapis.dev/ruby/google-cloud-container_analysis-v1/latest/Google/Cloud/ContainerAnalysis/V1/ContainerAnalysis/Client.html)
+      # [Google::Cloud::ContainerAnalysis::V1::ContainerAnalysis::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-container_analysis-v1/latest/Google-Cloud-ContainerAnalysis-V1-ContainerAnalysis-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the ContainerAnalysis service is

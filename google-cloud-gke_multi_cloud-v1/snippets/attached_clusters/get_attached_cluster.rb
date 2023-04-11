@@ -20,8 +20,11 @@
 require "google/cloud/gke_multi_cloud/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client#get_attached_cluster
+# Snippet for the get_attached_cluster call in the AttachedClusters service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::GkeMultiCloud::V1::AttachedClusters::Client#get_attached_cluster.
+# It may require modification in order to execute successfully.
 #
 def get_attached_cluster
   # Create a client object. The client can be reused for multiple calls.

@@ -18,6 +18,7 @@ describe Google::Cloud::Firestore::CollectionReference, :list_documents, :mock_f
   let(:collection_id) { "messages" }
   let(:collection_path) { "users/alice/#{collection_id}" }
   let(:collection) { Google::Cloud::Firestore::CollectionReference.from_path "projects/#{project}/databases/(default)/documents/#{collection_path}", firestore }
+  let(:read_time) { Time.now }
 
   it "lists documents" do
     num_documents = 3
@@ -64,6 +65,27 @@ describe Google::Cloud::Firestore::CollectionReference, :list_documents, :mock_f
     firestore_mock.expect :list_documents, second_list_res, **list_documents_args(page_token: "next_page_token")
 
     first_documents = collection.list_documents
+    second_documents = first_documents.next
+
+    firestore_mock.verify
+
+    first_documents.each { |m| _(m).must_be_kind_of Google::Cloud::Firestore::DocumentReference }
+    _(first_documents.count).must_equal 3
+    _(first_documents.next?).must_equal true #must_be :next?
+
+    second_documents.each { |m| _(m).must_be_kind_of Google::Cloud::Firestore::DocumentReference }
+    _(second_documents.count).must_equal 2
+    _(second_documents.next?).must_equal false #wont_be :next?
+  end
+
+  it "paginates documents using next? and next with read time set" do
+    first_list_res = paged_enum_struct list_documents_gapi(3, "next_page_token")
+    second_list_res = paged_enum_struct list_documents_gapi(2)
+
+    firestore_mock.expect :list_documents, first_list_res, **list_documents_args(read_time: read_time)
+    firestore_mock.expect :list_documents, second_list_res, **list_documents_args(page_token: "next_page_token", read_time: read_time)
+
+    first_documents = collection.list_documents read_time: read_time
     second_documents = first_documents.next
 
     firestore_mock.verify
@@ -153,14 +175,15 @@ describe Google::Cloud::Firestore::CollectionReference, :list_documents, :mock_f
     )
   end
 
-  def list_documents_args page_size: nil, page_token: nil
+  def list_documents_args page_size: nil, page_token: nil, read_time: nil
     {
       parent: "projects/projectID/databases/(default)/documents/users/alice",
       collection_id: "messages",
       page_size: page_size,
       page_token: page_token,
       mask: {field_paths: []},
-      show_missing: true
+      show_missing: true,
+      read_time: firestore.service.read_time_to_timestamp(read_time)
     }
   end
 end

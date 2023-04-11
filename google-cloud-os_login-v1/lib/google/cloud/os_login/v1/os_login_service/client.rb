@@ -283,9 +283,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. A reference to the POSIX account to update. POSIX accounts are identified
-            #     by the project ID they are associated with. A reference to the POSIX
-            #     account is in format `users/{user}/projects/{project}`.
+            #     Required. A reference to the POSIX account to update. POSIX accounts are
+            #     identified by the project ID they are associated with. A reference to the
+            #     POSIX account is in format `users/{user}/projects/{project}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]
@@ -370,9 +370,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The fingerprint of the public key to update. Public keys are identified by
-            #     their SHA-256 fingerprint. The fingerprint of the public key is in format
-            #     `users/{user}/sshPublicKeys/{fingerprint}`.
+            #     Required. The fingerprint of the public key to update. Public keys are
+            #     identified by their SHA-256 fingerprint. The fingerprint of the public key
+            #     is in format `users/{user}/sshPublicKeys/{fingerprint}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]
@@ -547,9 +547,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The fingerprint of the public key to retrieve. Public keys are identified
-            #     by their SHA-256 fingerprint. The fingerprint of the public key is in
-            #     format `users/{user}/sshPublicKeys/{fingerprint}`.
+            #     Required. The fingerprint of the public key to retrieve. Public keys are
+            #     identified by their SHA-256 fingerprint. The fingerprint of the public key
+            #     is in format `users/{user}/sshPublicKeys/{fingerprint}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::OsLogin::Common::SshPublicKey]
@@ -726,9 +726,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The fingerprint of the public key to update. Public keys are identified by
-            #     their SHA-256 fingerprint. The fingerprint of the public key is in format
-            #     `users/{user}/sshPublicKeys/{fingerprint}`.
+            #     Required. The fingerprint of the public key to update. Public keys are
+            #     identified by their SHA-256 fingerprint. The fingerprint of the public key
+            #     is in format `users/{user}/sshPublicKeys/{fingerprint}`.
             #   @param ssh_public_key [::Google::Cloud::OsLogin::Common::SshPublicKey, ::Hash]
             #     Required. The SSH public key and expiration time.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
@@ -836,9 +836,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials

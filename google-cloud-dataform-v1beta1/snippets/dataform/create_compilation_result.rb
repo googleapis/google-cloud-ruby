@@ -20,8 +20,11 @@
 require "google/cloud/dataform/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dataform::V1beta1::Dataform::Client#create_compilation_result
+# Snippet for the create_compilation_result call in the Dataform service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dataform::V1beta1::Dataform::Client#create_compilation_result.
+# It may require modification in order to execute successfully.
 #
 def create_compilation_result
   # Create a client object. The client can be reused for multiple calls.

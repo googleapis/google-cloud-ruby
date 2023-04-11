@@ -47,6 +47,12 @@ module Google
             rpc :CreateEkmConnection, ::Google::Cloud::Kms::V1::CreateEkmConnectionRequest, ::Google::Cloud::Kms::V1::EkmConnection
             # Updates an [EkmConnection][google.cloud.kms.v1.EkmConnection]'s metadata.
             rpc :UpdateEkmConnection, ::Google::Cloud::Kms::V1::UpdateEkmConnectionRequest, ::Google::Cloud::Kms::V1::EkmConnection
+            # Returns the [EkmConfig][google.cloud.kms.v1.EkmConfig] singleton resource
+            # for a given project and location.
+            rpc :GetEkmConfig, ::Google::Cloud::Kms::V1::GetEkmConfigRequest, ::Google::Cloud::Kms::V1::EkmConfig
+            # Updates the [EkmConfig][google.cloud.kms.v1.EkmConfig] singleton resource
+            # for a given project and location.
+            rpc :UpdateEkmConfig, ::Google::Cloud::Kms::V1::UpdateEkmConfigRequest, ::Google::Cloud::Kms::V1::EkmConfig
           end
 
           Stub = Service.rpc_stub_class

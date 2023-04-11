@@ -66,6 +66,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.aiplatform.v1.StudySpec.MetricSpec" do
       optional :metric_id, :string, 1
       optional :goal, :enum, 2, "google.cloud.aiplatform.v1.StudySpec.MetricSpec.GoalType"
+      proto3_optional :safety_config, :message, 3, "google.cloud.aiplatform.v1.StudySpec.MetricSpec.SafetyMetricConfig"
+    end
+    add_message "google.cloud.aiplatform.v1.StudySpec.MetricSpec.SafetyMetricConfig" do
+      optional :safety_threshold, :double, 1
+      proto3_optional :desired_min_safe_trials_fraction, :double, 2
     end
     add_enum "google.cloud.aiplatform.v1.StudySpec.MetricSpec.GoalType" do
       value :GOAL_TYPE_UNSPECIFIED, 0
@@ -176,6 +181,7 @@ module Google
         Trial::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.Trial.State").enummodule
         StudySpec = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.StudySpec").msgclass
         StudySpec::MetricSpec = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.StudySpec.MetricSpec").msgclass
+        StudySpec::MetricSpec::SafetyMetricConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.StudySpec.MetricSpec.SafetyMetricConfig").msgclass
         StudySpec::MetricSpec::GoalType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.StudySpec.MetricSpec.GoalType").enummodule
         StudySpec::ParameterSpec = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.StudySpec.ParameterSpec").msgclass
         StudySpec::ParameterSpec::DoubleValueSpec = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.StudySpec.ParameterSpec.DoubleValueSpec").msgclass

@@ -20,8 +20,11 @@
 require "google/cloud/build/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Build::V1::CloudBuild::Client#list_worker_pools
+# Snippet for the list_worker_pools call in the CloudBuild service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Build::V1::CloudBuild::Client#list_worker_pools. It may require
+# modification in order to execute successfully.
 #
 def list_worker_pools
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_worker_pools
   # Call the list_worker_pools method.
   result = client.list_worker_pools request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::Build::V1::WorkerPool.
-    p response
+    p item
   end
 end
 # [END cloudbuild_v1_generated_CloudBuild_ListWorkerPools_sync]

@@ -27,7 +27,13 @@ describe Google::Cloud::Firestore::Service, :firestore_acceptance do
   it "passes the correct configuration to its v1 client" do
     _(firestore.project_id).wont_be :empty?
     config = firestore.service.firestore.configure
-    _(config).must_be_kind_of Google::Cloud::Firestore::V1::Firestore::Client::Configuration
+    config_class =
+      if Google::Cloud.configure.firestore.transport == :rest
+        Google::Cloud::Firestore::V1::Firestore::Rest::Client::Configuration
+      else
+        Google::Cloud::Firestore::V1::Firestore::Client::Configuration
+      end
+    _(config).must_be_kind_of config_class
     _(config.lib_name).must_equal "gccl"
     _(config.lib_version).must_equal Google::Cloud::Firestore::VERSION
     _(config.metadata).must_equal config_metadata

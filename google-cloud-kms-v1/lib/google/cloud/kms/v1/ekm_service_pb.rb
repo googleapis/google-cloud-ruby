@@ -36,6 +36,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :ekm_connection, :message, 1, "google.cloud.kms.v1.EkmConnection"
       optional :update_mask, :message, 2, "google.protobuf.FieldMask"
     end
+    add_message "google.cloud.kms.v1.GetEkmConfigRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.cloud.kms.v1.UpdateEkmConfigRequest" do
+      optional :ekm_config, :message, 1, "google.cloud.kms.v1.EkmConfig"
+      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
+    end
     add_message "google.cloud.kms.v1.Certificate" do
       optional :raw_der, :bytes, 1
       optional :parsed, :bool, 2
@@ -52,12 +59,23 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :create_time, :message, 2, "google.protobuf.Timestamp"
       repeated :service_resolvers, :message, 3, "google.cloud.kms.v1.EkmConnection.ServiceResolver"
       optional :etag, :string, 5
+      optional :key_management_mode, :enum, 6, "google.cloud.kms.v1.EkmConnection.KeyManagementMode"
+      optional :crypto_space_path, :string, 7
     end
     add_message "google.cloud.kms.v1.EkmConnection.ServiceResolver" do
       optional :service_directory_service, :string, 1
       optional :endpoint_filter, :string, 2
       optional :hostname, :string, 3
       repeated :server_certificates, :message, 4, "google.cloud.kms.v1.Certificate"
+    end
+    add_enum "google.cloud.kms.v1.EkmConnection.KeyManagementMode" do
+      value :KEY_MANAGEMENT_MODE_UNSPECIFIED, 0
+      value :MANUAL, 1
+      value :CLOUD_KMS, 2
+    end
+    add_message "google.cloud.kms.v1.EkmConfig" do
+      optional :name, :string, 1
+      optional :default_ekm_connection, :string, 2
     end
   end
 end
@@ -71,9 +89,13 @@ module Google
         GetEkmConnectionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.GetEkmConnectionRequest").msgclass
         CreateEkmConnectionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.CreateEkmConnectionRequest").msgclass
         UpdateEkmConnectionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.UpdateEkmConnectionRequest").msgclass
+        GetEkmConfigRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.GetEkmConfigRequest").msgclass
+        UpdateEkmConfigRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.UpdateEkmConfigRequest").msgclass
         Certificate = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.Certificate").msgclass
         EkmConnection = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.EkmConnection").msgclass
         EkmConnection::ServiceResolver = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.EkmConnection.ServiceResolver").msgclass
+        EkmConnection::KeyManagementMode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.EkmConnection.KeyManagementMode").enummodule
+        EkmConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.EkmConfig").msgclass
       end
     end
   end

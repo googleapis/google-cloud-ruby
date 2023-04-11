@@ -26,6 +26,7 @@ require "google/cloud/resource_manager/v3/tag_values/credentials"
 require "google/cloud/resource_manager/v3/tag_values/paths"
 require "google/cloud/resource_manager/v3/tag_values/operations"
 require "google/cloud/resource_manager/v3/tag_values/client"
+require "google/cloud/resource_manager/v3/tag_values/rest"
 
 module Google
   module Cloud
@@ -38,6 +39,11 @@ module Google
         #
         #     require "google/cloud/resource_manager/v3/tag_values"
         #     client = ::Google::Cloud::ResourceManager::V3::TagValues::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/resource_manager/v3/tag_values/rest"
+        #     client = ::Google::Cloud::ResourceManager::V3::TagValues::Rest::Client.new
         #
         module TagValues
         end

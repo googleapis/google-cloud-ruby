@@ -80,7 +80,7 @@ module Google
             # will be permanently purged.
             # https://support.google.com/analytics/answer/6154772
             #
-            # Returns an error if the target is not found, or is not an GA4 Property.
+            # Returns an error if the target is not found, or is not a GA4 Property.
             rpc :DeleteProperty, ::Google::Analytics::Admin::V1alpha::DeletePropertyRequest, ::Google::Analytics::Admin::V1alpha::Property
             # Updates a property.
             rpc :UpdateProperty, ::Google::Analytics::Admin::V1alpha::UpdatePropertyRequest, ::Google::Analytics::Admin::V1alpha::Property
@@ -156,7 +156,8 @@ module Google
             # Acknowledges the terms of user data collection for the specified property.
             #
             # This acknowledgement must be completed (either in the Google Analytics UI
-            # or via this API) before MeasurementProtocolSecret resources may be created.
+            # or through this API) before MeasurementProtocolSecret resources may be
+            # created.
             rpc :AcknowledgeUserDataCollection, ::Google::Analytics::Admin::V1alpha::AcknowledgeUserDataCollectionRequest, ::Google::Analytics::Admin::V1alpha::AcknowledgeUserDataCollectionResponse
             # Searches through all changes to an account or its children given the
             # specified set of filters.
@@ -244,9 +245,11 @@ module Google
             rpc :GetDataStream, ::Google::Analytics::Admin::V1alpha::GetDataStreamRequest, ::Google::Analytics::Admin::V1alpha::DataStream
             # Lookup for a single Audience.
             # Audiences created before 2020 may not be supported.
+            # Default audiences will not show filter definitions.
             rpc :GetAudience, ::Google::Analytics::Admin::V1alpha::GetAudienceRequest, ::Google::Analytics::Admin::V1alpha::Audience
             # Lists Audiences on a property.
             # Audiences created before 2020 may not be supported.
+            # Default audiences will not show filter definitions.
             rpc :ListAudiences, ::Google::Analytics::Admin::V1alpha::ListAudiencesRequest, ::Google::Analytics::Admin::V1alpha::ListAudiencesResponse
             # Creates an Audience.
             rpc :CreateAudience, ::Google::Analytics::Admin::V1alpha::CreateAudienceRequest, ::Google::Analytics::Admin::V1alpha::Audience
@@ -254,6 +257,16 @@ module Google
             rpc :UpdateAudience, ::Google::Analytics::Admin::V1alpha::UpdateAudienceRequest, ::Google::Analytics::Admin::V1alpha::Audience
             # Archives an Audience on a property.
             rpc :ArchiveAudience, ::Google::Analytics::Admin::V1alpha::ArchiveAudienceRequest, ::Google::Protobuf::Empty
+            # Look up a single SearchAds360Link
+            rpc :GetSearchAds360Link, ::Google::Analytics::Admin::V1alpha::GetSearchAds360LinkRequest, ::Google::Analytics::Admin::V1alpha::SearchAds360Link
+            # Lists all SearchAds360Links on a property.
+            rpc :ListSearchAds360Links, ::Google::Analytics::Admin::V1alpha::ListSearchAds360LinksRequest, ::Google::Analytics::Admin::V1alpha::ListSearchAds360LinksResponse
+            # Creates a SearchAds360Link.
+            rpc :CreateSearchAds360Link, ::Google::Analytics::Admin::V1alpha::CreateSearchAds360LinkRequest, ::Google::Analytics::Admin::V1alpha::SearchAds360Link
+            # Deletes a SearchAds360Link on a property.
+            rpc :DeleteSearchAds360Link, ::Google::Analytics::Admin::V1alpha::DeleteSearchAds360LinkRequest, ::Google::Protobuf::Empty
+            # Updates a SearchAds360Link on a property.
+            rpc :UpdateSearchAds360Link, ::Google::Analytics::Admin::V1alpha::UpdateSearchAds360LinkRequest, ::Google::Analytics::Admin::V1alpha::SearchAds360Link
             # Lookup for a AttributionSettings singleton.
             rpc :GetAttributionSettings, ::Google::Analytics::Admin::V1alpha::GetAttributionSettingsRequest, ::Google::Analytics::Admin::V1alpha::AttributionSettings
             # Updates attribution settings on a property.
@@ -272,6 +285,70 @@ module Google
             # property's time zone. For configuration change history, see
             # [searchChangeHistoryEvents](https://developers.google.com/analytics/devguides/config/admin/v1/rest/v1alpha/accounts/searchChangeHistoryEvents).
             rpc :RunAccessReport, ::Google::Analytics::Admin::V1alpha::RunAccessReportRequest, ::Google::Analytics::Admin::V1alpha::RunAccessReportResponse
+            # Creates an access binding on an account or property.
+            rpc :CreateAccessBinding, ::Google::Analytics::Admin::V1alpha::CreateAccessBindingRequest, ::Google::Analytics::Admin::V1alpha::AccessBinding
+            # Gets information about an access binding.
+            rpc :GetAccessBinding, ::Google::Analytics::Admin::V1alpha::GetAccessBindingRequest, ::Google::Analytics::Admin::V1alpha::AccessBinding
+            # Updates an access binding on an account or property.
+            rpc :UpdateAccessBinding, ::Google::Analytics::Admin::V1alpha::UpdateAccessBindingRequest, ::Google::Analytics::Admin::V1alpha::AccessBinding
+            # Deletes an access binding on an account or property.
+            rpc :DeleteAccessBinding, ::Google::Analytics::Admin::V1alpha::DeleteAccessBindingRequest, ::Google::Protobuf::Empty
+            # Lists all access bindings on an account or property.
+            rpc :ListAccessBindings, ::Google::Analytics::Admin::V1alpha::ListAccessBindingsRequest, ::Google::Analytics::Admin::V1alpha::ListAccessBindingsResponse
+            # Creates information about multiple access bindings to an account or
+            # property.
+            #
+            # This method is transactional. If any AccessBinding cannot be created, none
+            # of the AccessBindings will be created.
+            rpc :BatchCreateAccessBindings, ::Google::Analytics::Admin::V1alpha::BatchCreateAccessBindingsRequest, ::Google::Analytics::Admin::V1alpha::BatchCreateAccessBindingsResponse
+            # Gets information about multiple access bindings to an account or property.
+            rpc :BatchGetAccessBindings, ::Google::Analytics::Admin::V1alpha::BatchGetAccessBindingsRequest, ::Google::Analytics::Admin::V1alpha::BatchGetAccessBindingsResponse
+            # Updates information about multiple access bindings to an account or
+            # property.
+            rpc :BatchUpdateAccessBindings, ::Google::Analytics::Admin::V1alpha::BatchUpdateAccessBindingsRequest, ::Google::Analytics::Admin::V1alpha::BatchUpdateAccessBindingsResponse
+            # Deletes information about multiple users' links to an account or property.
+            rpc :BatchDeleteAccessBindings, ::Google::Analytics::Admin::V1alpha::BatchDeleteAccessBindingsRequest, ::Google::Protobuf::Empty
+            # Lookup for a single ExpandedDataSet.
+            rpc :GetExpandedDataSet, ::Google::Analytics::Admin::V1alpha::GetExpandedDataSetRequest, ::Google::Analytics::Admin::V1alpha::ExpandedDataSet
+            # Lists ExpandedDataSets on a property.
+            rpc :ListExpandedDataSets, ::Google::Analytics::Admin::V1alpha::ListExpandedDataSetsRequest, ::Google::Analytics::Admin::V1alpha::ListExpandedDataSetsResponse
+            # Creates a ExpandedDataSet.
+            rpc :CreateExpandedDataSet, ::Google::Analytics::Admin::V1alpha::CreateExpandedDataSetRequest, ::Google::Analytics::Admin::V1alpha::ExpandedDataSet
+            # Updates a ExpandedDataSet on a property.
+            rpc :UpdateExpandedDataSet, ::Google::Analytics::Admin::V1alpha::UpdateExpandedDataSetRequest, ::Google::Analytics::Admin::V1alpha::ExpandedDataSet
+            # Deletes a ExpandedDataSet on a property.
+            rpc :DeleteExpandedDataSet, ::Google::Analytics::Admin::V1alpha::DeleteExpandedDataSetRequest, ::Google::Protobuf::Empty
+            # Sets the opt out status for the automated GA4 setup process for a UA
+            # property.
+            # Note: this has no effect on GA4 property.
+            rpc :SetAutomatedGa4ConfigurationOptOut, ::Google::Analytics::Admin::V1alpha::SetAutomatedGa4ConfigurationOptOutRequest, ::Google::Analytics::Admin::V1alpha::SetAutomatedGa4ConfigurationOptOutResponse
+            # Fetches the opt out status for the automated GA4 setup process for a UA
+            # property.
+            # Note: this has no effect on GA4 property.
+            rpc :FetchAutomatedGa4ConfigurationOptOut, ::Google::Analytics::Admin::V1alpha::FetchAutomatedGa4ConfigurationOptOutRequest, ::Google::Analytics::Admin::V1alpha::FetchAutomatedGa4ConfigurationOptOutResponse
+            # Lookup for a single BigQuery Link.
+            rpc :GetBigQueryLink, ::Google::Analytics::Admin::V1alpha::GetBigQueryLinkRequest, ::Google::Analytics::Admin::V1alpha::BigQueryLink
+            # Lists BigQuery Links on a property.
+            rpc :ListBigQueryLinks, ::Google::Analytics::Admin::V1alpha::ListBigQueryLinksRequest, ::Google::Analytics::Admin::V1alpha::ListBigQueryLinksResponse
+            # Returns the enhanced measurement settings for this data stream.
+            # Note that the stream must enable enhanced measurement for these settings to
+            # take effect.
+            rpc :GetEnhancedMeasurementSettings, ::Google::Analytics::Admin::V1alpha::GetEnhancedMeasurementSettingsRequest, ::Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings
+            # Updates the enhanced measurement settings for this data stream.
+            # Note that the stream must enable enhanced measurement for these settings to
+            # take effect.
+            rpc :UpdateEnhancedMeasurementSettings, ::Google::Analytics::Admin::V1alpha::UpdateEnhancedMeasurementSettingsRequest, ::Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings
+            # Creates a connected site tag for a Universal Analytics property. You can
+            # create a maximum of 20 connected site tags per property.
+            # Note: This API cannot be used on GA4 properties.
+            rpc :CreateConnectedSiteTag, ::Google::Analytics::Admin::V1alpha::CreateConnectedSiteTagRequest, ::Google::Analytics::Admin::V1alpha::CreateConnectedSiteTagResponse
+            # Deletes a connected site tag for a Universal Analytics property.
+            # Note: this has no effect on GA4 properties.
+            rpc :DeleteConnectedSiteTag, ::Google::Analytics::Admin::V1alpha::DeleteConnectedSiteTagRequest, ::Google::Protobuf::Empty
+            # Lists the connected site tags for a Universal Analytics property. A maximum
+            # of 20 connected site tags will be returned. Note: this has no effect on GA4
+            # property.
+            rpc :ListConnectedSiteTags, ::Google::Analytics::Admin::V1alpha::ListConnectedSiteTagsRequest, ::Google::Analytics::Admin::V1alpha::ListConnectedSiteTagsResponse
           end
 
           Stub = Service.rpc_stub_class

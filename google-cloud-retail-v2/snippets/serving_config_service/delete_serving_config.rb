@@ -20,8 +20,11 @@
 require "google/cloud/retail/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Retail::V2::ServingConfigService::Client#delete_serving_config
+# Snippet for the delete_serving_config call in the ServingConfigService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Retail::V2::ServingConfigService::Client#delete_serving_config.
+# It may require modification in order to execute successfully.
 #
 def delete_serving_config
   # Create a client object. The client can be reused for multiple calls.

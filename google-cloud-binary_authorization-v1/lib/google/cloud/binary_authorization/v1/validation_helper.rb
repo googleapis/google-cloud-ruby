@@ -24,6 +24,7 @@ require "google/cloud/binary_authorization/v1/version"
 
 require "google/cloud/binary_authorization/v1/validation_helper/credentials"
 require "google/cloud/binary_authorization/v1/validation_helper/client"
+require "google/cloud/binary_authorization/v1/validation_helper/rest"
 
 module Google
   module Cloud
@@ -36,6 +37,11 @@ module Google
         #
         #     require "google/cloud/binary_authorization/v1/validation_helper"
         #     client = ::Google::Cloud::BinaryAuthorization::V1::ValidationHelper::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/binary_authorization/v1/validation_helper/rest"
+        #     client = ::Google::Cloud::BinaryAuthorization::V1::ValidationHelper::Rest::Client.new
         #
         module ValidationHelper
         end

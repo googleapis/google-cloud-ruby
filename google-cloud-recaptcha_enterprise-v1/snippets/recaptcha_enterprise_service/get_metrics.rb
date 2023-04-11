@@ -20,8 +20,11 @@
 require "google/cloud/recaptcha_enterprise/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#get_metrics
+# Snippet for the get_metrics call in the RecaptchaEnterpriseService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#get_metrics.
+# It may require modification in order to execute successfully.
 #
 def get_metrics
   # Create a client object. The client can be reused for multiple calls.

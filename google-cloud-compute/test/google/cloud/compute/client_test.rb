@@ -490,6 +490,15 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_region_instance_templates_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Compute.region_instance_templates do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::RegionInstanceTemplates::Rest::Client, client
+    end
+  end
+
   def test_region_instances_rest
     Gapic::Rest::ClientStub.stub :new, :stub do
       client = Google::Cloud::Compute.region_instances do |config|

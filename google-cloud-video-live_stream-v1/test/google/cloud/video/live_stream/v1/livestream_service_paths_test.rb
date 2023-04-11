@@ -70,4 +70,16 @@ class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::ClientPathsTest
       assert_equal "projects/value0/locations/value1", path
     end
   end
+
+  def test_secret_version_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.secret_version_path project: "value0", secret: "value1", version: "value2"
+      assert_equal "projects/value0/secrets/value1/versions/value2", path
+    end
+  end
 end

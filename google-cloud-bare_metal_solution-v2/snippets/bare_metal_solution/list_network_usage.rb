@@ -20,8 +20,11 @@
 require "google/cloud/bare_metal_solution/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#list_network_usage
+# Snippet for the list_network_usage call in the BareMetalSolution service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#list_network_usage.
+# It may require modification in order to execute successfully.
 #
 def list_network_usage
   # Create a client object. The client can be reused for multiple calls.

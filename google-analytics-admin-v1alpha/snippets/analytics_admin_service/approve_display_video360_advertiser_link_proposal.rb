@@ -20,8 +20,11 @@
 require "google/analytics/admin/v1alpha"
 
 ##
-# Example demonstrating basic usage of
-# Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#approve_display_video360_advertiser_link_proposal
+# Snippet for the approve_display_video360_advertiser_link_proposal call in the AnalyticsAdminService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#approve_display_video360_advertiser_link_proposal.
+# It may require modification in order to execute successfully.
 #
 def approve_display_video360_advertiser_link_proposal
   # Create a client object. The client can be reused for multiple calls.

@@ -20,8 +20,11 @@
 require "google/cloud/network_security/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client#delete_server_tls_policy
+# Snippet for the delete_server_tls_policy call in the NetworkSecurity service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client#delete_server_tls_policy.
+# It may require modification in order to execute successfully.
 #
 def delete_server_tls_policy
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def delete_server_tls_policy
   # Call the delete_server_tls_policy method.
   result = client.delete_server_tls_policy request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END networksecurity_v1beta1_generated_NetworkSecurity_DeleteServerTlsPolicy_sync]

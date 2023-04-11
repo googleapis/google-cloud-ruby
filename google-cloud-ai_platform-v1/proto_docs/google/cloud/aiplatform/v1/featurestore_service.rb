@@ -316,10 +316,7 @@ module Google
         # @!attribute [rw] entity_type_specs
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::BatchReadFeatureValuesRequest::EntityTypeSpec>]
         #     Required. Specifies EntityType grouping Features to read values of and
-        #     settings. Each EntityType referenced in
-        #     [BatchReadFeatureValuesRequest.entity_type_specs] must have a column
-        #     specifying entity IDs in the EntityType in
-        #     [BatchReadFeatureValuesRequest.request][] .
+        #     settings.
         # @!attribute [rw] start_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Optional. Excludes Feature values with feature generation timestamp before
@@ -1009,6 +1006,15 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Details of operations that delete Feature values.
+        # @!attribute [rw] generic_metadata
+        #   @return [::Google::Cloud::AIPlatform::V1::GenericOperationMetadata]
+        #     Operation metadata for Featurestore delete Features values.
+        class DeleteFeatureValuesOperationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Details of operations that perform create EntityType.
         # @!attribute [rw] generic_metadata
         #   @return [::Google::Cloud::AIPlatform::V1::GenericOperationMetadata]
@@ -1032,6 +1038,125 @@ module Google
         #   @return [::Google::Cloud::AIPlatform::V1::GenericOperationMetadata]
         #     Operation metadata for Feature.
         class BatchCreateFeaturesOperationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::FeaturestoreService::Client#delete_feature_values FeaturestoreService.DeleteFeatureValues}.
+        # @!attribute [rw] select_entity
+        #   @return [::Google::Cloud::AIPlatform::V1::DeleteFeatureValuesRequest::SelectEntity]
+        #     Select feature values to be deleted by specifying entities.
+        # @!attribute [rw] select_time_range_and_feature
+        #   @return [::Google::Cloud::AIPlatform::V1::DeleteFeatureValuesRequest::SelectTimeRangeAndFeature]
+        #     Select feature values to be deleted by specifying time range and
+        #     features.
+        # @!attribute [rw] entity_type
+        #   @return [::String]
+        #     Required. The resource name of the EntityType grouping the Features for
+        #     which values are being deleted from. Format:
+        #     `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entityType}`
+        class DeleteFeatureValuesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Message to select entity.
+          # If an entity id is selected, all the feature values corresponding to the
+          # entity id will be deleted, including the entityId.
+          # @!attribute [rw] entity_id_selector
+          #   @return [::Google::Cloud::AIPlatform::V1::EntityIdSelector]
+          #     Required. Selectors choosing feature values of which entity id to be
+          #     deleted from the EntityType.
+          class SelectEntity
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Message to select time range and feature.
+          # Values of the selected feature generated within an inclusive time range
+          # will be deleted. Using this option permanently deletes the feature values
+          # from the specified feature IDs within the specified time range.
+          # This might include data from the online storage. If you want to retain
+          # any deleted historical data in the online storage, you must re-ingest it.
+          # @!attribute [rw] time_range
+          #   @return [::Google::Type::Interval]
+          #     Required. Select feature generated within a half-inclusive time range.
+          #     The time range is lower inclusive and upper exclusive.
+          # @!attribute [rw] feature_selector
+          #   @return [::Google::Cloud::AIPlatform::V1::FeatureSelector]
+          #     Required. Selectors choosing which feature values to be deleted from the
+          #     EntityType.
+          # @!attribute [rw] skip_online_storage_delete
+          #   @return [::Boolean]
+          #     If set, data will not be deleted from online storage.
+          #     When time range is older than the data in online storage, setting this to
+          #     be true will make the deletion have no impact on online serving.
+          class SelectTimeRangeAndFeature
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::FeaturestoreService::Client#delete_feature_values FeaturestoreService.DeleteFeatureValues}.
+        # @!attribute [rw] select_entity
+        #   @return [::Google::Cloud::AIPlatform::V1::DeleteFeatureValuesResponse::SelectEntity]
+        #     Response for request specifying the entities to delete
+        # @!attribute [rw] select_time_range_and_feature
+        #   @return [::Google::Cloud::AIPlatform::V1::DeleteFeatureValuesResponse::SelectTimeRangeAndFeature]
+        #     Response for request specifying time range and feature
+        class DeleteFeatureValuesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Response message if the request uses the SelectEntity option.
+          # @!attribute [rw] offline_storage_deleted_entity_row_count
+          #   @return [::Integer]
+          #     The count of deleted entity rows in the offline storage.
+          #     Each row corresponds to the combination of an entity ID and a timestamp.
+          #     One entity ID can have multiple rows in the offline storage.
+          # @!attribute [rw] online_storage_deleted_entity_count
+          #   @return [::Integer]
+          #     The count of deleted entities in the online storage.
+          #     Each entity ID corresponds to one entity.
+          class SelectEntity
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Response message if the request uses the SelectTimeRangeAndFeature option.
+          # @!attribute [rw] impacted_feature_count
+          #   @return [::Integer]
+          #     The count of the features or columns impacted.
+          #     This is the same as the feature count in the request.
+          # @!attribute [rw] offline_storage_modified_entity_row_count
+          #   @return [::Integer]
+          #     The count of modified entity rows in the offline storage.
+          #     Each row corresponds to the combination of an entity ID and a timestamp.
+          #     One entity ID can have multiple rows in the offline storage.
+          #     Within each row, only the features specified in the request are
+          #     deleted.
+          # @!attribute [rw] online_storage_modified_entity_count
+          #   @return [::Integer]
+          #     The count of modified entities in the online storage.
+          #     Each entity ID corresponds to one entity.
+          #     Within each entity, only the features specified in the request are
+          #     deleted.
+          class SelectTimeRangeAndFeature
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Selector for entityId. Getting ids from the given source.
+        # @!attribute [rw] csv_source
+        #   @return [::Google::Cloud::AIPlatform::V1::CsvSource]
+        #     Source of Csv
+        # @!attribute [rw] entity_id_field
+        #   @return [::String]
+        #     Source column that holds entity IDs. If not provided, entity IDs are
+        #     extracted from the column named `entity_id`.
+        class EntityIdSelector
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

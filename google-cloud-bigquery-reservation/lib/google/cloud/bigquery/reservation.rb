@@ -49,16 +49,18 @@ module Google
         # Create a new client object for ReservationService.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client](https://googleapis.dev/ruby/google-cloud-bigquery-reservation-v1/latest/Google/Cloud/Bigquery/Reservation/V1/ReservationService/Client.html)
+        # [Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-bigquery-reservation-v1/latest/Google-Cloud-Bigquery-Reservation-V1-ReservationService-Client)
         # for a gRPC client for version V1 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the ReservationService service is
         # supported by that API version, and the corresponding gem is available, the
         # appropriate versioned client will be returned.
+        # You can also specify a different transport by passing `:rest` or `:grpc` in
+        # the `transport` parameter.
         #
         # ## About ReservationService
         #
-        # This API allows users to manage their flat-rate BigQuery reservations.
+        # This API allows users to manage their BigQuery reservations.
         #
         # A reservation provides computational resource guarantees, in the form of
         # [slots](https://cloud.google.com/bigquery/docs/slots), to users. A slot is a
@@ -76,9 +78,10 @@ module Google
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
         #   Defaults to `:v1`.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [::Object] A client object for the specified version.
         #
-        def self.reservation_service version: :v1, &block
+        def self.reservation_service version: :v1, transport: :grpc, &block
           require "google/cloud/bigquery/reservation/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Bigquery::Reservation
@@ -86,6 +89,7 @@ module Google
                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                          .first
           service_module = Google::Cloud::Bigquery::Reservation.const_get(package_name).const_get(:ReservationService)
+          service_module = service_module.const_get(:Rest) if transport == :rest
           service_module.const_get(:Client).new(&block)
         end
 

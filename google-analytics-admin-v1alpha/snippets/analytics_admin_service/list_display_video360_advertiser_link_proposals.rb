@@ -20,8 +20,11 @@
 require "google/analytics/admin/v1alpha"
 
 ##
-# Example demonstrating basic usage of
-# Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#list_display_video360_advertiser_link_proposals
+# Snippet for the list_display_video360_advertiser_link_proposals call in the AnalyticsAdminService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#list_display_video360_advertiser_link_proposals.
+# It may require modification in order to execute successfully.
 #
 def list_display_video360_advertiser_link_proposals
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_display_video360_advertiser_link_proposals
   # Call the list_display_video360_advertiser_link_proposals method.
   result = client.list_display_video360_advertiser_link_proposals request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLinkProposal.
-    p response
+    p item
   end
 end
 # [END analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListDisplayVideo360AdvertiserLinkProposals_sync]

@@ -41,6 +41,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       map :labels, :string, :string, 17
       optional :encryption_spec, :message, 24, "google.cloud.aiplatform.v1.EncryptionSpec"
       optional :model_source_info, :message, 38, "google.cloud.aiplatform.v1.ModelSourceInfo"
+      optional :original_model_info, :message, 34, "google.cloud.aiplatform.v1.Model.OriginalModelInfo"
       optional :metadata_artifact, :string, 44
     end
     add_message "google.cloud.aiplatform.v1.Model.ExportFormat" do
@@ -51,6 +52,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :EXPORTABLE_CONTENT_UNSPECIFIED, 0
       value :ARTIFACT, 1
       value :IMAGE, 2
+    end
+    add_message "google.cloud.aiplatform.v1.Model.OriginalModelInfo" do
+      optional :model, :string, 1
     end
     add_enum "google.cloud.aiplatform.v1.Model.DeploymentResourcesType" do
       value :DEPLOYMENT_RESOURCES_TYPE_UNSPECIFIED, 0
@@ -77,12 +81,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.aiplatform.v1.ModelSourceInfo" do
       optional :source_type, :enum, 1, "google.cloud.aiplatform.v1.ModelSourceInfo.ModelSourceType"
+      optional :copy, :bool, 2
     end
     add_enum "google.cloud.aiplatform.v1.ModelSourceInfo.ModelSourceType" do
       value :MODEL_SOURCE_TYPE_UNSPECIFIED, 0
       value :AUTOML, 1
       value :CUSTOM, 2
       value :BQML, 3
+      value :MODEL_GARDEN, 4
     end
   end
 end
@@ -94,6 +100,7 @@ module Google
         Model = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.Model").msgclass
         Model::ExportFormat = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.Model.ExportFormat").msgclass
         Model::ExportFormat::ExportableContent = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.Model.ExportFormat.ExportableContent").enummodule
+        Model::OriginalModelInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.Model.OriginalModelInfo").msgclass
         Model::DeploymentResourcesType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.Model.DeploymentResourcesType").enummodule
         PredictSchemata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.PredictSchemata").msgclass
         ModelContainerSpec = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ModelContainerSpec").msgclass

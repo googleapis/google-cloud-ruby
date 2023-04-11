@@ -90,27 +90,27 @@ class ::Google::Cloud::Compute::V1::RegionInstances::Rest::ClientTest < Minitest
 
         # Use hash object
         client.bulk_insert({ bulk_insert_instance_resource_resource: bulk_insert_instance_resource_resource, project: project, region: region, request_id: request_id }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.bulk_insert bulk_insert_instance_resource_resource: bulk_insert_instance_resource_resource, project: project, region: region, request_id: request_id do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.bulk_insert ::Google::Cloud::Compute::V1::BulkInsertRegionInstanceRequest.new(bulk_insert_instance_resource_resource: bulk_insert_instance_resource_resource, project: project, region: region, request_id: request_id) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.bulk_insert({ bulk_insert_instance_resource_resource: bulk_insert_instance_resource_resource, project: project, region: region, request_id: request_id }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.bulk_insert(::Google::Cloud::Compute::V1::BulkInsertRegionInstanceRequest.new(bulk_insert_instance_resource_resource: bulk_insert_instance_resource_resource, project: project, region: region, request_id: request_id), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls

@@ -308,6 +308,13 @@ module Google
         # @!attribute [rw] request_options
         #   @return [::Google::Cloud::Spanner::V1::RequestOptions]
         #     Common options for this request.
+        # @!attribute [rw] data_boost_enabled
+        #   @return [::Boolean]
+        #     If this is for a partitioned query and this field is set to `true`, the
+        #     request will be executed via Spanner independent compute resources.
+        #
+        #     If the field is set to `true` but the request does not set
+        #     `partition_token`, the API will return an `INVALID_ARGUMENT` error.
         class ExecuteSqlRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -718,6 +725,13 @@ module Google
         # @!attribute [rw] request_options
         #   @return [::Google::Cloud::Spanner::V1::RequestOptions]
         #     Common options for this request.
+        # @!attribute [rw] data_boost_enabled
+        #   @return [::Boolean]
+        #     If this is for a partitioned read and this field is set to `true`, the
+        #     request will be executed via Spanner independent compute resources.
+        #
+        #     If the field is set to `true` but the request does not set
+        #     `partition_token`, the API will return an `INVALID_ARGUMENT` error.
         class ReadRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

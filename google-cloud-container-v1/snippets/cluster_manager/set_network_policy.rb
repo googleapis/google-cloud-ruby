@@ -20,8 +20,11 @@
 require "google/cloud/container/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Container::V1::ClusterManager::Client#set_network_policy
+# Snippet for the set_network_policy call in the ClusterManager service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Container::V1::ClusterManager::Client#set_network_policy. It
+# may require modification in order to execute successfully.
 #
 def set_network_policy
   # Create a client object. The client can be reused for multiple calls.

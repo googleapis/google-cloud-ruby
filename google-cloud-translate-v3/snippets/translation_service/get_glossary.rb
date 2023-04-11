@@ -20,8 +20,11 @@
 require "google/cloud/translate/v3"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Translate::V3::TranslationService::Client#get_glossary
+# Snippet for the get_glossary call in the TranslationService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Translate::V3::TranslationService::Client#get_glossary. It may
+# require modification in order to execute successfully.
 #
 def get_glossary
   # Create a client object. The client can be reused for multiple calls.

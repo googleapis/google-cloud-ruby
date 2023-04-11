@@ -20,8 +20,11 @@
 require "google/cloud/run/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Run::V2::Jobs::Client#run_job
+# Snippet for the run_job call in the Jobs service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Run::V2::Jobs::Client#run_job. It may require modification in
+# order to execute successfully.
 #
 def run_job
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def run_job
   # Call the run_job method.
   result = client.run_job request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END run_v2_generated_Jobs_RunJob_sync]

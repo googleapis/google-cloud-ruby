@@ -693,7 +693,9 @@ module Google
             #     - "1.X.Y-gke.N": picks an explicit Kubernetes version
             #     - "-": picks the Kubernetes master version
             #   @param image_type [::String]
-            #     Required. The desired image type for the node pool.
+            #     Required. The desired image type for the node pool. Please see
+            #     https://cloud.google.com/kubernetes-engine/docs/concepts/node-images for
+            #     available image types.
             #   @param locations [::Array<::String>]
             #     The desired list of Google Compute Engine
             #     [zones](https://cloud.google.com/compute/docs/zones#available) in which the
@@ -2054,6 +2056,95 @@ module Google
             end
 
             ##
+            # Gets the public component of the cluster signing keys in
+            # JSON Web Key format.
+            # This API is not yet intended for general use, and is not available for all
+            # clusters.
+            #
+            # @overload get_json_web_keys(request, options = nil)
+            #   Pass arguments to `get_json_web_keys` via a request object, either of type
+            #   {::Google::Cloud::Container::V1beta1::GetJSONWebKeysRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Container::V1beta1::GetJSONWebKeysRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_json_web_keys(parent: nil)
+            #   Pass arguments to `get_json_web_keys` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     The cluster (project, location, cluster name) to get keys for. Specified in
+            #     the format `projects/*/locations/*/clusters/*`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Container::V1beta1::GetJSONWebKeysResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Container::V1beta1::GetJSONWebKeysResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/container/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1beta1::GetJSONWebKeysRequest.new
+            #
+            #   # Call the get_json_web_keys method.
+            #   result = client.get_json_web_keys request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1beta1::GetJSONWebKeysResponse.
+            #   p result
+            #
+            def get_json_web_keys request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Container::V1beta1::GetJSONWebKeysRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_json_web_keys.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Container::V1beta1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_json_web_keys.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_json_web_keys.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @cluster_manager_stub.call_rpc :get_json_web_keys, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Lists the node pools for a cluster.
             #
             # @overload list_node_pools(request, options = nil)
@@ -2144,95 +2235,6 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :list_node_pools, request, options: options do |response, operation|
-                yield response, operation if block_given?
-                return response
-              end
-            rescue ::GRPC::BadStatus => e
-              raise ::Google::Cloud::Error.from_error(e)
-            end
-
-            ##
-            # Gets the public component of the cluster signing keys in
-            # JSON Web Key format.
-            # This API is not yet intended for general use, and is not available for all
-            # clusters.
-            #
-            # @overload get_json_web_keys(request, options = nil)
-            #   Pass arguments to `get_json_web_keys` via a request object, either of type
-            #   {::Google::Cloud::Container::V1beta1::GetJSONWebKeysRequest} or an equivalent Hash.
-            #
-            #   @param request [::Google::Cloud::Container::V1beta1::GetJSONWebKeysRequest, ::Hash]
-            #     A request object representing the call parameters. Required. To specify no
-            #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [::Gapic::CallOptions, ::Hash]
-            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
-            #
-            # @overload get_json_web_keys(parent: nil)
-            #   Pass arguments to `get_json_web_keys` via keyword arguments. Note that at
-            #   least one keyword argument is required. To specify no parameters, or to keep all
-            #   the default parameter values, pass an empty Hash as a request object (see above).
-            #
-            #   @param parent [::String]
-            #     The cluster (project, location, cluster name) to get keys for. Specified in
-            #     the format `projects/*/locations/*/clusters/*`.
-            #
-            # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [::Google::Cloud::Container::V1beta1::GetJSONWebKeysResponse]
-            # @yieldparam operation [::GRPC::ActiveCall::Operation]
-            #
-            # @return [::Google::Cloud::Container::V1beta1::GetJSONWebKeysResponse]
-            #
-            # @raise [::Google::Cloud::Error] if the RPC is aborted.
-            #
-            # @example Basic example
-            #   require "google/cloud/container/v1beta1"
-            #
-            #   # Create a client object. The client can be reused for multiple calls.
-            #   client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
-            #
-            #   # Create a request. To set request fields, pass in keyword arguments.
-            #   request = Google::Cloud::Container::V1beta1::GetJSONWebKeysRequest.new
-            #
-            #   # Call the get_json_web_keys method.
-            #   result = client.get_json_web_keys request
-            #
-            #   # The returned object is of type Google::Cloud::Container::V1beta1::GetJSONWebKeysResponse.
-            #   p result
-            #
-            def get_json_web_keys request, options = nil
-              raise ::ArgumentError, "request must be provided" if request.nil?
-
-              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Container::V1beta1::GetJSONWebKeysRequest
-
-              # Converts hash and nil to an options object
-              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-              # Customize the options with defaults
-              metadata = @config.rpcs.get_json_web_keys.metadata.to_h
-
-              # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Cloud::Container::V1beta1::VERSION
-              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-              header_params = {}
-              if request.parent
-                header_params["parent"] = request.parent
-              end
-
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              metadata[:"x-goog-request-params"] ||= request_params_header
-
-              options.apply_defaults timeout:      @config.rpcs.get_json_web_keys.timeout,
-                                     metadata:     metadata,
-                                     retry_policy: @config.rpcs.get_json_web_keys.retry_policy
-
-              options.apply_defaults timeout:      @config.timeout,
-                                     metadata:     @config.metadata,
-                                     retry_policy: @config.retry_policy
-
-              @cluster_manager_stub.call_rpc :get_json_web_keys, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -3608,13 +3610,11 @@ module Google
             #   # Call the list_usable_subnetworks method.
             #   result = client.list_usable_subnetworks request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Container::V1beta1::UsableSubnetwork.
-            #     p response
+            #     p item
             #   end
             #
             def list_usable_subnetworks request, options = nil
@@ -3783,9 +3783,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -3966,15 +3966,15 @@ module Google
                 #
                 attr_reader :get_server_config
                 ##
-                # RPC-specific configuration for `list_node_pools`
-                # @return [::Gapic::Config::Method]
-                #
-                attr_reader :list_node_pools
-                ##
                 # RPC-specific configuration for `get_json_web_keys`
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_json_web_keys
+                ##
+                # RPC-specific configuration for `list_node_pools`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_node_pools
                 ##
                 # RPC-specific configuration for `get_node_pool`
                 # @return [::Gapic::Config::Method]
@@ -4087,10 +4087,10 @@ module Google
                   @cancel_operation = ::Gapic::Config::Method.new cancel_operation_config
                   get_server_config_config = parent_rpcs.get_server_config if parent_rpcs.respond_to? :get_server_config
                   @get_server_config = ::Gapic::Config::Method.new get_server_config_config
-                  list_node_pools_config = parent_rpcs.list_node_pools if parent_rpcs.respond_to? :list_node_pools
-                  @list_node_pools = ::Gapic::Config::Method.new list_node_pools_config
                   get_json_web_keys_config = parent_rpcs.get_json_web_keys if parent_rpcs.respond_to? :get_json_web_keys
                   @get_json_web_keys = ::Gapic::Config::Method.new get_json_web_keys_config
+                  list_node_pools_config = parent_rpcs.list_node_pools if parent_rpcs.respond_to? :list_node_pools
+                  @list_node_pools = ::Gapic::Config::Method.new list_node_pools_config
                   get_node_pool_config = parent_rpcs.get_node_pool if parent_rpcs.respond_to? :get_node_pool
                   @get_node_pool = ::Gapic::Config::Method.new get_node_pool_config
                   create_node_pool_config = parent_rpcs.create_node_pool if parent_rpcs.respond_to? :create_node_pool

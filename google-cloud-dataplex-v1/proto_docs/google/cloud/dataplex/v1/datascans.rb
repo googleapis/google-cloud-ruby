@@ -25,8 +25,8 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the parent location:
-        #     projects/\\{project}/locations/\\{location_id}
-        #     where `{project}` refers to a project_id or project_number and
+        #     `projects/{project}/locations/{location_id}`
+        #     where `project` refers to a *project_id* or *project_number* and
         #     `location_id` refers to a GCP region.
         # @!attribute [rw] data_scan
         #   @return [::Google::Cloud::Dataplex::V1::DataScan]
@@ -34,6 +34,7 @@ module Google
         # @!attribute [rw] data_scan_id
         #   @return [::String]
         #     Required. DataScan identifier.
+        #
         #     * Must contain only lowercase letters, numbers and hyphens.
         #     * Must start with a letter.
         #     * Must end with a number or a letter.
@@ -47,7 +48,8 @@ module Google
         # Update dataScan request.
         # @!attribute [rw] data_scan
         #   @return [::Google::Cloud::Dataplex::V1::DataScan]
-        #     Required. Update description.
+        #     Required. DataScan resource to be updated.
+        #
         #     Only fields specified in `update_mask` are updated.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
@@ -61,8 +63,8 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the dataScan:
-        #     projects/\\{project}/locations/\\{location_id}/dataScans/\\{data_scan_id}
-        #     where `{project}` refers to a project_id or project_number and
+        #     `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}`
+        #     where `project` refers to a *project_id* or *project_number* and
         #     `location_id` refers to a GCP region.
         class DeleteDataScanRequest
           include ::Google::Protobuf::MessageExts
@@ -73,23 +75,22 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the dataScan:
-        #     projects/\\{project}/locations/\\{location_id}/dataScans/\\{data_scan_id}
-        #     where `{project}` refers to a project_id or project_number and
+        #     `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}`
+        #     where `project` refers to a *project_id* or *project_number* and
         #     `location_id` refers to a GCP region.
         # @!attribute [rw] view
         #   @return [::Google::Cloud::Dataplex::V1::GetDataScanRequest::DataScanView]
-        #     Optional. Used to select the subset of DataScan information to return.
-        #     Defaults to `BASIC`.
+        #     Optional. Select the DataScan view to return. Defaults to `BASIC`.
         class GetDataScanRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # DataScan views for getting a partial dataScan.
+          # DataScan view options.
           module DataScanView
             # The API will default to the `BASIC` view.
             DATA_SCAN_VIEW_UNSPECIFIED = 0
 
-            # Basic view that does not include spec and result.
+            # Basic view that does not include *spec* and *result*.
             BASIC = 1
 
             # Include everything.
@@ -100,8 +101,9 @@ module Google
         # List dataScans request.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. projects/\\{project}/locations/\\{location_id}
-        #     where `{project}` refers to a project_id or project_number and
+        #     Required. The resource name of the parent location:
+        #     `projects/{project}/locations/{location_id}`
+        #     where `project` refers to a *project_id* or *project_number* and
         #     `location_id` refers to a GCP region.
         # @!attribute [rw] page_size
         #   @return [::Integer]
@@ -119,7 +121,7 @@ module Google
         #     Optional. Filter request.
         # @!attribute [rw] order_by
         #   @return [::String]
-        #     Optional. Order by fields (name or create_time) for the result.
+        #     Optional. Order by fields (`name` or `create_time`) for the result.
         #     If not specified, the ordering is undefined.
         class ListDataScansRequest
           include ::Google::Protobuf::MessageExts
@@ -129,7 +131,7 @@ module Google
         # List dataScans response.
         # @!attribute [rw] data_scans
         #   @return [::Array<::Google::Cloud::Dataplex::V1::DataScan>]
-        #     DataScans (metadata only) under the given parent location.
+        #     DataScans (`BASIC` view only) under the given parent location.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     Token to retrieve the next page of results, or empty if there are no more
@@ -146,10 +148,11 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the DataScan:
-        #     projects/\\{project}/locations/\\{location_id}/dataScans/\\{data_scan_id}.
-        #     where `{project}` refers to a project_id or project_number and
+        #     `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}`.
+        #     where `project` refers to a *project_id* or *project_number* and
         #     `location_id` refers to a GCP region.
-        #     Only on-demand DataScans are allowed.
+        #
+        #     Only **OnDemand** data scans are allowed.
         class RunDataScanRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -158,7 +161,7 @@ module Google
         # Run DataScan Response.
         # @!attribute [rw] job
         #   @return [::Google::Cloud::Dataplex::V1::DataScanJob]
-        #     DataScanJob created by RunDataScan API.
+        #     DataScanJob created by RunDataScan request.
         class RunDataScanResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -168,23 +171,22 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the DataScanJob:
-        #     projects/\\{project}/locations/\\{location_id}/dataScans/\\{data_scan_id}/dataScanJobs/\\{data_scan_job_id}
-        #     where `{project}` refers to a project_id or project_number and
+        #     `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}/dataScanJobs/{data_scan_job_id}`
+        #     where `project` refers to a *project_id* or *project_number* and
         #     `location_id` refers to a GCP region.
         # @!attribute [rw] view
         #   @return [::Google::Cloud::Dataplex::V1::GetDataScanJobRequest::DataScanJobView]
-        #     Optional. Used to select the subset of DataScan information to return.
-        #     Defaults to `BASIC`.
+        #     Optional. Select the DataScanJob view to return. Defaults to `BASIC`.
         class GetDataScanJobRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # DataScanJob views for getting a partial dataScanJob.
+          # DataScanJob view options.
           module DataScanJobView
             # The API will default to the `BASIC` view.
             DATA_SCAN_JOB_VIEW_UNSPECIFIED = 0
 
-            # Basic view that does not include spec and result.
+            # Basic view that does not include *spec* and *result*.
             BASIC = 1
 
             # Include everything.
@@ -196,8 +198,8 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the parent environment:
-        #     projects/\\{project}/locations/\\{location_id}/dataScans/\\{data_scan_id}
-        #     where `{project}` refers to a project_id or project_number and
+        #     `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}`
+        #     where `project` refers to a *project_id* or *project_number* and
         #     `location_id` refers to a GCP region.
         # @!attribute [rw] page_size
         #   @return [::Integer]
@@ -219,7 +221,7 @@ module Google
         # List DataScanJobs response.
         # @!attribute [rw] data_scan_jobs
         #   @return [::Array<::Google::Cloud::Dataplex::V1::DataScanJob>]
-        #     DataScanJobs (metadata only) under a given dataScan.
+        #     DataScanJobs (`BASIC` view only) under a given dataScan.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     Token to retrieve the next page of results, or empty if there are no more
@@ -242,8 +244,8 @@ module Google
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The relative resource name of the scan, of the form:
-        #     projects/\\{project}/locations/\\{location_id}/dataScans/\\{datascan_id}.
-        #     where `{project}` refers to a project_id or project_number and
+        #     `projects/{project}/locations/{location_id}/dataScans/{datascan_id}`,
+        #     where `project` refers to a *project_id* or *project_number* and
         #     `location_id` refers to a GCP region.
         # @!attribute [r] uid
         #   @return [::String]
@@ -252,10 +254,12 @@ module Google
         # @!attribute [rw] description
         #   @return [::String]
         #     Optional. Description of the scan.
+        #
         #     * Must be between 1-1024 characters.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Optional. User friendly display name.
+        #
         #     * Must be between 1-256 characters.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
@@ -275,7 +279,8 @@ module Google
         # @!attribute [rw] execution_spec
         #   @return [::Google::Cloud::Dataplex::V1::DataScan::ExecutionSpec]
         #     Optional. DataScan execution settings.
-        #     If not specified, the fields under it will use their default values.
+        #
+        #     If not specified, the fields in it will use their default values.
         # @!attribute [r] execution_status
         #   @return [::Google::Cloud::Dataplex::V1::DataScan::ExecutionStatus]
         #     Output only. Status of the data scan execution.
@@ -302,12 +307,15 @@ module Google
           # @!attribute [rw] trigger
           #   @return [::Google::Cloud::Dataplex::V1::Trigger]
           #     Optional. Spec related to how often and when a scan should be triggered.
-          #     If not specified, the default is OnDemand, which means the scan will not
-          #     run until the user calls RunDataScan API.
+          #
+          #     If not specified, the default is `OnDemand`, which means the scan will
+          #     not run until the user calls `RunDataScan` API.
           # @!attribute [rw] field
           #   @return [::String]
-          #     Immutable. The unnested field (Date or Timestamp) that contains values
-          #     that monotonically increase over time.
+          #     Immutable. The unnested field (of type *Date* or *Timestamp*) that
+          #     contains values which monotonically increase over time.
+          #
+          #     If not specified, a data scan will run for all data in the table.
           class ExecutionSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -335,12 +343,12 @@ module Google
           end
         end
 
-        # A DataScanJob represents an instance of a data scan.
+        # A DataScanJob represents an instance of DataScan execution.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The relative resource name of the DataScanJob, of the form:
-        #     projects/\\{project}/locations/\\{location_id}/dataScans/\\{datascan_id}/jobs/\\{job_id}.
-        #     where `{project}` refers to a project_id or project_number and
+        #     `projects/{project}/locations/{location_id}/dataScans/{datascan_id}/jobs/{job_id}`,
+        #     where `project` refers to a *project_id* or *project_number* and
         #     `location_id` refers to a GCP region.
         # @!attribute [r] uid
         #   @return [::String]
@@ -403,13 +411,13 @@ module Google
 
         # The type of DataScan.
         module DataScanType
-          # The DataScan Type is unspecified.
+          # The DataScan type is unspecified.
           DATA_SCAN_TYPE_UNSPECIFIED = 0
 
-          # Data Quality Scan.
+          # Data Quality scan.
           DATA_QUALITY = 1
 
-          # Data Profile Scan.
+          # Data Profile scan.
           DATA_PROFILE = 2
         end
       end

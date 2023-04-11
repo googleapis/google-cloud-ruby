@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-contact_center_insights-v1",
-    "version": "0.9.0",
+    "version": "0.13.0",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_CreateConversation_sync",
-      "title": "Snippet for create_conversation in ContactCenterInsights",
-      "description": "Basic snippet for create_conversation in ContactCenterInsights",
+      "title": "Snippet for the create_conversation call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#create_conversation. It may require modification in order to execute successfully.",
       "file": "contact_center_insights/create_conversation.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,55 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_UploadConversation_sync",
+      "title": "Snippet for the upload_conversation call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#upload_conversation. It may require modification in order to execute successfully.",
+      "file": "contact_center_insights/upload_conversation.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "upload_conversation",
+        "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#upload_conversation",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ContactCenterInsights::V1::UploadConversationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ContactCenterInsights::Client",
+          "full_name": "::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client"
+        },
+        "method": {
+          "short_name": "UploadConversation",
+          "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights.UploadConversation",
+          "service": {
+            "short_name": "ContactCenterInsights",
+            "full_name": "google.cloud.contactcenterinsights.v1.ContactCenterInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_UpdateConversation_sync",
-      "title": "Snippet for update_conversation in ContactCenterInsights",
-      "description": "Basic snippet for update_conversation in ContactCenterInsights",
+      "title": "Snippet for the update_conversation call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#update_conversation. It may require modification in order to execute successfully.",
       "file": "contact_center_insights/update_conversation.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_GetConversation_sync",
-      "title": "Snippet for get_conversation in ContactCenterInsights",
-      "description": "Basic snippet for get_conversation in ContactCenterInsights",
+      "title": "Snippet for the get_conversation call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#get_conversation. It may require modification in order to execute successfully.",
       "file": "contact_center_insights/get_conversation.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_ListConversations_sync",
-      "title": "Snippet for list_conversations in ContactCenterInsights",
-      "description": "Basic snippet for list_conversations in ContactCenterInsights",
+      "title": "Snippet for the list_conversations call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#list_conversations. It may require modification in order to execute successfully.",
       "file": "contact_center_insights/list_conversations.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_DeleteConversation_sync",
-      "title": "Snippet for delete_conversation in ContactCenterInsights",
-      "description": "Basic snippet for delete_conversation in ContactCenterInsights",
+      "title": "Snippet for the delete_conversation call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#delete_conversation. It may require modification in order to execute successfully.",
       "file": "contact_center_insights/delete_conversation.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_CreateAnalysis_sync",
-      "title": "Snippet for create_analysis in ContactCenterInsights",
-      "description": "Basic snippet for create_analysis in ContactCenterInsights",
+      "title": "Snippet for the create_analysis call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#create_analysis. It may require modification in order to execute successfully.",
       "file": "contact_center_insights/create_analysis.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_GetAnalysis_sync",
-      "title": "Snippet for get_analysis in ContactCenterInsights",
-      "description": "Basic snippet for get_analysis in ContactCenterInsights",
+      "title": "Snippet for the get_analysis call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#get_analysis. It may require modification in order to execute successfully.",
       "file": "contact_center_insights/get_analysis.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_ListAnalyses_sync",
-      "title": "Snippet for list_analyses in ContactCenterInsights",
-      "description": "Basic snippet for list_analyses in ContactCenterInsights",
+      "title": "Snippet for the list_analyses call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#list_analyses. It may require modification in order to execute successfully.",
       "file": "contact_center_insights/list_analyses.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_DeleteAnalysis_sync",
-      "title": "Snippet for delete_analysis in ContactCenterInsights",
-      "description": "Basic snippet for delete_analysis in ContactCenterInsights",
+      "title": "Snippet for the delete_analysis call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#delete_analysis. It may require modification in order to execute successfully.",
       "file": "contact_center_insights/delete_analysis.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,15 +406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_BulkAnalyzeConversations_sync",
-      "title": "Snippet for bulk_analyze_conversations in ContactCenterInsights",
-      "description": "Basic snippet for bulk_analyze_conversations in ContactCenterInsights",
+      "title": "Snippet for the bulk_analyze_conversations call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#bulk_analyze_conversations. It may require modification in order to execute successfully.",
       "file": "contact_center_insights/bulk_analyze_conversations.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,15 +446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_IngestConversations_sync",
-      "title": "Snippet for ingest_conversations in ContactCenterInsights",
-      "description": "Basic snippet for ingest_conversations in ContactCenterInsights",
+      "title": "Snippet for the ingest_conversations call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#ingest_conversations. It may require modification in order to execute successfully.",
       "file": "contact_center_insights/ingest_conversations.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,15 +486,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_ExportInsightsData_sync",
-      "title": "Snippet for export_insights_data in ContactCenterInsights",
-      "description": "Basic snippet for export_insights_data in ContactCenterInsights",
+      "title": "Snippet for the export_insights_data call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#export_insights_data. It may require modification in order to execute successfully.",
       "file": "contact_center_insights/export_insights_data.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,15 +526,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_CreateIssueModel_sync",
-      "title": "Snippet for create_issue_model in ContactCenterInsights",
-      "description": "Basic snippet for create_issue_model in ContactCenterInsights",
+      "title": "Snippet for the create_issue_model call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#create_issue_model. It may require modification in order to execute successfully.",
       "file": "contact_center_insights/create_issue_model.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,15 +566,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_UpdateIssueModel_sync",
-      "title": "Snippet for update_issue_model in ContactCenterInsights",
-      "description": "Basic snippet for update_issue_model in ContactCenterInsights",
+      "title": "Snippet for the update_issue_model call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#update_issue_model. It may require modification in order to execute successfully.",
       "file": "contact_center_insights/update_issue_model.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,15 +606,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_GetIssueModel_sync",
-      "title": "Snippet for get_issue_model in ContactCenterInsights",
-      "description": "Basic snippet for get_issue_model in ContactCenterInsights",
+      "title": "Snippet for the get_issue_model call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#get_issue_model. It may require modification in order to execute successfully.",
       "file": "contact_center_insights/get_issue_model.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,15 +646,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_ListIssueModels_sync",
-      "title": "Snippet for list_issue_models in ContactCenterInsights",
-      "description": "Basic snippet for list_issue_models in ContactCenterInsights",
+      "title": "Snippet for the list_issue_models call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#list_issue_models. It may require modification in order to execute successfully.",
       "file": "contact_center_insights/list_issue_models.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,15 +686,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_DeleteIssueModel_sync",
-      "title": "Snippet for delete_issue_model in ContactCenterInsights",
-      "description": "Basic snippet for delete_issue_model in ContactCenterInsights",
+      "title": "Snippet for the delete_issue_model call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#delete_issue_model. It may require modification in order to execute successfully.",
       "file": "contact_center_insights/delete_issue_model.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,15 +726,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_DeployIssueModel_sync",
-      "title": "Snippet for deploy_issue_model in ContactCenterInsights",
-      "description": "Basic snippet for deploy_issue_model in ContactCenterInsights",
+      "title": "Snippet for the deploy_issue_model call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#deploy_issue_model. It may require modification in order to execute successfully.",
       "file": "contact_center_insights/deploy_issue_model.rb",
       "language": "RUBY",
       "client_method": {
@@ -726,15 +766,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_UndeployIssueModel_sync",
-      "title": "Snippet for undeploy_issue_model in ContactCenterInsights",
-      "description": "Basic snippet for undeploy_issue_model in ContactCenterInsights",
+      "title": "Snippet for the undeploy_issue_model call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#undeploy_issue_model. It may require modification in order to execute successfully.",
       "file": "contact_center_insights/undeploy_issue_model.rb",
       "language": "RUBY",
       "client_method": {
@@ -766,15 +806,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_GetIssue_sync",
-      "title": "Snippet for get_issue in ContactCenterInsights",
-      "description": "Basic snippet for get_issue in ContactCenterInsights",
+      "title": "Snippet for the get_issue call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#get_issue. It may require modification in order to execute successfully.",
       "file": "contact_center_insights/get_issue.rb",
       "language": "RUBY",
       "client_method": {
@@ -806,15 +846,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_ListIssues_sync",
-      "title": "Snippet for list_issues in ContactCenterInsights",
-      "description": "Basic snippet for list_issues in ContactCenterInsights",
+      "title": "Snippet for the list_issues call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#list_issues. It may require modification in order to execute successfully.",
       "file": "contact_center_insights/list_issues.rb",
       "language": "RUBY",
       "client_method": {
@@ -846,15 +886,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_UpdateIssue_sync",
-      "title": "Snippet for update_issue in ContactCenterInsights",
-      "description": "Basic snippet for update_issue in ContactCenterInsights",
+      "title": "Snippet for the update_issue call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#update_issue. It may require modification in order to execute successfully.",
       "file": "contact_center_insights/update_issue.rb",
       "language": "RUBY",
       "client_method": {
@@ -886,15 +926,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_DeleteIssue_sync",
-      "title": "Snippet for delete_issue in ContactCenterInsights",
-      "description": "Basic snippet for delete_issue in ContactCenterInsights",
+      "title": "Snippet for the delete_issue call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#delete_issue. It may require modification in order to execute successfully.",
       "file": "contact_center_insights/delete_issue.rb",
       "language": "RUBY",
       "client_method": {
@@ -926,15 +966,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_CalculateIssueModelStats_sync",
-      "title": "Snippet for calculate_issue_model_stats in ContactCenterInsights",
-      "description": "Basic snippet for calculate_issue_model_stats in ContactCenterInsights",
+      "title": "Snippet for the calculate_issue_model_stats call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#calculate_issue_model_stats. It may require modification in order to execute successfully.",
       "file": "contact_center_insights/calculate_issue_model_stats.rb",
       "language": "RUBY",
       "client_method": {
@@ -966,15 +1006,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_CreatePhraseMatcher_sync",
-      "title": "Snippet for create_phrase_matcher in ContactCenterInsights",
-      "description": "Basic snippet for create_phrase_matcher in ContactCenterInsights",
+      "title": "Snippet for the create_phrase_matcher call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#create_phrase_matcher. It may require modification in order to execute successfully.",
       "file": "contact_center_insights/create_phrase_matcher.rb",
       "language": "RUBY",
       "client_method": {
@@ -1006,15 +1046,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_GetPhraseMatcher_sync",
-      "title": "Snippet for get_phrase_matcher in ContactCenterInsights",
-      "description": "Basic snippet for get_phrase_matcher in ContactCenterInsights",
+      "title": "Snippet for the get_phrase_matcher call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#get_phrase_matcher. It may require modification in order to execute successfully.",
       "file": "contact_center_insights/get_phrase_matcher.rb",
       "language": "RUBY",
       "client_method": {
@@ -1046,15 +1086,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_ListPhraseMatchers_sync",
-      "title": "Snippet for list_phrase_matchers in ContactCenterInsights",
-      "description": "Basic snippet for list_phrase_matchers in ContactCenterInsights",
+      "title": "Snippet for the list_phrase_matchers call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#list_phrase_matchers. It may require modification in order to execute successfully.",
       "file": "contact_center_insights/list_phrase_matchers.rb",
       "language": "RUBY",
       "client_method": {
@@ -1086,15 +1126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_DeletePhraseMatcher_sync",
-      "title": "Snippet for delete_phrase_matcher in ContactCenterInsights",
-      "description": "Basic snippet for delete_phrase_matcher in ContactCenterInsights",
+      "title": "Snippet for the delete_phrase_matcher call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#delete_phrase_matcher. It may require modification in order to execute successfully.",
       "file": "contact_center_insights/delete_phrase_matcher.rb",
       "language": "RUBY",
       "client_method": {
@@ -1126,15 +1166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_UpdatePhraseMatcher_sync",
-      "title": "Snippet for update_phrase_matcher in ContactCenterInsights",
-      "description": "Basic snippet for update_phrase_matcher in ContactCenterInsights",
+      "title": "Snippet for the update_phrase_matcher call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#update_phrase_matcher. It may require modification in order to execute successfully.",
       "file": "contact_center_insights/update_phrase_matcher.rb",
       "language": "RUBY",
       "client_method": {
@@ -1166,15 +1206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_CalculateStats_sync",
-      "title": "Snippet for calculate_stats in ContactCenterInsights",
-      "description": "Basic snippet for calculate_stats in ContactCenterInsights",
+      "title": "Snippet for the calculate_stats call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#calculate_stats. It may require modification in order to execute successfully.",
       "file": "contact_center_insights/calculate_stats.rb",
       "language": "RUBY",
       "client_method": {
@@ -1206,15 +1246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_GetSettings_sync",
-      "title": "Snippet for get_settings in ContactCenterInsights",
-      "description": "Basic snippet for get_settings in ContactCenterInsights",
+      "title": "Snippet for the get_settings call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#get_settings. It may require modification in order to execute successfully.",
       "file": "contact_center_insights/get_settings.rb",
       "language": "RUBY",
       "client_method": {
@@ -1246,15 +1286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_UpdateSettings_sync",
-      "title": "Snippet for update_settings in ContactCenterInsights",
-      "description": "Basic snippet for update_settings in ContactCenterInsights",
+      "title": "Snippet for the update_settings call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#update_settings. It may require modification in order to execute successfully.",
       "file": "contact_center_insights/update_settings.rb",
       "language": "RUBY",
       "client_method": {
@@ -1286,15 +1326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_CreateView_sync",
-      "title": "Snippet for create_view in ContactCenterInsights",
-      "description": "Basic snippet for create_view in ContactCenterInsights",
+      "title": "Snippet for the create_view call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#create_view. It may require modification in order to execute successfully.",
       "file": "contact_center_insights/create_view.rb",
       "language": "RUBY",
       "client_method": {
@@ -1326,15 +1366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_GetView_sync",
-      "title": "Snippet for get_view in ContactCenterInsights",
-      "description": "Basic snippet for get_view in ContactCenterInsights",
+      "title": "Snippet for the get_view call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#get_view. It may require modification in order to execute successfully.",
       "file": "contact_center_insights/get_view.rb",
       "language": "RUBY",
       "client_method": {
@@ -1366,15 +1406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_ListViews_sync",
-      "title": "Snippet for list_views in ContactCenterInsights",
-      "description": "Basic snippet for list_views in ContactCenterInsights",
+      "title": "Snippet for the list_views call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#list_views. It may require modification in order to execute successfully.",
       "file": "contact_center_insights/list_views.rb",
       "language": "RUBY",
       "client_method": {
@@ -1406,15 +1446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_UpdateView_sync",
-      "title": "Snippet for update_view in ContactCenterInsights",
-      "description": "Basic snippet for update_view in ContactCenterInsights",
+      "title": "Snippet for the update_view call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#update_view. It may require modification in order to execute successfully.",
       "file": "contact_center_insights/update_view.rb",
       "language": "RUBY",
       "client_method": {
@@ -1446,15 +1486,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "contactcenterinsights_v1_generated_ContactCenterInsights_DeleteView_sync",
-      "title": "Snippet for delete_view in ContactCenterInsights",
-      "description": "Basic snippet for delete_view in ContactCenterInsights",
+      "title": "Snippet for the delete_view call in the ContactCenterInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#delete_view. It may require modification in order to execute successfully.",
       "file": "contact_center_insights/delete_view.rb",
       "language": "RUBY",
       "client_method": {
@@ -1486,7 +1526,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]

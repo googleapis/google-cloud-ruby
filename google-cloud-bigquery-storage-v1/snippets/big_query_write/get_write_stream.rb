@@ -20,8 +20,11 @@
 require "google/cloud/bigquery/storage/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Client#get_write_stream
+# Snippet for the get_write_stream call in the BigQueryWrite service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Client#get_write_stream.
+# It may require modification in order to execute successfully.
 #
 def get_write_stream
   # Create a client object. The client can be reused for multiple calls.

@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-identity-access_context_manager-v1",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "accesscontextmanager_v1_generated_AccessContextManager_ListAccessPolicies_sync",
-      "title": "Snippet for list_access_policies in AccessContextManager",
-      "description": "Basic snippet for list_access_policies in AccessContextManager",
+      "title": "Snippet for the list_access_policies call in the AccessContextManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Identity::AccessContextManager::V1::AccessContextManager::Client#list_access_policies. It may require modification in order to execute successfully.",
       "file": "access_context_manager/list_access_policies.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "accesscontextmanager_v1_generated_AccessContextManager_GetAccessPolicy_sync",
-      "title": "Snippet for get_access_policy in AccessContextManager",
-      "description": "Basic snippet for get_access_policy in AccessContextManager",
+      "title": "Snippet for the get_access_policy call in the AccessContextManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Identity::AccessContextManager::V1::AccessContextManager::Client#get_access_policy. It may require modification in order to execute successfully.",
       "file": "access_context_manager/get_access_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "accesscontextmanager_v1_generated_AccessContextManager_CreateAccessPolicy_sync",
-      "title": "Snippet for create_access_policy in AccessContextManager",
-      "description": "Basic snippet for create_access_policy in AccessContextManager",
+      "title": "Snippet for the create_access_policy call in the AccessContextManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Identity::AccessContextManager::V1::AccessContextManager::Client#create_access_policy. It may require modification in order to execute successfully.",
       "file": "access_context_manager/create_access_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "accesscontextmanager_v1_generated_AccessContextManager_UpdateAccessPolicy_sync",
-      "title": "Snippet for update_access_policy in AccessContextManager",
-      "description": "Basic snippet for update_access_policy in AccessContextManager",
+      "title": "Snippet for the update_access_policy call in the AccessContextManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Identity::AccessContextManager::V1::AccessContextManager::Client#update_access_policy. It may require modification in order to execute successfully.",
       "file": "access_context_manager/update_access_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "accesscontextmanager_v1_generated_AccessContextManager_DeleteAccessPolicy_sync",
-      "title": "Snippet for delete_access_policy in AccessContextManager",
-      "description": "Basic snippet for delete_access_policy in AccessContextManager",
+      "title": "Snippet for the delete_access_policy call in the AccessContextManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Identity::AccessContextManager::V1::AccessContextManager::Client#delete_access_policy. It may require modification in order to execute successfully.",
       "file": "access_context_manager/delete_access_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "accesscontextmanager_v1_generated_AccessContextManager_ListAccessLevels_sync",
-      "title": "Snippet for list_access_levels in AccessContextManager",
-      "description": "Basic snippet for list_access_levels in AccessContextManager",
+      "title": "Snippet for the list_access_levels call in the AccessContextManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Identity::AccessContextManager::V1::AccessContextManager::Client#list_access_levels. It may require modification in order to execute successfully.",
       "file": "access_context_manager/list_access_levels.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "accesscontextmanager_v1_generated_AccessContextManager_GetAccessLevel_sync",
-      "title": "Snippet for get_access_level in AccessContextManager",
-      "description": "Basic snippet for get_access_level in AccessContextManager",
+      "title": "Snippet for the get_access_level call in the AccessContextManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Identity::AccessContextManager::V1::AccessContextManager::Client#get_access_level. It may require modification in order to execute successfully.",
       "file": "access_context_manager/get_access_level.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "accesscontextmanager_v1_generated_AccessContextManager_CreateAccessLevel_sync",
-      "title": "Snippet for create_access_level in AccessContextManager",
-      "description": "Basic snippet for create_access_level in AccessContextManager",
+      "title": "Snippet for the create_access_level call in the AccessContextManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Identity::AccessContextManager::V1::AccessContextManager::Client#create_access_level. It may require modification in order to execute successfully.",
       "file": "access_context_manager/create_access_level.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "accesscontextmanager_v1_generated_AccessContextManager_UpdateAccessLevel_sync",
-      "title": "Snippet for update_access_level in AccessContextManager",
-      "description": "Basic snippet for update_access_level in AccessContextManager",
+      "title": "Snippet for the update_access_level call in the AccessContextManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Identity::AccessContextManager::V1::AccessContextManager::Client#update_access_level. It may require modification in order to execute successfully.",
       "file": "access_context_manager/update_access_level.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,15 +366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "accesscontextmanager_v1_generated_AccessContextManager_DeleteAccessLevel_sync",
-      "title": "Snippet for delete_access_level in AccessContextManager",
-      "description": "Basic snippet for delete_access_level in AccessContextManager",
+      "title": "Snippet for the delete_access_level call in the AccessContextManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Identity::AccessContextManager::V1::AccessContextManager::Client#delete_access_level. It may require modification in order to execute successfully.",
       "file": "access_context_manager/delete_access_level.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,15 +406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "accesscontextmanager_v1_generated_AccessContextManager_ReplaceAccessLevels_sync",
-      "title": "Snippet for replace_access_levels in AccessContextManager",
-      "description": "Basic snippet for replace_access_levels in AccessContextManager",
+      "title": "Snippet for the replace_access_levels call in the AccessContextManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Identity::AccessContextManager::V1::AccessContextManager::Client#replace_access_levels. It may require modification in order to execute successfully.",
       "file": "access_context_manager/replace_access_levels.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,15 +446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "accesscontextmanager_v1_generated_AccessContextManager_ListServicePerimeters_sync",
-      "title": "Snippet for list_service_perimeters in AccessContextManager",
-      "description": "Basic snippet for list_service_perimeters in AccessContextManager",
+      "title": "Snippet for the list_service_perimeters call in the AccessContextManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Identity::AccessContextManager::V1::AccessContextManager::Client#list_service_perimeters. It may require modification in order to execute successfully.",
       "file": "access_context_manager/list_service_perimeters.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,15 +486,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "accesscontextmanager_v1_generated_AccessContextManager_GetServicePerimeter_sync",
-      "title": "Snippet for get_service_perimeter in AccessContextManager",
-      "description": "Basic snippet for get_service_perimeter in AccessContextManager",
+      "title": "Snippet for the get_service_perimeter call in the AccessContextManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Identity::AccessContextManager::V1::AccessContextManager::Client#get_service_perimeter. It may require modification in order to execute successfully.",
       "file": "access_context_manager/get_service_perimeter.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,15 +526,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "accesscontextmanager_v1_generated_AccessContextManager_CreateServicePerimeter_sync",
-      "title": "Snippet for create_service_perimeter in AccessContextManager",
-      "description": "Basic snippet for create_service_perimeter in AccessContextManager",
+      "title": "Snippet for the create_service_perimeter call in the AccessContextManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Identity::AccessContextManager::V1::AccessContextManager::Client#create_service_perimeter. It may require modification in order to execute successfully.",
       "file": "access_context_manager/create_service_perimeter.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,15 +566,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "accesscontextmanager_v1_generated_AccessContextManager_UpdateServicePerimeter_sync",
-      "title": "Snippet for update_service_perimeter in AccessContextManager",
-      "description": "Basic snippet for update_service_perimeter in AccessContextManager",
+      "title": "Snippet for the update_service_perimeter call in the AccessContextManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Identity::AccessContextManager::V1::AccessContextManager::Client#update_service_perimeter. It may require modification in order to execute successfully.",
       "file": "access_context_manager/update_service_perimeter.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,15 +606,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "accesscontextmanager_v1_generated_AccessContextManager_DeleteServicePerimeter_sync",
-      "title": "Snippet for delete_service_perimeter in AccessContextManager",
-      "description": "Basic snippet for delete_service_perimeter in AccessContextManager",
+      "title": "Snippet for the delete_service_perimeter call in the AccessContextManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Identity::AccessContextManager::V1::AccessContextManager::Client#delete_service_perimeter. It may require modification in order to execute successfully.",
       "file": "access_context_manager/delete_service_perimeter.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,15 +646,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "accesscontextmanager_v1_generated_AccessContextManager_ReplaceServicePerimeters_sync",
-      "title": "Snippet for replace_service_perimeters in AccessContextManager",
-      "description": "Basic snippet for replace_service_perimeters in AccessContextManager",
+      "title": "Snippet for the replace_service_perimeters call in the AccessContextManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Identity::AccessContextManager::V1::AccessContextManager::Client#replace_service_perimeters. It may require modification in order to execute successfully.",
       "file": "access_context_manager/replace_service_perimeters.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,15 +686,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "accesscontextmanager_v1_generated_AccessContextManager_CommitServicePerimeters_sync",
-      "title": "Snippet for commit_service_perimeters in AccessContextManager",
-      "description": "Basic snippet for commit_service_perimeters in AccessContextManager",
+      "title": "Snippet for the commit_service_perimeters call in the AccessContextManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Identity::AccessContextManager::V1::AccessContextManager::Client#commit_service_perimeters. It may require modification in order to execute successfully.",
       "file": "access_context_manager/commit_service_perimeters.rb",
       "language": "RUBY",
       "client_method": {
@@ -726,15 +726,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "accesscontextmanager_v1_generated_AccessContextManager_ListGcpUserAccessBindings_sync",
-      "title": "Snippet for list_gcp_user_access_bindings in AccessContextManager",
-      "description": "Basic snippet for list_gcp_user_access_bindings in AccessContextManager",
+      "title": "Snippet for the list_gcp_user_access_bindings call in the AccessContextManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Identity::AccessContextManager::V1::AccessContextManager::Client#list_gcp_user_access_bindings. It may require modification in order to execute successfully.",
       "file": "access_context_manager/list_gcp_user_access_bindings.rb",
       "language": "RUBY",
       "client_method": {
@@ -766,15 +766,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "accesscontextmanager_v1_generated_AccessContextManager_GetGcpUserAccessBinding_sync",
-      "title": "Snippet for get_gcp_user_access_binding in AccessContextManager",
-      "description": "Basic snippet for get_gcp_user_access_binding in AccessContextManager",
+      "title": "Snippet for the get_gcp_user_access_binding call in the AccessContextManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Identity::AccessContextManager::V1::AccessContextManager::Client#get_gcp_user_access_binding. It may require modification in order to execute successfully.",
       "file": "access_context_manager/get_gcp_user_access_binding.rb",
       "language": "RUBY",
       "client_method": {
@@ -806,15 +806,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "accesscontextmanager_v1_generated_AccessContextManager_CreateGcpUserAccessBinding_sync",
-      "title": "Snippet for create_gcp_user_access_binding in AccessContextManager",
-      "description": "Basic snippet for create_gcp_user_access_binding in AccessContextManager",
+      "title": "Snippet for the create_gcp_user_access_binding call in the AccessContextManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Identity::AccessContextManager::V1::AccessContextManager::Client#create_gcp_user_access_binding. It may require modification in order to execute successfully.",
       "file": "access_context_manager/create_gcp_user_access_binding.rb",
       "language": "RUBY",
       "client_method": {
@@ -846,15 +846,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "accesscontextmanager_v1_generated_AccessContextManager_UpdateGcpUserAccessBinding_sync",
-      "title": "Snippet for update_gcp_user_access_binding in AccessContextManager",
-      "description": "Basic snippet for update_gcp_user_access_binding in AccessContextManager",
+      "title": "Snippet for the update_gcp_user_access_binding call in the AccessContextManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Identity::AccessContextManager::V1::AccessContextManager::Client#update_gcp_user_access_binding. It may require modification in order to execute successfully.",
       "file": "access_context_manager/update_gcp_user_access_binding.rb",
       "language": "RUBY",
       "client_method": {
@@ -886,15 +886,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "accesscontextmanager_v1_generated_AccessContextManager_DeleteGcpUserAccessBinding_sync",
-      "title": "Snippet for delete_gcp_user_access_binding in AccessContextManager",
-      "description": "Basic snippet for delete_gcp_user_access_binding in AccessContextManager",
+      "title": "Snippet for the delete_gcp_user_access_binding call in the AccessContextManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Identity::AccessContextManager::V1::AccessContextManager::Client#delete_gcp_user_access_binding. It may require modification in order to execute successfully.",
       "file": "access_context_manager/delete_gcp_user_access_binding.rb",
       "language": "RUBY",
       "client_method": {
@@ -926,15 +926,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "accesscontextmanager_v1_generated_AccessContextManager_SetIamPolicy_sync",
-      "title": "Snippet for set_iam_policy in AccessContextManager",
-      "description": "Basic snippet for set_iam_policy in AccessContextManager",
+      "title": "Snippet for the set_iam_policy call in the AccessContextManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Identity::AccessContextManager::V1::AccessContextManager::Client#set_iam_policy. It may require modification in order to execute successfully.",
       "file": "access_context_manager/set_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -966,15 +966,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "accesscontextmanager_v1_generated_AccessContextManager_GetIamPolicy_sync",
-      "title": "Snippet for get_iam_policy in AccessContextManager",
-      "description": "Basic snippet for get_iam_policy in AccessContextManager",
+      "title": "Snippet for the get_iam_policy call in the AccessContextManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Identity::AccessContextManager::V1::AccessContextManager::Client#get_iam_policy. It may require modification in order to execute successfully.",
       "file": "access_context_manager/get_iam_policy.rb",
       "language": "RUBY",
       "client_method": {
@@ -1006,15 +1006,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "accesscontextmanager_v1_generated_AccessContextManager_TestIamPermissions_sync",
-      "title": "Snippet for test_iam_permissions in AccessContextManager",
-      "description": "Basic snippet for test_iam_permissions in AccessContextManager",
+      "title": "Snippet for the test_iam_permissions call in the AccessContextManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Identity::AccessContextManager::V1::AccessContextManager::Client#test_iam_permissions. It may require modification in order to execute successfully.",
       "file": "access_context_manager/test_iam_permissions.rb",
       "language": "RUBY",
       "client_method": {
@@ -1046,7 +1046,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]

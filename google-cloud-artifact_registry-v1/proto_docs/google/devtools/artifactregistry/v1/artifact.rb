@@ -29,8 +29,8 @@ module Google
         # * buildTime
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. registry_location, project_id, repository_name and image id forms a unique
-        #     image
+        #     Required. registry_location, project_id, repository_name and image id forms
+        #     a unique image
         #     name:`projects/<project_id>/locations/<location>/repository/<repository_name>/dockerImages/<docker_image>`.
         #     For example,
         #     "projects/test-project/locations/us-west4/repositories/test-repo/dockerImages/
@@ -68,6 +68,9 @@ module Google
         #     Version resource.
         #     The build time is returned to the client as an RFC 3339 string, which can
         #     be easily used with the JavaScript Date constructor.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time when the docker image was last updated.
         class DockerImage
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -76,13 +79,17 @@ module Google
         # The request to list docker images.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The name of the parent resource whose docker images will be listed.
+        #     Required. The name of the parent resource whose docker images will be
+        #     listed.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of artifacts to return.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     The next_page_token value returned from a previous list request, if any.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     The field to order the results by.
         class ListDockerImagesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -106,6 +113,222 @@ module Google
         #   @return [::String]
         #     Required. The name of the docker images.
         class GetDockerImageRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # MavenArtifact represents a maven artifact.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. registry_location, project_id, repository_name and maven_artifact
+        #     forms a unique artifact For example,
+        #     "projects/test-project/locations/us-west4/repositories/test-repo/mavenArtifacts/
+        #     com.google.guava:guava:31.0-jre",
+        #     where "us-west4" is the registry_location, "test-project" is the
+        #     project_id, "test-repo" is the repository_name and
+        #     "com.google.guava:guava:31.0-jre"
+        #     is the maven artifact.
+        # @!attribute [rw] pom_uri
+        #   @return [::String]
+        #     Required. URL to access the pom file of the artifact.
+        #     Example:
+        #     us-west4-maven.pkg.dev/test-project/test-repo/com/google/guava/guava/31.0/guava-31.0.pom
+        # @!attribute [rw] group_id
+        #   @return [::String]
+        #     Group ID for the artifact.
+        #     Example:
+        #     com.google.guava
+        # @!attribute [rw] artifact_id
+        #   @return [::String]
+        #     Artifact ID for the artifact.
+        # @!attribute [rw] version
+        #   @return [::String]
+        #     Version of this artifact.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Time the artifact was created.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Time the artifact was updated.
+        class MavenArtifact
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to list maven artifacts.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The name of the parent resource whose maven artifacts will be
+        #     listed.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of artifacts to return.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     The next_page_token value returned from a previous list request, if any.
+        class ListMavenArtifactsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response from listing maven artifacts.
+        # @!attribute [rw] maven_artifacts
+        #   @return [::Array<::Google::Cloud::ArtifactRegistry::V1::MavenArtifact>]
+        #     The maven artifacts returned.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     The token to retrieve the next page of artifacts, or empty if there are no
+        #     more artifacts to return.
+        class ListMavenArtifactsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to get maven artifacts.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the maven artifact.
+        class GetMavenArtifactRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # NpmPackage represents an npm artifact.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. registry_location, project_id, repository_name and npm_package
+        #     forms a unique package For example,
+        #     "projects/test-project/locations/us-west4/repositories/test-repo/npmPackages/
+        #     npm_test:1.0.0",
+        #     where "us-west4" is the registry_location, "test-project" is the
+        #     project_id, "test-repo" is the repository_name and
+        #     npm_test:1.0.0" is the npm package.
+        # @!attribute [rw] package_name
+        #   @return [::String]
+        #     Package for the artifact.
+        # @!attribute [rw] version
+        #   @return [::String]
+        #     Version of this package.
+        # @!attribute [rw] tags
+        #   @return [::Array<::String>]
+        #     Tags attached to this package.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Time the package was created.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Time the package was updated.
+        class NpmPackage
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to list npm packages.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The name of the parent resource whose npm packages will be
+        #     listed.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of artifacts to return.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     The next_page_token value returned from a previous list request, if any.
+        class ListNpmPackagesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response from listing npm packages.
+        # @!attribute [rw] npm_packages
+        #   @return [::Array<::Google::Cloud::ArtifactRegistry::V1::NpmPackage>]
+        #     The npm packages returned.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     The token to retrieve the next page of artifacts, or empty if there are no
+        #     more artifacts to return.
+        class ListNpmPackagesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to get npm packages.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the npm package.
+        class GetNpmPackageRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # PythonPackage represents a python artifact.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. registry_location, project_id, repository_name and python_package
+        #     forms a unique package
+        #     name:`projects/<project_id>/locations/<location>/repository/<repository_name>/pythonPackages/<python_package>`.
+        #     For example,
+        #     "projects/test-project/locations/us-west4/repositories/test-repo/pythonPackages/
+        #     python_package:1.0.0",
+        #     where "us-west4" is the registry_location, "test-project" is the
+        #     project_id, "test-repo" is the repository_name and
+        #     python_package:1.0.0" is the python package.
+        # @!attribute [rw] uri
+        #   @return [::String]
+        #     Required. URL to access the package.
+        #     Example:
+        #     us-west4-python.pkg.dev/test-project/test-repo/python_package/file-name-1.0.0.tar.gz
+        # @!attribute [rw] package_name
+        #   @return [::String]
+        #     Package for the artifact.
+        # @!attribute [rw] version
+        #   @return [::String]
+        #     Version of this package.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Time the package was created.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Time the package was updated.
+        class PythonPackage
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to list python packages.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The name of the parent resource whose python packages will be
+        #     listed.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of artifacts to return.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     The next_page_token value returned from a previous list request, if any.
+        class ListPythonPackagesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response from listing python packages.
+        # @!attribute [rw] python_packages
+        #   @return [::Array<::Google::Cloud::ArtifactRegistry::V1::PythonPackage>]
+        #     The python packages returned.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     The token to retrieve the next page of artifacts, or empty if there are no
+        #     more artifacts to return.
+        class ListPythonPackagesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to get python packages.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the python package.
+        class GetPythonPackageRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

@@ -31,6 +31,11 @@ module Google
         #     require "google/cloud/bigquery/connection/v1"
         #     client = ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client.new
         #
+        # @example Load this package, including all its services, and instantiate a REST client
+        #
+        #     require "google/cloud/bigquery/connection/v1"
+        #     client = ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::Rest::Client.new
+        #
         module V1
         end
       end

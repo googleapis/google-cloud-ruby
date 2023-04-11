@@ -30,6 +30,11 @@ module Google
       #     require "google/cloud/redis/v1beta1"
       #     client = ::Google::Cloud::Redis::V1beta1::CloudRedis::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/redis/v1beta1"
+      #     client = ::Google::Cloud::Redis::V1beta1::CloudRedis::Rest::Client.new
+      #
       module V1beta1
       end
     end

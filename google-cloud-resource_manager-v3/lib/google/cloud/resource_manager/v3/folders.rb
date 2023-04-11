@@ -26,6 +26,7 @@ require "google/cloud/resource_manager/v3/folders/credentials"
 require "google/cloud/resource_manager/v3/folders/paths"
 require "google/cloud/resource_manager/v3/folders/operations"
 require "google/cloud/resource_manager/v3/folders/client"
+require "google/cloud/resource_manager/v3/folders/rest"
 
 module Google
   module Cloud
@@ -40,6 +41,11 @@ module Google
         #
         #     require "google/cloud/resource_manager/v3/folders"
         #     client = ::Google::Cloud::ResourceManager::V3::Folders::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/resource_manager/v3/folders/rest"
+        #     client = ::Google::Cloud::ResourceManager::V3::Folders::Rest::Client.new
         #
         module Folders
         end

@@ -11,12 +11,12 @@ verisoned gems in as dependencies, and provides high-level methods for
 constructing clients. More information on versioned clients can be found below
 in the section titled *Which client should I use?*.
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-analytics-data/latest)
+View the [Client Library Documentation](https://rubydoc.info/gems/google-analytics-data)
 for this library, google-analytics-data, to see the convenience methods for
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
-[google-analytics-data-v1beta](https://googleapis.dev/ruby/google-analytics-data-v1beta/latest).
+[google-analytics-data-v1beta](https://rubydoc.info/gems/google-analytics-data-v1beta).
 
 See also the [Product Documentation](https://developers.google.com/analytics/devguides/reporting/data/v1)
 for more usage information.
@@ -33,32 +33,6 @@ In order to use this library, you first need to go through the following steps:
 1. [Enable billing for your project.](https://cloud.google.com/billing/docs/how-to/modify-project#enable_billing_for_a_project)
 1. [Enable the API.](https://console.cloud.google.com/apis/library/analyticsdata.googleapis.com)
 1. {file:AUTHENTICATION.md Set up authentication.}
-
-## Enabling Logging
-
-To enable logging for this library, set the logger for the underlying [gRPC](https://github.com/grpc/grpc/tree/master/src/ruby) library.
-The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/current/stdlibs/logger/Logger.html) as shown below,
-or a [`Google::Cloud::Logging::Logger`](https://googleapis.dev/ruby/google-cloud-logging/latest)
-that will write logs to [Cloud Logging](https://cloud.google.com/logging/). See [grpc/logconfig.rb](https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb)
-and the gRPC [spec_helper.rb](https://github.com/grpc/grpc/blob/master/src/ruby/spec/spec_helper.rb) for additional information.
-
-Configuring a Ruby stdlib logger:
-
-```ruby
-require "logger"
-
-module MyLogger
-  LOGGER = Logger.new $stderr, level: Logger::WARN
-  def logger
-    LOGGER
-  end
-end
-
-# Define a gRPC module-level logger method before grpc/logconfig.rb loads.
-module GRPC
-  extend MyLogger
-end
-```
 
 ## Supported Ruby Versions
 

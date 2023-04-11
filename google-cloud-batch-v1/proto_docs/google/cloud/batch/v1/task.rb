@@ -49,6 +49,9 @@ module Google
         # @!attribute [rw] task_execution
         #   @return [::Google::Cloud::Batch::V1::TaskExecution]
         #     Task Execution
+        # @!attribute [rw] task_state
+        #   @return [::Google::Cloud::Batch::V1::TaskStatus::State]
+        #     Task State
         class StatusEvent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -184,9 +187,23 @@ module Google
           # @!attribute [rw] path
           #   @return [::String]
           #     Script file path on the host VM.
+          #
+          #     To specify an interpreter, please add a `#!<interpreter>`(also known as
+          #     [shebang line](https://en.wikipedia.org/wiki/Shebang_(Unix))) as the
+          #     first line of the file.(For example, to execute the script using bash,
+          #     `#!/bin/bash` should be the first line of the file. To execute the
+          #     script using`Python3`, `#!/usr/bin/env python3` should be the first
+          #     line of the file.) Otherwise, the file will by default be excuted by
+          #     `/bin/sh`.
           # @!attribute [rw] text
           #   @return [::String]
           #     Shell script text.
+          #
+          #     To specify an interpreter, please add a `#!<interpreter>\n` at the
+          #     beginning of the text.(For example, to execute the script using bash,
+          #     `#!/bin/bash\n` should be added. To execute the script using`Python3`,
+          #     `#!/usr/bin/env python3\n` should be added.) Otherwise, the script will
+          #     by default be excuted by `/bin/sh`.
           class Script
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -231,13 +248,12 @@ module Google
         # @!attribute [rw] lifecycle_policies
         #   @return [::Array<::Google::Cloud::Batch::V1::LifecyclePolicy>]
         #     Lifecycle management schema when any task in a task group is failed.
-        #     The valid size of lifecycle policies are [0, 10].
-        #     For each lifecycle policy, when the condition is met,
-        #     the action in that policy will execute.
-        #     If there are multiple policies that the task execution result matches,
-        #     we use the action from the first matched policy. If task execution result
-        #     does not meet with any of the defined lifecycle policy, we consider it as
-        #     the default policy. Default policy means if the exit code is 0, exit task.
+        #     Currently we only support one lifecycle policy.
+        #     When the lifecycle policy condition is met,
+        #     the action in the policy will execute.
+        #     If task execution result does not meet with the defined lifecycle
+        #     policy, we consider it as the default policy.
+        #     Default policy means if the exit code is 0, exit task.
         #     If task ends with non-zero exit code, retry the task with max_retry_count.
         # @!attribute [rw] environments
         #   @return [::Google::Protobuf::Map{::String => ::String}]
@@ -267,6 +283,10 @@ module Google
         # @!attribute [rw] action
         #   @return [::Google::Cloud::Batch::V1::LifecyclePolicy::Action]
         #     Action to execute when ActionCondition is true.
+        #     When RETRY_TASK is specified, we will retry failed tasks
+        #     if we notice any exit code match and fail tasks if no match is found.
+        #     Likewise, when FAIL_TASK is specified, we will fail tasks
+        #     if we notice any exit code match and retry tasks if no match is found.
         # @!attribute [rw] action_condition
         #   @return [::Google::Cloud::Batch::V1::LifecyclePolicy::ActionCondition]
         #     Conditions that decide why a task failure is dealt with a specific action.

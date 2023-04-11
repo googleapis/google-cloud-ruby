@@ -20,8 +20,11 @@
 require "google/cloud/channel/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Channel::V1::CloudChannelService::Client#list_channel_partner_links
+# Snippet for the list_channel_partner_links call in the CloudChannelService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Channel::V1::CloudChannelService::Client#list_channel_partner_links.
+# It may require modification in order to execute successfully.
 #
 def list_channel_partner_links
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_channel_partner_links
   # Call the list_channel_partner_links method.
   result = client.list_channel_partner_links request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::Channel::V1::ChannelPartnerLink.
-    p response
+    p item
   end
 end
 # [END cloudchannel_v1_generated_CloudChannelService_ListChannelPartnerLinks_sync]

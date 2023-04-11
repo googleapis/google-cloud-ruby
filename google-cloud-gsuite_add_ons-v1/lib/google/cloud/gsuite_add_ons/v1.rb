@@ -30,6 +30,11 @@ module Google
       #     require "google/cloud/gsuite_add_ons/v1"
       #     client = ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/gsuite_add_ons/v1"
+      #     client = ::Google::Cloud::GSuiteAddOns::V1::GSuiteAddOns::Rest::Client.new
+      #
       module V1
       end
     end

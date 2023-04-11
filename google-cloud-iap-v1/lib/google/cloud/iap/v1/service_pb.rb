@@ -84,6 +84,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :LOGIN, 1
       value :PASSWORD, 2
       value :SECURE_KEY, 3
+      value :ENROLLED_SECOND_FACTORS, 4
     end
     add_enum "google.cloud.iap.v1.ReauthSettings.PolicyType" do
       value :POLICY_TYPE_UNSPECIFIED, 0

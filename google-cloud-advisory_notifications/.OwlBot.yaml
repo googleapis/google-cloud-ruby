@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/advisorynotifications/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-advisory_notifications/$1

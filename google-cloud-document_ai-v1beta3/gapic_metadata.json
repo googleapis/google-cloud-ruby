@@ -119,6 +119,11 @@
               "methods": [
                 "list_evaluations"
               ]
+            },
+            "ImportProcessorVersion": {
+              "methods": [
+                "import_processor_version"
+              ]
             }
           }
         }

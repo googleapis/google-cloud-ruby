@@ -20,8 +20,11 @@
 require "google/cloud/vmware_engine/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#show_vcenter_credentials
+# Snippet for the show_vcenter_credentials call in the VmwareEngine service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#show_vcenter_credentials.
+# It may require modification in order to execute successfully.
 #
 def show_vcenter_credentials
   # Create a client object. The client can be reused for multiple calls.

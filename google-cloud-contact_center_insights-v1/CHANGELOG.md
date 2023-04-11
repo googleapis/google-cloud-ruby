@@ -1,5 +1,30 @@
 # Changelog
 
+### 0.13.0 (2023-04-10)
+
+#### Features
+
+* support upload_conversation api 
+
+### 0.12.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20625](https://github.com/googleapis/google-cloud-ruby/issues/20625)) 
+
+### 0.11.0 (2023-03-03)
+
+#### Features
+
+* add upload_conversation_analysis_percentage in AnalysisConfig ([#20588](https://github.com/googleapis/google-cloud-ruby/issues/20588)) 
+
+### 0.10.0 (2023-02-13)
+
+#### Features
+
+* Support for IngestConversationsStats ([#20122](https://github.com/googleapis/google-cloud-ruby/issues/20122)) 
+* Support for IssueModel#issue_count 
+
 ### 0.9.0 (2022-12-14)
 
 #### Features

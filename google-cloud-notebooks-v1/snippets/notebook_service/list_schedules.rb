@@ -20,8 +20,11 @@
 require "google/cloud/notebooks/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Notebooks::V1::NotebookService::Client#list_schedules
+# Snippet for the list_schedules call in the NotebookService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Notebooks::V1::NotebookService::Client#list_schedules. It may
+# require modification in order to execute successfully.
 #
 def list_schedules
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_schedules
   # Call the list_schedules method.
   result = client.list_schedules request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::Notebooks::V1::Schedule.
-    p response
+    p item
   end
 end
 # [END notebooks_v1_generated_NotebookService_ListSchedules_sync]

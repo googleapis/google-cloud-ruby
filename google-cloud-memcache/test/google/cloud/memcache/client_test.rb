@@ -20,15 +20,25 @@ require "helper"
 require "google/cloud/memcache"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Cloud::Memcache::ClientConstructionMinitest < Minitest::Test
   def test_cloud_memcache_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Memcache.cloud_memcache do |config|
+      client = Google::Cloud::Memcache.cloud_memcache transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Memcache::V1::CloudMemcache::Client, client
+    end
+  end
+
+  def test_cloud_memcache_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Memcache.cloud_memcache transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Memcache::V1::CloudMemcache::Rest::Client, client
     end
   end
 end

@@ -20,8 +20,11 @@
 require "google/cloud/data_labeling/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#get_evaluation
+# Snippet for the get_evaluation call in the DataLabelingService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#get_evaluation.
+# It may require modification in order to execute successfully.
 #
 def get_evaluation
   # Create a client object. The client can be reused for multiple calls.

@@ -20,8 +20,11 @@
 require "google/cloud/artifact_registry/v1beta2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#list_packages
+# Snippet for the list_packages call in the ArtifactRegistry service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#list_packages.
+# It may require modification in order to execute successfully.
 #
 def list_packages
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_packages
   # Call the list_packages method.
   result = client.list_packages request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::ArtifactRegistry::V1beta2::Package.
-    p response
+    p item
   end
 end
 # [END artifactregistry_v1beta2_generated_ArtifactRegistry_ListPackages_sync]

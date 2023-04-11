@@ -11,6 +11,7 @@ require 'google/cloud/dialogflow/v2/validation_result_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
+require 'google/protobuf/struct_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/dialogflow/v2/agent.proto", :syntax => :proto3) do

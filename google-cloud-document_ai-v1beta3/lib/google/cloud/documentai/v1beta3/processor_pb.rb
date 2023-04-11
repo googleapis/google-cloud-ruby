@@ -6,6 +6,7 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/documentai/v1beta3/document_schema_pb'
+require 'google/cloud/documentai/v1beta3/evaluation_pb'
 require 'google/protobuf/timestamp_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
@@ -16,6 +17,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :document_schema, :message, 12, "google.cloud.documentai.v1beta3.DocumentSchema"
       optional :state, :enum, 6, "google.cloud.documentai.v1beta3.ProcessorVersion.State"
       optional :create_time, :message, 7, "google.protobuf.Timestamp"
+      optional :latest_evaluation, :message, 8, "google.cloud.documentai.v1beta3.EvaluationReference"
       optional :kms_key_name, :string, 9
       optional :kms_key_version_name, :string, 10
       optional :google_managed, :bool, 11

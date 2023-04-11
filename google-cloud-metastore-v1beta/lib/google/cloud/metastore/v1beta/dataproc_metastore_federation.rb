@@ -26,6 +26,7 @@ require "google/cloud/metastore/v1beta/dataproc_metastore_federation/credentials
 require "google/cloud/metastore/v1beta/dataproc_metastore_federation/paths"
 require "google/cloud/metastore/v1beta/dataproc_metastore_federation/operations"
 require "google/cloud/metastore/v1beta/dataproc_metastore_federation/client"
+require "google/cloud/metastore/v1beta/dataproc_metastore_federation/rest"
 
 module Google
   module Cloud
@@ -50,6 +51,11 @@ module Google
         #
         #     require "google/cloud/metastore/v1beta/dataproc_metastore_federation"
         #     client = ::Google::Cloud::Metastore::V1beta::DataprocMetastoreFederation::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/metastore/v1beta/dataproc_metastore_federation/rest"
+        #     client = ::Google::Cloud::Metastore::V1beta::DataprocMetastoreFederation::Rest::Client.new
         #
         module DataprocMetastoreFederation
         end

@@ -20,8 +20,11 @@
 require "google/cloud/essential_contacts/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::EssentialContacts::V1::EssentialContactsService::Client#send_test_message
+# Snippet for the send_test_message call in the EssentialContactsService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::EssentialContacts::V1::EssentialContactsService::Client#send_test_message.
+# It may require modification in order to execute successfully.
 #
 def send_test_message
   # Create a client object. The client can be reused for multiple calls.

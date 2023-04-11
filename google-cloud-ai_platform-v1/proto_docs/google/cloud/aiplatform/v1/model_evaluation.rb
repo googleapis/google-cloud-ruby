@@ -52,8 +52,8 @@ module Google
         #   @return [::String]
         #     Points to a YAML file stored on Google Cloud Storage describing
         #     [EvaluatedDataItemView.data_item_payload][] and
-        #     [EvaluatedAnnotation.data_item_payload][]. The schema is defined as an
-        #     OpenAPI 3.0.2 [Schema
+        #     {::Google::Cloud::AIPlatform::V1::EvaluatedAnnotation#data_item_payload EvaluatedAnnotation.data_item_payload}.
+        #     The schema is defined as an OpenAPI 3.0.2 [Schema
         #     Object](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.2.md#schemaObject).
         #
         #     This field is not populated if there are neither EvaluatedDataItemViews nor
@@ -63,9 +63,10 @@ module Google
         #     Points to a YAML file stored on Google Cloud Storage describing
         #     [EvaluatedDataItemView.predictions][],
         #     [EvaluatedDataItemView.ground_truths][],
-        #     [EvaluatedAnnotation.predictions][], and
-        #     [EvaluatedAnnotation.ground_truths][]. The schema is defined as an
-        #     OpenAPI 3.0.2 [Schema
+        #     {::Google::Cloud::AIPlatform::V1::EvaluatedAnnotation#predictions EvaluatedAnnotation.predictions},
+        #     and
+        #     {::Google::Cloud::AIPlatform::V1::EvaluatedAnnotation#ground_truths EvaluatedAnnotation.ground_truths}.
+        #     The schema is defined as an OpenAPI 3.0.2 [Schema
         #     Object](https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.2.md#schemaObject).
         #
         #     This field is not populated if there are neither EvaluatedDataItemViews nor

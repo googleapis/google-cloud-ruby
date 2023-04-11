@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-automl-v1",
-    "version": "0.5.0",
+    "version": "0.6.0",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "automl_v1_generated_PredictionService_Predict_sync",
-      "title": "Snippet for predict in PredictionService",
-      "description": "Basic snippet for predict in PredictionService",
+      "title": "Snippet for the predict call in the PredictionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AutoML::V1::PredictionService::Client#predict. It may require modification in order to execute successfully.",
       "file": "prediction_service/predict.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "automl_v1_generated_PredictionService_BatchPredict_sync",
-      "title": "Snippet for batch_predict in PredictionService",
-      "description": "Basic snippet for batch_predict in PredictionService",
+      "title": "Snippet for the batch_predict call in the PredictionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AutoML::V1::PredictionService::Client#batch_predict. It may require modification in order to execute successfully.",
       "file": "prediction_service/batch_predict.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "automl_v1_generated_AutoML_CreateDataset_sync",
-      "title": "Snippet for create_dataset in AutoML",
-      "description": "Basic snippet for create_dataset in AutoML",
+      "title": "Snippet for the create_dataset call in the AutoML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AutoML::V1::AutoML::Client#create_dataset. It may require modification in order to execute successfully.",
       "file": "automl/create_dataset.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "automl_v1_generated_AutoML_GetDataset_sync",
-      "title": "Snippet for get_dataset in AutoML",
-      "description": "Basic snippet for get_dataset in AutoML",
+      "title": "Snippet for the get_dataset call in the AutoML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AutoML::V1::AutoML::Client#get_dataset. It may require modification in order to execute successfully.",
       "file": "automl/get_dataset.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "automl_v1_generated_AutoML_ListDatasets_sync",
-      "title": "Snippet for list_datasets in AutoML",
-      "description": "Basic snippet for list_datasets in AutoML",
+      "title": "Snippet for the list_datasets call in the AutoML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AutoML::V1::AutoML::Client#list_datasets. It may require modification in order to execute successfully.",
       "file": "automl/list_datasets.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "automl_v1_generated_AutoML_UpdateDataset_sync",
-      "title": "Snippet for update_dataset in AutoML",
-      "description": "Basic snippet for update_dataset in AutoML",
+      "title": "Snippet for the update_dataset call in the AutoML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AutoML::V1::AutoML::Client#update_dataset. It may require modification in order to execute successfully.",
       "file": "automl/update_dataset.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "automl_v1_generated_AutoML_DeleteDataset_sync",
-      "title": "Snippet for delete_dataset in AutoML",
-      "description": "Basic snippet for delete_dataset in AutoML",
+      "title": "Snippet for the delete_dataset call in the AutoML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AutoML::V1::AutoML::Client#delete_dataset. It may require modification in order to execute successfully.",
       "file": "automl/delete_dataset.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "automl_v1_generated_AutoML_ImportData_sync",
-      "title": "Snippet for import_data in AutoML",
-      "description": "Basic snippet for import_data in AutoML",
+      "title": "Snippet for the import_data call in the AutoML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AutoML::V1::AutoML::Client#import_data. It may require modification in order to execute successfully.",
       "file": "automl/import_data.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "automl_v1_generated_AutoML_ExportData_sync",
-      "title": "Snippet for export_data in AutoML",
-      "description": "Basic snippet for export_data in AutoML",
+      "title": "Snippet for the export_data call in the AutoML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AutoML::V1::AutoML::Client#export_data. It may require modification in order to execute successfully.",
       "file": "automl/export_data.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,15 +366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "automl_v1_generated_AutoML_GetAnnotationSpec_sync",
-      "title": "Snippet for get_annotation_spec in AutoML",
-      "description": "Basic snippet for get_annotation_spec in AutoML",
+      "title": "Snippet for the get_annotation_spec call in the AutoML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AutoML::V1::AutoML::Client#get_annotation_spec. It may require modification in order to execute successfully.",
       "file": "automl/get_annotation_spec.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,15 +406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "automl_v1_generated_AutoML_CreateModel_sync",
-      "title": "Snippet for create_model in AutoML",
-      "description": "Basic snippet for create_model in AutoML",
+      "title": "Snippet for the create_model call in the AutoML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AutoML::V1::AutoML::Client#create_model. It may require modification in order to execute successfully.",
       "file": "automl/create_model.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,15 +446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "automl_v1_generated_AutoML_GetModel_sync",
-      "title": "Snippet for get_model in AutoML",
-      "description": "Basic snippet for get_model in AutoML",
+      "title": "Snippet for the get_model call in the AutoML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AutoML::V1::AutoML::Client#get_model. It may require modification in order to execute successfully.",
       "file": "automl/get_model.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,15 +486,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "automl_v1_generated_AutoML_ListModels_sync",
-      "title": "Snippet for list_models in AutoML",
-      "description": "Basic snippet for list_models in AutoML",
+      "title": "Snippet for the list_models call in the AutoML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AutoML::V1::AutoML::Client#list_models. It may require modification in order to execute successfully.",
       "file": "automl/list_models.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,15 +526,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "automl_v1_generated_AutoML_DeleteModel_sync",
-      "title": "Snippet for delete_model in AutoML",
-      "description": "Basic snippet for delete_model in AutoML",
+      "title": "Snippet for the delete_model call in the AutoML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AutoML::V1::AutoML::Client#delete_model. It may require modification in order to execute successfully.",
       "file": "automl/delete_model.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,15 +566,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "automl_v1_generated_AutoML_UpdateModel_sync",
-      "title": "Snippet for update_model in AutoML",
-      "description": "Basic snippet for update_model in AutoML",
+      "title": "Snippet for the update_model call in the AutoML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AutoML::V1::AutoML::Client#update_model. It may require modification in order to execute successfully.",
       "file": "automl/update_model.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,15 +606,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "automl_v1_generated_AutoML_DeployModel_sync",
-      "title": "Snippet for deploy_model in AutoML",
-      "description": "Basic snippet for deploy_model in AutoML",
+      "title": "Snippet for the deploy_model call in the AutoML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AutoML::V1::AutoML::Client#deploy_model. It may require modification in order to execute successfully.",
       "file": "automl/deploy_model.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,15 +646,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "automl_v1_generated_AutoML_UndeployModel_sync",
-      "title": "Snippet for undeploy_model in AutoML",
-      "description": "Basic snippet for undeploy_model in AutoML",
+      "title": "Snippet for the undeploy_model call in the AutoML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AutoML::V1::AutoML::Client#undeploy_model. It may require modification in order to execute successfully.",
       "file": "automl/undeploy_model.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,15 +686,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "automl_v1_generated_AutoML_ExportModel_sync",
-      "title": "Snippet for export_model in AutoML",
-      "description": "Basic snippet for export_model in AutoML",
+      "title": "Snippet for the export_model call in the AutoML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AutoML::V1::AutoML::Client#export_model. It may require modification in order to execute successfully.",
       "file": "automl/export_model.rb",
       "language": "RUBY",
       "client_method": {
@@ -726,15 +726,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "automl_v1_generated_AutoML_GetModelEvaluation_sync",
-      "title": "Snippet for get_model_evaluation in AutoML",
-      "description": "Basic snippet for get_model_evaluation in AutoML",
+      "title": "Snippet for the get_model_evaluation call in the AutoML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AutoML::V1::AutoML::Client#get_model_evaluation. It may require modification in order to execute successfully.",
       "file": "automl/get_model_evaluation.rb",
       "language": "RUBY",
       "client_method": {
@@ -766,15 +766,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "automl_v1_generated_AutoML_ListModelEvaluations_sync",
-      "title": "Snippet for list_model_evaluations in AutoML",
-      "description": "Basic snippet for list_model_evaluations in AutoML",
+      "title": "Snippet for the list_model_evaluations call in the AutoML service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AutoML::V1::AutoML::Client#list_model_evaluations. It may require modification in order to execute successfully.",
       "file": "automl/list_model_evaluations.rb",
       "language": "RUBY",
       "client_method": {
@@ -806,7 +806,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]

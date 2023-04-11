@@ -20,8 +20,11 @@
 require "google/cloud/notebooks/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Notebooks::V1beta1::NotebookService::Client#is_instance_upgradeable
+# Snippet for the is_instance_upgradeable call in the NotebookService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Notebooks::V1beta1::NotebookService::Client#is_instance_upgradeable.
+# It may require modification in order to execute successfully.
 #
 def is_instance_upgradeable
   # Create a client object. The client can be reused for multiple calls.

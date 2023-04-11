@@ -20,8 +20,11 @@
 require "google/cloud/bigquery/migration/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Bigquery::Migration::V2::MigrationService::Client#get_migration_subtask
+# Snippet for the get_migration_subtask call in the MigrationService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Bigquery::Migration::V2::MigrationService::Client#get_migration_subtask.
+# It may require modification in order to execute successfully.
 #
 def get_migration_subtask
   # Create a client object. The client can be reused for multiple calls.

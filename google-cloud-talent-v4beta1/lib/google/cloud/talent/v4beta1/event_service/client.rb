@@ -177,8 +177,8 @@ module Google
             #     "projects/foo/tenant/bar". If tenant id is unspecified, a default tenant
             #     is created, for example, "projects/foo".
             #   @param client_event [::Google::Cloud::Talent::V4beta1::ClientEvent, ::Hash]
-            #     Required. Events issued when end user interacts with customer's application that
-            #     uses Cloud Talent Solution.
+            #     Required. Events issued when end user interacts with customer's application
+            #     that uses Cloud Talent Solution.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Talent::V4beta1::ClientEvent]
@@ -282,9 +282,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials

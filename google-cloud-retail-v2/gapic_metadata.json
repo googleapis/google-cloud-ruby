@@ -122,6 +122,55 @@
         }
       }
     },
+    "ModelService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Retail::V2::ModelService::Client",
+          "rpcs": {
+            "CreateModel": {
+              "methods": [
+                "create_model"
+              ]
+            },
+            "GetModel": {
+              "methods": [
+                "get_model"
+              ]
+            },
+            "PauseModel": {
+              "methods": [
+                "pause_model"
+              ]
+            },
+            "ResumeModel": {
+              "methods": [
+                "resume_model"
+              ]
+            },
+            "DeleteModel": {
+              "methods": [
+                "delete_model"
+              ]
+            },
+            "ListModels": {
+              "methods": [
+                "list_models"
+              ]
+            },
+            "UpdateModel": {
+              "methods": [
+                "update_model"
+              ]
+            },
+            "TuneModel": {
+              "methods": [
+                "tune_model"
+              ]
+            }
+          }
+        }
+      }
+    },
     "PredictionService": {
       "clients": {
         "grpc": {

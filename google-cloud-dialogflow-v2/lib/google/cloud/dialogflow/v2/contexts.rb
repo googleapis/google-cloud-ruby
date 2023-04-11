@@ -25,6 +25,7 @@ require "google/cloud/dialogflow/v2/version"
 require "google/cloud/dialogflow/v2/contexts/credentials"
 require "google/cloud/dialogflow/v2/contexts/paths"
 require "google/cloud/dialogflow/v2/contexts/client"
+require "google/cloud/dialogflow/v2/contexts/rest"
 
 module Google
   module Cloud
@@ -37,6 +38,11 @@ module Google
         #
         #     require "google/cloud/dialogflow/v2/contexts"
         #     client = ::Google::Cloud::Dialogflow::V2::Contexts::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/dialogflow/v2/contexts/rest"
+        #     client = ::Google::Cloud::Dialogflow::V2::Contexts::Rest::Client.new
         #
         module Contexts
         end

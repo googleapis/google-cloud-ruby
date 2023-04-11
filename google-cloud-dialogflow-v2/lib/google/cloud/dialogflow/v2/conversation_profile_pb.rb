@@ -31,6 +31,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :language_code, :string, 10
       optional :time_zone, :string, 14
       optional :security_settings, :string, 13
+      optional :tts_config, :message, 18, "google.cloud.dialogflow.v2.SynthesizeSpeechConfig"
     end
     add_message "google.cloud.dialogflow.v2.ListConversationProfilesRequest" do
       optional :parent, :string, 1

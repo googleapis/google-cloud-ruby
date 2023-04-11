@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-scheduler-v1beta1",
-    "version": "0.6.0",
+    "version": "0.7.0",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "cloudscheduler_v1beta1_generated_CloudScheduler_ListJobs_sync",
-      "title": "Snippet for list_jobs in CloudScheduler",
-      "description": "Basic snippet for list_jobs in CloudScheduler",
+      "title": "Snippet for the list_jobs call in the CloudScheduler service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client#list_jobs. It may require modification in order to execute successfully.",
       "file": "cloud_scheduler/list_jobs.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudscheduler_v1beta1_generated_CloudScheduler_GetJob_sync",
-      "title": "Snippet for get_job in CloudScheduler",
-      "description": "Basic snippet for get_job in CloudScheduler",
+      "title": "Snippet for the get_job call in the CloudScheduler service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client#get_job. It may require modification in order to execute successfully.",
       "file": "cloud_scheduler/get_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudscheduler_v1beta1_generated_CloudScheduler_CreateJob_sync",
-      "title": "Snippet for create_job in CloudScheduler",
-      "description": "Basic snippet for create_job in CloudScheduler",
+      "title": "Snippet for the create_job call in the CloudScheduler service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client#create_job. It may require modification in order to execute successfully.",
       "file": "cloud_scheduler/create_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudscheduler_v1beta1_generated_CloudScheduler_UpdateJob_sync",
-      "title": "Snippet for update_job in CloudScheduler",
-      "description": "Basic snippet for update_job in CloudScheduler",
+      "title": "Snippet for the update_job call in the CloudScheduler service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client#update_job. It may require modification in order to execute successfully.",
       "file": "cloud_scheduler/update_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudscheduler_v1beta1_generated_CloudScheduler_DeleteJob_sync",
-      "title": "Snippet for delete_job in CloudScheduler",
-      "description": "Basic snippet for delete_job in CloudScheduler",
+      "title": "Snippet for the delete_job call in the CloudScheduler service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client#delete_job. It may require modification in order to execute successfully.",
       "file": "cloud_scheduler/delete_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudscheduler_v1beta1_generated_CloudScheduler_PauseJob_sync",
-      "title": "Snippet for pause_job in CloudScheduler",
-      "description": "Basic snippet for pause_job in CloudScheduler",
+      "title": "Snippet for the pause_job call in the CloudScheduler service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client#pause_job. It may require modification in order to execute successfully.",
       "file": "cloud_scheduler/pause_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudscheduler_v1beta1_generated_CloudScheduler_ResumeJob_sync",
-      "title": "Snippet for resume_job in CloudScheduler",
-      "description": "Basic snippet for resume_job in CloudScheduler",
+      "title": "Snippet for the resume_job call in the CloudScheduler service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client#resume_job. It may require modification in order to execute successfully.",
       "file": "cloud_scheduler/resume_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudscheduler_v1beta1_generated_CloudScheduler_RunJob_sync",
-      "title": "Snippet for run_job in CloudScheduler",
-      "description": "Basic snippet for run_job in CloudScheduler",
+      "title": "Snippet for the run_job call in the CloudScheduler service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client#run_job. It may require modification in order to execute successfully.",
       "file": "cloud_scheduler/run_job.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,7 +326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]

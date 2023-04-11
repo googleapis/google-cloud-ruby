@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
   gem.description   = "The Cloud Org Policy service provides a simple mechanism for organizations to restrict the allowed configurations across their entire Cloud Resource hierarchy. Note that google-cloud-org_policy-v2 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-org_policy instead. See the readme for more details."
-  gem.summary       = "API Client library for the Organization Policy V2 API"
+  gem.summary       = "The Organization Policy API allows users to configure governance rules on their Google Cloud resources across the resource hierarchy."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
@@ -23,10 +23,10 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 2.6"
 
-  gem.add_dependency "gapic-common", ">= 0.16.0", "< 2.a"
+  gem.add_dependency "gapic-common", ">= 0.18.0", "< 2.a"
   gem.add_dependency "google-cloud-errors", "~> 1.0"
 
-  gem.add_development_dependency "google-style", "~> 1.26.1"
+  gem.add_development_dependency "google-style", "~> 1.26.3"
   gem.add_development_dependency "minitest", "~> 5.16"
   gem.add_development_dependency "minitest-focus", "~> 1.1"
   gem.add_development_dependency "minitest-rg", "~> 5.2"

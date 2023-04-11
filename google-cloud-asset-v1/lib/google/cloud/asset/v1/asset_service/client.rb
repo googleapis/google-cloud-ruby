@@ -141,6 +141,21 @@ module Google
                   initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
+                default_config.rpcs.analyze_org_policies.timeout = 60.0
+                default_config.rpcs.analyze_org_policies.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                }
+
+                default_config.rpcs.analyze_org_policy_governed_containers.timeout = 60.0
+                default_config.rpcs.analyze_org_policy_governed_containers.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                }
+
+                default_config.rpcs.analyze_org_policy_governed_assets.timeout = 60.0
+                default_config.rpcs.analyze_org_policy_governed_assets.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                }
+
                 default_config
               end
               yield @configure if block_given?
@@ -335,14 +350,14 @@ module Google
             #   # Call the export_assets method.
             #   result = client.export_assets request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def export_assets request, options = nil
@@ -484,13 +499,11 @@ module Google
             #   # Call the list_assets method.
             #   result = client.list_assets request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Asset::V1::Asset.
-            #     p response
+            #     p item
             #   end
             #
             def list_assets request, options = nil
@@ -686,7 +699,7 @@ module Google
             #     Required. The name of the project/folder/organization where this feed
             #     should be created in. It can only be an organization number (such as
             #     "organizations/123"), a folder number (such as "folders/123"), a project ID
-            #     (such as "projects/my-project-id")", or a project number (such as
+            #     (such as "projects/my-project-id"), or a project number (such as
             #     "projects/12345").
             #   @param feed_id [::String]
             #     Required. This is the client-assigned asset feed identifier and it needs to
@@ -1307,13 +1320,11 @@ module Google
             #   # Call the search_all_resources method.
             #   result = client.search_all_resources request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Asset::V1::ResourceSearchResult.
-            #     p response
+            #     p item
             #   end
             #
             def search_all_resources request, options = nil
@@ -1496,13 +1507,11 @@ module Google
             #   # Call the search_all_iam_policies method.
             #   result = client.search_all_iam_policies request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Asset::V1::IamPolicySearchResult.
-            #     p response
+            #     p item
             #   end
             #
             def search_all_iam_policies request, options = nil
@@ -1732,14 +1741,14 @@ module Google
             #   # Call the analyze_iam_policy_longrunning method.
             #   result = client.analyze_iam_policy_longrunning request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def analyze_iam_policy_longrunning request, options = nil
@@ -2059,8 +2068,8 @@ module Google
             #     Required. The name of the project/folder/organization where this
             #     saved_query should be created in. It can only be an organization number
             #     (such as "organizations/123"), a folder number (such as "folders/123"), a
-            #     project ID (such as "projects/my-project-id")", or a project number (such
-            #     as "projects/12345").
+            #     project ID (such as "projects/my-project-id"), or a project number (such as
+            #     "projects/12345").
             #   @param saved_query [::Google::Cloud::Asset::V1::SavedQuery, ::Hash]
             #     Required. The saved_query details. The `name` field must be empty as it
             #     will be generated based on the parent and saved_query_id.
@@ -2261,8 +2270,8 @@ module Google
             #   @param page_size [::Integer]
             #     Optional. The maximum number of saved queries to return per page. The
             #     service may return fewer than this value. If unspecified, at most 50 will
-            #     be returned.
-            #      The maximum value is 1000; values above 1000 will be coerced to 1000.
+            #     be returned. The maximum value is 1000; values above 1000 will be coerced
+            #     to 1000.
             #   @param page_token [::String]
             #     Optional. A page token, received from a previous `ListSavedQueries` call.
             #     Provide this to retrieve the subsequent page.
@@ -2290,13 +2299,11 @@ module Google
             #   # Call the list_saved_queries method.
             #   result = client.list_saved_queries request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Asset::V1::SavedQuery.
-            #     p response
+            #     p item
             #   end
             #
             def list_saved_queries request, options = nil
@@ -2689,13 +2696,11 @@ module Google
             #   # Call the analyze_org_policies method.
             #   result = client.analyze_org_policies request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Asset::V1::AnalyzeOrgPoliciesResponse::OrgPolicyResult.
-            #     p response
+            #     p item
             #   end
             #
             def analyze_org_policies request, options = nil
@@ -2805,13 +2810,11 @@ module Google
             #   # Call the analyze_org_policy_governed_containers method.
             #   result = client.analyze_org_policy_governed_containers request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedContainersResponse::GovernedContainer.
-            #     p response
+            #     p item
             #   end
             #
             def analyze_org_policy_governed_containers request, options = nil
@@ -2943,13 +2946,11 @@ module Google
             #   # Call the analyze_org_policy_governed_assets method.
             #   result = client.analyze_org_policy_governed_assets request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsResponse::GovernedAsset.
-            #     p response
+            #     p item
             #   end
             #
             def analyze_org_policy_governed_assets request, options = nil
@@ -3032,9 +3033,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials

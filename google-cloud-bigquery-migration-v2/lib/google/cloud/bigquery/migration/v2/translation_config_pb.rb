@@ -9,6 +9,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :source_dialect, :message, 3, "google.cloud.bigquery.migration.v2.Dialect"
       optional :target_dialect, :message, 4, "google.cloud.bigquery.migration.v2.Dialect"
       optional :source_env, :message, 6, "google.cloud.bigquery.migration.v2.SourceEnv"
+      optional :request_source, :string, 8
       oneof :source_location do
         optional :gcs_source_path, :string, 1
       end

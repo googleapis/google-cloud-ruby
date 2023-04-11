@@ -270,7 +270,7 @@ module Google
         #     Required. The name of the project/folder/organization where this feed
         #     should be created in. It can only be an organization number (such as
         #     "organizations/123"), a folder number (such as "folders/123"), a project ID
-        #     (such as "projects/my-project-id")", or a project number (such as
+        #     (such as "projects/my-project-id"), or a project number (such as
         #     "projects/12345").
         # @!attribute [rw] feed_id
         #   @return [::String]
@@ -1388,8 +1388,8 @@ module Google
         #     Required. The name of the project/folder/organization where this
         #     saved_query should be created in. It can only be an organization number
         #     (such as "organizations/123"), a folder number (such as "folders/123"), a
-        #     project ID (such as "projects/my-project-id")", or a project number (such
-        #     as "projects/12345").
+        #     project ID (such as "projects/my-project-id"), or a project number (such as
+        #     "projects/12345").
         # @!attribute [rw] saved_query
         #   @return [::Google::Cloud::Asset::V1::SavedQuery]
         #     Required. The saved_query details. The `name` field must be empty as it
@@ -1442,8 +1442,8 @@ module Google
         #   @return [::Integer]
         #     Optional. The maximum number of saved queries to return per page. The
         #     service may return fewer than this value. If unspecified, at most 50 will
-        #     be returned.
-        #      The maximum value is 1000; values above 1000 will be coerced to 1000.
+        #     be returned. The maximum value is 1000; values above 1000 will be coerced
+        #     to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. A page token, received from a previous `ListSavedQueries` call.
@@ -2356,19 +2356,19 @@ module Google
           #     {::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsResponse::GovernedResource#full_resource_name AnalyzeOrgPolicyGovernedAssetsResponse.GovernedResource.full_resource_name}.
           # @!attribute [rw] project
           #   @return [::String]
-          #     The project that this resource belongs to, in the form of
+          #     The project that this resource belongs to, in the format of
           #     projects/\\{PROJECT_NUMBER}. This field is available when the resource
           #     belongs to a project.
           # @!attribute [rw] folders
           #   @return [::Array<::String>]
-          #     The folder(s) that this resource belongs to, in the form of
+          #     The folder(s) that this resource belongs to, in the format of
           #     folders/\\{FOLDER_NUMBER}. This field is available when the resource
-          #     belongs(directly or cascadingly) to one or more folders.
+          #     belongs (directly or cascadingly) to one or more folders.
           # @!attribute [rw] organization
           #   @return [::String]
-          #     The organization that this resource belongs to, in the form of
+          #     The organization that this resource belongs to, in the format of
           #     organizations/\\{ORGANIZATION_NUMBER}. This field is available when the
-          #     resource belongs(directly or cascadingly) to an organization.
+          #     resource belongs (directly or cascadingly) to an organization.
           class GovernedResource
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2389,19 +2389,19 @@ module Google
           #     The IAM policy directly set on the given resource.
           # @!attribute [rw] project
           #   @return [::String]
-          #     The project that this IAM policy belongs to, in the form of
+          #     The project that this IAM policy belongs to, in the format of
           #     projects/\\{PROJECT_NUMBER}. This field is available when the IAM policy
           #     belongs to a project.
           # @!attribute [rw] folders
           #   @return [::Array<::String>]
-          #     The folder(s) that this IAM policy belongs to, in the form of
+          #     The folder(s) that this IAM policy belongs to, in the format of
           #     folders/\\{FOLDER_NUMBER}. This field is available when the IAM policy
-          #     belongs(directly or cascadingly) to one or more folders.
+          #     belongs (directly or cascadingly) to one or more folders.
           # @!attribute [rw] organization
           #   @return [::String]
-          #     The organization that this IAM policy belongs to, in the form of
+          #     The organization that this IAM policy belongs to, in the format of
           #     organizations/\\{ORGANIZATION_NUMBER}. This field is available when the
-          #     IAM policy belongs(directly or cascadingly) to an organization.
+          #     IAM policy belongs (directly or cascadingly) to an organization.
           class GovernedIamPolicy
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

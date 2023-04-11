@@ -20,8 +20,11 @@
 require "google/iam/credentials/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Iam::Credentials::V1::IAMCredentials::Client#sign_blob
+# Snippet for the sign_blob call in the IAMCredentials service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Iam::Credentials::V1::IAMCredentials::Client#sign_blob. It may require
+# modification in order to execute successfully.
 #
 def sign_blob
   # Create a client object. The client can be reused for multiple calls.

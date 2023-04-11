@@ -48,7 +48,7 @@ module Google
       # Create a new client object for SecretManagerService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::SecretManager::V1::SecretManagerService::Client](https://googleapis.dev/ruby/google-cloud-secret_manager-v1/latest/Google/Cloud/SecretManager/V1/SecretManagerService/Client.html)
+      # [Google::Cloud::SecretManager::V1::SecretManagerService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-secret_manager-v1/latest/Google-Cloud-SecretManager-V1-SecretManagerService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the SecretManagerService service is

@@ -10,6 +10,7 @@ require 'google/api/resource_pb'
 require 'google/cloud/aiplatform/v1/index_pb'
 require 'google/cloud/aiplatform/v1/operation_pb'
 require 'google/longrunning/operations_pb'
+require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do

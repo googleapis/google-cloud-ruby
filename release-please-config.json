@@ -47,6 +47,14 @@
       "component": "google-cloud-access_approval-v1",
       "version_file": "lib/google/cloud/access_approval/v1/version.rb"
     },
+    "google-cloud-advisory_notifications": {
+      "component": "google-cloud-advisory_notifications",
+      "version_file": "lib/google/cloud/advisory_notifications/version.rb"
+    },
+    "google-cloud-advisory_notifications-v1": {
+      "component": "google-cloud-advisory_notifications-v1",
+      "version_file": "lib/google/cloud/advisory_notifications/v1/version.rb"
+    },
     "google-cloud-ai_platform": {
       "component": "google-cloud-ai_platform",
       "version_file": "lib/google/cloud/ai_platform/version.rb"
@@ -54,6 +62,18 @@
     "google-cloud-ai_platform-v1": {
       "component": "google-cloud-ai_platform-v1",
       "version_file": "lib/google/cloud/ai_platform/v1/version.rb"
+    },
+    "google-cloud-alloy_db": {
+      "component": "google-cloud-alloy_db",
+      "version_file": "lib/google/cloud/alloy_db/version.rb"
+    },
+    "google-cloud-alloy_db-v1": {
+      "component": "google-cloud-alloy_db-v1",
+      "version_file": "lib/google/cloud/alloy_db/v1/version.rb"
+    },
+    "google-cloud-alloy_db-v1beta": {
+      "component": "google-cloud-alloy_db-v1beta",
+      "version_file": "lib/google/cloud/alloy_db/v1beta/version.rb"
     },
     "google-cloud-api_gateway": {
       "component": "google-cloud-api_gateway",
@@ -303,6 +323,10 @@
       "component": "google-cloud-build-v1",
       "version_file": "lib/google/cloud/build/v1/version.rb"
     },
+    "google-cloud-build-v2": {
+      "component": "google-cloud-build-v2",
+      "version_file": "lib/google/cloud/build/v2/version.rb"
+    },
     "google-cloud-certificate_manager": {
       "component": "google-cloud-certificate_manager",
       "version_file": "lib/google/cloud/certificate_manager/version.rb"
@@ -370,6 +394,14 @@
     "google-cloud-data_catalog": {
       "component": "google-cloud-data_catalog",
       "version_file": "lib/google/cloud/data_catalog/version.rb"
+    },
+    "google-cloud-data_catalog-lineage": {
+      "component": "google-cloud-data_catalog-lineage",
+      "version_file": "lib/google/cloud/data_catalog/lineage/version.rb"
+    },
+    "google-cloud-data_catalog-lineage-v1": {
+      "component": "google-cloud-data_catalog-lineage-v1",
+      "version_file": "lib/google/cloud/data_catalog/lineage/v1/version.rb"
     },
     "google-cloud-data_catalog-v1": {
       "component": "google-cloud-data_catalog-v1",
@@ -682,6 +714,14 @@
     "google-cloud-kms": {
       "component": "google-cloud-kms",
       "version_file": "lib/google/cloud/kms/version.rb"
+    },
+    "google-cloud-kms-inventory": {
+      "component": "google-cloud-kms-inventory",
+      "version_file": "lib/google/cloud/kms/inventory/version.rb"
+    },
+    "google-cloud-kms-inventory-v1": {
+      "component": "google-cloud-kms-inventory-v1",
+      "version_file": "lib/google/cloud/kms/inventory/v1/version.rb"
     },
     "google-cloud-kms-v1": {
       "component": "google-cloud-kms-v1",

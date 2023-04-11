@@ -48,12 +48,14 @@ module Google
       # Create a new client object for CloudFunctionsService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Functions::V1::CloudFunctionsService::Client](https://googleapis.dev/ruby/google-cloud-functions-v1/latest/Google/Cloud/Functions/V1/CloudFunctionsService/Client.html)
+      # [Google::Cloud::Functions::V1::CloudFunctionsService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-functions-v1/latest/Google-Cloud-Functions-V1-CloudFunctionsService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the CloudFunctionsService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About CloudFunctionsService
       #
@@ -61,9 +63,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.cloud_functions_service version: :v1, &block
+      def self.cloud_functions_service version: :v1, transport: :grpc, &block
         require "google/cloud/functions/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Functions
@@ -71,6 +74,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::Functions.const_get(package_name).const_get(:CloudFunctionsService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 

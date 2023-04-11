@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-gaming-v1",
-    "version": "0.5.0",
+    "version": "0.6.0",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "gameservices_v1_generated_GameServerClustersService_ListGameServerClusters_sync",
-      "title": "Snippet for list_game_server_clusters in GameServerClustersService",
-      "description": "Basic snippet for list_game_server_clusters in GameServerClustersService",
+      "title": "Snippet for the list_game_server_clusters call in the GameServerClustersService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Gaming::V1::GameServerClustersService::Client#list_game_server_clusters. It may require modification in order to execute successfully.",
       "file": "game_server_clusters_service/list_game_server_clusters.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gameservices_v1_generated_GameServerClustersService_GetGameServerCluster_sync",
-      "title": "Snippet for get_game_server_cluster in GameServerClustersService",
-      "description": "Basic snippet for get_game_server_cluster in GameServerClustersService",
+      "title": "Snippet for the get_game_server_cluster call in the GameServerClustersService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Gaming::V1::GameServerClustersService::Client#get_game_server_cluster. It may require modification in order to execute successfully.",
       "file": "game_server_clusters_service/get_game_server_cluster.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gameservices_v1_generated_GameServerClustersService_CreateGameServerCluster_sync",
-      "title": "Snippet for create_game_server_cluster in GameServerClustersService",
-      "description": "Basic snippet for create_game_server_cluster in GameServerClustersService",
+      "title": "Snippet for the create_game_server_cluster call in the GameServerClustersService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Gaming::V1::GameServerClustersService::Client#create_game_server_cluster. It may require modification in order to execute successfully.",
       "file": "game_server_clusters_service/create_game_server_cluster.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gameservices_v1_generated_GameServerClustersService_PreviewCreateGameServerCluster_sync",
-      "title": "Snippet for preview_create_game_server_cluster in GameServerClustersService",
-      "description": "Basic snippet for preview_create_game_server_cluster in GameServerClustersService",
+      "title": "Snippet for the preview_create_game_server_cluster call in the GameServerClustersService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Gaming::V1::GameServerClustersService::Client#preview_create_game_server_cluster. It may require modification in order to execute successfully.",
       "file": "game_server_clusters_service/preview_create_game_server_cluster.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gameservices_v1_generated_GameServerClustersService_DeleteGameServerCluster_sync",
-      "title": "Snippet for delete_game_server_cluster in GameServerClustersService",
-      "description": "Basic snippet for delete_game_server_cluster in GameServerClustersService",
+      "title": "Snippet for the delete_game_server_cluster call in the GameServerClustersService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Gaming::V1::GameServerClustersService::Client#delete_game_server_cluster. It may require modification in order to execute successfully.",
       "file": "game_server_clusters_service/delete_game_server_cluster.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gameservices_v1_generated_GameServerClustersService_PreviewDeleteGameServerCluster_sync",
-      "title": "Snippet for preview_delete_game_server_cluster in GameServerClustersService",
-      "description": "Basic snippet for preview_delete_game_server_cluster in GameServerClustersService",
+      "title": "Snippet for the preview_delete_game_server_cluster call in the GameServerClustersService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Gaming::V1::GameServerClustersService::Client#preview_delete_game_server_cluster. It may require modification in order to execute successfully.",
       "file": "game_server_clusters_service/preview_delete_game_server_cluster.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gameservices_v1_generated_GameServerClustersService_UpdateGameServerCluster_sync",
-      "title": "Snippet for update_game_server_cluster in GameServerClustersService",
-      "description": "Basic snippet for update_game_server_cluster in GameServerClustersService",
+      "title": "Snippet for the update_game_server_cluster call in the GameServerClustersService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Gaming::V1::GameServerClustersService::Client#update_game_server_cluster. It may require modification in order to execute successfully.",
       "file": "game_server_clusters_service/update_game_server_cluster.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gameservices_v1_generated_GameServerClustersService_PreviewUpdateGameServerCluster_sync",
-      "title": "Snippet for preview_update_game_server_cluster in GameServerClustersService",
-      "description": "Basic snippet for preview_update_game_server_cluster in GameServerClustersService",
+      "title": "Snippet for the preview_update_game_server_cluster call in the GameServerClustersService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Gaming::V1::GameServerClustersService::Client#preview_update_game_server_cluster. It may require modification in order to execute successfully.",
       "file": "game_server_clusters_service/preview_update_game_server_cluster.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gameservices_v1_generated_GameServerConfigsService_ListGameServerConfigs_sync",
-      "title": "Snippet for list_game_server_configs in GameServerConfigsService",
-      "description": "Basic snippet for list_game_server_configs in GameServerConfigsService",
+      "title": "Snippet for the list_game_server_configs call in the GameServerConfigsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Gaming::V1::GameServerConfigsService::Client#list_game_server_configs. It may require modification in order to execute successfully.",
       "file": "game_server_configs_service/list_game_server_configs.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,15 +366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gameservices_v1_generated_GameServerConfigsService_GetGameServerConfig_sync",
-      "title": "Snippet for get_game_server_config in GameServerConfigsService",
-      "description": "Basic snippet for get_game_server_config in GameServerConfigsService",
+      "title": "Snippet for the get_game_server_config call in the GameServerConfigsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Gaming::V1::GameServerConfigsService::Client#get_game_server_config. It may require modification in order to execute successfully.",
       "file": "game_server_configs_service/get_game_server_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,15 +406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gameservices_v1_generated_GameServerConfigsService_CreateGameServerConfig_sync",
-      "title": "Snippet for create_game_server_config in GameServerConfigsService",
-      "description": "Basic snippet for create_game_server_config in GameServerConfigsService",
+      "title": "Snippet for the create_game_server_config call in the GameServerConfigsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Gaming::V1::GameServerConfigsService::Client#create_game_server_config. It may require modification in order to execute successfully.",
       "file": "game_server_configs_service/create_game_server_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,15 +446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gameservices_v1_generated_GameServerConfigsService_DeleteGameServerConfig_sync",
-      "title": "Snippet for delete_game_server_config in GameServerConfigsService",
-      "description": "Basic snippet for delete_game_server_config in GameServerConfigsService",
+      "title": "Snippet for the delete_game_server_config call in the GameServerConfigsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Gaming::V1::GameServerConfigsService::Client#delete_game_server_config. It may require modification in order to execute successfully.",
       "file": "game_server_configs_service/delete_game_server_config.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,15 +486,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gameservices_v1_generated_GameServerDeploymentsService_ListGameServerDeployments_sync",
-      "title": "Snippet for list_game_server_deployments in GameServerDeploymentsService",
-      "description": "Basic snippet for list_game_server_deployments in GameServerDeploymentsService",
+      "title": "Snippet for the list_game_server_deployments call in the GameServerDeploymentsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Gaming::V1::GameServerDeploymentsService::Client#list_game_server_deployments. It may require modification in order to execute successfully.",
       "file": "game_server_deployments_service/list_game_server_deployments.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,15 +526,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gameservices_v1_generated_GameServerDeploymentsService_GetGameServerDeployment_sync",
-      "title": "Snippet for get_game_server_deployment in GameServerDeploymentsService",
-      "description": "Basic snippet for get_game_server_deployment in GameServerDeploymentsService",
+      "title": "Snippet for the get_game_server_deployment call in the GameServerDeploymentsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Gaming::V1::GameServerDeploymentsService::Client#get_game_server_deployment. It may require modification in order to execute successfully.",
       "file": "game_server_deployments_service/get_game_server_deployment.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,15 +566,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gameservices_v1_generated_GameServerDeploymentsService_CreateGameServerDeployment_sync",
-      "title": "Snippet for create_game_server_deployment in GameServerDeploymentsService",
-      "description": "Basic snippet for create_game_server_deployment in GameServerDeploymentsService",
+      "title": "Snippet for the create_game_server_deployment call in the GameServerDeploymentsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Gaming::V1::GameServerDeploymentsService::Client#create_game_server_deployment. It may require modification in order to execute successfully.",
       "file": "game_server_deployments_service/create_game_server_deployment.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,15 +606,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gameservices_v1_generated_GameServerDeploymentsService_DeleteGameServerDeployment_sync",
-      "title": "Snippet for delete_game_server_deployment in GameServerDeploymentsService",
-      "description": "Basic snippet for delete_game_server_deployment in GameServerDeploymentsService",
+      "title": "Snippet for the delete_game_server_deployment call in the GameServerDeploymentsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Gaming::V1::GameServerDeploymentsService::Client#delete_game_server_deployment. It may require modification in order to execute successfully.",
       "file": "game_server_deployments_service/delete_game_server_deployment.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,15 +646,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gameservices_v1_generated_GameServerDeploymentsService_UpdateGameServerDeployment_sync",
-      "title": "Snippet for update_game_server_deployment in GameServerDeploymentsService",
-      "description": "Basic snippet for update_game_server_deployment in GameServerDeploymentsService",
+      "title": "Snippet for the update_game_server_deployment call in the GameServerDeploymentsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Gaming::V1::GameServerDeploymentsService::Client#update_game_server_deployment. It may require modification in order to execute successfully.",
       "file": "game_server_deployments_service/update_game_server_deployment.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,15 +686,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gameservices_v1_generated_GameServerDeploymentsService_GetGameServerDeploymentRollout_sync",
-      "title": "Snippet for get_game_server_deployment_rollout in GameServerDeploymentsService",
-      "description": "Basic snippet for get_game_server_deployment_rollout in GameServerDeploymentsService",
+      "title": "Snippet for the get_game_server_deployment_rollout call in the GameServerDeploymentsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Gaming::V1::GameServerDeploymentsService::Client#get_game_server_deployment_rollout. It may require modification in order to execute successfully.",
       "file": "game_server_deployments_service/get_game_server_deployment_rollout.rb",
       "language": "RUBY",
       "client_method": {
@@ -726,15 +726,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gameservices_v1_generated_GameServerDeploymentsService_UpdateGameServerDeploymentRollout_sync",
-      "title": "Snippet for update_game_server_deployment_rollout in GameServerDeploymentsService",
-      "description": "Basic snippet for update_game_server_deployment_rollout in GameServerDeploymentsService",
+      "title": "Snippet for the update_game_server_deployment_rollout call in the GameServerDeploymentsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Gaming::V1::GameServerDeploymentsService::Client#update_game_server_deployment_rollout. It may require modification in order to execute successfully.",
       "file": "game_server_deployments_service/update_game_server_deployment_rollout.rb",
       "language": "RUBY",
       "client_method": {
@@ -766,15 +766,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gameservices_v1_generated_GameServerDeploymentsService_PreviewGameServerDeploymentRollout_sync",
-      "title": "Snippet for preview_game_server_deployment_rollout in GameServerDeploymentsService",
-      "description": "Basic snippet for preview_game_server_deployment_rollout in GameServerDeploymentsService",
+      "title": "Snippet for the preview_game_server_deployment_rollout call in the GameServerDeploymentsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Gaming::V1::GameServerDeploymentsService::Client#preview_game_server_deployment_rollout. It may require modification in order to execute successfully.",
       "file": "game_server_deployments_service/preview_game_server_deployment_rollout.rb",
       "language": "RUBY",
       "client_method": {
@@ -806,15 +806,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gameservices_v1_generated_GameServerDeploymentsService_FetchDeploymentState_sync",
-      "title": "Snippet for fetch_deployment_state in GameServerDeploymentsService",
-      "description": "Basic snippet for fetch_deployment_state in GameServerDeploymentsService",
+      "title": "Snippet for the fetch_deployment_state call in the GameServerDeploymentsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Gaming::V1::GameServerDeploymentsService::Client#fetch_deployment_state. It may require modification in order to execute successfully.",
       "file": "game_server_deployments_service/fetch_deployment_state.rb",
       "language": "RUBY",
       "client_method": {
@@ -846,15 +846,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gameservices_v1_generated_RealmsService_ListRealms_sync",
-      "title": "Snippet for list_realms in RealmsService",
-      "description": "Basic snippet for list_realms in RealmsService",
+      "title": "Snippet for the list_realms call in the RealmsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Gaming::V1::RealmsService::Client#list_realms. It may require modification in order to execute successfully.",
       "file": "realms_service/list_realms.rb",
       "language": "RUBY",
       "client_method": {
@@ -886,15 +886,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gameservices_v1_generated_RealmsService_GetRealm_sync",
-      "title": "Snippet for get_realm in RealmsService",
-      "description": "Basic snippet for get_realm in RealmsService",
+      "title": "Snippet for the get_realm call in the RealmsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Gaming::V1::RealmsService::Client#get_realm. It may require modification in order to execute successfully.",
       "file": "realms_service/get_realm.rb",
       "language": "RUBY",
       "client_method": {
@@ -926,15 +926,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gameservices_v1_generated_RealmsService_CreateRealm_sync",
-      "title": "Snippet for create_realm in RealmsService",
-      "description": "Basic snippet for create_realm in RealmsService",
+      "title": "Snippet for the create_realm call in the RealmsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Gaming::V1::RealmsService::Client#create_realm. It may require modification in order to execute successfully.",
       "file": "realms_service/create_realm.rb",
       "language": "RUBY",
       "client_method": {
@@ -966,15 +966,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gameservices_v1_generated_RealmsService_DeleteRealm_sync",
-      "title": "Snippet for delete_realm in RealmsService",
-      "description": "Basic snippet for delete_realm in RealmsService",
+      "title": "Snippet for the delete_realm call in the RealmsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Gaming::V1::RealmsService::Client#delete_realm. It may require modification in order to execute successfully.",
       "file": "realms_service/delete_realm.rb",
       "language": "RUBY",
       "client_method": {
@@ -1006,15 +1006,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gameservices_v1_generated_RealmsService_UpdateRealm_sync",
-      "title": "Snippet for update_realm in RealmsService",
-      "description": "Basic snippet for update_realm in RealmsService",
+      "title": "Snippet for the update_realm call in the RealmsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Gaming::V1::RealmsService::Client#update_realm. It may require modification in order to execute successfully.",
       "file": "realms_service/update_realm.rb",
       "language": "RUBY",
       "client_method": {
@@ -1046,15 +1046,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gameservices_v1_generated_RealmsService_PreviewRealmUpdate_sync",
-      "title": "Snippet for preview_realm_update in RealmsService",
-      "description": "Basic snippet for preview_realm_update in RealmsService",
+      "title": "Snippet for the preview_realm_update call in the RealmsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Gaming::V1::RealmsService::Client#preview_realm_update. It may require modification in order to execute successfully.",
       "file": "realms_service/preview_realm_update.rb",
       "language": "RUBY",
       "client_method": {
@@ -1086,7 +1086,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]

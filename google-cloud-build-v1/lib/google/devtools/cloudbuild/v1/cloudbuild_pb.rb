@@ -413,6 +413,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :env, :string, 12
       repeated :secret_env, :string, 13
       repeated :volumes, :message, 14, "google.devtools.cloudbuild.v1.Volume"
+      optional :default_logs_bucket_behavior, :enum, 21, "google.devtools.cloudbuild.v1.BuildOptions.DefaultLogsBucketBehavior"
     end
     add_message "google.devtools.cloudbuild.v1.BuildOptions.PoolOption" do
       optional :name, :string, 1
@@ -444,6 +445,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :STACKDRIVER_ONLY, 3
       value :CLOUD_LOGGING_ONLY, 5
       value :NONE, 4
+    end
+    add_enum "google.devtools.cloudbuild.v1.BuildOptions.DefaultLogsBucketBehavior" do
+      value :DEFAULT_LOGS_BUCKET_BEHAVIOR_UNSPECIFIED, 0
+      value :REGIONAL_USER_OWNED_BUCKET, 1
     end
     add_message "google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest" do
       optional :name, :string, 5
@@ -609,6 +614,7 @@ module Google
         BuildOptions::SubstitutionOption = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.BuildOptions.SubstitutionOption").enummodule
         BuildOptions::LogStreamingOption = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.BuildOptions.LogStreamingOption").enummodule
         BuildOptions::LoggingMode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.BuildOptions.LoggingMode").enummodule
+        BuildOptions::DefaultLogsBucketBehavior = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.BuildOptions.DefaultLogsBucketBehavior").enummodule
         ReceiveTriggerWebhookRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest").msgclass
         ReceiveTriggerWebhookResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse").msgclass
         WorkerPool = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.WorkerPool").msgclass

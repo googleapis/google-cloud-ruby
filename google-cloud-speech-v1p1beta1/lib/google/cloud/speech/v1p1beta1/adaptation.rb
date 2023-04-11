@@ -25,6 +25,7 @@ require "google/cloud/speech/v1p1beta1/version"
 require "google/cloud/speech/v1p1beta1/adaptation/credentials"
 require "google/cloud/speech/v1p1beta1/adaptation/paths"
 require "google/cloud/speech/v1p1beta1/adaptation/client"
+require "google/cloud/speech/v1p1beta1/adaptation/rest"
 
 module Google
   module Cloud
@@ -37,6 +38,11 @@ module Google
         #
         #     require "google/cloud/speech/v1p1beta1/adaptation"
         #     client = ::Google::Cloud::Speech::V1p1beta1::Adaptation::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/speech/v1p1beta1/adaptation/rest"
+        #     client = ::Google::Cloud::Speech::V1p1beta1::Adaptation::Rest::Client.new
         #
         module Adaptation
         end

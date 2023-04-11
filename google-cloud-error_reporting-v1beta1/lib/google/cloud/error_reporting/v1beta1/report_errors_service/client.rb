@@ -161,10 +161,6 @@ module Google
             # on Cloud Logging and doesn't analyze logs stored
             # in regional log buckets or logs routed to other Google Cloud projects.
             #
-            # For more information, see
-            # [Using Error Reporting with regionalized
-            # logs](/error-reporting/docs/regionalization).
-            #
             # @overload report_error_event(request, options = nil)
             #   Pass arguments to `report_error_event` via a request object, either of type
             #   {::Google::Cloud::ErrorReporting::V1beta1::ReportErrorEventRequest} or an equivalent Hash.
@@ -292,9 +288,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials

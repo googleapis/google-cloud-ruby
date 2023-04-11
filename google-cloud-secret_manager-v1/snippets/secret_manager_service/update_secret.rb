@@ -20,8 +20,11 @@
 require "google/cloud/secret_manager/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::SecretManager::V1::SecretManagerService::Client#update_secret
+# Snippet for the update_secret call in the SecretManagerService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::SecretManager::V1::SecretManagerService::Client#update_secret.
+# It may require modification in order to execute successfully.
 #
 def update_secret
   # Create a client object. The client can be reused for multiple calls.

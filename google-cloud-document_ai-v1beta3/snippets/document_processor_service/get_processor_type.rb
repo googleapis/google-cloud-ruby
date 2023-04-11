@@ -20,8 +20,11 @@
 require "google/cloud/document_ai/v1beta3"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client#get_processor_type
+# Snippet for the get_processor_type call in the DocumentProcessorService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client#get_processor_type.
+# It may require modification in order to execute successfully.
 #
 def get_processor_type
   # Create a client object. The client can be reused for multiple calls.

@@ -242,6 +242,11 @@
                 "export_feature_values"
               ]
             },
+            "DeleteFeatureValues": {
+              "methods": [
+                "delete_feature_values"
+              ]
+            },
             "SearchFeatures": {
               "methods": [
                 "search_features"
@@ -422,6 +427,41 @@
             "CancelHyperparameterTuningJob": {
               "methods": [
                 "cancel_hyperparameter_tuning_job"
+              ]
+            },
+            "CreateNasJob": {
+              "methods": [
+                "create_nas_job"
+              ]
+            },
+            "GetNasJob": {
+              "methods": [
+                "get_nas_job"
+              ]
+            },
+            "ListNasJobs": {
+              "methods": [
+                "list_nas_jobs"
+              ]
+            },
+            "DeleteNasJob": {
+              "methods": [
+                "delete_nas_job"
+              ]
+            },
+            "CancelNasJob": {
+              "methods": [
+                "cancel_nas_job"
+              ]
+            },
+            "GetNasTrialDetail": {
+              "methods": [
+                "get_nas_trial_detail"
+              ]
+            },
+            "ListNasTrialDetails": {
+              "methods": [
+                "list_nas_trial_details"
               ]
             },
             "CreateBatchPredictionJob": {
@@ -731,6 +771,11 @@
                 "export_model"
               ]
             },
+            "CopyModel": {
+              "methods": [
+                "copy_model"
+              ]
+            },
             "ImportModelEvaluation": {
               "methods": [
                 "import_model_evaluation"
@@ -739,6 +784,11 @@
             "BatchImportModelEvaluationSlices": {
               "methods": [
                 "batch_import_model_evaluation_slices"
+              ]
+            },
+            "BatchImportEvaluatedAnnotations": {
+              "methods": [
+                "batch_import_evaluated_annotations"
               ]
             },
             "GetModelEvaluation": {

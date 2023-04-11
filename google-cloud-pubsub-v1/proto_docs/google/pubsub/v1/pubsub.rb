@@ -99,7 +99,7 @@ module Google
         #     timestamp](https://cloud.google.com/pubsub/docs/replay-overview#seek_to_a_time)
         #     that is up to `message_retention_duration` in the past. If this field is
         #     not set, message retention is controlled by settings on individual
-        #     subscriptions. Cannot be more than 7 days or less than 10 minutes.
+        #     subscriptions. Cannot be more than 31 days or less than 10 minutes.
         class Topic
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -150,6 +150,8 @@ module Google
         #     delivered to subscribers in the order in which they are received by the
         #     Pub/Sub system. All `PubsubMessage`s published in a given `PublishRequest`
         #     must specify the same `ordering_key` value.
+        #     For more information, see [ordering
+        #     messages](https://cloud.google.com/pubsub/docs/ordering).
         class PubsubMessage
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -336,7 +338,9 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A subscription resource.
+        # A subscription resource. If none of `push_config` or `bigquery_config` is
+        # set, then the subscriber will pull and ack messages using API methods. At
+        # most one of these fields may be set.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the subscription. It must have the format
@@ -353,21 +357,17 @@ module Google
         # @!attribute [rw] push_config
         #   @return [::Google::Cloud::PubSub::V1::PushConfig]
         #     If push delivery is used with this subscription, this field is
-        #     used to configure it. Either `pushConfig` or `bigQueryConfig` can be set,
-        #     but not both. If both are empty, then the subscriber will pull and ack
-        #     messages using API methods.
+        #     used to configure it.
         # @!attribute [rw] bigquery_config
         #   @return [::Google::Cloud::PubSub::V1::BigQueryConfig]
         #     If delivery to BigQuery is used with this subscription, this field is
-        #     used to configure it. Either `pushConfig` or `bigQueryConfig` can be set,
-        #     but not both. If both are empty, then the subscriber will pull and ack
-        #     messages using API methods.
+        #     used to configure it.
         # @!attribute [rw] ack_deadline_seconds
         #   @return [::Integer]
         #     The approximate amount of time (on a best-effort basis) Pub/Sub waits for
         #     the subscriber to acknowledge receipt before resending the message. In the
         #     interval after the message is delivered and before it is acknowledged, it
-        #     is considered to be <i>outstanding</i>. During that time period, the
+        #     is considered to be _outstanding_. During that time period, the
         #     message will not be redelivered (on a best-effort basis).
         #
         #     For pull subscriptions, this value is used as the initial value for the ack
@@ -402,8 +402,8 @@ module Google
         #     minutes.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     See <a href="https://cloud.google.com/pubsub/docs/labels"> Creating and
-        #     managing labels</a>.
+        #     See [Creating and managing
+        #     labels](https://cloud.google.com/pubsub/docs/labels).
         # @!attribute [rw] enable_message_ordering
         #   @return [::Boolean]
         #     If true, messages published with the same `ordering_key` in `PubsubMessage`
@@ -417,7 +417,8 @@ module Google
         #     successfully consuming messages from the subscription or is issuing
         #     operations on the subscription. If `expiration_policy` is not set, a
         #     *default policy* with `ttl` of 31 days will be used. The minimum allowed
-        #     value for `expiration_policy.ttl` is 1 day.
+        #     value for `expiration_policy.ttl` is 1 day. If `expiration_policy` is set,
+        #     but `expiration_policy.ttl` is not set, the subscription never expires.
         # @!attribute [rw] filter
         #   @return [::String]
         #     An expression written in the Pub/Sub [filter
@@ -606,7 +607,7 @@ module Google
         #     * `v1` or `v1beta2`: uses the push format defined in the v1 Pub/Sub API.
         #
         #     For example:
-        #     <pre><code>attributes { "x-goog-version": "v1" } </code></pre>
+        #     `attributes { "x-goog-version": "v1" }`
         # @!attribute [rw] oidc_token
         #   @return [::Google::Cloud::PubSub::V1::PushConfig::OidcToken]
         #     If specified, Pub/Sub will generate and attach an OIDC JWT token as an
@@ -652,7 +653,7 @@ module Google
         # @!attribute [rw] table
         #   @return [::String]
         #     The name of the table to which to write data, of the form
-        #     \\{projectId}:\\{datasetId}.\\{tableId}
+        #     \\{projectId}.\\{datasetId}.\\{tableId}
         # @!attribute [rw] use_topic_schema
         #   @return [::Boolean]
         #     When true, use the topic's schema as the columns to write to in BigQuery,
@@ -688,6 +689,11 @@ module Google
             ACTIVE = 1
 
             # Cannot write to the BigQuery table because of permission denied errors.
+            # This can happen if
+            # - Pub/Sub SA has not been granted the [appropriate BigQuery IAM
+            # permissions](https://cloud.google.com/pubsub/docs/create-subscription#assign_bigquery_service_account)
+            # - bigquery.googleapis.com API is not enabled for the project
+            # ([instructions](https://cloud.google.com/service-usage/docs/enable-disable))
             PERMISSION_DENIED = 2
 
             # Cannot write to the BigQuery table because it does not exist.
@@ -839,7 +845,8 @@ module Google
         # @!attribute [rw] received_messages
         #   @return [::Array<::Google::Cloud::PubSub::V1::ReceivedMessage>]
         #     Received Pub/Sub messages. The list will be empty if there are no more
-        #     messages available in the backlog. For JSON, the response can be entirely
+        #     messages available in the backlog, or if no messages could be returned
+        #     before the request timeout. For JSON, the response can be entirely
         #     empty. The Pub/Sub system may return fewer than the `maxMessages` requested
         #     even if there are more messages available in the backlog.
         class PullResponse
@@ -994,6 +1001,9 @@ module Google
           # @!attribute [rw] unordered_ack_ids
           #   @return [::Array<::String>]
           #     List of acknowledgement IDs that were out of order.
+          # @!attribute [rw] temporary_failed_ack_ids
+          #   @return [::Array<::String>]
+          #     List of acknowledgement IDs that failed processing with temporary issues.
           class AcknowledgeConfirmation
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1008,6 +1018,9 @@ module Google
           #   @return [::Array<::String>]
           #     List of acknowledgement IDs that were malformed or whose acknowledgement
           #     deadline has expired.
+          # @!attribute [rw] temporary_failed_ack_ids
+          #   @return [::Array<::String>]
+          #     List of acknowledgement IDs that failed processing with temporary issues.
           class ModifyAckDeadlineConfirmation
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1032,9 +1045,9 @@ module Google
         #     Required. User-provided name for this snapshot. If the name is not provided
         #     in the request, the server will assign a random name for this snapshot on
         #     the same project as the subscription. Note that for REST API requests, you
-        #     must specify a name.  See the <a
-        #     href="https://cloud.google.com/pubsub/docs/admin#resource_names"> resource
-        #     name rules</a>. Format is `projects/{project}/snapshots/{snap}`.
+        #     must specify a name.  See the [resource name
+        #     rules](https://cloud.google.com/pubsub/docs/admin#resource_names). Format
+        #     is `projects/{project}/snapshots/{snap}`.
         # @!attribute [rw] subscription
         #   @return [::String]
         #     Required. The subscription whose backlog the snapshot retains.
@@ -1048,8 +1061,8 @@ module Google
         #     Format is `projects/{project}/subscriptions/{sub}`.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     See <a href="https://cloud.google.com/pubsub/docs/labels"> Creating and
-        #     managing labels</a>.
+        #     See [Creating and managing
+        #     labels](https://cloud.google.com/pubsub/docs/labels).
         class CreateSnapshotRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

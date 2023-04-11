@@ -374,6 +374,7 @@ class ::Google::Cloud::Dialogflow::V2::Conversations::ClientTest < Minitest::Tes
     conversation = "hello world"
     latest_message = "hello world"
     context_size = 42
+    assist_query_params = {}
 
     suggest_conversation_summary_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :suggest_conversation_summary, name
@@ -381,6 +382,7 @@ class ::Google::Cloud::Dialogflow::V2::Conversations::ClientTest < Minitest::Tes
       assert_equal "hello world", request["conversation"]
       assert_equal "hello world", request["latest_message"]
       assert_equal 42, request["context_size"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::AssistQueryParameters), request["assist_query_params"]
       refute_nil options
     end
 
@@ -391,31 +393,31 @@ class ::Google::Cloud::Dialogflow::V2::Conversations::ClientTest < Minitest::Tes
       end
 
       # Use hash object
-      client.suggest_conversation_summary({ conversation: conversation, latest_message: latest_message, context_size: context_size }) do |response, operation|
+      client.suggest_conversation_summary({ conversation: conversation, latest_message: latest_message, context_size: context_size, assist_query_params: assist_query_params }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.suggest_conversation_summary conversation: conversation, latest_message: latest_message, context_size: context_size do |response, operation|
+      client.suggest_conversation_summary conversation: conversation, latest_message: latest_message, context_size: context_size, assist_query_params: assist_query_params do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.suggest_conversation_summary ::Google::Cloud::Dialogflow::V2::SuggestConversationSummaryRequest.new(conversation: conversation, latest_message: latest_message, context_size: context_size) do |response, operation|
+      client.suggest_conversation_summary ::Google::Cloud::Dialogflow::V2::SuggestConversationSummaryRequest.new(conversation: conversation, latest_message: latest_message, context_size: context_size, assist_query_params: assist_query_params) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.suggest_conversation_summary({ conversation: conversation, latest_message: latest_message, context_size: context_size }, grpc_options) do |response, operation|
+      client.suggest_conversation_summary({ conversation: conversation, latest_message: latest_message, context_size: context_size, assist_query_params: assist_query_params }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.suggest_conversation_summary(::Google::Cloud::Dialogflow::V2::SuggestConversationSummaryRequest.new(conversation: conversation, latest_message: latest_message, context_size: context_size), grpc_options) do |response, operation|
+      client.suggest_conversation_summary(::Google::Cloud::Dialogflow::V2::SuggestConversationSummaryRequest.new(conversation: conversation, latest_message: latest_message, context_size: context_size, assist_query_params: assist_query_params), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

@@ -20,15 +20,25 @@ require "helper"
 require "google/cloud/private_catalog"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Cloud::PrivateCatalog::ClientConstructionMinitest < Minitest::Test
   def test_private_catalog_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::PrivateCatalog.private_catalog do |config|
+      client = Google::Cloud::PrivateCatalog.private_catalog transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::Client, client
+    end
+  end
+
+  def test_private_catalog_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::PrivateCatalog.private_catalog transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::PrivateCatalog::V1beta1::PrivateCatalog::Rest::Client, client
     end
   end
 end

@@ -24,6 +24,7 @@ require "google/cloud/trace/v1/version"
 
 require "google/cloud/trace/v1/trace_service/credentials"
 require "google/cloud/trace/v1/trace_service/client"
+require "google/cloud/trace/v1/trace_service/rest"
 
 module Google
   module Cloud
@@ -40,6 +41,11 @@ module Google
         #
         #     require "google/cloud/trace/v1/trace_service"
         #     client = ::Google::Cloud::Trace::V1::TraceService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/trace/v1/trace_service/rest"
+        #     client = ::Google::Cloud::Trace::V1::TraceService::Rest::Client.new
         #
         module TraceService
         end

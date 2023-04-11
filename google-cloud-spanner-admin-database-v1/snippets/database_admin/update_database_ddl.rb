@@ -20,8 +20,11 @@
 require "google/cloud/spanner/admin/database/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_database_ddl
+# Snippet for the update_database_ddl call in the DatabaseAdmin service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_database_ddl.
+# It may require modification in order to execute successfully.
 #
 def update_database_ddl
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def update_database_ddl
   # Call the update_database_ddl method.
   result = client.update_database_ddl request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END spanner_v1_generated_DatabaseAdmin_UpdateDatabaseDdl_sync]

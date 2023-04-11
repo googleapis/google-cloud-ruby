@@ -20,8 +20,11 @@
 require "google/cloud/spanner/admin/instance/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#get_instance_config
+# Snippet for the get_instance_config call in the InstanceAdmin service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#get_instance_config.
+# It may require modification in order to execute successfully.
 #
 def get_instance_config
   # Create a client object. The client can be reused for multiple calls.

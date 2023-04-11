@@ -20,8 +20,11 @@
 require "google/cloud/domains/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Domains::V1::Domains::Client#list_registrations
+# Snippet for the list_registrations call in the Domains service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Domains::V1::Domains::Client#list_registrations. It may require
+# modification in order to execute successfully.
 #
 def list_registrations
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_registrations
   # Call the list_registrations method.
   result = client.list_registrations request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::Domains::V1::Registration.
-    p response
+    p item
   end
 end
 # [END domains_v1_generated_Domains_ListRegistrations_sync]

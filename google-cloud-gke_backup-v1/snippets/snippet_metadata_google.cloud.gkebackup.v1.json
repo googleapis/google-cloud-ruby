@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-gke_backup-v1",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "gkebackup_v1_generated_BackupForGKE_CreateBackupPlan_sync",
-      "title": "Snippet for create_backup_plan in BackupForGKE",
-      "description": "Basic snippet for create_backup_plan in BackupForGKE",
+      "title": "Snippet for the create_backup_plan call in the BackupForGKE service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeBackup::V1::BackupForGKE::Client#create_backup_plan. It may require modification in order to execute successfully.",
       "file": "backup_for_gke/create_backup_plan.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gkebackup_v1_generated_BackupForGKE_ListBackupPlans_sync",
-      "title": "Snippet for list_backup_plans in BackupForGKE",
-      "description": "Basic snippet for list_backup_plans in BackupForGKE",
+      "title": "Snippet for the list_backup_plans call in the BackupForGKE service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeBackup::V1::BackupForGKE::Client#list_backup_plans. It may require modification in order to execute successfully.",
       "file": "backup_for_gke/list_backup_plans.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gkebackup_v1_generated_BackupForGKE_GetBackupPlan_sync",
-      "title": "Snippet for get_backup_plan in BackupForGKE",
-      "description": "Basic snippet for get_backup_plan in BackupForGKE",
+      "title": "Snippet for the get_backup_plan call in the BackupForGKE service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeBackup::V1::BackupForGKE::Client#get_backup_plan. It may require modification in order to execute successfully.",
       "file": "backup_for_gke/get_backup_plan.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gkebackup_v1_generated_BackupForGKE_UpdateBackupPlan_sync",
-      "title": "Snippet for update_backup_plan in BackupForGKE",
-      "description": "Basic snippet for update_backup_plan in BackupForGKE",
+      "title": "Snippet for the update_backup_plan call in the BackupForGKE service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeBackup::V1::BackupForGKE::Client#update_backup_plan. It may require modification in order to execute successfully.",
       "file": "backup_for_gke/update_backup_plan.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gkebackup_v1_generated_BackupForGKE_DeleteBackupPlan_sync",
-      "title": "Snippet for delete_backup_plan in BackupForGKE",
-      "description": "Basic snippet for delete_backup_plan in BackupForGKE",
+      "title": "Snippet for the delete_backup_plan call in the BackupForGKE service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeBackup::V1::BackupForGKE::Client#delete_backup_plan. It may require modification in order to execute successfully.",
       "file": "backup_for_gke/delete_backup_plan.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gkebackup_v1_generated_BackupForGKE_CreateBackup_sync",
-      "title": "Snippet for create_backup in BackupForGKE",
-      "description": "Basic snippet for create_backup in BackupForGKE",
+      "title": "Snippet for the create_backup call in the BackupForGKE service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeBackup::V1::BackupForGKE::Client#create_backup. It may require modification in order to execute successfully.",
       "file": "backup_for_gke/create_backup.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gkebackup_v1_generated_BackupForGKE_ListBackups_sync",
-      "title": "Snippet for list_backups in BackupForGKE",
-      "description": "Basic snippet for list_backups in BackupForGKE",
+      "title": "Snippet for the list_backups call in the BackupForGKE service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeBackup::V1::BackupForGKE::Client#list_backups. It may require modification in order to execute successfully.",
       "file": "backup_for_gke/list_backups.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gkebackup_v1_generated_BackupForGKE_GetBackup_sync",
-      "title": "Snippet for get_backup in BackupForGKE",
-      "description": "Basic snippet for get_backup in BackupForGKE",
+      "title": "Snippet for the get_backup call in the BackupForGKE service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeBackup::V1::BackupForGKE::Client#get_backup. It may require modification in order to execute successfully.",
       "file": "backup_for_gke/get_backup.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gkebackup_v1_generated_BackupForGKE_UpdateBackup_sync",
-      "title": "Snippet for update_backup in BackupForGKE",
-      "description": "Basic snippet for update_backup in BackupForGKE",
+      "title": "Snippet for the update_backup call in the BackupForGKE service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeBackup::V1::BackupForGKE::Client#update_backup. It may require modification in order to execute successfully.",
       "file": "backup_for_gke/update_backup.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,15 +366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gkebackup_v1_generated_BackupForGKE_DeleteBackup_sync",
-      "title": "Snippet for delete_backup in BackupForGKE",
-      "description": "Basic snippet for delete_backup in BackupForGKE",
+      "title": "Snippet for the delete_backup call in the BackupForGKE service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeBackup::V1::BackupForGKE::Client#delete_backup. It may require modification in order to execute successfully.",
       "file": "backup_for_gke/delete_backup.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,15 +406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gkebackup_v1_generated_BackupForGKE_ListVolumeBackups_sync",
-      "title": "Snippet for list_volume_backups in BackupForGKE",
-      "description": "Basic snippet for list_volume_backups in BackupForGKE",
+      "title": "Snippet for the list_volume_backups call in the BackupForGKE service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeBackup::V1::BackupForGKE::Client#list_volume_backups. It may require modification in order to execute successfully.",
       "file": "backup_for_gke/list_volume_backups.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,15 +446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gkebackup_v1_generated_BackupForGKE_GetVolumeBackup_sync",
-      "title": "Snippet for get_volume_backup in BackupForGKE",
-      "description": "Basic snippet for get_volume_backup in BackupForGKE",
+      "title": "Snippet for the get_volume_backup call in the BackupForGKE service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeBackup::V1::BackupForGKE::Client#get_volume_backup. It may require modification in order to execute successfully.",
       "file": "backup_for_gke/get_volume_backup.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,15 +486,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gkebackup_v1_generated_BackupForGKE_CreateRestorePlan_sync",
-      "title": "Snippet for create_restore_plan in BackupForGKE",
-      "description": "Basic snippet for create_restore_plan in BackupForGKE",
+      "title": "Snippet for the create_restore_plan call in the BackupForGKE service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeBackup::V1::BackupForGKE::Client#create_restore_plan. It may require modification in order to execute successfully.",
       "file": "backup_for_gke/create_restore_plan.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,15 +526,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gkebackup_v1_generated_BackupForGKE_ListRestorePlans_sync",
-      "title": "Snippet for list_restore_plans in BackupForGKE",
-      "description": "Basic snippet for list_restore_plans in BackupForGKE",
+      "title": "Snippet for the list_restore_plans call in the BackupForGKE service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeBackup::V1::BackupForGKE::Client#list_restore_plans. It may require modification in order to execute successfully.",
       "file": "backup_for_gke/list_restore_plans.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,15 +566,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gkebackup_v1_generated_BackupForGKE_GetRestorePlan_sync",
-      "title": "Snippet for get_restore_plan in BackupForGKE",
-      "description": "Basic snippet for get_restore_plan in BackupForGKE",
+      "title": "Snippet for the get_restore_plan call in the BackupForGKE service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeBackup::V1::BackupForGKE::Client#get_restore_plan. It may require modification in order to execute successfully.",
       "file": "backup_for_gke/get_restore_plan.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,15 +606,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gkebackup_v1_generated_BackupForGKE_UpdateRestorePlan_sync",
-      "title": "Snippet for update_restore_plan in BackupForGKE",
-      "description": "Basic snippet for update_restore_plan in BackupForGKE",
+      "title": "Snippet for the update_restore_plan call in the BackupForGKE service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeBackup::V1::BackupForGKE::Client#update_restore_plan. It may require modification in order to execute successfully.",
       "file": "backup_for_gke/update_restore_plan.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,15 +646,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gkebackup_v1_generated_BackupForGKE_DeleteRestorePlan_sync",
-      "title": "Snippet for delete_restore_plan in BackupForGKE",
-      "description": "Basic snippet for delete_restore_plan in BackupForGKE",
+      "title": "Snippet for the delete_restore_plan call in the BackupForGKE service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeBackup::V1::BackupForGKE::Client#delete_restore_plan. It may require modification in order to execute successfully.",
       "file": "backup_for_gke/delete_restore_plan.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,15 +686,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gkebackup_v1_generated_BackupForGKE_CreateRestore_sync",
-      "title": "Snippet for create_restore in BackupForGKE",
-      "description": "Basic snippet for create_restore in BackupForGKE",
+      "title": "Snippet for the create_restore call in the BackupForGKE service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeBackup::V1::BackupForGKE::Client#create_restore. It may require modification in order to execute successfully.",
       "file": "backup_for_gke/create_restore.rb",
       "language": "RUBY",
       "client_method": {
@@ -726,15 +726,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gkebackup_v1_generated_BackupForGKE_ListRestores_sync",
-      "title": "Snippet for list_restores in BackupForGKE",
-      "description": "Basic snippet for list_restores in BackupForGKE",
+      "title": "Snippet for the list_restores call in the BackupForGKE service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeBackup::V1::BackupForGKE::Client#list_restores. It may require modification in order to execute successfully.",
       "file": "backup_for_gke/list_restores.rb",
       "language": "RUBY",
       "client_method": {
@@ -766,15 +766,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gkebackup_v1_generated_BackupForGKE_GetRestore_sync",
-      "title": "Snippet for get_restore in BackupForGKE",
-      "description": "Basic snippet for get_restore in BackupForGKE",
+      "title": "Snippet for the get_restore call in the BackupForGKE service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeBackup::V1::BackupForGKE::Client#get_restore. It may require modification in order to execute successfully.",
       "file": "backup_for_gke/get_restore.rb",
       "language": "RUBY",
       "client_method": {
@@ -806,15 +806,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gkebackup_v1_generated_BackupForGKE_UpdateRestore_sync",
-      "title": "Snippet for update_restore in BackupForGKE",
-      "description": "Basic snippet for update_restore in BackupForGKE",
+      "title": "Snippet for the update_restore call in the BackupForGKE service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeBackup::V1::BackupForGKE::Client#update_restore. It may require modification in order to execute successfully.",
       "file": "backup_for_gke/update_restore.rb",
       "language": "RUBY",
       "client_method": {
@@ -846,15 +846,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gkebackup_v1_generated_BackupForGKE_DeleteRestore_sync",
-      "title": "Snippet for delete_restore in BackupForGKE",
-      "description": "Basic snippet for delete_restore in BackupForGKE",
+      "title": "Snippet for the delete_restore call in the BackupForGKE service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeBackup::V1::BackupForGKE::Client#delete_restore. It may require modification in order to execute successfully.",
       "file": "backup_for_gke/delete_restore.rb",
       "language": "RUBY",
       "client_method": {
@@ -886,15 +886,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gkebackup_v1_generated_BackupForGKE_ListVolumeRestores_sync",
-      "title": "Snippet for list_volume_restores in BackupForGKE",
-      "description": "Basic snippet for list_volume_restores in BackupForGKE",
+      "title": "Snippet for the list_volume_restores call in the BackupForGKE service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeBackup::V1::BackupForGKE::Client#list_volume_restores. It may require modification in order to execute successfully.",
       "file": "backup_for_gke/list_volume_restores.rb",
       "language": "RUBY",
       "client_method": {
@@ -926,15 +926,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "gkebackup_v1_generated_BackupForGKE_GetVolumeRestore_sync",
-      "title": "Snippet for get_volume_restore in BackupForGKE",
-      "description": "Basic snippet for get_volume_restore in BackupForGKE",
+      "title": "Snippet for the get_volume_restore call in the BackupForGKE service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::GkeBackup::V1::BackupForGKE::Client#get_volume_restore. It may require modification in order to execute successfully.",
       "file": "backup_for_gke/get_volume_restore.rb",
       "language": "RUBY",
       "client_method": {
@@ -966,7 +966,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]

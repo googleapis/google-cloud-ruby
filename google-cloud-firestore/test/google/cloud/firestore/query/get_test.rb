@@ -50,6 +50,18 @@ describe Google::Cloud::Firestore::Query, :get, :mock_firestore do
     assert_results_enum results_enum
   end
 
+  it "gets a query with a single select and read time set" do
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      select: Google::Cloud::Firestore::V1::StructuredQuery::Projection.new(
+        fields: [Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "name")])
+    )
+    firestore_mock.expect :run_query, query_results_enum, run_query_args(expected_query, read_time: read_time)
+
+    results_enum = query.select(:name).get read_time: read_time
+
+    assert_results_enum results_enum
+  end
+
   it "gets a query with multiple select values" do
     expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
       select: Google::Cloud::Firestore::V1::StructuredQuery::Projection.new(

@@ -20,8 +20,11 @@
 require "google/cloud/security_center/v1p1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#run_asset_discovery
+# Snippet for the run_asset_discovery call in the SecurityCenter service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#run_asset_discovery.
+# It may require modification in order to execute successfully.
 #
 def run_asset_discovery
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def run_asset_discovery
   # Call the run_asset_discovery method.
   result = client.run_asset_discovery request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END securitycenter_v1p1beta1_generated_SecurityCenter_RunAssetDiscovery_sync]

@@ -26,6 +26,7 @@ require "google/cloud/vision/v1p4beta1/product_search/credentials"
 require "google/cloud/vision/v1p4beta1/product_search/paths"
 require "google/cloud/vision/v1p4beta1/product_search/operations"
 require "google/cloud/vision/v1p4beta1/product_search/client"
+require "google/cloud/vision/v1p4beta1/product_search/rest"
 
 module Google
   module Cloud
@@ -55,6 +56,11 @@ module Google
         #
         #     require "google/cloud/vision/v1p4beta1/product_search"
         #     client = ::Google::Cloud::Vision::V1p4beta1::ProductSearch::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/vision/v1p4beta1/product_search/rest"
+        #     client = ::Google::Cloud::Vision::V1p4beta1::ProductSearch::Rest::Client.new
         #
         module ProductSearch
         end

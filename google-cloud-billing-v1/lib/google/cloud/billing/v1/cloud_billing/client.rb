@@ -213,8 +213,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The resource name of the billing account to retrieve. For example,
-            #     `billingAccounts/012345-567890-ABCDEF`.
+            #     Required. The resource name of the billing account to retrieve. For
+            #     example, `billingAccounts/012345-567890-ABCDEF`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Billing::V1::BillingAccount]
@@ -335,13 +335,11 @@ module Google
             #   # Call the list_billing_accounts method.
             #   result = client.list_billing_accounts request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Billing::V1::BillingAccount.
-            #     p response
+            #     p item
             #   end
             #
             def list_billing_accounts request, options = nil
@@ -404,7 +402,8 @@ module Google
             #   @param name [::String]
             #     Required. The name of the billing account resource to be updated.
             #   @param account [::Google::Cloud::Billing::V1::BillingAccount, ::Hash]
-            #     Required. The billing account resource to replace the resource on the server.
+            #     Required. The billing account resource to replace the resource on the
+            #     server.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     The update mask applied to the resource.
             #     Only "display_name" is currently supported.
@@ -589,8 +588,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The resource name of the billing account associated with the projects that
-            #     you want to list. For example, `billingAccounts/012345-567890-ABCDEF`.
+            #     Required. The resource name of the billing account associated with the
+            #     projects that you want to list. For example,
+            #     `billingAccounts/012345-567890-ABCDEF`.
             #   @param page_size [::Integer]
             #     Requested page size. The maximum page size is 100; this is also the
             #     default.
@@ -619,13 +619,11 @@ module Google
             #   # Call the list_project_billing_info method.
             #   result = client.list_project_billing_info request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Billing::V1::ProjectBillingInfo.
-            #     p response
+            #     p item
             #   end
             #
             def list_project_billing_info request, options = nil
@@ -809,8 +807,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The resource name of the project associated with the billing information
-            #     that you want to update. For example, `projects/tokyo-rain-123`.
+            #     Required. The resource name of the project associated with the billing
+            #     information that you want to update. For example,
+            #     `projects/tokyo-rain-123`.
             #   @param project_billing_info [::Google::Cloud::Billing::V1::ProjectBillingInfo, ::Hash]
             #     The new billing information for the project. Read-only fields are ignored;
             #     thus, you can leave empty all fields except `billing_account_name`.
@@ -1203,9 +1202,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials

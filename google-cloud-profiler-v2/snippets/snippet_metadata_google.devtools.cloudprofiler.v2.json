@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-profiler-v2",
-    "version": "0.3.0",
+    "version": "0.5.0",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "cloudprofiler_v2_generated_ProfilerService_CreateProfile_sync",
-      "title": "Snippet for create_profile in ProfilerService",
-      "description": "Basic snippet for create_profile in ProfilerService",
+      "title": "Snippet for the create_profile call in the ProfilerService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Profiler::V2::ProfilerService::Client#create_profile. It may require modification in order to execute successfully.",
       "file": "profiler_service/create_profile.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudprofiler_v2_generated_ProfilerService_CreateOfflineProfile_sync",
-      "title": "Snippet for create_offline_profile in ProfilerService",
-      "description": "Basic snippet for create_offline_profile in ProfilerService",
+      "title": "Snippet for the create_offline_profile call in the ProfilerService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Profiler::V2::ProfilerService::Client#create_offline_profile. It may require modification in order to execute successfully.",
       "file": "profiler_service/create_offline_profile.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudprofiler_v2_generated_ProfilerService_UpdateProfile_sync",
-      "title": "Snippet for update_profile in ProfilerService",
-      "description": "Basic snippet for update_profile in ProfilerService",
+      "title": "Snippet for the update_profile call in the ProfilerService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Profiler::V2::ProfilerService::Client#update_profile. It may require modification in order to execute successfully.",
       "file": "profiler_service/update_profile.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,7 +126,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]

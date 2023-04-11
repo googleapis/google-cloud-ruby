@@ -1,5 +1,38 @@
 # Changelog
 
+### 0.21.0 (2023-04-06)
+
+#### Features
+
+* Return copy information for a model source 
+* Support for public endpoints ([#21046](https://github.com/googleapis/google-cloud-ruby/issues/21046)) 
+* Support for the MODEL_GARDEN source 
+
+### 0.20.0 (2023-03-03)
+
+#### Features
+
+* add support for batch_import_evaluated_annotations in model_service 
+* add support for delete_feature_values in feature_store ([#20601](https://github.com/googleapis/google-cloud-ruby/issues/20601)) 
+* add support for evaluated_annotation 
+
+### 0.19.0 (2023-02-13)
+
+#### Features
+
+* Support for IndexEndpoint#private_service_connect_config 
+* Support for MetricSpec#safety_config 
+* Support for Model#original_model_info 
+* Support for NasJob management RPCs ([#20117](https://github.com/googleapis/google-cloud-ruby/issues/20117)) 
+* Support for NasTrialDetail RPCs 
+* Support for the copy_model RPC 
+
+### 0.18.0 (2023-01-19)
+
+#### Features
+
+* Support for enabling access to the customized dashboard in training chief container ([#20037](https://github.com/googleapis/google-cloud-ruby/issues/20037)) 
+
 ### 0.17.0 (2023-01-11)
 
 #### Features

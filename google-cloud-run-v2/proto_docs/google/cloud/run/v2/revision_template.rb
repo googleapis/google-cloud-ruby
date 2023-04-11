@@ -30,9 +30,19 @@ module Google
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     KRM-style labels for the resource.
+        #
+        #     <p>Cloud Run API v2 does not support labels with `run.googleapis.com`,
+        #     `cloud.googleapis.com`, `serving.knative.dev`, or `autoscaling.knative.dev`
+        #     namespaces, and they will be rejected. All system labels in v1 now have a
+        #     corresponding field in v2 RevisionTemplate.
         # @!attribute [rw] annotations
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     KRM-style annotations for the resource.
+        #
+        #     <p>Cloud Run API v2 does not support annotations with `run.googleapis.com`,
+        #     `cloud.googleapis.com`, `serving.knative.dev`, or `autoscaling.knative.dev`
+        #     namespaces, and they will be rejected. All system annotations in v1 now
+        #     have a corresponding field in v2 RevisionTemplate.
         # @!attribute [rw] scaling
         #   @return [::Google::Cloud::Run::V2::RevisionScaling]
         #     Scaling settings for this Revision.

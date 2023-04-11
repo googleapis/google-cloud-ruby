@@ -419,6 +419,11 @@ module Google
           #   @return [::String]
           #     Output only. The name of the
           #     {::Google::Cloud::AIPlatform::V1::CustomJob CustomJob}.
+          # @!attribute [r] failed_jobs
+          #   @return [::Array<::String>]
+          #     Output only. The names of the previously failed
+          #     {::Google::Cloud::AIPlatform::V1::CustomJob CustomJob}. The list includes the
+          #     all attempts in chronological order.
           class CustomJobDetail
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

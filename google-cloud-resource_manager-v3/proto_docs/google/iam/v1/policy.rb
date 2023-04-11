@@ -35,7 +35,8 @@ module Google
       # only if the expression evaluates to `true`. A condition can add constraints
       # based on attributes of the request, the resource, or both. To learn which
       # resources support conditions in their IAM policies, see the
-      # [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
+      # [IAM
+      # documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
       #
       # **JSON example:**
       #
@@ -58,7 +59,8 @@ module Google
       #           "condition": {
       #             "title": "expirable access",
       #             "description": "Does not grant access after Sep 2020",
-      #             "expression": "request.time < timestamp('2020-10-01T00:00:00.000Z')",
+      #             "expression": "request.time <
+      #             timestamp('2020-10-01T00:00:00.000Z')",
       #           }
       #         }
       #       ],
@@ -112,7 +114,8 @@ module Google
       #     specify any valid version or leave the field unset.
       #
       #     To learn which resources support conditions in their IAM policies, see the
-      #     [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
+      #     [IAM
+      #     documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
       # @!attribute [rw] bindings
       #   @return [::Array<::Google::Iam::V1::Binding>]
       #     Associates a list of `members`, or principals, with a `role`. Optionally,
@@ -305,7 +308,8 @@ module Google
       #   @return [::Array<::String>]
       #     Specifies the identities that do not cause logging for this type of
       #     permission.
-      #     Follows the same format of {::Google::Iam::V1::Binding#members Binding.members}.
+      #     Follows the same format of
+      #     {::Google::Iam::V1::Binding#members Binding.members}.
       class AuditLogConfig
         include ::Google::Protobuf::MessageExts
         extend ::Google::Protobuf::MessageExts::ClassMethods

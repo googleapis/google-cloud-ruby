@@ -30,6 +30,11 @@ module Google
       #     require "google/cloud/profiler/v2"
       #     client = ::Google::Cloud::Profiler::V2::ProfilerService::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/profiler/v2"
+      #     client = ::Google::Cloud::Profiler::V2::ProfilerService::Rest::Client.new
+      #
       module V2
       end
     end

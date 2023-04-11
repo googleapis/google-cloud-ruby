@@ -21,7 +21,8 @@ module Google
   module Cloud
     module Firestore
       module V1
-        # The request for {::Google::Cloud::Firestore::V1::Firestore::Client#get_document Firestore.GetDocument}.
+        # The request for
+        # {::Google::Cloud::Firestore::V1::Firestore::Client#get_document Firestore.GetDocument}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the Document to get. In the format:
@@ -44,68 +45,93 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request for {::Google::Cloud::Firestore::V1::Firestore::Client#list_documents Firestore.ListDocuments}.
+        # The request for
+        # {::Google::Cloud::Firestore::V1::Firestore::Client#list_documents Firestore.ListDocuments}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource name. In the format:
         #     `projects/{project_id}/databases/{database_id}/documents` or
         #     `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
+        #
         #     For example:
         #     `projects/my-project/databases/my-database/documents` or
         #     `projects/my-project/databases/my-database/documents/chatrooms/my-chatroom`
         # @!attribute [rw] collection_id
         #   @return [::String]
-        #     Required. The collection ID, relative to `parent`, to list. For example: `chatrooms`
-        #     or `messages`.
+        #     Optional. The collection ID, relative to `parent`, to list.
+        #
+        #     For example: `chatrooms` or `messages`.
+        #
+        #     This is optional, and when not provided, Firestore will list documents
+        #     from all collections under the provided `parent`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     The maximum number of documents to return.
+        #     Optional. The maximum number of documents to return in a single response.
+        #
+        #     Firestore may return fewer than this value.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     The `next_page_token` value returned from a previous List request, if any.
+        #     Optional. A page token, received from a previous `ListDocuments` response.
+        #
+        #     Provide this to retrieve the subsequent page. When paginating, all other
+        #     parameters (with the exception of `page_size`) must match the values set
+        #     in the request that generated the page token.
         # @!attribute [rw] order_by
         #   @return [::String]
-        #     The order to sort results by. For example: `priority desc, name`.
+        #     Optional. The optional ordering of the documents to return.
+        #
+        #     For example: `priority desc, __name__ desc`.
+        #
+        #     This mirrors the {::Google::Cloud::Firestore::V1::StructuredQuery#order_by `ORDER BY`}
+        #     used in Firestore queries but in a string representation. When absent,
+        #     documents are ordered based on `__name__ ASC`.
         # @!attribute [rw] mask
         #   @return [::Google::Cloud::Firestore::V1::DocumentMask]
-        #     The fields to return. If not set, returns all fields.
+        #     Optional. The fields to return. If not set, returns all fields.
         #
         #     If a document has a field that is not present in this mask, that field
         #     will not be returned in the response.
         # @!attribute [rw] transaction
         #   @return [::String]
-        #     Reads documents in a transaction.
+        #     Perform the read as part of an already active transaction.
         # @!attribute [rw] read_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Reads documents as they were at the given time.
+        #     Perform the read at the provided time.
+        #
         #     This may not be older than 270 seconds.
         # @!attribute [rw] show_missing
         #   @return [::Boolean]
-        #     If the list should show missing documents. A missing document is a
-        #     document that does not exist but has sub-documents. These documents will
-        #     be returned with a key but will not have fields, {::Google::Cloud::Firestore::V1::Document#create_time Document.create_time},
-        #     or {::Google::Cloud::Firestore::V1::Document#update_time Document.update_time} set.
+        #     If the list should show missing documents.
         #
-        #     Requests with `show_missing` may not specify `where` or
-        #     `order_by`.
+        #     A document is missing if it does not exist, but there are sub-documents
+        #     nested underneath it. When true, such missing documents will be returned
+        #     with a key but will not have fields,
+        #     {::Google::Cloud::Firestore::V1::Document#create_time `create_time`}, or
+        #     {::Google::Cloud::Firestore::V1::Document#update_time `update_time`} set.
+        #
+        #     Requests with `show_missing` may not specify `where` or `order_by`.
         class ListDocumentsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response for {::Google::Cloud::Firestore::V1::Firestore::Client#list_documents Firestore.ListDocuments}.
+        # The response for
+        # {::Google::Cloud::Firestore::V1::Firestore::Client#list_documents Firestore.ListDocuments}.
         # @!attribute [rw] documents
         #   @return [::Array<::Google::Cloud::Firestore::V1::Document>]
         #     The Documents found.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     The next page token.
+        #     A token to retrieve the next page of documents.
+        #
+        #     If this field is omitted, there are no subsequent pages.
         class ListDocumentsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request for {::Google::Cloud::Firestore::V1::Firestore::Client#create_document Firestore.CreateDocument}.
+        # The request for
+        # {::Google::Cloud::Firestore::V1::Firestore::Client#create_document Firestore.CreateDocument}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource. For example:
@@ -113,7 +139,8 @@ module Google
         #     `projects/{project_id}/databases/{database_id}/documents/chatrooms/{chatroom_id}`
         # @!attribute [rw] collection_id
         #   @return [::String]
-        #     Required. The collection ID, relative to `parent`, to list. For example: `chatrooms`.
+        #     Required. The collection ID, relative to `parent`, to list. For example:
+        #     `chatrooms`.
         # @!attribute [rw] document_id
         #   @return [::String]
         #     The client-assigned document ID to use for this document.
@@ -133,7 +160,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request for {::Google::Cloud::Firestore::V1::Firestore::Client#update_document Firestore.UpdateDocument}.
+        # The request for
+        # {::Google::Cloud::Firestore::V1::Firestore::Client#update_document Firestore.UpdateDocument}.
         # @!attribute [rw] document
         #   @return [::Google::Cloud::Firestore::V1::Document]
         #     Required. The updated document.
@@ -162,7 +190,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request for {::Google::Cloud::Firestore::V1::Firestore::Client#delete_document Firestore.DeleteDocument}.
+        # The request for
+        # {::Google::Cloud::Firestore::V1::Firestore::Client#delete_document Firestore.DeleteDocument}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the Document to delete. In the format:
@@ -176,7 +205,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request for {::Google::Cloud::Firestore::V1::Firestore::Client#batch_get_documents Firestore.BatchGetDocuments}.
+        # The request for
+        # {::Google::Cloud::Firestore::V1::Firestore::Client#batch_get_documents Firestore.BatchGetDocuments}.
         # @!attribute [rw] database
         #   @return [::String]
         #     Required. The database name. In the format:
@@ -211,7 +241,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The streamed response for {::Google::Cloud::Firestore::V1::Firestore::Client#batch_get_documents Firestore.BatchGetDocuments}.
+        # The streamed response for
+        # {::Google::Cloud::Firestore::V1::Firestore::Client#batch_get_documents Firestore.BatchGetDocuments}.
         # @!attribute [rw] found
         #   @return [::Google::Cloud::Firestore::V1::Document]
         #     A document that was requested.
@@ -223,7 +254,8 @@ module Google
         #   @return [::String]
         #     The transaction that was started as part of this request.
         #     Will only be set in the first response, and only if
-        #     {::Google::Cloud::Firestore::V1::BatchGetDocumentsRequest#new_transaction BatchGetDocumentsRequest.new_transaction} was set in the request.
+        #     {::Google::Cloud::Firestore::V1::BatchGetDocumentsRequest#new_transaction BatchGetDocumentsRequest.new_transaction}
+        #     was set in the request.
         # @!attribute [rw] read_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The time at which the document was read.
@@ -235,7 +267,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request for {::Google::Cloud::Firestore::V1::Firestore::Client#begin_transaction Firestore.BeginTransaction}.
+        # The request for
+        # {::Google::Cloud::Firestore::V1::Firestore::Client#begin_transaction Firestore.BeginTransaction}.
         # @!attribute [rw] database
         #   @return [::String]
         #     Required. The database name. In the format:
@@ -249,7 +282,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response for {::Google::Cloud::Firestore::V1::Firestore::Client#begin_transaction Firestore.BeginTransaction}.
+        # The response for
+        # {::Google::Cloud::Firestore::V1::Firestore::Client#begin_transaction Firestore.BeginTransaction}.
         # @!attribute [rw] transaction
         #   @return [::String]
         #     The transaction that was started.
@@ -337,13 +371,15 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response for {::Google::Cloud::Firestore::V1::Firestore::Client#run_query Firestore.RunQuery}.
+        # The response for
+        # {::Google::Cloud::Firestore::V1::Firestore::Client#run_query Firestore.RunQuery}.
         # @!attribute [rw] transaction
         #   @return [::String]
         #     The transaction that was started as part of this request.
         #     Can only be set in the first response, and only if
-        #     {::Google::Cloud::Firestore::V1::RunQueryRequest#new_transaction RunQueryRequest.new_transaction} was set in the request.
-        #     If set, no other fields will be set in this response.
+        #     {::Google::Cloud::Firestore::V1::RunQueryRequest#new_transaction RunQueryRequest.new_transaction}
+        #     was set in the request. If set, no other fields will be set in this
+        #     response.
         # @!attribute [rw] document
         #   @return [::Google::Cloud::Firestore::V1::Document]
         #     A query result, not set when reporting partial progress.
@@ -369,7 +405,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request for {::Google::Cloud::Firestore::V1::Firestore::Client#run_aggregation_query Firestore.RunAggregationQuery}.
+        # The request for
+        # {::Google::Cloud::Firestore::V1::Firestore::Client#run_aggregation_query Firestore.RunAggregationQuery}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource name. In the format:
@@ -404,7 +441,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response for {::Google::Cloud::Firestore::V1::Firestore::Client#run_aggregation_query Firestore.RunAggregationQuery}.
+        # The response for
+        # {::Google::Cloud::Firestore::V1::Firestore::Client#run_aggregation_query Firestore.RunAggregationQuery}.
         # @!attribute [rw] result
         #   @return [::Google::Cloud::Firestore::V1::AggregationResult]
         #     A single aggregation result.
@@ -424,7 +462,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request for {::Google::Cloud::Firestore::V1::Firestore::Client#partition_query Firestore.PartitionQuery}.
+        # The request for
+        # {::Google::Cloud::Firestore::V1::Firestore::Client#partition_query Firestore.PartitionQuery}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource name. In the format:
@@ -480,7 +519,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response for {::Google::Cloud::Firestore::V1::Firestore::Client#partition_query Firestore.PartitionQuery}.
+        # The response for
+        # {::Google::Cloud::Firestore::V1::Firestore::Client#partition_query Firestore.PartitionQuery}.
         # @!attribute [rw] partitions
         #   @return [::Array<::Google::Cloud::Firestore::V1::Cursor>]
         #     Partition results.
@@ -543,9 +583,9 @@ module Google
         #     A stream token that was previously sent by the server.
         #
         #     The client should set this field to the token from the most recent
-        #     {::Google::Cloud::Firestore::V1::WriteResponse WriteResponse} it has received. This acknowledges that the client has
-        #     received responses up to this token. After sending this token, earlier
-        #     tokens may not be used anymore.
+        #     {::Google::Cloud::Firestore::V1::WriteResponse WriteResponse} it has received. This
+        #     acknowledges that the client has received responses up to this token. After
+        #     sending this token, earlier tokens may not be used anymore.
         #
         #     The server may close the stream if there are too many unacknowledged
         #     responses.
@@ -637,8 +677,8 @@ module Google
         #     A {::Google::Cloud::Firestore::V1::Document Document} has been deleted.
         # @!attribute [rw] document_remove
         #   @return [::Google::Cloud::Firestore::V1::DocumentRemove]
-        #     A {::Google::Cloud::Firestore::V1::Document Document} has been removed from a target (because it is no longer
-        #     relevant to that target).
+        #     A {::Google::Cloud::Firestore::V1::Document Document} has been removed from a target
+        #     (because it is no longer relevant to that target).
         # @!attribute [rw] filter
         #   @return [::Google::Cloud::Firestore::V1::ExistenceFilter]
         #     A filter to apply to the set of documents previously returned for the
@@ -660,7 +700,8 @@ module Google
         #     A target specified by a set of document names.
         # @!attribute [rw] resume_token
         #   @return [::String]
-        #     A resume token from a prior {::Google::Cloud::Firestore::V1::TargetChange TargetChange} for an identical target.
+        #     A resume token from a prior
+        #     {::Google::Cloud::Firestore::V1::TargetChange TargetChange} for an identical target.
         #
         #     Using a resume token with a different target is unsupported and may fail.
         # @!attribute [rw] read_time
@@ -775,7 +816,8 @@ module Google
           end
         end
 
-        # The request for {::Google::Cloud::Firestore::V1::Firestore::Client#list_collection_ids Firestore.ListCollectionIds}.
+        # The request for
+        # {::Google::Cloud::Firestore::V1::Firestore::Client#list_collection_ids Firestore.ListCollectionIds}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent document. In the format:
@@ -798,7 +840,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response from {::Google::Cloud::Firestore::V1::Firestore::Client#list_collection_ids Firestore.ListCollectionIds}.
+        # The response from
+        # {::Google::Cloud::Firestore::V1::Firestore::Client#list_collection_ids Firestore.ListCollectionIds}.
         # @!attribute [rw] collection_ids
         #   @return [::Array<::String>]
         #     The collection ids.
@@ -810,7 +853,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request for {::Google::Cloud::Firestore::V1::Firestore::Client#batch_write Firestore.BatchWrite}.
+        # The request for
+        # {::Google::Cloud::Firestore::V1::Firestore::Client#batch_write Firestore.BatchWrite}.
         # @!attribute [rw] database
         #   @return [::String]
         #     Required. The database name. In the format:
@@ -839,7 +883,8 @@ module Google
           end
         end
 
-        # The response from {::Google::Cloud::Firestore::V1::Firestore::Client#batch_write Firestore.BatchWrite}.
+        # The response from
+        # {::Google::Cloud::Firestore::V1::Firestore::Client#batch_write Firestore.BatchWrite}.
         # @!attribute [rw] write_results
         #   @return [::Array<::Google::Cloud::Firestore::V1::WriteResult>]
         #     The result of applying the writes.

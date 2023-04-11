@@ -278,6 +278,9 @@ module Google
         #     Max number of messages prior to and including
         #     [latest_message] to use as context when compiling the
         #     suggestion. By default 500 and at most 1000.
+        # @!attribute [rw] assist_query_params
+        #   @return [::Google::Cloud::Dialogflow::V2::AssistQueryParameters]
+        #     Parameters for a human assist query.
         class SuggestConversationSummaryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

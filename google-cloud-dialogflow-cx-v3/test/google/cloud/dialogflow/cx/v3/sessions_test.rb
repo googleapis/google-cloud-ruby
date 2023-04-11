@@ -218,6 +218,7 @@ class ::Google::Cloud::Dialogflow::CX::V3::Sessions::ClientTest < Minitest::Test
     session = "hello world"
     query_params = {}
     query_input = {}
+    persist_parameter_changes = true
 
     match_intent_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :match_intent, name
@@ -225,6 +226,7 @@ class ::Google::Cloud::Dialogflow::CX::V3::Sessions::ClientTest < Minitest::Test
       assert_equal "hello world", request["session"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::CX::V3::QueryParameters), request["query_params"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::CX::V3::QueryInput), request["query_input"]
+      assert_equal true, request["persist_parameter_changes"]
       refute_nil options
     end
 
@@ -235,31 +237,31 @@ class ::Google::Cloud::Dialogflow::CX::V3::Sessions::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.match_intent({ session: session, query_params: query_params, query_input: query_input }) do |response, operation|
+      client.match_intent({ session: session, query_params: query_params, query_input: query_input, persist_parameter_changes: persist_parameter_changes }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.match_intent session: session, query_params: query_params, query_input: query_input do |response, operation|
+      client.match_intent session: session, query_params: query_params, query_input: query_input, persist_parameter_changes: persist_parameter_changes do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.match_intent ::Google::Cloud::Dialogflow::CX::V3::MatchIntentRequest.new(session: session, query_params: query_params, query_input: query_input) do |response, operation|
+      client.match_intent ::Google::Cloud::Dialogflow::CX::V3::MatchIntentRequest.new(session: session, query_params: query_params, query_input: query_input, persist_parameter_changes: persist_parameter_changes) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.match_intent({ session: session, query_params: query_params, query_input: query_input }, grpc_options) do |response, operation|
+      client.match_intent({ session: session, query_params: query_params, query_input: query_input, persist_parameter_changes: persist_parameter_changes }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.match_intent(::Google::Cloud::Dialogflow::CX::V3::MatchIntentRequest.new(session: session, query_params: query_params, query_input: query_input), grpc_options) do |response, operation|
+      client.match_intent(::Google::Cloud::Dialogflow::CX::V3::MatchIntentRequest.new(session: session, query_params: query_params, query_input: query_input, persist_parameter_changes: persist_parameter_changes), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

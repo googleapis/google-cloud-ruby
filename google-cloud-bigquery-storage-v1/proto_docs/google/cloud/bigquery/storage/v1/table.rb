@@ -103,6 +103,10 @@ module Google
           # @!attribute [rw] scale
           #   @return [::Integer]
           #     Optional. See documentation for precision.
+          # @!attribute [rw] default_value_expression
+          #   @return [::String]
+          #     Optional. A SQL expression to specify the [default value]
+          #     (https://cloud.google.com/bigquery/docs/default-values) for this field.
           class TableFieldSchema
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

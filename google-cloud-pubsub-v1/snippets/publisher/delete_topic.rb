@@ -20,8 +20,11 @@
 require "google/cloud/pubsub/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::PubSub::V1::Publisher::Client#delete_topic
+# Snippet for the delete_topic call in the Publisher service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::PubSub::V1::Publisher::Client#delete_topic. It may require
+# modification in order to execute successfully.
 #
 def delete_topic
   # Create a client object. The client can be reused for multiple calls.

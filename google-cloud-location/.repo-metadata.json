@@ -1,5 +1,4 @@
 {
-    "api_shortname": "unknown",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-location/latest",
     "distribution_name": "google-cloud-location",
     "is_cloud": true,
@@ -9,5 +8,5 @@
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "An add-on interface used by some Google API clients to provide location management calls.",
-    "library_type": "GAPIC_MANUAL"
+    "library_type": "CORE"
 }

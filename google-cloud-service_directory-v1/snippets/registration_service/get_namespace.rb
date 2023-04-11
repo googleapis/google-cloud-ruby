@@ -20,8 +20,11 @@
 require "google/cloud/service_directory/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::ServiceDirectory::V1::RegistrationService::Client#get_namespace
+# Snippet for the get_namespace call in the RegistrationService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::ServiceDirectory::V1::RegistrationService::Client#get_namespace.
+# It may require modification in order to execute successfully.
 #
 def get_namespace
   # Create a client object. The client can be reused for multiple calls.

@@ -4,6 +4,9 @@
 require 'google/protobuf'
 
 require 'google/api/field_behavior_pb'
+require 'google/api/resource_pb'
+require 'google/protobuf/duration_pb'
+require 'google/protobuf/timestamp_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/dataproc/v1/shared.proto", :syntax => :proto3) do
@@ -20,6 +23,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :service_account, :string, 2
       repeated :network_tags, :string, 6
       optional :kms_key, :string, 7
+      optional :ttl, :message, 9, "google.protobuf.Duration"
+      optional :staging_bucket, :string, 10
       oneof :network do
         optional :network_uri, :string, 4
         optional :subnetwork_uri, :string, 5
@@ -36,6 +41,17 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       map :endpoints, :string, :string, 1
       optional :output_uri, :string, 2
       optional :diagnostic_output_uri, :string, 3
+      optional :approximate_usage, :message, 6, "google.cloud.dataproc.v1.UsageMetrics"
+      optional :current_usage, :message, 7, "google.cloud.dataproc.v1.UsageSnapshot"
+    end
+    add_message "google.cloud.dataproc.v1.UsageMetrics" do
+      optional :milli_dcu_seconds, :int64, 1
+      optional :shuffle_storage_gb_seconds, :int64, 2
+    end
+    add_message "google.cloud.dataproc.v1.UsageSnapshot" do
+      optional :milli_dcu, :int64, 1
+      optional :shuffle_storage_gb, :int64, 2
+      optional :snapshot_time, :message, 3, "google.protobuf.Timestamp"
     end
     add_message "google.cloud.dataproc.v1.GkeClusterConfig" do
       optional :gke_cluster_target, :string, 2
@@ -71,14 +87,17 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig" do
       optional :machine_type, :string, 1
-      optional :preemptible, :bool, 10
       optional :local_ssd_count, :int32, 7
+      optional :preemptible, :bool, 10
       repeated :accelerators, :message, 11, "google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAcceleratorConfig"
       optional :min_cpu_platform, :string, 13
+      optional :boot_disk_kms_key, :string, 23
+      optional :spot, :bool, 32
     end
     add_message "google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAcceleratorConfig" do
       optional :accelerator_count, :int64, 1
       optional :accelerator_type, :string, 2
+      optional :gpu_partition_size, :string, 3
     end
     add_message "google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAutoscalingConfig" do
       optional :min_node_count, :int32, 2
@@ -92,8 +111,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :FLINK, 14
       value :HBASE, 11
       value :HIVE_WEBHCAT, 3
+      value :HUDI, 18
       value :JUPYTER, 1
       value :PRESTO, 6
+      value :TRINO, 17
       value :RANGER, 12
       value :SOLR, 10
       value :ZEPPELIN, 4
@@ -117,6 +138,8 @@ module Google
         SparkHistoryServerConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.SparkHistoryServerConfig").msgclass
         PeripheralsConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.PeripheralsConfig").msgclass
         RuntimeInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.RuntimeInfo").msgclass
+        UsageMetrics = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.UsageMetrics").msgclass
+        UsageSnapshot = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.UsageSnapshot").msgclass
         GkeClusterConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.GkeClusterConfig").msgclass
         KubernetesClusterConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.KubernetesClusterConfig").msgclass
         KubernetesSoftwareConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.KubernetesSoftwareConfig").msgclass

@@ -20,8 +20,11 @@
 require "google/cloud/retail/v2"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Retail::V2::ControlService::Client#get_control
+# Snippet for the get_control call in the ControlService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Retail::V2::ControlService::Client#get_control. It may require
+# modification in order to execute successfully.
 #
 def get_control
   # Create a client object. The client can be reused for multiple calls.

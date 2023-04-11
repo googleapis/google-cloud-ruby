@@ -20,8 +20,11 @@
 require "google/cloud/contact_center_insights/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#get_phrase_matcher
+# Snippet for the get_phrase_matcher call in the ContactCenterInsights service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client#get_phrase_matcher.
+# It may require modification in order to execute successfully.
 #
 def get_phrase_matcher
   # Create a client object. The client can be reused for multiple calls.

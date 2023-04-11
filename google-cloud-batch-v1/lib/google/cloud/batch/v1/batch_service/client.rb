@@ -19,7 +19,6 @@
 require "google/cloud/errors"
 require "google/cloud/batch/v1/batch_pb"
 require "google/cloud/location"
-require "google/iam/v1"
 
 module Google
   module Cloud
@@ -173,12 +172,6 @@ module Google
                 config.endpoint = @config.endpoint
               end
 
-              @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
-                config.credentials = credentials
-                config.quota_project = @quota_project_id
-                config.endpoint = @config.endpoint
-              end
-
               @batch_service_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::Batch::V1::BatchService::Stub,
                 credentials:  credentials,
@@ -201,13 +194,6 @@ module Google
             # @return [Google::Cloud::Location::Locations::Client]
             #
             attr_reader :location_client
-
-            ##
-            # Get the associated client for mix-in of the IAMPolicy.
-            #
-            # @return [Google::Iam::V1::IAMPolicy::Client]
-            #
-            attr_reader :iam_policy_client
 
             # Service calls
 
@@ -250,8 +236,8 @@ module Google
             #     ignore the request if it has already been completed. The server will
             #     guarantee that for at least 60 minutes since the first request.
             #
-            #     For example, consider a situation where you make an initial request and t
-            #     he request times out. If you make the request again with the same request
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
             #     ID, the server can check if original operation with the same request ID
             #     was received, and if so, will ignore the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
@@ -436,8 +422,8 @@ module Google
             #     ignore the request if it has already been completed. The server will
             #     guarantee that for at least 60 minutes after the first request.
             #
-            #     For example, consider a situation where you make an initial request and t
-            #     he request times out. If you make the request again with the same request
+            #     For example, consider a situation where you make an initial request and
+            #     the request times out. If you make the request again with the same request
             #     ID, the server can check if original operation with the same request ID
             #     was received, and if so, will ignore the second request. This prevents
             #     clients from accidentally creating duplicate commitments.
@@ -465,14 +451,14 @@ module Google
             #   # Call the delete_job method.
             #   result = client.delete_job request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_job request, options = nil
@@ -564,13 +550,11 @@ module Google
             #   # Call the list_jobs method.
             #   result = client.list_jobs request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Batch::V1::Job.
-            #     p response
+            #     p item
             #   end
             #
             def list_jobs request, options = nil
@@ -751,13 +735,11 @@ module Google
             #   # Call the list_tasks method.
             #   result = client.list_tasks request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Batch::V1::Task.
-            #     p response
+            #     p item
             #   end
             #
             def list_tasks request, options = nil
@@ -840,9 +822,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials

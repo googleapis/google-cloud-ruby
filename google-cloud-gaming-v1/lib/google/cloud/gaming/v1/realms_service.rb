@@ -26,6 +26,7 @@ require "google/cloud/gaming/v1/realms_service/credentials"
 require "google/cloud/gaming/v1/realms_service/paths"
 require "google/cloud/gaming/v1/realms_service/operations"
 require "google/cloud/gaming/v1/realms_service/client"
+require "google/cloud/gaming/v1/realms_service/rest"
 
 module Google
   module Cloud
@@ -39,6 +40,11 @@ module Google
         #
         #     require "google/cloud/gaming/v1/realms_service"
         #     client = ::Google::Cloud::Gaming::V1::RealmsService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/gaming/v1/realms_service/rest"
+        #     client = ::Google::Cloud::Gaming::V1::RealmsService::Rest::Client.new
         #
         module RealmsService
         end

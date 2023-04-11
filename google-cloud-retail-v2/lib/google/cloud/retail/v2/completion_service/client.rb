@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/retail/v2/completion_service_pb"
+require "google/cloud/location"
 
 module Google
   module Cloud
@@ -27,7 +28,7 @@ module Google
           ##
           # Client for the CompletionService service.
           #
-          # Auto-completion service for retail.
+          # Autocomplete service for retail.
           #
           # This feature is only available for users who have Retail Search enabled.
           # Enable Retail Search on Cloud Console before using this feature.
@@ -147,6 +148,12 @@ module Google
                 config.endpoint = @config.endpoint
               end
 
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
               @completion_service_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::Retail::V2::CompletionService::Stub,
                 credentials:  credentials,
@@ -162,6 +169,13 @@ module Google
             # @return [::Google::Cloud::Retail::V2::CompletionService::Operations]
             #
             attr_reader :operations_client
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
 
             # Service calls
 
@@ -181,7 +195,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload complete_query(catalog: nil, query: nil, visitor_id: nil, language_codes: nil, device_type: nil, dataset: nil, max_suggestions: nil)
+            # @overload complete_query(catalog: nil, query: nil, visitor_id: nil, language_codes: nil, device_type: nil, dataset: nil, max_suggestions: nil, entity: nil)
             #   Pass arguments to `complete_query` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -251,6 +265,13 @@ module Google
             #
             #     The maximum allowed max suggestions is 20. If it is set higher, it will be
             #     capped by 20.
+            #   @param entity [::String]
+            #     The entity for customers that may run multiple different entities, domains,
+            #     sites or regions, for example, `Google US`, `Google Ads`, `Waymo`,
+            #     `google.com`, `youtube.com`, etc.
+            #     If this is set, it should be exactly matched with
+            #     {::Google::Cloud::Retail::V2::UserEvent#entity UserEvent.entity} to get
+            #     per-entity autocomplete results.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Retail::V2::CompleteQueryResponse]
@@ -375,14 +396,14 @@ module Google
             #   # Call the import_completion_data method.
             #   result = client.import_completion_data request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def import_completion_data request, options = nil
@@ -465,9 +486,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials

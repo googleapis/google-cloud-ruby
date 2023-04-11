@@ -31,6 +31,11 @@ module Google
       #     require "google/cloud/speech/v1"
       #     client = ::Google::Cloud::Speech::V1::Speech::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/speech/v1"
+      #     client = ::Google::Cloud::Speech::V1::Speech::Rest::Client.new
+      #
       module V1
       end
     end

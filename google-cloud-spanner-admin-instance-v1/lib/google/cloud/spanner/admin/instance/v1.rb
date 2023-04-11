@@ -32,6 +32,11 @@ module Google
           #     require "google/cloud/spanner/admin/instance/v1"
           #     client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new
           #
+          # @example Load this package, including all its services, and instantiate a REST client
+          #
+          #     require "google/cloud/spanner/admin/instance/v1"
+          #     client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new
+          #
           module V1
           end
         end

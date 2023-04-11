@@ -26,16 +26,26 @@ require "google/cloud/dataplex/v1/data_scan_service/credentials"
 require "google/cloud/dataplex/v1/data_scan_service/paths"
 require "google/cloud/dataplex/v1/data_scan_service/operations"
 require "google/cloud/dataplex/v1/data_scan_service/client"
+require "google/cloud/dataplex/v1/data_scan_service/rest"
 
 module Google
   module Cloud
     module Dataplex
       module V1
         ##
+        # DataScanService manages DataScan resources which can be configured to run
+        # various types of data scanning workload and generate enriched metadata (e.g.
+        # Data Profile, Data Quality) for the data source.
+        #
         # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/dataplex/v1/data_scan_service"
         #     client = ::Google::Cloud::Dataplex::V1::DataScanService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/dataplex/v1/data_scan_service/rest"
+        #     client = ::Google::Cloud::Dataplex::V1::DataScanService::Rest::Client.new
         #
         module DataScanService
         end

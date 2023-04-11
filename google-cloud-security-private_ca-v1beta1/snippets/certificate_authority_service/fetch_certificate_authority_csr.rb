@@ -20,8 +20,11 @@
 require "google/cloud/security/private_ca/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#fetch_certificate_authority_csr
+# Snippet for the fetch_certificate_authority_csr call in the CertificateAuthorityService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#fetch_certificate_authority_csr.
+# It may require modification in order to execute successfully.
 #
 def fetch_certificate_authority_csr
   # Create a client object. The client can be reused for multiple calls.

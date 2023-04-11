@@ -86,7 +86,8 @@ module Google
     #   @return [::String]
     #     Selects the methods to which this rule applies.
     #
-    #     Refer to {::Google::Api::DocumentationRule#selector selector} for syntax details.
+    #     Refer to {::Google::Api::DocumentationRule#selector selector} for syntax
+    #     details.
     # @!attribute [rw] metric_costs
     #   @return [::Google::Protobuf::Map{::String => ::Integer}]
     #     Metrics to update when the selected methods are called, and the associated

@@ -48,12 +48,14 @@ module Google
       # Create a new client object for ApiGatewayService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::ApiGateway::V1::ApiGatewayService::Client](https://googleapis.dev/ruby/google-cloud-api_gateway-v1/latest/Google/Cloud/ApiGateway/V1/ApiGatewayService/Client.html)
+      # [Google::Cloud::ApiGateway::V1::ApiGatewayService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-api_gateway-v1/latest/Google-Cloud-ApiGateway-V1-ApiGatewayService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the ApiGatewayService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About ApiGatewayService
       #
@@ -61,9 +63,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.api_gateway_service version: :v1, &block
+      def self.api_gateway_service version: :v1, transport: :grpc, &block
         require "google/cloud/api_gateway/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::ApiGateway
@@ -71,6 +74,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::ApiGateway.const_get(package_name).const_get(:ApiGatewayService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 

@@ -31,6 +31,11 @@ module Google
         #     require "google/cloud/bigquery/reservation/v1"
         #     client = ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new
         #
+        # @example Load this package, including all its services, and instantiate a REST client
+        #
+        #     require "google/cloud/bigquery/reservation/v1"
+        #     client = ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Client.new
+        #
         module V1
         end
       end

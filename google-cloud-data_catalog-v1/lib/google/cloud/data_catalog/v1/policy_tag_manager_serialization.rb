@@ -25,6 +25,7 @@ require "google/cloud/data_catalog/v1/version"
 require "google/cloud/data_catalog/v1/policy_tag_manager_serialization/credentials"
 require "google/cloud/data_catalog/v1/policy_tag_manager_serialization/paths"
 require "google/cloud/data_catalog/v1/policy_tag_manager_serialization/client"
+require "google/cloud/data_catalog/v1/policy_tag_manager_serialization/rest"
 
 module Google
   module Cloud
@@ -40,6 +41,11 @@ module Google
         #
         #     require "google/cloud/data_catalog/v1/policy_tag_manager_serialization"
         #     client = ::Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/data_catalog/v1/policy_tag_manager_serialization/rest"
+        #     client = ::Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::Rest::Client.new
         #
         module PolicyTagManagerSerialization
         end

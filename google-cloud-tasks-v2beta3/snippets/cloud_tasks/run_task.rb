@@ -20,8 +20,11 @@
 require "google/cloud/tasks/v2beta3"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Tasks::V2beta3::CloudTasks::Client#run_task
+# Snippet for the run_task call in the CloudTasks service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Tasks::V2beta3::CloudTasks::Client#run_task. It may require
+# modification in order to execute successfully.
 #
 def run_task
   # Create a client object. The client can be reused for multiple calls.

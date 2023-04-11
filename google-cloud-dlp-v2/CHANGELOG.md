@@ -1,5 +1,17 @@
 # Release History
 
+### 0.16.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20626](https://github.com/googleapis/google-cloud-ruby/issues/20626)) 
+
+### 0.15.0 (2023-02-17)
+
+#### Features
+
+* Include the location mixin client ([#20455](https://github.com/googleapis/google-cloud-ruby/issues/20455)) 
+
 ### 0.14.0 (2022-11-11)
 
 #### Features

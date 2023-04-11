@@ -20,8 +20,11 @@
 require "google/cloud/recommendation_engine/v1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Client#delete_prediction_api_key_registration
+# Snippet for the delete_prediction_api_key_registration call in the PredictionApiKeyRegistry service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Client#delete_prediction_api_key_registration.
+# It may require modification in order to execute successfully.
 #
 def delete_prediction_api_key_registration
   # Create a client object. The client can be reused for multiple calls.

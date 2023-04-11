@@ -20,8 +20,11 @@
 require "google/cloud/dialogflow/cx/v3"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dialogflow::CX::V3::Flows::Client#delete_flow
+# Snippet for the delete_flow call in the Flows service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dialogflow::CX::V3::Flows::Client#delete_flow. It may require
+# modification in order to execute successfully.
 #
 def delete_flow
   # Create a client object. The client can be reused for multiple calls.

@@ -20,8 +20,11 @@
 require "google/cloud/monitoring/v3"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Monitoring::V3::NotificationChannelService::Client#delete_notification_channel
+# Snippet for the delete_notification_channel call in the NotificationChannelService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Monitoring::V3::NotificationChannelService::Client#delete_notification_channel.
+# It may require modification in order to execute successfully.
 #
 def delete_notification_channel
   # Create a client object. The client can be reused for multiple calls.

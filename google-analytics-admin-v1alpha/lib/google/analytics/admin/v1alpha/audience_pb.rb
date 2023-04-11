@@ -32,7 +32,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :ENDS_WITH, 3
       value :CONTAINS, 4
       value :FULL_REGEXP, 5
-      value :PARTIAL_REGEXP, 6
     end
     add_message "google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.InListFilter" do
       repeated :values, :string, 1
@@ -52,9 +51,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :OPERATION_UNSPECIFIED, 0
       value :EQUAL, 1
       value :LESS_THAN, 2
-      value :LESS_THAN_OR_EQUAL, 3
       value :GREATER_THAN, 4
-      value :GREATER_THAN_OR_EQUAL, 5
     end
     add_message "google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.BetweenFilter" do
       optional :from_value, :message, 1, "google.analytics.admin.v1alpha.AudienceDimensionOrMetricFilter.NumericValue"

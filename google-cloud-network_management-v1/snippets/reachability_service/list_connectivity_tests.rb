@@ -20,8 +20,11 @@
 require "google/cloud/network_management/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::NetworkManagement::V1::ReachabilityService::Client#list_connectivity_tests
+# Snippet for the list_connectivity_tests call in the ReachabilityService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::NetworkManagement::V1::ReachabilityService::Client#list_connectivity_tests.
+# It may require modification in order to execute successfully.
 #
 def list_connectivity_tests
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_connectivity_tests
   # Call the list_connectivity_tests method.
   result = client.list_connectivity_tests request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::NetworkManagement::V1::ConnectivityTest.
-    p response
+    p item
   end
 end
 # [END networkmanagement_v1_generated_ReachabilityService_ListConnectivityTests_sync]

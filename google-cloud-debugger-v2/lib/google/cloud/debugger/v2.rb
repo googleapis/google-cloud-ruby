@@ -31,6 +31,11 @@ module Google
       #     require "google/cloud/debugger/v2"
       #     client = ::Google::Cloud::Debugger::V2::Controller::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/debugger/v2"
+      #     client = ::Google::Cloud::Debugger::V2::Controller::Rest::Client.new
+      #
       module V2
       end
     end

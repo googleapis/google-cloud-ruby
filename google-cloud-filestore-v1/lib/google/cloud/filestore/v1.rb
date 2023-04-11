@@ -30,6 +30,11 @@ module Google
       #     require "google/cloud/filestore/v1"
       #     client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/filestore/v1"
+      #     client = ::Google::Cloud::Filestore::V1::CloudFilestoreManager::Rest::Client.new
+      #
       module V1
       end
     end

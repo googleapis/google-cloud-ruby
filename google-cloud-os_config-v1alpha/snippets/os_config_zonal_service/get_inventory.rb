@@ -20,8 +20,11 @@
 require "google/cloud/os_config/v1alpha"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client#get_inventory
+# Snippet for the get_inventory call in the OsConfigZonalService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client#get_inventory.
+# It may require modification in order to execute successfully.
 #
 def get_inventory
   # Create a client object. The client can be reused for multiple calls.

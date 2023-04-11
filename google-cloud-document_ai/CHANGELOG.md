@@ -1,5 +1,17 @@
 # Release History
 
+### 1.2.1 (2023-03-16)
+
+#### Documentation
+
+* Added Quickstart for Document AI ([#20871](https://github.com/googleapis/google-cloud-ruby/issues/20871)) 
+
+### 1.2.0 (2023-03-09)
+
+#### Features
+
+* Support REST transport ([#20766](https://github.com/googleapis/google-cloud-ruby/issues/20766)) 
+
 ### 1.1.0 (2022-07-02)
 
 #### Features

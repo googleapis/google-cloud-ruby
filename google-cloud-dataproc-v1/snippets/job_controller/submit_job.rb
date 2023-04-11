@@ -20,8 +20,11 @@
 require "google/cloud/dataproc/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dataproc::V1::JobController::Client#submit_job
+# Snippet for the submit_job call in the JobController service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dataproc::V1::JobController::Client#submit_job. It may require
+# modification in order to execute successfully.
 #
 def submit_job
   # Create a client object. The client can be reused for multiple calls.

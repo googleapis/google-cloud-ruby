@@ -271,13 +271,11 @@ module Google
             #   # Call the list_customers method.
             #   result = client.list_customers request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Channel::V1::Customer.
-            #     p response
+            #     p item
             #   end
             #
             def list_customers request, options = nil
@@ -1013,14 +1011,14 @@ module Google
             #   # Call the provision_cloud_identity method.
             #   result = client.provision_cloud_identity request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def provision_cloud_identity request, options = nil
@@ -1129,13 +1127,11 @@ module Google
             #   # Call the list_entitlements method.
             #   result = client.list_entitlements request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Channel::V1::Entitlement.
-            #     p response
+            #     p item
             #   end
             #
             def list_entitlements request, options = nil
@@ -1269,13 +1265,11 @@ module Google
             #   # Call the list_transferable_skus method.
             #   result = client.list_transferable_skus request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Channel::V1::TransferableSku.
-            #     p response
+            #     p item
             #   end
             #
             def list_transferable_skus request, options = nil
@@ -1402,13 +1396,11 @@ module Google
             #   # Call the list_transferable_offers method.
             #   result = client.list_transferable_offers request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Channel::V1::TransferableOffer.
-            #     p response
+            #     p item
             #   end
             #
             def list_transferable_offers request, options = nil
@@ -1643,14 +1635,14 @@ module Google
             #   # Call the create_entitlement method.
             #   result = client.create_entitlement request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_entitlement request, options = nil
@@ -1782,14 +1774,14 @@ module Google
             #   # Call the change_parameters method.
             #   result = client.change_parameters request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def change_parameters request, options = nil
@@ -1914,14 +1906,14 @@ module Google
             #   # Call the change_renewal_settings method.
             #   result = client.change_renewal_settings request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def change_renewal_settings request, options = nil
@@ -2052,14 +2044,14 @@ module Google
             #   # Call the change_offer method.
             #   result = client.change_offer request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def change_offer request, options = nil
@@ -2183,14 +2175,14 @@ module Google
             #   # Call the start_paid_service method.
             #   result = client.start_paid_service request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def start_paid_service request, options = nil
@@ -2311,14 +2303,14 @@ module Google
             #   # Call the suspend_entitlement method.
             #   result = client.suspend_entitlement request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def suspend_entitlement request, options = nil
@@ -2444,14 +2436,14 @@ module Google
             #   # Call the cancel_entitlement method.
             #   result = client.cancel_entitlement request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def cancel_entitlement request, options = nil
@@ -2578,14 +2570,14 @@ module Google
             #   # Call the activate_entitlement method.
             #   result = client.activate_entitlement request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def activate_entitlement request, options = nil
@@ -2721,14 +2713,14 @@ module Google
             #   # Call the transfer_entitlements method.
             #   result = client.transfer_entitlements request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def transfer_entitlements request, options = nil
@@ -2859,14 +2851,14 @@ module Google
             #   # Call the transfer_entitlements_to_google method.
             #   result = client.transfer_entitlements_to_google request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def transfer_entitlements_to_google request, options = nil
@@ -2977,13 +2969,11 @@ module Google
             #   # Call the list_channel_partner_links method.
             #   result = client.list_channel_partner_links request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Channel::V1::ChannelPartnerLink.
-            #     p response
+            #     p item
             #   end
             #
             def list_channel_partner_links request, options = nil
@@ -3548,13 +3538,11 @@ module Google
             #   # Call the list_customer_repricing_configs method.
             #   result = client.list_customer_repricing_configs request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Channel::V1::CustomerRepricingConfig.
-            #     p response
+            #     p item
             #   end
             #
             def list_customer_repricing_configs request, options = nil
@@ -4140,13 +4128,11 @@ module Google
             #   # Call the list_channel_partner_repricing_configs method.
             #   result = client.list_channel_partner_repricing_configs request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig.
-            #     p response
+            #     p item
             #   end
             #
             def list_channel_partner_repricing_configs request, options = nil
@@ -4690,13 +4676,11 @@ module Google
             #   # Call the list_products method.
             #   result = client.list_products request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Channel::V1::Product.
-            #     p response
+            #     p item
             #   end
             #
             def list_products request, options = nil
@@ -4794,13 +4778,11 @@ module Google
             #   # Call the list_skus method.
             #   result = client.list_skus request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Channel::V1::Sku.
-            #     p response
+            #     p item
             #   end
             #
             def list_skus request, options = nil
@@ -4862,7 +4844,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_offers(parent: nil, page_size: nil, page_token: nil, filter: nil, language_code: nil)
+            # @overload list_offers(parent: nil, page_size: nil, page_token: nil, filter: nil, language_code: nil, show_future_offers: nil)
             #   Pass arguments to `list_offers` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -4886,6 +4868,11 @@ module Google
             #     Optional. The BCP-47 language code. For example, "en-US". The
             #     response will localize in the corresponding language code, if specified.
             #     The default value is "en-US".
+            #   @param show_future_offers [::Boolean]
+            #     Optional. A boolean flag that determines if a response returns future
+            #     offers 30 days from now. If the show_future_offers is true, the response
+            #     will only contain offers that are scheduled to be available 30 days from
+            #     now.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Channel::V1::Offer>]
@@ -4907,13 +4894,11 @@ module Google
             #   # Call the list_offers method.
             #   result = client.list_offers request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Channel::V1::Offer.
-            #     p response
+            #     p item
             #   end
             #
             def list_offers request, options = nil
@@ -5022,13 +5007,11 @@ module Google
             #   # Call the list_purchasable_skus method.
             #   result = client.list_purchasable_skus request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Channel::V1::PurchasableSku.
-            #     p response
+            #     p item
             #   end
             #
             def list_purchasable_skus request, options = nil
@@ -5137,13 +5120,11 @@ module Google
             #   # Call the list_purchasable_offers method.
             #   result = client.list_purchasable_offers request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::Channel::V1::PurchasableOffer.
-            #     p response
+            #     p item
             #   end
             #
             def list_purchasable_offers request, options = nil
@@ -5514,6 +5495,131 @@ module Google
             end
 
             ##
+            # List entitlement history.
+            #
+            # Possible error codes:
+            #
+            # * PERMISSION_DENIED: The reseller account making the request and the
+            # provided reseller account are different.
+            # * INVALID_ARGUMENT: Missing or invalid required fields in the request.
+            # * NOT_FOUND: The parent resource doesn't exist. Usually the result of an
+            # invalid name parameter.
+            # * INTERNAL: Any non-user error related to a technical issue in the backend.
+            # In this case, contact CloudChannel support.
+            # * UNKNOWN: Any non-user error related to a technical issue in the backend.
+            # In this case, contact Cloud Channel support.
+            #
+            # Return value:
+            # List of {::Google::Cloud::Channel::V1::EntitlementChange EntitlementChange}s.
+            #
+            # @overload list_entitlement_changes(request, options = nil)
+            #   Pass arguments to `list_entitlement_changes` via a request object, either of type
+            #   {::Google::Cloud::Channel::V1::ListEntitlementChangesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Channel::V1::ListEntitlementChangesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_entitlement_changes(parent: nil, page_size: nil, page_token: nil, filter: nil)
+            #   Pass arguments to `list_entitlement_changes` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The resource name of the entitlement for which to list
+            #     entitlement changes. The `-` wildcard may be used to match entitlements
+            #     across a customer. Formats:
+            #
+            #       * accounts/\\{account_id}/customers/\\{customer_id}/entitlements/\\{entitlement_id}
+            #       * accounts/\\{account_id}/customers/\\{customer_id}/entitlements/-
+            #   @param page_size [::Integer]
+            #     Optional. The maximum number of entitlement changes to return. The service
+            #     may return fewer than this value. If unspecified, returns at most 10
+            #     entitlement changes. The maximum value is 50; the server will coerce values
+            #     above 50.
+            #   @param page_token [::String]
+            #     Optional. A page token, received from a previous
+            #     {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_entitlement_changes CloudChannelService.ListEntitlementChanges}
+            #     call. Provide this to retrieve the subsequent page.
+            #
+            #     When paginating, all other parameters provided to
+            #     {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_entitlement_changes CloudChannelService.ListEntitlementChanges}
+            #     must match the call that provided the page token.
+            #   @param filter [::String]
+            #     Optional. Filters applied to the list results.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Channel::V1::EntitlementChange>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Channel::V1::EntitlementChange>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/channel/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Channel::V1::ListEntitlementChangesRequest.new
+            #
+            #   # Call the list_entitlement_changes method.
+            #   result = client.list_entitlement_changes request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::Channel::V1::EntitlementChange.
+            #     p item
+            #   end
+            #
+            def list_entitlement_changes request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Channel::V1::ListEntitlementChangesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_entitlement_changes.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Channel::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_entitlement_changes.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_entitlement_changes.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @cloud_channel_service_stub.call_rpc :list_entitlement_changes, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @cloud_channel_service_stub, :list_entitlement_changes, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the CloudChannelService API.
             #
             # This class represents the configuration for CloudChannelService,
@@ -5551,9 +5657,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -5873,6 +5979,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_subscribers
+                ##
+                # RPC-specific configuration for `list_entitlement_changes`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_entitlement_changes
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -5966,6 +6077,8 @@ module Google
                   @unregister_subscriber = ::Gapic::Config::Method.new unregister_subscriber_config
                   list_subscribers_config = parent_rpcs.list_subscribers if parent_rpcs.respond_to? :list_subscribers
                   @list_subscribers = ::Gapic::Config::Method.new list_subscribers_config
+                  list_entitlement_changes_config = parent_rpcs.list_entitlement_changes if parent_rpcs.respond_to? :list_entitlement_changes
+                  @list_entitlement_changes = ::Gapic::Config::Method.new list_entitlement_changes_config
 
                   yield self if block_given?
                 end

@@ -390,6 +390,31 @@
                 "archive_audience"
               ]
             },
+            "GetSearchAds360Link": {
+              "methods": [
+                "get_search_ads360_link"
+              ]
+            },
+            "ListSearchAds360Links": {
+              "methods": [
+                "list_search_ads360_links"
+              ]
+            },
+            "CreateSearchAds360Link": {
+              "methods": [
+                "create_search_ads360_link"
+              ]
+            },
+            "DeleteSearchAds360Link": {
+              "methods": [
+                "delete_search_ads360_link"
+              ]
+            },
+            "UpdateSearchAds360Link": {
+              "methods": [
+                "update_search_ads360_link"
+              ]
+            },
             "GetAttributionSettings": {
               "methods": [
                 "get_attribution_settings"
@@ -403,6 +428,121 @@
             "RunAccessReport": {
               "methods": [
                 "run_access_report"
+              ]
+            },
+            "CreateAccessBinding": {
+              "methods": [
+                "create_access_binding"
+              ]
+            },
+            "GetAccessBinding": {
+              "methods": [
+                "get_access_binding"
+              ]
+            },
+            "UpdateAccessBinding": {
+              "methods": [
+                "update_access_binding"
+              ]
+            },
+            "DeleteAccessBinding": {
+              "methods": [
+                "delete_access_binding"
+              ]
+            },
+            "ListAccessBindings": {
+              "methods": [
+                "list_access_bindings"
+              ]
+            },
+            "BatchCreateAccessBindings": {
+              "methods": [
+                "batch_create_access_bindings"
+              ]
+            },
+            "BatchGetAccessBindings": {
+              "methods": [
+                "batch_get_access_bindings"
+              ]
+            },
+            "BatchUpdateAccessBindings": {
+              "methods": [
+                "batch_update_access_bindings"
+              ]
+            },
+            "BatchDeleteAccessBindings": {
+              "methods": [
+                "batch_delete_access_bindings"
+              ]
+            },
+            "GetExpandedDataSet": {
+              "methods": [
+                "get_expanded_data_set"
+              ]
+            },
+            "ListExpandedDataSets": {
+              "methods": [
+                "list_expanded_data_sets"
+              ]
+            },
+            "CreateExpandedDataSet": {
+              "methods": [
+                "create_expanded_data_set"
+              ]
+            },
+            "UpdateExpandedDataSet": {
+              "methods": [
+                "update_expanded_data_set"
+              ]
+            },
+            "DeleteExpandedDataSet": {
+              "methods": [
+                "delete_expanded_data_set"
+              ]
+            },
+            "SetAutomatedGa4ConfigurationOptOut": {
+              "methods": [
+                "set_automated_ga4_configuration_opt_out"
+              ]
+            },
+            "FetchAutomatedGa4ConfigurationOptOut": {
+              "methods": [
+                "fetch_automated_ga4_configuration_opt_out"
+              ]
+            },
+            "GetBigQueryLink": {
+              "methods": [
+                "get_big_query_link"
+              ]
+            },
+            "ListBigQueryLinks": {
+              "methods": [
+                "list_big_query_links"
+              ]
+            },
+            "GetEnhancedMeasurementSettings": {
+              "methods": [
+                "get_enhanced_measurement_settings"
+              ]
+            },
+            "UpdateEnhancedMeasurementSettings": {
+              "methods": [
+                "update_enhanced_measurement_settings"
+              ]
+            },
+            "CreateConnectedSiteTag": {
+              "methods": [
+                "create_connected_site_tag"
+              ]
+            },
+            "DeleteConnectedSiteTag": {
+              "methods": [
+                "delete_connected_site_tag"
+              ]
+            },
+            "ListConnectedSiteTags": {
+              "methods": [
+                "list_connected_site_tags"
               ]
             }
           }

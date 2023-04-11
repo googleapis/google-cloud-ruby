@@ -49,7 +49,7 @@ module Google
         # Create a new client object for AppConnectionsService.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::BeyondCorp::AppConnections::V1::AppConnectionsService::Client](https://googleapis.dev/ruby/google-cloud-beyond_corp-app_connections-v1/latest/Google/Cloud/BeyondCorp/AppConnections/V1/AppConnectionsService/Client.html)
+        # [Google::Cloud::BeyondCorp::AppConnections::V1::AppConnectionsService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-beyond_corp-app_connections-v1/latest/Google-Cloud-BeyondCorp-AppConnections-V1-AppConnectionsService-Client)
         # for a gRPC client for version V1 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the AppConnectionsService service is

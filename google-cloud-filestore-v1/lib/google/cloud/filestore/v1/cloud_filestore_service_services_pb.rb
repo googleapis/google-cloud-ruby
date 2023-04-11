@@ -24,23 +24,23 @@ module Google
     module Filestore
       module V1
         module CloudFilestoreManager
-          # Configures and manages Cloud Filestore resources.
+          # Configures and manages Filestore resources.
           #
-          # Cloud Filestore Manager v1.
+          # Filestore Manager v1.
           #
-          # The `file.googleapis.com` service implements the Cloud Filestore API and
+          # The `file.googleapis.com` service implements the Filestore API and
           # defines the following resource model for managing instances:
           # * The service works with a collection of cloud projects, named: `/projects/*`
           # * Each project has a collection of available locations, named: `/locations/*`
           # * Each location has a collection of instances and backups, named:
           # `/instances/*` and `/backups/*` respectively.
-          # * As such, Cloud Filestore instances are resources of the form:
+          # * As such, Filestore instances are resources of the form:
           #   `/projects/{project_number}/locations/{location_id}/instances/{instance_id}`
           #   and backups are resources of the form:
           #   `/projects/{project_number}/locations/{location_id}/backup/{backup_id}`
           #
-          # Note that location_id must be a GCP `zone` for instances and but to a GCP
-          # `region` for backups; for example:
+          # Note that location_id must be a Google Cloud `zone` for instances, but
+          # a Google Cloud `region` for backups; for example:
           # * `projects/12345/locations/us-central1-c/instances/my-filestore`
           # * `projects/12345/locations/us-central1/backups/my-backup`
           class Service
@@ -71,6 +71,17 @@ module Google
             rpc :RestoreInstance, ::Google::Cloud::Filestore::V1::RestoreInstanceRequest, ::Google::Longrunning::Operation
             # Deletes an instance.
             rpc :DeleteInstance, ::Google::Cloud::Filestore::V1::DeleteInstanceRequest, ::Google::Longrunning::Operation
+            # Lists all snapshots in a project for either a specified location
+            # or for all locations.
+            rpc :ListSnapshots, ::Google::Cloud::Filestore::V1::ListSnapshotsRequest, ::Google::Cloud::Filestore::V1::ListSnapshotsResponse
+            # Gets the details of a specific snapshot.
+            rpc :GetSnapshot, ::Google::Cloud::Filestore::V1::GetSnapshotRequest, ::Google::Cloud::Filestore::V1::Snapshot
+            # Creates a snapshot.
+            rpc :CreateSnapshot, ::Google::Cloud::Filestore::V1::CreateSnapshotRequest, ::Google::Longrunning::Operation
+            # Deletes a snapshot.
+            rpc :DeleteSnapshot, ::Google::Cloud::Filestore::V1::DeleteSnapshotRequest, ::Google::Longrunning::Operation
+            # Updates the settings of a specific snapshot.
+            rpc :UpdateSnapshot, ::Google::Cloud::Filestore::V1::UpdateSnapshotRequest, ::Google::Longrunning::Operation
             # Lists all backups in a project for either a specified location or for all
             # locations.
             rpc :ListBackups, ::Google::Cloud::Filestore::V1::ListBackupsRequest, ::Google::Cloud::Filestore::V1::ListBackupsResponse

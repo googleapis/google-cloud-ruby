@@ -20,8 +20,11 @@
 require "google/cloud/datastore/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Datastore::V1::Datastore::Client#allocate_ids
+# Snippet for the allocate_ids call in the Datastore service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Datastore::V1::Datastore::Client#allocate_ids. It may require
+# modification in order to execute successfully.
 #
 def allocate_ids
   # Create a client object. The client can be reused for multiple calls.

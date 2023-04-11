@@ -52,6 +52,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :azure, :message, 11, "google.cloud.bigquery.connection.v1.AzureProperties"
         optional :cloud_spanner, :message, 21, "google.cloud.bigquery.connection.v1.CloudSpannerProperties"
         optional :cloud_resource, :message, 22, "google.cloud.bigquery.connection.v1.CloudResourceProperties"
+        optional :spark, :message, 23, "google.cloud.bigquery.connection.v1.SparkProperties"
       end
     end
     add_message "google.cloud.bigquery.connection.v1.CloudSqlProperties" do
@@ -73,6 +74,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.bigquery.connection.v1.CloudSpannerProperties" do
       optional :database, :string, 1
       optional :use_parallelism, :bool, 2
+      optional :use_serverless_analytics, :bool, 3
+      optional :database_role, :string, 4
     end
     add_message "google.cloud.bigquery.connection.v1.AwsProperties" do
       oneof :authentication_method do
@@ -101,6 +104,17 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.bigquery.connection.v1.CloudResourceProperties" do
       optional :service_account_id, :string, 1
     end
+    add_message "google.cloud.bigquery.connection.v1.MetastoreServiceConfig" do
+      optional :metastore_service, :string, 1
+    end
+    add_message "google.cloud.bigquery.connection.v1.SparkHistoryServerConfig" do
+      optional :dataproc_cluster, :string, 1
+    end
+    add_message "google.cloud.bigquery.connection.v1.SparkProperties" do
+      optional :service_account_id, :string, 1
+      optional :metastore_service_config, :message, 3, "google.cloud.bigquery.connection.v1.MetastoreServiceConfig"
+      optional :spark_history_server_config, :message, 4, "google.cloud.bigquery.connection.v1.SparkHistoryServerConfig"
+    end
   end
 end
 
@@ -125,6 +139,9 @@ module Google
           AwsAccessRole = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.connection.v1.AwsAccessRole").msgclass
           AzureProperties = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.connection.v1.AzureProperties").msgclass
           CloudResourceProperties = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.connection.v1.CloudResourceProperties").msgclass
+          MetastoreServiceConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.connection.v1.MetastoreServiceConfig").msgclass
+          SparkHistoryServerConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.connection.v1.SparkHistoryServerConfig").msgclass
+          SparkProperties = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.connection.v1.SparkProperties").msgclass
         end
       end
     end

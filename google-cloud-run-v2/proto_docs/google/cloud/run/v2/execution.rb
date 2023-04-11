@@ -96,8 +96,9 @@ module Google
         #     Output only. The unique name of this Execution.
         # @!attribute [r] uid
         #   @return [::String]
-        #     Output only. Server assigned unique identifier for the Execution. The value is a UUID4
-        #     string and guaranteed to remain unchanged until the resource is deleted.
+        #     Output only. Server assigned unique identifier for the Execution. The value
+        #     is a UUID4 string and guaranteed to remain unchanged until the resource is
+        #     deleted.
         # @!attribute [r] generation
         #   @return [::Integer]
         #     Output only. A number that monotonically increases every time the user
@@ -110,17 +111,14 @@ module Google
         #     environment, state, etc. For more information, visit
         #     https://cloud.google.com/resource-manager/docs/creating-managing-labels or
         #     https://cloud.google.com/run/docs/configuring/labels
-        #     Cloud Run will populate some labels with 'run.googleapis.com' or
-        #     'serving.knative.dev' namespaces. Those labels are read-only, and user
-        #     changes will not be preserved.
         # @!attribute [rw] annotations
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     KRM-style annotations for the resource.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. Represents time when the execution was acknowledged by the execution
-        #     controller. It is not guaranteed to be set in happens-before order across
-        #     separate operations.
+        #     Output only. Represents time when the execution was acknowledged by the
+        #     execution controller. It is not guaranteed to be set in happens-before
+        #     order across separate operations.
         # @!attribute [r] start_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Represents time when the execution started to run.
@@ -128,8 +126,8 @@ module Google
         #     operations.
         # @!attribute [r] completion_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. Represents time when the execution was completed. It is not guaranteed to
-        #     be set in happens-before order across separate operations.
+        #     Output only. Represents time when the execution was completed. It is not
+        #     guaranteed to be set in happens-before order across separate operations.
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The last-modified time.
@@ -153,16 +151,16 @@ module Google
         #     Output only. The name of the parent Job.
         # @!attribute [r] parallelism
         #   @return [::Integer]
-        #     Output only. Specifies the maximum desired number of tasks the execution should
-        #     run at any given time. Must be <= task_count. The actual number of
+        #     Output only. Specifies the maximum desired number of tasks the execution
+        #     should run at any given time. Must be <= task_count. The actual number of
         #     tasks running in steady state will be less than this number when
         #     ((.spec.task_count - .status.successful) < .spec.parallelism), i.e. when
         #     the work left to do is less than max parallelism. More info:
         #     https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/
         # @!attribute [r] task_count
         #   @return [::Integer]
-        #     Output only. Specifies the desired number of tasks the execution should run.
-        #     Setting to 1 means that parallelism is limited to 1 and the success of
+        #     Output only. Specifies the desired number of tasks the execution should
+        #     run. Setting to 1 means that parallelism is limited to 1 and the success of
         #     that task signals the success of the execution.
         #     More info:
         #     https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/
@@ -171,17 +169,19 @@ module Google
         #     Output only. The template used to create tasks for this execution.
         # @!attribute [r] reconciling
         #   @return [::Boolean]
-        #     Output only. Indicates whether the resource's reconciliation is still in progress.
-        #     See comments in `Job.reconciling` for additional information on
+        #     Output only. Indicates whether the resource's reconciliation is still in
+        #     progress. See comments in `Job.reconciling` for additional information on
         #     reconciliation process in Cloud Run.
         # @!attribute [r] conditions
         #   @return [::Array<::Google::Cloud::Run::V2::Condition>]
-        #     Output only. The Condition of this Execution, containing its readiness status, and
-        #     detailed error information in case it did not reach the desired state.
+        #     Output only. The Condition of this Execution, containing its readiness
+        #     status, and detailed error information in case it did not reach the desired
+        #     state.
         # @!attribute [r] observed_generation
         #   @return [::Integer]
-        #     Output only. The generation of this Execution. See comments in `reconciling` for
-        #     additional information on reconciliation process in Cloud Run.
+        #     Output only. The generation of this Execution. See comments in
+        #     `reconciling` for additional information on reconciliation process in Cloud
+        #     Run.
         # @!attribute [r] running_count
         #   @return [::Integer]
         #     Output only. The number of actively running tasks.
@@ -191,6 +191,16 @@ module Google
         # @!attribute [r] failed_count
         #   @return [::Integer]
         #     Output only. The number of tasks which reached phase Failed.
+        # @!attribute [r] cancelled_count
+        #   @return [::Integer]
+        #     Output only. The number of tasks which reached phase Cancelled.
+        # @!attribute [r] retried_count
+        #   @return [::Integer]
+        #     Output only. The number of tasks which have retried at least once.
+        # @!attribute [r] log_uri
+        #   @return [::String]
+        #     Output only. URI where logs for this execution can be found in Cloud
+        #     Console.
         # @!attribute [r] etag
         #   @return [::String]
         #     Output only. A system-generated fingerprint for this version of the

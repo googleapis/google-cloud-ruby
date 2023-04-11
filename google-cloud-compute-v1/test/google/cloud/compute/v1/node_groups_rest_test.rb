@@ -91,27 +91,27 @@ class ::Google::Cloud::Compute::V1::NodeGroups::Rest::ClientTest < Minitest::Tes
 
         # Use hash object
         client.add_nodes({ node_group: node_group, node_groups_add_nodes_request_resource: node_groups_add_nodes_request_resource, project: project, request_id: request_id, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.add_nodes node_group: node_group, node_groups_add_nodes_request_resource: node_groups_add_nodes_request_resource, project: project, request_id: request_id, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.add_nodes ::Google::Cloud::Compute::V1::AddNodesNodeGroupRequest.new(node_group: node_group, node_groups_add_nodes_request_resource: node_groups_add_nodes_request_resource, project: project, request_id: request_id, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.add_nodes({ node_group: node_group, node_groups_add_nodes_request_resource: node_groups_add_nodes_request_resource, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.add_nodes(::Google::Cloud::Compute::V1::AddNodesNodeGroupRequest.new(node_group: node_group, node_groups_add_nodes_request_resource: node_groups_add_nodes_request_resource, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -151,27 +151,27 @@ class ::Google::Cloud::Compute::V1::NodeGroups::Rest::ClientTest < Minitest::Tes
 
         # Use hash object
         client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListNodeGroupsRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListNodeGroupsRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -208,27 +208,27 @@ class ::Google::Cloud::Compute::V1::NodeGroups::Rest::ClientTest < Minitest::Tes
 
         # Use hash object
         client.delete({ node_group: node_group, project: project, request_id: request_id, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.delete node_group: node_group, project: project, request_id: request_id, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.delete ::Google::Cloud::Compute::V1::DeleteNodeGroupRequest.new(node_group: node_group, project: project, request_id: request_id, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.delete({ node_group: node_group, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.delete(::Google::Cloud::Compute::V1::DeleteNodeGroupRequest.new(node_group: node_group, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -266,27 +266,27 @@ class ::Google::Cloud::Compute::V1::NodeGroups::Rest::ClientTest < Minitest::Tes
 
         # Use hash object
         client.delete_nodes({ node_group: node_group, node_groups_delete_nodes_request_resource: node_groups_delete_nodes_request_resource, project: project, request_id: request_id, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.delete_nodes node_group: node_group, node_groups_delete_nodes_request_resource: node_groups_delete_nodes_request_resource, project: project, request_id: request_id, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.delete_nodes ::Google::Cloud::Compute::V1::DeleteNodesNodeGroupRequest.new(node_group: node_group, node_groups_delete_nodes_request_resource: node_groups_delete_nodes_request_resource, project: project, request_id: request_id, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.delete_nodes({ node_group: node_group, node_groups_delete_nodes_request_resource: node_groups_delete_nodes_request_resource, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.delete_nodes(::Google::Cloud::Compute::V1::DeleteNodesNodeGroupRequest.new(node_group: node_group, node_groups_delete_nodes_request_resource: node_groups_delete_nodes_request_resource, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -322,27 +322,27 @@ class ::Google::Cloud::Compute::V1::NodeGroups::Rest::ClientTest < Minitest::Tes
 
         # Use hash object
         client.get({ node_group: node_group, project: project, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.get node_group: node_group, project: project, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.get ::Google::Cloud::Compute::V1::GetNodeGroupRequest.new(node_group: node_group, project: project, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.get({ node_group: node_group, project: project, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.get(::Google::Cloud::Compute::V1::GetNodeGroupRequest.new(node_group: node_group, project: project, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -379,27 +379,27 @@ class ::Google::Cloud::Compute::V1::NodeGroups::Rest::ClientTest < Minitest::Tes
 
         # Use hash object
         client.get_iam_policy({ options_requested_policy_version: options_requested_policy_version, project: project, resource: resource, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.get_iam_policy options_requested_policy_version: options_requested_policy_version, project: project, resource: resource, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.get_iam_policy ::Google::Cloud::Compute::V1::GetIamPolicyNodeGroupRequest.new(options_requested_policy_version: options_requested_policy_version, project: project, resource: resource, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.get_iam_policy({ options_requested_policy_version: options_requested_policy_version, project: project, resource: resource, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.get_iam_policy(::Google::Cloud::Compute::V1::GetIamPolicyNodeGroupRequest.new(options_requested_policy_version: options_requested_policy_version, project: project, resource: resource, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -437,27 +437,27 @@ class ::Google::Cloud::Compute::V1::NodeGroups::Rest::ClientTest < Minitest::Tes
 
         # Use hash object
         client.insert({ initial_node_count: initial_node_count, node_group_resource: node_group_resource, project: project, request_id: request_id, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.insert initial_node_count: initial_node_count, node_group_resource: node_group_resource, project: project, request_id: request_id, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.insert ::Google::Cloud::Compute::V1::InsertNodeGroupRequest.new(initial_node_count: initial_node_count, node_group_resource: node_group_resource, project: project, request_id: request_id, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.insert({ initial_node_count: initial_node_count, node_group_resource: node_group_resource, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.insert(::Google::Cloud::Compute::V1::InsertNodeGroupRequest.new(initial_node_count: initial_node_count, node_group_resource: node_group_resource, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -497,27 +497,27 @@ class ::Google::Cloud::Compute::V1::NodeGroups::Rest::ClientTest < Minitest::Tes
 
         # Use hash object
         client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.list ::Google::Cloud::Compute::V1::ListNodeGroupsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.list(::Google::Cloud::Compute::V1::ListNodeGroupsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -558,27 +558,27 @@ class ::Google::Cloud::Compute::V1::NodeGroups::Rest::ClientTest < Minitest::Tes
 
         # Use hash object
         client.list_nodes({ filter: filter, max_results: max_results, node_group: node_group, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.list_nodes filter: filter, max_results: max_results, node_group: node_group, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.list_nodes ::Google::Cloud::Compute::V1::ListNodesNodeGroupsRequest.new(filter: filter, max_results: max_results, node_group: node_group, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.list_nodes({ filter: filter, max_results: max_results, node_group: node_group, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.list_nodes(::Google::Cloud::Compute::V1::ListNodesNodeGroupsRequest.new(filter: filter, max_results: max_results, node_group: node_group, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -616,27 +616,27 @@ class ::Google::Cloud::Compute::V1::NodeGroups::Rest::ClientTest < Minitest::Tes
 
         # Use hash object
         client.patch({ node_group: node_group, node_group_resource: node_group_resource, project: project, request_id: request_id, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.patch node_group: node_group, node_group_resource: node_group_resource, project: project, request_id: request_id, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.patch ::Google::Cloud::Compute::V1::PatchNodeGroupRequest.new(node_group: node_group, node_group_resource: node_group_resource, project: project, request_id: request_id, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.patch({ node_group: node_group, node_group_resource: node_group_resource, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.patch(::Google::Cloud::Compute::V1::PatchNodeGroupRequest.new(node_group: node_group, node_group_resource: node_group_resource, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -673,27 +673,27 @@ class ::Google::Cloud::Compute::V1::NodeGroups::Rest::ClientTest < Minitest::Tes
 
         # Use hash object
         client.set_iam_policy({ project: project, resource: resource, zone: zone, zone_set_policy_request_resource: zone_set_policy_request_resource }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.set_iam_policy project: project, resource: resource, zone: zone, zone_set_policy_request_resource: zone_set_policy_request_resource do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.set_iam_policy ::Google::Cloud::Compute::V1::SetIamPolicyNodeGroupRequest.new(project: project, resource: resource, zone: zone, zone_set_policy_request_resource: zone_set_policy_request_resource) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.set_iam_policy({ project: project, resource: resource, zone: zone, zone_set_policy_request_resource: zone_set_policy_request_resource }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.set_iam_policy(::Google::Cloud::Compute::V1::SetIamPolicyNodeGroupRequest.new(project: project, resource: resource, zone: zone, zone_set_policy_request_resource: zone_set_policy_request_resource), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -731,31 +731,89 @@ class ::Google::Cloud::Compute::V1::NodeGroups::Rest::ClientTest < Minitest::Tes
 
         # Use hash object
         client.set_node_template({ node_group: node_group, node_groups_set_node_template_request_resource: node_groups_set_node_template_request_resource, project: project, request_id: request_id, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.set_node_template node_group: node_group, node_groups_set_node_template_request_resource: node_groups_set_node_template_request_resource, project: project, request_id: request_id, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.set_node_template ::Google::Cloud::Compute::V1::SetNodeTemplateNodeGroupRequest.new(node_group: node_group, node_groups_set_node_template_request_resource: node_groups_set_node_template_request_resource, project: project, request_id: request_id, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.set_node_template({ node_group: node_group, node_groups_set_node_template_request_resource: node_groups_set_node_template_request_resource, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.set_node_template(::Google::Cloud::Compute::V1::SetNodeTemplateNodeGroupRequest.new(node_group: node_group, node_groups_set_node_template_request_resource: node_groups_set_node_template_request_resource, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
         assert_equal 5, set_node_template_client_stub.call_count
+      end
+    end
+  end
+
+  def test_simulate_maintenance_event
+    # Create test objects.
+    client_result = ::Google::Cloud::Compute::V1::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    node_group = "hello world"
+    node_groups_simulate_maintenance_event_request_resource = {}
+    project = "hello world"
+    request_id = "hello world"
+    zone = "hello world"
+
+    simulate_maintenance_event_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Compute::V1::NodeGroups::Rest::ServiceStub.stub :transcode_simulate_maintenance_event_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, simulate_maintenance_event_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::NodeGroups::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.simulate_maintenance_event({ node_group: node_group, node_groups_simulate_maintenance_event_request_resource: node_groups_simulate_maintenance_event_request_resource, project: project, request_id: request_id, zone: zone }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.simulate_maintenance_event node_group: node_group, node_groups_simulate_maintenance_event_request_resource: node_groups_simulate_maintenance_event_request_resource, project: project, request_id: request_id, zone: zone do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.simulate_maintenance_event ::Google::Cloud::Compute::V1::SimulateMaintenanceEventNodeGroupRequest.new(node_group: node_group, node_groups_simulate_maintenance_event_request_resource: node_groups_simulate_maintenance_event_request_resource, project: project, request_id: request_id, zone: zone) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.simulate_maintenance_event({ node_group: node_group, node_groups_simulate_maintenance_event_request_resource: node_groups_simulate_maintenance_event_request_resource, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.simulate_maintenance_event(::Google::Cloud::Compute::V1::SimulateMaintenanceEventNodeGroupRequest.new(node_group: node_group, node_groups_simulate_maintenance_event_request_resource: node_groups_simulate_maintenance_event_request_resource, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, simulate_maintenance_event_client_stub.call_count
       end
     end
   end
@@ -788,27 +846,27 @@ class ::Google::Cloud::Compute::V1::NodeGroups::Rest::ClientTest < Minitest::Tes
 
         # Use hash object
         client.test_iam_permissions({ project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.test_iam_permissions project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.test_iam_permissions ::Google::Cloud::Compute::V1::TestIamPermissionsNodeGroupRequest.new(project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.test_iam_permissions({ project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.test_iam_permissions(::Google::Cloud::Compute::V1::TestIamPermissionsNodeGroupRequest.new(project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls

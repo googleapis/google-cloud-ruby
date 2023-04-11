@@ -497,6 +497,51 @@ module Google
           end
         end
 
+        # A Dataproc job for running [Trino](https://trino.io/) queries.
+        # **IMPORTANT**: The [Dataproc Trino Optional
+        # Component](https://cloud.google.com/dataproc/docs/concepts/components/trino)
+        # must be enabled when the cluster is created to submit a Trino job to the
+        # cluster.
+        # @!attribute [rw] query_file_uri
+        #   @return [::String]
+        #     The HCFS URI of the script that contains SQL queries.
+        # @!attribute [rw] query_list
+        #   @return [::Google::Cloud::Dataproc::V1::QueryList]
+        #     A list of queries.
+        # @!attribute [rw] continue_on_failure
+        #   @return [::Boolean]
+        #     Optional. Whether to continue executing queries if a query fails.
+        #     The default value is `false`. Setting to `true` can be useful when
+        #     executing independent parallel queries.
+        # @!attribute [rw] output_format
+        #   @return [::String]
+        #     Optional. The format in which query output will be displayed. See the
+        #     Trino documentation for supported output formats
+        # @!attribute [rw] client_tags
+        #   @return [::Array<::String>]
+        #     Optional. Trino client tags to attach to this query
+        # @!attribute [rw] properties
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. A mapping of property names to values. Used to set Trino
+        #     [session properties](https://trino.io/docs/current/sql/set-session.html)
+        #     Equivalent to using the --session flag in the Trino CLI
+        # @!attribute [rw] logging_config
+        #   @return [::Google::Cloud::Dataproc::V1::LoggingConfig]
+        #     Optional. The runtime log config for job execution.
+        class TrinoJob
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class PropertiesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # Dataproc job config.
         # @!attribute [rw] cluster_name
         #   @return [::String]
@@ -715,6 +760,9 @@ module Google
         # @!attribute [rw] presto_job
         #   @return [::Google::Cloud::Dataproc::V1::PrestoJob]
         #     Optional. Job is a Presto job.
+        # @!attribute [rw] trino_job
+        #   @return [::Google::Cloud::Dataproc::V1::TrinoJob]
+        #     Optional. Job is a Trino job.
         # @!attribute [r] status
         #   @return [::Google::Cloud::Dataproc::V1::JobStatus]
         #     Output only. The job status. Additional application-specific

@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-functions-v2",
-    "version": "0.1.0",
+    "version": "0.3.0",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "cloudfunctions_v2_generated_FunctionService_GetFunction_sync",
-      "title": "Snippet for get_function in FunctionService",
-      "description": "Basic snippet for get_function in FunctionService",
+      "title": "Snippet for the get_function call in the FunctionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Functions::V2::FunctionService::Client#get_function. It may require modification in order to execute successfully.",
       "file": "function_service/get_function.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudfunctions_v2_generated_FunctionService_ListFunctions_sync",
-      "title": "Snippet for list_functions in FunctionService",
-      "description": "Basic snippet for list_functions in FunctionService",
+      "title": "Snippet for the list_functions call in the FunctionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Functions::V2::FunctionService::Client#list_functions. It may require modification in order to execute successfully.",
       "file": "function_service/list_functions.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudfunctions_v2_generated_FunctionService_CreateFunction_sync",
-      "title": "Snippet for create_function in FunctionService",
-      "description": "Basic snippet for create_function in FunctionService",
+      "title": "Snippet for the create_function call in the FunctionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Functions::V2::FunctionService::Client#create_function. It may require modification in order to execute successfully.",
       "file": "function_service/create_function.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudfunctions_v2_generated_FunctionService_UpdateFunction_sync",
-      "title": "Snippet for update_function in FunctionService",
-      "description": "Basic snippet for update_function in FunctionService",
+      "title": "Snippet for the update_function call in the FunctionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Functions::V2::FunctionService::Client#update_function. It may require modification in order to execute successfully.",
       "file": "function_service/update_function.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudfunctions_v2_generated_FunctionService_DeleteFunction_sync",
-      "title": "Snippet for delete_function in FunctionService",
-      "description": "Basic snippet for delete_function in FunctionService",
+      "title": "Snippet for the delete_function call in the FunctionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Functions::V2::FunctionService::Client#delete_function. It may require modification in order to execute successfully.",
       "file": "function_service/delete_function.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudfunctions_v2_generated_FunctionService_GenerateUploadUrl_sync",
-      "title": "Snippet for generate_upload_url in FunctionService",
-      "description": "Basic snippet for generate_upload_url in FunctionService",
+      "title": "Snippet for the generate_upload_url call in the FunctionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Functions::V2::FunctionService::Client#generate_upload_url. It may require modification in order to execute successfully.",
       "file": "function_service/generate_upload_url.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudfunctions_v2_generated_FunctionService_GenerateDownloadUrl_sync",
-      "title": "Snippet for generate_download_url in FunctionService",
-      "description": "Basic snippet for generate_download_url in FunctionService",
+      "title": "Snippet for the generate_download_url call in the FunctionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Functions::V2::FunctionService::Client#generate_download_url. It may require modification in order to execute successfully.",
       "file": "function_service/generate_download_url.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "cloudfunctions_v2_generated_FunctionService_ListRuntimes_sync",
-      "title": "Snippet for list_runtimes in FunctionService",
-      "description": "Basic snippet for list_runtimes in FunctionService",
+      "title": "Snippet for the list_runtimes call in the FunctionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Functions::V2::FunctionService::Client#list_runtimes. It may require modification in order to execute successfully.",
       "file": "function_service/list_runtimes.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,7 +326,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]

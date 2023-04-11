@@ -5,6 +5,7 @@ require 'google/protobuf'
 
 require 'google/analytics/admin/v1alpha/access_report_pb'
 require 'google/analytics/admin/v1alpha/audience_pb'
+require 'google/analytics/admin/v1alpha/expanded_data_set_pb'
 require 'google/analytics/admin/v1alpha/resources_pb'
 require 'google/api/annotations_pb'
 require 'google/api/client_pb'
@@ -314,6 +315,29 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.analytics.admin.v1alpha.CancelDisplayVideo360AdvertiserLinkProposalRequest" do
       optional :name, :string, 1
     end
+    add_message "google.analytics.admin.v1alpha.GetSearchAds360LinkRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.ListSearchAds360LinksRequest" do
+      optional :parent, :string, 1
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
+    end
+    add_message "google.analytics.admin.v1alpha.ListSearchAds360LinksResponse" do
+      repeated :search_ads_360_links, :message, 1, "google.analytics.admin.v1alpha.SearchAds360Link"
+      optional :next_page_token, :string, 2
+    end
+    add_message "google.analytics.admin.v1alpha.CreateSearchAds360LinkRequest" do
+      optional :parent, :string, 1
+      optional :search_ads_360_link, :message, 2, "google.analytics.admin.v1alpha.SearchAds360Link"
+    end
+    add_message "google.analytics.admin.v1alpha.DeleteSearchAds360LinkRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.UpdateSearchAds360LinkRequest" do
+      optional :search_ads_360_link, :message, 1, "google.analytics.admin.v1alpha.SearchAds360Link"
+      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
+    end
     add_message "google.analytics.admin.v1alpha.CreateCustomDimensionRequest" do
       optional :parent, :string, 1
       optional :custom_dimension, :message, 2, "google.analytics.admin.v1alpha.CustomDimension"
@@ -420,6 +444,123 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :attribution_settings, :message, 1, "google.analytics.admin.v1alpha.AttributionSettings"
       optional :update_mask, :message, 2, "google.protobuf.FieldMask"
     end
+    add_message "google.analytics.admin.v1alpha.GetAccessBindingRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.BatchGetAccessBindingsRequest" do
+      optional :parent, :string, 1
+      repeated :names, :string, 2
+    end
+    add_message "google.analytics.admin.v1alpha.BatchGetAccessBindingsResponse" do
+      repeated :access_bindings, :message, 1, "google.analytics.admin.v1alpha.AccessBinding"
+    end
+    add_message "google.analytics.admin.v1alpha.ListAccessBindingsRequest" do
+      optional :parent, :string, 1
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
+    end
+    add_message "google.analytics.admin.v1alpha.ListAccessBindingsResponse" do
+      repeated :access_bindings, :message, 1, "google.analytics.admin.v1alpha.AccessBinding"
+      optional :next_page_token, :string, 2
+    end
+    add_message "google.analytics.admin.v1alpha.CreateAccessBindingRequest" do
+      optional :parent, :string, 1
+      optional :access_binding, :message, 2, "google.analytics.admin.v1alpha.AccessBinding"
+    end
+    add_message "google.analytics.admin.v1alpha.BatchCreateAccessBindingsRequest" do
+      optional :parent, :string, 1
+      repeated :requests, :message, 3, "google.analytics.admin.v1alpha.CreateAccessBindingRequest"
+    end
+    add_message "google.analytics.admin.v1alpha.BatchCreateAccessBindingsResponse" do
+      repeated :access_bindings, :message, 1, "google.analytics.admin.v1alpha.AccessBinding"
+    end
+    add_message "google.analytics.admin.v1alpha.UpdateAccessBindingRequest" do
+      optional :access_binding, :message, 1, "google.analytics.admin.v1alpha.AccessBinding"
+    end
+    add_message "google.analytics.admin.v1alpha.BatchUpdateAccessBindingsRequest" do
+      optional :parent, :string, 1
+      repeated :requests, :message, 2, "google.analytics.admin.v1alpha.UpdateAccessBindingRequest"
+    end
+    add_message "google.analytics.admin.v1alpha.BatchUpdateAccessBindingsResponse" do
+      repeated :access_bindings, :message, 1, "google.analytics.admin.v1alpha.AccessBinding"
+    end
+    add_message "google.analytics.admin.v1alpha.DeleteAccessBindingRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.BatchDeleteAccessBindingsRequest" do
+      optional :parent, :string, 1
+      repeated :requests, :message, 2, "google.analytics.admin.v1alpha.DeleteAccessBindingRequest"
+    end
+    add_message "google.analytics.admin.v1alpha.CreateExpandedDataSetRequest" do
+      optional :parent, :string, 1
+      optional :expanded_data_set, :message, 2, "google.analytics.admin.v1alpha.ExpandedDataSet"
+    end
+    add_message "google.analytics.admin.v1alpha.UpdateExpandedDataSetRequest" do
+      optional :expanded_data_set, :message, 1, "google.analytics.admin.v1alpha.ExpandedDataSet"
+      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
+    end
+    add_message "google.analytics.admin.v1alpha.DeleteExpandedDataSetRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.GetExpandedDataSetRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.ListExpandedDataSetsRequest" do
+      optional :parent, :string, 1
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
+    end
+    add_message "google.analytics.admin.v1alpha.ListExpandedDataSetsResponse" do
+      repeated :expanded_data_sets, :message, 1, "google.analytics.admin.v1alpha.ExpandedDataSet"
+      optional :next_page_token, :string, 2
+    end
+    add_message "google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest" do
+      optional :property, :string, 1
+      optional :opt_out, :bool, 2
+    end
+    add_message "google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse" do
+    end
+    add_message "google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutRequest" do
+      optional :property, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse" do
+      optional :opt_out, :bool, 1
+    end
+    add_message "google.analytics.admin.v1alpha.GetBigQueryLinkRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.ListBigQueryLinksRequest" do
+      optional :parent, :string, 1
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
+    end
+    add_message "google.analytics.admin.v1alpha.ListBigQueryLinksResponse" do
+      repeated :bigquery_links, :message, 1, "google.analytics.admin.v1alpha.BigQueryLink"
+      optional :next_page_token, :string, 2
+    end
+    add_message "google.analytics.admin.v1alpha.GetEnhancedMeasurementSettingsRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.UpdateEnhancedMeasurementSettingsRequest" do
+      optional :enhanced_measurement_settings, :message, 1, "google.analytics.admin.v1alpha.EnhancedMeasurementSettings"
+      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
+    end
+    add_message "google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest" do
+      optional :property, :string, 1
+      optional :connected_site_tag, :message, 2, "google.analytics.admin.v1alpha.ConnectedSiteTag"
+    end
+    add_message "google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse" do
+    end
+    add_message "google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest" do
+      optional :property, :string, 1
+      optional :tag_id, :string, 2
+    end
+    add_message "google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest" do
+      optional :property, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse" do
+      repeated :connected_site_tags, :message, 1, "google.analytics.admin.v1alpha.ConnectedSiteTag"
+    end
   end
 end
 
@@ -501,6 +642,12 @@ module Google
         ApproveDisplayVideo360AdvertiserLinkProposalRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalRequest").msgclass
         ApproveDisplayVideo360AdvertiserLinkProposalResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalResponse").msgclass
         CancelDisplayVideo360AdvertiserLinkProposalRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CancelDisplayVideo360AdvertiserLinkProposalRequest").msgclass
+        GetSearchAds360LinkRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetSearchAds360LinkRequest").msgclass
+        ListSearchAds360LinksRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListSearchAds360LinksRequest").msgclass
+        ListSearchAds360LinksResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListSearchAds360LinksResponse").msgclass
+        CreateSearchAds360LinkRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CreateSearchAds360LinkRequest").msgclass
+        DeleteSearchAds360LinkRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DeleteSearchAds360LinkRequest").msgclass
+        UpdateSearchAds360LinkRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.UpdateSearchAds360LinkRequest").msgclass
         CreateCustomDimensionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CreateCustomDimensionRequest").msgclass
         UpdateCustomDimensionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.UpdateCustomDimensionRequest").msgclass
         ListCustomDimensionsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListCustomDimensionsRequest").msgclass
@@ -529,6 +676,39 @@ module Google
         ArchiveAudienceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ArchiveAudienceRequest").msgclass
         GetAttributionSettingsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetAttributionSettingsRequest").msgclass
         UpdateAttributionSettingsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.UpdateAttributionSettingsRequest").msgclass
+        GetAccessBindingRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetAccessBindingRequest").msgclass
+        BatchGetAccessBindingsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.BatchGetAccessBindingsRequest").msgclass
+        BatchGetAccessBindingsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.BatchGetAccessBindingsResponse").msgclass
+        ListAccessBindingsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListAccessBindingsRequest").msgclass
+        ListAccessBindingsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListAccessBindingsResponse").msgclass
+        CreateAccessBindingRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CreateAccessBindingRequest").msgclass
+        BatchCreateAccessBindingsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.BatchCreateAccessBindingsRequest").msgclass
+        BatchCreateAccessBindingsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.BatchCreateAccessBindingsResponse").msgclass
+        UpdateAccessBindingRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.UpdateAccessBindingRequest").msgclass
+        BatchUpdateAccessBindingsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.BatchUpdateAccessBindingsRequest").msgclass
+        BatchUpdateAccessBindingsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.BatchUpdateAccessBindingsResponse").msgclass
+        DeleteAccessBindingRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DeleteAccessBindingRequest").msgclass
+        BatchDeleteAccessBindingsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.BatchDeleteAccessBindingsRequest").msgclass
+        CreateExpandedDataSetRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CreateExpandedDataSetRequest").msgclass
+        UpdateExpandedDataSetRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.UpdateExpandedDataSetRequest").msgclass
+        DeleteExpandedDataSetRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DeleteExpandedDataSetRequest").msgclass
+        GetExpandedDataSetRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetExpandedDataSetRequest").msgclass
+        ListExpandedDataSetsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListExpandedDataSetsRequest").msgclass
+        ListExpandedDataSetsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListExpandedDataSetsResponse").msgclass
+        SetAutomatedGa4ConfigurationOptOutRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest").msgclass
+        SetAutomatedGa4ConfigurationOptOutResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse").msgclass
+        FetchAutomatedGa4ConfigurationOptOutRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutRequest").msgclass
+        FetchAutomatedGa4ConfigurationOptOutResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutResponse").msgclass
+        GetBigQueryLinkRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetBigQueryLinkRequest").msgclass
+        ListBigQueryLinksRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListBigQueryLinksRequest").msgclass
+        ListBigQueryLinksResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListBigQueryLinksResponse").msgclass
+        GetEnhancedMeasurementSettingsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetEnhancedMeasurementSettingsRequest").msgclass
+        UpdateEnhancedMeasurementSettingsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.UpdateEnhancedMeasurementSettingsRequest").msgclass
+        CreateConnectedSiteTagRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CreateConnectedSiteTagRequest").msgclass
+        CreateConnectedSiteTagResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CreateConnectedSiteTagResponse").msgclass
+        DeleteConnectedSiteTagRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest").msgclass
+        ListConnectedSiteTagsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest").msgclass
+        ListConnectedSiteTagsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse").msgclass
       end
     end
   end

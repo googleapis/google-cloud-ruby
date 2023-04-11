@@ -20,8 +20,11 @@
 require "google/area120/tables/v1alpha1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Area120::Tables::V1alpha1::TablesService::Client#delete_row
+# Snippet for the delete_row call in the TablesService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Area120::Tables::V1alpha1::TablesService::Client#delete_row. It may
+# require modification in order to execute successfully.
 #
 def delete_row
   # Create a client object. The client can be reused for multiple calls.

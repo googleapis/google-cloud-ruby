@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-memcache-v1beta2",
-    "version": "0.4.0",
+    "version": "0.5.0",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "memcache_v1beta2_generated_CloudMemcache_ListInstances_sync",
-      "title": "Snippet for list_instances in CloudMemcache",
-      "description": "Basic snippet for list_instances in CloudMemcache",
+      "title": "Snippet for the list_instances call in the CloudMemcache service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Memcache::V1beta2::CloudMemcache::Client#list_instances. It may require modification in order to execute successfully.",
       "file": "cloud_memcache/list_instances.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "memcache_v1beta2_generated_CloudMemcache_GetInstance_sync",
-      "title": "Snippet for get_instance in CloudMemcache",
-      "description": "Basic snippet for get_instance in CloudMemcache",
+      "title": "Snippet for the get_instance call in the CloudMemcache service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Memcache::V1beta2::CloudMemcache::Client#get_instance. It may require modification in order to execute successfully.",
       "file": "cloud_memcache/get_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "memcache_v1beta2_generated_CloudMemcache_CreateInstance_sync",
-      "title": "Snippet for create_instance in CloudMemcache",
-      "description": "Basic snippet for create_instance in CloudMemcache",
+      "title": "Snippet for the create_instance call in the CloudMemcache service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Memcache::V1beta2::CloudMemcache::Client#create_instance. It may require modification in order to execute successfully.",
       "file": "cloud_memcache/create_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "memcache_v1beta2_generated_CloudMemcache_UpdateInstance_sync",
-      "title": "Snippet for update_instance in CloudMemcache",
-      "description": "Basic snippet for update_instance in CloudMemcache",
+      "title": "Snippet for the update_instance call in the CloudMemcache service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Memcache::V1beta2::CloudMemcache::Client#update_instance. It may require modification in order to execute successfully.",
       "file": "cloud_memcache/update_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "memcache_v1beta2_generated_CloudMemcache_UpdateParameters_sync",
-      "title": "Snippet for update_parameters in CloudMemcache",
-      "description": "Basic snippet for update_parameters in CloudMemcache",
+      "title": "Snippet for the update_parameters call in the CloudMemcache service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Memcache::V1beta2::CloudMemcache::Client#update_parameters. It may require modification in order to execute successfully.",
       "file": "cloud_memcache/update_parameters.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "memcache_v1beta2_generated_CloudMemcache_DeleteInstance_sync",
-      "title": "Snippet for delete_instance in CloudMemcache",
-      "description": "Basic snippet for delete_instance in CloudMemcache",
+      "title": "Snippet for the delete_instance call in the CloudMemcache service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Memcache::V1beta2::CloudMemcache::Client#delete_instance. It may require modification in order to execute successfully.",
       "file": "cloud_memcache/delete_instance.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "memcache_v1beta2_generated_CloudMemcache_ApplyParameters_sync",
-      "title": "Snippet for apply_parameters in CloudMemcache",
-      "description": "Basic snippet for apply_parameters in CloudMemcache",
+      "title": "Snippet for the apply_parameters call in the CloudMemcache service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Memcache::V1beta2::CloudMemcache::Client#apply_parameters. It may require modification in order to execute successfully.",
       "file": "cloud_memcache/apply_parameters.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "memcache_v1beta2_generated_CloudMemcache_ApplySoftwareUpdate_sync",
-      "title": "Snippet for apply_software_update in CloudMemcache",
-      "description": "Basic snippet for apply_software_update in CloudMemcache",
+      "title": "Snippet for the apply_software_update call in the CloudMemcache service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Memcache::V1beta2::CloudMemcache::Client#apply_software_update. It may require modification in order to execute successfully.",
       "file": "cloud_memcache/apply_software_update.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "memcache_v1beta2_generated_CloudMemcache_RescheduleMaintenance_sync",
-      "title": "Snippet for reschedule_maintenance in CloudMemcache",
-      "description": "Basic snippet for reschedule_maintenance in CloudMemcache",
+      "title": "Snippet for the reschedule_maintenance call in the CloudMemcache service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Memcache::V1beta2::CloudMemcache::Client#reschedule_maintenance. It may require modification in order to execute successfully.",
       "file": "cloud_memcache/reschedule_maintenance.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,7 +366,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]

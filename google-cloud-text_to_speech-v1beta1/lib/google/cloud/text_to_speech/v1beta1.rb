@@ -31,6 +31,11 @@ module Google
       #     require "google/cloud/text_to_speech/v1beta1"
       #     client = ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/text_to_speech/v1beta1"
+      #     client = ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Rest::Client.new
+      #
       module V1beta1
       end
     end

@@ -37,12 +37,14 @@ module Google
         #     Optional. The cluster config for a cluster of Compute Engine Instances.
         #     Note that Dataproc may set default values, and values may change
         #     when clusters are updated.
+        #
+        #     Exactly one of ClusterConfig or VirtualClusterConfig must be specified.
         # @!attribute [rw] virtual_cluster_config
         #   @return [::Google::Cloud::Dataproc::V1::VirtualClusterConfig]
         #     Optional. The virtual cluster config is used when creating a Dataproc
         #     cluster that does not directly control the underlying compute resources,
         #     for example, when creating a [Dataproc-on-GKE
-        #     cluster](https://cloud.google.com/dataproc/docs/guides/dpgke/dataproc-gke).
+        #     cluster](https://cloud.google.com/dataproc/docs/guides/dpgke/dataproc-gke-overview).
         #     Dataproc may set default values, and values may change when
         #     clusters are updated. Exactly one of
         #     {::Google::Cloud::Dataproc::V1::Cluster#config config} or
@@ -180,7 +182,7 @@ module Google
 
         # The Dataproc cluster config for a cluster that does not directly control the
         # underlying compute resources, such as a [Dataproc-on-GKE
-        # cluster](https://cloud.google.com/dataproc/docs/guides/dpgke/dataproc-gke).
+        # cluster](https://cloud.google.com/dataproc/docs/guides/dpgke/dataproc-gke-overview).
         # @!attribute [rw] staging_bucket
         #   @return [::String]
         #     Optional. A Cloud Storage bucket used to stage job
@@ -272,17 +274,15 @@ module Google
         # instances, applicable to all instances in the cluster.
         # @!attribute [rw] zone_uri
         #   @return [::String]
-        #     Optional. The zone where the Compute Engine cluster will be located.
-        #     On a create request, it is required in the "global" region. If omitted
-        #     in a non-global Dataproc region, the service will pick a zone in the
-        #     corresponding Compute Engine region. On a get request, zone will
-        #     always be present.
+        #     Optional. The Compute Engine zone where the Dataproc cluster will be
+        #     located. If omitted, the service will pick a zone in the cluster's Compute
+        #     Engine region. On a get request, zone will always be present.
         #
         #     A full URL, partial URI, or short name are valid. Examples:
         #
         #     * `https://www.googleapis.com/compute/v1/projects/[project_id]/zones/[zone]`
         #     * `projects/[project_id]/zones/[zone]`
-        #     * `us-central1-f`
+        #     * `[zone]`
         # @!attribute [rw] network_uri
         #   @return [::String]
         #     Optional. The Compute Engine network to be used for machine
@@ -294,8 +294,8 @@ module Google
         #
         #     A full URL, partial URI, or short name are valid. Examples:
         #
-        #     * `https://www.googleapis.com/compute/v1/projects/[project_id]/regions/global/default`
-        #     * `projects/[project_id]/regions/global/default`
+        #     * `https://www.googleapis.com/compute/v1/projects/[project_id]/global/networks/default`
+        #     * `projects/[project_id]/global/networks/default`
         #     * `default`
         # @!attribute [rw] subnetwork_uri
         #   @return [::String]
@@ -304,8 +304,8 @@ module Google
         #
         #     A full URL, partial URI, or short name are valid. Examples:
         #
-        #     * `https://www.googleapis.com/compute/v1/projects/[project_id]/regions/us-east1/subnetworks/sub0`
-        #     * `projects/[project_id]/regions/us-east1/subnetworks/sub0`
+        #     * `https://www.googleapis.com/compute/v1/projects/[project_id]/regions/[region]/subnetworks/sub0`
+        #     * `projects/[project_id]/regions/[region]/subnetworks/sub0`
         #     * `sub0`
         # @!attribute [rw] internal_ip_only
         #   @return [::Boolean]
@@ -422,8 +422,8 @@ module Google
         #
         #     A full URL, partial URI, or node group name are valid. Examples:
         #
-        #     * `https://www.googleapis.com/compute/v1/projects/[project_id]/zones/us-central1-a/nodeGroups/node-group-1`
-        #     * `projects/[project_id]/zones/us-central1-a/nodeGroups/node-group-1`
+        #     * `https://www.googleapis.com/compute/v1/projects/[project_id]/zones/[zone]/nodeGroups/node-group-1`
+        #     * `projects/[project_id]/zones/[zone]/nodeGroups/node-group-1`
         #     * `node-group-1`
         class NodeGroupAffinity
           include ::Google::Protobuf::MessageExts
@@ -479,14 +479,14 @@ module Google
         #
         #     Image examples:
         #
-        #     * `https://www.googleapis.com/compute/beta/projects/[project_id]/global/images/[image-id]`
+        #     * `https://www.googleapis.com/compute/v1/projects/[project_id]/global/images/[image-id]`
         #     * `projects/[project_id]/global/images/[image-id]`
         #     * `image-id`
         #
         #     Image family examples. Dataproc will use the most recent
         #     image from the family:
         #
-        #     * `https://www.googleapis.com/compute/beta/projects/[project_id]/global/images/family/[custom-image-family-name]`
+        #     * `https://www.googleapis.com/compute/v1/projects/[project_id]/global/images/family/[custom-image-family-name]`
         #     * `projects/[project_id]/global/images/family/[custom-image-family-name]`
         #
         #     If the URI is unspecified, it will be inferred from
@@ -497,8 +497,8 @@ module Google
         #
         #     A full URL, partial URI, or short name are valid. Examples:
         #
-        #     * `https://www.googleapis.com/compute/v1/projects/[project_id]/zones/us-east1-a/machineTypes/n1-standard-2`
-        #     * `projects/[project_id]/zones/us-east1-a/machineTypes/n1-standard-2`
+        #     * `https://www.googleapis.com/compute/v1/projects/[project_id]/zones/[zone]/machineTypes/n1-standard-2`
+        #     * `projects/[project_id]/zones/[zone]/machineTypes/n1-standard-2`
         #     * `n1-standard-2`
         #
         #     **Auto Zone Exception**: If you are using the Dataproc
@@ -559,6 +559,16 @@ module Google
             # (https://cloud.google.com/dataproc/docs/concepts/compute/secondary-vms)
             # groups.
             PREEMPTIBLE = 2
+
+            # Instances are [Spot VMs]
+            # (https://cloud.google.com/compute/docs/instances/spot).
+            #
+            # This option is allowed only for [secondary worker]
+            # (https://cloud.google.com/dataproc/docs/concepts/compute/secondary-vms)
+            # groups. Spot VMs are the latest version of [preemptible VMs]
+            # (https://cloud.google.com/compute/docs/instances/preemptible), and
+            # provide additional features.
+            SPOT = 3
           end
         end
 
@@ -583,12 +593,12 @@ module Google
         #     Full URL, partial URI, or short name of the accelerator type resource to
         #     expose to this instance. See
         #     [Compute Engine
-        #     AcceleratorTypes](https://cloud.google.com/compute/docs/reference/beta/acceleratorTypes).
+        #     AcceleratorTypes](https://cloud.google.com/compute/docs/reference/v1/acceleratorTypes).
         #
         #     Examples:
         #
-        #     * `https://www.googleapis.com/compute/beta/projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80`
-        #     * `projects/[project_id]/zones/us-east1-a/acceleratorTypes/nvidia-tesla-k80`
+        #     * `https://www.googleapis.com/compute/v1/projects/[project_id]/zones/[zone]/acceleratorTypes/nvidia-tesla-k80`
+        #     * `projects/[project_id]/zones/[zone]/acceleratorTypes/nvidia-tesla-k80`
         #     * `nvidia-tesla-k80`
         #
         #     **Auto Zone Exception**: If you are using the Dataproc
@@ -623,6 +633,9 @@ module Google
         #     If one or more SSDs are attached, this runtime bulk
         #     data is spread across them, and the boot disk contains only basic
         #     config and installed binaries.
+        #
+        #     Note: Local SSD options may vary by machine type and number of vCPUs
+        #     selected.
         # @!attribute [rw] local_ssd_interface
         #   @return [::String]
         #     Optional. Interface type of local SSDs (default is "scsi").
@@ -988,6 +1001,39 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Contains cluster daemon metrics, such as HDFS and YARN stats.
+        #
+        # **Beta Feature**: This report is available for testing purposes only. It may
+        # be changed before final release.
+        # @!attribute [rw] hdfs_metrics
+        #   @return [::Google::Protobuf::Map{::String => ::Integer}]
+        #     The HDFS metrics.
+        # @!attribute [rw] yarn_metrics
+        #   @return [::Google::Protobuf::Map{::String => ::Integer}]
+        #     YARN metrics.
+        class ClusterMetrics
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Integer]
+          class HdfsMetricsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Integer]
+          class YarnMetricsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # Dataproc metric config.
         # @!attribute [rw] metrics
         #   @return [::Array<::Google::Cloud::Dataproc::V1::DataprocMetricConfig::Metric>]
@@ -1066,39 +1112,9 @@ module Google
 
             # Hiveserver2 metric source.
             HIVESERVER2 = 6
-          end
-        end
 
-        # Contains cluster daemon metrics, such as HDFS and YARN stats.
-        #
-        # **Beta Feature**: This report is available for testing purposes only. It may
-        # be changed before final release.
-        # @!attribute [rw] hdfs_metrics
-        #   @return [::Google::Protobuf::Map{::String => ::Integer}]
-        #     The HDFS metrics.
-        # @!attribute [rw] yarn_metrics
-        #   @return [::Google::Protobuf::Map{::String => ::Integer}]
-        #     The YARN metrics.
-        class ClusterMetrics
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-
-          # @!attribute [rw] key
-          #   @return [::String]
-          # @!attribute [rw] value
-          #   @return [::Integer]
-          class HdfsMetricsEntry
-            include ::Google::Protobuf::MessageExts
-            extend ::Google::Protobuf::MessageExts::ClassMethods
-          end
-
-          # @!attribute [rw] key
-          #   @return [::String]
-          # @!attribute [rw] value
-          #   @return [::Integer]
-          class YarnMetricsEntry
-            include ::Google::Protobuf::MessageExts
-            extend ::Google::Protobuf::MessageExts::ClassMethods
+            # hivemetastore metric source
+            HIVEMETASTORE = 7
           end
         end
 
@@ -1151,7 +1167,7 @@ module Google
         #     Required. The changes to the cluster.
         # @!attribute [rw] graceful_decommission_timeout
         #   @return [::Google::Protobuf::Duration]
-        #     Optional. Timeout for graceful YARN decomissioning. Graceful
+        #     Optional. Timeout for graceful YARN decommissioning. Graceful
         #     decommissioning allows removing nodes from the cluster without
         #     interrupting jobs in progress. Timeout specifies how long to wait for jobs
         #     in progress to finish before forcefully removing nodes (and potentially

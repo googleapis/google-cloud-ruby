@@ -628,7 +628,7 @@ module Google
           # @!attribute [rw] audio
           #   @return [::String]
           #     The natural language speech audio to be processed.
-          #     A single request can contain up to 1 minute of speech audio data.
+          #     A single request can contain up to 2 minutes of speech audio data.
           #     The [transcribed
           #     text][google.cloud.dialogflow.cx.v3.QueryResult.transcript] cannot contain
           #     more than 256 bytes.
@@ -758,6 +758,9 @@ module Google
           # @!attribute [rw] query_input
           #   @return [::Google::Cloud::Dialogflow::CX::V3::QueryInput]
           #     Required. The input specification.
+          # @!attribute [rw] persist_parameter_changes
+          #   @return [::Boolean]
+          #     Persist session parameter changes from `query_params`.
           class MatchIntentRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

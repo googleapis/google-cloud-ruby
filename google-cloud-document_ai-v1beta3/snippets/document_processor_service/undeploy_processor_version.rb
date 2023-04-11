@@ -20,8 +20,11 @@
 require "google/cloud/document_ai/v1beta3"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client#undeploy_processor_version
+# Snippet for the undeploy_processor_version call in the DocumentProcessorService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client#undeploy_processor_version.
+# It may require modification in order to execute successfully.
 #
 def undeploy_processor_version
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def undeploy_processor_version
   # Call the undeploy_processor_version method.
   result = client.undeploy_processor_version request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END documentai_v1beta3_generated_DocumentProcessorService_UndeployProcessorVersion_sync]

@@ -20,8 +20,11 @@
 require "google/cloud/iot/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Iot::V1::DeviceManager::Client#list_device_config_versions
+# Snippet for the list_device_config_versions call in the DeviceManager service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Iot::V1::DeviceManager::Client#list_device_config_versions. It
+# may require modification in order to execute successfully.
 #
 def list_device_config_versions
   # Create a client object. The client can be reused for multiple calls.

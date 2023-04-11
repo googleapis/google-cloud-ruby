@@ -26,6 +26,7 @@ require "google/cloud/dataplex/v1/dataplex_service/credentials"
 require "google/cloud/dataplex/v1/dataplex_service/paths"
 require "google/cloud/dataplex/v1/dataplex_service/operations"
 require "google/cloud/dataplex/v1/dataplex_service/client"
+require "google/cloud/dataplex/v1/dataplex_service/rest"
 
 module Google
   module Cloud
@@ -42,6 +43,11 @@ module Google
         #
         #     require "google/cloud/dataplex/v1/dataplex_service"
         #     client = ::Google::Cloud::Dataplex::V1::DataplexService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/dataplex/v1/dataplex_service/rest"
+        #     client = ::Google::Cloud::Dataplex::V1::DataplexService::Rest::Client.new
         #
         module DataplexService
         end

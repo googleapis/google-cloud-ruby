@@ -73,8 +73,9 @@ module Google
         #     Output only. The unique name of this Task.
         # @!attribute [r] uid
         #   @return [::String]
-        #     Output only. Server assigned unique identifier for the Task. The value is a UUID4
-        #     string and guaranteed to remain unchanged until the resource is deleted.
+        #     Output only. Server assigned unique identifier for the Task. The value is a
+        #     UUID4 string and guaranteed to remain unchanged until the resource is
+        #     deleted.
         # @!attribute [r] generation
         #   @return [::Integer]
         #     Output only. A number that monotonically increases every time the user
@@ -87,17 +88,14 @@ module Google
         #     environment, state, etc. For more information, visit
         #     https://cloud.google.com/resource-manager/docs/creating-managing-labels or
         #     https://cloud.google.com/run/docs/configuring/labels
-        #     Cloud Run will populate some labels with 'run.googleapis.com' or
-        #     'serving.knative.dev' namespaces. Those labels are read-only, and user
-        #     changes will not be preserved.
         # @!attribute [rw] annotations
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     KRM-style annotations for the resource.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. Represents time when the task was created by the job controller.
-        #     It is not guaranteed to be set in happens-before order across separate
-        #     operations.
+        #     Output only. Represents time when the task was created by the job
+        #     controller. It is not guaranteed to be set in happens-before order across
+        #     separate operations.
         # @!attribute [r] start_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Represents time when the task started to run.
@@ -105,8 +103,8 @@ module Google
         #     operations.
         # @!attribute [r] completion_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. Represents time when the Task was completed. It is not guaranteed to
-        #     be set in happens-before order across separate operations.
+        #     Output only. Represents time when the Task was completed. It is not
+        #     guaranteed to be set in happens-before order across separate operations.
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The last-modified time.
@@ -151,13 +149,13 @@ module Google
         #     The execution environment being used to host this Task.
         # @!attribute [r] reconciling
         #   @return [::Boolean]
-        #     Output only. Indicates whether the resource's reconciliation is still in progress.
-        #     See comments in `Job.reconciling` for additional information on
+        #     Output only. Indicates whether the resource's reconciliation is still in
+        #     progress. See comments in `Job.reconciling` for additional information on
         #     reconciliation process in Cloud Run.
         # @!attribute [r] conditions
         #   @return [::Array<::Google::Cloud::Run::V2::Condition>]
-        #     Output only. The Condition of this Task, containing its readiness status, and
-        #     detailed error information in case it did not reach the desired state.
+        #     Output only. The Condition of this Task, containing its readiness status,
+        #     and detailed error information in case it did not reach the desired state.
         # @!attribute [r] observed_generation
         #   @return [::Integer]
         #     Output only. The generation of this Task. See comments in `Job.reconciling`
@@ -174,13 +172,18 @@ module Google
         #     Output only. Result of the last attempt of this Task.
         # @!attribute [r] encryption_key
         #   @return [::String]
-        #     Output only. A reference to a customer managed encryption key (CMEK) to use to encrypt
-        #     this container image. For more information, go to
+        #     Output only. A reference to a customer managed encryption key (CMEK) to use
+        #     to encrypt this container image. For more information, go to
         #     https://cloud.google.com/run/docs/securing/using-cmek
         # @!attribute [r] vpc_access
         #   @return [::Google::Cloud::Run::V2::VpcAccess]
-        #     Output only. VPC Access configuration to use for this Task. For more information,
-        #     visit https://cloud.google.com/run/docs/configuring/connecting-vpc.
+        #     Output only. VPC Access configuration to use for this Task. For more
+        #     information, visit
+        #     https://cloud.google.com/run/docs/configuring/connecting-vpc.
+        # @!attribute [r] log_uri
+        #   @return [::String]
+        #     Output only. URI where logs for this execution can be found in Cloud
+        #     Console.
         # @!attribute [r] etag
         #   @return [::String]
         #     Output only. A system-generated fingerprint for this version of the

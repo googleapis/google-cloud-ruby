@@ -20,8 +20,11 @@
 require "google/cloud/dataflow/v1beta3"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Dataflow::V1beta3::Jobs::Client#aggregated_list_jobs
+# Snippet for the aggregated_list_jobs call in the Jobs service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Dataflow::V1beta3::Jobs::Client#aggregated_list_jobs. It may
+# require modification in order to execute successfully.
 #
 def aggregated_list_jobs
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def aggregated_list_jobs
   # Call the aggregated_list_jobs method.
   result = client.aggregated_list_jobs request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::Dataflow::V1beta3::Job.
-    p response
+    p item
   end
 end
 # [END dataflow_v1beta3_generated_Jobs_AggregatedListJobs_sync]

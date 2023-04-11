@@ -20,8 +20,11 @@
 require "google/cloud/gke_backup/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::GkeBackup::V1::BackupForGKE::Client#get_restore_plan
+# Snippet for the get_restore_plan call in the BackupForGKE service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::GkeBackup::V1::BackupForGKE::Client#get_restore_plan. It may
+# require modification in order to execute successfully.
 #
 def get_restore_plan
   # Create a client object. The client can be reused for multiple calls.

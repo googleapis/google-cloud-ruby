@@ -30,6 +30,11 @@ module Google
       #     require "google/cloud/workflows/v1beta"
       #     client = ::Google::Cloud::Workflows::V1beta::Workflows::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/workflows/v1beta"
+      #     client = ::Google::Cloud::Workflows::V1beta::Workflows::Rest::Client.new
+      #
       module V1beta
       end
     end

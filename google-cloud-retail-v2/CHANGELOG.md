@@ -1,5 +1,29 @@
 # Release History
 
+### 0.15.0 (2023-04-10)
+
+#### Features
+
+* add model service ([#21060](https://github.com/googleapis/google-cloud-ruby/issues/21060)) 
+* expose A/B experiment info in search response 
+* support new filter syntax for recommendation 
+* support per-entity search and autocomplete 
+#### Documentation
+
+* keep the API doc up-to-date with recent changes 
+
+### 0.14.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20628](https://github.com/googleapis/google-cloud-ruby/issues/20628)) 
+
+### 0.13.0 (2023-02-17)
+
+#### Features
+
+* Include the location mixin client ([#20459](https://github.com/googleapis/google-cloud-ruby/issues/20459)) 
+
 ### 0.12.0 (2023-01-05)
 
 #### Features

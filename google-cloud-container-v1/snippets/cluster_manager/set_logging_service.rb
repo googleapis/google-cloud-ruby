@@ -20,8 +20,11 @@
 require "google/cloud/container/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Container::V1::ClusterManager::Client#set_logging_service
+# Snippet for the set_logging_service call in the ClusterManager service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Container::V1::ClusterManager::Client#set_logging_service. It
+# may require modification in order to execute successfully.
 #
 def set_logging_service
   # Create a client object. The client can be reused for multiple calls.

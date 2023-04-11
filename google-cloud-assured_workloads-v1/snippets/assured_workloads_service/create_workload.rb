@@ -20,8 +20,11 @@
 require "google/cloud/assured_workloads/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Client#create_workload
+# Snippet for the create_workload call in the AssuredWorkloadsService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Client#create_workload.
+# It may require modification in order to execute successfully.
 #
 def create_workload
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def create_workload
   # Call the create_workload method.
   result = client.create_workload request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END assuredworkloads_v1_generated_AssuredWorkloadsService_CreateWorkload_sync]

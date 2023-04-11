@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-bigquery-reservation-v1",
-    "version": "0.6.0",
+    "version": "0.8.1",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "bigqueryreservation_v1_generated_ReservationService_CreateReservation_sync",
-      "title": "Snippet for create_reservation in ReservationService",
-      "description": "Basic snippet for create_reservation in ReservationService",
+      "title": "Snippet for the create_reservation call in the ReservationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#create_reservation. It may require modification in order to execute successfully.",
       "file": "reservation_service/create_reservation.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigqueryreservation_v1_generated_ReservationService_ListReservations_sync",
-      "title": "Snippet for list_reservations in ReservationService",
-      "description": "Basic snippet for list_reservations in ReservationService",
+      "title": "Snippet for the list_reservations call in the ReservationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#list_reservations. It may require modification in order to execute successfully.",
       "file": "reservation_service/list_reservations.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigqueryreservation_v1_generated_ReservationService_GetReservation_sync",
-      "title": "Snippet for get_reservation in ReservationService",
-      "description": "Basic snippet for get_reservation in ReservationService",
+      "title": "Snippet for the get_reservation call in the ReservationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#get_reservation. It may require modification in order to execute successfully.",
       "file": "reservation_service/get_reservation.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigqueryreservation_v1_generated_ReservationService_DeleteReservation_sync",
-      "title": "Snippet for delete_reservation in ReservationService",
-      "description": "Basic snippet for delete_reservation in ReservationService",
+      "title": "Snippet for the delete_reservation call in the ReservationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#delete_reservation. It may require modification in order to execute successfully.",
       "file": "reservation_service/delete_reservation.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigqueryreservation_v1_generated_ReservationService_UpdateReservation_sync",
-      "title": "Snippet for update_reservation in ReservationService",
-      "description": "Basic snippet for update_reservation in ReservationService",
+      "title": "Snippet for the update_reservation call in the ReservationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#update_reservation. It may require modification in order to execute successfully.",
       "file": "reservation_service/update_reservation.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigqueryreservation_v1_generated_ReservationService_CreateCapacityCommitment_sync",
-      "title": "Snippet for create_capacity_commitment in ReservationService",
-      "description": "Basic snippet for create_capacity_commitment in ReservationService",
+      "title": "Snippet for the create_capacity_commitment call in the ReservationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#create_capacity_commitment. It may require modification in order to execute successfully.",
       "file": "reservation_service/create_capacity_commitment.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigqueryreservation_v1_generated_ReservationService_ListCapacityCommitments_sync",
-      "title": "Snippet for list_capacity_commitments in ReservationService",
-      "description": "Basic snippet for list_capacity_commitments in ReservationService",
+      "title": "Snippet for the list_capacity_commitments call in the ReservationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#list_capacity_commitments. It may require modification in order to execute successfully.",
       "file": "reservation_service/list_capacity_commitments.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigqueryreservation_v1_generated_ReservationService_GetCapacityCommitment_sync",
-      "title": "Snippet for get_capacity_commitment in ReservationService",
-      "description": "Basic snippet for get_capacity_commitment in ReservationService",
+      "title": "Snippet for the get_capacity_commitment call in the ReservationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#get_capacity_commitment. It may require modification in order to execute successfully.",
       "file": "reservation_service/get_capacity_commitment.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigqueryreservation_v1_generated_ReservationService_DeleteCapacityCommitment_sync",
-      "title": "Snippet for delete_capacity_commitment in ReservationService",
-      "description": "Basic snippet for delete_capacity_commitment in ReservationService",
+      "title": "Snippet for the delete_capacity_commitment call in the ReservationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#delete_capacity_commitment. It may require modification in order to execute successfully.",
       "file": "reservation_service/delete_capacity_commitment.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,15 +366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigqueryreservation_v1_generated_ReservationService_UpdateCapacityCommitment_sync",
-      "title": "Snippet for update_capacity_commitment in ReservationService",
-      "description": "Basic snippet for update_capacity_commitment in ReservationService",
+      "title": "Snippet for the update_capacity_commitment call in the ReservationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#update_capacity_commitment. It may require modification in order to execute successfully.",
       "file": "reservation_service/update_capacity_commitment.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,15 +406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigqueryreservation_v1_generated_ReservationService_SplitCapacityCommitment_sync",
-      "title": "Snippet for split_capacity_commitment in ReservationService",
-      "description": "Basic snippet for split_capacity_commitment in ReservationService",
+      "title": "Snippet for the split_capacity_commitment call in the ReservationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#split_capacity_commitment. It may require modification in order to execute successfully.",
       "file": "reservation_service/split_capacity_commitment.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,15 +446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigqueryreservation_v1_generated_ReservationService_MergeCapacityCommitments_sync",
-      "title": "Snippet for merge_capacity_commitments in ReservationService",
-      "description": "Basic snippet for merge_capacity_commitments in ReservationService",
+      "title": "Snippet for the merge_capacity_commitments call in the ReservationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#merge_capacity_commitments. It may require modification in order to execute successfully.",
       "file": "reservation_service/merge_capacity_commitments.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,15 +486,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigqueryreservation_v1_generated_ReservationService_CreateAssignment_sync",
-      "title": "Snippet for create_assignment in ReservationService",
-      "description": "Basic snippet for create_assignment in ReservationService",
+      "title": "Snippet for the create_assignment call in the ReservationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#create_assignment. It may require modification in order to execute successfully.",
       "file": "reservation_service/create_assignment.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,15 +526,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigqueryreservation_v1_generated_ReservationService_ListAssignments_sync",
-      "title": "Snippet for list_assignments in ReservationService",
-      "description": "Basic snippet for list_assignments in ReservationService",
+      "title": "Snippet for the list_assignments call in the ReservationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#list_assignments. It may require modification in order to execute successfully.",
       "file": "reservation_service/list_assignments.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,15 +566,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigqueryreservation_v1_generated_ReservationService_DeleteAssignment_sync",
-      "title": "Snippet for delete_assignment in ReservationService",
-      "description": "Basic snippet for delete_assignment in ReservationService",
+      "title": "Snippet for the delete_assignment call in the ReservationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#delete_assignment. It may require modification in order to execute successfully.",
       "file": "reservation_service/delete_assignment.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,15 +606,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigqueryreservation_v1_generated_ReservationService_SearchAssignments_sync",
-      "title": "Snippet for search_assignments in ReservationService",
-      "description": "Basic snippet for search_assignments in ReservationService",
+      "title": "Snippet for the search_assignments call in the ReservationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#search_assignments. It may require modification in order to execute successfully.",
       "file": "reservation_service/search_assignments.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,15 +646,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigqueryreservation_v1_generated_ReservationService_SearchAllAssignments_sync",
-      "title": "Snippet for search_all_assignments in ReservationService",
-      "description": "Basic snippet for search_all_assignments in ReservationService",
+      "title": "Snippet for the search_all_assignments call in the ReservationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#search_all_assignments. It may require modification in order to execute successfully.",
       "file": "reservation_service/search_all_assignments.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,15 +686,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigqueryreservation_v1_generated_ReservationService_MoveAssignment_sync",
-      "title": "Snippet for move_assignment in ReservationService",
-      "description": "Basic snippet for move_assignment in ReservationService",
+      "title": "Snippet for the move_assignment call in the ReservationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#move_assignment. It may require modification in order to execute successfully.",
       "file": "reservation_service/move_assignment.rb",
       "language": "RUBY",
       "client_method": {
@@ -726,15 +726,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigqueryreservation_v1_generated_ReservationService_UpdateAssignment_sync",
-      "title": "Snippet for update_assignment in ReservationService",
-      "description": "Basic snippet for update_assignment in ReservationService",
+      "title": "Snippet for the update_assignment call in the ReservationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#update_assignment. It may require modification in order to execute successfully.",
       "file": "reservation_service/update_assignment.rb",
       "language": "RUBY",
       "client_method": {
@@ -766,15 +766,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigqueryreservation_v1_generated_ReservationService_GetBiReservation_sync",
-      "title": "Snippet for get_bi_reservation in ReservationService",
-      "description": "Basic snippet for get_bi_reservation in ReservationService",
+      "title": "Snippet for the get_bi_reservation call in the ReservationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#get_bi_reservation. It may require modification in order to execute successfully.",
       "file": "reservation_service/get_bi_reservation.rb",
       "language": "RUBY",
       "client_method": {
@@ -806,15 +806,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "bigqueryreservation_v1_generated_ReservationService_UpdateBiReservation_sync",
-      "title": "Snippet for update_bi_reservation in ReservationService",
-      "description": "Basic snippet for update_bi_reservation in ReservationService",
+      "title": "Snippet for the update_bi_reservation call in the ReservationService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#update_bi_reservation. It may require modification in order to execute successfully.",
       "file": "reservation_service/update_bi_reservation.rb",
       "language": "RUBY",
       "client_method": {
@@ -846,7 +846,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]

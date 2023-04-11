@@ -127,6 +127,16 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :increment_amount, :int64, 4
       end
     end
+    add_message "google.bigtable.v2.StreamPartition" do
+      optional :row_range, :message, 1, "google.bigtable.v2.RowRange"
+    end
+    add_message "google.bigtable.v2.StreamContinuationTokens" do
+      repeated :tokens, :message, 1, "google.bigtable.v2.StreamContinuationToken"
+    end
+    add_message "google.bigtable.v2.StreamContinuationToken" do
+      optional :partition, :message, 1, "google.bigtable.v2.StreamPartition"
+      optional :token, :string, 2
+    end
   end
 end
 
@@ -153,6 +163,9 @@ module Google
         Mutation::DeleteFromFamily = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.Mutation.DeleteFromFamily").msgclass
         Mutation::DeleteFromRow = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.Mutation.DeleteFromRow").msgclass
         ReadModifyWriteRule = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.ReadModifyWriteRule").msgclass
+        StreamPartition = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.StreamPartition").msgclass
+        StreamContinuationTokens = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.StreamContinuationTokens").msgclass
+        StreamContinuationToken = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.StreamContinuationToken").msgclass
       end
     end
   end

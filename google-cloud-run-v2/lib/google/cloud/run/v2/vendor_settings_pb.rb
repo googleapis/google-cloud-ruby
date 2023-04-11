@@ -37,6 +37,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :EXECUTION_ENVIRONMENT_GEN1, 1
       value :EXECUTION_ENVIRONMENT_GEN2, 2
     end
+    add_enum "google.cloud.run.v2.EncryptionKeyRevocationAction" do
+      value :ENCRYPTION_KEY_REVOCATION_ACTION_UNSPECIFIED, 0
+      value :PREVENT_NEW, 1
+      value :SHUTDOWN, 2
+    end
   end
 end
 
@@ -50,6 +55,7 @@ module Google
         RevisionScaling = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.run.v2.RevisionScaling").msgclass
         IngressTraffic = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.run.v2.IngressTraffic").enummodule
         ExecutionEnvironment = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.run.v2.ExecutionEnvironment").enummodule
+        EncryptionKeyRevocationAction = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.run.v2.EncryptionKeyRevocationAction").enummodule
       end
     end
   end

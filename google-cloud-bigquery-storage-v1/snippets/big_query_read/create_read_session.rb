@@ -20,8 +20,11 @@
 require "google/cloud/bigquery/storage/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client#create_read_session
+# Snippet for the create_read_session call in the BigQueryRead service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client#create_read_session.
+# It may require modification in order to execute successfully.
 #
 def create_read_session
   # Create a client object. The client can be reused for multiple calls.

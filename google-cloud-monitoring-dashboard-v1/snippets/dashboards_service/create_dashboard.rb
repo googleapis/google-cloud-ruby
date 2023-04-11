@@ -20,8 +20,11 @@
 require "google/cloud/monitoring/dashboard/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client#create_dashboard
+# Snippet for the create_dashboard call in the DashboardsService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client#create_dashboard.
+# It may require modification in order to execute successfully.
 #
 def create_dashboard
   # Create a client object. The client can be reused for multiple calls.

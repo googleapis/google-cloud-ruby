@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-dataform-v1beta1",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "dataform_v1beta1_generated_Dataform_ListRepositories_sync",
-      "title": "Snippet for list_repositories in Dataform",
-      "description": "Basic snippet for list_repositories in Dataform",
+      "title": "Snippet for the list_repositories call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#list_repositories. It may require modification in order to execute successfully.",
       "file": "dataform/list_repositories.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataform_v1beta1_generated_Dataform_GetRepository_sync",
-      "title": "Snippet for get_repository in Dataform",
-      "description": "Basic snippet for get_repository in Dataform",
+      "title": "Snippet for the get_repository call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#get_repository. It may require modification in order to execute successfully.",
       "file": "dataform/get_repository.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataform_v1beta1_generated_Dataform_CreateRepository_sync",
-      "title": "Snippet for create_repository in Dataform",
-      "description": "Basic snippet for create_repository in Dataform",
+      "title": "Snippet for the create_repository call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#create_repository. It may require modification in order to execute successfully.",
       "file": "dataform/create_repository.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataform_v1beta1_generated_Dataform_UpdateRepository_sync",
-      "title": "Snippet for update_repository in Dataform",
-      "description": "Basic snippet for update_repository in Dataform",
+      "title": "Snippet for the update_repository call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#update_repository. It may require modification in order to execute successfully.",
       "file": "dataform/update_repository.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataform_v1beta1_generated_Dataform_DeleteRepository_sync",
-      "title": "Snippet for delete_repository in Dataform",
-      "description": "Basic snippet for delete_repository in Dataform",
+      "title": "Snippet for the delete_repository call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#delete_repository. It may require modification in order to execute successfully.",
       "file": "dataform/delete_repository.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataform_v1beta1_generated_Dataform_FetchRemoteBranches_sync",
-      "title": "Snippet for fetch_remote_branches in Dataform",
-      "description": "Basic snippet for fetch_remote_branches in Dataform",
+      "title": "Snippet for the fetch_remote_branches call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#fetch_remote_branches. It may require modification in order to execute successfully.",
       "file": "dataform/fetch_remote_branches.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataform_v1beta1_generated_Dataform_ListWorkspaces_sync",
-      "title": "Snippet for list_workspaces in Dataform",
-      "description": "Basic snippet for list_workspaces in Dataform",
+      "title": "Snippet for the list_workspaces call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#list_workspaces. It may require modification in order to execute successfully.",
       "file": "dataform/list_workspaces.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataform_v1beta1_generated_Dataform_GetWorkspace_sync",
-      "title": "Snippet for get_workspace in Dataform",
-      "description": "Basic snippet for get_workspace in Dataform",
+      "title": "Snippet for the get_workspace call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#get_workspace. It may require modification in order to execute successfully.",
       "file": "dataform/get_workspace.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataform_v1beta1_generated_Dataform_CreateWorkspace_sync",
-      "title": "Snippet for create_workspace in Dataform",
-      "description": "Basic snippet for create_workspace in Dataform",
+      "title": "Snippet for the create_workspace call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#create_workspace. It may require modification in order to execute successfully.",
       "file": "dataform/create_workspace.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,15 +366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataform_v1beta1_generated_Dataform_DeleteWorkspace_sync",
-      "title": "Snippet for delete_workspace in Dataform",
-      "description": "Basic snippet for delete_workspace in Dataform",
+      "title": "Snippet for the delete_workspace call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#delete_workspace. It may require modification in order to execute successfully.",
       "file": "dataform/delete_workspace.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,15 +406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataform_v1beta1_generated_Dataform_InstallNpmPackages_sync",
-      "title": "Snippet for install_npm_packages in Dataform",
-      "description": "Basic snippet for install_npm_packages in Dataform",
+      "title": "Snippet for the install_npm_packages call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#install_npm_packages. It may require modification in order to execute successfully.",
       "file": "dataform/install_npm_packages.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,15 +446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataform_v1beta1_generated_Dataform_PullGitCommits_sync",
-      "title": "Snippet for pull_git_commits in Dataform",
-      "description": "Basic snippet for pull_git_commits in Dataform",
+      "title": "Snippet for the pull_git_commits call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#pull_git_commits. It may require modification in order to execute successfully.",
       "file": "dataform/pull_git_commits.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,15 +486,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataform_v1beta1_generated_Dataform_PushGitCommits_sync",
-      "title": "Snippet for push_git_commits in Dataform",
-      "description": "Basic snippet for push_git_commits in Dataform",
+      "title": "Snippet for the push_git_commits call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#push_git_commits. It may require modification in order to execute successfully.",
       "file": "dataform/push_git_commits.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,15 +526,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataform_v1beta1_generated_Dataform_FetchFileGitStatuses_sync",
-      "title": "Snippet for fetch_file_git_statuses in Dataform",
-      "description": "Basic snippet for fetch_file_git_statuses in Dataform",
+      "title": "Snippet for the fetch_file_git_statuses call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#fetch_file_git_statuses. It may require modification in order to execute successfully.",
       "file": "dataform/fetch_file_git_statuses.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,15 +566,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataform_v1beta1_generated_Dataform_FetchGitAheadBehind_sync",
-      "title": "Snippet for fetch_git_ahead_behind in Dataform",
-      "description": "Basic snippet for fetch_git_ahead_behind in Dataform",
+      "title": "Snippet for the fetch_git_ahead_behind call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#fetch_git_ahead_behind. It may require modification in order to execute successfully.",
       "file": "dataform/fetch_git_ahead_behind.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,15 +606,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataform_v1beta1_generated_Dataform_CommitWorkspaceChanges_sync",
-      "title": "Snippet for commit_workspace_changes in Dataform",
-      "description": "Basic snippet for commit_workspace_changes in Dataform",
+      "title": "Snippet for the commit_workspace_changes call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#commit_workspace_changes. It may require modification in order to execute successfully.",
       "file": "dataform/commit_workspace_changes.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,15 +646,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataform_v1beta1_generated_Dataform_ResetWorkspaceChanges_sync",
-      "title": "Snippet for reset_workspace_changes in Dataform",
-      "description": "Basic snippet for reset_workspace_changes in Dataform",
+      "title": "Snippet for the reset_workspace_changes call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#reset_workspace_changes. It may require modification in order to execute successfully.",
       "file": "dataform/reset_workspace_changes.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,15 +686,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataform_v1beta1_generated_Dataform_FetchFileDiff_sync",
-      "title": "Snippet for fetch_file_diff in Dataform",
-      "description": "Basic snippet for fetch_file_diff in Dataform",
+      "title": "Snippet for the fetch_file_diff call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#fetch_file_diff. It may require modification in order to execute successfully.",
       "file": "dataform/fetch_file_diff.rb",
       "language": "RUBY",
       "client_method": {
@@ -726,15 +726,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataform_v1beta1_generated_Dataform_QueryDirectoryContents_sync",
-      "title": "Snippet for query_directory_contents in Dataform",
-      "description": "Basic snippet for query_directory_contents in Dataform",
+      "title": "Snippet for the query_directory_contents call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#query_directory_contents. It may require modification in order to execute successfully.",
       "file": "dataform/query_directory_contents.rb",
       "language": "RUBY",
       "client_method": {
@@ -766,15 +766,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataform_v1beta1_generated_Dataform_MakeDirectory_sync",
-      "title": "Snippet for make_directory in Dataform",
-      "description": "Basic snippet for make_directory in Dataform",
+      "title": "Snippet for the make_directory call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#make_directory. It may require modification in order to execute successfully.",
       "file": "dataform/make_directory.rb",
       "language": "RUBY",
       "client_method": {
@@ -806,15 +806,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataform_v1beta1_generated_Dataform_RemoveDirectory_sync",
-      "title": "Snippet for remove_directory in Dataform",
-      "description": "Basic snippet for remove_directory in Dataform",
+      "title": "Snippet for the remove_directory call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#remove_directory. It may require modification in order to execute successfully.",
       "file": "dataform/remove_directory.rb",
       "language": "RUBY",
       "client_method": {
@@ -846,15 +846,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataform_v1beta1_generated_Dataform_MoveDirectory_sync",
-      "title": "Snippet for move_directory in Dataform",
-      "description": "Basic snippet for move_directory in Dataform",
+      "title": "Snippet for the move_directory call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#move_directory. It may require modification in order to execute successfully.",
       "file": "dataform/move_directory.rb",
       "language": "RUBY",
       "client_method": {
@@ -886,15 +886,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataform_v1beta1_generated_Dataform_ReadFile_sync",
-      "title": "Snippet for read_file in Dataform",
-      "description": "Basic snippet for read_file in Dataform",
+      "title": "Snippet for the read_file call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#read_file. It may require modification in order to execute successfully.",
       "file": "dataform/read_file.rb",
       "language": "RUBY",
       "client_method": {
@@ -926,15 +926,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataform_v1beta1_generated_Dataform_RemoveFile_sync",
-      "title": "Snippet for remove_file in Dataform",
-      "description": "Basic snippet for remove_file in Dataform",
+      "title": "Snippet for the remove_file call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#remove_file. It may require modification in order to execute successfully.",
       "file": "dataform/remove_file.rb",
       "language": "RUBY",
       "client_method": {
@@ -966,15 +966,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataform_v1beta1_generated_Dataform_MoveFile_sync",
-      "title": "Snippet for move_file in Dataform",
-      "description": "Basic snippet for move_file in Dataform",
+      "title": "Snippet for the move_file call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#move_file. It may require modification in order to execute successfully.",
       "file": "dataform/move_file.rb",
       "language": "RUBY",
       "client_method": {
@@ -1006,15 +1006,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataform_v1beta1_generated_Dataform_WriteFile_sync",
-      "title": "Snippet for write_file in Dataform",
-      "description": "Basic snippet for write_file in Dataform",
+      "title": "Snippet for the write_file call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#write_file. It may require modification in order to execute successfully.",
       "file": "dataform/write_file.rb",
       "language": "RUBY",
       "client_method": {
@@ -1046,15 +1046,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataform_v1beta1_generated_Dataform_ListCompilationResults_sync",
-      "title": "Snippet for list_compilation_results in Dataform",
-      "description": "Basic snippet for list_compilation_results in Dataform",
+      "title": "Snippet for the list_compilation_results call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#list_compilation_results. It may require modification in order to execute successfully.",
       "file": "dataform/list_compilation_results.rb",
       "language": "RUBY",
       "client_method": {
@@ -1086,15 +1086,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataform_v1beta1_generated_Dataform_GetCompilationResult_sync",
-      "title": "Snippet for get_compilation_result in Dataform",
-      "description": "Basic snippet for get_compilation_result in Dataform",
+      "title": "Snippet for the get_compilation_result call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#get_compilation_result. It may require modification in order to execute successfully.",
       "file": "dataform/get_compilation_result.rb",
       "language": "RUBY",
       "client_method": {
@@ -1126,15 +1126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataform_v1beta1_generated_Dataform_CreateCompilationResult_sync",
-      "title": "Snippet for create_compilation_result in Dataform",
-      "description": "Basic snippet for create_compilation_result in Dataform",
+      "title": "Snippet for the create_compilation_result call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#create_compilation_result. It may require modification in order to execute successfully.",
       "file": "dataform/create_compilation_result.rb",
       "language": "RUBY",
       "client_method": {
@@ -1166,15 +1166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataform_v1beta1_generated_Dataform_QueryCompilationResultActions_sync",
-      "title": "Snippet for query_compilation_result_actions in Dataform",
-      "description": "Basic snippet for query_compilation_result_actions in Dataform",
+      "title": "Snippet for the query_compilation_result_actions call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#query_compilation_result_actions. It may require modification in order to execute successfully.",
       "file": "dataform/query_compilation_result_actions.rb",
       "language": "RUBY",
       "client_method": {
@@ -1206,15 +1206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataform_v1beta1_generated_Dataform_ListWorkflowInvocations_sync",
-      "title": "Snippet for list_workflow_invocations in Dataform",
-      "description": "Basic snippet for list_workflow_invocations in Dataform",
+      "title": "Snippet for the list_workflow_invocations call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#list_workflow_invocations. It may require modification in order to execute successfully.",
       "file": "dataform/list_workflow_invocations.rb",
       "language": "RUBY",
       "client_method": {
@@ -1246,15 +1246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataform_v1beta1_generated_Dataform_GetWorkflowInvocation_sync",
-      "title": "Snippet for get_workflow_invocation in Dataform",
-      "description": "Basic snippet for get_workflow_invocation in Dataform",
+      "title": "Snippet for the get_workflow_invocation call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#get_workflow_invocation. It may require modification in order to execute successfully.",
       "file": "dataform/get_workflow_invocation.rb",
       "language": "RUBY",
       "client_method": {
@@ -1286,15 +1286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataform_v1beta1_generated_Dataform_CreateWorkflowInvocation_sync",
-      "title": "Snippet for create_workflow_invocation in Dataform",
-      "description": "Basic snippet for create_workflow_invocation in Dataform",
+      "title": "Snippet for the create_workflow_invocation call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#create_workflow_invocation. It may require modification in order to execute successfully.",
       "file": "dataform/create_workflow_invocation.rb",
       "language": "RUBY",
       "client_method": {
@@ -1326,15 +1326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataform_v1beta1_generated_Dataform_DeleteWorkflowInvocation_sync",
-      "title": "Snippet for delete_workflow_invocation in Dataform",
-      "description": "Basic snippet for delete_workflow_invocation in Dataform",
+      "title": "Snippet for the delete_workflow_invocation call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#delete_workflow_invocation. It may require modification in order to execute successfully.",
       "file": "dataform/delete_workflow_invocation.rb",
       "language": "RUBY",
       "client_method": {
@@ -1366,15 +1366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataform_v1beta1_generated_Dataform_CancelWorkflowInvocation_sync",
-      "title": "Snippet for cancel_workflow_invocation in Dataform",
-      "description": "Basic snippet for cancel_workflow_invocation in Dataform",
+      "title": "Snippet for the cancel_workflow_invocation call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#cancel_workflow_invocation. It may require modification in order to execute successfully.",
       "file": "dataform/cancel_workflow_invocation.rb",
       "language": "RUBY",
       "client_method": {
@@ -1406,15 +1406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dataform_v1beta1_generated_Dataform_QueryWorkflowInvocationActions_sync",
-      "title": "Snippet for query_workflow_invocation_actions in Dataform",
-      "description": "Basic snippet for query_workflow_invocation_actions in Dataform",
+      "title": "Snippet for the query_workflow_invocation_actions call in the Dataform service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataform::V1beta1::Dataform::Client#query_workflow_invocation_actions. It may require modification in order to execute successfully.",
       "file": "dataform/query_workflow_invocation_actions.rb",
       "language": "RUBY",
       "client_method": {
@@ -1446,7 +1446,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]

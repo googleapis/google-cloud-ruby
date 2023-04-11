@@ -213,10 +213,16 @@ module Google
             #     component of the endpoint resource name.
             #     If not provided, Vertex AI will generate a value for this ID.
             #
-            #     This value should be 1-10 characters, and valid characters are /[0-9]/.
-            #     When using HTTP/JSON, this field is populated based on a query string
-            #     argument, such as `?endpoint_id=12345`. This is the fallback for fields
-            #     that are not included in either the URI or the body.
+            #     If the first character is a letter, this value may be up to 63 characters,
+            #     and valid characters are `[a-z0-9-]`. The last character must be a letter
+            #     or number.
+            #
+            #     If the first character is a number, this value may be up to 9 characters,
+            #     and valid characters are `[0-9]` with no leading zeros.
+            #
+            #     When using HTTP/JSON, this field is populated
+            #     based on a query string argument, such as `?endpoint_id=12345`. This is the
+            #     fallback for fields that are not included in either the URI or the body.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -238,14 +244,14 @@ module Google
             #   # Call the create_endpoint method.
             #   result = client.create_endpoint request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_endpoint request, options = nil
@@ -456,13 +462,11 @@ module Google
             #   # Call the list_endpoints method.
             #   result = client.list_endpoints request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::AIPlatform::V1::Endpoint.
-            #     p response
+            #     p item
             #   end
             #
             def list_endpoints request, options = nil
@@ -638,14 +642,14 @@ module Google
             #   # Call the delete_endpoint method.
             #   result = client.delete_endpoint request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_endpoint request, options = nil
@@ -753,14 +757,14 @@ module Google
             #   # Call the deploy_model method.
             #   result = client.deploy_model request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def deploy_model request, options = nil
@@ -859,14 +863,14 @@ module Google
             #   # Call the undeploy_model method.
             #   result = client.undeploy_model request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def undeploy_model request, options = nil
@@ -949,9 +953,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials

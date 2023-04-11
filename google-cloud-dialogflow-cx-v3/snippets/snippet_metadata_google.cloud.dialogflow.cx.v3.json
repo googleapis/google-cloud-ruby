@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-dialogflow-cx-v3",
-    "version": "0.11.0",
+    "version": "0.15.1",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "dialogflow_v3_generated_Pages_ListPages_sync",
-      "title": "Snippet for list_pages in Pages",
-      "description": "Basic snippet for list_pages in Pages",
+      "title": "Snippet for the list_pages call in the Pages service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Pages::Client#list_pages. It may require modification in order to execute successfully.",
       "file": "pages/list_pages.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Pages_GetPage_sync",
-      "title": "Snippet for get_page in Pages",
-      "description": "Basic snippet for get_page in Pages",
+      "title": "Snippet for the get_page call in the Pages service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Pages::Client#get_page. It may require modification in order to execute successfully.",
       "file": "pages/get_page.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Pages_CreatePage_sync",
-      "title": "Snippet for create_page in Pages",
-      "description": "Basic snippet for create_page in Pages",
+      "title": "Snippet for the create_page call in the Pages service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Pages::Client#create_page. It may require modification in order to execute successfully.",
       "file": "pages/create_page.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Pages_UpdatePage_sync",
-      "title": "Snippet for update_page in Pages",
-      "description": "Basic snippet for update_page in Pages",
+      "title": "Snippet for the update_page call in the Pages service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Pages::Client#update_page. It may require modification in order to execute successfully.",
       "file": "pages/update_page.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Pages_DeletePage_sync",
-      "title": "Snippet for delete_page in Pages",
-      "description": "Basic snippet for delete_page in Pages",
+      "title": "Snippet for the delete_page call in the Pages service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Pages::Client#delete_page. It may require modification in order to execute successfully.",
       "file": "pages/delete_page.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Flows_CreateFlow_sync",
-      "title": "Snippet for create_flow in Flows",
-      "description": "Basic snippet for create_flow in Flows",
+      "title": "Snippet for the create_flow call in the Flows service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Flows::Client#create_flow. It may require modification in order to execute successfully.",
       "file": "flows/create_flow.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Flows_DeleteFlow_sync",
-      "title": "Snippet for delete_flow in Flows",
-      "description": "Basic snippet for delete_flow in Flows",
+      "title": "Snippet for the delete_flow call in the Flows service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Flows::Client#delete_flow. It may require modification in order to execute successfully.",
       "file": "flows/delete_flow.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Flows_ListFlows_sync",
-      "title": "Snippet for list_flows in Flows",
-      "description": "Basic snippet for list_flows in Flows",
+      "title": "Snippet for the list_flows call in the Flows service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Flows::Client#list_flows. It may require modification in order to execute successfully.",
       "file": "flows/list_flows.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Flows_GetFlow_sync",
-      "title": "Snippet for get_flow in Flows",
-      "description": "Basic snippet for get_flow in Flows",
+      "title": "Snippet for the get_flow call in the Flows service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Flows::Client#get_flow. It may require modification in order to execute successfully.",
       "file": "flows/get_flow.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,15 +366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Flows_UpdateFlow_sync",
-      "title": "Snippet for update_flow in Flows",
-      "description": "Basic snippet for update_flow in Flows",
+      "title": "Snippet for the update_flow call in the Flows service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Flows::Client#update_flow. It may require modification in order to execute successfully.",
       "file": "flows/update_flow.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,15 +406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Flows_TrainFlow_sync",
-      "title": "Snippet for train_flow in Flows",
-      "description": "Basic snippet for train_flow in Flows",
+      "title": "Snippet for the train_flow call in the Flows service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Flows::Client#train_flow. It may require modification in order to execute successfully.",
       "file": "flows/train_flow.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,15 +446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Flows_ValidateFlow_sync",
-      "title": "Snippet for validate_flow in Flows",
-      "description": "Basic snippet for validate_flow in Flows",
+      "title": "Snippet for the validate_flow call in the Flows service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Flows::Client#validate_flow. It may require modification in order to execute successfully.",
       "file": "flows/validate_flow.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,15 +486,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Flows_GetFlowValidationResult_sync",
-      "title": "Snippet for get_flow_validation_result in Flows",
-      "description": "Basic snippet for get_flow_validation_result in Flows",
+      "title": "Snippet for the get_flow_validation_result call in the Flows service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Flows::Client#get_flow_validation_result. It may require modification in order to execute successfully.",
       "file": "flows/get_flow_validation_result.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,15 +526,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Flows_ImportFlow_sync",
-      "title": "Snippet for import_flow in Flows",
-      "description": "Basic snippet for import_flow in Flows",
+      "title": "Snippet for the import_flow call in the Flows service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Flows::Client#import_flow. It may require modification in order to execute successfully.",
       "file": "flows/import_flow.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,15 +566,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Flows_ExportFlow_sync",
-      "title": "Snippet for export_flow in Flows",
-      "description": "Basic snippet for export_flow in Flows",
+      "title": "Snippet for the export_flow call in the Flows service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Flows::Client#export_flow. It may require modification in order to execute successfully.",
       "file": "flows/export_flow.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,15 +606,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Agents_ListAgents_sync",
-      "title": "Snippet for list_agents in Agents",
-      "description": "Basic snippet for list_agents in Agents",
+      "title": "Snippet for the list_agents call in the Agents service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Agents::Client#list_agents. It may require modification in order to execute successfully.",
       "file": "agents/list_agents.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,15 +646,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Agents_GetAgent_sync",
-      "title": "Snippet for get_agent in Agents",
-      "description": "Basic snippet for get_agent in Agents",
+      "title": "Snippet for the get_agent call in the Agents service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Agents::Client#get_agent. It may require modification in order to execute successfully.",
       "file": "agents/get_agent.rb",
       "language": "RUBY",
       "client_method": {
@@ -686,15 +686,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Agents_CreateAgent_sync",
-      "title": "Snippet for create_agent in Agents",
-      "description": "Basic snippet for create_agent in Agents",
+      "title": "Snippet for the create_agent call in the Agents service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Agents::Client#create_agent. It may require modification in order to execute successfully.",
       "file": "agents/create_agent.rb",
       "language": "RUBY",
       "client_method": {
@@ -726,15 +726,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Agents_UpdateAgent_sync",
-      "title": "Snippet for update_agent in Agents",
-      "description": "Basic snippet for update_agent in Agents",
+      "title": "Snippet for the update_agent call in the Agents service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Agents::Client#update_agent. It may require modification in order to execute successfully.",
       "file": "agents/update_agent.rb",
       "language": "RUBY",
       "client_method": {
@@ -766,15 +766,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Agents_DeleteAgent_sync",
-      "title": "Snippet for delete_agent in Agents",
-      "description": "Basic snippet for delete_agent in Agents",
+      "title": "Snippet for the delete_agent call in the Agents service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Agents::Client#delete_agent. It may require modification in order to execute successfully.",
       "file": "agents/delete_agent.rb",
       "language": "RUBY",
       "client_method": {
@@ -806,15 +806,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Agents_ExportAgent_sync",
-      "title": "Snippet for export_agent in Agents",
-      "description": "Basic snippet for export_agent in Agents",
+      "title": "Snippet for the export_agent call in the Agents service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Agents::Client#export_agent. It may require modification in order to execute successfully.",
       "file": "agents/export_agent.rb",
       "language": "RUBY",
       "client_method": {
@@ -846,15 +846,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Agents_RestoreAgent_sync",
-      "title": "Snippet for restore_agent in Agents",
-      "description": "Basic snippet for restore_agent in Agents",
+      "title": "Snippet for the restore_agent call in the Agents service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Agents::Client#restore_agent. It may require modification in order to execute successfully.",
       "file": "agents/restore_agent.rb",
       "language": "RUBY",
       "client_method": {
@@ -886,15 +886,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Agents_ValidateAgent_sync",
-      "title": "Snippet for validate_agent in Agents",
-      "description": "Basic snippet for validate_agent in Agents",
+      "title": "Snippet for the validate_agent call in the Agents service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Agents::Client#validate_agent. It may require modification in order to execute successfully.",
       "file": "agents/validate_agent.rb",
       "language": "RUBY",
       "client_method": {
@@ -926,15 +926,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Agents_GetAgentValidationResult_sync",
-      "title": "Snippet for get_agent_validation_result in Agents",
-      "description": "Basic snippet for get_agent_validation_result in Agents",
+      "title": "Snippet for the get_agent_validation_result call in the Agents service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Agents::Client#get_agent_validation_result. It may require modification in order to execute successfully.",
       "file": "agents/get_agent_validation_result.rb",
       "language": "RUBY",
       "client_method": {
@@ -966,15 +966,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Changelogs_ListChangelogs_sync",
-      "title": "Snippet for list_changelogs in Changelogs",
-      "description": "Basic snippet for list_changelogs in Changelogs",
+      "title": "Snippet for the list_changelogs call in the Changelogs service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Changelogs::Client#list_changelogs. It may require modification in order to execute successfully.",
       "file": "changelogs/list_changelogs.rb",
       "language": "RUBY",
       "client_method": {
@@ -1006,15 +1006,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Changelogs_GetChangelog_sync",
-      "title": "Snippet for get_changelog in Changelogs",
-      "description": "Basic snippet for get_changelog in Changelogs",
+      "title": "Snippet for the get_changelog call in the Changelogs service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Changelogs::Client#get_changelog. It may require modification in order to execute successfully.",
       "file": "changelogs/get_changelog.rb",
       "language": "RUBY",
       "client_method": {
@@ -1046,15 +1046,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Deployments_ListDeployments_sync",
-      "title": "Snippet for list_deployments in Deployments",
-      "description": "Basic snippet for list_deployments in Deployments",
+      "title": "Snippet for the list_deployments call in the Deployments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Deployments::Client#list_deployments. It may require modification in order to execute successfully.",
       "file": "deployments/list_deployments.rb",
       "language": "RUBY",
       "client_method": {
@@ -1086,15 +1086,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Deployments_GetDeployment_sync",
-      "title": "Snippet for get_deployment in Deployments",
-      "description": "Basic snippet for get_deployment in Deployments",
+      "title": "Snippet for the get_deployment call in the Deployments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Deployments::Client#get_deployment. It may require modification in order to execute successfully.",
       "file": "deployments/get_deployment.rb",
       "language": "RUBY",
       "client_method": {
@@ -1126,15 +1126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_EntityTypes_ListEntityTypes_sync",
-      "title": "Snippet for list_entity_types in EntityTypes",
-      "description": "Basic snippet for list_entity_types in EntityTypes",
+      "title": "Snippet for the list_entity_types call in the EntityTypes service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::EntityTypes::Client#list_entity_types. It may require modification in order to execute successfully.",
       "file": "entity_types/list_entity_types.rb",
       "language": "RUBY",
       "client_method": {
@@ -1166,15 +1166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_EntityTypes_GetEntityType_sync",
-      "title": "Snippet for get_entity_type in EntityTypes",
-      "description": "Basic snippet for get_entity_type in EntityTypes",
+      "title": "Snippet for the get_entity_type call in the EntityTypes service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::EntityTypes::Client#get_entity_type. It may require modification in order to execute successfully.",
       "file": "entity_types/get_entity_type.rb",
       "language": "RUBY",
       "client_method": {
@@ -1206,15 +1206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_EntityTypes_CreateEntityType_sync",
-      "title": "Snippet for create_entity_type in EntityTypes",
-      "description": "Basic snippet for create_entity_type in EntityTypes",
+      "title": "Snippet for the create_entity_type call in the EntityTypes service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::EntityTypes::Client#create_entity_type. It may require modification in order to execute successfully.",
       "file": "entity_types/create_entity_type.rb",
       "language": "RUBY",
       "client_method": {
@@ -1246,15 +1246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_EntityTypes_UpdateEntityType_sync",
-      "title": "Snippet for update_entity_type in EntityTypes",
-      "description": "Basic snippet for update_entity_type in EntityTypes",
+      "title": "Snippet for the update_entity_type call in the EntityTypes service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::EntityTypes::Client#update_entity_type. It may require modification in order to execute successfully.",
       "file": "entity_types/update_entity_type.rb",
       "language": "RUBY",
       "client_method": {
@@ -1286,15 +1286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_EntityTypes_DeleteEntityType_sync",
-      "title": "Snippet for delete_entity_type in EntityTypes",
-      "description": "Basic snippet for delete_entity_type in EntityTypes",
+      "title": "Snippet for the delete_entity_type call in the EntityTypes service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::EntityTypes::Client#delete_entity_type. It may require modification in order to execute successfully.",
       "file": "entity_types/delete_entity_type.rb",
       "language": "RUBY",
       "client_method": {
@@ -1326,15 +1326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Intents_ListIntents_sync",
-      "title": "Snippet for list_intents in Intents",
-      "description": "Basic snippet for list_intents in Intents",
+      "title": "Snippet for the list_intents call in the Intents service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Intents::Client#list_intents. It may require modification in order to execute successfully.",
       "file": "intents/list_intents.rb",
       "language": "RUBY",
       "client_method": {
@@ -1366,15 +1366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Intents_GetIntent_sync",
-      "title": "Snippet for get_intent in Intents",
-      "description": "Basic snippet for get_intent in Intents",
+      "title": "Snippet for the get_intent call in the Intents service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Intents::Client#get_intent. It may require modification in order to execute successfully.",
       "file": "intents/get_intent.rb",
       "language": "RUBY",
       "client_method": {
@@ -1406,15 +1406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Intents_CreateIntent_sync",
-      "title": "Snippet for create_intent in Intents",
-      "description": "Basic snippet for create_intent in Intents",
+      "title": "Snippet for the create_intent call in the Intents service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Intents::Client#create_intent. It may require modification in order to execute successfully.",
       "file": "intents/create_intent.rb",
       "language": "RUBY",
       "client_method": {
@@ -1446,15 +1446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Intents_UpdateIntent_sync",
-      "title": "Snippet for update_intent in Intents",
-      "description": "Basic snippet for update_intent in Intents",
+      "title": "Snippet for the update_intent call in the Intents service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Intents::Client#update_intent. It may require modification in order to execute successfully.",
       "file": "intents/update_intent.rb",
       "language": "RUBY",
       "client_method": {
@@ -1486,15 +1486,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Intents_DeleteIntent_sync",
-      "title": "Snippet for delete_intent in Intents",
-      "description": "Basic snippet for delete_intent in Intents",
+      "title": "Snippet for the delete_intent call in the Intents service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Intents::Client#delete_intent. It may require modification in order to execute successfully.",
       "file": "intents/delete_intent.rb",
       "language": "RUBY",
       "client_method": {
@@ -1526,15 +1526,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_SessionEntityTypes_ListSessionEntityTypes_sync",
-      "title": "Snippet for list_session_entity_types in SessionEntityTypes",
-      "description": "Basic snippet for list_session_entity_types in SessionEntityTypes",
+      "title": "Snippet for the list_session_entity_types call in the SessionEntityTypes service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::SessionEntityTypes::Client#list_session_entity_types. It may require modification in order to execute successfully.",
       "file": "session_entity_types/list_session_entity_types.rb",
       "language": "RUBY",
       "client_method": {
@@ -1566,15 +1566,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_SessionEntityTypes_GetSessionEntityType_sync",
-      "title": "Snippet for get_session_entity_type in SessionEntityTypes",
-      "description": "Basic snippet for get_session_entity_type in SessionEntityTypes",
+      "title": "Snippet for the get_session_entity_type call in the SessionEntityTypes service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::SessionEntityTypes::Client#get_session_entity_type. It may require modification in order to execute successfully.",
       "file": "session_entity_types/get_session_entity_type.rb",
       "language": "RUBY",
       "client_method": {
@@ -1606,15 +1606,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_SessionEntityTypes_CreateSessionEntityType_sync",
-      "title": "Snippet for create_session_entity_type in SessionEntityTypes",
-      "description": "Basic snippet for create_session_entity_type in SessionEntityTypes",
+      "title": "Snippet for the create_session_entity_type call in the SessionEntityTypes service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::SessionEntityTypes::Client#create_session_entity_type. It may require modification in order to execute successfully.",
       "file": "session_entity_types/create_session_entity_type.rb",
       "language": "RUBY",
       "client_method": {
@@ -1646,15 +1646,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_SessionEntityTypes_UpdateSessionEntityType_sync",
-      "title": "Snippet for update_session_entity_type in SessionEntityTypes",
-      "description": "Basic snippet for update_session_entity_type in SessionEntityTypes",
+      "title": "Snippet for the update_session_entity_type call in the SessionEntityTypes service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::SessionEntityTypes::Client#update_session_entity_type. It may require modification in order to execute successfully.",
       "file": "session_entity_types/update_session_entity_type.rb",
       "language": "RUBY",
       "client_method": {
@@ -1686,15 +1686,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_SessionEntityTypes_DeleteSessionEntityType_sync",
-      "title": "Snippet for delete_session_entity_type in SessionEntityTypes",
-      "description": "Basic snippet for delete_session_entity_type in SessionEntityTypes",
+      "title": "Snippet for the delete_session_entity_type call in the SessionEntityTypes service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::SessionEntityTypes::Client#delete_session_entity_type. It may require modification in order to execute successfully.",
       "file": "session_entity_types/delete_session_entity_type.rb",
       "language": "RUBY",
       "client_method": {
@@ -1726,15 +1726,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Sessions_DetectIntent_sync",
-      "title": "Snippet for detect_intent in Sessions",
-      "description": "Basic snippet for detect_intent in Sessions",
+      "title": "Snippet for the detect_intent call in the Sessions service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Sessions::Client#detect_intent. It may require modification in order to execute successfully.",
       "file": "sessions/detect_intent.rb",
       "language": "RUBY",
       "client_method": {
@@ -1766,15 +1766,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Sessions_StreamingDetectIntent_sync",
-      "title": "Snippet for streaming_detect_intent in Sessions",
-      "description": "Basic snippet for streaming_detect_intent in Sessions",
+      "title": "Snippet for the streaming_detect_intent call in the Sessions service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Sessions::Client#streaming_detect_intent. It may require modification in order to execute successfully.",
       "file": "sessions/streaming_detect_intent.rb",
       "language": "RUBY",
       "client_method": {
@@ -1806,15 +1806,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 47,
+          "end": 50,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Sessions_MatchIntent_sync",
-      "title": "Snippet for match_intent in Sessions",
-      "description": "Basic snippet for match_intent in Sessions",
+      "title": "Snippet for the match_intent call in the Sessions service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Sessions::Client#match_intent. It may require modification in order to execute successfully.",
       "file": "sessions/match_intent.rb",
       "language": "RUBY",
       "client_method": {
@@ -1846,15 +1846,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Sessions_FulfillIntent_sync",
-      "title": "Snippet for fulfill_intent in Sessions",
-      "description": "Basic snippet for fulfill_intent in Sessions",
+      "title": "Snippet for the fulfill_intent call in the Sessions service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Sessions::Client#fulfill_intent. It may require modification in order to execute successfully.",
       "file": "sessions/fulfill_intent.rb",
       "language": "RUBY",
       "client_method": {
@@ -1886,15 +1886,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_TransitionRouteGroups_ListTransitionRouteGroups_sync",
-      "title": "Snippet for list_transition_route_groups in TransitionRouteGroups",
-      "description": "Basic snippet for list_transition_route_groups in TransitionRouteGroups",
+      "title": "Snippet for the list_transition_route_groups call in the TransitionRouteGroups service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::Client#list_transition_route_groups. It may require modification in order to execute successfully.",
       "file": "transition_route_groups/list_transition_route_groups.rb",
       "language": "RUBY",
       "client_method": {
@@ -1926,15 +1926,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_TransitionRouteGroups_GetTransitionRouteGroup_sync",
-      "title": "Snippet for get_transition_route_group in TransitionRouteGroups",
-      "description": "Basic snippet for get_transition_route_group in TransitionRouteGroups",
+      "title": "Snippet for the get_transition_route_group call in the TransitionRouteGroups service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::Client#get_transition_route_group. It may require modification in order to execute successfully.",
       "file": "transition_route_groups/get_transition_route_group.rb",
       "language": "RUBY",
       "client_method": {
@@ -1966,15 +1966,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_TransitionRouteGroups_CreateTransitionRouteGroup_sync",
-      "title": "Snippet for create_transition_route_group in TransitionRouteGroups",
-      "description": "Basic snippet for create_transition_route_group in TransitionRouteGroups",
+      "title": "Snippet for the create_transition_route_group call in the TransitionRouteGroups service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::Client#create_transition_route_group. It may require modification in order to execute successfully.",
       "file": "transition_route_groups/create_transition_route_group.rb",
       "language": "RUBY",
       "client_method": {
@@ -2006,15 +2006,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_TransitionRouteGroups_UpdateTransitionRouteGroup_sync",
-      "title": "Snippet for update_transition_route_group in TransitionRouteGroups",
-      "description": "Basic snippet for update_transition_route_group in TransitionRouteGroups",
+      "title": "Snippet for the update_transition_route_group call in the TransitionRouteGroups service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::Client#update_transition_route_group. It may require modification in order to execute successfully.",
       "file": "transition_route_groups/update_transition_route_group.rb",
       "language": "RUBY",
       "client_method": {
@@ -2046,15 +2046,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_TransitionRouteGroups_DeleteTransitionRouteGroup_sync",
-      "title": "Snippet for delete_transition_route_group in TransitionRouteGroups",
-      "description": "Basic snippet for delete_transition_route_group in TransitionRouteGroups",
+      "title": "Snippet for the delete_transition_route_group call in the TransitionRouteGroups service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroups::Client#delete_transition_route_group. It may require modification in order to execute successfully.",
       "file": "transition_route_groups/delete_transition_route_group.rb",
       "language": "RUBY",
       "client_method": {
@@ -2086,15 +2086,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_TestCases_ListTestCases_sync",
-      "title": "Snippet for list_test_cases in TestCases",
-      "description": "Basic snippet for list_test_cases in TestCases",
+      "title": "Snippet for the list_test_cases call in the TestCases service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::TestCases::Client#list_test_cases. It may require modification in order to execute successfully.",
       "file": "test_cases/list_test_cases.rb",
       "language": "RUBY",
       "client_method": {
@@ -2126,15 +2126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_TestCases_BatchDeleteTestCases_sync",
-      "title": "Snippet for batch_delete_test_cases in TestCases",
-      "description": "Basic snippet for batch_delete_test_cases in TestCases",
+      "title": "Snippet for the batch_delete_test_cases call in the TestCases service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::TestCases::Client#batch_delete_test_cases. It may require modification in order to execute successfully.",
       "file": "test_cases/batch_delete_test_cases.rb",
       "language": "RUBY",
       "client_method": {
@@ -2166,15 +2166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_TestCases_GetTestCase_sync",
-      "title": "Snippet for get_test_case in TestCases",
-      "description": "Basic snippet for get_test_case in TestCases",
+      "title": "Snippet for the get_test_case call in the TestCases service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::TestCases::Client#get_test_case. It may require modification in order to execute successfully.",
       "file": "test_cases/get_test_case.rb",
       "language": "RUBY",
       "client_method": {
@@ -2206,15 +2206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_TestCases_CreateTestCase_sync",
-      "title": "Snippet for create_test_case in TestCases",
-      "description": "Basic snippet for create_test_case in TestCases",
+      "title": "Snippet for the create_test_case call in the TestCases service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::TestCases::Client#create_test_case. It may require modification in order to execute successfully.",
       "file": "test_cases/create_test_case.rb",
       "language": "RUBY",
       "client_method": {
@@ -2246,15 +2246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_TestCases_UpdateTestCase_sync",
-      "title": "Snippet for update_test_case in TestCases",
-      "description": "Basic snippet for update_test_case in TestCases",
+      "title": "Snippet for the update_test_case call in the TestCases service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::TestCases::Client#update_test_case. It may require modification in order to execute successfully.",
       "file": "test_cases/update_test_case.rb",
       "language": "RUBY",
       "client_method": {
@@ -2286,15 +2286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_TestCases_RunTestCase_sync",
-      "title": "Snippet for run_test_case in TestCases",
-      "description": "Basic snippet for run_test_case in TestCases",
+      "title": "Snippet for the run_test_case call in the TestCases service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::TestCases::Client#run_test_case. It may require modification in order to execute successfully.",
       "file": "test_cases/run_test_case.rb",
       "language": "RUBY",
       "client_method": {
@@ -2326,15 +2326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_TestCases_BatchRunTestCases_sync",
-      "title": "Snippet for batch_run_test_cases in TestCases",
-      "description": "Basic snippet for batch_run_test_cases in TestCases",
+      "title": "Snippet for the batch_run_test_cases call in the TestCases service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::TestCases::Client#batch_run_test_cases. It may require modification in order to execute successfully.",
       "file": "test_cases/batch_run_test_cases.rb",
       "language": "RUBY",
       "client_method": {
@@ -2366,15 +2366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_TestCases_CalculateCoverage_sync",
-      "title": "Snippet for calculate_coverage in TestCases",
-      "description": "Basic snippet for calculate_coverage in TestCases",
+      "title": "Snippet for the calculate_coverage call in the TestCases service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::TestCases::Client#calculate_coverage. It may require modification in order to execute successfully.",
       "file": "test_cases/calculate_coverage.rb",
       "language": "RUBY",
       "client_method": {
@@ -2406,15 +2406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_TestCases_ImportTestCases_sync",
-      "title": "Snippet for import_test_cases in TestCases",
-      "description": "Basic snippet for import_test_cases in TestCases",
+      "title": "Snippet for the import_test_cases call in the TestCases service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::TestCases::Client#import_test_cases. It may require modification in order to execute successfully.",
       "file": "test_cases/import_test_cases.rb",
       "language": "RUBY",
       "client_method": {
@@ -2446,15 +2446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_TestCases_ExportTestCases_sync",
-      "title": "Snippet for export_test_cases in TestCases",
-      "description": "Basic snippet for export_test_cases in TestCases",
+      "title": "Snippet for the export_test_cases call in the TestCases service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::TestCases::Client#export_test_cases. It may require modification in order to execute successfully.",
       "file": "test_cases/export_test_cases.rb",
       "language": "RUBY",
       "client_method": {
@@ -2486,15 +2486,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_TestCases_ListTestCaseResults_sync",
-      "title": "Snippet for list_test_case_results in TestCases",
-      "description": "Basic snippet for list_test_case_results in TestCases",
+      "title": "Snippet for the list_test_case_results call in the TestCases service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::TestCases::Client#list_test_case_results. It may require modification in order to execute successfully.",
       "file": "test_cases/list_test_case_results.rb",
       "language": "RUBY",
       "client_method": {
@@ -2526,15 +2526,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_TestCases_GetTestCaseResult_sync",
-      "title": "Snippet for get_test_case_result in TestCases",
-      "description": "Basic snippet for get_test_case_result in TestCases",
+      "title": "Snippet for the get_test_case_result call in the TestCases service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::TestCases::Client#get_test_case_result. It may require modification in order to execute successfully.",
       "file": "test_cases/get_test_case_result.rb",
       "language": "RUBY",
       "client_method": {
@@ -2566,15 +2566,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Webhooks_ListWebhooks_sync",
-      "title": "Snippet for list_webhooks in Webhooks",
-      "description": "Basic snippet for list_webhooks in Webhooks",
+      "title": "Snippet for the list_webhooks call in the Webhooks service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Webhooks::Client#list_webhooks. It may require modification in order to execute successfully.",
       "file": "webhooks/list_webhooks.rb",
       "language": "RUBY",
       "client_method": {
@@ -2606,15 +2606,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Webhooks_GetWebhook_sync",
-      "title": "Snippet for get_webhook in Webhooks",
-      "description": "Basic snippet for get_webhook in Webhooks",
+      "title": "Snippet for the get_webhook call in the Webhooks service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Webhooks::Client#get_webhook. It may require modification in order to execute successfully.",
       "file": "webhooks/get_webhook.rb",
       "language": "RUBY",
       "client_method": {
@@ -2646,15 +2646,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Webhooks_CreateWebhook_sync",
-      "title": "Snippet for create_webhook in Webhooks",
-      "description": "Basic snippet for create_webhook in Webhooks",
+      "title": "Snippet for the create_webhook call in the Webhooks service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Webhooks::Client#create_webhook. It may require modification in order to execute successfully.",
       "file": "webhooks/create_webhook.rb",
       "language": "RUBY",
       "client_method": {
@@ -2686,15 +2686,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Webhooks_UpdateWebhook_sync",
-      "title": "Snippet for update_webhook in Webhooks",
-      "description": "Basic snippet for update_webhook in Webhooks",
+      "title": "Snippet for the update_webhook call in the Webhooks service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Webhooks::Client#update_webhook. It may require modification in order to execute successfully.",
       "file": "webhooks/update_webhook.rb",
       "language": "RUBY",
       "client_method": {
@@ -2726,15 +2726,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Webhooks_DeleteWebhook_sync",
-      "title": "Snippet for delete_webhook in Webhooks",
-      "description": "Basic snippet for delete_webhook in Webhooks",
+      "title": "Snippet for the delete_webhook call in the Webhooks service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Webhooks::Client#delete_webhook. It may require modification in order to execute successfully.",
       "file": "webhooks/delete_webhook.rb",
       "language": "RUBY",
       "client_method": {
@@ -2766,15 +2766,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Environments_ListEnvironments_sync",
-      "title": "Snippet for list_environments in Environments",
-      "description": "Basic snippet for list_environments in Environments",
+      "title": "Snippet for the list_environments call in the Environments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Environments::Client#list_environments. It may require modification in order to execute successfully.",
       "file": "environments/list_environments.rb",
       "language": "RUBY",
       "client_method": {
@@ -2806,15 +2806,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Environments_GetEnvironment_sync",
-      "title": "Snippet for get_environment in Environments",
-      "description": "Basic snippet for get_environment in Environments",
+      "title": "Snippet for the get_environment call in the Environments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Environments::Client#get_environment. It may require modification in order to execute successfully.",
       "file": "environments/get_environment.rb",
       "language": "RUBY",
       "client_method": {
@@ -2846,15 +2846,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Environments_CreateEnvironment_sync",
-      "title": "Snippet for create_environment in Environments",
-      "description": "Basic snippet for create_environment in Environments",
+      "title": "Snippet for the create_environment call in the Environments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Environments::Client#create_environment. It may require modification in order to execute successfully.",
       "file": "environments/create_environment.rb",
       "language": "RUBY",
       "client_method": {
@@ -2886,15 +2886,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Environments_UpdateEnvironment_sync",
-      "title": "Snippet for update_environment in Environments",
-      "description": "Basic snippet for update_environment in Environments",
+      "title": "Snippet for the update_environment call in the Environments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Environments::Client#update_environment. It may require modification in order to execute successfully.",
       "file": "environments/update_environment.rb",
       "language": "RUBY",
       "client_method": {
@@ -2926,15 +2926,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Environments_DeleteEnvironment_sync",
-      "title": "Snippet for delete_environment in Environments",
-      "description": "Basic snippet for delete_environment in Environments",
+      "title": "Snippet for the delete_environment call in the Environments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Environments::Client#delete_environment. It may require modification in order to execute successfully.",
       "file": "environments/delete_environment.rb",
       "language": "RUBY",
       "client_method": {
@@ -2966,15 +2966,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Environments_LookupEnvironmentHistory_sync",
-      "title": "Snippet for lookup_environment_history in Environments",
-      "description": "Basic snippet for lookup_environment_history in Environments",
+      "title": "Snippet for the lookup_environment_history call in the Environments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Environments::Client#lookup_environment_history. It may require modification in order to execute successfully.",
       "file": "environments/lookup_environment_history.rb",
       "language": "RUBY",
       "client_method": {
@@ -3006,15 +3006,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Environments_RunContinuousTest_sync",
-      "title": "Snippet for run_continuous_test in Environments",
-      "description": "Basic snippet for run_continuous_test in Environments",
+      "title": "Snippet for the run_continuous_test call in the Environments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Environments::Client#run_continuous_test. It may require modification in order to execute successfully.",
       "file": "environments/run_continuous_test.rb",
       "language": "RUBY",
       "client_method": {
@@ -3046,15 +3046,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Environments_ListContinuousTestResults_sync",
-      "title": "Snippet for list_continuous_test_results in Environments",
-      "description": "Basic snippet for list_continuous_test_results in Environments",
+      "title": "Snippet for the list_continuous_test_results call in the Environments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Environments::Client#list_continuous_test_results. It may require modification in order to execute successfully.",
       "file": "environments/list_continuous_test_results.rb",
       "language": "RUBY",
       "client_method": {
@@ -3086,15 +3086,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Environments_DeployFlow_sync",
-      "title": "Snippet for deploy_flow in Environments",
-      "description": "Basic snippet for deploy_flow in Environments",
+      "title": "Snippet for the deploy_flow call in the Environments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Environments::Client#deploy_flow. It may require modification in order to execute successfully.",
       "file": "environments/deploy_flow.rb",
       "language": "RUBY",
       "client_method": {
@@ -3126,15 +3126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Experiments_ListExperiments_sync",
-      "title": "Snippet for list_experiments in Experiments",
-      "description": "Basic snippet for list_experiments in Experiments",
+      "title": "Snippet for the list_experiments call in the Experiments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Experiments::Client#list_experiments. It may require modification in order to execute successfully.",
       "file": "experiments/list_experiments.rb",
       "language": "RUBY",
       "client_method": {
@@ -3166,15 +3166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Experiments_GetExperiment_sync",
-      "title": "Snippet for get_experiment in Experiments",
-      "description": "Basic snippet for get_experiment in Experiments",
+      "title": "Snippet for the get_experiment call in the Experiments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Experiments::Client#get_experiment. It may require modification in order to execute successfully.",
       "file": "experiments/get_experiment.rb",
       "language": "RUBY",
       "client_method": {
@@ -3206,15 +3206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Experiments_CreateExperiment_sync",
-      "title": "Snippet for create_experiment in Experiments",
-      "description": "Basic snippet for create_experiment in Experiments",
+      "title": "Snippet for the create_experiment call in the Experiments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Experiments::Client#create_experiment. It may require modification in order to execute successfully.",
       "file": "experiments/create_experiment.rb",
       "language": "RUBY",
       "client_method": {
@@ -3246,15 +3246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Experiments_UpdateExperiment_sync",
-      "title": "Snippet for update_experiment in Experiments",
-      "description": "Basic snippet for update_experiment in Experiments",
+      "title": "Snippet for the update_experiment call in the Experiments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Experiments::Client#update_experiment. It may require modification in order to execute successfully.",
       "file": "experiments/update_experiment.rb",
       "language": "RUBY",
       "client_method": {
@@ -3286,15 +3286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Experiments_DeleteExperiment_sync",
-      "title": "Snippet for delete_experiment in Experiments",
-      "description": "Basic snippet for delete_experiment in Experiments",
+      "title": "Snippet for the delete_experiment call in the Experiments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Experiments::Client#delete_experiment. It may require modification in order to execute successfully.",
       "file": "experiments/delete_experiment.rb",
       "language": "RUBY",
       "client_method": {
@@ -3326,15 +3326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Experiments_StartExperiment_sync",
-      "title": "Snippet for start_experiment in Experiments",
-      "description": "Basic snippet for start_experiment in Experiments",
+      "title": "Snippet for the start_experiment call in the Experiments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Experiments::Client#start_experiment. It may require modification in order to execute successfully.",
       "file": "experiments/start_experiment.rb",
       "language": "RUBY",
       "client_method": {
@@ -3366,15 +3366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Experiments_StopExperiment_sync",
-      "title": "Snippet for stop_experiment in Experiments",
-      "description": "Basic snippet for stop_experiment in Experiments",
+      "title": "Snippet for the stop_experiment call in the Experiments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Experiments::Client#stop_experiment. It may require modification in order to execute successfully.",
       "file": "experiments/stop_experiment.rb",
       "language": "RUBY",
       "client_method": {
@@ -3406,15 +3406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_SecuritySettingsService_CreateSecuritySettings_sync",
-      "title": "Snippet for create_security_settings in SecuritySettingsService",
-      "description": "Basic snippet for create_security_settings in SecuritySettingsService",
+      "title": "Snippet for the create_security_settings call in the SecuritySettingsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::SecuritySettingsService::Client#create_security_settings. It may require modification in order to execute successfully.",
       "file": "security_settings_service/create_security_settings.rb",
       "language": "RUBY",
       "client_method": {
@@ -3446,15 +3446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_SecuritySettingsService_GetSecuritySettings_sync",
-      "title": "Snippet for get_security_settings in SecuritySettingsService",
-      "description": "Basic snippet for get_security_settings in SecuritySettingsService",
+      "title": "Snippet for the get_security_settings call in the SecuritySettingsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::SecuritySettingsService::Client#get_security_settings. It may require modification in order to execute successfully.",
       "file": "security_settings_service/get_security_settings.rb",
       "language": "RUBY",
       "client_method": {
@@ -3486,15 +3486,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_SecuritySettingsService_UpdateSecuritySettings_sync",
-      "title": "Snippet for update_security_settings in SecuritySettingsService",
-      "description": "Basic snippet for update_security_settings in SecuritySettingsService",
+      "title": "Snippet for the update_security_settings call in the SecuritySettingsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::SecuritySettingsService::Client#update_security_settings. It may require modification in order to execute successfully.",
       "file": "security_settings_service/update_security_settings.rb",
       "language": "RUBY",
       "client_method": {
@@ -3526,15 +3526,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_SecuritySettingsService_ListSecuritySettings_sync",
-      "title": "Snippet for list_security_settings in SecuritySettingsService",
-      "description": "Basic snippet for list_security_settings in SecuritySettingsService",
+      "title": "Snippet for the list_security_settings call in the SecuritySettingsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::SecuritySettingsService::Client#list_security_settings. It may require modification in order to execute successfully.",
       "file": "security_settings_service/list_security_settings.rb",
       "language": "RUBY",
       "client_method": {
@@ -3566,15 +3566,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_SecuritySettingsService_DeleteSecuritySettings_sync",
-      "title": "Snippet for delete_security_settings in SecuritySettingsService",
-      "description": "Basic snippet for delete_security_settings in SecuritySettingsService",
+      "title": "Snippet for the delete_security_settings call in the SecuritySettingsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::SecuritySettingsService::Client#delete_security_settings. It may require modification in order to execute successfully.",
       "file": "security_settings_service/delete_security_settings.rb",
       "language": "RUBY",
       "client_method": {
@@ -3606,15 +3606,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Versions_ListVersions_sync",
-      "title": "Snippet for list_versions in Versions",
-      "description": "Basic snippet for list_versions in Versions",
+      "title": "Snippet for the list_versions call in the Versions service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Versions::Client#list_versions. It may require modification in order to execute successfully.",
       "file": "versions/list_versions.rb",
       "language": "RUBY",
       "client_method": {
@@ -3646,15 +3646,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Versions_GetVersion_sync",
-      "title": "Snippet for get_version in Versions",
-      "description": "Basic snippet for get_version in Versions",
+      "title": "Snippet for the get_version call in the Versions service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Versions::Client#get_version. It may require modification in order to execute successfully.",
       "file": "versions/get_version.rb",
       "language": "RUBY",
       "client_method": {
@@ -3686,15 +3686,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Versions_CreateVersion_sync",
-      "title": "Snippet for create_version in Versions",
-      "description": "Basic snippet for create_version in Versions",
+      "title": "Snippet for the create_version call in the Versions service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Versions::Client#create_version. It may require modification in order to execute successfully.",
       "file": "versions/create_version.rb",
       "language": "RUBY",
       "client_method": {
@@ -3726,15 +3726,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Versions_UpdateVersion_sync",
-      "title": "Snippet for update_version in Versions",
-      "description": "Basic snippet for update_version in Versions",
+      "title": "Snippet for the update_version call in the Versions service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Versions::Client#update_version. It may require modification in order to execute successfully.",
       "file": "versions/update_version.rb",
       "language": "RUBY",
       "client_method": {
@@ -3766,15 +3766,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Versions_DeleteVersion_sync",
-      "title": "Snippet for delete_version in Versions",
-      "description": "Basic snippet for delete_version in Versions",
+      "title": "Snippet for the delete_version call in the Versions service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Versions::Client#delete_version. It may require modification in order to execute successfully.",
       "file": "versions/delete_version.rb",
       "language": "RUBY",
       "client_method": {
@@ -3806,15 +3806,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Versions_LoadVersion_sync",
-      "title": "Snippet for load_version in Versions",
-      "description": "Basic snippet for load_version in Versions",
+      "title": "Snippet for the load_version call in the Versions service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Versions::Client#load_version. It may require modification in order to execute successfully.",
       "file": "versions/load_version.rb",
       "language": "RUBY",
       "client_method": {
@@ -3846,15 +3846,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "dialogflow_v3_generated_Versions_CompareVersions_sync",
-      "title": "Snippet for compare_versions in Versions",
-      "description": "Basic snippet for compare_versions in Versions",
+      "title": "Snippet for the compare_versions call in the Versions service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dialogflow::CX::V3::Versions::Client#compare_versions. It may require modification in order to execute successfully.",
       "file": "versions/compare_versions.rb",
       "language": "RUBY",
       "client_method": {
@@ -3886,7 +3886,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]

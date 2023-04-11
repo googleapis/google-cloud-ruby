@@ -20,8 +20,11 @@
 require "google/cloud/bigquery/reservation/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#delete_reservation
+# Snippet for the delete_reservation call in the ReservationService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#delete_reservation.
+# It may require modification in order to execute successfully.
 #
 def delete_reservation
   # Create a client object. The client can be reused for multiple calls.

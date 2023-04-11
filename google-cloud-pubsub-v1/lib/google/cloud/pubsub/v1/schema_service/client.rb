@@ -397,13 +397,11 @@ module Google
             #   # Call the list_schemas method.
             #   result = client.list_schemas request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::PubSub::V1::Schema.
-            #     p response
+            #     p item
             #   end
             #
             def list_schemas request, options = nil
@@ -498,13 +496,11 @@ module Google
             #   # Call the list_schema_revisions method.
             #   result = client.list_schema_revisions request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::PubSub::V1::Schema.
-            #     p response
+            #     p item
             #   end
             #
             def list_schema_revisions request, options = nil
@@ -749,12 +745,11 @@ module Google
             #     Required. The name of the schema revision to be deleted, with a revision ID
             #     explicitly included.
             #
-            #     Example: projects/123/schemas/my-schema@c7cfa2a8
+            #     Example: `projects/123/schemas/my-schema@c7cfa2a8`
             #   @param revision_id [::String]
-            #     Required. The revision ID to roll back to.
-            #     It must be a revision of the same schema.
-            #
-            #       Example: c7cfa2a8
+            #     Optional. This field is deprecated and should not be used for specifying
+            #     the revision ID. The revision ID should be specified via the `name`
+            #     parameter.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::PubSub::V1::Schema]
@@ -1128,9 +1123,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials

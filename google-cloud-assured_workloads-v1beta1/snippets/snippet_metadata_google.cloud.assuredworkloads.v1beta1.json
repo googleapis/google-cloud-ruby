@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-assured_workloads-v1beta1",
-    "version": "0.13.0",
+    "version": "0.14.0",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "assuredworkloads_v1beta1_generated_AssuredWorkloadsService_CreateWorkload_sync",
-      "title": "Snippet for create_workload in AssuredWorkloadsService",
-      "description": "Basic snippet for create_workload in AssuredWorkloadsService",
+      "title": "Snippet for the create_workload call in the AssuredWorkloadsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client#create_workload. It may require modification in order to execute successfully.",
       "file": "assured_workloads_service/create_workload.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "assuredworkloads_v1beta1_generated_AssuredWorkloadsService_UpdateWorkload_sync",
-      "title": "Snippet for update_workload in AssuredWorkloadsService",
-      "description": "Basic snippet for update_workload in AssuredWorkloadsService",
+      "title": "Snippet for the update_workload call in the AssuredWorkloadsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client#update_workload. It may require modification in order to execute successfully.",
       "file": "assured_workloads_service/update_workload.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "assuredworkloads_v1beta1_generated_AssuredWorkloadsService_RestrictAllowedResources_sync",
-      "title": "Snippet for restrict_allowed_resources in AssuredWorkloadsService",
-      "description": "Basic snippet for restrict_allowed_resources in AssuredWorkloadsService",
+      "title": "Snippet for the restrict_allowed_resources call in the AssuredWorkloadsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client#restrict_allowed_resources. It may require modification in order to execute successfully.",
       "file": "assured_workloads_service/restrict_allowed_resources.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "assuredworkloads_v1beta1_generated_AssuredWorkloadsService_DeleteWorkload_sync",
-      "title": "Snippet for delete_workload in AssuredWorkloadsService",
-      "description": "Basic snippet for delete_workload in AssuredWorkloadsService",
+      "title": "Snippet for the delete_workload call in the AssuredWorkloadsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client#delete_workload. It may require modification in order to execute successfully.",
       "file": "assured_workloads_service/delete_workload.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "assuredworkloads_v1beta1_generated_AssuredWorkloadsService_GetWorkload_sync",
-      "title": "Snippet for get_workload in AssuredWorkloadsService",
-      "description": "Basic snippet for get_workload in AssuredWorkloadsService",
+      "title": "Snippet for the get_workload call in the AssuredWorkloadsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client#get_workload. It may require modification in order to execute successfully.",
       "file": "assured_workloads_service/get_workload.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "assuredworkloads_v1beta1_generated_AssuredWorkloadsService_AnalyzeWorkloadMove_sync",
-      "title": "Snippet for analyze_workload_move in AssuredWorkloadsService",
-      "description": "Basic snippet for analyze_workload_move in AssuredWorkloadsService",
+      "title": "Snippet for the analyze_workload_move call in the AssuredWorkloadsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client#analyze_workload_move. It may require modification in order to execute successfully.",
       "file": "assured_workloads_service/analyze_workload_move.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "assuredworkloads_v1beta1_generated_AssuredWorkloadsService_ListWorkloads_sync",
-      "title": "Snippet for list_workloads in AssuredWorkloadsService",
-      "description": "Basic snippet for list_workloads in AssuredWorkloadsService",
+      "title": "Snippet for the list_workloads call in the AssuredWorkloadsService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client#list_workloads. It may require modification in order to execute successfully.",
       "file": "assured_workloads_service/list_workloads.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,7 +286,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]

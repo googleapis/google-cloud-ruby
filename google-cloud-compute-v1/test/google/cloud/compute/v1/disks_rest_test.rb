@@ -85,33 +85,33 @@ class ::Google::Cloud::Compute::V1::Disks::Rest::ClientTest < Minitest::Test
     ::Google::Cloud::Compute::V1::Disks::Rest::ServiceStub.stub :transcode_add_resource_policies_request, ["", "", {}] do
       Gapic::Rest::ClientStub.stub :new, add_resource_policies_client_stub do
         # Create client
-        client = ::Google::Cloud::Compute::V1::Disks::Rest::Client.new do  |config|
+        client = ::Google::Cloud::Compute::V1::Disks::Rest::Client.new do |config|
           config.credentials = :dummy_value
         end
 
         # Use hash object
         client.add_resource_policies({ disk: disk, disks_add_resource_policies_request_resource: disks_add_resource_policies_request_resource, project: project, request_id: request_id, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.add_resource_policies disk: disk, disks_add_resource_policies_request_resource: disks_add_resource_policies_request_resource, project: project, request_id: request_id, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.add_resource_policies ::Google::Cloud::Compute::V1::AddResourcePoliciesDiskRequest.new(disk: disk, disks_add_resource_policies_request_resource: disks_add_resource_policies_request_resource, project: project, request_id: request_id, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.add_resource_policies({ disk: disk, disks_add_resource_policies_request_resource: disks_add_resource_policies_request_resource, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.add_resource_policies(::Google::Cloud::Compute::V1::AddResourcePoliciesDiskRequest.new(disk: disk, disks_add_resource_policies_request_resource: disks_add_resource_policies_request_resource, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -151,27 +151,27 @@ class ::Google::Cloud::Compute::V1::Disks::Rest::ClientTest < Minitest::Test
 
         # Use hash object
         client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListDisksRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListDisksRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -210,27 +210,27 @@ class ::Google::Cloud::Compute::V1::Disks::Rest::ClientTest < Minitest::Test
 
         # Use hash object
         client.create_snapshot({ disk: disk, guest_flush: guest_flush, project: project, request_id: request_id, snapshot_resource: snapshot_resource, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.create_snapshot disk: disk, guest_flush: guest_flush, project: project, request_id: request_id, snapshot_resource: snapshot_resource, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.create_snapshot ::Google::Cloud::Compute::V1::CreateSnapshotDiskRequest.new(disk: disk, guest_flush: guest_flush, project: project, request_id: request_id, snapshot_resource: snapshot_resource, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.create_snapshot({ disk: disk, guest_flush: guest_flush, project: project, request_id: request_id, snapshot_resource: snapshot_resource, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.create_snapshot(::Google::Cloud::Compute::V1::CreateSnapshotDiskRequest.new(disk: disk, guest_flush: guest_flush, project: project, request_id: request_id, snapshot_resource: snapshot_resource, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -267,27 +267,27 @@ class ::Google::Cloud::Compute::V1::Disks::Rest::ClientTest < Minitest::Test
 
         # Use hash object
         client.delete({ disk: disk, project: project, request_id: request_id, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.delete disk: disk, project: project, request_id: request_id, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.delete ::Google::Cloud::Compute::V1::DeleteDiskRequest.new(disk: disk, project: project, request_id: request_id, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.delete({ disk: disk, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.delete(::Google::Cloud::Compute::V1::DeleteDiskRequest.new(disk: disk, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -323,27 +323,27 @@ class ::Google::Cloud::Compute::V1::Disks::Rest::ClientTest < Minitest::Test
 
         # Use hash object
         client.get({ disk: disk, project: project, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.get disk: disk, project: project, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.get ::Google::Cloud::Compute::V1::GetDiskRequest.new(disk: disk, project: project, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.get({ disk: disk, project: project, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.get(::Google::Cloud::Compute::V1::GetDiskRequest.new(disk: disk, project: project, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -380,27 +380,27 @@ class ::Google::Cloud::Compute::V1::Disks::Rest::ClientTest < Minitest::Test
 
         # Use hash object
         client.get_iam_policy({ options_requested_policy_version: options_requested_policy_version, project: project, resource: resource, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.get_iam_policy options_requested_policy_version: options_requested_policy_version, project: project, resource: resource, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.get_iam_policy ::Google::Cloud::Compute::V1::GetIamPolicyDiskRequest.new(options_requested_policy_version: options_requested_policy_version, project: project, resource: resource, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.get_iam_policy({ options_requested_policy_version: options_requested_policy_version, project: project, resource: resource, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.get_iam_policy(::Google::Cloud::Compute::V1::GetIamPolicyDiskRequest.new(options_requested_policy_version: options_requested_policy_version, project: project, resource: resource, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -438,27 +438,27 @@ class ::Google::Cloud::Compute::V1::Disks::Rest::ClientTest < Minitest::Test
 
         # Use hash object
         client.insert({ disk_resource: disk_resource, project: project, request_id: request_id, source_image: source_image, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.insert disk_resource: disk_resource, project: project, request_id: request_id, source_image: source_image, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.insert ::Google::Cloud::Compute::V1::InsertDiskRequest.new(disk_resource: disk_resource, project: project, request_id: request_id, source_image: source_image, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.insert({ disk_resource: disk_resource, project: project, request_id: request_id, source_image: source_image, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.insert(::Google::Cloud::Compute::V1::InsertDiskRequest.new(disk_resource: disk_resource, project: project, request_id: request_id, source_image: source_image, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -498,27 +498,27 @@ class ::Google::Cloud::Compute::V1::Disks::Rest::ClientTest < Minitest::Test
 
         # Use hash object
         client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.list ::Google::Cloud::Compute::V1::ListDisksRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.list(::Google::Cloud::Compute::V1::ListDisksRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -556,27 +556,27 @@ class ::Google::Cloud::Compute::V1::Disks::Rest::ClientTest < Minitest::Test
 
         # Use hash object
         client.remove_resource_policies({ disk: disk, disks_remove_resource_policies_request_resource: disks_remove_resource_policies_request_resource, project: project, request_id: request_id, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.remove_resource_policies disk: disk, disks_remove_resource_policies_request_resource: disks_remove_resource_policies_request_resource, project: project, request_id: request_id, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.remove_resource_policies ::Google::Cloud::Compute::V1::RemoveResourcePoliciesDiskRequest.new(disk: disk, disks_remove_resource_policies_request_resource: disks_remove_resource_policies_request_resource, project: project, request_id: request_id, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.remove_resource_policies({ disk: disk, disks_remove_resource_policies_request_resource: disks_remove_resource_policies_request_resource, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.remove_resource_policies(::Google::Cloud::Compute::V1::RemoveResourcePoliciesDiskRequest.new(disk: disk, disks_remove_resource_policies_request_resource: disks_remove_resource_policies_request_resource, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -614,27 +614,27 @@ class ::Google::Cloud::Compute::V1::Disks::Rest::ClientTest < Minitest::Test
 
         # Use hash object
         client.resize({ disk: disk, disks_resize_request_resource: disks_resize_request_resource, project: project, request_id: request_id, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.resize disk: disk, disks_resize_request_resource: disks_resize_request_resource, project: project, request_id: request_id, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.resize ::Google::Cloud::Compute::V1::ResizeDiskRequest.new(disk: disk, disks_resize_request_resource: disks_resize_request_resource, project: project, request_id: request_id, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.resize({ disk: disk, disks_resize_request_resource: disks_resize_request_resource, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.resize(::Google::Cloud::Compute::V1::ResizeDiskRequest.new(disk: disk, disks_resize_request_resource: disks_resize_request_resource, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -671,27 +671,27 @@ class ::Google::Cloud::Compute::V1::Disks::Rest::ClientTest < Minitest::Test
 
         # Use hash object
         client.set_iam_policy({ project: project, resource: resource, zone: zone, zone_set_policy_request_resource: zone_set_policy_request_resource }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.set_iam_policy project: project, resource: resource, zone: zone, zone_set_policy_request_resource: zone_set_policy_request_resource do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.set_iam_policy ::Google::Cloud::Compute::V1::SetIamPolicyDiskRequest.new(project: project, resource: resource, zone: zone, zone_set_policy_request_resource: zone_set_policy_request_resource) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.set_iam_policy({ project: project, resource: resource, zone: zone, zone_set_policy_request_resource: zone_set_policy_request_resource }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.set_iam_policy(::Google::Cloud::Compute::V1::SetIamPolicyDiskRequest.new(project: project, resource: resource, zone: zone, zone_set_policy_request_resource: zone_set_policy_request_resource), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -729,27 +729,27 @@ class ::Google::Cloud::Compute::V1::Disks::Rest::ClientTest < Minitest::Test
 
         # Use hash object
         client.set_labels({ project: project, request_id: request_id, resource: resource, zone: zone, zone_set_labels_request_resource: zone_set_labels_request_resource }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.set_labels project: project, request_id: request_id, resource: resource, zone: zone, zone_set_labels_request_resource: zone_set_labels_request_resource do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.set_labels ::Google::Cloud::Compute::V1::SetLabelsDiskRequest.new(project: project, request_id: request_id, resource: resource, zone: zone, zone_set_labels_request_resource: zone_set_labels_request_resource) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.set_labels({ project: project, request_id: request_id, resource: resource, zone: zone, zone_set_labels_request_resource: zone_set_labels_request_resource }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.set_labels(::Google::Cloud::Compute::V1::SetLabelsDiskRequest.new(project: project, request_id: request_id, resource: resource, zone: zone, zone_set_labels_request_resource: zone_set_labels_request_resource), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
@@ -786,31 +786,91 @@ class ::Google::Cloud::Compute::V1::Disks::Rest::ClientTest < Minitest::Test
 
         # Use hash object
         client.test_iam_permissions({ project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource, zone: zone }) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
         client.test_iam_permissions project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource, zone: zone do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
         client.test_iam_permissions ::Google::Cloud::Compute::V1::TestIamPermissionsDiskRequest.new(project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource, zone: zone) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
         client.test_iam_permissions({ project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource, zone: zone }, call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
         client.test_iam_permissions(::Google::Cloud::Compute::V1::TestIamPermissionsDiskRequest.new(project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource, zone: zone), call_options) do |_result, response|
-          assert_equal http_response, response
+          assert_equal http_response, response.underlying_op
         end
 
         # Verify method calls
         assert_equal 5, test_iam_permissions_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update
+    # Create test objects.
+    client_result = ::Google::Cloud::Compute::V1::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    disk = "hello world"
+    disk_resource = {}
+    paths = "hello world"
+    project = "hello world"
+    request_id = "hello world"
+    update_mask = "hello world"
+    zone = "hello world"
+
+    update_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Compute::V1::Disks::Rest::ServiceStub.stub :transcode_update_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_client_stub do
+        # Create client
+        client = ::Google::Cloud::Compute::V1::Disks::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update({ disk: disk, disk_resource: disk_resource, paths: paths, project: project, request_id: request_id, update_mask: update_mask, zone: zone }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update disk: disk, disk_resource: disk_resource, paths: paths, project: project, request_id: request_id, update_mask: update_mask, zone: zone do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update ::Google::Cloud::Compute::V1::UpdateDiskRequest.new(disk: disk, disk_resource: disk_resource, paths: paths, project: project, request_id: request_id, update_mask: update_mask, zone: zone) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update({ disk: disk, disk_resource: disk_resource, paths: paths, project: project, request_id: request_id, update_mask: update_mask, zone: zone }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update(::Google::Cloud::Compute::V1::UpdateDiskRequest.new(disk: disk, disk_resource: disk_resource, paths: paths, project: project, request_id: request_id, update_mask: update_mask, zone: zone), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_client_stub.call_count
       end
     end
   end

@@ -26,6 +26,7 @@ require "google/cloud/dialogflow/v2/conversation_models/credentials"
 require "google/cloud/dialogflow/v2/conversation_models/paths"
 require "google/cloud/dialogflow/v2/conversation_models/operations"
 require "google/cloud/dialogflow/v2/conversation_models/client"
+require "google/cloud/dialogflow/v2/conversation_models/rest"
 
 module Google
   module Cloud
@@ -38,6 +39,11 @@ module Google
         #
         #     require "google/cloud/dialogflow/v2/conversation_models"
         #     client = ::Google::Cloud::Dialogflow::V2::ConversationModels::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/dialogflow/v2/conversation_models/rest"
+        #     client = ::Google::Cloud::Dialogflow::V2::ConversationModels::Rest::Client.new
         #
         module ConversationModels
         end

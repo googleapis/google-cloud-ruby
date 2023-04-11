@@ -20,8 +20,11 @@
 require "google/cloud/spanner/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Spanner::V1::Spanner::Client#begin_transaction
+# Snippet for the begin_transaction call in the Spanner service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Spanner::V1::Spanner::Client#begin_transaction. It may require
+# modification in order to execute successfully.
 #
 def begin_transaction
   # Create a client object. The client can be reused for multiple calls.

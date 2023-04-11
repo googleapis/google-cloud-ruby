@@ -1,5 +1,36 @@
 # Changelog
 
+### 0.15.1 (2023-03-15)
+
+#### Documentation
+
+* Update quota usage information ([#20894](https://github.com/googleapis/google-cloud-ruby/issues/20894)) 
+
+### 0.15.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20626](https://github.com/googleapis/google-cloud-ruby/issues/20626)) 
+
+### 0.14.0 (2023-02-28)
+
+#### Features
+
+* Support the persist_parameter_changes parameter to match_intent ([#20546](https://github.com/googleapis/google-cloud-ruby/issues/20546)) 
+
+### 0.13.0 (2023-02-23)
+
+#### Features
+
+* Support for audio export destination in Google Cloud Storage ([#20493](https://github.com/googleapis/google-cloud-ruby/issues/20493)) 
+* Support for text-to-speech settings for an Agent 
+
+### 0.12.0 (2023-01-26)
+
+#### Features
+
+* Added JSON_PACKAGE data format for ExportAgentRequest ([#20065](https://github.com/googleapis/google-cloud-ruby/issues/20065)) 
+
 ### 0.11.0 (2023-01-15)
 
 #### Features

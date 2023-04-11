@@ -30,6 +30,11 @@ module Google
       #     require "google/cloud/web_security_scanner/v1"
       #     client = ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/web_security_scanner/v1"
+      #     client = ::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Rest::Client.new
+      #
       module V1
       end
     end

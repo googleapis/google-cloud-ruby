@@ -73,7 +73,7 @@ module Google
           #     one should be set.
           # @!attribute [rw] properties
           #   @return [::Array<::Google::Cloud::DocumentAI::V1::DocumentSchema::EntityType::Property>]
-          #     Describing the nested structure, or composition of an entity.
+          #     Description the nested structure, or composition of an entity.
           class EntityType
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -104,20 +104,28 @@ module Google
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
 
-              # Types of occurrences of the entity type in the document.  Note: this
-              # represents the number of instances of an entity types, not number of
-              # mentions of a given entity instance.
+              # Types of occurrences of the entity type in the document.  This
+              # represents the number of instances of instances of an entity, not
+              # number of mentions of an entity.  For example, a bank statement may
+              # only have one `account_number`, but this account number may be
+              # mentioned in several places on the document.  In this case the
+              # 'account_number' would be considered a `REQUIRED_ONCE` entity type. If,
+              # on the other hand, we expect a bank statement to contain the status of
+              # multiple different accounts for the customers, the occurrence type will
+              # be set to `REQUIRED_MULTIPLE`.
               module OccurrenceType
                 # Unspecified occurrence type.
                 OCCURRENCE_TYPE_UNSPECIFIED = 0
 
-                # There will be zero or one instance of this entity type.
+                # There will be zero or one instance of this entity type.  The same
+                # entity instance may be mentioned multiple times.
                 OPTIONAL_ONCE = 1
 
                 # The entity type will appear zero or multiple times.
                 OPTIONAL_MULTIPLE = 2
 
-                # The entity type will only appear exactly once.
+                # The entity type will only appear exactly once.  The same
+                # entity instance may be mentioned multiple times.
                 REQUIRED_ONCE = 3
 
                 # The entity type will appear once or more times.

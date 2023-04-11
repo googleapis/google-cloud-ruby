@@ -20,8 +20,11 @@
 require "google/cloud/recaptcha_enterprise/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#list_keys
+# Snippet for the list_keys call in the RecaptchaEnterpriseService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#list_keys.
+# It may require modification in order to execute successfully.
 #
 def list_keys
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_keys
   # Call the list_keys method.
   result = client.list_keys request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::RecaptchaEnterprise::V1::Key.
-    p response
+    p item
   end
 end
 # [END recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_ListKeys_sync]

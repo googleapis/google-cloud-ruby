@@ -20,8 +20,11 @@
 require "google/cloud/certificate_manager/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::CertificateManager::V1::CertificateManager::Client#list_certificate_maps
+# Snippet for the list_certificate_maps call in the CertificateManager service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::CertificateManager::V1::CertificateManager::Client#list_certificate_maps.
+# It may require modification in order to execute successfully.
 #
 def list_certificate_maps
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_certificate_maps
   # Call the list_certificate_maps method.
   result = client.list_certificate_maps request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::CertificateManager::V1::CertificateMap.
-    p response
+    p item
   end
 end
 # [END certificatemanager_v1_generated_CertificateManager_ListCertificateMaps_sync]

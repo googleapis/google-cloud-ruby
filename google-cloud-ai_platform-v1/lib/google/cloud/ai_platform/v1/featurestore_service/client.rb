@@ -238,14 +238,14 @@ module Google
             #   # Call the create_featurestore method.
             #   result = client.create_featurestore request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_featurestore request, options = nil
@@ -461,13 +461,11 @@ module Google
             #   # Call the list_featurestores method.
             #   result = client.list_featurestores request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::AIPlatform::V1::Featurestore.
-            #     p response
+            #     p item
             #   end
             #
             def list_featurestores request, options = nil
@@ -570,14 +568,14 @@ module Google
             #   # Call the update_featurestore method.
             #   result = client.update_featurestore request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def update_featurestore request, options = nil
@@ -670,14 +668,14 @@ module Google
             #   # Call the delete_featurestore method.
             #   result = client.delete_featurestore request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_featurestore request, options = nil
@@ -775,14 +773,14 @@ module Google
             #   # Call the create_entity_type method.
             #   result = client.create_entity_type request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_entity_type request, options = nil
@@ -1000,13 +998,11 @@ module Google
             #   # Call the list_entity_types method.
             #   result = client.list_entity_types request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::AIPlatform::V1::EntityType.
-            #     p response
+            #     p item
             #   end
             #
             def list_entity_types request, options = nil
@@ -1206,14 +1202,14 @@ module Google
             #   # Call the delete_entity_type method.
             #   result = client.delete_entity_type request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_entity_type request, options = nil
@@ -1311,14 +1307,14 @@ module Google
             #   # Call the create_feature method.
             #   result = client.create_feature request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def create_feature request, options = nil
@@ -1412,14 +1408,14 @@ module Google
             #   # Call the batch_create_features method.
             #   result = client.batch_create_features request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def batch_create_features request, options = nil
@@ -1646,13 +1642,11 @@ module Google
             #   # Call the list_features method.
             #   result = client.list_features request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::AIPlatform::V1::Feature.
-            #     p response
+            #     p item
             #   end
             #
             def list_features request, options = nil
@@ -1842,14 +1836,14 @@ module Google
             #   # Call the delete_feature method.
             #   result = client.delete_feature request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def delete_feature request, options = nil
@@ -1985,14 +1979,14 @@ module Google
             #   # Call the import_feature_values method.
             #   result = client.import_feature_values request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def import_feature_values request, options = nil
@@ -2103,10 +2097,7 @@ module Google
             #     passed as opaque bytes.
             #   @param entity_type_specs [::Array<::Google::Cloud::AIPlatform::V1::BatchReadFeatureValuesRequest::EntityTypeSpec, ::Hash>]
             #     Required. Specifies EntityType grouping Features to read values of and
-            #     settings. Each EntityType referenced in
-            #     [BatchReadFeatureValuesRequest.entity_type_specs] must have a column
-            #     specifying entity IDs in the EntityType in
-            #     [BatchReadFeatureValuesRequest.request][] .
+            #     settings.
             #   @param start_time [::Google::Protobuf::Timestamp, ::Hash]
             #     Optional. Excludes Feature values with feature generation timestamp before
             #     this timestamp. If not set, retrieve oldest values kept in Feature Store.
@@ -2132,14 +2123,14 @@ module Google
             #   # Call the batch_read_feature_values method.
             #   result = client.batch_read_feature_values request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def batch_read_feature_values request, options = nil
@@ -2239,14 +2230,14 @@ module Google
             #   # Call the export_feature_values method.
             #   result = client.export_feature_values request
             #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
             #   result.wait_until_done! timeout: 60
             #   if result.response?
             #     p result.response
             #   else
-            #     puts "Error!"
+            #     puts "No response received."
             #   end
             #
             def export_feature_values request, options = nil
@@ -2283,6 +2274,115 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @featurestore_service_stub.call_rpc :export_feature_values, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Delete Feature values from Featurestore.
+            #
+            # The progress of the deletion is tracked by the returned operation. The
+            # deleted feature values are guaranteed to be invisible to subsequent read
+            # operations after the operation is marked as successfully done.
+            #
+            # If a delete feature values operation fails, the feature values
+            # returned from reads and exports may be inconsistent. If consistency is
+            # required, the caller must retry the same delete request again and wait till
+            # the new operation returned is marked as successfully done.
+            #
+            # @overload delete_feature_values(request, options = nil)
+            #   Pass arguments to `delete_feature_values` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::DeleteFeatureValuesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::DeleteFeatureValuesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_feature_values(select_entity: nil, select_time_range_and_feature: nil, entity_type: nil)
+            #   Pass arguments to `delete_feature_values` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param select_entity [::Google::Cloud::AIPlatform::V1::DeleteFeatureValuesRequest::SelectEntity, ::Hash]
+            #     Select feature values to be deleted by specifying entities.
+            #   @param select_time_range_and_feature [::Google::Cloud::AIPlatform::V1::DeleteFeatureValuesRequest::SelectTimeRangeAndFeature, ::Hash]
+            #     Select feature values to be deleted by specifying time range and
+            #     features.
+            #   @param entity_type [::String]
+            #     Required. The resource name of the EntityType grouping the Features for
+            #     which values are being deleted from. Format:
+            #     `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entityType}`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::FeaturestoreService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::DeleteFeatureValuesRequest.new
+            #
+            #   # Call the delete_feature_values method.
+            #   result = client.delete_feature_values request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def delete_feature_values request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::DeleteFeatureValuesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_feature_values.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.entity_type
+                header_params["entity_type"] = request.entity_type
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_feature_values.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_feature_values.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @featurestore_service_stub.call_rpc :delete_feature_values, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
@@ -2407,13 +2507,11 @@ module Google
             #   # Call the search_features method.
             #   result = client.search_features request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Cloud::AIPlatform::V1::Feature.
-            #     p response
+            #     p item
             #   end
             #
             def search_features request, options = nil
@@ -2496,9 +2594,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -2689,6 +2787,11 @@ module Google
                 #
                 attr_reader :export_feature_values
                 ##
+                # RPC-specific configuration for `delete_feature_values`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_feature_values
+                ##
                 # RPC-specific configuration for `search_features`
                 # @return [::Gapic::Config::Method]
                 #
@@ -2734,6 +2837,8 @@ module Google
                   @batch_read_feature_values = ::Gapic::Config::Method.new batch_read_feature_values_config
                   export_feature_values_config = parent_rpcs.export_feature_values if parent_rpcs.respond_to? :export_feature_values
                   @export_feature_values = ::Gapic::Config::Method.new export_feature_values_config
+                  delete_feature_values_config = parent_rpcs.delete_feature_values if parent_rpcs.respond_to? :delete_feature_values
+                  @delete_feature_values = ::Gapic::Config::Method.new delete_feature_values_config
                   search_features_config = parent_rpcs.search_features if parent_rpcs.respond_to? :search_features
                   @search_features = ::Gapic::Config::Method.new search_features_config
 

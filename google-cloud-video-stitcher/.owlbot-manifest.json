@@ -22,8 +22,7 @@
     ".OwlBot.yaml",
     "samples/Gemfile",
     "samples/Rakefile",
-    "samples/acceptance/akamai_cdn_key_definition.rb",
-    "samples/acceptance/cloud_cdn_key_definition.rb",
+    "samples/acceptance/create_cdn_key_akamai_test.rb",
     "samples/acceptance/create_cdn_key_test.rb",
     "samples/acceptance/create_live_session_test.rb",
     "samples/acceptance/create_slate_test.rb",
@@ -43,12 +42,11 @@
     "samples/acceptance/list_slates_test.rb",
     "samples/acceptance/list_vod_ad_tag_details_test.rb",
     "samples/acceptance/list_vod_stitch_details_test.rb",
-    "samples/acceptance/live_session_definition.rb",
-    "samples/acceptance/slate_definition.rb",
+    "samples/acceptance/update_cdn_key_akamai_test.rb",
     "samples/acceptance/update_cdn_key_test.rb",
     "samples/acceptance/update_slate_test.rb",
-    "samples/acceptance/vod_session_definition.rb",
     "samples/create_cdn_key.rb",
+    "samples/create_cdn_key_akamai.rb",
     "samples/create_live_session.rb",
     "samples/create_slate.rb",
     "samples/create_vod_session.rb",
@@ -67,6 +65,7 @@
     "samples/list_vod_ad_tag_details.rb",
     "samples/list_vod_stitch_details.rb",
     "samples/update_cdn_key.rb",
+    "samples/update_cdn_key_akamai.rb",
     "samples/update_slate.rb"
   ]
 }

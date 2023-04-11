@@ -20,8 +20,11 @@
 require "google/cloud/workflows/executions/v1beta"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Workflows::Executions::V1beta::Executions::Client#cancel_execution
+# Snippet for the cancel_execution call in the Executions service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Workflows::Executions::V1beta::Executions::Client#cancel_execution.
+# It may require modification in order to execute successfully.
 #
 def cancel_execution
   # Create a client object. The client can be reused for multiple calls.

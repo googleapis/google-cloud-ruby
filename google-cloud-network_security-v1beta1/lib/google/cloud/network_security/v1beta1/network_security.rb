@@ -26,6 +26,7 @@ require "google/cloud/network_security/v1beta1/network_security/credentials"
 require "google/cloud/network_security/v1beta1/network_security/paths"
 require "google/cloud/network_security/v1beta1/network_security/operations"
 require "google/cloud/network_security/v1beta1/network_security/client"
+require "google/cloud/network_security/v1beta1/network_security/rest"
 
 module Google
   module Cloud
@@ -40,6 +41,11 @@ module Google
         #
         #     require "google/cloud/network_security/v1beta1/network_security"
         #     client = ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/network_security/v1beta1/network_security/rest"
+        #     client = ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Rest::Client.new
         #
         module NetworkSecurity
         end

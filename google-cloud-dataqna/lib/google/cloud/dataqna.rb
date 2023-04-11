@@ -48,7 +48,7 @@ module Google
       # Create a new client object for AutoSuggestionService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::DataQnA::V1alpha::AutoSuggestionService::Client](https://googleapis.dev/ruby/google-cloud-dataqna-v1alpha/latest/Google/Cloud/DataQnA/V1alpha/AutoSuggestionService/Client.html)
+      # [Google::Cloud::DataQnA::V1alpha::AutoSuggestionService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dataqna-v1alpha/latest/Google-Cloud-DataQnA-V1alpha-AutoSuggestionService-Client)
       # for a gRPC client for version V1alpha of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the AutoSuggestionService service is
@@ -143,7 +143,7 @@ module Google
       # Create a new client object for QuestionService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::DataQnA::V1alpha::QuestionService::Client](https://googleapis.dev/ruby/google-cloud-dataqna-v1alpha/latest/Google/Cloud/DataQnA/V1alpha/QuestionService/Client.html)
+      # [Google::Cloud::DataQnA::V1alpha::QuestionService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dataqna-v1alpha/latest/Google-Cloud-DataQnA-V1alpha-QuestionService-Client)
       # for a gRPC client for version V1alpha of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the QuestionService service is

@@ -1,5 +1,17 @@
 # Changelog
 
+### 1.2.1 (2023-03-23)
+
+#### Documentation
+
+* Refractor the documentation ([#20940](https://github.com/googleapis/google-cloud-ruby/issues/20940)) 
+
+### 1.2.0 (2023-03-09)
+
+#### Features
+
+* Support REST transport ([#20767](https://github.com/googleapis/google-cloud-ruby/issues/20767)) 
+
 ### 1.1.0 (2022-07-02)
 
 #### Features

@@ -30,6 +30,11 @@ module Google
       #     require "google/cloud/trace/v2"
       #     client = ::Google::Cloud::Trace::V2::TraceService::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/trace/v2"
+      #     client = ::Google::Cloud::Trace::V2::TraceService::Rest::Client.new
+      #
       module V2
       end
     end

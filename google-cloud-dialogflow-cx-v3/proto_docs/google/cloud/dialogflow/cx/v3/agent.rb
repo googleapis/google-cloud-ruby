@@ -116,6 +116,10 @@ module Google
           #   @return [::Google::Cloud::Dialogflow::CX::V3::AdvancedSettings]
           #     Hierarchical advanced settings for this agent. The settings exposed at the
           #     lower level overrides the settings exposed at the higher level.
+          # @!attribute [rw] text_to_speech_settings
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::TextToSpeechSettings]
+          #     Settings on instructing the speech synthesizer on how to generate the
+          #     output audio content.
           class Agent
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -242,6 +246,9 @@ module Google
 
               # Agent content will be exported as raw bytes.
               BLOB = 1
+
+              # Agent content will be exported in JSON Package format.
+              JSON_PACKAGE = 4
             end
           end
 

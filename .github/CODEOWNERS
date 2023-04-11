@@ -12,7 +12,7 @@
 /google-cloud-automl*/.              @googleapis/ruby-team @googleapis/ml-apis
 /google-cloud-bigquery*/.            @googleapis/ruby-team @googleapis/api-bigquery
 /google-cloud-bigtable*/.            @googleapis/ruby-team @googleapis/api-bigtable
-/google-cloud-datastore*/.           @googleapis/ruby-team @googleapis/firestore-dpe
+/google-cloud-datastore*/.           @googleapis/ruby-team @googleapis/api-datastore-sdk
 /google-cloud-firestore*/.           @googleapis/ruby-team @googleapis/firestore-dpe
 /google-cloud-language*/.            @googleapis/ruby-team @googleapis/ml-apis
 /google-cloud-pubsub*/.              @googleapis/ruby-team @googleapis/api-pubsub

@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-video-live_stream-v1",
-    "version": "0.2.0",
+    "version": "0.4.0",
     "language": "RUBY",
     "apis": [
       {
@@ -13,8 +13,8 @@
   "snippets": [
     {
       "region_tag": "livestream_v1_generated_LivestreamService_CreateChannel_sync",
-      "title": "Snippet for create_channel in LivestreamService",
-      "description": "Basic snippet for create_channel in LivestreamService",
+      "title": "Snippet for the create_channel call in the LivestreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#create_channel. It may require modification in order to execute successfully.",
       "file": "livestream_service/create_channel.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "livestream_v1_generated_LivestreamService_ListChannels_sync",
-      "title": "Snippet for list_channels in LivestreamService",
-      "description": "Basic snippet for list_channels in LivestreamService",
+      "title": "Snippet for the list_channels call in the LivestreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#list_channels. It may require modification in order to execute successfully.",
       "file": "livestream_service/list_channels.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "livestream_v1_generated_LivestreamService_GetChannel_sync",
-      "title": "Snippet for get_channel in LivestreamService",
-      "description": "Basic snippet for get_channel in LivestreamService",
+      "title": "Snippet for the get_channel call in the LivestreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#get_channel. It may require modification in order to execute successfully.",
       "file": "livestream_service/get_channel.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "livestream_v1_generated_LivestreamService_DeleteChannel_sync",
-      "title": "Snippet for delete_channel in LivestreamService",
-      "description": "Basic snippet for delete_channel in LivestreamService",
+      "title": "Snippet for the delete_channel call in the LivestreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#delete_channel. It may require modification in order to execute successfully.",
       "file": "livestream_service/delete_channel.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "livestream_v1_generated_LivestreamService_UpdateChannel_sync",
-      "title": "Snippet for update_channel in LivestreamService",
-      "description": "Basic snippet for update_channel in LivestreamService",
+      "title": "Snippet for the update_channel call in the LivestreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#update_channel. It may require modification in order to execute successfully.",
       "file": "livestream_service/update_channel.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "livestream_v1_generated_LivestreamService_StartChannel_sync",
-      "title": "Snippet for start_channel in LivestreamService",
-      "description": "Basic snippet for start_channel in LivestreamService",
+      "title": "Snippet for the start_channel call in the LivestreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#start_channel. It may require modification in order to execute successfully.",
       "file": "livestream_service/start_channel.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "livestream_v1_generated_LivestreamService_StopChannel_sync",
-      "title": "Snippet for stop_channel in LivestreamService",
-      "description": "Basic snippet for stop_channel in LivestreamService",
+      "title": "Snippet for the stop_channel call in the LivestreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#stop_channel. It may require modification in order to execute successfully.",
       "file": "livestream_service/stop_channel.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "livestream_v1_generated_LivestreamService_CreateInput_sync",
-      "title": "Snippet for create_input in LivestreamService",
-      "description": "Basic snippet for create_input in LivestreamService",
+      "title": "Snippet for the create_input call in the LivestreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#create_input. It may require modification in order to execute successfully.",
       "file": "livestream_service/create_input.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "livestream_v1_generated_LivestreamService_ListInputs_sync",
-      "title": "Snippet for list_inputs in LivestreamService",
-      "description": "Basic snippet for list_inputs in LivestreamService",
+      "title": "Snippet for the list_inputs call in the LivestreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#list_inputs. It may require modification in order to execute successfully.",
       "file": "livestream_service/list_inputs.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,15 +366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "livestream_v1_generated_LivestreamService_GetInput_sync",
-      "title": "Snippet for get_input in LivestreamService",
-      "description": "Basic snippet for get_input in LivestreamService",
+      "title": "Snippet for the get_input call in the LivestreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#get_input. It may require modification in order to execute successfully.",
       "file": "livestream_service/get_input.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,15 +406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "livestream_v1_generated_LivestreamService_DeleteInput_sync",
-      "title": "Snippet for delete_input in LivestreamService",
-      "description": "Basic snippet for delete_input in LivestreamService",
+      "title": "Snippet for the delete_input call in the LivestreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#delete_input. It may require modification in order to execute successfully.",
       "file": "livestream_service/delete_input.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,15 +446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "livestream_v1_generated_LivestreamService_UpdateInput_sync",
-      "title": "Snippet for update_input in LivestreamService",
-      "description": "Basic snippet for update_input in LivestreamService",
+      "title": "Snippet for the update_input call in the LivestreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#update_input. It may require modification in order to execute successfully.",
       "file": "livestream_service/update_input.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,15 +486,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 45,
+          "end": 48,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "livestream_v1_generated_LivestreamService_CreateEvent_sync",
-      "title": "Snippet for create_event in LivestreamService",
-      "description": "Basic snippet for create_event in LivestreamService",
+      "title": "Snippet for the create_event call in the LivestreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#create_event. It may require modification in order to execute successfully.",
       "file": "livestream_service/create_event.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,15 +526,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "livestream_v1_generated_LivestreamService_ListEvents_sync",
-      "title": "Snippet for list_events in LivestreamService",
-      "description": "Basic snippet for list_events in LivestreamService",
+      "title": "Snippet for the list_events call in the LivestreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#list_events. It may require modification in order to execute successfully.",
       "file": "livestream_service/list_events.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,15 +566,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "livestream_v1_generated_LivestreamService_GetEvent_sync",
-      "title": "Snippet for get_event in LivestreamService",
-      "description": "Basic snippet for get_event in LivestreamService",
+      "title": "Snippet for the get_event call in the LivestreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#get_event. It may require modification in order to execute successfully.",
       "file": "livestream_service/get_event.rb",
       "language": "RUBY",
       "client_method": {
@@ -606,15 +606,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
       "region_tag": "livestream_v1_generated_LivestreamService_DeleteEvent_sync",
-      "title": "Snippet for delete_event in LivestreamService",
-      "description": "Basic snippet for delete_event in LivestreamService",
+      "title": "Snippet for the delete_event call in the LivestreamService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#delete_event. It may require modification in order to execute successfully.",
       "file": "livestream_service/delete_event.rb",
       "language": "RUBY",
       "client_method": {
@@ -646,7 +646,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]

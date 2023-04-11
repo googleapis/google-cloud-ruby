@@ -20,8 +20,11 @@
 require "google/cloud/ai_platform/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::AIPlatform::V1::TensorboardService::Client#export_tensorboard_time_series_data
+# Snippet for the export_tensorboard_time_series_data call in the TensorboardService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::TensorboardService::Client#export_tensorboard_time_series_data.
+# It may require modification in order to execute successfully.
 #
 def export_tensorboard_time_series_data
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def export_tensorboard_time_series_data
   # Call the export_tensorboard_time_series_data method.
   result = client.export_tensorboard_time_series_data request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::AIPlatform::V1::TimeSeriesDataPoint.
-    p response
+    p item
   end
 end
 # [END aiplatform_v1_generated_TensorboardService_ExportTensorboardTimeSeriesData_sync]

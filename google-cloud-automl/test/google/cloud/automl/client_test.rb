@@ -20,25 +20,44 @@ require "helper"
 require "google/cloud/automl"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Cloud::AutoML::ClientConstructionMinitest < Minitest::Test
   def test_prediction_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::AutoML.prediction_service do |config|
+      client = Google::Cloud::AutoML.prediction_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::AutoML::V1::PredictionService::Client, client
     end
   end
 
-  def test_auto_ml_grpc
+  def test_prediction_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::AutoML.prediction_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::AutoML::V1::PredictionService::Rest::Client, client
+    end
+  end
+
+  def test_automl_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::AutoML.auto_ml do |config|
+      client = Google::Cloud::AutoML.automl transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::AutoML::V1::AutoML::Client, client
+    end
+  end
+
+  def test_automl_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::AutoML.automl transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::AutoML::V1::AutoML::Rest::Client, client
     end
   end
 end

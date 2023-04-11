@@ -20,8 +20,11 @@
 require "google/cloud/monitoring/metrics_scope/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Monitoring::MetricsScope::V1::MetricsScopes::Client#create_monitored_project
+# Snippet for the create_monitored_project call in the MetricsScopes service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Monitoring::MetricsScope::V1::MetricsScopes::Client#create_monitored_project.
+# It may require modification in order to execute successfully.
 #
 def create_monitored_project
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def create_monitored_project
   # Call the create_monitored_project method.
   result = client.create_monitored_project request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END monitoring_v1_generated_MetricsScopes_CreateMonitoredProject_sync]

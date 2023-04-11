@@ -29,7 +29,7 @@ module Grafeas
   # Create a new client object for Grafeas.
   #
   # By default, this returns an instance of
-  # [Grafeas::V1::Grafeas::Client](https://googleapis.dev/ruby/grafeas-v1/latest/Grafeas/V1/Grafeas/Client.html)
+  # [Grafeas::V1::Grafeas::Client](https://cloud.google.com/ruby/docs/reference/grafeas-v1/latest/Grafeas-V1-Grafeas-Client)
   # for a gRPC client for version V1 of the API.
   # However, you can specify a different API version by passing it in the
   # `version` parameter. If the Grafeas service is

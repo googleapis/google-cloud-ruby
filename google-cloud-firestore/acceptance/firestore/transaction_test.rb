@@ -64,6 +64,36 @@ describe "Transaction", :firestore_acceptance do
     _(doc_ref.get[:foo]).must_equal "bar"
   end
 
+  it "read only transaction with read time" do
+    get_all_col = firestore.col "#{root_path}/get_all/#{SecureRandom.hex(4)}"
+    results = []
+    results_1 = []
+
+    doc1 = get_all_col.doc "doc1"
+    doc2 = get_all_col.doc "doc2"
+
+    doc1.create foo: :a
+    doc2.create foo: :b
+
+    sleep(1)
+    read_time = Time.now
+    sleep(1)
+
+    doc3 = get_all_col.doc "doc3"
+    doc3.create foo: :c
+
+    firestore.read_only_transaction(read_time: read_time) do |tx|
+      tx.get_all(doc1, doc2, doc3) { |doc| results << doc unless doc.grpc.nil? }
+    end
+
+    firestore.read_only_transaction do |tx|
+      tx.get_all(doc1, doc2, doc3) { |doc| results_1 << doc unless doc.grpc.nil? }
+    end
+
+    _(results.count).must_equal 2
+    _(results_1.count).must_equal 3
+  end
+
   it "has update method" do
     rand_tx_col = firestore.col "#{root_path}/tx/#{SecureRandom.hex(4)}"
     doc_ref = rand_tx_col.doc

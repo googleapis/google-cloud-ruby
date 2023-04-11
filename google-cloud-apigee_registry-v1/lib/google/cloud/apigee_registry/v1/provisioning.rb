@@ -26,6 +26,7 @@ require "google/cloud/apigee_registry/v1/provisioning/credentials"
 require "google/cloud/apigee_registry/v1/provisioning/paths"
 require "google/cloud/apigee_registry/v1/provisioning/operations"
 require "google/cloud/apigee_registry/v1/provisioning/client"
+require "google/cloud/apigee_registry/v1/provisioning/rest"
 
 module Google
   module Cloud
@@ -39,6 +40,11 @@ module Google
         #
         #     require "google/cloud/apigee_registry/v1/provisioning"
         #     client = ::Google::Cloud::ApigeeRegistry::V1::Provisioning::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/apigee_registry/v1/provisioning/rest"
+        #     client = ::Google::Cloud::ApigeeRegistry::V1::Provisioning::Rest::Client.new
         #
         module Provisioning
         end

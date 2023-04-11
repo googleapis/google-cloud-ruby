@@ -20,8 +20,11 @@
 require "google/identity/access_context_manager/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Identity::AccessContextManager::V1::AccessContextManager::Client#get_access_level
+# Snippet for the get_access_level call in the AccessContextManager service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Identity::AccessContextManager::V1::AccessContextManager::Client#get_access_level.
+# It may require modification in order to execute successfully.
 #
 def get_access_level
   # Create a client object. The client can be reused for multiple calls.

@@ -20,8 +20,11 @@
 require "google/cloud/tpu/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Tpu::V1::Tpu::Client#list_accelerator_types
+# Snippet for the list_accelerator_types call in the Tpu service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Tpu::V1::Tpu::Client#list_accelerator_types. It may require
+# modification in order to execute successfully.
 #
 def list_accelerator_types
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def list_accelerator_types
   # Call the list_accelerator_types method.
   result = client.list_accelerator_types request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::Tpu::V1::AcceleratorType.
-    p response
+    p item
   end
 end
 # [END tpu_v1_generated_Tpu_ListAcceleratorTypes_sync]

@@ -20,8 +20,11 @@
 require "google/cloud/security_center/v1p1beta1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#group_findings
+# Snippet for the group_findings call in the SecurityCenter service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#group_findings.
+# It may require modification in order to execute successfully.
 #
 def group_findings
   # Create a client object. The client can be reused for multiple calls.
@@ -33,13 +36,11 @@ def group_findings
   # Call the group_findings method.
   result = client.group_findings request
 
-  # The returned object is of type Gapic::PagedEnumerable. You can
-  # iterate over all elements by calling #each, and the enumerable
-  # will lazily make API calls to fetch subsequent pages. Other
-  # methods are also available for managing paging directly.
-  result.each do |response|
+  # The returned object is of type Gapic::PagedEnumerable. You can iterate
+  # over elements, and API calls will be issued to fetch pages as needed.
+  result.each do |item|
     # Each element is of type ::Google::Cloud::SecurityCenter::V1p1beta1::GroupResult.
-    p response
+    p item
   end
 end
 # [END securitycenter_v1p1beta1_generated_SecurityCenter_GroupFindings_sync]

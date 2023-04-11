@@ -1,5 +1,23 @@
 # Changelog
 
+### 0.8.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20624](https://github.com/googleapis/google-cloud-ruby/issues/20624)) 
+
+### 0.7.0 (2023-02-13)
+
+#### Features
+
+* Support for DockerImage#update_time 
+* Support for File#fetch_time 
+* Support for RPCs for getting and updating VPCSC configs 
+* Support for RPCs for retrieving Maven artifacts ([#20121](https://github.com/googleapis/google-cloud-ruby/issues/20121)) 
+* Support for RPCs for retrieving NPM packages 
+* Support for RPCs for retrieving Python packages 
+* Support for the order_by parameter to list_docker_images 
+
 ### 0.6.0 (2023-01-05)
 
 #### Features

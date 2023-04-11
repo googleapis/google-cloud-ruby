@@ -48,7 +48,7 @@ module Google
       # Create a new client object for ClusterManager.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Container::V1::ClusterManager::Client](https://googleapis.dev/ruby/google-cloud-container-v1/latest/Google/Cloud/Container/V1/ClusterManager/Client.html)
+      # [Google::Cloud::Container::V1::ClusterManager::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-container-v1/latest/Google-Cloud-Container-V1-ClusterManager-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the ClusterManager service is

@@ -20,25 +20,44 @@ require "helper"
 require "google/cloud/orchestration/airflow/service"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Cloud::Orchestration::Airflow::Service::ClientConstructionMinitest < Minitest::Test
   def test_environments_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Orchestration::Airflow::Service.environments do |config|
+      client = Google::Cloud::Orchestration::Airflow::Service.environments transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client, client
     end
   end
 
+  def test_environments_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Orchestration::Airflow::Service.environments transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Rest::Client, client
+    end
+  end
+
   def test_image_versions_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Orchestration::Airflow::Service.image_versions do |config|
+      client = Google::Cloud::Orchestration::Airflow::Service.image_versions transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Orchestration::Airflow::Service::V1::ImageVersions::Client, client
+    end
+  end
+
+  def test_image_versions_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Orchestration::Airflow::Service.image_versions transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Orchestration::Airflow::Service::V1::ImageVersions::Rest::Client, client
     end
   end
 end

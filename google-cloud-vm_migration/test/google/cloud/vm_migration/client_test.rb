@@ -20,15 +20,25 @@ require "helper"
 require "google/cloud/vm_migration"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Cloud::VMMigration::ClientConstructionMinitest < Minitest::Test
   def test_vm_migration_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::VMMigration.vm_migration do |config|
+      client = Google::Cloud::VMMigration.vm_migration transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::VMMigration::V1::VMMigration::Client, client
+    end
+  end
+
+  def test_vm_migration_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::VMMigration.vm_migration transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::VMMigration::V1::VMMigration::Rest::Client, client
     end
   end
 end

@@ -20,8 +20,11 @@
 require "google/cloud/datastream/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Datastream::V1::Datastream::Client#get_private_connection
+# Snippet for the get_private_connection call in the Datastream service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Datastream::V1::Datastream::Client#get_private_connection. It
+# may require modification in order to execute successfully.
 #
 def get_private_connection
   # Create a client object. The client can be reused for multiple calls.

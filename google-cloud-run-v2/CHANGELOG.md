@@ -1,5 +1,22 @@
 # Changelog
 
+### 0.7.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20628](https://github.com/googleapis/google-cloud-ruby/issues/20628)) 
+
+### 0.6.0 (2023-01-26)
+
+#### Features
+
+* Execution resource includes the cancelled and retried task counts 
+* Execution resource provides the log URL 
+* Revision resource includes the action to take when an encryption key is revoked ([#20055](https://github.com/googleapis/google-cloud-ruby/issues/20055)) 
+#### Bug Fixes
+
+* Set the request path params header correctly 
+
 ### 0.5.0 (2022-11-08)
 
 #### Features

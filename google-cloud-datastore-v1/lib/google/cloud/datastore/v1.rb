@@ -30,6 +30,11 @@ module Google
       #     require "google/cloud/datastore/v1"
       #     client = ::Google::Cloud::Datastore::V1::Datastore::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/datastore/v1"
+      #     client = ::Google::Cloud::Datastore::V1::Datastore::Rest::Client.new
+      #
       module V1
       end
     end

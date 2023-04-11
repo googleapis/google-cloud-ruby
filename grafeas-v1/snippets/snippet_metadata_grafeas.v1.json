@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "grafeas-v1",
-    "version": "0.7.0",
+    "version": "0.9.0",
     "language": "RUBY",
     "apis": [
       {
@@ -12,9 +12,9 @@
   },
   "snippets": [
     {
-      "region_tag": "grafeas_v1_generated_Grafeas_GetOccurrence_sync",
-      "title": "Snippet for get_occurrence in Grafeas",
-      "description": "Basic snippet for get_occurrence in Grafeas",
+      "region_tag": "containeranalysis_v1_generated_Grafeas_GetOccurrence_sync",
+      "title": "Snippet for the get_occurrence call in the Grafeas service",
+      "description": "This is an auto-generated example demonstrating basic usage of Grafeas::V1::Grafeas::Client#get_occurrence. It may require modification in order to execute successfully.",
       "file": "grafeas/get_occurrence.rb",
       "language": "RUBY",
       "client_method": {
@@ -46,15 +46,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
-      "region_tag": "grafeas_v1_generated_Grafeas_ListOccurrences_sync",
-      "title": "Snippet for list_occurrences in Grafeas",
-      "description": "Basic snippet for list_occurrences in Grafeas",
+      "region_tag": "containeranalysis_v1_generated_Grafeas_ListOccurrences_sync",
+      "title": "Snippet for the list_occurrences call in the Grafeas service",
+      "description": "This is an auto-generated example demonstrating basic usage of Grafeas::V1::Grafeas::Client#list_occurrences. It may require modification in order to execute successfully.",
       "file": "grafeas/list_occurrences.rb",
       "language": "RUBY",
       "client_method": {
@@ -86,15 +86,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
-      "region_tag": "grafeas_v1_generated_Grafeas_DeleteOccurrence_sync",
-      "title": "Snippet for delete_occurrence in Grafeas",
-      "description": "Basic snippet for delete_occurrence in Grafeas",
+      "region_tag": "containeranalysis_v1_generated_Grafeas_DeleteOccurrence_sync",
+      "title": "Snippet for the delete_occurrence call in the Grafeas service",
+      "description": "This is an auto-generated example demonstrating basic usage of Grafeas::V1::Grafeas::Client#delete_occurrence. It may require modification in order to execute successfully.",
       "file": "grafeas/delete_occurrence.rb",
       "language": "RUBY",
       "client_method": {
@@ -126,15 +126,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
-      "region_tag": "grafeas_v1_generated_Grafeas_CreateOccurrence_sync",
-      "title": "Snippet for create_occurrence in Grafeas",
-      "description": "Basic snippet for create_occurrence in Grafeas",
+      "region_tag": "containeranalysis_v1_generated_Grafeas_CreateOccurrence_sync",
+      "title": "Snippet for the create_occurrence call in the Grafeas service",
+      "description": "This is an auto-generated example demonstrating basic usage of Grafeas::V1::Grafeas::Client#create_occurrence. It may require modification in order to execute successfully.",
       "file": "grafeas/create_occurrence.rb",
       "language": "RUBY",
       "client_method": {
@@ -166,15 +166,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
-      "region_tag": "grafeas_v1_generated_Grafeas_BatchCreateOccurrences_sync",
-      "title": "Snippet for batch_create_occurrences in Grafeas",
-      "description": "Basic snippet for batch_create_occurrences in Grafeas",
+      "region_tag": "containeranalysis_v1_generated_Grafeas_BatchCreateOccurrences_sync",
+      "title": "Snippet for the batch_create_occurrences call in the Grafeas service",
+      "description": "This is an auto-generated example demonstrating basic usage of Grafeas::V1::Grafeas::Client#batch_create_occurrences. It may require modification in order to execute successfully.",
       "file": "grafeas/batch_create_occurrences.rb",
       "language": "RUBY",
       "client_method": {
@@ -206,15 +206,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
-      "region_tag": "grafeas_v1_generated_Grafeas_UpdateOccurrence_sync",
-      "title": "Snippet for update_occurrence in Grafeas",
-      "description": "Basic snippet for update_occurrence in Grafeas",
+      "region_tag": "containeranalysis_v1_generated_Grafeas_UpdateOccurrence_sync",
+      "title": "Snippet for the update_occurrence call in the Grafeas service",
+      "description": "This is an auto-generated example demonstrating basic usage of Grafeas::V1::Grafeas::Client#update_occurrence. It may require modification in order to execute successfully.",
       "file": "grafeas/update_occurrence.rb",
       "language": "RUBY",
       "client_method": {
@@ -246,15 +246,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
-      "region_tag": "grafeas_v1_generated_Grafeas_GetOccurrenceNote_sync",
-      "title": "Snippet for get_occurrence_note in Grafeas",
-      "description": "Basic snippet for get_occurrence_note in Grafeas",
+      "region_tag": "containeranalysis_v1_generated_Grafeas_GetOccurrenceNote_sync",
+      "title": "Snippet for the get_occurrence_note call in the Grafeas service",
+      "description": "This is an auto-generated example demonstrating basic usage of Grafeas::V1::Grafeas::Client#get_occurrence_note. It may require modification in order to execute successfully.",
       "file": "grafeas/get_occurrence_note.rb",
       "language": "RUBY",
       "client_method": {
@@ -286,15 +286,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
-      "region_tag": "grafeas_v1_generated_Grafeas_GetNote_sync",
-      "title": "Snippet for get_note in Grafeas",
-      "description": "Basic snippet for get_note in Grafeas",
+      "region_tag": "containeranalysis_v1_generated_Grafeas_GetNote_sync",
+      "title": "Snippet for the get_note call in the Grafeas service",
+      "description": "This is an auto-generated example demonstrating basic usage of Grafeas::V1::Grafeas::Client#get_note. It may require modification in order to execute successfully.",
       "file": "grafeas/get_note.rb",
       "language": "RUBY",
       "client_method": {
@@ -326,15 +326,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
-      "region_tag": "grafeas_v1_generated_Grafeas_ListNotes_sync",
-      "title": "Snippet for list_notes in Grafeas",
-      "description": "Basic snippet for list_notes in Grafeas",
+      "region_tag": "containeranalysis_v1_generated_Grafeas_ListNotes_sync",
+      "title": "Snippet for the list_notes call in the Grafeas service",
+      "description": "This is an auto-generated example demonstrating basic usage of Grafeas::V1::Grafeas::Client#list_notes. It may require modification in order to execute successfully.",
       "file": "grafeas/list_notes.rb",
       "language": "RUBY",
       "client_method": {
@@ -366,15 +366,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]
     },
     {
-      "region_tag": "grafeas_v1_generated_Grafeas_DeleteNote_sync",
-      "title": "Snippet for delete_note in Grafeas",
-      "description": "Basic snippet for delete_note in Grafeas",
+      "region_tag": "containeranalysis_v1_generated_Grafeas_DeleteNote_sync",
+      "title": "Snippet for the delete_note call in the Grafeas service",
+      "description": "This is an auto-generated example demonstrating basic usage of Grafeas::V1::Grafeas::Client#delete_note. It may require modification in order to execute successfully.",
       "file": "grafeas/delete_note.rb",
       "language": "RUBY",
       "client_method": {
@@ -406,15 +406,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
-      "region_tag": "grafeas_v1_generated_Grafeas_CreateNote_sync",
-      "title": "Snippet for create_note in Grafeas",
-      "description": "Basic snippet for create_note in Grafeas",
+      "region_tag": "containeranalysis_v1_generated_Grafeas_CreateNote_sync",
+      "title": "Snippet for the create_note call in the Grafeas service",
+      "description": "This is an auto-generated example demonstrating basic usage of Grafeas::V1::Grafeas::Client#create_note. It may require modification in order to execute successfully.",
       "file": "grafeas/create_note.rb",
       "language": "RUBY",
       "client_method": {
@@ -446,15 +446,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
-      "region_tag": "grafeas_v1_generated_Grafeas_BatchCreateNotes_sync",
-      "title": "Snippet for batch_create_notes in Grafeas",
-      "description": "Basic snippet for batch_create_notes in Grafeas",
+      "region_tag": "containeranalysis_v1_generated_Grafeas_BatchCreateNotes_sync",
+      "title": "Snippet for the batch_create_notes call in the Grafeas service",
+      "description": "This is an auto-generated example demonstrating basic usage of Grafeas::V1::Grafeas::Client#batch_create_notes. It may require modification in order to execute successfully.",
       "file": "grafeas/batch_create_notes.rb",
       "language": "RUBY",
       "client_method": {
@@ -486,15 +486,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
-      "region_tag": "grafeas_v1_generated_Grafeas_UpdateNote_sync",
-      "title": "Snippet for update_note in Grafeas",
-      "description": "Basic snippet for update_note in Grafeas",
+      "region_tag": "containeranalysis_v1_generated_Grafeas_UpdateNote_sync",
+      "title": "Snippet for the update_note call in the Grafeas service",
+      "description": "This is an auto-generated example demonstrating basic usage of Grafeas::V1::Grafeas::Client#update_note. It may require modification in order to execute successfully.",
       "file": "grafeas/update_note.rb",
       "language": "RUBY",
       "client_method": {
@@ -526,15 +526,15 @@
       "segments": [
         {
           "start": 20,
-          "end": 38,
+          "end": 41,
           "type": "FULL"
         }
       ]
     },
     {
-      "region_tag": "grafeas_v1_generated_Grafeas_ListNoteOccurrences_sync",
-      "title": "Snippet for list_note_occurrences in Grafeas",
-      "description": "Basic snippet for list_note_occurrences in Grafeas",
+      "region_tag": "containeranalysis_v1_generated_Grafeas_ListNoteOccurrences_sync",
+      "title": "Snippet for the list_note_occurrences call in the Grafeas service",
+      "description": "This is an auto-generated example demonstrating basic usage of Grafeas::V1::Grafeas::Client#list_note_occurrences. It may require modification in order to execute successfully.",
       "file": "grafeas/list_note_occurrences.rb",
       "language": "RUBY",
       "client_method": {
@@ -566,7 +566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 44,
+          "end": 45,
           "type": "FULL"
         }
       ]

@@ -55,6 +55,63 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
       end
     end
 
+    it "should be able to run queries with and without read_time set" do
+      kind_val = "Post_#{SecureRandom.hex(4)}"
+      post.key = Google::Cloud::Datastore::Key.new kind_val, "post_1_#{SecureRandom.hex(4)}"
+      post2.key = Google::Cloud::Datastore::Key.new kind_val, "post_2_#{SecureRandom.hex(4)}"
+      dataset.save post, post2
+
+      sleep(1)
+      read_time = Time.now
+      sleep(1)
+
+      post2["isDraft"] = true
+      dataset.update post2
+
+      query = dataset.query(kind_val).where("isDraft", "=", false)
+
+      entities = dataset.run query, read_time: read_time
+      _(entities.count).must_equal 2
+      _(entities.batch_read_time.seconds).must_equal read_time.to_i
+      entities = dataset.run query
+      _(entities.count).must_equal 1
+      assert( entities.batch_read_time.seconds > read_time.to_i)
+
+      dataset.read_only_transaction(read_time: read_time) do |tx|
+        entities = tx.run query
+        _(entities.count).must_equal 2
+        _(entities.batch_read_time.seconds).must_equal read_time.to_i
+      end
+      dataset.read_only_transaction do |tx|
+        entities = tx.run query
+        _(entities.count).must_equal 1
+        assert( entities.batch_read_time.seconds > read_time.to_i)
+      end
+
+      dataset.delete post, post2
+    end
+
+    it "should be able to lookup for entities with and without read_time set" do
+      post.key = Google::Cloud::Datastore::Key.new "Post", "post_1_#{SecureRandom.hex(4)}"
+      dataset.save post
+
+      sleep(1)
+      read_time = Time.now
+      sleep(1)
+
+      post2.key = Google::Cloud::Datastore::Key.new "Post", "post_2_#{SecureRandom.hex(4)}"
+      dataset.save post2
+
+      entities = dataset.find_all post.key, post2.key
+      _(entities.count).must_equal 2
+      assert( entities.response_read_time.seconds > read_time.to_i)
+      entities = dataset.find_all post.key, post2.key, read_time: read_time
+      _(entities.count).must_equal 1
+      _(entities.response_read_time.seconds).must_equal read_time.to_i
+
+      dataset.delete post, post2
+    end
+
     it "should save/find/delete with a key name" do
       post.key = Google::Cloud::Datastore::Key.new "Post", "#{prefix}_post1"
       post.exclude_from_indexes! "author", true
@@ -146,6 +203,46 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
       dataset.delete post, post2
 
       entities = dataset.find_all post.key, post2.key
+      _(entities.count).must_equal 0
+    end
+
+    it "should save/find/delete multiple entities at once on multiple database" do
+      skip "Don't have secondary database to run the test" unless dataset_2
+      post.key  = Google::Cloud::Datastore::Key.new "Post"
+      post2.key = Google::Cloud::Datastore::Key.new "Post"
+
+      _(post.key).must_be :incomplete?
+      _(post2.key).must_be :incomplete?
+
+      dataset.save post
+      dataset_2.save post2
+
+      _(post.key).wont_be :incomplete?
+      _(post2.key).wont_be :incomplete?
+
+      entities = dataset.find_all post.key
+      _(entities.count).must_equal 1
+      entities = dataset_2.find_all post2.key
+      _(entities.count).must_equal 1
+
+      error = assert_raises Google::Cloud::InvalidArgumentError do
+        dataset.find_all post2.key
+      end
+      _(error).wont_be :nil?
+      _(error.message).must_include "mismatched databases within request"
+      error = assert_raises Google::Cloud::InvalidArgumentError do
+        dataset_2.find_all post.key
+      end
+      _(error).wont_be :nil?
+      _(error.message).must_include "mismatched databases within request"
+
+
+      dataset.delete post
+      dataset_2.delete post2
+
+      entities = dataset.find_all post.key
+      _(entities.count).must_equal 0
+      entities = dataset_2.find_all post2.key
       _(entities.count).must_equal 0
     end
 

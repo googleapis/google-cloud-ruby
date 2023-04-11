@@ -20,8 +20,11 @@
 require "google/analytics/admin/v1alpha"
 
 ##
-# Example demonstrating basic usage of
-# Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#provision_account_ticket
+# Snippet for the provision_account_ticket call in the AnalyticsAdminService service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#provision_account_ticket.
+# It may require modification in order to execute successfully.
 #
 def provision_account_ticket
   # Create a client object. The client can be reused for multiple calls.

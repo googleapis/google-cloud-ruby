@@ -32,7 +32,8 @@ module Google
         # @!attribute [rw] priority
         #   @return [::Integer]
         #     Priority of the Job.
-        #     The valid value range is [0, 100).
+        #     The valid value range is [0, 100). Default value is 0.
+        #     Higher value indicates higher priority.
         #     A job with higher priority value is more likely to run earlier if all other
         #     requirements are satisfied.
         # @!attribute [rw] task_groups
@@ -137,6 +138,9 @@ module Google
           # @!attribute [rw] task_pack
           #   @return [::Integer]
           #     The max number of tasks can be assigned to this instance type.
+          # @!attribute [rw] boot_disk
+          #   @return [::Google::Cloud::Batch::V1::AllocationPolicy::Disk]
+          #     The VM boot disk.
           class InstanceStatus
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -301,19 +305,36 @@ module Google
           # @!attribute [rw] image
           #   @return [::String]
           #     Name of a public or custom image used as the data source.
+          #     For example, the following are all valid URLs:
+          #     (1) Specify the image by its family name:
+          #     projects/\\{project}/global/images/family/\\{image_family}
+          #     (2) Specify the image version:
+          #     projects/\\{project}/global/images/\\{image_version}
+          #     You can also use Batch customized image in short names.
+          #     The following image values are supported for a boot disk:
+          #     "batch-debian": use Batch Debian images.
+          #     "batch-centos": use Batch CentOS images.
+          #     "batch-cos": use Batch Container-Optimized images.
           # @!attribute [rw] snapshot
           #   @return [::String]
           #     Name of a snapshot used as the data source.
           # @!attribute [rw] type
           #   @return [::String]
-          #     Disk type as shown in `gcloud compute disk-types list`
-          #     For example, "pd-ssd", "pd-standard", "pd-balanced", "local-ssd".
+          #     Disk type as shown in `gcloud compute disk-types list`.
+          #     For example, local SSD uses type "local-ssd".
+          #     Persistent disks and boot disks use "pd-balanced", "pd-extreme", "pd-ssd"
+          #     or "pd-standard".
           # @!attribute [rw] size_gb
           #   @return [::Integer]
           #     Disk size in GB.
-          #     This field is ignored if `data_source` is `disk` or `image`.
-          #     If `type` is `local-ssd`, size_gb should be a multiple of 375GB,
+          #     For persistent disk, this field is ignored if `data_source` is `image` or
+          #     `snapshot`.
+          #     For local SSD, size_gb should be a multiple of 375GB,
           #     otherwise, the final size will be the next greater multiple of 375 GB.
+          #     For boot disk, Batch will calculate the boot disk size based on source
+          #     image and task requirements if you do not speicify the size.
+          #     If both this field and the boot_disk_mib field in task spec's
+          #     compute_resource are defined, Batch will only honor this field.
           # @!attribute [rw] disk_interface
           #   @return [::String]
           #     Local SSDs are available through both "SCSI" and "NVMe" interfaces.
@@ -375,6 +396,10 @@ module Google
           # @!attribute [rw] accelerators
           #   @return [::Array<::Google::Cloud::Batch::V1::AllocationPolicy::Accelerator>]
           #     The accelerators attached to each VM instance.
+          # @!attribute [rw] boot_disk
+          #   @return [::Google::Cloud::Batch::V1::AllocationPolicy::Disk]
+          #     Book disk to be created and attached to each VM by this InstancePolicy.
+          #     Boot disk will be deleted when the VM is deleted.
           # @!attribute [rw] disks
           #   @return [::Array<::Google::Cloud::Batch::V1::AllocationPolicy::AttachedDisk>]
           #     Non-boot disks to be attached for each VM created by this InstancePolicy.
@@ -532,6 +557,10 @@ module Google
         #     Compute Engine service account for the project will be used. If instance
         #     template is being used, the service account has to be specified in the
         #     instance template and it has to match the email field here.
+        # @!attribute [rw] scopes
+        #   @return [::Array<::String>]
+        #     List of scopes to be enabled for this service account on the VM, in
+        #     addition to the cloud-platform API scope that will be added by default.
         class ServiceAccount
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

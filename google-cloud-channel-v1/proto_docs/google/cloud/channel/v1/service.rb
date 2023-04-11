@@ -1125,6 +1125,12 @@ module Google
         #     Optional. The BCP-47 language code. For example, "en-US". The
         #     response will localize in the corresponding language code, if specified.
         #     The default value is "en-US".
+        # @!attribute [rw] show_future_offers
+        #   @return [::Boolean]
+        #     Optional. A boolean flag that determines if a response returns future
+        #     offers 30 days from now. If the show_future_offers is true, the response
+        #     will only contain offers that are scheduled to be available 30 days from
+        #     now.
         class ListOffersRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1388,6 +1394,52 @@ module Google
         #     A token that can be sent as `page_token` to retrieve the next page.
         #     If this field is omitted, there are no subsequent pages.
         class ListSubscribersResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_entitlement_changes CloudChannelService.ListEntitlementChanges}
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the entitlement for which to list
+        #     entitlement changes. The `-` wildcard may be used to match entitlements
+        #     across a customer. Formats:
+        #
+        #       * accounts/\\{account_id}/customers/\\{customer_id}/entitlements/\\{entitlement_id}
+        #       * accounts/\\{account_id}/customers/\\{customer_id}/entitlements/-
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of entitlement changes to return. The service
+        #     may return fewer than this value. If unspecified, returns at most 10
+        #     entitlement changes. The maximum value is 50; the server will coerce values
+        #     above 50.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A page token, received from a previous
+        #     {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_entitlement_changes CloudChannelService.ListEntitlementChanges}
+        #     call. Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to
+        #     {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_entitlement_changes CloudChannelService.ListEntitlementChanges}
+        #     must match the call that provided the page token.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Filters applied to the list results.
+        class ListEntitlementChangesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_entitlement_changes CloudChannelService.ListEntitlementChanges}
+        # @!attribute [rw] entitlement_changes
+        #   @return [::Array<::Google::Cloud::Channel::V1::EntitlementChange>]
+        #     The list of entitlement changes.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token to list the next page of results.
+        class ListEntitlementChangesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

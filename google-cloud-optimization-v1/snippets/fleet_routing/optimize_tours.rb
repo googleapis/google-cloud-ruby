@@ -20,8 +20,11 @@
 require "google/cloud/optimization/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Optimization::V1::FleetRouting::Client#optimize_tours
+# Snippet for the optimize_tours call in the FleetRouting service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Optimization::V1::FleetRouting::Client#optimize_tours. It may
+# require modification in order to execute successfully.
 #
 def optimize_tours
   # Create a client object. The client can be reused for multiple calls.

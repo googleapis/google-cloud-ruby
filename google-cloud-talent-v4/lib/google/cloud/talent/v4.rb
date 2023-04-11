@@ -34,6 +34,11 @@ module Google
       #     require "google/cloud/talent/v4"
       #     client = ::Google::Cloud::Talent::V4::CompanyService::Client.new
       #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/talent/v4"
+      #     client = ::Google::Cloud::Talent::V4::CompanyService::Rest::Client.new
+      #
       module V4
       end
     end

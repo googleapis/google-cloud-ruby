@@ -43,6 +43,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :description, :string, 12
       map :labels, :string, :string, 13
       repeated :warnings, :string, 14
+      repeated :child_operation_ids, :string, 15
     end
     add_message "google.cloud.dataproc.v1.NodeGroupOperationMetadata" do
       optional :node_group_id, :string, 1

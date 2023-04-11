@@ -20,8 +20,11 @@
 require "google/cloud/vision/v1"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Vision::V1::ImageAnnotator::Client#async_batch_annotate_images
+# Snippet for the async_batch_annotate_images call in the ImageAnnotator service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Vision::V1::ImageAnnotator::Client#async_batch_annotate_images.
+# It may require modification in order to execute successfully.
 #
 def async_batch_annotate_images
   # Create a client object. The client can be reused for multiple calls.
@@ -33,14 +36,14 @@ def async_batch_annotate_images
   # Call the async_batch_annotate_images method.
   result = client.async_batch_annotate_images request
 
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
   result.wait_until_done! timeout: 60
   if result.response?
     p result.response
   else
-    puts "Error!"
+    puts "No response received."
   end
 end
 # [END vision_v1_generated_ImageAnnotator_AsyncBatchAnnotateImages_sync]

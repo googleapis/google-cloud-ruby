@@ -48,12 +48,14 @@ module Google
       # Create a new client object for GameServerClustersService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Gaming::V1::GameServerClustersService::Client](https://googleapis.dev/ruby/google-cloud-gaming-v1/latest/Google/Cloud/Gaming/V1/GameServerClustersService/Client.html)
+      # [Google::Cloud::Gaming::V1::GameServerClustersService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-gaming-v1/latest/Google-Cloud-Gaming-V1-GameServerClustersService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the GameServerClustersService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About GameServerClustersService
       #
@@ -62,9 +64,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.game_server_clusters_service version: :v1, &block
+      def self.game_server_clusters_service version: :v1, transport: :grpc, &block
         require "google/cloud/gaming/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Gaming
@@ -72,6 +75,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::Gaming.const_get(package_name).const_get(:GameServerClustersService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -79,12 +83,14 @@ module Google
       # Create a new client object for GameServerConfigsService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Gaming::V1::GameServerConfigsService::Client](https://googleapis.dev/ruby/google-cloud-gaming-v1/latest/Google/Cloud/Gaming/V1/GameServerConfigsService/Client.html)
+      # [Google::Cloud::Gaming::V1::GameServerConfigsService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-gaming-v1/latest/Google-Cloud-Gaming-V1-GameServerConfigsService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the GameServerConfigsService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About GameServerConfigsService
       #
@@ -92,9 +98,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.game_server_configs_service version: :v1, &block
+      def self.game_server_configs_service version: :v1, transport: :grpc, &block
         require "google/cloud/gaming/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Gaming
@@ -102,6 +109,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::Gaming.const_get(package_name).const_get(:GameServerConfigsService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -109,12 +117,14 @@ module Google
       # Create a new client object for GameServerDeploymentsService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Gaming::V1::GameServerDeploymentsService::Client](https://googleapis.dev/ruby/google-cloud-gaming-v1/latest/Google/Cloud/Gaming/V1/GameServerDeploymentsService/Client.html)
+      # [Google::Cloud::Gaming::V1::GameServerDeploymentsService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-gaming-v1/latest/Google-Cloud-Gaming-V1-GameServerDeploymentsService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the GameServerDeploymentsService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About GameServerDeploymentsService
       #
@@ -123,9 +133,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.game_server_deployments_service version: :v1, &block
+      def self.game_server_deployments_service version: :v1, transport: :grpc, &block
         require "google/cloud/gaming/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Gaming
@@ -133,6 +144,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::Gaming.const_get(package_name).const_get(:GameServerDeploymentsService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 
@@ -140,12 +152,14 @@ module Google
       # Create a new client object for RealmsService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Gaming::V1::RealmsService::Client](https://googleapis.dev/ruby/google-cloud-gaming-v1/latest/Google/Cloud/Gaming/V1/RealmsService/Client.html)
+      # [Google::Cloud::Gaming::V1::RealmsService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-gaming-v1/latest/Google-Cloud-Gaming-V1-RealmsService-Client)
       # for a gRPC client for version V1 of the API.
       # However, you can specify a different API version by passing it in the
       # `version` parameter. If the RealmsService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About RealmsService
       #
@@ -154,9 +168,10 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
       # @return [::Object] A client object for the specified version.
       #
-      def self.realms_service version: :v1, &block
+      def self.realms_service version: :v1, transport: :grpc, &block
         require "google/cloud/gaming/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Gaming
@@ -164,6 +179,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         service_module = Google::Cloud::Gaming.const_get(package_name).const_get(:RealmsService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
         service_module.const_get(:Client).new(&block)
       end
 

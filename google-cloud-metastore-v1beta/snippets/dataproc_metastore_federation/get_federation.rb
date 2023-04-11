@@ -20,8 +20,11 @@
 require "google/cloud/metastore/v1beta"
 
 ##
-# Example demonstrating basic usage of
-# Google::Cloud::Metastore::V1beta::DataprocMetastoreFederation::Client#get_federation
+# Snippet for the get_federation call in the DataprocMetastoreFederation service
+#
+# This is an auto-generated example demonstrating basic usage of
+# Google::Cloud::Metastore::V1beta::DataprocMetastoreFederation::Client#get_federation.
+# It may require modification in order to execute successfully.
 #
 def get_federation
   # Create a client object. The client can be reused for multiple calls.

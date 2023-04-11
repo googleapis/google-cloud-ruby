@@ -1,5 +1,35 @@
 # Release History
 
+### 0.18.0 (2023-04-10)
+
+#### Features
+
+* support AdditionalPodRangesConfig for IPAllocationPolicy 
+
+### 0.17.0 (2023-03-29)
+
+#### Features
+
+* Added support for fleet registration ([#21031](https://github.com/googleapis/google-cloud-ruby/issues/21031)) 
+
+### 0.16.3 (2023-03-08)
+
+#### Documentation
+
+* minor typo fix ([#20607](https://github.com/googleapis/google-cloud-ruby/issues/20607)) 
+
+### 0.16.2 (2023-02-13)
+
+#### Documentation
+
+* Improve documentation for NodePool ([#20114](https://github.com/googleapis/google-cloud-ruby/issues/20114)) 
+
+### 0.16.1 (2023-01-31)
+
+#### Documentation
+
+* clarify wording around the NodePoolUpdateStrategy default behavior ([#20100](https://github.com/googleapis/google-cloud-ruby/issues/20100)) 
+
 ### 0.16.0 (2023-01-11)
 
 #### Features

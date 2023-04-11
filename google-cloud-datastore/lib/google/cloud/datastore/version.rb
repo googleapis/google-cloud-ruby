@@ -16,7 +16,7 @@
 module Google
   module Cloud
     module Datastore
-      VERSION = "2.3.1".freeze
+      VERSION = "2.6.0".freeze
     end
   end
 end

@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
   gem.description   = "Service Directory is the single place to register, browse, and resolve application services. Note that google-cloud-service_directory-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-service_directory instead. See the readme for more details."
-  gem.summary       = "API Client library for the Service Directory V1 API"
+  gem.summary       = "Service Directory is a platform for discovering, publishing, and connecting services."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
@@ -23,11 +23,11 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 2.6"
 
-  gem.add_dependency "gapic-common", ">= 0.16.0", "< 2.a"
+  gem.add_dependency "gapic-common", ">= 0.18.0", "< 2.a"
   gem.add_dependency "google-cloud-errors", "~> 1.0"
   gem.add_dependency "grpc-google-iam-v1", "~> 1.1"
 
-  gem.add_development_dependency "google-style", "~> 1.26.1"
+  gem.add_development_dependency "google-style", "~> 1.26.3"
   gem.add_development_dependency "minitest", "~> 5.16"
   gem.add_development_dependency "minitest-focus", "~> 1.1"
   gem.add_development_dependency "minitest-rg", "~> 5.2"

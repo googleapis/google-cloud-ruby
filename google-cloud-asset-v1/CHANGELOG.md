@@ -1,5 +1,17 @@
 # Release History
 
+### 0.25.0 (2023-04-09)
+
+#### Features
+
+* Add client library support for AssetService v1 AnalyzeOrgPolicies API ([#21045](https://github.com/googleapis/google-cloud-ruby/issues/21045)) 
+
+### 0.24.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20624](https://github.com/googleapis/google-cloud-ruby/issues/20624)) 
+
 ### 0.23.0 (2023-01-15)
 
 #### Features

@@ -69,6 +69,66 @@ module Google
                   initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 2]
                 }
 
+                default_config.rpcs.get_account.timeout = 60.0
+
+                default_config.rpcs.list_accounts.timeout = 60.0
+
+                default_config.rpcs.delete_account.timeout = 60.0
+
+                default_config.rpcs.update_account.timeout = 60.0
+
+                default_config.rpcs.provision_account_ticket.timeout = 60.0
+
+                default_config.rpcs.get_property.timeout = 60.0
+
+                default_config.rpcs.list_properties.timeout = 60.0
+
+                default_config.rpcs.create_property.timeout = 60.0
+
+                default_config.rpcs.delete_property.timeout = 60.0
+
+                default_config.rpcs.update_property.timeout = 60.0
+
+                default_config.rpcs.get_user_link.timeout = 60.0
+
+                default_config.rpcs.batch_get_user_links.timeout = 60.0
+
+                default_config.rpcs.list_user_links.timeout = 60.0
+
+                default_config.rpcs.audit_user_links.timeout = 60.0
+
+                default_config.rpcs.create_user_link.timeout = 60.0
+
+                default_config.rpcs.batch_create_user_links.timeout = 60.0
+
+                default_config.rpcs.update_user_link.timeout = 60.0
+
+                default_config.rpcs.batch_update_user_links.timeout = 60.0
+
+                default_config.rpcs.delete_user_link.timeout = 60.0
+
+                default_config.rpcs.batch_delete_user_links.timeout = 60.0
+
+                default_config.rpcs.create_firebase_link.timeout = 60.0
+
+                default_config.rpcs.delete_firebase_link.timeout = 60.0
+
+                default_config.rpcs.list_firebase_links.timeout = 60.0
+
+                default_config.rpcs.get_global_site_tag.timeout = 60.0
+
+                default_config.rpcs.create_google_ads_link.timeout = 60.0
+
+                default_config.rpcs.update_google_ads_link.timeout = 60.0
+
+                default_config.rpcs.delete_google_ads_link.timeout = 60.0
+
+                default_config.rpcs.list_google_ads_links.timeout = 60.0
+
+                default_config.rpcs.get_enhanced_measurement_settings.timeout = 60.0
+
+                default_config.rpcs.update_enhanced_measurement_settings.timeout = 60.0
+
                 default_config
               end
               yield @configure if block_given?
@@ -293,13 +353,11 @@ module Google
             #   # Call the list_accounts method.
             #   result = client.list_accounts request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Analytics::Admin::V1alpha::Account.
-            #     p response
+            #     p item
             #   end
             #
             def list_accounts request, options = nil
@@ -455,9 +513,10 @@ module Google
             #     Required. The account to update.
             #     The account's `name` field is used to identify the account.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. The list of fields to be updated. Field names must be in snake case
-            #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
-            #     the entire entity, use one path with the string "*" to match all fields.
+            #     Required. The list of fields to be updated. Field names must be in snake
+            #     case (for example, "field_to_update"). Omitted fields will not be updated.
+            #     To replace the entire entity, use one path with the string "*" to match all
+            #     fields.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Analytics::Admin::V1alpha::Account]
@@ -545,7 +604,7 @@ module Google
             #     The account to create.
             #   @param redirect_uri [::String]
             #     Redirect URI where the user will be sent after accepting Terms of Service.
-            #     Must be configured in Developers Console as a Redirect URI
+            #     Must be configured in Cloud Console as a Redirect URI.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Analytics::Admin::V1alpha::ProvisionAccountTicketResponse]
@@ -652,13 +711,11 @@ module Google
             #   # Call the list_account_summaries method.
             #   result = client.list_account_summaries request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Analytics::Admin::V1alpha::AccountSummary.
-            #     p response
+            #     p item
             #   end
             #
             def list_account_summaries request, options = nil
@@ -857,13 +914,11 @@ module Google
             #   # Call the list_properties method.
             #   result = client.list_properties request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Analytics::Admin::V1alpha::Property.
-            #     p response
+            #     p item
             #   end
             #
             def list_properties request, options = nil
@@ -989,7 +1044,7 @@ module Google
             # will be permanently purged.
             # https://support.google.com/analytics/answer/6154772
             #
-            # Returns an error if the target is not found, or is not an GA4 Property.
+            # Returns an error if the target is not found, or is not a GA4 Property.
             #
             # @overload delete_property(request, options = nil)
             #   Pass arguments to `delete_property` via a request object, either of type
@@ -1098,9 +1153,10 @@ module Google
             #     The property's `name` field is used to identify the property to be
             #     updated.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. The list of fields to be updated. Field names must be in snake case
-            #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
-            #     the entire entity, use one path with the string "*" to match all fields.
+            #     Required. The list of fields to be updated. Field names must be in snake
+            #     case (e.g., "field_to_update"). Omitted fields will not be updated. To
+            #     replace the entire entity, use one path with the string "*" to match all
+            #     fields.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Analytics::Admin::V1alpha::Property]
@@ -1394,13 +1450,11 @@ module Google
             #   # Call the list_user_links method.
             #   result = client.list_user_links request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Analytics::Admin::V1alpha::UserLink.
-            #     p response
+            #     p item
             #   end
             #
             def list_user_links request, options = nil
@@ -1504,13 +1558,11 @@ module Google
             #   # Call the audit_user_links method.
             #   result = client.audit_user_links request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Analytics::Admin::V1alpha::AuditUserLink.
-            #     p response
+            #     p item
             #   end
             #
             def audit_user_links request, options = nil
@@ -1580,8 +1632,8 @@ module Google
             #   @param parent [::String]
             #     Required. Example format: accounts/1234
             #   @param notify_new_user [::Boolean]
-            #     Optional. If set, then email the new user notifying them that they've been granted
-            #     permissions to the resource.
+            #     Optional. If set, then email the new user notifying them that they've been
+            #     granted permissions to the resource.
             #   @param user_link [::Google::Analytics::Admin::V1alpha::UserLink, ::Hash]
             #     Required. The user link to create.
             #
@@ -1671,14 +1723,14 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The account or property that all user links in the request are for.
-            #     This field is required. The parent field in the CreateUserLinkRequest
+            #     Required. The account or property that all user links in the request are
+            #     for. This field is required. The parent field in the CreateUserLinkRequest
             #     messages must either be empty or match this field.
             #     Example format: accounts/1234
             #   @param notify_new_users [::Boolean]
-            #     Optional. If set, then email the new users notifying them that they've been granted
-            #     permissions to the resource. Regardless of whether this is set or not,
-            #     notify_new_user field inside each individual request is ignored.
+            #     Optional. If set, then email the new users notifying them that they've been
+            #     granted permissions to the resource. Regardless of whether this is set or
+            #     not, notify_new_user field inside each individual request is ignored.
             #   @param requests [::Array<::Google::Analytics::Admin::V1alpha::CreateUserLinkRequest, ::Hash>]
             #     Required. The requests specifying the user links to create.
             #     A maximum of 1000 user links can be created in a batch.
@@ -2305,7 +2357,7 @@ module Google
             #   @param page_token [::String]
             #     A page token, received from a previous `ListFirebaseLinks` call.
             #     Provide this to retrieve the subsequent page.
-            #     When paginating, all other parameters provided to `ListProperties` must
+            #     When paginating, all other parameters provided to `ListFirebaseLinks` must
             #     match the call that provided the page token.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -2328,13 +2380,11 @@ module Google
             #   # Call the list_firebase_links method.
             #   result = client.list_firebase_links request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Analytics::Admin::V1alpha::FirebaseLink.
-            #     p response
+            #     p item
             #   end
             #
             def list_firebase_links request, options = nil
@@ -2576,9 +2626,10 @@ module Google
             #   @param google_ads_link [::Google::Analytics::Admin::V1alpha::GoogleAdsLink, ::Hash]
             #     The GoogleAdsLink to update
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. The list of fields to be updated. Field names must be in snake case
-            #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
-            #     the entire entity, use one path with the string "*" to match all fields.
+            #     Required. The list of fields to be updated. Field names must be in snake
+            #     case (e.g., "field_to_update"). Omitted fields will not be updated. To
+            #     replace the entire entity, use one path with the string "*" to match all
+            #     fields.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Analytics::Admin::V1alpha::GoogleAdsLink]
@@ -2780,13 +2831,11 @@ module Google
             #   # Call the list_google_ads_links method.
             #   result = client.list_google_ads_links request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Analytics::Admin::V1alpha::GoogleAdsLink.
-            #     p response
+            #     p item
             #   end
             #
             def list_google_ads_links request, options = nil
@@ -3059,13 +3108,11 @@ module Google
             #   # Call the list_measurement_protocol_secrets method.
             #   result = client.list_measurement_protocol_secrets request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Analytics::Admin::V1alpha::MeasurementProtocolSecret.
-            #     p response
+            #     p item
             #   end
             #
             def list_measurement_protocol_secrets request, options = nil
@@ -3376,7 +3423,8 @@ module Google
             # Acknowledges the terms of user data collection for the specified property.
             #
             # This acknowledgement must be completed (either in the Google Analytics UI
-            # or via this API) before MeasurementProtocolSecret resources may be created.
+            # or through this API) before MeasurementProtocolSecret resources may be
+            # created.
             #
             # @overload acknowledge_user_data_collection(request, options = nil)
             #   Pass arguments to `acknowledge_user_data_collection` via a request object, either of type
@@ -3396,8 +3444,8 @@ module Google
             #   @param property [::String]
             #     Required. The property for which to acknowledge user data collection.
             #   @param acknowledgement [::String]
-            #     Required. An acknowledgement that the caller of this method understands the terms
-            #     of user data collection.
+            #     Required. An acknowledgement that the caller of this method understands the
+            #     terms of user data collection.
             #
             #     This field must contain the exact value:
             #     "I acknowledge that I have the necessary privacy disclosures and rights
@@ -3489,18 +3537,20 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param account [::String]
-            #     Required. The account resource for which to return change history resources.
+            #     Required. The account resource for which to return change history
+            #     resources.
             #   @param property [::String]
             #     Optional. Resource name for a child property. If set, only return changes
             #     made to this property or its child resources.
             #   @param resource_type [::Array<::Google::Analytics::Admin::V1alpha::ChangeHistoryResourceType>]
-            #     Optional. If set, only return changes if they are for a resource that matches at
-            #     least one of these types.
+            #     Optional. If set, only return changes if they are for a resource that
+            #     matches at least one of these types.
             #   @param action [::Array<::Google::Analytics::Admin::V1alpha::ActionType>]
-            #     Optional. If set, only return changes that match one or more of these types of
-            #     actions.
+            #     Optional. If set, only return changes that match one or more of these types
+            #     of actions.
             #   @param actor_email [::Array<::String>]
-            #     Optional. If set, only return changes if they are made by a user in this list.
+            #     Optional. If set, only return changes if they are made by a user in this
+            #     list.
             #   @param earliest_change_time [::Google::Protobuf::Timestamp, ::Hash]
             #     Optional. If set, only return changes made after this time (inclusive).
             #   @param latest_change_time [::Google::Protobuf::Timestamp, ::Hash]
@@ -3511,10 +3561,11 @@ module Google
             #     pages. If unspecified, at most 50 items will be returned.
             #     The maximum value is 200 (higher values will be coerced to the maximum).
             #   @param page_token [::String]
-            #     Optional. A page token, received from a previous `SearchChangeHistoryEvents` call.
-            #     Provide this to retrieve the subsequent page. When paginating, all other
-            #     parameters provided to `SearchChangeHistoryEvents` must match the call that
-            #     provided the page token.
+            #     Optional. A page token, received from a previous
+            #     `SearchChangeHistoryEvents` call. Provide this to retrieve the subsequent
+            #     page. When paginating, all other parameters provided to
+            #     `SearchChangeHistoryEvents` must match the call that provided the page
+            #     token.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Analytics::Admin::V1alpha::ChangeHistoryEvent>]
@@ -3536,13 +3587,11 @@ module Google
             #   # Call the search_change_history_events method.
             #   result = client.search_change_history_events request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Analytics::Admin::V1alpha::ChangeHistoryEvent.
-            #     p response
+            #     p item
             #   end
             #
             def search_change_history_events request, options = nil
@@ -3695,9 +3744,10 @@ module Google
             #     Required. The settings to update.
             #     The `name` field is used to identify the settings to be updated.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. The list of fields to be updated. Field names must be in snake case
-            #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
-            #     the entire entity, use one path with the string "*" to match all fields.
+            #     Required. The list of fields to be updated. Field names must be in snake
+            #     case (e.g., "field_to_update"). Omitted fields will not be updated. To
+            #     replace the entire entity, use one path with the string "*" to match all
+            #     fields.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Analytics::Admin::V1alpha::GoogleSignalsSettings]
@@ -3784,8 +3834,8 @@ module Google
             #   @param conversion_event [::Google::Analytics::Admin::V1alpha::ConversionEvent, ::Hash]
             #     Required. The conversion event to create.
             #   @param parent [::String]
-            #     Required. The resource name of the parent property where this conversion event will
-            #     be created. Format: properties/123
+            #     Required. The resource name of the parent property where this conversion
+            #     event will be created. Format: properties/123
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Analytics::Admin::V1alpha::ConversionEvent]
@@ -4078,13 +4128,11 @@ module Google
             #   # Call the list_conversion_events method.
             #   result = client.list_conversion_events request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Analytics::Admin::V1alpha::ConversionEvent.
-            #     p response
+            #     p item
             #   end
             #
             def list_conversion_events request, options = nil
@@ -4267,13 +4315,11 @@ module Google
             #   # Call the list_display_video360_advertiser_links method.
             #   result = client.list_display_video360_advertiser_links request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink.
-            #     p response
+            #     p item
             #   end
             #
             def list_display_video360_advertiser_links request, options = nil
@@ -4516,9 +4562,9 @@ module Google
             #   @param display_video_360_advertiser_link [::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink, ::Hash]
             #     The DisplayVideo360AdvertiserLink to update
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. The list of fields to be updated. Omitted fields will not be updated.
-            #     To replace the entire entity, use one path with the string "*" to match
-            #     all fields.
+            #     Required. The list of fields to be updated. Omitted fields will not be
+            #     updated. To replace the entire entity, use one path with the string "*" to
+            #     match all fields.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink]
@@ -4723,13 +4769,11 @@ module Google
             #   # Call the list_display_video360_advertiser_link_proposals method.
             #   result = client.list_display_video360_advertiser_link_proposals request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLinkProposal.
-            #     p response
+            #     p item
             #   end
             #
             def list_display_video360_advertiser_link_proposals request, options = nil
@@ -5234,9 +5278,9 @@ module Google
             #   @param custom_dimension [::Google::Analytics::Admin::V1alpha::CustomDimension, ::Hash]
             #     The CustomDimension to update
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. The list of fields to be updated. Omitted fields will not be updated.
-            #     To replace the entire entity, use one path with the string "*" to match
-            #     all fields.
+            #     Required. The list of fields to be updated. Omitted fields will not be
+            #     updated. To replace the entire entity, use one path with the string "*" to
+            #     match all fields.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Analytics::Admin::V1alpha::CustomDimension]
@@ -5353,13 +5397,11 @@ module Google
             #   # Call the list_custom_dimensions method.
             #   result = client.list_custom_dimensions request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Analytics::Admin::V1alpha::CustomDimension.
-            #     p response
+            #     p item
             #   end
             #
             def list_custom_dimensions request, options = nil
@@ -5684,9 +5726,9 @@ module Google
             #   @param custom_metric [::Google::Analytics::Admin::V1alpha::CustomMetric, ::Hash]
             #     The CustomMetric to update
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. The list of fields to be updated. Omitted fields will not be updated.
-            #     To replace the entire entity, use one path with the string "*" to match
-            #     all fields.
+            #     Required. The list of fields to be updated. Omitted fields will not be
+            #     updated. To replace the entire entity, use one path with the string "*" to
+            #     match all fields.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Analytics::Admin::V1alpha::CustomMetric]
@@ -5803,13 +5845,11 @@ module Google
             #   # Call the list_custom_metrics method.
             #   result = client.list_custom_metrics request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Analytics::Admin::V1alpha::CustomMetric.
-            #     p response
+            #     p item
             #   end
             #
             def list_custom_metrics request, options = nil
@@ -6136,9 +6176,10 @@ module Google
             #     Required. The settings to update.
             #     The `name` field is used to identify the settings to be updated.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. The list of fields to be updated. Field names must be in snake case
-            #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
-            #     the entire entity, use one path with the string "*" to match all fields.
+            #     Required. The list of fields to be updated. Field names must be in snake
+            #     case (e.g., "field_to_update"). Omitted fields will not be updated. To
+            #     replace the entire entity, use one path with the string "*" to match all
+            #     fields.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Analytics::Admin::V1alpha::DataRetentionSettings]
@@ -6398,9 +6439,9 @@ module Google
             #   @param data_stream [::Google::Analytics::Admin::V1alpha::DataStream, ::Hash]
             #     The DataStream to update
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. The list of fields to be updated. Omitted fields will not be updated.
-            #     To replace the entire entity, use one path with the string "*" to match
-            #     all fields.
+            #     Required. The list of fields to be updated. Omitted fields will not be
+            #     updated. To replace the entire entity, use one path with the string "*" to
+            #     match all fields.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Analytics::Admin::V1alpha::DataStream]
@@ -6517,13 +6558,11 @@ module Google
             #   # Call the list_data_streams method.
             #   result = client.list_data_streams request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Analytics::Admin::V1alpha::DataStream.
-            #     p response
+            #     p item
             #   end
             #
             def list_data_streams request, options = nil
@@ -6657,6 +6696,7 @@ module Google
             ##
             # Lookup for a single Audience.
             # Audiences created before 2020 may not be supported.
+            # Default audiences will not show filter definitions.
             #
             # @overload get_audience(request, options = nil)
             #   Pass arguments to `get_audience` via a request object, either of type
@@ -6744,6 +6784,7 @@ module Google
             ##
             # Lists Audiences on a property.
             # Audiences created before 2020 may not be supported.
+            # Default audiences will not show filter definitions.
             #
             # @overload list_audiences(request, options = nil)
             #   Pass arguments to `list_audiences` via a request object, either of type
@@ -6793,13 +6834,11 @@ module Google
             #   # Call the list_audiences method.
             #   result = client.list_audiences request
             #
-            #   # The returned object is of type Gapic::PagedEnumerable. You can
-            #   # iterate over all elements by calling #each, and the enumerable
-            #   # will lazily make API calls to fetch subsequent pages. Other
-            #   # methods are also available for managing paging directly.
-            #   result.each do |response|
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
             #     # Each element is of type ::Google::Analytics::Admin::V1alpha::Audience.
-            #     p response
+            #     p item
             #   end
             #
             def list_audiences request, options = nil
@@ -6953,9 +6992,10 @@ module Google
             #     Required. The audience to update.
             #     The audience's `name` field is used to identify the audience to be updated.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. The list of fields to be updated. Field names must be in snake case
-            #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
-            #     the entire entity, use one path with the string "*" to match all fields.
+            #     Required. The list of fields to be updated. Field names must be in snake
+            #     case (e.g., "field_to_update"). Omitted fields will not be updated. To
+            #     replace the entire entity, use one path with the string "*" to match all
+            #     fields.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Analytics::Admin::V1alpha::Audience]
@@ -7107,6 +7147,455 @@ module Google
             end
 
             ##
+            # Look up a single SearchAds360Link
+            #
+            # @overload get_search_ads360_link(request, options = nil)
+            #   Pass arguments to `get_search_ads360_link` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::GetSearchAds360LinkRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::GetSearchAds360LinkRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_search_ads360_link(name: nil)
+            #   Pass arguments to `get_search_ads360_link` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the SearchAds360Link to get.
+            #     Example format: properties/1234/SearchAds360Link/5678
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Analytics::Admin::V1alpha::SearchAds360Link]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Analytics::Admin::V1alpha::SearchAds360Link]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::GetSearchAds360LinkRequest.new
+            #
+            #   # Call the get_search_ads360_link method.
+            #   result = client.get_search_ads360_link request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::SearchAds360Link.
+            #   p result
+            #
+            def get_search_ads360_link request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::GetSearchAds360LinkRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_search_ads360_link.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_search_ads360_link.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_search_ads360_link.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :get_search_ads360_link, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists all SearchAds360Links on a property.
+            #
+            # @overload list_search_ads360_links(request, options = nil)
+            #   Pass arguments to `list_search_ads360_links` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::ListSearchAds360LinksRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::ListSearchAds360LinksRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_search_ads360_links(parent: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `list_search_ads360_links` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Example format: properties/1234
+            #   @param page_size [::Integer]
+            #     The maximum number of resources to return.
+            #     If unspecified, at most 50 resources will be returned.
+            #     The maximum value is 200 (higher values will be coerced to the maximum).
+            #   @param page_token [::String]
+            #     A page token, received from a previous `ListSearchAds360Links`
+            #     call. Provide this to retrieve the subsequent page.
+            #
+            #     When paginating, all other parameters provided to
+            #     `ListSearchAds360Links` must match the call that provided the
+            #     page token.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Analytics::Admin::V1alpha::SearchAds360Link>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Analytics::Admin::V1alpha::SearchAds360Link>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::ListSearchAds360LinksRequest.new
+            #
+            #   # Call the list_search_ads360_links method.
+            #   result = client.list_search_ads360_links request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Analytics::Admin::V1alpha::SearchAds360Link.
+            #     p item
+            #   end
+            #
+            def list_search_ads360_links request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::ListSearchAds360LinksRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_search_ads360_links.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_search_ads360_links.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_search_ads360_links.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :list_search_ads360_links, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @analytics_admin_service_stub, :list_search_ads360_links, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Creates a SearchAds360Link.
+            #
+            # @overload create_search_ads360_link(request, options = nil)
+            #   Pass arguments to `create_search_ads360_link` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::CreateSearchAds360LinkRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::CreateSearchAds360LinkRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_search_ads360_link(parent: nil, search_ads_360_link: nil)
+            #   Pass arguments to `create_search_ads360_link` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Example format: properties/1234
+            #   @param search_ads_360_link [::Google::Analytics::Admin::V1alpha::SearchAds360Link, ::Hash]
+            #     Required. The SearchAds360Link to create.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Analytics::Admin::V1alpha::SearchAds360Link]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Analytics::Admin::V1alpha::SearchAds360Link]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::CreateSearchAds360LinkRequest.new
+            #
+            #   # Call the create_search_ads360_link method.
+            #   result = client.create_search_ads360_link request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::SearchAds360Link.
+            #   p result
+            #
+            def create_search_ads360_link request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::CreateSearchAds360LinkRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_search_ads360_link.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_search_ads360_link.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_search_ads360_link.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :create_search_ads360_link, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes a SearchAds360Link on a property.
+            #
+            # @overload delete_search_ads360_link(request, options = nil)
+            #   Pass arguments to `delete_search_ads360_link` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::DeleteSearchAds360LinkRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::DeleteSearchAds360LinkRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_search_ads360_link(name: nil)
+            #   Pass arguments to `delete_search_ads360_link` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the SearchAds360Link to delete.
+            #     Example format: properties/1234/SearchAds360Links/5678
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Protobuf::Empty]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::DeleteSearchAds360LinkRequest.new
+            #
+            #   # Call the delete_search_ads360_link method.
+            #   result = client.delete_search_ads360_link request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
+            def delete_search_ads360_link request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::DeleteSearchAds360LinkRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_search_ads360_link.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_search_ads360_link.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_search_ads360_link.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :delete_search_ads360_link, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates a SearchAds360Link on a property.
+            #
+            # @overload update_search_ads360_link(request, options = nil)
+            #   Pass arguments to `update_search_ads360_link` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::UpdateSearchAds360LinkRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::UpdateSearchAds360LinkRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_search_ads360_link(search_ads_360_link: nil, update_mask: nil)
+            #   Pass arguments to `update_search_ads360_link` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param search_ads_360_link [::Google::Analytics::Admin::V1alpha::SearchAds360Link, ::Hash]
+            #     The SearchAds360Link to update
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Required. The list of fields to be updated. Omitted fields will not be
+            #     updated. To replace the entire entity, use one path with the string "*" to
+            #     match all fields.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Analytics::Admin::V1alpha::SearchAds360Link]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Analytics::Admin::V1alpha::SearchAds360Link]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::UpdateSearchAds360LinkRequest.new
+            #
+            #   # Call the update_search_ads360_link method.
+            #   result = client.update_search_ads360_link request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::SearchAds360Link.
+            #   p result
+            #
+            def update_search_ads360_link request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::UpdateSearchAds360LinkRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_search_ads360_link.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.search_ads_360_link&.name
+                header_params["search_ads_360_link.name"] = request.search_ads_360_link.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_search_ads360_link.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_search_ads360_link.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :update_search_ads360_link, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Lookup for a AttributionSettings singleton.
             #
             # @overload get_attribution_settings(request, options = nil)
@@ -7214,9 +7703,10 @@ module Google
             #     Required. The attribution settings to update.
             #     The `name` field is used to identify the settings to be updated.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. The list of fields to be updated. Field names must be in snake case
-            #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
-            #     the entire entity, use one path with the string "*" to match all fields.
+            #     Required. The list of fields to be updated. Field names must be in snake
+            #     case (e.g., "field_to_update"). Omitted fields will not be updated. To
+            #     replace the entire entity, use one path with the string "*" to match all
+            #     fields.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Analytics::Admin::V1alpha::AttributionSettings]
@@ -7313,9 +7803,14 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param entity [::String]
-            #     The Data Access Report is requested for this property.
-            #     For example if "123" is your GA4 property ID, then entity should be
-            #     "properties/123".
+            #     The Data Access Report supports requesting at the property level or account
+            #     level. If requested at the account level, Data Access Reports include all
+            #     access for all properties under that account.
+            #
+            #     To request at the property level, entity should be for example
+            #     'properties/123' if "123" is your GA4 property ID. To request at the
+            #     account level, entity should be for example 'accounts/1234' if "1234" is
+            #     your GA4 Account ID.
             #   @param dimensions [::Array<::Google::Analytics::Admin::V1alpha::AccessDimension, ::Hash>]
             #     The dimensions requested and displayed in the response. Requests are
             #     allowed up to 9 dimensions.
@@ -7329,7 +7824,7 @@ module Google
             #     included in the response rows for both date ranges. Requests are allowed up
             #     to 2 date ranges.
             #   @param dimension_filter [::Google::Analytics::Admin::V1alpha::AccessFilterExpression, ::Hash]
-            #     Dimension filters allow you to restrict report response to specific
+            #     Dimension filters let you restrict report response to specific
             #     dimension values which match the filter. For example, filtering on access
             #     records of a single user. To learn more, see [Fundamentals of Dimension
             #     Filters](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#dimension_filters)
@@ -7371,7 +7866,8 @@ module Google
             #     Specifies how rows are ordered in the response.
             #   @param return_entity_quota [::Boolean]
             #     Toggles whether to return the current state of this Analytics Property's
-            #     quota. Quota is returned in [AccessQuota](#AccessQuota).
+            #     quota. Quota is returned in [AccessQuota](#AccessQuota). For account-level
+            #     requests, this field must be false.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Analytics::Admin::V1alpha::RunAccessReportResponse]
@@ -7438,6 +7934,2072 @@ module Google
             end
 
             ##
+            # Creates an access binding on an account or property.
+            #
+            # @overload create_access_binding(request, options = nil)
+            #   Pass arguments to `create_access_binding` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::CreateAccessBindingRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::CreateAccessBindingRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_access_binding(parent: nil, access_binding: nil)
+            #   Pass arguments to `create_access_binding` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Formats:
+            #     - accounts/\\{account}
+            #     - properties/\\{property}
+            #   @param access_binding [::Google::Analytics::Admin::V1alpha::AccessBinding, ::Hash]
+            #     Required. The access binding to create.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Analytics::Admin::V1alpha::AccessBinding]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Analytics::Admin::V1alpha::AccessBinding]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::CreateAccessBindingRequest.new
+            #
+            #   # Call the create_access_binding method.
+            #   result = client.create_access_binding request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::AccessBinding.
+            #   p result
+            #
+            def create_access_binding request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::CreateAccessBindingRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_access_binding.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_access_binding.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_access_binding.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :create_access_binding, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets information about an access binding.
+            #
+            # @overload get_access_binding(request, options = nil)
+            #   Pass arguments to `get_access_binding` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::GetAccessBindingRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::GetAccessBindingRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_access_binding(name: nil)
+            #   Pass arguments to `get_access_binding` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the access binding to retrieve.
+            #     Formats:
+            #     - accounts/\\{account}/accessBindings/\\{accessBinding}
+            #     - properties/\\{property}/accessBindings/\\{accessBinding}
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Analytics::Admin::V1alpha::AccessBinding]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Analytics::Admin::V1alpha::AccessBinding]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::GetAccessBindingRequest.new
+            #
+            #   # Call the get_access_binding method.
+            #   result = client.get_access_binding request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::AccessBinding.
+            #   p result
+            #
+            def get_access_binding request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::GetAccessBindingRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_access_binding.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_access_binding.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_access_binding.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :get_access_binding, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates an access binding on an account or property.
+            #
+            # @overload update_access_binding(request, options = nil)
+            #   Pass arguments to `update_access_binding` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::UpdateAccessBindingRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::UpdateAccessBindingRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_access_binding(access_binding: nil)
+            #   Pass arguments to `update_access_binding` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param access_binding [::Google::Analytics::Admin::V1alpha::AccessBinding, ::Hash]
+            #     Required. The access binding to update.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Analytics::Admin::V1alpha::AccessBinding]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Analytics::Admin::V1alpha::AccessBinding]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::UpdateAccessBindingRequest.new
+            #
+            #   # Call the update_access_binding method.
+            #   result = client.update_access_binding request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::AccessBinding.
+            #   p result
+            #
+            def update_access_binding request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::UpdateAccessBindingRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_access_binding.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.access_binding&.name
+                header_params["access_binding.name"] = request.access_binding.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_access_binding.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_access_binding.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :update_access_binding, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes an access binding on an account or property.
+            #
+            # @overload delete_access_binding(request, options = nil)
+            #   Pass arguments to `delete_access_binding` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::DeleteAccessBindingRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::DeleteAccessBindingRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_access_binding(name: nil)
+            #   Pass arguments to `delete_access_binding` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Formats:
+            #     - accounts/\\{account}/accessBindings/\\{accessBinding}
+            #     - properties/\\{property}/accessBindings/\\{accessBinding}
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Protobuf::Empty]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::DeleteAccessBindingRequest.new
+            #
+            #   # Call the delete_access_binding method.
+            #   result = client.delete_access_binding request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
+            def delete_access_binding request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::DeleteAccessBindingRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_access_binding.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_access_binding.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_access_binding.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :delete_access_binding, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists all access bindings on an account or property.
+            #
+            # @overload list_access_bindings(request, options = nil)
+            #   Pass arguments to `list_access_bindings` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::ListAccessBindingsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::ListAccessBindingsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_access_bindings(parent: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `list_access_bindings` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Formats:
+            #     - accounts/\\{account}
+            #     - properties/\\{property}
+            #   @param page_size [::Integer]
+            #     The maximum number of access bindings to return.
+            #     The service may return fewer than this value.
+            #     If unspecified, at most 200 access bindings will be returned.
+            #     The maximum value is 500; values above 500 will be coerced to 500.
+            #   @param page_token [::String]
+            #     A page token, received from a previous `ListAccessBindings` call.
+            #     Provide this to retrieve the subsequent page.
+            #     When paginating, all other parameters provided to `ListAccessBindings` must
+            #     match the call that provided the page token.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Analytics::Admin::V1alpha::AccessBinding>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Analytics::Admin::V1alpha::AccessBinding>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::ListAccessBindingsRequest.new
+            #
+            #   # Call the list_access_bindings method.
+            #   result = client.list_access_bindings request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Analytics::Admin::V1alpha::AccessBinding.
+            #     p item
+            #   end
+            #
+            def list_access_bindings request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::ListAccessBindingsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_access_bindings.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_access_bindings.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_access_bindings.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :list_access_bindings, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @analytics_admin_service_stub, :list_access_bindings, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Creates information about multiple access bindings to an account or
+            # property.
+            #
+            # This method is transactional. If any AccessBinding cannot be created, none
+            # of the AccessBindings will be created.
+            #
+            # @overload batch_create_access_bindings(request, options = nil)
+            #   Pass arguments to `batch_create_access_bindings` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::BatchCreateAccessBindingsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::BatchCreateAccessBindingsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload batch_create_access_bindings(parent: nil, requests: nil)
+            #   Pass arguments to `batch_create_access_bindings` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The account or property that owns the access bindings. The parent
+            #     field in the CreateAccessBindingRequest messages must either be empty or
+            #     match this field. Formats:
+            #     - accounts/\\{account}
+            #     - properties/\\{property}
+            #   @param requests [::Array<::Google::Analytics::Admin::V1alpha::CreateAccessBindingRequest, ::Hash>]
+            #     Required. The requests specifying the access bindings to create.
+            #     A maximum of 1000 access bindings can be created in a batch.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Analytics::Admin::V1alpha::BatchCreateAccessBindingsResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Analytics::Admin::V1alpha::BatchCreateAccessBindingsResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::BatchCreateAccessBindingsRequest.new
+            #
+            #   # Call the batch_create_access_bindings method.
+            #   result = client.batch_create_access_bindings request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::BatchCreateAccessBindingsResponse.
+            #   p result
+            #
+            def batch_create_access_bindings request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::BatchCreateAccessBindingsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.batch_create_access_bindings.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.batch_create_access_bindings.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.batch_create_access_bindings.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :batch_create_access_bindings, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets information about multiple access bindings to an account or property.
+            #
+            # @overload batch_get_access_bindings(request, options = nil)
+            #   Pass arguments to `batch_get_access_bindings` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::BatchGetAccessBindingsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::BatchGetAccessBindingsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload batch_get_access_bindings(parent: nil, names: nil)
+            #   Pass arguments to `batch_get_access_bindings` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The account or property that owns the access bindings. The parent
+            #     of all provided values for the 'names' field must match this field.
+            #     Formats:
+            #     - accounts/\\{account}
+            #     - properties/\\{property}
+            #   @param names [::Array<::String>]
+            #     Required. The names of the access bindings to retrieve.
+            #     A maximum of 1000 access bindings can be retrieved in a batch.
+            #     Formats:
+            #     - accounts/\\{account}/accessBindings/\\{accessBinding}
+            #     - properties/\\{property}/accessBindings/\\{accessBinding}
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Analytics::Admin::V1alpha::BatchGetAccessBindingsResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Analytics::Admin::V1alpha::BatchGetAccessBindingsResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::BatchGetAccessBindingsRequest.new
+            #
+            #   # Call the batch_get_access_bindings method.
+            #   result = client.batch_get_access_bindings request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::BatchGetAccessBindingsResponse.
+            #   p result
+            #
+            def batch_get_access_bindings request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::BatchGetAccessBindingsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.batch_get_access_bindings.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.batch_get_access_bindings.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.batch_get_access_bindings.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :batch_get_access_bindings, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates information about multiple access bindings to an account or
+            # property.
+            #
+            # @overload batch_update_access_bindings(request, options = nil)
+            #   Pass arguments to `batch_update_access_bindings` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::BatchUpdateAccessBindingsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::BatchUpdateAccessBindingsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload batch_update_access_bindings(parent: nil, requests: nil)
+            #   Pass arguments to `batch_update_access_bindings` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The account or property that owns the access bindings. The parent
+            #     of all provided AccessBinding in UpdateAccessBindingRequest messages must
+            #     match this field.
+            #     Formats:
+            #     - accounts/\\{account}
+            #     - properties/\\{property}
+            #   @param requests [::Array<::Google::Analytics::Admin::V1alpha::UpdateAccessBindingRequest, ::Hash>]
+            #     Required. The requests specifying the access bindings to update.
+            #     A maximum of 1000 access bindings can be updated in a batch.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Analytics::Admin::V1alpha::BatchUpdateAccessBindingsResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Analytics::Admin::V1alpha::BatchUpdateAccessBindingsResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::BatchUpdateAccessBindingsRequest.new
+            #
+            #   # Call the batch_update_access_bindings method.
+            #   result = client.batch_update_access_bindings request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::BatchUpdateAccessBindingsResponse.
+            #   p result
+            #
+            def batch_update_access_bindings request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::BatchUpdateAccessBindingsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.batch_update_access_bindings.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.batch_update_access_bindings.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.batch_update_access_bindings.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :batch_update_access_bindings, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes information about multiple users' links to an account or property.
+            #
+            # @overload batch_delete_access_bindings(request, options = nil)
+            #   Pass arguments to `batch_delete_access_bindings` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::BatchDeleteAccessBindingsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::BatchDeleteAccessBindingsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload batch_delete_access_bindings(parent: nil, requests: nil)
+            #   Pass arguments to `batch_delete_access_bindings` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The account or property that owns the access bindings. The parent
+            #     of all provided values for the 'names' field in DeleteAccessBindingRequest
+            #     messages must match this field. Formats:
+            #     - accounts/\\{account}
+            #     - properties/\\{property}
+            #   @param requests [::Array<::Google::Analytics::Admin::V1alpha::DeleteAccessBindingRequest, ::Hash>]
+            #     Required. The requests specifying the access bindings to delete.
+            #     A maximum of 1000 access bindings can be deleted in a batch.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Protobuf::Empty]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::BatchDeleteAccessBindingsRequest.new
+            #
+            #   # Call the batch_delete_access_bindings method.
+            #   result = client.batch_delete_access_bindings request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
+            def batch_delete_access_bindings request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::BatchDeleteAccessBindingsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.batch_delete_access_bindings.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.batch_delete_access_bindings.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.batch_delete_access_bindings.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :batch_delete_access_bindings, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lookup for a single ExpandedDataSet.
+            #
+            # @overload get_expanded_data_set(request, options = nil)
+            #   Pass arguments to `get_expanded_data_set` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::GetExpandedDataSetRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::GetExpandedDataSetRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_expanded_data_set(name: nil)
+            #   Pass arguments to `get_expanded_data_set` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the Audience to get.
+            #     Example format: properties/1234/expandedDataSets/5678
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Analytics::Admin::V1alpha::ExpandedDataSet]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Analytics::Admin::V1alpha::ExpandedDataSet]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::GetExpandedDataSetRequest.new
+            #
+            #   # Call the get_expanded_data_set method.
+            #   result = client.get_expanded_data_set request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::ExpandedDataSet.
+            #   p result
+            #
+            def get_expanded_data_set request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::GetExpandedDataSetRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_expanded_data_set.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_expanded_data_set.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_expanded_data_set.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :get_expanded_data_set, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists ExpandedDataSets on a property.
+            #
+            # @overload list_expanded_data_sets(request, options = nil)
+            #   Pass arguments to `list_expanded_data_sets` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::ListExpandedDataSetsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::ListExpandedDataSetsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_expanded_data_sets(parent: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `list_expanded_data_sets` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Example format: properties/1234
+            #   @param page_size [::Integer]
+            #     The maximum number of resources to return.
+            #     If unspecified, at most 50 resources will be returned.
+            #     The maximum value is 200 (higher values will be coerced to the maximum).
+            #   @param page_token [::String]
+            #     A page token, received from a previous `ListExpandedDataSets` call. Provide
+            #     this to retrieve the subsequent page.
+            #
+            #     When paginating, all other parameters provided to `ListExpandedDataSet`
+            #     must match the call that provided the page token.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Analytics::Admin::V1alpha::ExpandedDataSet>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Analytics::Admin::V1alpha::ExpandedDataSet>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::ListExpandedDataSetsRequest.new
+            #
+            #   # Call the list_expanded_data_sets method.
+            #   result = client.list_expanded_data_sets request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Analytics::Admin::V1alpha::ExpandedDataSet.
+            #     p item
+            #   end
+            #
+            def list_expanded_data_sets request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::ListExpandedDataSetsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_expanded_data_sets.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_expanded_data_sets.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_expanded_data_sets.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :list_expanded_data_sets, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @analytics_admin_service_stub, :list_expanded_data_sets, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Creates a ExpandedDataSet.
+            #
+            # @overload create_expanded_data_set(request, options = nil)
+            #   Pass arguments to `create_expanded_data_set` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::CreateExpandedDataSetRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::CreateExpandedDataSetRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_expanded_data_set(parent: nil, expanded_data_set: nil)
+            #   Pass arguments to `create_expanded_data_set` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Example format: properties/1234
+            #   @param expanded_data_set [::Google::Analytics::Admin::V1alpha::ExpandedDataSet, ::Hash]
+            #     Required. The ExpandedDataSet to create.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Analytics::Admin::V1alpha::ExpandedDataSet]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Analytics::Admin::V1alpha::ExpandedDataSet]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::CreateExpandedDataSetRequest.new
+            #
+            #   # Call the create_expanded_data_set method.
+            #   result = client.create_expanded_data_set request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::ExpandedDataSet.
+            #   p result
+            #
+            def create_expanded_data_set request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::CreateExpandedDataSetRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_expanded_data_set.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_expanded_data_set.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_expanded_data_set.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :create_expanded_data_set, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates a ExpandedDataSet on a property.
+            #
+            # @overload update_expanded_data_set(request, options = nil)
+            #   Pass arguments to `update_expanded_data_set` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::UpdateExpandedDataSetRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::UpdateExpandedDataSetRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_expanded_data_set(expanded_data_set: nil, update_mask: nil)
+            #   Pass arguments to `update_expanded_data_set` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param expanded_data_set [::Google::Analytics::Admin::V1alpha::ExpandedDataSet, ::Hash]
+            #     Required. The ExpandedDataSet to update.
+            #     The resource's `name` field is used to identify the ExpandedDataSet to be
+            #     updated.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Required. The list of fields to be updated. Field names must be in snake
+            #     case (e.g., "field_to_update"). Omitted fields will not be updated. To
+            #     replace the entire entity, use one path with the string "*" to match all
+            #     fields.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Analytics::Admin::V1alpha::ExpandedDataSet]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Analytics::Admin::V1alpha::ExpandedDataSet]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::UpdateExpandedDataSetRequest.new
+            #
+            #   # Call the update_expanded_data_set method.
+            #   result = client.update_expanded_data_set request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::ExpandedDataSet.
+            #   p result
+            #
+            def update_expanded_data_set request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::UpdateExpandedDataSetRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_expanded_data_set.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.expanded_data_set&.name
+                header_params["expanded_data_set.name"] = request.expanded_data_set.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_expanded_data_set.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_expanded_data_set.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :update_expanded_data_set, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes a ExpandedDataSet on a property.
+            #
+            # @overload delete_expanded_data_set(request, options = nil)
+            #   Pass arguments to `delete_expanded_data_set` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::DeleteExpandedDataSetRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::DeleteExpandedDataSetRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_expanded_data_set(name: nil)
+            #   Pass arguments to `delete_expanded_data_set` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Example format: properties/1234/expandedDataSets/5678
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Protobuf::Empty]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::DeleteExpandedDataSetRequest.new
+            #
+            #   # Call the delete_expanded_data_set method.
+            #   result = client.delete_expanded_data_set request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
+            def delete_expanded_data_set request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::DeleteExpandedDataSetRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_expanded_data_set.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_expanded_data_set.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_expanded_data_set.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :delete_expanded_data_set, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Sets the opt out status for the automated GA4 setup process for a UA
+            # property.
+            # Note: this has no effect on GA4 property.
+            #
+            # @overload set_automated_ga4_configuration_opt_out(request, options = nil)
+            #   Pass arguments to `set_automated_ga4_configuration_opt_out` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::SetAutomatedGa4ConfigurationOptOutRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::SetAutomatedGa4ConfigurationOptOutRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload set_automated_ga4_configuration_opt_out(property: nil, opt_out: nil)
+            #   Pass arguments to `set_automated_ga4_configuration_opt_out` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param property [::String]
+            #     Required. The UA property to set the opt out status. Note this request uses
+            #     the internal property ID, not the tracking ID of the form UA-XXXXXX-YY.
+            #     Format: properties/\\{internalWebPropertyId}
+            #     Example: properties/1234
+            #   @param opt_out [::Boolean]
+            #     The status to set.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Analytics::Admin::V1alpha::SetAutomatedGa4ConfigurationOptOutResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Analytics::Admin::V1alpha::SetAutomatedGa4ConfigurationOptOutResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::SetAutomatedGa4ConfigurationOptOutRequest.new
+            #
+            #   # Call the set_automated_ga4_configuration_opt_out method.
+            #   result = client.set_automated_ga4_configuration_opt_out request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::SetAutomatedGa4ConfigurationOptOutResponse.
+            #   p result
+            #
+            def set_automated_ga4_configuration_opt_out request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::SetAutomatedGa4ConfigurationOptOutRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.set_automated_ga4_configuration_opt_out.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              options.apply_defaults timeout:      @config.rpcs.set_automated_ga4_configuration_opt_out.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.set_automated_ga4_configuration_opt_out.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :set_automated_ga4_configuration_opt_out, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Fetches the opt out status for the automated GA4 setup process for a UA
+            # property.
+            # Note: this has no effect on GA4 property.
+            #
+            # @overload fetch_automated_ga4_configuration_opt_out(request, options = nil)
+            #   Pass arguments to `fetch_automated_ga4_configuration_opt_out` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::FetchAutomatedGa4ConfigurationOptOutRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::FetchAutomatedGa4ConfigurationOptOutRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload fetch_automated_ga4_configuration_opt_out(property: nil)
+            #   Pass arguments to `fetch_automated_ga4_configuration_opt_out` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param property [::String]
+            #     Required. The UA property to get the opt out status. Note this request uses
+            #     the internal property ID, not the tracking ID of the form UA-XXXXXX-YY.
+            #     Format: properties/\\{internalWebPropertyId}
+            #     Example: properties/1234
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Analytics::Admin::V1alpha::FetchAutomatedGa4ConfigurationOptOutResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Analytics::Admin::V1alpha::FetchAutomatedGa4ConfigurationOptOutResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::FetchAutomatedGa4ConfigurationOptOutRequest.new
+            #
+            #   # Call the fetch_automated_ga4_configuration_opt_out method.
+            #   result = client.fetch_automated_ga4_configuration_opt_out request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::FetchAutomatedGa4ConfigurationOptOutResponse.
+            #   p result
+            #
+            def fetch_automated_ga4_configuration_opt_out request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::FetchAutomatedGa4ConfigurationOptOutRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.fetch_automated_ga4_configuration_opt_out.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              options.apply_defaults timeout:      @config.rpcs.fetch_automated_ga4_configuration_opt_out.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.fetch_automated_ga4_configuration_opt_out.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :fetch_automated_ga4_configuration_opt_out, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lookup for a single BigQuery Link.
+            #
+            # @overload get_big_query_link(request, options = nil)
+            #   Pass arguments to `get_big_query_link` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::GetBigQueryLinkRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::GetBigQueryLinkRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_big_query_link(name: nil)
+            #   Pass arguments to `get_big_query_link` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the BigQuery link to lookup.
+            #     Format: properties/\\{property_id}/bigQueryLinks/\\{bigquery_link_id}
+            #     Example: properties/123/bigQueryLinks/456
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Analytics::Admin::V1alpha::BigQueryLink]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Analytics::Admin::V1alpha::BigQueryLink]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::GetBigQueryLinkRequest.new
+            #
+            #   # Call the get_big_query_link method.
+            #   result = client.get_big_query_link request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::BigQueryLink.
+            #   p result
+            #
+            def get_big_query_link request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::GetBigQueryLinkRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_big_query_link.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_big_query_link.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_big_query_link.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :get_big_query_link, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists BigQuery Links on a property.
+            #
+            # @overload list_big_query_links(request, options = nil)
+            #   Pass arguments to `list_big_query_links` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::ListBigQueryLinksRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::ListBigQueryLinksRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_big_query_links(parent: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `list_big_query_links` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The name of the property to list BigQuery links under.
+            #     Format: properties/\\{property_id}
+            #     Example: properties/1234
+            #   @param page_size [::Integer]
+            #     The maximum number of resources to return. The service may return
+            #     fewer than this value, even if there are additional pages.
+            #     If unspecified, at most 50 resources will be returned.
+            #     The maximum value is 200; (higher values will be coerced to the maximum)
+            #   @param page_token [::String]
+            #     A page token, received from a previous `ListBigQueryLinks` call.
+            #     Provide this to retrieve the subsequent page.
+            #     When paginating, all other parameters provided to `ListBigQueryLinks` must
+            #     match the call that provided the page token.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Analytics::Admin::V1alpha::BigQueryLink>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Analytics::Admin::V1alpha::BigQueryLink>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::ListBigQueryLinksRequest.new
+            #
+            #   # Call the list_big_query_links method.
+            #   result = client.list_big_query_links request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Analytics::Admin::V1alpha::BigQueryLink.
+            #     p item
+            #   end
+            #
+            def list_big_query_links request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::ListBigQueryLinksRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_big_query_links.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_big_query_links.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_big_query_links.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :list_big_query_links, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @analytics_admin_service_stub, :list_big_query_links, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Returns the enhanced measurement settings for this data stream.
+            # Note that the stream must enable enhanced measurement for these settings to
+            # take effect.
+            #
+            # @overload get_enhanced_measurement_settings(request, options = nil)
+            #   Pass arguments to `get_enhanced_measurement_settings` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::GetEnhancedMeasurementSettingsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::GetEnhancedMeasurementSettingsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_enhanced_measurement_settings(name: nil)
+            #   Pass arguments to `get_enhanced_measurement_settings` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the settings to lookup.
+            #     Format:
+            #     properties/\\{property}/dataStreams/\\{data_stream}/enhancedMeasurementSettings
+            #     Example: "properties/1000/dataStreams/2000/enhancedMeasurementSettings"
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::GetEnhancedMeasurementSettingsRequest.new
+            #
+            #   # Call the get_enhanced_measurement_settings method.
+            #   result = client.get_enhanced_measurement_settings request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings.
+            #   p result
+            #
+            def get_enhanced_measurement_settings request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::GetEnhancedMeasurementSettingsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_enhanced_measurement_settings.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_enhanced_measurement_settings.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_enhanced_measurement_settings.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :get_enhanced_measurement_settings, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates the enhanced measurement settings for this data stream.
+            # Note that the stream must enable enhanced measurement for these settings to
+            # take effect.
+            #
+            # @overload update_enhanced_measurement_settings(request, options = nil)
+            #   Pass arguments to `update_enhanced_measurement_settings` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::UpdateEnhancedMeasurementSettingsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::UpdateEnhancedMeasurementSettingsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_enhanced_measurement_settings(enhanced_measurement_settings: nil, update_mask: nil)
+            #   Pass arguments to `update_enhanced_measurement_settings` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param enhanced_measurement_settings [::Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings, ::Hash]
+            #     Required. The settings to update.
+            #     The `name` field is used to identify the settings to be updated.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Required. The list of fields to be updated. Field names must be in snake
+            #     case (e.g., "field_to_update"). Omitted fields will not be updated. To
+            #     replace the entire entity, use one path with the string "*" to match all
+            #     fields.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::UpdateEnhancedMeasurementSettingsRequest.new
+            #
+            #   # Call the update_enhanced_measurement_settings method.
+            #   result = client.update_enhanced_measurement_settings request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings.
+            #   p result
+            #
+            def update_enhanced_measurement_settings request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::UpdateEnhancedMeasurementSettingsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_enhanced_measurement_settings.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.enhanced_measurement_settings&.name
+                header_params["enhanced_measurement_settings.name"] = request.enhanced_measurement_settings.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_enhanced_measurement_settings.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_enhanced_measurement_settings.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :update_enhanced_measurement_settings, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Creates a connected site tag for a Universal Analytics property. You can
+            # create a maximum of 20 connected site tags per property.
+            # Note: This API cannot be used on GA4 properties.
+            #
+            # @overload create_connected_site_tag(request, options = nil)
+            #   Pass arguments to `create_connected_site_tag` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::CreateConnectedSiteTagRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::CreateConnectedSiteTagRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_connected_site_tag(property: nil, connected_site_tag: nil)
+            #   Pass arguments to `create_connected_site_tag` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param property [::String]
+            #     The Universal Analytics property to create connected site tags for.
+            #     This API does not support GA4 properties.
+            #     Format: properties/\\{universalAnalyticsPropertyId}
+            #     Example: properties/1234
+            #   @param connected_site_tag [::Google::Analytics::Admin::V1alpha::ConnectedSiteTag, ::Hash]
+            #     Required. The tag to add to the Universal Analytics property
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Analytics::Admin::V1alpha::CreateConnectedSiteTagResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Analytics::Admin::V1alpha::CreateConnectedSiteTagResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::CreateConnectedSiteTagRequest.new
+            #
+            #   # Call the create_connected_site_tag method.
+            #   result = client.create_connected_site_tag request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::CreateConnectedSiteTagResponse.
+            #   p result
+            #
+            def create_connected_site_tag request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::CreateConnectedSiteTagRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_connected_site_tag.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              options.apply_defaults timeout:      @config.rpcs.create_connected_site_tag.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_connected_site_tag.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :create_connected_site_tag, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes a connected site tag for a Universal Analytics property.
+            # Note: this has no effect on GA4 properties.
+            #
+            # @overload delete_connected_site_tag(request, options = nil)
+            #   Pass arguments to `delete_connected_site_tag` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::DeleteConnectedSiteTagRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::DeleteConnectedSiteTagRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_connected_site_tag(property: nil, tag_id: nil)
+            #   Pass arguments to `delete_connected_site_tag` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param property [::String]
+            #     The Universal Analytics property to delete connected site tags for.
+            #     This API does not support GA4 properties.
+            #     Format: properties/\\{universalAnalyticsPropertyId}
+            #     Example: properties/1234
+            #   @param tag_id [::String]
+            #     Tag ID to forward events to. Also known as the Measurement ID, or the
+            #     "G-ID"  (For example: G-12345).
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Protobuf::Empty]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::DeleteConnectedSiteTagRequest.new
+            #
+            #   # Call the delete_connected_site_tag method.
+            #   result = client.delete_connected_site_tag request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
+            def delete_connected_site_tag request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::DeleteConnectedSiteTagRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_connected_site_tag.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              options.apply_defaults timeout:      @config.rpcs.delete_connected_site_tag.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_connected_site_tag.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :delete_connected_site_tag, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists the connected site tags for a Universal Analytics property. A maximum
+            # of 20 connected site tags will be returned. Note: this has no effect on GA4
+            # property.
+            #
+            # @overload list_connected_site_tags(request, options = nil)
+            #   Pass arguments to `list_connected_site_tags` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::ListConnectedSiteTagsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::ListConnectedSiteTagsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_connected_site_tags(property: nil)
+            #   Pass arguments to `list_connected_site_tags` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param property [::String]
+            #     The Universal Analytics property to fetch connected site tags for.
+            #     This does not work on GA4 properties. A maximum of 20 connected site tags
+            #     will be returned.
+            #     Example Format: `properties/1234`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Analytics::Admin::V1alpha::ListConnectedSiteTagsResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Analytics::Admin::V1alpha::ListConnectedSiteTagsResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::ListConnectedSiteTagsRequest.new
+            #
+            #   # Call the list_connected_site_tags method.
+            #   result = client.list_connected_site_tags request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::ListConnectedSiteTagsResponse.
+            #   p result
+            #
+            def list_connected_site_tags request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::ListConnectedSiteTagsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_connected_site_tags.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              options.apply_defaults timeout:      @config.rpcs.list_connected_site_tags.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_connected_site_tags.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :list_connected_site_tags, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the AnalyticsAdminService API.
             #
             # This class represents the configuration for AnalyticsAdminService,
@@ -7475,9 +10037,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -7953,6 +10515,31 @@ module Google
                 #
                 attr_reader :archive_audience
                 ##
+                # RPC-specific configuration for `get_search_ads360_link`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_search_ads360_link
+                ##
+                # RPC-specific configuration for `list_search_ads360_links`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_search_ads360_links
+                ##
+                # RPC-specific configuration for `create_search_ads360_link`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_search_ads360_link
+                ##
+                # RPC-specific configuration for `delete_search_ads360_link`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_search_ads360_link
+                ##
+                # RPC-specific configuration for `update_search_ads360_link`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_search_ads360_link
+                ##
                 # RPC-specific configuration for `get_attribution_settings`
                 # @return [::Gapic::Config::Method]
                 #
@@ -7967,6 +10554,121 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :run_access_report
+                ##
+                # RPC-specific configuration for `create_access_binding`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_access_binding
+                ##
+                # RPC-specific configuration for `get_access_binding`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_access_binding
+                ##
+                # RPC-specific configuration for `update_access_binding`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_access_binding
+                ##
+                # RPC-specific configuration for `delete_access_binding`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_access_binding
+                ##
+                # RPC-specific configuration for `list_access_bindings`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_access_bindings
+                ##
+                # RPC-specific configuration for `batch_create_access_bindings`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :batch_create_access_bindings
+                ##
+                # RPC-specific configuration for `batch_get_access_bindings`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :batch_get_access_bindings
+                ##
+                # RPC-specific configuration for `batch_update_access_bindings`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :batch_update_access_bindings
+                ##
+                # RPC-specific configuration for `batch_delete_access_bindings`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :batch_delete_access_bindings
+                ##
+                # RPC-specific configuration for `get_expanded_data_set`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_expanded_data_set
+                ##
+                # RPC-specific configuration for `list_expanded_data_sets`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_expanded_data_sets
+                ##
+                # RPC-specific configuration for `create_expanded_data_set`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_expanded_data_set
+                ##
+                # RPC-specific configuration for `update_expanded_data_set`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_expanded_data_set
+                ##
+                # RPC-specific configuration for `delete_expanded_data_set`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_expanded_data_set
+                ##
+                # RPC-specific configuration for `set_automated_ga4_configuration_opt_out`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :set_automated_ga4_configuration_opt_out
+                ##
+                # RPC-specific configuration for `fetch_automated_ga4_configuration_opt_out`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :fetch_automated_ga4_configuration_opt_out
+                ##
+                # RPC-specific configuration for `get_big_query_link`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_big_query_link
+                ##
+                # RPC-specific configuration for `list_big_query_links`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_big_query_links
+                ##
+                # RPC-specific configuration for `get_enhanced_measurement_settings`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_enhanced_measurement_settings
+                ##
+                # RPC-specific configuration for `update_enhanced_measurement_settings`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_enhanced_measurement_settings
+                ##
+                # RPC-specific configuration for `create_connected_site_tag`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_connected_site_tag
+                ##
+                # RPC-specific configuration for `delete_connected_site_tag`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_connected_site_tag
+                ##
+                # RPC-specific configuration for `list_connected_site_tags`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_connected_site_tags
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -8122,12 +10824,68 @@ module Google
                   @update_audience = ::Gapic::Config::Method.new update_audience_config
                   archive_audience_config = parent_rpcs.archive_audience if parent_rpcs.respond_to? :archive_audience
                   @archive_audience = ::Gapic::Config::Method.new archive_audience_config
+                  get_search_ads360_link_config = parent_rpcs.get_search_ads360_link if parent_rpcs.respond_to? :get_search_ads360_link
+                  @get_search_ads360_link = ::Gapic::Config::Method.new get_search_ads360_link_config
+                  list_search_ads360_links_config = parent_rpcs.list_search_ads360_links if parent_rpcs.respond_to? :list_search_ads360_links
+                  @list_search_ads360_links = ::Gapic::Config::Method.new list_search_ads360_links_config
+                  create_search_ads360_link_config = parent_rpcs.create_search_ads360_link if parent_rpcs.respond_to? :create_search_ads360_link
+                  @create_search_ads360_link = ::Gapic::Config::Method.new create_search_ads360_link_config
+                  delete_search_ads360_link_config = parent_rpcs.delete_search_ads360_link if parent_rpcs.respond_to? :delete_search_ads360_link
+                  @delete_search_ads360_link = ::Gapic::Config::Method.new delete_search_ads360_link_config
+                  update_search_ads360_link_config = parent_rpcs.update_search_ads360_link if parent_rpcs.respond_to? :update_search_ads360_link
+                  @update_search_ads360_link = ::Gapic::Config::Method.new update_search_ads360_link_config
                   get_attribution_settings_config = parent_rpcs.get_attribution_settings if parent_rpcs.respond_to? :get_attribution_settings
                   @get_attribution_settings = ::Gapic::Config::Method.new get_attribution_settings_config
                   update_attribution_settings_config = parent_rpcs.update_attribution_settings if parent_rpcs.respond_to? :update_attribution_settings
                   @update_attribution_settings = ::Gapic::Config::Method.new update_attribution_settings_config
                   run_access_report_config = parent_rpcs.run_access_report if parent_rpcs.respond_to? :run_access_report
                   @run_access_report = ::Gapic::Config::Method.new run_access_report_config
+                  create_access_binding_config = parent_rpcs.create_access_binding if parent_rpcs.respond_to? :create_access_binding
+                  @create_access_binding = ::Gapic::Config::Method.new create_access_binding_config
+                  get_access_binding_config = parent_rpcs.get_access_binding if parent_rpcs.respond_to? :get_access_binding
+                  @get_access_binding = ::Gapic::Config::Method.new get_access_binding_config
+                  update_access_binding_config = parent_rpcs.update_access_binding if parent_rpcs.respond_to? :update_access_binding
+                  @update_access_binding = ::Gapic::Config::Method.new update_access_binding_config
+                  delete_access_binding_config = parent_rpcs.delete_access_binding if parent_rpcs.respond_to? :delete_access_binding
+                  @delete_access_binding = ::Gapic::Config::Method.new delete_access_binding_config
+                  list_access_bindings_config = parent_rpcs.list_access_bindings if parent_rpcs.respond_to? :list_access_bindings
+                  @list_access_bindings = ::Gapic::Config::Method.new list_access_bindings_config
+                  batch_create_access_bindings_config = parent_rpcs.batch_create_access_bindings if parent_rpcs.respond_to? :batch_create_access_bindings
+                  @batch_create_access_bindings = ::Gapic::Config::Method.new batch_create_access_bindings_config
+                  batch_get_access_bindings_config = parent_rpcs.batch_get_access_bindings if parent_rpcs.respond_to? :batch_get_access_bindings
+                  @batch_get_access_bindings = ::Gapic::Config::Method.new batch_get_access_bindings_config
+                  batch_update_access_bindings_config = parent_rpcs.batch_update_access_bindings if parent_rpcs.respond_to? :batch_update_access_bindings
+                  @batch_update_access_bindings = ::Gapic::Config::Method.new batch_update_access_bindings_config
+                  batch_delete_access_bindings_config = parent_rpcs.batch_delete_access_bindings if parent_rpcs.respond_to? :batch_delete_access_bindings
+                  @batch_delete_access_bindings = ::Gapic::Config::Method.new batch_delete_access_bindings_config
+                  get_expanded_data_set_config = parent_rpcs.get_expanded_data_set if parent_rpcs.respond_to? :get_expanded_data_set
+                  @get_expanded_data_set = ::Gapic::Config::Method.new get_expanded_data_set_config
+                  list_expanded_data_sets_config = parent_rpcs.list_expanded_data_sets if parent_rpcs.respond_to? :list_expanded_data_sets
+                  @list_expanded_data_sets = ::Gapic::Config::Method.new list_expanded_data_sets_config
+                  create_expanded_data_set_config = parent_rpcs.create_expanded_data_set if parent_rpcs.respond_to? :create_expanded_data_set
+                  @create_expanded_data_set = ::Gapic::Config::Method.new create_expanded_data_set_config
+                  update_expanded_data_set_config = parent_rpcs.update_expanded_data_set if parent_rpcs.respond_to? :update_expanded_data_set
+                  @update_expanded_data_set = ::Gapic::Config::Method.new update_expanded_data_set_config
+                  delete_expanded_data_set_config = parent_rpcs.delete_expanded_data_set if parent_rpcs.respond_to? :delete_expanded_data_set
+                  @delete_expanded_data_set = ::Gapic::Config::Method.new delete_expanded_data_set_config
+                  set_automated_ga4_configuration_opt_out_config = parent_rpcs.set_automated_ga4_configuration_opt_out if parent_rpcs.respond_to? :set_automated_ga4_configuration_opt_out
+                  @set_automated_ga4_configuration_opt_out = ::Gapic::Config::Method.new set_automated_ga4_configuration_opt_out_config
+                  fetch_automated_ga4_configuration_opt_out_config = parent_rpcs.fetch_automated_ga4_configuration_opt_out if parent_rpcs.respond_to? :fetch_automated_ga4_configuration_opt_out
+                  @fetch_automated_ga4_configuration_opt_out = ::Gapic::Config::Method.new fetch_automated_ga4_configuration_opt_out_config
+                  get_big_query_link_config = parent_rpcs.get_big_query_link if parent_rpcs.respond_to? :get_big_query_link
+                  @get_big_query_link = ::Gapic::Config::Method.new get_big_query_link_config
+                  list_big_query_links_config = parent_rpcs.list_big_query_links if parent_rpcs.respond_to? :list_big_query_links
+                  @list_big_query_links = ::Gapic::Config::Method.new list_big_query_links_config
+                  get_enhanced_measurement_settings_config = parent_rpcs.get_enhanced_measurement_settings if parent_rpcs.respond_to? :get_enhanced_measurement_settings
+                  @get_enhanced_measurement_settings = ::Gapic::Config::Method.new get_enhanced_measurement_settings_config
+                  update_enhanced_measurement_settings_config = parent_rpcs.update_enhanced_measurement_settings if parent_rpcs.respond_to? :update_enhanced_measurement_settings
+                  @update_enhanced_measurement_settings = ::Gapic::Config::Method.new update_enhanced_measurement_settings_config
+                  create_connected_site_tag_config = parent_rpcs.create_connected_site_tag if parent_rpcs.respond_to? :create_connected_site_tag
+                  @create_connected_site_tag = ::Gapic::Config::Method.new create_connected_site_tag_config
+                  delete_connected_site_tag_config = parent_rpcs.delete_connected_site_tag if parent_rpcs.respond_to? :delete_connected_site_tag
+                  @delete_connected_site_tag = ::Gapic::Config::Method.new delete_connected_site_tag_config
+                  list_connected_site_tags_config = parent_rpcs.list_connected_site_tags if parent_rpcs.respond_to? :list_connected_site_tags
+                  @list_connected_site_tags = ::Gapic::Config::Method.new list_connected_site_tags_config
 
                   yield self if block_given?
                 end
