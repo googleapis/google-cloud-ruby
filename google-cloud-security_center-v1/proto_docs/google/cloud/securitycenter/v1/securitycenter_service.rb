@@ -130,6 +130,23 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for creating security health analytics custom modules.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Resource name of the new custom module's parent. Its format is
+        #     "organizations/\\{organization}/securityHealthAnalyticsSettings",
+        #     "folders/\\{folder}/securityHealthAnalyticsSettings", or
+        #     "projects/\\{project}/securityHealthAnalyticsSettings"
+        # @!attribute [rw] security_health_analytics_custom_module
+        #   @return [::Google::Cloud::SecurityCenter::V1::SecurityHealthAnalyticsCustomModule]
+        #     Required. SecurityHealthAnalytics custom module to create. The provided
+        #     name is ignored and reset with provided parent information and
+        #     server-generated ID.
+        class CreateSecurityHealthAnalyticsCustomModuleRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for creating a source.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -164,6 +181,19 @@ module Google
         #     "folders/[folder_id]/notificationConfigs/[config_id]",
         #     or "projects/[project_id]/notificationConfigs/[config_id]".
         class DeleteNotificationConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for deleting security health analytics custom modules.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the custom module to delete. Its format is
+        #     "organizations/\\{organization}/securityHealthAnalyticsSettings/customModules/\\{customModule}",
+        #     "folders/\\{folder}/securityHealthAnalyticsSettings/customModules/\\{customModule}",
+        #     or
+        #     "projects/\\{project}/securityHealthAnalyticsSettings/customModules/\\{customModule}"
+        class DeleteSecurityHealthAnalyticsCustomModuleRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -210,6 +240,33 @@ module Google
         #     Required. Name of the organization to get organization settings for. Its
         #     format is "organizations/[organization_id]/organizationSettings".
         class GetOrganizationSettingsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for getting effective security health analytics custom
+        # modules.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the effective custom module to get. Its format is
+        #     "organizations/\\{organization}/securityHealthAnalyticsSettings/effectiveCustomModules/\\{customModule}",
+        #     "folders/\\{folder}/securityHealthAnalyticsSettings/effectiveCustomModules/\\{customModule}",
+        #     or
+        #     "projects/\\{project}/securityHealthAnalyticsSettings/effectiveCustomModules/\\{customModule}"
+        class GetEffectiveSecurityHealthAnalyticsCustomModuleRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for getting security health analytics custom modules.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the custom module to get. Its format is
+        #     "organizations/\\{organization}/securityHealthAnalyticsSettings/customModules/\\{customModule}",
+        #     "folders/\\{folder}/securityHealthAnalyticsSettings/customModules/\\{customModule}",
+        #     or
+        #     "projects/\\{project}/securityHealthAnalyticsSettings/customModules/\\{customModule}"
+        class GetSecurityHealthAnalyticsCustomModuleRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -568,6 +625,40 @@ module Google
           end
         end
 
+        # Request message for listing descendant security health analytics custom
+        # modules.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Name of parent to list descendant custom modules. Its format is
+        #     "organizations/\\{organization}/securityHealthAnalyticsSettings",
+        #     "folders/\\{folder}/securityHealthAnalyticsSettings", or
+        #     "projects/\\{project}/securityHealthAnalyticsSettings"
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of results to return in a single response. Default is
+        #     10, minimum is 1, maximum is 1000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     The value returned by the last call indicating a continuation
+        class ListDescendantSecurityHealthAnalyticsCustomModulesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for listing descendant security health analytics custom
+        # modules.
+        # @!attribute [rw] security_health_analytics_custom_modules
+        #   @return [::Array<::Google::Cloud::SecurityCenter::V1::SecurityHealthAnalyticsCustomModule>]
+        #     Custom modules belonging to the requested parent and its descendants.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     If not empty, indicates that there may be more custom modules to be
+        #     returned.
+        class ListDescendantSecurityHealthAnalyticsCustomModulesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for listing  mute configs at a given scope e.g. organization,
         # folder or project.
         # @!attribute [rw] parent
@@ -635,6 +726,72 @@ module Google
         #     Token to retrieve the next page of results, or empty if there are no more
         #     results.
         class ListNotificationConfigsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for listing effective security health analytics custom
+        # modules.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Name of parent to list effective custom modules. Its format is
+        #     "organizations/\\{organization}/securityHealthAnalyticsSettings",
+        #     "folders/\\{folder}/securityHealthAnalyticsSettings", or
+        #     "projects/\\{project}/securityHealthAnalyticsSettings"
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of results to return in a single response. Default is
+        #     10, minimum is 1, maximum is 1000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     The value returned by the last call indicating a continuation
+        class ListEffectiveSecurityHealthAnalyticsCustomModulesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for listing effective security health analytics custom
+        # modules.
+        # @!attribute [rw] effective_security_health_analytics_custom_modules
+        #   @return [::Array<::Google::Cloud::SecurityCenter::V1::EffectiveSecurityHealthAnalyticsCustomModule>]
+        #     Effective custom modules belonging to the requested parent.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     If not empty, indicates that there may be more effective custom modules to
+        #     be returned.
+        class ListEffectiveSecurityHealthAnalyticsCustomModulesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for listing security health analytics custom modules.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Name of parent to list custom modules. Its format is
+        #     "organizations/\\{organization}/securityHealthAnalyticsSettings",
+        #     "folders/\\{folder}/securityHealthAnalyticsSettings", or
+        #     "projects/\\{project}/securityHealthAnalyticsSettings"
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of results to return in a single response. Default is
+        #     10, minimum is 1, maximum is 1000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     The value returned by the last call indicating a continuation
+        class ListSecurityHealthAnalyticsCustomModulesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for listing security health analytics custom modules.
+        # @!attribute [rw] security_health_analytics_custom_modules
+        #   @return [::Array<::Google::Cloud::SecurityCenter::V1::SecurityHealthAnalyticsCustomModule>]
+        #     Custom modules belonging to the requested parent.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     If not empty, indicates that there may be more custom modules to be
+        #     returned.
+        class ListSecurityHealthAnalyticsCustomModulesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1235,6 +1392,18 @@ module Google
         #
         #     If empty all mutable fields will be updated.
         class UpdateOrganizationSettingsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for updating security health analytics custom modules.
+        # @!attribute [rw] security_health_analytics_custom_module
+        #   @return [::Google::Cloud::SecurityCenter::V1::SecurityHealthAnalyticsCustomModule]
+        #     Required. The SecurityHealthAnalytics custom module to update.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     The list of fields to update.
+        class UpdateSecurityHealthAnalyticsCustomModuleRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

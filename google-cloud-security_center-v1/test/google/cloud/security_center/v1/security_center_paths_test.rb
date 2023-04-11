@@ -41,6 +41,24 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientPathsTest < Min
     end
   end
 
+  def test_effective_security_health_analytics_custom_module_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.effective_security_health_analytics_custom_module_path organization: "value0", effective_custom_module: "value1"
+      assert_equal "organizations/value0/securityHealthAnalyticsSettings/effectiveCustomModules/value1", path
+
+      path = client.effective_security_health_analytics_custom_module_path folder: "value0", effective_custom_module: "value1"
+      assert_equal "folders/value0/securityHealthAnalyticsSettings/effectiveCustomModules/value1", path
+
+      path = client.effective_security_health_analytics_custom_module_path project: "value0", effective_custom_module: "value1"
+      assert_equal "projects/value0/securityHealthAnalyticsSettings/effectiveCustomModules/value1", path
+    end
+  end
+
   def test_external_system_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do
@@ -158,6 +176,42 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientPathsTest < Min
 
       path = client.project_path project: "value0"
       assert_equal "projects/value0", path
+    end
+  end
+
+  def test_security_health_analytics_custom_module_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.security_health_analytics_custom_module_path organization: "value0", custom_module: "value1"
+      assert_equal "organizations/value0/securityHealthAnalyticsSettings/customModules/value1", path
+
+      path = client.security_health_analytics_custom_module_path folder: "value0", custom_module: "value1"
+      assert_equal "folders/value0/securityHealthAnalyticsSettings/customModules/value1", path
+
+      path = client.security_health_analytics_custom_module_path project: "value0", custom_module: "value1"
+      assert_equal "projects/value0/securityHealthAnalyticsSettings/customModules/value1", path
+    end
+  end
+
+  def test_security_health_analytics_settings_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.security_health_analytics_settings_path organization: "value0"
+      assert_equal "organizations/value0/securityHealthAnalyticsSettings", path
+
+      path = client.security_health_analytics_settings_path folder: "value0"
+      assert_equal "folders/value0/securityHealthAnalyticsSettings", path
+
+      path = client.security_health_analytics_settings_path project: "value0"
+      assert_equal "projects/value0/securityHealthAnalyticsSettings", path
     end
   end
 

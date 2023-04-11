@@ -114,7 +114,7 @@ module Google
         #     Reference: https://en.wikipedia.org/wiki/Indicator_of_compromise
         # @!attribute [rw] vulnerability
         #   @return [::Google::Cloud::SecurityCenter::V1::Vulnerability]
-        #     Represents vulnerability-specific fields like CVE and CVS scores.
+        #     Represents vulnerability-specific fields like CVE and CVSS scores.
         #     CVE stands for Common Vulnerabilities and Exposures
         #     (https://cve.mitre.org/about/)
         # @!attribute [r] mute_update_time
@@ -122,8 +122,8 @@ module Google
         #     Output only. The most recent time this finding was muted or unmuted.
         # @!attribute [r] external_systems
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::SecurityCenter::V1::ExternalSystem}]
-        #     Output only. Third party SIEM/SOAR fields within SCC, contains external system
-        #     information and external system finding fields.
+        #     Output only. Third party SIEM/SOAR fields within SCC, contains external
+        #     system information and external system finding fields.
         # @!attribute [rw] mitre_attack
         #   @return [::Google::Cloud::SecurityCenter::V1::MitreAttack]
         #     MITRE ATT&CK tactics and techniques related to this finding.
@@ -146,9 +146,9 @@ module Google
         #     Represents operating system processes associated with the Finding.
         # @!attribute [r] contacts
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::SecurityCenter::V1::ContactDetails}]
-        #     Output only. Map containing the points of contact for the given finding. The key
-        #     represents the type of contact, while the value contains a list of all the
-        #     contacts that pertain. Please refer to:
+        #     Output only. Map containing the points of contact for the given finding.
+        #     The key represents the type of contact, while the value contains a list of
+        #     all the contacts that pertain. Please refer to:
         #     https://cloud.google.com/resource-manager/docs/managing-notification-contacts#notification-categories
         #
         #         {
@@ -183,6 +183,11 @@ module Google
         # @!attribute [rw] next_steps
         #   @return [::String]
         #     Next steps associate to the finding.
+        # @!attribute [rw] module_name
+        #   @return [::String]
+        #     Unique identifier of the module which generated the finding.
+        #     Example:
+        #     folders/598186756061/securityHealthAnalyticsSettings/customModules/56799441161885
         # @!attribute [rw] containers
         #   @return [::Array<::Google::Cloud::SecurityCenter::V1::Container>]
         #     Containers associated with the finding. containers provides information

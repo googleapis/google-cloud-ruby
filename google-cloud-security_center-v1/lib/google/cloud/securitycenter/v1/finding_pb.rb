@@ -58,6 +58,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :exfiltration, :message, 38, "google.cloud.securitycenter.v1.Exfiltration"
       repeated :iam_bindings, :message, 39, "google.cloud.securitycenter.v1.IamBinding"
       optional :next_steps, :string, 40
+      optional :module_name, :string, 41
       repeated :containers, :message, 42, "google.cloud.securitycenter.v1.Container"
       optional :kubernetes, :message, 43, "google.cloud.securitycenter.v1.Kubernetes"
       optional :database, :message, 44, "google.cloud.securitycenter.v1.Database"

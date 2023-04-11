@@ -21,7 +21,7 @@ module Google
   module Cloud
     module SecurityCenter
       module V1
-        # Kubernetes related attributes.
+        # Kubernetes-related attributes.
         # @!attribute [rw] pods
         #   @return [::Array<::Google::Cloud::SecurityCenter::V1::Kubernetes::Pod>]
         #     Kubernetes Pods associated with the finding. This field will contain Pod
@@ -129,8 +129,8 @@ module Google
           #     The Role or ClusterRole referenced by the binding.
           # @!attribute [rw] subjects
           #   @return [::Array<::Google::Cloud::SecurityCenter::V1::Kubernetes::Subject>]
-          #     Represents the subjects(s) bound to the role. Not always available
-          #     for PATCH requests.
+          #     Represents one or more subjects that are bound to the role. Not always
+          #     available for PATCH requests.
           class Binding
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
