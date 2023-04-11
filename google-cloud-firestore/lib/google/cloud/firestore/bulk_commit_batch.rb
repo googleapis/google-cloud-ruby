@@ -68,7 +68,7 @@ module Google
             responses = @service.batch_write @operations.map(&:write)
             parse_results responses
           rescue StandardError => e
-            raise BulkCommitBatchError, e.message
+            raise BulkCommitBatchError, e
           end
         end
       end

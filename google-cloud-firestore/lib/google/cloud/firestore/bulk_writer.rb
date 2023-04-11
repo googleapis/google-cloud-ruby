@@ -55,7 +55,6 @@ module Google
           @write_thread_pool = Concurrent::ThreadPoolExecutor.new max_threads: @request_threads,
                                                                   max_queue: 0
           @mutex = Mutex.new
-          @pending_batch_count = 0
           @scheduler = BulkWriterScheduler.new client, service, batch_threads
           @doc_refs = Set.new
           @retries = [retries || MAX_RETRY_ATTEMPTS, MAX_RETRY_ATTEMPTS].min
@@ -367,10 +366,7 @@ module Google
         # @return [nil]
         def flush
           @mutex.synchronize { @flush = true }
-          loop do
-            break unless @scheduler.operations_remaining?
-            sleep 0.1
-          end
+          sleep 0.1 while @scheduler.operations_remaining?
           @mutex.synchronize do
             @doc_refs = Set.new
             @flush = false
@@ -392,16 +388,6 @@ module Google
         end
 
         private
-
-        ##
-        # @private Checks if all the operations are completed.
-        #
-        def operations_completed?
-          @mutex.synchronize do
-            (@retry_operations.length + @buffered_operations.length +
-              @batch_thread_pool.scheduled_task_count - @batch_thread_pool.completed_task_count).zero?
-          end
-        end
 
         ##
         # @private The client the Cloud Firestore BulkWriter belongs to.

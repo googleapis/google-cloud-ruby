@@ -55,7 +55,6 @@ module Google
           @batch_thread_pool = Concurrent::ThreadPoolExecutor.new max_threads: @batch_threads, max_queue: 0
           @retry_operations = Containers::MinHeap.new
           @pending_batch_count = 0
-          @doc_refs = Set.new
           @mutex = Mutex.new
           start_scheduling_operations
         end
