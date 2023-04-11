@@ -97,6 +97,16 @@ module Google
         ##
         # Add a property filter to the query.
         #
+        # @overload and(name, operator, value)
+        #   Joins the filter with a property filter
+        #   @param name [String]
+        #   @param operator [String]
+        #   @param value
+        #
+        # @overload and(filter)
+        #   Joins the filter with a Filter object
+        #   @param filter [Filter]
+        #
         # @example
         #   require "google/cloud/datastore"
         #
