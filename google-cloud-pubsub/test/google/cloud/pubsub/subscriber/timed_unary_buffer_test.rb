@@ -78,6 +78,9 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
     stub = StreamingPullStub.new response_groups
     called = false  
     def stub.modify_ack_deadline subscription:, ack_ids:, ack_deadline_seconds:
+      if @modify_ack_deadline_requests.count == 0
+        return  @modify_ack_deadline_requests << [subscription, ack_ids.sort, ack_deadline_seconds]
+      end
       @modify_ack_deadline_requests << [subscription, ack_ids.sort, ack_deadline_seconds]
       begin
         raise GRPC::InvalidArgument.new "test"
@@ -102,7 +105,7 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
     end
      
     sleep 5
-    assert stub.modify_ack_deadline_requests.length > 1
+    assert stub.modify_ack_deadline_requests.length > 2
     subscriber.stop
     subscriber.wait!
   end
@@ -118,6 +121,9 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
     called = false  
     errors = []
     def stub.modify_ack_deadline subscription:, ack_ids:, ack_deadline_seconds:
+      if @modify_ack_deadline_requests.count == 0
+        return  @modify_ack_deadline_requests << [subscription, ack_ids.sort, ack_deadline_seconds]
+      end
       raise StandardError.new "Test failure"
     end
   
@@ -245,6 +251,9 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
     called = false  
     errors = []
     def stub.modify_ack_deadline subscription:, ack_ids:, ack_deadline_seconds:
+      if @modify_ack_deadline_requests.count == 0
+        return  @modify_ack_deadline_requests << ["ack_ids"]
+      end
       raise Google::Cloud::PermissionDeniedError.new "Test failure"
     end
   
@@ -329,6 +338,9 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
     called = false  
     errors = []
     def stub.modify_ack_deadline subscription:, ack_ids:, ack_deadline_seconds:
+      if @modify_ack_deadline_requests.count == 0
+        return  @modify_ack_deadline_requests << ["ack_ids"]
+      end
       raise Google::Cloud::FailedPreconditionError.new "Test failure"
     end
   

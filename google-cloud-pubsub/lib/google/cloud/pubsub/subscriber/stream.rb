@@ -248,6 +248,7 @@ module Google
                 # Cannot syncronize the enumerator, causes deadlock
                 response = enum.next
                 new_exactly_once_delivery_enabled = response&.subscription_properties&.exactly_once_delivery_enabled
+                received_messages = response.received_messages
 
                 # Use synchronize so changes happen atomically
                 synchronize do
@@ -256,17 +257,21 @@ module Google
                   @subscriber.exactly_once_delivery_enabled = @exactly_once_delivery_enabled
 
                   # Create receipt of received messages reception
-                  @subscriber.buffer.modify_ack_deadline @subscriber.deadline, response.received_messages.map(&:ack_id)
-
-                  # Add received messages to inventory
-                  @inventory.add response.received_messages
+                  if @exactly_once_delivery_enabled
+                    create_receipt_modack_for_eos received_messages
+                  else
+                    @subscriber.buffer.modify_ack_deadline @subscriber.deadline, received_messages.map(&:ack_id)
+                    # Add received messages to inventory
+                    @inventory.add received_messages
+                  end
                 end
 
-                response.received_messages.each do |rec_msg_grpc|
+                received_messages.each do |rec_msg_grpc|
                   rec_msg = ReceivedMessage.from_grpc(rec_msg_grpc, self)
                   # No need to synchronize the callback future
                   register_callback rec_msg
-                end
+                end if !@exactly_once_delivery_enabled # Exactly once delivery scenario is handled by callback
+                
                 synchronize { pause_streaming! }
               rescue StopIteration
                 break
@@ -294,6 +299,19 @@ module Google
           end
 
           # rubocop:enable all
+
+          def create_receipt_modack_for_eos received_messages
+            received_messages.each do |rec_msg_grpc|
+              callback = Proc.new do |result|
+                if result.succeeded?
+                  synchronize { @inventory.add rec_msg_grpc }
+                  rec_msg = ReceivedMessage.from_grpc(rec_msg_grpc, self)
+                  register_callback rec_msg
+                end
+              end
+              @subscriber.buffer.modify_ack_deadline @subscriber.deadline, [rec_msg_grpc.ack_id], callback 
+            end
+          end
 
           # Updates min_duration_per_lease_extension to 60 when exactly_once_delivery_enabled
           # and reverts back to default 0 when disabled.
