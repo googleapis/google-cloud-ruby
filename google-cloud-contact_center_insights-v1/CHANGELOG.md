@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.13.0 (2023-04-10)
+
+#### Features
+
+* support upload_conversation api 
+
 ### 0.12.0 (2023-03-08)
 
 #### Features
