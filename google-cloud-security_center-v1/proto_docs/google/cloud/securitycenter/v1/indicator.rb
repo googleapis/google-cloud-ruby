@@ -21,13 +21,14 @@ module Google
   module Cloud
     module SecurityCenter
       module V1
-        # Represents what's commonly known as an Indicator of compromise (IoC) in
+        # Represents what's commonly known as an _indicator of compromise_ (IoC) in
         # computer forensics. This is an artifact observed on a network or in an
         # operating system that, with high confidence, indicates a computer intrusion.
-        # Reference: https://en.wikipedia.org/wiki/Indicator_of_compromise
+        # For more information, see [Indicator of
+        # compromise](https://en.wikipedia.org/wiki/Indicator_of_compromise).
         # @!attribute [rw] ip_addresses
         #   @return [::Array<::String>]
-        #     List of ip addresses associated to the Finding.
+        #     The list of IP addresses that are associated with the finding.
         # @!attribute [rw] domains
         #   @return [::Array<::String>]
         #     List of domains associated to the Finding.

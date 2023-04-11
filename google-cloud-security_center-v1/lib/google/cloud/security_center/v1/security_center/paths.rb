@@ -77,6 +77,58 @@ module Google
             end
 
             ##
+            # Create a fully-qualified EffectiveSecurityHealthAnalyticsCustomModule resource string.
+            #
+            # @overload effective_security_health_analytics_custom_module_path(organization:, effective_custom_module:)
+            #   The resource will be in the following format:
+            #
+            #   `organizations/{organization}/securityHealthAnalyticsSettings/effectiveCustomModules/{effective_custom_module}`
+            #
+            #   @param organization [String]
+            #   @param effective_custom_module [String]
+            #
+            # @overload effective_security_health_analytics_custom_module_path(folder:, effective_custom_module:)
+            #   The resource will be in the following format:
+            #
+            #   `folders/{folder}/securityHealthAnalyticsSettings/effectiveCustomModules/{effective_custom_module}`
+            #
+            #   @param folder [String]
+            #   @param effective_custom_module [String]
+            #
+            # @overload effective_security_health_analytics_custom_module_path(project:, effective_custom_module:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/securityHealthAnalyticsSettings/effectiveCustomModules/{effective_custom_module}`
+            #
+            #   @param project [String]
+            #   @param effective_custom_module [String]
+            #
+            # @return [::String]
+            def effective_security_health_analytics_custom_module_path **args
+              resources = {
+                "effective_custom_module:organization" => (proc do |organization:, effective_custom_module:|
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+
+                  "organizations/#{organization}/securityHealthAnalyticsSettings/effectiveCustomModules/#{effective_custom_module}"
+                end),
+                "effective_custom_module:folder" => (proc do |folder:, effective_custom_module:|
+                  raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
+
+                  "folders/#{folder}/securityHealthAnalyticsSettings/effectiveCustomModules/#{effective_custom_module}"
+                end),
+                "effective_custom_module:project" => (proc do |project:, effective_custom_module:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+                  "projects/#{project}/securityHealthAnalyticsSettings/effectiveCustomModules/#{effective_custom_module}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
+            ##
             # Create a fully-qualified ExternalSystem resource string.
             #
             # @overload external_system_path(organization:, source:, finding:, externalsystem:)
@@ -356,6 +408,101 @@ module Google
             # @return [::String]
             def project_path project:
               "projects/#{project}"
+            end
+
+            ##
+            # Create a fully-qualified SecurityHealthAnalyticsCustomModule resource string.
+            #
+            # @overload security_health_analytics_custom_module_path(organization:, custom_module:)
+            #   The resource will be in the following format:
+            #
+            #   `organizations/{organization}/securityHealthAnalyticsSettings/customModules/{custom_module}`
+            #
+            #   @param organization [String]
+            #   @param custom_module [String]
+            #
+            # @overload security_health_analytics_custom_module_path(folder:, custom_module:)
+            #   The resource will be in the following format:
+            #
+            #   `folders/{folder}/securityHealthAnalyticsSettings/customModules/{custom_module}`
+            #
+            #   @param folder [String]
+            #   @param custom_module [String]
+            #
+            # @overload security_health_analytics_custom_module_path(project:, custom_module:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/securityHealthAnalyticsSettings/customModules/{custom_module}`
+            #
+            #   @param project [String]
+            #   @param custom_module [String]
+            #
+            # @return [::String]
+            def security_health_analytics_custom_module_path **args
+              resources = {
+                "custom_module:organization" => (proc do |organization:, custom_module:|
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+
+                  "organizations/#{organization}/securityHealthAnalyticsSettings/customModules/#{custom_module}"
+                end),
+                "custom_module:folder" => (proc do |folder:, custom_module:|
+                  raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
+
+                  "folders/#{folder}/securityHealthAnalyticsSettings/customModules/#{custom_module}"
+                end),
+                "custom_module:project" => (proc do |project:, custom_module:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+                  "projects/#{project}/securityHealthAnalyticsSettings/customModules/#{custom_module}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
+            ##
+            # Create a fully-qualified SecurityHealthAnalyticsSettings resource string.
+            #
+            # @overload security_health_analytics_settings_path(organization:)
+            #   The resource will be in the following format:
+            #
+            #   `organizations/{organization}/securityHealthAnalyticsSettings`
+            #
+            #   @param organization [String]
+            #
+            # @overload security_health_analytics_settings_path(folder:)
+            #   The resource will be in the following format:
+            #
+            #   `folders/{folder}/securityHealthAnalyticsSettings`
+            #
+            #   @param folder [String]
+            #
+            # @overload security_health_analytics_settings_path(project:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/securityHealthAnalyticsSettings`
+            #
+            #   @param project [String]
+            #
+            # @return [::String]
+            def security_health_analytics_settings_path **args
+              resources = {
+                "organization" => (proc do |organization:|
+                  "organizations/#{organization}/securityHealthAnalyticsSettings"
+                end),
+                "folder" => (proc do |folder:|
+                  "folders/#{folder}/securityHealthAnalyticsSettings"
+                end),
+                "project" => (proc do |project:|
+                  "projects/#{project}/securityHealthAnalyticsSettings"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
             end
 
             ##
