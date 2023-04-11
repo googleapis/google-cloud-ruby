@@ -678,23 +678,25 @@ module Google
         #  requests. Default is 2. Optional.
         # @param [Integer] batch_threads The number of threads used for processing
         #  batches. Default is 4. Optional.
+        # @param [Integer] retries The number of times a failed write request will
+        # be retried (with exponential delay) before being marked as failure. Max
+        # attempts are 15. Optional
         #
         # @return [Google::Cloud::Firestore::BulkWriter] Returns an object of
         #   bulk writer.
         #
-        # @example
+        # @example Initializing a BulkWriter with all the configurations.
         #   require "google/cloud/firestore"
         #
         #   firestore = Google::Cloud::Firestore.new
         #
         #   bw = firestore.bulk_writer
         #
-        #   bulk_write_result = bw.create "doc_ref", {data}
+        #   bulk_write_result = bw.create "doc_ref", request_threads: 4, batch_threads: 10, retries: 10
         #
-        def bulk_writer request_threads: nil, batch_threads: nil
+        def bulk_writer request_threads: nil, batch_threads: nil, retries: nil
           BulkWriter.new self, @service, request_threads: request_threads,
-                         batch_threads: batch_threads
-
+                         batch_threads: batch_threads, retries: retries
         end
 
         # @!endgroup

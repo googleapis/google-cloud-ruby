@@ -98,6 +98,33 @@ class StreamingListenStub
   end
 end
 
+class BatchWriteStub
+  attr_reader :requests, :responses
+
+  def initialize responses, requests, response_delay = 0.1
+    @requests = requests
+    @responses = responses
+    @response_delay = response_delay
+  end
+
+  def batch_write request, options = nil
+    sleep @response_delay
+    if @requests.first == [request, options]
+      @requests.shift
+      @responses.shift
+    else
+      batch_write_fail_resp(request[:writes]&.length)
+    end
+  end
+
+  def batch_write_fail_resp size = 20
+    Google::Cloud::Firestore::V1::BatchWriteResponse.new(
+      write_results: [Google::Cloud::Firestore::V1::WriteResult.new]*size,
+      status: [Google::Rpc::Status.new(code: 1, message: "Mock rejection")]*size
+    )
+  end
+end
+
 class MockFirestore < Minitest::Spec
   let(:project) { "projectID" }
   let(:transaction_id) { "transaction123" }
@@ -240,10 +267,17 @@ class MockFirestore < Minitest::Spec
   def batch_write_fail_resp size = 20
     Google::Cloud::Firestore::V1::BatchWriteResponse.new(
       write_results: [Google::Cloud::Firestore::V1::WriteResult.new]*size,
-      status: [Google::Rpc::Status.new(code: 1)]*size
+      status: [Google::Rpc::Status.new(code: 1, message: "Mock rejection")]*size
     )
   end
 
+  def batch_write_mix_resp size = 20
+    Google::Cloud::Firestore::V1::BatchWriteResponse.new(
+      write_results: [Google::Cloud::Firestore::V1::WriteResult.new]*size,
+      status: [Google::Rpc::Status.new]*(size/2) +
+        [Google::Rpc::Status.new(code: 1, message: "Mock rejection")]*(size/2)
+    )
+  end
 end
 
 class WatchFirestore < MockFirestore

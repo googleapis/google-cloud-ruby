@@ -125,7 +125,7 @@ describe "BulkWriter", :firestore_acceptance do
   focus; it "CRUD operations" do
     rand_tx_col = firestore.col "#{root_path}/tx/#{SecureRandom.hex(4)}"
     doc_refs = []
-    (1..5).each do |i|
+    (1..50).each do |i|
       doc_refs << rand_tx_col.doc
     end
     bw = firestore.bulk_writer

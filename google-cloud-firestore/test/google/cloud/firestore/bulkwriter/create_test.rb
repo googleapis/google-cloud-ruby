@@ -18,7 +18,7 @@ describe Google::Cloud::Firestore::BulkWriter, :create, :mock_firestore do
   let(:bulk_writer) { firestore.bulk_writer }
 
   it "add a create operation" do
-    response = batch_write_resp 1
+    response = batch_write_pass_resp 1
     write_requests = [Google::Cloud::Firestore::Convert.write_for_create("#{documents_path}/cities/NYC", { foo: "bar"})]
     request = batch_write_args write_requests
 
@@ -27,5 +27,22 @@ describe Google::Cloud::Firestore::BulkWriter, :create, :mock_firestore do
     bulk_writer.flush
 
     _(result.value).must_be_kind_of Google::Cloud::Firestore::BulkWriterOperation::WriteResult
+  end
+
+  it "retries a create operation" do
+    write_requests = [Google::Cloud::Firestore::Convert.write_for_create("#{documents_path}/cities/NYC", { foo: "bar"})]
+    request = batch_write_args write_requests
+    responses = [batch_write_fail_resp(1), batch_write_fail_resp(1), batch_write_pass_resp(1)]
+    requests = [request] * responses.length
+
+    stub = BatchWriteStub.new responses, requests
+    firestore.service.instance_variable_set :@firestore, stub
+
+    result = bulk_writer.create "cities/NYC", { foo: "bar"}
+    bulk_writer.flush
+
+    _(result.value).must_be_kind_of Google::Cloud::Firestore::BulkWriterOperation::WriteResult
+    _(stub.responses.length).must_equal 0
+    _(stub.requests.length).must_equal 0
   end
 end

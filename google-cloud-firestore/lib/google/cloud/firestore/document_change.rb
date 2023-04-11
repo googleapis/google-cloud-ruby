@@ -49,7 +49,6 @@ module Google
         #
         def doc
           @doc
-          Concurrent::Promises::Future.new
         end
         alias document doc
 

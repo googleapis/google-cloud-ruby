@@ -1,6 +1,6 @@
 # Copyright 2023 Google LLC
 #
-# Licensed under the Apache License, Version 2.0 (the "License")
+# Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
@@ -23,26 +23,46 @@ require "google/cloud/firestore/document_snapshot"
 require "google/cloud/firestore/collection_group"
 require "google/cloud/firestore/batch"
 require "google/cloud/firestore/transaction"
-require "google/cloud/errors"
+require "concurrent"
+require "google/cloud/firestore/bulk_writer_exception"
+
+
 
 module Google
   module Cloud
     module Firestore
-      class BulkWriterException < StandardError
+      ##
+      # Indicates that the an error was reported while scheduling
+      # bulkwriter operations.
+      #
+      class BulkWriterSchedulerError < Google::Cloud::Error
+        def initialize message
+          super "BulkWriterSchedulerError : #{message}"
+        end
+      end
 
-        attr_reader :status
-        attr_reader :message
-        attr_reader :details
 
-        def initialize status
-          @status = status.code
-          @message = status.message
-          @details = status.details
+      ##
+      # Indicates that the an error was reported while committing a
+      # batch of operations.
+      #
+      class BulkCommitBatchError < Google::Cloud::Error
+        def initialize message
+          super "BulkCommitBatchError : #{message}"
+        end
+      end
 
-          super status.message
+      ##
+      # Indicates that the an error was reported while scheduling
+      # bulkwriter operations.
+      #
+      class BulkWriterOperationError < Google::Cloud::Error
+        def initialize message
+          super "BulkWriterOperationError : #{message}"
         end
       end
     end
   end
 end
+
 

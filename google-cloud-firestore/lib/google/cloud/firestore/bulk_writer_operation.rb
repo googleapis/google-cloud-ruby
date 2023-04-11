@@ -40,19 +40,14 @@ module Google
         attr_reader :completion_event
         attr_reader :write
 
-        MAX_RETRY_ATTEMPTS = 15
-
         ##
         # Initialize the object
-        def initialize write, document_reference
+        def initialize write, retries
           @write = write
-          @status = false
-          @result = true
           @failed_attempts = 0
-          @document_reference = document_reference
+          @retries = retries
           @retry_time = Time.now
           @completion_event = Concurrent::Event.new
-          @failure_message = nil
         end
 
         ##
@@ -61,8 +56,13 @@ module Google
         #
         # @param [Google::Cloud::Firestore::V1::WriteResult] result The result returned in the response.
         def on_success result
-          @result = WriteResult.new result
-          @completion_event.set
+          begin
+            @result = WriteResult.new result
+          rescue StandardError => e
+            raise BulkWriterOperationError, e
+          ensure
+            @completion_event.set
+          end
         end
 
         ##
@@ -75,11 +75,11 @@ module Google
         #
         def on_failure status
           @failed_attempts += 1
-          if @failed_attempts == MAX_RETRY_ATTEMPTS
+          if @failed_attempts == @retries
             begin
               @result = BulkWriterException.new status
             rescue StandardError => e
-              puts e
+              raise BulkWriterOperationError, e
             ensure
               @completion_event.set
             end

@@ -22,6 +22,7 @@ require "google/cloud/firestore/document_reference"
 require "google/cloud/firestore/document_snapshot"
 require "google/cloud/firestore/collection_group"
 require "google/cloud/firestore/batch"
+require "google/cloud/firestore/errors"
 require "google/cloud/firestore/transaction"
 
 module Google
@@ -50,13 +51,9 @@ module Google
         def parse_results responses
           @operations.zip responses.write_results, responses.status do |operation, write_result, status|
             begin
-              if status.code.zero?
-                operation.on_success write_result
-              else
-                operation.on_failure status
-              end
+              status&.code&.zero? ? operation.on_success(write_result) : operation.on_failure(status)
             rescue StandardError => e
-              puts e
+              # TODO: Log the error while parsing response
             end
           end
         end
@@ -68,8 +65,12 @@ module Google
         # @return [nil]
         #
         def commit
-          responses = @service.batch_write @operations.map(&:write)
-          parse_results responses
+          begin
+            responses = @service.batch_write @operations.map(&:write)
+            parse_results responses
+          rescue StandardError => e
+            raise BulkCommitBatchError, e.message
+          end
         end
       end
     end
