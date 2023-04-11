@@ -139,8 +139,6 @@ module Google
         # @return [nil]
         def schedule_operations
           loop do
-            # puts "Batch tasks added - #{@batch_thread_pool.scheduled_task_count} processed - #{@batch_thread_pool.completed_task_count} left - #{@batch_thread_pool.queue_length} "
-            # puts "Thread count - #{Thread.list.count}"
             dequeue_retry_operations
             batch_size = [MAX_BATCH_SIZE, @buffered_operations.length].min
             if batch_size.zero? || @batch_thread_pool.remaining_capacity.zero?

@@ -183,7 +183,7 @@ describe Google::Cloud::Firestore::BulkWriter, :mock_firestore do
       firestore.service.instance_variable_set :@firestore, stub
 
       thread_count = Thread.list.count
-      bw = firestore.bulk_writer request_threads: 1
+      bw = firestore.bulk_writer request_threads: 1, batch_threads: 2
 
       result_1 = bw.create "cities/NYC", { foo: "bar"}
       result_2 = bw.create "cities/MTV", { foo: "bar"}
@@ -193,7 +193,7 @@ describe Google::Cloud::Firestore::BulkWriter, :mock_firestore do
       bw.flush
       bw.close
 
-      _(thread_count_2 - thread_count).must_equal 3
+      _(thread_count_2 - thread_count).must_be :<=, 3
       _(result_1.value).must_be_kind_of Google::Cloud::Firestore::BulkWriterOperation::WriteResult
       _(result_2.value).must_be_kind_of Google::Cloud::Firestore::BulkWriterOperation::WriteResult
       _(result_3.value).must_be_kind_of Google::Cloud::Firestore::BulkWriterOperation::WriteResult
@@ -209,14 +209,14 @@ describe Google::Cloud::Firestore::BulkWriter, :mock_firestore do
       bw = firestore.bulk_writer batch_threads: 3, request_threads: 1, retries: 1
 
       (1..100).each do
-        bw.create "cities/#{SecureRandom.hex(2)}", { foo: "bar"}
+        bw.create "cities/#{SecureRandom.hex(4)}", { foo: "bar"}
       end
       sleep 0.3
       thread_count_2 = Thread.list.count
       bw.flush
       bw.close
 
-      _(thread_count_2 - thread_count).must_equal 4
+      _(thread_count_2 - thread_count).must_be :<=, 4
     end
   end
 

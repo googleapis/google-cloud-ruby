@@ -186,7 +186,6 @@ module Google
           )
         end
 
-        def database_path project_id: project, database_id: database
         ##
         # Makes the BatchWrite API call. Contains the list of write operations to be processed.
         #
@@ -199,7 +198,7 @@ module Google
           firestore.batch_write batch_write_req, call_options(parent: database_path)
         end
 
-        def database_path project_id: project, database_id: "(default)"
+        def database_path project_id: project, database_id: database
           # Originally used V1::FirestoreClient.database_root_path until it was removed in #5405.
           "projects/#{project_id}/databases/#{database_id}"
         end

@@ -90,6 +90,7 @@ module Google
 
         ##
         # Exponentially increases the waiting time for retry.
+        #
         def backoff_duration
           @retry_time = Time.now + (@failed_attempts**2)
         end
