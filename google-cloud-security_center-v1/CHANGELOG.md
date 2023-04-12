@@ -1,5 +1,11 @@
 # Release History
 
+### 0.27.0 (2023-04-12)
+
+#### Features
+
+* support security health analytics custom module 
+
 ### 0.26.0 (2023-03-08)
 
 #### Features
