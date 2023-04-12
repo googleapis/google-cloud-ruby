@@ -221,7 +221,7 @@ module Google
         #   firestore = Google::Cloud::Firestore.new
         #
         #   # Create a filter
-        #   filter = firestore.where(:population, :>=, 1000000)
+        #   filter = firestore.filter(:population, :>=, 1000000)
         #
         def filter field, operator, value
           Filter.new field, operator, value

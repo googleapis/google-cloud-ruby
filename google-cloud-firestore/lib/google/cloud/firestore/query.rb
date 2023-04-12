@@ -1118,34 +1118,6 @@ module Google
 
         ##
         # @private
-        FILTER_OPS = {
-          "<"                  => :LESS_THAN,
-          "lt"                 => :LESS_THAN,
-          "<="                 => :LESS_THAN_OR_EQUAL,
-          "lte"                => :LESS_THAN_OR_EQUAL,
-          ">"                  => :GREATER_THAN,
-          "gt"                 => :GREATER_THAN,
-          ">="                 => :GREATER_THAN_OR_EQUAL,
-          "gte"                => :GREATER_THAN_OR_EQUAL,
-          "="                  => :EQUAL,
-          "=="                 => :EQUAL,
-          "eq"                 => :EQUAL,
-          "eql"                => :EQUAL,
-          "is"                 => :EQUAL,
-          "!="                 => :NOT_EQUAL,
-          "array_contains"     => :ARRAY_CONTAINS,
-          "array-contains"     => :ARRAY_CONTAINS,
-          "include"            => :ARRAY_CONTAINS,
-          "include?"           => :ARRAY_CONTAINS,
-          "has"                => :ARRAY_CONTAINS,
-          "in"                 => :IN,
-          "not_in"             => :NOT_IN,
-          "not-in"             => :NOT_IN,
-          "array_contains_any" => :ARRAY_CONTAINS_ANY,
-          "array-contains-any" => :ARRAY_CONTAINS_ANY
-        }.freeze
-        ##
-        # @private
         INEQUALITY_FILTERS = [
           :LESS_THAN,
           :LESS_THAN_OR_EQUAL,
@@ -1165,36 +1137,6 @@ module Google
 
         def value_unary? value
           value_nil?(value) || value_nan?(value)
-        end
-
-        def filter name, op_key, value
-          field = StructuredQuery::FieldReference.new field_path: name.to_s
-          operator = FILTER_OPS[op_key.to_s.downcase]
-          raise ArgumentError, "unknown operator #{op_key}" if operator.nil?
-
-          if value_unary? value
-            operator = case operator
-                       when :EQUAL
-                         value_nan?(value) ? :IS_NAN : :IS_NULL
-                       when :NOT_EQUAL
-                         value_nan?(value) ? :IS_NOT_NAN : :IS_NOT_NULL
-                       else
-                         raise ArgumentError, "can only perform '==' and '!=' comparisons on #{value} values"
-                       end
-
-            return StructuredQuery::Filter.new(
-              unary_filter: StructuredQuery::UnaryFilter.new(
-                field: field, op: operator
-              )
-            )
-          end
-
-          value = Convert.raw_to_value value
-          StructuredQuery::Filter.new(
-            field_filter: StructuredQuery::FieldFilter.new(
-              field: field, op: operator, value: value
-            )
-          )
         end
 
         def composite_filter
