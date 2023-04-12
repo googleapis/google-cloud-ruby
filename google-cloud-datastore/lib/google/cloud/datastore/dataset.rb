@@ -985,9 +985,20 @@ module Google
         # Create a new Filter instance. This is a convenience method to make the
         # creation of Filter objects easier.
         #
-        # @param name [String] The property to filter by
-        # @param operator [String] The operator to filter by
-        # @param value The value to compare the property to
+        # @param name [String] The property to filter by.
+        # @param operator [String] The operator to filter by.
+        # @param value The value to compare the property to.
+        #       Possible values are:
+        #         - Integer
+        #         - Float/BigDecimal
+        #         - String
+        #         - Boolean
+        #         - Array
+        #         - Date/Time
+        #         - StringIO
+        #         - Google::Cloud::Datastore::Key
+        #         - Google::Cloud::Datastore::Entity
+        #         - nil
         #
         # @return [Google::Cloud::Datastore::Filter]
         #
