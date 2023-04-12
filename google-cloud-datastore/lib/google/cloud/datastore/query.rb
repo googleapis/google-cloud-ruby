@@ -16,6 +16,7 @@
 require "google/cloud/datastore/entity"
 require "google/cloud/datastore/key"
 require "google/cloud/datastore/aggregate_query"
+require "google/cloud/datastore/filter"
 
 module Google
   module Cloud
@@ -96,6 +97,27 @@ module Google
         ##
         # Add a property filter to the query.
         #
+        # @overload and(name, operator, value)
+        #   Joins the filter with a property filter
+        #   @param name [String] The property to filter by.
+        #   @param operator [String] The operator to filter by. Defaults to nil.
+        #   @param value [Object] The value to compare the property to. Defaults to nil.
+        #       Possible values are:
+        #         - Integer
+        #         - Float/BigDecimal
+        #         - String
+        #         - Boolean
+        #         - Array
+        #         - Date/Time
+        #         - StringIO
+        #         - Google::Cloud::Datastore::Key
+        #         - Google::Cloud::Datastore::Entity
+        #         - nil
+        #
+        # @overload and(filter)
+        #   Joins the filter with a Filter object
+        #   @param filter [Filter]
+        #
         # @example
         #   require "google/cloud/datastore"
         #
@@ -116,6 +138,34 @@ module Google
         #   query.kind("Task").
         #     where("done", "=", false).
         #     where("priority", ">=", 4)
+        #
+        #   tasks = datastore.run query
+        #
+        # @example Add a composite "AND" filter:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   filter = Google::Cloud::Filter.new("done", "=", false)
+        #                                 .and("priority", ">=", 4)
+        #
+        #   query = Google::Cloud::Datastore::Query.new
+        #   query.kind("Task")
+        #        .where(filter)
+        #
+        #   tasks = datastore.run query
+        #
+        # @example Add a composite "OR" filter:
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   filter = Google::Cloud::Filter.new("done", "=", false)
+        #                                 .or("priority", ">=", 4)
+        #
+        #   query = Google::Cloud::Datastore::Query.new
+        #   query.kind("Task")
+        #        .where(filter)
         #
         #   tasks = datastore.run query
         #
@@ -177,22 +227,18 @@ module Google
         #
         #   tasks = datastore.run query
         #
-        def where name, operator, value
+        def where name_or_filter, operator = nil, value = nil
           @grpc.filter ||= Google::Cloud::Datastore::V1::Filter.new(
             composite_filter: Google::Cloud::Datastore::V1::CompositeFilter.new(
               op: :AND
             )
           )
-          @grpc.filter.composite_filter.filters << \
-            Google::Cloud::Datastore::V1::Filter.new(
-              property_filter: Google::Cloud::Datastore::V1::PropertyFilter.new(
-                property: Google::Cloud::Datastore::V1::PropertyReference.new(
-                  name: name
-                ),
-                op: Convert.to_prop_filter_op(operator),
-                value: Convert.to_value(value)
-              )
-            )
+          if name_or_filter.is_a? Google::Cloud::Datastore::Filter
+            @grpc.filter.composite_filter.filters << name_or_filter.to_grpc
+          else
+            @grpc.filter.composite_filter.filters << \
+              Google::Cloud::Datastore::Filter.new(name_or_filter, operator, value).to_grpc
+          end
 
           self
         end
