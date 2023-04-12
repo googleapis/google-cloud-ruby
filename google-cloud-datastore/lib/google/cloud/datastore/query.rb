@@ -99,9 +99,20 @@ module Google
         #
         # @overload and(name, operator, value)
         #   Joins the filter with a property filter
-        #   @param name [String]
-        #   @param operator [String]
-        #   @param value
+        #   @param name [String] The property to filter by.
+        #   @param operator [String] The operator to filter by.
+        #   @param value [Object] The value to compare the property to.
+        #       Possible values are:
+        #         - Integer
+        #         - Float/BigDecimal
+        #         - String
+        #         - Boolean
+        #         - Array
+        #         - Date/Time
+        #         - StringIO
+        #         - Google::Cloud::Datastore::Key
+        #         - Google::Cloud::Datastore::Entity
+        #         - nil
         #
         # @overload and(filter)
         #   Joins the filter with a Filter object
