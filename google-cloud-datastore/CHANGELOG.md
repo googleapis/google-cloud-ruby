@@ -1,5 +1,11 @@
 # Release History
 
+### 2.7.0 (2023-04-12)
+
+#### Features
+
+* Support OR filter ([#21002](https://github.com/googleapis/google-cloud-ruby/issues/21002)) 
+
 ### 2.6.0 (2023-02-13)
 
 #### Features
