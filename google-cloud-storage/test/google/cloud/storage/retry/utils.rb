@@ -422,7 +422,7 @@ module MethodMapping
 
   def self.insert_object client, preconditions, **resources
     bucket = resources[:bucket]
-    file = StringIO.new CONF_TEST_FILE_CONTENT * 1024 * 1024 * 15 # 12MB
+    file = StringIO.new CONF_TEST_FILE_CONTENT * 1024 * 1024 * 15 # 180MB
     if preconditions
       bucket.create_file file, CONF_TEST_FILE_PATH, if_generation_match: 0
     else
