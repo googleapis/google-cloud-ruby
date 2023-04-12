@@ -114,6 +114,66 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
     end
   end
 
+  def test_create_security_health_analytics_custom_module
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::SecurityCenter::V1::SecurityHealthAnalyticsCustomModule.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    security_health_analytics_custom_module = {}
+
+    create_security_health_analytics_custom_module_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_security_health_analytics_custom_module, name
+      assert_kind_of ::Google::Cloud::SecurityCenter::V1::CreateSecurityHealthAnalyticsCustomModuleRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::SecurityCenter::V1::SecurityHealthAnalyticsCustomModule), request["security_health_analytics_custom_module"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_security_health_analytics_custom_module_client_stub do
+      # Create client
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_security_health_analytics_custom_module({ parent: parent, security_health_analytics_custom_module: security_health_analytics_custom_module }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_security_health_analytics_custom_module parent: parent, security_health_analytics_custom_module: security_health_analytics_custom_module do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_security_health_analytics_custom_module ::Google::Cloud::SecurityCenter::V1::CreateSecurityHealthAnalyticsCustomModuleRequest.new(parent: parent, security_health_analytics_custom_module: security_health_analytics_custom_module) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_security_health_analytics_custom_module({ parent: parent, security_health_analytics_custom_module: security_health_analytics_custom_module }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_security_health_analytics_custom_module(::Google::Cloud::SecurityCenter::V1::CreateSecurityHealthAnalyticsCustomModuleRequest.new(parent: parent, security_health_analytics_custom_module: security_health_analytics_custom_module), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_security_health_analytics_custom_module_client_stub.call_rpc_count
+    end
+  end
+
   def test_create_source
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::SecurityCenter::V1::Source.new
@@ -476,6 +536,64 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
     end
   end
 
+  def test_delete_security_health_analytics_custom_module
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_security_health_analytics_custom_module_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_security_health_analytics_custom_module, name
+      assert_kind_of ::Google::Cloud::SecurityCenter::V1::DeleteSecurityHealthAnalyticsCustomModuleRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_security_health_analytics_custom_module_client_stub do
+      # Create client
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_security_health_analytics_custom_module({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_security_health_analytics_custom_module name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_security_health_analytics_custom_module ::Google::Cloud::SecurityCenter::V1::DeleteSecurityHealthAnalyticsCustomModuleRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_security_health_analytics_custom_module({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_security_health_analytics_custom_module(::Google::Cloud::SecurityCenter::V1::DeleteSecurityHealthAnalyticsCustomModuleRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_security_health_analytics_custom_module_client_stub.call_rpc_count
+    end
+  end
+
   def test_get_big_query_export
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::SecurityCenter::V1::BigQueryExport.new
@@ -768,6 +886,122 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
     end
   end
 
+  def test_get_effective_security_health_analytics_custom_module
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::SecurityCenter::V1::EffectiveSecurityHealthAnalyticsCustomModule.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_effective_security_health_analytics_custom_module_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_effective_security_health_analytics_custom_module, name
+      assert_kind_of ::Google::Cloud::SecurityCenter::V1::GetEffectiveSecurityHealthAnalyticsCustomModuleRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_effective_security_health_analytics_custom_module_client_stub do
+      # Create client
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_effective_security_health_analytics_custom_module({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_effective_security_health_analytics_custom_module name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_effective_security_health_analytics_custom_module ::Google::Cloud::SecurityCenter::V1::GetEffectiveSecurityHealthAnalyticsCustomModuleRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_effective_security_health_analytics_custom_module({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_effective_security_health_analytics_custom_module(::Google::Cloud::SecurityCenter::V1::GetEffectiveSecurityHealthAnalyticsCustomModuleRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_effective_security_health_analytics_custom_module_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_security_health_analytics_custom_module
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::SecurityCenter::V1::SecurityHealthAnalyticsCustomModule.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_security_health_analytics_custom_module_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_security_health_analytics_custom_module, name
+      assert_kind_of ::Google::Cloud::SecurityCenter::V1::GetSecurityHealthAnalyticsCustomModuleRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_security_health_analytics_custom_module_client_stub do
+      # Create client
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_security_health_analytics_custom_module({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_security_health_analytics_custom_module name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_security_health_analytics_custom_module ::Google::Cloud::SecurityCenter::V1::GetSecurityHealthAnalyticsCustomModuleRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_security_health_analytics_custom_module({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_security_health_analytics_custom_module(::Google::Cloud::SecurityCenter::V1::GetSecurityHealthAnalyticsCustomModuleRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_security_health_analytics_custom_module_client_stub.call_rpc_count
+    end
+  end
+
   def test_get_source
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::SecurityCenter::V1::Source.new
@@ -1053,6 +1287,73 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
     end
   end
 
+  def test_list_descendant_security_health_analytics_custom_modules
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::SecurityCenter::V1::ListDescendantSecurityHealthAnalyticsCustomModulesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_descendant_security_health_analytics_custom_modules_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_descendant_security_health_analytics_custom_modules, name
+      assert_kind_of ::Google::Cloud::SecurityCenter::V1::ListDescendantSecurityHealthAnalyticsCustomModulesRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_descendant_security_health_analytics_custom_modules_client_stub do
+      # Create client
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_descendant_security_health_analytics_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_descendant_security_health_analytics_custom_modules parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_descendant_security_health_analytics_custom_modules ::Google::Cloud::SecurityCenter::V1::ListDescendantSecurityHealthAnalyticsCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_descendant_security_health_analytics_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_descendant_security_health_analytics_custom_modules(::Google::Cloud::SecurityCenter::V1::ListDescendantSecurityHealthAnalyticsCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_descendant_security_health_analytics_custom_modules_client_stub.call_rpc_count
+    end
+  end
+
   def test_list_findings
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::SecurityCenter::V1::ListFindingsResponse.new
@@ -1261,6 +1562,140 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
       # Verify method calls
       assert_equal 5, list_notification_configs_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_effective_security_health_analytics_custom_modules
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::SecurityCenter::V1::ListEffectiveSecurityHealthAnalyticsCustomModulesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_effective_security_health_analytics_custom_modules_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_effective_security_health_analytics_custom_modules, name
+      assert_kind_of ::Google::Cloud::SecurityCenter::V1::ListEffectiveSecurityHealthAnalyticsCustomModulesRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_effective_security_health_analytics_custom_modules_client_stub do
+      # Create client
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_effective_security_health_analytics_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_effective_security_health_analytics_custom_modules parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_effective_security_health_analytics_custom_modules ::Google::Cloud::SecurityCenter::V1::ListEffectiveSecurityHealthAnalyticsCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_effective_security_health_analytics_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_effective_security_health_analytics_custom_modules(::Google::Cloud::SecurityCenter::V1::ListEffectiveSecurityHealthAnalyticsCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_effective_security_health_analytics_custom_modules_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_security_health_analytics_custom_modules
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::SecurityCenter::V1::ListSecurityHealthAnalyticsCustomModulesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_security_health_analytics_custom_modules_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_security_health_analytics_custom_modules, name
+      assert_kind_of ::Google::Cloud::SecurityCenter::V1::ListSecurityHealthAnalyticsCustomModulesRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_security_health_analytics_custom_modules_client_stub do
+      # Create client
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_security_health_analytics_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_security_health_analytics_custom_modules parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_security_health_analytics_custom_modules ::Google::Cloud::SecurityCenter::V1::ListSecurityHealthAnalyticsCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_security_health_analytics_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_security_health_analytics_custom_modules(::Google::Cloud::SecurityCenter::V1::ListSecurityHealthAnalyticsCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_security_health_analytics_custom_modules_client_stub.call_rpc_count
     end
   end
 
@@ -1935,6 +2370,66 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
       # Verify method calls
       assert_equal 5, update_organization_settings_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_security_health_analytics_custom_module
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::SecurityCenter::V1::SecurityHealthAnalyticsCustomModule.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    security_health_analytics_custom_module = {}
+    update_mask = {}
+
+    update_security_health_analytics_custom_module_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_security_health_analytics_custom_module, name
+      assert_kind_of ::Google::Cloud::SecurityCenter::V1::UpdateSecurityHealthAnalyticsCustomModuleRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::SecurityCenter::V1::SecurityHealthAnalyticsCustomModule), request["security_health_analytics_custom_module"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_security_health_analytics_custom_module_client_stub do
+      # Create client
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_security_health_analytics_custom_module({ security_health_analytics_custom_module: security_health_analytics_custom_module, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_security_health_analytics_custom_module security_health_analytics_custom_module: security_health_analytics_custom_module, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_security_health_analytics_custom_module ::Google::Cloud::SecurityCenter::V1::UpdateSecurityHealthAnalyticsCustomModuleRequest.new(security_health_analytics_custom_module: security_health_analytics_custom_module, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_security_health_analytics_custom_module({ security_health_analytics_custom_module: security_health_analytics_custom_module, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_security_health_analytics_custom_module(::Google::Cloud::SecurityCenter::V1::UpdateSecurityHealthAnalyticsCustomModuleRequest.new(security_health_analytics_custom_module: security_health_analytics_custom_module, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_security_health_analytics_custom_module_client_stub.call_rpc_count
     end
   end
 

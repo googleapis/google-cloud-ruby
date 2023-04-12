@@ -27,34 +27,34 @@ module Google
         #     Rootkit name when available.
         # @!attribute [rw] unexpected_code_modification
         #   @return [::Boolean]
-        #     True if unexpected modifications of kernel code memory are present.
+        #     True when unexpected modifications of kernel code memory are present.
         # @!attribute [rw] unexpected_read_only_data_modification
         #   @return [::Boolean]
-        #     True if unexpected modifications of kernel read-only data memory are
+        #     True when unexpected modifications of kernel read-only data memory are
         #     present.
         # @!attribute [rw] unexpected_ftrace_handler
         #   @return [::Boolean]
-        #     True if `ftrace` points are present with callbacks pointing to regions
+        #     True when `ftrace` points are present with callbacks pointing to regions
         #     that are not in the expected kernel or module code range.
         # @!attribute [rw] unexpected_kprobe_handler
         #   @return [::Boolean]
-        #     True if `kprobe` points are present with callbacks pointing to regions
+        #     True when `kprobe` points are present with callbacks pointing to regions
         #     that are not in the expected kernel or module code range.
         # @!attribute [rw] unexpected_kernel_code_pages
         #   @return [::Boolean]
-        #     True if kernel code pages that are not in the expected kernel or module
+        #     True when kernel code pages that are not in the expected kernel or module
         #     code regions are present.
         # @!attribute [rw] unexpected_system_call_handler
         #   @return [::Boolean]
-        #     True if system call handlers that are are not in the expected kernel or
+        #     True when system call handlers that are are not in the expected kernel or
         #     module code regions are present.
         # @!attribute [rw] unexpected_interrupt_handler
         #   @return [::Boolean]
-        #     True if interrupt handlers that are are not in the expected kernel or
+        #     True when interrupt handlers that are are not in the expected kernel or
         #     module code regions are present.
         # @!attribute [rw] unexpected_processes_in_runqueue
         #   @return [::Boolean]
-        #     True if unexpected processes in the scheduler run queue are present. Such
+        #     True when unexpected processes in the scheduler run queue are present. Such
         #     processes are in the run queue, but not in the process task list.
         class KernelRootkit
           include ::Google::Protobuf::MessageExts

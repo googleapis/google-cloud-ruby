@@ -118,6 +118,61 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Rest::ClientTest < Mi
     end
   end
 
+  def test_create_security_health_analytics_custom_module
+    # Create test objects.
+    client_result = ::Google::Cloud::SecurityCenter::V1::SecurityHealthAnalyticsCustomModule.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    security_health_analytics_custom_module = {}
+
+    create_security_health_analytics_custom_module_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Rest::ServiceStub.stub :transcode_create_security_health_analytics_custom_module_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_security_health_analytics_custom_module_client_stub do
+        # Create client
+        client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_security_health_analytics_custom_module({ parent: parent, security_health_analytics_custom_module: security_health_analytics_custom_module }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_security_health_analytics_custom_module parent: parent, security_health_analytics_custom_module: security_health_analytics_custom_module do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_security_health_analytics_custom_module ::Google::Cloud::SecurityCenter::V1::CreateSecurityHealthAnalyticsCustomModuleRequest.new(parent: parent, security_health_analytics_custom_module: security_health_analytics_custom_module) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_security_health_analytics_custom_module({ parent: parent, security_health_analytics_custom_module: security_health_analytics_custom_module }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_security_health_analytics_custom_module(::Google::Cloud::SecurityCenter::V1::CreateSecurityHealthAnalyticsCustomModuleRequest.new(parent: parent, security_health_analytics_custom_module: security_health_analytics_custom_module), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_security_health_analytics_custom_module_client_stub.call_count
+      end
+    end
+  end
+
   def test_create_source
     # Create test objects.
     client_result = ::Google::Cloud::SecurityCenter::V1::Source.new
@@ -449,6 +504,60 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Rest::ClientTest < Mi
     end
   end
 
+  def test_delete_security_health_analytics_custom_module
+    # Create test objects.
+    client_result = ::Google::Protobuf::Empty.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_security_health_analytics_custom_module_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Rest::ServiceStub.stub :transcode_delete_security_health_analytics_custom_module_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_security_health_analytics_custom_module_client_stub do
+        # Create client
+        client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_security_health_analytics_custom_module({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_security_health_analytics_custom_module name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_security_health_analytics_custom_module ::Google::Cloud::SecurityCenter::V1::DeleteSecurityHealthAnalyticsCustomModuleRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_security_health_analytics_custom_module({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_security_health_analytics_custom_module(::Google::Cloud::SecurityCenter::V1::DeleteSecurityHealthAnalyticsCustomModuleRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_security_health_analytics_custom_module_client_stub.call_count
+      end
+    end
+  end
+
   def test_get_big_query_export
     # Create test objects.
     client_result = ::Google::Cloud::SecurityCenter::V1::BigQueryExport.new
@@ -720,6 +829,114 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Rest::ClientTest < Mi
     end
   end
 
+  def test_get_effective_security_health_analytics_custom_module
+    # Create test objects.
+    client_result = ::Google::Cloud::SecurityCenter::V1::EffectiveSecurityHealthAnalyticsCustomModule.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_effective_security_health_analytics_custom_module_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Rest::ServiceStub.stub :transcode_get_effective_security_health_analytics_custom_module_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_effective_security_health_analytics_custom_module_client_stub do
+        # Create client
+        client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_effective_security_health_analytics_custom_module({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_effective_security_health_analytics_custom_module name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_effective_security_health_analytics_custom_module ::Google::Cloud::SecurityCenter::V1::GetEffectiveSecurityHealthAnalyticsCustomModuleRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_effective_security_health_analytics_custom_module({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_effective_security_health_analytics_custom_module(::Google::Cloud::SecurityCenter::V1::GetEffectiveSecurityHealthAnalyticsCustomModuleRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_effective_security_health_analytics_custom_module_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_security_health_analytics_custom_module
+    # Create test objects.
+    client_result = ::Google::Cloud::SecurityCenter::V1::SecurityHealthAnalyticsCustomModule.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_security_health_analytics_custom_module_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Rest::ServiceStub.stub :transcode_get_security_health_analytics_custom_module_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_security_health_analytics_custom_module_client_stub do
+        # Create client
+        client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_security_health_analytics_custom_module({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_security_health_analytics_custom_module name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_security_health_analytics_custom_module ::Google::Cloud::SecurityCenter::V1::GetSecurityHealthAnalyticsCustomModuleRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_security_health_analytics_custom_module({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_security_health_analytics_custom_module(::Google::Cloud::SecurityCenter::V1::GetSecurityHealthAnalyticsCustomModuleRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_security_health_analytics_custom_module_client_stub.call_count
+      end
+    end
+  end
+
   def test_get_source
     # Create test objects.
     client_result = ::Google::Cloud::SecurityCenter::V1::Source.new
@@ -955,6 +1172,62 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Rest::ClientTest < Mi
     end
   end
 
+  def test_list_descendant_security_health_analytics_custom_modules
+    # Create test objects.
+    client_result = ::Google::Cloud::SecurityCenter::V1::ListDescendantSecurityHealthAnalyticsCustomModulesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_descendant_security_health_analytics_custom_modules_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Rest::ServiceStub.stub :transcode_list_descendant_security_health_analytics_custom_modules_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_descendant_security_health_analytics_custom_modules_client_stub do
+        # Create client
+        client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_descendant_security_health_analytics_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_descendant_security_health_analytics_custom_modules parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_descendant_security_health_analytics_custom_modules ::Google::Cloud::SecurityCenter::V1::ListDescendantSecurityHealthAnalyticsCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_descendant_security_health_analytics_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_descendant_security_health_analytics_custom_modules(::Google::Cloud::SecurityCenter::V1::ListDescendantSecurityHealthAnalyticsCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_descendant_security_health_analytics_custom_modules_client_stub.call_count
+      end
+    end
+  end
+
   def test_list_findings
     # Create test objects.
     client_result = ::Google::Cloud::SecurityCenter::V1::ListFindingsResponse.new
@@ -1124,6 +1397,118 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Rest::ClientTest < Mi
 
         # Verify method calls
         assert_equal 5, list_notification_configs_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_effective_security_health_analytics_custom_modules
+    # Create test objects.
+    client_result = ::Google::Cloud::SecurityCenter::V1::ListEffectiveSecurityHealthAnalyticsCustomModulesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_effective_security_health_analytics_custom_modules_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Rest::ServiceStub.stub :transcode_list_effective_security_health_analytics_custom_modules_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_effective_security_health_analytics_custom_modules_client_stub do
+        # Create client
+        client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_effective_security_health_analytics_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_effective_security_health_analytics_custom_modules parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_effective_security_health_analytics_custom_modules ::Google::Cloud::SecurityCenter::V1::ListEffectiveSecurityHealthAnalyticsCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_effective_security_health_analytics_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_effective_security_health_analytics_custom_modules(::Google::Cloud::SecurityCenter::V1::ListEffectiveSecurityHealthAnalyticsCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_effective_security_health_analytics_custom_modules_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_security_health_analytics_custom_modules
+    # Create test objects.
+    client_result = ::Google::Cloud::SecurityCenter::V1::ListSecurityHealthAnalyticsCustomModulesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_security_health_analytics_custom_modules_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Rest::ServiceStub.stub :transcode_list_security_health_analytics_custom_modules_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_security_health_analytics_custom_modules_client_stub do
+        # Create client
+        client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_security_health_analytics_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_security_health_analytics_custom_modules parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_security_health_analytics_custom_modules ::Google::Cloud::SecurityCenter::V1::ListSecurityHealthAnalyticsCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_security_health_analytics_custom_modules({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_security_health_analytics_custom_modules(::Google::Cloud::SecurityCenter::V1::ListSecurityHealthAnalyticsCustomModulesRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_security_health_analytics_custom_modules_client_stub.call_count
       end
     end
   end
@@ -1731,6 +2116,61 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Rest::ClientTest < Mi
 
         # Verify method calls
         assert_equal 5, update_organization_settings_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_security_health_analytics_custom_module
+    # Create test objects.
+    client_result = ::Google::Cloud::SecurityCenter::V1::SecurityHealthAnalyticsCustomModule.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    security_health_analytics_custom_module = {}
+    update_mask = {}
+
+    update_security_health_analytics_custom_module_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Rest::ServiceStub.stub :transcode_update_security_health_analytics_custom_module_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_security_health_analytics_custom_module_client_stub do
+        # Create client
+        client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_security_health_analytics_custom_module({ security_health_analytics_custom_module: security_health_analytics_custom_module, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_security_health_analytics_custom_module security_health_analytics_custom_module: security_health_analytics_custom_module, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_security_health_analytics_custom_module ::Google::Cloud::SecurityCenter::V1::UpdateSecurityHealthAnalyticsCustomModuleRequest.new(security_health_analytics_custom_module: security_health_analytics_custom_module, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_security_health_analytics_custom_module({ security_health_analytics_custom_module: security_health_analytics_custom_module, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_security_health_analytics_custom_module(::Google::Cloud::SecurityCenter::V1::UpdateSecurityHealthAnalyticsCustomModuleRequest.new(security_health_analytics_custom_module: security_health_analytics_custom_module, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_security_health_analytics_custom_module_client_stub.call_count
       end
     end
   end

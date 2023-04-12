@@ -79,6 +79,44 @@ module Google
               end
 
               ##
+              # Baseline implementation for the create_security_health_analytics_custom_module REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::CreateSecurityHealthAnalyticsCustomModuleRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::SecurityCenter::V1::SecurityHealthAnalyticsCustomModule]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::SecurityCenter::V1::SecurityHealthAnalyticsCustomModule]
+              #   A result object deserialized from the server's reply
+              def create_security_health_analytics_custom_module request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_create_security_health_analytics_custom_module_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::SecurityCenter::V1::SecurityHealthAnalyticsCustomModule.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
               # Baseline implementation for the create_source REST call
               #
               # @param request_pb [::Google::Cloud::SecurityCenter::V1::CreateSourceRequest]
@@ -307,6 +345,44 @@ module Google
               end
 
               ##
+              # Baseline implementation for the delete_security_health_analytics_custom_module REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::DeleteSecurityHealthAnalyticsCustomModuleRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #   A result object deserialized from the server's reply
+              def delete_security_health_analytics_custom_module request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_delete_security_health_analytics_custom_module_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Protobuf::Empty.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
               # Baseline implementation for the get_big_query_export REST call
               #
               # @param request_pb [::Google::Cloud::SecurityCenter::V1::GetBigQueryExportRequest]
@@ -497,6 +573,82 @@ module Google
               end
 
               ##
+              # Baseline implementation for the get_effective_security_health_analytics_custom_module REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::GetEffectiveSecurityHealthAnalyticsCustomModuleRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::SecurityCenter::V1::EffectiveSecurityHealthAnalyticsCustomModule]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::SecurityCenter::V1::EffectiveSecurityHealthAnalyticsCustomModule]
+              #   A result object deserialized from the server's reply
+              def get_effective_security_health_analytics_custom_module request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_effective_security_health_analytics_custom_module_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::SecurityCenter::V1::EffectiveSecurityHealthAnalyticsCustomModule.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the get_security_health_analytics_custom_module REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::GetSecurityHealthAnalyticsCustomModuleRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::SecurityCenter::V1::SecurityHealthAnalyticsCustomModule]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::SecurityCenter::V1::SecurityHealthAnalyticsCustomModule]
+              #   A result object deserialized from the server's reply
+              def get_security_health_analytics_custom_module request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_get_security_health_analytics_custom_module_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::SecurityCenter::V1::SecurityHealthAnalyticsCustomModule.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
               # Baseline implementation for the get_source REST call
               #
               # @param request_pb [::Google::Cloud::SecurityCenter::V1::GetSourceRequest]
@@ -649,6 +801,44 @@ module Google
               end
 
               ##
+              # Baseline implementation for the list_descendant_security_health_analytics_custom_modules REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::ListDescendantSecurityHealthAnalyticsCustomModulesRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::SecurityCenter::V1::ListDescendantSecurityHealthAnalyticsCustomModulesResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::SecurityCenter::V1::ListDescendantSecurityHealthAnalyticsCustomModulesResponse]
+              #   A result object deserialized from the server's reply
+              def list_descendant_security_health_analytics_custom_modules request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_descendant_security_health_analytics_custom_modules_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::SecurityCenter::V1::ListDescendantSecurityHealthAnalyticsCustomModulesResponse.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
               # Baseline implementation for the list_findings REST call
               #
               # @param request_pb [::Google::Cloud::SecurityCenter::V1::ListFindingsRequest]
@@ -757,6 +947,82 @@ module Google
                 )
                 operation = ::Gapic::Rest::TransportOperation.new response
                 result = ::Google::Cloud::SecurityCenter::V1::ListNotificationConfigsResponse.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the list_effective_security_health_analytics_custom_modules REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::ListEffectiveSecurityHealthAnalyticsCustomModulesRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::SecurityCenter::V1::ListEffectiveSecurityHealthAnalyticsCustomModulesResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::SecurityCenter::V1::ListEffectiveSecurityHealthAnalyticsCustomModulesResponse]
+              #   A result object deserialized from the server's reply
+              def list_effective_security_health_analytics_custom_modules request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_effective_security_health_analytics_custom_modules_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::SecurityCenter::V1::ListEffectiveSecurityHealthAnalyticsCustomModulesResponse.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
+              # Baseline implementation for the list_security_health_analytics_custom_modules REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::ListSecurityHealthAnalyticsCustomModulesRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::SecurityCenter::V1::ListSecurityHealthAnalyticsCustomModulesResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::SecurityCenter::V1::ListSecurityHealthAnalyticsCustomModulesResponse]
+              #   A result object deserialized from the server's reply
+              def list_security_health_analytics_custom_modules request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_list_security_health_analytics_custom_modules_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::SecurityCenter::V1::ListSecurityHealthAnalyticsCustomModulesResponse.decode_json response.body, ignore_unknown_fields: true
 
                 yield result, operation if block_given?
                 result
@@ -1181,6 +1447,44 @@ module Google
               end
 
               ##
+              # Baseline implementation for the update_security_health_analytics_custom_module REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::UpdateSecurityHealthAnalyticsCustomModuleRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::SecurityCenter::V1::SecurityHealthAnalyticsCustomModule]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::SecurityCenter::V1::SecurityHealthAnalyticsCustomModule]
+              #   A result object deserialized from the server's reply
+              def update_security_health_analytics_custom_module request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                verb, uri, query_string_params, body = ServiceStub.transcode_update_security_health_analytics_custom_module_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
+                  uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
+                  options: options
+                )
+                operation = ::Gapic::Rest::TransportOperation.new response
+                result = ::Google::Cloud::SecurityCenter::V1::SecurityHealthAnalyticsCustomModule.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, operation if block_given?
+                result
+              end
+
+              ##
               # Baseline implementation for the update_source REST call
               #
               # @param request_pb [::Google::Cloud::SecurityCenter::V1::UpdateSourceRequest]
@@ -1449,6 +1753,44 @@ module Google
               ##
               # @private
               #
+              # GRPC transcoding helper method for the create_security_health_analytics_custom_module REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::CreateSecurityHealthAnalyticsCustomModuleRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_create_security_health_analytics_custom_module_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{parent}/customModules",
+                                                          body: "security_health_analytics_custom_module",
+                                                          matches: [
+                                                            ["parent", %r{^organizations/[^/]+/securityHealthAnalyticsSettings/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{parent}/customModules",
+                                                          body: "security_health_analytics_custom_module",
+                                                          matches: [
+                                                            ["parent", %r{^folders/[^/]+/securityHealthAnalyticsSettings/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1/{parent}/customModules",
+                                                          body: "security_health_analytics_custom_module",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/securityHealthAnalyticsSettings/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
               # GRPC transcoding helper method for the create_source REST call
               #
               # @param request_pb [::Google::Cloud::SecurityCenter::V1::CreateSourceRequest]
@@ -1639,6 +1981,41 @@ module Google
               ##
               # @private
               #
+              # GRPC transcoding helper method for the delete_security_health_analytics_custom_module REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::DeleteSecurityHealthAnalyticsCustomModuleRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_delete_security_health_analytics_custom_module_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^organizations/[^/]+/securityHealthAnalyticsSettings/customModules/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^folders/[^/]+/securityHealthAnalyticsSettings/customModules/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/securityHealthAnalyticsSettings/customModules/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
               # GRPC transcoding helper method for the get_big_query_export REST call
               #
               # @param request_pb [::Google::Cloud::SecurityCenter::V1::GetBigQueryExportRequest]
@@ -1787,6 +2164,76 @@ module Google
               ##
               # @private
               #
+              # GRPC transcoding helper method for the get_effective_security_health_analytics_custom_module REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::GetEffectiveSecurityHealthAnalyticsCustomModuleRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_get_effective_security_health_analytics_custom_module_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^organizations/[^/]+/securityHealthAnalyticsSettings/effectiveCustomModules/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^folders/[^/]+/securityHealthAnalyticsSettings/effectiveCustomModules/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/securityHealthAnalyticsSettings/effectiveCustomModules/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the get_security_health_analytics_custom_module REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::GetSecurityHealthAnalyticsCustomModuleRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_get_security_health_analytics_custom_module_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^organizations/[^/]+/securityHealthAnalyticsSettings/customModules/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^folders/[^/]+/securityHealthAnalyticsSettings/customModules/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/securityHealthAnalyticsSettings/customModules/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
               # GRPC transcoding helper method for the get_source REST call
               #
               # @param request_pb [::Google::Cloud::SecurityCenter::V1::GetSourceRequest]
@@ -1919,6 +2366,41 @@ module Google
               ##
               # @private
               #
+              # GRPC transcoding helper method for the list_descendant_security_health_analytics_custom_modules REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::ListDescendantSecurityHealthAnalyticsCustomModulesRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_list_descendant_security_health_analytics_custom_modules_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/customModules:listDescendant",
+                                                          matches: [
+                                                            ["parent", %r{^organizations/[^/]+/securityHealthAnalyticsSettings/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/customModules:listDescendant",
+                                                          matches: [
+                                                            ["parent", %r{^folders/[^/]+/securityHealthAnalyticsSettings/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/customModules:listDescendant",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/securityHealthAnalyticsSettings/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
               # GRPC transcoding helper method for the list_findings REST call
               #
               # @param request_pb [::Google::Cloud::SecurityCenter::V1::ListFindingsRequest]
@@ -2016,6 +2498,76 @@ module Google
                                                           uri_template: "/v1/{parent}/notificationConfigs",
                                                           matches: [
                                                             ["parent", %r{^projects/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the list_effective_security_health_analytics_custom_modules REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::ListEffectiveSecurityHealthAnalyticsCustomModulesRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_list_effective_security_health_analytics_custom_modules_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/effectiveCustomModules",
+                                                          matches: [
+                                                            ["parent", %r{^organizations/[^/]+/securityHealthAnalyticsSettings/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/effectiveCustomModules",
+                                                          matches: [
+                                                            ["parent", %r{^folders/[^/]+/securityHealthAnalyticsSettings/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/effectiveCustomModules",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/securityHealthAnalyticsSettings/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the list_security_health_analytics_custom_modules REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::ListSecurityHealthAnalyticsCustomModulesRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_list_security_health_analytics_custom_modules_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/customModules",
+                                                          matches: [
+                                                            ["parent", %r{^organizations/[^/]+/securityHealthAnalyticsSettings/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/customModules",
+                                                          matches: [
+                                                            ["parent", %r{^folders/[^/]+/securityHealthAnalyticsSettings/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1/{parent}/customModules",
+                                                          matches: [
+                                                            ["parent", %r{^projects/[^/]+/securityHealthAnalyticsSettings/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -2367,6 +2919,44 @@ module Google
                                                           body: "organization_settings",
                                                           matches: [
                                                             ["organization_settings.name", %r{^organizations/[^/]+/organizationSettings/?$}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the update_security_health_analytics_custom_module REST call
+              #
+              # @param request_pb [::Google::Cloud::SecurityCenter::V1::UpdateSecurityHealthAnalyticsCustomModuleRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def self.transcode_update_security_health_analytics_custom_module_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1/{security_health_analytics_custom_module.name}",
+                                                          body: "security_health_analytics_custom_module",
+                                                          matches: [
+                                                            ["security_health_analytics_custom_module.name", %r{^organizations/[^/]+/securityHealthAnalyticsSettings/customModules/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1/{security_health_analytics_custom_module.name}",
+                                                          body: "security_health_analytics_custom_module",
+                                                          matches: [
+                                                            ["security_health_analytics_custom_module.name", %r{^folders/[^/]+/securityHealthAnalyticsSettings/customModules/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/v1/{security_health_analytics_custom_module.name}",
+                                                          body: "security_health_analytics_custom_module",
+                                                          matches: [
+                                                            ["security_health_analytics_custom_module.name", %r{^projects/[^/]+/securityHealthAnalyticsSettings/customModules/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
