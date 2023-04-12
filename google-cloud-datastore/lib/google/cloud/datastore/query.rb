@@ -100,8 +100,8 @@ module Google
         # @overload and(name, operator, value)
         #   Joins the filter with a property filter
         #   @param name [String] The property to filter by.
-        #   @param operator [String] The operator to filter by.
-        #   @param value [Object] The value to compare the property to.
+        #   @param operator [String] The operator to filter by. Defaults to nil.
+        #   @param value [Object] The value to compare the property to. Defaults to nil.
         #       Possible values are:
         #         - Integer
         #         - Float/BigDecimal

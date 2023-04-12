@@ -986,8 +986,8 @@ module Google
         # creation of Filter objects easier.
         #
         # @param name [String] The property to filter by.
-        # @param operator [String] The operator to filter by.
-        # @param value The value to compare the property to.
+        # @param operator [String] The operator to filter by. Defaults to nil.
+        # @param value The value to compare the property to. Defaults to nil.
         #       Possible values are:
         #         - Integer
         #         - Float/BigDecimal
