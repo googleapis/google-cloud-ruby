@@ -118,4 +118,103 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
     subscriber.stop
     subscriber.wait!
   end
+
+  it "should send message to callback on receipt modack success of when exactly only delivery is enabled" do
+    pull_res1 = Google::Cloud::PubSub::V1::StreamingPullResponse.new received_messages: [rec_msg1_grpc],
+                                                                     subscription_properties: {
+                                                                         exactly_once_delivery_enabled: true
+                                                                     }   
+    response_groups = [[pull_res1]]
+
+    stub = StreamingPullStub.new response_groups
+    called = false
+
+    subscription.service.mocked_subscriber = stub
+    def stub.modify_ack_deadline subscription:, ack_ids:, ack_deadline_seconds:
+      if @modify_ack_deadline_requests.count == 0
+        return  @modify_ack_deadline_requests << ["ack_ids"]
+      end
+      raise Google::Cloud::PermissionDeniedError.new "Test failure"
+    end
+    
+    subscriber = subscription.listen streams: 1 do |msg|
+      called = true
+    end
+
+    subscriber.start
+
+    subscriber_retries = 0
+    until called
+      fail "total number of calls were never made" if subscriber_retries > 100
+      subscriber_retries += 1
+      sleep 0.01
+    end
+
+    subscriber.stop
+    subscriber.wait!
+  end
+
+  it "should not send message to callback on receipt modack failure when exactly only delivery is enabled" do
+    pull_res1 = Google::Cloud::PubSub::V1::StreamingPullResponse.new received_messages: [rec_msg1_grpc],
+                                                                     subscription_properties: {
+                                                                         exactly_once_delivery_enabled: true
+                                                                     }   
+    response_groups = [[pull_res1]]
+
+    stub = StreamingPullStub.new response_groups
+    called = false
+
+    subscription.service.mocked_subscriber = stub
+    def stub.modify_ack_deadline subscription:, ack_ids:, ack_deadline_seconds:
+      raise Google::Cloud::PermissionDeniedError.new "Test failure"
+    end
+    
+    subscriber = subscription.listen streams: 1 do |msg|
+      called = true
+    end
+
+    subscriber.start
+
+    subscriber_retries = 0
+    until subscriber_retries < 100
+      subscriber_retries += 1
+      sleep 0.01
+    end
+
+    subscriber.stop
+    subscriber.wait!
+    assert_equal called, false
+  end
+
+  it "should send message to callback without waiting for receipt modack" do
+    pull_res1 = Google::Cloud::PubSub::V1::StreamingPullResponse.new received_messages: [rec_msg1_grpc],
+                                                                     subscription_properties: {
+                                                                         exactly_once_delivery_enabled: false
+                                                                     }   
+    response_groups = [[pull_res1]]
+
+    stub = StreamingPullStub.new response_groups
+    called = false
+
+    subscription.service.mocked_subscriber = stub
+    def stub.modify_ack_deadline subscription:, ack_ids:, ack_deadline_seconds:
+      raise Google::Cloud::PermissionDeniedError.new "Test failure"
+    end
+    
+    subscriber = subscription.listen streams: 1 do |msg|
+      called = true
+    end
+
+    subscriber.start
+
+    subscriber_retries = 0
+    until called
+      fail "total number of calls were never made" if subscriber_retries > 100
+      subscriber_retries += 1
+      sleep 0.01
+    end
+
+    subscriber.stop
+    subscriber.wait!
+  end
 end
