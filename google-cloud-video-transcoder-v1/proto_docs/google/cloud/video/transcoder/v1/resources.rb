@@ -45,13 +45,9 @@ module Google
           # @!attribute [rw] template_id
           #   @return [::String]
           #     Input only. Specify the `template_id` to use for populating `Job.config`.
-          #     The default is `preset/web-hd`.
+          #     The default is `preset/web-hd`, which is the only supported preset.
           #
-          #     Preset Transcoder templates:
-          #     - `preset/{preset_id}`
-          #
-          #     - User defined JobTemplate:
-          #       `{job_template_id}`
+          #     User defined JobTemplate: `{job_template_id}`
           # @!attribute [rw] config
           #   @return [::Google::Cloud::Video::Transcoder::V1::JobConfig]
           #     The configuration for this job.
@@ -80,6 +76,10 @@ module Google
           #   @return [::Google::Rpc::Status]
           #     Output only. An error object that describes the reason for the failure.
           #     This property is always present when `state` is `FAILED`.
+          # @!attribute [rw] mode
+          #   @return [::Google::Cloud::Video::Transcoder::V1::Job::ProcessingMode]
+          #     The processing mode of the job.
+          #     The default is `PROCESSING_MODE_INTERACTIVE`.
           class Job
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -110,6 +110,21 @@ module Google
               # The job has failed. For additional information, see `failure_reason` and
               # `failure_details`
               FAILED = 4
+            end
+
+            # The processing mode of the job.
+            module ProcessingMode
+              # The job processing mode is not specified.
+              PROCESSING_MODE_UNSPECIFIED = 0
+
+              # The job processing mode is interactive mode.
+              # Interactive job will either be ran or rejected if quota does not allow
+              # for it.
+              PROCESSING_MODE_INTERACTIVE = 1
+
+              # The job processing mode is batch mode.
+              # Batch mode allows queuing of jobs.
+              PROCESSING_MODE_BATCH = 2
             end
           end
 
@@ -448,11 +463,11 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
-            # Overlaid jpeg image.
+            # Overlaid image.
             # @!attribute [rw] uri
             #   @return [::String]
-            #     Required. URI of the JPEG image in Cloud Storage. For example,
-            #     `gs://bucket/inputs/image.jpeg`. JPEG is the only supported image type.
+            #     Required. URI of the image in Cloud Storage. For example,
+            #     `gs://bucket/inputs/image.png`. Only PNG and JPEG images are supported.
             # @!attribute [rw] resolution
             #   @return [::Google::Cloud::Video::Transcoder::V1::Overlay::NormalizedCoordinate]
             #     Normalized image resolution, based on output video resolution. Valid
@@ -1218,11 +1233,12 @@ module Google
           #   @return [::String]
           #     The BCP-47 language code, such as `en-US` or `sr-Latn`. For more
           #     information, see
-          #     https://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+          #     https://www.unicode.org/reports/tr35/#Unicode_locale_identifier. Not
+          #     supported in MP4 files.
           # @!attribute [rw] display_name
           #   @return [::String]
           #     The name for this particular audio stream that
-          #     will be added to the HLS/DASH manifest.
+          #     will be added to the HLS/DASH manifest. Not supported in MP4 files.
           class AudioStream
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1270,14 +1286,15 @@ module Google
           #   @return [::String]
           #     The BCP-47 language code, such as `en-US` or `sr-Latn`. For more
           #     information, see
-          #     https://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
+          #     https://www.unicode.org/reports/tr35/#Unicode_locale_identifier. Not
+          #     supported in MP4 files.
           # @!attribute [rw] mapping
           #   @return [::Array<::Google::Cloud::Video::Transcoder::V1::TextStream::TextMapping>]
           #     The mapping for the `Job.edit_list` atoms with text `EditAtom.inputs`.
           # @!attribute [rw] display_name
           #   @return [::String]
           #     The name for this particular text stream that
-          #     will be added to the HLS/DASH manifest.
+          #     will be added to the HLS/DASH manifest. Not supported in MP4 files.
           class TextStream
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
