@@ -33,7 +33,7 @@ def list_slates project_id:, location:
   puts "Slates:"
   # Print out all slates.
   response.each do |slate|
-    puts slate.name.to_s
+    puts slate.name
   end
 end
 # [END videostitcher_list_slates]

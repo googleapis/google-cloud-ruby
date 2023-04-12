@@ -35,7 +35,7 @@ def list_live_ad_tag_details project_id:, location:, session_id:
   puts "Live ad tag details:"
   # Print out all live ad tag details.
   response.each do |live_ad_tag_detail|
-    puts live_ad_tag_detail.name.to_s
+    puts live_ad_tag_detail.name
   end
 end
 # [END videostitcher_list_live_ad_tag_details]
