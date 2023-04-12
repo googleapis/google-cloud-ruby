@@ -302,14 +302,14 @@ module Google
 
           def create_receipt_modack_for_eos received_messages
             received_messages.each do |rec_msg_grpc|
-              callback = Proc.new do |result|
+              callback = proc do |result|
                 if result.succeeded?
                   synchronize { @inventory.add rec_msg_grpc }
-                  rec_msg = ReceivedMessage.from_grpc(rec_msg_grpc, self)
+                  rec_msg = ReceivedMessage.from_grpc rec_msg_grpc, self
                   register_callback rec_msg
                 end
               end
-              @subscriber.buffer.modify_ack_deadline @subscriber.deadline, [rec_msg_grpc.ack_id], callback 
+              @subscriber.buffer.modify_ack_deadline @subscriber.deadline, [rec_msg_grpc.ack_id], callback
             end
           end
 
