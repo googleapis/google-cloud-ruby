@@ -35,7 +35,7 @@ def list_channel_events project_id:, location:, channel_id:
   puts "Channel events:"
   # Print out all channel events.
   response.each do |event|
-    puts event.name.to_s
+    puts event.name
   end
 end
 # [END livestream_list_channel_events]

@@ -35,7 +35,7 @@ def list_vod_stitch_details project_id:, location:, session_id:
   puts "VOD stitch details:"
   # Print out all VOD stitch details.
   response.each do |vod_stitch_detail|
-    puts vod_stitch_detail.name.to_s
+    puts vod_stitch_detail.name
   end
 end
 # [END videostitcher_list_vod_stitch_details]

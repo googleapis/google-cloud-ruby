@@ -34,7 +34,7 @@ def list_inputs project_id:, location:
   puts "Inputs:"
   # Print out all inputs.
   response.each do |input|
-    puts input.name.to_s
+    puts input.name
   end
 end
 # [END livestream_list_inputs]

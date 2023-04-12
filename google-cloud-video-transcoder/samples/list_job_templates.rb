@@ -32,7 +32,7 @@ def list_job_templates project_id:, location:
   puts "Job templates:"
   # Print out all job templates.
   response.each do |job_template|
-    puts job_template.name.to_s
+    puts job_template.name
   end
   # [END transcoder_list_job_templates]
 end
