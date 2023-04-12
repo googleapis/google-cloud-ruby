@@ -144,6 +144,7 @@ end
 
 file_path = File.expand_path "../../../../../conformance/v1/retry_tests.json", __dir__
 test_file = Google::Cloud::Conformance::Storage::V1::RetryTests.decode_json File.read(file_path)
+puts "Running conformance tests - "
 test_file.retryTests.each do |test|
   # Run test for each case
   test.cases.each do |c|
