@@ -170,6 +170,8 @@ module Google
           join_filters composite_filter_or, args
         end
 
+        private
+
         ##
         # @private
         StructuredQuery = Google::Cloud::Firestore::V1::StructuredQuery
