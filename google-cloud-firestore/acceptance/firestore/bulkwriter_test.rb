@@ -17,7 +17,7 @@ require "firestore_helper"
 describe "BulkWriter", :firestore_acceptance do
   let(:query_count) { 5 }
 
-  focus; it "has create method" do
+  it "has create method" do
     rand_tx_col = firestore.col "#{root_path}/tx/#{SecureRandom.hex(4)}"
     bw = firestore.bulk_writer
 
