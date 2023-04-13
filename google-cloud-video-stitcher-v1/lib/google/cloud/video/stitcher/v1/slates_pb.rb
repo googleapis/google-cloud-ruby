@@ -11,6 +11,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.video.stitcher.v1.Slate" do
       optional :name, :string, 1
       optional :uri, :string, 2
+      optional :gam_slate, :message, 3, "google.cloud.video.stitcher.v1.Slate.GamSlate"
+    end
+    add_message "google.cloud.video.stitcher.v1.Slate.GamSlate" do
+      optional :network_code, :string, 1
+      optional :gam_slate_id, :int64, 2
     end
   end
 end
@@ -21,6 +26,7 @@ module Google
       module Stitcher
         module V1
           Slate = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.stitcher.v1.Slate").msgclass
+          Slate::GamSlate = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.stitcher.v1.Slate.GamSlate").msgclass
         end
       end
     end

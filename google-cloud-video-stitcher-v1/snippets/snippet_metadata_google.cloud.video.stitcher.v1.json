@@ -27,7 +27,7 @@
             "name": "request"
           }
         ],
-        "result_type": "::Google::Cloud::Video::Stitcher::V1::CdnKey",
+        "result_type": "::Google::Longrunning::Operation",
         "client": {
           "short_name": "VideoStitcherService::Client",
           "full_name": "::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client"
@@ -46,7 +46,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 48,
           "type": "FULL"
         }
       ]
@@ -147,7 +147,7 @@
             "name": "request"
           }
         ],
-        "result_type": "::Google::Protobuf::Empty",
+        "result_type": "::Google::Longrunning::Operation",
         "client": {
           "short_name": "VideoStitcherService::Client",
           "full_name": "::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client"
@@ -166,7 +166,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 48,
           "type": "FULL"
         }
       ]
@@ -187,7 +187,7 @@
             "name": "request"
           }
         ],
-        "result_type": "::Google::Cloud::Video::Stitcher::V1::CdnKey",
+        "result_type": "::Google::Longrunning::Operation",
         "client": {
           "short_name": "VideoStitcherService::Client",
           "full_name": "::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client"
@@ -206,7 +206,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 48,
           "type": "FULL"
         }
       ]
@@ -547,7 +547,7 @@
             "name": "request"
           }
         ],
-        "result_type": "::Google::Cloud::Video::Stitcher::V1::Slate",
+        "result_type": "::Google::Longrunning::Operation",
         "client": {
           "short_name": "VideoStitcherService::Client",
           "full_name": "::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client"
@@ -566,7 +566,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 48,
           "type": "FULL"
         }
       ]
@@ -667,7 +667,7 @@
             "name": "request"
           }
         ],
-        "result_type": "::Google::Cloud::Video::Stitcher::V1::Slate",
+        "result_type": "::Google::Longrunning::Operation",
         "client": {
           "short_name": "VideoStitcherService::Client",
           "full_name": "::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client"
@@ -686,7 +686,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 48,
           "type": "FULL"
         }
       ]
@@ -707,7 +707,7 @@
             "name": "request"
           }
         ],
-        "result_type": "::Google::Protobuf::Empty",
+        "result_type": "::Google::Longrunning::Operation",
         "client": {
           "short_name": "VideoStitcherService::Client",
           "full_name": "::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client"
@@ -726,7 +726,7 @@
       "segments": [
         {
           "start": 20,
-          "end": 41,
+          "end": 48,
           "type": "FULL"
         }
       ]
@@ -807,6 +807,166 @@
         {
           "start": 20,
           "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "videostitcher_v1_generated_VideoStitcherService_CreateLiveConfig_sync",
+      "title": "Snippet for the create_live_config call in the VideoStitcherService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client#create_live_config. It may require modification in order to execute successfully.",
+      "file": "video_stitcher_service/create_live_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_live_config",
+        "full_name": "::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client#create_live_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Video::Stitcher::V1::CreateLiveConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VideoStitcherService::Client",
+          "full_name": "::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client"
+        },
+        "method": {
+          "short_name": "CreateLiveConfig",
+          "full_name": "google.cloud.video.stitcher.v1.VideoStitcherService.CreateLiveConfig",
+          "service": {
+            "short_name": "VideoStitcherService",
+            "full_name": "google.cloud.video.stitcher.v1.VideoStitcherService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "videostitcher_v1_generated_VideoStitcherService_ListLiveConfigs_sync",
+      "title": "Snippet for the list_live_configs call in the VideoStitcherService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client#list_live_configs. It may require modification in order to execute successfully.",
+      "file": "video_stitcher_service/list_live_configs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_live_configs",
+        "full_name": "::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client#list_live_configs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Video::Stitcher::V1::ListLiveConfigsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Video::Stitcher::V1::ListLiveConfigsResponse",
+        "client": {
+          "short_name": "VideoStitcherService::Client",
+          "full_name": "::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client"
+        },
+        "method": {
+          "short_name": "ListLiveConfigs",
+          "full_name": "google.cloud.video.stitcher.v1.VideoStitcherService.ListLiveConfigs",
+          "service": {
+            "short_name": "VideoStitcherService",
+            "full_name": "google.cloud.video.stitcher.v1.VideoStitcherService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "videostitcher_v1_generated_VideoStitcherService_GetLiveConfig_sync",
+      "title": "Snippet for the get_live_config call in the VideoStitcherService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client#get_live_config. It may require modification in order to execute successfully.",
+      "file": "video_stitcher_service/get_live_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_live_config",
+        "full_name": "::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client#get_live_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Video::Stitcher::V1::GetLiveConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Video::Stitcher::V1::LiveConfig",
+        "client": {
+          "short_name": "VideoStitcherService::Client",
+          "full_name": "::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client"
+        },
+        "method": {
+          "short_name": "GetLiveConfig",
+          "full_name": "google.cloud.video.stitcher.v1.VideoStitcherService.GetLiveConfig",
+          "service": {
+            "short_name": "VideoStitcherService",
+            "full_name": "google.cloud.video.stitcher.v1.VideoStitcherService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "videostitcher_v1_generated_VideoStitcherService_DeleteLiveConfig_sync",
+      "title": "Snippet for the delete_live_config call in the VideoStitcherService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client#delete_live_config. It may require modification in order to execute successfully.",
+      "file": "video_stitcher_service/delete_live_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_live_config",
+        "full_name": "::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client#delete_live_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Video::Stitcher::V1::DeleteLiveConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VideoStitcherService::Client",
+          "full_name": "::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client"
+        },
+        "method": {
+          "short_name": "DeleteLiveConfig",
+          "full_name": "google.cloud.video.stitcher.v1.VideoStitcherService.DeleteLiveConfig",
+          "service": {
+            "short_name": "VideoStitcherService",
+            "full_name": "google.cloud.video.stitcher.v1.VideoStitcherService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
           "type": "FULL"
         }
       ]
