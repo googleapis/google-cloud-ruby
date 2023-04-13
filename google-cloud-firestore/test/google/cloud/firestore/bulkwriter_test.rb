@@ -84,7 +84,7 @@ describe Google::Cloud::Firestore::BulkWriter, :mock_firestore do
   end
 
   describe "retry tests" do
-    focus; it "do not exceed the max retry attempts" do
+    it "do not exceed the max retry attempts" do
       write_requests = [Google::Cloud::Firestore::Convert.write_for_create("#{documents_path}/cities/NYC", { foo: "bar"})]
       request = batch_write_args write_requests
       responses = [batch_write_fail_resp(1), batch_write_fail_resp(1), batch_write_fail_resp(1), batch_write_pass_resp(1)]
