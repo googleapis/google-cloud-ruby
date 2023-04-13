@@ -233,11 +233,10 @@ module Google
             #     Required. The location name.
             #     For example: `projects/PROJECT_ID/locations/LOCATION_ID`
             #   @param filter [::String]
-            #     `filter` can be used to specify a subset of queues. Any {::Google::Cloud::Tasks::V2beta2::Queue Queue}
-            #     field can be used as a filter and several operators as supported.
-            #     For example: `<=, <, >=, >, !=, =, :`. The filter syntax is the same as
-            #     described in
-            #     [Stackdriver's Advanced Logs
+            #     `filter` can be used to specify a subset of queues. Any
+            #     {::Google::Cloud::Tasks::V2beta2::Queue Queue} field can be used as a filter and
+            #     several operators as supported. For example: `<=, <, >=, >, !=, =, :`. The
+            #     filter syntax is the same as described in [Stackdriver's Advanced Logs
             #     Filters](https://cloud.google.com/logging/docs/view/advanced_filters).
             #
             #     Sample filter "app_engine_http_target: *".
@@ -250,20 +249,22 @@ module Google
             #     The maximum page size is 9800. If unspecified, the page size will
             #     be the maximum. Fewer queues than requested might be returned,
             #     even if more queues exist; use the
-            #     {::Google::Cloud::Tasks::V2beta2::ListQueuesResponse#next_page_token next_page_token} in the
-            #     response to determine if more queues exist.
+            #     {::Google::Cloud::Tasks::V2beta2::ListQueuesResponse#next_page_token next_page_token}
+            #     in the response to determine if more queues exist.
             #   @param page_token [::String]
             #     A token identifying the page of results to return.
             #
             #     To request the first page results, page_token must be empty. To
             #     request the next page of results, page_token must be the value of
-            #     {::Google::Cloud::Tasks::V2beta2::ListQueuesResponse#next_page_token next_page_token} returned
-            #     from the previous call to {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#list_queues ListQueues}
-            #     method. It is an error to switch the value of the
-            #     {::Google::Cloud::Tasks::V2beta2::ListQueuesRequest#filter filter} while iterating through pages.
+            #     {::Google::Cloud::Tasks::V2beta2::ListQueuesResponse#next_page_token next_page_token}
+            #     returned from the previous call to
+            #     {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#list_queues ListQueues} method. It
+            #     is an error to switch the value of the
+            #     {::Google::Cloud::Tasks::V2beta2::ListQueuesRequest#filter filter} while
+            #     iterating through pages.
             #   @param read_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Optional. Read mask is used for a more granular control over what the API returns.
-            #     If the mask is not present all fields will be returned except
+            #     Optional. Read mask is used for a more granular control over what the API
+            #     returns. If the mask is not present all fields will be returned except
             #     [Queue.stats]. [Queue.stats] will be returned only if it was  explicitly
             #     specified in the mask.
             #
@@ -358,8 +359,8 @@ module Google
             #     Required. The resource name of the queue. For example:
             #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
             #   @param read_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Optional. Read mask is used for a more granular control over what the API returns.
-            #     If the mask is not present all fields will be returned except
+            #     Optional. Read mask is used for a more granular control over what the API
+            #     returns. If the mask is not present all fields will be returned except
             #     [Queue.stats]. [Queue.stats] will be returned only if it was  explicitly
             #     specified in the mask.
             #
@@ -431,8 +432,8 @@ module Google
             # Creates a queue.
             #
             # Queues created with this method allow tasks to live for a maximum of 31
-            # days. After a task is 31 days old, the task will be deleted regardless of whether
-            # it was dispatched or not.
+            # days. After a task is 31 days old, the task will be deleted regardless of
+            # whether it was dispatched or not.
             #
             # WARNING: Using this method may have unintended side effects if you are
             # using an App Engine `queue.yaml` or `queue.xml` file to manage your queues.
@@ -466,7 +467,8 @@ module Google
             #   @param queue [::Google::Cloud::Tasks::V2beta2::Queue, ::Hash]
             #     Required. The queue to create.
             #
-            #     [Queue's name][google.cloud.tasks.v2beta2.Queue.name] cannot be the same as an existing queue.
+            #     [Queue's name][google.cloud.tasks.v2beta2.Queue.name] cannot be the same as
+            #     an existing queue.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Tasks::V2beta2::Queue]
@@ -539,8 +541,8 @@ module Google
             # the queue if it does exist.
             #
             # Queues created with this method allow tasks to live for a maximum of 31
-            # days. After a task is 31 days old, the task will be deleted regardless of whether
-            # it was dispatched or not.
+            # days. After a task is 31 days old, the task will be deleted regardless of
+            # whether it was dispatched or not.
             #
             # WARNING: Using this method may have unintended side effects if you are
             # using an App Engine `queue.yaml` or `queue.xml` file to manage your queues.
@@ -567,11 +569,13 @@ module Google
             #   @param queue [::Google::Cloud::Tasks::V2beta2::Queue, ::Hash]
             #     Required. The queue to create or update.
             #
-            #     The queue's {::Google::Cloud::Tasks::V2beta2::Queue#name name} must be specified.
+            #     The queue's {::Google::Cloud::Tasks::V2beta2::Queue#name name} must be
+            #     specified.
             #
             #     Output only fields cannot be modified using UpdateQueue.
             #     Any value specified for an output only field will be ignored.
-            #     The queue's {::Google::Cloud::Tasks::V2beta2::Queue#name name} cannot be changed.
+            #     The queue's {::Google::Cloud::Tasks::V2beta2::Queue#name name} cannot be
+            #     changed.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     A mask used to specify which fields of the queue are being updated.
             #
@@ -835,9 +839,10 @@ module Google
             #
             # If a queue is paused then the system will stop dispatching tasks
             # until the queue is resumed via
-            # {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#resume_queue ResumeQueue}. Tasks can still be added
-            # when the queue is paused. A queue is paused if its
-            # {::Google::Cloud::Tasks::V2beta2::Queue#state state} is {::Google::Cloud::Tasks::V2beta2::Queue::State::PAUSED PAUSED}.
+            # {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#resume_queue ResumeQueue}. Tasks can
+            # still be added when the queue is paused. A queue is paused if its
+            # {::Google::Cloud::Tasks::V2beta2::Queue#state state} is
+            # {::Google::Cloud::Tasks::V2beta2::Queue::State::PAUSED PAUSED}.
             #
             # @overload pause_queue(request, options = nil)
             #   Pass arguments to `pause_queue` via a request object, either of type
@@ -927,9 +932,11 @@ module Google
             #
             # This method resumes a queue after it has been
             # {::Google::Cloud::Tasks::V2beta2::Queue::State::PAUSED PAUSED} or
-            # {::Google::Cloud::Tasks::V2beta2::Queue::State::DISABLED DISABLED}. The state of a queue is stored
-            # in the queue's {::Google::Cloud::Tasks::V2beta2::Queue#state state}; after calling this method it
-            # will be set to {::Google::Cloud::Tasks::V2beta2::Queue::State::RUNNING RUNNING}.
+            # {::Google::Cloud::Tasks::V2beta2::Queue::State::DISABLED DISABLED}. The state of a
+            # queue is stored in the queue's
+            # {::Google::Cloud::Tasks::V2beta2::Queue#state state}; after calling this method
+            # it will be set to
+            # {::Google::Cloud::Tasks::V2beta2::Queue::State::RUNNING RUNNING}.
             #
             # WARNING: Resuming many high-QPS queues at the same time can
             # lead to target overloading. If you are resuming high-QPS
@@ -1021,9 +1028,9 @@ module Google
             end
 
             ##
-            # Gets the access control policy for a {::Google::Cloud::Tasks::V2beta2::Queue Queue}.
-            # Returns an empty policy if the resource exists and does not have a policy
-            # set.
+            # Gets the access control policy for a
+            # {::Google::Cloud::Tasks::V2beta2::Queue Queue}. Returns an empty policy if the
+            # resource exists and does not have a policy set.
             #
             # Authorization requires the following
             # [Google IAM](https://cloud.google.com/iam) permission on the specified
@@ -1118,8 +1125,8 @@ module Google
             end
 
             ##
-            # Sets the access control policy for a {::Google::Cloud::Tasks::V2beta2::Queue Queue}. Replaces any existing
-            # policy.
+            # Sets the access control policy for a
+            # {::Google::Cloud::Tasks::V2beta2::Queue Queue}. Replaces any existing policy.
             #
             # Note: The Cloud Console does not check queue-level IAM permissions yet.
             # Project-level permissions are required to use the Cloud Console.
@@ -1225,9 +1232,10 @@ module Google
             end
 
             ##
-            # Returns permissions that a caller has on a {::Google::Cloud::Tasks::V2beta2::Queue Queue}.
-            # If the resource does not exist, this will return an empty set of
-            # permissions, not a [NOT_FOUND][google.rpc.Code.NOT_FOUND] error.
+            # Returns permissions that a caller has on a
+            # {::Google::Cloud::Tasks::V2beta2::Queue Queue}. If the resource does not exist,
+            # this will return an empty set of permissions, not a
+            # [NOT_FOUND][google.rpc.Code.NOT_FOUND] error.
             #
             # Note: This operation is designed to be used for building permission-aware
             # UIs and command-line tools, not for authorization checking. This operation
@@ -1324,10 +1332,10 @@ module Google
             ##
             # Lists the tasks in a queue.
             #
-            # By default, only the {::Google::Cloud::Tasks::V2beta2::Task::View::BASIC BASIC} view is retrieved
-            # due to performance considerations;
-            # {::Google::Cloud::Tasks::V2beta2::ListTasksRequest#response_view response_view} controls the
-            # subset of information which is returned.
+            # By default, only the {::Google::Cloud::Tasks::V2beta2::Task::View::BASIC BASIC}
+            # view is retrieved due to performance considerations;
+            # {::Google::Cloud::Tasks::V2beta2::ListTasksRequest#response_view response_view}
+            # controls the subset of information which is returned.
             #
             # The tasks may be returned in any order. The ordering may change at any
             # time.
@@ -1351,24 +1359,25 @@ module Google
             #     Required. The queue name. For example:
             #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
             #   @param response_view [::Google::Cloud::Tasks::V2beta2::Task::View]
-            #     The response_view specifies which subset of the {::Google::Cloud::Tasks::V2beta2::Task Task} will be
-            #     returned.
+            #     The response_view specifies which subset of the
+            #     {::Google::Cloud::Tasks::V2beta2::Task Task} will be returned.
             #
-            #     By default response_view is {::Google::Cloud::Tasks::V2beta2::Task::View::BASIC BASIC}; not all
-            #     information is retrieved by default because some data, such as
-            #     payloads, might be desirable to return only when needed because
-            #     of its large size or because of the sensitivity of data that it
-            #     contains.
+            #     By default response_view is
+            #     {::Google::Cloud::Tasks::V2beta2::Task::View::BASIC BASIC}; not all information is
+            #     retrieved by default because some data, such as payloads, might be
+            #     desirable to return only when needed because of its large size or because
+            #     of the sensitivity of data that it contains.
             #
-            #     Authorization for {::Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
-            #     `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
-            #     permission on the {::Google::Cloud::Tasks::V2beta2::Task Task} resource.
+            #     Authorization for {::Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL}
+            #     requires `cloudtasks.tasks.fullView` [Google
+            #     IAM](https://cloud.google.com/iam/) permission on the
+            #     {::Google::Cloud::Tasks::V2beta2::Task Task} resource.
             #   @param page_size [::Integer]
             #     Maximum page size.
             #
             #     Fewer tasks than requested might be returned, even if more tasks exist; use
-            #     {::Google::Cloud::Tasks::V2beta2::ListTasksResponse#next_page_token next_page_token} in the response to
-            #     determine if more tasks exist.
+            #     {::Google::Cloud::Tasks::V2beta2::ListTasksResponse#next_page_token next_page_token}
+            #     in the response to determine if more tasks exist.
             #
             #     The maximum page size is 1000. If unspecified, the page size will be the
             #     maximum.
@@ -1377,9 +1386,9 @@ module Google
             #
             #     To request the first page results, page_token must be empty. To
             #     request the next page of results, page_token must be the value of
-            #     {::Google::Cloud::Tasks::V2beta2::ListTasksResponse#next_page_token next_page_token} returned
-            #     from the previous call to {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#list_tasks ListTasks}
-            #     method.
+            #     {::Google::Cloud::Tasks::V2beta2::ListTasksResponse#next_page_token next_page_token}
+            #     returned from the previous call to
+            #     {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#list_tasks ListTasks} method.
             #
             #     The page token is valid for only 2 hours.
             #
@@ -1474,18 +1483,19 @@ module Google
             #     Required. The task name. For example:
             #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
             #   @param response_view [::Google::Cloud::Tasks::V2beta2::Task::View]
-            #     The response_view specifies which subset of the {::Google::Cloud::Tasks::V2beta2::Task Task} will be
-            #     returned.
+            #     The response_view specifies which subset of the
+            #     {::Google::Cloud::Tasks::V2beta2::Task Task} will be returned.
             #
-            #     By default response_view is {::Google::Cloud::Tasks::V2beta2::Task::View::BASIC BASIC}; not all
-            #     information is retrieved by default because some data, such as
-            #     payloads, might be desirable to return only when needed because
-            #     of its large size or because of the sensitivity of data that it
-            #     contains.
+            #     By default response_view is
+            #     {::Google::Cloud::Tasks::V2beta2::Task::View::BASIC BASIC}; not all information is
+            #     retrieved by default because some data, such as payloads, might be
+            #     desirable to return only when needed because of its large size or because
+            #     of the sensitivity of data that it contains.
             #
-            #     Authorization for {::Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
-            #     `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
-            #     permission on the {::Google::Cloud::Tasks::V2beta2::Task Task} resource.
+            #     Authorization for {::Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL}
+            #     requires `cloudtasks.tasks.fullView` [Google
+            #     IAM](https://cloud.google.com/iam/) permission on the
+            #     {::Google::Cloud::Tasks::V2beta2::Task Task} resource.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Tasks::V2beta2::Task]
@@ -1556,9 +1566,11 @@ module Google
             #
             # Tasks cannot be updated after creation; there is no UpdateTask command.
             #
-            # * For {::Google::Cloud::Tasks::V2beta2::AppEngineHttpTarget App Engine queues}, the maximum task size is
+            # * For {::Google::Cloud::Tasks::V2beta2::AppEngineHttpTarget App Engine queues},
+            # the maximum task size is
             #   100KB.
-            # * For {::Google::Cloud::Tasks::V2beta2::PullTarget pull queues}, the maximum task size is 1MB.
+            # * For {::Google::Cloud::Tasks::V2beta2::PullTarget pull queues}, the maximum
+            # task size is 1MB.
             #
             # @overload create_task(request, options = nil)
             #   Pass arguments to `create_task` via a request object, either of type
@@ -1585,13 +1597,13 @@ module Google
             #
             #     Task names have the following format:
             #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`.
-            #     The user can optionally specify a task {::Google::Cloud::Tasks::V2beta2::Task#name name}. If a
-            #     name is not specified then the system will generate a random
-            #     unique task id, which will be set in the task returned in the
-            #     {::Google::Cloud::Tasks::V2beta2::Task#name response}.
+            #     The user can optionally specify a task
+            #     {::Google::Cloud::Tasks::V2beta2::Task#name name}. If a name is not specified
+            #     then the system will generate a random unique task id, which will be set in
+            #     the task returned in the {::Google::Cloud::Tasks::V2beta2::Task#name response}.
             #
-            #     If {::Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time} is not set or is in the
-            #     past then Cloud Tasks will set it to the current time.
+            #     If {::Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time} is not
+            #     set or is in the past then Cloud Tasks will set it to the current time.
             #
             #     Task De-duplication:
             #
@@ -1606,27 +1618,28 @@ module Google
             #     for ~9days after the original task was deleted or completed.
             #
             #     Because there is an extra lookup cost to identify duplicate task
-            #     names, these {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#create_task CreateTask} calls have significantly
-            #     increased latency. Using hashed strings for the task id or for
-            #     the prefix of the task id is recommended. Choosing task ids that
-            #     are sequential or have sequential prefixes, for example using a
+            #     names, these {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#create_task CreateTask}
+            #     calls have significantly increased latency. Using hashed strings for the
+            #     task id or for the prefix of the task id is recommended. Choosing task ids
+            #     that are sequential or have sequential prefixes, for example using a
             #     timestamp, causes an increase in latency and error rates in all
             #     task commands. The infrastructure relies on an approximately
             #     uniform distribution of task ids to store and serve tasks
             #     efficiently.
             #   @param response_view [::Google::Cloud::Tasks::V2beta2::Task::View]
-            #     The response_view specifies which subset of the {::Google::Cloud::Tasks::V2beta2::Task Task} will be
-            #     returned.
+            #     The response_view specifies which subset of the
+            #     {::Google::Cloud::Tasks::V2beta2::Task Task} will be returned.
             #
-            #     By default response_view is {::Google::Cloud::Tasks::V2beta2::Task::View::BASIC BASIC}; not all
-            #     information is retrieved by default because some data, such as
-            #     payloads, might be desirable to return only when needed because
-            #     of its large size or because of the sensitivity of data that it
-            #     contains.
+            #     By default response_view is
+            #     {::Google::Cloud::Tasks::V2beta2::Task::View::BASIC BASIC}; not all information is
+            #     retrieved by default because some data, such as payloads, might be
+            #     desirable to return only when needed because of its large size or because
+            #     of the sensitivity of data that it contains.
             #
-            #     Authorization for {::Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
-            #     `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
-            #     permission on the {::Google::Cloud::Tasks::V2beta2::Task Task} resource.
+            #     Authorization for {::Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL}
+            #     requires `cloudtasks.tasks.fullView` [Google
+            #     IAM](https://cloud.google.com/iam/) permission on the
+            #     {::Google::Cloud::Tasks::V2beta2::Task Task} resource.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Tasks::V2beta2::Task]
@@ -1788,18 +1801,19 @@ module Google
             #
             # This method is invoked by the worker to obtain a lease. The
             # worker must acknowledge the task via
-            # {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#acknowledge_task AcknowledgeTask} after they have
-            # performed the work associated with the task.
+            # {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#acknowledge_task AcknowledgeTask}
+            # after they have performed the work associated with the task.
             #
-            # The {::Google::Cloud::Tasks::V2beta2::PullMessage#payload payload} is intended to store data that
-            # the worker needs to perform the work associated with the task. To
-            # return the payloads in the {::Google::Cloud::Tasks::V2beta2::LeaseTasksResponse response}, set
-            # {::Google::Cloud::Tasks::V2beta2::LeaseTasksRequest#response_view response_view} to
-            # {::Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL}.
+            # The {::Google::Cloud::Tasks::V2beta2::PullMessage#payload payload} is intended
+            # to store data that the worker needs to perform the work associated with the
+            # task. To return the payloads in the
+            # {::Google::Cloud::Tasks::V2beta2::LeaseTasksResponse response}, set
+            # {::Google::Cloud::Tasks::V2beta2::LeaseTasksRequest#response_view response_view}
+            # to {::Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL}.
             #
-            # A maximum of 10 qps of {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#lease_tasks LeaseTasks}
-            # requests are allowed per
-            # queue. [RESOURCE_EXHAUSTED][google.rpc.Code.RESOURCE_EXHAUSTED]
+            # A maximum of 10 qps of
+            # {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#lease_tasks LeaseTasks} requests are
+            # allowed per queue. [RESOURCE_EXHAUSTED][google.rpc.Code.RESOURCE_EXHAUSTED]
             # is returned when this limit is
             # exceeded. [RESOURCE_EXHAUSTED][google.rpc.Code.RESOURCE_EXHAUSTED]
             # is also returned when
@@ -1832,53 +1846,59 @@ module Google
             #
             #     The largest that `max_tasks` can be is 1000.
             #
-            #     The maximum total size of a {::Google::Cloud::Tasks::V2beta2::LeaseTasksResponse lease tasks response} is
-            #     32 MB. If the sum of all task sizes requested reaches this limit,
-            #     fewer tasks than requested are returned.
+            #     The maximum total size of a [lease tasks
+            #     response][google.cloud.tasks.v2beta2.LeaseTasksResponse] is 32 MB. If the
+            #     sum of all task sizes requested reaches this limit, fewer tasks than
+            #     requested are returned.
             #   @param lease_duration [::Google::Protobuf::Duration, ::Hash]
             #     Required. The duration of the lease.
             #
-            #     Each task returned in the {::Google::Cloud::Tasks::V2beta2::LeaseTasksResponse response} will
-            #     have its {::Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time} set to the current
-            #     time plus the `lease_duration`. The task is leased until its
-            #     {::Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time}; thus, the task will not be
-            #     returned to another {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#lease_tasks LeaseTasks} call
-            #     before its {::Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time}.
+            #     Each task returned in the
+            #     {::Google::Cloud::Tasks::V2beta2::LeaseTasksResponse response} will have its
+            #     {::Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time} set to the
+            #     current time plus the `lease_duration`. The task is leased until its
+            #     {::Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time}; thus, the
+            #     task will not be returned to another
+            #     {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#lease_tasks LeaseTasks} call before
+            #     its {::Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time}.
             #
             #
             #     After the worker has successfully finished the work associated
             #     with the task, the worker must call via
-            #     {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#acknowledge_task AcknowledgeTask} before the
-            #     {::Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time}. Otherwise the task will be
-            #     returned to a later {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#lease_tasks LeaseTasks} call so
-            #     that another worker can retry it.
+            #     {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#acknowledge_task AcknowledgeTask}
+            #     before the {::Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time}.
+            #     Otherwise the task will be returned to a later
+            #     {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#lease_tasks LeaseTasks} call so that
+            #     another worker can retry it.
             #
             #     The maximum lease duration is 1 week.
             #     `lease_duration` will be truncated to the nearest second.
             #   @param response_view [::Google::Cloud::Tasks::V2beta2::Task::View]
-            #     The response_view specifies which subset of the {::Google::Cloud::Tasks::V2beta2::Task Task} will be
-            #     returned.
+            #     The response_view specifies which subset of the
+            #     {::Google::Cloud::Tasks::V2beta2::Task Task} will be returned.
             #
-            #     By default response_view is {::Google::Cloud::Tasks::V2beta2::Task::View::BASIC BASIC}; not all
-            #     information is retrieved by default because some data, such as
-            #     payloads, might be desirable to return only when needed because
-            #     of its large size or because of the sensitivity of data that it
-            #     contains.
+            #     By default response_view is
+            #     {::Google::Cloud::Tasks::V2beta2::Task::View::BASIC BASIC}; not all information is
+            #     retrieved by default because some data, such as payloads, might be
+            #     desirable to return only when needed because of its large size or because
+            #     of the sensitivity of data that it contains.
             #
-            #     Authorization for {::Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
-            #     `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
-            #     permission on the {::Google::Cloud::Tasks::V2beta2::Task Task} resource.
+            #     Authorization for {::Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL}
+            #     requires `cloudtasks.tasks.fullView` [Google
+            #     IAM](https://cloud.google.com/iam/) permission on the
+            #     {::Google::Cloud::Tasks::V2beta2::Task Task} resource.
             #   @param filter [::String]
             #     `filter` can be used to specify a subset of tasks to lease.
             #
             #     When `filter` is set to `tag=<my-tag>` then the
-            #     {::Google::Cloud::Tasks::V2beta2::LeaseTasksResponse response} will contain only tasks whose
-            #     {::Google::Cloud::Tasks::V2beta2::PullMessage#tag tag} is equal to `<my-tag>`. `<my-tag>` must be
-            #     less than 500 characters.
+            #     {::Google::Cloud::Tasks::V2beta2::LeaseTasksResponse response} will contain only
+            #     tasks whose {::Google::Cloud::Tasks::V2beta2::PullMessage#tag tag} is equal to
+            #     `<my-tag>`. `<my-tag>` must be less than 500 characters.
             #
             #     When `filter` is set to `tag_function=oldest_tag()`, only tasks which have
             #     the same tag as the task with the oldest
-            #     {::Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time} will be returned.
+            #     {::Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time} will be
+            #     returned.
             #
             #     Grammar Syntax:
             #
@@ -1896,8 +1916,9 @@ module Google
             #     [bytes](https://cloud.google.com/appengine/docs/standard/java/javadoc/com/google/appengine/api/taskqueue/TaskOptions.html#tag-byte:A-),
             #     only UTF-8 encoded tags can be used in Cloud Tasks. Tag which
             #     aren't UTF-8 encoded can't be used in the
-            #     {::Google::Cloud::Tasks::V2beta2::LeaseTasksRequest#filter filter} and the task's
-            #     {::Google::Cloud::Tasks::V2beta2::PullMessage#tag tag} will be displayed as empty in Cloud Tasks.
+            #     {::Google::Cloud::Tasks::V2beta2::LeaseTasksRequest#filter filter} and the
+            #     task's {::Google::Cloud::Tasks::V2beta2::PullMessage#tag tag} will be displayed
+            #     as empty in Cloud Tasks.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Tasks::V2beta2::LeaseTasksResponse]
@@ -1967,12 +1988,13 @@ module Google
             # Acknowledges a pull task.
             #
             # The worker, that is, the entity that
-            # {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#lease_tasks leased} this task must call this method
-            # to indicate that the work associated with the task has finished.
+            # {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#lease_tasks leased} this task must
+            # call this method to indicate that the work associated with the task has
+            # finished.
             #
             # The worker must acknowledge a task within the
-            # {::Google::Cloud::Tasks::V2beta2::LeaseTasksRequest#lease_duration lease_duration} or the lease
-            # will expire and the task will become available to be leased
+            # {::Google::Cloud::Tasks::V2beta2::LeaseTasksRequest#lease_duration lease_duration}
+            # or the lease will expire and the task will become available to be leased
             # again. After the task is acknowledged, it will not be returned
             # by a later {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#lease_tasks LeaseTasks},
             # {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#get_task GetTask}, or
@@ -2000,8 +2022,8 @@ module Google
             #     Required. The task's current schedule time, available in the
             #     {::Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time} returned by
             #     {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#lease_tasks LeaseTasks} response or
-            #     {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#renew_lease RenewLease} response. This restriction is
-            #     to ensure that your worker currently holds the lease.
+            #     {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#renew_lease RenewLease} response.
+            #     This restriction is to ensure that your worker currently holds the lease.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]
@@ -2072,7 +2094,8 @@ module Google
             #
             # The worker can use this method to extend the lease by a new
             # duration, starting from now. The new task lease will be
-            # returned in the task's {::Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time}.
+            # returned in the task's
+            # {::Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time}.
             #
             # @overload renew_lease(request, options = nil)
             #   Pass arguments to `renew_lease` via a request object, either of type
@@ -2096,8 +2119,8 @@ module Google
             #     Required. The task's current schedule time, available in the
             #     {::Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time} returned by
             #     {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#lease_tasks LeaseTasks} response or
-            #     {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#renew_lease RenewLease} response. This restriction is
-            #     to ensure that your worker currently holds the lease.
+            #     {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#renew_lease RenewLease} response.
+            #     This restriction is to ensure that your worker currently holds the lease.
             #   @param lease_duration [::Google::Protobuf::Duration, ::Hash]
             #     Required. The desired new lease duration, starting from now.
             #
@@ -2105,18 +2128,19 @@ module Google
             #     The maximum lease duration is 1 week.
             #     `lease_duration` will be truncated to the nearest second.
             #   @param response_view [::Google::Cloud::Tasks::V2beta2::Task::View]
-            #     The response_view specifies which subset of the {::Google::Cloud::Tasks::V2beta2::Task Task} will be
-            #     returned.
+            #     The response_view specifies which subset of the
+            #     {::Google::Cloud::Tasks::V2beta2::Task Task} will be returned.
             #
-            #     By default response_view is {::Google::Cloud::Tasks::V2beta2::Task::View::BASIC BASIC}; not all
-            #     information is retrieved by default because some data, such as
-            #     payloads, might be desirable to return only when needed because
-            #     of its large size or because of the sensitivity of data that it
-            #     contains.
+            #     By default response_view is
+            #     {::Google::Cloud::Tasks::V2beta2::Task::View::BASIC BASIC}; not all information is
+            #     retrieved by default because some data, such as payloads, might be
+            #     desirable to return only when needed because of its large size or because
+            #     of the sensitivity of data that it contains.
             #
-            #     Authorization for {::Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
-            #     `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
-            #     permission on the {::Google::Cloud::Tasks::V2beta2::Task Task} resource.
+            #     Authorization for {::Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL}
+            #     requires `cloudtasks.tasks.fullView` [Google
+            #     IAM](https://cloud.google.com/iam/) permission on the
+            #     {::Google::Cloud::Tasks::V2beta2::Task Task} resource.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Tasks::V2beta2::Task]
@@ -2186,9 +2210,9 @@ module Google
             # Cancel a pull task's lease.
             #
             # The worker can use this method to cancel a task's lease by
-            # setting its {::Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time} to now. This will
-            # make the task available to be leased to the next caller of
-            # {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#lease_tasks LeaseTasks}.
+            # setting its {::Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time}
+            # to now. This will make the task available to be leased to the next caller
+            # of {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#lease_tasks LeaseTasks}.
             #
             # @overload cancel_lease(request, options = nil)
             #   Pass arguments to `cancel_lease` via a request object, either of type
@@ -2212,21 +2236,22 @@ module Google
             #     Required. The task's current schedule time, available in the
             #     {::Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time} returned by
             #     {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#lease_tasks LeaseTasks} response or
-            #     {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#renew_lease RenewLease} response. This restriction is
-            #     to ensure that your worker currently holds the lease.
+            #     {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#renew_lease RenewLease} response.
+            #     This restriction is to ensure that your worker currently holds the lease.
             #   @param response_view [::Google::Cloud::Tasks::V2beta2::Task::View]
-            #     The response_view specifies which subset of the {::Google::Cloud::Tasks::V2beta2::Task Task} will be
-            #     returned.
+            #     The response_view specifies which subset of the
+            #     {::Google::Cloud::Tasks::V2beta2::Task Task} will be returned.
             #
-            #     By default response_view is {::Google::Cloud::Tasks::V2beta2::Task::View::BASIC BASIC}; not all
-            #     information is retrieved by default because some data, such as
-            #     payloads, might be desirable to return only when needed because
-            #     of its large size or because of the sensitivity of data that it
-            #     contains.
+            #     By default response_view is
+            #     {::Google::Cloud::Tasks::V2beta2::Task::View::BASIC BASIC}; not all information is
+            #     retrieved by default because some data, such as payloads, might be
+            #     desirable to return only when needed because of its large size or because
+            #     of the sensitivity of data that it contains.
             #
-            #     Authorization for {::Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
-            #     `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
-            #     permission on the {::Google::Cloud::Tasks::V2beta2::Task Task} resource.
+            #     Authorization for {::Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL}
+            #     requires `cloudtasks.tasks.fullView` [Google
+            #     IAM](https://cloud.google.com/iam/) permission on the
+            #     {::Google::Cloud::Tasks::V2beta2::Task Task} resource.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Tasks::V2beta2::Task]
@@ -2296,30 +2321,33 @@ module Google
             # Forces a task to run now.
             #
             # When this method is called, Cloud Tasks will dispatch the task, even if
-            # the task is already running, the queue has reached its {::Google::Cloud::Tasks::V2beta2::RateLimits RateLimits} or
-            # is {::Google::Cloud::Tasks::V2beta2::Queue::State::PAUSED PAUSED}.
+            # the task is already running, the queue has reached its
+            # {::Google::Cloud::Tasks::V2beta2::RateLimits RateLimits} or is
+            # {::Google::Cloud::Tasks::V2beta2::Queue::State::PAUSED PAUSED}.
             #
             # This command is meant to be used for manual debugging. For
-            # example, {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#run_task RunTask} can be used to retry a failed
-            # task after a fix has been made or to manually force a task to be
-            # dispatched now.
+            # example, {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#run_task RunTask} can be
+            # used to retry a failed task after a fix has been made or to manually force
+            # a task to be dispatched now.
             #
             # The dispatched task is returned. That is, the task that is returned
-            # contains the {::Google::Cloud::Tasks::V2beta2::Task#status status} after the task is dispatched but
-            # before the task is received by its target.
+            # contains the {::Google::Cloud::Tasks::V2beta2::Task#status status} after the
+            # task is dispatched but before the task is received by its target.
             #
             # If Cloud Tasks receives a successful response from the task's
             # target, then the task will be deleted; otherwise the task's
-            # {::Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time} will be reset to the time that
-            # {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#run_task RunTask} was called plus the retry delay specified
-            # in the queue's {::Google::Cloud::Tasks::V2beta2::RetryConfig RetryConfig}.
+            # {::Google::Cloud::Tasks::V2beta2::Task#schedule_time schedule_time} will be
+            # reset to the time that
+            # {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#run_task RunTask} was called plus
+            # the retry delay specified in the queue's
+            # {::Google::Cloud::Tasks::V2beta2::RetryConfig RetryConfig}.
             #
             # {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#run_task RunTask} returns
             # [NOT_FOUND][google.rpc.Code.NOT_FOUND] when it is called on a
             # task that has already succeeded or permanently failed.
             #
-            # {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#run_task RunTask} cannot be called on a
-            # {::Google::Cloud::Tasks::V2beta2::PullMessage pull task}.
+            # {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#run_task RunTask} cannot be called
+            # on a {::Google::Cloud::Tasks::V2beta2::PullMessage pull task}.
             #
             # @overload run_task(request, options = nil)
             #   Pass arguments to `run_task` via a request object, either of type
@@ -2340,18 +2368,19 @@ module Google
             #     Required. The task name. For example:
             #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
             #   @param response_view [::Google::Cloud::Tasks::V2beta2::Task::View]
-            #     The response_view specifies which subset of the {::Google::Cloud::Tasks::V2beta2::Task Task} will be
-            #     returned.
+            #     The response_view specifies which subset of the
+            #     {::Google::Cloud::Tasks::V2beta2::Task Task} will be returned.
             #
-            #     By default response_view is {::Google::Cloud::Tasks::V2beta2::Task::View::BASIC BASIC}; not all
-            #     information is retrieved by default because some data, such as
-            #     payloads, might be desirable to return only when needed because
-            #     of its large size or because of the sensitivity of data that it
-            #     contains.
+            #     By default response_view is
+            #     {::Google::Cloud::Tasks::V2beta2::Task::View::BASIC BASIC}; not all information is
+            #     retrieved by default because some data, such as payloads, might be
+            #     desirable to return only when needed because of its large size or because
+            #     of the sensitivity of data that it contains.
             #
-            #     Authorization for {::Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
-            #     `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
-            #     permission on the {::Google::Cloud::Tasks::V2beta2::Task Task} resource.
+            #     Authorization for {::Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL}
+            #     requires `cloudtasks.tasks.fullView` [Google
+            #     IAM](https://cloud.google.com/iam/) permission on the
+            #     {::Google::Cloud::Tasks::V2beta2::Task Task} resource.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Tasks::V2beta2::Task]
