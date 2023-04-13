@@ -28,6 +28,7 @@ describe Google::Cloud::Firestore::Promise::Future, :mock_firestore do
     stub = BatchWriteStub.new responses_pass, requests, 0.1
     firestore.service.instance_variable_set :@firestore, stub
     result_1 = bw.create "cities/NYC", { foo: "bar"}
+
     _(result_1.fulfilled?).must_equal false
     result_1.wait!
     _(result_1.fulfilled?).must_equal true
@@ -37,10 +38,11 @@ describe Google::Cloud::Firestore::Promise::Future, :mock_firestore do
     stub = BatchWriteStub.new responses_fail, requests, 0.1
     firestore.service.instance_variable_set :@firestore, stub
     result_2 = bw.create "cities/NYC", { foo: "bar"}
+
     _(result_2.rejected?).must_equal false
-    bw.flush
-    result_2.wait!
-    puts result_2.rejected?
+    assert_raises Google::Cloud::Firestore::BulkWriterException do
+      result_2.wait!
+    end
     _(result_2.rejected?).must_equal true
 
     bw.close

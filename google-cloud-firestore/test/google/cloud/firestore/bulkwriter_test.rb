@@ -98,7 +98,9 @@ describe Google::Cloud::Firestore::BulkWriter, :mock_firestore do
       bw.flush
       bw.close
 
-      puts result.rejected?
+      assert_raises Google::Cloud::Firestore::BulkWriterException do
+        result.wait!
+      end
       _(result.rejected?).must_equal true
       _(result.reason).must_be_kind_of Google::Cloud::Firestore::BulkWriterException
       _(result.reason.status).must_equal 1
