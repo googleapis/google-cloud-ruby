@@ -39,6 +39,7 @@ describe Google::Cloud::Firestore::Promise::Future, :mock_firestore do
     result_2 = bw.create "cities/NYC", { foo: "bar"}
     _(result_2.rejected?).must_equal false
     bw.flush
+    puts result_2.rejected?
     _(result_2.rejected?).must_equal true
 
     bw.close
