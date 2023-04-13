@@ -77,6 +77,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :ATTACK_COMPLEXITY_UNSPECIFIED, 0
       value :ATTACK_COMPLEXITY_LOW, 1
       value :ATTACK_COMPLEXITY_HIGH, 2
+      value :ATTACK_COMPLEXITY_MEDIUM, 3
     end
     add_enum "grafeas.v1.CVSS.Authentication" do
       value :AUTHENTICATION_UNSPECIFIED, 0
@@ -105,6 +106,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :IMPACT_HIGH, 1
       value :IMPACT_LOW, 2
       value :IMPACT_NONE, 3
+      value :IMPACT_PARTIAL, 4
+      value :IMPACT_COMPLETE, 5
     end
     add_enum "grafeas.v1.CVSSVersion" do
       value :CVSS_VERSION_UNSPECIFIED, 0
