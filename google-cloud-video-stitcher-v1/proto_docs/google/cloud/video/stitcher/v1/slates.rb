@@ -33,7 +33,7 @@ module Google
           #     MP4 video with at least one audio track.
           # @!attribute [rw] gam_slate
           #   @return [::Google::Cloud::Video::Stitcher::V1::Slate::GamSlate]
-          #     gam_slate has all the GAM related attributes of slates.
+          #     gam_slate has all the GAM-related attributes of slates.
           class Slate
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

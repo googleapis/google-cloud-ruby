@@ -12,10 +12,6 @@ require 'google/protobuf/duration_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/video/stitcher/v1/sessions.proto", :syntax => :proto3) do
-    add_message "google.cloud.video.stitcher.v1.GamVodConfig" do
-      optional :network_code, :string, 1
-      optional :stream_id, :string, 2
-    end
     add_message "google.cloud.video.stitcher.v1.VodSession" do
       optional :name, :string, 1
       optional :interstitials, :message, 2, "google.cloud.video.stitcher.v1.Interstitials"
@@ -26,7 +22,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :manifest_options, :message, 9, "google.cloud.video.stitcher.v1.ManifestOptions"
       optional :asset_id, :string, 10
       optional :ad_tracking, :enum, 11, "google.cloud.video.stitcher.v1.AdTracking"
-      optional :gam_vod_config, :message, 12, "google.cloud.video.stitcher.v1.GamVodConfig"
+      optional :gam_settings, :message, 13, "google.cloud.video.stitcher.v1.VodSession.GamSettings"
+    end
+    add_message "google.cloud.video.stitcher.v1.VodSession.GamSettings" do
+      optional :network_code, :string, 1
+      optional :stream_id, :string, 2
     end
     add_message "google.cloud.video.stitcher.v1.Interstitials" do
       repeated :ad_breaks, :message, 1, "google.cloud.video.stitcher.v1.VodSessionAdBreak"
@@ -56,15 +56,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.video.stitcher.v1.LiveSession.GamSettings" do
       optional :stream_id, :string, 1
-      oneof :manifest_fields do
-        optional :gam_hls, :message, 2, "google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamHls"
-        optional :gam_dash, :message, 3, "google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamDash"
-      end
-    end
-    add_message "google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamHls" do
-    end
-    add_message "google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamDash" do
-      optional :period_template_uri, :string, 1
     end
     add_message "google.cloud.video.stitcher.v1.ManifestOptions" do
       repeated :include_renditions, :message, 1, "google.cloud.video.stitcher.v1.RenditionFilter"
@@ -87,16 +78,14 @@ module Google
     module Video
       module Stitcher
         module V1
-          GamVodConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.stitcher.v1.GamVodConfig").msgclass
           VodSession = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.stitcher.v1.VodSession").msgclass
+          VodSession::GamSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.stitcher.v1.VodSession.GamSettings").msgclass
           Interstitials = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.stitcher.v1.Interstitials").msgclass
           VodSessionAd = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.stitcher.v1.VodSessionAd").msgclass
           VodSessionContent = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.stitcher.v1.VodSessionContent").msgclass
           VodSessionAdBreak = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.stitcher.v1.VodSessionAdBreak").msgclass
           LiveSession = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.stitcher.v1.LiveSession").msgclass
           LiveSession::GamSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.stitcher.v1.LiveSession.GamSettings").msgclass
-          LiveSession::GamSettings::GamHls = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamHls").msgclass
-          LiveSession::GamSettings::GamDash = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.stitcher.v1.LiveSession.GamSettings.GamDash").msgclass
           ManifestOptions = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.stitcher.v1.ManifestOptions").msgclass
           ManifestOptions::OrderPolicy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.stitcher.v1.ManifestOptions.OrderPolicy").enummodule
           RenditionFilter = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.stitcher.v1.RenditionFilter").msgclass

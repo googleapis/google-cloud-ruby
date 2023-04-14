@@ -42,14 +42,14 @@ module Google
           #     Output only. State of the live config.
           # @!attribute [rw] ad_tracking
           #   @return [::Google::Cloud::Video::Stitcher::V1::AdTracking]
-          #     Required. Determines how the ads should be tracked. If
+          #     Required. Determines how the ads are tracked. If
           #     {::Google::Cloud::Video::Stitcher::V1::LiveConfig#gam_live_config gam_live_config}
           #     is set, the value must be `CLIENT` because the IMA SDK handles ad tracking.
           # @!attribute [rw] default_slate
           #   @return [::String]
           #     This must refer to a slate in the same
-          #     project. In case Google Ad Manager (GAM) is being used for ads this will be
-          #     used to set the appropriate value of slateCreativeId in
+          #     project. If Google Ad Manager (GAM) is used for ads, this string sets the
+          #     value of `slateCreativeId` in
           #     https://developers.google.com/ad-manager/api/reference/v202211/LiveStreamEventService.LiveStreamEvent#slateCreativeId
           # @!attribute [rw] stitching_policy
           #   @return [::Google::Cloud::Video::Stitcher::V1::LiveConfig::StitchingPolicy]
@@ -79,7 +79,7 @@ module Google
 
             # Defines the ad stitching behavior in case the ad duration does not align
             # exactly with the ad break boundaries. If not specified, the default is
-            # CUT_CURRENT.
+            # `CUT_CURRENT`.
             module StitchingPolicy
               # Stitching policy is not specified.
               STITCHING_POLICY_UNSPECIFIED = 0
@@ -124,12 +124,12 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Determines the Ad tracking policy.
+          # Determines the ad tracking policy.
           module AdTracking
             # The ad tracking policy is not specified.
             AD_TRACKING_UNSPECIFIED = 0
 
-            # Client side ad tracking is specified. The client player is expected to
+            # Client-side ad tracking is specified. The client player is expected to
             # trigger playback and activity events itself.
             CLIENT = 1
 
