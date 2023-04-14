@@ -143,10 +143,13 @@ class MockFirestore < Minitest::Spec
   let(:firestore_mock) { Minitest::Mock.new }
 
   before do
+    puts "#{self.class.name}"
+    @start_time = Time.now
     firestore.service.instance_variable_set :@firestore, firestore_mock
   end
 
   after do
+    puts "Time elapsed : #{(Time.now - @start_time).to_f}" unless @start_time.nil?
     firestore_mock.verify
   end
 
