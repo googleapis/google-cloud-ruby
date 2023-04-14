@@ -8,6 +8,7 @@ require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/longrunning/operations_pb'
+require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/protobuf/wrappers_pb'
@@ -36,6 +37,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :network_config, :message, 21, "google.cloud.metastore.v1beta.NetworkConfig"
       optional :database_type, :enum, 22, "google.cloud.metastore.v1beta.Service.DatabaseType"
       optional :telemetry_config, :message, 23, "google.cloud.metastore.v1beta.TelemetryConfig"
+      optional :scaling_config, :message, 24, "google.cloud.metastore.v1beta.ScalingConfig"
       oneof :metastore_config do
         optional :hive_metastore_config, :message, 5, "google.cloud.metastore.v1beta.HiveMetastoreConfig"
       end
@@ -114,6 +116,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.metastore.v1beta.NetworkConfig" do
       repeated :consumers, :message, 1, "google.cloud.metastore.v1beta.NetworkConfig.Consumer"
+      optional :custom_routes_enabled, :bool, 2
     end
     add_message "google.cloud.metastore.v1beta.NetworkConfig.Consumer" do
       optional :endpoint_uri, :string, 3
@@ -213,6 +216,20 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :RESTORE_TYPE_UNSPECIFIED, 0
       value :FULL, 1
       value :METADATA_ONLY, 2
+    end
+    add_message "google.cloud.metastore.v1beta.ScalingConfig" do
+      oneof :scaling_model do
+        optional :instance_size, :enum, 1, "google.cloud.metastore.v1beta.ScalingConfig.InstanceSize"
+        optional :scaling_factor, :float, 2
+      end
+    end
+    add_enum "google.cloud.metastore.v1beta.ScalingConfig.InstanceSize" do
+      value :INSTANCE_SIZE_UNSPECIFIED, 0
+      value :EXTRA_SMALL, 1
+      value :SMALL, 2
+      value :MEDIUM, 3
+      value :LARGE, 4
+      value :EXTRA_LARGE, 5
     end
     add_message "google.cloud.metastore.v1beta.ListServicesRequest" do
       optional :parent, :string, 1
@@ -400,6 +417,8 @@ module Google
         Restore = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.Restore").msgclass
         Restore::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.Restore.State").enummodule
         Restore::RestoreType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.Restore.RestoreType").enummodule
+        ScalingConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.ScalingConfig").msgclass
+        ScalingConfig::InstanceSize = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.ScalingConfig.InstanceSize").enummodule
         ListServicesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.ListServicesRequest").msgclass
         ListServicesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.ListServicesResponse").msgclass
         GetServiceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.GetServiceRequest").msgclass
