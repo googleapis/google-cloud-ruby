@@ -334,8 +334,10 @@ module Google
             end
 
             ##
-            # Finds entities, similar to {::Google::Cloud::Language::V1::LanguageService::Client#analyze_entities AnalyzeEntities} in the text and analyzes
-            # sentiment associated with each entity and its mentions.
+            # Finds entities, similar to
+            # {::Google::Cloud::Language::V1::LanguageService::Client#analyze_entities AnalyzeEntities}
+            # in the text and analyzes sentiment associated with each entity and its
+            # mentions.
             #
             # @overload analyze_entity_sentiment(request, options = nil)
             #   Pass arguments to `analyze_entity_sentiment` via a request object, either of type
