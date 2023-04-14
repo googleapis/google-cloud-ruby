@@ -28,8 +28,8 @@ module Google
         #     software as the metastore service.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Immutable. The relative resource name of the metastore service, in the following
-        #     format:
+        #     Immutable. The relative resource name of the metastore service, in the
+        #     following format:
         #
         #     `projects/{project_number}/locations/{location_id}/services/{service_id}`.
         # @!attribute [r] create_time
@@ -43,8 +43,8 @@ module Google
         #     User-defined labels for the metastore service.
         # @!attribute [rw] network
         #   @return [::String]
-        #     Immutable. The relative resource name of the VPC network on which the instance can be
-        #     accessed. It is specified in the following form:
+        #     Immutable. The relative resource name of the VPC network on which the
+        #     instance can be accessed. It is specified in the following form:
         #
         #     `projects/{project_number}/global/networks/{network_id}`.
         # @!attribute [r] endpoint_uri
@@ -58,12 +58,12 @@ module Google
         #     Output only. The current state of the metastore service.
         # @!attribute [r] state_message
         #   @return [::String]
-        #     Output only. Additional information about the current state of the metastore service, if
-        #     available.
+        #     Output only. Additional information about the current state of the
+        #     metastore service, if available.
         # @!attribute [r] artifact_gcs_uri
         #   @return [::String]
-        #     Output only. A Cloud Storage URI (starting with `gs://`) that specifies where artifacts
-        #     related to the metastore service are stored.
+        #     Output only. A Cloud Storage URI (starting with `gs://`) that specifies
+        #     where artifacts related to the metastore service are stored.
         # @!attribute [rw] tier
         #   @return [::Google::Cloud::Metastore::V1::Service::Tier]
         #     The tier of the service.
@@ -75,7 +75,8 @@ module Google
         #     database type.
         # @!attribute [r] uid
         #   @return [::String]
-        #     Output only. The globally unique resource identifier of the metastore service.
+        #     Output only. The globally unique resource identifier of the metastore
+        #     service.
         # @!attribute [r] metadata_management_activity
         #   @return [::Google::Cloud::Metastore::V1::MetadataManagementActivity]
         #     Output only. The metadata management activities of the metastore service.
@@ -85,8 +86,8 @@ module Google
         #     If unspecified, defaults to `STABLE`.
         # @!attribute [rw] encryption_config
         #   @return [::Google::Cloud::Metastore::V1::EncryptionConfig]
-        #     Immutable. Information used to configure the Dataproc Metastore service to encrypt
-        #     customer data at rest. Cannot be updated.
+        #     Immutable. Information used to configure the Dataproc Metastore service to
+        #     encrypt customer data at rest. Cannot be updated.
         # @!attribute [rw] network_config
         #   @return [::Google::Cloud::Metastore::V1::NetworkConfig]
         #     The configuration specifying the network settings for the
@@ -98,6 +99,9 @@ module Google
         #   @return [::Google::Cloud::Metastore::V1::TelemetryConfig]
         #     The configuration specifying telemetry settings for the Dataproc Metastore
         #     service. If unspecified defaults to `JSON`.
+        # @!attribute [rw] scaling_config
+        #   @return [::Google::Cloud::Metastore::V1::ScalingConfig]
+        #     Scaling configuration of the metastore service.
         class Service
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -217,6 +221,16 @@ module Google
         #     method and specify this field's path
         #     (`hive_metastore_config.kerberos_config`) in the request's `update_mask`
         #     while omitting this field from the request's `service`.
+        # @!attribute [rw] auxiliary_versions
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Metastore::V1::AuxiliaryVersionConfig}]
+        #     A mapping of Hive metastore version to the auxiliary version
+        #     configuration. When specified, a secondary Hive metastore service is
+        #     created along with the primary service. All auxiliary versions must be less
+        #     than the service's primary version. The key is the auxiliary service name
+        #     and it must match the regular expression [a-z]([-a-z0-9]*[a-z0-9])?. This
+        #     means that the first character must be a lowercase letter, and all the
+        #     following characters must be hyphens, lowercase letters, or digits, except
+        #     the last character, which cannot be a hyphen.
         class HiveMetastoreConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -226,6 +240,15 @@ module Google
           # @!attribute [rw] value
           #   @return [::String]
           class ConfigOverridesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Metastore::V1::AuxiliaryVersionConfig]
+          class AuxiliaryVersionsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -275,11 +298,41 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Configuration information for the auxiliary service versions.
+        # @!attribute [rw] version
+        #   @return [::String]
+        #     The Hive metastore version of the auxiliary service. It must be less
+        #     than the primary Hive metastore service's version.
+        # @!attribute [rw] config_overrides
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     A mapping of Hive metastore configuration key-value pairs to apply to the
+        #     auxiliary Hive metastore (configured in `hive-site.xml`) in addition to
+        #     the primary version's overrides. If keys are present in both the auxiliary
+        #     version's overrides and the primary version's overrides, the value from
+        #     the auxiliary version's overrides takes precedence.
+        # @!attribute [r] network_config
+        #   @return [::Google::Cloud::Metastore::V1::NetworkConfig]
+        #     Output only. The network configuration contains the endpoint URI(s) of the
+        #     auxiliary Hive metastore service.
+        class AuxiliaryVersionConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class ConfigOverridesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # Network configuration for the Dataproc Metastore service.
         # @!attribute [rw] consumers
         #   @return [::Array<::Google::Cloud::Metastore::V1::NetworkConfig::Consumer>]
-        #     Immutable. The consumer-side network configuration for the Dataproc Metastore
-        #     instance.
+        #     Immutable. The consumer-side network configuration for the Dataproc
+        #     Metastore instance.
         class NetworkConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -287,8 +340,8 @@ module Google
           # Contains information of the customer's network configurations.
           # @!attribute [rw] subnetwork
           #   @return [::String]
-          #     Immutable. The subnetwork of the customer project from which an IP address is
-          #     reserved and used as the Dataproc Metastore service's
+          #     Immutable. The subnetwork of the customer project from which an IP
+          #     address is reserved and used as the Dataproc Metastore service's
           #     endpoint. It is accessible to hosts in the subnet and to all
           #     hosts in a subnet in the same region and same network. There must
           #     be at least one IP address available in the subnet's primary range. The
@@ -297,7 +350,8 @@ module Google
           #     `projects/{project_number}/regions/{region_id}/subnetworks/{subnetwork_id}`
           # @!attribute [r] endpoint_uri
           #   @return [::String]
-          #     Output only. The URI of the endpoint used to access the metastore service.
+          #     Output only. The URI of the endpoint used to access the metastore
+          #     service.
           class Consumer
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -375,7 +429,8 @@ module Google
           #     to import metadata. It must begin with `gs://`.
           # @!attribute [rw] type
           #   @return [::Google::Cloud::Metastore::V1::DatabaseDumpSpec::Type]
-          #     Optional. The type of the database dump. If unspecified, defaults to `MYSQL`.
+          #     Optional. The type of the database dump. If unspecified, defaults to
+          #     `MYSQL`.
           class DatabaseDump
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -413,8 +468,9 @@ module Google
         # The details of a metadata export operation.
         # @!attribute [r] destination_gcs_uri
         #   @return [::String]
-        #     Output only. A Cloud Storage URI of a folder that metadata are exported to, in the
-        #     form of `gs://<bucket_name>/<path_inside_bucket>/<export_folder>`, where
+        #     Output only. A Cloud Storage URI of a folder that metadata are exported
+        #     to, in the form of
+        #     `gs://<bucket_name>/<path_inside_bucket>/<export_folder>`, where
         #     `<export_folder>` is automatically generated.
         # @!attribute [r] start_time
         #   @return [::Google::Protobuf::Timestamp]
@@ -513,8 +569,8 @@ module Google
         #     Output only. The current state of the restore.
         # @!attribute [r] backup
         #   @return [::String]
-        #     Output only. The relative resource name of the metastore service backup to restore
-        #     from, in the following form:
+        #     Output only. The relative resource name of the metastore service backup to
+        #     restore from, in the following form:
         #
         #     `projects/{project_id}/locations/{location_id}/services/{service_id}/backups/{backup_id}`.
         # @!attribute [r] type
@@ -522,8 +578,8 @@ module Google
         #     Output only. The type of restore.
         # @!attribute [r] details
         #   @return [::String]
-        #     Output only. The restore details containing the revision of the service to be restored
-        #     to, in format of JSON.
+        #     Output only. The restore details containing the revision of the service to
+        #     be restored to, in format of JSON.
         class Restore
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -559,28 +615,66 @@ module Google
           end
         end
 
-        # Request message for {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#list_services DataprocMetastore.ListServices}.
+        # Represents the scaling configuration of a metastore service.
+        # @!attribute [rw] instance_size
+        #   @return [::Google::Cloud::Metastore::V1::ScalingConfig::InstanceSize]
+        #     An enum of readable instance sizes, with each instance size mapping to a
+        #     float value (e.g. InstanceSize.EXTRA_SMALL = scaling_factor(0.1))
+        # @!attribute [rw] scaling_factor
+        #   @return [::Float]
+        #     Scaling factor, increments of 0.1 for values less than 1.0, and
+        #     increments of 1.0 for values greater than 1.0.
+        class ScalingConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Metastore instance sizes.
+          module InstanceSize
+            # Unspecified instance size
+            INSTANCE_SIZE_UNSPECIFIED = 0
+
+            # Extra small instance size, maps to a scaling factor of 0.1.
+            EXTRA_SMALL = 1
+
+            # Small instance size, maps to a scaling factor of 0.5.
+            SMALL = 2
+
+            # Medium instance size, maps to a scaling factor of 1.0.
+            MEDIUM = 3
+
+            # Large instance size, maps to a scaling factor of 3.0.
+            LARGE = 4
+
+            # Extra large instance size, maps to a scaling factor of 6.0.
+            EXTRA_LARGE = 5
+          end
+        end
+
+        # Request message for
+        # {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#list_services DataprocMetastore.ListServices}.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The relative resource name of the location of metastore services to
-        #     list, in the following form:
+        #     Required. The relative resource name of the location of metastore services
+        #     to list, in the following form:
         #
         #     `projects/{project_number}/locations/{location_id}`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. The maximum number of services to return. The response may contain less
-        #     than the maximum number. If unspecified, no more than 500 services are
-        #     returned. The maximum value is 1000; values above 1000 are changed to 1000.
+        #     Optional. The maximum number of services to return. The response may
+        #     contain less than the maximum number. If unspecified, no more than 500
+        #     services are returned. The maximum value is 1000; values above 1000 are
+        #     changed to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. A page token, received from a previous {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#list_services DataprocMetastore.ListServices}
+        #     Optional. A page token, received from a previous
+        #     {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#list_services DataprocMetastore.ListServices}
         #     call. Provide this token to retrieve the subsequent page.
         #
         #     To retrieve the first page, supply an empty page token.
         #
         #     When paginating, other parameters provided to
-        #     {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#list_services DataprocMetastore.ListServices} must match the call that provided the
-        #     page token.
+        #     {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#list_services DataprocMetastore.ListServices}
+        #     must match the call that provided the page token.
         # @!attribute [rw] filter
         #   @return [::String]
         #     Optional. The filter to apply to list results.
@@ -594,7 +688,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#list_services DataprocMetastore.ListServices}.
+        # Response message for
+        # {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#list_services DataprocMetastore.ListServices}.
         # @!attribute [rw] services
         #   @return [::Array<::Google::Cloud::Metastore::V1::Service>]
         #     The services in the specified location.
@@ -610,11 +705,12 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#get_service DataprocMetastore.GetService}.
+        # Request message for
+        # {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#get_service DataprocMetastore.GetService}.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The relative resource name of the metastore service to retrieve, in the
-        #     following form:
+        #     Required. The relative resource name of the metastore service to retrieve,
+        #     in the following form:
         #
         #     `projects/{project_number}/locations/{location_id}/services/{service_id}`.
         class GetServiceRequest
@@ -622,11 +718,12 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#create_service DataprocMetastore.CreateService}.
+        # Request message for
+        # {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#create_service DataprocMetastore.CreateService}.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The relative resource name of the location in which to create a metastore
-        #     service, in the following form:
+        #     Required. The relative resource name of the location in which to create a
+        #     metastore service, in the following form:
         #
         #     `projects/{project_number}/locations/{location_id}`.
         # @!attribute [rw] service_id
@@ -644,10 +741,10 @@ module Google
         #     the request's `service_id` field.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. A request ID. Specify a unique request ID to allow the server to ignore the
-        #     request if it has completed. The server will ignore subsequent requests
-        #     that provide a duplicate request ID for at least 60 minutes after the first
-        #     request.
+        #     Optional. A request ID. Specify a unique request ID to allow the server to
+        #     ignore the request if it has completed. The server will ignore subsequent
+        #     requests that provide a duplicate request ID for at least 60 minutes after
+        #     the first request.
         #
         #     For example, if an initial request times out, followed by another request
         #     with the same request ID, the server ignores the second request to prevent
@@ -661,7 +758,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#update_service DataprocMetastore.UpdateService}.
+        # Request message for
+        # {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#update_service DataprocMetastore.UpdateService}.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Required. A field mask used to specify the fields to be overwritten in the
@@ -677,10 +775,10 @@ module Google
         #     service to be updated.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. A request ID. Specify a unique request ID to allow the server to ignore the
-        #     request if it has completed. The server will ignore subsequent requests
-        #     that provide a duplicate request ID for at least 60 minutes after the first
-        #     request.
+        #     Optional. A request ID. Specify a unique request ID to allow the server to
+        #     ignore the request if it has completed. The server will ignore subsequent
+        #     requests that provide a duplicate request ID for at least 60 minutes after
+        #     the first request.
         #
         #     For example, if an initial request times out, followed by another request
         #     with the same request ID, the server ignores the second request to prevent
@@ -694,19 +792,20 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#delete_service DataprocMetastore.DeleteService}.
+        # Request message for
+        # {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#delete_service DataprocMetastore.DeleteService}.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The relative resource name of the metastore service to delete, in the
-        #     following form:
+        #     Required. The relative resource name of the metastore service to delete, in
+        #     the following form:
         #
         #     `projects/{project_number}/locations/{location_id}/services/{service_id}`.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. A request ID. Specify a unique request ID to allow the server to ignore the
-        #     request if it has completed. The server will ignore subsequent requests
-        #     that provide a duplicate request ID for at least 60 minutes after the first
-        #     request.
+        #     Optional. A request ID. Specify a unique request ID to allow the server to
+        #     ignore the request if it has completed. The server will ignore subsequent
+        #     requests that provide a duplicate request ID for at least 60 minutes after
+        #     the first request.
         #
         #     For example, if an initial request times out, followed by another request
         #     with the same request ID, the server ignores the second request to prevent
@@ -720,28 +819,30 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#list_metadata_imports DataprocMetastore.ListMetadataImports}.
+        # Request message for
+        # {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#list_metadata_imports DataprocMetastore.ListMetadataImports}.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The relative resource name of the service whose metadata imports to
-        #     list, in the following form:
+        #     Required. The relative resource name of the service whose metadata imports
+        #     to list, in the following form:
         #
         #     `projects/{project_number}/locations/{location_id}/services/{service_id}/metadataImports`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. The maximum number of imports to return. The response may contain less
-        #     than the maximum number. If unspecified, no more than 500 imports are
+        #     Optional. The maximum number of imports to return. The response may contain
+        #     less than the maximum number. If unspecified, no more than 500 imports are
         #     returned. The maximum value is 1000; values above 1000 are changed to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. A page token, received from a previous {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#list_services DataprocMetastore.ListServices}
+        #     Optional. A page token, received from a previous
+        #     {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#list_services DataprocMetastore.ListServices}
         #     call. Provide this token to retrieve the subsequent page.
         #
         #     To retrieve the first page, supply an empty page token.
         #
         #     When paginating, other parameters provided to
-        #     {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#list_services DataprocMetastore.ListServices} must match the call that provided the
-        #     page token.
+        #     {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#list_services DataprocMetastore.ListServices}
+        #     must match the call that provided the page token.
         # @!attribute [rw] filter
         #   @return [::String]
         #     Optional. The filter to apply to list results.
@@ -755,7 +856,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#list_metadata_imports DataprocMetastore.ListMetadataImports}.
+        # Response message for
+        # {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#list_metadata_imports DataprocMetastore.ListMetadataImports}.
         # @!attribute [rw] metadata_imports
         #   @return [::Array<::Google::Cloud::Metastore::V1::MetadataImport>]
         #     The imports in the specified service.
@@ -771,11 +873,12 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#get_metadata_import DataprocMetastore.GetMetadataImport}.
+        # Request message for
+        # {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#get_metadata_import DataprocMetastore.GetMetadataImport}.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The relative resource name of the metadata import to retrieve, in the
-        #     following form:
+        #     Required. The relative resource name of the metadata import to retrieve, in
+        #     the following form:
         #
         #     `projects/{project_number}/locations/{location_id}/services/{service_id}/metadataImports/{import_id}`.
         class GetMetadataImportRequest
@@ -783,32 +886,33 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#create_metadata_import DataprocMetastore.CreateMetadataImport}.
+        # Request message for
+        # {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#create_metadata_import DataprocMetastore.CreateMetadataImport}.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The relative resource name of the service in which to create a metastore
-        #     import, in the following form:
+        #     Required. The relative resource name of the service in which to create a
+        #     metastore import, in the following form:
         #
         #     `projects/{project_number}/locations/{location_id}/services/{service_id}`.
         # @!attribute [rw] metadata_import_id
         #   @return [::String]
-        #     Required. The ID of the metadata import, which is used as the final component of the
-        #     metadata import's name.
+        #     Required. The ID of the metadata import, which is used as the final
+        #     component of the metadata import's name.
         #
         #     This value must be between 1 and 64 characters long, begin with a letter,
         #     end with a letter or number, and consist of alpha-numeric ASCII characters
         #     or hyphens.
         # @!attribute [rw] metadata_import
         #   @return [::Google::Cloud::Metastore::V1::MetadataImport]
-        #     Required. The metadata import to create. The `name` field is ignored. The ID of the
-        #     created metadata import must be provided in the request's
+        #     Required. The metadata import to create. The `name` field is ignored. The
+        #     ID of the created metadata import must be provided in the request's
         #     `metadata_import_id` field.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. A request ID. Specify a unique request ID to allow the server to ignore the
-        #     request if it has completed. The server will ignore subsequent requests
-        #     that provide a duplicate request ID for at least 60 minutes after the first
-        #     request.
+        #     Optional. A request ID. Specify a unique request ID to allow the server to
+        #     ignore the request if it has completed. The server will ignore subsequent
+        #     requests that provide a duplicate request ID for at least 60 minutes after
+        #     the first request.
         #
         #     For example, if an initial request times out, followed by another request
         #     with the same request ID, the server ignores the second request to prevent
@@ -822,7 +926,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#update_metadata_import DataprocMetastore.UpdateMetadataImport}.
+        # Request message for
+        # {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#update_metadata_import DataprocMetastore.UpdateMetadataImport}.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Required. A field mask used to specify the fields to be overwritten in the
@@ -838,10 +943,10 @@ module Google
         #     import to be updated.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. A request ID. Specify a unique request ID to allow the server to ignore the
-        #     request if it has completed. The server will ignore subsequent requests
-        #     that provide a duplicate request ID for at least 60 minutes after the first
-        #     request.
+        #     Optional. A request ID. Specify a unique request ID to allow the server to
+        #     ignore the request if it has completed. The server will ignore subsequent
+        #     requests that provide a duplicate request ID for at least 60 minutes after
+        #     the first request.
         #
         #     For example, if an initial request times out, followed by another request
         #     with the same request ID, the server ignores the second request to prevent
@@ -855,7 +960,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#list_backups DataprocMetastore.ListBackups}.
+        # Request message for
+        # {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#list_backups DataprocMetastore.ListBackups}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The relative resource name of the service whose backups to
@@ -864,19 +970,20 @@ module Google
         #     `projects/{project_number}/locations/{location_id}/services/{service_id}/backups`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. The maximum number of backups to return. The response may contain less
-        #     than the maximum number. If unspecified, no more than 500 backups are
+        #     Optional. The maximum number of backups to return. The response may contain
+        #     less than the maximum number. If unspecified, no more than 500 backups are
         #     returned. The maximum value is 1000; values above 1000 are changed to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. A page token, received from a previous {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#list_backups DataprocMetastore.ListBackups}
+        #     Optional. A page token, received from a previous
+        #     {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#list_backups DataprocMetastore.ListBackups}
         #     call. Provide this token to retrieve the subsequent page.
         #
         #     To retrieve the first page, supply an empty page token.
         #
         #     When paginating, other parameters provided to
-        #     {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#list_backups DataprocMetastore.ListBackups} must match the call that provided the
-        #     page token.
+        #     {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#list_backups DataprocMetastore.ListBackups}
+        #     must match the call that provided the page token.
         # @!attribute [rw] filter
         #   @return [::String]
         #     Optional. The filter to apply to list results.
@@ -890,7 +997,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#list_backups DataprocMetastore.ListBackups}.
+        # Response message for
+        # {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#list_backups DataprocMetastore.ListBackups}.
         # @!attribute [rw] backups
         #   @return [::Array<::Google::Cloud::Metastore::V1::Backup>]
         #     The backups of the specified service.
@@ -906,7 +1014,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#get_backup DataprocMetastore.GetBackup}.
+        # Request message for
+        # {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#get_backup DataprocMetastore.GetBackup}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The relative resource name of the backup to retrieve, in the
@@ -918,11 +1027,12 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#create_backup DataprocMetastore.CreateBackup}.
+        # Request message for
+        # {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#create_backup DataprocMetastore.CreateBackup}.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The relative resource name of the service in which to create a backup
-        #     of the following form:
+        #     Required. The relative resource name of the service in which to create a
+        #     backup of the following form:
         #
         #     `projects/{project_number}/locations/{location_id}/services/{service_id}`.
         # @!attribute [rw] backup_id
@@ -935,14 +1045,14 @@ module Google
         #     or hyphens.
         # @!attribute [rw] backup
         #   @return [::Google::Cloud::Metastore::V1::Backup]
-        #     Required. The backup to create. The `name` field is ignored. The ID of the created
-        #     backup must be provided in the request's `backup_id` field.
+        #     Required. The backup to create. The `name` field is ignored. The ID of the
+        #     created backup must be provided in the request's `backup_id` field.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. A request ID. Specify a unique request ID to allow the server to ignore the
-        #     request if it has completed. The server will ignore subsequent requests
-        #     that provide a duplicate request ID for at least 60 minutes after the first
-        #     request.
+        #     Optional. A request ID. Specify a unique request ID to allow the server to
+        #     ignore the request if it has completed. The server will ignore subsequent
+        #     requests that provide a duplicate request ID for at least 60 minutes after
+        #     the first request.
         #
         #     For example, if an initial request times out, followed by another request
         #     with the same request ID, the server ignores the second request to prevent
@@ -956,7 +1066,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#delete_backup DataprocMetastore.DeleteBackup}.
+        # Request message for
+        # {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#delete_backup DataprocMetastore.DeleteBackup}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The relative resource name of the backup to delete, in the
@@ -965,10 +1076,10 @@ module Google
         #     `projects/{project_number}/locations/{location_id}/services/{service_id}/backups/{backup_id}`.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. A request ID. Specify a unique request ID to allow the server to ignore the
-        #     request if it has completed. The server will ignore subsequent requests
-        #     that provide a duplicate request ID for at least 60 minutes after the first
-        #     request.
+        #     Optional. A request ID. Specify a unique request ID to allow the server to
+        #     ignore the request if it has completed. The server will ignore subsequent
+        #     requests that provide a duplicate request ID for at least 60 minutes after
+        #     the first request.
         #
         #     For example, if an initial request times out, followed by another request
         #     with the same request ID, the server ignores the second request to prevent
@@ -982,7 +1093,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#export_metadata DataprocMetastore.ExportMetadata}.
+        # Request message for
+        # {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#export_metadata DataprocMetastore.ExportMetadata}.
         # @!attribute [rw] destination_gcs_folder
         #   @return [::String]
         #     A Cloud Storage URI of a folder, in the format
@@ -990,16 +1102,16 @@ module Google
         #     `<export_folder>` containing exported files will be created below it.
         # @!attribute [rw] service
         #   @return [::String]
-        #     Required. The relative resource name of the metastore service to run export, in the
-        #     following form:
+        #     Required. The relative resource name of the metastore service to run
+        #     export, in the following form:
         #
         #     `projects/{project_id}/locations/{location_id}/services/{service_id}`.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. A request ID. Specify a unique request ID to allow the server to ignore the
-        #     request if it has completed. The server will ignore subsequent requests
-        #     that provide a duplicate request ID for at least 60 minutes after the first
-        #     request.
+        #     Optional. A request ID. Specify a unique request ID to allow the server to
+        #     ignore the request if it has completed. The server will ignore subsequent
+        #     requests that provide a duplicate request ID for at least 60 minutes after
+        #     the first request.
         #
         #     For example, if an initial request times out, followed by another request
         #     with the same request ID, the server ignores the second request to prevent
@@ -1010,7 +1122,8 @@ module Google
         #     A zero UUID (00000000-0000-0000-0000-000000000000) is not supported.
         # @!attribute [rw] database_dump_type
         #   @return [::Google::Cloud::Metastore::V1::DatabaseDumpSpec::Type]
-        #     Optional. The type of the database dump. If unspecified, defaults to `MYSQL`.
+        #     Optional. The type of the database dump. If unspecified, defaults to
+        #     `MYSQL`.
         class ExportMetadataRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1019,14 +1132,14 @@ module Google
         # Request message for [DataprocMetastore.Restore][].
         # @!attribute [rw] service
         #   @return [::String]
-        #     Required. The relative resource name of the metastore service to run restore, in the
-        #     following form:
+        #     Required. The relative resource name of the metastore service to run
+        #     restore, in the following form:
         #
         #     `projects/{project_id}/locations/{location_id}/services/{service_id}`.
         # @!attribute [rw] backup
         #   @return [::String]
-        #     Required. The relative resource name of the metastore service backup to restore
-        #     from, in the following form:
+        #     Required. The relative resource name of the metastore service backup to
+        #     restore from, in the following form:
         #
         #     `projects/{project_id}/locations/{location_id}/services/{service_id}/backups/{backup_id}`.
         # @!attribute [rw] restore_type
@@ -1034,10 +1147,10 @@ module Google
         #     Optional. The type of restore. If unspecified, defaults to `METADATA_ONLY`.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. A request ID. Specify a unique request ID to allow the server to ignore the
-        #     request if it has completed. The server will ignore subsequent requests
-        #     that provide a duplicate request ID for at least 60 minutes after the first
-        #     request.
+        #     Optional. A request ID. Specify a unique request ID to allow the server to
+        #     ignore the request if it has completed. The server will ignore subsequent
+        #     requests that provide a duplicate request ID for at least 60 minutes after
+        #     the first request.
         #
         #     For example, if an initial request times out, followed by another request
         #     with the same request ID, the server ignores the second request to prevent
@@ -1071,8 +1184,9 @@ module Google
         #   @return [::Boolean]
         #     Output only. Identifies whether the caller has requested cancellation
         #     of the operation. Operations that have successfully been cancelled
-        #     have [Operation.error][] value with a {::Google::Rpc::Status#code google.rpc.Status.code} of 1,
-        #     corresponding to `Code.CANCELLED`.
+        #     have [Operation.error][] value with a
+        #     {::Google::Rpc::Status#code google.rpc.Status.code} of 1, corresponding to
+        #     `Code.CANCELLED`.
         # @!attribute [r] api_version
         #   @return [::String]
         #     Output only. API version used to start the operation.

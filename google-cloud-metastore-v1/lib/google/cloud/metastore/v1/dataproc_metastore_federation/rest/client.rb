@@ -209,13 +209,14 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The relative resource name of the location of metastore federations
-              #     to list, in the following form:
+              #     Required. The relative resource name of the location of metastore
+              #     federations to list, in the following form:
               #     `projects/{project_number}/locations/{location_id}`.
               #   @param page_size [::Integer]
-              #     Optional. The maximum number of federations to return. The response may contain less
-              #     than the maximum number. If unspecified, no more than 500 services are
-              #     returned. The maximum value is 1000; values above 1000 are changed to 1000.
+              #     Optional. The maximum number of federations to return. The response may
+              #     contain less than the maximum number. If unspecified, no more than 500
+              #     services are returned. The maximum value is 1000; values above 1000 are
+              #     changed to 1000.
               #   @param page_token [::String]
               #     Optional. A page token, received from a previous ListFederationServices
               #     call. Provide this token to retrieve the subsequent page.
@@ -292,8 +293,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The relative resource name of the metastore federation to retrieve,
-              #     in the following form:
+              #     Required. The relative resource name of the metastore federation to
+              #     retrieve, in the following form:
               #
               #     `projects/{project_number}/locations/{location_id}/federations/{federation_id}`.
               # @yield [result, operation] Access the result along with the TransportOperation object
@@ -357,8 +358,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The relative resource name of the location in which to create a federation
-              #     service, in the following form:
+              #     Required. The relative resource name of the location in which to create a
+              #     federation service, in the following form:
               #
               #     `projects/{project_number}/locations/{location_id}`.
               #   @param federation_id [::String]
@@ -373,10 +374,10 @@ module Google
               #     ignored. The ID of the created metastore federation must be
               #     provided in the request's `federation_id` field.
               #   @param request_id [::String]
-              #     Optional. A request ID. Specify a unique request ID to allow the server to ignore the
-              #     request if it has completed. The server will ignore subsequent requests
-              #     that provide a duplicate request ID for at least 60 minutes after the first
-              #     request.
+              #     Optional. A request ID. Specify a unique request ID to allow the server to
+              #     ignore the request if it has completed. The server will ignore subsequent
+              #     requests that provide a duplicate request ID for at least 60 minutes after
+              #     the first request.
               #
               #     For example, if an initial request times out, followed by another request
               #     with the same request ID, the server ignores the second request to prevent
@@ -458,10 +459,10 @@ module Google
               #     The metastore federation's `name` field is used to identify the
               #     metastore service to be updated.
               #   @param request_id [::String]
-              #     Optional. A request ID. Specify a unique request ID to allow the server to ignore the
-              #     request if it has completed. The server will ignore subsequent requests
-              #     that provide a duplicate request ID for at least 60 minutes after the first
-              #     request.
+              #     Optional. A request ID. Specify a unique request ID to allow the server to
+              #     ignore the request if it has completed. The server will ignore subsequent
+              #     requests that provide a duplicate request ID for at least 60 minutes after
+              #     the first request.
               #
               #     For example, if an initial request times out, followed by another request
               #     with the same request ID, the server ignores the second request to prevent
@@ -537,10 +538,10 @@ module Google
               #
               #     `projects/{project_number}/locations/{location_id}/federations/{federation_id}`.
               #   @param request_id [::String]
-              #     Optional. A request ID. Specify a unique request ID to allow the server to ignore the
-              #     request if it has completed. The server will ignore subsequent requests
-              #     that provide a duplicate request ID for at least 60 minutes after the first
-              #     request.
+              #     Optional. A request ID. Specify a unique request ID to allow the server to
+              #     ignore the request if it has completed. The server will ignore subsequent
+              #     requests that provide a duplicate request ID for at least 60 minutes after
+              #     the first request.
               #
               #     For example, if an initial request times out, followed by another request
               #     with the same request ID, the server ignores the second request to prevent

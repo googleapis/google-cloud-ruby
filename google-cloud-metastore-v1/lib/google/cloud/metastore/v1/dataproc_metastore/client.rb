@@ -243,23 +243,25 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The relative resource name of the location of metastore services to
-            #     list, in the following form:
+            #     Required. The relative resource name of the location of metastore services
+            #     to list, in the following form:
             #
             #     `projects/{project_number}/locations/{location_id}`.
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of services to return. The response may contain less
-            #     than the maximum number. If unspecified, no more than 500 services are
-            #     returned. The maximum value is 1000; values above 1000 are changed to 1000.
+            #     Optional. The maximum number of services to return. The response may
+            #     contain less than the maximum number. If unspecified, no more than 500
+            #     services are returned. The maximum value is 1000; values above 1000 are
+            #     changed to 1000.
             #   @param page_token [::String]
-            #     Optional. A page token, received from a previous {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#list_services DataprocMetastore.ListServices}
+            #     Optional. A page token, received from a previous
+            #     {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#list_services DataprocMetastore.ListServices}
             #     call. Provide this token to retrieve the subsequent page.
             #
             #     To retrieve the first page, supply an empty page token.
             #
             #     When paginating, other parameters provided to
-            #     {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#list_services DataprocMetastore.ListServices} must match the call that provided the
-            #     page token.
+            #     {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#list_services DataprocMetastore.ListServices}
+            #     must match the call that provided the page token.
             #   @param filter [::String]
             #     Optional. The filter to apply to list results.
             #   @param order_by [::String]
@@ -355,8 +357,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The relative resource name of the metastore service to retrieve, in the
-            #     following form:
+            #     Required. The relative resource name of the metastore service to retrieve,
+            #     in the following form:
             #
             #     `projects/{project_number}/locations/{location_id}/services/{service_id}`.
             #
@@ -443,8 +445,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The relative resource name of the location in which to create a metastore
-            #     service, in the following form:
+            #     Required. The relative resource name of the location in which to create a
+            #     metastore service, in the following form:
             #
             #     `projects/{project_number}/locations/{location_id}`.
             #   @param service_id [::String]
@@ -459,10 +461,10 @@ module Google
             #     ignored. The ID of the created metastore service must be provided in
             #     the request's `service_id` field.
             #   @param request_id [::String]
-            #     Optional. A request ID. Specify a unique request ID to allow the server to ignore the
-            #     request if it has completed. The server will ignore subsequent requests
-            #     that provide a duplicate request ID for at least 60 minutes after the first
-            #     request.
+            #     Optional. A request ID. Specify a unique request ID to allow the server to
+            #     ignore the request if it has completed. The server will ignore subsequent
+            #     requests that provide a duplicate request ID for at least 60 minutes after
+            #     the first request.
             #
             #     For example, if an initial request times out, followed by another request
             #     with the same request ID, the server ignores the second request to prevent
@@ -574,10 +576,10 @@ module Google
             #     The metastore service's `name` field is used to identify the metastore
             #     service to be updated.
             #   @param request_id [::String]
-            #     Optional. A request ID. Specify a unique request ID to allow the server to ignore the
-            #     request if it has completed. The server will ignore subsequent requests
-            #     that provide a duplicate request ID for at least 60 minutes after the first
-            #     request.
+            #     Optional. A request ID. Specify a unique request ID to allow the server to
+            #     ignore the request if it has completed. The server will ignore subsequent
+            #     requests that provide a duplicate request ID for at least 60 minutes after
+            #     the first request.
             #
             #     For example, if an initial request times out, followed by another request
             #     with the same request ID, the server ignores the second request to prevent
@@ -678,15 +680,15 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The relative resource name of the metastore service to delete, in the
-            #     following form:
+            #     Required. The relative resource name of the metastore service to delete, in
+            #     the following form:
             #
             #     `projects/{project_number}/locations/{location_id}/services/{service_id}`.
             #   @param request_id [::String]
-            #     Optional. A request ID. Specify a unique request ID to allow the server to ignore the
-            #     request if it has completed. The server will ignore subsequent requests
-            #     that provide a duplicate request ID for at least 60 minutes after the first
-            #     request.
+            #     Optional. A request ID. Specify a unique request ID to allow the server to
+            #     ignore the request if it has completed. The server will ignore subsequent
+            #     requests that provide a duplicate request ID for at least 60 minutes after
+            #     the first request.
             #
             #     For example, if an initial request times out, followed by another request
             #     with the same request ID, the server ignores the second request to prevent
@@ -787,23 +789,24 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The relative resource name of the service whose metadata imports to
-            #     list, in the following form:
+            #     Required. The relative resource name of the service whose metadata imports
+            #     to list, in the following form:
             #
             #     `projects/{project_number}/locations/{location_id}/services/{service_id}/metadataImports`.
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of imports to return. The response may contain less
-            #     than the maximum number. If unspecified, no more than 500 imports are
+            #     Optional. The maximum number of imports to return. The response may contain
+            #     less than the maximum number. If unspecified, no more than 500 imports are
             #     returned. The maximum value is 1000; values above 1000 are changed to 1000.
             #   @param page_token [::String]
-            #     Optional. A page token, received from a previous {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#list_services DataprocMetastore.ListServices}
+            #     Optional. A page token, received from a previous
+            #     {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#list_services DataprocMetastore.ListServices}
             #     call. Provide this token to retrieve the subsequent page.
             #
             #     To retrieve the first page, supply an empty page token.
             #
             #     When paginating, other parameters provided to
-            #     {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#list_services DataprocMetastore.ListServices} must match the call that provided the
-            #     page token.
+            #     {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#list_services DataprocMetastore.ListServices}
+            #     must match the call that provided the page token.
             #   @param filter [::String]
             #     Optional. The filter to apply to list results.
             #   @param order_by [::String]
@@ -899,8 +902,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The relative resource name of the metadata import to retrieve, in the
-            #     following form:
+            #     Required. The relative resource name of the metadata import to retrieve, in
+            #     the following form:
             #
             #     `projects/{project_number}/locations/{location_id}/services/{service_id}/metadataImports/{import_id}`.
             #
@@ -987,26 +990,26 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The relative resource name of the service in which to create a metastore
-            #     import, in the following form:
+            #     Required. The relative resource name of the service in which to create a
+            #     metastore import, in the following form:
             #
             #     `projects/{project_number}/locations/{location_id}/services/{service_id}`.
             #   @param metadata_import_id [::String]
-            #     Required. The ID of the metadata import, which is used as the final component of the
-            #     metadata import's name.
+            #     Required. The ID of the metadata import, which is used as the final
+            #     component of the metadata import's name.
             #
             #     This value must be between 1 and 64 characters long, begin with a letter,
             #     end with a letter or number, and consist of alpha-numeric ASCII characters
             #     or hyphens.
             #   @param metadata_import [::Google::Cloud::Metastore::V1::MetadataImport, ::Hash]
-            #     Required. The metadata import to create. The `name` field is ignored. The ID of the
-            #     created metadata import must be provided in the request's
+            #     Required. The metadata import to create. The `name` field is ignored. The
+            #     ID of the created metadata import must be provided in the request's
             #     `metadata_import_id` field.
             #   @param request_id [::String]
-            #     Optional. A request ID. Specify a unique request ID to allow the server to ignore the
-            #     request if it has completed. The server will ignore subsequent requests
-            #     that provide a duplicate request ID for at least 60 minutes after the first
-            #     request.
+            #     Optional. A request ID. Specify a unique request ID to allow the server to
+            #     ignore the request if it has completed. The server will ignore subsequent
+            #     requests that provide a duplicate request ID for at least 60 minutes after
+            #     the first request.
             #
             #     For example, if an initial request times out, followed by another request
             #     with the same request ID, the server ignores the second request to prevent
@@ -1119,10 +1122,10 @@ module Google
             #     The metadata import's `name` field is used to identify the metastore
             #     import to be updated.
             #   @param request_id [::String]
-            #     Optional. A request ID. Specify a unique request ID to allow the server to ignore the
-            #     request if it has completed. The server will ignore subsequent requests
-            #     that provide a duplicate request ID for at least 60 minutes after the first
-            #     request.
+            #     Optional. A request ID. Specify a unique request ID to allow the server to
+            #     ignore the request if it has completed. The server will ignore subsequent
+            #     requests that provide a duplicate request ID for at least 60 minutes after
+            #     the first request.
             #
             #     For example, if an initial request times out, followed by another request
             #     with the same request ID, the server ignores the second request to prevent
@@ -1227,15 +1230,15 @@ module Google
             #     `gs://<bucket_name>/<path_inside_bucket>`. A sub-folder
             #     `<export_folder>` containing exported files will be created below it.
             #   @param service [::String]
-            #     Required. The relative resource name of the metastore service to run export, in the
-            #     following form:
+            #     Required. The relative resource name of the metastore service to run
+            #     export, in the following form:
             #
             #     `projects/{project_id}/locations/{location_id}/services/{service_id}`.
             #   @param request_id [::String]
-            #     Optional. A request ID. Specify a unique request ID to allow the server to ignore the
-            #     request if it has completed. The server will ignore subsequent requests
-            #     that provide a duplicate request ID for at least 60 minutes after the first
-            #     request.
+            #     Optional. A request ID. Specify a unique request ID to allow the server to
+            #     ignore the request if it has completed. The server will ignore subsequent
+            #     requests that provide a duplicate request ID for at least 60 minutes after
+            #     the first request.
             #
             #     For example, if an initial request times out, followed by another request
             #     with the same request ID, the server ignores the second request to prevent
@@ -1245,7 +1248,8 @@ module Google
             #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Format).
             #     A zero UUID (00000000-0000-0000-0000-000000000000) is not supported.
             #   @param database_dump_type [::Google::Cloud::Metastore::V1::DatabaseDumpSpec::Type]
-            #     Optional. The type of the database dump. If unspecified, defaults to `MYSQL`.
+            #     Optional. The type of the database dump. If unspecified, defaults to
+            #     `MYSQL`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -1338,22 +1342,22 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param service [::String]
-            #     Required. The relative resource name of the metastore service to run restore, in the
-            #     following form:
+            #     Required. The relative resource name of the metastore service to run
+            #     restore, in the following form:
             #
             #     `projects/{project_id}/locations/{location_id}/services/{service_id}`.
             #   @param backup [::String]
-            #     Required. The relative resource name of the metastore service backup to restore
-            #     from, in the following form:
+            #     Required. The relative resource name of the metastore service backup to
+            #     restore from, in the following form:
             #
             #     `projects/{project_id}/locations/{location_id}/services/{service_id}/backups/{backup_id}`.
             #   @param restore_type [::Google::Cloud::Metastore::V1::Restore::RestoreType]
             #     Optional. The type of restore. If unspecified, defaults to `METADATA_ONLY`.
             #   @param request_id [::String]
-            #     Optional. A request ID. Specify a unique request ID to allow the server to ignore the
-            #     request if it has completed. The server will ignore subsequent requests
-            #     that provide a duplicate request ID for at least 60 minutes after the first
-            #     request.
+            #     Optional. A request ID. Specify a unique request ID to allow the server to
+            #     ignore the request if it has completed. The server will ignore subsequent
+            #     requests that provide a duplicate request ID for at least 60 minutes after
+            #     the first request.
             #
             #     For example, if an initial request times out, followed by another request
             #     with the same request ID, the server ignores the second request to prevent
@@ -1459,18 +1463,19 @@ module Google
             #
             #     `projects/{project_number}/locations/{location_id}/services/{service_id}/backups`.
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of backups to return. The response may contain less
-            #     than the maximum number. If unspecified, no more than 500 backups are
+            #     Optional. The maximum number of backups to return. The response may contain
+            #     less than the maximum number. If unspecified, no more than 500 backups are
             #     returned. The maximum value is 1000; values above 1000 are changed to 1000.
             #   @param page_token [::String]
-            #     Optional. A page token, received from a previous {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#list_backups DataprocMetastore.ListBackups}
+            #     Optional. A page token, received from a previous
+            #     {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#list_backups DataprocMetastore.ListBackups}
             #     call. Provide this token to retrieve the subsequent page.
             #
             #     To retrieve the first page, supply an empty page token.
             #
             #     When paginating, other parameters provided to
-            #     {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#list_backups DataprocMetastore.ListBackups} must match the call that provided the
-            #     page token.
+            #     {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#list_backups DataprocMetastore.ListBackups}
+            #     must match the call that provided the page token.
             #   @param filter [::String]
             #     Optional. The filter to apply to list results.
             #   @param order_by [::String]
@@ -1654,8 +1659,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The relative resource name of the service in which to create a backup
-            #     of the following form:
+            #     Required. The relative resource name of the service in which to create a
+            #     backup of the following form:
             #
             #     `projects/{project_number}/locations/{location_id}/services/{service_id}`.
             #   @param backup_id [::String]
@@ -1666,13 +1671,13 @@ module Google
             #     end with a letter or number, and consist of alpha-numeric ASCII characters
             #     or hyphens.
             #   @param backup [::Google::Cloud::Metastore::V1::Backup, ::Hash]
-            #     Required. The backup to create. The `name` field is ignored. The ID of the created
-            #     backup must be provided in the request's `backup_id` field.
+            #     Required. The backup to create. The `name` field is ignored. The ID of the
+            #     created backup must be provided in the request's `backup_id` field.
             #   @param request_id [::String]
-            #     Optional. A request ID. Specify a unique request ID to allow the server to ignore the
-            #     request if it has completed. The server will ignore subsequent requests
-            #     that provide a duplicate request ID for at least 60 minutes after the first
-            #     request.
+            #     Optional. A request ID. Specify a unique request ID to allow the server to
+            #     ignore the request if it has completed. The server will ignore subsequent
+            #     requests that provide a duplicate request ID for at least 60 minutes after
+            #     the first request.
             #
             #     For example, if an initial request times out, followed by another request
             #     with the same request ID, the server ignores the second request to prevent
@@ -1778,10 +1783,10 @@ module Google
             #
             #     `projects/{project_number}/locations/{location_id}/services/{service_id}/backups/{backup_id}`.
             #   @param request_id [::String]
-            #     Optional. A request ID. Specify a unique request ID to allow the server to ignore the
-            #     request if it has completed. The server will ignore subsequent requests
-            #     that provide a duplicate request ID for at least 60 minutes after the first
-            #     request.
+            #     Optional. A request ID. Specify a unique request ID to allow the server to
+            #     ignore the request if it has completed. The server will ignore subsequent
+            #     requests that provide a duplicate request ID for at least 60 minutes after
+            #     the first request.
             #
             #     For example, if an initial request times out, followed by another request
             #     with the same request ID, the server ignores the second request to prevent
