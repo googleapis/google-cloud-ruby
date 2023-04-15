@@ -79,7 +79,7 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
     called = false  
     def stub.modify_ack_deadline subscription:, ack_ids:, ack_deadline_seconds:
       if @modify_ack_deadline_requests.count == 0
-        return  @modify_ack_deadline_requests << [subscription, ack_ids.sort, ack_deadline_seconds]
+        return @modify_ack_deadline_requests << [subscription, ack_ids.sort, ack_deadline_seconds]
       end
       @modify_ack_deadline_requests << [subscription, ack_ids.sort, ack_deadline_seconds]
       begin
@@ -122,7 +122,7 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
     errors = []
     def stub.modify_ack_deadline subscription:, ack_ids:, ack_deadline_seconds:
       if @modify_ack_deadline_requests.count == 0
-        return  @modify_ack_deadline_requests << [subscription, ack_ids.sort, ack_deadline_seconds]
+        return @modify_ack_deadline_requests << [subscription, ack_ids.sort, ack_deadline_seconds]
       end
       raise StandardError.new "Test failure"
     end
@@ -252,7 +252,7 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
     errors = []
     def stub.modify_ack_deadline subscription:, ack_ids:, ack_deadline_seconds:
       if @modify_ack_deadline_requests.count == 0
-        return  @modify_ack_deadline_requests << ["ack_ids"]
+        return @modify_ack_deadline_requests << ["ack_ids"]
       end
       raise Google::Cloud::PermissionDeniedError.new "Test failure"
     end
@@ -339,7 +339,7 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
     errors = []
     def stub.modify_ack_deadline subscription:, ack_ids:, ack_deadline_seconds:
       if @modify_ack_deadline_requests.count == 0
-        return  @modify_ack_deadline_requests << ["ack_ids"]
+        return @modify_ack_deadline_requests << ["ack_ids"]
       end
       raise Google::Cloud::FailedPreconditionError.new "Test failure"
     end
