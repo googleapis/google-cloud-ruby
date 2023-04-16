@@ -1,5 +1,11 @@
 # Release History
 
+### 0.10.0 (2023-04-16)
+
+#### Features
+
+* Update AttackComplexity and Authentication enums 
+
 ### 0.9.0 (2023-03-15)
 
 #### Features
