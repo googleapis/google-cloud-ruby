@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.8.0 (2023-04-16)
+
+#### Features
+
+* support batch processing mode 
+
 ### 0.7.0 (2023-03-08)
 
 #### Features
