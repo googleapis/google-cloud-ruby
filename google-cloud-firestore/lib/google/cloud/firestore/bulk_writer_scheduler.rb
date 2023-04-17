@@ -42,7 +42,6 @@ module Google
           @batch_threads = (batch_threads || 4).to_i
           @batch_thread_pool = Concurrent::ThreadPoolExecutor.new max_threads: @batch_threads, max_queue: 0
           @retry_operations = Containers::MinHeap.new
-          @scheduling_event = Concurrent::Event.new
           @mutex = Mutex.new
           start_scheduling_operations
         end
@@ -60,10 +59,7 @@ module Google
         end
 
         def add_operation operation
-          @mutex.synchronize do
-            @buffered_operations << operation
-            @scheduling_event.set
-          end
+          @mutex.synchronize { @buffered_operations << operation }
         end
 
         ##
