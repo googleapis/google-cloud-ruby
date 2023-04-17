@@ -1,4 +1,4 @@
-# Copyright 2018 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -67,7 +67,6 @@ describe Google::Cloud::Firestore::Filter do
     _(generated_filter.filter).must_equal expected_filter
   end
 
-
   it "with complex composite filters" do
     expected_filter = Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
       composite_filter: Google::Cloud::Firestore::V1::StructuredQuery::CompositeFilter.new(
@@ -108,5 +107,65 @@ describe Google::Cloud::Firestore::Filter do
     filter_1 = Google::Cloud::Firestore::Filter.new(:bar, :==, "bar")
     generated_filter = Google::Cloud::Firestore::Filter.new(:foo, :==, 42).or(:bar, :==, "baz").and(filter_1)
     _(generated_filter.filter).must_equal expected_filter
+  end
+
+  it "does not mutate existing filter objects on .and method" do
+    expected_filter = Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
+      composite_filter: Google::Cloud::Firestore::V1::StructuredQuery::CompositeFilter.new(
+        op: :AND,
+        filters: [
+          Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
+            field_filter: Google::Cloud::Firestore::V1::StructuredQuery::FieldFilter.new(
+              field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "a"),
+              op: :EQUAL,
+              value: Google::Cloud::Firestore::V1::Value.new(integer_value: 3)
+            )
+          ),
+          Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
+            field_filter: Google::Cloud::Firestore::V1::StructuredQuery::FieldFilter.new(
+              field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "b"),
+              op: :GREATER_THAN,
+              value: Google::Cloud::Firestore::V1::Value.new(integer_value: 4)
+            )
+          )
+        ]
+      )
+    )
+    filter_1 = Google::Cloud::Firestore::Filter.new(:a, :==, 3)
+    filter_2 = Google::Cloud::Firestore::Filter.new(:b, :>, 4)
+    filter_3 = filter_1.and(filter_2)
+    _(filter_3.filter).must_equal expected_filter
+    _(filter_1.filter).must_equal Google::Cloud::Firestore::Filter.new(:a, :==, 3).filter
+    _(filter_2.filter).must_equal Google::Cloud::Firestore::Filter.new(:b, :>, 4).filter
+  end
+
+  it "does not mutate existing filter objects on .or method" do
+    expected_filter = Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
+      composite_filter: Google::Cloud::Firestore::V1::StructuredQuery::CompositeFilter.new(
+        op: :OR,
+        filters: [
+          Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
+            field_filter: Google::Cloud::Firestore::V1::StructuredQuery::FieldFilter.new(
+              field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "a"),
+              op: :EQUAL,
+              value: Google::Cloud::Firestore::V1::Value.new(integer_value: 3)
+            )
+          ),
+          Google::Cloud::Firestore::V1::StructuredQuery::Filter.new(
+            field_filter: Google::Cloud::Firestore::V1::StructuredQuery::FieldFilter.new(
+              field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "b"),
+              op: :GREATER_THAN,
+              value: Google::Cloud::Firestore::V1::Value.new(integer_value: 4)
+            )
+          )
+        ]
+      )
+    )
+    filter_1 = Google::Cloud::Firestore::Filter.new(:a, :==, 3)
+    filter_2 = Google::Cloud::Firestore::Filter.new(:b, :>, 4)
+    filter_3 = filter_1.or(filter_2)
+    _(filter_3.filter).must_equal expected_filter
+    _(filter_1.filter).must_equal Google::Cloud::Firestore::Filter.new(:a, :==, 3).filter
+    _(filter_2.filter).must_equal Google::Cloud::Firestore::Filter.new(:b, :>, 4).filter
   end
 end
