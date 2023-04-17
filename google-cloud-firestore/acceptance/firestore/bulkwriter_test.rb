@@ -122,7 +122,7 @@ describe "BulkWriter", :firestore_acceptance do
     end
   end
 
-  it "CRUD operations" do
+  focus; it "CRUD operations" do
     rand_tx_col = firestore.col "#{root_path}/tx/#{SecureRandom.hex(4)}"
     doc_refs = []
     (1..50).each do |i|

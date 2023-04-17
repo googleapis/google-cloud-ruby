@@ -50,9 +50,8 @@ module Google
           Concurrent::Promises.future_on @batch_thread_pool do
             begin
               schedule_operations
-            rescue StandardError => e
+            rescue StandardError
               # TODO: Log the error when logging is available
-              puts e
               retry
             end
           end
@@ -121,10 +120,8 @@ module Google
               next
             end
             @rate_limiter.get_tokens batch_size
-            @mutex.synchronize do
-              operations = dequeue_buffered_operations batch_size
-              commit_batch BulkCommitBatch.new(@service, operations)
-            end
+            operations = dequeue_buffered_operations batch_size
+            commit_batch BulkCommitBatch.new(@service, operations)
           end
         end
 
@@ -133,7 +130,9 @@ module Google
         # the current batch
         #
         def dequeue_buffered_operations size
-          @buffered_operations.shift size
+          @mutex.synchronize do
+            @buffered_operations.shift size
+          end
         end
 
         ##
