@@ -69,13 +69,15 @@ module Google
         ##
         # Joins filter using AND operator.
         #
-        # @overload and(filter)
+        # @overload where(filter_or_field)
+        #   Pass Firestore::Filter to `where` via field_or_filter argument.
         #
         #   @param [::Google::Cloud::Firestore::Filter] filter
         #
-        # @overload and(field, operator, value)
+        # @overload where(filter_or_field, operator, value)
+        #   Pass arguments to `where` via positional arguments.
         #
-        #    @param [FieldPath, String, Symbol] filter_or_field A field path to filter
+        #    @param [FieldPath, String, Symbol] field A field path to filter
         #     results with.
         #
         #     If a {FieldPath} object is not provided then the field will be
@@ -114,20 +116,22 @@ module Google
         #
         #   filter = filter_1.and("done", "=", "false")
         #
-        def and *args
-          join_filters composite_filter_and, args
+        def and filter_or_field = nil, operator = nil, value = nil
+          combine_filters composite_filter_and, filter_or_field, operator, value
         end
 
         ##
         # Joins filter using OR operator.
         #
-        # @overload and(filter)
+        # @overload where(filter_or_field)
+        #   Pass Firestore::Filter to `where` via field_or_filter argument.
         #
         #   @param [::Google::Cloud::Firestore::Filter] filter
         #
-        # @overload and(field, operator, value)
+        # @overload where(filter_or_field, operator, value)
+        #   Pass arguments to `where` via positional arguments.
         #
-        #    @param [FieldPath, String, Symbol] filter_or_field A field path to filter
+        #    @param [FieldPath, String, Symbol] field A field path to filter
         #     results with.
         #
         #     If a {FieldPath} object is not provided then the field will be
@@ -166,8 +170,8 @@ module Google
         #
         #   filter = filter_1.or("done", "=", "false")
         #
-        def or *args
-          join_filters composite_filter_or, args
+        def or filter_or_field = nil, operator = nil, value = nil
+          combine_filters composite_filter_or, filter_or_field, operator, value
         end
 
         private
@@ -225,15 +229,15 @@ module Google
           )
         end
 
-        def join_filters composite_filter, sec_filter
-          composite_filter.composite_filter.filters << @filter
-          if (sec_filter.length == 1) && sec_filter[0].is_a?(Google::Cloud::Firestore::Filter)
-            composite_filter.composite_filter.filters << sec_filter[0].filter
-          else
-            composite_filter.composite_filter.filters << create_filter(*sec_filter)
-          end
-          Filter.new(nil, nil, nil).tap do |f|
-            f.filter = composite_filter
+        def combine_filters new_filter, filter_or_field, operator, value
+          new_filter.composite_filter.filters << @filter
+          new_filter.composite_filter.filters << if filter_or_field.is_a? Google::Cloud::Firestore::Filter
+                                                   filter_or_field.filter
+                                                 else
+                                                   create_filter filter_or_field, operator, value
+                                                 end
+          dup.tap do |f|
+            f.filter = new_filter
           end
         end
 
