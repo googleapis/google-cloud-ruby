@@ -80,12 +80,12 @@ module Google
         ##
         # Joins filter using AND operator.
         #
-        # @overload where(filter_or_field)
+        # @overload where(filter)
         #   Pass Firestore::Filter to `where` via field_or_filter argument.
         #
         #  @param filter [::Google::Cloud::Firestore::Filter]
         #
-        # @overload where(filter_or_field, operator, value)
+        # @overload where(field, operator, value)
         #   Pass arguments to `where` via positional arguments.
         #
         #   @param field [FieldPath, String, Symbol] A field path to filter
@@ -145,12 +145,12 @@ module Google
         ##
         # Joins filter using OR operator.
         #
-        # @overload where(filter_or_field)
+        # @overload where(filter)
         #   Pass Firestore::Filter to `where` via field_or_filter argument.
         #
         #  @param filter [::Google::Cloud::Firestore::Filter]
         #
-        # @overload where(filter_or_field, operator, value)
+        # @overload where(field, operator, value)
         #   Pass arguments to `where` via positional arguments.
         #
         #   @param field [FieldPath, String, Symbol] A field path to filter
