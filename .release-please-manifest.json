@@ -695,7 +695,7 @@
   "grafeas+FILLER": "0.0.0",
   "grafeas-client": "0.4.0",
   "grafeas-client+FILLER": "0.0.0",
-  "grafeas-v1": "0.9.0",
+  "grafeas-v1": "0.10.0",
   "grafeas-v1+FILLER": "0.0.0",
   "stackdriver": "0.21.1",
   "stackdriver+FILLER": "0.0.0",
