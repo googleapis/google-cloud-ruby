@@ -153,7 +153,7 @@ module Google
         #   firestore = Google::Cloud::Firestore.new
         #   bw = firestore.bulk_writer
         #
-        #     bw.set("cities/NYC", { name: "New York City" }, merge: :name)
+        #   bw.set("cities/NYC", { name: "New York City" }, merge: :name)
         #
         # @example Set a document and deleting a field using merge:
         #   require "google/cloud/firestore"
@@ -397,24 +397,24 @@ module Google
         ##
         # @private Checks if the BulkWriter is accepting write requests
         def accepting_request
-          @mutex.synchronize do
-            unless @closed || @flush
-              return true
-            end
-            false
+          unless @closed || @flush
+            return true
           end
+          false
         end
 
         ##
         # @private Sanity checks before adding a write request in the BulkWriter
         def pre_add_operation doc_path
-          unless accepting_request
-            raise StandardError, "BulkWriter not accepting responses for now. Either closed or in flush state"
+          @mutex.synchronize do
+            unless accepting_request
+              raise StandardError, "BulkWriter not accepting responses for now. Either closed or in flush state"
+            end
+            if @doc_refs.include? doc_path
+              raise StandardError, "BulkWriter already contains mutations for this document"
+            end
+            @doc_refs.add doc_path
           end
-          if @doc_refs.include? doc_path
-            raise StandardError, "BulkWriter already contains mutations for this document"
-          end
-          @doc_refs.add doc_path
         end
 
         ##

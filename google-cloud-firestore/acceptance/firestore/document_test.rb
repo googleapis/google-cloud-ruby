@@ -83,7 +83,7 @@ describe "Document", :firestore_acceptance do
     _(doc_snp[:linked].document_path).must_equal all_values[:linked].document_path
     _(doc_snp[:list]).must_equal all_values[:list]
     _(doc_snp[:empty_list]).must_equal all_values[:empty_list]
-    assert_nil doc_snp[:null]
+    _(doc_snp[:null]).must_be :nil?
     _(doc_snp[:location]).must_equal all_values[:location]
     _(doc_snp[:binary]).must_be_kind_of StringIO
     doc_snp[:binary].rewind
