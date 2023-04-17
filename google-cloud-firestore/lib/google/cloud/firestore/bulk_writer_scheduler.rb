@@ -42,7 +42,7 @@ module Google
           @batch_threads = (batch_threads || 4).to_i
           @batch_thread_pool = Concurrent::ThreadPoolExecutor.new max_threads: @batch_threads, max_queue: 0
           @retry_operations = Containers::MinHeap.new
-          @pending_batch_count = 0
+          @scheduling_event = Concurrent::Event.new
           @mutex = Mutex.new
           start_scheduling_operations
         end
@@ -51,23 +51,18 @@ module Google
           Concurrent::Promises.future_on @batch_thread_pool do
             begin
               schedule_operations
-            rescue StandardError
+            rescue StandardError => e
               # TODO: Log the error when logging is available
+              puts e
               retry
             end
           end
         end
 
         def add_operation operation
-          @mutex.synchronize { @buffered_operations << operation }
-        end
-
-        ##
-        # @private Checks if all the operations are completed.
-        #
-        def operations_remaining?
           @mutex.synchronize do
-            (@retry_operations.length + @buffered_operations.length + @pending_batch_count).positive?
+            @buffered_operations << operation
+            @scheduling_event.set
           end
         end
 
@@ -92,7 +87,6 @@ module Google
                 @retry_operations.push operation.retry_time, operation
               end
             end
-            @pending_batch_count -= 1
           end
         end
 
@@ -126,14 +120,13 @@ module Google
           loop do
             dequeue_retry_operations
             batch_size = [MAX_BATCH_SIZE, @buffered_operations.length].min
-            if batch_size.zero? || @batch_thread_pool.remaining_capacity.zero?
-              sleep 0.1
+            if batch_size.zero?
+              sleep 0.001
               next
             end
             @rate_limiter.get_tokens batch_size
             @mutex.synchronize do
               operations = dequeue_buffered_operations batch_size
-              @pending_batch_count += 1
               commit_batch BulkCommitBatch.new(@service, operations)
             end
           end

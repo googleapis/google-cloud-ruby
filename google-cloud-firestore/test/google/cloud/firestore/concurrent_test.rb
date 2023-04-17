@@ -40,6 +40,8 @@ describe Google::Cloud::Firestore::Promise::Future, :mock_firestore do
     result_2 = bw.create "cities/NYC", { foo: "bar"}
 
     _(result_2.rejected?).must_equal false
+
+    bw.flush
     assert_raises Google::Cloud::Firestore::BulkWriterException do
       result_2.wait!
     end
@@ -106,7 +108,7 @@ describe Google::Cloud::Firestore::Promise::Future, :mock_firestore do
     request = batch_write_args write_requests
     responses_pass = [batch_write_pass_resp(1)]
     requests = [request]
-    stub = BatchWriteStub.new responses_pass, requests, 0.1
+    stub = BatchWriteStub.new responses_pass, requests
 
     bw = firestore.bulk_writer retries: 1
 
@@ -116,11 +118,12 @@ describe Google::Cloud::Firestore::Promise::Future, :mock_firestore do
     future = result_1.then do |value|
       results << value
     end
-
-    bw.close
+    bw.flush
     future.wait!
 
     _(results.first).must_be_kind_of Google::Cloud::Firestore::BulkWriterOperation::WriteResult
+
+    bw.close
   end
 
   it "successfully adds callback on rejection" do
@@ -128,7 +131,7 @@ describe Google::Cloud::Firestore::Promise::Future, :mock_firestore do
     request = batch_write_args write_requests
     responses_fail = [batch_write_fail_resp(1)]
     requests = [request]
-    stub = BatchWriteStub.new responses_fail, requests, 0.1
+    stub = BatchWriteStub.new responses_fail, requests
 
     bw = firestore.bulk_writer retries: 1
 
@@ -138,10 +141,10 @@ describe Google::Cloud::Firestore::Promise::Future, :mock_firestore do
     future = result_1.rescue do |reason|
       reasons << reason
     end
-
-    bw.close
+    bw.flush
     future.wait!
 
     _(reasons.first).must_be_kind_of Google::Cloud::Firestore::BulkWriterException
+    bw.close
   end
 end

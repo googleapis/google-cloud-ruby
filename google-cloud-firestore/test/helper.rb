@@ -101,7 +101,7 @@ end
 class BatchWriteStub
   attr_reader :requests, :responses
 
-  def initialize responses, requests, response_delay = 0.01
+  def initialize responses, requests, response_delay = 0
     @requests = requests
     @responses = responses
     @response_delay = response_delay

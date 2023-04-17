@@ -47,6 +47,7 @@ module Google
           @scheduler = BulkWriterScheduler.new client, service, batch_threads
           @doc_refs = Set.new
           @retries = [retries || MAX_RETRY_ATTEMPTS, MAX_RETRY_ATTEMPTS].min
+          @request_results = []
         end
 
         ##
@@ -355,7 +356,13 @@ module Google
         # @return [nil]
         def flush
           @mutex.synchronize { @flush = true }
-          sleep 0.1 while @scheduler.operations_remaining?
+          @request_results.each do |result|
+            begin
+              result.wait!
+            rescue StandardError
+              # Ignored
+            end
+          end
           @mutex.synchronize do
             @doc_refs = Set.new
             @flush = false
@@ -434,6 +441,7 @@ module Google
             raise bulk_writer_operation.result if bulk_writer_operation.result.is_a? BulkWriterException
             bulk_writer_operation.result
           end
+          @mutex.synchronize { @request_results << future }
           Promise::Future.new future
         end
 
