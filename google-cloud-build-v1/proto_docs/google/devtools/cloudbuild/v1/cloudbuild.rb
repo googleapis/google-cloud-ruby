@@ -77,6 +77,35 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Location of the source in any accessible Git repository.
+        # @!attribute [rw] url
+        #   @return [::String]
+        #     Location of the Git repo to build.
+        #
+        #     This will be used as a `git remote`, see
+        #     https://git-scm.com/docs/git-remote.
+        # @!attribute [rw] dir
+        #   @return [::String]
+        #     Directory, relative to the source root, in which to run the build.
+        #
+        #     This must be a relative path. If a step's `dir` is specified and is an
+        #     absolute path, this value is ignored for that step's execution.
+        # @!attribute [rw] revision
+        #   @return [::String]
+        #     The revision to fetch from the Git repository such as a branch, a tag, a
+        #     commit SHA, or any Git ref.
+        #
+        #     Cloud Build uses `git fetch` to fetch the revision from the Git
+        #     repository; therefore make sure that the string you provide for `revision`
+        #     is parsable  by the command. For information on string values accepted by
+        #     `git fetch`, see
+        #     https://git-scm.com/docs/gitrevisions#_specifying_revisions. For
+        #     information on `git fetch`, see https://git-scm.com/docs/git-fetch.
+        class GitSource
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Location of the source in a Google Cloud Source Repository.
         # @!attribute [rw] project_id
         #   @return [::String]
@@ -158,6 +187,9 @@ module Google
         #   @return [::Google::Cloud::Build::V1::RepoSource]
         #     If provided, get the source from this location in a Cloud Source
         #     Repository.
+        # @!attribute [rw] git_source
+        #   @return [::Google::Cloud::Build::V1::GitSource]
+        #     If provided, get the source from this Git repository.
         # @!attribute [rw] storage_source_manifest
         #   @return [::Google::Cloud::Build::V1::StorageSourceManifest]
         #     If provided, get the source from this manifest in Google Cloud Storage.

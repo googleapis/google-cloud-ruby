@@ -32,6 +32,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :object, :string, 2
       optional :generation, :int64, 3
     end
+    add_message "google.devtools.cloudbuild.v1.GitSource" do
+      optional :url, :string, 1
+      optional :dir, :string, 5
+      optional :revision, :string, 6
+    end
     add_message "google.devtools.cloudbuild.v1.RepoSource" do
       optional :project_id, :string, 1
       optional :repo_name, :string, 2
@@ -53,6 +58,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       oneof :source do
         optional :storage_source, :message, 2, "google.devtools.cloudbuild.v1.StorageSource"
         optional :repo_source, :message, 3, "google.devtools.cloudbuild.v1.RepoSource"
+        optional :git_source, :message, 5, "google.devtools.cloudbuild.v1.GitSource"
         optional :storage_source_manifest, :message, 8, "google.devtools.cloudbuild.v1.StorageSourceManifest"
       end
     end
@@ -551,6 +557,7 @@ module Google
         RetryBuildRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.RetryBuildRequest").msgclass
         RunBuildTriggerRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.RunBuildTriggerRequest").msgclass
         StorageSource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.StorageSource").msgclass
+        GitSource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.GitSource").msgclass
         RepoSource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.RepoSource").msgclass
         StorageSourceManifest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.StorageSourceManifest").msgclass
         Source = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.Source").msgclass
