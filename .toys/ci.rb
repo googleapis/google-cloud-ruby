@@ -328,7 +328,8 @@ def run_linkinator dir
   skip_regexes = [
     "\\w+\\.md$",
     "^https://rubygems\\.org/gems/#{dir_without_version}",
-    "^https://cloud\\.google\\.com/ruby/docs/reference/#{dir}/latest$"
+    "^https://cloud\\.google\\.com/ruby/docs/reference/#{dir}/latest$",
+    "^https://rubydoc\\.info/gems/#{dir_without_version}"
   ]
   if dir == dir_without_version
     skip_regexes << "^https://cloud\\.google\\.com/ruby/docs/reference/#{dir}-v\\d\\w*/latest$"
