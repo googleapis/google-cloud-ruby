@@ -115,12 +115,10 @@ module Google
         #     The formats of the relative resource names for the currently supported
         #     metastores are listed below:
         #
-        #     * Dataplex
-        #       * `projects/{project_id}/locations/{location}/lakes/{lake_id}`
         #     * BigQuery
-        #       * `projects/{project_id}`
+        #         * `projects/{project_id}`
         #     * Dataproc Metastore
-        #       * `projects/{project_id}/locations/{location}/services/{service_id}`
+        #         * `projects/{project_id}/locations/{location}/services/{service_id}`
         # @!attribute [rw] metastore_type
         #   @return [::Google::Cloud::Metastore::V1beta::BackendMetastore::MetastoreType]
         #     The type of the backend metastore.
@@ -132,6 +130,9 @@ module Google
           module MetastoreType
             # The metastore type is not set.
             METASTORE_TYPE_UNSPECIFIED = 0
+
+            # The backend metastore is Dataplex.
+            DATAPLEX = 1
 
             # The backend metastore is BigQuery.
             BIGQUERY = 2
