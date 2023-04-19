@@ -186,6 +186,35 @@
               "methods": [
                 "delete_tag_binding"
               ]
+            },
+            "ListEffectiveTags": {
+              "methods": [
+                "list_effective_tags"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "TagHolds": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::ResourceManager::V3::TagHolds::Client",
+          "rpcs": {
+            "CreateTagHold": {
+              "methods": [
+                "create_tag_hold"
+              ]
+            },
+            "DeleteTagHold": {
+              "methods": [
+                "delete_tag_hold"
+              ]
+            },
+            "ListTagHolds": {
+              "methods": [
+                "list_tag_holds"
+              ]
             }
           }
         }
@@ -204,6 +233,11 @@
             "GetTagKey": {
               "methods": [
                 "get_tag_key"
+              ]
+            },
+            "GetNamespacedTagKey": {
+              "methods": [
+                "get_namespaced_tag_key"
               ]
             },
             "CreateTagKey": {
@@ -253,6 +287,11 @@
             "GetTagValue": {
               "methods": [
                 "get_tag_value"
+              ]
+            },
+            "GetNamespacedTagValue": {
+              "methods": [
+                "get_namespaced_tag_value"
               ]
             },
             "CreateTagValue": {

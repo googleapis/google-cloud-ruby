@@ -24,6 +24,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :create_time, :message, 6, "google.protobuf.Timestamp"
       optional :update_time, :message, 7, "google.protobuf.Timestamp"
       optional :etag, :string, 8
+      optional :purpose, :enum, 11, "google.cloud.resourcemanager.v3.Purpose"
+      map :purpose_data, :string, :string, 12
     end
     add_message "google.cloud.resourcemanager.v3.ListTagKeysRequest" do
       optional :parent, :string, 1
@@ -35,6 +37,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :next_page_token, :string, 2
     end
     add_message "google.cloud.resourcemanager.v3.GetTagKeyRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.cloud.resourcemanager.v3.GetNamespacedTagKeyRequest" do
       optional :name, :string, 1
     end
     add_message "google.cloud.resourcemanager.v3.CreateTagKeyRequest" do
@@ -57,6 +62,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.resourcemanager.v3.DeleteTagKeyMetadata" do
     end
+    add_enum "google.cloud.resourcemanager.v3.Purpose" do
+      value :PURPOSE_UNSPECIFIED, 0
+      value :GCE_FIREWALL, 1
+    end
   end
 end
 
@@ -68,12 +77,14 @@ module Google
         ListTagKeysRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.resourcemanager.v3.ListTagKeysRequest").msgclass
         ListTagKeysResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.resourcemanager.v3.ListTagKeysResponse").msgclass
         GetTagKeyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.resourcemanager.v3.GetTagKeyRequest").msgclass
+        GetNamespacedTagKeyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.resourcemanager.v3.GetNamespacedTagKeyRequest").msgclass
         CreateTagKeyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.resourcemanager.v3.CreateTagKeyRequest").msgclass
         CreateTagKeyMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.resourcemanager.v3.CreateTagKeyMetadata").msgclass
         UpdateTagKeyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.resourcemanager.v3.UpdateTagKeyRequest").msgclass
         UpdateTagKeyMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.resourcemanager.v3.UpdateTagKeyMetadata").msgclass
         DeleteTagKeyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.resourcemanager.v3.DeleteTagKeyRequest").msgclass
         DeleteTagKeyMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.resourcemanager.v3.DeleteTagKeyMetadata").msgclass
+        Purpose = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.resourcemanager.v3.Purpose").enummodule
       end
     end
   end

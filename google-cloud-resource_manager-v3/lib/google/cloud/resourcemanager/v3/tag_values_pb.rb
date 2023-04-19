@@ -37,6 +37,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.resourcemanager.v3.GetTagValueRequest" do
       optional :name, :string, 1
     end
+    add_message "google.cloud.resourcemanager.v3.GetNamespacedTagValueRequest" do
+      optional :name, :string, 1
+    end
     add_message "google.cloud.resourcemanager.v3.CreateTagValueRequest" do
       optional :tag_value, :message, 1, "google.cloud.resourcemanager.v3.TagValue"
       optional :validate_only, :bool, 2
@@ -68,6 +71,7 @@ module Google
         ListTagValuesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.resourcemanager.v3.ListTagValuesRequest").msgclass
         ListTagValuesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.resourcemanager.v3.ListTagValuesResponse").msgclass
         GetTagValueRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.resourcemanager.v3.GetTagValueRequest").msgclass
+        GetNamespacedTagValueRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.resourcemanager.v3.GetNamespacedTagValueRequest").msgclass
         CreateTagValueRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.resourcemanager.v3.CreateTagValueRequest").msgclass
         CreateTagValueMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.resourcemanager.v3.CreateTagValueMetadata").msgclass
         UpdateTagValueRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.resourcemanager.v3.UpdateTagValueRequest").msgclass
