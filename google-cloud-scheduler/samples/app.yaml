@@ -12,9 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START cloud_scheduler_yaml]
+# [START cloudscheduler_yaml]
 runtime: ruby
 service: my-service
 env: flex
 entrypoint: bundle exec ruby app.rb
-# [END cloud_scheduler_yaml]
+# [END cloudscheduler_yaml]
