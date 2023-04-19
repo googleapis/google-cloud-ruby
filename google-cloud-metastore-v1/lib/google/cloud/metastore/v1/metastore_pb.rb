@@ -8,6 +8,7 @@ require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/longrunning/operations_pb'
+require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/protobuf/wrappers_pb'
@@ -35,6 +36,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :network_config, :message, 21, "google.cloud.metastore.v1.NetworkConfig"
       optional :database_type, :enum, 22, "google.cloud.metastore.v1.Service.DatabaseType"
       optional :telemetry_config, :message, 23, "google.cloud.metastore.v1.TelemetryConfig"
+      optional :scaling_config, :message, 24, "google.cloud.metastore.v1.ScalingConfig"
       oneof :metastore_config do
         optional :hive_metastore_config, :message, 5, "google.cloud.metastore.v1.HiveMetastoreConfig"
       end
@@ -72,6 +74,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :version, :string, 1
       map :config_overrides, :string, :string, 2
       optional :kerberos_config, :message, 3, "google.cloud.metastore.v1.KerberosConfig"
+      map :auxiliary_versions, :string, :message, 5, "google.cloud.metastore.v1.AuxiliaryVersionConfig"
     end
     add_message "google.cloud.metastore.v1.KerberosConfig" do
       optional :keytab, :message, 1, "google.cloud.metastore.v1.Secret"
@@ -85,6 +88,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.metastore.v1.EncryptionConfig" do
       optional :kms_key, :string, 1
+    end
+    add_message "google.cloud.metastore.v1.AuxiliaryVersionConfig" do
+      optional :version, :string, 1
+      map :config_overrides, :string, :string, 2
+      optional :network_config, :message, 3, "google.cloud.metastore.v1.NetworkConfig"
     end
     add_message "google.cloud.metastore.v1.NetworkConfig" do
       repeated :consumers, :message, 1, "google.cloud.metastore.v1.NetworkConfig.Consumer"
@@ -186,6 +194,20 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :RESTORE_TYPE_UNSPECIFIED, 0
       value :FULL, 1
       value :METADATA_ONLY, 2
+    end
+    add_message "google.cloud.metastore.v1.ScalingConfig" do
+      oneof :scaling_model do
+        optional :instance_size, :enum, 1, "google.cloud.metastore.v1.ScalingConfig.InstanceSize"
+        optional :scaling_factor, :float, 2
+      end
+    end
+    add_enum "google.cloud.metastore.v1.ScalingConfig.InstanceSize" do
+      value :INSTANCE_SIZE_UNSPECIFIED, 0
+      value :EXTRA_SMALL, 1
+      value :SMALL, 2
+      value :MEDIUM, 3
+      value :LARGE, 4
+      value :EXTRA_LARGE, 5
     end
     add_message "google.cloud.metastore.v1.ListServicesRequest" do
       optional :parent, :string, 1
@@ -322,6 +344,7 @@ module Google
         KerberosConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1.KerberosConfig").msgclass
         Secret = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1.Secret").msgclass
         EncryptionConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1.EncryptionConfig").msgclass
+        AuxiliaryVersionConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1.AuxiliaryVersionConfig").msgclass
         NetworkConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1.NetworkConfig").msgclass
         NetworkConfig::Consumer = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1.NetworkConfig.Consumer").msgclass
         TelemetryConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1.TelemetryConfig").msgclass
@@ -338,6 +361,8 @@ module Google
         Restore = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1.Restore").msgclass
         Restore::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1.Restore.State").enummodule
         Restore::RestoreType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1.Restore.RestoreType").enummodule
+        ScalingConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1.ScalingConfig").msgclass
+        ScalingConfig::InstanceSize = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1.ScalingConfig.InstanceSize").enummodule
         ListServicesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1.ListServicesRequest").msgclass
         ListServicesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1.ListServicesResponse").msgclass
         GetServiceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1.GetServiceRequest").msgclass
