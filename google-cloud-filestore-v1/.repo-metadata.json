@@ -11,7 +11,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
-    "ruby-cloud-description": "Filestore instances are fully managed NFS file servers on Google Cloud for use with applications running on Compute Engine virtual machines (VMs) instances or Google Kubernetes Engine clusters. Note that google-cloud-filestore-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-filestore instead. See the readme for more details.",
+    "ruby-cloud-description": "Filestore instances are fully managed NFS file servers on Google Cloud for use with applications running on Compute Engine virtual machine (VM) instances, Google Kubernetes Engine clusters, external datastores such as Google Cloud VMware Engine, or your on-premises machines. Note that google-cloud-filestore-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-filestore instead. See the readme for more details.",
     "ruby-cloud-product-url": "https://cloud.google.com/filestore/",
     "library_type": "GAPIC_AUTO"
 }

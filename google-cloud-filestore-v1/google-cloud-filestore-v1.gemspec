@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Filestore instances are fully managed NFS file servers on Google Cloud for use with applications running on Compute Engine virtual machines (VMs) instances or Google Kubernetes Engine clusters. Note that google-cloud-filestore-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-filestore instead. See the readme for more details."
+  gem.description   = "Filestore instances are fully managed NFS file servers on Google Cloud for use with applications running on Compute Engine virtual machine (VM) instances, Google Kubernetes Engine clusters, external datastores such as Google Cloud VMware Engine, or your on-premises machines. Note that google-cloud-filestore-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-filestore instead. See the readme for more details."
   gem.summary       = "The Cloud Filestore API is used for creating and managing cloud file servers."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
