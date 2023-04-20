@@ -78,9 +78,12 @@ module Google
             # Upon success, the `Operation.response` field will be populated with the
             # moved project.
             #
-            # The caller must have `resourcemanager.projects.update` permission on the
-            # project and have `resourcemanager.projects.move` permission on the
-            # project's current and proposed new parent.
+            # The caller must have `resourcemanager.projects.move` permission on the
+            # project, on the project's current and proposed new parent.
+            #
+            # If project has no current parent, or it currently does not have an
+            # associated organization resource, you will also need the
+            # `resourcemanager.projects.setIamPolicy` permission in the project.
             #
             #
             rpc :MoveProject, ::Google::Cloud::ResourceManager::V3::MoveProjectRequest, ::Google::Longrunning::Operation
@@ -92,7 +95,8 @@ module Google
             #
             # This method changes the Project's lifecycle state from
             # [ACTIVE][google.cloud.resourcemanager.v3.Project.State.ACTIVE]
-            # to [DELETE_REQUESTED][google.cloud.resourcemanager.v3.Project.State.DELETE_REQUESTED].
+            # to
+            # [DELETE_REQUESTED][google.cloud.resourcemanager.v3.Project.State.DELETE_REQUESTED].
             # The deletion starts at an unspecified time,
             # at which point the Project is no longer accessible.
             #
@@ -127,10 +131,12 @@ module Google
             # The caller must have `resourcemanager.projects.undelete` permission for
             # this project.
             rpc :UndeleteProject, ::Google::Cloud::ResourceManager::V3::UndeleteProjectRequest, ::Google::Longrunning::Operation
-            # Returns the IAM access control policy for the specified project.
+            # Returns the IAM access control policy for the specified project, in the
+            # format `projects/{ProjectIdOrNumber}` e.g. projects/123.
             # Permission is denied if the policy or the resource do not exist.
             rpc :GetIamPolicy, ::Google::Iam::V1::GetIamPolicyRequest, ::Google::Iam::V1::Policy
-            # Sets the IAM access control policy for the specified project.
+            # Sets the IAM access control policy for the specified project, in the
+            # format `projects/{ProjectIdOrNumber}` e.g. projects/123.
             #
             # CAUTION: This method will replace the existing policy, and cannot be used
             # to append additional IAM settings.
@@ -162,20 +168,17 @@ module Google
             # `setIamPolicy()`;
             # they must be sent only using the Cloud Platform Console.
             #
-            # + Membership changes that leave the project without any owners that have
-            # accepted the Terms of Service (ToS) will be rejected.
-            #
             # + If the project is not part of an organization, there must be at least
             # one owner who has accepted the Terms of Service (ToS) agreement in the
             # policy. Calling `setIamPolicy()` to remove the last ToS-accepted owner
             # from the policy will fail. This restriction also applies to legacy
             # projects that no longer have owners who have accepted the ToS. Edits to
             # IAM policies will be rejected until the lack of a ToS-accepting owner is
-            # rectified.
-            #
-            # + Calling this method requires enabling the App Engine Admin API.
+            # rectified. If the project is part of an organization, you can remove all
+            # owners, potentially making the organization inaccessible.
             rpc :SetIamPolicy, ::Google::Iam::V1::SetIamPolicyRequest, ::Google::Iam::V1::Policy
-            # Returns permissions that a caller has on the specified project.
+            # Returns permissions that a caller has on the specified project, in the
+            # format `projects/{ProjectIdOrNumber}` e.g. projects/123..
             rpc :TestIamPermissions, ::Google::Iam::V1::TestIamPermissionsRequest, ::Google::Iam::V1::TestIamPermissionsResponse
           end
 

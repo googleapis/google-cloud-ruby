@@ -51,9 +51,9 @@ module Google
         #     Output only. Timestamp when the Organization was requested for deletion.
         # @!attribute [r] etag
         #   @return [::String]
-        #     Output only. A checksum computed by the server based on the current value of the
-        #     Organization resource. This may be sent on update and delete requests to
-        #     ensure the client has an up-to-date value before proceeding.
+        #     Output only. A checksum computed by the server based on the current value
+        #     of the Organization resource. This may be sent on update and delete
+        #     requests to ensure the client has an up-to-date value before proceeding.
         class Organization
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -75,9 +75,9 @@ module Google
         # required. `organization_id` is no longer accepted.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The resource name of the Organization to fetch. This is the organization's
-        #     relative path in the API, formatted as "organizations/[organizationId]".
-        #     For example, "organizations/1234".
+        #     Required. The resource name of the Organization to fetch. This is the
+        #     organization's relative path in the API, formatted as
+        #     "organizations/[organizationId]". For example, "organizations/1234".
         class GetOrganizationRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -87,15 +87,17 @@ module Google
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. The maximum number of organizations to return in the response.
-        #     If unspecified, server picks an appropriate default.
+        #     The server can return fewer organizations than requested. If unspecified,
+        #     server picks an appropriate default.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. A pagination token returned from a previous call to `SearchOrganizations`
-        #     that indicates from where listing should continue.
+        #     Optional. A pagination token returned from a previous call to
+        #     `SearchOrganizations` that indicates from where listing should continue.
         # @!attribute [rw] query
         #   @return [::String]
-        #     Optional. An optional query string used to filter the Organizations to return in
-        #     the response. Query rules are case-insensitive.
+        #     Optional. An optional query string used to filter the Organizations to
+        #     return in the response. Query rules are case-insensitive.
+        #
         #
         #     ```
         #     | Field            | Description                                |

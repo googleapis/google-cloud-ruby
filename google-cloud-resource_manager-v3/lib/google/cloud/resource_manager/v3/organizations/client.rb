@@ -177,9 +177,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The resource name of the Organization to fetch. This is the organization's
-            #     relative path in the API, formatted as "organizations/[organizationId]".
-            #     For example, "organizations/1234".
+            #     Required. The resource name of the Organization to fetch. This is the
+            #     organization's relative path in the API, formatted as
+            #     "organizations/[organizationId]". For example, "organizations/1234".
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::ResourceManager::V3::Organization]
@@ -271,13 +271,15 @@ module Google
             #
             #   @param page_size [::Integer]
             #     Optional. The maximum number of organizations to return in the response.
-            #     If unspecified, server picks an appropriate default.
+            #     The server can return fewer organizations than requested. If unspecified,
+            #     server picks an appropriate default.
             #   @param page_token [::String]
-            #     Optional. A pagination token returned from a previous call to `SearchOrganizations`
-            #     that indicates from where listing should continue.
+            #     Optional. A pagination token returned from a previous call to
+            #     `SearchOrganizations` that indicates from where listing should continue.
             #   @param query [::String]
-            #     Optional. An optional query string used to filter the Organizations to return in
-            #     the response. Query rules are case-insensitive.
+            #     Optional. An optional query string used to filter the Organizations to
+            #     return in the response. Query rules are case-insensitive.
+            #
             #
             #     ```
             #     | Field            | Description                                |

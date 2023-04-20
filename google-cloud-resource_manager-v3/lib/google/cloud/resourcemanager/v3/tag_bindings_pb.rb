@@ -8,6 +8,7 @@ require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/longrunning/operations_pb'
+require 'google/protobuf/empty_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/resourcemanager/v3/tag_bindings.proto", :syntax => :proto3) do
@@ -15,6 +16,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 1
       optional :parent, :string, 2
       optional :tag_value, :string, 3
+      optional :tag_value_namespaced_name, :string, 4
     end
     add_message "google.cloud.resourcemanager.v3.CreateTagBindingMetadata" do
     end
@@ -36,6 +38,23 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :tag_bindings, :message, 1, "google.cloud.resourcemanager.v3.TagBinding"
       optional :next_page_token, :string, 2
     end
+    add_message "google.cloud.resourcemanager.v3.ListEffectiveTagsRequest" do
+      optional :parent, :string, 1
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
+    end
+    add_message "google.cloud.resourcemanager.v3.ListEffectiveTagsResponse" do
+      repeated :effective_tags, :message, 1, "google.cloud.resourcemanager.v3.EffectiveTag"
+      optional :next_page_token, :string, 2
+    end
+    add_message "google.cloud.resourcemanager.v3.EffectiveTag" do
+      optional :tag_value, :string, 1
+      optional :namespaced_tag_value, :string, 2
+      optional :tag_key, :string, 3
+      optional :namespaced_tag_key, :string, 4
+      optional :tag_key_parent_name, :string, 6
+      optional :inherited, :bool, 5
+    end
   end
 end
 
@@ -50,6 +69,9 @@ module Google
         DeleteTagBindingRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.resourcemanager.v3.DeleteTagBindingRequest").msgclass
         ListTagBindingsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.resourcemanager.v3.ListTagBindingsRequest").msgclass
         ListTagBindingsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.resourcemanager.v3.ListTagBindingsResponse").msgclass
+        ListEffectiveTagsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.resourcemanager.v3.ListEffectiveTagsRequest").msgclass
+        ListEffectiveTagsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.resourcemanager.v3.ListEffectiveTagsResponse").msgclass
+        EffectiveTag = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.resourcemanager.v3.EffectiveTag").msgclass
       end
     end
   end
