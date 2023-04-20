@@ -399,6 +399,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :removed_additional_pod_ranges_config, :message, 121, "google.container.v1.AdditionalPodRangesConfig"
     end
     add_message "google.container.v1.AdditionalPodRangesConfig" do
+      repeated :pod_range_names, :string, 1
     end
     add_message "google.container.v1.Operation" do
       optional :name, :string, 1
