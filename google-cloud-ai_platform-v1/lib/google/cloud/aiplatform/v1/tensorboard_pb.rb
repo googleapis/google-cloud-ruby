@@ -21,6 +21,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :update_time, :message, 7, "google.protobuf.Timestamp"
       map :labels, :string, :string, 8
       optional :etag, :string, 9
+      optional :is_default, :bool, 12
     end
   end
 end
