@@ -68,7 +68,10 @@ module Google
       # * Membership
       # * Feature
       #
-      # GKE Hub is currently only available in the global region.
+      # GKE Hub is currently available in the global region and all regions in
+      # https://cloud.google.com/compute/docs/regions-zones. Feature is only
+      # available in global region while membership is global region and all the
+      # regions.
       #
       # **Membership management may be non-trivial:** it is recommended to use one
       # of the Google-provided client libraries or tools where possible when working
