@@ -2074,6 +2074,9 @@ module Google
 
         # AdditionalPodRangesConfig is the configuration for additional pod secondary
         # ranges supporting the ClusterUpdate message.
+        # @!attribute [rw] pod_range_names
+        #   @return [::Array<::String>]
+        #     Name for pod secondary ipv4 range which has the actual range defined ahead.
         class AdditionalPodRangesConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
