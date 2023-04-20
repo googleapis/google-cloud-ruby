@@ -38,7 +38,10 @@ module Google
             # * {::Google::Cloud::GkeHub::V1::Membership Membership}
             # * {::Google::Cloud::GkeHub::V1::Feature Feature}
             #
-            # GKE Hub is currently only available in the global region.
+            # GKE Hub is currently available in the global region and all regions in
+            # https://cloud.google.com/compute/docs/regions-zones. Feature is only
+            # available in global region while membership is global region and all the
+            # regions.
             #
             # **Membership management may be non-trivial:** it is recommended to use one
             # of the Google-provided client libraries or tools where possible when working
@@ -185,19 +188,20 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The parent (project and location) where the Memberships will be listed.
-              #     Specified in the format `projects/*/locations/*`.
+              #     Required. The parent (project and location) where the Memberships will be
+              #     listed. Specified in the format `projects/*/locations/*`.
+              #     `projects/*/locations/-` list memberships in all the regions.
               #   @param page_size [::Integer]
-              #     Optional. When requesting a 'page' of resources, `page_size` specifies number of
-              #     resources to return. If unspecified or set to 0, all resources will
-              #     be returned.
+              #     Optional. When requesting a 'page' of resources, `page_size` specifies
+              #     number of resources to return. If unspecified or set to 0, all resources
+              #     will be returned.
               #   @param page_token [::String]
               #     Optional. Token returned by previous call to `ListMemberships` which
               #     specifies the position in the list from where to continue listing the
               #     resources.
               #   @param filter [::String]
-              #     Optional. Lists Memberships that match the filter expression, following the syntax
-              #     outlined in https://google.aip.dev/160.
+              #     Optional. Lists Memberships that match the filter expression, following the
+              #     syntax outlined in https://google.aip.dev/160.
               #
               #     Examples:
               #
@@ -502,11 +506,11 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The parent (project and location) where the Memberships will be created.
-              #     Specified in the format `projects/*/locations/*`.
+              #     Required. The parent (project and location) where the Memberships will be
+              #     created. Specified in the format `projects/*/locations/*`.
               #   @param membership_id [::String]
-              #     Required. Client chosen ID for the membership. `membership_id` must be a valid RFC
-              #     1123 compliant DNS label:
+              #     Required. Client chosen ID for the membership. `membership_id` must be a
+              #     valid RFC 1123 compliant DNS label:
               #
               #       1. At most 63 characters in length
               #       2. It must consist of lower case alphanumeric characters or `-`
@@ -672,7 +676,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload delete_membership(name: nil, request_id: nil)
+              # @overload delete_membership(name: nil, request_id: nil, force: nil)
               #   Pass arguments to `delete_membership` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -694,6 +698,10 @@ module Google
               #
               #     The request ID must be a valid UUID with the exception that zero UUID is
               #     not supported (00000000-0000-0000-0000-000000000000).
+              #   @param force [::Boolean]
+              #     Optional. If set to true, any subresource from this Membership will also be
+              #     deleted. Otherwise, the request will only work if the Membership has no
+              #     subresource.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1019,22 +1027,24 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The Membership resource name the Agent will associate with, in the format
-              #     `projects/*/locations/*/memberships/*`.
+              #     Required. The Membership resource name the Agent will associate with, in
+              #     the format `projects/*/locations/*/memberships/*`.
               #   @param namespace [::String]
-              #     Optional. Namespace for GKE Connect agent resources. Defaults to `gke-connect`.
+              #     Optional. Namespace for GKE Connect agent resources. Defaults to
+              #     `gke-connect`.
               #
               #     The Connect Agent is authorized automatically when run in the default
               #     namespace. Otherwise, explicit authorization must be granted with an
               #     additional IAM binding.
               #   @param proxy [::String]
-              #     Optional. URI of a proxy if connectivity from the agent to gkeconnect.googleapis.com
-              #     requires the use of a proxy. Format must be in the form
-              #     `http(s)://{proxy_address}`, depending on the HTTP/HTTPS protocol
+              #     Optional. URI of a proxy if connectivity from the agent to
+              #     gkeconnect.googleapis.com requires the use of a proxy. Format must be in
+              #     the form `http(s)://{proxy_address}`, depending on the HTTP/HTTPS protocol
               #     supported by the proxy. This will direct the connect agent's outbound
               #     traffic through a HTTP(S) proxy.
               #   @param version [::String]
-              #     Optional. The Connect agent version to use. Defaults to the most current version.
+              #     Optional. The Connect agent version to use. Defaults to the most current
+              #     version.
               #   @param is_upgrade [::Boolean]
               #     Optional. If true, generate the resources for upgrade only. Some resources
               #     generated only for installation (e.g. secrets) will be excluded.
