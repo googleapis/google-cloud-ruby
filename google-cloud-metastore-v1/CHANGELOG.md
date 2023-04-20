@@ -1,5 +1,12 @@
 # Release History
 
+### 0.7.0 (2023-04-20)
+
+#### Features
+
+* Support Common Expression Language ([#21441](https://github.com/googleapis/google-cloud-ruby/issues/21441)) 
+* Support Scaling configuration ([#21441](https://github.com/googleapis/google-cloud-ruby/issues/21441)) 
+
 ### 0.6.0 (2023-03-08)
 
 #### Features
