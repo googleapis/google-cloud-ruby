@@ -1,5 +1,13 @@
 # Release History
 
+### 0.16.0 (2023-04-21)
+
+#### Features
+
+* Add `peered_network_ip_range` option to `NetworkConfig` ([#21447](https://github.com/googleapis/google-cloud-ruby/issues/21447)) 
+* Support locating Git source repo ([#21447](https://github.com/googleapis/google-cloud-ruby/issues/21447)) 
+* Support locating NPM packages ([#21447](https://github.com/googleapis/google-cloud-ruby/issues/21447)) 
+
 ### 0.15.0 (2023-03-15)
 
 #### Features
