@@ -241,6 +241,7 @@ class ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Rest::ClientTes
     # Create request parameters for a unary method.
     name = "hello world"
     request_id = "hello world"
+    force = true
 
     delete_membership_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -256,27 +257,27 @@ class ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Rest::ClientTes
         end
 
         # Use hash object
-        client.delete_membership({ name: name, request_id: request_id }) do |_result, response|
+        client.delete_membership({ name: name, request_id: request_id, force: force }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.delete_membership name: name, request_id: request_id do |_result, response|
+        client.delete_membership name: name, request_id: request_id, force: force do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.delete_membership ::Google::Cloud::GkeHub::V1beta1::DeleteMembershipRequest.new(name: name, request_id: request_id) do |_result, response|
+        client.delete_membership ::Google::Cloud::GkeHub::V1beta1::DeleteMembershipRequest.new(name: name, request_id: request_id, force: force) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.delete_membership({ name: name, request_id: request_id }, call_options) do |_result, response|
+        client.delete_membership({ name: name, request_id: request_id, force: force }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.delete_membership(::Google::Cloud::GkeHub::V1beta1::DeleteMembershipRequest.new(name: name, request_id: request_id), call_options) do |_result, response|
+        client.delete_membership(::Google::Cloud::GkeHub::V1beta1::DeleteMembershipRequest.new(name: name, request_id: request_id, force: force), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
