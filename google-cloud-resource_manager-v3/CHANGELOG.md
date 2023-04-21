@@ -1,5 +1,13 @@
 # Changelog
 
+### 0.5.0 (2023-04-21)
+
+#### Features
+
+* Support `GetNamespacedTagKey` and `GetNamespacedTagValue` APIs ([#21452](https://github.com/googleapis/google-cloud-ruby/issues/21452)) 
+* Support `ListEffectiveTags` API ([#21452](https://github.com/googleapis/google-cloud-ruby/issues/21452)) 
+* Support `TagHold` APIs ([#21452](https://github.com/googleapis/google-cloud-ruby/issues/21452)) 
+
 ### 0.4.0 (2023-03-08)
 
 #### Features
