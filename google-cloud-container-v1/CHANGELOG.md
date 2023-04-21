@@ -1,5 +1,11 @@
 # Release History
 
+### 0.19.0 (2023-04-21)
+
+#### Features
+
+* Support additional pod IPv4 ranges ([#21442](https://github.com/googleapis/google-cloud-ruby/issues/21442)) 
+
 ### 0.18.0 (2023-04-10)
 
 #### Features
