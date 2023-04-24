@@ -1,5 +1,14 @@
 # Release History
 
+### 0.28.0 (2023-04-23)
+
+#### Features
+
+* Add DlpDataProfile & DlpInspection options to Finding ([#21461](https://github.com/googleapis/google-cloud-ruby/issues/21461)) 
+#### Documentation
+
+* Improve documentation ([#21461](https://github.com/googleapis/google-cloud-ruby/issues/21461)) 
+
 ### 0.27.0 (2023-04-12)
 
 #### Features
