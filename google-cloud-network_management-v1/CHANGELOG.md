@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.5.1 (2023-04-20)
+
+#### Documentation
+
+* Improve docs in Connectivity Test ([#21448](https://github.com/googleapis/google-cloud-ruby/issues/21448)) 
+
 ### 0.5.0 (2023-03-08)
 
 #### Features

@@ -24,7 +24,7 @@ require "google/cloud/firestore/collection_group"
 require "google/cloud/firestore/batch"
 require "google/cloud/firestore/transaction"
 require "google/cloud/firestore/bulk_writer"
-
+require "google/cloud/firestore/filter"
 
 module Google
   module Cloud
@@ -186,6 +186,56 @@ module Google
           CollectionGroup.from_collection_id service.documents_path, collection_id, self
         end
         alias collection_group col_group
+
+        ##
+        # Creates a filter object.
+        #
+        # @param field [FieldPath, String, Symbol] A field path to filter
+        #   results with.
+        #   If a {FieldPath} object is not provided then the field will be
+        #   treated as a dotted string, meaning the string represents individual
+        #   fields joined by ".". Fields containing `~`, `*`, `/`, `[`, `]`, and
+        #   `.` cannot be in a dotted string, and should provided using a
+        #   {FieldPath} object instead.
+        #
+        # @param operator [String, Symbol] The operation to compare the field
+        #   to. Acceptable values include:
+        #   * less than: `<`, `lt`
+        #   * less than or equal: `<=`, `lte`
+        #   * greater than: `>`, `gt`
+        #   * greater than or equal: `>=`, `gte`
+        #   * equal: `=`, `==`, `eq`, `eql`, `is`
+        #   * not equal: `!=`
+        #   * in: `in`
+        #   * not in: `not-in`, `not_in`
+        #   * array contains: `array-contains`, `array_contains`
+        #
+        # @param value [Object] The value to compare the property to. Defaults to nil.
+        #   Possible values are:
+        #   * Integer
+        #   * Float/BigDecimal
+        #   * String
+        #   * Boolean
+        #   * Array
+        #   * Date/Time
+        #   * StringIO
+        #   * Google::Cloud::Datastore::Key
+        #   * Google::Cloud::Datastore::Entity
+        #   * nil
+        #
+        # @return [Google::Cloud::Firestore::Filter] New filter object.
+        #
+        # @example
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   # Create a filter
+        #   filter = firestore.filter(:population, :>=, 1000000)
+        #
+        def filter field, operator, value
+          Filter.new field, operator, value
+        end
 
         ##
         # Retrieves a document reference.

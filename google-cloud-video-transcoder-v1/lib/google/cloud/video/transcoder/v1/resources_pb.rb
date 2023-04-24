@@ -22,6 +22,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :ttl_after_completion_days, :int32, 15
       map :labels, :string, :string, 16
       optional :error, :message, 17, "google.rpc.Status"
+      optional :mode, :enum, 20, "google.cloud.video.transcoder.v1.Job.ProcessingMode"
       oneof :job_config do
         optional :template_id, :string, 4
         optional :config, :message, 5, "google.cloud.video.transcoder.v1.JobConfig"
@@ -33,6 +34,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :RUNNING, 2
       value :SUCCEEDED, 3
       value :FAILED, 4
+    end
+    add_enum "google.cloud.video.transcoder.v1.Job.ProcessingMode" do
+      value :PROCESSING_MODE_UNSPECIFIED, 0
+      value :PROCESSING_MODE_INTERACTIVE, 1
+      value :PROCESSING_MODE_BATCH, 2
     end
     add_message "google.cloud.video.transcoder.v1.JobTemplate" do
       optional :name, :string, 1
@@ -316,6 +322,7 @@ module Google
         module V1
           Job = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.transcoder.v1.Job").msgclass
           Job::ProcessingState = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.transcoder.v1.Job.ProcessingState").enummodule
+          Job::ProcessingMode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.transcoder.v1.Job.ProcessingMode").enummodule
           JobTemplate = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.transcoder.v1.JobTemplate").msgclass
           JobConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.transcoder.v1.JobConfig").msgclass
           Input = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.transcoder.v1.Input").msgclass

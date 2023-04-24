@@ -7,7 +7,9 @@ require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
+require 'google/cloud/metastore/v1beta/metastore_pb'
 require 'google/longrunning/operations_pb'
+require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
 
@@ -39,6 +41,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_enum "google.cloud.metastore.v1beta.BackendMetastore.MetastoreType" do
       value :METASTORE_TYPE_UNSPECIFIED, 0
+      value :DATAPLEX, 1
       value :BIGQUERY, 2
       value :DATAPROC_METASTORE, 3
     end

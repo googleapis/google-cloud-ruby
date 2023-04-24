@@ -103,6 +103,9 @@ module Google
         #   @return [::Google::Cloud::Metastore::V1beta::TelemetryConfig]
         #     The configuration specifying telemetry settings for the Dataproc Metastore
         #     service. If unspecified defaults to `JSON`.
+        # @!attribute [rw] scaling_config
+        #   @return [::Google::Cloud::Metastore::V1beta::ScalingConfig]
+        #     Scaling configuration of the metastore service.
         class Service
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -405,6 +408,10 @@ module Google
         #   @return [::Array<::Google::Cloud::Metastore::V1beta::NetworkConfig::Consumer>]
         #     Immutable. The consumer-side network configuration for the Dataproc
         #     Metastore instance.
+        # @!attribute [rw] custom_routes_enabled
+        #   @return [::Boolean]
+        #     Enables custom routes to be imported and exported for the Dataproc
+        #     Metastore service's peered VPC network.
         class NetworkConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -687,6 +694,41 @@ module Google
 
             # Only the service's metadata is restored.
             METADATA_ONLY = 2
+          end
+        end
+
+        # Represents the scaling configuration of a metastore service.
+        # @!attribute [rw] instance_size
+        #   @return [::Google::Cloud::Metastore::V1beta::ScalingConfig::InstanceSize]
+        #     An enum of readable instance sizes, with each instance size mapping to a
+        #     float value (e.g. InstanceSize.EXTRA_SMALL = scaling_factor(0.1))
+        # @!attribute [rw] scaling_factor
+        #   @return [::Float]
+        #     Scaling factor, increments of 0.1 for values less than 1.0, and
+        #     increments of 1.0 for values greater than 1.0.
+        class ScalingConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Metastore instance sizes.
+          module InstanceSize
+            # Unspecified instance size
+            INSTANCE_SIZE_UNSPECIFIED = 0
+
+            # Extra small instance size, maps to a scaling factor of 0.1.
+            EXTRA_SMALL = 1
+
+            # Small instance size, maps to a scaling factor of 0.5.
+            SMALL = 2
+
+            # Medium instance size, maps to a scaling factor of 1.0.
+            MEDIUM = 3
+
+            # Large instance size, maps to a scaling factor of 3.0.
+            LARGE = 4
+
+            # Extra large instance size, maps to a scaling factor of 6.0.
+            EXTRA_LARGE = 5
           end
         end
 

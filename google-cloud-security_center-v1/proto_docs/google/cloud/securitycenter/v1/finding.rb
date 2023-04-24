@@ -30,10 +30,12 @@ module Google
         # finding.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The relative resource name of this finding. See:
-        #     https://cloud.google.com/apis/design/resource_names#relative_resource_name
-        #     Example:
-        #     "organizations/\\{organization_id}/sources/\\{source_id}/findings/\\{finding_id}"
+        #     The [relative resource
+        #     name](https://cloud.google.com/apis/design/resource_names#relative_resource_name)
+        #     of the finding. Example:
+        #     "organizations/\\{organization_id}/sources/\\{source_id}/findings/\\{finding_id}",
+        #     "folders/\\{folder_id}/sources/\\{source_id}/findings/\\{finding_id}",
+        #     "projects/\\{project_id}/sources/\\{source_id}/findings/\\{finding_id}".
         # @!attribute [rw] parent
         #   @return [::String]
         #     The relative resource name of the source the finding belongs to. See:
@@ -107,14 +109,14 @@ module Google
         #     The class of the finding.
         # @!attribute [rw] indicator
         #   @return [::Google::Cloud::SecurityCenter::V1::Indicator]
-        #     Represents what's commonly known as an Indicator of compromise (IoC) in
+        #     Represents what's commonly known as an *indicator of compromise* (IoC) in
         #     computer forensics. This is an artifact observed on a network or in an
         #     operating system that, with high confidence, indicates a computer
-        #     intrusion.
-        #     Reference: https://en.wikipedia.org/wiki/Indicator_of_compromise
+        #     intrusion. For more information, see [Indicator of
+        #     compromise](https://en.wikipedia.org/wiki/Indicator_of_compromise).
         # @!attribute [rw] vulnerability
         #   @return [::Google::Cloud::SecurityCenter::V1::Vulnerability]
-        #     Represents vulnerability-specific fields like CVE and CVS scores.
+        #     Represents vulnerability-specific fields like CVE and CVSS scores.
         #     CVE stands for Common Vulnerabilities and Exposures
         #     (https://cve.mitre.org/about/)
         # @!attribute [r] mute_update_time
@@ -122,33 +124,32 @@ module Google
         #     Output only. The most recent time this finding was muted or unmuted.
         # @!attribute [r] external_systems
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::SecurityCenter::V1::ExternalSystem}]
-        #     Output only. Third party SIEM/SOAR fields within SCC, contains external system
-        #     information and external system finding fields.
+        #     Output only. Third party SIEM/SOAR fields within SCC, contains external
+        #     system information and external system finding fields.
         # @!attribute [rw] mitre_attack
         #   @return [::Google::Cloud::SecurityCenter::V1::MitreAttack]
         #     MITRE ATT&CK tactics and techniques related to this finding.
         #     See: https://attack.mitre.org
         # @!attribute [rw] access
         #   @return [::Google::Cloud::SecurityCenter::V1::Access]
-        #     Access details associated to the Finding, such as more information on the
-        #     caller, which method was accessed, from where, etc.
+        #     Access details associated with the finding, such as more information on the
+        #     caller, which method was accessed, and from where.
         # @!attribute [rw] connections
         #   @return [::Array<::Google::Cloud::SecurityCenter::V1::Connection>]
         #     Contains information about the IP connection associated with the finding.
         # @!attribute [rw] mute_initiator
         #   @return [::String]
-        #     First known as mute_annotation. Records additional information about the
-        #     mute operation e.g. mute config that muted the finding, user who muted the
-        #     finding, etc. Unlike other attributes of a finding, a finding provider
-        #     shouldn't set the value of mute.
+        #     Records additional information about the mute operation, for example, the
+        #     [mute configuration](/security-command-center/docs/how-to-mute-findings)
+        #     that muted the finding and the user who muted the finding.
         # @!attribute [rw] processes
         #   @return [::Array<::Google::Cloud::SecurityCenter::V1::Process>]
         #     Represents operating system processes associated with the Finding.
         # @!attribute [r] contacts
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::SecurityCenter::V1::ContactDetails}]
-        #     Output only. Map containing the points of contact for the given finding. The key
-        #     represents the type of contact, while the value contains a list of all the
-        #     contacts that pertain. Please refer to:
+        #     Output only. Map containing the points of contact for the given finding.
+        #     The key represents the type of contact, while the value contains a list of
+        #     all the contacts that pertain. Please refer to:
         #     https://cloud.google.com/resource-manager/docs/managing-notification-contacts#notification-categories
         #
         #         {
@@ -173,20 +174,25 @@ module Google
         #     "Event Threat Detection" or "Security Health Analytics".
         # @!attribute [rw] description
         #   @return [::String]
-        #     Contains more detail about the finding.
+        #     Contains more details about the finding.
         # @!attribute [rw] exfiltration
         #   @return [::Google::Cloud::SecurityCenter::V1::Exfiltration]
-        #     Represents exfiltration associated with the Finding.
+        #     Represents exfiltrations associated with the finding.
         # @!attribute [rw] iam_bindings
         #   @return [::Array<::Google::Cloud::SecurityCenter::V1::IamBinding>]
-        #     Represents IAM bindings associated with the Finding.
+        #     Represents IAM bindings associated with the finding.
         # @!attribute [rw] next_steps
         #   @return [::String]
-        #     Next steps associate to the finding.
+        #     Steps to address the finding.
+        # @!attribute [rw] module_name
+        #   @return [::String]
+        #     Unique identifier of the module which generated the finding.
+        #     Example:
+        #     folders/598186756061/securityHealthAnalyticsSettings/customModules/56799441161885
         # @!attribute [rw] containers
         #   @return [::Array<::Google::Cloud::SecurityCenter::V1::Container>]
-        #     Containers associated with the finding. containers provides information
-        #     for both Kubernetes and non-Kubernetes containers.
+        #     Containers associated with the finding. This field provides information for
+        #     both Kubernetes and non-Kubernetes containers.
         # @!attribute [rw] kubernetes
         #   @return [::Google::Cloud::SecurityCenter::V1::Kubernetes]
         #     Kubernetes resources associated with the finding.
@@ -196,9 +202,16 @@ module Google
         # @!attribute [rw] files
         #   @return [::Array<::Google::Cloud::SecurityCenter::V1::File>]
         #     File associated with the finding.
+        # @!attribute [rw] cloud_dlp_inspection
+        #   @return [::Google::Cloud::SecurityCenter::V1::CloudDlpInspection]
+        #     Cloud Data Loss Prevention (Cloud DLP) inspection results that are
+        #     associated with the finding.
+        # @!attribute [rw] cloud_dlp_data_profile
+        #   @return [::Google::Cloud::SecurityCenter::V1::CloudDlpDataProfile]
+        #     Cloud DLP data profile that is associated with the finding.
         # @!attribute [rw] kernel_rootkit
         #   @return [::Google::Cloud::SecurityCenter::V1::KernelRootkit]
-        #     Kernel Rootkit signature.
+        #     Signature of the kernel rootkit.
         class Finding
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -254,7 +267,8 @@ module Google
             # exploitable, and results in the direct ability to execute arbitrary code,
             # exfiltrate data, and otherwise gain additional access and privileges to
             # cloud resources and workloads. Examples include publicly accessible
-            # unprotected user data, public SSH access with weak or no passwords, etc.
+            # unprotected user data and public SSH access with weak or no
+            # passwords.
             #
             # Threat:
             # Indicates a threat that is able to access, modify, or delete data or

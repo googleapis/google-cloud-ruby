@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.22.0 (2023-04-21)
+
+#### Features
+
+* Support marking TensorBoard instance as default ([#21445](https://github.com/googleapis/google-cloud-ruby/issues/21445)) 
+
 ### 0.21.0 (2023-04-06)
 
 #### Features

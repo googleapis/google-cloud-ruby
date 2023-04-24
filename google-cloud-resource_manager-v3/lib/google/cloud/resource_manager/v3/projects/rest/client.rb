@@ -267,21 +267,23 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The name of the parent resource to list projects under.
+              #     Required. The name of the parent resource whose projects are being listed.
+              #     Only children of this parent resource are listed; descendants are not
+              #     listed.
               #
-              #     For example, setting this field to 'folders/1234' would list all projects
-              #     directly under that folder.
+              #     If the parent is a folder, use the value `folders/{folder_id}`. If the
+              #     parent is an organization, use the value `organizations/{org_id}`.
               #   @param page_token [::String]
-              #     Optional. A pagination token returned from a previous call to [ListProjects]
-              #     [google.cloud.resourcemanager.v3.Projects.ListProjects]
-              #     that indicates from where listing should continue.
+              #     Optional. A pagination token returned from a previous call to
+              #     [ListProjects] [google.cloud.resourcemanager.v3.Projects.ListProjects] that
+              #     indicates from where listing should continue.
               #   @param page_size [::Integer]
               #     Optional. The maximum number of projects to return in the response.
               #     The server can return fewer projects than requested.
               #     If unspecified, server picks an appropriate default.
               #   @param show_deleted [::Boolean]
-              #     Optional. Indicate that projects in the `DELETE_REQUESTED` state should also be
-              #     returned. Normally only `ACTIVE` projects are returned.
+              #     Optional. Indicate that projects in the `DELETE_REQUESTED` state should
+              #     also be returned. Normally only `ACTIVE` projects are returned.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ResourceManager::V3::Project>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -355,22 +357,22 @@ module Google
               #   @param query [::String]
               #     Optional. A query string for searching for projects that the caller has
               #     `resourcemanager.projects.get` permission to. If multiple fields are
-              #     included in the query, the it will return results that match any of the
+              #     included in the query, then it will return results that match any of the
               #     fields. Some eligible fields are:
               #
               #     ```
               #     | Field                   | Description                                  |
               #     |-------------------------|----------------------------------------------|
               #     | displayName, name       | Filters by displayName.                      |
-              #     | parent                  | Project's parent. (for example: folders/123,
-              #     organizations/*) Prefer parent field over parent.type and parent.id. |
-              #     | parent.type             | Parent's type: `folder` or `organization`.   |
-              #     | parent.id               | Parent's id number (for example: 123)        |
-              #     | id, projectId           | Filters by projectId.                        |
-              #     | state, lifecycleState   | Filters by state.                            |
-              #     | labels                  | Filters by label name or value.              |
-              #     | labels.<key> (where *key* is the name of a label) | Filters by label
-              #     name. |
+              #     | parent                  | Project's parent (for example: folders/123,
+              #     organizations/*). Prefer parent field over parent.type and parent.id.| |
+              #     parent.type             | Parent's type: `folder` or `organization`.   | |
+              #     parent.id               | Parent's id number (for example: 123)        | |
+              #     id, projectId           | Filters by projectId.                        | |
+              #     state, lifecycleState   | Filters by state.                            | |
+              #     labels                  | Filters by label name or value.              | |
+              #     labels.\<key\> (where *key* is the name of a label) | Filters by label
+              #     name.|
               #     ```
               #
               #     Search expressions are case insensitive.
@@ -386,16 +388,16 @@ module Google
               #     | NAME:howl        | Equivalent to above.                                |
               #     | labels.color:*   | The project has the label `color`.                  |
               #     | labels.color:red | The project's label `color` has the value `red`.    |
-              #     | labels.color:red&nbsp;labels.size:big | The project's label `color` has
-              #     the value `red` and its label `size` has the value `big`.                |
+              #     | labels.color:red labels.size:big | The project's label `color` has the
+              #     value `red` or its label `size` has the value `big`.                     |
               #     ```
               #
               #     If no query is specified, the call will return projects for which the user
               #     has the `resourcemanager.projects.get` permission.
               #   @param page_token [::String]
-              #     Optional. A pagination token returned from a previous call to [ListProjects]
-              #     [google.cloud.resourcemanager.v3.Projects.ListProjects]
-              #     that indicates from where listing should continue.
+              #     Optional. A pagination token returned from a previous call to
+              #     [ListProjects] [google.cloud.resourcemanager.v3.Projects.ListProjects] that
+              #     indicates from where listing should continue.
               #   @param page_size [::Integer]
               #     Optional. The maximum number of projects to return in the response.
               #     The server can return fewer projects than requested.
@@ -473,7 +475,7 @@ module Google
               #
               #     If the `parent` field is set, the `resourcemanager.projects.create`
               #     permission is checked on the parent resource. If no parent is set and
-              #     the authorization credentials belong to an Organziation, the parent
+              #     the authorization credentials belong to an Organization, the parent
               #     will be set to that Organization.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
@@ -597,9 +599,12 @@ module Google
               # Upon success, the `Operation.response` field will be populated with the
               # moved project.
               #
-              # The caller must have `resourcemanager.projects.update` permission on the
-              # project and have `resourcemanager.projects.move` permission on the
-              # project's current and proposed new parent.
+              # The caller must have `resourcemanager.projects.move` permission on the
+              # project, on the project's current and proposed new parent.
+              #
+              # If project has no current parent, or it currently does not have an
+              # associated organization resource, you will also need the
+              # `resourcemanager.projects.setIamPolicy` permission in the project.
               #
               # @overload move_project(request, options = nil)
               #   Pass arguments to `move_project` via a request object, either of type
@@ -672,7 +677,8 @@ module Google
               #
               # This method changes the Project's lifecycle state from
               # {::Google::Cloud::ResourceManager::V3::Project::State::ACTIVE ACTIVE}
-              # to {::Google::Cloud::ResourceManager::V3::Project::State::DELETE_REQUESTED DELETE_REQUESTED}.
+              # to
+              # {::Google::Cloud::ResourceManager::V3::Project::State::DELETE_REQUESTED DELETE_REQUESTED}.
               # The deletion starts at an unspecified time,
               # at which point the Project is no longer accessible.
               #
@@ -831,7 +837,8 @@ module Google
               end
 
               ##
-              # Returns the IAM access control policy for the specified project.
+              # Returns the IAM access control policy for the specified project, in the
+              # format `projects/{ProjectIdOrNumber}` e.g. projects/123.
               # Permission is denied if the policy or the resource do not exist.
               #
               # @overload get_iam_policy(request, options = nil)
@@ -898,7 +905,8 @@ module Google
               end
 
               ##
-              # Sets the IAM access control policy for the specified project.
+              # Sets the IAM access control policy for the specified project, in the
+              # format `projects/{ProjectIdOrNumber}` e.g. projects/123.
               #
               # CAUTION: This method will replace the existing policy, and cannot be used
               # to append additional IAM settings.
@@ -930,18 +938,14 @@ module Google
               # `setIamPolicy()`;
               # they must be sent only using the Cloud Platform Console.
               #
-              # + Membership changes that leave the project without any owners that have
-              # accepted the Terms of Service (ToS) will be rejected.
-              #
               # + If the project is not part of an organization, there must be at least
               # one owner who has accepted the Terms of Service (ToS) agreement in the
               # policy. Calling `setIamPolicy()` to remove the last ToS-accepted owner
               # from the policy will fail. This restriction also applies to legacy
               # projects that no longer have owners who have accepted the ToS. Edits to
               # IAM policies will be rejected until the lack of a ToS-accepting owner is
-              # rectified.
-              #
-              # + Calling this method requires enabling the App Engine Admin API.
+              # rectified. If the project is part of an organization, you can remove all
+              # owners, potentially making the organization inaccessible.
               #
               # @overload set_iam_policy(request, options = nil)
               #   Pass arguments to `set_iam_policy` via a request object, either of type
@@ -1015,7 +1019,8 @@ module Google
               end
 
               ##
-              # Returns permissions that a caller has on the specified project.
+              # Returns permissions that a caller has on the specified project, in the
+              # format `projects/{ProjectIdOrNumber}` e.g. projects/123..
               #
               # @overload test_iam_permissions(request, options = nil)
               #   Pass arguments to `test_iam_permissions` via a request object, either of type

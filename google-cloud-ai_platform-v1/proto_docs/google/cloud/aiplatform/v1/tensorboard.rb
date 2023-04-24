@@ -70,6 +70,13 @@ module Google
         #   @return [::String]
         #     Used to perform a consistent read-modify-write updates. If not set, a blind
         #     "overwrite" update happens.
+        # @!attribute [rw] is_default
+        #   @return [::Boolean]
+        #     Used to indicate if the TensorBoard instance is the default one.
+        #     Each project & region can have at most one default TensorBoard instance.
+        #     Creation of a default TensorBoard instance and updating an existing
+        #     TensorBoard instance to be default will mark all other TensorBoard
+        #     instances (if any) as non default.
         class Tensorboard
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

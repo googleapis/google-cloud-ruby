@@ -1,5 +1,11 @@
 # Release History
 
+### 2.15.3 (2023-04-19)
+
+#### Bug Fixes
+
+* wait for successful receipt modack when exactly once delivery enabled ([#21431](https://github.com/googleapis/google-cloud-ruby/issues/21431)) 
+
 ### 2.15.2 (2023-03-19)
 
 #### Bug Fixes

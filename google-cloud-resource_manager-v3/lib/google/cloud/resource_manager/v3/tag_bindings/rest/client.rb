@@ -30,7 +30,7 @@ module Google
             # REST client for the TagBindings service.
             #
             # Allow users to create and manage TagBindings between TagValues and
-            # different cloud resources throughout the GCP resource hierarchy.
+            # different Google Cloud resources throughout the GCP resource hierarchy.
             #
             class Client
               include Paths
@@ -159,8 +159,8 @@ module Google
               # Service calls
 
               ##
-              # Lists the TagBindings for the given cloud resource, as specified with
-              # `parent`.
+              # Lists the TagBindings for the given Google Cloud resource, as specified
+              # with `parent`.
               #
               # NOTE: The `parent` field is expected to be a full resource name:
               # https://cloud.google.com/apis/design/resource_names#full_resource_name
@@ -181,16 +181,16 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The full resource name of a resource for which you want to list existing
-              #     TagBindings.
-              #     E.g. "//cloudresourcemanager.googleapis.com/projects/123"
+              #     Required. The full resource name of a resource for which you want to list
+              #     existing TagBindings. E.g.
+              #     "//cloudresourcemanager.googleapis.com/projects/123"
               #   @param page_size [::Integer]
-              #     Optional. The maximum number of TagBindings to return in the response. The server
-              #     allows a maximum of 300 TagBindings to return. If unspecified, the server
-              #     will use 100 as the default.
+              #     Optional. The maximum number of TagBindings to return in the response. The
+              #     server allows a maximum of 300 TagBindings to return. If unspecified, the
+              #     server will use 100 as the default.
               #   @param page_token [::String]
-              #     Optional. A pagination token returned from a previous call to `ListTagBindings`
-              #     that indicates where this listing should continue from.
+              #     Optional. A pagination token returned from a previous call to
+              #     `ListTagBindings` that indicates where this listing should continue from.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ResourceManager::V3::TagBinding>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -235,8 +235,7 @@ module Google
               end
 
               ##
-              # Creates a TagBinding between a TagValue and a cloud resource
-              # (currently project, folder, or organization).
+              # Creates a TagBinding between a TagValue and a Google Cloud resource.
               #
               # @overload create_tag_binding(request, options = nil)
               #   Pass arguments to `create_tag_binding` via a request object, either of type
@@ -256,8 +255,8 @@ module Google
               #   @param tag_binding [::Google::Cloud::ResourceManager::V3::TagBinding, ::Hash]
               #     Required. The TagBinding to be created.
               #   @param validate_only [::Boolean]
-              #     Optional. Set to true to perform the validations necessary for creating the resource,
-              #     but not actually perform the action.
+              #     Optional. Set to true to perform the validations necessary for creating the
+              #     resource, but not actually perform the action.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -359,6 +358,79 @@ module Google
 
                 @tag_bindings_stub.delete_tag_binding request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Return a list of effective tags for the given Google Cloud resource, as
+              # specified in `parent`.
+              #
+              # @overload list_effective_tags(request, options = nil)
+              #   Pass arguments to `list_effective_tags` via a request object, either of type
+              #   {::Google::Cloud::ResourceManager::V3::ListEffectiveTagsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::ResourceManager::V3::ListEffectiveTagsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_effective_tags(parent: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_effective_tags` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The full resource name of a resource for which you want to list
+              #     the effective tags. E.g.
+              #     "//cloudresourcemanager.googleapis.com/projects/123"
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of effective tags to return in the response.
+              #     The server allows a maximum of 300 effective tags to return in a single
+              #     page. If unspecified, the server will use 100 as the default.
+              #   @param page_token [::String]
+              #     Optional. A pagination token returned from a previous call to
+              #     `ListEffectiveTags` that indicates from where this listing should continue.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ResourceManager::V3::EffectiveTag>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::ResourceManager::V3::EffectiveTag>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def list_effective_tags request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ResourceManager::V3::ListEffectiveTagsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_effective_tags.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::ResourceManager::V3::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_effective_tags.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_effective_tags.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @tag_bindings_stub.list_effective_tags request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @tag_bindings_stub, :list_effective_tags, "effective_tags", request, result, options
                   yield result, operation if block_given?
                   return result
                 end
@@ -504,6 +576,11 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :delete_tag_binding
+                  ##
+                  # RPC-specific configuration for `list_effective_tags`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_effective_tags
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -513,6 +590,8 @@ module Google
                     @create_tag_binding = ::Gapic::Config::Method.new create_tag_binding_config
                     delete_tag_binding_config = parent_rpcs.delete_tag_binding if parent_rpcs.respond_to? :delete_tag_binding
                     @delete_tag_binding = ::Gapic::Config::Method.new delete_tag_binding_config
+                    list_effective_tags_config = parent_rpcs.list_effective_tags if parent_rpcs.respond_to? :list_effective_tags
+                    @list_effective_tags = ::Gapic::Config::Method.new list_effective_tags_config
 
                     yield self if block_given?
                   end

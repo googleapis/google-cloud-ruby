@@ -2,7 +2,7 @@
 
 The Cloud Filestore API is used for creating and managing cloud file servers.
 
-Filestore instances are fully managed NFS file servers on Google Cloud for use with applications running on Compute Engine virtual machines (VMs) instances or Google Kubernetes Engine clusters.
+Filestore instances are fully managed NFS file servers on Google Cloud for use with applications running on Compute Engine virtual machine (VM) instances, Google Kubernetes Engine clusters, external datastores such as Google Cloud VMware Engine, or your on-premises machines.
 
 https://github.com/googleapis/google-cloud-ruby
 

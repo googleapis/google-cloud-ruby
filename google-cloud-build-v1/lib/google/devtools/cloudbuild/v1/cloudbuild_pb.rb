@@ -32,6 +32,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :object, :string, 2
       optional :generation, :int64, 3
     end
+    add_message "google.devtools.cloudbuild.v1.GitSource" do
+      optional :url, :string, 1
+      optional :dir, :string, 5
+      optional :revision, :string, 6
+    end
     add_message "google.devtools.cloudbuild.v1.RepoSource" do
       optional :project_id, :string, 1
       optional :repo_name, :string, 2
@@ -53,6 +58,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       oneof :source do
         optional :storage_source, :message, 2, "google.devtools.cloudbuild.v1.StorageSource"
         optional :repo_source, :message, 3, "google.devtools.cloudbuild.v1.RepoSource"
+        optional :git_source, :message, 5, "google.devtools.cloudbuild.v1.GitSource"
         optional :storage_source_manifest, :message, 8, "google.devtools.cloudbuild.v1.StorageSourceManifest"
       end
     end
@@ -67,6 +73,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :push_timing, :message, 3, "google.devtools.cloudbuild.v1.TimeSpan"
     end
     add_message "google.devtools.cloudbuild.v1.UploadedMavenArtifact" do
+      optional :uri, :string, 1
+      optional :file_hashes, :message, 2, "google.devtools.cloudbuild.v1.FileHashes"
+      optional :push_timing, :message, 3, "google.devtools.cloudbuild.v1.TimeSpan"
+    end
+    add_message "google.devtools.cloudbuild.v1.UploadedNpmPackage" do
       optional :uri, :string, 1
       optional :file_hashes, :message, 2, "google.devtools.cloudbuild.v1.FileHashes"
       optional :push_timing, :message, 3, "google.devtools.cloudbuild.v1.TimeSpan"
@@ -103,6 +114,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :artifact_timing, :message, 7, "google.devtools.cloudbuild.v1.TimeSpan"
       repeated :python_packages, :message, 8, "google.devtools.cloudbuild.v1.UploadedPythonPackage"
       repeated :maven_artifacts, :message, 9, "google.devtools.cloudbuild.v1.UploadedMavenArtifact"
+      repeated :npm_packages, :message, 12, "google.devtools.cloudbuild.v1.UploadedNpmPackage"
     end
     add_message "google.devtools.cloudbuild.v1.ArtifactResult" do
       optional :location, :string, 1
@@ -179,6 +191,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :objects, :message, 2, "google.devtools.cloudbuild.v1.Artifacts.ArtifactObjects"
       repeated :maven_artifacts, :message, 3, "google.devtools.cloudbuild.v1.Artifacts.MavenArtifact"
       repeated :python_packages, :message, 5, "google.devtools.cloudbuild.v1.Artifacts.PythonPackage"
+      repeated :npm_packages, :message, 6, "google.devtools.cloudbuild.v1.Artifacts.NpmPackage"
     end
     add_message "google.devtools.cloudbuild.v1.Artifacts.ArtifactObjects" do
       optional :location, :string, 1
@@ -195,6 +208,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.devtools.cloudbuild.v1.Artifacts.PythonPackage" do
       optional :repository, :string, 1
       repeated :paths, :string, 2
+    end
+    add_message "google.devtools.cloudbuild.v1.Artifacts.NpmPackage" do
+      optional :repository, :string, 1
+      optional :package_path, :string, 2
     end
     add_message "google.devtools.cloudbuild.v1.TimeSpan" do
       optional :start_time, :message, 1, "google.protobuf.Timestamp"
@@ -220,6 +237,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :NONE, 0
       value :SHA256, 1
       value :MD5, 2
+      value :SHA512, 4
     end
     add_message "google.devtools.cloudbuild.v1.Secrets" do
       repeated :secret_manager, :message, 1, "google.devtools.cloudbuild.v1.SecretManagerSecret"
@@ -491,6 +509,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.devtools.cloudbuild.v1.PrivatePoolV1Config.NetworkConfig" do
       optional :peered_network, :string, 1
       optional :egress_option, :enum, 2, "google.devtools.cloudbuild.v1.PrivatePoolV1Config.NetworkConfig.EgressOption"
+      optional :peered_network_ip_range, :string, 3
     end
     add_enum "google.devtools.cloudbuild.v1.PrivatePoolV1Config.NetworkConfig.EgressOption" do
       value :EGRESS_OPTION_UNSPECIFIED, 0
@@ -551,12 +570,14 @@ module Google
         RetryBuildRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.RetryBuildRequest").msgclass
         RunBuildTriggerRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.RunBuildTriggerRequest").msgclass
         StorageSource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.StorageSource").msgclass
+        GitSource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.GitSource").msgclass
         RepoSource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.RepoSource").msgclass
         StorageSourceManifest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.StorageSourceManifest").msgclass
         Source = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.Source").msgclass
         BuiltImage = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.BuiltImage").msgclass
         UploadedPythonPackage = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.UploadedPythonPackage").msgclass
         UploadedMavenArtifact = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.UploadedMavenArtifact").msgclass
+        UploadedNpmPackage = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.UploadedNpmPackage").msgclass
         BuildStep = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.BuildStep").msgclass
         Volume = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.Volume").msgclass
         Results = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.Results").msgclass
@@ -571,6 +592,7 @@ module Google
         Artifacts::ArtifactObjects = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.Artifacts.ArtifactObjects").msgclass
         Artifacts::MavenArtifact = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.Artifacts.MavenArtifact").msgclass
         Artifacts::PythonPackage = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.Artifacts.PythonPackage").msgclass
+        Artifacts::NpmPackage = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.Artifacts.NpmPackage").msgclass
         TimeSpan = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.TimeSpan").msgclass
         BuildOperationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.BuildOperationMetadata").msgclass
         SourceProvenance = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.cloudbuild.v1.SourceProvenance").msgclass

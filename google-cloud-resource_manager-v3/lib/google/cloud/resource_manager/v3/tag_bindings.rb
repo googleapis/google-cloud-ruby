@@ -34,7 +34,7 @@ module Google
       module V3
         ##
         # Allow users to create and manage TagBindings between TagValues and
-        # different cloud resources throughout the GCP resource hierarchy.
+        # different Google Cloud resources throughout the GCP resource hierarchy.
         #
         # @example Load this service and instantiate a gRPC client
         #

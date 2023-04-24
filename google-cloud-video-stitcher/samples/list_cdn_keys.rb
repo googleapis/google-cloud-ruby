@@ -33,7 +33,7 @@ def list_cdn_keys project_id:, location:
   puts "CDN keys:"
   # Print out all CDN keys.
   response.each do |cdn_key|
-    puts cdn_key.name.to_s
+    puts cdn_key.name
   end
 end
 # [END videostitcher_list_cdn_keys]

@@ -24,13 +24,14 @@ module Google
         # Request message for `GkeHub.ListMemberships` method.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent (project and location) where the Memberships will be listed.
-        #     Specified in the format `projects/*/locations/*`.
+        #     Required. The parent (project and location) where the Memberships will be
+        #     listed. Specified in the format `projects/*/locations/*`.
+        #     `projects/*/locations/-` list memberships in all the regions.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. When requesting a 'page' of resources, `page_size` specifies number of
-        #     resources to return. If unspecified or set to 0, all resources will
-        #     be returned.
+        #     Optional. When requesting a 'page' of resources, `page_size` specifies
+        #     number of resources to return. If unspecified or set to 0, all resources
+        #     will be returned.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. Token returned by previous call to `ListMemberships` which
@@ -38,8 +39,8 @@ module Google
         #     resources.
         # @!attribute [rw] filter
         #   @return [::String]
-        #     Optional. Lists Memberships that match the filter expression, following the syntax
-        #     outlined in https://google.aip.dev/160.
+        #     Optional. Lists Memberships that match the filter expression, following the
+        #     syntax outlined in https://google.aip.dev/160.
         #
         #     Examples:
         #
@@ -97,12 +98,12 @@ module Google
         # Request message for the `GkeHub.CreateMembership` method.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent (project and location) where the Memberships will be created.
-        #     Specified in the format `projects/*/locations/*`.
+        #     Required. The parent (project and location) where the Memberships will be
+        #     created. Specified in the format `projects/*/locations/*`.
         # @!attribute [rw] membership_id
         #   @return [::String]
-        #     Required. Client chosen ID for the membership. `membership_id` must be a valid RFC
-        #     1123 compliant DNS label:
+        #     Required. Client chosen ID for the membership. `membership_id` must be a
+        #     valid RFC 1123 compliant DNS label:
         #
         #       1. At most 63 characters in length
         #       2. It must consist of lower case alphanumeric characters or `-`
@@ -153,6 +154,11 @@ module Google
         #
         #     The request ID must be a valid UUID with the exception that zero UUID is
         #     not supported (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] force
+        #   @return [::Boolean]
+        #     Optional. If set to true, any subresource from this Membership will also be
+        #     deleted. Otherwise, the request will only work if the Membership has no
+        #     subresource.
         class DeleteMembershipRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -201,25 +207,27 @@ module Google
         # .
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The Membership resource name the Agent will associate with, in the format
-        #     `projects/*/locations/*/memberships/*`.
+        #     Required. The Membership resource name the Agent will associate with, in
+        #     the format `projects/*/locations/*/memberships/*`.
         # @!attribute [rw] namespace
         #   @return [::String]
-        #     Optional. Namespace for GKE Connect agent resources. Defaults to `gke-connect`.
+        #     Optional. Namespace for GKE Connect agent resources. Defaults to
+        #     `gke-connect`.
         #
         #     The Connect Agent is authorized automatically when run in the default
         #     namespace. Otherwise, explicit authorization must be granted with an
         #     additional IAM binding.
         # @!attribute [rw] proxy
         #   @return [::String]
-        #     Optional. URI of a proxy if connectivity from the agent to gkeconnect.googleapis.com
-        #     requires the use of a proxy. Format must be in the form
-        #     `http(s)://{proxy_address}`, depending on the HTTP/HTTPS protocol
+        #     Optional. URI of a proxy if connectivity from the agent to
+        #     gkeconnect.googleapis.com requires the use of a proxy. Format must be in
+        #     the form `http(s)://{proxy_address}`, depending on the HTTP/HTTPS protocol
         #     supported by the proxy. This will direct the connect agent's outbound
         #     traffic through a HTTP(S) proxy.
         # @!attribute [rw] version
         #   @return [::String]
-        #     Optional. The Connect agent version to use. Defaults to the most current version.
+        #     Optional. The Connect agent version to use. Defaults to the most current
+        #     version.
         # @!attribute [rw] is_upgrade
         #   @return [::Boolean]
         #     Optional. If true, generate the resources for upgrade only. Some resources

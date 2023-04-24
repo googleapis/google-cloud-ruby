@@ -6,6 +6,8 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/securitycenter/v1/access_pb'
+require 'google/cloud/securitycenter/v1/cloud_dlp_data_profile_pb'
+require 'google/cloud/securitycenter/v1/cloud_dlp_inspection_pb'
 require 'google/cloud/securitycenter/v1/compliance_pb'
 require 'google/cloud/securitycenter/v1/connection_pb'
 require 'google/cloud/securitycenter/v1/contact_details_pb'
@@ -58,10 +60,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :exfiltration, :message, 38, "google.cloud.securitycenter.v1.Exfiltration"
       repeated :iam_bindings, :message, 39, "google.cloud.securitycenter.v1.IamBinding"
       optional :next_steps, :string, 40
+      optional :module_name, :string, 41
       repeated :containers, :message, 42, "google.cloud.securitycenter.v1.Container"
       optional :kubernetes, :message, 43, "google.cloud.securitycenter.v1.Kubernetes"
       optional :database, :message, 44, "google.cloud.securitycenter.v1.Database"
       repeated :files, :message, 46, "google.cloud.securitycenter.v1.File"
+      optional :cloud_dlp_inspection, :message, 48, "google.cloud.securitycenter.v1.CloudDlpInspection"
+      optional :cloud_dlp_data_profile, :message, 49, "google.cloud.securitycenter.v1.CloudDlpDataProfile"
       optional :kernel_rootkit, :message, 50, "google.cloud.securitycenter.v1.KernelRootkit"
     end
     add_enum "google.cloud.securitycenter.v1.Finding.State" do

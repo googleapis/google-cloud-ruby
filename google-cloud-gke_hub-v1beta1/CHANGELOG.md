@@ -1,5 +1,15 @@
 # Release History
 
+### 0.7.0 (2023-04-23)
+
+#### Features
+
+* Support force deletion of sub-resources during membership deletes ([#21460](https://github.com/googleapis/google-cloud-ruby/issues/21460)) 
+* Support monitoring configuration in membership ([#21460](https://github.com/googleapis/google-cloud-ruby/issues/21460)) 
+#### Documentation
+
+* Reformat documentation ([#21460](https://github.com/googleapis/google-cloud-ruby/issues/21460)) 
+
 ### 0.6.0 (2023-03-08)
 
 #### Features

@@ -1,5 +1,11 @@
 # Release History
 
+### 2.12.0 (2023-04-20)
+
+#### Features
+
+* Add support for OR query ([#20920](https://github.com/googleapis/google-cloud-ruby/issues/20920)) 
+
 ### 2.11.0 (2023-02-23)
 
 #### Features

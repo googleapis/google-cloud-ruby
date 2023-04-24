@@ -22,7 +22,7 @@ module Google
     module SecurityCenter
       module V1
         # Exfiltration represents a data exfiltration attempt of one or more
-        # sources to one or more targets.  Sources represent the source
+        # sources to one or more targets. Sources represent the source
         # of data that is exfiltrated, and Targets represents the destination the
         # data was copied to.
         # @!attribute [rw] sources

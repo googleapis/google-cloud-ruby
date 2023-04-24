@@ -21,6 +21,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :last_connection_time, :message, 10, "google.protobuf.Timestamp"
       optional :unique_id, :string, 11
       optional :authority, :message, 12, "google.cloud.gkehub.v1.Authority"
+      optional :monitoring_config, :message, 14, "google.cloud.gkehub.v1.MonitoringConfig"
       oneof :type do
         optional :endpoint, :message, 4, "google.cloud.gkehub.v1.MembershipEndpoint"
       end
@@ -29,6 +30,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :gke_cluster, :message, 1, "google.cloud.gkehub.v1.GkeCluster"
       optional :kubernetes_metadata, :message, 2, "google.cloud.gkehub.v1.KubernetesMetadata"
       optional :kubernetes_resource, :message, 3, "google.cloud.gkehub.v1.KubernetesResource"
+      optional :google_managed, :bool, 8
     end
     add_message "google.cloud.gkehub.v1.KubernetesResource" do
       optional :membership_cr_manifest, :string, 1
@@ -47,6 +49,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.gkehub.v1.GkeCluster" do
       optional :resource_link, :string, 1
+      optional :cluster_missing, :bool, 2
     end
     add_message "google.cloud.gkehub.v1.KubernetesMetadata" do
       optional :kubernetes_api_server_version, :string, 1
@@ -55,6 +58,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :vcpu_count, :int32, 4
       optional :memory_mb, :int32, 5
       optional :update_time, :message, 100, "google.protobuf.Timestamp"
+    end
+    add_message "google.cloud.gkehub.v1.MonitoringConfig" do
+      optional :project_id, :string, 1
+      optional :location, :string, 2
+      optional :cluster, :string, 3
+      optional :kubernetes_metrics_prefix, :string, 4
+      optional :cluster_hash, :string, 5
     end
     add_message "google.cloud.gkehub.v1.MembershipState" do
       optional :code, :enum, 1, "google.cloud.gkehub.v1.MembershipState.Code"
@@ -87,6 +97,7 @@ module Google
         ResourceManifest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkehub.v1.ResourceManifest").msgclass
         GkeCluster = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkehub.v1.GkeCluster").msgclass
         KubernetesMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkehub.v1.KubernetesMetadata").msgclass
+        MonitoringConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkehub.v1.MonitoringConfig").msgclass
         MembershipState = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkehub.v1.MembershipState").msgclass
         MembershipState::Code = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkehub.v1.MembershipState.Code").enummodule
         Authority = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkehub.v1.Authority").msgclass

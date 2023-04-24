@@ -35,13 +35,16 @@ module Google
 
             # Lists all TagValues for a specific TagKey.
             rpc :ListTagValues, ::Google::Cloud::ResourceManager::V3::ListTagValuesRequest, ::Google::Cloud::ResourceManager::V3::ListTagValuesResponse
-            # Retrieves TagValue. If the TagValue or namespaced name does not exist, or
-            # if the user does not have permission to view it, this method will return
-            # `PERMISSION_DENIED`.
+            # Retrieves a TagValue. This method will return `PERMISSION_DENIED` if the
+            # value does not exist or the user does not have permission to view it.
             rpc :GetTagValue, ::Google::Cloud::ResourceManager::V3::GetTagValueRequest, ::Google::Cloud::ResourceManager::V3::TagValue
+            # Retrieves a TagValue by its namespaced name.
+            # This method will return `PERMISSION_DENIED` if the value does not exist
+            # or the user does not have permission to view it.
+            rpc :GetNamespacedTagValue, ::Google::Cloud::ResourceManager::V3::GetNamespacedTagValueRequest, ::Google::Cloud::ResourceManager::V3::TagValue
             # Creates a TagValue as a child of the specified TagKey. If a another
             # request with the same parameters is sent while the original request is in
-            # process the second request will receive an error. A maximum of 300
+            # process the second request will receive an error. A maximum of 1000
             # TagValues can exist under a TagKey at any given time.
             rpc :CreateTagValue, ::Google::Cloud::ResourceManager::V3::CreateTagValueRequest, ::Google::Longrunning::Operation
             # Updates the attributes of the TagValue resource.
