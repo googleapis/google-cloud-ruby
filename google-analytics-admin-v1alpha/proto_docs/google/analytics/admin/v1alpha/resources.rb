@@ -549,6 +549,9 @@ module Google
           # @!attribute [rw] expanded_data_set
           #   @return [::Google::Analytics::Admin::V1alpha::ExpandedDataSet]
           #     A snapshot of an ExpandedDataSet resource in change history.
+          # @!attribute [rw] channel_group
+          #   @return [::Google::Analytics::Admin::V1alpha::ChannelGroup]
+          #     A snapshot of a ChannelGroup resource in change history.
           # @!attribute [rw] bigquery_link
           #   @return [::Google::Analytics::Admin::V1alpha::BigQueryLink]
           #     A snapshot of a BigQuery link resource in change history.
@@ -761,6 +764,9 @@ module Google
         #     If this is an event-scoped dimension, then this is the event parameter
         #     name.
         #
+        #     If this is an item-scoped dimension, then this is the parameter
+        #     name found in the eCommerce items array.
+        #
         #     May only contain alphanumeric and underscore characters, starting with a
         #     letter. Max length of 24 characters for user-scoped dimensions, 40
         #     characters for event-scoped dimensions.
@@ -798,6 +804,9 @@ module Google
 
             # Dimension scoped to a user.
             USER = 2
+
+            # Dimension scoped to eCommerce items
+            ITEM = 3
           end
         end
 

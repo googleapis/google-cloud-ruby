@@ -318,6 +318,16 @@ module Google
             rpc :UpdateExpandedDataSet, ::Google::Analytics::Admin::V1alpha::UpdateExpandedDataSetRequest, ::Google::Analytics::Admin::V1alpha::ExpandedDataSet
             # Deletes a ExpandedDataSet on a property.
             rpc :DeleteExpandedDataSet, ::Google::Analytics::Admin::V1alpha::DeleteExpandedDataSetRequest, ::Google::Protobuf::Empty
+            # Lookup for a single ChannelGroup.
+            rpc :GetChannelGroup, ::Google::Analytics::Admin::V1alpha::GetChannelGroupRequest, ::Google::Analytics::Admin::V1alpha::ChannelGroup
+            # Lists ChannelGroups on a property.
+            rpc :ListChannelGroups, ::Google::Analytics::Admin::V1alpha::ListChannelGroupsRequest, ::Google::Analytics::Admin::V1alpha::ListChannelGroupsResponse
+            # Creates a ChannelGroup.
+            rpc :CreateChannelGroup, ::Google::Analytics::Admin::V1alpha::CreateChannelGroupRequest, ::Google::Analytics::Admin::V1alpha::ChannelGroup
+            # Updates a ChannelGroup.
+            rpc :UpdateChannelGroup, ::Google::Analytics::Admin::V1alpha::UpdateChannelGroupRequest, ::Google::Analytics::Admin::V1alpha::ChannelGroup
+            # Deletes a ChannelGroup on a property.
+            rpc :DeleteChannelGroup, ::Google::Analytics::Admin::V1alpha::DeleteChannelGroupRequest, ::Google::Protobuf::Empty
             # Sets the opt out status for the automated GA4 setup process for a UA
             # property.
             # Note: this has no effect on GA4 property.
@@ -349,6 +359,9 @@ module Google
             # of 20 connected site tags will be returned. Note: this has no effect on GA4
             # property.
             rpc :ListConnectedSiteTags, ::Google::Analytics::Admin::V1alpha::ListConnectedSiteTagsRequest, ::Google::Analytics::Admin::V1alpha::ListConnectedSiteTagsResponse
+            # Given a specified UA property, looks up the GA4 property connected to it.
+            # Note: this cannot be used with GA4 properties.
+            rpc :FetchConnectedGa4Property, ::Google::Analytics::Admin::V1alpha::FetchConnectedGa4PropertyRequest, ::Google::Analytics::Admin::V1alpha::FetchConnectedGa4PropertyResponse
           end
 
           Stub = Service.rpc_stub_class

@@ -3,6 +3,7 @@
 
 require 'google/protobuf'
 
+require 'google/analytics/admin/v1alpha/channel_group_pb'
 require 'google/analytics/admin/v1alpha/expanded_data_set_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
@@ -151,6 +152,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :data_stream, :message, 18, "google.analytics.admin.v1alpha.DataStream"
         optional :attribution_settings, :message, 20, "google.analytics.admin.v1alpha.AttributionSettings"
         optional :expanded_data_set, :message, 21, "google.analytics.admin.v1alpha.ExpandedDataSet"
+        optional :channel_group, :message, 22, "google.analytics.admin.v1alpha.ChannelGroup"
         optional :bigquery_link, :message, 23, "google.analytics.admin.v1alpha.BigQueryLink"
         optional :enhanced_measurement_settings, :message, 24, "google.analytics.admin.v1alpha.EnhancedMeasurementSettings"
       end
@@ -211,6 +213,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :DIMENSION_SCOPE_UNSPECIFIED, 0
       value :EVENT, 1
       value :USER, 2
+      value :ITEM, 3
     end
     add_message "google.analytics.admin.v1alpha.CustomMetric" do
       optional :name, :string, 1
