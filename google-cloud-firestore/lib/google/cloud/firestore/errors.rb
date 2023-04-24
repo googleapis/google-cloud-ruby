@@ -46,6 +46,15 @@ module Google
           super "BulkWriterOperationError : #{message}"
         end
       end
+
+      ##
+      # Indicates that the an error was reported in BulkWriter.
+      #
+      class BulkWriterError < Google::Cloud::Error
+        def initialize message
+          super "BulkWriterError : #{message}"
+        end
+      end
     end
   end
 end

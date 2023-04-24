@@ -509,10 +509,10 @@ module Google
         def pre_add_operation doc_path
           @mutex.synchronize do
             unless accepting_request?
-              raise StandardError, "BulkWriter not accepting responses for now. Either closed or in flush state"
+              raise BulkWriterError, "Not accepting responses for now. Either closed or in flush state"
             end
             if @doc_refs.include? doc_path
-              raise StandardError, "BulkWriter already contains mutations for this document"
+              raise BulkWriterError, "Already contains mutations for this document"
             end
             @doc_refs.add doc_path
           end

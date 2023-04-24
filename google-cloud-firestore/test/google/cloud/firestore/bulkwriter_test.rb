@@ -14,6 +14,7 @@
 
 require "helper"
 require "concurrent"
+require "google/cloud/firestore/errors"
 
 describe Google::Cloud::Firestore::BulkWriter, :mock_firestore do
   let(:bulk_writer) { firestore.bulk_writer }
@@ -25,10 +26,10 @@ describe Google::Cloud::Firestore::BulkWriter, :mock_firestore do
 
     firestore_mock.expect :batch_write, response, request
     bulk_writer.create "cities/NYC", { foo: "bar"}
-    error = assert_raises StandardError do
+    error = assert_raises Google::Cloud::Firestore::BulkWriterError do
       bulk_writer.create "cities/NYC", { foo: "bar"}
     end
-    _(error.message).must_equal "BulkWriter already contains mutations for this document"
+    _(error.message).must_equal "BulkWriterError : Already contains mutations for this document"
 
     bulk_writer.flush
   end
@@ -54,10 +55,10 @@ describe Google::Cloud::Firestore::BulkWriter, :mock_firestore do
     bw = firestore.bulk_writer
     bw.close
 
-    error = assert_raises StandardError do
+    error = assert_raises Google::Cloud::Firestore::BulkWriterError do
       bw.create "cities/NYC", { foo: "bar"}
     end
-    _(error.message).must_equal "BulkWriter not accepting responses for now. Either closed or in flush state"
+    _(error.message).must_equal "BulkWriterError : Not accepting responses for now. Either closed or in flush state"
   end
 
   it "cannot add operations when bulk writer is in closed state" do
@@ -77,10 +78,10 @@ describe Google::Cloud::Firestore::BulkWriter, :mock_firestore do
     end
 
     sleep 0.1
-    error = assert_raises StandardError do
+    error = assert_raises Google::Cloud::Firestore::BulkWriterError do
       bw.create "cities/NYC", { foo: "bar"}
     end
-    _(error.message).must_equal "BulkWriter not accepting responses for now. Either closed or in flush state"
+    _(error.message).must_equal "BulkWriterError : Not accepting responses for now. Either closed or in flush state"
   end
 
   describe "retry tests" do

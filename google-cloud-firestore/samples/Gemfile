@@ -16,11 +16,11 @@ source "https://rubygems.org"
 
 master = ENV["GOOGLE_CLOUD_SAMPLES_TEST"] == "master"
 
+gem "algorithms"
 gem "google-cloud-firestore", path: master ? "../../google-cloud-firestore" : nil
 gem "google-cloud-firestore-v1", path: master ? "../../google-cloud-firestore-v1" : nil
 
 group :test do
-  gem "algorithms"
   gem "google-style", "~> 1.25.1"
   gem "minitest", "~> 5.14"
   gem "minitest-focus", "~> 1.2"
