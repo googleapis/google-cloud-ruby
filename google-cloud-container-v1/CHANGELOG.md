@@ -1,5 +1,15 @@
 # Release History
 
+### 0.20.0 (2023-04-24)
+
+#### Features
+
+* Add option RESIZE_CLUSTER to enum Operation Type ([#21471](https://github.com/googleapis/google-cloud-ruby/issues/21471)) 
+* Add state field to DatabaseEncryption ([#21471](https://github.com/googleapis/google-cloud-ruby/issues/21471)) 
+#### Documentation
+
+* Expand documentation for Operation Type ([#21471](https://github.com/googleapis/google-cloud-ruby/issues/21471)) 
+
 ### 0.19.0 (2023-04-21)
 
 #### Features
