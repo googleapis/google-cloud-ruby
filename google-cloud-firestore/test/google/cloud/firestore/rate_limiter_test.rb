@@ -20,7 +20,7 @@ describe Google::Cloud::Firestore::RateLimiter do
   it "get 501 token from the RateLimiter" do
     rate_limiter = Google::Cloud::Firestore::RateLimiter.new
     time_1 = Time.now
-    rate_limiter.get_tokens 501
+    rate_limiter.wait_for_tokens 501
     time_2 = Time.now
     _((time_2 - time_1).to_f).must_be :>, 1
   end
@@ -28,9 +28,9 @@ describe Google::Cloud::Firestore::RateLimiter do
 
   it "checks whether the bandwidth increases after phase length" do
     rate_limiter = Google::Cloud::Firestore::RateLimiter.new phase_length: 2
-    rate_limiter.get_tokens 500
+    rate_limiter.wait_for_tokens 500
     _(rate_limiter.bandwidth).must_equal 500
-    rate_limiter.get_tokens 500
+    rate_limiter.wait_for_tokens 500
     _(rate_limiter.bandwidth).must_equal 750
   end
 

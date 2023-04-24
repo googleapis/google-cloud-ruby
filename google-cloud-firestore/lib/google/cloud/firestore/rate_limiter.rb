@@ -17,7 +17,14 @@ module Google
   module Cloud
     module Firestore
       ##
-      # @private
+      # @private Implements 5/5/5 ramp-up via Token Bucket algorithm.
+      #
+      # 5/5/5 is a ramp up strategy that starts with a budget of 500 operations per
+      # second. Additionally, every 5 minutes, the maximum budget can increase by
+      # 50%. Thus, at 5:01 into a long bulk-writing process, the maximum budget
+      # becomes 750 operations per second. At 10:01, the budget becomes 1,125
+      # operations per second.
+      #
       class RateLimiter
         DEFAULT_STARTING_MAXIMUM_OPS_PER_SECOND = 500.0
         DEFAULT_PHASE_LENGTH = 300.0
@@ -41,7 +48,7 @@ module Google
         # per query
         #
         # @return [nil]
-        def get_tokens size
+        def wait_for_tokens size
           available_time = @last_fetched + (size / @bandwidth)
           waiting_time = [0, available_time - time].max
           sleep waiting_time

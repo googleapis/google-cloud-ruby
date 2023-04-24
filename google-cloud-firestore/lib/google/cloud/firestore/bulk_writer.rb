@@ -26,6 +26,28 @@ require "google/cloud/firestore/bulk_writer_scheduler"
 module Google
   module Cloud
     module Firestore
+      ##
+      # #  BulkWriter
+      #
+      # Accumulate and efficiently sends large amounts of document write
+      # operations to the server.
+      #
+      # BulkWriter can handle large data migrations or updates, buffering records
+      # in memory and submitting them to the server in batches of 20.
+      #
+      # The submission of batches is internally parallelized with a ThreadPoolExecutor.
+      #
+      # @example Create a BulkWriter and add a write request:
+      #   require "google/cloud/firestore"
+      #
+      #   firestore = Google::Cloud::Firestore.new
+      #   bw = firestore.bulk_writer
+      #
+      #   bw.create("cities/NYC", { name: "New York City" })
+      #
+      #   bw.flush
+      #   bw.close
+      #
       class BulkWriter
         MAX_RETRY_ATTEMPTS = 15
 
@@ -35,7 +57,7 @@ module Google
         def initialize client, service,
                        request_threads: nil,
                        batch_threads: nil,
-                       retries: MAX_RETRY_ATTEMPTS
+                       retries: nil
           @client = client
           @service = service
           @closed = false
@@ -58,6 +80,9 @@ module Google
         # @param [String, DocumentReference] doc A string representing the
         #   path of the document, or a document reference object.
         # @param [Hash] data The document's fields and values.
+        #
+        # @return [Google::Cloud::Firestore::Promise::Future] Denoting the future value of
+        #   write operation.
         #
         # @example Create a document using a document path:
         #   require "google/cloud/firestore"
@@ -90,6 +115,22 @@ module Google
         #   bw.create(nyc_ref, { name: "New York City",
         #                          updated_at: firestore.field_server_time })
         #
+        # @example Get the value of write operation:
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #   bw = firestore.bulk_writer
+        #
+        #   # Get a document reference
+        #   nyc_ref = firestore.doc "cities/NYC"
+        #
+        #   result = bw.create(nyc_ref, { name: "New York City",
+        #                                 updated_at: firestore.field_server_time })
+        #
+        #   bw.close
+        #
+        #   puts result.value
+        #
         def create doc, data
           doc_path = coalesce_doc_path_argument doc
           pre_add_operation doc_path
@@ -118,6 +159,9 @@ module Google
         #   fields in this argument is merged with the existing document data.
         #   The default is to not merge, but to instead overwrite the existing
         #   document data.
+        #
+        # @return [Google::Cloud::Firestore::Promise::Future] Denoting the future value of
+        #   write operation.
         #
         # @example Set a document using a document path:
         #   require "google/cloud/firestore"
@@ -183,6 +227,24 @@ module Google
         #
         #   bw.set(nyc_ref, nyc_data, merge: true)
         #
+        # @example Get the value of write operation:
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #   bw = firestore.bulk_writer
+        #
+        #   # Get a document reference
+        #   nyc_ref = firestore.doc "cities/NYC"
+        #
+        #   nyc_data = { name: "New York City",
+        #                updated_at: firestore.field_server_time }
+        #
+        #   result = bw.set(nyc_ref, nyc_data)
+        #
+        #   bw.close
+        #
+        #   puts result.value
+        #
         def set doc, data, merge: nil
           doc_path = coalesce_doc_path_argument doc
           pre_add_operation doc_path
@@ -211,6 +273,9 @@ module Google
         #   {FieldPath} object instead.
         # @param [Time] update_time When set, the document must have been last
         #   updated at that time. Optional.
+        #
+        # @return [Google::Cloud::Firestore::Promise::Future] Denoting the future value of
+        #   write operation.
         #
         # @example Update a document using a document path:
         #   require "google/cloud/firestore"
@@ -280,6 +345,24 @@ module Google
         #
         #   bw.update(nyc_ref, nyc_data)
         #
+        # @example Get the value of write operation:
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #   bw = firestore.bulk_writer
+        #
+        #   # Get a document reference
+        #   nyc_ref = firestore.doc "cities/NYC"
+        #
+        #   nyc_data = { name: "New York City",
+        #                updated_at: firestore.field_server_time }
+        #
+        #   result = bw.update(nyc_ref, nyc_data)
+        #
+        #   bw.close
+        #
+        #   puts result.value
+        #
         def update doc, data, update_time: nil
           doc_path = coalesce_doc_path_argument doc
           pre_add_operation doc_path
@@ -299,6 +382,9 @@ module Google
         #   Optional.
         # @param [Time] update_time When set, the document must have been last
         #   updated at that time. Optional.
+        #
+        # @return [Google::Cloud::Firestore::Promise::Future] Denoting the future value of
+        #   write operation.
         #
         # @example Delete a document using a document path:
         #   require "google/cloud/firestore"
@@ -340,6 +426,21 @@ module Google
         #
         #   # Delete a document
         #   bw.delete "cities/NYC", update_time: last_updated_at
+        #
+        # @example Get the value of write operation:
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #   bw = firestore.bulk_writer
+        #
+        #   last_updated_at = Time.now - 42 # 42 seconds ago
+        #
+        #   # Delete a document
+        #   result = bw.delete "cities/NYC", update_time: last_updated_at
+        #
+        #   bw.close
+        #
+        #   puts result.value
         #
         def delete doc, exists: nil, update_time: nil
           doc_path = coalesce_doc_path_argument doc
@@ -396,7 +497,7 @@ module Google
 
         ##
         # @private Checks if the BulkWriter is accepting write requests
-        def accepting_request
+        def accepting_request?
           unless @closed || @flush
             return true
           end
@@ -407,7 +508,7 @@ module Google
         # @private Sanity checks before adding a write request in the BulkWriter
         def pre_add_operation doc_path
           @mutex.synchronize do
-            unless accepting_request
+            unless accepting_request?
               raise StandardError, "BulkWriter not accepting responses for now. Either closed or in flush state"
             end
             if @doc_refs.include? doc_path

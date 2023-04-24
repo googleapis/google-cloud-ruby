@@ -17,7 +17,15 @@ module Google
   module Cloud
     module Firestore
       ##
-      # @private
+      #
+      # @private Accumulate write operations to be sent in a batch. Use this for higher
+      # volumes (e.g., via `BulkWriter`) and when the order of operations
+      # within a given batch is unimportant.
+      #
+      # Because the order in which individual write operations are applied to the database
+      # is not guaranteed, `batch_write` RPCs can never contain multiple operations
+      # to the same document. In practice, the BulkWriter class handle this case.
+      #
       class BulkCommitBatch
         attr_reader :operations
 

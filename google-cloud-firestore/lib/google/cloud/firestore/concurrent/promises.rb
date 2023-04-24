@@ -15,9 +15,13 @@
 module Google
   module Cloud
     module Firestore
-      ##
-      # @private
       module Promise
+        ##
+        # # Future
+        #
+        # A Future object represents a value which will become available in future.
+        # May reject with a reason instead, e.g. when the tasks raises an exception.
+        #
         class Future
           ##
           # Initialize the future object

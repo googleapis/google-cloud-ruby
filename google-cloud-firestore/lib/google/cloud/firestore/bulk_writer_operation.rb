@@ -21,7 +21,11 @@ module Google
   module Cloud
     module Firestore
       ##
-      # @private
+      #
+      # @private A BulkWriterOperation object refers to a write operations and houses
+      # all the necessary information for a specific write task, including meta
+      # information like the current number of attempts
+      #
       class BulkWriterOperation
         attr_reader :retry_time
         attr_reader :result

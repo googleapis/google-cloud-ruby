@@ -27,7 +27,10 @@ module Google
   module Cloud
     module Firestore
       ##
-      # @private
+      #
+      # @private Accumulate BulkWriterOperations from the BulkWriter, schedules them
+      # in accordance with 555 rule and retry the failed operations from the BulkCommitBatch.
+      #
       class BulkWriterScheduler
         MAX_BATCH_SIZE = 20
 
@@ -119,7 +122,7 @@ module Google
               sleep 0.001
               next
             end
-            @rate_limiter.get_tokens batch_size
+            @rate_limiter.wait_for_tokens batch_size
             operations = dequeue_buffered_operations batch_size
             commit_batch BulkCommitBatch.new(@service, operations)
           end

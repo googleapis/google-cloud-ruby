@@ -16,6 +16,12 @@
 module Google
   module Cloud
     module Firestore
+      ##
+      # #  BulkWriterException
+      #
+      # A BulkWriterException object refers to the error that will be thrown
+      # incase a BulkWriterOperation fails in all the attempts.
+      #
       class BulkWriterException < StandardError
         attr_reader :status
         attr_reader :message
