@@ -371,7 +371,6 @@ end
 tool "report-failures" do
   flag :report_path, "--report-path=PATH", default: FAILURES_REPORT_PATH
   flag :github_action_id, "--github-action-id=ACTION_ID" do |f|
-    f.default ""
     f.desc "Github Action ID under which the CI is running. Optional."
   end
 
@@ -437,12 +436,11 @@ tool "report-failures" do
   
   def create_body dir, tasks
     now = Time.now.utc.strftime "%Y-%m-%d %H:%M:%S"
-    if github_action_id
-      action_url = "https://github.com/googleapis/google-cloud-ruby/actions/runs/#{github_action_id}"
+    messages = []
+    messages << "At #{now} UTC, detected failures in #{dir} for: #{tasks.join ', '}."
+    unless github_action_id.nil?
+      messages << "The CI logs can be found [here](https://github.com/googleapis/google-cloud-ruby/actions/runs/#{github_action_id})"
     end
-    [
-      "At #{now} UTC, detected failures in #{dir} for: #{tasks.join ', '}.",
-      "The CI logs can be found [here](#{action_url})."
-    ].join("\n\n")
+    messages.join("\n\n")
   end
 end
