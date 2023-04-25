@@ -13,7 +13,6 @@
 # limitations under the License.
 
 
-require "algorithms"
 require "concurrent"
 require "google/cloud/firestore/rate_limiter"
 require "google/cloud/firestore/bulk_commit_batch"
@@ -49,7 +48,7 @@ module Google
       #   bw.close
       #
       class BulkWriter
-        MAX_RETRY_ATTEMPTS = 15
+        MAX_RETRY_ATTEMPTS = 10
 
         ##
         # Initialize the attributes and start the schedule_operations job

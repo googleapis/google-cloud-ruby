@@ -173,6 +173,30 @@ describe Google::Cloud::Firestore::BulkWriter, :mock_firestore do
       _(stub.responses.length).must_equal 0
       _(stub.requests.length).must_equal 0
     end
+
+    it "retry operations in correct order" do
+      write_1 = Google::Cloud::Firestore::Convert.write_for_create("#{documents_path}/cities/NYC", { foo: "bar"})
+      write_2 = Google::Cloud::Firestore::Convert.write_for_create("#{documents_path}/cities/MTV", { foo: "bar"})
+      request_1 = batch_write_args [write_1]
+      request_2 = batch_write_args [write_2]
+      responses = [batch_write_fail_resp(1), batch_write_fail_resp(1), batch_write_fail_resp(1), batch_write_pass_resp(1), batch_write_pass_resp(1)]
+      requests = [request_1, request_1, request_2, request_2, request_1]
+      stub = BatchWriteStub.new responses, requests
+      firestore.service.instance_variable_set :@firestore, stub
+
+      bw = firestore.bulk_writer
+
+      result_1 = bw.create "cities/NYC", { foo: "bar"}
+      sleep 1.5
+      result_2 = bw.create "cities/MTV", { foo: "bar"}
+      bw.flush
+      bw.close
+
+      _(result_1.value).must_be_kind_of Google::Cloud::Firestore::BulkWriterOperation::WriteResult
+      _(result_2.value).must_be_kind_of Google::Cloud::Firestore::BulkWriterOperation::WriteResult
+      _(stub.responses.length).must_equal 0
+      _(stub.requests.length).must_equal 0
+    end
   end
 
   describe "thread tests" do

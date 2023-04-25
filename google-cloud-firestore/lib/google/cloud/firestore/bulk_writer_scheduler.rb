@@ -14,7 +14,6 @@
 
 
 require "concurrent"
-require "algorithms"
 require "google/cloud/firestore/errors"
 require "google/cloud/firestore/bulk_writer_operation"
 require "google/cloud/firestore/rate_limiter"
@@ -44,7 +43,7 @@ module Google
           @buffered_operations = []
           @batch_threads = (batch_threads || 4).to_i
           @batch_thread_pool = Concurrent::ThreadPoolExecutor.new max_threads: @batch_threads, max_queue: 0
-          @retry_operations = Containers::MinHeap.new
+          @retry_operations = []
           @mutex = Mutex.new
           start_scheduling_operations
         end
@@ -82,9 +81,10 @@ module Google
           @mutex.synchronize do
             bulk_commit_batch.operations.each do |operation|
               unless operation.completion_event.set?
-                @retry_operations.push operation.retry_time, operation
+                @retry_operations << operation
               end
             end
+            @retry_operations.sort_by!(&:retry_time)
           end
         end
 
@@ -144,8 +144,8 @@ module Google
         #
         def dequeue_retry_operations
           @mutex.synchronize do
-            while @retry_operations.size.positive? && @retry_operations.min.retry_time <= Time.now
-              @buffered_operations << @retry_operations.min!
+            while @retry_operations.length.positive? && @retry_operations.first.retry_time <= Time.now
+              @buffered_operations << @retry_operations.shift
             end
           end
         end
