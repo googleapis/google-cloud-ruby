@@ -82,10 +82,10 @@ module Google
             # can be used by RunQuery as starting/end points for the query results.
             rpc :PartitionQuery, ::Google::Cloud::Firestore::V1::PartitionQueryRequest, ::Google::Cloud::Firestore::V1::PartitionQueryResponse
             # Streams batches of document updates and deletes, in order. This method is
-            # only available via the gRPC API (not REST).
+            # only available via gRPC or WebChannel (not REST).
             rpc :Write, stream(::Google::Cloud::Firestore::V1::WriteRequest), stream(::Google::Cloud::Firestore::V1::WriteResponse)
-            # Listens to changes. This method is only available via the gRPC API (not
-            # REST).
+            # Listens to changes. This method is only available via gRPC or WebChannel
+            # (not REST).
             rpc :Listen, stream(::Google::Cloud::Firestore::V1::ListenRequest), stream(::Google::Cloud::Firestore::V1::ListenResponse)
             # Lists all the collection IDs underneath a document.
             rpc :ListCollectionIds, ::Google::Cloud::Firestore::V1::ListCollectionIdsRequest, ::Google::Cloud::Firestore::V1::ListCollectionIdsResponse
