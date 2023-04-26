@@ -189,7 +189,7 @@ def gem_name
   @gem_name ||= begin
     build_file_path = File.join bazel_base_dir, proto_namespace, "BUILD.bazel"
     bazel_rules_content = File.read build_file_path
-    if bazel_rules_content =~ /"ruby-cloud-gem-name=([\w-]+)",/
+    if bazel_rules_content =~ /"ruby-cloud-gem-name=([\w-]+)"/
       Regexp.last_match[1]
     else
       error "Unable to find gem name rule in #{build_file_path}"
