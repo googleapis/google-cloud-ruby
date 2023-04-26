@@ -441,6 +441,6 @@ tool "report-failures" do
     unless github_action_id.nil?
       messages << "The CI logs can be found [here](https://github.com/googleapis/google-cloud-ruby/actions/runs/#{github_action_id})"
     end
-    messages.join("\n\n")
+    messages.join "\n\n"
   end
 end
