@@ -364,6 +364,13 @@ module Google
             #     Output only. The URI of the Apache Airflow Web UI hosted within this
             #     environment (see [Airflow web
             #     interface](/composer/docs/how-to/accessing/airflow-web-interface)).
+            # @!attribute [r] airflow_byoid_uri
+            #   @return [::String]
+            #     Output only. The 'bring your own identity' variant of the URI of the Apache
+            #     Airflow Web UI hosted within this environment, to be accessed with external
+            #     identities using workforce identity federation (see [Access environments
+            #     with workforce identity
+            #     federation](/composer/docs/composer-2/access-environments-with-workforce-identity-federation)).
             # @!attribute [rw] master_authorized_networks_config
             #   @return [::Google::Cloud::Orchestration::Airflow::Service::V1::MasterAuthorizedNetworksConfig]
             #     Optional. The configuration options for GKE cluster master authorized
