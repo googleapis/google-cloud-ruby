@@ -1147,6 +1147,10 @@
       "component": "google-cloud-storage",
       "version_file": "lib/google/cloud/storage/version.rb"
     },
+    "google-cloud-storage_insights-v1": {
+      "component": "google-cloud-storage_insights-v1",
+      "version_file": "lib/google/cloud/storage_insights/v1/version.rb"
+    },
     "google-cloud-storage_transfer": {
       "component": "google-cloud-storage_transfer",
       "version_file": "lib/google/cloud/storage_transfer/version.rb"
