@@ -57,18 +57,20 @@ module Google
       #
       class AggregateQuery
         ##
-        # @private The Google::Cloud::Datastore::V1::Query object.
-        attr_reader :query
+        # @private The Google::Cloud::Datastore::V1::AggregationQuery object.
+        attr_reader :grpc
 
         ##
-        # @private Array of Google::Cloud::Datastore::V1::AggregationQuery::Aggregation objects
-        attr_reader :aggregates
-
-        ##
-        # @private Creates a new AggregateQuery
+        # @private
+        #
+        # Returns a new AggregateQuery object
+        #
+        # @param query [Google::Cloud::Datastore::V1::Query]
         def initialize query
-          @query = query
-          @aggregates = []
+          @grpc = Google::Cloud::Datastore::V1::AggregationQuery.new(
+            nested_query: query,
+            aggregations: []
+          )
         end
 
         ##
@@ -112,7 +114,7 @@ module Google
         #
         def add_count aggregate_alias: nil
           aggregate_alias ||= ALIASES[:count]
-          aggregates << Google::Cloud::Datastore::V1::AggregationQuery::Aggregation.new(
+          @grpc.aggregations << Google::Cloud::Datastore::V1::AggregationQuery::Aggregation.new(
             count: Google::Cloud::Datastore::V1::AggregationQuery::Aggregation::Count.new,
             alias: aggregate_alias
           )
@@ -198,10 +200,7 @@ module Google
 
         # @private
         def to_grpc
-          Google::Cloud::Datastore::V1::AggregationQuery.new(
-            nested_query: query,
-            aggregations: aggregates
-          )
+          @grpc
         end
 
         ##
