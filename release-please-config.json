@@ -359,6 +359,10 @@
       "component": "google-cloud-compute-v1",
       "version_file": "lib/google/cloud/compute/v1/version.rb"
     },
+    "google-cloud-confidential_computing-v1": {
+      "component": "google-cloud-confidential_computing-v1",
+      "version_file": "lib/google/cloud/confidential_computing/v1/version.rb"
+    },
     "google-cloud-contact_center_insights": {
       "component": "google-cloud-contact_center_insights",
       "version_file": "lib/google/cloud/contact_center_insights/version.rb"
