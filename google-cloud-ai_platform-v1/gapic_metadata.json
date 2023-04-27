@@ -113,6 +113,11 @@
               "methods": [
                 "undeploy_model"
               ]
+            },
+            "MutateDeployedModel": {
+              "methods": [
+                "mutate_deployed_model"
+              ]
             }
           }
         }

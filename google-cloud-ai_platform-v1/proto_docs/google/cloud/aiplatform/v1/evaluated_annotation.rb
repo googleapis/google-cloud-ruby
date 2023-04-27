@@ -76,10 +76,6 @@ module Google
         #     ModelEvaluation. The EvaluatedDataItemView consists of all ground truths
         #     and predictions on
         #     {::Google::Cloud::AIPlatform::V1::EvaluatedAnnotation#data_item_payload data_item_payload}.
-        #
-        #     Can be passed in
-        #     [GetEvaluatedDataItemView's][ModelService.GetEvaluatedDataItemView][]
-        #     [id][GetEvaluatedDataItemViewRequest.id].
         # @!attribute [rw] explanations
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::EvaluatedAnnotationExplanation>]
         #     Explanations of

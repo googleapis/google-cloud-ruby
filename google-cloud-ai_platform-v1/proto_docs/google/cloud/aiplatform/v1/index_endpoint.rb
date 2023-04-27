@@ -187,13 +187,13 @@ module Google
         #     e2-standard-16 and e2-highmem-16 for cost efficiency.
         # @!attribute [rw] enable_access_logging
         #   @return [::Boolean]
-        #     Optional. If true, private endpoint's access logs are sent to StackDriver
+        #     Optional. If true, private endpoint's access logs are sent to Cloud
         #     Logging.
         #
         #     These logs are like standard server access logs, containing
         #     information like timestamp and latency for each MatchRequest.
         #
-        #     Note that Stackdriver logs may incur a cost, especially if the deployed
+        #     Note that logs may incur a cost, especially if the deployed
         #     index receives a high queries per second rate (QPS).
         #     Estimate your costs before enabling this option.
         # @!attribute [rw] deployed_index_auth_config

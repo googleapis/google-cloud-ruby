@@ -106,7 +106,8 @@ module Google
         #   @return [::String]
         #     Output only. Resource name of the Model Monitoring job associated with this
         #     Endpoint if monitoring is enabled by
-        #     [CreateModelDeploymentMonitoringJob][]. Format:
+        #     {::Google::Cloud::AIPlatform::V1::JobService::Client#create_model_deployment_monitoring_job JobService.CreateModelDeploymentMonitoringJob}.
+        #     Format:
         #     `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}`
         # @!attribute [rw] predict_request_response_logging_config
         #   @return [::Google::Cloud::AIPlatform::V1::PredictRequestResponseLoggingConfig]
@@ -203,19 +204,19 @@ module Google
         #   @return [::Boolean]
         #     For custom-trained Models and AutoML Tabular Models, the container of the
         #     DeployedModel instances will send `stderr` and `stdout` streams to
-        #     Stackdriver Logging by default. Please note that the logs incur cost,
+        #     Cloud Logging by default. Please note that the logs incur cost,
         #     which are subject to [Cloud Logging
-        #     pricing](https://cloud.google.com/stackdriver/pricing).
+        #     pricing](https://cloud.google.com/logging/pricing).
         #
         #     User can disable container logging by setting this flag to true.
         # @!attribute [rw] enable_access_logging
         #   @return [::Boolean]
-        #     If true, online prediction access logs are sent to StackDriver
+        #     If true, online prediction access logs are sent to Cloud
         #     Logging.
         #     These logs are like standard server access logs, containing
         #     information like timestamp and latency for each prediction request.
         #
-        #     Note that Stackdriver logs may incur a cost, especially if your project
+        #     Note that logs may incur a cost, especially if your project
         #     receives prediction requests at a high queries per second rate (QPS).
         #     Estimate your costs before enabling this option.
         # @!attribute [r] private_endpoints

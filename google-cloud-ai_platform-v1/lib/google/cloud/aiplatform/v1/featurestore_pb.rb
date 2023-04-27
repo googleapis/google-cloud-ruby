@@ -18,6 +18,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       map :labels, :string, :string, 6
       optional :online_serving_config, :message, 7, "google.cloud.aiplatform.v1.Featurestore.OnlineServingConfig"
       optional :state, :enum, 8, "google.cloud.aiplatform.v1.Featurestore.State"
+      optional :online_storage_ttl_days, :int32, 13
       optional :encryption_spec, :message, 10, "google.cloud.aiplatform.v1.EncryptionSpec"
     end
     add_message "google.cloud.aiplatform.v1.Featurestore.OnlineServingConfig" do

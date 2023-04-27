@@ -692,6 +692,9 @@ module Google
 
             # The Model is saved or tuned from Model Garden.
             MODEL_GARDEN = 4
+
+            # The Model is saved or tuned from Genie.
+            GENIE = 5
           end
         end
       end

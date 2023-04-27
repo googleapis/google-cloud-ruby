@@ -153,7 +153,7 @@ module Google
         #       * `labels`
         #       * `online_serving_config.fixed_node_count`
         #       * `online_serving_config.scaling`
-        #       * `online_storage_ttl_days` (available in Preview)
+        #       * `online_storage_ttl_days`
         class UpdateFeaturestoreRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -617,7 +617,7 @@ module Google
         #       * `monitoring_config.import_features_analysis.anomaly_detection_baseline`
         #       * `monitoring_config.numerical_threshold_config.value`
         #       * `monitoring_config.categorical_threshold_config.value`
-        #       * `offline_storage_ttl_days` (available in Preview)
+        #       * `offline_storage_ttl_days`
         class UpdateEntityTypeRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

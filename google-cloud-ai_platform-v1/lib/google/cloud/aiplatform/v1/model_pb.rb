@@ -89,6 +89,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :CUSTOM, 2
       value :BQML, 3
       value :MODEL_GARDEN, 4
+      value :GENIE, 5
     end
   end
 end

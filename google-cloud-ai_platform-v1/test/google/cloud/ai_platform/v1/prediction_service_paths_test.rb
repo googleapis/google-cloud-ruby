@@ -32,6 +32,9 @@ class ::Google::Cloud::AIPlatform::V1::PredictionService::ClientPathsTest < Mini
 
       path = client.endpoint_path project: "value0", location: "value1", endpoint: "value2"
       assert_equal "projects/value0/locations/value1/endpoints/value2", path
+
+      path = client.endpoint_path project: "value0", location: "value1", publisher: "value2", model: "value3"
+      assert_equal "projects/value0/locations/value1/publishers/value2/models/value3", path
     end
   end
 end

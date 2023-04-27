@@ -2902,12 +2902,12 @@ module Google
             #     Values above 10000 are coerced to 10000.
             #   @param page_token [::String]
             #     A page token, received from a previous
-            #     [TensorboardService.ExportTensorboardTimeSeries][] call.
-            #     Provide this to retrieve the subsequent page.
+            #     {::Google::Cloud::AIPlatform::V1::TensorboardService::Client#export_tensorboard_time_series_data ExportTensorboardTimeSeriesData}
+            #     call. Provide this to retrieve the subsequent page.
             #
             #     When paginating, all other parameters provided to
-            #     [TensorboardService.ExportTensorboardTimeSeries][] must
-            #     match the call that provided the page token.
+            #     {::Google::Cloud::AIPlatform::V1::TensorboardService::Client#export_tensorboard_time_series_data ExportTensorboardTimeSeriesData}
+            #     must match the call that provided the page token.
             #   @param order_by [::String]
             #     Field to use to sort the TensorboardTimeSeries' data.
             #     By default, TensorboardTimeSeries' data is returned in a pseudo random

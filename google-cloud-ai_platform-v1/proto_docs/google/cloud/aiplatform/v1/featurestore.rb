@@ -61,6 +61,14 @@ module Google
         # @!attribute [r] state
         #   @return [::Google::Cloud::AIPlatform::V1::Featurestore::State]
         #     Output only. State of the featurestore.
+        # @!attribute [rw] online_storage_ttl_days
+        #   @return [::Integer]
+        #     Optional. TTL in days for feature values that will be stored in online
+        #     serving storage. The Feature Store online storage periodically removes
+        #     obsolete feature values older than `online_storage_ttl_days` since the
+        #     feature generation time. Note that `online_storage_ttl_days` should be less
+        #     than or equal to `offline_storage_ttl_days` for each EntityType under a
+        #     featurestore. If not set, default to 4000 days
         # @!attribute [rw] encryption_spec
         #   @return [::Google::Cloud::AIPlatform::V1::EncryptionSpec]
         #     Optional. Customer-managed encryption key spec for data storage. If set,

@@ -443,8 +443,8 @@ module Google
         # @!attribute [rw] parameters
         #   @return [::Google::Cloud::AIPlatform::V1::ExplanationParameters]
         #     The parameters to be overridden. Note that the
-        #     [method][google.cloud.aiplatform.v1.ExplanationParameters.method] cannot be
-        #     changed. If not specified, no parameter is overridden.
+        #     attribution method cannot be changed. If not specified,
+        #     no parameter is overridden.
         # @!attribute [rw] metadata
         #   @return [::Google::Cloud::AIPlatform::V1::ExplanationMetadataOverride]
         #     The metadata to be overridden. If not specified, no metadata is overridden.
