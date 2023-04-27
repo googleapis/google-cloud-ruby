@@ -80,6 +80,25 @@ class Google::Cloud::Retail::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_model_service_grpc
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Retail.model_service transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Retail::V2::ModelService::Client, client
+    end
+  end
+
+  def test_model_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Retail.model_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Retail::V2::ModelService::Rest::Client, client
+    end
+  end
+
   def test_prediction_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
