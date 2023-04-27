@@ -148,7 +148,7 @@ module Google
         #
         def add_sum name, aggregate_alias: nil
           aggregate_alias ||= ALIASES[:sum]
-          aggregates << Google::Cloud::Datastore::V1::AggregationQuery::Aggregation.new(
+          @grpc.aggregations << Google::Cloud::Datastore::V1::AggregationQuery::Aggregation.new(
             sum: Google::Cloud::Datastore::V1::AggregationQuery::Aggregation::Sum.new(
               property: Google::Cloud::Datastore::V1::PropertyReference.new(
                 name: name
@@ -186,7 +186,7 @@ module Google
         #
         def add_avg name, aggregate_alias: nil
           aggregate_alias ||= ALIASES[:avg]
-          aggregates << Google::Cloud::Datastore::V1::AggregationQuery::Aggregation.new(
+          @grpc.aggregations << Google::Cloud::Datastore::V1::AggregationQuery::Aggregation.new(
             avg: Google::Cloud::Datastore::V1::AggregationQuery::Aggregation::Avg.new(
               property: Google::Cloud::Datastore::V1::PropertyReference.new(
                 name: name
