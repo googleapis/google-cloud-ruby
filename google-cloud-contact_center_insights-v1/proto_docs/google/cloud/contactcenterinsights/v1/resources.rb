@@ -77,6 +77,9 @@ module Google
         # @!attribute [r] latest_analysis
         #   @return [::Google::Cloud::ContactCenterInsights::V1::Analysis]
         #     Output only. The conversation's latest analysis, if one exists.
+        # @!attribute [r] latest_summary
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::ConversationSummarizationSuggestionData]
+        #     Output only. Latest summary of the conversation.
         # @!attribute [r] runtime_annotations
         #   @return [::Array<::Google::Cloud::ContactCenterInsights::V1::RuntimeAnnotation>]
         #     Output only. The annotations that were generated during the customer and
@@ -886,7 +889,7 @@ module Google
         #     Required. The type of this phrase match rule group.
         # @!attribute [rw] phrase_match_rules
         #   @return [::Array<::Google::Cloud::ContactCenterInsights::V1::PhraseMatchRule>]
-        #     A list of phase match rules that are included in this group.
+        #     A list of phrase match rules that are included in this group.
         class PhraseMatchRuleGroup
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1051,6 +1054,9 @@ module Google
         # @!attribute [rw] dialogflow_interaction
         #   @return [::Google::Cloud::ContactCenterInsights::V1::DialogflowInteractionData]
         #     Dialogflow interaction data.
+        # @!attribute [rw] conversation_summarization_suggestion
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::ConversationSummarizationSuggestionData]
+        #     Conversation summarization suggestion data.
         # @!attribute [rw] annotation_id
         #   @return [::String]
         #     The unique identifier of the annotation.
@@ -1263,6 +1269,55 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Conversation summarization suggestion data.
+        # @!attribute [rw] text
+        #   @return [::String]
+        #     The summarization content that is concatenated into one string.
+        # @!attribute [rw] text_sections
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     The summarization content that is divided into sections. The key is the
+        #     section's name and the value is the section's content. There is no
+        #     specific format for the key or value.
+        # @!attribute [rw] confidence
+        #   @return [::Float]
+        #     The confidence score of the summarization.
+        # @!attribute [rw] metadata
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     A map that contains metadata about the summarization and the document
+        #     from which it originates.
+        # @!attribute [rw] answer_record
+        #   @return [::String]
+        #     The name of the answer record.
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/answerRecords/\\{answer_record}
+        # @!attribute [rw] conversation_model
+        #   @return [::String]
+        #     The name of the model that generates this summary.
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/conversationModels/\\{conversation_model}
+        class ConversationSummarizationSuggestionData
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class TextSectionsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class MetadataEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # The call participant speaking for a given utterance.
         # @!attribute [rw] dialogflow_participant_name
         #   @return [::String]
@@ -1365,9 +1420,38 @@ module Google
         #     inference if the issue model is deployed and if run_issue_model_annotator
         #     is set to true. If more than one issue model is provided, only the first
         #     provided issue model will be used for inference.
+        # @!attribute [rw] run_summarization_annotator
+        #   @return [::Boolean]
+        #     Whether to run the summarization annotator.
+        # @!attribute [rw] summarization_config
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::AnnotatorSelector::SummarizationConfig]
+        #     Configuration for the summarization annotator.
         class AnnotatorSelector
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Configuration for summarization.
+          # @!attribute [rw] conversation_profile
+          #   @return [::String]
+          #     Resource name of the Dialogflow conversation profile.
+          #     Format:
+          #     projects/\\{project}/locations/\\{location}/conversationProfiles/\\{conversation_profile}
+          # @!attribute [rw] summarization_model
+          #   @return [::Google::Cloud::ContactCenterInsights::V1::AnnotatorSelector::SummarizationConfig::SummarizationModel]
+          #     Default summarization model to be used.
+          class SummarizationConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Summarization model to use, if `conversation_profile` is not used.
+            module SummarizationModel
+              # Unspecified summarization model.
+              SUMMARIZATION_MODEL_UNSPECIFIED = 0
+
+              # The Insights baseline model.
+              BASELINE_MODEL = 1
+            end
+          end
         end
       end
     end

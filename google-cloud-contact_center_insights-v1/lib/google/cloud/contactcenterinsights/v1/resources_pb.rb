@@ -24,6 +24,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :duration, :message, 10, "google.protobuf.Duration"
       optional :turn_count, :int32, 11
       optional :latest_analysis, :message, 12, "google.cloud.contactcenterinsights.v1.Analysis"
+      optional :latest_summary, :message, 20, "google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData"
       repeated :runtime_annotations, :message, 13, "google.cloud.contactcenterinsights.v1.RuntimeAnnotation"
       map :dialogflow_intents, :string, :message, 18, "google.cloud.contactcenterinsights.v1.DialogflowIntent"
       optional :obfuscated_user_id, :string, 21
@@ -306,6 +307,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :smart_reply, :message, 8, "google.cloud.contactcenterinsights.v1.SmartReplyData"
         optional :smart_compose_suggestion, :message, 9, "google.cloud.contactcenterinsights.v1.SmartComposeSuggestionData"
         optional :dialogflow_interaction, :message, 10, "google.cloud.contactcenterinsights.v1.DialogflowInteractionData"
+        optional :conversation_summarization_suggestion, :message, 12, "google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData"
       end
     end
     add_message "google.cloud.contactcenterinsights.v1.AnswerFeedback" do
@@ -351,6 +353,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :dialogflow_intent_id, :string, 1
       optional :confidence, :float, 2
     end
+    add_message "google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData" do
+      optional :text, :string, 1
+      map :text_sections, :string, :string, 5
+      optional :confidence, :float, 2
+      map :metadata, :string, :string, 3
+      optional :answer_record, :string, 4
+      optional :conversation_model, :string, 6
+    end
     add_message "google.cloud.contactcenterinsights.v1.ConversationParticipant" do
       optional :dialogflow_participant, :string, 1
       optional :obfuscated_external_user_id, :string, 3
@@ -384,6 +394,18 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :run_intent_annotator, :bool, 7
       optional :run_issue_model_annotator, :bool, 8
       repeated :issue_models, :string, 10
+      optional :run_summarization_annotator, :bool, 9
+      optional :summarization_config, :message, 11, "google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig"
+    end
+    add_message "google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig" do
+      oneof :model_source do
+        optional :conversation_profile, :string, 1
+        optional :summarization_model, :enum, 2, "google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig.SummarizationModel"
+      end
+    end
+    add_enum "google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig.SummarizationModel" do
+      value :SUMMARIZATION_MODEL_UNSPECIFIED, 0
+      value :BASELINE_MODEL, 1
     end
   end
 end
@@ -447,10 +469,13 @@ module Google
         SmartReplyData = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.SmartReplyData").msgclass
         SmartComposeSuggestionData = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.SmartComposeSuggestionData").msgclass
         DialogflowInteractionData = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.DialogflowInteractionData").msgclass
+        ConversationSummarizationSuggestionData = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.ConversationSummarizationSuggestionData").msgclass
         ConversationParticipant = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.ConversationParticipant").msgclass
         ConversationParticipant::Role = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.ConversationParticipant.Role").enummodule
         View = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.View").msgclass
         AnnotatorSelector = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.AnnotatorSelector").msgclass
+        AnnotatorSelector::SummarizationConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig").msgclass
+        AnnotatorSelector::SummarizationConfig::SummarizationModel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.AnnotatorSelector.SummarizationConfig.SummarizationModel").enummodule
       end
     end
   end
