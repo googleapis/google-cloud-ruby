@@ -1,0 +1,295 @@
+{
+  "client_library": {
+    "name": "google-cloud-storage_insights-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.storageinsights.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "storageinsights_v1_generated_StorageInsights_ListReportConfigs_sync",
+      "title": "Snippet for the list_report_configs call in the StorageInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageInsights::V1::StorageInsights::Client#list_report_configs. It may require modification in order to execute successfully.",
+      "file": "storage_insights/list_report_configs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_report_configs",
+        "full_name": "::Google::Cloud::StorageInsights::V1::StorageInsights::Client#list_report_configs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::StorageInsights::V1::ListReportConfigsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::StorageInsights::V1::ListReportConfigsResponse",
+        "client": {
+          "short_name": "StorageInsights::Client",
+          "full_name": "::Google::Cloud::StorageInsights::V1::StorageInsights::Client"
+        },
+        "method": {
+          "short_name": "ListReportConfigs",
+          "full_name": "google.cloud.storageinsights.v1.StorageInsights.ListReportConfigs",
+          "service": {
+            "short_name": "StorageInsights",
+            "full_name": "google.cloud.storageinsights.v1.StorageInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "storageinsights_v1_generated_StorageInsights_GetReportConfig_sync",
+      "title": "Snippet for the get_report_config call in the StorageInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageInsights::V1::StorageInsights::Client#get_report_config. It may require modification in order to execute successfully.",
+      "file": "storage_insights/get_report_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_report_config",
+        "full_name": "::Google::Cloud::StorageInsights::V1::StorageInsights::Client#get_report_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::StorageInsights::V1::GetReportConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::StorageInsights::V1::ReportConfig",
+        "client": {
+          "short_name": "StorageInsights::Client",
+          "full_name": "::Google::Cloud::StorageInsights::V1::StorageInsights::Client"
+        },
+        "method": {
+          "short_name": "GetReportConfig",
+          "full_name": "google.cloud.storageinsights.v1.StorageInsights.GetReportConfig",
+          "service": {
+            "short_name": "StorageInsights",
+            "full_name": "google.cloud.storageinsights.v1.StorageInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "storageinsights_v1_generated_StorageInsights_CreateReportConfig_sync",
+      "title": "Snippet for the create_report_config call in the StorageInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageInsights::V1::StorageInsights::Client#create_report_config. It may require modification in order to execute successfully.",
+      "file": "storage_insights/create_report_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_report_config",
+        "full_name": "::Google::Cloud::StorageInsights::V1::StorageInsights::Client#create_report_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::StorageInsights::V1::CreateReportConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::StorageInsights::V1::ReportConfig",
+        "client": {
+          "short_name": "StorageInsights::Client",
+          "full_name": "::Google::Cloud::StorageInsights::V1::StorageInsights::Client"
+        },
+        "method": {
+          "short_name": "CreateReportConfig",
+          "full_name": "google.cloud.storageinsights.v1.StorageInsights.CreateReportConfig",
+          "service": {
+            "short_name": "StorageInsights",
+            "full_name": "google.cloud.storageinsights.v1.StorageInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "storageinsights_v1_generated_StorageInsights_UpdateReportConfig_sync",
+      "title": "Snippet for the update_report_config call in the StorageInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageInsights::V1::StorageInsights::Client#update_report_config. It may require modification in order to execute successfully.",
+      "file": "storage_insights/update_report_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_report_config",
+        "full_name": "::Google::Cloud::StorageInsights::V1::StorageInsights::Client#update_report_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::StorageInsights::V1::UpdateReportConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::StorageInsights::V1::ReportConfig",
+        "client": {
+          "short_name": "StorageInsights::Client",
+          "full_name": "::Google::Cloud::StorageInsights::V1::StorageInsights::Client"
+        },
+        "method": {
+          "short_name": "UpdateReportConfig",
+          "full_name": "google.cloud.storageinsights.v1.StorageInsights.UpdateReportConfig",
+          "service": {
+            "short_name": "StorageInsights",
+            "full_name": "google.cloud.storageinsights.v1.StorageInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "storageinsights_v1_generated_StorageInsights_DeleteReportConfig_sync",
+      "title": "Snippet for the delete_report_config call in the StorageInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageInsights::V1::StorageInsights::Client#delete_report_config. It may require modification in order to execute successfully.",
+      "file": "storage_insights/delete_report_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_report_config",
+        "full_name": "::Google::Cloud::StorageInsights::V1::StorageInsights::Client#delete_report_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::StorageInsights::V1::DeleteReportConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "StorageInsights::Client",
+          "full_name": "::Google::Cloud::StorageInsights::V1::StorageInsights::Client"
+        },
+        "method": {
+          "short_name": "DeleteReportConfig",
+          "full_name": "google.cloud.storageinsights.v1.StorageInsights.DeleteReportConfig",
+          "service": {
+            "short_name": "StorageInsights",
+            "full_name": "google.cloud.storageinsights.v1.StorageInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "storageinsights_v1_generated_StorageInsights_ListReportDetails_sync",
+      "title": "Snippet for the list_report_details call in the StorageInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageInsights::V1::StorageInsights::Client#list_report_details. It may require modification in order to execute successfully.",
+      "file": "storage_insights/list_report_details.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_report_details",
+        "full_name": "::Google::Cloud::StorageInsights::V1::StorageInsights::Client#list_report_details",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::StorageInsights::V1::ListReportDetailsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::StorageInsights::V1::ListReportDetailsResponse",
+        "client": {
+          "short_name": "StorageInsights::Client",
+          "full_name": "::Google::Cloud::StorageInsights::V1::StorageInsights::Client"
+        },
+        "method": {
+          "short_name": "ListReportDetails",
+          "full_name": "google.cloud.storageinsights.v1.StorageInsights.ListReportDetails",
+          "service": {
+            "short_name": "StorageInsights",
+            "full_name": "google.cloud.storageinsights.v1.StorageInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "storageinsights_v1_generated_StorageInsights_GetReportDetail_sync",
+      "title": "Snippet for the get_report_detail call in the StorageInsights service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::StorageInsights::V1::StorageInsights::Client#get_report_detail. It may require modification in order to execute successfully.",
+      "file": "storage_insights/get_report_detail.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_report_detail",
+        "full_name": "::Google::Cloud::StorageInsights::V1::StorageInsights::Client#get_report_detail",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::StorageInsights::V1::GetReportDetailRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::StorageInsights::V1::ReportDetail",
+        "client": {
+          "short_name": "StorageInsights::Client",
+          "full_name": "::Google::Cloud::StorageInsights::V1::StorageInsights::Client"
+        },
+        "method": {
+          "short_name": "GetReportDetail",
+          "full_name": "google.cloud.storageinsights.v1.StorageInsights.GetReportDetail",
+          "service": {
+            "short_name": "StorageInsights",
+            "full_name": "google.cloud.storageinsights.v1.StorageInsights"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
