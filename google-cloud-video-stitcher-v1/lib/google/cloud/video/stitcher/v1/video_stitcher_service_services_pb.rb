@@ -39,16 +39,16 @@ module Google
               self.service_name = 'google.cloud.video.stitcher.v1.VideoStitcherService'
 
               # Creates a new CDN key.
-              rpc :CreateCdnKey, ::Google::Cloud::Video::Stitcher::V1::CreateCdnKeyRequest, ::Google::Cloud::Video::Stitcher::V1::CdnKey
+              rpc :CreateCdnKey, ::Google::Cloud::Video::Stitcher::V1::CreateCdnKeyRequest, ::Google::Longrunning::Operation
               # Lists all CDN keys in the specified project and location.
               rpc :ListCdnKeys, ::Google::Cloud::Video::Stitcher::V1::ListCdnKeysRequest, ::Google::Cloud::Video::Stitcher::V1::ListCdnKeysResponse
               # Returns the specified CDN key.
               rpc :GetCdnKey, ::Google::Cloud::Video::Stitcher::V1::GetCdnKeyRequest, ::Google::Cloud::Video::Stitcher::V1::CdnKey
               # Deletes the specified CDN key.
-              rpc :DeleteCdnKey, ::Google::Cloud::Video::Stitcher::V1::DeleteCdnKeyRequest, ::Google::Protobuf::Empty
+              rpc :DeleteCdnKey, ::Google::Cloud::Video::Stitcher::V1::DeleteCdnKeyRequest, ::Google::Longrunning::Operation
               # Updates the specified CDN key. Only update fields specified
               # in the call method body.
-              rpc :UpdateCdnKey, ::Google::Cloud::Video::Stitcher::V1::UpdateCdnKeyRequest, ::Google::Cloud::Video::Stitcher::V1::CdnKey
+              rpc :UpdateCdnKey, ::Google::Cloud::Video::Stitcher::V1::UpdateCdnKeyRequest, ::Google::Longrunning::Operation
               # Creates a client side playback VOD session and returns the full
               # tracking and playback metadata of the session.
               rpc :CreateVodSession, ::Google::Cloud::Video::Stitcher::V1::CreateVodSessionRequest, ::Google::Cloud::Video::Stitcher::V1::VodSession
@@ -69,19 +69,30 @@ module Google
               # Returns the specified ad tag detail for the specified live session.
               rpc :GetLiveAdTagDetail, ::Google::Cloud::Video::Stitcher::V1::GetLiveAdTagDetailRequest, ::Google::Cloud::Video::Stitcher::V1::LiveAdTagDetail
               # Creates a slate.
-              rpc :CreateSlate, ::Google::Cloud::Video::Stitcher::V1::CreateSlateRequest, ::Google::Cloud::Video::Stitcher::V1::Slate
+              rpc :CreateSlate, ::Google::Cloud::Video::Stitcher::V1::CreateSlateRequest, ::Google::Longrunning::Operation
               # Lists all slates in the specified project and location.
               rpc :ListSlates, ::Google::Cloud::Video::Stitcher::V1::ListSlatesRequest, ::Google::Cloud::Video::Stitcher::V1::ListSlatesResponse
               # Returns the specified slate.
               rpc :GetSlate, ::Google::Cloud::Video::Stitcher::V1::GetSlateRequest, ::Google::Cloud::Video::Stitcher::V1::Slate
               # Updates the specified slate.
-              rpc :UpdateSlate, ::Google::Cloud::Video::Stitcher::V1::UpdateSlateRequest, ::Google::Cloud::Video::Stitcher::V1::Slate
+              rpc :UpdateSlate, ::Google::Cloud::Video::Stitcher::V1::UpdateSlateRequest, ::Google::Longrunning::Operation
               # Deletes the specified slate.
-              rpc :DeleteSlate, ::Google::Cloud::Video::Stitcher::V1::DeleteSlateRequest, ::Google::Protobuf::Empty
+              rpc :DeleteSlate, ::Google::Cloud::Video::Stitcher::V1::DeleteSlateRequest, ::Google::Longrunning::Operation
               # Creates a new live session.
               rpc :CreateLiveSession, ::Google::Cloud::Video::Stitcher::V1::CreateLiveSessionRequest, ::Google::Cloud::Video::Stitcher::V1::LiveSession
               # Returns the details for the specified live session.
               rpc :GetLiveSession, ::Google::Cloud::Video::Stitcher::V1::GetLiveSessionRequest, ::Google::Cloud::Video::Stitcher::V1::LiveSession
+              # Registers the live config with the provided unique ID in
+              # the specified region.
+              rpc :CreateLiveConfig, ::Google::Cloud::Video::Stitcher::V1::CreateLiveConfigRequest, ::Google::Longrunning::Operation
+              # Lists all live configs managed by the Video Stitcher that
+              # belong to the specified project and region.
+              rpc :ListLiveConfigs, ::Google::Cloud::Video::Stitcher::V1::ListLiveConfigsRequest, ::Google::Cloud::Video::Stitcher::V1::ListLiveConfigsResponse
+              # Returns the specified live config managed by the Video
+              # Stitcher service.
+              rpc :GetLiveConfig, ::Google::Cloud::Video::Stitcher::V1::GetLiveConfigRequest, ::Google::Cloud::Video::Stitcher::V1::LiveConfig
+              # Deletes the specified live config.
+              rpc :DeleteLiveConfig, ::Google::Cloud::Video::Stitcher::V1::DeleteLiveConfigRequest, ::Google::Longrunning::Operation
             end
 
             Stub = Service.rpc_stub_class

@@ -183,6 +183,12 @@ module Google
                 @quota_project_id = @config.quota_project
                 @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
+                @operations_client = Operations.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @config.endpoint
+                end
+
                 @video_stitcher_service_stub = ::Gapic::ServiceStub.new(
                   ::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Stub,
                   credentials:  credentials,
@@ -191,6 +197,13 @@ module Google
                   interceptors: @config.interceptors
                 )
               end
+
+              ##
+              # Get the associated client for long-running operations.
+              #
+              # @return [::Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Operations]
+              #
+              attr_reader :operations_client
 
               # Service calls
 
@@ -213,23 +226,23 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The project in which the CDN key should be created, in the form of
-              #     `projects/{project_number}/locations/{location}`.
+              #     Required. The project in which the CDN key should be created, in the form
+              #     of `projects/{project_number}/locations/{location}`.
               #   @param cdn_key [::Google::Cloud::Video::Stitcher::V1::CdnKey, ::Hash]
               #     Required. The CDN key resource to create.
               #   @param cdn_key_id [::String]
-              #     Required. The ID to use for the CDN key, which will become the final component of
-              #     the CDN key's resource name.
+              #     Required. The ID to use for the CDN key, which will become the final
+              #     component of the CDN key's resource name.
               #
               #     This value should conform to RFC-1034, which restricts to
               #     lower-case letters, numbers, and hyphen, with the first character a
               #     letter, the last a letter or a number, and a 63 character maximum.
               #
               # @yield [response, operation] Access the result along with the RPC operation
-              # @yieldparam response [::Google::Cloud::Video::Stitcher::V1::CdnKey]
+              # @yieldparam response [::Gapic::Operation]
               # @yieldparam operation [::GRPC::ActiveCall::Operation]
               #
-              # @return [::Google::Cloud::Video::Stitcher::V1::CdnKey]
+              # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
@@ -245,8 +258,15 @@ module Google
               #   # Call the create_cdn_key method.
               #   result = client.create_cdn_key request
               #
-              #   # The returned object is of type Google::Cloud::Video::Stitcher::V1::CdnKey.
-              #   p result
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
               #
               def create_cdn_key request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
@@ -282,6 +302,7 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @video_stitcher_service_stub.call_rpc :create_cdn_key, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
                   yield response, operation if block_given?
                   return response
                 end
@@ -498,10 +519,10 @@ module Google
               #     `projects/{project_number}/locations/{location}/cdnKeys/{id}`.
               #
               # @yield [response, operation] Access the result along with the RPC operation
-              # @yieldparam response [::Google::Protobuf::Empty]
+              # @yieldparam response [::Gapic::Operation]
               # @yieldparam operation [::GRPC::ActiveCall::Operation]
               #
-              # @return [::Google::Protobuf::Empty]
+              # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
@@ -517,8 +538,15 @@ module Google
               #   # Call the delete_cdn_key method.
               #   result = client.delete_cdn_key request
               #
-              #   # The returned object is of type Google::Protobuf::Empty.
-              #   p result
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
               #
               def delete_cdn_key request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
@@ -554,6 +582,7 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @video_stitcher_service_stub.call_rpc :delete_cdn_key, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
                   yield response, operation if block_given?
                   return response
                 end
@@ -588,10 +617,10 @@ module Google
               #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
               #
               # @yield [response, operation] Access the result along with the RPC operation
-              # @yieldparam response [::Google::Cloud::Video::Stitcher::V1::CdnKey]
+              # @yieldparam response [::Gapic::Operation]
               # @yieldparam operation [::GRPC::ActiveCall::Operation]
               #
-              # @return [::Google::Cloud::Video::Stitcher::V1::CdnKey]
+              # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
@@ -607,8 +636,15 @@ module Google
               #   # Call the update_cdn_key method.
               #   result = client.update_cdn_key request
               #
-              #   # The returned object is of type Google::Cloud::Video::Stitcher::V1::CdnKey.
-              #   p result
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
               #
               def update_cdn_key request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
@@ -644,6 +680,7 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @video_stitcher_service_stub.call_rpc :update_cdn_key, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
                   yield response, operation if block_given?
                   return response
                 end
@@ -671,8 +708,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The project and location in which the VOD session should be created, in the
-              #     form of `projects/{project_number}/locations/{location}`.
+              #     Required. The project and location in which the VOD session should be
+              #     created, in the form of `projects/{project_number}/locations/{location}`.
               #   @param vod_session [::Google::Cloud::Video::Stitcher::V1::VodSession, ::Hash]
               #     Required. Parameters for creating a session.
               #
@@ -847,8 +884,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The VOD session where the stitch details belong to, in the form of
-              #     `projects/{project}/locations/{location}/vodSessions/{id}`.
+              #     Required. The VOD session where the stitch details belong to, in the form
+              #     of `projects/{project}/locations/{location}/vodSessions/{id}`.
               #   @param page_size [::Integer]
               #     The maximum number of items to return.
               #   @param page_token [::String]
@@ -942,7 +979,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The name of the stitch detail in the specified VOD session, in the form of
+              #     Required. The name of the stitch detail in the specified VOD session, in
+              #     the form of
               #     `projects/{project}/locations/{location}/vodSessions/{vod_session_id}/vodStitchDetails/{id}`.
               #
               # @yield [response, operation] Access the result along with the RPC operation
@@ -1028,8 +1066,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The VOD session which the ad tag details belong to, in the form of
-              #     `projects/{project}/locations/{location}/vodSessions/{vod_session_id}`.
+              #     Required. The VOD session which the ad tag details belong to, in the form
+              #     of `projects/{project}/locations/{location}/vodSessions/{vod_session_id}`.
               #   @param page_size [::Integer]
               #     The maximum number of items to return.
               #   @param page_token [::String]
@@ -1123,7 +1161,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The name of the ad tag detail for the specified VOD session, in the form of
+              #     Required. The name of the ad tag detail for the specified VOD session, in
+              #     the form of
               #     `projects/{project}/locations/{location}/vodSessions/{vod_session_id}/vodAdTagDetails/{vod_ad_tag_detail}`.
               #
               # @yield [response, operation] Access the result along with the RPC operation
@@ -1384,14 +1423,14 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload create_slate(parent: nil, slate_id: nil, slate: nil)
+              # @overload create_slate(parent: nil, slate_id: nil, slate: nil, request_id: nil)
               #   Pass arguments to `create_slate` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
               #     Required. The project in which the slate should be created, in the form of
-              #     `projects/{project_number}`.
+              #     `projects/{project_number}/locations/{location}`.
               #   @param slate_id [::String]
               #     Required. The unique identifier for the slate.
               #     This value should conform to RFC-1034, which restricts to
@@ -1399,12 +1438,26 @@ module Google
               #     letter, the last a letter or a number, and a 63 character maximum.
               #   @param slate [::Google::Cloud::Video::Stitcher::V1::Slate, ::Hash]
               #     Required. The slate to create.
+              #   @param request_id [::String]
+              #     A request ID to identify requests. Specify a unique request ID
+              #     so that if you must retry your request, the server will know to ignore
+              #     the request if it has already been completed. The server will guarantee
+              #     that for at least 60 minutes since the first request.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request ID,
+              #     the server can check if original operation with the same request ID was
+              #     received, and if so, will ignore the second request. This prevents clients
+              #     from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported `(00000000-0000-0000-0000-000000000000)`.
               #
               # @yield [response, operation] Access the result along with the RPC operation
-              # @yieldparam response [::Google::Cloud::Video::Stitcher::V1::Slate]
+              # @yieldparam response [::Gapic::Operation]
               # @yieldparam operation [::GRPC::ActiveCall::Operation]
               #
-              # @return [::Google::Cloud::Video::Stitcher::V1::Slate]
+              # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
@@ -1420,8 +1473,15 @@ module Google
               #   # Call the create_slate method.
               #   result = client.create_slate request
               #
-              #   # The returned object is of type Google::Cloud::Video::Stitcher::V1::Slate.
-              #   p result
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
               #
               def create_slate request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1457,6 +1517,7 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @video_stitcher_service_stub.call_rpc :create_slate, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
                   yield response, operation if block_given?
                   return response
                 end
@@ -1483,7 +1544,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The project to list slates, in the form of `projects/{project_number}`.
+              #     Required. The project to list slates, in the form of
+              #     `projects/{project_number}/locations/{location}`.
               #   @param page_size [::Integer]
               #     Requested page size. Server may return fewer items than requested.
               #     If unspecified, server will pick an appropriate default.
@@ -1582,8 +1644,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The name of the slate to be retrieved, of the slate, in the form of
-              #     `projects/{project_number}/locations/{location}/slates/{id}`.
+              #     Required. The name of the slate to be retrieved, of the slate, in the form
+              #     of `projects/{project_number}/locations/{location}/slates/{id}`.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Video::Stitcher::V1::Slate]
@@ -1673,10 +1735,10 @@ module Google
               #     Required. The update mask which specifies fields which should be updated.
               #
               # @yield [response, operation] Access the result along with the RPC operation
-              # @yieldparam response [::Google::Cloud::Video::Stitcher::V1::Slate]
+              # @yieldparam response [::Gapic::Operation]
               # @yieldparam operation [::GRPC::ActiveCall::Operation]
               #
-              # @return [::Google::Cloud::Video::Stitcher::V1::Slate]
+              # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
@@ -1692,8 +1754,15 @@ module Google
               #   # Call the update_slate method.
               #   result = client.update_slate request
               #
-              #   # The returned object is of type Google::Cloud::Video::Stitcher::V1::Slate.
-              #   p result
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
               #
               def update_slate request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1729,6 +1798,7 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @video_stitcher_service_stub.call_rpc :update_slate, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
                   yield response, operation if block_given?
                   return response
                 end
@@ -1759,10 +1829,10 @@ module Google
               #     `projects/{project_number}/locations/{location}/slates/{id}`.
               #
               # @yield [response, operation] Access the result along with the RPC operation
-              # @yieldparam response [::Google::Protobuf::Empty]
+              # @yieldparam response [::Gapic::Operation]
               # @yieldparam operation [::GRPC::ActiveCall::Operation]
               #
-              # @return [::Google::Protobuf::Empty]
+              # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
@@ -1778,8 +1848,15 @@ module Google
               #   # Call the delete_slate method.
               #   result = client.delete_slate request
               #
-              #   # The returned object is of type Google::Protobuf::Empty.
-              #   p result
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
               #
               def delete_slate request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1815,6 +1892,7 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @video_stitcher_service_stub.call_rpc :delete_slate, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
                   yield response, operation if block_given?
                   return response
                 end
@@ -1841,8 +1919,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The project and location in which the live session should be created,
-              #     in the form of `projects/{project_number}/locations/{location}`.
+              #     Required. The project and location in which the live session should be
+              #     created, in the form of `projects/{project_number}/locations/{location}`.
               #   @param live_session [::Google::Cloud::Video::Stitcher::V1::LiveSession, ::Hash]
               #     Required. Parameters for creating a live session.
               #
@@ -1989,6 +2067,404 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @video_stitcher_service_stub.call_rpc :get_live_session, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Registers the live config with the provided unique ID in
+              # the specified region.
+              #
+              # @overload create_live_config(request, options = nil)
+              #   Pass arguments to `create_live_config` via a request object, either of type
+              #   {::Google::Cloud::Video::Stitcher::V1::CreateLiveConfigRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Video::Stitcher::V1::CreateLiveConfigRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload create_live_config(parent: nil, live_config_id: nil, live_config: nil, request_id: nil)
+              #   Pass arguments to `create_live_config` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The project in which the live config should be created, in
+              #     the form of `projects/{project_number}/locations/{location}`.
+              #   @param live_config_id [::String]
+              #     Required. The unique identifier ID to use for the live config.
+              #   @param live_config [::Google::Cloud::Video::Stitcher::V1::LiveConfig, ::Hash]
+              #     Required. The live config resource to create.
+              #   @param request_id [::String]
+              #     A request ID to identify requests. Specify a unique request ID
+              #     so that if you must retry your request, the server will know to ignore
+              #     the request if it has already been completed. The server will guarantee
+              #     that for at least 60 minutes since the first request.
+              #
+              #     For example, consider a situation where you make an initial request and the
+              #     request times out. If you make the request again with the same request ID,
+              #     the server can check if original operation with the same request ID was
+              #     received, and if so, will ignore the second request. This prevents clients
+              #     from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported `(00000000-0000-0000-0000-000000000000)`.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/video/stitcher/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Video::Stitcher::V1::CreateLiveConfigRequest.new
+              #
+              #   # Call the create_live_config method.
+              #   result = client.create_live_config request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def create_live_config request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Video::Stitcher::V1::CreateLiveConfigRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.create_live_config.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Video::Stitcher::V1::VERSION
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.create_live_config.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.create_live_config.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @video_stitcher_service_stub.call_rpc :create_live_config, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists all live configs managed by the Video Stitcher that
+              # belong to the specified project and region.
+              #
+              # @overload list_live_configs(request, options = nil)
+              #   Pass arguments to `list_live_configs` via a request object, either of type
+              #   {::Google::Cloud::Video::Stitcher::V1::ListLiveConfigsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Video::Stitcher::V1::ListLiveConfigsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload list_live_configs(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+              #   Pass arguments to `list_live_configs` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The project that contains the list of live configs, in the
+              #     form of `projects/{project_number}/locations/{location}`.
+              #   @param page_size [::Integer]
+              #     The maximum number of items to return.
+              #   @param page_token [::String]
+              #     The next_page_token value returned from a previous List request, if any.
+              #   @param filter [::String]
+              #     Optional. The filter to apply to list results (see
+              #     [Filtering](https://google.aip.dev/160)).
+              #   @param order_by [::String]
+              #     Optional. Specifies the ordering of results following
+              #     [Cloud API
+              #     syntax](https://cloud.google.com/apis/design/design_patterns#sorting_order).
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Video::Stitcher::V1::LiveConfig>]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::PagedEnumerable<::Google::Cloud::Video::Stitcher::V1::LiveConfig>]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/video/stitcher/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Video::Stitcher::V1::ListLiveConfigsRequest.new
+              #
+              #   # Call the list_live_configs method.
+              #   result = client.list_live_configs request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Video::Stitcher::V1::LiveConfig.
+              #     p item
+              #   end
+              #
+              def list_live_configs request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Video::Stitcher::V1::ListLiveConfigsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.list_live_configs.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Video::Stitcher::V1::VERSION
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.list_live_configs.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.list_live_configs.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @video_stitcher_service_stub.call_rpc :list_live_configs, request, options: options do |response, operation|
+                  response = ::Gapic::PagedEnumerable.new @video_stitcher_service_stub, :list_live_configs, request, response, operation, options
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Returns the specified live config managed by the Video
+              # Stitcher service.
+              #
+              # @overload get_live_config(request, options = nil)
+              #   Pass arguments to `get_live_config` via a request object, either of type
+              #   {::Google::Cloud::Video::Stitcher::V1::GetLiveConfigRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Video::Stitcher::V1::GetLiveConfigRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload get_live_config(name: nil)
+              #   Pass arguments to `get_live_config` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the live config to be retrieved, in the form
+              #     of
+              #     `projects/{project_number}/locations/{location}/liveConfigs/{id}`.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Cloud::Video::Stitcher::V1::LiveConfig]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Cloud::Video::Stitcher::V1::LiveConfig]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/video/stitcher/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Video::Stitcher::V1::GetLiveConfigRequest.new
+              #
+              #   # Call the get_live_config method.
+              #   result = client.get_live_config request
+              #
+              #   # The returned object is of type Google::Cloud::Video::Stitcher::V1::LiveConfig.
+              #   p result
+              #
+              def get_live_config request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Video::Stitcher::V1::GetLiveConfigRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.get_live_config.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Video::Stitcher::V1::VERSION
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.get_live_config.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.get_live_config.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @video_stitcher_service_stub.call_rpc :get_live_config, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes the specified live config.
+              #
+              # @overload delete_live_config(request, options = nil)
+              #   Pass arguments to `delete_live_config` via a request object, either of type
+              #   {::Google::Cloud::Video::Stitcher::V1::DeleteLiveConfigRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Video::Stitcher::V1::DeleteLiveConfigRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload delete_live_config(name: nil)
+              #   Pass arguments to `delete_live_config` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the live config to be deleted, in the form of
+              #     `projects/{project_number}/locations/{location}/liveConfigs/{id}`.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/video/stitcher/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Video::Stitcher::V1::DeleteLiveConfigRequest.new
+              #
+              #   # Call the delete_live_config method.
+              #   result = client.delete_live_config request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_live_config request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Video::Stitcher::V1::DeleteLiveConfigRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.delete_live_config.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Video::Stitcher::V1::VERSION
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.delete_live_config.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.delete_live_config.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @video_stitcher_service_stub.call_rpc :delete_live_config, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
                   yield response, operation if block_given?
                   return response
                 end
@@ -2231,6 +2707,26 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :get_live_session
+                  ##
+                  # RPC-specific configuration for `create_live_config`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_live_config
+                  ##
+                  # RPC-specific configuration for `list_live_configs`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_live_configs
+                  ##
+                  # RPC-specific configuration for `get_live_config`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_live_config
+                  ##
+                  # RPC-specific configuration for `delete_live_config`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_live_config
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -2274,6 +2770,14 @@ module Google
                     @create_live_session = ::Gapic::Config::Method.new create_live_session_config
                     get_live_session_config = parent_rpcs.get_live_session if parent_rpcs.respond_to? :get_live_session
                     @get_live_session = ::Gapic::Config::Method.new get_live_session_config
+                    create_live_config_config = parent_rpcs.create_live_config if parent_rpcs.respond_to? :create_live_config
+                    @create_live_config = ::Gapic::Config::Method.new create_live_config_config
+                    list_live_configs_config = parent_rpcs.list_live_configs if parent_rpcs.respond_to? :list_live_configs
+                    @list_live_configs = ::Gapic::Config::Method.new list_live_configs_config
+                    get_live_config_config = parent_rpcs.get_live_config if parent_rpcs.respond_to? :get_live_config
+                    @get_live_config = ::Gapic::Config::Method.new get_live_config_config
+                    delete_live_config_config = parent_rpcs.delete_live_config if parent_rpcs.respond_to? :delete_live_config
+                    @delete_live_config = ::Gapic::Config::Method.new delete_live_config_config
 
                     yield self if block_given?
                   end
