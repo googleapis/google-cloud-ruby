@@ -8,7 +8,7 @@
     "name": "confidentialcomputing",
     "name_pretty": "Confidential Computing V1 API",
     "product_documentation": "https://cloud.google.com/confidential-computing",
-    "release_level": "unreleased",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "google-cloud-confidential_computing-v1 is the official client library for the Confidential Computing V1 API. Note that google-cloud-confidential_computing-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-confidential_computing instead. See the readme for more details.",
