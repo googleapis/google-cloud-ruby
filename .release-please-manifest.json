@@ -173,7 +173,7 @@
   "google-cloud-compute+FILLER": "0.0.0",
   "google-cloud-compute-v1": "2.1.0",
   "google-cloud-compute-v1+FILLER": "0.0.0",
-  "google-cloud-confidential_computing-v1": "0.0.1",
+  "google-cloud-confidential_computing-v1": "0.1.0",
   "google-cloud-confidential_computing-v1+FILLER": "0.0.0",
   "google-cloud-contact_center_insights": "1.2.0",
   "google-cloud-contact_center_insights+FILLER": "0.0.0",
