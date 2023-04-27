@@ -148,7 +148,9 @@ module Google
           aggregate_alias ||= ALIASES[:sum]
           aggregates << Google::Cloud::Datastore::V1::AggregationQuery::Aggregation.new(
             sum: Google::Cloud::Datastore::V1::AggregationQuery::Aggregation::Sum.new(
-              property: name
+              property: Google::Cloud::Datastore::V1::PropertyReference.new(
+                name: name
+              )
             ),
             alias: aggregate_alias
           )
@@ -184,7 +186,9 @@ module Google
           aggregate_alias ||= ALIASES[:avg]
           aggregates << Google::Cloud::Datastore::V1::AggregationQuery::Aggregation.new(
             avg: Google::Cloud::Datastore::V1::AggregationQuery::Aggregation::Avg.new(
-              property: name
+              property: Google::Cloud::Datastore::V1::PropertyReference.new(
+                name: name
+              )
             ),
             alias: aggregate_alias
           )
@@ -203,8 +207,8 @@ module Google
         ##
         # @private
         ALIASES = {
-          count: "count"
-          sum: "sum"
+          count: "count",
+          sum: "sum",
           avg: "avg"
         }.freeze
       end
