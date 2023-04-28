@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/confidentialcomputing/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-confidential_computing/$1
