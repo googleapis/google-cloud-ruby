@@ -8,7 +8,7 @@
     "name": "storageinsights",
     "name_pretty": "Storage Insights API",
     "product_documentation": "https://cloud.google.com/storage/docs/insights/storage-insights",
-    "release_level": "unreleased",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Provides insights capability on Google Cloud Storage.",
