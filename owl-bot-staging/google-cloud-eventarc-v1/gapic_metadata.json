@@ -1,0 +1,108 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.eventarc.v1",
+  "libraryPackage": "::Google::Cloud::Eventarc::V1",
+  "services": {
+    "Eventarc": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Eventarc::V1::Eventarc::Client",
+          "rpcs": {
+            "GetTrigger": {
+              "methods": [
+                "get_trigger"
+              ]
+            },
+            "ListTriggers": {
+              "methods": [
+                "list_triggers"
+              ]
+            },
+            "CreateTrigger": {
+              "methods": [
+                "create_trigger"
+              ]
+            },
+            "UpdateTrigger": {
+              "methods": [
+                "update_trigger"
+              ]
+            },
+            "DeleteTrigger": {
+              "methods": [
+                "delete_trigger"
+              ]
+            },
+            "GetChannel": {
+              "methods": [
+                "get_channel"
+              ]
+            },
+            "ListChannels": {
+              "methods": [
+                "list_channels"
+              ]
+            },
+            "CreateChannel": {
+              "methods": [
+                "create_channel"
+              ]
+            },
+            "UpdateChannel": {
+              "methods": [
+                "update_channel"
+              ]
+            },
+            "DeleteChannel": {
+              "methods": [
+                "delete_channel"
+              ]
+            },
+            "GetProvider": {
+              "methods": [
+                "get_provider"
+              ]
+            },
+            "ListProviders": {
+              "methods": [
+                "list_providers"
+              ]
+            },
+            "GetChannelConnection": {
+              "methods": [
+                "get_channel_connection"
+              ]
+            },
+            "ListChannelConnections": {
+              "methods": [
+                "list_channel_connections"
+              ]
+            },
+            "CreateChannelConnection": {
+              "methods": [
+                "create_channel_connection"
+              ]
+            },
+            "DeleteChannelConnection": {
+              "methods": [
+                "delete_channel_connection"
+              ]
+            },
+            "GetGoogleChannelConfig": {
+              "methods": [
+                "get_google_channel_config"
+              ]
+            },
+            "UpdateGoogleChannelConfig": {
+              "methods": [
+                "update_google_channel_config"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
