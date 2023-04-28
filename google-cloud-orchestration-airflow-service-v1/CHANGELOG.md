@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.5.0 (2023-04-28)
+
+#### Features
+
+* Add airflow_byoid_uri field to EnvironmentConfig ([#21486](https://github.com/googleapis/google-cloud-ruby/issues/21486)) 
+
 ### 0.4.0 (2023-03-08)
 
 #### Features
