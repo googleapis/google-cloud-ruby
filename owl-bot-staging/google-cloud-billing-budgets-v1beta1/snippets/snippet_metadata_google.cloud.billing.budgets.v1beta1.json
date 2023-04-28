@@ -1,0 +1,215 @@
+{
+  "client_library": {
+    "name": "google-cloud-billing-budgets-v1beta1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.billing.budgets.v1beta1",
+        "version": "v1beta1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "billingbudgets_v1beta1_generated_BudgetService_CreateBudget_sync",
+      "title": "Snippet for the create_budget call in the BudgetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Billing::Budgets::V1beta1::BudgetService::Client#create_budget. It may require modification in order to execute successfully.",
+      "file": "budget_service/create_budget.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_budget",
+        "full_name": "::Google::Cloud::Billing::Budgets::V1beta1::BudgetService::Client#create_budget",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Billing::Budgets::V1beta1::CreateBudgetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Billing::Budgets::V1beta1::Budget",
+        "client": {
+          "short_name": "BudgetService::Client",
+          "full_name": "::Google::Cloud::Billing::Budgets::V1beta1::BudgetService::Client"
+        },
+        "method": {
+          "short_name": "CreateBudget",
+          "full_name": "google.cloud.billing.budgets.v1beta1.BudgetService.CreateBudget",
+          "service": {
+            "short_name": "BudgetService",
+            "full_name": "google.cloud.billing.budgets.v1beta1.BudgetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "billingbudgets_v1beta1_generated_BudgetService_UpdateBudget_sync",
+      "title": "Snippet for the update_budget call in the BudgetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Billing::Budgets::V1beta1::BudgetService::Client#update_budget. It may require modification in order to execute successfully.",
+      "file": "budget_service/update_budget.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_budget",
+        "full_name": "::Google::Cloud::Billing::Budgets::V1beta1::BudgetService::Client#update_budget",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Billing::Budgets::V1beta1::UpdateBudgetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Billing::Budgets::V1beta1::Budget",
+        "client": {
+          "short_name": "BudgetService::Client",
+          "full_name": "::Google::Cloud::Billing::Budgets::V1beta1::BudgetService::Client"
+        },
+        "method": {
+          "short_name": "UpdateBudget",
+          "full_name": "google.cloud.billing.budgets.v1beta1.BudgetService.UpdateBudget",
+          "service": {
+            "short_name": "BudgetService",
+            "full_name": "google.cloud.billing.budgets.v1beta1.BudgetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "billingbudgets_v1beta1_generated_BudgetService_GetBudget_sync",
+      "title": "Snippet for the get_budget call in the BudgetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Billing::Budgets::V1beta1::BudgetService::Client#get_budget. It may require modification in order to execute successfully.",
+      "file": "budget_service/get_budget.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_budget",
+        "full_name": "::Google::Cloud::Billing::Budgets::V1beta1::BudgetService::Client#get_budget",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Billing::Budgets::V1beta1::GetBudgetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Billing::Budgets::V1beta1::Budget",
+        "client": {
+          "short_name": "BudgetService::Client",
+          "full_name": "::Google::Cloud::Billing::Budgets::V1beta1::BudgetService::Client"
+        },
+        "method": {
+          "short_name": "GetBudget",
+          "full_name": "google.cloud.billing.budgets.v1beta1.BudgetService.GetBudget",
+          "service": {
+            "short_name": "BudgetService",
+            "full_name": "google.cloud.billing.budgets.v1beta1.BudgetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "billingbudgets_v1beta1_generated_BudgetService_ListBudgets_sync",
+      "title": "Snippet for the list_budgets call in the BudgetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Billing::Budgets::V1beta1::BudgetService::Client#list_budgets. It may require modification in order to execute successfully.",
+      "file": "budget_service/list_budgets.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_budgets",
+        "full_name": "::Google::Cloud::Billing::Budgets::V1beta1::BudgetService::Client#list_budgets",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Billing::Budgets::V1beta1::ListBudgetsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Billing::Budgets::V1beta1::ListBudgetsResponse",
+        "client": {
+          "short_name": "BudgetService::Client",
+          "full_name": "::Google::Cloud::Billing::Budgets::V1beta1::BudgetService::Client"
+        },
+        "method": {
+          "short_name": "ListBudgets",
+          "full_name": "google.cloud.billing.budgets.v1beta1.BudgetService.ListBudgets",
+          "service": {
+            "short_name": "BudgetService",
+            "full_name": "google.cloud.billing.budgets.v1beta1.BudgetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "billingbudgets_v1beta1_generated_BudgetService_DeleteBudget_sync",
+      "title": "Snippet for the delete_budget call in the BudgetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Billing::Budgets::V1beta1::BudgetService::Client#delete_budget. It may require modification in order to execute successfully.",
+      "file": "budget_service/delete_budget.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_budget",
+        "full_name": "::Google::Cloud::Billing::Budgets::V1beta1::BudgetService::Client#delete_budget",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Billing::Budgets::V1beta1::DeleteBudgetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "BudgetService::Client",
+          "full_name": "::Google::Cloud::Billing::Budgets::V1beta1::BudgetService::Client"
+        },
+        "method": {
+          "short_name": "DeleteBudget",
+          "full_name": "google.cloud.billing.budgets.v1beta1.BudgetService.DeleteBudget",
+          "service": {
+            "short_name": "BudgetService",
+            "full_name": "google.cloud.billing.budgets.v1beta1.BudgetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
