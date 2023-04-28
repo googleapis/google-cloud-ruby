@@ -1,0 +1,975 @@
+{
+  "client_library": {
+    "name": "google-cloud-certificate_manager-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.certificatemanager.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "certificatemanager_v1_generated_CertificateManager_ListCertificates_sync",
+      "title": "Snippet for the list_certificates call in the CertificateManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CertificateManager::V1::CertificateManager::Client#list_certificates. It may require modification in order to execute successfully.",
+      "file": "certificate_manager/list_certificates.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_certificates",
+        "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client#list_certificates",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CertificateManager::V1::ListCertificatesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CertificateManager::V1::ListCertificatesResponse",
+        "client": {
+          "short_name": "CertificateManager::Client",
+          "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client"
+        },
+        "method": {
+          "short_name": "ListCertificates",
+          "full_name": "google.cloud.certificatemanager.v1.CertificateManager.ListCertificates",
+          "service": {
+            "short_name": "CertificateManager",
+            "full_name": "google.cloud.certificatemanager.v1.CertificateManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "certificatemanager_v1_generated_CertificateManager_GetCertificate_sync",
+      "title": "Snippet for the get_certificate call in the CertificateManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CertificateManager::V1::CertificateManager::Client#get_certificate. It may require modification in order to execute successfully.",
+      "file": "certificate_manager/get_certificate.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_certificate",
+        "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client#get_certificate",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CertificateManager::V1::GetCertificateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CertificateManager::V1::Certificate",
+        "client": {
+          "short_name": "CertificateManager::Client",
+          "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client"
+        },
+        "method": {
+          "short_name": "GetCertificate",
+          "full_name": "google.cloud.certificatemanager.v1.CertificateManager.GetCertificate",
+          "service": {
+            "short_name": "CertificateManager",
+            "full_name": "google.cloud.certificatemanager.v1.CertificateManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "certificatemanager_v1_generated_CertificateManager_CreateCertificate_sync",
+      "title": "Snippet for the create_certificate call in the CertificateManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CertificateManager::V1::CertificateManager::Client#create_certificate. It may require modification in order to execute successfully.",
+      "file": "certificate_manager/create_certificate.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_certificate",
+        "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client#create_certificate",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CertificateManager::V1::CreateCertificateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CertificateManager::Client",
+          "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client"
+        },
+        "method": {
+          "short_name": "CreateCertificate",
+          "full_name": "google.cloud.certificatemanager.v1.CertificateManager.CreateCertificate",
+          "service": {
+            "short_name": "CertificateManager",
+            "full_name": "google.cloud.certificatemanager.v1.CertificateManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "certificatemanager_v1_generated_CertificateManager_UpdateCertificate_sync",
+      "title": "Snippet for the update_certificate call in the CertificateManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CertificateManager::V1::CertificateManager::Client#update_certificate. It may require modification in order to execute successfully.",
+      "file": "certificate_manager/update_certificate.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_certificate",
+        "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client#update_certificate",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CertificateManager::V1::UpdateCertificateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CertificateManager::Client",
+          "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client"
+        },
+        "method": {
+          "short_name": "UpdateCertificate",
+          "full_name": "google.cloud.certificatemanager.v1.CertificateManager.UpdateCertificate",
+          "service": {
+            "short_name": "CertificateManager",
+            "full_name": "google.cloud.certificatemanager.v1.CertificateManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "certificatemanager_v1_generated_CertificateManager_DeleteCertificate_sync",
+      "title": "Snippet for the delete_certificate call in the CertificateManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CertificateManager::V1::CertificateManager::Client#delete_certificate. It may require modification in order to execute successfully.",
+      "file": "certificate_manager/delete_certificate.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_certificate",
+        "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client#delete_certificate",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CertificateManager::V1::DeleteCertificateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CertificateManager::Client",
+          "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client"
+        },
+        "method": {
+          "short_name": "DeleteCertificate",
+          "full_name": "google.cloud.certificatemanager.v1.CertificateManager.DeleteCertificate",
+          "service": {
+            "short_name": "CertificateManager",
+            "full_name": "google.cloud.certificatemanager.v1.CertificateManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "certificatemanager_v1_generated_CertificateManager_ListCertificateMaps_sync",
+      "title": "Snippet for the list_certificate_maps call in the CertificateManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CertificateManager::V1::CertificateManager::Client#list_certificate_maps. It may require modification in order to execute successfully.",
+      "file": "certificate_manager/list_certificate_maps.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_certificate_maps",
+        "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client#list_certificate_maps",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CertificateManager::V1::ListCertificateMapsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CertificateManager::V1::ListCertificateMapsResponse",
+        "client": {
+          "short_name": "CertificateManager::Client",
+          "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client"
+        },
+        "method": {
+          "short_name": "ListCertificateMaps",
+          "full_name": "google.cloud.certificatemanager.v1.CertificateManager.ListCertificateMaps",
+          "service": {
+            "short_name": "CertificateManager",
+            "full_name": "google.cloud.certificatemanager.v1.CertificateManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "certificatemanager_v1_generated_CertificateManager_GetCertificateMap_sync",
+      "title": "Snippet for the get_certificate_map call in the CertificateManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CertificateManager::V1::CertificateManager::Client#get_certificate_map. It may require modification in order to execute successfully.",
+      "file": "certificate_manager/get_certificate_map.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_certificate_map",
+        "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client#get_certificate_map",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CertificateManager::V1::GetCertificateMapRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CertificateManager::V1::CertificateMap",
+        "client": {
+          "short_name": "CertificateManager::Client",
+          "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client"
+        },
+        "method": {
+          "short_name": "GetCertificateMap",
+          "full_name": "google.cloud.certificatemanager.v1.CertificateManager.GetCertificateMap",
+          "service": {
+            "short_name": "CertificateManager",
+            "full_name": "google.cloud.certificatemanager.v1.CertificateManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "certificatemanager_v1_generated_CertificateManager_CreateCertificateMap_sync",
+      "title": "Snippet for the create_certificate_map call in the CertificateManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CertificateManager::V1::CertificateManager::Client#create_certificate_map. It may require modification in order to execute successfully.",
+      "file": "certificate_manager/create_certificate_map.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_certificate_map",
+        "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client#create_certificate_map",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CertificateManager::V1::CreateCertificateMapRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CertificateManager::Client",
+          "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client"
+        },
+        "method": {
+          "short_name": "CreateCertificateMap",
+          "full_name": "google.cloud.certificatemanager.v1.CertificateManager.CreateCertificateMap",
+          "service": {
+            "short_name": "CertificateManager",
+            "full_name": "google.cloud.certificatemanager.v1.CertificateManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "certificatemanager_v1_generated_CertificateManager_UpdateCertificateMap_sync",
+      "title": "Snippet for the update_certificate_map call in the CertificateManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CertificateManager::V1::CertificateManager::Client#update_certificate_map. It may require modification in order to execute successfully.",
+      "file": "certificate_manager/update_certificate_map.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_certificate_map",
+        "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client#update_certificate_map",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CertificateManager::V1::UpdateCertificateMapRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CertificateManager::Client",
+          "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client"
+        },
+        "method": {
+          "short_name": "UpdateCertificateMap",
+          "full_name": "google.cloud.certificatemanager.v1.CertificateManager.UpdateCertificateMap",
+          "service": {
+            "short_name": "CertificateManager",
+            "full_name": "google.cloud.certificatemanager.v1.CertificateManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "certificatemanager_v1_generated_CertificateManager_DeleteCertificateMap_sync",
+      "title": "Snippet for the delete_certificate_map call in the CertificateManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CertificateManager::V1::CertificateManager::Client#delete_certificate_map. It may require modification in order to execute successfully.",
+      "file": "certificate_manager/delete_certificate_map.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_certificate_map",
+        "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client#delete_certificate_map",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CertificateManager::V1::DeleteCertificateMapRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CertificateManager::Client",
+          "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client"
+        },
+        "method": {
+          "short_name": "DeleteCertificateMap",
+          "full_name": "google.cloud.certificatemanager.v1.CertificateManager.DeleteCertificateMap",
+          "service": {
+            "short_name": "CertificateManager",
+            "full_name": "google.cloud.certificatemanager.v1.CertificateManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "certificatemanager_v1_generated_CertificateManager_ListCertificateMapEntries_sync",
+      "title": "Snippet for the list_certificate_map_entries call in the CertificateManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CertificateManager::V1::CertificateManager::Client#list_certificate_map_entries. It may require modification in order to execute successfully.",
+      "file": "certificate_manager/list_certificate_map_entries.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_certificate_map_entries",
+        "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client#list_certificate_map_entries",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CertificateManager::V1::ListCertificateMapEntriesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CertificateManager::V1::ListCertificateMapEntriesResponse",
+        "client": {
+          "short_name": "CertificateManager::Client",
+          "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client"
+        },
+        "method": {
+          "short_name": "ListCertificateMapEntries",
+          "full_name": "google.cloud.certificatemanager.v1.CertificateManager.ListCertificateMapEntries",
+          "service": {
+            "short_name": "CertificateManager",
+            "full_name": "google.cloud.certificatemanager.v1.CertificateManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "certificatemanager_v1_generated_CertificateManager_GetCertificateMapEntry_sync",
+      "title": "Snippet for the get_certificate_map_entry call in the CertificateManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CertificateManager::V1::CertificateManager::Client#get_certificate_map_entry. It may require modification in order to execute successfully.",
+      "file": "certificate_manager/get_certificate_map_entry.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_certificate_map_entry",
+        "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client#get_certificate_map_entry",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CertificateManager::V1::GetCertificateMapEntryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CertificateManager::V1::CertificateMapEntry",
+        "client": {
+          "short_name": "CertificateManager::Client",
+          "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client"
+        },
+        "method": {
+          "short_name": "GetCertificateMapEntry",
+          "full_name": "google.cloud.certificatemanager.v1.CertificateManager.GetCertificateMapEntry",
+          "service": {
+            "short_name": "CertificateManager",
+            "full_name": "google.cloud.certificatemanager.v1.CertificateManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "certificatemanager_v1_generated_CertificateManager_CreateCertificateMapEntry_sync",
+      "title": "Snippet for the create_certificate_map_entry call in the CertificateManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CertificateManager::V1::CertificateManager::Client#create_certificate_map_entry. It may require modification in order to execute successfully.",
+      "file": "certificate_manager/create_certificate_map_entry.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_certificate_map_entry",
+        "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client#create_certificate_map_entry",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CertificateManager::V1::CreateCertificateMapEntryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CertificateManager::Client",
+          "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client"
+        },
+        "method": {
+          "short_name": "CreateCertificateMapEntry",
+          "full_name": "google.cloud.certificatemanager.v1.CertificateManager.CreateCertificateMapEntry",
+          "service": {
+            "short_name": "CertificateManager",
+            "full_name": "google.cloud.certificatemanager.v1.CertificateManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "certificatemanager_v1_generated_CertificateManager_UpdateCertificateMapEntry_sync",
+      "title": "Snippet for the update_certificate_map_entry call in the CertificateManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CertificateManager::V1::CertificateManager::Client#update_certificate_map_entry. It may require modification in order to execute successfully.",
+      "file": "certificate_manager/update_certificate_map_entry.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_certificate_map_entry",
+        "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client#update_certificate_map_entry",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CertificateManager::V1::UpdateCertificateMapEntryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CertificateManager::Client",
+          "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client"
+        },
+        "method": {
+          "short_name": "UpdateCertificateMapEntry",
+          "full_name": "google.cloud.certificatemanager.v1.CertificateManager.UpdateCertificateMapEntry",
+          "service": {
+            "short_name": "CertificateManager",
+            "full_name": "google.cloud.certificatemanager.v1.CertificateManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "certificatemanager_v1_generated_CertificateManager_DeleteCertificateMapEntry_sync",
+      "title": "Snippet for the delete_certificate_map_entry call in the CertificateManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CertificateManager::V1::CertificateManager::Client#delete_certificate_map_entry. It may require modification in order to execute successfully.",
+      "file": "certificate_manager/delete_certificate_map_entry.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_certificate_map_entry",
+        "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client#delete_certificate_map_entry",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CertificateManager::V1::DeleteCertificateMapEntryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CertificateManager::Client",
+          "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client"
+        },
+        "method": {
+          "short_name": "DeleteCertificateMapEntry",
+          "full_name": "google.cloud.certificatemanager.v1.CertificateManager.DeleteCertificateMapEntry",
+          "service": {
+            "short_name": "CertificateManager",
+            "full_name": "google.cloud.certificatemanager.v1.CertificateManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "certificatemanager_v1_generated_CertificateManager_ListDnsAuthorizations_sync",
+      "title": "Snippet for the list_dns_authorizations call in the CertificateManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CertificateManager::V1::CertificateManager::Client#list_dns_authorizations. It may require modification in order to execute successfully.",
+      "file": "certificate_manager/list_dns_authorizations.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_dns_authorizations",
+        "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client#list_dns_authorizations",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CertificateManager::V1::ListDnsAuthorizationsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CertificateManager::V1::ListDnsAuthorizationsResponse",
+        "client": {
+          "short_name": "CertificateManager::Client",
+          "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client"
+        },
+        "method": {
+          "short_name": "ListDnsAuthorizations",
+          "full_name": "google.cloud.certificatemanager.v1.CertificateManager.ListDnsAuthorizations",
+          "service": {
+            "short_name": "CertificateManager",
+            "full_name": "google.cloud.certificatemanager.v1.CertificateManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "certificatemanager_v1_generated_CertificateManager_GetDnsAuthorization_sync",
+      "title": "Snippet for the get_dns_authorization call in the CertificateManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CertificateManager::V1::CertificateManager::Client#get_dns_authorization. It may require modification in order to execute successfully.",
+      "file": "certificate_manager/get_dns_authorization.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_dns_authorization",
+        "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client#get_dns_authorization",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CertificateManager::V1::GetDnsAuthorizationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CertificateManager::V1::DnsAuthorization",
+        "client": {
+          "short_name": "CertificateManager::Client",
+          "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client"
+        },
+        "method": {
+          "short_name": "GetDnsAuthorization",
+          "full_name": "google.cloud.certificatemanager.v1.CertificateManager.GetDnsAuthorization",
+          "service": {
+            "short_name": "CertificateManager",
+            "full_name": "google.cloud.certificatemanager.v1.CertificateManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "certificatemanager_v1_generated_CertificateManager_CreateDnsAuthorization_sync",
+      "title": "Snippet for the create_dns_authorization call in the CertificateManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CertificateManager::V1::CertificateManager::Client#create_dns_authorization. It may require modification in order to execute successfully.",
+      "file": "certificate_manager/create_dns_authorization.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_dns_authorization",
+        "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client#create_dns_authorization",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CertificateManager::V1::CreateDnsAuthorizationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CertificateManager::Client",
+          "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client"
+        },
+        "method": {
+          "short_name": "CreateDnsAuthorization",
+          "full_name": "google.cloud.certificatemanager.v1.CertificateManager.CreateDnsAuthorization",
+          "service": {
+            "short_name": "CertificateManager",
+            "full_name": "google.cloud.certificatemanager.v1.CertificateManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "certificatemanager_v1_generated_CertificateManager_UpdateDnsAuthorization_sync",
+      "title": "Snippet for the update_dns_authorization call in the CertificateManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CertificateManager::V1::CertificateManager::Client#update_dns_authorization. It may require modification in order to execute successfully.",
+      "file": "certificate_manager/update_dns_authorization.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_dns_authorization",
+        "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client#update_dns_authorization",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CertificateManager::V1::UpdateDnsAuthorizationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CertificateManager::Client",
+          "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client"
+        },
+        "method": {
+          "short_name": "UpdateDnsAuthorization",
+          "full_name": "google.cloud.certificatemanager.v1.CertificateManager.UpdateDnsAuthorization",
+          "service": {
+            "short_name": "CertificateManager",
+            "full_name": "google.cloud.certificatemanager.v1.CertificateManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "certificatemanager_v1_generated_CertificateManager_DeleteDnsAuthorization_sync",
+      "title": "Snippet for the delete_dns_authorization call in the CertificateManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CertificateManager::V1::CertificateManager::Client#delete_dns_authorization. It may require modification in order to execute successfully.",
+      "file": "certificate_manager/delete_dns_authorization.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_dns_authorization",
+        "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client#delete_dns_authorization",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CertificateManager::V1::DeleteDnsAuthorizationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CertificateManager::Client",
+          "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client"
+        },
+        "method": {
+          "short_name": "DeleteDnsAuthorization",
+          "full_name": "google.cloud.certificatemanager.v1.CertificateManager.DeleteDnsAuthorization",
+          "service": {
+            "short_name": "CertificateManager",
+            "full_name": "google.cloud.certificatemanager.v1.CertificateManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "certificatemanager_v1_generated_CertificateManager_ListCertificateIssuanceConfigs_sync",
+      "title": "Snippet for the list_certificate_issuance_configs call in the CertificateManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CertificateManager::V1::CertificateManager::Client#list_certificate_issuance_configs. It may require modification in order to execute successfully.",
+      "file": "certificate_manager/list_certificate_issuance_configs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_certificate_issuance_configs",
+        "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client#list_certificate_issuance_configs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CertificateManager::V1::ListCertificateIssuanceConfigsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CertificateManager::V1::ListCertificateIssuanceConfigsResponse",
+        "client": {
+          "short_name": "CertificateManager::Client",
+          "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client"
+        },
+        "method": {
+          "short_name": "ListCertificateIssuanceConfigs",
+          "full_name": "google.cloud.certificatemanager.v1.CertificateManager.ListCertificateIssuanceConfigs",
+          "service": {
+            "short_name": "CertificateManager",
+            "full_name": "google.cloud.certificatemanager.v1.CertificateManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "certificatemanager_v1_generated_CertificateManager_GetCertificateIssuanceConfig_sync",
+      "title": "Snippet for the get_certificate_issuance_config call in the CertificateManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CertificateManager::V1::CertificateManager::Client#get_certificate_issuance_config. It may require modification in order to execute successfully.",
+      "file": "certificate_manager/get_certificate_issuance_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_certificate_issuance_config",
+        "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client#get_certificate_issuance_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CertificateManager::V1::GetCertificateIssuanceConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CertificateManager::V1::CertificateIssuanceConfig",
+        "client": {
+          "short_name": "CertificateManager::Client",
+          "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client"
+        },
+        "method": {
+          "short_name": "GetCertificateIssuanceConfig",
+          "full_name": "google.cloud.certificatemanager.v1.CertificateManager.GetCertificateIssuanceConfig",
+          "service": {
+            "short_name": "CertificateManager",
+            "full_name": "google.cloud.certificatemanager.v1.CertificateManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "certificatemanager_v1_generated_CertificateManager_CreateCertificateIssuanceConfig_sync",
+      "title": "Snippet for the create_certificate_issuance_config call in the CertificateManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CertificateManager::V1::CertificateManager::Client#create_certificate_issuance_config. It may require modification in order to execute successfully.",
+      "file": "certificate_manager/create_certificate_issuance_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_certificate_issuance_config",
+        "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client#create_certificate_issuance_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CertificateManager::V1::CreateCertificateIssuanceConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CertificateManager::Client",
+          "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client"
+        },
+        "method": {
+          "short_name": "CreateCertificateIssuanceConfig",
+          "full_name": "google.cloud.certificatemanager.v1.CertificateManager.CreateCertificateIssuanceConfig",
+          "service": {
+            "short_name": "CertificateManager",
+            "full_name": "google.cloud.certificatemanager.v1.CertificateManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "certificatemanager_v1_generated_CertificateManager_DeleteCertificateIssuanceConfig_sync",
+      "title": "Snippet for the delete_certificate_issuance_config call in the CertificateManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::CertificateManager::V1::CertificateManager::Client#delete_certificate_issuance_config. It may require modification in order to execute successfully.",
+      "file": "certificate_manager/delete_certificate_issuance_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_certificate_issuance_config",
+        "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client#delete_certificate_issuance_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CertificateManager::V1::DeleteCertificateIssuanceConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CertificateManager::Client",
+          "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client"
+        },
+        "method": {
+          "short_name": "DeleteCertificateIssuanceConfig",
+          "full_name": "google.cloud.certificatemanager.v1.CertificateManager.DeleteCertificateIssuanceConfig",
+          "service": {
+            "short_name": "CertificateManager",
+            "full_name": "google.cloud.certificatemanager.v1.CertificateManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
