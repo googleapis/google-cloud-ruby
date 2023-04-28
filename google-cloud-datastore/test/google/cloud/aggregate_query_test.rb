@@ -14,167 +14,98 @@
 
 require "helper"
 
-describe "Aggregate Query", :mock_datastore do
-  let(:project_id) { "my-todo-project" }
-  let(:read_time) { Time.now }
-  let(:credentials) { OpenStruct.new }
-  let(:default_database) { "" }
-  let(:dataset) { Google::Cloud::Datastore::Dataset.new(Google::Cloud::Datastore::Service.new(project_id, credentials, default_database)) }
+describe Google::Cloud::Datastore::AggregateQuery, :mock_datastore do
   let(:query) { Google::Cloud::Datastore::Query.new.kind("User") }
-  let(:expected_query) do
-    Google::Cloud::Datastore::V1::Query.new(
-      projection: [],
-      kind: [Google::Cloud::Datastore::V1::KindExpression.new(name: "User")],
-      order: [],
-      distinct_on: [],
-      start_cursor: "",
-      end_cursor: "",
-      offset: 0
-    )
+
+  it "creates empty AggregateQuery object" do
+    aggregate_query = query.aggregate_query
+
+    _(aggregate_query).must_be_kind_of Google::Cloud::Datastore::AggregateQuery
+
+    grpc = aggregate_query.to_grpc
+    _(grpc).must_be_kind_of Google::Cloud::Datastore::V1::AggregationQuery
+
+    _(grpc.nested_query).wont_be :nil?
+    _(grpc.nested_query).must_be_kind_of Google::Cloud::Datastore::V1::Query
+    _(grpc.nested_query).must_equal query.to_grpc
+
+    _(grpc.aggregations).wont_be :nil?
+    _(grpc.aggregations).must_be_kind_of Google::Protobuf::RepeatedField
+    _(grpc.aggregations.size).must_equal 0
   end
 
-  before do
-    dataset.service.mocked_service = Minitest::Mock.new
+  it "creates COUNT aggregate with default alias" do
+    aggregate_query = query.aggregate_query
+                           .add_count
+
+    grpc = aggregate_query.to_grpc
+    _(grpc).must_be_kind_of Google::Cloud::Datastore::V1::AggregationQuery
+
+    _(grpc.nested_query).wont_be :nil?
+    _(grpc.nested_query).must_be_kind_of Google::Cloud::Datastore::V1::Query
+    _(grpc.nested_query).must_equal query.to_grpc
+
+    _(grpc.aggregations).wont_be :nil?
+    _(grpc.aggregations).must_be_kind_of Google::Protobuf::RepeatedField
+    _(grpc.aggregations.size).must_equal 1
+
+    _(grpc.aggregations.first.alias).wont_be :nil?
+    _(grpc.aggregations.first.alias).must_equal 'count'
+    _(grpc.aggregations.first.count).wont_be :nil?
+    _(grpc.aggregations.first.count).must_be_kind_of Google::Cloud::Datastore::V1::AggregationQuery::Aggregation::Count
   end
 
-  after do
-    dataset.service.mocked_service.verify
+  it "creates COUNT aggregate with custom alias" do
+    aggregate_query = query.aggregate_query
+                           .add_count aggregate_alias: 'total'
+
+    grpc = aggregate_query.to_grpc
+    _(grpc).must_be_kind_of Google::Cloud::Datastore::V1::AggregationQuery
+
+    _(grpc.nested_query).wont_be :nil?
+    _(grpc.nested_query).must_be_kind_of Google::Cloud::Datastore::V1::Query
+    _(grpc.nested_query).must_equal query.to_grpc
+
+    _(grpc.aggregations).wont_be :nil?
+    _(grpc.aggregations).must_be_kind_of Google::Protobuf::RepeatedField
+    _(grpc.aggregations.size).must_equal 1
+
+    _(grpc.aggregations.first.alias).wont_be :nil?
+    _(grpc.aggregations.first.alias).must_equal 'total'
+    _(grpc.aggregations.first.count).wont_be :nil?
+    _(grpc.aggregations.first.count).must_be_kind_of Google::Cloud::Datastore::V1::AggregationQuery::Aggregation::Count
   end
 
-  it "creates an aggregate query with default alias" do
-    expected_aggregation_query = aggregation_query_factory('count')
-    aggr_resp = aggregation_query_response_factory('count': 4)
-    dataset.service.mocked_service.expect :run_aggregation_query, aggr_resp, **aggr_args(project_id: project_id, aggregation_query: expected_aggregation_query)
+  it "creates multiple COUNT aggregates" do
+    aggregate_query = query.aggregate_query
+                           .add_count(aggregate_alias: 'total_1')
+                           .add_count(aggregate_alias: 'total_2')
+                           .add_count(aggregate_alias: 'total_3')
 
-    aq = query.aggregate_query
-              .add_count
-    res = dataset.run_aggregation aq
+    grpc = aggregate_query.to_grpc
+    _(grpc).must_be_kind_of Google::Cloud::Datastore::V1::AggregationQuery
 
-    _(res.get).must_equal 4
-    _(res.get('count')).must_equal 4
-  end
+    _(grpc.nested_query).wont_be :nil?
+    _(grpc.nested_query).must_be_kind_of Google::Cloud::Datastore::V1::Query
+    _(grpc.nested_query).must_equal query.to_grpc
 
-  it "creates an aggregate query with default alias and read time" do
-    read_options = Google::Cloud::Datastore::V1::ReadOptions.new read_time: read_time_to_timestamp(read_time)
-    expected_aggregation_query = aggregation_query_factory('count')
-    aggr_resp = aggregation_query_response_factory('count': 4)
-    dataset.service.mocked_service.expect :run_aggregation_query, aggr_resp, **aggr_args(project_id: project_id, aggregation_query: expected_aggregation_query, read_options: read_options)
+    _(grpc.aggregations).wont_be :nil?
+    _(grpc.aggregations).must_be_kind_of Google::Protobuf::RepeatedField
+    _(grpc.aggregations.size).must_equal 3
 
-    aq = query.aggregate_query
-              .add_count
-    res = dataset.run_aggregation aq, read_time: read_time
+    _(grpc.aggregations[0].alias).wont_be :nil?
+    _(grpc.aggregations[0].alias).must_equal 'total_1'
+    _(grpc.aggregations[0].count).wont_be :nil?
+    _(grpc.aggregations[0].count).must_be_kind_of Google::Cloud::Datastore::V1::AggregationQuery::Aggregation::Count
 
-    _(res.get).must_equal 4
-    _(res.get('count')).must_equal 4
-  end
+    _(grpc.aggregations[1].alias).wont_be :nil?
+    _(grpc.aggregations[1].alias).must_equal 'total_2'
+    _(grpc.aggregations[1].count).wont_be :nil?
+    _(grpc.aggregations[1].count).must_be_kind_of Google::Cloud::Datastore::V1::AggregationQuery::Aggregation::Count
 
-  it "creates an aggregate query with custom alias" do
-    expected_aggregation_query = aggregation_query_factory('total')
-    aggr_resp = aggregation_query_response_factory('total': 4)
-    dataset.service.mocked_service.expect :run_aggregation_query, aggr_resp, **aggr_args(project_id: project_id, aggregation_query: expected_aggregation_query)
-
-    aq = query.aggregate_query
-              .add_count(aggregate_alias: 'total')
-    res = dataset.run_aggregation aq
-
-    _(res.get).must_equal 4
-    _(res.get('total')).must_equal 4
-  end
-
-  it "creates an aggregate query with multiple aliases" do
-    expected_aggregation_query = aggregation_query_factory('total_1', 'total_2')
-    aggr_resp = aggregation_query_response_factory('total_1': 4, 'total_2': 4)
-    dataset.service.mocked_service.expect :run_aggregation_query, aggr_resp, **aggr_args(project_id: project_id, aggregation_query: expected_aggregation_query)
-
-    aq = query.aggregate_query
-              .add_count(aggregate_alias: 'total_1')
-              .add_count(aggregate_alias: 'total_2')
-    res = dataset.run_aggregation aq
-    _(res.get('total_1')).must_equal 4
-    _(res.get('total_2')).must_equal 4
-  end
-
-  it "creates an aggregate query with unspecified alias" do
-    expected_aggregation_query = aggregation_query_factory('count')
-    aggr_resp = aggregation_query_response_factory
-    dataset.service.mocked_service.expect :run_aggregation_query, aggr_resp, **aggr_args(project_id: project_id, aggregation_query: expected_aggregation_query)
-
-    aq = query.aggregate_query
-              .add_count
-    res = dataset.run_aggregation aq
-
-    _(res.get('unspecified_alias')).must_be :nil?
-  end
-
-  it "creates aggregate via gql query" do
-    expected_aggregation_query = gql_aggregation_query_factory "SELECT COUNT(*) FROM User"
-    aggr_resp = gql_query_response_factory('count': 4)
-    dataset.service.mocked_service.expect :run_aggregation_query, aggr_resp, **aggr_args(project_id: project_id, gql_query: expected_aggregation_query)
-    gql = dataset.gql "SELECT COUNT(*) FROM User"
-    res = dataset.run_aggregation gql
-    _(res.get).must_equal 4
-  end
-
-  def aggregation_query_factory *aliases
-    aggregations = aliases.map do |a|
-      Google::Cloud::Datastore::V1::AggregationQuery::Aggregation.new(
-        alias: a,
-        count: Google::Cloud::Datastore::V1::AggregationQuery::Aggregation::Count.new
-      )
-    end
-    Google::Cloud::Datastore::V1::AggregationQuery.new(nested_query: expected_query, aggregations: aggregations)
-  end
-
-  def aggregation_query_response_factory **kwargs
-    aggregation_results = [
-      Google::Cloud::Datastore::V1::AggregationResult.new(aggregate_properties: kwargs.transform_values { |v| Google::Cloud::Datastore::V1::Value.new(meaning: 0, exclude_from_indexes: false, integer_value: v) })
-    ]
-    Google::Cloud::Datastore::V1::RunAggregationQueryResponse.new(
-      batch: Google::Cloud::Datastore::V1::AggregationResultBatch.new(
-        read_time: Google::Protobuf::Timestamp.new(seconds: 1673852227, nanos: 370563000),
-        more_results: :NO_MORE_RESULTS,
-        aggregation_results: aggregation_results
-      )
-    )
-  end
-
-  def gql_aggregation_query_factory query_string
-    Google::Cloud::Datastore::V1::GqlQuery.new(query_string: query_string, allow_literals: false, named_bindings: {}, positional_bindings: [])
-  end
-
-  def gql_query_response_factory **kwargs
-    aggregation_results = [
-      Google::Cloud::Datastore::V1::AggregationResult.new(aggregate_properties: kwargs.transform_values { |v| Google::Cloud::Datastore::V1::Value.new(meaning: 0, exclude_from_indexes: false, integer_value: v) })
-    ]
-    Google::Cloud::Datastore::V1::RunAggregationQueryResponse.new(
-      batch: Google::Cloud::Datastore::V1::AggregationResultBatch.new(
-        read_time: Google::Protobuf::Timestamp.new(seconds: 1673852227, nanos: 370563000),
-        more_results: :NO_MORE_RESULTS,
-        aggregation_results: aggregation_results
-      ),
-      query: Google::Cloud::Datastore::V1::AggregationQuery.new(
-        nested_query: expected_query,
-        aggregations: [
-          Google::Cloud::Datastore::V1::AggregationQuery::Aggregation.new(
-            alias: "total",
-            count: Google::Cloud::Datastore::V1::AggregationQuery::Aggregation::Count.new
-          )
-        ]
-      )
-    )
-  end
-
-  def aggr_args project_id: nil,
-                partition_id: nil,
-                read_options: nil,
-                aggregation_query: nil,
-                gql_query: nil
-    {
-      project_id: project_id,
-      partition_id: partition_id,
-      read_options: read_options,
-      aggregation_query: aggregation_query,
-      gql_query: gql_query
-    }
+    _(grpc.aggregations[2].alias).wont_be :nil?
+    _(grpc.aggregations[2].alias).must_equal 'total_3'
+    _(grpc.aggregations[2].count).wont_be :nil?
+    _(grpc.aggregations[2].count).must_be_kind_of Google::Cloud::Datastore::V1::AggregationQuery::Aggregation::Count
   end
 end
