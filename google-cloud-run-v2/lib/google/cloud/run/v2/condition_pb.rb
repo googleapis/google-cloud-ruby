@@ -69,6 +69,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :JOB_STATUS_SERVICE_POLLING_ERROR, 1
       value :NON_ZERO_EXIT_CODE, 2
       value :CANCELLED, 3
+      value :CANCELLING, 4
     end
   end
 end

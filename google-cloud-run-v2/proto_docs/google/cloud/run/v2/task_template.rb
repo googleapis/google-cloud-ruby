@@ -33,11 +33,13 @@ module Google
         # @!attribute [rw] max_retries
         #   @return [::Integer]
         #     Number of retries allowed per Task, before marking this Task failed.
+        #     Defaults to 3.
         # @!attribute [rw] timeout
         #   @return [::Google::Protobuf::Duration]
         #     Max allowed time duration the Task may be active before the system will
         #     actively try to mark it failed and kill associated containers. This applies
         #     per attempt of a task, meaning each retry can run for the full timeout.
+        #     Defaults to 600 seconds.
         # @!attribute [rw] service_account
         #   @return [::String]
         #     Email address of the IAM service account associated with the Task of a

@@ -63,6 +63,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :conditions, :message, 31, "google.cloud.run.v2.Condition"
       optional :observed_generation, :int64, 32
       optional :log_uri, :string, 33
+      optional :satisfies_pzs, :bool, 37
+      optional :session_affinity, :bool, 38
       optional :etag, :string, 99
     end
   end

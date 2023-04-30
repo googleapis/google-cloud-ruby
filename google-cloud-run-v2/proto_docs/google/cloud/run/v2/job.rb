@@ -163,12 +163,13 @@ module Google
         #     modifies the desired state.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     KRM-style labels for the resource.
+        #     Unstructured key value map that can be used to organize and categorize
+        #     objects.
         #     User-provided labels are shared with Google's billing system, so they can
         #     be used to filter, or break down billing charges by team, component,
         #     environment, state, etc. For more information, visit
         #     https://cloud.google.com/resource-manager/docs/creating-managing-labels or
-        #     https://cloud.google.com/run/docs/configuring/labels
+        #     https://cloud.google.com/run/docs/configuring/labels.
         #
         #     <p>Cloud Run API v2 does not support labels with `run.googleapis.com`,
         #     `cloud.googleapis.com`, `serving.knative.dev`, or `autoscaling.knative.dev`
@@ -176,18 +177,18 @@ module Google
         #     corresponding field in v2 Job.
         # @!attribute [rw] annotations
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     KRM-style annotations for the resource. Unstructured key value map that may
+        #     Unstructured key value map that may
         #     be set by external tools to store and arbitrary metadata.
         #     They are not queryable and should be preserved
         #     when modifying objects.
         #
         #     <p>Cloud Run API v2 does not support annotations with `run.googleapis.com`,
         #     `cloud.googleapis.com`, `serving.knative.dev`, or `autoscaling.knative.dev`
-        #     namespaces, and they will be rejected. All system annotations in v1 now
-        #     have a corresponding field in v2 Job.
+        #     namespaces, and they will be rejected on new resources. All system
+        #     annotations in v1 now have a corresponding field in v2 Job.
         #
         #     <p>This field follows Kubernetes annotations' namespacing, limits, and
-        #     rules. More info: https://kubernetes.io/docs/user-guide/annotations
+        #     rules.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The creation time.
@@ -219,6 +220,12 @@ module Google
         #     Launch Stages](https://cloud.google.com/terms/launch-stages).
         #     Cloud Run supports `ALPHA`, `BETA`, and `GA`. If no value is specified, GA
         #     is assumed.
+        #     Set the launch stage to a preview stage on input to allow use of preview
+        #     features in that stage. On read (or output), describes whether the resource
+        #     uses preview features.
+        #     <p>
+        #     For example, if ALPHA is provided as input, but only BETA and GA-level
+        #     features are used, this field will be BETA on output.
         # @!attribute [rw] binary_authorization
         #   @return [::Google::Cloud::Run::V2::BinaryAuthorization]
         #     Settings for the Binary Authorization feature.
@@ -268,6 +275,9 @@ module Google
         #     `latest_succeeded_execution` will have the state of the last succeeded
         #     execution or empty for newly created Job. Additional information on the
         #     failure can be found in `terminal_condition` and `conditions`.
+        # @!attribute [r] satisfies_pzs
+        #   @return [::Boolean]
+        #     Output only. Reserved for future use.
         # @!attribute [r] etag
         #   @return [::String]
         #     Output only. A system-generated fingerprint for this version of the
