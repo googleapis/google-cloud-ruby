@@ -316,6 +316,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.deploy.v1.TargetArtifact.PhaseArtifact" do
       optional :skaffold_config_path, :string, 1
       optional :manifest_path, :string, 3
+      optional :job_manifests_path, :string, 4
+    end
+    add_message "google.cloud.deploy.v1.DeployArtifact" do
+      optional :artifact_uri, :string, 1
+      repeated :manifest_paths, :string, 2
     end
     add_message "google.cloud.deploy.v1.CloudRunRenderMetadata" do
       optional :service, :string, 1
@@ -563,6 +568,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :failure_cause, :enum, 2, "google.cloud.deploy.v1.DeployJobRun.FailureCause"
       optional :failure_message, :string, 3
       optional :metadata, :message, 4, "google.cloud.deploy.v1.DeployJobRunMetadata"
+      optional :artifact, :message, 5, "google.cloud.deploy.v1.DeployArtifact"
     end
     add_enum "google.cloud.deploy.v1.DeployJobRun.FailureCause" do
       value :FAILURE_CAUSE_UNSPECIFIED, 0
@@ -692,6 +698,7 @@ module Google
         BuildArtifact = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.BuildArtifact").msgclass
         TargetArtifact = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.TargetArtifact").msgclass
         TargetArtifact::PhaseArtifact = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.TargetArtifact.PhaseArtifact").msgclass
+        DeployArtifact = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.DeployArtifact").msgclass
         CloudRunRenderMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.CloudRunRenderMetadata").msgclass
         RenderMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.RenderMetadata").msgclass
         ListReleasesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.ListReleasesRequest").msgclass
