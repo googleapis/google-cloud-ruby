@@ -126,6 +126,23 @@ module Google
             end
 
             ##
+            # Create a fully-qualified ChannelGroup resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `properties/{property}/channelGroups/{channel_group}`
+            #
+            # @param property [String]
+            # @param channel_group [String]
+            #
+            # @return [::String]
+            def channel_group_path property:, channel_group:
+              raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
+
+              "properties/#{property}/channelGroups/#{channel_group}"
+            end
+
+            ##
             # Create a fully-qualified ConversionEvent resource string.
             #
             # The resource will be in the following format:

@@ -5448,6 +5448,280 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ClientTe
     end
   end
 
+  def test_get_channel_group
+    # Create test objects.
+    client_result = ::Google::Analytics::Admin::V1alpha::ChannelGroup.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_channel_group_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ServiceStub.stub :transcode_get_channel_group_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_channel_group_client_stub do
+        # Create client
+        client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_channel_group({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_channel_group name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_channel_group ::Google::Analytics::Admin::V1alpha::GetChannelGroupRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_channel_group({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_channel_group(::Google::Analytics::Admin::V1alpha::GetChannelGroupRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_channel_group_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_channel_groups
+    # Create test objects.
+    client_result = ::Google::Analytics::Admin::V1alpha::ListChannelGroupsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_channel_groups_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ServiceStub.stub :transcode_list_channel_groups_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_channel_groups_client_stub do
+        # Create client
+        client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_channel_groups({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_channel_groups parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_channel_groups ::Google::Analytics::Admin::V1alpha::ListChannelGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_channel_groups({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_channel_groups(::Google::Analytics::Admin::V1alpha::ListChannelGroupsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_channel_groups_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_channel_group
+    # Create test objects.
+    client_result = ::Google::Analytics::Admin::V1alpha::ChannelGroup.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    channel_group = {}
+
+    create_channel_group_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ServiceStub.stub :transcode_create_channel_group_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_channel_group_client_stub do
+        # Create client
+        client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_channel_group({ parent: parent, channel_group: channel_group }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_channel_group parent: parent, channel_group: channel_group do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_channel_group ::Google::Analytics::Admin::V1alpha::CreateChannelGroupRequest.new(parent: parent, channel_group: channel_group) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_channel_group({ parent: parent, channel_group: channel_group }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_channel_group(::Google::Analytics::Admin::V1alpha::CreateChannelGroupRequest.new(parent: parent, channel_group: channel_group), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_channel_group_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_channel_group
+    # Create test objects.
+    client_result = ::Google::Analytics::Admin::V1alpha::ChannelGroup.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    channel_group = {}
+    update_mask = {}
+
+    update_channel_group_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ServiceStub.stub :transcode_update_channel_group_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_channel_group_client_stub do
+        # Create client
+        client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_channel_group({ channel_group: channel_group, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_channel_group channel_group: channel_group, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_channel_group ::Google::Analytics::Admin::V1alpha::UpdateChannelGroupRequest.new(channel_group: channel_group, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_channel_group({ channel_group: channel_group, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_channel_group(::Google::Analytics::Admin::V1alpha::UpdateChannelGroupRequest.new(channel_group: channel_group, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_channel_group_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_channel_group
+    # Create test objects.
+    client_result = ::Google::Protobuf::Empty.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_channel_group_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ServiceStub.stub :transcode_delete_channel_group_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_channel_group_client_stub do
+        # Create client
+        client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_channel_group({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_channel_group name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_channel_group ::Google::Analytics::Admin::V1alpha::DeleteChannelGroupRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_channel_group({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_channel_group(::Google::Analytics::Admin::V1alpha::DeleteChannelGroupRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_channel_group_client_stub.call_count
+      end
+    end
+  end
+
   def test_set_automated_ga4_configuration_opt_out
     # Create test objects.
     client_result = ::Google::Analytics::Admin::V1alpha::SetAutomatedGa4ConfigurationOptOutResponse.new
@@ -5936,6 +6210,60 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ClientTe
 
         # Verify method calls
         assert_equal 5, list_connected_site_tags_client_stub.call_count
+      end
+    end
+  end
+
+  def test_fetch_connected_ga4_property
+    # Create test objects.
+    client_result = ::Google::Analytics::Admin::V1alpha::FetchConnectedGa4PropertyResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    property = "hello world"
+
+    fetch_connected_ga4_property_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::ServiceStub.stub :transcode_fetch_connected_ga4_property_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, fetch_connected_ga4_property_client_stub do
+        # Create client
+        client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.fetch_connected_ga4_property({ property: property }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.fetch_connected_ga4_property property: property do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.fetch_connected_ga4_property ::Google::Analytics::Admin::V1alpha::FetchConnectedGa4PropertyRequest.new(property: property) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.fetch_connected_ga4_property({ property: property }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.fetch_connected_ga4_property(::Google::Analytics::Admin::V1alpha::FetchConnectedGa4PropertyRequest.new(property: property), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, fetch_connected_ga4_property_client_stub.call_count
       end
     end
   end

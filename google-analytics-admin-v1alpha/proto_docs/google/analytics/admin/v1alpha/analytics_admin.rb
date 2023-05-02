@@ -1854,7 +1854,7 @@ module Google
         # Request message for GetExpandedDataSet RPC.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The name of the Audience to get.
+        #     Required. The name of the ExpandedDataSet to get.
         #     Example format: properties/1234/expandedDataSets/5678
         class GetExpandedDataSetRequest
           include ::Google::Protobuf::MessageExts
@@ -1892,6 +1892,92 @@ module Google
         #     A token, which can be sent as `page_token` to retrieve the next page.
         #     If this field is omitted, there are no subsequent pages.
         class ListExpandedDataSetsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for CreateChannelGroup RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The property for which to create a ChannelGroup.
+        #     Example format: properties/1234
+        # @!attribute [rw] channel_group
+        #   @return [::Google::Analytics::Admin::V1alpha::ChannelGroup]
+        #     Required. The ChannelGroup to create.
+        class CreateChannelGroupRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for UpdateChannelGroup RPC.
+        # @!attribute [rw] channel_group
+        #   @return [::Google::Analytics::Admin::V1alpha::ChannelGroup]
+        #     Required. The ChannelGroup to update.
+        #     The resource's `name` field is used to identify the ChannelGroup to be
+        #     updated.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The list of fields to be updated. Field names must be in snake
+        #     case (e.g., "field_to_update"). Omitted fields will not be updated. To
+        #     replace the entire entity, use one path with the string "*" to match all
+        #     fields.
+        class UpdateChannelGroupRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for DeleteChannelGroup RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The ChannelGroup to delete.
+        #     Example format: properties/1234/channelGroups/5678
+        class DeleteChannelGroupRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetChannelGroup RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The ChannelGroup to get.
+        #     Example format: properties/1234/channelGroups/5678
+        class GetChannelGroupRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ListChannelGroups RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The property for which to list ChannelGroups.
+        #     Example format: properties/1234
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of resources to return.
+        #     If unspecified, at most 50 resources will be returned.
+        #     The maximum value is 200 (higher values will be coerced to the maximum).
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous `ListChannelGroups` call. Provide
+        #     this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to `ListChannelGroups`
+        #     must match the call that provided the page token.
+        class ListChannelGroupsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListChannelGroups RPC.
+        # @!attribute [rw] channel_groups
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::ChannelGroup>]
+        #     List of ChannelGroup. These will be ordered stably, but in an arbitrary
+        #     order.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListChannelGroupsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -2070,6 +2156,31 @@ module Google
         #     The site tags for the Universal Analytics property. A maximum of 20
         #     connected site tags will be returned.
         class ListConnectedSiteTagsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for looking up GA4 property connected to a UA property.
+        # @!attribute [rw] property
+        #   @return [::String]
+        #     Required. The UA property for which to look up the connected GA4 property.
+        #     Note this request uses the
+        #     internal property ID, not the tracking ID of the form UA-XXXXXX-YY.
+        #     Format: properties/\\{internal_web_property_id}
+        #     Example: properties/1234
+        class FetchConnectedGa4PropertyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response for looking up GA4 property connected to a UA property.
+        # @!attribute [rw] property
+        #   @return [::String]
+        #     The GA4 property connected to the UA property. An empty string is returned
+        #     when there is no connected GA4 property.
+        #     Format: properties/\\{property_id}
+        #     Example: properties/1234
+        class FetchConnectedGa4PropertyResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
