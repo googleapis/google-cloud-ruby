@@ -91,8 +91,6 @@ module Google
 
                 default_config.rpcs.search_jobs.timeout = 30.0
 
-                default_config.rpcs.search_jobs_for_alert.timeout = 30.0
-
                 default_config
               end
               yield @configure if block_given?
