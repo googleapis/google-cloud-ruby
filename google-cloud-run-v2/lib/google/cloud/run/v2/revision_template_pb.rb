@@ -23,6 +23,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :execution_environment, :enum, 13, "google.cloud.run.v2.ExecutionEnvironment"
       optional :encryption_key, :string, 14
       optional :max_instance_request_concurrency, :int32, 15
+      optional :session_affinity, :bool, 19
     end
   end
 end

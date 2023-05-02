@@ -3,13 +3,13 @@
 
 require 'google/protobuf'
 
-require 'google/cloud/run/v2/execution_pb'
 require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/launch_stage_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/run/v2/condition_pb'
+require 'google/cloud/run/v2/execution_pb'
 require 'google/cloud/run/v2/execution_template_pb'
 require 'google/cloud/run/v2/vendor_settings_pb'
 require 'google/iam/v1/iam_policy_pb'
@@ -76,6 +76,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :execution_count, :int32, 20
       optional :latest_created_execution, :message, 22, "google.cloud.run.v2.ExecutionReference"
       optional :reconciling, :bool, 23
+      optional :satisfies_pzs, :bool, 25
       optional :etag, :string, 99
     end
     add_message "google.cloud.run.v2.ExecutionReference" do

@@ -198,6 +198,9 @@ module Google
 
             # The execution was cancelled by users.
             CANCELLED = 3
+
+            # The execution is in the process of being cancelled.
+            CANCELLING = 4
           end
         end
       end
