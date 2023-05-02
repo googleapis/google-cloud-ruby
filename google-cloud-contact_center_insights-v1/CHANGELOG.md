@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.14.0 (2023-05-02)
+
+#### Features
+
+* Support summary generation during conversation analysis ([#21497](https://github.com/googleapis/google-cloud-ruby/issues/21497)) 
+
 ### 0.13.0 (2023-04-10)
 
 #### Features
