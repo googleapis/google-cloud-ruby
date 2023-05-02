@@ -17,7 +17,7 @@ require "helper"
 describe Google::Cloud::Firestore::BulkWriter, :delete, :mock_firestore do
   let(:bulk_writer) { firestore.bulk_writer }
 
-  it "add a delete operation" do
+  it "adds a delete operation" do
     response = batch_write_pass_resp 1
     write_requests = [Google::Cloud::Firestore::Convert.write_for_delete("#{documents_path}/cities/NYC")]
     request = batch_write_args write_requests

@@ -22,7 +22,7 @@ module Google
     module Firestore
       ##
       #
-      # @private A BulkWriterOperation object refers to a write operations and houses
+      # @private A BulkWriterOperation object refers to a write operation and contains
       # all the necessary information for a specific write task, including meta
       # information like the current number of attempts
       #
@@ -43,7 +43,7 @@ module Google
         end
 
         ##
-        # Processing to be done when the response is a failure.
+        # Processing to be done when the response is a success.
         # Updates the result and set the completion event.
         #
         # @param [Google::Cloud::Firestore::V1::WriteResult] result The result returned in the response.
@@ -58,7 +58,7 @@ module Google
         end
 
         ##
-        # Processing to be done when the response is a success.
+        # Processing to be done when the response is a failure.
         # Updates the failure attempts. If the retry count reaches
         # the upper threshold, operations will be marked
         # as failure and the completion event will be set.
@@ -67,7 +67,7 @@ module Google
         #
         def on_failure status
           @failed_attempts += 1
-          if @failed_attempts == @retries
+          if @failed_attempts == @retries + 1
             begin
               @result = BulkWriterException.new status
             rescue StandardError => e

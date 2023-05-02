@@ -19,7 +19,7 @@ require "google/cloud/firestore/errors"
 describe Google::Cloud::Firestore::BulkWriter, :mock_firestore do
   let(:bulk_writer) { firestore.bulk_writer }
 
-  it "can't add multiple mutations to same doc" do
+  it "can't add multiple mutations to the same doc" do
     response = batch_write_pass_resp 1
     write_requests = [Google::Cloud::Firestore::Convert.write_for_create("#{documents_path}/cities/NYC", { foo: "bar"})]
     request = batch_write_args write_requests
@@ -34,7 +34,7 @@ describe Google::Cloud::Firestore::BulkWriter, :mock_firestore do
     bulk_writer.flush
   end
 
-  it "can add multiple mutations to same doc after flush" do
+  it "can add multiple mutations to the same doc after flush" do
     response = batch_write_pass_resp 1
     write_requests = [Google::Cloud::Firestore::Convert.write_for_create("#{documents_path}/cities/NYC", { foo: "bar"})]
     request = batch_write_args write_requests
@@ -61,7 +61,7 @@ describe Google::Cloud::Firestore::BulkWriter, :mock_firestore do
     _(error.message).must_equal "BulkWriterError : Not accepting responses for now. Either closed or in flush state"
   end
 
-  it "cannot add operations when bulk writer is in closed state" do
+  it "cannot add operations when bulk writer is in flush state" do
     write_requests = [Google::Cloud::Firestore::Convert.write_for_create("#{documents_path}/cities/NYC", { foo: "bar"})]
     request = batch_write_args write_requests
     responses = [batch_write_fail_resp(1), batch_write_pass_resp(1)]
@@ -88,7 +88,7 @@ describe Google::Cloud::Firestore::BulkWriter, :mock_firestore do
     it "do not exceed the max retry attempts" do
       write_requests = [Google::Cloud::Firestore::Convert.write_for_create("#{documents_path}/cities/NYC", { foo: "bar"})]
       request = batch_write_args write_requests
-      responses = [batch_write_fail_resp(1), batch_write_fail_resp(1), batch_write_fail_resp(1), batch_write_pass_resp(1)]
+      responses = [batch_write_fail_resp(1, message: "Attempt 1"), batch_write_fail_resp(1, message: "Attempt 2"), batch_write_fail_resp(1, message: "Attempt 3"), batch_write_pass_resp(1)]
       requests = [request] * responses.length
       stub = BatchWriteStub.new responses, requests
       firestore.service.instance_variable_set :@firestore, stub
@@ -105,9 +105,9 @@ describe Google::Cloud::Firestore::BulkWriter, :mock_firestore do
       _(result.rejected?).must_equal true
       _(result.reason).must_be_kind_of Google::Cloud::Firestore::BulkWriterException
       _(result.reason.status).must_equal 1
-      _(result.reason.message).must_equal "Mock rejection"
-      _(stub.responses.length).must_equal 2
-      _(stub.requests.length).must_equal 2
+      _(result.reason.message).must_equal "Attempt 3"
+      _(stub.responses.length).must_equal 1
+      _(stub.requests.length).must_equal 1
     end
 
     it "retry operation in case of BulkCommitError" do
@@ -221,7 +221,7 @@ describe Google::Cloud::Firestore::BulkWriter, :mock_firestore do
       bw.flush
       bw.close
 
-      _(thread_count_2 - thread_count).must_be :<=, 3
+      _(thread_count_2 - thread_count).must_be :==, 3
       _(result_1.value).must_be_kind_of Google::Cloud::Firestore::BulkWriterOperation::WriteResult
       _(result_2.value).must_be_kind_of Google::Cloud::Firestore::BulkWriterOperation::WriteResult
       _(result_3.value).must_be_kind_of Google::Cloud::Firestore::BulkWriterOperation::WriteResult
@@ -244,11 +244,11 @@ describe Google::Cloud::Firestore::BulkWriter, :mock_firestore do
       bw.flush
       bw.close
 
-      _(thread_count_2 - thread_count).must_be :<=, 4
+      _(thread_count_2 - thread_count).must_be :==, 4
     end
   end
 
-  it "marks operation complete incase of BulkWriterOperationError when mutation was failure" do
+  it "marks operation complete in case of BulkWriterOperationError when mutation was failure" do
     write_1 = Google::Cloud::Firestore::Convert.write_for_create("#{documents_path}/cities/NYC", { foo: "bar"})
     write_2 = Google::Cloud::Firestore::Convert.write_for_create("#{documents_path}/cities/MTV", { foo: "bar"})
     request_1 = batch_write_args [write_1, write_2]
@@ -275,7 +275,7 @@ describe Google::Cloud::Firestore::BulkWriter, :mock_firestore do
     _(stub.requests.length).must_equal 0
   end
 
-  it "marks operation complete incase of BulkWriterOperationError when mutation was success" do
+  it "marks operation complete in case of BulkWriterOperationError when mutation was success" do
     write_1 = Google::Cloud::Firestore::Convert.write_for_create("#{documents_path}/cities/NYC", { foo: "bar"})
     write_2 = Google::Cloud::Firestore::Convert.write_for_create("#{documents_path}/cities/MTV", { foo: "bar"})
     request_1 = batch_write_args [write_1, write_2]
@@ -302,7 +302,7 @@ describe Google::Cloud::Firestore::BulkWriter, :mock_firestore do
     _(stub.requests.length).must_equal 0
   end
 
-  it "parses all responses incase of error " do
+  it "parses all responses in case of error " do
     write_1 = Google::Cloud::Firestore::Convert.write_for_create("#{documents_path}/cities/NYC", { foo: "bar"})
     write_2 = Google::Cloud::Firestore::Convert.write_for_create("#{documents_path}/cities/MTV", { foo: "bar"})
     request_1 = batch_write_args [write_1, write_2]
@@ -328,6 +328,4 @@ describe Google::Cloud::Firestore::BulkWriter, :mock_firestore do
     _(stub.responses.length).must_equal 0
     _(stub.requests.length).must_equal 0
   end
-
-
 end

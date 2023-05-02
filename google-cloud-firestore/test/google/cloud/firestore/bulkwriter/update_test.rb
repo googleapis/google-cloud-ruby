@@ -17,7 +17,7 @@ require "helper"
 describe Google::Cloud::Firestore::BulkWriter, :update, :mock_firestore do
   let(:bulk_writer) { firestore.bulk_writer }
 
-  it "add a update operation" do
+  it "adds a update operation" do
     response = batch_write_pass_resp 1
     write_requests = [Google::Cloud::Firestore::Convert.write_for_update("#{documents_path}/cities/NYC", { name: "New York City" })]
     request = batch_write_args write_requests

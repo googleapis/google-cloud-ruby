@@ -32,6 +32,7 @@ module Google
       #
       class BulkWriterScheduler
         MAX_BATCH_SIZE = 20
+        BATCH_THREAD_COUNT = 4
 
         ##
         # Initialize the attributes and start the schedule_operations job
@@ -41,7 +42,7 @@ module Google
           @service = service
           @rate_limiter = RateLimiter.new
           @buffered_operations = []
-          @batch_threads = (batch_threads || 4).to_i
+          @batch_threads = (batch_threads || BATCH_THREAD_COUNT).to_i
           @batch_thread_pool = Concurrent::ThreadPoolExecutor.new max_threads: @batch_threads, max_queue: 0
           @retry_operations = []
           @mutex = Mutex.new

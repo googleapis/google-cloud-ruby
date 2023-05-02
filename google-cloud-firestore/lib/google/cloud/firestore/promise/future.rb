@@ -46,7 +46,7 @@ module Google
 
           ##
           # Method waits for the timeout duration and return the value of the future if
-          # fulfilled, timeout value incase of timeout and nil incase of rejection.
+          # fulfilled, timeout value in case of timeout and nil in case of rejection.
           #
           # @param [Integer] timeout the maximum time in seconds to wait
           # @param [Object] timeout_value a value returned by the method when it times out

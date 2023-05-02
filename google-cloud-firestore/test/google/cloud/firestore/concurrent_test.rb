@@ -19,13 +19,13 @@ describe Google::Cloud::Firestore::Promise::Future, :mock_firestore do
   it "correctly provides the status" do
     write_requests = [Google::Cloud::Firestore::Convert.write_for_create("#{documents_path}/cities/NYC", { foo: "bar"})]
     request = batch_write_args write_requests
-    responses_pass = [batch_write_pass_resp(1)]
-    responses_fail = [batch_write_fail_resp(1)]
+    pass_responses = [batch_write_pass_resp(1)]
+    fail_responses = [batch_write_fail_resp(1)]
     requests = [request]
 
     bw = firestore.bulk_writer retries: 1
 
-    stub = BatchWriteStub.new responses_pass, requests, 0.1
+    stub = BatchWriteStub.new pass_responses, requests, 0.1
     firestore.service.instance_variable_set :@firestore, stub
     result_1 = bw.create "cities/NYC", { foo: "bar"}
 
@@ -35,7 +35,7 @@ describe Google::Cloud::Firestore::Promise::Future, :mock_firestore do
 
     bw.flush
 
-    stub = BatchWriteStub.new responses_fail, requests, 0.1
+    stub = BatchWriteStub.new fail_responses, requests, 0.1
     firestore.service.instance_variable_set :@firestore, stub
     result_2 = bw.create "cities/NYC", { foo: "bar"}
 
@@ -53,12 +53,12 @@ describe Google::Cloud::Firestore::Promise::Future, :mock_firestore do
   it "waits for the future to resolve" do
     write_requests = [Google::Cloud::Firestore::Convert.write_for_create("#{documents_path}/cities/NYC", { foo: "bar"})]
     request = batch_write_args write_requests
-    responses_pass = [batch_write_pass_resp(1)]
+    pass_responses = [batch_write_pass_resp(1)]
     requests = [request]
 
     bw = firestore.bulk_writer retries: 1
 
-    stub = BatchWriteStub.new responses_pass, requests, 0.1
+    stub = BatchWriteStub.new pass_responses, requests, 0.1
     firestore.service.instance_variable_set :@firestore, stub
     result_1 = bw.create "cities/NYC", { foo: "bar"}
 
@@ -72,9 +72,9 @@ describe Google::Cloud::Firestore::Promise::Future, :mock_firestore do
   it "correctly returns the value if fulfilled" do
     write_requests = [Google::Cloud::Firestore::Convert.write_for_create("#{documents_path}/cities/NYC", { foo: "bar"})]
     request = batch_write_args write_requests
-    responses_pass = [batch_write_pass_resp(1)]
+    pass_responses = [batch_write_pass_resp(1)]
     requests = [request]
-    stub = BatchWriteStub.new responses_pass, requests, 0.1
+    stub = BatchWriteStub.new pass_responses, requests, 0.1
 
     bw = firestore.bulk_writer retries: 1
 
@@ -89,9 +89,9 @@ describe Google::Cloud::Firestore::Promise::Future, :mock_firestore do
   it "correctly returns the rejected reason" do
     write_requests = [Google::Cloud::Firestore::Convert.write_for_create("#{documents_path}/cities/NYC", { foo: "bar"})]
     request = batch_write_args write_requests
-    responses_fail = [batch_write_fail_resp(1)]
+    fail_responses = [batch_write_fail_resp(1)]
     requests = [request]
-    stub = BatchWriteStub.new responses_fail, requests, 0.1
+    stub = BatchWriteStub.new fail_responses, requests, 0.1
 
     bw = firestore.bulk_writer retries: 1
 
@@ -106,9 +106,9 @@ describe Google::Cloud::Firestore::Promise::Future, :mock_firestore do
   it "successfully adds callback on fulfillment" do
     write_requests = [Google::Cloud::Firestore::Convert.write_for_create("#{documents_path}/cities/NYC", { foo: "bar"})]
     request = batch_write_args write_requests
-    responses_pass = [batch_write_pass_resp(1)]
+    pass_responses = [batch_write_pass_resp(1)]
     requests = [request]
-    stub = BatchWriteStub.new responses_pass, requests
+    stub = BatchWriteStub.new pass_responses, requests
 
     bw = firestore.bulk_writer retries: 1
 
@@ -129,9 +129,9 @@ describe Google::Cloud::Firestore::Promise::Future, :mock_firestore do
   it "successfully adds callback on rejection" do
     write_requests = [Google::Cloud::Firestore::Convert.write_for_create("#{documents_path}/cities/NYC", { foo: "bar"})]
     request = batch_write_args write_requests
-    responses_fail = [batch_write_fail_resp(1)]
+    fail_responses = [batch_write_fail_resp(1)]
     requests = [request]
-    stub = BatchWriteStub.new responses_fail, requests
+    stub = BatchWriteStub.new fail_responses, requests
 
     bw = firestore.bulk_writer retries: 1
 

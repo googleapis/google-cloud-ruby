@@ -20,7 +20,7 @@ module Google
       # #  BulkWriterException
       #
       # A BulkWriterException object refers to the error that will be thrown
-      # incase a BulkWriterOperation fails in all the attempts.
+      # in case a BulkWriterOperation fails in all the attempts.
       #
       class BulkWriterException < StandardError
         attr_reader :status

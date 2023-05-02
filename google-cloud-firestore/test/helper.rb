@@ -117,10 +117,10 @@ class BatchWriteStub
     end
   end
 
-  def batch_write_fail_resp size = 20
+  def batch_write_fail_resp size = 20, code: nil, message: nil
     Google::Cloud::Firestore::V1::BatchWriteResponse.new(
       write_results: [Google::Cloud::Firestore::V1::WriteResult.new]*size,
-      status: [Google::Rpc::Status.new(code: 1, message: "Mock rejection")]*size
+      status: [Google::Rpc::Status.new(code: (code || 1), message: (message || "Mock rejection"))]*size
     )
   end
 end
@@ -276,10 +276,10 @@ class MockFirestore < Minitest::Spec
     )
   end
 
-  def batch_write_fail_resp size = 20
+  def batch_write_fail_resp size = 20, code: nil, message: nil
     Google::Cloud::Firestore::V1::BatchWriteResponse.new(
       write_results: [Google::Cloud::Firestore::V1::WriteResult.new]*size,
-      status: [Google::Rpc::Status.new(code: 1, message: "Mock rejection")]*size
+      status: [Google::Rpc::Status.new(code: (code || 1), message: (message || "Mock rejection"))]*size
     )
   end
 

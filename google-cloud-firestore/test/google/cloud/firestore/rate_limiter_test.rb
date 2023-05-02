@@ -17,7 +17,7 @@ require "google/cloud/firestore/rate_limiter"
 
 describe Google::Cloud::Firestore::RateLimiter do
 
-  it "get 501 token from the RateLimiter" do
+  it "gets 501 token from the RateLimiter" do
     rate_limiter = Google::Cloud::Firestore::RateLimiter.new
     time_1 = Time.now
     rate_limiter.wait_for_tokens 501
@@ -33,7 +33,4 @@ describe Google::Cloud::Firestore::RateLimiter do
     rate_limiter.wait_for_tokens 500
     _(rate_limiter.bandwidth).must_equal 750
   end
-
-
-
 end
