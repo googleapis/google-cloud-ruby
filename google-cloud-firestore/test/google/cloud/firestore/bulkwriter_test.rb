@@ -216,18 +216,13 @@ describe Google::Cloud::Firestore::BulkWriter, :mock_firestore do
       result_1 = bw.create "cities/NYC", { foo: "bar"}
       result_2 = bw.create "cities/MTV", { foo: "bar"}
       result_3 = bw.create "cities/KIR", { foo: "bar"}
-      sleep 0.1
-      thread_count_2 = Thread.list.count
       bw.flush
       (1..10).each do
-        sleep 1
+        sleep 0.1
         pp Thread.list.count - thread_count
       end
+      thread_count_2 = Thread.list.count
       bw.close
-      (1..10).each do
-        sleep 1
-        pp Thread.list.count - thread_count
-      end
 
       _(thread_count_2 - thread_count).must_be :==, 3
       _(result_1.value).must_be_kind_of Google::Cloud::Firestore::BulkWriterOperation::WriteResult
