@@ -203,6 +203,16 @@ module Google
         #     {::Google::Cloud::AIPlatform::V1::Trial#web_access_uris Trial.web_access_uris}
         #     (within
         #     {::Google::Cloud::AIPlatform::V1::HyperparameterTuningJob#trials HyperparameterTuningJob.trials}).
+        # @!attribute [rw] experiment
+        #   @return [::String]
+        #     Optional. The Experiment associated with this job.
+        #     Format:
+        #     `projects/{project}/locations/{location}/metadataStores/{metadataStores}/contexts/{experiment-name}`
+        # @!attribute [rw] experiment_run
+        #   @return [::String]
+        #     Optional. The Experiment Run associated with this job.
+        #     Format:
+        #     `projects/{project}/locations/{location}/metadataStores/{metadataStores}/contexts/{experiment-name}-{experiment-run-name}`
         class CustomJobSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

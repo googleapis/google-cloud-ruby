@@ -66,6 +66,17 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.aiplatform.v1.UndeployModelOperationMetadata" do
       optional :generic_metadata, :message, 1, "google.cloud.aiplatform.v1.GenericOperationMetadata"
     end
+    add_message "google.cloud.aiplatform.v1.MutateDeployedModelRequest" do
+      optional :endpoint, :string, 1
+      optional :deployed_model, :message, 2, "google.cloud.aiplatform.v1.DeployedModel"
+      optional :update_mask, :message, 4, "google.protobuf.FieldMask"
+    end
+    add_message "google.cloud.aiplatform.v1.MutateDeployedModelResponse" do
+      optional :deployed_model, :message, 1, "google.cloud.aiplatform.v1.DeployedModel"
+    end
+    add_message "google.cloud.aiplatform.v1.MutateDeployedModelOperationMetadata" do
+      optional :generic_metadata, :message, 1, "google.cloud.aiplatform.v1.GenericOperationMetadata"
+    end
   end
 end
 
@@ -86,6 +97,9 @@ module Google
         UndeployModelRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.UndeployModelRequest").msgclass
         UndeployModelResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.UndeployModelResponse").msgclass
         UndeployModelOperationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.UndeployModelOperationMetadata").msgclass
+        MutateDeployedModelRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.MutateDeployedModelRequest").msgclass
+        MutateDeployedModelResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.MutateDeployedModelResponse").msgclass
+        MutateDeployedModelOperationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.MutateDeployedModelOperationMetadata").msgclass
       end
     end
   end

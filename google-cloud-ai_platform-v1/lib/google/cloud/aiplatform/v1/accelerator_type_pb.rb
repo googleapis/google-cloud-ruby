@@ -13,6 +13,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :NVIDIA_TESLA_P4, 4
       value :NVIDIA_TESLA_T4, 5
       value :NVIDIA_TESLA_A100, 8
+      value :NVIDIA_L4, 11
       value :TPU_V2, 6
       value :TPU_V3, 7
       value :TPU_V4_POD, 10

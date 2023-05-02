@@ -18,6 +18,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       map :labels, :string, :string, 6
       optional :etag, :string, 7
       optional :monitoring_config, :message, 8, "google.cloud.aiplatform.v1.FeaturestoreMonitoringConfig"
+      optional :offline_storage_ttl_days, :int32, 10
     end
   end
 end

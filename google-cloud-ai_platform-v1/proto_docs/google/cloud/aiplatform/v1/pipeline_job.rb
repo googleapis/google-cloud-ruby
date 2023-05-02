@@ -251,7 +251,7 @@ module Google
         # @!attribute [r] task_name
         #   @return [::String]
         #     Output only. The user specified name of the task that is defined in
-        #     [PipelineJob.spec][].
+        #     {::Google::Cloud::AIPlatform::V1::PipelineJob#pipeline_spec pipeline_spec}.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Task create time.

@@ -80,10 +80,11 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # A list of historical [Snapshot
-          # Analysis][FeaturestoreMonitoringConfig.SnapshotAnalysis] or [Import Feature
-          # Analysis] [FeaturestoreMonitoringConfig.ImportFeatureAnalysis] stats
-          # requested by user, sorted by
+          # A list of historical
+          # {::Google::Cloud::AIPlatform::V1::FeaturestoreMonitoringConfig::SnapshotAnalysis SnapshotAnalysis}
+          # or
+          # {::Google::Cloud::AIPlatform::V1::FeaturestoreMonitoringConfig::ImportFeaturesAnalysis ImportFeaturesAnalysis}
+          # stats requested by user, sorted by
           # {::Google::Cloud::AIPlatform::V1::FeatureStatsAnomaly#start_time FeatureStatsAnomaly.start_time}
           # descending.
           # @!attribute [r] objective

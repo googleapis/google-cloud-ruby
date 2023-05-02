@@ -329,6 +329,7 @@
     "snippets/endpoint_service/deploy_model.rb",
     "snippets/endpoint_service/get_endpoint.rb",
     "snippets/endpoint_service/list_endpoints.rb",
+    "snippets/endpoint_service/mutate_deployed_model.rb",
     "snippets/endpoint_service/undeploy_model.rb",
     "snippets/endpoint_service/update_endpoint.rb",
     "snippets/featurestore_online_serving_service/read_feature_values.rb",
