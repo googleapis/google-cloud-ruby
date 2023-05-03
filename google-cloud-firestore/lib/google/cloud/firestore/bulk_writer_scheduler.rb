@@ -43,7 +43,7 @@ module Google
           @rate_limiter = RateLimiter.new
           @buffered_operations = []
           @batch_threads = (batch_threads || BATCH_THREAD_COUNT).to_i
-          @batch_thread_pool = Concurrent::ThreadPoolExecutor.new max_threads: @batch_threads, max_queue: 0
+          @batch_thread_pool = Concurrent::ThreadPoolExecutor.new max_threads: @batch_threads, max_queue: 0, auto_terminate: true
           @retry_operations = []
           @mutex = Mutex.new
           start_scheduling_operations
@@ -66,11 +66,16 @@ module Google
 
         ##
         # Closes the scheduler object.
-        # Won't wait for the existing complete before the completion.
+        # Waits for the enqueued tasks to complete
+        # before closing down.
         #
         # @return [nil]
         def close
-          @mutex.synchronize { @batch_thread_pool.shutdown }
+          @mutex.synchronize do
+            @batch_thread_pool.shutdown
+            @batch_thread_pool.wait_for_termination 1
+            @batch_thread_pool.kill unless @batch_thread_pool.shutdown?
+          end
         end
 
         private
@@ -117,6 +122,7 @@ module Google
         # @return [nil]
         def schedule_operations
           loop do
+            break if @batch_thread_pool.shuttingdown?
             dequeue_retry_operations
             batch_size = [MAX_BATCH_SIZE, @buffered_operations.length].min
             if batch_size.zero?

@@ -200,8 +200,7 @@ describe Google::Cloud::Firestore::BulkWriter, :mock_firestore do
   end
 
   describe "thread tests" do
-
-    focus; it "request threads tests" do
+    it "request threads tests" do
       write_1 = Google::Cloud::Firestore::Convert.write_for_create("#{documents_path}/cities/NYC", { foo: "bar"})
       write_2 = Google::Cloud::Firestore::Convert.write_for_create("#{documents_path}/cities/MTV", { foo: "bar"})
       write_3 = Google::Cloud::Firestore::Convert.write_for_create("#{documents_path}/cities/KIR", { foo: "bar"})
@@ -217,10 +216,6 @@ describe Google::Cloud::Firestore::BulkWriter, :mock_firestore do
       result_2 = bw.create "cities/MTV", { foo: "bar"}
       result_3 = bw.create "cities/KIR", { foo: "bar"}
       bw.flush
-      (1..10).each do
-        sleep 0.1
-        pp Thread.list.count - thread_count
-      end
       thread_count_2 = Thread.list.count
       bw.close
 
@@ -242,9 +237,9 @@ describe Google::Cloud::Firestore::BulkWriter, :mock_firestore do
       (1..100).each do
         bw.create "cities/#{SecureRandom.hex(4)}", { foo: "bar"}
       end
-      sleep 0.3
-      thread_count_2 = Thread.list.count
       bw.flush
+      thread_count_2 = Thread.list.count
+
       bw.close
 
       _(thread_count_2 - thread_count).must_be :==, 4
