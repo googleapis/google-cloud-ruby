@@ -174,9 +174,8 @@ module Google
           #     tab, apply a prefix in the cron tab: "CRON_TZ=$\\{IANA_TIME_ZONE}" or
           #     "TZ=$\\{IANA_TIME_ZONE}". The $\\{IANA_TIME_ZONE} may only be a valid
           #     string from IANA time zone database. For example,
-          #     `CRON_TZ=America/New_York 1 * * * *`,
-          #     or `TZ=America/New_York 1 * * * *`.
-          #     This field is required for RECURRING tasks.
+          #     `CRON_TZ=America/New_York 1 * * * *`, or `TZ=America/New_York 1 * * *
+          #     *`. This field is required for RECURRING tasks.
           class TriggerSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

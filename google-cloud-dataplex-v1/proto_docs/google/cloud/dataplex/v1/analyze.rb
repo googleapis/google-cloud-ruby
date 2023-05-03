@@ -131,6 +131,7 @@ module Google
             end
           end
 
+          # Configuration for sessions created for this environment.
           # @!attribute [rw] max_idle_duration
           #   @return [::Google::Protobuf::Duration]
           #     Optional. The idle time configuration of the session. The session will be
@@ -147,6 +148,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Status of sessions created for this environment.
           # @!attribute [r] active
           #   @return [::Boolean]
           #     Output only. Queries over sessions to mark whether the environment is
@@ -156,6 +158,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # URI Endpoints to access sessions associated with the Environment.
           # @!attribute [r] notebooks
           #   @return [::String]
           #     Output only. URI to serve notebook APIs
@@ -276,6 +279,7 @@ module Google
         #     Output only. Session start time.
         # @!attribute [r] state
         #   @return [::Google::Cloud::Dataplex::V1::State]
+        #     Output only. State of Session
         class Session
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

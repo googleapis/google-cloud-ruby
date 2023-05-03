@@ -40,6 +40,10 @@ module Google
         #     * Must end with a number or a letter.
         #     * Must be between 1-63 characters.
         #     * Must be unique within the customer project / location.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. Only validate the request, but do not perform mutations.
+        #     The default is `false`.
         class CreateDataScanRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -54,6 +58,10 @@ module Google
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Required. Mask of fields to update.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. Only validate the request, but do not perform mutations.
+        #     The default is `false`.
         class UpdateDataScanRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -108,7 +116,7 @@ module Google
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. Maximum number of dataScans to return. The service may return
-        #     fewer than this value. If unspecified, at most 10 scans will be returned.
+        #     fewer than this value. If unspecified, at most 500 scans will be returned.
         #     The maximum value is 1000; values above 1000 will be coerced to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
@@ -171,7 +179,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the DataScanJob:
-        #     `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}/dataScanJobs/{data_scan_job_id}`
+        #     `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}/jobs/{data_scan_job_id}`
         #     where `project` refers to a *project_id* or *project_number* and
         #     `location_id` refers to a GCP region.
         # @!attribute [rw] view

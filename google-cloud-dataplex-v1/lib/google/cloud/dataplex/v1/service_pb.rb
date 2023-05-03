@@ -162,6 +162,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.dataplex.v1.GetJobRequest" do
       optional :name, :string, 1
     end
+    add_message "google.cloud.dataplex.v1.RunTaskRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.cloud.dataplex.v1.RunTaskResponse" do
+      optional :job, :message, 1, "google.cloud.dataplex.v1.Job"
+    end
     add_message "google.cloud.dataplex.v1.ListJobsRequest" do
       optional :parent, :string, 1
       optional :page_size, :int32, 2
@@ -249,6 +255,8 @@ module Google
         ListTasksResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.ListTasksResponse").msgclass
         GetTaskRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.GetTaskRequest").msgclass
         GetJobRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.GetJobRequest").msgclass
+        RunTaskRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.RunTaskRequest").msgclass
+        RunTaskResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.RunTaskResponse").msgclass
         ListJobsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.ListJobsRequest").msgclass
         ListJobsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.ListJobsResponse").msgclass
         CancelJobRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.CancelJobRequest").msgclass

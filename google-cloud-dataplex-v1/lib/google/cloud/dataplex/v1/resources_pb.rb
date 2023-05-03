@@ -203,16 +203,23 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.dataplex.v1.Asset.ResourceSpec" do
       optional :name, :string, 1
       optional :type, :enum, 2, "google.cloud.dataplex.v1.Asset.ResourceSpec.Type"
+      optional :read_access_mode, :enum, 5, "google.cloud.dataplex.v1.Asset.ResourceSpec.AccessMode"
     end
     add_enum "google.cloud.dataplex.v1.Asset.ResourceSpec.Type" do
       value :TYPE_UNSPECIFIED, 0
       value :STORAGE_BUCKET, 1
       value :BIGQUERY_DATASET, 2
     end
+    add_enum "google.cloud.dataplex.v1.Asset.ResourceSpec.AccessMode" do
+      value :ACCESS_MODE_UNSPECIFIED, 0
+      value :DIRECT, 1
+      value :MANAGED, 2
+    end
     add_message "google.cloud.dataplex.v1.Asset.ResourceStatus" do
       optional :state, :enum, 1, "google.cloud.dataplex.v1.Asset.ResourceStatus.State"
       optional :message, :string, 2
       optional :update_time, :message, 3, "google.protobuf.Timestamp"
+      optional :managed_access_identity, :string, 4
     end
     add_enum "google.cloud.dataplex.v1.Asset.ResourceStatus.State" do
       value :STATE_UNSPECIFIED, 0
@@ -286,6 +293,7 @@ module Google
         Asset::DiscoverySpec::JsonOptions = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.Asset.DiscoverySpec.JsonOptions").msgclass
         Asset::ResourceSpec = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.Asset.ResourceSpec").msgclass
         Asset::ResourceSpec::Type = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.Asset.ResourceSpec.Type").enummodule
+        Asset::ResourceSpec::AccessMode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.Asset.ResourceSpec.AccessMode").enummodule
         Asset::ResourceStatus = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.Asset.ResourceStatus").msgclass
         Asset::ResourceStatus::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.Asset.ResourceStatus.State").enummodule
         Asset::DiscoveryStatus = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.Asset.DiscoveryStatus").msgclass

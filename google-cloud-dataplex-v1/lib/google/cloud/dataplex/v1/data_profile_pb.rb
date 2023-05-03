@@ -3,6 +3,7 @@
 
 require 'google/protobuf'
 
+require 'google/api/field_behavior_pb'
 require 'google/cloud/dataplex/v1/processing_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
