@@ -29,8 +29,8 @@ module Google
         #     `projects/<project>/instances/<instance>/tables/<table>`.
         # @!attribute [rw] app_profile_id
         #   @return [::String]
-        #     This value specifies routing for replication. This API only accepts the
-        #     empty value of app_profile_id.
+        #     This value specifies routing for replication. If not specified, the
+        #     "default" application profile will be used.
         # @!attribute [rw] rows
         #   @return [::Google::Cloud::Bigtable::V2::RowSet]
         #     The row keys and/or ranges to read sequentially. If not specified, reads
@@ -274,6 +274,11 @@ module Google
         # @!attribute [rw] entries
         #   @return [::Array<::Google::Cloud::Bigtable::V2::MutateRowsResponse::Entry>]
         #     One or more results for Entries from the batch request.
+        # @!attribute [rw] rate_limit_info
+        #   @return [::Google::Cloud::Bigtable::V2::RateLimitInfo]
+        #     Information about how client should limit the rate (QPS). Primirily used by
+        #     supported official Cloud Bigtable clients. If unset, the rate limit info is
+        #     not provided by the server.
         class MutateRowsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -293,6 +298,31 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # Information about how client should adjust the load to Bigtable.
+        # @!attribute [rw] period
+        #   @return [::Google::Protobuf::Duration]
+        #     Time that clients should wait before adjusting the target rate again.
+        #     If clients adjust rate too frequently, the impact of the previous
+        #     adjustment may not have been taken into account and may
+        #     over-throttle or under-throttle. If clients adjust rate too slowly, they
+        #     will not be responsive to load changes on server side, and may
+        #     over-throttle or under-throttle.
+        # @!attribute [rw] factor
+        #   @return [::Float]
+        #     If it has been at least one `period` since the last load adjustment, the
+        #     client should multiply the current load by this value to get the new target
+        #     load. For example, if the current load is 100 and `factor` is 0.8, the new
+        #     target load should be 80. After adjusting, the client should ignore
+        #     `factor` until another `period` has passed.
+        #
+        #     The client can measure its load using any unit that's comparable over time
+        #     For example, QPS can be used as long as each request involves a similar
+        #     amount of work.
+        class RateLimitInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for Bigtable.CheckAndMutateRow.

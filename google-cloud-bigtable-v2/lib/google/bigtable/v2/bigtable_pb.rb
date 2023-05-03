@@ -75,10 +75,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.bigtable.v2.MutateRowsResponse" do
       repeated :entries, :message, 1, "google.bigtable.v2.MutateRowsResponse.Entry"
+      proto3_optional :rate_limit_info, :message, 3, "google.bigtable.v2.RateLimitInfo"
     end
     add_message "google.bigtable.v2.MutateRowsResponse.Entry" do
       optional :index, :int64, 1
       optional :status, :message, 2, "google.rpc.Status"
+    end
+    add_message "google.bigtable.v2.RateLimitInfo" do
+      optional :period, :message, 1, "google.protobuf.Duration"
+      optional :factor, :double, 2
     end
     add_message "google.bigtable.v2.CheckAndMutateRowRequest" do
       optional :table_name, :string, 1
@@ -185,6 +190,7 @@ module Google
         MutateRowsRequest::Entry = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.MutateRowsRequest.Entry").msgclass
         MutateRowsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.MutateRowsResponse").msgclass
         MutateRowsResponse::Entry = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.MutateRowsResponse.Entry").msgclass
+        RateLimitInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.RateLimitInfo").msgclass
         CheckAndMutateRowRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.CheckAndMutateRowRequest").msgclass
         CheckAndMutateRowResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.CheckAndMutateRowResponse").msgclass
         PingAndWarmRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.PingAndWarmRequest").msgclass

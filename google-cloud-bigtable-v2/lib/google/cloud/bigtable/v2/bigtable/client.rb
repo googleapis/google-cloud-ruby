@@ -190,8 +190,8 @@ module Google
             #     Values are of the form
             #     `projects/<project>/instances/<instance>/tables/<table>`.
             #   @param app_profile_id [::String]
-            #     This value specifies routing for replication. This API only accepts the
-            #     empty value of app_profile_id.
+            #     This value specifies routing for replication. If not specified, the
+            #     "default" application profile will be used.
             #   @param rows [::Google::Cloud::Bigtable::V2::RowSet, ::Hash]
             #     The row keys and/or ranges to read sequentially. If not specified, reads
             #     from all rows.
