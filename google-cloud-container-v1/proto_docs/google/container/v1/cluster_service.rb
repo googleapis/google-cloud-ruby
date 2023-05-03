@@ -1766,6 +1766,9 @@ module Google
         # @!attribute [rw] desired_node_pool_logging_config
         #   @return [::Google::Cloud::Container::V1::NodePoolLoggingConfig]
         #     The desired node pool logging configuration defaults for the cluster.
+        # @!attribute [rw] desired_fleet
+        #   @return [::Google::Cloud::Container::V1::Fleet]
+        #     The desired fleet configuration for the cluster.
         # @!attribute [rw] desired_stack_type
         #   @return [::Google::Cloud::Container::V1::StackType]
         #     The desired stack type of the cluster.
@@ -1831,12 +1834,12 @@ module Google
         #
         #     Examples:
         #
-        #     -
-        #     `https://container.googleapis.com/v1/projects/123/locations/us-central1/clusters/my-cluster`
-        #     -
-        #     `https://container.googleapis.com/v1/projects/123/zones/us-central1-c/clusters/my-cluster/nodePools/my-np`
-        #     -
-        #     `https://container.googleapis.com/v1/projects/123/zones/us-central1-c/clusters/my-cluster/nodePools/my-np/node/my-node`
+        #       -
+        #       `https://container.googleapis.com/v1/projects/123/locations/us-central1/clusters/my-cluster`
+        #       -
+        #       `https://container.googleapis.com/v1/projects/123/zones/us-central1-c/clusters/my-cluster/nodePools/my-np`
+        #       -
+        #       `https://container.googleapis.com/v1/projects/123/zones/us-central1-c/clusters/my-cluster/nodePools/my-np/node/my-node`
         # @!attribute [rw] location
         #   @return [::String]
         #     [Output only] The name of the Google Compute Engine

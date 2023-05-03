@@ -394,6 +394,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :desired_gateway_api_config, :message, 114, "google.container.v1.GatewayAPIConfig"
       optional :etag, :string, 115
       optional :desired_node_pool_logging_config, :message, 116, "google.container.v1.NodePoolLoggingConfig"
+      optional :desired_fleet, :message, 117, "google.container.v1.Fleet"
       optional :desired_stack_type, :enum, 119, "google.container.v1.StackType"
       optional :additional_pod_ranges_config, :message, 120, "google.container.v1.AdditionalPodRangesConfig"
       optional :removed_additional_pod_ranges_config, :message, 121, "google.container.v1.AdditionalPodRangesConfig"
