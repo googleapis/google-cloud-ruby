@@ -43,7 +43,9 @@ module Google
           @rate_limiter = RateLimiter.new
           @buffered_operations = []
           @batch_threads = (batch_threads || BATCH_THREAD_COUNT).to_i
-          @batch_thread_pool = Concurrent::ThreadPoolExecutor.new max_threads: @batch_threads, max_queue: 0, auto_terminate: true
+          @batch_thread_pool = Concurrent::ThreadPoolExecutor.new max_threads: @batch_threads,
+                                                                  max_queue: 0,
+                                                                  auto_terminate: true
           @retry_operations = []
           @mutex = Mutex.new
           start_scheduling_operations
