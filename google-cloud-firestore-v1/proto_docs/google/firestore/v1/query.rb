@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2020 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,11 +24,7 @@ module Google
         # A Firestore query.
         # @!attribute [rw] select
         #   @return [::Google::Cloud::Firestore::V1::StructuredQuery::Projection]
-        #     Optional sub-set of the fields to return.
-        #
-        #     This acts as a {::Google::Cloud::Firestore::V1::DocumentMask DocumentMask} over the
-        #     documents returned from a query. When not set, assumes that the caller
-        #     wants all fields returned.
+        #     The projection to return.
         # @!attribute [rw] from
         #   @return [::Array<::Google::Cloud::Firestore::V1::StructuredQuery::CollectionSelector>]
         #     The collections to query.
@@ -247,9 +243,8 @@ module Google
               #
               # Requires:
               #
-              # * That `value` is a non-empty `ArrayValue`, subject to disjunction
-              #   limits.
-              # * No `NOT_IN` filters in the same query.
+              # * That `value` is a non-empty `ArrayValue` with at most 10 values.
+              # * No other `IN` or `ARRAY_CONTAINS_ANY` or `NOT_IN`.
               IN = 8
 
               # The given `field` is an array that contains any of the values in the
@@ -257,10 +252,8 @@ module Google
               #
               # Requires:
               #
-              # * That `value` is a non-empty `ArrayValue`, subject to disjunction
-              #   limits.
-              # * No other `ARRAY_CONTAINS_ANY` filters within the same disjunction.
-              # * No `NOT_IN` filters in the same query.
+              # * That `value` is a non-empty `ArrayValue` with at most 10 values.
+              # * No other `IN` or `ARRAY_CONTAINS_ANY` or `NOT_IN`.
               ARRAY_CONTAINS_ANY = 9
 
               # The value of the `field` is not in the given array.
@@ -268,7 +261,7 @@ module Google
               # Requires:
               #
               # * That `value` is a non-empty `ArrayValue` with at most 10 values.
-              # * No other `OR`, `IN`, `ARRAY_CONTAINS_ANY`, `NOT_IN`, `NOT_EQUAL`,
+              # * No other `IN`, `ARRAY_CONTAINS_ANY`, `NOT_IN`, `NOT_EQUAL`,
               #   `IS_NOT_NULL`, or `IS_NOT_NAN`.
               # * That `field` comes first in the `order_by`.
               NOT_IN = 10
@@ -383,10 +376,16 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Defines an aggregation that produces a single result.
+          # Defines a aggregation that produces a single result.
           # @!attribute [rw] count
           #   @return [::Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation::Count]
           #     Count aggregator.
+          # @!attribute [rw] sum
+          #   @return [::Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation::Sum]
+          #     Sum aggregator.
+          # @!attribute [rw] avg
+          #   @return [::Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation::Avg]
+          #     Average aggregator.
           # @!attribute [rw] alias
           #   @return [::String]
           #     Optional. Optional name of the field to store the result of the
@@ -400,7 +399,7 @@ module Google
           #       COUNT_UP_TO(1) AS count_up_to_1,
           #       COUNT_UP_TO(2),
           #       COUNT_UP_TO(3) AS count_up_to_3,
-          #       COUNT(*)
+          #       COUNT_UP_TO(4)
           #     OVER (
           #       ...
           #     );
@@ -413,7 +412,7 @@ module Google
           #       COUNT_UP_TO(1) AS count_up_to_1,
           #       COUNT_UP_TO(2) AS field_1,
           #       COUNT_UP_TO(3) AS count_up_to_3,
-          #       COUNT(*) AS field_2
+          #       COUNT_UP_TO(4) AS field_2
           #     OVER (
           #       ...
           #     );
@@ -438,7 +437,7 @@ module Google
             #     count.
             #
             #     This provides a way to set an upper bound on the number of documents
-            #     to scan, limiting latency, and cost.
+            #     to scan, limiting latency and cost.
             #
             #     Unspecified is interpreted as no bound.
             #
@@ -452,6 +451,43 @@ module Google
             #
             #     * Must be greater than zero when present.
             class Count
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Sum of the values of the requested field.
+            #
+            # * Only numeric values will be aggregated. All non-numeric values
+            # including `NULL` are skipped.
+            #
+            # * If the aggregated values contain `NaN`, returns `NaN`.
+            #
+            # * If the aggregated value set is empty, returns 0.
+            #
+            # * Returns a 64-bit integer if the sum result is an integer value and does
+            # not overflow or underflow. Otherwise, the result is returned as a double.
+            # @!attribute [rw] field
+            #   @return [::Google::Cloud::Firestore::V1::StructuredQuery::FieldReference]
+            #     The field to aggregate on.
+            class Sum
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Average of the values of the requested field.
+            #
+            # * Only numeric values will be aggregated. All non-numeric values
+            # including `NULL` are skipped.
+            #
+            # * If the aggregated values contain `NaN`, returns `NaN`.
+            #
+            # * If the aggregated value set is empty, returns `NULL`.
+            #
+            # * Always returns the result as a double.
+            # @!attribute [rw] field
+            #   @return [::Google::Cloud::Firestore::V1::StructuredQuery::FieldReference]
+            #     The field to aggregate on.
+            class Avg
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
