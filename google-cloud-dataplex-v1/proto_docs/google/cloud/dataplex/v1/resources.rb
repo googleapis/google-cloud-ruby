@@ -249,9 +249,8 @@ module Google
           #     discovery every 60 minutes. To explicitly set a timezone to the cron
           #     tab, apply a prefix in the cron tab: "CRON_TZ=$\\{IANA_TIME_ZONE}" or
           #     TZ=$\\{IANA_TIME_ZONE}". The $\\{IANA_TIME_ZONE} may only be a valid string
-          #     from IANA time zone database. For example,
-          #     `CRON_TZ=America/New_York 1 * * * *`,
-          #     or `TZ=America/New_York 1 * * * *`.
+          #     from IANA time zone database. For example, `CRON_TZ=America/New_York 1
+          #     * * * *`, or `TZ=America/New_York 1 * * * *`.
           class DiscoverySpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -629,9 +628,8 @@ module Google
           #     discovery every 60 minutes. To explicitly set a timezone to the cron
           #     tab, apply a prefix in the cron tab: "CRON_TZ=$\\{IANA_TIME_ZONE}" or
           #     TZ=$\\{IANA_TIME_ZONE}". The $\\{IANA_TIME_ZONE} may only be a valid string
-          #     from IANA time zone database. For example,
-          #     `CRON_TZ=America/New_York 1 * * * *`,
-          #     or `TZ=America/New_York 1 * * * *`.
+          #     from IANA time zone database. For example, `CRON_TZ=America/New_York 1
+          #     * * * *`, or `TZ=America/New_York 1 * * * *`.
           class DiscoverySpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -682,6 +680,10 @@ module Google
           # @!attribute [rw] type
           #   @return [::Google::Cloud::Dataplex::V1::Asset::ResourceSpec::Type]
           #     Required. Immutable. Type of resource.
+          # @!attribute [rw] read_access_mode
+          #   @return [::Google::Cloud::Dataplex::V1::Asset::ResourceSpec::AccessMode]
+          #     Optional. Determines how read permissions are handled for each asset and
+          #     their associated tables. Only available to storage buckets assets.
           class ResourceSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -697,6 +699,19 @@ module Google
               # BigQuery dataset.
               BIGQUERY_DATASET = 2
             end
+
+            # Access Mode determines how data stored within the resource is read. This
+            # is only applicable to storage bucket assets.
+            module AccessMode
+              # Access mode unspecified.
+              ACCESS_MODE_UNSPECIFIED = 0
+
+              # Default. Data is accessed directly using storage APIs.
+              DIRECT = 1
+
+              # Data is accessed through a managed interface using BigQuery APIs.
+              MANAGED = 2
+            end
           end
 
           # Status of the resource referenced by an asset.
@@ -709,6 +724,9 @@ module Google
           # @!attribute [rw] update_time
           #   @return [::Google::Protobuf::Timestamp]
           #     Last update time of the status.
+          # @!attribute [r] managed_access_identity
+          #   @return [::String]
+          #     Output only. Service account associated with the BigQuery Connection.
           class ResourceStatus
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

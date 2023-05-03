@@ -22,6 +22,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.dataplex.v1.DataSource" do
       oneof :source do
         optional :entity, :string, 100
+        optional :resource, :string, 101
       end
     end
     add_message "google.cloud.dataplex.v1.ScannedData" do

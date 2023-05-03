@@ -24,7 +24,7 @@ module Google
         # DataScan scheduling and trigger settings.
         # @!attribute [rw] on_demand
         #   @return [::Google::Cloud::Dataplex::V1::Trigger::OnDemand]
-        #     The scan runs one-time shortly after DataScan Creation.
+        #     The scan runs once via `RunDataScan` API.
         # @!attribute [rw] schedule
         #   @return [::Google::Cloud::Dataplex::V1::Trigger::Schedule]
         #     The scan is scheduled to run periodically.
@@ -32,7 +32,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # The scan runs one-time via RunDataScan API.
+          # The scan runs once via `RunDataScan` API.
           class OnDemand
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -41,13 +41,17 @@ module Google
           # The scan is scheduled to run periodically.
           # @!attribute [rw] cron
           #   @return [::String]
-          #     Required. Cron schedule (https://en.wikipedia.org/wiki/Cron) for running
+          #     Required. [Cron](https://en.wikipedia.org/wiki/Cron) schedule for running
           #     scans periodically.
-          #     To explicitly set a timezone to the cron tab, apply a prefix in the
-          #     cron tab: "CRON_TZ=$\\{IANA_TIME_ZONE}" or "TZ=$\\{IANA_TIME_ZONE}".
-          #     The $\\{IANA_TIME_ZONE} may only be a valid string from IANA time zone
-          #     database. For example, "CRON_TZ=America/New_York 1 * * * *", or
-          #     "TZ=America/New_York 1 * * * *".
+          #
+          #     To explicitly set a timezone in the cron tab, apply a prefix in the
+          #     cron tab: **"CRON_TZ=$\\{IANA_TIME_ZONE}"** or **"TZ=$\\{IANA_TIME_ZONE}"**.
+          #     The **$\\{IANA_TIME_ZONE}** may only be a valid string from IANA time zone
+          #     database
+          #     ([wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List)).
+          #     For example, `CRON_TZ=America/New_York 1 * * * *`, or
+          #     `TZ=America/New_York 1 * * * *`.
+          #
           #     This field is required for Schedule scans.
           class Schedule
             include ::Google::Protobuf::MessageExts
@@ -58,9 +62,15 @@ module Google
         # The data source for DataScan.
         # @!attribute [rw] entity
         #   @return [::String]
-        #     Immutable. The dataplex entity that contains the data for DataScan, of
-        #     the form:
+        #     Immutable. The Dataplex entity that represents the data source (e.g.
+        #     BigQuery table) for DataScan, of the form:
         #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}`.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Immutable. The service-qualified full resource name of the cloud resource
+        #     for a DataScan job to scan against. The field could be: BigQuery table of
+        #     type "TABLE" for DataProfileScan/DataQualityScan Format:
+        #     //bigquery.googleapis.com/projects/PROJECT_ID/datasets/DATASET_ID/tables/TABLE_ID
         class DataSource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -78,13 +88,13 @@ module Google
           # @!attribute [rw] field
           #   @return [::String]
           #     The field that contains values which monotonically increases over time
-          #     (e.g. timestamp).
+          #     (e.g. a timestamp column).
           # @!attribute [rw] start
           #   @return [::String]
-          #     Value that marks the start of the range
+          #     Value that marks the start of the range.
           # @!attribute [rw] end
           #   @return [::String]
-          #     Value that marks the end of the range
+          #     Value that marks the end of the range.
           class IncrementalField
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

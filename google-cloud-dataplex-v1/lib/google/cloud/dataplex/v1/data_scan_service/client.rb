@@ -200,7 +200,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload create_data_scan(parent: nil, data_scan: nil, data_scan_id: nil)
+            # @overload create_data_scan(parent: nil, data_scan: nil, data_scan_id: nil, validate_only: nil)
             #   Pass arguments to `create_data_scan` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -220,6 +220,9 @@ module Google
             #     * Must end with a number or a letter.
             #     * Must be between 1-63 characters.
             #     * Must be unique within the customer project / location.
+            #   @param validate_only [::Boolean]
+            #     Optional. Only validate the request, but do not perform mutations.
+            #     The default is `false`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -306,7 +309,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload update_data_scan(data_scan: nil, update_mask: nil)
+            # @overload update_data_scan(data_scan: nil, update_mask: nil, validate_only: nil)
             #   Pass arguments to `update_data_scan` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -317,6 +320,9 @@ module Google
             #     Only fields specified in `update_mask` are updated.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Required. Mask of fields to update.
+            #   @param validate_only [::Boolean]
+            #     Optional. Only validate the request, but do not perform mutations.
+            #     The default is `false`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -601,7 +607,7 @@ module Google
             #     `location_id` refers to a GCP region.
             #   @param page_size [::Integer]
             #     Optional. Maximum number of dataScans to return. The service may return
-            #     fewer than this value. If unspecified, at most 10 scans will be returned.
+            #     fewer than this value. If unspecified, at most 500 scans will be returned.
             #     The maximum value is 1000; values above 1000 will be coerced to 1000.
             #   @param page_token [::String]
             #     Optional. Page token received from a previous `ListDataScans` call. Provide
@@ -793,7 +799,7 @@ module Google
             #
             #   @param name [::String]
             #     Required. The resource name of the DataScanJob:
-            #     `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}/dataScanJobs/{data_scan_job_id}`
+            #     `projects/{project}/locations/{location_id}/dataScans/{data_scan_id}/jobs/{data_scan_job_id}`
             #     where `project` refers to a *project_id* or *project_number* and
             #     `location_id` refers to a GCP region.
             #   @param view [::Google::Cloud::Dataplex::V1::GetDataScanJobRequest::DataScanJobView]

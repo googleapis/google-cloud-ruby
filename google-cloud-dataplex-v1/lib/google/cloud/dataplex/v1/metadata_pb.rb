@@ -89,6 +89,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :system, :enum, 15, "google.cloud.dataplex.v1.StorageSystem"
       optional :format, :message, 16, "google.cloud.dataplex.v1.StorageFormat"
       optional :compatibility, :message, 19, "google.cloud.dataplex.v1.Entity.CompatibilityStatus"
+      optional :access, :message, 21, "google.cloud.dataplex.v1.StorageAccess"
+      optional :uid, :string, 22
       optional :schema, :message, 50, "google.cloud.dataplex.v1.Schema"
     end
     add_message "google.cloud.dataplex.v1.Entity.CompatibilityStatus" do
@@ -197,6 +199,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :GZIP, 2
       value :BZIP2, 3
     end
+    add_message "google.cloud.dataplex.v1.StorageAccess" do
+      optional :read, :enum, 21, "google.cloud.dataplex.v1.StorageAccess.AccessMode"
+    end
+    add_enum "google.cloud.dataplex.v1.StorageAccess.AccessMode" do
+      value :ACCESS_MODE_UNSPECIFIED, 0
+      value :DIRECT, 1
+      value :MANAGED, 2
+    end
     add_enum "google.cloud.dataplex.v1.StorageSystem" do
       value :STORAGE_SYSTEM_UNSPECIFIED, 0
       value :CLOUD_STORAGE, 1
@@ -239,6 +249,8 @@ module Google
         StorageFormat::IcebergOptions = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.StorageFormat.IcebergOptions").msgclass
         StorageFormat::Format = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.StorageFormat.Format").enummodule
         StorageFormat::CompressionFormat = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.StorageFormat.CompressionFormat").enummodule
+        StorageAccess = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.StorageAccess").msgclass
+        StorageAccess::AccessMode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.StorageAccess.AccessMode").enummodule
         StorageSystem = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.StorageSystem").enummodule
       end
     end

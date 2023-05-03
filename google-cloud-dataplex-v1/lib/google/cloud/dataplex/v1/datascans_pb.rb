@@ -11,7 +11,9 @@ require 'google/cloud/dataplex/v1/data_profile_pb'
 require 'google/cloud/dataplex/v1/data_quality_pb'
 require 'google/cloud/dataplex/v1/processing_pb'
 require 'google/cloud/dataplex/v1/resources_pb'
+require 'google/cloud/dataplex/v1/service_pb'
 require 'google/longrunning/operations_pb'
+require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
 
@@ -21,10 +23,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :parent, :string, 1
       optional :data_scan, :message, 2, "google.cloud.dataplex.v1.DataScan"
       optional :data_scan_id, :string, 3
+      optional :validate_only, :bool, 4
     end
     add_message "google.cloud.dataplex.v1.UpdateDataScanRequest" do
       optional :data_scan, :message, 1, "google.cloud.dataplex.v1.DataScan"
       optional :update_mask, :message, 2, "google.protobuf.FieldMask"
+      optional :validate_only, :bool, 3
     end
     add_message "google.cloud.dataplex.v1.DeleteDataScanRequest" do
       optional :name, :string, 1

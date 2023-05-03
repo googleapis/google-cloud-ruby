@@ -132,6 +132,7 @@
     "snippets/dataplex_service/list_tasks.rb",
     "snippets/dataplex_service/list_zone_actions.rb",
     "snippets/dataplex_service/list_zones.rb",
+    "snippets/dataplex_service/run_task.rb",
     "snippets/dataplex_service/update_asset.rb",
     "snippets/dataplex_service/update_environment.rb",
     "snippets/dataplex_service/update_lake.rb",
