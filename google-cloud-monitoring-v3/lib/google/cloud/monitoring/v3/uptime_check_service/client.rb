@@ -28,13 +28,13 @@ module Google
           # Client for the UptimeCheckService service.
           #
           # The UptimeCheckService API is used to manage (list, create, delete, edit)
-          # Uptime check configurations in the Stackdriver Monitoring product. An Uptime
+          # Uptime check configurations in the Cloud Monitoring product. An Uptime
           # check is a piece of configuration that determines which resources and
           # services to monitor for availability. These configurations can also be
-          # configured interactively by navigating to the [Cloud Console]
-          # (http://console.cloud.google.com), selecting the appropriate project,
-          # clicking on "Monitoring" on the left-hand side to navigate to Stackdriver,
-          # and then clicking on "Uptime".
+          # configured interactively by navigating to the [Cloud console]
+          # (https://console.cloud.google.com), selecting the appropriate project,
+          # clicking on "Monitoring" on the left-hand side to navigate to Cloud
+          # Monitoring, and then clicking on "Uptime".
           #
           class Client
             include Paths
@@ -189,7 +189,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_uptime_check_configs(parent: nil, page_size: nil, page_token: nil)
+            # @overload list_uptime_check_configs(parent: nil, filter: nil, page_size: nil, page_token: nil)
             #   Pass arguments to `list_uptime_check_configs` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -200,6 +200,12 @@ module Google
             #     Uptime check configurations are listed. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
+            #   @param filter [::String]
+            #     If provided, this field specifies the criteria that must be met by
+            #     uptime checks to be included in the response.
+            #
+            #     For more details, see [Filtering
+            #     syntax](https://cloud.google.com/monitoring/api/v3/sorting-and-filtering#filter_syntax).
             #   @param page_size [::Integer]
             #     The maximum number of results to return in a single response. The server
             #     may further constrain the maximum number of results returned in a single
@@ -488,7 +494,7 @@ module Google
             #     the values for the set of fields mentioned in the `updateMask`. If an
             #     `updateMask` has not been given, this Uptime check configuration replaces
             #     the current configuration. If a field is mentioned in `updateMask` but
-            #     the corresonding field is omitted in this partial Uptime check
+            #     the corresponding field is omitted in this partial Uptime check
             #     configuration, it has the effect of deleting/clearing the field from the
             #     configuration on the server.
             #

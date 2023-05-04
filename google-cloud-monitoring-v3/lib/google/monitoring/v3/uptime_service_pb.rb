@@ -15,6 +15,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/monitoring/v3/uptime_service.proto", :syntax => :proto3) do
     add_message "google.monitoring.v3.ListUptimeCheckConfigsRequest" do
       optional :parent, :string, 1
+      optional :filter, :string, 2
       optional :page_size, :int32, 3
       optional :page_token, :string, 4
     end
