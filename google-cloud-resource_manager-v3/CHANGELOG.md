@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.5.1 (2023-05-04)
+
+#### Documentation
+
+* Fix some documentation content and formatting ([#21536](https://github.com/googleapis/google-cloud-ruby/issues/21536)) 
+* Replaced poorly formatted tables with lists. 
+
 ### 0.5.0 (2023-04-21)
 
 #### Features
