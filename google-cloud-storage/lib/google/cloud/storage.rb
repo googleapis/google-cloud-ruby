@@ -67,7 +67,8 @@ module Google
       # @param [Integer] send_timeout How long, in seconds, before receiving response from server times out. Optional.
       # @param [String] endpoint Override of the endpoint host name. Optional.
       #   If the param is nil, uses the default endpoint.
-      # @param [Integer] upload_chunk_size The chunk size of storage upload, in bytes. The default value is 100 MB.
+      # @param [Integer] upload_chunk_size The chunk size of storage upload, in bytes. The default value is 100 MB, i.e. 104_857_600 bytes.
+      #                                    To disable chunking and upload the complete file regardless of size, pass 0 as the chunk size.
       # @param [String] project Alias for the `project_id` argument. Deprecated.
       # @param [String] keyfile Alias for the `credentials` argument.
       #   Deprecated.
@@ -143,7 +144,8 @@ module Google
       # @param [Integer] send_timeout How long, in seconds, before receiving response from server times out. Optional.
       # @param [String] endpoint Override of the endpoint host name. Optional.
       #   If the param is nil, uses the default endpoint.
-      # @param [Integer] upload_chunk_size The chunk size of storage upload, in bytes. The default value is 100 MB.
+      # @param [Integer] upload_chunk_size The chunk size of storage upload, in bytes. The default value is 100 MB, i.e. 104_857_600 bytes.
+      #                                    To disable chunking and upload the complete file regardless of size, pass 0 as the chunk size.
       #
       # @return [Google::Cloud::Storage::Project]
       #
