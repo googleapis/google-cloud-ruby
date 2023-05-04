@@ -190,8 +190,9 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The resource name of the new TagKey's parent.
-              #     Must be of the form `folders/{folder_id}` or `organizations/{org_id}`.
+              #     Required. The resource name of the TagKey's parent.
+              #     Must be of the form `organizations/{org_id}` or `projects/{project_id}` or
+              #     `projects/{project_number}`
               #   @param page_size [::Integer]
               #     Optional. The maximum number of TagKeys to return in the response. The
               #     server allows a maximum of 300 TagKeys to return. If unspecified, the

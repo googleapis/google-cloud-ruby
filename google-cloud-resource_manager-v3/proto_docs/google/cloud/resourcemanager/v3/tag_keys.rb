@@ -29,8 +29,11 @@ module Google
         #     the TagKey.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Immutable. The resource name of the new TagKey's parent.
-        #     Must be of the form `organizations/{org_id}`.
+        #     Immutable. The resource name of the TagKey's parent. A TagKey can be
+        #     parented by an Organization or a Project. For a TagKey parented by an
+        #     Organization, its parent must be in the form `organizations/{org_id}`. For
+        #     a TagKey parented by a Project, its parent can be in the form
+        #     `projects/{project_id}` or `projects/{project_number}`.
         # @!attribute [rw] short_name
         #   @return [::String]
         #     Required. Immutable. The user friendly name for a TagKey. The short name
@@ -91,8 +94,9 @@ module Google
         # The request message for listing all TagKeys under a parent resource.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The resource name of the new TagKey's parent.
-        #     Must be of the form `folders/{folder_id}` or `organizations/{org_id}`.
+        #     Required. The resource name of the TagKey's parent.
+        #     Must be of the form `organizations/{org_id}` or `projects/{project_id}` or
+        #     `projects/{project_number}`
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. The maximum number of TagKeys to return in the response. The
@@ -222,15 +226,19 @@ module Google
           PURPOSE_UNSPECIFIED = 0
 
           # Purpose for Compute Engine firewalls.
-          # A corresponding purpose_data should be set for the network the tag is
-          # intended for. The key should be 'network' and the value should be in
+          # A corresponding `purpose_data` should be set for the network the tag is
+          # intended for. The key should be `network` and the value should be in
           # either of these two formats:
-          # -https://www.googleapis.com/compute/\\{compute_version}/projects/\\{project_id}/global/networks/\\{network_id}
-          # -\\{project_id}/\\{network_name}
+          #
+          # -
+          # `https://www.googleapis.com/compute/{compute_version}/projects/{project_id}/global/networks/{network_id}`
+          # - `{project_id}/{network_name}`
           #
           # Examples:
-          # -https://www.googleapis.com/compute/staging_v1/projects/fail-closed-load-testing/global/networks/6992953698831725600
-          # -fail-closed-load-testing/load-testing-network
+          #
+          # -
+          # `https://www.googleapis.com/compute/staging_v1/projects/fail-closed-load-testing/global/networks/6992953698831725600`
+          # - `fail-closed-load-testing/load-testing-network`
           GCE_FIREWALL = 1
         end
       end
