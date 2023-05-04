@@ -1,5 +1,17 @@
 # Release History
 
+### 0.11.0 (2023-05-04)
+
+#### Features
+
+* Support adding ICMP pings to HttpCheck and TcpCheck 
+* Support checker type and user labels in UptimeCheckConfig 
+* Support filtering in list_uptime_check_configs 
+* Support for JSON_PATH content matchers 
+* Support for providing the passing http response codes in HttpCheck 
+* Support Oregon, Iowa, and Virginia regional checks 
+* Support user provided content-type headers in HttpCheck 
+
 ### 0.10.0 (2023-01-11)
 
 #### Features
