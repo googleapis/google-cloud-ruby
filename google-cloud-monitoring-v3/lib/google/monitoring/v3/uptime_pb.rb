@@ -3,6 +3,7 @@
 
 require 'google/protobuf'
 
+require 'google/api/field_behavior_pb'
 require 'google/api/monitored_resource_pb'
 require 'google/api/resource_pb'
 require 'google/protobuf/duration_pb'
@@ -28,9 +29,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :period, :message, 7, "google.protobuf.Duration"
       optional :timeout, :message, 8, "google.protobuf.Duration"
       repeated :content_matchers, :message, 9, "google.monitoring.v3.UptimeCheckConfig.ContentMatcher"
+      optional :checker_type, :enum, 17, "google.monitoring.v3.UptimeCheckConfig.CheckerType"
       repeated :selected_regions, :enum, 10, "google.monitoring.v3.UptimeCheckRegion"
       optional :is_internal, :bool, 15
       repeated :internal_checkers, :message, 14, "google.monitoring.v3.InternalChecker"
+      map :user_labels, :string, :string, 20
       oneof :resource do
         optional :monitored_resource, :message, 3, "google.api.MonitoredResource"
         optional :resource_group, :message, 4, "google.monitoring.v3.UptimeCheckConfig.ResourceGroup"
@@ -44,6 +47,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :group_id, :string, 1
       optional :resource_type, :enum, 2, "google.monitoring.v3.GroupResourceType"
     end
+    add_message "google.monitoring.v3.UptimeCheckConfig.PingConfig" do
+      optional :pings_count, :int32, 1
+    end
     add_message "google.monitoring.v3.UptimeCheckConfig.HttpCheck" do
       optional :request_method, :enum, 8, "google.monitoring.v3.UptimeCheckConfig.HttpCheck.RequestMethod"
       optional :use_ssl, :bool, 1
@@ -53,12 +59,30 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :mask_headers, :bool, 5
       map :headers, :string, :string, 6
       optional :content_type, :enum, 9, "google.monitoring.v3.UptimeCheckConfig.HttpCheck.ContentType"
+      optional :custom_content_type, :string, 13
       optional :validate_ssl, :bool, 7
       optional :body, :bytes, 10
+      repeated :accepted_response_status_codes, :message, 11, "google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode"
+      optional :ping_config, :message, 12, "google.monitoring.v3.UptimeCheckConfig.PingConfig"
     end
     add_message "google.monitoring.v3.UptimeCheckConfig.HttpCheck.BasicAuthentication" do
       optional :username, :string, 1
       optional :password, :string, 2
+    end
+    add_message "google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode" do
+      oneof :status_code do
+        optional :status_value, :int32, 1
+        optional :status_class, :enum, 2, "google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode.StatusClass"
+      end
+    end
+    add_enum "google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode.StatusClass" do
+      value :STATUS_CLASS_UNSPECIFIED, 0
+      value :STATUS_CLASS_1XX, 100
+      value :STATUS_CLASS_2XX, 200
+      value :STATUS_CLASS_3XX, 300
+      value :STATUS_CLASS_4XX, 400
+      value :STATUS_CLASS_5XX, 500
+      value :STATUS_CLASS_ANY, 1000
     end
     add_enum "google.monitoring.v3.UptimeCheckConfig.HttpCheck.RequestMethod" do
       value :METHOD_UNSPECIFIED, 0
@@ -68,13 +92,27 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_enum "google.monitoring.v3.UptimeCheckConfig.HttpCheck.ContentType" do
       value :TYPE_UNSPECIFIED, 0
       value :URL_ENCODED, 1
+      value :USER_PROVIDED, 2
     end
     add_message "google.monitoring.v3.UptimeCheckConfig.TcpCheck" do
       optional :port, :int32, 1
+      optional :ping_config, :message, 2, "google.monitoring.v3.UptimeCheckConfig.PingConfig"
     end
     add_message "google.monitoring.v3.UptimeCheckConfig.ContentMatcher" do
       optional :content, :string, 1
       optional :matcher, :enum, 2, "google.monitoring.v3.UptimeCheckConfig.ContentMatcher.ContentMatcherOption"
+      oneof :additional_matcher_info do
+        optional :json_path_matcher, :message, 3, "google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher"
+      end
+    end
+    add_message "google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher" do
+      optional :json_path, :string, 1
+      optional :json_matcher, :enum, 2, "google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher.JsonPathMatcherOption"
+    end
+    add_enum "google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher.JsonPathMatcherOption" do
+      value :JSON_PATH_MATCHER_OPTION_UNSPECIFIED, 0
+      value :EXACT_MATCH, 1
+      value :REGEX_MATCH, 2
     end
     add_enum "google.monitoring.v3.UptimeCheckConfig.ContentMatcher.ContentMatcherOption" do
       value :CONTENT_MATCHER_OPTION_UNSPECIFIED, 0
@@ -82,6 +120,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :NOT_CONTAINS_STRING, 2
       value :MATCHES_REGEX, 3
       value :NOT_MATCHES_REGEX, 4
+      value :MATCHES_JSON_PATH, 5
+      value :NOT_MATCHES_JSON_PATH, 6
+    end
+    add_enum "google.monitoring.v3.UptimeCheckConfig.CheckerType" do
+      value :CHECKER_TYPE_UNSPECIFIED, 0
+      value :STATIC_IP_CHECKERS, 1
+      value :VPC_CHECKERS, 3
     end
     add_message "google.monitoring.v3.UptimeCheckIp" do
       optional :region, :enum, 1, "google.monitoring.v3.UptimeCheckRegion"
@@ -94,6 +139,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :EUROPE, 2
       value :SOUTH_AMERICA, 3
       value :ASIA_PACIFIC, 4
+      value :USA_OREGON, 5
+      value :USA_IOWA, 6
+      value :USA_VIRGINIA, 7
     end
     add_enum "google.monitoring.v3.GroupResourceType" do
       value :RESOURCE_TYPE_UNSPECIFIED, 0
@@ -111,13 +159,19 @@ module Google
         InternalChecker::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.InternalChecker.State").enummodule
         UptimeCheckConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UptimeCheckConfig").msgclass
         UptimeCheckConfig::ResourceGroup = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UptimeCheckConfig.ResourceGroup").msgclass
+        UptimeCheckConfig::PingConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UptimeCheckConfig.PingConfig").msgclass
         UptimeCheckConfig::HttpCheck = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UptimeCheckConfig.HttpCheck").msgclass
         UptimeCheckConfig::HttpCheck::BasicAuthentication = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UptimeCheckConfig.HttpCheck.BasicAuthentication").msgclass
+        UptimeCheckConfig::HttpCheck::ResponseStatusCode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode").msgclass
+        UptimeCheckConfig::HttpCheck::ResponseStatusCode::StatusClass = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UptimeCheckConfig.HttpCheck.ResponseStatusCode.StatusClass").enummodule
         UptimeCheckConfig::HttpCheck::RequestMethod = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UptimeCheckConfig.HttpCheck.RequestMethod").enummodule
         UptimeCheckConfig::HttpCheck::ContentType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UptimeCheckConfig.HttpCheck.ContentType").enummodule
         UptimeCheckConfig::TcpCheck = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UptimeCheckConfig.TcpCheck").msgclass
         UptimeCheckConfig::ContentMatcher = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UptimeCheckConfig.ContentMatcher").msgclass
+        UptimeCheckConfig::ContentMatcher::JsonPathMatcher = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher").msgclass
+        UptimeCheckConfig::ContentMatcher::JsonPathMatcher::JsonPathMatcherOption = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UptimeCheckConfig.ContentMatcher.JsonPathMatcher.JsonPathMatcherOption").enummodule
         UptimeCheckConfig::ContentMatcher::ContentMatcherOption = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UptimeCheckConfig.ContentMatcher.ContentMatcherOption").enummodule
+        UptimeCheckConfig::CheckerType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UptimeCheckConfig.CheckerType").enummodule
         UptimeCheckIp = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UptimeCheckIp").msgclass
         UptimeCheckRegion = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.UptimeCheckRegion").enummodule
         GroupResourceType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.GroupResourceType").enummodule
