@@ -1,5 +1,11 @@
 # Release History
 
+### 0.10.0 (2023-05-04)
+
+#### Features
+
+* The mutate_rows call now returns rate limit information 
+
 ### 0.9.0 (2023-03-01)
 
 #### Features
