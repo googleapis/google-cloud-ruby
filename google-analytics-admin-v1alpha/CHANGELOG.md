@@ -1,5 +1,14 @@
 # Release History
 
+### 0.18.0 (2023-05-04)
+
+#### Features
+
+* Added ChangeHistoryResource#channel_group 
+* Added CustomDimension::DimensionScope::ITEM 
+* Support for fetch_connected_ga4_property 
+* Support for managing channel groups 
+
 ### 0.17.0 (2023-03-23)
 
 #### Features
