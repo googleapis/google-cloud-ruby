@@ -402,6 +402,67 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
     _(table).wont_be :materialized_view?
   end
 
+  it "creates a table with the schema and default values" do
+    mock = Minitest::Mock.new
+    insert_table = Google::Apis::BigqueryV2::Table.new(
+      table_reference: Google::Apis::BigqueryV2::TableReference.new(
+        project_id: project, dataset_id: dataset_id, table_id: table_id),
+      schema: Google::Apis::BigqueryV2::TableSchema.new(fields: [
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REQUIRED", name: "name",          type: "STRING", description: nil, fields: [], max_length: max_length_string, default_value_expression: "'name'"),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "age",           type: "INTEGER", policy_tags: policy_tags_gapi, description: nil, fields: [], default_value_expression: "10"),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "score",         type: "FLOAT", description: "A score from 0.0 to 10.0", fields: [], default_value_expression: "1.0"),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "cost",          type: "NUMERIC", description: nil, fields: [], precision: precision_numeric, scale: scale_numeric, default_value_expression: "100"),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "my_bignumeric", type: "BIGNUMERIC", description: nil, fields: [], precision: precision_bignumeric, scale: scale_bignumeric, default_value_expression: "1000"),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "active",        type: "BOOLEAN", description: nil, fields: [], default_value_expression: "false"),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "avatar",        type: "BYTES", description: nil, fields: [], max_length: max_length_bytes, default_value_expression: "b'bytes'"),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "creation_date", type: "TIMESTAMP", description: nil, fields: [], default_value_expression: "CURRENT_TIMESTAMP"),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "duration",      type: "TIME", description: nil, fields: [], default_value_expression: "CURRENT_TIME"),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "target_end",    type: "DATETIME", description: nil, fields: [], default_value_expression: "CURRENT_DATETIME"),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "birthday",      type: "DATE", description: nil, fields: [], default_value_expression: "CURRENT_DATE"),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "home",          type: "GEOGRAPHY", description: nil, fields: [], default_value_expression: "ST_GEOGPOINT(1,0)"),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REPEATED", name: "cities_lived",  type: "RECORD", description: nil, default_value_expression: "[STRUCT('place', 10)]", fields: [
+          Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "place",                type: "STRING",  description: nil, fields: []),
+          Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "number_of_years",      type: "INTEGER", description: nil, fields: []),
+        ])
+      ])
+    )
+    return_table = create_table_gapi table_id, table_name, table_description
+    return_table.schema = table_schema_gapi
+    mock.expect :insert_table, return_table, [project, dataset_id, insert_table]
+    dataset.service.mocked_service = mock
+
+    table = dataset.create_table table_id do |schema|
+      schema.string "name", mode: :required, max_length: max_length_string, default_value_expression: "'name'"
+      schema.integer "age", policy_tags: policy_tags, default_value_expression: "10"
+      schema.float "score", description: "A score from 0.0 to 10.0", default_value_expression: "1.0"
+      schema.numeric "cost", precision: precision_numeric, scale: scale_numeric, default_value_expression: "100"
+      schema.bignumeric "my_bignumeric", precision: precision_bignumeric, scale: scale_bignumeric, default_value_expression: "1000"
+      schema.boolean "active", default_value_expression: "false"
+      schema.bytes "avatar", max_length: max_length_bytes, default_value_expression: "b'bytes'"
+      schema.timestamp "creation_date", default_value_expression: "CURRENT_TIMESTAMP"
+      schema.time "duration", default_value_expression: "CURRENT_TIME"
+      schema.datetime "target_end", default_value_expression: "CURRENT_DATETIME"
+      schema.date "birthday", default_value_expression: "CURRENT_DATE"
+      schema.geography "home", default_value_expression: "ST_GEOGPOINT(1,0)"
+      schema.record "cities_lived", mode: :repeated, default_value_expression: "[STRUCT('place', 10)]" do |nested_schema|
+        nested_schema.string "place"
+        nested_schema.integer "number_of_years"
+      end
+    end
+
+    mock.verify
+
+    _(table).must_be_kind_of Google::Cloud::Bigquery::Table
+    _(table.table_id).must_equal table_id
+    _(table.name).must_equal table_name
+    _(table.description).must_equal table_description
+    _(table.schema).wont_be :empty?
+    _(table.schema).must_be :frozen?
+    _(table).must_be :table?
+    _(table).wont_be :view?
+    _(table).wont_be :materialized_view?
+  end
+
   it "creates a table with a schema in a block" do
     mock = Minitest::Mock.new
     insert_table = Google::Apis::BigqueryV2::Table.new(

@@ -36,6 +36,14 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     end
     t
   end
+  let(:schema_fields_default) do
+    [
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REQUIRED", name: "id", type: "INTEGER", description: "id description"),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REQUIRED", name: "breed", type: "STRING", description: "breed description"),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REQUIRED", name: "name", type: "STRING", description: "name description", default_value_expression: "'name'"),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REQUIRED", name: "dob", type: "TIMESTAMP", description: "dob description", default_value_expression: "CURRENT_TIMESTAMP"),
+    ]
+  end
   let(:time_partitioned_table_id) { "daily_kittens"}
   let(:seven_days) { 7 * 24 * 60 * 60 }
   let(:clustering_fields) { ["last_name", "first_name"] }
@@ -1135,6 +1143,20 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     ensure
       table_clone.delete  
     end
+  end
+
+  it "updates the table schema with default values" do
+    table.schema do |schema|
+      schema.field "name" do |field|
+        field.default_value_expression = "'name'"
+      end
+      schema.field "dob" do |field|
+        field.default_value_expression = "CURRENT_TIMESTAMP"
+      end
+    end
+
+    table = dataset.table table_id
+    _(table.schema.fields.map(&:default_value_expression)).must_be :==, schema_fields_default.map(&:default_value_expression)
   end
 
   it "restores snapshot into a table" do

@@ -87,6 +87,28 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
   let(:clustering_fields) { ["breed", "name"] }
   let(:string_numeric) { "0.123456789" }
   let(:string_bignumeric) { "0.12345678901234567890123456789012345678" }
+  let(:schema_fields_default) do
+    [
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REQUIRED", name: "id", type: "INTEGER", description: "id description"),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REQUIRED", name: "breed", type: "STRING", description: "breed description"),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REQUIRED", name: "name", type: "STRING", description: "name description", default_value_expression: "'name'"),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REQUIRED", name: "dob", type: "TIMESTAMP", description: "dob description", default_value_expression: "CURRENT_TIMESTAMP"),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "age", type: "INTEGER", default_value_expression: "10"),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "score", type: "FLOAT", description: "A score from 0.0 to 10.0", default_value_expression: "1.0"),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "cost", type: "NUMERIC", default_value_expression: "100"),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "my_bignumeric", type: "BIGNUMERIC", default_value_expression: "1000"),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "active", type: "BOOLEAN", default_value_expression: "false"),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "avatar", type: "BYTES", default_value_expression: "b'101'"),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "duration", type: "TIME", default_value_expression: "CURRENT_TIME"),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "target_end", type: "DATETIME", default_value_expression: "CURRENT_DATETIME"),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "birthday", type: "DATE", default_value_expression: "CURRENT_DATE"),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "home", type: "GEOGRAPHY", default_value_expression: "ST_GEOGPOINT(1,0)"),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REPEATED", name: "cities_lived", type: "RECORD", default_value_expression: "[STRUCT('place', 10)]", fields: [
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "place", type: "STRING"),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "number_of_years", type: "INTEGER")
+      ])
+    ]
+  end
 
   before do
     table
@@ -319,6 +341,70 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
 
     job.wait_until_done!
     _(job.output_rows).must_equal 3
+  end
+
+  it "imports data from a local file and creates a new table with schema having default values" do
+    table_id = "load_job_#{SecureRandom.hex(4)}"
+    schema = bigquery.schema do |s|
+      s.integer   "id",    description: "id description",    mode: :required
+      s.string    "breed", description: "breed description", mode: :required
+      s.string    "name",  description: "name description",  mode: :required, default_value_expression: "'name'"
+      s.timestamp "dob",   description: "dob description",   mode: :required, default_value_expression: "CURRENT_TIMESTAMP"
+      s.integer "age", default_value_expression: "10"
+      s.float "score", description: "A score from 0.0 to 10.0", default_value_expression: "1.0"
+      s.numeric "cost", default_value_expression: "100"
+      s.bignumeric "my_bignumeric", default_value_expression: "1000"
+      s.boolean "active", default_value_expression: "false"
+      s.bytes "avatar", default_value_expression: "b'101'"
+      s.time "duration", default_value_expression: "CURRENT_TIME"
+      s.datetime "target_end", default_value_expression: "CURRENT_DATETIME"
+      s.date "birthday", default_value_expression: "CURRENT_DATE"
+      s.geography "home", default_value_expression: "ST_GEOGPOINT(1,0)"
+      s.record "cities_lived", mode: :repeated, default_value_expression: "[STRUCT('place', 10)]" do |nested_schema|
+        nested_schema.string "place"
+        nested_schema.integer "number_of_years"
+      end
+    end
+
+    job = dataset.load_job table_id, local_file, schema: schema
+    job.wait_until_done!
+    _(job.output_rows).must_equal 3
+
+    table = dataset.table table_id
+    _(table.schema.fields.map(&:default_value_expression)).must_be :==, schema_fields_default.map(&:default_value_expression)
+  end
+
+  it "creates a new table with schema having default values" do
+    table_id = "load_job_#{SecureRandom.hex(4)}"
+    table = dataset.create_table table_id do |s|
+      s.integer   "id",    description: "id description",    mode: :required
+      s.string    "breed", description: "breed description", mode: :required
+      s.string    "name",  description: "name description",  mode: :required, default_value_expression: "'name'"
+      s.timestamp "dob",   description: "dob description",   mode: :required, default_value_expression: "CURRENT_TIMESTAMP"
+      s.integer "age", default_value_expression: "10"
+      s.float "score", description: "A score from 0.0 to 10.0", default_value_expression: "1.0"
+      s.numeric "cost", default_value_expression: "100"
+      s.bignumeric "my_bignumeric", default_value_expression: "1000"
+      s.boolean "active", default_value_expression: "false"
+      s.bytes "avatar", default_value_expression: "b'101'"
+      s.time "duration", default_value_expression: "CURRENT_TIME"
+      s.datetime "target_end", default_value_expression: "CURRENT_DATETIME"
+      s.date "birthday", default_value_expression: "CURRENT_DATE"
+      s.geography "home", default_value_expression: "ST_GEOGPOINT(1,0)"
+      s.record "cities_lived", mode: :repeated, default_value_expression: "[STRUCT('place', 10)]" do |nested_schema|
+        nested_schema.string "place"
+        nested_schema.integer "number_of_years"
+      end
+    end
+
+    insert_response = table.insert rows
+    _(insert_response).must_be :success?
+    _(insert_response.insert_count).must_equal 3
+    _(insert_response.insert_errors).must_be :empty?
+    _(insert_response.error_rows).must_be :empty?
+
+    table = dataset.table table_id
+    _(table.schema.fields.map(&:default_value_expression)).must_be :==, schema_fields_default.map(&:default_value_expression)
   end
 
   it "imports data from a local file and creates a new table without a schema with load_job" do
