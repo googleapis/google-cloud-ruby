@@ -1,5 +1,16 @@
 # Changelog
 
+### 0.23.0 (2023-05-04)
+
+#### Features
+
+* Added AcceleratorType::NVIDIA_L4 
+* Added EntityType#offline_storage_ttl_days 
+* Added experiment and experiment_run fields to CustomJobSpec 
+* Added Featurestore#online_storage_ttl_days 
+* Added ModelSourceInfo::ModelSourceType::GENIE 
+* Support for mutate_deployed_model 
+
 ### 0.22.0 (2023-04-21)
 
 #### Features
