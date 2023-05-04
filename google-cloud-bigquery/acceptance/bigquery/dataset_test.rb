@@ -95,8 +95,8 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
       Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REQUIRED", name: "dob", type: "TIMESTAMP", description: "dob description", default_value_expression: "CURRENT_TIMESTAMP"),
       Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "age", type: "INTEGER", default_value_expression: "10"),
       Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "score", type: "FLOAT", description: "A score from 0.0 to 10.0", default_value_expression: "1.0"),
-      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "cost", type: "NUMERIC", default_value_expression: "100"),
-      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "my_bignumeric", type: "BIGNUMERIC", default_value_expression: "1000"),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "cost", type: "NUMERIC", default_value_expression: "1.0e4"),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "my_bignumeric", type: "BIGNUMERIC", default_value_expression: "1.0e10"),
       Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "active", type: "BOOLEAN", default_value_expression: "false"),
       Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "avatar", type: "BYTES", default_value_expression: "b'101'"),
       Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "duration", type: "TIME", default_value_expression: "CURRENT_TIME"),
@@ -352,8 +352,8 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
       s.timestamp "dob",   description: "dob description",   mode: :required, default_value_expression: "CURRENT_TIMESTAMP"
       s.integer "age", default_value_expression: "10"
       s.float "score", description: "A score from 0.0 to 10.0", default_value_expression: "1.0"
-      s.numeric "cost", default_value_expression: "100"
-      s.bignumeric "my_bignumeric", default_value_expression: "1000"
+      s.numeric "cost", default_value_expression: "1.0e4"
+      s.bignumeric "my_bignumeric", default_value_expression: "1.0e10"
       s.boolean "active", default_value_expression: "false"
       s.bytes "avatar", default_value_expression: "b'101'"
       s.time "duration", default_value_expression: "CURRENT_TIME"
@@ -383,8 +383,8 @@ describe Google::Cloud::Bigquery::Dataset, :bigquery do
       s.timestamp "dob",   description: "dob description",   mode: :required, default_value_expression: "CURRENT_TIMESTAMP"
       s.integer "age", default_value_expression: "10"
       s.float "score", description: "A score from 0.0 to 10.0", default_value_expression: "1.0"
-      s.numeric "cost", default_value_expression: "100"
-      s.bignumeric "my_bignumeric", default_value_expression: "1000"
+      s.numeric "cost", default_value_expression: "1.0e4"
+      s.bignumeric "my_bignumeric", default_value_expression: "1.0e10"
       s.boolean "active", default_value_expression: "false"
       s.bytes "avatar", default_value_expression: "b'101'"
       s.time "duration", default_value_expression: "CURRENT_TIME"
