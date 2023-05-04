@@ -1,5 +1,16 @@
 # Changelog
 
+### 0.8.0 (2023-05-04)
+
+#### Features
+
+* Added DataSource#resource 
+* Added Entity#access and Entity#uid 
+* Added ResourceSpec#read_access_mode 
+* Added ResourceStatus#managed_access_identity 
+* Support for the run_task call 
+* The create_data_scan and update_data_scan support the validate_only flag 
+
 ### 0.7.0 (2023-03-08)
 
 #### Features
