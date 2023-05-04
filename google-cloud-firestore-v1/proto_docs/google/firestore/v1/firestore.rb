@@ -723,6 +723,14 @@ module Google
         # @!attribute [rw] once
         #   @return [::Boolean]
         #     If the target should be removed once it is current and consistent.
+        # @!attribute [rw] expected_count
+        #   @return [::Google::Protobuf::Int32Value]
+        #     The number of documents that last matched the query at the resume token or
+        #     read time.
+        #
+        #     This value is only relevant when a `resume_type` is provided. This value
+        #     being present and greater than zero signals that the client wants
+        #     `ExistenceFilter.unchanged_names` to be included in the response.
         class Target
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

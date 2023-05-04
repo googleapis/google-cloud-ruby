@@ -3,6 +3,7 @@
 
 require 'google/protobuf'
 
+require 'google/firestore/v1/bloom_filter_pb'
 require 'google/firestore/v1/common_pb'
 require 'google/firestore/v1/document_pb'
 require 'google/protobuf/timestamp_pb'
@@ -60,6 +61,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.firestore.v1.ExistenceFilter" do
       optional :target_id, :int32, 1
       optional :count, :int32, 2
+      optional :unchanged_names, :message, 3, "google.firestore.v1.BloomFilter"
     end
   end
 end
