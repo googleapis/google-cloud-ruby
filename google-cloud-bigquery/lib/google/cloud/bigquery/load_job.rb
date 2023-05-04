@@ -1587,7 +1587,7 @@ module Google
           #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
           #   job = dataset.load_job "my_table", "gs://abc/file" do |schema|
-          #     schema.record "cities_lived", mode: :repeated, default_value_expression: "[STRUCT('place',10)]" do |cities_lived|
+          #     schema.record "cities_lived", default_value_expression: "STRUCT('place',10)" do |cities_lived|
           #       cities_lived.string "place", mode: :required
           #       cities_lived.integer "number_of_years", mode: :required
           #     end

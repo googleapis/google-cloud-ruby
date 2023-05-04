@@ -365,7 +365,7 @@ module Google
                     description: description,
                     mode: mode,
                     policy_tags: policy_tags,
-                    default_value_expression:default_value_expression
+                    default_value_expression: default_value_expression
         end
 
         ##
@@ -885,7 +885,10 @@ module Google
           # TODO: do we need to raise if no block was given?
           raise ArgumentError, "a block is required" unless block_given?
 
-          nested_field = add_field name, :record, description: description, mode: mode, default_value_expression: default_value_expression
+          nested_field = add_field name, :record,
+                                   description: description,
+                                   mode: mode,
+                                   default_value_expression: default_value_expression
           yield nested_field
           nested_field
         end
