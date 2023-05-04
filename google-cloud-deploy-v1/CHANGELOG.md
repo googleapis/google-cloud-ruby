@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.7.0 (2023-05-04)
+
+#### Features
+
+* Added PhaseArtifact#job_manifests_path 
+* Added support for DeployArtifacts 
+
 ### 0.6.0 (2023-03-24)
 
 #### Features
