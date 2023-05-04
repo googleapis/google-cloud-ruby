@@ -1,5 +1,11 @@
 # Release History
 
+### 0.11.0 (2023-05-04)
+
+#### Features
+
+* Added support for bulk writer ([#21426](https://github.com/googleapis/google-cloud-ruby/issues/21426)) 
+
 ### 0.10.0 (2023-04-16)
 
 #### Features
