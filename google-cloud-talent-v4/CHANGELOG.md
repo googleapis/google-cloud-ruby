@@ -1,5 +1,11 @@
 # Release History
 
+### 0.9.1 (2023-05-04)
+
+#### Bug Fixes
+
+* Fixed timeout settings for search_jobs_for_alert 
+
 ### 0.9.0 (2023-03-08)
 
 #### Features
