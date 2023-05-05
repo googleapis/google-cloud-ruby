@@ -21,6 +21,7 @@ require "gapic/config"
 require "gapic/config/method"
 
 require "google/cloud/redis/v1/version"
+require "google/cloud/redis/v1/bindings_override"
 
 require "google/cloud/redis/v1/cloud_redis/credentials"
 require "google/cloud/redis/v1/cloud_redis/paths"

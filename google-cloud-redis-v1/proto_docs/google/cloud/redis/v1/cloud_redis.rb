@@ -43,8 +43,10 @@ module Google
         #     Note: Redis instances are managed and addressed at regional level so
         #     location_id here refers to a GCP region; however, users may choose which
         #     specific zone (or collection of zones for cross-zone instances) an instance
-        #     should be provisioned in. Refer to {::Google::Cloud::Redis::V1::Instance#location_id location_id} and
-        #     {::Google::Cloud::Redis::V1::Instance#alternative_location_id alternative_location_id} fields for more details.
+        #     should be provisioned in. Refer to
+        #     {::Google::Cloud::Redis::V1::Instance#location_id location_id} and
+        #     {::Google::Cloud::Redis::V1::Instance#alternative_location_id alternative_location_id}
+        #     fields for more details.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     An arbitrary and optional user-provided name for the instance.
@@ -87,11 +89,11 @@ module Google
         #     the default block size is /28.
         # @!attribute [rw] secondary_ip_range
         #   @return [::String]
-        #     Optional. Additional IP range for node placement. Required when enabling read
-        #     replicas on an existing instance. For DIRECT_PEERING mode value must be a
-        #     CIDR range of size /28, or "auto". For PRIVATE_SERVICE_ACCESS mode value
-        #     must be the name of an allocated address range associated with the private
-        #     service access connection, or "auto".
+        #     Optional. Additional IP range for node placement. Required when enabling
+        #     read replicas on an existing instance. For DIRECT_PEERING mode value must
+        #     be a CIDR range of size /28, or "auto". For PRIVATE_SERVICE_ACCESS mode
+        #     value must be the name of an allocated address range associated with the
+        #     private service access connection, or "auto".
         # @!attribute [r] host
         #   @return [::String]
         #     Output only. Hostname or IP address of the exposed Redis endpoint used by
@@ -161,9 +163,9 @@ module Google
         #     If not provided, the connect mode defaults to DIRECT_PEERING.
         # @!attribute [rw] auth_enabled
         #   @return [::Boolean]
-        #     Optional. Indicates whether OSS Redis AUTH is enabled for the instance. If set to
-        #     "true" AUTH is enabled on the instance. Default value is "false" meaning
-        #     AUTH is disabled.
+        #     Optional. Indicates whether OSS Redis AUTH is enabled for the instance. If
+        #     set to "true" AUTH is enabled on the instance. Default value is "false"
+        #     meaning AUTH is disabled.
         # @!attribute [r] server_ca_certs
         #   @return [::Array<::Google::Cloud::Redis::V1::TlsCertificate>]
         #     Output only. List of server CA certificates for the instance.
@@ -181,11 +183,11 @@ module Google
         #     scheduled.
         # @!attribute [rw] replica_count
         #   @return [::Integer]
-        #     Optional. The number of replica nodes. The valid range for the Standard Tier with
-        #     read replicas enabled is [1-5] and defaults to 2. If read replicas are not
-        #     enabled for a Standard Tier instance, the only valid value is 1 and the
-        #     default is 1. The valid value for basic tier is 0 and the default is also
-        #     0.
+        #     Optional. The number of replica nodes. The valid range for the Standard
+        #     Tier with read replicas enabled is [1-5] and defaults to 2. If read
+        #     replicas are not enabled for a Standard Tier instance, the only valid value
+        #     is 1 and the default is 1. The valid value for basic tier is 0 and the
+        #     default is also 0.
         # @!attribute [r] nodes
         #   @return [::Array<::Google::Cloud::Redis::V1::NodeInfo>]
         #     Output only. Info per node.
@@ -201,7 +203,26 @@ module Google
         #     endpoint. Standard tier only. Write requests should target 'port'.
         # @!attribute [rw] read_replicas_mode
         #   @return [::Google::Cloud::Redis::V1::Instance::ReadReplicasMode]
-        #     Optional. Read replicas mode for the instance. Defaults to READ_REPLICAS_DISABLED.
+        #     Optional. Read replicas mode for the instance. Defaults to
+        #     READ_REPLICAS_DISABLED.
+        # @!attribute [rw] customer_managed_key
+        #   @return [::String]
+        #     Optional. The KMS key reference that the customer provides when trying to
+        #     create the instance.
+        # @!attribute [rw] persistence_config
+        #   @return [::Google::Cloud::Redis::V1::PersistenceConfig]
+        #     Optional. Persistence configuration parameters
+        # @!attribute [rw] suspension_reasons
+        #   @return [::Array<::Google::Cloud::Redis::V1::Instance::SuspensionReason>]
+        #     Optional. reasons that causes instance in "SUSPENDED" state.
+        # @!attribute [rw] maintenance_version
+        #   @return [::String]
+        #     Optional. The self service update maintenance version.
+        #     The version is date based such as "20210712_00_00".
+        # @!attribute [rw] available_maintenance_versions
+        #   @return [::Array<::String>]
+        #     Optional. The available maintenance versions that an instance could update
+        #     to.
         class Instance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -308,9 +329,76 @@ module Google
             # up and down the number of replicas. Not valid for basic tier.
             READ_REPLICAS_ENABLED = 2
           end
+
+          # Possible reasons for the instance to be in a "SUSPENDED" state.
+          module SuspensionReason
+            # Not set.
+            SUSPENSION_REASON_UNSPECIFIED = 0
+
+            # Something wrong with the CMEK key provided by customer.
+            CUSTOMER_MANAGED_KEY_ISSUE = 1
+          end
         end
 
-        # Request for {::Google::Cloud::Redis::V1::CloudRedis::Client#reschedule_maintenance RescheduleMaintenance}.
+        # Configuration of the persistence functionality.
+        # @!attribute [rw] persistence_mode
+        #   @return [::Google::Cloud::Redis::V1::PersistenceConfig::PersistenceMode]
+        #     Optional. Controls whether Persistence features are enabled.
+        #     If not provided, the existing value will be used.
+        # @!attribute [rw] rdb_snapshot_period
+        #   @return [::Google::Cloud::Redis::V1::PersistenceConfig::SnapshotPeriod]
+        #     Optional. Period between RDB snapshots. Snapshots will be attempted every
+        #     period starting from the provided snapshot start time. For example, a start
+        #     time of 01/01/2033 06:45 and SIX_HOURS snapshot period will do nothing
+        #     until 01/01/2033, and then trigger snapshots every day at 06:45, 12:45,
+        #     18:45, and 00:45 the next day, and so on. If not provided,
+        #     TWENTY_FOUR_HOURS will be used as default.
+        # @!attribute [r] rdb_next_snapshot_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The next time that a snapshot attempt is scheduled to occur.
+        # @!attribute [rw] rdb_snapshot_start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Optional. Date and time that the first snapshot was/will be attempted, and
+        #     to which future snapshots will be aligned. If not provided, the current
+        #     time will be used.
+        class PersistenceConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Available Persistence modes.
+          module PersistenceMode
+            # Not set.
+            PERSISTENCE_MODE_UNSPECIFIED = 0
+
+            # Persistence is disabled for the instance,
+            # and any existing snapshots are deleted.
+            DISABLED = 1
+
+            # RDB based Persistence is enabled.
+            RDB = 2
+          end
+
+          # Available snapshot periods for scheduling.
+          module SnapshotPeriod
+            # Not set.
+            SNAPSHOT_PERIOD_UNSPECIFIED = 0
+
+            # Snapshot every 1 hour.
+            ONE_HOUR = 3
+
+            # Snapshot every 6 hours.
+            SIX_HOURS = 4
+
+            # Snapshot every 12 hours.
+            TWELVE_HOURS = 5
+
+            # Snapshot every 24 hours.
+            TWENTY_FOUR_HOURS = 6
+          end
+        end
+
+        # Request for
+        # {::Google::Cloud::Redis::V1::CloudRedis::Client#reschedule_maintenance RescheduleMaintenance}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Redis instance resource name using the form:
@@ -318,7 +406,8 @@ module Google
         #     where `location_id` refers to a GCP region.
         # @!attribute [rw] reschedule_type
         #   @return [::Google::Cloud::Redis::V1::RescheduleMaintenanceRequest::RescheduleType]
-        #     Required. If reschedule type is SPECIFIC_TIME, must set up schedule_time as well.
+        #     Required. If reschedule type is SPECIFIC_TIME, must set up schedule_time as
+        #     well.
         # @!attribute [rw] schedule_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Optional. Timestamp when the maintenance shall be rescheduled to if
@@ -376,7 +465,8 @@ module Google
         #     Required. Start time of the window in UTC time.
         # @!attribute [r] duration
         #   @return [::Google::Protobuf::Duration]
-        #     Output only. Duration of the maintenance window. The current window is fixed at 1 hour.
+        #     Output only. Duration of the maintenance window. The current window is
+        #     fixed at 1 hour.
         class WeeklyMaintenanceWindow
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -386,17 +476,19 @@ module Google
         # populated.
         # @!attribute [r] start_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The start time of any upcoming scheduled maintenance for this instance.
+        #     Output only. The start time of any upcoming scheduled maintenance for this
+        #     instance.
         # @!attribute [r] end_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The end time of any upcoming scheduled maintenance for this instance.
+        #     Output only. The end time of any upcoming scheduled maintenance for this
+        #     instance.
         # @!attribute [rw] can_reschedule
         #   @return [::Boolean]
         #     If the scheduled maintenance can be rescheduled, default is true.
         # @!attribute [r] schedule_deadline_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The deadline that the maintenance schedule start time can not go beyond,
-        #     including reschedule.
+        #     Output only. The deadline that the maintenance schedule start time can not
+        #     go beyond, including reschedule.
         class MaintenanceSchedule
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -420,7 +512,8 @@ module Google
         # @!attribute [rw] page_token
         #   @return [::String]
         #     The `next_page_token` value returned from a previous
-        #     {::Google::Cloud::Redis::V1::CloudRedis::Client#list_instances ListInstances} request, if any.
+        #     {::Google::Cloud::Redis::V1::CloudRedis::Client#list_instances ListInstances} request, if
+        #     any.
         class ListInstancesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -463,7 +556,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for {::Google::Cloud::Redis::V1::CloudRedis::Client#get_instance_auth_string GetInstanceAuthString}.
+        # Request for
+        # {::Google::Cloud::Redis::V1::CloudRedis::Client#get_instance_auth_string GetInstanceAuthString}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Redis instance resource name using the form:
@@ -483,7 +577,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for {::Google::Cloud::Redis::V1::CloudRedis::Client#create_instance CreateInstance}.
+        # Request for
+        # {::Google::Cloud::Redis::V1::CloudRedis::Client#create_instance CreateInstance}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the instance location using the form:
@@ -507,7 +602,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for {::Google::Cloud::Redis::V1::CloudRedis::Client#update_instance UpdateInstance}.
+        # Request for
+        # {::Google::Cloud::Redis::V1::CloudRedis::Client#update_instance UpdateInstance}.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Required. Mask of fields to update. At least one path must be supplied in
@@ -528,7 +624,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for {::Google::Cloud::Redis::V1::CloudRedis::Client#upgrade_instance UpgradeInstance}.
+        # Request for
+        # {::Google::Cloud::Redis::V1::CloudRedis::Client#upgrade_instance UpgradeInstance}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Redis instance resource name using the form:
@@ -542,7 +639,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for {::Google::Cloud::Redis::V1::CloudRedis::Client#delete_instance DeleteInstance}.
+        # Request for
+        # {::Google::Cloud::Redis::V1::CloudRedis::Client#delete_instance DeleteInstance}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Redis instance resource name using the form:
