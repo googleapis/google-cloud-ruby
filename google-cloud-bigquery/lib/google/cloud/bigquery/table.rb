@@ -4263,7 +4263,7 @@ module Google
           #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
           #   table = dataset.create_table "my_table" do |schema|
-          #     schema.geography "home", default_value_expression: "ST_GEOGPOINT(1,0)"
+          #     schema.geography "home", default_value_expression: "ST_GEOGPOINT(-122.084801, 37.422131)"
           #   end
           #
           def geography name, description: nil, mode: :nullable, policy_tags: nil,

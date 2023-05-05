@@ -419,7 +419,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "duration",      type: "TIME", description: nil, fields: [], default_value_expression: "CURRENT_TIME"),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "target_end",    type: "DATETIME", description: nil, fields: [], default_value_expression: "CURRENT_DATETIME"),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "birthday",      type: "DATE", description: nil, fields: [], default_value_expression: "CURRENT_DATE"),
-        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "home",          type: "GEOGRAPHY", description: nil, fields: [], default_value_expression: "ST_GEOGPOINT(1,0)"),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "home",          type: "GEOGRAPHY", description: nil, fields: [], default_value_expression: "ST_GEOGPOINT(-122.084801, 37.422131)"),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REPEATED", name: "cities_lived",  type: "RECORD", description: nil, default_value_expression: "[STRUCT('place', 10)]", fields: [
           Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "place",                type: "STRING",  description: nil, fields: []),
           Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "number_of_years",      type: "INTEGER", description: nil, fields: []),
@@ -443,7 +443,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
       schema.time "duration", default_value_expression: "CURRENT_TIME"
       schema.datetime "target_end", default_value_expression: "CURRENT_DATETIME"
       schema.date "birthday", default_value_expression: "CURRENT_DATE"
-      schema.geography "home", default_value_expression: "ST_GEOGPOINT(1,0)"
+      schema.geography "home", default_value_expression: "ST_GEOGPOINT(-122.084801, 37.422131)"
       schema.record "cities_lived", mode: :repeated, default_value_expression: "[STRUCT('place', 10)]" do |nested_schema|
         nested_schema.string "place"
         nested_schema.integer "number_of_years"

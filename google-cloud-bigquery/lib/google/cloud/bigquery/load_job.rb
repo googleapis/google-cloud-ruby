@@ -1519,7 +1519,7 @@ module Google
           #   bigquery = Google::Cloud::Bigquery.new
           #   dataset = bigquery.dataset "my_dataset"
           #   job = dataset.load_job "my_table", "gs://abc/file" do |schema|
-          #     schema.geography "location", default_value_expression: "ST_GEOGPOINT(1,0)"
+          #     schema.geography "location", default_value_expression: "ST_GEOGPOINT(-122.084801, 37.422131)"
           #   end
           #
           def geography name, description: nil, mode: :nullable, policy_tags: nil,
