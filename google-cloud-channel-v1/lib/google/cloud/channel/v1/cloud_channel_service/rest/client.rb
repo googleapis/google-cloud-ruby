@@ -2744,7 +2744,8 @@ module Google
               # {::Google::Cloud::Channel::V1::CustomerRepricingConfig CustomerRepricingConfig}
               # resources. The data for each resource is displayed in the ascending order
               # of:
-              # * customer ID
+              #
+              # * Customer ID
               # * {::Google::Cloud::Channel::V1::RepricingConfig::EntitlementGranularity#entitlement RepricingConfig.EntitlementGranularity.entitlement}
               # * {::Google::Cloud::Channel::V1::RepricingConfig#effective_invoice_month RepricingConfig.effective_invoice_month}
               # * {::Google::Cloud::Channel::V1::CustomerRepricingConfig#update_time CustomerRepricingConfig.update_time}
@@ -3212,7 +3213,8 @@ module Google
               # {::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig ChannelPartnerRepricingConfig}
               # resources. The data for each resource is displayed in the ascending order
               # of:
-              # * channel partner ID
+              #
+              # * Channel Partner ID
               # * {::Google::Cloud::Channel::V1::RepricingConfig#effective_invoice_month RepricingConfig.effective_invoice_month}
               # * {::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig#update_time ChannelPartnerRepricingConfig.update_time}
               #

@@ -25,6 +25,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :trial_settings, :message, 21, "google.cloud.channel.v1.TrialSettings"
       optional :association_info, :message, 23, "google.cloud.channel.v1.AssociationInfo"
       repeated :parameters, :message, 26, "google.cloud.channel.v1.Parameter"
+      optional :billing_account, :string, 28
     end
     add_enum "google.cloud.channel.v1.Entitlement.ProvisioningState" do
       value :PROVISIONING_STATE_UNSPECIFIED, 0
