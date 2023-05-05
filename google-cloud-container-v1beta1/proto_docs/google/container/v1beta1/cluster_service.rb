@@ -817,6 +817,9 @@ module Google
         # @!attribute [rw] gke_backup_agent_config
         #   @return [::Google::Cloud::Container::V1beta1::GkeBackupAgentConfig]
         #     Configuration for the Backup for GKE agent addon.
+        # @!attribute [rw] gcs_fuse_csi_driver_config
+        #   @return [::Google::Cloud::Container::V1beta1::GcsFuseCsiDriverConfig]
+        #     Configuration for the Cloud Storage Fuse CSI driver.
         class AddonsConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -917,6 +920,15 @@ module Google
         #   @return [::Boolean]
         #     Whether the GCP Filestore CSI driver is enabled for this cluster.
         class GcpFilestoreCsiDriverConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration for the Cloud Storage Fuse CSI driver.
+        # @!attribute [rw] enabled
+        #   @return [::Boolean]
+        #     Whether the Cloud Storage Fuse CSI driver is enabled for this cluster.
+        class GcsFuseCsiDriverConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -2053,6 +2065,9 @@ module Google
         # @!attribute [rw] desired_node_pool_logging_config
         #   @return [::Google::Cloud::Container::V1beta1::NodePoolLoggingConfig]
         #     The desired node pool logging configuration defaults for the cluster.
+        # @!attribute [rw] desired_fleet
+        #   @return [::Google::Cloud::Container::V1beta1::Fleet]
+        #     The desired fleet configuration for the cluster.
         # @!attribute [rw] desired_stack_type
         #   @return [::Google::Cloud::Container::V1beta1::StackType]
         #     The desired stack type of the cluster.
