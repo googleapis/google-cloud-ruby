@@ -85,6 +85,10 @@ module Google
         #     input:
         #
         #     - display_name: The display name of the billing subaccount.
+        # @!attribute [rw] billing_account
+        #   @return [::String]
+        #     Optional. The billing account resource name that is used to pay for this
+        #     entitlement.
         class Entitlement
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
