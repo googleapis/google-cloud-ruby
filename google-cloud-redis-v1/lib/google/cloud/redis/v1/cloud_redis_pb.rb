@@ -9,6 +9,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/duration_pb'
+require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/type/dayofweek_pb'
@@ -51,6 +52,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :read_endpoint, :string, 33
       optional :read_endpoint_port, :int32, 34
       optional :read_replicas_mode, :enum, 35, "google.cloud.redis.v1.Instance.ReadReplicasMode"
+      optional :customer_managed_key, :string, 36
+      optional :persistence_config, :message, 37, "google.cloud.redis.v1.PersistenceConfig"
+      repeated :suspension_reasons, :enum, 38, "google.cloud.redis.v1.Instance.SuspensionReason"
+      optional :maintenance_version, :string, 39
+      repeated :available_maintenance_versions, :string, 40
     end
     add_enum "google.cloud.redis.v1.Instance.State" do
       value :STATE_UNSPECIFIED, 0
@@ -82,6 +88,28 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :READ_REPLICAS_MODE_UNSPECIFIED, 0
       value :READ_REPLICAS_DISABLED, 1
       value :READ_REPLICAS_ENABLED, 2
+    end
+    add_enum "google.cloud.redis.v1.Instance.SuspensionReason" do
+      value :SUSPENSION_REASON_UNSPECIFIED, 0
+      value :CUSTOMER_MANAGED_KEY_ISSUE, 1
+    end
+    add_message "google.cloud.redis.v1.PersistenceConfig" do
+      optional :persistence_mode, :enum, 1, "google.cloud.redis.v1.PersistenceConfig.PersistenceMode"
+      optional :rdb_snapshot_period, :enum, 2, "google.cloud.redis.v1.PersistenceConfig.SnapshotPeriod"
+      optional :rdb_next_snapshot_time, :message, 4, "google.protobuf.Timestamp"
+      optional :rdb_snapshot_start_time, :message, 5, "google.protobuf.Timestamp"
+    end
+    add_enum "google.cloud.redis.v1.PersistenceConfig.PersistenceMode" do
+      value :PERSISTENCE_MODE_UNSPECIFIED, 0
+      value :DISABLED, 1
+      value :RDB, 2
+    end
+    add_enum "google.cloud.redis.v1.PersistenceConfig.SnapshotPeriod" do
+      value :SNAPSHOT_PERIOD_UNSPECIFIED, 0
+      value :ONE_HOUR, 3
+      value :SIX_HOURS, 4
+      value :TWELVE_HOURS, 5
+      value :TWENTY_FOUR_HOURS, 6
     end
     add_message "google.cloud.redis.v1.RescheduleMaintenanceRequest" do
       optional :name, :string, 1
@@ -214,6 +242,10 @@ module Google
         Instance::ConnectMode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.Instance.ConnectMode").enummodule
         Instance::TransitEncryptionMode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.Instance.TransitEncryptionMode").enummodule
         Instance::ReadReplicasMode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.Instance.ReadReplicasMode").enummodule
+        Instance::SuspensionReason = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.Instance.SuspensionReason").enummodule
+        PersistenceConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.PersistenceConfig").msgclass
+        PersistenceConfig::PersistenceMode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.PersistenceConfig.PersistenceMode").enummodule
+        PersistenceConfig::SnapshotPeriod = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.PersistenceConfig.SnapshotPeriod").enummodule
         RescheduleMaintenanceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.RescheduleMaintenanceRequest").msgclass
         RescheduleMaintenanceRequest::RescheduleType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.RescheduleMaintenanceRequest.RescheduleType").enummodule
         MaintenancePolicy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.MaintenancePolicy").msgclass

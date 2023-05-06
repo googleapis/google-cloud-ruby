@@ -14,6 +14,7 @@
     "google-cloud-redis-v1.gemspec",
     "lib/google-cloud-redis-v1.rb",
     "lib/google/cloud/redis/v1.rb",
+    "lib/google/cloud/redis/v1/bindings_override.rb",
     "lib/google/cloud/redis/v1/cloud_redis.rb",
     "lib/google/cloud/redis/v1/cloud_redis/client.rb",
     "lib/google/cloud/redis/v1/cloud_redis/credentials.rb",
