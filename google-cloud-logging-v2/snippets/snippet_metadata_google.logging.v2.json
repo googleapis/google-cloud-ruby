@@ -332,6 +332,86 @@
       ]
     },
     {
+      "region_tag": "logging_v2_generated_ConfigService_CreateBucketAsync_sync",
+      "title": "Snippet for the create_bucket_async call in the ConfigService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#create_bucket_async. It may require modification in order to execute successfully.",
+      "file": "config_service/create_bucket_async.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_bucket_async",
+        "full_name": "::Google::Cloud::Logging::V2::ConfigService::Client#create_bucket_async",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Logging::V2::CreateBucketRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ConfigService::Client",
+          "full_name": "::Google::Cloud::Logging::V2::ConfigService::Client"
+        },
+        "method": {
+          "short_name": "CreateBucketAsync",
+          "full_name": "google.logging.v2.ConfigServiceV2.CreateBucketAsync",
+          "service": {
+            "short_name": "ConfigService",
+            "full_name": "google.logging.v2.ConfigServiceV2"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "logging_v2_generated_ConfigService_UpdateBucketAsync_sync",
+      "title": "Snippet for the update_bucket_async call in the ConfigService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#update_bucket_async. It may require modification in order to execute successfully.",
+      "file": "config_service/update_bucket_async.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_bucket_async",
+        "full_name": "::Google::Cloud::Logging::V2::ConfigService::Client#update_bucket_async",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Logging::V2::UpdateBucketRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ConfigService::Client",
+          "full_name": "::Google::Cloud::Logging::V2::ConfigService::Client"
+        },
+        "method": {
+          "short_name": "UpdateBucketAsync",
+          "full_name": "google.logging.v2.ConfigServiceV2.UpdateBucketAsync",
+          "service": {
+            "short_name": "ConfigService",
+            "full_name": "google.logging.v2.ConfigServiceV2"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "logging_v2_generated_ConfigService_CreateBucket_sync",
       "title": "Snippet for the create_bucket call in the ConfigService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#create_bucket. It may require modification in order to execute successfully.",
@@ -875,6 +955,166 @@
         "method": {
           "short_name": "DeleteSink",
           "full_name": "google.logging.v2.ConfigServiceV2.DeleteSink",
+          "service": {
+            "short_name": "ConfigService",
+            "full_name": "google.logging.v2.ConfigServiceV2"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "logging_v2_generated_ConfigService_CreateLink_sync",
+      "title": "Snippet for the create_link call in the ConfigService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#create_link. It may require modification in order to execute successfully.",
+      "file": "config_service/create_link.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_link",
+        "full_name": "::Google::Cloud::Logging::V2::ConfigService::Client#create_link",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Logging::V2::CreateLinkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ConfigService::Client",
+          "full_name": "::Google::Cloud::Logging::V2::ConfigService::Client"
+        },
+        "method": {
+          "short_name": "CreateLink",
+          "full_name": "google.logging.v2.ConfigServiceV2.CreateLink",
+          "service": {
+            "short_name": "ConfigService",
+            "full_name": "google.logging.v2.ConfigServiceV2"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "logging_v2_generated_ConfigService_DeleteLink_sync",
+      "title": "Snippet for the delete_link call in the ConfigService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#delete_link. It may require modification in order to execute successfully.",
+      "file": "config_service/delete_link.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_link",
+        "full_name": "::Google::Cloud::Logging::V2::ConfigService::Client#delete_link",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Logging::V2::DeleteLinkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ConfigService::Client",
+          "full_name": "::Google::Cloud::Logging::V2::ConfigService::Client"
+        },
+        "method": {
+          "short_name": "DeleteLink",
+          "full_name": "google.logging.v2.ConfigServiceV2.DeleteLink",
+          "service": {
+            "short_name": "ConfigService",
+            "full_name": "google.logging.v2.ConfigServiceV2"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "logging_v2_generated_ConfigService_ListLinks_sync",
+      "title": "Snippet for the list_links call in the ConfigService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#list_links. It may require modification in order to execute successfully.",
+      "file": "config_service/list_links.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_links",
+        "full_name": "::Google::Cloud::Logging::V2::ConfigService::Client#list_links",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Logging::V2::ListLinksRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Logging::V2::ListLinksResponse",
+        "client": {
+          "short_name": "ConfigService::Client",
+          "full_name": "::Google::Cloud::Logging::V2::ConfigService::Client"
+        },
+        "method": {
+          "short_name": "ListLinks",
+          "full_name": "google.logging.v2.ConfigServiceV2.ListLinks",
+          "service": {
+            "short_name": "ConfigService",
+            "full_name": "google.logging.v2.ConfigServiceV2"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "logging_v2_generated_ConfigService_GetLink_sync",
+      "title": "Snippet for the get_link call in the ConfigService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Logging::V2::ConfigService::Client#get_link. It may require modification in order to execute successfully.",
+      "file": "config_service/get_link.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_link",
+        "full_name": "::Google::Cloud::Logging::V2::ConfigService::Client#get_link",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Logging::V2::GetLinkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Logging::V2::Link",
+        "client": {
+          "short_name": "ConfigService::Client",
+          "full_name": "::Google::Cloud::Logging::V2::ConfigService::Client"
+        },
+        "method": {
+          "short_name": "GetLink",
+          "full_name": "google.logging.v2.ConfigServiceV2.GetLink",
           "service": {
             "short_name": "ConfigService",
             "full_name": "google.logging.v2.ConfigServiceV2"
