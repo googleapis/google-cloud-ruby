@@ -52,9 +52,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.logging.v2.ListLogsRequest" do
       optional :parent, :string, 1
+      repeated :resource_names, :string, 8
       optional :page_size, :int32, 2
       optional :page_token, :string, 3
-      repeated :resource_names, :string, 8
     end
     add_message "google.logging.v2.ListLogsResponse" do
       repeated :log_names, :string, 3
