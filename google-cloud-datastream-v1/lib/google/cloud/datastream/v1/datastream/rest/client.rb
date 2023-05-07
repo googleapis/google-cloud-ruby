@@ -380,8 +380,8 @@ module Google
               #     The request ID must be a valid UUID with the exception that zero UUID is
               #     not supported (00000000-0000-0000-0000-000000000000).
               #   @param validate_only [::Boolean]
-              #     Optional. Only validate the connection profile, but don't create any resources.
-              #     The default is false.
+              #     Optional. Only validate the connection profile, but don't create any
+              #     resources. The default is false.
               #   @param force [::Boolean]
               #     Optional. Create the connection profile without validating it.
               # @yield [result, operation] Access the result along with the TransportOperation object
@@ -468,8 +468,8 @@ module Google
               #     The request ID must be a valid UUID with the exception that zero UUID is
               #     not supported (00000000-0000-0000-0000-000000000000).
               #   @param validate_only [::Boolean]
-              #     Optional. Only validate the connection profile, but don't update any resources.
-              #     The default is false.
+              #     Optional. Only validate the connection profile, but don't update any
+              #     resources. The default is false.
               #   @param force [::Boolean]
               #     Optional. Update the connection profile without validating it.
               # @yield [result, operation] Access the result along with the TransportOperation object
@@ -614,8 +614,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The parent resource of the connection profile type. Must be in the
-              #     format `projects/*/locations/*`.
+              #     Required. The parent resource of the connection profile type. Must be in
+              #     the format `projects/*/locations/*`.
               #   @param connection_profile [::Google::Cloud::Datastream::V1::ConnectionProfile, ::Hash]
               #     An ad-hoc connection profile configuration.
               #   @param connection_profile_name [::String]
@@ -938,8 +938,8 @@ module Google
               #     The request ID must be a valid UUID with the exception that zero UUID is
               #     not supported (00000000-0000-0000-0000-000000000000).
               #   @param validate_only [::Boolean]
-              #     Optional. Only validate the stream with the changes, without actually updating it.
-              #     The default is false.
+              #     Optional. Only validate the stream with the changes, without actually
+              #     updating it. The default is false.
               #   @param force [::Boolean]
               #     Optional. Update the stream without validating it.
               # @yield [result, operation] Access the result along with the TransportOperation object
@@ -1280,7 +1280,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param object [::String]
-              #     Required. The name of the stream object resource to start a backfill job for.
+              #     Required. The name of the stream object resource to start a backfill job
+              #     for.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Datastream::V1::StartBackfillJobResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1342,7 +1343,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param object [::String]
-              #     Required. The name of the stream object resource to stop the backfill job for.
+              #     Required. The name of the stream object resource to stop the backfill job
+              #     for.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Datastream::V1::StopBackfillJobResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1405,8 +1407,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The resource name for the location for which static IPs should be returned.
-              #     Must be in the format `projects/*/locations/*`.
+              #     Required. The resource name for the location for which static IPs should be
+              #     returned. Must be in the format `projects/*/locations/*`.
               #   @param page_size [::Integer]
               #     Maximum number of Ips to return, will likely not be specified.
               #   @param page_token [::String]
@@ -1468,7 +1470,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload create_private_connection(parent: nil, private_connection_id: nil, private_connection: nil, request_id: nil)
+              # @overload create_private_connection(parent: nil, private_connection_id: nil, private_connection: nil, request_id: nil, force: nil)
               #   Pass arguments to `create_private_connection` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1493,6 +1495,8 @@ module Google
               #
               #     The request ID must be a valid UUID with the exception that zero UUID is
               #     not supported (00000000-0000-0000-0000-000000000000).
+              #   @param force [::Boolean]
+              #     Optional. If set to true, will skip validations.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1618,7 +1622,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The parent that owns the collection of private connectivity configurations.
+              #     Required. The parent that owns the collection of private connectivity
+              #     configurations.
               #   @param page_size [::Integer]
               #     Maximum number of private connectivity configurations to return.
               #     If unspecified, at most 50 private connectivity configurations that will be
@@ -1712,8 +1717,8 @@ module Google
               #     The request ID must be a valid UUID with the exception that zero UUID is
               #     not supported (00000000-0000-0000-0000-000000000000).
               #   @param force [::Boolean]
-              #     Optional. If set to true, any child routes that belong to this PrivateConnection will
-              #     also be deleted.
+              #     Optional. If set to true, any child routes that belong to this
+              #     PrivateConnection will also be deleted.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

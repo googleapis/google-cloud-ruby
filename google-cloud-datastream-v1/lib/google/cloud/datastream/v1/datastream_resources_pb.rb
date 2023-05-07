@@ -136,6 +136,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :include_objects, :message, 1, "google.cloud.datastream.v1.OracleRdbms"
       optional :exclude_objects, :message, 2, "google.cloud.datastream.v1.OracleRdbms"
       optional :max_concurrent_cdc_tasks, :int32, 3
+      optional :max_concurrent_backfill_tasks, :int32, 4
       oneof :large_objects_handling do
         optional :drop_large_objects, :message, 100, "google.cloud.datastream.v1.OracleSourceConfig.DropLargeObjects"
         optional :stream_large_objects, :message, 102, "google.cloud.datastream.v1.OracleSourceConfig.StreamLargeObjects"
@@ -171,6 +172,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :exclude_objects, :message, 2, "google.cloud.datastream.v1.PostgresqlRdbms"
       optional :replication_slot, :string, 3
       optional :publication, :string, 4
+      optional :max_concurrent_backfill_tasks, :int32, 5
     end
     add_message "google.cloud.datastream.v1.MysqlColumn" do
       optional :column, :string, 1
@@ -196,6 +198,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :include_objects, :message, 1, "google.cloud.datastream.v1.MysqlRdbms"
       optional :exclude_objects, :message, 2, "google.cloud.datastream.v1.MysqlRdbms"
       optional :max_concurrent_cdc_tasks, :int32, 3
+      optional :max_concurrent_backfill_tasks, :int32, 4
     end
     add_message "google.cloud.datastream.v1.SourceConfig" do
       optional :source_connection_profile, :string, 1

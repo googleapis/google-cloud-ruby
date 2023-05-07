@@ -1165,6 +1165,7 @@ class ::Google::Cloud::Datastream::V1::Datastream::ClientTest < Minitest::Test
     private_connection_id = "hello world"
     private_connection = {}
     request_id = "hello world"
+    force = true
 
     create_private_connection_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_private_connection, name
@@ -1173,6 +1174,7 @@ class ::Google::Cloud::Datastream::V1::Datastream::ClientTest < Minitest::Test
       assert_equal "hello world", request["private_connection_id"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Datastream::V1::PrivateConnection), request["private_connection"]
       assert_equal "hello world", request["request_id"]
+      assert_equal true, request["force"]
       refute_nil options
     end
 
@@ -1183,35 +1185,35 @@ class ::Google::Cloud::Datastream::V1::Datastream::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.create_private_connection({ parent: parent, private_connection_id: private_connection_id, private_connection: private_connection, request_id: request_id }) do |response, operation|
+      client.create_private_connection({ parent: parent, private_connection_id: private_connection_id, private_connection: private_connection, request_id: request_id, force: force }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_private_connection parent: parent, private_connection_id: private_connection_id, private_connection: private_connection, request_id: request_id do |response, operation|
+      client.create_private_connection parent: parent, private_connection_id: private_connection_id, private_connection: private_connection, request_id: request_id, force: force do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_private_connection ::Google::Cloud::Datastream::V1::CreatePrivateConnectionRequest.new(parent: parent, private_connection_id: private_connection_id, private_connection: private_connection, request_id: request_id) do |response, operation|
+      client.create_private_connection ::Google::Cloud::Datastream::V1::CreatePrivateConnectionRequest.new(parent: parent, private_connection_id: private_connection_id, private_connection: private_connection, request_id: request_id, force: force) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_private_connection({ parent: parent, private_connection_id: private_connection_id, private_connection: private_connection, request_id: request_id }, grpc_options) do |response, operation|
+      client.create_private_connection({ parent: parent, private_connection_id: private_connection_id, private_connection: private_connection, request_id: request_id, force: force }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_private_connection(::Google::Cloud::Datastream::V1::CreatePrivateConnectionRequest.new(parent: parent, private_connection_id: private_connection_id, private_connection: private_connection, request_id: request_id), grpc_options) do |response, operation|
+      client.create_private_connection(::Google::Cloud::Datastream::V1::CreatePrivateConnectionRequest.new(parent: parent, private_connection_id: private_connection_id, private_connection: private_connection, request_id: request_id, force: force), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
