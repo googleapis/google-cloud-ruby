@@ -407,7 +407,78 @@ module Google
         #     The input audio content to be recognized. Must be sent if
         #     `query_input` was set to a streaming input audio config. The complete audio
         #     over all streaming messages must not exceed 1 minute.
+        # @!attribute [rw] enable_debugging_info
+        #   @return [::Boolean]
+        #     if true, `StreamingDetectIntentResponse.debugging_info` will get populated.
         class StreamingDetectIntentRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Cloud conversation info for easier debugging.
+        # It will get populated in `StreamingDetectIntentResponse` or
+        # `StreamingAnalyzeContentResponse` when the flag `enable_debugging_info` is
+        # set to true in corresponding requests.
+        # @!attribute [rw] audio_data_chunks
+        #   @return [::Integer]
+        #     Number of input audio data chunks in streaming requests.
+        # @!attribute [rw] result_end_time_offset
+        #   @return [::Google::Protobuf::Duration]
+        #     Time offset of the end of speech utterance relative to the
+        #     beginning of the first audio chunk.
+        # @!attribute [rw] first_audio_duration
+        #   @return [::Google::Protobuf::Duration]
+        #     Duration of first audio chunk.
+        # @!attribute [rw] single_utterance
+        #   @return [::Boolean]
+        #     Whether client used single utterance mode.
+        # @!attribute [rw] speech_partial_results_end_times
+        #   @return [::Array<::Google::Protobuf::Duration>]
+        #     Time offsets of the speech partial results relative to the beginning of
+        #     the stream.
+        # @!attribute [rw] speech_final_results_end_times
+        #   @return [::Array<::Google::Protobuf::Duration>]
+        #     Time offsets of the speech final results (is_final=true) relative to the
+        #     beginning of the stream.
+        # @!attribute [rw] partial_responses
+        #   @return [::Integer]
+        #     Total number of partial responses.
+        # @!attribute [rw] speaker_id_passive_latency_ms_offset
+        #   @return [::Integer]
+        #     Time offset of Speaker ID stream close time relative to the Speech stream
+        #     close time in milliseconds. Only meaningful for conversations involving
+        #     passive verification.
+        # @!attribute [rw] bargein_event_triggered
+        #   @return [::Boolean]
+        #     Whether a barge-in event is triggered in this request.
+        # @!attribute [rw] speech_single_utterance
+        #   @return [::Boolean]
+        #     Whether speech uses single utterance mode.
+        # @!attribute [rw] dtmf_partial_results_times
+        #   @return [::Array<::Google::Protobuf::Duration>]
+        #     Time offsets of the DTMF partial results relative to the beginning of
+        #     the stream.
+        # @!attribute [rw] dtmf_final_results_times
+        #   @return [::Array<::Google::Protobuf::Duration>]
+        #     Time offsets of the DTMF final results relative to the beginning of
+        #     the stream.
+        # @!attribute [rw] single_utterance_end_time_offset
+        #   @return [::Google::Protobuf::Duration]
+        #     Time offset of the end-of-single-utterance signal relative to the
+        #     beginning of the stream.
+        # @!attribute [rw] no_speech_timeout
+        #   @return [::Google::Protobuf::Duration]
+        #     No speech timeout settings observed at runtime.
+        # @!attribute [rw] is_input_text
+        #   @return [::Boolean]
+        #     Whether the streaming terminates with an injected text query.
+        # @!attribute [rw] client_half_close_time_offset
+        #   @return [::Google::Protobuf::Duration]
+        #     Client half close time in terms of input audio duration.
+        # @!attribute [rw] client_half_close_streaming_time_offset
+        #   @return [::Google::Protobuf::Duration]
+        #     Client half close time in terms of API streaming duration.
+        class CloudConversationDebuggingInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -454,6 +525,10 @@ module Google
         # @!attribute [rw] output_audio_config
         #   @return [::Google::Cloud::Dialogflow::V2::OutputAudioConfig]
         #     The config used by the speech synthesizer to generate the output audio.
+        # @!attribute [rw] debugging_info
+        #   @return [::Google::Cloud::Dialogflow::V2::CloudConversationDebuggingInfo]
+        #     Debugging info that would get populated when
+        #     `StreamingDetectIntentRequest.enable_debugging_info` is set to true.
         class StreamingDetectIntentResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
