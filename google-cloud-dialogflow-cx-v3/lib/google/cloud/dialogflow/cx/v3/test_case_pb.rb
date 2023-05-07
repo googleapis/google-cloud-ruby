@@ -73,6 +73,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :PAGE, 2
       value :PARAMETERS, 3
       value :UTTERANCE, 4
+      value :FLOW, 5
     end
     add_message "google.cloud.dialogflow.cx.v3.TransitionCoverage" do
       repeated :transitions, :message, 1, "google.cloud.dialogflow.cx.v3.TransitionCoverage.Transition"

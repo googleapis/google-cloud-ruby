@@ -245,6 +245,10 @@ module Google
           #   @return [::String]
           #     If an {::Google::Cloud::Dialogflow::CX::V3::EventInput event} was provided as
           #     input, this field will contain the name of the event.
+          # @!attribute [rw] dtmf_digits
+          #   @return [::String]
+          #     If {::Google::Cloud::Dialogflow::CX::V3::DtmfInput DTMF} was provided as input,
+          #     this field will contain the DTMF digits.
           # @!attribute [rw] language_code
           #   @return [::String]
           #     The language code specified in the [original
