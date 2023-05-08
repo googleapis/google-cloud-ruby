@@ -30,6 +30,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :model_variant, :enum, 10, "google.cloud.dialogflow.v2.SpeechModelVariant"
       optional :single_utterance, :bool, 8
       optional :disable_no_speech_recognized_event, :bool, 14
+      optional :enable_automatic_punctuation, :bool, 17
     end
     add_message "google.cloud.dialogflow.v2.VoiceSelectionParams" do
       optional :name, :string, 1

@@ -7,6 +7,7 @@ require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
+require 'google/cloud/dialogflow/v2/conversation_profile_pb'
 require 'google/cloud/dialogflow/v2/participant_pb'
 require 'google/protobuf/timestamp_pb'
 
@@ -81,6 +82,25 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       map :text_sections, :string, :string, 4
       optional :answer_record, :string, 3
     end
+    add_message "google.cloud.dialogflow.v2.GenerateStatelessSummaryRequest" do
+      optional :stateless_conversation, :message, 1, "google.cloud.dialogflow.v2.GenerateStatelessSummaryRequest.MinimalConversation"
+      optional :conversation_profile, :message, 2, "google.cloud.dialogflow.v2.ConversationProfile"
+      optional :latest_message, :string, 3
+      optional :max_context_size, :int32, 4
+    end
+    add_message "google.cloud.dialogflow.v2.GenerateStatelessSummaryRequest.MinimalConversation" do
+      repeated :messages, :message, 1, "google.cloud.dialogflow.v2.Message"
+      optional :parent, :string, 2
+    end
+    add_message "google.cloud.dialogflow.v2.GenerateStatelessSummaryResponse" do
+      optional :summary, :message, 1, "google.cloud.dialogflow.v2.GenerateStatelessSummaryResponse.Summary"
+      optional :latest_message, :string, 2
+      optional :context_size, :int32, 3
+    end
+    add_message "google.cloud.dialogflow.v2.GenerateStatelessSummaryResponse.Summary" do
+      optional :text, :string, 1
+      map :text_sections, :string, :string, 2
+    end
   end
 end
 
@@ -102,6 +122,10 @@ module Google
         SuggestConversationSummaryRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.SuggestConversationSummaryRequest").msgclass
         SuggestConversationSummaryResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.SuggestConversationSummaryResponse").msgclass
         SuggestConversationSummaryResponse::Summary = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.SuggestConversationSummaryResponse.Summary").msgclass
+        GenerateStatelessSummaryRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.GenerateStatelessSummaryRequest").msgclass
+        GenerateStatelessSummaryRequest::MinimalConversation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.GenerateStatelessSummaryRequest.MinimalConversation").msgclass
+        GenerateStatelessSummaryResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.GenerateStatelessSummaryResponse").msgclass
+        GenerateStatelessSummaryResponse::Summary = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.GenerateStatelessSummaryResponse.Summary").msgclass
       end
     end
   end

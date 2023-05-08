@@ -141,6 +141,8 @@ module Google
         #   @return [::Boolean]
         #     Indicates whether the answer/item was clicked by the human agent
         #     or not. Default to false.
+        #     For knowledge search, the answer record is considered to be clicked if the
+        #     answer was copied or any URI was clicked.
         # @!attribute [rw] click_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Time when the answer/item was clicked.

@@ -785,6 +785,106 @@ module Google
             end
 
             ##
+            # Generates and returns a summary for a conversation that does not have a
+            # resource created for it.
+            #
+            # @overload generate_stateless_summary(request, options = nil)
+            #   Pass arguments to `generate_stateless_summary` via a request object, either of type
+            #   {::Google::Cloud::Dialogflow::V2::GenerateStatelessSummaryRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dialogflow::V2::GenerateStatelessSummaryRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload generate_stateless_summary(stateless_conversation: nil, conversation_profile: nil, latest_message: nil, max_context_size: nil)
+            #   Pass arguments to `generate_stateless_summary` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param stateless_conversation [::Google::Cloud::Dialogflow::V2::GenerateStatelessSummaryRequest::MinimalConversation, ::Hash]
+            #     Required. The conversation to suggest a summary for.
+            #   @param conversation_profile [::Google::Cloud::Dialogflow::V2::ConversationProfile, ::Hash]
+            #     Required. A ConversationProfile containing information required for Summary
+            #     generation.
+            #     Required fields: \\{language_code, security_settings}
+            #     Optional fields: \\{agent_assistant_config}
+            #   @param latest_message [::String]
+            #     The name of the latest conversation message used as context for
+            #     generating a Summary. If empty, the latest message of the conversation will
+            #     be used. The format is specific to the user and the names of the messages
+            #     provided.
+            #   @param max_context_size [::Integer]
+            #     Max number of messages prior to and including
+            #     [latest_message] to use as context when compiling the
+            #     suggestion. By default 500 and at most 1000.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Dialogflow::V2::GenerateStatelessSummaryResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Dialogflow::V2::GenerateStatelessSummaryResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Conversations::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::GenerateStatelessSummaryRequest.new
+            #
+            #   # Call the generate_stateless_summary method.
+            #   result = client.generate_stateless_summary request
+            #
+            #   # The returned object is of type Google::Cloud::Dialogflow::V2::GenerateStatelessSummaryResponse.
+            #   p result
+            #
+            def generate_stateless_summary request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dialogflow::V2::GenerateStatelessSummaryRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.generate_stateless_summary.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.stateless_conversation&.parent
+                header_params["stateless_conversation.parent"] = request.stateless_conversation.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.generate_stateless_summary.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.generate_stateless_summary.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @conversations_stub.call_rpc :generate_stateless_summary, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the Conversations API.
             #
             # This class represents the configuration for Conversations,
@@ -949,6 +1049,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :suggest_conversation_summary
+                ##
+                # RPC-specific configuration for `generate_stateless_summary`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :generate_stateless_summary
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -964,6 +1069,8 @@ module Google
                   @list_messages = ::Gapic::Config::Method.new list_messages_config
                   suggest_conversation_summary_config = parent_rpcs.suggest_conversation_summary if parent_rpcs.respond_to? :suggest_conversation_summary
                   @suggest_conversation_summary = ::Gapic::Config::Method.new suggest_conversation_summary_config
+                  generate_stateless_summary_config = parent_rpcs.generate_stateless_summary if parent_rpcs.respond_to? :generate_stateless_summary
+                  @generate_stateless_summary = ::Gapic::Config::Method.new generate_stateless_summary_config
 
                   yield self if block_given?
                 end

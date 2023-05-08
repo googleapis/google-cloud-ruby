@@ -130,6 +130,7 @@ class ::Google::Cloud::Dialogflow::V2::Sessions::ClientTest < Minitest::Test
     output_audio_config = {}
     output_audio_config_mask = {}
     input_audio = "hello world"
+    enable_debugging_info = true
 
     streaming_detect_intent_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
       assert_equal :streaming_detect_intent, name
@@ -145,8 +146,8 @@ class ::Google::Cloud::Dialogflow::V2::Sessions::ClientTest < Minitest::Test
       end
 
       # Use enumerable object with hash and protobuf object.
-      request_hash = { session: session, query_params: query_params, query_input: query_input, single_utterance: single_utterance, output_audio_config: output_audio_config, output_audio_config_mask: output_audio_config_mask, input_audio: input_audio }
-      request_proto = ::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest.new session: session, query_params: query_params, query_input: query_input, single_utterance: single_utterance, output_audio_config: output_audio_config, output_audio_config_mask: output_audio_config_mask, input_audio: input_audio
+      request_hash = { session: session, query_params: query_params, query_input: query_input, single_utterance: single_utterance, output_audio_config: output_audio_config, output_audio_config_mask: output_audio_config_mask, input_audio: input_audio, enable_debugging_info: enable_debugging_info }
+      request_proto = ::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest.new session: session, query_params: query_params, query_input: query_input, single_utterance: single_utterance, output_audio_config: output_audio_config, output_audio_config_mask: output_audio_config_mask, input_audio: input_audio, enable_debugging_info: enable_debugging_info
       enum_input = [request_hash, request_proto].to_enum
       client.streaming_detect_intent enum_input do |response, operation|
         assert_kind_of Enumerable, response
@@ -157,8 +158,8 @@ class ::Google::Cloud::Dialogflow::V2::Sessions::ClientTest < Minitest::Test
       end
 
       # Use stream input object (from gapic-common).
-      request_hash = { session: session, query_params: query_params, query_input: query_input, single_utterance: single_utterance, output_audio_config: output_audio_config, output_audio_config_mask: output_audio_config_mask, input_audio: input_audio }
-      request_proto = ::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest.new session: session, query_params: query_params, query_input: query_input, single_utterance: single_utterance, output_audio_config: output_audio_config, output_audio_config_mask: output_audio_config_mask, input_audio: input_audio
+      request_hash = { session: session, query_params: query_params, query_input: query_input, single_utterance: single_utterance, output_audio_config: output_audio_config, output_audio_config_mask: output_audio_config_mask, input_audio: input_audio, enable_debugging_info: enable_debugging_info }
+      request_proto = ::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest.new session: session, query_params: query_params, query_input: query_input, single_utterance: single_utterance, output_audio_config: output_audio_config, output_audio_config_mask: output_audio_config_mask, input_audio: input_audio, enable_debugging_info: enable_debugging_info
       stream_input = Gapic::StreamInput.new
       client.streaming_detect_intent stream_input do |response, operation|
         assert_kind_of Enumerable, response
@@ -172,8 +173,8 @@ class ::Google::Cloud::Dialogflow::V2::Sessions::ClientTest < Minitest::Test
       stream_input.close
 
       # Use enumerable object with hash and protobuf object with options.
-      request_hash = { session: session, query_params: query_params, query_input: query_input, single_utterance: single_utterance, output_audio_config: output_audio_config, output_audio_config_mask: output_audio_config_mask, input_audio: input_audio }
-      request_proto = ::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest.new session: session, query_params: query_params, query_input: query_input, single_utterance: single_utterance, output_audio_config: output_audio_config, output_audio_config_mask: output_audio_config_mask, input_audio: input_audio
+      request_hash = { session: session, query_params: query_params, query_input: query_input, single_utterance: single_utterance, output_audio_config: output_audio_config, output_audio_config_mask: output_audio_config_mask, input_audio: input_audio, enable_debugging_info: enable_debugging_info }
+      request_proto = ::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest.new session: session, query_params: query_params, query_input: query_input, single_utterance: single_utterance, output_audio_config: output_audio_config, output_audio_config_mask: output_audio_config_mask, input_audio: input_audio, enable_debugging_info: enable_debugging_info
       enum_input = [request_hash, request_proto].to_enum
       client.streaming_detect_intent enum_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
@@ -184,8 +185,8 @@ class ::Google::Cloud::Dialogflow::V2::Sessions::ClientTest < Minitest::Test
       end
 
       # Use stream input object (from gapic-common) with options.
-      request_hash = { session: session, query_params: query_params, query_input: query_input, single_utterance: single_utterance, output_audio_config: output_audio_config, output_audio_config_mask: output_audio_config_mask, input_audio: input_audio }
-      request_proto = ::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest.new session: session, query_params: query_params, query_input: query_input, single_utterance: single_utterance, output_audio_config: output_audio_config, output_audio_config_mask: output_audio_config_mask, input_audio: input_audio
+      request_hash = { session: session, query_params: query_params, query_input: query_input, single_utterance: single_utterance, output_audio_config: output_audio_config, output_audio_config_mask: output_audio_config_mask, input_audio: input_audio, enable_debugging_info: enable_debugging_info }
+      request_proto = ::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest.new session: session, query_params: query_params, query_input: query_input, single_utterance: single_utterance, output_audio_config: output_audio_config, output_audio_config_mask: output_audio_config_mask, input_audio: input_audio, enable_debugging_info: enable_debugging_info
       stream_input = Gapic::StreamInput.new
       client.streaming_detect_intent stream_input, grpc_options do |response, operation|
         assert_kind_of Enumerable, response
@@ -210,6 +211,7 @@ class ::Google::Cloud::Dialogflow::V2::Sessions::ClientTest < Minitest::Test
           assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::OutputAudioConfig), r["output_audio_config"]
           assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), r["output_audio_config_mask"]
           assert_equal "hello world", r["input_audio"]
+          assert_equal true, r["enable_debugging_info"]
         end
       end
     end

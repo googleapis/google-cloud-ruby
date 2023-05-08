@@ -140,6 +140,12 @@ module Google
         #     [Cloud Speech API
         #     documentation](https://cloud.google.com/speech-to-text/docs/basics#select-model)
         #     for more details.
+        #     If you specify a model, the following models typically have the best
+        #     performance:
+        #
+        #     - phone_call (best for Agent Assist and telephony)
+        #     - latest_short (best for Dialogflow non-telephony)
+        #     - command_and_search (best for very short utterances and commands)
         # @!attribute [rw] model_variant
         #   @return [::Google::Cloud::Dialogflow::V2::SpeechModelVariant]
         #     Which variant of the [Speech
@@ -164,6 +170,9 @@ module Google
         #     {::Google::Cloud::Dialogflow::V2::Participants::Client#streaming_analyze_content Participants.StreamingAnalyzeContent}.
         #     If `false` and recognition doesn't return any result, trigger
         #     `NO_SPEECH_RECOGNIZED` event to Dialogflow agent.
+        # @!attribute [rw] enable_automatic_punctuation
+        #   @return [::Boolean]
+        #     Enable automatic punctuation option at the speech backend.
         class InputAudioConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
