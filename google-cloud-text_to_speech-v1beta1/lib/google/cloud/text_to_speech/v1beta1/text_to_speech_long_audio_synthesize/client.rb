@@ -179,17 +179,18 @@ module Google
             #
             #   @param parent [::String]
             #     The resource states of the request in the form of
-            #     `projects/*/locations/*/voices/*`.
+            #     `projects/*/locations/*`.
             #   @param input [::Google::Cloud::TextToSpeech::V1beta1::SynthesisInput, ::Hash]
             #     Required. The Synthesizer requires either plain text or SSML as input.
+            #     While Long Audio is in preview, SSML is temporarily unsupported.
             #   @param audio_config [::Google::Cloud::TextToSpeech::V1beta1::AudioConfig, ::Hash]
             #     Required. The configuration of the synthesized audio.
             #   @param output_gcs_uri [::String]
-            #     Specifies a Cloud Storage URI for the synthesis results. Must be
+            #     Required. Specifies a Cloud Storage URI for the synthesis results. Must be
             #     specified in the format: `gs://bucket_name/object_name`, and the bucket
             #     must already exist.
             #   @param voice [::Google::Cloud::TextToSpeech::V1beta1::VoiceSelectionParams, ::Hash]
-            #     The desired voice of the synthesized audio.
+            #     Required. The desired voice of the synthesized audio.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
