@@ -90,6 +90,12 @@ module Google
           #     [Cloud Speech API
           #     documentation](https://cloud.google.com/speech-to-text/docs/basics#select-model)
           #     for more details.
+          #     If you specify a model, the following models typically have the best
+          #     performance:
+          #
+          #     - phone_call (best for Agent Assist and telephony)
+          #     - latest_short (best for Dialogflow non-telephony)
+          #     - command_and_search (best for very short utterances and commands)
           # @!attribute [rw] model_variant
           #   @return [::Google::Cloud::Dialogflow::CX::V3::SpeechModelVariant]
           #     Optional. Which variant of the [Speech
@@ -185,12 +191,22 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Settings related to speech generating.
+          # Settings related to speech synthesizing.
           # @!attribute [rw] synthesize_speech_configs
           #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Dialogflow::CX::V3::SynthesizeSpeechConfig}]
-          #     Configuration of how speech should be synthesized, mapping from
-          #     language (https://dialogflow.com/docs/reference/language) to
+          #     Configuration of how speech should be synthesized, mapping from language
+          #     (https://cloud.google.com/dialogflow/cx/docs/reference/language) to
           #     SynthesizeSpeechConfig.
+          #
+          #     These settings affect:
+          #
+          #      - The synthesize configuration used in [phone
+          #        gateway](https://cloud.google.com/dialogflow/cx/docs/concept/integration/phone-gateway).
+          #
+          #      - You no longer need to specify
+          #        {::Google::Cloud::Dialogflow::CX::V3::OutputAudioConfig#synthesize_speech_config OutputAudioConfig.synthesize_speech_config}
+          #        when invoking API calls. Your agent will use the pre-configured options
+          #        for speech synthesizing.
           class TextToSpeechSettings
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

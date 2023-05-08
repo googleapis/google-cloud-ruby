@@ -44,8 +44,29 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :query_input, :message, 3, "google.cloud.dialogflow.cx.v3.QueryInput"
       optional :output_audio_config, :message, 4, "google.cloud.dialogflow.cx.v3.OutputAudioConfig"
       optional :enable_partial_response, :bool, 5
+      optional :enable_debugging_info, :bool, 8
+    end
+    add_message "google.cloud.dialogflow.cx.v3.CloudConversationDebuggingInfo" do
+      optional :audio_data_chunks, :int32, 1
+      optional :result_end_time_offset, :message, 2, "google.protobuf.Duration"
+      optional :first_audio_duration, :message, 3, "google.protobuf.Duration"
+      optional :single_utterance, :bool, 5
+      repeated :speech_partial_results_end_times, :message, 6, "google.protobuf.Duration"
+      repeated :speech_final_results_end_times, :message, 7, "google.protobuf.Duration"
+      optional :partial_responses, :int32, 8
+      optional :speaker_id_passive_latency_ms_offset, :int32, 9
+      optional :bargein_event_triggered, :bool, 10
+      optional :speech_single_utterance, :bool, 11
+      repeated :dtmf_partial_results_times, :message, 12, "google.protobuf.Duration"
+      repeated :dtmf_final_results_times, :message, 13, "google.protobuf.Duration"
+      optional :single_utterance_end_time_offset, :message, 14, "google.protobuf.Duration"
+      optional :no_speech_timeout, :message, 15, "google.protobuf.Duration"
+      optional :is_input_text, :bool, 16
+      optional :client_half_close_time_offset, :message, 17, "google.protobuf.Duration"
+      optional :client_half_close_streaming_time_offset, :message, 18, "google.protobuf.Duration"
     end
     add_message "google.cloud.dialogflow.cx.v3.StreamingDetectIntentResponse" do
+      optional :debugging_info, :message, 4, "google.cloud.dialogflow.cx.v3.CloudConversationDebuggingInfo"
       oneof :response do
         optional :recognition_result, :message, 1, "google.cloud.dialogflow.cx.v3.StreamingRecognitionResult"
         optional :detect_intent_response, :message, 2, "google.cloud.dialogflow.cx.v3.DetectIntentResponse"
@@ -186,6 +207,7 @@ module Google
           DetectIntentResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.cx.v3.DetectIntentResponse").msgclass
           DetectIntentResponse::ResponseType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.cx.v3.DetectIntentResponse.ResponseType").enummodule
           StreamingDetectIntentRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.cx.v3.StreamingDetectIntentRequest").msgclass
+          CloudConversationDebuggingInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.cx.v3.CloudConversationDebuggingInfo").msgclass
           StreamingDetectIntentResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.cx.v3.StreamingDetectIntentResponse").msgclass
           StreamingRecognitionResult = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.cx.v3.StreamingRecognitionResult").msgclass
           StreamingRecognitionResult::MessageType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.cx.v3.StreamingRecognitionResult.MessageType").enummodule

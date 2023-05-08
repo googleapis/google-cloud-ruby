@@ -257,7 +257,7 @@ module Google
           # @!attribute [rw] agent_uri
           #   @return [::String]
           #     The URI to a file containing the exported agent. This field is populated
-          #     only if `agent_uri` is specified in
+          #     if `agent_uri` is specified in
           #     {::Google::Cloud::Dialogflow::CX::V3::ExportAgentRequest ExportAgentRequest}.
           # @!attribute [rw] agent_content
           #   @return [::String]
