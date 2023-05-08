@@ -1,5 +1,12 @@
 # Release History
 
+### 0.21.0 (2023-05-08)
+
+#### Features
+
+* Support for configuring the Cloud Storage Fuse CSI driver 
+* Support for fleet registration via cluster update 
+
 ### 0.20.0 (2023-04-27)
 
 #### Features
