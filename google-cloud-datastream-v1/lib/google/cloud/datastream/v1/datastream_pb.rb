@@ -9,6 +9,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/datastream/v1/datastream_resources_pb'
 require 'google/longrunning/operations_pb'
+require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
 
@@ -157,6 +158,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :private_connection_id, :string, 2
       optional :private_connection, :message, 3, "google.cloud.datastream.v1.PrivateConnection"
       optional :request_id, :string, 4
+      optional :force, :bool, 6
     end
     add_message "google.cloud.datastream.v1.ListPrivateConnectionsRequest" do
       optional :parent, :string, 1
