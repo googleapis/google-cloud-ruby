@@ -1,5 +1,11 @@
 # Release History
 
+### 0.18.0 (2023-05-08)
+
+#### Features
+
+* Added billing account field to the Entitlement resource ([#21551](https://github.com/googleapis/google-cloud-ruby/issues/21551)) 
+
 ### 0.17.0 (2023-03-15)
 
 #### Features
