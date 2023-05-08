@@ -1,5 +1,15 @@
 # Release History
 
+### 0.10.0 (2023-05-08)
+
+#### Features
+
+* Added locations mixin client 
+* Support for instance customer managed key 
+* Support for instance maintenance versions 
+* Support for instance persistence configuration 
+* Support for instance suspension reasons 
+
 ### 0.9.0 (2023-03-08)
 
 #### Features
