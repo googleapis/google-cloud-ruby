@@ -1,5 +1,15 @@
 # Changelog
 
+### 0.16.0 (2023-05-09)
+
+#### Features
+
+* add debug info to StreamingDetectIntent 
+* add dtmf digits to WebhookRequest 
+* add FLOW as a new DiffType in TestRunDifference 
+* extended CreateAgent timeout to 180 seconds 
+* extended CreateAgent timeout to 180 seconds ([#21559](https://github.com/googleapis/google-cloud-ruby/issues/21559)) 
+
 ### 0.15.1 (2023-03-15)
 
 #### Documentation
