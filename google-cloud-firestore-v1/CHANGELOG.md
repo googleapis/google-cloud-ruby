@@ -1,5 +1,14 @@
 # Release History
 
+### 0.11.0 (2023-05-10)
+
+#### Features
+
+* Added a bloom filter of unchanged document names ([#21547](https://github.com/googleapis/google-cloud-ruby/issues/21547)) 
+#### Bug Fixes
+
+* Set request params header using resource prefix 
+
 ### 0.10.0 (2023-02-17)
 
 #### Features
