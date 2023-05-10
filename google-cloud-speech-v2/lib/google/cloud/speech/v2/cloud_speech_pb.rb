@@ -212,6 +212,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :config_mask, :message, 5, "google.protobuf.FieldMask"
       repeated :files, :message, 3, "google.cloud.speech.v2.BatchRecognizeFileMetadata"
       optional :recognition_output_config, :message, 6, "google.cloud.speech.v2.RecognitionOutputConfig"
+      optional :processing_strategy, :enum, 7, "google.cloud.speech.v2.BatchRecognizeRequest.ProcessingStrategy"
+    end
+    add_enum "google.cloud.speech.v2.BatchRecognizeRequest.ProcessingStrategy" do
+      value :PROCESSING_STRATEGY_UNSPECIFIED, 0
+      value :DYNAMIC_BATCHING, 1
     end
     add_message "google.cloud.speech.v2.GcsOutputConfig" do
       optional :uri, :string, 1
@@ -442,6 +447,7 @@ module Google
         StreamingRecognitionConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v2.StreamingRecognitionConfig").msgclass
         StreamingRecognizeRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v2.StreamingRecognizeRequest").msgclass
         BatchRecognizeRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v2.BatchRecognizeRequest").msgclass
+        BatchRecognizeRequest::ProcessingStrategy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v2.BatchRecognizeRequest.ProcessingStrategy").enummodule
         GcsOutputConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v2.GcsOutputConfig").msgclass
         InlineOutputConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v2.InlineOutputConfig").msgclass
         RecognitionOutputConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v2.RecognitionOutputConfig").msgclass

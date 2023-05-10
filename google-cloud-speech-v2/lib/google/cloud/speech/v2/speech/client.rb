@@ -304,8 +304,8 @@ module Google
             #     format is `projects/{project}/locations/{location}`.
             #   @param page_size [::Integer]
             #     The maximum number of Recognizers to return. The service may return fewer
-            #     than this value. If unspecified, at most 20 Recognizers will be returned.
-            #     The maximum value is 20; values above 20 will be coerced to 20.
+            #     than this value. If unspecified, at most 5 Recognizers will be returned.
+            #     The maximum value is 100; values above 100 will be coerced to 100.
             #   @param page_token [::String]
             #     A page token, received from a previous
             #     {::Google::Cloud::Speech::V2::Speech::Client#list_recognizers ListRecognizers} call.
@@ -999,7 +999,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload batch_recognize(recognizer: nil, config: nil, config_mask: nil, files: nil, recognition_output_config: nil)
+            # @overload batch_recognize(recognizer: nil, config: nil, config_mask: nil, files: nil, recognition_output_config: nil, processing_strategy: nil)
             #   Pass arguments to `batch_recognize` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1032,6 +1032,8 @@ module Google
             #     The maximum number of files allowed to be specified is 5.
             #   @param recognition_output_config [::Google::Cloud::Speech::V2::RecognitionOutputConfig, ::Hash]
             #     Configuration options for where to output the transcripts of each file.
+            #   @param processing_strategy [::Google::Cloud::Speech::V2::BatchRecognizeRequest::ProcessingStrategy]
+            #     Processing strategy to use for this request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -1409,10 +1411,10 @@ module Google
             #     Required. The project and location of CustomClass resources to list. The
             #     expected format is `projects/{project}/locations/{location}`.
             #   @param page_size [::Integer]
-            #     Number of results per requests. A valid page_size ranges from 0 to 20
+            #     Number of results per requests. A valid page_size ranges from 0 to 100
             #     inclusive. If the page_size is zero or unspecified, a page size of 5 will
-            #     be chosen. If the page size exceeds 20, it will be coerced down to 20. Note
-            #     that a call might return fewer results than the requested page size.
+            #     be chosen. If the page size exceeds 100, it will be coerced down to 100.
+            #     Note that a call might return fewer results than the requested page size.
             #   @param page_token [::String]
             #     A page token, received from a previous
             #     {::Google::Cloud::Speech::V2::Speech::Client#list_custom_classes ListCustomClasses} call.
@@ -2018,8 +2020,8 @@ module Google
             #     expected format is `projects/{project}/locations/{location}`.
             #   @param page_size [::Integer]
             #     The maximum number of PhraseSets to return. The service may return fewer
-            #     than this value. If unspecified, at most 20 PhraseSets will be returned.
-            #     The maximum value is 20; values above 20 will be coerced to 20.
+            #     than this value. If unspecified, at most 5 PhraseSets will be returned.
+            #     The maximum value is 100; values above 100 will be coerced to 100.
             #   @param page_token [::String]
             #     A page token, received from a previous
             #     {::Google::Cloud::Speech::V2::Speech::Client#list_phrase_sets ListPhraseSets} call.
