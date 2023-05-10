@@ -398,6 +398,16 @@ module Google
           #   @return [::String]
           #     Conversation model resource name. Format: `projects/<Project
           #     ID>/conversationModels/<Model ID>`.
+          # @!attribute [rw] baseline_model_version
+          #   @return [::String]
+          #     Version of current baseline model. It will be ignored if
+          #     {::Google::Cloud::Dialogflow::V2::HumanAgentAssistantConfig::ConversationModelConfig#model model}
+          #     is set. Valid versions are:
+          #       Article Suggestion baseline model:
+          #         - 0.9
+          #         - 1.0 (default)
+          #       Summarization baseline model:
+          #         - 1.0
           class ConversationModelConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
