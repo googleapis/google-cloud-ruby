@@ -252,6 +252,46 @@
       ]
     },
     {
+      "region_tag": "cloudkms_v1_generated_EkmService_VerifyConnectivity_sync",
+      "title": "Snippet for the verify_connectivity call in the EkmService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::EkmService::Client#verify_connectivity. It may require modification in order to execute successfully.",
+      "file": "ekm_service/verify_connectivity.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "verify_connectivity",
+        "full_name": "::Google::Cloud::Kms::V1::EkmService::Client#verify_connectivity",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Kms::V1::VerifyConnectivityRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Kms::V1::VerifyConnectivityResponse",
+        "client": {
+          "short_name": "EkmService::Client",
+          "full_name": "::Google::Cloud::Kms::V1::EkmService::Client"
+        },
+        "method": {
+          "short_name": "VerifyConnectivity",
+          "full_name": "google.cloud.kms.v1.EkmService.VerifyConnectivity",
+          "service": {
+            "short_name": "EkmService",
+            "full_name": "google.cloud.kms.v1.EkmService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "cloudkms_v1_generated_KeyManagementService_ListKeyRings_sync",
       "title": "Snippet for the list_key_rings call in the KeyManagementService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Kms::V1::KeyManagementService::Client#list_key_rings. It may require modification in order to execute successfully.",

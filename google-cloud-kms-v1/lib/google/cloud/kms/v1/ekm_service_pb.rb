@@ -77,6 +77,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 1
       optional :default_ekm_connection, :string, 2
     end
+    add_message "google.cloud.kms.v1.VerifyConnectivityRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.cloud.kms.v1.VerifyConnectivityResponse" do
+    end
   end
 end
 
@@ -96,6 +101,8 @@ module Google
         EkmConnection::ServiceResolver = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.EkmConnection.ServiceResolver").msgclass
         EkmConnection::KeyManagementMode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.EkmConnection.KeyManagementMode").enummodule
         EkmConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.EkmConfig").msgclass
+        VerifyConnectivityRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.VerifyConnectivityRequest").msgclass
+        VerifyConnectivityResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.VerifyConnectivityResponse").msgclass
       end
     end
   end
