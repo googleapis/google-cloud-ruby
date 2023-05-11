@@ -275,9 +275,6 @@ module Google
         # @!attribute [rw] network
         #   @return [::Google::Cloud::Batch::V1::AllocationPolicy::NetworkPolicy]
         #     The network policy.
-        # @!attribute [rw] placement
-        #   @return [::Google::Cloud::Batch::V1::AllocationPolicy::PlacementPolicy]
-        #     The placement policy.
         class AllocationPolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -285,14 +282,12 @@ module Google
           # @!attribute [rw] allowed_locations
           #   @return [::Array<::String>]
           #     A list of allowed location names represented by internal URLs.
-          #
           #     Each location can be a region or a zone.
           #     Only one region or multiple zones in one region is supported now.
           #     For example,
           #     ["regions/us-central1"] allow VMs in any zones in region us-central1.
           #     ["zones/us-central1-a", "zones/us-central1-c"] only allow VMs
           #     in zones us-central1-a and us-central1-c.
-          #
           #     All locations end up in different regions would cause errors.
           #     For example,
           #     ["regions/us-central1", "zones/us-central1-a", "zones/us-central1-b",
@@ -305,28 +300,24 @@ module Google
 
           # A new persistent disk or a local ssd.
           # A VM can only have one local SSD setting but multiple local SSD partitions.
-          # See https://cloud.google.com/compute/docs/disks#pdspecs and
+          # https://cloud.google.com/compute/docs/disks#pdspecs.
           # https://cloud.google.com/compute/docs/disks#localssds.
           # @!attribute [rw] image
           #   @return [::String]
           #     Name of a public or custom image used as the data source.
           #     For example, the following are all valid URLs:
-          #
-          #     * Specify the image by its family name:
+          #     (1) Specify the image by its family name:
           #     projects/\\{project}/global/images/family/\\{image_family}
-          #     * Specify the image version:
+          #     (2) Specify the image version:
           #     projects/\\{project}/global/images/\\{image_version}
-          #
           #     You can also use Batch customized image in short names.
           #     The following image values are supported for a boot disk:
-          #
-          #     * "batch-debian": use Batch Debian images.
-          #     * "batch-centos": use Batch CentOS images.
-          #     * "batch-cos": use Batch Container-Optimized images.
+          #     "batch-debian": use Batch Debian images.
+          #     "batch-centos": use Batch CentOS images.
+          #     "batch-cos": use Batch Container-Optimized images.
           # @!attribute [rw] snapshot
           #   @return [::String]
           #     Name of a snapshot used as the data source.
-          #     Snapshot is not supported as boot disk now.
           # @!attribute [rw] type
           #   @return [::String]
           #     Disk type as shown in `gcloud compute disk-types list`.
@@ -336,7 +327,6 @@ module Google
           # @!attribute [rw] size_gb
           #   @return [::Integer]
           #     Disk size in GB.
-          #
           #     For persistent disk, this field is ignored if `data_source` is `image` or
           #     `snapshot`.
           #     For local SSD, size_gb should be a multiple of 375GB,
@@ -398,7 +388,7 @@ module Google
           #   @return [::String]
           #     The minimum CPU platform.
           #     See
-          #     https://cloud.google.com/compute/docs/instances/specify-min-cpu-platform.
+          #     `https://cloud.google.com/compute/docs/instances/specify-min-cpu-platform`.
           #     Not yet implemented.
           # @!attribute [rw] provisioning_model
           #   @return [::Google::Cloud::Batch::V1::AllocationPolicy::ProvisioningModel]
@@ -408,9 +398,8 @@ module Google
           #     The accelerators attached to each VM instance.
           # @!attribute [rw] boot_disk
           #   @return [::Google::Cloud::Batch::V1::AllocationPolicy::Disk]
-          #     Boot disk to be created and attached to each VM by this InstancePolicy.
+          #     Book disk to be created and attached to each VM by this InstancePolicy.
           #     Boot disk will be deleted when the VM is deleted.
-          #     Batch API now only supports booting from image.
           # @!attribute [rw] disks
           #   @return [::Array<::Google::Cloud::Batch::V1::AllocationPolicy::AttachedDisk>]
           #     Non-boot disks to be attached for each VM created by this InstancePolicy.
@@ -445,22 +434,18 @@ module Google
           #   @return [::String]
           #     The URL of an existing network resource.
           #     You can specify the network as a full or partial URL.
-          #
           #     For example, the following are all valid URLs:
-          #
-          #     * https://www.googleapis.com/compute/v1/projects/\\{project}/global/networks/\\{network}
-          #     * projects/\\{project}/global/networks/\\{network}
-          #     * global/networks/\\{network}
+          #     https://www.googleapis.com/compute/v1/projects/\\{project}/global/networks/\\{network}
+          #     projects/\\{project}/global/networks/\\{network}
+          #     global/networks/\\{network}
           # @!attribute [rw] subnetwork
           #   @return [::String]
           #     The URL of an existing subnetwork resource in the network.
           #     You can specify the subnetwork as a full or partial URL.
-          #
           #     For example, the following are all valid URLs:
-          #
-          #     * https://www.googleapis.com/compute/v1/projects/\\{project}/regions/\\{region}/subnetworks/\\{subnetwork}
-          #     * projects/\\{project}/regions/\\{region}/subnetworks/\\{subnetwork}
-          #     * regions/\\{region}/subnetworks/\\{subnetwork}
+          #     https://www.googleapis.com/compute/v1/projects/\\{project}/regions/\\{region}/subnetworks/\\{subnetwork}
+          #     projects/\\{project}/regions/\\{region}/subnetworks/\\{subnetwork}
+          #     regions/\\{region}/subnetworks/\\{subnetwork}
           # @!attribute [rw] no_external_ip_address
           #   @return [::Boolean]
           #     Default is false (with an external IP address). Required if
@@ -480,26 +465,6 @@ module Google
           #   @return [::Array<::Google::Cloud::Batch::V1::AllocationPolicy::NetworkInterface>]
           #     Network configurations.
           class NetworkPolicy
-            include ::Google::Protobuf::MessageExts
-            extend ::Google::Protobuf::MessageExts::ClassMethods
-          end
-
-          # PlacementPolicy describes a group placement policy for the VMs controlled
-          # by this AllocationPolicy.
-          # @!attribute [rw] collocation
-          #   @return [::String]
-          #     UNSPECIFIED vs. COLLOCATED (default UNSPECIFIED). Use COLLOCATED when you
-          #     want VMs to be located close to each other for low network latency
-          #     between the VMs. No placement policy will be generated when collocation
-          #     is UNSPECIFIED.
-          # @!attribute [rw] max_distance
-          #   @return [::Integer]
-          #     When specified, causes the job to fail if more than max_distance logical
-          #     switches are required between VMs. Batch uses the most compact possible
-          #     placement of VMs even when max_distance is not specified. An explicit
-          #     max_distance makes that level of compactness a strict requirement.
-          #     Not yet implemented
-          class PlacementPolicy
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -548,12 +513,11 @@ module Google
         # @!attribute [rw] task_count
         #   @return [::Integer]
         #     Number of Tasks in the TaskGroup.
-        #     Default is 1.
+        #     default is 1
         # @!attribute [rw] parallelism
         #   @return [::Integer]
         #     Max number of tasks that can run in parallel.
         #     Default to min(task_count, 1000).
-        #     Field parallelism must be 1 if the scheduling_policy is IN_ORDER.
         # @!attribute [rw] task_environments
         #   @return [::Array<::Google::Cloud::Batch::V1::Environment>]
         #     An array of environment variable mappings, which are passed to Tasks with

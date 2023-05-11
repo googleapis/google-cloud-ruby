@@ -81,7 +81,7 @@ module Google
 
           # Task states.
           module State
-            # Unknown state.
+            # unknown state
             STATE_UNSPECIFIED = 0
 
             # The Task is created and waiting for resources.
@@ -98,9 +98,6 @@ module Google
 
             # The Task has succeeded.
             SUCCEEDED = 5
-
-            # The Task has not been executed when the Job finishes.
-            UNEXECUTED = 6
           end
         end
 
@@ -141,9 +138,6 @@ module Google
         # @!attribute [rw] timeout
         #   @return [::Google::Protobuf::Duration]
         #     Timeout for this Runnable.
-        # @!attribute [rw] labels
-        #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Labels for this Runnable.
         class Runnable
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -172,9 +166,8 @@ module Google
           # @!attribute [rw] block_external_network
           #   @return [::Boolean]
           #     If set to true, external network access to and from container will be
-          #     blocked, containers that are with block_external_network as true can
-          #     still communicate with each other, network cannot be specified in the
-          #     `container.options` field.
+          #     blocked. The container will use the default internal network
+          #     'goog-internal'.
           # @!attribute [rw] username
           #   @return [::String]
           #     Optional username for logging in to a docker registry. If username
@@ -222,15 +215,6 @@ module Google
           #     Barriers are identified by their index in runnable list.
           #     Names are not required, but if present should be an identifier.
           class Barrier
-            include ::Google::Protobuf::MessageExts
-            extend ::Google::Protobuf::MessageExts::ClassMethods
-          end
-
-          # @!attribute [rw] key
-          #   @return [::String]
-          # @!attribute [rw] value
-          #   @return [::String]
-          class LabelsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
