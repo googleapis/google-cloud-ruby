@@ -107,6 +107,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.dialogflow.v2.HumanAgentAssistantConfig.ConversationModelConfig" do
       optional :model, :string, 1
+      optional :baseline_model_version, :string, 8
     end
     add_message "google.cloud.dialogflow.v2.HumanAgentAssistantConfig.ConversationProcessConfig" do
       optional :recent_sentences_count, :int32, 2
