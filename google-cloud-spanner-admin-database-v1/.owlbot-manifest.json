@@ -67,6 +67,7 @@
     "snippets/database_admin/set_iam_policy.rb",
     "snippets/database_admin/test_iam_permissions.rb",
     "snippets/database_admin/update_backup.rb",
+    "snippets/database_admin/update_database.rb",
     "snippets/database_admin/update_database_ddl.rb",
     "snippets/snippet_metadata_google.spanner.admin.database.v1.json",
     "test/google/cloud/spanner/admin/database/v1/database_admin_operations_test.rb",

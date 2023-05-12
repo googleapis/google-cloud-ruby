@@ -54,6 +54,43 @@ module Google
                 rpc :CreateDatabase, ::Google::Cloud::Spanner::Admin::Database::V1::CreateDatabaseRequest, ::Google::Longrunning::Operation
                 # Gets the state of a Cloud Spanner database.
                 rpc :GetDatabase, ::Google::Cloud::Spanner::Admin::Database::V1::GetDatabaseRequest, ::Google::Cloud::Spanner::Admin::Database::V1::Database
+                # Updates a Cloud Spanner database. The returned
+                # [long-running operation][google.longrunning.Operation] can be used to track
+                # the progress of updating the database. If the named database does not
+                # exist, returns `NOT_FOUND`.
+                #
+                # While the operation is pending:
+                #
+                #   * The database's
+                #     [reconciling][google.spanner.admin.database.v1.Database.reconciling]
+                #     field is set to true.
+                #   * Cancelling the operation is best-effort. If the cancellation succeeds,
+                #     the operation metadata's
+                #     [cancel_time][google.spanner.admin.database.v1.UpdateDatabaseMetadata.cancel_time]
+                #     is set, the updates are reverted, and the operation terminates with a
+                #     `CANCELLED` status.
+                #   * New UpdateDatabase requests will return a `FAILED_PRECONDITION` error
+                #     until the pending operation is done (returns successfully or with
+                #     error).
+                #   * Reading the database via the API continues to give the pre-request
+                #     values.
+                #
+                # Upon completion of the returned operation:
+                #
+                #   * The new values are in effect and readable via the API.
+                #   * The database's
+                #     [reconciling][google.spanner.admin.database.v1.Database.reconciling]
+                #     field becomes false.
+                #
+                # The returned [long-running operation][google.longrunning.Operation] will
+                # have a name of the format
+                # `projects/<project>/instances/<instance>/databases/<database>/operations/<operation_id>`
+                # and can be used to track the database modification. The
+                # [metadata][google.longrunning.Operation.metadata] field type is
+                # [UpdateDatabaseMetadata][google.spanner.admin.database.v1.UpdateDatabaseMetadata].
+                # The [response][google.longrunning.Operation.response] field type is
+                # [Database][google.spanner.admin.database.v1.Database], if successful.
+                rpc :UpdateDatabase, ::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseRequest, ::Google::Longrunning::Operation
                 # Updates the schema of a Cloud Spanner database by
                 # creating/altering/dropping tables, columns, indexes, etc. The returned
                 # [long-running operation][google.longrunning.Operation] will have a name of
