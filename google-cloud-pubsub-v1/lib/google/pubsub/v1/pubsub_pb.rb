@@ -94,6 +94,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :topic, :string, 2
       optional :push_config, :message, 4, "google.pubsub.v1.PushConfig"
       optional :bigquery_config, :message, 18, "google.pubsub.v1.BigQueryConfig"
+      optional :cloud_storage_config, :message, 22, "google.pubsub.v1.CloudStorageConfig"
       optional :ack_deadline_seconds, :int32, 5
       optional :retain_acked_messages, :bool, 7
       optional :message_retention_duration, :message, 8, "google.protobuf.Duration"
@@ -148,6 +149,29 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :PERMISSION_DENIED, 2
       value :NOT_FOUND, 3
       value :SCHEMA_MISMATCH, 4
+    end
+    add_message "google.pubsub.v1.CloudStorageConfig" do
+      optional :bucket, :string, 1
+      optional :filename_prefix, :string, 2
+      optional :filename_suffix, :string, 3
+      optional :max_duration, :message, 6, "google.protobuf.Duration"
+      optional :max_bytes, :int64, 7
+      optional :state, :enum, 9, "google.pubsub.v1.CloudStorageConfig.State"
+      oneof :output_format do
+        optional :text_config, :message, 4, "google.pubsub.v1.CloudStorageConfig.TextConfig"
+        optional :avro_config, :message, 5, "google.pubsub.v1.CloudStorageConfig.AvroConfig"
+      end
+    end
+    add_message "google.pubsub.v1.CloudStorageConfig.TextConfig" do
+    end
+    add_message "google.pubsub.v1.CloudStorageConfig.AvroConfig" do
+      optional :write_metadata, :bool, 1
+    end
+    add_enum "google.pubsub.v1.CloudStorageConfig.State" do
+      value :STATE_UNSPECIFIED, 0
+      value :ACTIVE, 1
+      value :PERMISSION_DENIED, 2
+      value :NOT_FOUND, 3
     end
     add_message "google.pubsub.v1.ReceivedMessage" do
       optional :ack_id, :string, 1
@@ -297,6 +321,10 @@ module Google
         PushConfig::OidcToken = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.PushConfig.OidcToken").msgclass
         BigQueryConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.BigQueryConfig").msgclass
         BigQueryConfig::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.BigQueryConfig.State").enummodule
+        CloudStorageConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.CloudStorageConfig").msgclass
+        CloudStorageConfig::TextConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.CloudStorageConfig.TextConfig").msgclass
+        CloudStorageConfig::AvroConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.CloudStorageConfig.AvroConfig").msgclass
+        CloudStorageConfig::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.CloudStorageConfig.State").enummodule
         ReceivedMessage = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ReceivedMessage").msgclass
         GetSubscriptionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.GetSubscriptionRequest").msgclass
         UpdateSubscriptionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.UpdateSubscriptionRequest").msgclass
