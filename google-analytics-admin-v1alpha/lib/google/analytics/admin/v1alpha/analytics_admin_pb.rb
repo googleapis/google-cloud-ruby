@@ -6,6 +6,7 @@ require 'google/protobuf'
 require 'google/analytics/admin/v1alpha/access_report_pb'
 require 'google/analytics/admin/v1alpha/audience_pb'
 require 'google/analytics/admin/v1alpha/channel_group_pb'
+require 'google/analytics/admin/v1alpha/event_create_and_edit_pb'
 require 'google/analytics/admin/v1alpha/expanded_data_set_pb'
 require 'google/analytics/admin/v1alpha/resources_pb'
 require 'google/api/annotations_pb'
@@ -585,11 +586,53 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse" do
       repeated :connected_site_tags, :message, 1, "google.analytics.admin.v1alpha.ConnectedSiteTag"
     end
+    add_message "google.analytics.admin.v1alpha.CreateAdSenseLinkRequest" do
+      optional :parent, :string, 1
+      optional :adsense_link, :message, 2, "google.analytics.admin.v1alpha.AdSenseLink"
+    end
+    add_message "google.analytics.admin.v1alpha.GetAdSenseLinkRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.DeleteAdSenseLinkRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.ListAdSenseLinksRequest" do
+      optional :parent, :string, 1
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
+    end
+    add_message "google.analytics.admin.v1alpha.ListAdSenseLinksResponse" do
+      repeated :adsense_links, :message, 1, "google.analytics.admin.v1alpha.AdSenseLink"
+      optional :next_page_token, :string, 2
+    end
     add_message "google.analytics.admin.v1alpha.FetchConnectedGa4PropertyRequest" do
       optional :property, :string, 1
     end
     add_message "google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse" do
       optional :property, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.CreateEventCreateRuleRequest" do
+      optional :parent, :string, 1
+      optional :event_create_rule, :message, 2, "google.analytics.admin.v1alpha.EventCreateRule"
+    end
+    add_message "google.analytics.admin.v1alpha.UpdateEventCreateRuleRequest" do
+      optional :event_create_rule, :message, 1, "google.analytics.admin.v1alpha.EventCreateRule"
+      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
+    end
+    add_message "google.analytics.admin.v1alpha.DeleteEventCreateRuleRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.GetEventCreateRuleRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.ListEventCreateRulesRequest" do
+      optional :parent, :string, 1
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
+    end
+    add_message "google.analytics.admin.v1alpha.ListEventCreateRulesResponse" do
+      repeated :event_create_rules, :message, 1, "google.analytics.admin.v1alpha.EventCreateRule"
+      optional :next_page_token, :string, 2
     end
   end
 end
@@ -745,8 +788,19 @@ module Google
         DeleteConnectedSiteTagRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest").msgclass
         ListConnectedSiteTagsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest").msgclass
         ListConnectedSiteTagsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse").msgclass
+        CreateAdSenseLinkRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CreateAdSenseLinkRequest").msgclass
+        GetAdSenseLinkRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetAdSenseLinkRequest").msgclass
+        DeleteAdSenseLinkRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DeleteAdSenseLinkRequest").msgclass
+        ListAdSenseLinksRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListAdSenseLinksRequest").msgclass
+        ListAdSenseLinksResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListAdSenseLinksResponse").msgclass
         FetchConnectedGa4PropertyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.FetchConnectedGa4PropertyRequest").msgclass
         FetchConnectedGa4PropertyResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse").msgclass
+        CreateEventCreateRuleRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CreateEventCreateRuleRequest").msgclass
+        UpdateEventCreateRuleRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.UpdateEventCreateRuleRequest").msgclass
+        DeleteEventCreateRuleRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DeleteEventCreateRuleRequest").msgclass
+        GetEventCreateRuleRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetEventCreateRuleRequest").msgclass
+        ListEventCreateRulesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListEventCreateRulesRequest").msgclass
+        ListEventCreateRulesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListEventCreateRulesResponse").msgclass
       end
     end
   end

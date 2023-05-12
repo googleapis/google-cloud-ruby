@@ -38,7 +38,12 @@ module Google
         #     or metric.
         # @!attribute [rw] field_name
         #   @return [::String]
-        #     Required. Immutable. The dimension name or metric name to filter.
+        #     Required. Immutable. The dimension name or metric name to filter. If the
+        #     field name refers to a custom dimension or metric, a scope prefix will be
+        #     added to the front of the custom dimensions or metric name. For more on
+        #     scope prefixes or custom dimensions/metrics, reference the [Google
+        #     Analytics Data API documentation]
+        #     (https://developers.google.com/analytics/devguides/reporting/data/v1/api-schema#custom_dimensions).
         # @!attribute [rw] at_any_point_in_time
         #   @return [::Boolean]
         #     Optional. Indicates whether this filter needs dynamic evaluation or not. If
@@ -52,7 +57,7 @@ module Google
         #   @return [::Integer]
         #     Optional. If set, specifies the time window for which to evaluate data in
         #     number of days. If not set, then audience data is evaluated against
-        #     lifetime data (i.e., infinite time window).
+        #     lifetime data (For example, infinite time window).
         #
         #     For example, if set to 1 day, only the current day's data is evaluated. The
         #     reference point is the current day when at_any_point_in_time is unset or
@@ -178,7 +183,7 @@ module Google
         #   @return [::Google::Analytics::Admin::V1alpha::AudienceFilterExpression]
         #     Optional. If specified, this filter matches events that match both the
         #     single event name and the parameter filter expressions. AudienceEventFilter
-        #     inside the parameter filter expression cannot be set (i.e., nested
+        #     inside the parameter filter expression cannot be set (For example, nested
         #     event filters are not supported). This should be a single and_group of
         #     dimension_or_metric_filter or not_expression; ANDs of ORs are not
         #     supported. Also, if it includes a filter for "eventCount", only that one
@@ -200,9 +205,9 @@ module Google
         #     AudienceFilterExpressions with and_group or or_group.
         # @!attribute [rw] not_expression
         #   @return [::Google::Analytics::Admin::V1alpha::AudienceFilterExpression]
-        #     A filter expression to be NOT'ed (i.e., inverted, complemented). It
-        #     can only include a dimension_or_metric_filter. This cannot be set on the
-        #     top level AudienceFilterExpression.
+        #     A filter expression to be NOT'ed (For example, inverted, complemented).
+        #     It can only include a dimension_or_metric_filter. This cannot be set on
+        #     the top level AudienceFilterExpression.
         # @!attribute [rw] dimension_or_metric_filter
         #   @return [::Google::Analytics::Admin::V1alpha::AudienceDimensionOrMetricFilter]
         #     A filter on a single dimension or metric. This cannot be set on the top
@@ -270,7 +275,7 @@ module Google
           # @!attribute [rw] constraint_duration
           #   @return [::Google::Protobuf::Duration]
           #     Optional. When set, this step must be satisfied within the
-          #     constraint_duration of the previous step (i.e., t[i] - t[i-1] <=
+          #     constraint_duration of the previous step (For example,  t[i] - t[i-1] <=
           #     constraint_duration). If not set, there is no duration requirement (the
           #     duration is effectively unlimited). It is ignored for the first step.
           # @!attribute [rw] filter_expression
@@ -284,9 +289,9 @@ module Google
         end
 
         # A clause for defining either a simple or sequence filter. A filter can be
-        # inclusive (i.e., users satisfying the filter clause are included in the
-        # Audience) or exclusive (i.e., users satisfying the filter clause are
-        # excluded from the Audience).
+        # inclusive (For example, users satisfying the filter clause are included in
+        # the Audience) or exclusive (For example, users satisfying the filter clause
+        # are excluded from the Audience).
         # @!attribute [rw] simple_filter
         #   @return [::Google::Analytics::Admin::V1alpha::AudienceSimpleFilter]
         #     A simple filter that a user must satisfy to be a member of the Audience.
