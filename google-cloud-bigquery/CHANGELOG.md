@@ -1,5 +1,11 @@
 # Release History
 
+### 1.43.0 (2023-05-10)
+
+#### Features
+
+* Added support for default value expression ([#21540](https://github.com/googleapis/google-cloud-ruby/issues/21540)) 
+
 ### 1.42.0 (2023-01-15)
 
 #### Features
