@@ -470,7 +470,7 @@ module Google
           table = Google::Cloud::Bigtable::Admin::V2::Table.new({
             column_families: column_families.to_grpc_hash,
             granularity:     granularity
-          }.delete_if { |_, v| v.nil? })
+          }.compact)
 
           grpc = service.create_table instance_id, table_id, table, initial_splits: initial_splits
           from_grpc grpc, service, view: :SCHEMA_VIEW

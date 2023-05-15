@@ -77,7 +77,7 @@ module Google
           #
           # @return [Future]
           # @yield [reason, *args] to the task.
-          def then(*args, &task)
+          def then *args, &task
             Future.new @future.then(*args, &task)
           end
 
@@ -87,7 +87,7 @@ module Google
           #
           # @return [Future]
           # @yield [reason, *args] to the task.
-          def rescue(*args, &task)
+          def rescue *args, &task
             Future.new @future.rescue(*args, &task)
           end
         end
