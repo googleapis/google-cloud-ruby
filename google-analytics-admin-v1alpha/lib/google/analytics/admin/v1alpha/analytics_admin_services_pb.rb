@@ -362,6 +362,24 @@ module Google
             # Given a specified UA property, looks up the GA4 property connected to it.
             # Note: this cannot be used with GA4 properties.
             rpc :FetchConnectedGa4Property, ::Google::Analytics::Admin::V1alpha::FetchConnectedGa4PropertyRequest, ::Google::Analytics::Admin::V1alpha::FetchConnectedGa4PropertyResponse
+            # Looks up a single AdSenseLink.
+            rpc :GetAdSenseLink, ::Google::Analytics::Admin::V1alpha::GetAdSenseLinkRequest, ::Google::Analytics::Admin::V1alpha::AdSenseLink
+            # Creates an AdSenseLink.
+            rpc :CreateAdSenseLink, ::Google::Analytics::Admin::V1alpha::CreateAdSenseLinkRequest, ::Google::Analytics::Admin::V1alpha::AdSenseLink
+            # Deletes an AdSenseLink.
+            rpc :DeleteAdSenseLink, ::Google::Analytics::Admin::V1alpha::DeleteAdSenseLinkRequest, ::Google::Protobuf::Empty
+            # Lists AdSenseLinks on a property.
+            rpc :ListAdSenseLinks, ::Google::Analytics::Admin::V1alpha::ListAdSenseLinksRequest, ::Google::Analytics::Admin::V1alpha::ListAdSenseLinksResponse
+            # Lookup for a single EventCreateRule.
+            rpc :GetEventCreateRule, ::Google::Analytics::Admin::V1alpha::GetEventCreateRuleRequest, ::Google::Analytics::Admin::V1alpha::EventCreateRule
+            # Lists EventCreateRules on a web data stream.
+            rpc :ListEventCreateRules, ::Google::Analytics::Admin::V1alpha::ListEventCreateRulesRequest, ::Google::Analytics::Admin::V1alpha::ListEventCreateRulesResponse
+            # Creates an EventCreateRule.
+            rpc :CreateEventCreateRule, ::Google::Analytics::Admin::V1alpha::CreateEventCreateRuleRequest, ::Google::Analytics::Admin::V1alpha::EventCreateRule
+            # Updates an EventCreateRule.
+            rpc :UpdateEventCreateRule, ::Google::Analytics::Admin::V1alpha::UpdateEventCreateRuleRequest, ::Google::Analytics::Admin::V1alpha::EventCreateRule
+            # Deletes an EventCreateRule.
+            rpc :DeleteEventCreateRule, ::Google::Analytics::Admin::V1alpha::DeleteEventCreateRuleRequest, ::Google::Protobuf::Empty
           end
 
           Stub = Service.rpc_stub_class
