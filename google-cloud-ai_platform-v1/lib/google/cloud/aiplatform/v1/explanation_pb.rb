@@ -5,6 +5,7 @@ require 'google/protobuf'
 
 require 'google/api/field_behavior_pb'
 require 'google/cloud/aiplatform/v1/explanation_metadata_pb'
+require 'google/cloud/aiplatform/v1/io_pb'
 require 'google/protobuf/struct_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
@@ -40,6 +41,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :sampled_shapley_attribution, :message, 1, "google.cloud.aiplatform.v1.SampledShapleyAttribution"
         optional :integrated_gradients_attribution, :message, 2, "google.cloud.aiplatform.v1.IntegratedGradientsAttribution"
         optional :xrai_attribution, :message, 3, "google.cloud.aiplatform.v1.XraiAttribution"
+        optional :examples, :message, 7, "google.cloud.aiplatform.v1.Examples"
       end
     end
     add_message "google.cloud.aiplatform.v1.SampledShapleyAttribution" do
@@ -71,6 +73,38 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.aiplatform.v1.BlurBaselineConfig" do
       optional :max_blur_sigma, :float, 1
+    end
+    add_message "google.cloud.aiplatform.v1.Examples" do
+      optional :neighbor_count, :int32, 3
+      oneof :source do
+        optional :example_gcs_source, :message, 5, "google.cloud.aiplatform.v1.Examples.ExampleGcsSource"
+      end
+      oneof :config do
+        optional :nearest_neighbor_search_config, :message, 2, "google.protobuf.Value"
+        optional :presets, :message, 4, "google.cloud.aiplatform.v1.Presets"
+      end
+    end
+    add_message "google.cloud.aiplatform.v1.Examples.ExampleGcsSource" do
+      optional :data_format, :enum, 1, "google.cloud.aiplatform.v1.Examples.ExampleGcsSource.DataFormat"
+      optional :gcs_source, :message, 2, "google.cloud.aiplatform.v1.GcsSource"
+    end
+    add_enum "google.cloud.aiplatform.v1.Examples.ExampleGcsSource.DataFormat" do
+      value :DATA_FORMAT_UNSPECIFIED, 0
+      value :JSONL, 1
+    end
+    add_message "google.cloud.aiplatform.v1.Presets" do
+      proto3_optional :query, :enum, 1, "google.cloud.aiplatform.v1.Presets.Query"
+      optional :modality, :enum, 2, "google.cloud.aiplatform.v1.Presets.Modality"
+    end
+    add_enum "google.cloud.aiplatform.v1.Presets.Query" do
+      value :PRECISE, 0
+      value :FAST, 1
+    end
+    add_enum "google.cloud.aiplatform.v1.Presets.Modality" do
+      value :MODALITY_UNSPECIFIED, 0
+      value :IMAGE, 1
+      value :TEXT, 2
+      value :TABULAR, 3
     end
     add_message "google.cloud.aiplatform.v1.ExplanationSpecOverride" do
       optional :parameters, :message, 1, "google.cloud.aiplatform.v1.ExplanationParameters"
@@ -120,6 +154,12 @@ module Google
         FeatureNoiseSigma = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.FeatureNoiseSigma").msgclass
         FeatureNoiseSigma::NoiseSigmaForFeature = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.FeatureNoiseSigma.NoiseSigmaForFeature").msgclass
         BlurBaselineConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.BlurBaselineConfig").msgclass
+        Examples = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.Examples").msgclass
+        Examples::ExampleGcsSource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.Examples.ExampleGcsSource").msgclass
+        Examples::ExampleGcsSource::DataFormat = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.Examples.ExampleGcsSource.DataFormat").enummodule
+        Presets = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.Presets").msgclass
+        Presets::Query = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.Presets.Query").enummodule
+        Presets::Modality = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.Presets.Modality").enummodule
         ExplanationSpecOverride = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ExplanationSpecOverride").msgclass
         ExplanationMetadataOverride = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ExplanationMetadataOverride").msgclass
         ExplanationMetadataOverride::InputMetadataOverride = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ExplanationMetadataOverride.InputMetadataOverride").msgclass
