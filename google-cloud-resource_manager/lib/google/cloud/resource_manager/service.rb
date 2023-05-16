@@ -80,7 +80,7 @@ module Google
           parent = parent.to_gapi unless parent.nil?
           project_attrs = {
             project_id: project_id, name: name, labels: labels, parent: parent
-          }.delete_if { |_, v| v.nil? }
+          }.compact
           execute { service.create_project API::Project.new(**project_attrs) }
         end
 

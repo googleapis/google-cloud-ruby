@@ -234,7 +234,7 @@ module Google
           Gapic::CallOptions.new(**{
             metadata:   default_headers(parent),
             page_token: token
-          }.delete_if { |_, v| v.nil? })
+          }.compact)
         end
 
         def document_mask mask

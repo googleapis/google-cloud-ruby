@@ -490,7 +490,7 @@ module Google
             project_id: m["prj"],
             dataset_id: m["dts"],
             table_id:   m["tbl"]
-          }.delete_if { |_, v| v.nil? }
+          }.compact
           str_table_ref_hash = default_ref.to_h.merge str_table_ref_hash
           ref = Google::Apis::BigqueryV2::TableReference.new(**str_table_ref_hash)
           validate_table_ref ref
@@ -506,7 +506,7 @@ module Google
           params = {
             dataset: Google::Apis::BigqueryV2::DatasetReference.new(**dataset_hash),
             target_types: dataset_hash[:target_types]
-          }.delete_if { |_, v| v.nil? }
+          }.compact
           Google::Apis::BigqueryV2::DatasetAccessEntry.new(**params)
         end
 

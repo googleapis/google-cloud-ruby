@@ -50,7 +50,7 @@ module Google
             body = {
               q: Array(text), target: to, source: from, format: format,
               model: model, cid: cid
-            }.delete_if { |_k, v| v.nil? }.to_json
+            }.compact.to_json
 
             post "/language/translate/v2", body
           end
@@ -104,7 +104,7 @@ module Google
           def http
             @http ||= Faraday.new url: @url, request: {
               open_timeout: @timeout, timeout: @timeout
-            }.delete_if { |_k, v| v.nil? }
+            }.compact
           end
 
           ##
