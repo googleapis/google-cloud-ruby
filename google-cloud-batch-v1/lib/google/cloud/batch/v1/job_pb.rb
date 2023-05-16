@@ -78,6 +78,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :service_account, :message, 9, "google.cloud.batch.v1.ServiceAccount"
       map :labels, :string, :string, 6
       optional :network, :message, 7, "google.cloud.batch.v1.AllocationPolicy.NetworkPolicy"
+      optional :placement, :message, 10, "google.cloud.batch.v1.AllocationPolicy.PlacementPolicy"
     end
     add_message "google.cloud.batch.v1.AllocationPolicy.LocationPolicy" do
       repeated :allowed_locations, :string, 1
@@ -126,6 +127,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.batch.v1.AllocationPolicy.NetworkPolicy" do
       repeated :network_interfaces, :message, 1, "google.cloud.batch.v1.AllocationPolicy.NetworkInterface"
     end
+    add_message "google.cloud.batch.v1.AllocationPolicy.PlacementPolicy" do
+      optional :collocation, :string, 1
+      optional :max_distance, :int64, 2
+    end
     add_enum "google.cloud.batch.v1.AllocationPolicy.ProvisioningModel" do
       value :PROVISIONING_MODEL_UNSPECIFIED, 0
       value :STANDARD, 1
@@ -172,6 +177,7 @@ module Google
         AllocationPolicy::InstancePolicyOrTemplate = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.batch.v1.AllocationPolicy.InstancePolicyOrTemplate").msgclass
         AllocationPolicy::NetworkInterface = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.batch.v1.AllocationPolicy.NetworkInterface").msgclass
         AllocationPolicy::NetworkPolicy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.batch.v1.AllocationPolicy.NetworkPolicy").msgclass
+        AllocationPolicy::PlacementPolicy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.batch.v1.AllocationPolicy.PlacementPolicy").msgclass
         AllocationPolicy::ProvisioningModel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.batch.v1.AllocationPolicy.ProvisioningModel").enummodule
         TaskGroup = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.batch.v1.TaskGroup").msgclass
         ServiceAccount = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.batch.v1.ServiceAccount").msgclass

@@ -36,6 +36,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :RUNNING, 3
       value :FAILED, 4
       value :SUCCEEDED, 5
+      value :UNEXECUTED, 6
     end
     add_message "google.cloud.batch.v1.Runnable" do
       optional :ignore_exit_status, :bool, 3
@@ -43,6 +44,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :always_run, :bool, 5
       optional :environment, :message, 7, "google.cloud.batch.v1.Environment"
       optional :timeout, :message, 8, "google.protobuf.Duration"
+      map :labels, :string, :string, 9
       oneof :executable do
         optional :container, :message, 1, "google.cloud.batch.v1.Runnable.Container"
         optional :script, :message, 2, "google.cloud.batch.v1.Runnable.Script"
