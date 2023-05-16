@@ -162,7 +162,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload search(serving_config: nil, branch: nil, query: nil, page_size: nil, page_token: nil, offset: nil, filter: nil, order_by: nil, user_info: nil, facet_specs: nil, boost_spec: nil, params: nil, query_expansion_spec: nil, spell_correction_spec: nil, user_pseudo_id: nil, content_search_spec: nil, safe_search: nil, user_label: nil)
+            # @overload search(serving_config: nil, branch: nil, query: nil, page_size: nil, page_token: nil, offset: nil, filter: nil, order_by: nil, user_info: nil, facet_specs: nil, boost_spec: nil, params: nil, query_expansion_spec: nil, spell_correction_spec: nil, user_pseudo_id: nil, content_search_spec: nil, safe_search: nil, user_labels: nil)
             #   Pass arguments to `search` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -267,7 +267,7 @@ module Google
             #   @param safe_search [::Boolean]
             #     Whether to turn on safe search. This is only supported for
             #     [ContentConfig.PUBLIC_WEBSITE][].
-            #   @param user_label [::Hash{::String => ::String}]
+            #   @param user_labels [::Hash{::String => ::String}]
             #     The user labels applied to a resource must meet the following requirements:
             #
             #     * Each resource can have multiple labels, up to a maximum of 64.
