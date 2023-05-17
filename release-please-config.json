@@ -23,10 +23,6 @@
       "component": "google-analytics-data",
       "version_file": "lib/google/analytics/data/version.rb"
     },
-    "google-analytics-data-v1alpha": {
-      "component": "google-analytics-data-v1alpha",
-      "version_file": "lib/google/analytics/data/v1alpha/version.rb"
-    },
     "google-analytics-data-v1beta": {
       "component": "google-analytics-data-v1beta",
       "version_file": "lib/google/analytics/data/v1beta/version.rb"
