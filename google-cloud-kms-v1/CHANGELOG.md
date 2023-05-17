@@ -1,5 +1,11 @@
 # Release History
 
+### 0.19.0 (2023-05-16)
+
+#### Features
+
+* add VerifyConnectivity RPC ([#21574](https://github.com/googleapis/google-cloud-ruby/issues/21574)) 
+
 ### 0.18.1 (2023-03-29)
 
 #### Documentation
