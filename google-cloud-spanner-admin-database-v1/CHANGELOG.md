@@ -1,5 +1,11 @@
 # Release History
 
+### 0.13.0 (2023-05-17)
+
+#### Features
+
+* Add support for UpdateDatabase in Spanner database admin 
+
 ### 0.12.0 (2023-03-08)
 
 #### Features
