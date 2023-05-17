@@ -245,6 +245,10 @@ module Google
         #     house or an animal. If the images are taken in artificial environments,
         #     like a lab or manufacturing line, or from diagnostic equipment, like
         #     x-rays or quality-control cameras, use Integrated Gradients instead.
+        # @!attribute [rw] examples
+        #   @return [::Google::Cloud::AIPlatform::V1::Examples]
+        #     Example-based explanations that returns the nearest neighbors from the
+        #     provided dataset.
         # @!attribute [rw] top_k
         #   @return [::Integer]
         #     If populated, returns attributions for top K indices of outputs
@@ -435,6 +439,91 @@ module Google
         class BlurBaselineConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Example-based explainability that returns the nearest neighbors from the
+        # provided dataset.
+        # @!attribute [rw] example_gcs_source
+        #   @return [::Google::Cloud::AIPlatform::V1::Examples::ExampleGcsSource]
+        #     The Cloud Storage input instances.
+        # @!attribute [rw] nearest_neighbor_search_config
+        #   @return [::Google::Protobuf::Value]
+        #     The full configuration for the generated index, the semantics are the
+        #     same as {::Google::Cloud::AIPlatform::V1::Index#metadata metadata} and should
+        #     match
+        #     [NearestNeighborSearchConfig](https://cloud.google.com/vertex-ai/docs/explainable-ai/configuring-explanations-example-based#nearest-neighbor-search-config).
+        # @!attribute [rw] presets
+        #   @return [::Google::Cloud::AIPlatform::V1::Presets]
+        #     Simplified preset configuration, which automatically sets configuration
+        #     values based on the desired query speed-precision trade-off and modality.
+        # @!attribute [rw] neighbor_count
+        #   @return [::Integer]
+        #     The number of neighbors to return when querying for examples.
+        class Examples
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The Cloud Storage input instances.
+          # @!attribute [rw] data_format
+          #   @return [::Google::Cloud::AIPlatform::V1::Examples::ExampleGcsSource::DataFormat]
+          #     The format in which instances are given, if not specified, assume it's
+          #     JSONL format. Currently only JSONL format is supported.
+          # @!attribute [rw] gcs_source
+          #   @return [::Google::Cloud::AIPlatform::V1::GcsSource]
+          #     The Cloud Storage location for the input instances.
+          class ExampleGcsSource
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The format of the input example instances.
+            module DataFormat
+              # Format unspecified, used when unset.
+              DATA_FORMAT_UNSPECIFIED = 0
+
+              # Examples are stored in JSONL files.
+              JSONL = 1
+            end
+          end
+        end
+
+        # Preset configuration for example-based explanations
+        # @!attribute [rw] query
+        #   @return [::Google::Cloud::AIPlatform::V1::Presets::Query]
+        #     Preset option controlling parameters for speed-precision trade-off when
+        #     querying for examples. If omitted, defaults to `PRECISE`.
+        # @!attribute [rw] modality
+        #   @return [::Google::Cloud::AIPlatform::V1::Presets::Modality]
+        #     The modality of the uploaded model, which automatically configures the
+        #     distance measurement and feature normalization for the underlying example
+        #     index and queries. If your model does not precisely fit one of these types,
+        #     it is okay to choose the closest type.
+        class Presets
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Preset option controlling parameters for query speed-precision trade-off
+          module Query
+            # More precise neighbors as a trade-off against slower response.
+            PRECISE = 0
+
+            # Faster response as a trade-off against less precise neighbors.
+            FAST = 1
+          end
+
+          # Preset option controlling parameters for different modalities
+          module Modality
+            # Should not be set. Added as a recommended best practice for enums
+            MODALITY_UNSPECIFIED = 0
+
+            # IMAGE modality
+            IMAGE = 1
+
+            # TEXT modality
+            TEXT = 2
+
+            # TABULAR modality
+            TABULAR = 3
+          end
         end
 
         # The {::Google::Cloud::AIPlatform::V1::ExplanationSpec ExplanationSpec} entries
