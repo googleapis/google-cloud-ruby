@@ -1561,7 +1561,12 @@ module Google
         #     Shielded Nodes configuration.
         # @!attribute [rw] release_channel
         #   @return [::Google::Cloud::Container::V1beta1::ReleaseChannel]
-        #     Release channel configuration.
+        #     Release channel configuration. If left unspecified on cluster creation and
+        #     a version is specified, the cluster is enrolled in the most mature release
+        #     channel where the version is available (first checking STABLE, then
+        #     REGULAR, and finally RAPID). Otherwise, if no release channel
+        #     configuration and no version is specified, the cluster is enrolled in the
+        #     REGULAR channel with its default version.
         # @!attribute [rw] workload_identity_config
         #   @return [::Google::Cloud::Container::V1beta1::WorkloadIdentityConfig]
         #     Configuration for the use of Kubernetes Service Accounts in GCP IAM
@@ -2133,12 +2138,14 @@ module Google
         #
         #     Examples:
         #
-        #       -
-        #       `https://container.googleapis.com/v1beta1/projects/123/locations/us-central1/clusters/my-cluster`
-        #       -
-        #       `https://container.googleapis.com/v1beta1/projects/123/zones/us-central1-c/clusters/my-cluster/nodePools/my-np`
-        #       -
-        #       `https://container.googleapis.com/v1beta1/projects/123/zones/us-central1-c/clusters/my-cluster/nodePools/my-np/node/my-node`
+        #     -
+        #     ##
+        #     `https://container.googleapis.com/v1/projects/123/locations/us-central1/clusters/my-cluster`
+        #
+        #     ##
+        #     `https://container.googleapis.com/v1/projects/123/zones/us-central1-c/clusters/my-cluster/nodePools/my-np`
+        #
+        #     `https://container.googleapis.com/v1/projects/123/zones/us-central1-c/clusters/my-cluster/nodePools/my-np/node/my-node`
         # @!attribute [rw] location
         #   @return [::String]
         #     [Output only] The name of the Google Compute Engine
