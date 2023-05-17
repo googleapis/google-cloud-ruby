@@ -97,6 +97,10 @@ module Google
         #     of the previous
         #     {::Google::Cloud::Channel::V1::CloudChannelReportsService::Client#fetch_report_results CloudChannelReportsService.FetchReportResults}
         #     call.
+        # @!attribute [rw] partition_keys
+        #   @return [::Array<::String>]
+        #     Optional. List of keys specifying which report partitions to return.
+        #     If empty, returns all partitions.
         class FetchReportResultsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -276,15 +280,14 @@ module Google
         #   @return [::Google::Type::Date]
         #     The earliest invoice date (inclusive).
         #
-        #     If your product uses monthly invoices, and this value is not the beginning
-        #     of a month, this will adjust the date to the first day of the given month.
+        #     If this value is not the first day of a month, this will move it back to
+        #     the first day of the given month.
         # @!attribute [rw] invoice_end_date
         #   @return [::Google::Type::Date]
-        #     The latest invoice date (exclusive).
+        #     The latest invoice date (inclusive).
         #
-        #     If your product uses monthly invoices, and this value is not the beginning
-        #     of a month, this will adjust the date to the first day of the following
-        #     month.
+        #     If this value is not the last day of a month, this will move it forward to
+        #     the last day of the given month.
         class DateRange
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -294,6 +297,10 @@ module Google
         # @!attribute [rw] values
         #   @return [::Array<::Google::Cloud::Channel::V1::ReportValue>]
         #     The list of values in the row.
+        # @!attribute [rw] partition_key
+        #   @return [::String]
+        #     The key for the partition this row belongs to. This field is empty
+        #     if the report is not partitioned.
         class Row
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -360,7 +367,8 @@ module Google
         end
 
         # The ID and description of a report that was used to generate report data.
-        # For example, "GCP Daily Spend", "Google Workspace License Activity", etc.
+        # For example, "Google Cloud Daily Spend", "Google Workspace License Activity",
+        # etc.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The report's resource name. Specifies the account and report used

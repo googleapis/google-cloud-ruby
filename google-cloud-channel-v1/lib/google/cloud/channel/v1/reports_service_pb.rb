@@ -31,6 +31,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :report_job, :string, 1
       optional :page_size, :int32, 2
       optional :page_token, :string, 3
+      repeated :partition_keys, :string, 4
     end
     add_message "google.cloud.channel.v1.FetchReportResultsResponse" do
       optional :report_metadata, :message, 1, "google.cloud.channel.v1.ReportResultsMetadata"
@@ -79,6 +80,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.channel.v1.Row" do
       repeated :values, :message, 1, "google.cloud.channel.v1.ReportValue"
+      optional :partition_key, :string, 2
     end
     add_message "google.cloud.channel.v1.ReportValue" do
       oneof :value do
