@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.4.0 (2023-05-17)
+
+#### Features
+
+* add processing strategy to batch recognition requests ([#21571](https://github.com/googleapis/google-cloud-ruby/issues/21571)) 
+
 ### 0.3.0 (2023-03-23)
 
 #### Features
