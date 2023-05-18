@@ -1,5 +1,11 @@
 # Release History
 
+### 0.16.0 (2023-05-18)
+
+#### Features
+
+* add cloud storage subscription fields ([#21576](https://github.com/googleapis/google-cloud-ruby/issues/21576)) 
+
 ### 0.15.1 (2023-02-23)
 
 #### Documentation
