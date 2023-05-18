@@ -30,10 +30,10 @@ class ::Google::Cloud::Support::V2::CommentService::ClientPathsTest < Minitest::
         config.credentials = grpc_channel
       end
 
-      path = client.case_path organization: "value0", case: "value1"
+      path = client.case_path organization: "value0", a_case: "value1"
       assert_equal "organizations/value0/cases/value1", path
 
-      path = client.case_path project: "value0", case: "value1"
+      path = client.case_path project: "value0", a_case: "value1"
       assert_equal "projects/value0/cases/value1", path
     end
   end
@@ -45,10 +45,10 @@ class ::Google::Cloud::Support::V2::CommentService::ClientPathsTest < Minitest::
         config.credentials = grpc_channel
       end
 
-      path = client.comment_path organization: "value0", case: "value1", comment: "value2"
+      path = client.comment_path organization: "value0", a_case: "value1", comment: "value2"
       assert_equal "organizations/value0/cases/value1/comments/value2", path
 
-      path = client.comment_path project: "value0", case: "value1", comment: "value2"
+      path = client.comment_path project: "value0", a_case: "value1", comment: "value2"
       assert_equal "projects/value0/cases/value1/comments/value2", path
     end
   end
