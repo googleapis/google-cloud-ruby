@@ -27,34 +27,34 @@ module Google
             ##
             # Create a fully-qualified Case resource string.
             #
-            # @overload case_path(organization:, pathcase:)
+            # @overload case_path(organization:, case:)
             #   The resource will be in the following format:
             #
-            #   `organizations/{organization}/cases/{pathcase}`
+            #   `organizations/{organization}/cases/{case}`
             #
             #   @param organization [String]
-            #   @param pathcase [String]
+            #   @param case [String]
             #
-            # @overload case_path(project:, pathcase:)
+            # @overload case_path(project:, case:)
             #   The resource will be in the following format:
             #
-            #   `projects/{project}/cases/{pathcase}`
+            #   `projects/{project}/cases/{case}`
             #
             #   @param project [String]
-            #   @param pathcase [String]
+            #   @param case [String]
             #
             # @return [::String]
             def case_path **args
               resources = {
-                "pathcase:organization" => (proc do |organization:, pathcase:|
+                "case:organization" => (proc do |organization:, case:|
                   raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
 
-                  "organizations/#{organization}/cases/#{pathcase}"
+                  "organizations/#{organization}/cases/#{binding.local_variable_get(:case)}"
                 end),
-                "pathcase:project" => (proc do |project:, pathcase:|
+                "case:project" => (proc do |project:, case:|
                   raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
-                  "projects/#{project}/cases/#{pathcase}"
+                  "projects/#{project}/cases/#{binding.local_variable_get(:case)}"
                 end)
               }
 
