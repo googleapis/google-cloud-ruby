@@ -748,11 +748,10 @@ module Google
         def data token: nil, max: nil, start: nil
           return nil unless done?
           return Data.from_gapi_json({ rows: [] }, nil, @gapi, service) if dryrun?
-          if ddl? || dml?
+          if ddl? || dml? || !ensure_schema!
             data_hash = { totalRows: nil, rows: [] }
             return Data.from_gapi_json data_hash, nil, @gapi, service
           end
-          ensure_schema!
 
           data_hash = service.list_tabledata destination_table_dataset_id,
                                              destination_table_table_id,
@@ -1791,10 +1790,10 @@ module Google
         protected
 
         def ensure_schema!
-          return unless destination_schema.nil?
+          return true unless destination_schema.nil?
 
           query_results_gapi = service.job_query_results job_id, location: location, max: 0
-          # raise "unable to retrieve schema" if query_results_gapi.schema.nil?
+          return false if query_results_gapi.schema.nil?
           @destination_schema_gapi = query_results_gapi.schema
         end
 
