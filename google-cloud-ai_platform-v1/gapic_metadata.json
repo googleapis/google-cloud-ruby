@@ -538,6 +538,25 @@
         }
       }
     },
+    "MatchService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AIPlatform::V1::MatchService::Client",
+          "rpcs": {
+            "FindNeighbors": {
+              "methods": [
+                "find_neighbors"
+              ]
+            },
+            "ReadIndexDatapoints": {
+              "methods": [
+                "read_index_datapoints"
+              ]
+            }
+          }
+        }
+      }
+    },
     "MetadataService": {
       "clients": {
         "grpc": {
