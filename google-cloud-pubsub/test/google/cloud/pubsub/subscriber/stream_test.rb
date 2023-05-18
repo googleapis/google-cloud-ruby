@@ -24,6 +24,9 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
   let(:rec_msg1_grpc) { Google::Cloud::PubSub::V1::ReceivedMessage.new \
                           rec_message_hash("rec_message1-msg-goes-here", 1111) }
 
+  after do
+    subscription.service = pubsub.service
+  end
 
   it "should track exactly_once_delivery_enabled from streaming response" do
     pull_res1 = Google::Cloud::PubSub::V1::StreamingPullResponse.new received_messages: [rec_msg1_grpc],
