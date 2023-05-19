@@ -1,5 +1,11 @@
 # Release History
 
+### 0.42.3 (2023-05-19)
+
+#### Documentation
+
+* Fixed broken links in authentication documentation ([#21619](https://github.com/googleapis/google-cloud-ruby/issues/21619)) 
+
 ### 0.42.2 / 2021-10-21
 
 #### Documentation
