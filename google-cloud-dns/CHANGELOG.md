@@ -1,6 +1,6 @@
 # Release History
 
-### 0.36.1 (2023-05-18)
+### 0.36.1 (2023-05-19)
 
 #### Documentation
 
