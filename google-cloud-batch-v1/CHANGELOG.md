@@ -1,5 +1,13 @@
 # Changelog
 
+### 0.8.0 (2023-05-19)
+
+#### Features
+
+* support for placement policies 
+* support labels for runnable 
+* support UNEXECUTED state for TaskStatus 
+
 ### 0.7.0 (2023-03-08)
 
 #### Features
