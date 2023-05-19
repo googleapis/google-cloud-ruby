@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.3.0 (2023-05-19)
+
+#### Features
+
+* support Oracle for PostgreSQL migration APIs 
+
 ### 0.2.0 (2022-07-02)
 
 #### Features
