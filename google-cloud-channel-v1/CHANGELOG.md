@@ -6,6 +6,12 @@
 
 * support partition_keys to filter results from FetchReportResults 
 
+### 0.19.0 (2023-05-19)
+
+#### Features
+
+* support partition_keys to filter results from FetchReportResults 
+
 ### 0.18.0 (2023-05-08)
 
 #### Features
