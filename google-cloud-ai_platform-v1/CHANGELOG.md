@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.24.0 (2023-05-19)
+
+#### Features
+
+* add match service 
+* support examples for ExplanationParameters 
+
 ### 0.24.0 (2023-05-18)
 
 #### Features
