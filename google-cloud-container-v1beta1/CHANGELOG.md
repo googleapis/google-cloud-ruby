@@ -6,6 +6,12 @@
 
 * clarify release channel defaulting behavior 
 
+### 0.21.1 (2023-05-19)
+
+#### Documentation
+
+* clarify release channel defaulting behavior 
+
 ### 0.21.0 (2023-05-08)
 
 #### Features
