@@ -1,5 +1,11 @@
 # Release History
 
+### 0.9.0 (2023-05-19)
+
+#### Features
+
+* add ApiScope and COLLECTION_RECURSIVE query_scope for Firestore index 
+
 ### 0.8.0 (2023-03-08)
 
 #### Features
