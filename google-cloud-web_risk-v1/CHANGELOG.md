@@ -1,5 +1,11 @@
 # Release History
 
+### 0.8.0 (2023-05-19)
+
+#### Features
+
+* support operations and submitURI 
+
 ### 0.7.0 (2023-03-08)
 
 #### Features
