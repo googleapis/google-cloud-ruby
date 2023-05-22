@@ -27,34 +27,34 @@ module Google
             ##
             # Create a fully-qualified Case resource string.
             #
-            # @overload case_path(organization:, a_case:)
+            # @overload case_path(organization:, case:)
             #   The resource will be in the following format:
             #
-            #   `organizations/{organization}/cases/{a_case}`
+            #   `organizations/{organization}/cases/{case}`
             #
             #   @param organization [String]
-            #   @param a_case [String]
+            #   @param case [String]
             #
-            # @overload case_path(project:, a_case:)
+            # @overload case_path(project:, case:)
             #   The resource will be in the following format:
             #
-            #   `projects/{project}/cases/{a_case}`
+            #   `projects/{project}/cases/{case}`
             #
             #   @param project [String]
-            #   @param a_case [String]
+            #   @param case [String]
             #
             # @return [::String]
             def case_path **args
               resources = {
-                "a_case:organization" => (proc do |organization:, a_case:|
+                "case:organization" => (proc do |organization:, case:|
                   raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
 
-                  "organizations/#{organization}/cases/#{a_case}"
+                  "organizations/#{organization}/cases/#{binding.local_variable_get(:case)}"
                 end),
-                "a_case:project" => (proc do |project:, a_case:|
+                "case:project" => (proc do |project:, case:|
                   raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
-                  "projects/#{project}/cases/#{a_case}"
+                  "projects/#{project}/cases/#{binding.local_variable_get(:case)}"
                 end)
               }
 
@@ -66,38 +66,38 @@ module Google
             ##
             # Create a fully-qualified Comment resource string.
             #
-            # @overload comment_path(organization:, a_case:, comment:)
+            # @overload comment_path(organization:, case:, comment:)
             #   The resource will be in the following format:
             #
-            #   `organizations/{organization}/cases/{a_case}/comments/{comment}`
+            #   `organizations/{organization}/cases/{case}/comments/{comment}`
             #
             #   @param organization [String]
-            #   @param a_case [String]
+            #   @param case [String]
             #   @param comment [String]
             #
-            # @overload comment_path(project:, a_case:, comment:)
+            # @overload comment_path(project:, case:, comment:)
             #   The resource will be in the following format:
             #
-            #   `projects/{project}/cases/{a_case}/comments/{comment}`
+            #   `projects/{project}/cases/{case}/comments/{comment}`
             #
             #   @param project [String]
-            #   @param a_case [String]
+            #   @param case [String]
             #   @param comment [String]
             #
             # @return [::String]
             def comment_path **args
               resources = {
-                "a_case:comment:organization" => (proc do |organization:, a_case:, comment:|
+                "case:comment:organization" => (proc do |organization:, case:, comment:|
                   raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
-                  raise ::ArgumentError, "a_case cannot contain /" if a_case.to_s.include? "/"
+                  raise ::ArgumentError, "binding.local_variable_get(:case) cannot contain /" if binding.local_variable_get(:case).to_s.include? "/"
 
-                  "organizations/#{organization}/cases/#{a_case}/comments/#{comment}"
+                  "organizations/#{organization}/cases/#{binding.local_variable_get(:case)}/comments/#{comment}"
                 end),
-                "a_case:comment:project" => (proc do |project:, a_case:, comment:|
+                "case:comment:project" => (proc do |project:, case:, comment:|
                   raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-                  raise ::ArgumentError, "a_case cannot contain /" if a_case.to_s.include? "/"
+                  raise ::ArgumentError, "binding.local_variable_get(:case) cannot contain /" if binding.local_variable_get(:case).to_s.include? "/"
 
-                  "projects/#{project}/cases/#{a_case}/comments/#{comment}"
+                  "projects/#{project}/cases/#{binding.local_variable_get(:case)}/comments/#{comment}"
                 end)
               }
 

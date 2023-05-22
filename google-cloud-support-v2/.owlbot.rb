@@ -17,7 +17,7 @@
 lib_paths = [
   "lib/google/cloud/support/v2/case_attachment_service/paths.rb",
   "lib/google/cloud/support/v2/case_service/paths.rb",
-  "lib/google/cloud/support/v2/comment_service/paths.rb",
+  "lib/google/cloud/support/v2/comment_service/paths.rb"
 ]
 
 # Fix for b/283189019 (internal)
@@ -33,20 +33,15 @@ OwlBot.modifier path: lib_paths do |content|
   end
 end
 
+test_paths = [
+  "test/google/cloud/support/v2/case_service_test.rb"
+]
 
-# test_paths = [
-#   "test/google/cloud/support/v2/case_service_test.rb",
-#   "test/google/cloud/support/v2/comment_service_paths_test.rb",
-#   "test/google/cloud/support/v2/case_service_paths_test.rb",
-#   "test/google/cloud/support/v2/case_attachment_service_paths_test.rb"
-# ]
-#
-# # Fix for b/283189019 (internal)
-# OwlBot.modifier path: test_paths do |content|
-#   content.gsub(/\bcase\b/) do |match|
-#     puts "sandeep: #{match}"
-#     "a_case" # need this to be be in sorted order of case, comment and organisation
-#   end
-# end
+# Fix for b/283189019 (internal)
+OwlBot.modifier path: test_paths do |content|
+  content&.gsub(/\scase([^:])/) do |_match|
+    "a_case#{Regexp.last_match 1}"
+  end
+end
 
 OwlBot.move_files
