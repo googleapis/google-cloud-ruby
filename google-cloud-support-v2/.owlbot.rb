@@ -14,22 +14,39 @@
 
 # OwlBot script for google-cloud-support-v2
 
-paths = [
+lib_paths = [
   "lib/google/cloud/support/v2/case_attachment_service/paths.rb",
   "lib/google/cloud/support/v2/case_service/paths.rb",
   "lib/google/cloud/support/v2/comment_service/paths.rb",
-  "test/google/cloud/support/v2/case_service_test.rb",
-  "test/google/cloud/support/v2/comment_service_paths_test.rb",
-  "test/google/cloud/support/v2/case_service_paths_test.rb",
-  "test/google/cloud/support/v2/case_attachment_service_paths_test.rb"
 ]
 
 # Fix for b/283189019 (internal)
-OwlBot.modifier path: paths do |content|
-  content.gsub(/\bcase\b/) do |match|
-    puts "sandeep: #{match}"
-    "a_case" # need this to be be in sorted order of case, comment and organisation
+OwlBot.modifier path: lib_paths do |content|
+  # The regex matches following conditions:
+  # - Ignore comments
+  # - Look for occurences of 'case' in method definitions, but
+  #   ignore the keyword arguments (ex: case:)
+  content&.gsub(/^((?!\s*#).*\b)(case)\b[^:]/) do |match|
+    match
+      .split(/\bcase\b/) # ensure we don't change false positives of 'case' (ex: cases)
+      .join("binding.local_variable_get(:case)") # This works according to https://stackoverflow.com/a/45654031
   end
 end
+
+
+# test_paths = [
+#   "test/google/cloud/support/v2/case_service_test.rb",
+#   "test/google/cloud/support/v2/comment_service_paths_test.rb",
+#   "test/google/cloud/support/v2/case_service_paths_test.rb",
+#   "test/google/cloud/support/v2/case_attachment_service_paths_test.rb"
+# ]
+#
+# # Fix for b/283189019 (internal)
+# OwlBot.modifier path: test_paths do |content|
+#   content.gsub(/\bcase\b/) do |match|
+#     puts "sandeep: #{match}"
+#     "a_case" # need this to be be in sorted order of case, comment and organisation
+#   end
+# end
 
 OwlBot.move_files
