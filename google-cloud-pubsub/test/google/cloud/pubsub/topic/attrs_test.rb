@@ -84,7 +84,7 @@ describe Google::Cloud::PubSub::Topic, :attributes, :mock_pubsub do
       _(topic).wont_be :resource?
 
       mock = Minitest::Mock.new
-      mock.expect :get_topic, topic_grpc, [topic: topic_path(topic_name)]
+      mock.expect :get_topic, topic_grpc, topic: topic_path(topic_name)
       topic.service.mocked_publisher = mock
 
       _(topic.labels).must_equal labels
@@ -100,7 +100,7 @@ describe Google::Cloud::PubSub::Topic, :attributes, :mock_pubsub do
       _(topic).wont_be :resource?
 
       mock = Minitest::Mock.new
-      mock.expect :get_topic, topic_grpc, [topic: topic_path(topic_name)]
+      mock.expect :get_topic, topic_grpc, topic: topic_path(topic_name)
       topic.service.mocked_publisher = mock
 
       _(topic.kms_key).must_equal kms_key_name
@@ -116,7 +116,7 @@ describe Google::Cloud::PubSub::Topic, :attributes, :mock_pubsub do
       _(topic).wont_be :resource?
 
       mock = Minitest::Mock.new
-      mock.expect :get_topic, topic_grpc, [topic: topic_path(topic_name)]
+      mock.expect :get_topic, topic_grpc, topic: topic_path(topic_name)
       topic.service.mocked_publisher = mock
 
       _(topic.persistence_regions).must_equal persistence_regions
@@ -132,7 +132,7 @@ describe Google::Cloud::PubSub::Topic, :attributes, :mock_pubsub do
       _(topic).wont_be :resource?
 
       mock = Minitest::Mock.new
-      mock.expect :get_topic, topic_grpc, [topic: topic_path(topic_name)]
+      mock.expect :get_topic, topic_grpc, topic: topic_path(topic_name)
       topic.service.mocked_publisher = mock
 
       _(topic.schema_name).must_equal schema_name
@@ -154,7 +154,7 @@ describe Google::Cloud::PubSub::Topic, :attributes, :mock_pubsub do
         _(topic).wont_be :resource?
 
         mock = Minitest::Mock.new
-        mock.expect :get_topic, topic_grpc, [topic: topic_path(topic_name)]
+        mock.expect :get_topic, topic_grpc, topic: topic_path(topic_name)
         topic.service.mocked_publisher = mock
 
         _(topic.schema_name).must_be :nil?

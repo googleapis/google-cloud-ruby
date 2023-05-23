@@ -30,6 +30,11 @@
                 "list_keys"
               ]
             },
+            "RetrieveLegacySecretKey": {
+              "methods": [
+                "retrieve_legacy_secret_key"
+              ]
+            },
             "GetKey": {
               "methods": [
                 "get_key"
@@ -43,6 +48,31 @@
             "DeleteKey": {
               "methods": [
                 "delete_key"
+              ]
+            },
+            "MigrateKey": {
+              "methods": [
+                "migrate_key"
+              ]
+            },
+            "GetMetrics": {
+              "methods": [
+                "get_metrics"
+              ]
+            },
+            "ListRelatedAccountGroups": {
+              "methods": [
+                "list_related_account_groups"
+              ]
+            },
+            "ListRelatedAccountGroupMemberships": {
+              "methods": [
+                "list_related_account_group_memberships"
+              ]
+            },
+            "SearchRelatedAccountGroupMemberships": {
+              "methods": [
+                "search_related_account_group_memberships"
               ]
             }
           }

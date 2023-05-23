@@ -8,7 +8,7 @@ require 'google/cloud/scheduler/v1/target_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/rpc/status_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/scheduler/v1/job.proto", :syntax => :proto3) do
     add_message "google.cloud.scheduler.v1.Job" do

@@ -9,6 +9,7 @@ require 'google/cloud/dataqna/v1alpha/annotated_string_pb'
 require 'google/protobuf/any_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/rpc/status_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/dataqna/v1alpha/question.proto", :syntax => :proto3) do
     add_message "google.cloud.dataqna.v1alpha.Question" do

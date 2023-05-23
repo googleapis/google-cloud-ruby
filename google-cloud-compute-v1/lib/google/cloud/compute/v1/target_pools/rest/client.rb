@@ -18,6 +18,8 @@
 
 require "google/cloud/errors"
 require "google/cloud/compute/v1/compute_pb"
+require "google/cloud/compute/v1/target_pools/rest/service_stub"
+require "google/cloud/compute/v1/region_operations/rest"
 
 module Google
   module Cloud
@@ -31,8 +33,6 @@ module Google
             # The TargetPools API.
             #
             class Client
-              include GrpcTranscoding
-
               # @private
               attr_reader :target_pools_stub
 
@@ -42,13 +42,12 @@ module Google
               # See {::Google::Cloud::Compute::V1::TargetPools::Rest::Client::Configuration}
               # for a description of the configuration fields.
               #
-              # ## Example
+              # @example
               #
-              # To modify the configuration for all TargetPools clients:
-              #
-              #     ::Google::Cloud::Compute::V1::TargetPools::Rest::Client.configure do |config|
-              #       config.timeout = 10.0
-              #     end
+              #   # Modify the configuration for all TargetPools clients
+              #   ::Google::Cloud::Compute::V1::TargetPools::Rest::Client.configure do |config|
+              #     config.timeout = 10.0
+              #   end
               #
               # @yield [config] Configure the Client client.
               # @yieldparam config [Client::Configuration]
@@ -65,6 +64,37 @@ module Google
                                     namespace.pop
                                   end
                   default_config = Client::Configuration.new parent_config
+
+                  default_config.rpcs.add_health_check.timeout = 600.0
+
+                  default_config.rpcs.add_instance.timeout = 600.0
+
+                  default_config.rpcs.aggregated_list.timeout = 600.0
+                  default_config.rpcs.aggregated_list.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  }
+
+                  default_config.rpcs.delete.timeout = 600.0
+
+                  default_config.rpcs.get.timeout = 600.0
+                  default_config.rpcs.get.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  }
+
+                  default_config.rpcs.get_health.timeout = 600.0
+
+                  default_config.rpcs.insert.timeout = 600.0
+
+                  default_config.rpcs.list.timeout = 600.0
+                  default_config.rpcs.list.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  }
+
+                  default_config.rpcs.remove_health_check.timeout = 600.0
+
+                  default_config.rpcs.remove_instance.timeout = 600.0
+
+                  default_config.rpcs.set_backup.timeout = 600.0
 
                   default_config
                 end
@@ -95,28 +125,20 @@ module Google
               ##
               # Create a new TargetPools REST client object.
               #
-              # ## Examples
+              # @example
               #
-              # To create a new TargetPools REST client with the default
-              # configuration:
+              #   # Create a client using the default configuration
+              #   client = ::Google::Cloud::Compute::V1::TargetPools::Rest::Client.new
               #
-              #     client = ::Google::Cloud::Compute::V1::TargetPools::Rest::Client.new
-              #
-              # To create a new TargetPools REST client with a custom
-              # configuration:
-              #
-              #     client = ::Google::Cloud::Compute::V1::TargetPools::Rest::Client.new do |config|
-              #       config.timeout = 10.0
-              #     end
+              #   # Create a client using a custom configuration
+              #   client = ::Google::Cloud::Compute::V1::TargetPools::Rest::Client.new do |config|
+              #     config.timeout = 10.0
+              #   end
               #
               # @yield [config] Configure the TargetPools client.
               # @yieldparam config [Client::Configuration]
               #
               def initialize
-                # These require statements are intentionally placed here to initialize
-                # the REST modules only when it's required.
-                require "gapic/rest"
-
                 # Create the configuration object
                 @config = Configuration.new Client.configure
 
@@ -125,13 +147,34 @@ module Google
 
                 # Create credentials
                 credentials = @config.credentials
-                credentials ||= Credentials.default scope: @config.scope
-                if credentials.is_a?(String) || credentials.is_a?(Hash)
+                # Use self-signed JWT if the endpoint is unchanged from default,
+                # but only if the default endpoint does not have a region prefix.
+                enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+                                         !@config.endpoint.split(".").first.include?("-")
+                credentials ||= Credentials.default scope: @config.scope,
+                                                    enable_self_signed_jwt: enable_self_signed_jwt
+                if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                   credentials = Credentials.new credentials, scope: @config.scope
                 end
 
-                @client_stub = ::Gapic::Rest::ClientStub.new endpoint: @config.endpoint, credentials: credentials
+                @quota_project_id = @config.quota_project
+                @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
+
+                @region_operations = ::Google::Cloud::Compute::V1::RegionOperations::Rest::Client.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @config.endpoint
+                end
+
+                @target_pools_stub = ::Google::Cloud::Compute::V1::TargetPools::Rest::ServiceStub.new endpoint: @config.endpoint, credentials: credentials
               end
+
+              ##
+              # Get the associated client for long-running operations via RegionOperations.
+              #
+              # @return [::Google::Cloud::Compute::V1::RegionOperations::Rest::Client]
+              #
+              attr_reader :region_operations
 
               # Service calls
 
@@ -147,8 +190,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload add_health_check(project: nil, region: nil, request_id: nil, target_pool: nil, target_pools_add_health_check_request_resource: nil)
               #   Pass arguments to `add_health_check` via keyword arguments. Note that at
@@ -160,20 +201,16 @@ module Google
               #   @param region [::String]
               #     Name of the region scoping this request.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-              #
-              #     For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-              #
-              #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param target_pool [::String]
               #     Name of the target pool to add a health check to.
               #   @param target_pools_add_health_check_request_resource [::Google::Cloud::Compute::V1::TargetPoolsAddHealthCheckRequest, ::Hash]
               #     The body resource for this request
-              # @yield [result, env] Access the result along with the Faraday environment object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def add_health_check request, options = nil
@@ -185,29 +222,39 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.add_health_check.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.add_health_check.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.add_health_check.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
-                uri, body, _query_string_params = transcode_add_health_check request
-                response = @client_stub.make_post_request(
-                  uri:     uri,
-                  body:    body,
-                  options: options
-                )
-                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, response if block_given?
-                result
-              rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
+                @target_pools_stub.add_health_check request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::RegionOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: region_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "region" => request.region
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -222,8 +269,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload add_instance(project: nil, region: nil, request_id: nil, target_pool: nil, target_pools_add_instance_request_resource: nil)
               #   Pass arguments to `add_instance` via keyword arguments. Note that at
@@ -235,20 +280,16 @@ module Google
               #   @param region [::String]
               #     Name of the region scoping this request.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-              #
-              #     For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-              #
-              #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param target_pool [::String]
               #     Name of the TargetPool resource to add instances to.
               #   @param target_pools_add_instance_request_resource [::Google::Cloud::Compute::V1::TargetPoolsAddInstanceRequest, ::Hash]
               #     The body resource for this request
-              # @yield [result, env] Access the result along with the Faraday environment object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def add_instance request, options = nil
@@ -260,29 +301,39 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.add_instance.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.add_instance.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.add_instance.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
-                uri, body, _query_string_params = transcode_add_instance request
-                response = @client_stub.make_post_request(
-                  uri:     uri,
-                  body:    body,
-                  options: options
-                )
-                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, response if block_given?
-                result
-              rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
+                @target_pools_stub.add_instance request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::RegionOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: region_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "region" => request.region
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -297,8 +348,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload aggregated_list(filter: nil, include_all_scopes: nil, max_results: nil, order_by: nil, page_token: nil, project: nil, return_partial_success: nil)
               #   Pass arguments to `aggregated_list` via keyword arguments. Note that at
@@ -306,34 +355,24 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param filter [::String]
-              #     A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
-              #
-              #     For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
-              #
-              #     You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
-              #
-              #     To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+              #     A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:` operator can be used with string fields to match substrings. For non-string fields it is equivalent to the `=` operator. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`.
               #   @param include_all_scopes [::Boolean]
               #     Indicates whether every visible scope for each scope type (zone, region, global) should be included in the response. For new resource types added after this field, the flag has no effect as new resource types will always include every visible scope for each scope type in response. For resource types which predate this field, if this flag is omitted or false, only scopes of the scope types where the resource type is expected to be found will be included.
               #   @param max_results [::Integer]
               #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
               #   @param order_by [::String]
-              #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
-              #
-              #     You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
-              #
-              #     Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+              #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
               #   @param page_token [::String]
               #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
               #   @param project [::String]
               #     Project ID for this request.
               #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
-              # @yield [result, env] Access the result along with the Faraday environment object
-              # @yieldparam result [::Google::Cloud::Compute::V1::TargetPoolAggregatedList]
-              # @yieldparam response [::Faraday::Response]
+              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::String, ::Google::Cloud::Compute::V1::TargetPoolsScopedList>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Compute::V1::TargetPoolAggregatedList]
+              # @return [::Gapic::Rest::PagedEnumerable<::String, ::Google::Cloud::Compute::V1::TargetPoolsScopedList>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def aggregated_list request, options = nil
@@ -345,29 +384,31 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.aggregated_list.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.aggregated_list.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.aggregated_list.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
-                uri, _body, query_string_params = transcode_aggregated_list request
-                response = @client_stub.make_get_request(
-                  uri:     uri,
-                  params:  query_string_params,
-                  options: options
-                )
-                result = ::Google::Cloud::Compute::V1::TargetPoolAggregatedList.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, response if block_given?
-                result
-              rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
+                @target_pools_stub.aggregated_list request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @target_pools_stub, :aggregated_list, "items", request, result, options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -382,8 +423,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload delete(project: nil, region: nil, request_id: nil, target_pool: nil)
               #   Pass arguments to `delete` via keyword arguments. Note that at
@@ -395,18 +434,14 @@ module Google
               #   @param region [::String]
               #     Name of the region scoping this request.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-              #
-              #     For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-              #
-              #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param target_pool [::String]
               #     Name of the TargetPool resource to delete.
-              # @yield [result, env] Access the result along with the Faraday environment object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def delete request, options = nil
@@ -418,33 +453,43 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.delete.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
-                uri, _body, query_string_params = transcode_delete request
-                response = @client_stub.make_delete_request(
-                  uri:     uri,
-                  params:  query_string_params,
-                  options: options
-                )
-                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, response if block_given?
-                result
-              rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
+                @target_pools_stub.delete request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::RegionOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: region_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "region" => request.region
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
-              # Returns the specified target pool. Gets a list of available target pools by making a list() request.
+              # Returns the specified target pool.
               #
               # @overload get(request, options = nil)
               #   Pass arguments to `get` via a request object, either of type
@@ -455,8 +500,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload get(project: nil, region: nil, target_pool: nil)
               #   Pass arguments to `get` via keyword arguments. Note that at
@@ -469,9 +512,9 @@ module Google
               #     Name of the region scoping this request.
               #   @param target_pool [::String]
               #     Name of the TargetPool resource to return.
-              # @yield [result, env] Access the result along with the Faraday environment object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::TargetPool]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::TargetPool]
               #
@@ -485,28 +528,30 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.get.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
-                uri, _body, _query_string_params = transcode_get request
-                response = @client_stub.make_get_request(
-                  uri:     uri,
-                  options: options
-                )
-                result = ::Google::Cloud::Compute::V1::TargetPool.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, response if block_given?
-                result
-              rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
+                @target_pools_stub.get request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -521,8 +566,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload get_health(instance_reference_resource: nil, project: nil, region: nil, target_pool: nil)
               #   Pass arguments to `get_health` via keyword arguments. Note that at
@@ -537,9 +580,9 @@ module Google
               #     Name of the region scoping this request.
               #   @param target_pool [::String]
               #     Name of the TargetPool resource to which the queried instance belongs.
-              # @yield [result, env] Access the result along with the Faraday environment object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::TargetPoolInstanceHealth]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::TargetPoolInstanceHealth]
               #
@@ -553,29 +596,30 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.get_health.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_health.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_health.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
-                uri, body, _query_string_params = transcode_get_health request
-                response = @client_stub.make_post_request(
-                  uri:     uri,
-                  body:    body,
-                  options: options
-                )
-                result = ::Google::Cloud::Compute::V1::TargetPoolInstanceHealth.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, response if block_given?
-                result
-              rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
+                @target_pools_stub.get_health request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -590,8 +634,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload insert(project: nil, region: nil, request_id: nil, target_pool_resource: nil)
               #   Pass arguments to `insert` via keyword arguments. Note that at
@@ -603,18 +645,14 @@ module Google
               #   @param region [::String]
               #     Name of the region scoping this request.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-              #
-              #     For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-              #
-              #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param target_pool_resource [::Google::Cloud::Compute::V1::TargetPool, ::Hash]
               #     The body resource for this request
-              # @yield [result, env] Access the result along with the Faraday environment object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def insert request, options = nil
@@ -626,29 +664,39 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.insert.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.insert.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.insert.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
-                uri, body, _query_string_params = transcode_insert request
-                response = @client_stub.make_post_request(
-                  uri:     uri,
-                  body:    body,
-                  options: options
-                )
-                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, response if block_given?
-                result
-              rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
+                @target_pools_stub.insert request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::RegionOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: region_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "region" => request.region
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -663,8 +711,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload list(filter: nil, max_results: nil, order_by: nil, page_token: nil, project: nil, region: nil, return_partial_success: nil)
               #   Pass arguments to `list` via keyword arguments. Note that at
@@ -672,21 +718,11 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param filter [::String]
-              #     A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
-              #
-              #     For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
-              #
-              #     You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
-              #
-              #     To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+              #     A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:` operator can be used with string fields to match substrings. For non-string fields it is equivalent to the `=` operator. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`.
               #   @param max_results [::Integer]
               #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
               #   @param order_by [::String]
-              #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
-              #
-              #     You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
-              #
-              #     Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+              #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
               #   @param page_token [::String]
               #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
               #   @param project [::String]
@@ -694,12 +730,12 @@ module Google
               #   @param region [::String]
               #     Name of the region scoping this request.
               #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
-              # @yield [result, env] Access the result along with the Faraday environment object
-              # @yieldparam result [::Google::Cloud::Compute::V1::TargetPoolList]
-              # @yieldparam response [::Faraday::Response]
+              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::TargetPool>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Compute::V1::TargetPoolList]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::TargetPool>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def list request, options = nil
@@ -711,29 +747,31 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.list.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
-                uri, _body, query_string_params = transcode_list request
-                response = @client_stub.make_get_request(
-                  uri:     uri,
-                  params:  query_string_params,
-                  options: options
-                )
-                result = ::Google::Cloud::Compute::V1::TargetPoolList.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, response if block_given?
-                result
-              rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
+                @target_pools_stub.list request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @target_pools_stub, :list, "items", request, result, options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -748,8 +786,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload remove_health_check(project: nil, region: nil, request_id: nil, target_pool: nil, target_pools_remove_health_check_request_resource: nil)
               #   Pass arguments to `remove_health_check` via keyword arguments. Note that at
@@ -761,20 +797,16 @@ module Google
               #   @param region [::String]
               #     Name of the region for this request.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-              #
-              #     For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-              #
-              #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param target_pool [::String]
               #     Name of the target pool to remove health checks from.
               #   @param target_pools_remove_health_check_request_resource [::Google::Cloud::Compute::V1::TargetPoolsRemoveHealthCheckRequest, ::Hash]
               #     The body resource for this request
-              # @yield [result, env] Access the result along with the Faraday environment object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def remove_health_check request, options = nil
@@ -786,29 +818,39 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.remove_health_check.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.remove_health_check.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.remove_health_check.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
-                uri, body, _query_string_params = transcode_remove_health_check request
-                response = @client_stub.make_post_request(
-                  uri:     uri,
-                  body:    body,
-                  options: options
-                )
-                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, response if block_given?
-                result
-              rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
+                @target_pools_stub.remove_health_check request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::RegionOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: region_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "region" => request.region
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -823,8 +865,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload remove_instance(project: nil, region: nil, request_id: nil, target_pool: nil, target_pools_remove_instance_request_resource: nil)
               #   Pass arguments to `remove_instance` via keyword arguments. Note that at
@@ -836,20 +876,16 @@ module Google
               #   @param region [::String]
               #     Name of the region scoping this request.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-              #
-              #     For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-              #
-              #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param target_pool [::String]
               #     Name of the TargetPool resource to remove instances from.
               #   @param target_pools_remove_instance_request_resource [::Google::Cloud::Compute::V1::TargetPoolsRemoveInstanceRequest, ::Hash]
               #     The body resource for this request
-              # @yield [result, env] Access the result along with the Faraday environment object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def remove_instance request, options = nil
@@ -861,29 +897,39 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.remove_instance.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.remove_instance.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.remove_instance.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
-                uri, body, _query_string_params = transcode_remove_instance request
-                response = @client_stub.make_post_request(
-                  uri:     uri,
-                  body:    body,
-                  options: options
-                )
-                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, response if block_given?
-                result
-              rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
+                @target_pools_stub.remove_instance request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::RegionOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: region_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "region" => request.region
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
@@ -898,8 +944,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload set_backup(failover_ratio: nil, project: nil, region: nil, request_id: nil, target_pool: nil, target_reference_resource: nil)
               #   Pass arguments to `set_backup` via keyword arguments. Note that at
@@ -913,20 +957,16 @@ module Google
               #   @param region [::String]
               #     Name of the region scoping this request.
               #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-              #
-              #     For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-              #
-              #     The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param target_pool [::String]
               #     Name of the TargetPool resource to set a backup pool for.
               #   @param target_reference_resource [::Google::Cloud::Compute::V1::TargetReference, ::Hash]
               #     The body resource for this request
-              # @yield [result, env] Access the result along with the Faraday environment object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
-              # @return [::Google::Cloud::Compute::V1::Operation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def set_backup request, options = nil
@@ -938,53 +978,69 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.set_backup.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.set_backup.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.set_backup.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
-                uri, body, _query_string_params = transcode_set_backup request
-                response = @client_stub.make_post_request(
-                  uri:     uri,
-                  body:    body,
-                  options: options
-                )
-                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, response if block_given?
-                result
-              rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
+                @target_pools_stub.set_backup request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::RegionOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: region_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "region" => request.region
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
               # Configuration class for the TargetPools REST API.
               #
               # This class represents the configuration for TargetPools REST,
-              # providing control over credentials, timeouts, retry behavior, logging.
+              # providing control over timeouts, retry behavior, logging, transport
+              # parameters, and other low-level controls. Certain parameters can also be
+              # applied individually to specific RPCs. See
+              # {::Google::Cloud::Compute::V1::TargetPools::Rest::Client::Configuration::Rpcs}
+              # for a list of RPCs that can be configured independently.
               #
               # Configuration can be applied globally to all clients, or to a single client
               # on construction.
               #
-              # # Examples
+              # @example
               #
-              # To modify the global config, setting the timeout for all calls to 10 seconds:
+              #   # Modify the global config, setting the timeout for
+              #   # add_health_check to 20 seconds,
+              #   # and all remaining timeouts to 10 seconds.
+              #   ::Google::Cloud::Compute::V1::TargetPools::Rest::Client.configure do |config|
+              #     config.timeout = 10.0
+              #     config.rpcs.add_health_check.timeout = 20.0
+              #   end
               #
-              #     ::Google::Cloud::Compute::V1::TargetPools::Client.configure do |config|
-              #       config.timeout = 10.0
-              #     end
-              #
-              # To apply the above configuration only to a new client:
-              #
-              #     client = ::Google::Cloud::Compute::V1::TargetPools::Client.new do |config|
-              #       config.timeout = 10.0
-              #     end
+              #   # Apply the above configuration only to a new client.
+              #   client = ::Google::Cloud::Compute::V1::TargetPools::Rest::Client.new do |config|
+              #     config.timeout = 10.0
+              #     config.rpcs.add_health_check.timeout = 20.0
+              #   end
               #
               # @!attribute [rw] endpoint
               #   The hostname or hostname:port of the service endpoint.
@@ -995,9 +1051,9 @@ module Google
               #    *  (`String`) The path to a service account key file in JSON format
               #    *  (`Hash`) A service account key as a Hash
               #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-              #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+              #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
               #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-              #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+              #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
               #    *  (`nil`) indicating no credentials
               #   @return [::Object]
               # @!attribute [rw] scope
@@ -1012,6 +1068,20 @@ module Google
               # @!attribute [rw] timeout
               #   The call timeout in seconds.
               #   @return [::Numeric]
+              # @!attribute [rw] metadata
+              #   Additional headers to be sent with the call.
+              #   @return [::Hash{::Symbol=>::String}]
+              # @!attribute [rw] retry_policy
+              #   The retry policy. The value is a hash with the following keys:
+              #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
+              #    *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
+              #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+              #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
+              #       trigger a retry.
+              #   @return [::Hash]
+              # @!attribute [rw] quota_project
+              #   A separate project against which to charge quota.
+              #   @return [::String]
               #
               class Configuration
                 extend ::Gapic::Config
@@ -1025,12 +1095,130 @@ module Google
                 config_attr :lib_name,      nil, ::String, nil
                 config_attr :lib_version,   nil, ::String, nil
                 config_attr :timeout,       nil, ::Numeric, nil
+                config_attr :metadata,      nil, ::Hash, nil
+                config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
+                config_attr :quota_project, nil, ::String, nil
 
                 # @private
                 def initialize parent_config = nil
                   @parent_config = parent_config unless parent_config.nil?
 
                   yield self if block_given?
+                end
+
+                ##
+                # Configurations for individual RPCs
+                # @return [Rpcs]
+                #
+                def rpcs
+                  @rpcs ||= begin
+                    parent_rpcs = nil
+                    parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
+                    Rpcs.new parent_rpcs
+                  end
+                end
+
+                ##
+                # Configuration RPC class for the TargetPools API.
+                #
+                # Includes fields providing the configuration for each RPC in this service.
+                # Each configuration object is of type `Gapic::Config::Method` and includes
+                # the following configuration fields:
+                #
+                #  *  `timeout` (*type:* `Numeric`) - The call timeout in seconds
+                #  *  `metadata` (*type:* `Hash{Symbol=>String}`) - Additional headers
+                #  *  `retry_policy (*type:* `Hash`) - The retry policy. The policy fields
+                #     include the following keys:
+                #      *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
+                #      *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
+                #      *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+                #      *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
+                #         trigger a retry.
+                #
+                class Rpcs
+                  ##
+                  # RPC-specific configuration for `add_health_check`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :add_health_check
+                  ##
+                  # RPC-specific configuration for `add_instance`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :add_instance
+                  ##
+                  # RPC-specific configuration for `aggregated_list`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :aggregated_list
+                  ##
+                  # RPC-specific configuration for `delete`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete
+                  ##
+                  # RPC-specific configuration for `get`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get
+                  ##
+                  # RPC-specific configuration for `get_health`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_health
+                  ##
+                  # RPC-specific configuration for `insert`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :insert
+                  ##
+                  # RPC-specific configuration for `list`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list
+                  ##
+                  # RPC-specific configuration for `remove_health_check`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :remove_health_check
+                  ##
+                  # RPC-specific configuration for `remove_instance`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :remove_instance
+                  ##
+                  # RPC-specific configuration for `set_backup`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :set_backup
+
+                  # @private
+                  def initialize parent_rpcs = nil
+                    add_health_check_config = parent_rpcs.add_health_check if parent_rpcs.respond_to? :add_health_check
+                    @add_health_check = ::Gapic::Config::Method.new add_health_check_config
+                    add_instance_config = parent_rpcs.add_instance if parent_rpcs.respond_to? :add_instance
+                    @add_instance = ::Gapic::Config::Method.new add_instance_config
+                    aggregated_list_config = parent_rpcs.aggregated_list if parent_rpcs.respond_to? :aggregated_list
+                    @aggregated_list = ::Gapic::Config::Method.new aggregated_list_config
+                    delete_config = parent_rpcs.delete if parent_rpcs.respond_to? :delete
+                    @delete = ::Gapic::Config::Method.new delete_config
+                    get_config = parent_rpcs.get if parent_rpcs.respond_to? :get
+                    @get = ::Gapic::Config::Method.new get_config
+                    get_health_config = parent_rpcs.get_health if parent_rpcs.respond_to? :get_health
+                    @get_health = ::Gapic::Config::Method.new get_health_config
+                    insert_config = parent_rpcs.insert if parent_rpcs.respond_to? :insert
+                    @insert = ::Gapic::Config::Method.new insert_config
+                    list_config = parent_rpcs.list if parent_rpcs.respond_to? :list
+                    @list = ::Gapic::Config::Method.new list_config
+                    remove_health_check_config = parent_rpcs.remove_health_check if parent_rpcs.respond_to? :remove_health_check
+                    @remove_health_check = ::Gapic::Config::Method.new remove_health_check_config
+                    remove_instance_config = parent_rpcs.remove_instance if parent_rpcs.respond_to? :remove_instance
+                    @remove_instance = ::Gapic::Config::Method.new remove_instance_config
+                    set_backup_config = parent_rpcs.set_backup if parent_rpcs.respond_to? :set_backup
+                    @set_backup = ::Gapic::Config::Method.new set_backup_config
+
+                    yield self if block_given?
+                  end
                 end
               end
             end

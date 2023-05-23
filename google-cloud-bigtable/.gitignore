@@ -17,3 +17,4 @@ jsondoc/*
 tmp/*
 .byebug_history
 .DS_Store
+rubocop_yard_examples/*

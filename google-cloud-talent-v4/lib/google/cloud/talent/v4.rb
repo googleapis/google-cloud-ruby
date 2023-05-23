@@ -27,10 +27,17 @@ module Google
   module Cloud
     module Talent
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
+      #
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/talent/v4"
       #     client = ::Google::Cloud::Talent::V4::CompanyService::Client.new
+      #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/talent/v4"
+      #     client = ::Google::Cloud::Talent::V4::CompanyService::Rest::Client.new
       #
       module V4
       end

@@ -4,12 +4,13 @@
 require 'google/protobuf'
 
 require 'google/api/resource_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/firestore/admin/v1/index.proto", :syntax => :proto3) do
     add_message "google.firestore.admin.v1.Index" do
       optional :name, :string, 1
       optional :query_scope, :enum, 2, "google.firestore.admin.v1.Index.QueryScope"
+      optional :api_scope, :enum, 5, "google.firestore.admin.v1.Index.ApiScope"
       repeated :fields, :message, 3, "google.firestore.admin.v1.Index.IndexField"
       optional :state, :enum, 4, "google.firestore.admin.v1.Index.State"
     end
@@ -33,6 +34,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :QUERY_SCOPE_UNSPECIFIED, 0
       value :COLLECTION, 1
       value :COLLECTION_GROUP, 2
+      value :COLLECTION_RECURSIVE, 3
+    end
+    add_enum "google.firestore.admin.v1.Index.ApiScope" do
+      value :ANY_API, 0
+      value :DATASTORE_MODE_API, 1
     end
     add_enum "google.firestore.admin.v1.Index.State" do
       value :STATE_UNSPECIFIED, 0
@@ -53,6 +59,7 @@ module Google
           Index::IndexField::Order = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.Index.IndexField.Order").enummodule
           Index::IndexField::ArrayConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.Index.IndexField.ArrayConfig").enummodule
           Index::QueryScope = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.Index.QueryScope").enummodule
+          Index::ApiScope = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.Index.ApiScope").enummodule
           Index::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.Index.State").enummodule
         end
       end

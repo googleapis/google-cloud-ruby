@@ -1,7 +1,19 @@
 {
-    "name": "pubsub",
-    "language": "ruby",
+    "api_id": "pubsub.googleapis.com",
+    "api_shortname": "pubsub",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-pubsub/latest",
     "distribution_name": "google-cloud-pubsub",
-    "client_documentation": "https://googleapis.dev/ruby/google-cloud-pubsub/latest",
+    "language": "ruby",
+    "name": "pubsub",
+    "name_pretty": "Cloud Pub/Sub API",
+    "product_documentation": "https://cloud.google.com/pubsub",
+    "release_level": "stable",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Cloud Pub/Sub is a fully-managed real-time messaging service that allows you to send and receive messages between independent applications. Note that google-cloud-pubsub-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-pubsub instead. See the readme for more details.",
+    "ruby-cloud-env-prefix": "PUBSUB",
+    "ruby-cloud-product-url": "https://cloud.google.com/pubsub",
+    "ruby-cloud-path-override": "pub_sub=pubsub",
+    "ruby-cloud-namespace-override": "Pubsub=PubSub",
     "library_type": "GAPIC_MANUAL"
 }

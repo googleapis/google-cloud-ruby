@@ -52,11 +52,10 @@ describe Google::Cloud::Bigtable::Cluster, :save, :mock_bigtable do
     cluster.nodes = serve_nodes
 
     mock = Minitest::Mock.new
-    mock.expect :update_cluster, operation_grpc(job_grpc, mock), [
-      name: cluster_path(instance_id, cluster_id),
-      location: location_path(location),
-      serve_nodes: serve_nodes
-    ]
+    mock.expect :update_cluster, operation_grpc(job_grpc, mock),
+                name: cluster_path(instance_id, cluster_id),
+                location: location_path(location),
+                serve_nodes: serve_nodes
     mock.expect :get_operation, operation_grpc(job_done_grpc, mock), [{name: ops_name}, Gapic::CallOptions]
     bigtable.service.mocked_instances = mock
 

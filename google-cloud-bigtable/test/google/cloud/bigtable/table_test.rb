@@ -105,7 +105,7 @@ describe Google::Cloud::Bigtable::Table, :mock_bigtable do
 
   it "reloads its state" do
     mock = Minitest::Mock.new
-    mock.expect :get_table, table_grpc, [name: table_path(instance_id, table_id), view: :SCHEMA_VIEW]
+    mock.expect :get_table, table_grpc, name: table_path(instance_id, table_id), view: :SCHEMA_VIEW
     table.service.mocked_tables = mock
 
     table.reload!
@@ -115,7 +115,7 @@ describe Google::Cloud::Bigtable::Table, :mock_bigtable do
 
   it "reloads its state with view option" do
     mock = Minitest::Mock.new
-    mock.expect :get_table, table_grpc, [name: table_path(instance_id, table_id), view: :REPLICATION_VIEW]
+    mock.expect :get_table, table_grpc, name: table_path(instance_id, table_id), view: :REPLICATION_VIEW
     table.service.mocked_tables = mock
 
     table.reload! view: :REPLICATION_VIEW
@@ -135,7 +135,7 @@ describe Google::Cloud::Bigtable::Table, :mock_bigtable do
       )
 
       mock = Minitest::Mock.new
-      mock.expect :get_table, get_res, [name: table_path(instance_id, table_id), view: :SCHEMA_VIEW]
+      mock.expect :get_table, get_res, name: table_path(instance_id, table_id), view: :SCHEMA_VIEW
       table.service.mocked_tables = mock
 
       _(table.column_families).wont_be :empty?
@@ -152,7 +152,7 @@ describe Google::Cloud::Bigtable::Table, :mock_bigtable do
       )
 
       mock = Minitest::Mock.new
-      mock.expect :get_table, get_res, [name: table_path(instance_id, table_id), view: :SCHEMA_VIEW]
+      mock.expect :get_table, get_res, name: table_path(instance_id, table_id), view: :SCHEMA_VIEW
       table.service.mocked_tables = mock
 
       _(table.granularity).must_equal :MILLIS
@@ -170,7 +170,7 @@ describe Google::Cloud::Bigtable::Table, :mock_bigtable do
       )
 
       mock = Minitest::Mock.new
-      mock.expect :get_table, get_res, [name: table_path(instance_id, table_id), view: :FULL]
+      mock.expect :get_table, get_res, name: table_path(instance_id, table_id), view: :FULL
       table.service.mocked_tables = mock
 
       _(table.cluster_states).wont_be :empty?
@@ -193,8 +193,8 @@ describe Google::Cloud::Bigtable::Table, :mock_bigtable do
       )
 
       mock = Minitest::Mock.new
-      mock.expect :get_table, get_res_schema, [name: table_path(instance_id, table_id), view: :SCHEMA_VIEW]
-      mock.expect :get_table, get_res_full, [name: table_path(instance_id, table_id), view: :FULL]
+      mock.expect :get_table, get_res_schema, name: table_path(instance_id, table_id), view: :SCHEMA_VIEW
+      mock.expect :get_table, get_res_full, name: table_path(instance_id, table_id), view: :FULL
       table.service.mocked_tables = mock
 
       _(table.column_families).wont_be :empty?
@@ -208,7 +208,7 @@ describe Google::Cloud::Bigtable::Table, :mock_bigtable do
 
   it "reloads its state with view option" do
     mock = Minitest::Mock.new
-    mock.expect :get_table, table_grpc, [name: table_path(instance_id, table_id), view: :ENCRYPTION_VIEW]
+    mock.expect :get_table, table_grpc, name: table_path(instance_id, table_id), view: :ENCRYPTION_VIEW
     table.service.mocked_tables = mock
 
     table.reload! view: :ENCRYPTION_VIEW

@@ -28,9 +28,12 @@ module Google
   module Cloud
     module Compute
       module V1
-        # To load this service and instantiate a REST client:
+        ##
+        # The InstanceGroups API.
         #
-        #     require "google/cloud/compute/v1/instance_groups"
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/compute/v1/instance_groups/rest"
         #     client = ::Google::Cloud::Compute::V1::InstanceGroups::Rest::Client.new
         #
         module InstanceGroups

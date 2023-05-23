@@ -9,7 +9,7 @@ require 'google/longrunning/operations_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/spanner/admin/database/v1/common_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/spanner/admin/database/v1/backup.proto", :syntax => :proto3) do
     add_message "google.spanner.admin.database.v1.Backup" do
@@ -22,6 +22,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :state, :enum, 6, "google.spanner.admin.database.v1.Backup.State"
       repeated :referencing_databases, :string, 7
       optional :encryption_info, :message, 8, "google.spanner.admin.database.v1.EncryptionInfo"
+      optional :database_dialect, :enum, 10, "google.spanner.admin.database.v1.DatabaseDialect"
+      repeated :referencing_backups, :string, 11
+      optional :max_expire_time, :message, 12, "google.protobuf.Timestamp"
     end
     add_enum "google.spanner.admin.database.v1.Backup.State" do
       value :STATE_UNSPECIFIED, 0
@@ -37,6 +40,19 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.spanner.admin.database.v1.CreateBackupMetadata" do
       optional :name, :string, 1
       optional :database, :string, 2
+      optional :progress, :message, 3, "google.spanner.admin.database.v1.OperationProgress"
+      optional :cancel_time, :message, 4, "google.protobuf.Timestamp"
+    end
+    add_message "google.spanner.admin.database.v1.CopyBackupRequest" do
+      optional :parent, :string, 1
+      optional :backup_id, :string, 2
+      optional :source_backup, :string, 3
+      optional :expire_time, :message, 4, "google.protobuf.Timestamp"
+      optional :encryption_config, :message, 5, "google.spanner.admin.database.v1.CopyBackupEncryptionConfig"
+    end
+    add_message "google.spanner.admin.database.v1.CopyBackupMetadata" do
+      optional :name, :string, 1
+      optional :source_backup, :string, 2
       optional :progress, :message, 3, "google.spanner.admin.database.v1.OperationProgress"
       optional :cancel_time, :message, 4, "google.protobuf.Timestamp"
     end
@@ -86,6 +102,16 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :GOOGLE_DEFAULT_ENCRYPTION, 2
       value :CUSTOMER_MANAGED_ENCRYPTION, 3
     end
+    add_message "google.spanner.admin.database.v1.CopyBackupEncryptionConfig" do
+      optional :encryption_type, :enum, 1, "google.spanner.admin.database.v1.CopyBackupEncryptionConfig.EncryptionType"
+      optional :kms_key_name, :string, 2
+    end
+    add_enum "google.spanner.admin.database.v1.CopyBackupEncryptionConfig.EncryptionType" do
+      value :ENCRYPTION_TYPE_UNSPECIFIED, 0
+      value :USE_CONFIG_DEFAULT_OR_BACKUP_ENCRYPTION, 1
+      value :GOOGLE_DEFAULT_ENCRYPTION, 2
+      value :CUSTOMER_MANAGED_ENCRYPTION, 3
+    end
   end
 end
 
@@ -99,6 +125,8 @@ module Google
             Backup::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.Backup.State").enummodule
             CreateBackupRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.CreateBackupRequest").msgclass
             CreateBackupMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.CreateBackupMetadata").msgclass
+            CopyBackupRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.CopyBackupRequest").msgclass
+            CopyBackupMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.CopyBackupMetadata").msgclass
             UpdateBackupRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.UpdateBackupRequest").msgclass
             GetBackupRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.GetBackupRequest").msgclass
             DeleteBackupRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.DeleteBackupRequest").msgclass
@@ -109,6 +137,8 @@ module Google
             BackupInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.BackupInfo").msgclass
             CreateBackupEncryptionConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.CreateBackupEncryptionConfig").msgclass
             CreateBackupEncryptionConfig::EncryptionType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.CreateBackupEncryptionConfig.EncryptionType").enummodule
+            CopyBackupEncryptionConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.CopyBackupEncryptionConfig").msgclass
+            CopyBackupEncryptionConfig::EncryptionType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.CopyBackupEncryptionConfig.EncryptionType").enummodule
           end
         end
       end

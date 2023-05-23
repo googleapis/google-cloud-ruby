@@ -32,13 +32,32 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
   let(:persistence_regions) { ["us-west1", "us-west2"] }
   let(:schema_name) { "my-schema" }
   let(:message_encoding) { :JSON }
+  let(:retention) { 600 }
+  let(:async) do
+    {
+      max_bytes: 2_000_000,
+      max_messages: 200,
+      interval: 0.02,
+      compress: true,
+      compression_bytes_threshold: 140,
+      threads: {
+        publish: 3,
+        callback: 5
+      },
+      flow_control: {
+        message_limit: 4_000,
+        byte_limit: 40_000_000,
+        limit_exceeded_behavior: :block
+      }
+    }
+  end
 
   it "creates a topic" do
     new_topic_name = "new-topic-#{Time.now.to_i}"
 
     create_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(new_topic_name)
     mock = Minitest::Mock.new
-    mock.expect :create_topic, create_res, [name: topic_path(new_topic_name), labels: nil, kms_key_name: nil, message_storage_policy: nil, schema_settings: nil]
+    mock.expect :create_topic, create_res, name: topic_path(new_topic_name), labels: nil, kms_key_name: nil, message_storage_policy: nil, schema_settings: nil, message_retention_duration: nil
     pubsub.service.mocked_publisher = mock
 
     topic = pubsub.create_topic new_topic_name
@@ -54,6 +73,7 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
     _(topic.message_encoding).must_be :nil?
     _(topic.message_encoding_json?).must_equal false
     _(topic.message_encoding_binary?).must_equal false
+    _(topic.retention).must_be :nil?
   end
 
   it "creates a topic with fully-qualified topic path" do
@@ -61,7 +81,7 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
 
     create_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(new_topic_path)
     mock = Minitest::Mock.new
-    mock.expect :create_topic, create_res, [name: new_topic_path, labels: nil, kms_key_name: nil, message_storage_policy: nil, schema_settings: nil]
+    mock.expect :create_topic, create_res, name: new_topic_path, labels: nil, kms_key_name: nil, message_storage_policy: nil, schema_settings: nil, message_retention_duration: nil
     pubsub.service.mocked_publisher = mock
 
     topic = pubsub.create_topic new_topic_path
@@ -76,7 +96,7 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
 
     create_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(new_topic_name)
     mock = Minitest::Mock.new
-    mock.expect :create_topic, create_res, [name: topic_path(new_topic_name), labels: nil, kms_key_name: nil, message_storage_policy: nil, schema_settings: nil]
+    mock.expect :create_topic, create_res, name: topic_path(new_topic_name), labels: nil, kms_key_name: nil, message_storage_policy: nil, schema_settings: nil, message_retention_duration: nil
     pubsub.service.mocked_publisher = mock
 
     topic = pubsub.new_topic new_topic_name
@@ -92,6 +112,7 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
     _(topic.message_encoding).must_be :nil?
     _(topic.message_encoding_json?).must_equal false
     _(topic.message_encoding_binary?).must_equal false
+    _(topic.retention).must_be :nil?
   end
 
   it "creates a topic with labels" do
@@ -99,7 +120,7 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
 
     create_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(new_topic_name, labels: labels)
     mock = Minitest::Mock.new
-    mock.expect :create_topic, create_res, [name: topic_path(new_topic_name), labels: labels, kms_key_name: nil, message_storage_policy: nil, schema_settings: nil]
+    mock.expect :create_topic, create_res, name: topic_path(new_topic_name), labels: labels, kms_key_name: nil, message_storage_policy: nil, schema_settings: nil, message_retention_duration: nil
     pubsub.service.mocked_publisher = mock
 
     topic = pubsub.create_topic new_topic_name, labels: labels
@@ -115,6 +136,7 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
     _(topic.message_encoding).must_be :nil?
     _(topic.message_encoding_json?).must_equal false
     _(topic.message_encoding_binary?).must_equal false
+    _(topic.retention).must_be :nil?
   end
 
   it "creates a topic with kms_key" do
@@ -122,7 +144,7 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
 
     create_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(new_topic_name, kms_key_name: kms_key)
     mock = Minitest::Mock.new
-    mock.expect :create_topic, create_res, [name: topic_path(new_topic_name), labels: nil, kms_key_name: kms_key, message_storage_policy: nil, schema_settings: nil]
+    mock.expect :create_topic, create_res, name: topic_path(new_topic_name), labels: nil, kms_key_name: kms_key, message_storage_policy: nil, schema_settings: nil, message_retention_duration: nil
     pubsub.service.mocked_publisher = mock
 
     topic = pubsub.create_topic new_topic_name, kms_key: kms_key
@@ -138,6 +160,7 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
     _(topic.message_encoding).must_be :nil?
     _(topic.message_encoding_json?).must_equal false
     _(topic.message_encoding_binary?).must_equal false
+    _(topic.retention).must_be :nil?
   end
 
   it "creates a topic with persistence_regions" do
@@ -146,7 +169,7 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
     create_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(new_topic_name, persistence_regions: persistence_regions)
     mock = Minitest::Mock.new
     message_storage_policy = Google::Cloud::PubSub::V1::MessageStoragePolicy.new allowed_persistence_regions: persistence_regions
-    mock.expect :create_topic, create_res, [name: topic_path(new_topic_name), labels: nil, kms_key_name: nil, message_storage_policy: message_storage_policy, schema_settings: nil]
+    mock.expect :create_topic, create_res, name: topic_path(new_topic_name), labels: nil, kms_key_name: nil, message_storage_policy: message_storage_policy, schema_settings: nil, message_retention_duration: nil
     pubsub.service.mocked_publisher = mock
 
     topic = pubsub.create_topic new_topic_name, persistence_regions: persistence_regions
@@ -162,6 +185,7 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
     _(topic.message_encoding).must_be :nil?
     _(topic.message_encoding_json?).must_equal false
     _(topic.message_encoding_binary?).must_equal false
+    _(topic.retention).must_be :nil?
   end
 
   it "creates a topic with schema_name and message_encoding" do
@@ -171,7 +195,7 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
     create_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(new_topic_name)
     create_res.schema_settings = schema_settings
     mock = Minitest::Mock.new
-    mock.expect :create_topic, create_res, [name: topic_path(new_topic_name), labels: nil, kms_key_name: nil, message_storage_policy: nil, schema_settings: schema_settings]
+    mock.expect :create_topic, create_res, name: topic_path(new_topic_name), labels: nil, kms_key_name: nil, message_storage_policy: nil, schema_settings: schema_settings, message_retention_duration: nil
     pubsub.service.mocked_publisher = mock
 
     topic = pubsub.create_topic new_topic_name, schema_name: schema_name, message_encoding: message_encoding
@@ -184,6 +208,57 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
     _(topic.kms_key).must_be :empty?
     _(topic.schema_name).must_equal schema_path(schema_name)
     _(topic.message_encoding).must_equal message_encoding
+    _(topic.retention).must_be :nil?
+  end
+
+  it "creates a topic with retention" do
+    new_topic_name = "new-topic-#{Time.now.to_i}"
+
+    duration = Google::Protobuf::Duration.new seconds: retention, nanos: 0
+    create_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(new_topic_name)
+    create_res.message_retention_duration = duration
+    mock = Minitest::Mock.new
+    mock.expect :create_topic, create_res, name: topic_path(new_topic_name), labels: nil, kms_key_name: nil, message_storage_policy: nil, schema_settings: nil, message_retention_duration: duration
+    pubsub.service.mocked_publisher = mock
+
+    topic = pubsub.create_topic new_topic_name, retention: retention
+
+    mock.verify
+
+    _(topic.name).must_equal topic_path(new_topic_name)
+    _(topic.labels).must_be :empty?
+    _(topic.labels).must_be :frozen?
+    _(topic.kms_key).must_be :empty?
+    _(topic.persistence_regions).must_be :empty?
+    _(topic.schema_name).must_be :nil?
+    _(topic.message_encoding).must_be :nil?
+    _(topic.message_encoding_json?).must_equal false
+    _(topic.message_encoding_binary?).must_equal false
+    _(topic.retention).must_equal retention
+  end
+
+  it "creates a topic with async option" do
+    new_topic_name = "new-topic-#{Time.now.to_i}"
+
+    create_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(new_topic_name)
+    mock = Minitest::Mock.new
+    mock.expect :create_topic, create_res, name: topic_path(new_topic_name), labels: nil, kms_key_name: nil, message_storage_policy: nil, schema_settings: nil, message_retention_duration: nil
+    pubsub.service.mocked_publisher = mock
+
+    topic = pubsub.create_topic new_topic_name, async: async
+    topic.enable_message_ordering! # Create the AsyncPublisher
+
+    mock.verify
+
+    _(topic.async_publisher.topic_name).must_equal topic_path(new_topic_name)
+    _(topic.async_publisher.max_bytes).must_equal async[:max_bytes]
+    _(topic.async_publisher.max_messages).must_equal async[:max_messages]
+    _(topic.async_publisher.interval).must_equal async[:interval]
+    _(topic.async_publisher.publish_threads).must_equal async[:threads][:publish]
+    _(topic.async_publisher.callback_threads).must_equal async[:threads][:callback]
+    _(topic.async_publisher.flow_control).must_equal async[:flow_control]
+    _(topic.async_publisher.compress).must_equal async[:compress]
+    _(topic.async_publisher.compression_bytes_threshold).must_equal async[:compression_bytes_threshold]
   end
 
   it "raises when creating a topic with schema_name but without message_encoding" do
@@ -205,7 +280,7 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
 
     get_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(topic_name)
     mock = Minitest::Mock.new
-    mock.expect :get_topic, get_res, [topic: topic_path(topic_name)]
+    mock.expect :get_topic, get_res, topic: topic_path(topic_name)
     pubsub.service.mocked_publisher = mock
 
     topic = pubsub.topic topic_name
@@ -222,7 +297,7 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
 
     get_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(topic_full_path)
     mock = Minitest::Mock.new
-    mock.expect :get_topic, get_res, [topic: topic_path(topic_full_path)]
+    mock.expect :get_topic, get_res, topic: topic_path(topic_full_path)
     pubsub.service.mocked_publisher = mock
 
     topic = pubsub.topic topic_full_path
@@ -237,7 +312,7 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
 
     get_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(topic_name)
     mock = Minitest::Mock.new
-    mock.expect :get_topic, get_res, [topic: topic_path(topic_name)]
+    mock.expect :get_topic, get_res, topic: topic_path(topic_name)
     pubsub.service.mocked_publisher = mock
 
     topic = pubsub.get_topic topic_name
@@ -254,7 +329,7 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
 
     get_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(topic_name)
     mock = Minitest::Mock.new
-    mock.expect :get_topic, get_res, [topic: topic_path(topic_name)]
+    mock.expect :get_topic, get_res, topic: topic_path(topic_name)
     pubsub.service.mocked_publisher = mock
 
     topic = pubsub.find_topic topic_name
@@ -295,7 +370,7 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
 
     get_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(topic_full_path)
     mock = Minitest::Mock.new
-    mock.expect :get_topic, get_res, [topic: topic_full_path]
+    mock.expect :get_topic, get_res, topic: topic_full_path
     pubsub.service.mocked_publisher = mock
 
     topic = pubsub.find_topic topic_name, project: "custom"
@@ -314,9 +389,33 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
     _(topic).wont_be :resource?
   end
 
+  it "gets a topic with async option" do
+    topic_name = "found-topic"
+
+    get_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(topic_name)
+    mock = Minitest::Mock.new
+    mock.expect :get_topic, get_res, topic: topic_path(topic_name)
+    pubsub.service.mocked_publisher = mock
+
+    topic = pubsub.topic topic_name, async: async
+    topic.enable_message_ordering! # Create the AsyncPublisher
+
+    mock.verify
+
+    _(topic.async_publisher.topic_name).must_equal topic_path(topic_name)
+    _(topic.async_publisher.max_bytes).must_equal async[:max_bytes]
+    _(topic.async_publisher.max_messages).must_equal async[:max_messages]
+    _(topic.async_publisher.interval).must_equal async[:interval]
+    _(topic.async_publisher.publish_threads).must_equal async[:threads][:publish]
+    _(topic.async_publisher.callback_threads).must_equal async[:threads][:callback]
+    _(topic.async_publisher.flow_control).must_equal async[:flow_control]
+    _(topic.async_publisher.compress).must_equal async[:compress]
+    _(topic.async_publisher.compression_bytes_threshold).must_equal async[:compression_bytes_threshold]
+  end
+
   it "lists topics" do
     mock = Minitest::Mock.new
-    mock.expect :list_topics, topics_with_token, [project: "projects/#{project}", page_size: nil, page_token: nil]
+    mock.expect :list_topics, topics_with_token, project: "projects/#{project}", page_size: nil, page_token: nil
     pubsub.service.mocked_publisher = mock
 
     topics = pubsub.topics
@@ -328,7 +427,7 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
 
   it "lists topics with find_topics alias" do
     mock = Minitest::Mock.new
-    mock.expect :list_topics, topics_with_token, [project: "projects/#{project}", page_size: nil, page_token: nil]
+    mock.expect :list_topics, topics_with_token, project: "projects/#{project}", page_size: nil, page_token: nil
     pubsub.service.mocked_publisher = mock
 
     topics = pubsub.find_topics
@@ -340,7 +439,7 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
 
   it "lists topics with list_topics alias" do
     mock = Minitest::Mock.new
-    mock.expect :list_topics, topics_with_token, [project: "projects/#{project}", page_size: nil, page_token: nil]
+    mock.expect :list_topics, topics_with_token, project: "projects/#{project}", page_size: nil, page_token: nil
     pubsub.service.mocked_publisher = mock
 
     topics = pubsub.list_topics
@@ -352,8 +451,8 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
 
   it "paginates topics" do
     mock = Minitest::Mock.new
-    mock.expect :list_topics, topics_with_token, [project: "projects/#{project}", page_size: nil, page_token: nil]
-    mock.expect :list_topics, topics_without_token, [project: "projects/#{project}", page_size: nil, page_token: "next_page_token"]
+    mock.expect :list_topics, topics_with_token, project: "projects/#{project}", page_size: nil, page_token: nil
+    mock.expect :list_topics, topics_without_token, project: "projects/#{project}", page_size: nil, page_token: "next_page_token"
     pubsub.service.mocked_publisher = mock
 
     first_topics = pubsub.topics
@@ -372,7 +471,7 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
 
   it "paginates topics with max set" do
     mock = Minitest::Mock.new
-    mock.expect :list_topics, topics_with_token, [project: "projects/#{project}", page_size: 3, page_token: nil]
+    mock.expect :list_topics, topics_with_token, project: "projects/#{project}", page_size: 3, page_token: nil
     pubsub.service.mocked_publisher = mock
 
     topics = pubsub.topics max: 3
@@ -387,8 +486,8 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
 
   it "paginates topics with next? and next" do
     mock = Minitest::Mock.new
-    mock.expect :list_topics, topics_with_token, [project: "projects/#{project}", page_size: nil, page_token: nil]
-    mock.expect :list_topics, topics_without_token, [project: "projects/#{project}", page_size: nil, page_token: "next_page_token"]
+    mock.expect :list_topics, topics_with_token, project: "projects/#{project}", page_size: nil, page_token: nil
+    mock.expect :list_topics, topics_without_token, project: "projects/#{project}", page_size: nil, page_token: "next_page_token"
     pubsub.service.mocked_publisher = mock
 
     first_topics = pubsub.topics
@@ -405,8 +504,8 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
 
   it "paginates topics with next? and next and max set" do
     mock = Minitest::Mock.new
-    mock.expect :list_topics, topics_with_token, [project: "projects/#{project}", page_size: 3, page_token: nil]
-    mock.expect :list_topics, topics_without_token, [project: "projects/#{project}", page_size: 3, page_token: "next_page_token"]
+    mock.expect :list_topics, topics_with_token, project: "projects/#{project}", page_size: 3, page_token: nil
+    mock.expect :list_topics, topics_without_token, project: "projects/#{project}", page_size: 3, page_token: "next_page_token"
     pubsub.service.mocked_publisher = mock
 
     first_topics = pubsub.topics max: 3
@@ -423,8 +522,8 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
 
   it "paginates topics with all" do
     mock = Minitest::Mock.new
-    mock.expect :list_topics, topics_with_token, [project: "projects/#{project}", page_size: nil, page_token: nil]
-    mock.expect :list_topics, topics_without_token, [project: "projects/#{project}", page_size: nil, page_token: "next_page_token"]
+    mock.expect :list_topics, topics_with_token, project: "projects/#{project}", page_size: nil, page_token: nil
+    mock.expect :list_topics, topics_without_token, project: "projects/#{project}", page_size: nil, page_token: "next_page_token"
     pubsub.service.mocked_publisher = mock
 
     topics = pubsub.topics.all.to_a
@@ -436,8 +535,8 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
 
   it "paginates topics with all and max set" do
     mock = Minitest::Mock.new
-    mock.expect :list_topics, topics_with_token, [project: "projects/#{project}", page_size: 3, page_token: nil]
-    mock.expect :list_topics, topics_without_token, [project: "projects/#{project}", page_size: 3, page_token: "next_page_token"]
+    mock.expect :list_topics, topics_with_token, project: "projects/#{project}", page_size: 3, page_token: nil
+    mock.expect :list_topics, topics_without_token, project: "projects/#{project}", page_size: 3, page_token: "next_page_token"
     pubsub.service.mocked_publisher = mock
 
     topics = pubsub.topics(max: 3).all.to_a
@@ -449,8 +548,8 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
 
   it "iterates topics with all using Enumerator" do
     mock = Minitest::Mock.new
-    mock.expect :list_topics, topics_with_token, [project: "projects/#{project}", page_size: nil, page_token: nil]
-    mock.expect :list_topics, topics_with_token_2, [project: "projects/#{project}", page_size: nil, page_token: "next_page_token"]
+    mock.expect :list_topics, topics_with_token, project: "projects/#{project}", page_size: nil, page_token: nil
+    mock.expect :list_topics, topics_with_token_2, project: "projects/#{project}", page_size: nil, page_token: "next_page_token"
     pubsub.service.mocked_publisher = mock
 
     topics = pubsub.topics.all.take(5)
@@ -462,8 +561,8 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
 
   it "iterates topics with all and request_limit set" do
     mock = Minitest::Mock.new
-    mock.expect :list_topics, topics_with_token, [project: "projects/#{project}", page_size: nil, page_token: nil]
-    mock.expect :list_topics, topics_with_token_2, [project: "projects/#{project}", page_size: nil, page_token: "next_page_token"]
+    mock.expect :list_topics, topics_with_token, project: "projects/#{project}", page_size: nil, page_token: nil
+    mock.expect :list_topics, topics_with_token_2, project: "projects/#{project}", page_size: nil, page_token: "next_page_token"
     pubsub.service.mocked_publisher = mock
 
     topics = pubsub.topics.all(request_limit: 1).to_a
@@ -475,7 +574,7 @@ describe Google::Cloud::PubSub::Project, :topics, :mock_pubsub do
 
   it "paginates topics without max set" do
     mock = Minitest::Mock.new
-    mock.expect :list_topics, topics_with_token, [project: "projects/#{project}", page_size: nil, page_token: nil]
+    mock.expect :list_topics, topics_with_token, project: "projects/#{project}", page_size: nil, page_token: nil
     pubsub.service.mocked_publisher = mock
 
     topics = pubsub.topics

@@ -1,5 +1,5 @@
 --no-private
---title=Retail V2 API
+--title="Retail V2 API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

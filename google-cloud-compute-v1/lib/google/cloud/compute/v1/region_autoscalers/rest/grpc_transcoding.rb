@@ -58,6 +58,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/regions/#{request_pb.region}/autoscalers"
                 body = request_pb.autoscaler_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -87,6 +88,8 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/regions/#{request_pb.region}/autoscalers"
                 body = request_pb.autoscaler_resource.to_json
                 query_string_params = {}
+                query_string_params["autoscaler"] = request_pb.autoscaler.to_s if request_pb.has_autoscaler?
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -99,6 +102,8 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/regions/#{request_pb.region}/autoscalers"
                 body = request_pb.autoscaler_resource.to_json
                 query_string_params = {}
+                query_string_params["autoscaler"] = request_pb.autoscaler.to_s if request_pb.has_autoscaler?
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end

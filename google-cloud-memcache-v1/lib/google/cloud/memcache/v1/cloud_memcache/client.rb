@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/memcache/v1/cloud_memcache_pb"
+require "google/cloud/location"
 
 module Google
   module Cloud
@@ -55,13 +56,12 @@ module Google
             # See {::Google::Cloud::Memcache::V1::CloudMemcache::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all CloudMemcache clients:
-            #
-            #     ::Google::Cloud::Memcache::V1::CloudMemcache::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all CloudMemcache clients
+            #   ::Google::Cloud::Memcache::V1::CloudMemcache::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -93,6 +93,8 @@ module Google
 
                 default_config.rpcs.apply_parameters.timeout = 1200.0
 
+                default_config.rpcs.reschedule_maintenance.timeout = 1200.0
+
                 default_config
               end
               yield @configure if block_given?
@@ -122,19 +124,15 @@ module Google
             ##
             # Create a new CloudMemcache client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new CloudMemcache client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Memcache::V1::CloudMemcache::Client.new
             #
-            #     client = ::Google::Cloud::Memcache::V1::CloudMemcache::Client.new
-            #
-            # To create a new CloudMemcache client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Memcache::V1::CloudMemcache::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Memcache::V1::CloudMemcache::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the CloudMemcache client.
             # @yieldparam config [Client::Configuration]
@@ -154,14 +152,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -169,6 +166,13 @@ module Google
 
               @operations_client = Operations.new do |config|
                 config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
                 config.endpoint = @config.endpoint
               end
 
@@ -187,6 +191,13 @@ module Google
             # @return [::Google::Cloud::Memcache::V1::CloudMemcache::Operations]
             #
             attr_reader :operations_client
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
 
             # Service calls
 
@@ -216,16 +227,15 @@ module Google
             #     The maximum number of items to return.
             #
             #     If not specified, a default value of 1000 will be used by the service.
-            #     Regardless of the page_size value, the response may include a partial list
-            #     and a caller should only rely on response's
-            #     [next_page_token][CloudMemcache.ListInstancesResponse.next_page_token]
+            #     Regardless of the `page_size` value, the response may include a partial
+            #     list and a caller should only rely on response's
+            #     {::Google::Cloud::Memcache::V1::ListInstancesResponse#next_page_token `next_page_token`}
             #     to determine if there are more instances left to be queried.
             #   @param page_token [::String]
-            #     The next_page_token value returned from a previous List request,
-            #     if any.
+            #     The `next_page_token` value returned from a previous List request, if any.
             #   @param filter [::String]
             #     List filter. For example, exclude all Memcached instances with name as
-            #     my-instance by specifying "name != my-instance".
+            #     my-instance by specifying `"name != my-instance"`.
             #   @param order_by [::String]
             #     Sort results. Supported values are "name", "name desc" or "" (unsorted).
             #
@@ -236,6 +246,25 @@ module Google
             # @return [::Gapic::PagedEnumerable<::Google::Cloud::Memcache::V1::Instance>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/memcache/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Memcache::V1::CloudMemcache::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Memcache::V1::ListInstancesRequest.new
+            #
+            #   # Call the list_instances method.
+            #   result = client.list_instances request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::Memcache::V1::Instance.
+            #     p item
+            #   end
             #
             def list_instances request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -254,16 +283,20 @@ module Google
                 gapic_version: ::Google::Cloud::Memcache::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_instances.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_instances.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_memcache_stub.call_rpc :list_instances, request, options: options do |response, operation|
@@ -306,6 +339,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/memcache/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Memcache::V1::CloudMemcache::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Memcache::V1::GetInstanceRequest.new
+            #
+            #   # Call the get_instance method.
+            #   result = client.get_instance request
+            #
+            #   # The returned object is of type Google::Cloud::Memcache::V1::Instance.
+            #   p result
+            #
             def get_instance request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -323,16 +371,20 @@ module Google
                 gapic_version: ::Google::Cloud::Memcache::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_instance.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_instance.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_memcache_stub.call_rpc :get_instance, request, options: options do |response, operation|
@@ -373,9 +425,9 @@ module Google
             #     * Must start with a letter.
             #     * Must be between 1-40 characters.
             #     * Must end with a number or a letter.
-            #     * Must be unique within the user project / location
+            #     * Must be unique within the user project / location.
             #
-            #     If any of the above are not met, will raise an invalid argument error.
+            #     If any of the above are not met, the API raises an invalid argument error.
             #   @param instance [::Google::Cloud::Memcache::V1::Instance, ::Hash]
             #     Required. A Memcached Instance
             #
@@ -386,6 +438,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/memcache/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Memcache::V1::CloudMemcache::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Memcache::V1::CreateInstanceRequest.new
+            #
+            #   # Call the create_instance method.
+            #   result = client.create_instance request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
             #
             def create_instance request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -404,16 +478,20 @@ module Google
                 gapic_version: ::Google::Cloud::Memcache::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_instance.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_instance.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_memcache_stub.call_rpc :create_instance, request, options: options do |response, operation|
@@ -445,6 +523,7 @@ module Google
             #
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Required. Mask of fields to update.
+            #
             #      *   `displayName`
             #   @param instance [::Google::Cloud::Memcache::V1::Instance, ::Hash]
             #     Required. A Memcached Instance.
@@ -457,6 +536,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/memcache/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Memcache::V1::CloudMemcache::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Memcache::V1::UpdateInstanceRequest.new
+            #
+            #   # Call the update_instance method.
+            #   result = client.update_instance request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
             #
             def update_instance request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -475,16 +576,20 @@ module Google
                 gapic_version: ::Google::Cloud::Memcache::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "instance.name" => request.instance.name
-              }
+              header_params = {}
+              if request.instance&.name
+                header_params["instance.name"] = request.instance.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_instance.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_instance.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_memcache_stub.call_rpc :update_instance, request, options: options do |response, operation|
@@ -497,9 +602,10 @@ module Google
             end
 
             ##
-            # Updates the defined Memcached Parameters for an existing Instance.
+            # Updates the defined Memcached parameters for an existing instance.
             # This method only stages the parameters, it must be followed by
-            # ApplyParameters to apply the parameters to nodes of the Memcached Instance.
+            # `ApplyParameters` to apply the parameters to nodes of the Memcached
+            # instance.
             #
             # @overload update_parameters(request, options = nil)
             #   Pass arguments to `update_parameters` via a request object, either of type
@@ -532,6 +638,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/memcache/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Memcache::V1::CloudMemcache::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Memcache::V1::UpdateParametersRequest.new
+            #
+            #   # Call the update_parameters method.
+            #   result = client.update_parameters request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
             def update_parameters request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -549,16 +677,20 @@ module Google
                 gapic_version: ::Google::Cloud::Memcache::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_parameters.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_parameters.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_memcache_stub.call_rpc :update_parameters, request, options: options do |response, operation|
@@ -601,6 +733,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/memcache/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Memcache::V1::CloudMemcache::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Memcache::V1::DeleteInstanceRequest.new
+            #
+            #   # Call the delete_instance method.
+            #   result = client.delete_instance request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
             def delete_instance request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -618,16 +772,20 @@ module Google
                 gapic_version: ::Google::Cloud::Memcache::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_instance.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_instance.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_memcache_stub.call_rpc :delete_instance, request, options: options do |response, operation|
@@ -640,7 +798,7 @@ module Google
             end
 
             ##
-            # ApplyParameters will restart the set of specified nodes in order to update
+            # `ApplyParameters` restarts the set of specified nodes in order to update
             # them to the current set of parameters for the Memcached Instance.
             #
             # @overload apply_parameters(request, options = nil)
@@ -662,11 +820,11 @@ module Google
             #     Required. Resource name of the Memcached instance for which parameter group updates
             #     should be applied.
             #   @param node_ids [::Array<::String>]
-            #     Nodes to which we should apply the instance-level parameter group.
+            #     Nodes to which the instance-level parameter group is applied.
             #   @param apply_all [::Boolean]
             #     Whether to apply instance-level parameter group to all nodes. If set to
-            #     true, will explicitly restrict users from specifying any nodes, and apply
-            #     parameter group updates to all nodes within the instance.
+            #     true, users are restricted from specifying individual nodes, and
+            #     `ApplyParameters` updates all nodes within the instance.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -675,6 +833,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/memcache/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Memcache::V1::CloudMemcache::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Memcache::V1::ApplyParametersRequest.new
+            #
+            #   # Call the apply_parameters method.
+            #   result = client.apply_parameters request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
             #
             def apply_parameters request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -693,19 +873,124 @@ module Google
                 gapic_version: ::Google::Cloud::Memcache::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.apply_parameters.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.apply_parameters.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_memcache_stub.call_rpc :apply_parameters, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Reschedules upcoming maintenance event.
+            #
+            # @overload reschedule_maintenance(request, options = nil)
+            #   Pass arguments to `reschedule_maintenance` via a request object, either of type
+            #   {::Google::Cloud::Memcache::V1::RescheduleMaintenanceRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Memcache::V1::RescheduleMaintenanceRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload reschedule_maintenance(instance: nil, reschedule_type: nil, schedule_time: nil)
+            #   Pass arguments to `reschedule_maintenance` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param instance [::String]
+            #     Required. Memcache instance resource name using the form:
+            #         `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
+            #     where `location_id` refers to a GCP region.
+            #   @param reschedule_type [::Google::Cloud::Memcache::V1::RescheduleMaintenanceRequest::RescheduleType]
+            #     Required. If reschedule type is SPECIFIC_TIME, must set up schedule_time as well.
+            #   @param schedule_time [::Google::Protobuf::Timestamp, ::Hash]
+            #     Timestamp when the maintenance shall be rescheduled to if
+            #     reschedule_type=SPECIFIC_TIME, in RFC 3339 format, for
+            #     example `2012-11-15T16:19:00.094Z`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/memcache/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Memcache::V1::CloudMemcache::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Memcache::V1::RescheduleMaintenanceRequest.new
+            #
+            #   # Call the reschedule_maintenance method.
+            #   result = client.reschedule_maintenance request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def reschedule_maintenance request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Memcache::V1::RescheduleMaintenanceRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.reschedule_maintenance.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Memcache::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.instance
+                header_params["instance"] = request.instance
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.reschedule_maintenance.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.reschedule_maintenance.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @cloud_memcache_stub.call_rpc :reschedule_maintenance, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
@@ -727,22 +1012,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for list_instances
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # list_instances to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Memcache::V1::CloudMemcache::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_instances.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Memcache::V1::CloudMemcache::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_instances.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Memcache::V1::CloudMemcache::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_instances.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Memcache::V1::CloudMemcache::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_instances.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
@@ -753,9 +1037,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -885,6 +1169,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :apply_parameters
+                ##
+                # RPC-specific configuration for `reschedule_maintenance`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :reschedule_maintenance
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -902,6 +1191,8 @@ module Google
                   @delete_instance = ::Gapic::Config::Method.new delete_instance_config
                   apply_parameters_config = parent_rpcs.apply_parameters if parent_rpcs.respond_to? :apply_parameters
                   @apply_parameters = ::Gapic::Config::Method.new apply_parameters_config
+                  reschedule_maintenance_config = parent_rpcs.reschedule_maintenance if parent_rpcs.respond_to? :reschedule_maintenance
+                  @reschedule_maintenance = ::Gapic::Config::Method.new reschedule_maintenance_config
 
                   yield self if block_given?
                 end

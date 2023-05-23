@@ -6,7 +6,7 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/protobuf/timestamp_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/notebooks/v1beta1/environment.proto", :syntax => :proto3) do
     add_message "google.cloud.notebooks.v1beta1.Environment" do

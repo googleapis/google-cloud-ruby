@@ -558,6 +558,66 @@ class ::Google::Cloud::Monitoring::V3::MetricService::ClientTest < Minitest::Tes
     end
   end
 
+  def test_create_service_time_series
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    time_series = [{}]
+
+    create_service_time_series_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_service_time_series, name
+      assert_kind_of ::Google::Cloud::Monitoring::V3::CreateTimeSeriesRequest, request
+      assert_equal "hello world", request["name"]
+      assert_kind_of ::Google::Cloud::Monitoring::V3::TimeSeries, request["time_series"].first
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_service_time_series_client_stub do
+      # Create client
+      client = ::Google::Cloud::Monitoring::V3::MetricService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_service_time_series({ name: name, time_series: time_series }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_service_time_series name: name, time_series: time_series do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_service_time_series ::Google::Cloud::Monitoring::V3::CreateTimeSeriesRequest.new(name: name, time_series: time_series) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_service_time_series({ name: name, time_series: time_series }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_service_time_series(::Google::Cloud::Monitoring::V3::CreateTimeSeriesRequest.new(name: name, time_series: time_series), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_service_time_series_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

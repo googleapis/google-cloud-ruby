@@ -1,5 +1,5 @@
 --no-private
---title=Network Connectivity V1alpha1 API
+--title="Network Connectivity V1alpha1 API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

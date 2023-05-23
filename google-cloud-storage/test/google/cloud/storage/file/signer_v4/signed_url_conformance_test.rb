@@ -64,7 +64,7 @@ class SignedUrlConformanceTest < MockStorage
   def self.bucket_test_for test, index
     define_method("test_bucket_#{index}: #{test.description}") do
       @test_data = [test, "bucket", index]
-      bucket_gapi = Google::Apis::StorageV1::Bucket.from_json random_bucket_hash(test.bucket).to_json
+      bucket_gapi = Google::Apis::StorageV1::Bucket.from_json random_bucket_hash(name: test.bucket).to_json
       bucket = Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service
       Time.stub :now, timestamp_to_time(test.timestamp) do
         # sut
@@ -78,7 +78,7 @@ class SignedUrlConformanceTest < MockStorage
   def self.file_test_for test, index
     define_method("test_file_#{index}: #{test.description}") do
       @test_data = [test, "file", index]
-      bucket_gapi = Google::Apis::StorageV1::Bucket.from_json random_bucket_hash(test.bucket).to_json
+      bucket_gapi = Google::Apis::StorageV1::Bucket.from_json random_bucket_hash(name: test.bucket).to_json
       bucket = Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service
       file_gapi = Google::Apis::StorageV1::Object.from_json random_file_hash(test.bucket, test.object).to_json
       file = Google::Cloud::Storage::File.from_gapi file_gapi, storage.service

@@ -32,6 +32,8 @@ module Google
         #       viewed.
         #     * `detail-page-view`: Products detail page viewed.
         #     * `home-page-view`: Homepage viewed.
+        #     * `promotion-offered`: Promotion is offered to a user.
+        #     * `promotion-not-offered`: Promotion is not offered to a user.
         #     * `purchase-complete`: User finishing a purchase.
         #     * `search`: Product search.
         #     * `shopping-cart-page-view`: User viewing a shopping cart.
@@ -43,8 +45,27 @@ module Google
         #     able to uniquely identify a visitor on a single device. This unique
         #     identifier should not change if the visitor log in/out of the website.
         #
+        #     Don't set the field to the same fixed ID for different users. This mixes
+        #     the event history of those users together, which results in degraded model
+        #     quality.
+        #
         #     The field must be a UTF-8 encoded string with a length limit of 128
         #     characters. Otherwise, an INVALID_ARGUMENT error is returned.
+        #
+        #     The field should not contain PII or user-data. We recommend to use Google
+        #     Analytics [Client
+        #     ID](https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference#clientId)
+        #     for this field.
+        # @!attribute [rw] session_id
+        #   @return [::String]
+        #     A unique identifier for tracking a visitor session with a length limit of
+        #     128 bytes. A session is an aggregation of an end user behavior in a time
+        #     span.
+        #
+        #     A general guideline to populate the sesion_id:
+        #     1. If user has no activity for 30 min, a new session_id should be assigned.
+        #     2. The session_id should be unique across users, suggest use uuid or add
+        #     visitor_id as prefix.
         # @!attribute [rw] event_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Only required for
@@ -67,6 +88,10 @@ module Google
         #     {::Google::Cloud::Retail::V2::PredictResponse#attribution_token PredictResponse.attribution_token}
         #     for user events that are the result of
         #     {::Google::Cloud::Retail::V2::PredictionService::Client#predict PredictionService.Predict}.
+        #     The value must be a valid
+        #     {::Google::Cloud::Retail::V2::SearchResponse#attribution_token SearchResponse.attribution_token}
+        #     for user events that are the result of
+        #     {::Google::Cloud::Retail::V2::SearchService::Client#search SearchService.Search}.
         #
         #     This token enables us to accurately attribute page view or purchase back to
         #     the event and the particular predict response containing this
@@ -81,33 +106,53 @@ module Google
         #   @return [::Array<::Google::Cloud::Retail::V2::ProductDetail>]
         #     The main product details related to the event.
         #
-        #     This field is required for the following event types:
+        #     This field is optional except for the following event types:
         #
         #     * `add-to-cart`
         #     * `detail-page-view`
         #     * `purchase-complete`
         #
         #     In a `search` event, this field represents the products returned to the end
-        #     user on the current page (the end user may have not finished broswing the
+        #     user on the current page (the end user may have not finished browsing the
         #     whole page yet). When a new page is returned to the end user, after
         #     pagination/filtering/ordering even for the same query, a new `search` event
         #     with different
         #     {::Google::Cloud::Retail::V2::UserEvent#product_details product_details} is
-        #     desired. The end user may have not finished broswing the whole page yet.
+        #     desired. The end user may have not finished browsing the whole page yet.
+        # @!attribute [rw] completion_detail
+        #   @return [::Google::Cloud::Retail::V2::CompletionDetail]
+        #     The main auto-completion details related to the event.
+        #
+        #     This field should be set for `search` event when autocomplete function is
+        #     enabled and the user clicks a suggestion for search.
         # @!attribute [rw] attributes
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Retail::V2::CustomAttribute}]
         #     Extra user event features to include in the recommendation model.
         #
-        #     The key must be a UTF-8 encoded string with a length limit of 5,000
-        #     characters. Otherwise, an INVALID_ARGUMENT error is returned.
+        #     If you provide custom attributes for ingested user events, also include
+        #     them in the user events that you associate with prediction requests. Custom
+        #     attribute formatting must be consistent between imported events and events
+        #     provided with prediction requests. This lets the Retail API use
+        #     those custom attributes when training models and serving predictions, which
+        #     helps improve recommendation quality.
         #
-        #     For product recommendation, an example of extra user information is
-        #     traffic_channel, i.e. how user arrives at the site. Users can arrive
-        #     at the site by coming to the site directly, or coming through Google
-        #     search, and etc.
+        #     This field needs to pass all below criteria, otherwise an INVALID_ARGUMENT
+        #     error is returned:
+        #
+        #     * The key must be a UTF-8 encoded string with a length limit of 5,000
+        #       characters.
+        #     * For text attributes, at most 400 values are allowed. Empty values are not
+        #       allowed. Each value must be a UTF-8 encoded string with a length limit of
+        #       256 characters.
+        #     * For number attributes, at most 400 values are allowed.
+        #
+        #     For product recommendations, an example of extra user information is
+        #     traffic_channel, which is how a user arrives at the site. Users can arrive
+        #     at the site by coming to the site directly, coming through Google
+        #     search, or in other ways.
         # @!attribute [rw] cart_id
         #   @return [::String]
-        #     The id or name of the associated shopping cart. This id is used
+        #     The ID or name of the associated shopping cart. This ID is used
         #     to associate multiple items added or present in the cart before purchase.
         #
         #     This can only be set for `add-to-cart`, `purchase-complete`, or
@@ -122,25 +167,68 @@ module Google
         #   @return [::String]
         #     The user's search query.
         #
+        #     See {::Google::Cloud::Retail::V2::SearchRequest#query SearchRequest.query} for
+        #     definition.
+        #
         #     The value must be a UTF-8 encoded string with a length limit of 5,000
         #     characters. Otherwise, an INVALID_ARGUMENT error is returned.
         #
-        #     Required for `search` events. Other event types should not set this field.
+        #     At least one of
+        #     {::Google::Cloud::Retail::V2::UserEvent#search_query search_query} or
+        #     {::Google::Cloud::Retail::V2::UserEvent#page_categories page_categories} is
+        #     required for `search` events. Other event types should not set this field.
         #     Otherwise, an INVALID_ARGUMENT error is returned.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     The filter syntax consists of an expression language for constructing a
+        #     predicate from one or more fields of the products being filtered.
+        #
+        #     See {::Google::Cloud::Retail::V2::SearchRequest#filter SearchRequest.filter} for
+        #     definition and syntax.
+        #
+        #     The value must be a UTF-8 encoded string with a length limit of 1,000
+        #     characters. Otherwise, an INVALID_ARGUMENT error is returned.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     The order in which products are returned.
+        #
+        #     See {::Google::Cloud::Retail::V2::SearchRequest#order_by SearchRequest.order_by}
+        #     for definition and syntax.
+        #
+        #     The value must be a UTF-8 encoded string with a length limit of 1,000
+        #     characters. Otherwise, an INVALID_ARGUMENT error is returned.
+        #
+        #     This can only be set for `search` events. Other event types should not set
+        #     this field. Otherwise, an INVALID_ARGUMENT error is returned.
+        # @!attribute [rw] offset
+        #   @return [::Integer]
+        #     An integer that specifies the current offset for pagination (the 0-indexed
+        #     starting location, amongst the products deemed by the API as relevant).
+        #
+        #     See {::Google::Cloud::Retail::V2::SearchRequest#offset SearchRequest.offset} for
+        #     definition.
+        #
+        #     If this field is negative, an INVALID_ARGUMENT is returned.
+        #
+        #     This can only be set for `search` events. Other event types should not set
+        #     this field. Otherwise, an INVALID_ARGUMENT error is returned.
         # @!attribute [rw] page_categories
         #   @return [::Array<::String>]
         #     The categories associated with a category page.
         #
         #     To represent full path of category, use '>' sign to separate different
-        #     hierarchies. If '>' is part of the category name, please replace it with
+        #     hierarchies. If '>' is part of the category name, replace it with
         #     other character(s).
         #
         #     Category pages include special pages such as sales or promotions. For
         #     instance, a special sale page may have the category hierarchy:
         #     "pageCategories" : ["Sales > 2017 Black Friday Deals"].
         #
-        #     Required for `category-page-view` events. Other event types should not set
-        #     this field. Otherwise, an INVALID_ARGUMENT error is returned.
+        #     Required for `category-page-view` events. At least one of
+        #     {::Google::Cloud::Retail::V2::UserEvent#search_query search_query} or
+        #     {::Google::Cloud::Retail::V2::UserEvent#page_categories page_categories} is
+        #     required for `search` events. Other event types should not set this field.
+        #     Otherwise, an INVALID_ARGUMENT error is returned.
         # @!attribute [rw] user_info
         #   @return [::Google::Cloud::Retail::V2::UserInfo]
         #     User information.
@@ -159,7 +247,7 @@ module Google
         #     Tag Manager, this value is filled in automatically.
         # @!attribute [rw] page_view_id
         #   @return [::String]
-        #     A unique id of a web page view.
+        #     A unique ID of a web page view.
         #
         #     This should be kept the same for all user events triggered from the same
         #     pageview. For example, an item detail page view could trigger multiple
@@ -169,6 +257,13 @@ module Google
         #
         #     When using the client side event reporting with JavaScript pixel and Google
         #     Tag Manager, this value is filled in automatically.
+        # @!attribute [rw] entity
+        #   @return [::String]
+        #     The entity for customers that may run multiple different entities, domains,
+        #     sites or regions, for example, `Google US`, `Google Ads`, `Waymo`,
+        #     `google.com`, `youtube.com`, etc.
+        #     It is recommended to set this field to get better per-entity search,
+        #     completion and prediction results.
         class UserEvent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -188,9 +283,21 @@ module Google
         #   @return [::Google::Cloud::Retail::V2::Product]
         #     Required. {::Google::Cloud::Retail::V2::Product Product} information.
         #
-        #     Only {::Google::Cloud::Retail::V2::Product#id Product.id} field is used when
-        #     ingesting an event, all other product fields are ignored as we will look
-        #     them up from the catalog.
+        #     Required field(s):
+        #
+        #     * {::Google::Cloud::Retail::V2::Product#id Product.id}
+        #
+        #     Optional override field(s):
+        #
+        #     * {::Google::Cloud::Retail::V2::Product#price_info Product.price_info}
+        #
+        #     If any supported optional fields are provided, we will treat them as a full
+        #     override when looking up product information from the catalog. Thus, it is
+        #     important to ensure that the overriding fields are accurate and
+        #     complete.
+        #
+        #     All other product fields are ignored and instead populated via catalog
+        #     lookup after event ingestion.
         # @!attribute [rw] quantity
         #   @return [::Google::Protobuf::Int32Value]
         #     Quantity of the product associated with the user event.
@@ -199,6 +306,26 @@ module Google
         #     cart for `purchase-complete` event. Required for `add-to-cart` and
         #     `purchase-complete` event types.
         class ProductDetail
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Detailed completion information including completion attribution token and
+        # clicked completion info.
+        # @!attribute [rw] completion_attribution_token
+        #   @return [::String]
+        #     Completion attribution token in
+        #     {::Google::Cloud::Retail::V2::CompleteQueryResponse#attribution_token CompleteQueryResponse.attribution_token}.
+        # @!attribute [rw] selected_suggestion
+        #   @return [::String]
+        #     End user selected
+        #     {::Google::Cloud::Retail::V2::CompleteQueryResponse::CompletionResult#suggestion CompleteQueryResponse.CompletionResult.suggestion}.
+        # @!attribute [rw] selected_position
+        #   @return [::Integer]
+        #     End user selected
+        #     {::Google::Cloud::Retail::V2::CompleteQueryResponse::CompletionResult#suggestion CompleteQueryResponse.CompletionResult.suggestion}
+        #     position, starting from 0.
+        class CompletionDetail
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

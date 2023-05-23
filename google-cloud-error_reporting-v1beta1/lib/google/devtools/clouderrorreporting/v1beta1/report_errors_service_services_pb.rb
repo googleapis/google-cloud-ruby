@@ -47,9 +47,6 @@ module Google
             # on Cloud Logging and doesn't analyze logs stored
             # in regional log buckets or logs routed to other Google Cloud projects.
             #
-            # For more information, see
-            # [Using Error Reporting with regionalized
-            # logs](/error-reporting/docs/regionalization).
             rpc :ReportErrorEvent, ::Google::Cloud::ErrorReporting::V1beta1::ReportErrorEventRequest, ::Google::Cloud::ErrorReporting::V1beta1::ReportErrorEventResponse
           end
 

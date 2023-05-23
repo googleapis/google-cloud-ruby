@@ -9,6 +9,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/empty_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/dataproc/v1/autoscaling_policies.proto", :syntax => :proto3) do
     add_message "google.cloud.dataproc.v1.AutoscalingPolicy" do
@@ -16,13 +17,16 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 2
       optional :worker_config, :message, 4, "google.cloud.dataproc.v1.InstanceGroupAutoscalingPolicyConfig"
       optional :secondary_worker_config, :message, 5, "google.cloud.dataproc.v1.InstanceGroupAutoscalingPolicyConfig"
+      map :labels, :string, :string, 6
       oneof :algorithm do
         optional :basic_algorithm, :message, 3, "google.cloud.dataproc.v1.BasicAutoscalingAlgorithm"
       end
     end
     add_message "google.cloud.dataproc.v1.BasicAutoscalingAlgorithm" do
-      optional :yarn_config, :message, 1, "google.cloud.dataproc.v1.BasicYarnAutoscalingConfig"
       optional :cooldown_period, :message, 2, "google.protobuf.Duration"
+      oneof :config do
+        optional :yarn_config, :message, 1, "google.cloud.dataproc.v1.BasicYarnAutoscalingConfig"
+      end
     end
     add_message "google.cloud.dataproc.v1.BasicYarnAutoscalingConfig" do
       optional :graceful_decommission_timeout, :message, 5, "google.protobuf.Duration"

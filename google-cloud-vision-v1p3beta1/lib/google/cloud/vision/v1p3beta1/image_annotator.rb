@@ -26,6 +26,7 @@ require "google/cloud/vision/v1p3beta1/image_annotator/credentials"
 require "google/cloud/vision/v1p3beta1/image_annotator/paths"
 require "google/cloud/vision/v1p3beta1/image_annotator/operations"
 require "google/cloud/vision/v1p3beta1/image_annotator/client"
+require "google/cloud/vision/v1p3beta1/image_annotator/rest"
 
 module Google
   module Cloud
@@ -36,10 +37,15 @@ module Google
         # images, such as face, landmark, logo, label, and text detection. The
         # ImageAnnotator service returns detected entities from the images.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/vision/v1p3beta1/image_annotator"
         #     client = ::Google::Cloud::Vision::V1p3beta1::ImageAnnotator::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/vision/v1p3beta1/image_annotator/rest"
+        #     client = ::Google::Cloud::Vision::V1p3beta1::ImageAnnotator::Rest::Client.new
         #
         module ImageAnnotator
         end

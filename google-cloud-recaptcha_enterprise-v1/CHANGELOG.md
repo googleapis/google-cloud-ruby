@@ -1,5 +1,104 @@
 # Release History
 
+### 0.13.0 (2023-03-23)
+
+#### Features
+
+* Add support for reCAPTCHA Enterprise FraudPrevention API ([#20939](https://github.com/googleapis/google-cloud-ruby/issues/20939)) 
+* Add support for reCAPTCHA Enterprise TransactionData 
+* Add support for reCAPTCHA Enterprise TransactionEvent 
+
+### 0.12.0 (2022-12-09)
+
+#### Features
+
+* Added account verification information to the Assessment resource ([#19836](https://github.com/googleapis/google-cloud-ruby/issues/19836)) 
+* Added Android package or iOS bundle with which a token was generated 
+* Added option to skip the billing check when migrating a key to reCAPTCHA Enterprise 
+
+### 0.11.0 (2022-10-18)
+
+#### Features
+
+* add annotation reasons REFUND, REFUND_FRAUD, TRANSACTION_ACCEPTED, TRANSACTION_DECLINED and SOCIAL_SPAM 
+* support PrivatePasswordLeakVerification 
+* support RetrieveLegacySecretKey 
+
+### 0.10.0 (2022-07-07)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+
+### 0.9.1 (2022-06-17)
+
+#### Bug Fixes
+
+* Fixed serialization of the Assessment.private_password_leak_verification field
+
+### 0.9.0 (2022-05-19)
+
+#### Features
+
+* add support for private_password_leak_verification
+
+### 0.8.0 (2022-05-05)
+
+#### Features
+
+* Added WAF settings to application keys
+
+#### Bug Fixes
+
+* BREAKING CHANGE: Renamed the "parent" argument to "project" in search_related_account_group_memberships to match what the service expects
+
+### 0.7.1 / 2022-01-11
+
+#### Documentation
+
+* Fix titles of documentation pages
+* Remove some broken images and fix outdated content in authentication documentation
+
+### 0.7.0 / 2021-12-07
+
+#### Features
+
+* Support the CHARGEBACK_FRAUD and CHARGEBACK_DISPUTE annotation reasons
+
+### 0.6.0 / 2021-11-08
+
+#### Features
+
+* Support related account groups and account defender assessments
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
+### 0.5.0 / 2021-09-21
+
+#### Features
+
+* Support migrate_key and get_metrics calls
+
+### 0.4.3 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
+### 0.4.2 / 2021-07-12
+
+#### Documentation
+
+* Clarify some language around authentication configuration
+
+### 0.4.1 / 2021-06-17
+
+#### Bug Fixes
+
+* Support future 1.x versions of gapic-common
+
 ### 0.4.0 / 2021-03-08
 
 #### Features

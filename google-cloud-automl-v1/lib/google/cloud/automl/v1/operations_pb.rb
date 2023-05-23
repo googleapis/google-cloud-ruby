@@ -3,11 +3,10 @@
 
 require 'google/protobuf'
 
-require 'google/cloud/automl/v1/dataset_pb'
 require 'google/cloud/automl/v1/io_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/rpc/status_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/automl/v1/operations.proto", :syntax => :proto3) do
     add_message "google.cloud.automl.v1.OperationMetadata" do

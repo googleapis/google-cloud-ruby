@@ -57,12 +57,14 @@ class ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::ClientTest 
     # Create request parameters for a unary method.
     parent = "hello world"
     dashboard = {}
+    validate_only = true
 
     create_dashboard_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_dashboard, name
       assert_kind_of ::Google::Cloud::Monitoring::Dashboard::V1::CreateDashboardRequest, request
       assert_equal "hello world", request["parent"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Monitoring::Dashboard::V1::Dashboard), request["dashboard"]
+      assert_equal true, request["validate_only"]
       refute_nil options
     end
 
@@ -73,31 +75,31 @@ class ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::ClientTest 
       end
 
       # Use hash object
-      client.create_dashboard({ parent: parent, dashboard: dashboard }) do |response, operation|
+      client.create_dashboard({ parent: parent, dashboard: dashboard, validate_only: validate_only }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_dashboard parent: parent, dashboard: dashboard do |response, operation|
+      client.create_dashboard parent: parent, dashboard: dashboard, validate_only: validate_only do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_dashboard ::Google::Cloud::Monitoring::Dashboard::V1::CreateDashboardRequest.new(parent: parent, dashboard: dashboard) do |response, operation|
+      client.create_dashboard ::Google::Cloud::Monitoring::Dashboard::V1::CreateDashboardRequest.new(parent: parent, dashboard: dashboard, validate_only: validate_only) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_dashboard({ parent: parent, dashboard: dashboard }, grpc_options) do |response, operation|
+      client.create_dashboard({ parent: parent, dashboard: dashboard, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_dashboard(::Google::Cloud::Monitoring::Dashboard::V1::CreateDashboardRequest.new(parent: parent, dashboard: dashboard), grpc_options) do |response, operation|
+      client.create_dashboard(::Google::Cloud::Monitoring::Dashboard::V1::CreateDashboardRequest.new(parent: parent, dashboard: dashboard, validate_only: validate_only), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -299,11 +301,13 @@ class ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::ClientTest 
 
     # Create request parameters for a unary method.
     dashboard = {}
+    validate_only = true
 
     update_dashboard_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_dashboard, name
       assert_kind_of ::Google::Cloud::Monitoring::Dashboard::V1::UpdateDashboardRequest, request
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Monitoring::Dashboard::V1::Dashboard), request["dashboard"]
+      assert_equal true, request["validate_only"]
       refute_nil options
     end
 
@@ -314,31 +318,31 @@ class ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::ClientTest 
       end
 
       # Use hash object
-      client.update_dashboard({ dashboard: dashboard }) do |response, operation|
+      client.update_dashboard({ dashboard: dashboard, validate_only: validate_only }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_dashboard dashboard: dashboard do |response, operation|
+      client.update_dashboard dashboard: dashboard, validate_only: validate_only do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_dashboard ::Google::Cloud::Monitoring::Dashboard::V1::UpdateDashboardRequest.new(dashboard: dashboard) do |response, operation|
+      client.update_dashboard ::Google::Cloud::Monitoring::Dashboard::V1::UpdateDashboardRequest.new(dashboard: dashboard, validate_only: validate_only) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_dashboard({ dashboard: dashboard }, grpc_options) do |response, operation|
+      client.update_dashboard({ dashboard: dashboard, validate_only: validate_only }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_dashboard(::Google::Cloud::Monitoring::Dashboard::V1::UpdateDashboardRequest.new(dashboard: dashboard), grpc_options) do |response, operation|
+      client.update_dashboard(::Google::Cloud::Monitoring::Dashboard::V1::UpdateDashboardRequest.new(dashboard: dashboard, validate_only: validate_only), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

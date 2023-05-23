@@ -48,7 +48,7 @@ module Google
         #     An Application containing the updated resource.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Standard field mask for the set of fields to be updated.
+        #     Required. Standard field mask for the set of fields to be updated.
         class UpdateApplicationRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -109,7 +109,7 @@ module Google
         #     field mask will be updated.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Standard field mask for the set of fields to be updated.
+        #     Required. Standard field mask for the set of fields to be updated.
         # @!attribute [rw] migrate_traffic
         #   @return [::Boolean]
         #     Set to `true` to gradually shift traffic to one or more versions that you
@@ -576,7 +576,7 @@ module Google
         #     in the field mask will be updated.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Standard field mask for the set of fields to be updated.
+        #     Required. Standard field mask for the set of fields to be updated.
         class UpdateDomainMappingRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

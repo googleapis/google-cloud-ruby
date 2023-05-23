@@ -24,7 +24,7 @@ module Google
         # Request message for RealmsService.ListRealms.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent resource name. Uses the form:
+        #     Required. The parent resource name, in the following form:
         #     `projects/{project}/locations/{location}`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
@@ -68,7 +68,7 @@ module Google
         # Request message for RealmsService.GetRealm.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The name of the realm to retrieve. Uses the form:
+        #     Required. The name of the realm to retrieve, in the following form:
         #     `projects/{project}/locations/{location}/realms/{realm}`.
         class GetRealmRequest
           include ::Google::Protobuf::MessageExts
@@ -78,7 +78,7 @@ module Google
         # Request message for RealmsService.CreateRealm.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent resource name. Uses the form:
+        #     Required. The parent resource name, in the following form:
         #     `projects/{project}/locations/{location}`.
         # @!attribute [rw] realm_id
         #   @return [::String]
@@ -94,7 +94,7 @@ module Google
         # Request message for RealmsService.DeleteRealm.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The name of the realm to delete. Uses the form:
+        #     Required. The name of the realm to delete, in the following form:
         #     `projects/{project}/locations/{location}/realms/{realm}`.
         class DeleteRealmRequest
           include ::Google::Protobuf::MessageExts
@@ -110,10 +110,7 @@ module Google
         #   @return [::Google::Protobuf::FieldMask]
         #     Required. The update mask applies to the resource. For the `FieldMask`
         #     definition, see
-        #
-        #     https:
-        #     //developers.google.com/protocol-buffers
-        #     // /docs/reference/google.protobuf#fieldmask
+        #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
         class UpdateRealmRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -128,10 +125,7 @@ module Google
         #   @return [::Google::Protobuf::FieldMask]
         #     Required. The update mask applies to the resource. For the `FieldMask`
         #     definition, see
-        #
-        #     https:
-        #     //developers.google.com/protocol-buffers
-        #     // /docs/reference/google.protobuf#fieldmask
+        #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
         # @!attribute [rw] preview_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Optional. The target timestamp to compute the preview.
@@ -155,7 +149,7 @@ module Google
         # A realm resource.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The resource name of the realm. Uses the form:
+        #     The resource name of the realm, in the following form:
         #     `projects/{project}/locations/{location}/realms/{realm}`. For
         #     example, `projects/my-project/locations/{location}/realms/my-realm`.
         # @!attribute [r] create_time

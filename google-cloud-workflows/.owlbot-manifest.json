@@ -1,0 +1,29 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-workflows.gemspec",
+    "lib/google-cloud-workflows.rb",
+    "lib/google/cloud/workflows.rb",
+    "lib/google/cloud/workflows/executions.rb",
+    "lib/google/cloud/workflows/executions/version.rb",
+    "lib/google/cloud/workflows/version.rb",
+    "test/google/cloud/workflows/client_test.rb",
+    "test/google/cloud/workflows/executions/client_test.rb",
+    "test/google/cloud/workflows/executions/version_test.rb",
+    "test/google/cloud/workflows/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml",
+    ".owlbot.rb"
+  ]
+}

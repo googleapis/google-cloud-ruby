@@ -41,23 +41,20 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
   let(:clustering_gapi) do
     Google::Apis::BigqueryV2::Clustering.new fields: clustering_fields
   end
-  let(:table_schema) {
-    {
-      fields: [
-        { mode: "REQUIRED", name: "name", type: "STRING", description: nil, fields: [] },
-        { mode: "NULLABLE", name: "age", type: "INTEGER", description: nil, fields: [] },
-        { mode: "NULLABLE", name: "score", type: "FLOAT", description: "A score from 0.0 to 10.0", fields: [] },
-        { mode: "NULLABLE", name: "active", type: "BOOLEAN", description: nil, fields: [] },
-        { mode: "NULLABLE", name: "avatar", type: "BYTES", description: nil, fields: [] }
-      ]
-    }
-  }
+  let(:policy_tag) { "projects/#{project}/locations/us/taxonomies/1/policyTags/1" }
+  let(:policy_tag_2) { "projects/#{project}/locations/us/taxonomies/1/policyTags/2" }
+  let(:policy_tags) { [ policy_tag, policy_tag_2 ] }
+  let(:policy_tags_gapi) { Google::Apis::BigqueryV2::TableFieldSchema::PolicyTags.new names: policy_tags }
   let(:table_schema_gapi) do
-    gapi = Google::Apis::BigqueryV2::TableSchema.from_json table_schema.to_json
-    gapi.fields.each do |f|
-      f.update! fields: []
-    end
-    gapi
+    Google::Apis::BigqueryV2::TableSchema.new(
+      fields: [
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REQUIRED", name: "name", type: "STRING", description: nil, fields: [], max_length: max_length_string),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "age", type: "INTEGER", description: nil, fields: [], policy_tags: policy_tags_gapi),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "score", type: "FLOAT", description: "A score from 0.0 to 10.0", fields: []),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "active", type: "BOOLEAN", description: nil, fields: []),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "avatar", type: "BYTES", description: nil, fields: [], max_length: max_length_bytes)
+      ]
+    )
   end
   let(:view_id) { "my_view" }
   let(:view_name) { "My View" }
@@ -71,6 +68,12 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
   let(:dataset_hash) { random_dataset_hash dataset_id, dataset_name, dataset_description, default_expiration }
   let(:dataset_gapi) { Google::Apis::BigqueryV2::Dataset.from_json dataset_hash.to_json }
   let(:dataset) { Google::Cloud::Bigquery::Dataset.from_gapi dataset_gapi, bigquery.service }
+  let(:max_length_string) { 50 }
+  let(:max_length_bytes) { 1024 }
+  let(:precision_numeric) { 10 }
+  let(:precision_bignumeric) { 38 }
+  let(:scale_numeric) { 9 }
+  let(:scale_bignumeric) { 37 }
 
   it "knows its attributes" do
     _(dataset.name).must_equal dataset_name
@@ -110,7 +113,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
   it "can delete itself" do
     mock = Minitest::Mock.new
     mock.expect :delete_dataset, nil,
-      [project, dataset.dataset_id, delete_contents: nil]
+      [project, dataset.dataset_id], delete_contents: nil
     dataset.service.mocked_service = mock
 
     _(dataset.delete).must_equal true
@@ -123,7 +126,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
   it "can delete itself and all table data" do
     mock = Minitest::Mock.new
     mock.expect :delete_dataset, nil,
-      [project, dataset.dataset_id, delete_contents: true]
+      [project, dataset.dataset_id], delete_contents: true
     dataset.service.mocked_service = mock
 
     _(dataset.delete(force: true)).must_equal true
@@ -318,11 +321,11 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
     table = dataset.create_table table_id do |t|
       t.name = table_name
       t.description = table_description
-      t.schema.string "name", mode: :required
-      t.schema.integer "age"
+      t.schema.string "name", mode: :required, max_length: max_length_string
+      t.schema.integer "age", policy_tags: policy_tags
       t.schema.float "score", description: "A score from 0.0 to 10.0"
       t.schema.boolean "active"
-      t.schema.bytes "avatar"
+      t.schema.bytes "avatar", max_length: max_length_bytes
     end
 
     mock.verify
@@ -344,19 +347,21 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
       table_reference: Google::Apis::BigqueryV2::TableReference.new(
         project_id: project, dataset_id: dataset_id, table_id: table_id),
       schema: Google::Apis::BigqueryV2::TableSchema.new(fields: [
-        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REQUIRED", name: "name",          type: "STRING", description: nil, fields: []),
-        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "age",           type: "INTEGER", description: nil, fields: []),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REQUIRED", name: "name",          type: "STRING", description: nil, fields: [], max_length: max_length_string),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "age",           type: "INTEGER", policy_tags: policy_tags_gapi, description: nil, fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "score",         type: "FLOAT", description: "A score from 0.0 to 10.0", fields: []),
-        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "cost",          type: "NUMERIC", description: nil, fields: []),
-        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "my_bignumeric", type: "BIGNUMERIC", description: nil, fields: []),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "cost",          type: "NUMERIC", description: nil, fields: [], precision: precision_numeric, scale: scale_numeric),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "my_bignumeric", type: "BIGNUMERIC", description: nil, fields: [], precision: precision_bignumeric, scale: scale_bignumeric),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "active",        type: "BOOLEAN", description: nil, fields: []),
-        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "avatar",        type: "BYTES", description: nil, fields: []),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "avatar",        type: "BYTES", description: nil, fields: [], max_length: max_length_bytes),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "creation_date", type: "TIMESTAMP", description: nil, fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "duration",      type: "TIME", description: nil, fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "target_end",    type: "DATETIME", description: nil, fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "birthday",      type: "DATE", description: nil, fields: []),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "home",          type: "GEOGRAPHY", description: nil, fields: []),
         Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REPEATED", name: "cities_lived",  type: "RECORD", description: nil, fields: [
           Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "place",           type: "STRING",  description: nil, fields: []),
+          Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "location",        type: "GEOGRAPHY",  description: nil, fields: []),
           Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "number_of_years", type: "INTEGER", description: nil, fields: [])])
         ]))
     return_table = create_table_gapi table_id, table_name, table_description
@@ -365,18 +370,81 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
     dataset.service.mocked_service = mock
 
     table = dataset.create_table table_id do |schema|
-      schema.string "name", mode: :required
-      schema.integer "age"
+      schema.string "name", mode: :required, max_length: max_length_string
+      schema.integer "age", policy_tags: policy_tags
       schema.float "score", description: "A score from 0.0 to 10.0"
-      schema.numeric "cost"
-      schema.bignumeric "my_bignumeric"
+      schema.numeric "cost", precision: precision_numeric, scale: scale_numeric
+      schema.bignumeric "my_bignumeric", precision: precision_bignumeric, scale: scale_bignumeric
       schema.boolean "active"
-      schema.bytes "avatar"
+      schema.bytes "avatar", max_length: max_length_bytes
       schema.timestamp "creation_date"
       schema.time "duration"
       schema.datetime "target_end"
       schema.date "birthday"
+      schema.geography "home"
       schema.record "cities_lived", mode: :repeated do |nested_schema|
+        nested_schema.string "place"
+        nested_schema.geography "location"
+        nested_schema.integer "number_of_years"
+      end
+    end
+
+    mock.verify
+
+    _(table).must_be_kind_of Google::Cloud::Bigquery::Table
+    _(table.table_id).must_equal table_id
+    _(table.name).must_equal table_name
+    _(table.description).must_equal table_description
+    _(table.schema).wont_be :empty?
+    _(table.schema).must_be :frozen?
+    _(table).must_be :table?
+    _(table).wont_be :view?
+    _(table).wont_be :materialized_view?
+  end
+
+  it "creates a table with the schema and default values" do
+    mock = Minitest::Mock.new
+    insert_table = Google::Apis::BigqueryV2::Table.new(
+      table_reference: Google::Apis::BigqueryV2::TableReference.new(
+        project_id: project, dataset_id: dataset_id, table_id: table_id),
+      schema: Google::Apis::BigqueryV2::TableSchema.new(fields: [
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REQUIRED", name: "name",          type: "STRING", description: nil, fields: [], max_length: max_length_string, default_value_expression: "'name'"),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "age",           type: "INTEGER", policy_tags: policy_tags_gapi, description: nil, fields: [], default_value_expression: "10"),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "score",         type: "FLOAT", description: "A score from 0.0 to 10.0", fields: [], default_value_expression: "1.0"),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "cost",          type: "NUMERIC", description: nil, fields: [], precision: precision_numeric, scale: scale_numeric, default_value_expression: "100"),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "my_bignumeric", type: "BIGNUMERIC", description: nil, fields: [], precision: precision_bignumeric, scale: scale_bignumeric, default_value_expression: "1000"),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "active",        type: "BOOLEAN", description: nil, fields: [], default_value_expression: "false"),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "avatar",        type: "BYTES", description: nil, fields: [], max_length: max_length_bytes, default_value_expression: "b'bytes'"),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "creation_date", type: "TIMESTAMP", description: nil, fields: [], default_value_expression: "CURRENT_TIMESTAMP"),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "duration",      type: "TIME", description: nil, fields: [], default_value_expression: "CURRENT_TIME"),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "target_end",    type: "DATETIME", description: nil, fields: [], default_value_expression: "CURRENT_DATETIME"),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "birthday",      type: "DATE", description: nil, fields: [], default_value_expression: "CURRENT_DATE"),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "home",          type: "GEOGRAPHY", description: nil, fields: [], default_value_expression: "ST_GEOGPOINT(-122.084801, 37.422131)"),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REPEATED", name: "cities_lived",  type: "RECORD", description: nil, default_value_expression: "[STRUCT('place', 10)]", fields: [
+          Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "place",                type: "STRING",  description: nil, fields: []),
+          Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "number_of_years",      type: "INTEGER", description: nil, fields: []),
+        ])
+      ])
+    )
+    return_table = create_table_gapi table_id, table_name, table_description
+    return_table.schema = table_schema_gapi
+    mock.expect :insert_table, return_table, [project, dataset_id, insert_table]
+    dataset.service.mocked_service = mock
+
+    table = dataset.create_table table_id do |schema|
+      schema.string "name", mode: :required, max_length: max_length_string, default_value_expression: "'name'"
+      schema.integer "age", policy_tags: policy_tags, default_value_expression: "10"
+      schema.float "score", description: "A score from 0.0 to 10.0", default_value_expression: "1.0"
+      schema.numeric "cost", precision: precision_numeric, scale: scale_numeric, default_value_expression: "100"
+      schema.bignumeric "my_bignumeric", precision: precision_bignumeric, scale: scale_bignumeric, default_value_expression: "1000"
+      schema.boolean "active", default_value_expression: "false"
+      schema.bytes "avatar", max_length: max_length_bytes, default_value_expression: "b'bytes'"
+      schema.timestamp "creation_date", default_value_expression: "CURRENT_TIMESTAMP"
+      schema.time "duration", default_value_expression: "CURRENT_TIME"
+      schema.datetime "target_end", default_value_expression: "CURRENT_DATETIME"
+      schema.date "birthday", default_value_expression: "CURRENT_DATE"
+      schema.geography "home", default_value_expression: "ST_GEOGPOINT(-122.084801, 37.422131)"
+      schema.record "cities_lived", mode: :repeated, default_value_expression: "[STRUCT('place', 10)]" do |nested_schema|
         nested_schema.string "place"
         nested_schema.integer "number_of_years"
       end
@@ -412,11 +480,11 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
       t.name = table_name
       t.description = table_description
       t.schema do |s|
-        s.string "name", mode: :required
-        s.integer "age"
+        s.string "name", mode: :required, max_length: max_length_string
+        s.integer "age", policy_tags: policy_tags
         s.float "score", description: "A score from 0.0 to 10.0"
         s.boolean "active"
-        s.bytes "avatar"
+        s.bytes "avatar", max_length: max_length_bytes
       end
     end
 
@@ -730,7 +798,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
   it "lists tables" do
     mock = Minitest::Mock.new
     mock.expect :list_tables, list_tables_gapi(3),
-      [project, dataset_id, max_results: nil, page_token: nil]
+      [project, dataset_id], max_results: nil, page_token: nil
     dataset.service.mocked_service = mock
 
     tables = dataset.tables
@@ -744,7 +812,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
   it "lists tables with max set" do
     mock = Minitest::Mock.new
     mock.expect :list_tables, list_tables_gapi(3, "next_page_token"),
-      [project, dataset_id, max_results: 3, page_token: nil]
+      [project, dataset_id], max_results: 3, page_token: nil
     dataset.service.mocked_service = mock
 
     tables = dataset.tables max: 3
@@ -760,9 +828,9 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
   it "paginates tables" do
     mock = Minitest::Mock.new
     mock.expect :list_tables, list_tables_gapi(3, "next_page_token", 5),
-      [project, dataset_id, max_results: nil, page_token: nil]
+      [project, dataset_id], max_results: nil, page_token: nil
     mock.expect :list_tables, list_tables_gapi(2, nil, 5),
-      [project, dataset_id, max_results: nil, page_token: "next_page_token"]
+      [project, dataset_id], max_results: nil, page_token: "next_page_token"
     dataset.service.mocked_service = mock
 
     first_tables = dataset.tables
@@ -785,9 +853,9 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
   it "paginates tables with next? and next" do
     mock = Minitest::Mock.new
     mock.expect :list_tables, list_tables_gapi(3, "next_page_token", 5),
-      [project, dataset_id, max_results: nil, page_token: nil]
+      [project, dataset_id], max_results: nil, page_token: nil
     mock.expect :list_tables, list_tables_gapi(2, nil, 5),
-      [project, dataset_id, max_results: nil, page_token: "next_page_token"]
+      [project, dataset_id], max_results: nil, page_token: "next_page_token"
     dataset.service.mocked_service = mock
 
     first_tables = dataset.tables
@@ -810,9 +878,9 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
   it "paginates tables with next? and next and max" do
     mock = Minitest::Mock.new
     mock.expect :list_tables, list_tables_gapi(3, "next_page_token", 5),
-      [project, dataset_id, max_results: 3, page_token: nil]
+      [project, dataset_id], max_results: 3, page_token: nil
     mock.expect :list_tables, list_tables_gapi(2, nil, 5),
-      [project, dataset_id, max_results: 3, page_token: "next_page_token"]
+      [project, dataset_id], max_results: 3, page_token: "next_page_token"
     dataset.service.mocked_service = mock
 
     first_tables = dataset.tables max: 3
@@ -834,9 +902,9 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
   it "paginates tables with all" do
     mock = Minitest::Mock.new
     mock.expect :list_tables, list_tables_gapi(3, "next_page_token", 5),
-      [project, dataset_id, max_results: nil, page_token: nil]
+      [project, dataset_id], max_results: nil, page_token: nil
     mock.expect :list_tables, list_tables_gapi(2, nil, 5),
-      [project, dataset_id, max_results: nil, page_token: "next_page_token"]
+      [project, dataset_id], max_results: nil, page_token: "next_page_token"
     dataset.service.mocked_service = mock
 
     tables = dataset.tables.all.to_a
@@ -850,9 +918,9 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
   it "paginates tables with all and max" do
     mock = Minitest::Mock.new
     mock.expect :list_tables, list_tables_gapi(3, "next_page_token", 5),
-      [project, dataset_id, max_results: 3, page_token: nil]
+      [project, dataset_id], max_results: 3, page_token: nil
     mock.expect :list_tables, list_tables_gapi(2, nil, 5),
-      [project, dataset_id, max_results: 3, page_token: "next_page_token"]
+      [project, dataset_id], max_results: 3, page_token: "next_page_token"
     dataset.service.mocked_service = mock
 
     tables = dataset.tables(max: 3).all.to_a
@@ -866,9 +934,9 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
   it "iterates tables with all using Enumerator" do
     mock = Minitest::Mock.new
     mock.expect :list_tables, list_tables_gapi(3, "next_page_token", 25),
-      [project, dataset_id, max_results: nil, page_token: nil]
+      [project, dataset_id], max_results: nil, page_token: nil
     mock.expect :list_tables, list_tables_gapi(3, "second_page_token", 25),
-      [project, dataset_id, max_results: nil, page_token: "next_page_token"]
+      [project, dataset_id], max_results: nil, page_token: "next_page_token"
     dataset.service.mocked_service = mock
 
     tables = dataset.tables.all.take(5)
@@ -882,9 +950,9 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
   it "iterates tables with all with request_limit set" do
     mock = Minitest::Mock.new
     mock.expect :list_tables, list_tables_gapi(3, "next_page_token", 25),
-      [project, dataset_id, max_results: nil, page_token: nil]
+      [project, dataset_id], max_results: nil, page_token: nil
     mock.expect :list_tables, list_tables_gapi(3, "second_page_token", 25),
-      [project, dataset_id, max_results: nil, page_token: "next_page_token"]
+      [project, dataset_id], max_results: nil, page_token: "next_page_token"
     dataset.service.mocked_service = mock
 
     tables = dataset.tables.all(request_limit: 1).to_a
@@ -899,7 +967,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
     found_table_id = "found_table"
 
     mock = Minitest::Mock.new
-    mock.expect :get_table, find_table_gapi(found_table_id), [project, dataset_id, found_table_id]
+    mock.expect :get_table, find_table_gapi(found_table_id), [project, dataset_id, found_table_id], **patch_table_args
     dataset.service.mocked_service = mock
 
     table = dataset.table found_table_id
@@ -908,6 +976,29 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
 
     _(table).must_be_kind_of Google::Cloud::Bigquery::Table
     _(table.table_id).must_equal found_table_id
+  end
+
+  it "finds a table with partial projection of table metadata" do
+    found_table_id = "found_table"
+    %w[unspecified basic storage full].each do |view|
+      mock = Minitest::Mock.new
+      dataset.service.mocked_service = mock
+      table_result = find_table_gapi(found_table_id)
+
+      if view == "basic"
+        table_result = find_partial_table_gapi(found_table_id)
+      end
+
+      mock.expect :get_table, table_result, [project, dataset_id, found_table_id],
+                  **patch_table_args(view: view)
+
+      table = dataset.table found_table_id, view: view
+      _(table).must_be_kind_of Google::Cloud::Bigquery::Table
+      _(table.table_id).must_equal found_table_id
+      verify_table_metadata table, view
+
+      mock.verify
+    end
   end
 
   it "finds a table with skip_lookup option" do
@@ -957,5 +1048,9 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
 
   def find_table_gapi id, name = nil, description = nil
     Google::Apis::BigqueryV2::Table.from_json random_table_hash(dataset_id, id, name, description).to_json
+  end
+
+  def find_partial_table_gapi id, name = nil, description = nil
+    Google::Apis::BigqueryV2::Table.from_json random_table_partial_hash(dataset_id, id, name, description).to_json
   end
 end

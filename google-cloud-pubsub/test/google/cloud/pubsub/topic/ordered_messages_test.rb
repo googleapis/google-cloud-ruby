@@ -16,7 +16,11 @@ require "helper"
 
 describe Google::Cloud::PubSub::Topic, :publish_async, :ordered_messages, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
-  let(:topic) { Google::Cloud::PubSub::Topic.from_grpc Google::Cloud::PubSub::V1::Topic.new(topic_hash(topic_name)), pubsub.service, async: { interval: 10 } }
+  let(:topic_grpc) { Google::Cloud::PubSub::V1::Topic.new(topic_hash(topic_name)) }
+  let(:topic) { Google::Cloud::PubSub::Topic.from_grpc topic_grpc, pubsub.service, async: { interval: 10 } }
+  let(:topic_low_max_messages) do
+    Google::Cloud::PubSub::Topic.from_grpc topic_grpc, pubsub.service, async: { max_messages: 100, interval: 30 }
+  end
 
   let(:fixture_file_path) { File.expand_path File.join __dir__, "../../../../conformance/ordered_messages.json" }
   let(:fixture) { JSON.parse File.read(fixture_file_path), symbolize_names: true }
@@ -137,25 +141,27 @@ describe Google::Cloud::PubSub::Topic, :publish_async, :ordered_messages, :mock_
   end
 
   it "publishes messages with ordering_key with a low max_messages" do
-    topic.service.mocked_publisher = AsyncPublisherStub.new
+    topic_low_max_messages.service.mocked_publisher = AsyncPublisherStub.new
 
-    topic.enable_message_ordering!
-    assert topic.message_ordering?
+    topic_low_max_messages.enable_message_ordering!
+    assert topic_low_max_messages.message_ordering?
+    _(topic_low_max_messages.async_publisher.max_messages).must_equal 100
+    _(topic_low_max_messages.async_publisher.interval).must_equal 30
 
     fixture[:input].each do |msg|
-      topic.publish_async msg[:message], ordering_key: msg[:key]
+      topic_low_max_messages.publish_async msg[:message], ordering_key: msg[:key]
     end
 
-    _(topic.async_publisher).must_be :started?
-    _(topic.async_publisher).wont_be :stopped?
+    _(topic_low_max_messages.async_publisher).must_be :started?
+    _(topic_low_max_messages.async_publisher).wont_be :stopped?
 
     # force the queued messages to be published
-    topic.async_publisher.stop!
+    topic_low_max_messages.async_publisher.stop!
 
-    _(topic.async_publisher).wont_be :started?
-    _(topic.async_publisher).must_be :stopped?
+    _(topic_low_max_messages.async_publisher).wont_be :started?
+    _(topic_low_max_messages.async_publisher).must_be :stopped?
 
-    published_messages_hash = topic.service.mocked_publisher.message_hash
+    published_messages_hash = topic_low_max_messages.service.mocked_publisher.message_hash
     assert_equal fixture_expected_hash.keys.sort, published_messages_hash.keys.sort
     fixture_expected_hash.each do |key, messages|
       assert_equal messages.count, published_messages_hash[key].count, "Message count for #{key} is incorrect"
@@ -164,10 +170,10 @@ describe Google::Cloud::PubSub::Topic, :publish_async, :ordered_messages, :mock_
   end
 
   it "raises when ordered messages is not yet enabled" do
-    refute topic.message_ordering?
+    refute topic_low_max_messages.message_ordering?
 
     assert_raises Google::Cloud::PubSub::OrderedMessagesDisabled do
-      topic.publish_async "ordered message", ordering_key: "123"
+      topic_low_max_messages.publish_async "ordered message", ordering_key: "123"
     end
   end
 end

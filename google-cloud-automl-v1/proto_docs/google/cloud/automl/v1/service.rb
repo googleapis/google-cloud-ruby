@@ -51,10 +51,10 @@ module Google
         #     An expression for filtering the results of the request.
         #
         #       * `dataset_metadata` - for existence of the case (e.g.
-        #                 image_classification_dataset_metadata:*). Some examples of using the filter are:
+        #                 `image_classification_dataset_metadata:*`). Some examples of using the filter are:
         #
         #       * `translation_dataset_metadata:*` --> The dataset has
-        #                                              translation_dataset_metadata.
+        #                                              `translation_dataset_metadata`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Requested page size. Server may return fewer results than requested.
@@ -169,11 +169,11 @@ module Google
         #     An expression for filtering the results of the request.
         #
         #       * `model_metadata` - for existence of the case (e.g.
-        #                 video_classification_model_metadata:*).
+        #                 `video_classification_model_metadata:*`).
         #       * `dataset_id` - for = or !=. Some examples of using the filter are:
         #
         #       * `image_classification_model_metadata:*` --> The model has
-        #                                            image_classification_model_metadata.
+        #                                          `image_classification_model_metadata`.
         #       * `dataset_id=5` --> The model was created from a dataset with ID 5.
         # @!attribute [rw] page_size
         #   @return [::Integer]

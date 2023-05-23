@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/language/v1/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-language-v1/$1

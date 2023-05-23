@@ -49,33 +49,34 @@ module Google
         # Create a new client object for DataTransferService.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client](https://googleapis.dev/ruby/google-cloud-bigquery-data_transfer-v1/latest/Google/Cloud/Bigquery/DataTransfer/V1/DataTransferService/Client.html)
-        # for version V1 of the API.
-        # However, you can specify specify a different API version by passing it in the
+        # [Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-bigquery-data_transfer-v1/latest/Google-Cloud-Bigquery-DataTransfer-V1-DataTransferService-Client)
+        # for a gRPC client for version V1 of the API.
+        # However, you can specify a different API version by passing it in the
         # `version` parameter. If the DataTransferService service is
         # supported by that API version, and the corresponding gem is available, the
         # appropriate versioned client will be returned.
+        # You can also specify a different transport by passing `:rest` or `:grpc` in
+        # the `transport` parameter.
         #
         # ## About DataTransferService
         #
-        # The Google BigQuery Data Transfer Service API enables BigQuery users to
-        # configure the transfer of their data from other Google Products into
-        # BigQuery. This service contains methods that are end user exposed. It backs
-        # up the frontend.
+        # This API allows users to manage their data transfers into BigQuery.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
         #   Defaults to `:v1`.
-        # @return [DataTransferService::Client] A client object for the specified version.
+        # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+        # @return [::Object] A client object for the specified version.
         #
-        def self.data_transfer_service version: :v1, &block
+        def self.data_transfer_service version: :v1, transport: :grpc, &block
           require "google/cloud/bigquery/data_transfer/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Bigquery::DataTransfer
                          .constants
                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                          .first
-          package_module = Google::Cloud::Bigquery::DataTransfer.const_get package_name
-          package_module.const_get(:DataTransferService).const_get(:Client).new(&block)
+          service_module = Google::Cloud::Bigquery::DataTransfer.const_get(package_name).const_get(:DataTransferService)
+          service_module = service_module.const_get(:Rest) if transport == :rest
+          service_module.const_get(:Client).new(&block)
         end
 
         ##
@@ -95,7 +96,7 @@ module Google
         # * `timeout` (*type:* `Numeric`) -
         #   Default timeout in seconds.
         # * `metadata` (*type:* `Hash{Symbol=>String}`) -
-        #   Additional gRPC headers to be sent with the call.
+        #   Additional headers to be sent with the call.
         # * `retry_policy` (*type:* `Hash`) -
         #   The retry policy. The value is a hash with the following keys:
         #     * `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.

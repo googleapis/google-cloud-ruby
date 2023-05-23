@@ -6,6 +6,7 @@ require 'google/protobuf'
 require 'google/cloud/policytroubleshooter/v1/explanations_pb'
 require 'google/api/annotations_pb'
 require 'google/api/client_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/policytroubleshooter/v1/checker.proto", :syntax => :proto3) do
     add_message "google.cloud.policytroubleshooter.v1.TroubleshootIamPolicyRequest" do

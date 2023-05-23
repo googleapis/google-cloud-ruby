@@ -24,6 +24,9 @@ require "google/cloud/pubsub/snapshot"
 module Google
   module Cloud
     module PubSub
+      DEFAULT_COMPRESS = false
+      DEFAULT_COMPRESSION_BYTES_THRESHOLD = 240
+
       ##
       # # Project
       #
@@ -103,6 +106,19 @@ module Google
         #   * `:threads` (Hash) The number of threads to create to handle concurrent calls by the publisher:
         #     * `:publish` (Integer) The number of threads used to publish messages. Default is 2.
         #     * `:callback` (Integer) The number of threads to handle the published messages' callbacks. Default is 4.
+        #   * `:compress` (Boolean) The flag that enables publisher compression. Default is false
+        #   * `:compression_bytes_threshold` (Integer) The number of bytes above which compress should be enabled.
+        #       Default is 240.
+        #   * `:flow_control` (Hash) The client flow control settings for message publishing:
+        #     * `:message_limit` (Integer) The maximum number of messages allowed to wait to be published. Default is
+        #       `10 * max_messages`.
+        #     * `:byte_limit` (Integer) The maximum total size of messages allowed to wait to be published. Default is
+        #       `10 * max_bytes`.
+        #     * `:limit_exceeded_behavior` (Symbol) The action to take when publish flow control limits are exceeded.
+        #       Possible values include: `:ignore` - Flow control is disabled. `:error` - Calls to {Topic#publish_async}
+        #       will raise {FlowControlLimitError} when publish flow control limits are exceeded. `:block` - Calls to
+        #       {Topic#publish_async} will block until capacity is available when publish flow control limits are
+        #       exceeded. The default value is `:ignore`.
         #
         # @return [Google::Cloud::PubSub::Topic, nil] Returns `nil` if topic
         #   does not exist.
@@ -150,7 +166,7 @@ module Google
         #
         def topic topic_name, project: nil, skip_lookup: nil, async: nil
           ensure_service!
-          options = { project: project }
+          options = { project: project, async: async }
           return Topic.from_name topic_name, service, options if skip_lookup
           grpc = service.get_topic topic_name, options
           Topic.from_grpc grpc, service, async: async
@@ -201,11 +217,23 @@ module Google
         #     the batch is published. Default is 0.01.
         #   * `:threads` (Hash) The number of threads to create to handle concurrent
         #     calls by the publisher:
-        #
         #     * `:publish` (Integer) The number of threads used to publish messages.
         #       Default is 2.
         #     * `:callback` (Integer) The number of threads to handle the published
         #       messages' callbacks. Default is 4.
+        #   * `:compress` (Boolean) The flag that enables publisher compression. Default is false
+        #   * `:compression_bytes_threshold` (Integer) The number of bytes above which compress should be enabled.
+        #       Default is 240.
+        #   * `:flow_control` (Hash) The client flow control settings for message publishing:
+        #     * `:message_limit` (Integer) The maximum number of messages allowed to wait to be published. Default is
+        #       `10 * max_messages`.
+        #     * `:byte_limit` (Integer) The maximum total size of messages allowed to wait to be published. Default is
+        #       `10 * max_bytes`.
+        #     * `:limit_exceeded_behavior` (Symbol) The action to take when publish flow control limits are exceeded.
+        #       Possible values include: `:ignore` - Flow control is disabled. `:error` - Calls to {Topic#publish_async}
+        #       will raise {FlowControlLimitError} when publish flow control limits are exceeded. `:block` - Calls to
+        #       {Topic#publish_async} will block until capacity is available when publish flow control limits are
+        #       exceeded. The default value is `:ignore`.
         # @param [String] schema_name The name of the schema that messages
         #   published should be validated against. Optional. The value can be a
         #   simple schema ID (relative name), in which case the current project
@@ -218,6 +246,14 @@ module Google
         #   * `JSON` - JSON encoding.
         #   * `BINARY` - Binary encoding, as defined by the schema type. For some
         #     schema types, binary encoding may not be available.
+        # @param [Numeric] retention Indicates the minimum number of seconds to retain a message
+        #   after it is published to the topic. If this field is set, messages published
+        #   to the topic within the `retention` number of seconds are always available to
+        #   subscribers. For instance, it allows any attached subscription to [seek to a
+        #   timestamp](https://cloud.google.com/pubsub/docs/replay-overview#seek_to_a_time)
+        #   that is up to `retention` number of seconds in the past. If this field is
+        #   not set, message retention is controlled by settings on individual
+        #   subscriptions. Cannot be less than 600 (10 minutes) or more than 604,800 (7 days).
         #
         # @return [Google::Cloud::PubSub::Topic]
         #
@@ -233,14 +269,16 @@ module Google
                          persistence_regions: nil,
                          async: nil,
                          schema_name: nil,
-                         message_encoding: nil
+                         message_encoding: nil,
+                         retention: nil
           ensure_service!
           grpc = service.create_topic topic_name,
                                       labels:              labels,
                                       kms_key_name:        kms_key,
                                       persistence_regions: persistence_regions,
                                       schema_name:         schema_name,
-                                      message_encoding:    message_encoding
+                                      message_encoding:    message_encoding,
+                                      retention:           retention
           Topic.from_grpc grpc, service, async: async
         end
         alias new_topic create_topic
@@ -423,7 +461,7 @@ module Google
         #   * `BASIC` - Include the `name` and `type` of the schema, but not the `definition`.
         #   * `FULL` - Include all Schema object fields.
         #
-        #   The default value is `BASIC`.
+        #   The default value is `FULL`.
         # @param [String] project If the schema belongs to a project other
         #   than the one currently connected to, the alternate project ID can be
         #   specified here. Not used if a fully-qualified schema name is
@@ -444,7 +482,7 @@ module Google
         #   schema = pubsub.schema "my-schema"
         #   schema.name #=> "projects/my-project/schemas/my-schema"
         #   schema.type #=> :PROTOCOL_BUFFER
-        #   # schema.definition # nil - Use view: :full to load complete resource.
+        #   schema.definition # The schema definition
         #
         # @example Skip the lookup against the service with `skip_lookup`:
         #   require "google/cloud/pubsub"
@@ -458,21 +496,21 @@ module Google
         #   schema.type #=> nil
         #   schema.definition #=> nil
         #
-        # @example Get the schema definition with `view: :full`:
+        # @example Omit the schema definition with `view: :basic`:
         #   require "google/cloud/pubsub"
         #
         #   pubsub = Google::Cloud::PubSub.new
         #
-        #   schema = pubsub.schema "my-schema", view: :full
+        #   schema = pubsub.schema "my-schema", view: :basic
         #   schema.name #=> "projects/my-project/schemas/my-schema"
         #   schema.type #=> :PROTOCOL_BUFFER
-        #   schema.definition # The schema definition
+        #   schema.definition #=> nil
         #
         def schema schema_name, view: nil, project: nil, skip_lookup: nil
           ensure_service!
           options = { project: project }
           return Schema.from_name schema_name, view, service, options if skip_lookup
-          view ||= :BASIC
+          view ||= :FULL
           grpc = service.get_schema schema_name, view, options
           Schema.from_grpc grpc, service
         rescue Google::Cloud::NotFoundError
@@ -531,7 +569,7 @@ module Google
         #     * `BASIC` - Include the `name` and `type` of the schema, but not the `definition`.
         #     * `FULL` - Include all Schema object fields.
         #
-        #   The default value is `BASIC`.
+        #   The default value is `FULL`.
         # @param [String] token A previously-returned page token representing
         #   part of the larger set of results to view.
         # @param [Integer] max Maximum number of schemas to return.
@@ -561,7 +599,7 @@ module Google
         #
         def schemas view: nil, token: nil, max: nil
           ensure_service!
-          view ||= :BASIC
+          view ||= :FULL
           options = { token: token, max: max }
           grpc = service.list_schemas view, options
           Schema::List.from_grpc grpc, service, view, max
@@ -611,13 +649,6 @@ module Google
         # available.
         def ensure_service!
           raise "Must have active connection to service" unless service
-        end
-
-        ##
-        # Call the publish API with arrays of data data and attrs.
-        def publish_batch_messages topic_name, batch
-          grpc = service.publish topic_name, batch.messages
-          batch.to_gcloud_messages Array(grpc.message_ids)
         end
       end
     end

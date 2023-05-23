@@ -9,8 +9,7 @@ require 'google/cloud/channel/v1/common_pb'
 require 'google/cloud/channel/v1/offers_pb'
 require 'google/cloud/channel/v1/products_pb'
 require 'google/protobuf/timestamp_pb'
-require 'google/protobuf/wrappers_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/channel/v1/entitlements.proto", :syntax => :proto3) do
     add_message "google.cloud.channel.v1.Entitlement" do
@@ -26,6 +25,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :trial_settings, :message, 21, "google.cloud.channel.v1.TrialSettings"
       optional :association_info, :message, 23, "google.cloud.channel.v1.AssociationInfo"
       repeated :parameters, :message, 26, "google.cloud.channel.v1.Parameter"
+      optional :billing_account, :string, 28
     end
     add_enum "google.cloud.channel.v1.Entitlement.ProvisioningState" do
       value :PROVISIONING_STATE_UNSPECIFIED, 0

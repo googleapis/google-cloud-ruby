@@ -34,12 +34,12 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   instance = bigtable.instance("my-instance")
-        #   cluster = instance.cluster("my-cluster")
-        #   table = instance.table("my-table")
+        #   instance = bigtable.instance "my-instance"
+        #   cluster = instance.cluster "my-cluster"
+        #   table = instance.table "my-table"
         #
         #   expire_time = Time.now + 60 * 60 * 7
-        #   job = cluster.create_backup(table, "my-backup", expire_time)
+        #   job = cluster.create_backup table, "my-backup", expire_time
         #
         #   job.wait_until_done!
         #   job.done? #=> true
@@ -61,12 +61,12 @@ module Google
           #   require "google/cloud/bigtable"
           #
           #   bigtable = Google::Cloud::Bigtable.new
-          #   instance = bigtable.instance("my-instance")
-          #   cluster = instance.cluster("my-cluster")
-          #   table = instance.table("my-table")
+          #   instance = bigtable.instance "my-instance"
+          #   cluster = instance.cluster "my-cluster"
+          #   table = instance.table "my-table"
           #
           #   expire_time = Time.now + 60 * 60 * 7
-          #   job = cluster.create_backup(table, "my-backup", expire_time)
+          #   job = cluster.create_backup table, "my-backup", expire_time
           #
           #   job.wait_until_done!
           #   job.done? #=> true

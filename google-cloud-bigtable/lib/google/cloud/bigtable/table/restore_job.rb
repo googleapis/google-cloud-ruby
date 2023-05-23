@@ -32,12 +32,12 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   instance = bigtable.instance("my-instance")
-        #   cluster = instance.cluster("my-cluster")
+        #   instance = bigtable.instance "my-instance"
+        #   cluster = instance.cluster "my-cluster"
         #
-        #   backup = cluster.backup("my-backup")
+        #   backup = cluster.backup "my-backup"
         #
-        #   job = backup.restore("my-new-table")
+        #   job = backup.restore "my-new-table"
         #
         #   job.wait_until_done!
         #   job.done? #=> true
@@ -60,12 +60,12 @@ module Google
           #   require "google/cloud/bigtable"
           #
           #   bigtable = Google::Cloud::Bigtable.new
-          #   instance = bigtable.instance("my-instance")
-          #   cluster = instance.cluster("my-cluster")
+          #   instance = bigtable.instance "my-instance"
+          #   cluster = instance.cluster "my-cluster"
           #
-          #   backup = cluster.backup("my-backup")
+          #   backup = cluster.backup "my-backup"
           #
-          #   job = backup.restore("my-new-table")
+          #   job = backup.restore "my-new-table"
           #
           #   job.wait_until_done!
           #   job.done? #=> true
@@ -90,12 +90,12 @@ module Google
           #   require "google/cloud/bigtable"
           #
           #   bigtable = Google::Cloud::Bigtable.new
-          #   instance = bigtable.instance("my-instance")
-          #   cluster = instance.cluster("my-cluster")
+          #   instance = bigtable.instance "my-instance"
+          #   cluster = instance.cluster "my-cluster"
           #
-          #   backup = cluster.backup("my-backup")
+          #   backup = cluster.backup "my-backup"
           #
-          #   job = backup.restore("my-new-table")
+          #   job = backup.restore "my-new-table"
           #
           #   job.wait_until_done!
           #   job.done? #=> true

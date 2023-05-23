@@ -86,8 +86,9 @@ module Google
           def next
             return nil unless next?
             ensure_client!
-            grpc = @client.service.list_documents @parent, @collection_id, token: token, max: @max
-            self.class.from_grpc grpc, @client, @parent, @collection_id, @max
+            grpc = @client.service.list_documents @parent, @collection_id, token: token, max: @max, \
+              read_time: @read_time
+            self.class.from_grpc grpc, @client, @parent, @collection_id, @max, read_time: @read_time
           end
 
           ##
@@ -109,7 +110,7 @@ module Google
           #
           # @return [Enumerator]
           #
-          # @example Iterating each document reference by passing a block:
+          # @example Iterating each document reference by passing a block or proc:
           #   require "google/cloud/firestore"
           #
           #   firestore = Google::Cloud::Firestore.new
@@ -162,7 +163,7 @@ module Google
           ##
           # @private New DocumentReference::List from a
           # Google::Cloud::Firestore::V1::ListDocumentsResponse object.
-          def self.from_grpc grpc, client, parent, collection_id, max = nil
+          def self.from_grpc grpc, client, parent, collection_id, max = nil, read_time: nil
             documents = List.new(Array(grpc.documents).map do |document|
               DocumentReference.from_path document.name, client
             end)
@@ -173,6 +174,7 @@ module Google
             documents.instance_variable_set :@token, token
             documents.instance_variable_set :@client, client
             documents.instance_variable_set :@max, max
+            documents.instance_variable_set :@read_time, read_time
             documents
           end
 

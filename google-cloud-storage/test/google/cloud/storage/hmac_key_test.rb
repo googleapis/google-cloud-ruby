@@ -67,8 +67,8 @@ describe Google::Cloud::Storage::HmacKey, :mock_storage do
 
   it "can delete itself" do
     mock = Minitest::Mock.new
-    mock.expect :delete_project_hmac_key, hmac_key_metadata_gapi, [project, access_id, { user_project: nil }]
-    mock.expect :get_project_hmac_key, hmac_key_metadata_gapi, [project, access_id, { user_project: nil }]
+    mock.expect :delete_project_hmac_key, hmac_key_metadata_gapi, [project, access_id], user_project: nil, options: {}
+    mock.expect :get_project_hmac_key, hmac_key_metadata_gapi, [project, access_id], user_project: nil, options: {}
     hmac_key.service.mocked_service = mock
 
     hmac_key.delete!
@@ -80,8 +80,8 @@ describe Google::Cloud::Storage::HmacKey, :mock_storage do
     hmac_key.gapi.project_id = other_project_id
 
     mock = Minitest::Mock.new
-    mock.expect :delete_project_hmac_key, hmac_key_metadata_gapi, [other_project_id, access_id, { user_project: nil }]
-    mock.expect :get_project_hmac_key, hmac_key_metadata_gapi, [other_project_id, access_id, { user_project: nil }]
+    mock.expect :delete_project_hmac_key, hmac_key_metadata_gapi, [other_project_id, access_id], user_project: nil, options: {}
+    mock.expect :get_project_hmac_key, hmac_key_metadata_gapi, [other_project_id, access_id], user_project: nil, options: {}
     hmac_key.service.mocked_service = mock
 
     hmac_key.delete!
@@ -91,8 +91,8 @@ describe Google::Cloud::Storage::HmacKey, :mock_storage do
 
   it "can delete itself with user_project set to true" do
     mock = Minitest::Mock.new
-    mock.expect :delete_project_hmac_key, hmac_key_metadata_gapi, [project, access_id, { user_project: "test" }]
-    mock.expect :get_project_hmac_key, hmac_key_metadata_gapi, [project, access_id, { user_project: "test" }]
+    mock.expect :delete_project_hmac_key, hmac_key_metadata_gapi, [project, access_id], user_project: "test", options: {}
+    mock.expect :get_project_hmac_key, hmac_key_metadata_gapi, [project, access_id], user_project: "test", options: {}
     hmac_key_user_project.service.mocked_service = mock
 
     hmac_key_user_project.delete!
@@ -104,7 +104,7 @@ describe Google::Cloud::Storage::HmacKey, :mock_storage do
     mock = Minitest::Mock.new
     update_gapi = hmac_key_metadata_gapi.dup
     update_gapi.state = "ACTIVE"
-    mock.expect :update_project_hmac_key, hmac_key_metadata_gapi, [project, access_id, update_gapi, { user_project: nil }]
+    mock.expect :update_project_hmac_key, hmac_key_metadata_gapi, [project, access_id, update_gapi], user_project: nil, options: {}
     hmac_key.service.mocked_service = mock
 
     hmac_key.active!
@@ -118,7 +118,7 @@ describe Google::Cloud::Storage::HmacKey, :mock_storage do
     mock = Minitest::Mock.new
     update_gapi = hmac_key_metadata_gapi.dup
     update_gapi.state = "ACTIVE"
-    mock.expect :update_project_hmac_key, hmac_key_metadata_gapi, [other_project_id, access_id, update_gapi, { user_project: nil }]
+    mock.expect :update_project_hmac_key, hmac_key_metadata_gapi, [other_project_id, access_id, update_gapi], user_project: nil, options: {}
     hmac_key.service.mocked_service = mock
 
     hmac_key.active!
@@ -130,7 +130,7 @@ describe Google::Cloud::Storage::HmacKey, :mock_storage do
     mock = Minitest::Mock.new
     update_gapi = hmac_key_metadata_gapi.dup
     update_gapi.state = "ACTIVE"
-    mock.expect :update_project_hmac_key, hmac_key_metadata_gapi, [project, access_id, update_gapi, { user_project: "test" }]
+    mock.expect :update_project_hmac_key, hmac_key_metadata_gapi, [project, access_id, update_gapi], user_project: "test", options: {}
     hmac_key_user_project.service.mocked_service = mock
 
     hmac_key_user_project.active!
@@ -142,7 +142,7 @@ describe Google::Cloud::Storage::HmacKey, :mock_storage do
     mock = Minitest::Mock.new
     update_gapi = hmac_key_metadata_gapi.dup
     update_gapi.state = "INACTIVE"
-    mock.expect :update_project_hmac_key, hmac_key_metadata_gapi, [project, access_id, update_gapi, { user_project: nil }]
+    mock.expect :update_project_hmac_key, hmac_key_metadata_gapi, [project, access_id, update_gapi], user_project: nil, options: {}
     hmac_key.service.mocked_service = mock
 
     hmac_key.inactive!
@@ -154,7 +154,7 @@ describe Google::Cloud::Storage::HmacKey, :mock_storage do
     mock = Minitest::Mock.new
     update_gapi = hmac_key_metadata_gapi.dup
     update_gapi.state = "INACTIVE"
-    mock.expect :update_project_hmac_key, hmac_key_metadata_gapi, [project, access_id, update_gapi, { user_project: "test" }]
+    mock.expect :update_project_hmac_key, hmac_key_metadata_gapi, [project, access_id, update_gapi], user_project: "test", options: {}
     hmac_key_user_project.service.mocked_service = mock
 
     hmac_key_user_project.inactive!
@@ -164,7 +164,7 @@ describe Google::Cloud::Storage::HmacKey, :mock_storage do
 
   it "can reload itself" do
     mock = Minitest::Mock.new
-    mock.expect :get_project_hmac_key, hmac_key_metadata_gapi, [project, access_id, { user_project: nil }]
+    mock.expect :get_project_hmac_key, hmac_key_metadata_gapi, [project, access_id], user_project: nil, options: {}
     hmac_key.service.mocked_service = mock
 
     hmac_key.reload!
@@ -176,7 +176,7 @@ describe Google::Cloud::Storage::HmacKey, :mock_storage do
     hmac_key.gapi.project_id = other_project_id
 
     mock = Minitest::Mock.new
-    mock.expect :get_project_hmac_key, hmac_key_metadata_gapi, [other_project_id, access_id, { user_project: nil }]
+    mock.expect :get_project_hmac_key, hmac_key_metadata_gapi, [other_project_id, access_id], user_project: nil, options: {}
     hmac_key.service.mocked_service = mock
 
     hmac_key.reload!
@@ -186,7 +186,7 @@ describe Google::Cloud::Storage::HmacKey, :mock_storage do
 
   it "can reload itself with user_project set to true" do
     mock = Minitest::Mock.new
-    mock.expect :get_project_hmac_key, hmac_key_metadata_gapi, [project, access_id, { user_project: "test" }]
+    mock.expect :get_project_hmac_key, hmac_key_metadata_gapi, [project, access_id], user_project: "test", options: {}
     hmac_key_user_project.service.mocked_service = mock
 
     hmac_key_user_project.reload!

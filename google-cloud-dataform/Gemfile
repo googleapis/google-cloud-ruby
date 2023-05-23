@@ -1,0 +1,5 @@
+source "https://rubygems.org"
+
+gemspec
+
+gem "google-cloud-dataform-v1beta1", path: "../google-cloud-dataform-v1beta1"

@@ -1,5 +1,77 @@
 # Release History
 
+### 0.16.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20628](https://github.com/googleapis/google-cloud-ruby/issues/20628)) 
+
+### 0.15.0 (2023-01-05)
+
+#### Features
+
+* add support for annotations in resources ([#19896](https://github.com/googleapis/google-cloud-ruby/issues/19896)) 
+
+### 0.14.0 (2022-07-07)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+
+### 0.13.0 (2022-04-20)
+
+#### Features
+
+* Added support for accessing secret versions by alias
+* Support for update masks when setting IAM policies
+
+### 0.12.0 / 2022-02-08
+
+#### Features
+
+* Support for payload checksums
+
+### 0.11.3 / 2022-01-11
+
+#### Documentation
+
+* Fix titles of documentation pages
+* Remove some broken images and fix outdated content in authentication documentation
+
+### 0.11.2 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
+### 0.11.1 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
+### 0.11.0 / 2021-07-29
+
+#### Features
+
+* Support filters when listing secrets and secret versions
+
+### 0.10.2 / 2021-07-12
+
+#### Bug Fixes
+
+* Minor updates to retry policy for access_secret_version
+
+#### Documentation
+
+* Clarify some language around authentication configuration
+
+### 0.10.1 / 2021-06-17
+
+#### Bug Fixes
+
+* Support future 1.x versions of gapic-common
+
 ### 0.10.0 / 2021-05-21
 
 #### Features

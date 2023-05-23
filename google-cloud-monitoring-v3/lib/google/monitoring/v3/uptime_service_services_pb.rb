@@ -25,13 +25,13 @@ module Google
       module V3
         module UptimeCheckService
           # The UptimeCheckService API is used to manage (list, create, delete, edit)
-          # Uptime check configurations in the Stackdriver Monitoring product. An Uptime
+          # Uptime check configurations in the Cloud Monitoring product. An Uptime
           # check is a piece of configuration that determines which resources and
           # services to monitor for availability. These configurations can also be
-          # configured interactively by navigating to the [Cloud Console]
-          # (http://console.cloud.google.com), selecting the appropriate project,
-          # clicking on "Monitoring" on the left-hand side to navigate to Stackdriver,
-          # and then clicking on "Uptime".
+          # configured interactively by navigating to the [Cloud console]
+          # (https://console.cloud.google.com), selecting the appropriate project,
+          # clicking on "Monitoring" on the left-hand side to navigate to Cloud
+          # Monitoring, and then clicking on "Uptime".
           class Service
 
             include ::GRPC::GenericService

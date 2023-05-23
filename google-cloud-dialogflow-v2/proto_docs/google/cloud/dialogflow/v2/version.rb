@@ -43,6 +43,7 @@ module Google
         #   @return [::String]
         #     Output only. The unique identifier of this agent version.
         #     Supported formats:
+        #
         #     - `projects/<Project ID>/agent/versions/<Version ID>`
         #     - `projects/<Project ID>/locations/<Location ID>/agent/versions/<Version
         #       ID>`
@@ -51,16 +52,16 @@ module Google
         #     Optional. The developer-provided description of this version.
         # @!attribute [r] version_number
         #   @return [::Integer]
-        #     Output only. The sequential number of this version. This field is read-only which means
-        #     it cannot be set by create and update methods.
+        #     Output only. The sequential number of this version. This field is read-only
+        #     which means it cannot be set by create and update methods.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The creation time of this version. This field is read-only, i.e., it cannot
-        #     be set by create and update methods.
+        #     Output only. The creation time of this version. This field is read-only,
+        #     i.e., it cannot be set by create and update methods.
         # @!attribute [r] status
         #   @return [::Google::Cloud::Dialogflow::V2::Version::VersionStatus]
-        #     Output only. The status of this version. This field is read-only and cannot be set by
-        #     create and update methods.
+        #     Output only. The status of this version. This field is read-only and cannot
+        #     be set by create and update methods.
         class Version
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -81,17 +82,19 @@ module Google
           end
         end
 
-        # The request message for {::Google::Cloud::Dialogflow::V2::Versions::Client#list_versions Versions.ListVersions}.
+        # The request message for
+        # {::Google::Cloud::Dialogflow::V2::Versions::Client#list_versions Versions.ListVersions}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The agent to list all versions from.
         #     Supported formats:
+        #
         #     - `projects/<Project ID>/agent`
         #     - `projects/<Project ID>/locations/<Location ID>/agent`
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. The maximum number of items to return in a single page. By default 100 and
-        #     at most 1000.
+        #     Optional. The maximum number of items to return in a single page. By
+        #     default 100 and at most 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. The next_page_token value returned from a previous list request.
@@ -100,7 +103,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response message for {::Google::Cloud::Dialogflow::V2::Versions::Client#list_versions Versions.ListVersions}.
+        # The response message for
+        # {::Google::Cloud::Dialogflow::V2::Versions::Client#list_versions Versions.ListVersions}.
         # @!attribute [rw] versions
         #   @return [::Array<::Google::Cloud::Dialogflow::V2::Version>]
         #     The list of agent versions. There will be a maximum number of items
@@ -114,11 +118,13 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {::Google::Cloud::Dialogflow::V2::Versions::Client#get_version Versions.GetVersion}.
+        # The request message for
+        # {::Google::Cloud::Dialogflow::V2::Versions::Client#get_version Versions.GetVersion}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the version.
         #     Supported formats:
+        #
         #     - `projects/<Project ID>/agent/versions/<Version ID>`
         #     - `projects/<Project ID>/locations/<Location ID>/agent/versions/<Version
         #       ID>`
@@ -127,11 +133,13 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {::Google::Cloud::Dialogflow::V2::Versions::Client#create_version Versions.CreateVersion}.
+        # The request message for
+        # {::Google::Cloud::Dialogflow::V2::Versions::Client#create_version Versions.CreateVersion}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The agent to create a version for.
         #     Supported formats:
+        #
         #     - `projects/<Project ID>/agent`
         #     - `projects/<Project ID>/locations/<Location ID>/agent`
         # @!attribute [rw] version
@@ -142,11 +150,13 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {::Google::Cloud::Dialogflow::V2::Versions::Client#update_version Versions.UpdateVersion}.
+        # The request message for
+        # {::Google::Cloud::Dialogflow::V2::Versions::Client#update_version Versions.UpdateVersion}.
         # @!attribute [rw] version
         #   @return [::Google::Cloud::Dialogflow::V2::Version]
         #     Required. The version to update.
         #     Supported formats:
+        #
         #     - `projects/<Project ID>/agent/versions/<Version ID>`
         #     - `projects/<Project ID>/locations/<Location ID>/agent/versions/<Version
         #       ID>`
@@ -158,11 +168,13 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {::Google::Cloud::Dialogflow::V2::Versions::Client#delete_version Versions.DeleteVersion}.
+        # The request message for
+        # {::Google::Cloud::Dialogflow::V2::Versions::Client#delete_version Versions.DeleteVersion}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the version to delete.
         #     Supported formats:
+        #
         #     - `projects/<Project ID>/agent/versions/<Version ID>`
         #     - `projects/<Project ID>/locations/<Location ID>/agent/versions/<Version
         #       ID>`

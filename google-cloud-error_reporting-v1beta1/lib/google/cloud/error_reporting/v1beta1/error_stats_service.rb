@@ -25,6 +25,7 @@ require "google/cloud/error_reporting/v1beta1/version"
 require "google/cloud/error_reporting/v1beta1/error_stats_service/credentials"
 require "google/cloud/error_reporting/v1beta1/error_stats_service/paths"
 require "google/cloud/error_reporting/v1beta1/error_stats_service/client"
+require "google/cloud/error_reporting/v1beta1/error_stats_service/rest"
 
 module Google
   module Cloud
@@ -34,10 +35,15 @@ module Google
         # An API for retrieving and managing error statistics as well as data for
         # individual events.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/error_reporting/v1beta1/error_stats_service"
         #     client = ::Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/error_reporting/v1beta1/error_stats_service/rest"
+        #     client = ::Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::Rest::Client.new
         #
         module ErrorStatsService
         end

@@ -13,6 +13,7 @@
 # limitations under the License.
 
 require "helper"
+require "ostruct"
 
 Thread.abort_on_exception = true
 
@@ -33,6 +34,10 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
     _(publisher.interval).must_equal 0.01
     _(publisher.publish_threads).must_equal 2
     _(publisher.callback_threads).must_equal 4
+    _(publisher.flow_control).must_be_kind_of Hash
+    _(publisher.flow_control[:message_limit]).must_equal 1000
+    _(publisher.flow_control[:byte_limit]).must_equal 10000000
+    _(publisher.flow_control[:limit_exceeded_behavior]).must_be :nil?
   end
 
   it "knows its given attributes" do
@@ -53,6 +58,9 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
     _(publisher.interval).must_equal 0.02
     _(publisher.publish_threads).must_equal 3
     _(publisher.callback_threads).must_equal 5
+    _(publisher.flow_control[:message_limit]).must_equal 2000
+    _(publisher.flow_control[:byte_limit]).must_equal 20000000
+    _(publisher.flow_control[:limit_exceeded_behavior]).must_be :nil?
   end
 
   it "knows given attributes and retains its defaults" do
@@ -70,6 +78,9 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
     _(publisher.interval).must_equal 0.01
     _(publisher.publish_threads).must_equal 3
     _(publisher.callback_threads).must_equal 4
+    _(publisher.flow_control[:message_limit]).must_equal 1000
+    _(publisher.flow_control[:byte_limit]).must_equal 20000000
+    _(publisher.flow_control[:limit_exceeded_behavior]).must_be :nil?
   end
 
   it "publishes a message" do
@@ -318,6 +329,235 @@ describe Google::Cloud::PubSub::AsyncPublisher, :mock_pubsub do
     ]
     assert_equal publisher.service.mocked_publisher.messages, expected_messages
     _(callback_count).must_equal 2
+  end
+
+  it "publishes multiple messages with flow control message_limit" do
+    flow_control = {
+      message_limit: 2,
+      byte_limit: 10000000,
+      limit_exceeded_behavior: :error
+    }
+    publisher = Google::Cloud::PubSub::AsyncPublisher.new topic_name,
+                                                          pubsub.service,
+                                                          interval: 10,
+                                                          flow_control: flow_control
+
+    publisher.service.mocked_publisher = AsyncPublisherStub.new
+
+    _(publisher.flow_controller.outstanding_messages).must_equal 0
+
+    publisher.publish "a"
+    _(publisher.flow_controller.outstanding_messages).must_equal 1
+
+    publisher.publish "b"
+    _(publisher.flow_controller.outstanding_messages).must_equal 2 # Limit
+
+    callback_called = true
+    expect do
+      publisher.publish "c" do |result|
+        assert_kind_of Google::Cloud::PubSub::FlowControlLimitError, result.error
+        callback_called = true
+      end
+    end.must_raise Google::Cloud::PubSub::FlowControlLimitError
+    _(callback_called).must_equal true
+
+    # force the queued messages to be published
+    publisher.stop!
+
+    _(publisher.flow_controller.outstanding_messages).must_equal 0
+
+    published_messages_hash = publisher.service.mocked_publisher.message_hash
+    assert_equal ["a","b"], published_messages_hash[""].map(&:data)
+  end
+
+  it "publishes multiple messages with flow control byte_limit" do
+    flow_control = {
+      message_limit: 1000,
+      byte_limit: 3 * 2,
+      limit_exceeded_behavior: :error
+    }
+    publisher = Google::Cloud::PubSub::AsyncPublisher.new topic_name,
+                                                          pubsub.service,
+                                                          interval: 10,
+                                                          flow_control: flow_control
+
+    publisher.service.mocked_publisher = AsyncPublisherStub.new
+
+    _(publisher.flow_controller.outstanding_bytes).must_equal 0
+
+    publisher.publish "a"
+    _(publisher.flow_controller.outstanding_bytes).must_equal 3
+
+    publisher.publish "b"
+    _(publisher.flow_controller.outstanding_bytes).must_equal 3 * 2 # Limit
+
+    callback_called = true
+    expect do
+      publisher.publish "c" do |result|
+        assert_kind_of Google::Cloud::PubSub::FlowControlLimitError, result.error
+        callback_called = true
+      end
+    end.must_raise Google::Cloud::PubSub::FlowControlLimitError
+
+    # force the queued messages to be published
+    publisher.stop!
+
+    _(publisher.flow_controller.outstanding_bytes).must_equal 0
+
+    published_messages_hash = publisher.service.mocked_publisher.message_hash
+    assert_equal ["a","b"], published_messages_hash[""].map(&:data)
+    _(callback_called).must_equal true
+  end
+
+  it "passes compress true to service when compress enabled and size above default threshold" do
+    publisher = Google::Cloud::PubSub::AsyncPublisher.new topic_name, pubsub.service, compress: true
+    mocked_publisher = Minitest::Mock.new
+    expected_request = {topic: "projects/test/topics/#{topic_name}", messages: ["data"]}
+    expected_option = ::Gapic::CallOptions.new metadata: { "grpc-internal-encoding-request": "gzip" }
+    actual_request = nil
+    actual_option = nil
+    mocked_publisher.expect :publish, nil do |request, option|
+      actual_request = request
+      actual_option = option
+    end
+    publisher.service.mocked_publisher = mocked_publisher
+    batch = OpenStruct.new( "rebalance!" => [OpenStruct.new(:msg => "data")], 
+                            "total_message_bytes" => 241,
+                            "ordering_key" => [],
+                            "items" => [OpenStruct.new(:msg => "data")])
+    publisher.send(:publish_batch_sync, topic_name, batch)
+    mocked_publisher.verify
+    assert_equal actual_option, expected_option
+    assert_equal actual_request, expected_request
+  end
+
+  it "passes compress true to service when compress enabled and size equal default threshold" do
+    publisher = Google::Cloud::PubSub::AsyncPublisher.new topic_name, pubsub.service, compress: true
+    mocked_publisher = Minitest::Mock.new
+    expected_request = {topic: "projects/test/topics/#{topic_name}", messages: ["data"]}
+    expected_option = ::Gapic::CallOptions.new metadata: { "grpc-internal-encoding-request": "gzip" }
+    actual_request = nil
+    actual_option = nil
+    mocked_publisher.expect :publish, nil do |request, option|
+      actual_request = request
+      actual_option = option
+    end
+    publisher.service.mocked_publisher = mocked_publisher
+    batch = OpenStruct.new( "rebalance!" => [OpenStruct.new(:msg => "data")], 
+                            "total_message_bytes" => 240,
+                            "ordering_key" => [],
+                            "items" => [OpenStruct.new(:msg => "data")])
+    publisher.send(:publish_batch_sync, topic_name, batch)
+    mocked_publisher.verify
+    assert_equal actual_option, expected_option
+    assert_equal actual_request, expected_request
+  end
+
+  it "passes compress false to service when compress enabled and size below default threshold" do
+    publisher = Google::Cloud::PubSub::AsyncPublisher.new topic_name, pubsub.service, compress: true
+    mocked_publisher = Minitest::Mock.new
+    publisher.service.mocked_publisher = mocked_publisher
+    expected_request = {topic: "projects/test/topics/#{topic_name}", messages: ["data"]}
+    actual_request = nil
+    actual_option = "test"
+    mocked_publisher.expect :publish, nil do |request, option|
+      actual_request = request
+      actual_option = option
+    end
+    batch = OpenStruct.new( "rebalance!" => [OpenStruct.new(:msg => "data")], 
+                            "total_message_bytes" => 25,
+                            "ordering_key" => [],
+                            "items" => [OpenStruct.new(:msg => "data")])
+    publisher.send(:publish_batch_sync, topic_name, batch)
+    mocked_publisher.verify
+    assert_nil actual_option
+    assert_equal actual_request, expected_request
+  end
+
+  it "passes compress true to service when compress enabled and size above given threshold" do
+    publisher = Google::Cloud::PubSub::AsyncPublisher.new topic_name, pubsub.service, compress: true, compression_bytes_threshold: 150
+    mocked_publisher = Minitest::Mock.new
+    publisher.service.mocked_publisher = mocked_publisher
+    expected_request = {topic: "projects/test/topics/#{topic_name}", messages: ["data"]}
+    expected_option = ::Gapic::CallOptions.new metadata: { "grpc-internal-encoding-request": "gzip" }
+    actual_request = nil
+    actual_option = nil
+    mocked_publisher.expect :publish, nil do |request, option|
+      actual_request = request
+      actual_option = option
+    end
+    batch = OpenStruct.new( "rebalance!" => [OpenStruct.new(:msg => "data")], 
+                            "total_message_bytes" => 151,
+                            "ordering_key" => [],
+                            "items" => [OpenStruct.new(:msg => "data")])
+    publisher.send(:publish_batch_sync, topic_name, batch)
+    mocked_publisher.verify
+    assert_equal actual_option, expected_option
+    assert_equal actual_request, expected_request
+  end
+
+  it "passes compress true to service when compress enabled and size equal given threshold" do
+    publisher = Google::Cloud::PubSub::AsyncPublisher.new topic_name, pubsub.service, compress: true, compression_bytes_threshold: 150
+    mocked_publisher = Minitest::Mock.new
+    publisher.service.mocked_publisher = mocked_publisher
+    expected_request = {topic: "projects/test/topics/#{topic_name}", messages: ["data"]}
+    expected_option = ::Gapic::CallOptions.new metadata: { "grpc-internal-encoding-request": "gzip" }
+    actual_request = nil
+    actual_option = nil
+    mocked_publisher.expect :publish, nil do |request, option|
+      actual_request = request
+      actual_option = option
+    end
+    batch = OpenStruct.new( "rebalance!" => [OpenStruct.new(:msg => "data")], 
+                            "total_message_bytes" => 150,
+                            "ordering_key" => [],
+                            "items" => [OpenStruct.new(:msg => "data")])
+    publisher.send(:publish_batch_sync, topic_name, batch)
+    mocked_publisher.verify
+    assert_equal actual_option, expected_option
+    assert_equal actual_request, expected_request
+  end
+
+  it "passes compress false to service when compress enabled and size below given threshold" do
+    publisher = Google::Cloud::PubSub::AsyncPublisher.new topic_name, pubsub.service, compress: true, compression_bytes_threshold: 150
+    mocked_publisher = Minitest::Mock.new
+    publisher.service.mocked_publisher = mocked_publisher
+    expected_request = {topic: "projects/test/topics/#{topic_name}", messages: ["data"]}
+    actual_request = nil
+    actual_option = "test"
+    mocked_publisher.expect :publish, nil do |request, option|
+      actual_request = request
+      actual_option = option
+    end
+    batch = OpenStruct.new( "rebalance!" => [OpenStruct.new(:msg => "data")], 
+                            "total_message_bytes" => 149,
+                            "ordering_key" => [],
+                            "items" => [OpenStruct.new(:msg => "data")])
+    publisher.send(:publish_batch_sync, topic_name, batch)
+    mocked_publisher.verify
+    assert_nil actual_option
+    assert_equal actual_request, expected_request
+  end
+
+  it "passes compress false to service when compress disabled" do
+    publisher = Google::Cloud::PubSub::AsyncPublisher.new topic_name, pubsub.service
+    mocked_publisher = Minitest::Mock.new
+    expected_request = {topic: "projects/test/topics/#{topic_name}", messages: ["data"]}
+    actual_request = nil
+    actual_option = "test"
+    mocked_publisher.expect :publish, nil do |request, option|
+      actual_request = request
+      actual_option = option
+    end
+    publisher.service.mocked_publisher = mocked_publisher
+    batch = OpenStruct.new( "rebalance!" => [OpenStruct.new(:msg => "data")], 
+                            "total_message_bytes" => 300,
+                            "ordering_key" => [],
+                            "items" => [OpenStruct.new(:msg => "data")])
+    publisher.send(:publish_batch_sync, topic_name, batch)
+    mocked_publisher.verify
+    assert_nil actual_option
+    assert_equal actual_request, expected_request
   end
 
   def wait_until delay: 0.01, max: 10, output: nil, msg: "criteria not met", &block

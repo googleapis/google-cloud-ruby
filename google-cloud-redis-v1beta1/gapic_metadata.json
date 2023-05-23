@@ -20,6 +20,11 @@
                 "get_instance"
               ]
             },
+            "GetInstanceAuthString": {
+              "methods": [
+                "get_instance_auth_string"
+              ]
+            },
             "CreateInstance": {
               "methods": [
                 "create_instance"
@@ -53,6 +58,11 @@
             "DeleteInstance": {
               "methods": [
                 "delete_instance"
+              ]
+            },
+            "RescheduleMaintenance": {
+              "methods": [
+                "reschedule_maintenance"
               ]
             }
           }

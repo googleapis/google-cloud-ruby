@@ -28,9 +28,12 @@ module Google
   module Cloud
     module Compute
       module V1
-        # To load this service and instantiate a REST client:
+        ##
+        # The BackendServices API.
         #
-        #     require "google/cloud/compute/v1/backend_services"
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/compute/v1/backend_services/rest"
         #     client = ::Google::Cloud::Compute::V1::BackendServices::Rest::Client.new
         #
         module BackendServices

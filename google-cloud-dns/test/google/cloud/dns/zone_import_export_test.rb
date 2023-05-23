@@ -61,7 +61,7 @@ EOS
 
   it "exports records to a zonefile string" do
     mock = Minitest::Mock.new
-    mock.expect :list_resource_record_sets, list_records_gapi, [project, zone.id, {max_results: nil, name: nil, page_token: nil, type: nil}]
+    mock.expect :list_resource_record_sets, list_records_gapi, [project, zone.id], max_results: nil, name: nil, page_token: nil, type: nil
 
     dns.service.mocked_service = mock
     zonefile = zone.to_zonefile
@@ -72,7 +72,7 @@ EOS
 
   it "exports records to a zonefile file" do
     mock = Minitest::Mock.new
-    mock.expect :list_resource_record_sets, list_records_gapi, [project, zone.id, {max_results: nil, name: nil, page_token: nil, type: nil}]
+    mock.expect :list_resource_record_sets, list_records_gapi, [project, zone.id], max_results: nil, name: nil, page_token: nil, type: nil
 
     dns.service.mocked_service = mock
     Tempfile.open "google-cloud" do |tmpfile|
@@ -90,7 +90,7 @@ EOS
     ]
 
     mock = Minitest::Mock.new
-    mock.expect :list_resource_record_sets, lookup_records_gapi(soa), [project, zone.id, {max_results: nil, name: "example.com.", page_token: nil, type: "SOA"}]
+    mock.expect :list_resource_record_sets, lookup_records_gapi(soa), [project, zone.id], max_results: nil, name: "example.com.", page_token: nil, type: "SOA"
     new_change = Google::Apis::DnsV1::Change.new(
       kind: "dns#change",
       additions: (to_add.map(&:to_gapi) << updated_soa.to_gapi),

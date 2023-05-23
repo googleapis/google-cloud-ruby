@@ -86,6 +86,13 @@ module Google
             # object, which may or may not be available depending on the bucket's
             # lifecycle management settings.
             rpc :RetryBuild, ::Google::Cloud::Build::V1::RetryBuildRequest, ::Google::Longrunning::Operation
+            # Approves or rejects a pending build.
+            #
+            # If approved, the returned LRO will be analogous to the LRO returned from
+            # a CreateBuild call.
+            #
+            # If rejected, the returned LRO will be immediately done.
+            rpc :ApproveBuild, ::Google::Cloud::Build::V1::ApproveBuildRequest, ::Google::Longrunning::Operation
             # Creates a new `BuildTrigger`.
             #
             # This API is experimental.
@@ -111,25 +118,15 @@ module Google
             # ReceiveTriggerWebhook [Experimental] is called when the API receives a
             # webhook request targeted at a specific trigger.
             rpc :ReceiveTriggerWebhook, ::Google::Cloud::Build::V1::ReceiveTriggerWebhookRequest, ::Google::Cloud::Build::V1::ReceiveTriggerWebhookResponse
-            # Creates a `WorkerPool` to run the builds, and returns the new worker pool.
-            #
-            # This API is experimental.
-            rpc :CreateWorkerPool, ::Google::Cloud::Build::V1::CreateWorkerPoolRequest, ::Google::Cloud::Build::V1::WorkerPool
-            # Returns information about a `WorkerPool`.
-            #
-            # This API is experimental.
+            # Creates a `WorkerPool`.
+            rpc :CreateWorkerPool, ::Google::Cloud::Build::V1::CreateWorkerPoolRequest, ::Google::Longrunning::Operation
+            # Returns details of a `WorkerPool`.
             rpc :GetWorkerPool, ::Google::Cloud::Build::V1::GetWorkerPoolRequest, ::Google::Cloud::Build::V1::WorkerPool
-            # Deletes a `WorkerPool` by its project ID and WorkerPool name.
-            #
-            # This API is experimental.
-            rpc :DeleteWorkerPool, ::Google::Cloud::Build::V1::DeleteWorkerPoolRequest, ::Google::Protobuf::Empty
-            # Update a `WorkerPool`.
-            #
-            # This API is experimental.
-            rpc :UpdateWorkerPool, ::Google::Cloud::Build::V1::UpdateWorkerPoolRequest, ::Google::Cloud::Build::V1::WorkerPool
-            # List project's `WorkerPools`.
-            #
-            # This API is experimental.
+            # Deletes a `WorkerPool`.
+            rpc :DeleteWorkerPool, ::Google::Cloud::Build::V1::DeleteWorkerPoolRequest, ::Google::Longrunning::Operation
+            # Updates a `WorkerPool`.
+            rpc :UpdateWorkerPool, ::Google::Cloud::Build::V1::UpdateWorkerPoolRequest, ::Google::Longrunning::Operation
+            # Lists `WorkerPool`s.
             rpc :ListWorkerPools, ::Google::Cloud::Build::V1::ListWorkerPoolsRequest, ::Google::Cloud::Build::V1::ListWorkerPoolsResponse
           end
 

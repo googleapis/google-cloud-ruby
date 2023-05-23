@@ -30,7 +30,7 @@ def upload_with_kms_key bucket_name:, local_file_path:, file_name: nil, kms_key:
 
   storage = Google::Cloud::Storage.new
 
-  bucket = storage.bucket bucket_name
+  bucket = storage.bucket bucket_name, skip_lookup: true
 
   file = bucket.create_file local_file_path, file_name, kms_key: kms_key
 

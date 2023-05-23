@@ -260,6 +260,9 @@ module Google
         # directive for the file data. If omitted, and the file is accessible
         # to all anonymous users, the default will be `public, max-age=3600`.
         #
+        # To pass generation and/or metageneration preconditions, call this
+        # method within a block passed to {#update}.
+        #
         # @param [String] cache_control The Cache-Control directive.
         #
         def cache_control= cache_control
@@ -280,6 +283,9 @@ module Google
         ##
         # Updates the [Content-Disposition](https://tools.ietf.org/html/rfc6266)
         # of the file data.
+        #
+        # To pass generation and/or metageneration preconditions, call this
+        # method within a block passed to {#update}.
         #
         # @param [String] content_disposition The Content-Disposition of the
         #   file.
@@ -305,6 +311,9 @@ module Google
         # ](https://tools.ietf.org/html/rfc7231#section-3.1.2.2) of the file
         # data.
         #
+        # To pass generation and/or metageneration preconditions, call this
+        # method within a block passed to {#update}.
+        #
         # @param [String] content_encoding The Content-Encoding of the file.
         #
         def content_encoding= content_encoding
@@ -325,6 +334,9 @@ module Google
         ##
         # Updates the [Content-Language](http://tools.ietf.org/html/bcp47) of
         # the file data.
+        #
+        # To pass generation and/or metageneration preconditions, call this
+        # method within a block passed to {#update}.
         #
         # @param [String] content_language The Content-Language of the file.
         #
@@ -348,6 +360,9 @@ module Google
         # [Content-Type](https://tools.ietf.org/html/rfc2616#section-14.17) of
         # the file data.
         #
+        # To pass generation and/or metageneration preconditions, call this
+        # method within a block passed to {#update}.
+        #
         # @param [String] content_type The Content-Type of the file.
         #
         def content_type= content_type
@@ -369,6 +384,9 @@ module Google
         # custom_time can't be unset, and it can only be changed to a time in the
         # future. If custom_time must be unset, you must either perform a rewrite
         # operation, or upload the data again and create a new file.
+        #
+        # To pass generation and/or metageneration preconditions, call this
+        # method within a block passed to {#update}.
         #
         # @param [DateTime] custom_time A custom time specified by the user
         #   for the file.
@@ -395,6 +413,9 @@ module Google
         # Updates the hash of custom, user-provided web-safe keys and arbitrary
         # string values that will returned with requests for the file as
         # "x-goog-meta-" response headers.
+        #
+        # To pass generation and/or metageneration preconditions, call this
+        # method within a block passed to {#update}.
         #
         # @param [Hash(String => String)] metadata The user-provided metadata,
         #   in key/value pairs.
@@ -465,6 +486,9 @@ module Google
         # The  default value is the default storage class for the bucket. See
         # {Bucket#storage_class}.
         #
+        # To pass generation and/or metageneration preconditions, call this
+        # method within a block passed to {#update}.
+        #
         # @param [Symbol, String] storage_class Storage class of the file.
         #
         def storage_class= storage_class
@@ -505,6 +529,9 @@ module Google
         # removed, the file's `retention_expires_at` date is not changed. The
         # default value is `false`.
         #
+        # To pass generation and/or metageneration preconditions, call this
+        # method within a block passed to {#update}.
+        #
         # See {#retention_expires_at}.
         #
         # @example
@@ -532,6 +559,9 @@ module Google
         # default value is `false`.
         #
         # See {#retention_expires_at}.
+        #
+        # To pass generation and/or metageneration preconditions, call this
+        # method within a block passed to {#update}.
         #
         # @example
         #   require "google/cloud/storage"
@@ -643,6 +673,9 @@ module Google
         #   holds released prior to the effective date of the new policy may
         #   have already been deleted by the user.
         #
+        # To pass generation and/or metageneration preconditions, call this
+        # method within a block passed to {#update}.
+        #
         # @example
         #   require "google/cloud/storage"
         #
@@ -680,6 +713,9 @@ module Google
         # See {#event_based_hold?}, {#set_event_based_hold!},
         # {Bucket#default_event_based_hold?} and
         # {Bucket#default_event_based_hold=}.
+        #
+        # To pass generation and/or metageneration preconditions, call this
+        # method within a block passed to {#update}.
         #
         # @example
         #   require "google/cloud/storage"
@@ -774,6 +810,22 @@ module Google
         # accessible in the block is completely mutable and will be included in the
         # request.
         #
+        # @param [Integer] generation Select a specific revision of the file to
+        #   update. The default is the latest version.
+        # @param [Integer] if_generation_match Makes the operation conditional
+        #   on whether the file's current generation matches the given value.
+        #   Setting to 0 makes the operation succeed only if there are no live
+        #   versions of the file.
+        # @param [Integer] if_generation_not_match Makes the operation conditional
+        #   on whether the file's current generation does not match the given
+        #   value. If no live file exists, the precondition fails. Setting to 0
+        #   makes the operation succeed only if there is a live version of the file.
+        # @param [Integer] if_metageneration_match Makes the operation conditional
+        #   on whether the file's current metageneration matches the given value.
+        # @param [Integer] if_metageneration_not_match Makes the operation
+        #   conditional on whether the file's current metageneration does not
+        #   match the given value.
+        #
         # @yield [file] a block yielding a delegate object for updating the file
         #
         # @example
@@ -796,11 +848,34 @@ module Google
         #     f.metadata["score"] = "10"
         #   end
         #
-        def update
+        # @example With a `if_generation_match` precondition:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   file = bucket.file "path/to/my-file.ext"
+        #
+        #   file.update if_generation_match: 1602263125261858 do |f|
+        #     f.cache_control = "private, max-age=0, no-cache"
+        #   end
+        #
+        def update generation: nil,
+                   if_generation_match: nil,
+                   if_generation_not_match: nil,
+                   if_metageneration_match: nil,
+                   if_metageneration_not_match: nil
           updater = Updater.new gapi
           yield updater
           updater.check_for_changed_metadata!
-          update_gapi! updater.updates unless updater.updates.empty?
+          return if updater.updates.empty?
+          update_gapi! updater.updates,
+                       generation: generation,
+                       if_generation_match: if_generation_match,
+                       if_generation_not_match: if_generation_not_match,
+                       if_metageneration_match: if_metageneration_match,
+                       if_metageneration_not_match: if_metageneration_not_match
         end
 
         ##
@@ -1138,6 +1213,27 @@ module Google
         #     access, and allUsers get READER access.
         # @param [Integer] generation Select a specific revision of the file to
         #   rewrite. The default is the latest version.
+        # @param [Integer] if_generation_match Makes the operation conditional
+        #   on whether the destination file's current generation matches the given value.
+        #   Setting to 0 makes the operation succeed only if there are no live
+        #   versions of the file.
+        # @param [Integer] if_generation_not_match Makes the operation conditional
+        #   on whether the destination file's current generation does not match the given
+        #   value. If no live file exists, the precondition fails. Setting to 0
+        #   makes the operation succeed only if there is a live version of the file.
+        # @param [Integer] if_metageneration_match Makes the operation conditional
+        #   on whether the destination file's current metageneration matches the given value.
+        # @param [Integer] if_metageneration_not_match Makes the operation
+        #   conditional on whether the destination file's current metageneration does not
+        #   match the given value.
+        # @param [Integer] if_source_generation_match Makes the operation conditional on
+        #   whether the source object's current generation matches the given value.
+        # @param [Integer] if_source_generation_not_match Makes the operation conditional
+        #   on whether the source object's current generation does not match the given value.
+        # @param [Integer] if_source_metageneration_match Makes the operation conditional
+        #   on whether the source object's current metageneration matches the given value.
+        # @param [Integer] if_source_metageneration_not_match Makes the operation conditional
+        #   on whether the source object's current metageneration does not match the given value.
         # @param [String] encryption_key Optional. The customer-supplied,
         #   AES-256 encryption key used to decrypt the file, if the existing
         #   file is encrypted.
@@ -1259,11 +1355,24 @@ module Google
         #     f.metadata["rewritten_from"] = "#{file.bucket}/#{file.name}"
         #   end
         #
-        def rewrite dest_bucket_or_path, dest_path = nil, acl: nil, generation: nil, encryption_key: nil,
-                    new_encryption_key: nil, new_kms_key: nil, force_copy_metadata: nil
+        def rewrite dest_bucket_or_path,
+                    dest_path = nil,
+                    acl: nil,
+                    generation: nil,
+                    if_generation_match: nil,
+                    if_generation_not_match: nil,
+                    if_metageneration_match: nil,
+                    if_metageneration_not_match: nil,
+                    if_source_generation_match: nil,
+                    if_source_generation_not_match: nil,
+                    if_source_metageneration_match: nil,
+                    if_source_metageneration_not_match: nil,
+                    encryption_key: nil,
+                    new_encryption_key: nil,
+                    new_kms_key: nil,
+                    force_copy_metadata: nil
           ensure_service!
-          dest_bucket, dest_path = fix_rewrite_args dest_bucket_or_path,
-                                                    dest_path
+          dest_bucket, dest_path = fix_rewrite_args dest_bucket_or_path, dest_path
 
           update_gapi = nil
           if block_given?
@@ -1276,9 +1385,21 @@ module Google
             end
           end
 
-          new_gapi = rewrite_gapi bucket, name, update_gapi,
-                                  new_bucket: dest_bucket, new_name: dest_path,
-                                  acl: acl, generation: generation,
+          new_gapi = rewrite_gapi bucket,
+                                  name,
+                                  update_gapi,
+                                  new_bucket: dest_bucket,
+                                  new_name: dest_path,
+                                  acl: acl,
+                                  generation: generation,
+                                  if_generation_match: if_generation_match,
+                                  if_generation_not_match: if_generation_not_match,
+                                  if_metageneration_match: if_metageneration_match,
+                                  if_metageneration_not_match: if_metageneration_not_match,
+                                  if_source_generation_match: if_source_generation_match,
+                                  if_source_generation_not_match: if_source_generation_not_match,
+                                  if_source_metageneration_match: if_source_metageneration_match,
+                                  if_source_metageneration_not_match: if_source_metageneration_not_match,
                                   encryption_key: encryption_key,
                                   new_encryption_key: new_encryption_key,
                                   new_kms_key: new_kms_key,
@@ -1375,6 +1496,20 @@ module Google
         #   {#generation}. The default behavior is to delete the latest version
         #   of the file (regardless of the version to which the file is set,
         #   which is the version returned by {#generation}.)
+        # @param [Integer] if_generation_match Makes the operation conditional
+        #   on whether the file's current generation matches the given value.
+        #   Setting to 0 makes the operation succeed only if there are no live
+        #   versions of the file.
+        # @param [Integer] if_generation_not_match Makes the operation conditional
+        #   on whether the file's current generation does not match the given
+        #   value. If no live file exists, the precondition fails. Setting to 0
+        #   makes the operation succeed only if there is a live version of the file.
+        # @param [Integer] if_metageneration_match Makes the operation conditional
+        #   on whether the file's current metageneration matches the given value.
+        # @param [Integer] if_metageneration_not_match Makes the operation
+        #   conditional on whether the file's current metageneration does not
+        #   match the given value.
+        #
         # @return [Boolean] Returns `true` if the file was deleted.
         #
         # @example
@@ -1407,11 +1542,21 @@ module Google
         #   file = bucket.file "path/to/my-file.ext"
         #   file.delete generation: 123456
         #
-        def delete generation: nil
+        def delete generation: nil,
+                   if_generation_match: nil,
+                   if_generation_not_match: nil,
+                   if_metageneration_match: nil,
+                   if_metageneration_not_match: nil
           generation = self.generation if generation == true
           ensure_service!
-          service.delete_file bucket, name, generation: generation,
-                                            user_project: user_project
+          service.delete_file bucket,
+                              name,
+                              generation: generation,
+                              if_generation_match: if_generation_match,
+                              if_generation_not_match: if_generation_not_match,
+                              if_metageneration_match: if_metageneration_match,
+                              if_metageneration_not_match: if_metageneration_not_match,
+                              user_project: user_project
           true
         end
 
@@ -1865,7 +2010,13 @@ module Google
           reload! generation: true
         end
 
-        def update_gapi! *attributes
+        def update_gapi! attributes,
+                         generation: nil,
+                         if_generation_match: nil,
+                         if_generation_not_match: nil,
+                         if_metageneration_match: nil,
+                         if_metageneration_not_match: nil
+          attributes = Array(attributes)
           attributes.flatten!
           return if attributes.empty?
           update_gapi = self.class.gapi_from_attrs @gapi, attributes
@@ -1875,26 +2026,65 @@ module Google
 
           rewrite_attrs = [:storage_class, :kms_key_name]
           @gapi = if attributes.any? { |a| rewrite_attrs.include? a }
-                    rewrite_gapi \
-                      bucket, name, update_gapi, user_project: user_project
+                    rewrite_gapi bucket,
+                                 name,
+                                 update_gapi,
+                                 generation: generation,
+                                 if_generation_match: if_generation_match,
+                                 if_generation_not_match: if_generation_not_match,
+                                 if_metageneration_match: if_metageneration_match,
+                                 if_metageneration_not_match: if_metageneration_not_match,
+                                 user_project: user_project
                   else
-                    service.patch_file \
-                      bucket, name, update_gapi, user_project: user_project
+                    service.patch_file bucket,
+                                       name,
+                                       update_gapi,
+                                       generation: generation,
+                                       if_generation_match: if_generation_match,
+                                       if_generation_not_match: if_generation_not_match,
+                                       if_metageneration_match: if_metageneration_match,
+                                       if_metageneration_not_match: if_metageneration_not_match,
+                                       user_project: user_project
                   end
         end
 
-        def rewrite_gapi bucket, name, updated_gapi,
-                         new_bucket: nil, new_name: nil, acl: nil,
-                         generation: nil, encryption_key: nil,
-                         new_encryption_key: nil, new_kms_key: nil,
+        def rewrite_gapi bucket,
+                         name,
+                         updated_gapi,
+                         new_bucket: nil,
+                         new_name: nil,
+                         acl: nil,
+                         generation: nil,
+                         if_generation_match: nil,
+                         if_generation_not_match: nil,
+                         if_metageneration_match: nil,
+                         if_metageneration_not_match: nil,
+                         if_source_generation_match: nil,
+                         if_source_generation_not_match: nil,
+                         if_source_metageneration_match: nil,
+                         if_source_metageneration_not_match: nil,
+                         encryption_key: nil,
+                         new_encryption_key: nil,
+                         new_kms_key: nil,
                          user_project: nil
           new_bucket ||= bucket
           new_name ||= name
-          options = { acl: File::Acl.predefined_rule_for(acl),
-                      generation: generation, source_key: encryption_key,
-                      destination_key: new_encryption_key,
-                      destination_kms_key: new_kms_key,
-                      user_project: user_project }.delete_if { |_k, v| v.nil? }
+          options = {
+            acl: File::Acl.predefined_rule_for(acl),
+            generation: generation,
+            if_generation_match: if_generation_match,
+            if_generation_not_match: if_generation_not_match,
+            if_metageneration_match: if_metageneration_match,
+            if_metageneration_not_match: if_metageneration_not_match,
+            if_source_generation_match: if_source_generation_match,
+            if_source_generation_not_match: if_source_generation_not_match,
+            if_source_metageneration_match: if_source_metageneration_match,
+            if_source_metageneration_not_match: if_source_metageneration_not_match,
+            source_key: encryption_key,
+            destination_key: new_encryption_key,
+            destination_kms_key: new_kms_key,
+            user_project: user_project
+          }.delete_if { |_k, v| v.nil? }
 
           resp = service.rewrite_file \
             bucket, name, new_bucket, new_name, updated_gapi, **options

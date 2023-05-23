@@ -16,13 +16,14 @@ require "google/cloud/firestore"
 
 def initialize_firestore_client project_id:
   # [START firestore_setup_client_create]
-  # [START fs_initialize]
   require "google/cloud/firestore"
 
+  # The `project_id` parameter is optional and represents which project the
+  # client will act on behalf of. If not supplied, the client falls back to the
+  # default project inferred from the environment.
   firestore = Google::Cloud::Firestore.new project_id: project_id
 
   puts "Created Cloud Firestore client with given project ID."
-  # [END fs_initialize]
   # [END firestore_setup_client_create]
 end
 
@@ -32,7 +33,6 @@ def add_data_1 project_id:, collection_path: "users"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START firestore_setup_dataset_pt1]
-  # [START fs_add_data_1]
   doc_ref = firestore.doc "#{collection_path}/alovelace"
 
   doc_ref.set(
@@ -44,7 +44,6 @@ def add_data_1 project_id:, collection_path: "users"
   )
 
   puts "Added data to the alovelace document in the users collection."
-  # [END fs_add_data_1]
   # [END firestore_setup_dataset_pt1]
 end
 
@@ -54,7 +53,6 @@ def add_data_2 project_id:, collection_path: "users"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START firestore_setup_dataset_pt2]
-  # [START fs_add_data_2]
   doc_ref = firestore.doc "#{collection_path}/aturing"
 
   doc_ref.set(
@@ -67,7 +65,6 @@ def add_data_2 project_id:, collection_path: "users"
   )
 
   puts "Added data to the aturing document in the users collection."
-  # [END fs_add_data_2]
   # [END firestore_setup_dataset_pt2]
 end
 
@@ -77,12 +74,10 @@ def get_all project_id:, collection_path: "users"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START firestore_setup_dataset_read]
-  # [START fs_get_all]
   users_ref = firestore.col collection_path
   users_ref.get do |user|
     puts "#{user.document_id} data: #{user.data}."
   end
-  # [END fs_get_all]
   # [END firestore_setup_dataset_read]
 end
 

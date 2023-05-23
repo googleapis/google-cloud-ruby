@@ -19,9 +19,7 @@ def document_ref project_id:
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START firestore_data_reference_document]
-  # [START fs_document_ref]
   document_ref = firestore.col("users").doc("alovelace")
-  # [END fs_document_ref]
   # [END firestore_data_reference_document]
 end
 
@@ -30,9 +28,7 @@ def collection_ref project_id:
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START firestore_data_reference_collection]
-  # [START fs_collection_ref]
   collection_ref = firestore.col "users"
-  # [END fs_collection_ref]
   # [END firestore_data_reference_collection]
 end
 
@@ -41,9 +37,7 @@ def document_path_ref project_id:
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START firestore_data_reference_document_path]
-  # [START fs_document_path_ref]
   document_path_ref = firestore.doc "users/alovelace"
-  # [END fs_document_path_ref]
   # [END firestore_data_reference_document_path]
 end
 
@@ -52,9 +46,7 @@ def subcollection_ref project_id:
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START firestore_data_reference_subcollection]
-  # [START fs_subcollection_ref]
   message_ref = firestore.col("rooms").doc("roomA").col("messages").doc("message1")
-  # [END fs_subcollection_ref]
   # [END firestore_data_reference_subcollection]
 end
 

@@ -59,8 +59,8 @@ describe Google::Cloud::Datastore::Dataset, :all, :mock_datastore do
 
   before do
     dataset.service.mocked_service = Minitest::Mock.new
-    dataset.service.mocked_service.expect :run_query, first_run_query_res, [project_id: project, partition_id: nil, read_options: nil, query: first_run_query, gql_query: nil]
-    dataset.service.mocked_service.expect :run_query, next_run_query_res, [project_id: project, partition_id: nil, read_options: nil, query: next_run_query, gql_query: nil]
+    dataset.service.mocked_service.expect :run_query, first_run_query_res, project_id: project, partition_id: nil, read_options: nil, query: first_run_query, gql_query: nil, database_id: default_database
+    dataset.service.mocked_service.expect :run_query, next_run_query_res, project_id: project, partition_id: nil, read_options: nil, query: next_run_query, gql_query: nil, database_id: default_database
   end
 
   after do
@@ -112,6 +112,59 @@ describe Google::Cloud::Datastore::Dataset, :all, :mock_datastore do
       [entity.key, cursor]
     end.each do |result, cursor|
       _(result).must_be_kind_of Google::Cloud::Datastore::Key
+      _(cursor).must_be_kind_of Google::Cloud::Datastore::Cursor
+    end
+    _(next_entities.cursor).must_be     :nil?
+    _(next_entities.end_cursor).must_be :nil?
+    _(next_entities.more_results).must_equal :NO_MORE_RESULTS
+    refute next_entities.not_finished?
+    refute next_entities.more_after_limit?
+    refute next_entities.more_after_cursor?
+    assert next_entities.no_more?
+
+    refute next_entities.next?
+  end
+
+  it "run will fulfill a query and return an object that can paginate with read_time set" do
+    read_time = Time.now
+    read_options = Google::Cloud::Datastore::V1::ReadOptions.new read_time: read_time_to_timestamp(read_time)
+    first_run_query_res_dup = first_run_query_res.dup
+    first_run_query_res_dup.batch.read_time = read_time
+    next_run_query_res_dup = next_run_query_res.dup
+    next_run_query_res_dup.batch.read_time = read_time
+    dataset.service.mocked_service = Minitest::Mock.new
+    dataset.service.mocked_service.expect :run_query, first_run_query_res, project_id: project, partition_id: nil, database_id: default_database, read_options: read_options, query: first_run_query, gql_query: nil
+    dataset.service.mocked_service.expect :run_query, next_run_query_res, project_id: project, partition_id: nil, database_id: default_database, read_options: read_options, query: next_run_query, gql_query: nil
+
+    first_entities = dataset.run dataset.query("Task"), read_time: read_time
+    _(first_entities.count).must_equal 25
+    first_entities.each do |entity|
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
+    end
+    _(first_entities.cursor_for(first_entities.first)).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-1-0")
+    _(first_entities.cursor_for(first_entities.last)).must_equal  Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-1-24")
+    first_entities.each_with_cursor do |entity, cursor|
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
+      _(cursor).must_be_kind_of Google::Cloud::Datastore::Cursor
+    end
+    _(first_entities.cursor).must_equal     Google::Cloud::Datastore::Cursor.from_grpc("second-page-cursor")
+    _(first_entities.end_cursor).must_equal Google::Cloud::Datastore::Cursor.from_grpc("second-page-cursor")
+    _(first_entities.more_results).must_equal :NOT_FINISHED
+    assert first_entities.not_finished?
+    refute first_entities.more_after_limit?
+    refute first_entities.more_after_cursor?
+    refute first_entities.no_more?
+
+    assert first_entities.next?
+    next_entities = first_entities.next
+
+    next_entities.each do |entity|
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
+    end
+    _(next_entities.cursor_for(next_entities.first)).must_equal Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-2-0")
+    _(next_entities.cursor_for(next_entities.last)).must_equal  Google::Cloud::Datastore::Cursor.from_grpc("result-cursor-2-24")
+    next_entities.each_with_cursor do |entity, cursor|
+      _(entity).must_be_kind_of Google::Cloud::Datastore::Entity
       _(cursor).must_be_kind_of Google::Cloud::Datastore::Cursor
     end
     _(next_entities.cursor).must_be     :nil?

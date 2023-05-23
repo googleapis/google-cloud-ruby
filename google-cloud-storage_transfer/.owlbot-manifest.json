@@ -1,0 +1,29 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-storage_transfer.gemspec",
+    "lib/google-cloud-storage_transfer.rb",
+    "lib/google/cloud/storage_transfer.rb",
+    "lib/google/cloud/storage_transfer/version.rb",
+    "test/google/cloud/storage_transfer/client_test.rb",
+    "test/google/cloud/storage_transfer/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml",
+    "samples/Gemfile",
+    "samples/Rakefile",
+    "samples/acceptance/helper.rb",
+    "samples/acceptance/quickstart_test.rb",
+    "samples/quickstart.rb"
+  ]
+}

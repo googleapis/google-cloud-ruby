@@ -102,7 +102,7 @@ module Google
             entry.log_name = log_path entry.log_name
           end
           resource = resource.to_grpc if resource
-          labels = Hash[labels.map { |k, v| [String(k), String(v)] }] if labels
+          labels = labels.to_h { |k, v| [String(k), String(v)] } if labels
           logging.write_log_entries entries:         entries,
                                     log_name:        log_path(log_name),
                                     resource:        resource,
@@ -112,10 +112,9 @@ module Google
 
         def list_logs resource: nil, token: nil, max: nil
           parent = resource || "projects/#{@project}"
-          paged_enum = logging.list_logs parent:     parent,
-                                         page_size:  max,
-                                         page_token: token
-          paged_enum.response
+          logging.list_logs parent:     parent,
+                            page_size:  max,
+                            page_token: token
         end
 
         def delete_log name
@@ -123,7 +122,8 @@ module Google
         end
 
         def list_resource_descriptors token: nil, max: nil
-          logging.list_monitored_resource_descriptors page_size: max, page_token: token
+          paged_enum = logging.list_monitored_resource_descriptors page_size: max, page_token: token
+          paged_enum.response
         end
 
         def list_sinks token: nil, max: nil
@@ -135,7 +135,7 @@ module Google
           sink = Google::Cloud::Logging::V2::LogSink.new(
             {
               name: name, destination: destination, filter: filter
-            }.delete_if { |_, v| v.nil? }
+            }.compact
           )
           sinks.create_sink parent:                 project_path,
                             sink:                   sink,
@@ -150,7 +150,7 @@ module Google
           sink = Google::Cloud::Logging::V2::LogSink.new(
             {
               name: name, destination: destination, filter: filter
-            }.delete_if { |_, v| v.nil? }
+            }.compact
           )
           sinks.update_sink sink_name:              sink_path(name),
                             sink:                   sink,
@@ -171,7 +171,7 @@ module Google
         def create_metric name, filter, description
           metric = Google::Cloud::Logging::V2::LogMetric.new(
             { name: name, description: description,
-              filter: filter }.delete_if { |_, v| v.nil? }
+              filter: filter }.compact
           )
           metrics.create_log_metric parent: project_path, metric: metric
         end
@@ -183,7 +183,7 @@ module Google
         def update_metric name, description, filter
           metric = Google::Cloud::Logging::V2::LogMetric.new(
             { name: name, description: description,
-              filter: filter }.delete_if { |_, v| v.nil? }
+              filter: filter }.compact
           )
           metrics.update_log_metric metric_name: metric_path(name), metric: metric
         end

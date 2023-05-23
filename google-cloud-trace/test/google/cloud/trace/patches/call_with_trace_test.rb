@@ -42,19 +42,27 @@ describe GRPC::Core::CallWithTrace do
   let (:call_with_trace) { MockGRPCCall.new }
 
   describe "#run_batch" do
-    it "doesn't interfere orignal #run_patch if there are no parent span" do
+    it "doesn't interfere orignal #run_patch if there is no parent span" do
+      Google::Cloud::Trace.stub :get, Google::Cloud::Trace::TraceRecord.new("hello") do
+        call_with_trace.run_batch
+      end
+
+      _(call_with_trace.run_batch_count).must_equal 1
+    end
+
+    it "doesn't interfere orignal #run_patch if there is no current trace record at all" do
       Google::Cloud::Trace.stub :get, nil do
         call_with_trace.run_batch
       end
 
-      call_with_trace.run_batch_count.must_equal 1
+      _(call_with_trace.run_batch_count).must_equal 1
     end
 
     it "calls add_request_labels with first message" do
       add_labels_called = false
 
-      stubbed_add_labels = ->(_, message, _) do
-        message.must_equal "grpc-test-message"
+      stubbed_add_labels = proc do |_, message|
+        _(message).must_equal "grpc-test-message"
         add_labels_called = true
       end
       stubbed_span = OpenStruct.new(labels: {}, name: GRPC::ActiveCallWithTrace::SPAN_NAME)
@@ -70,7 +78,7 @@ describe GRPC::Core::CallWithTrace do
         end
       end
 
-      add_labels_called.must_equal true
+      _(add_labels_called).must_equal true
     end
 
     it "addes all the labels" do
@@ -84,17 +92,17 @@ describe GRPC::Core::CallWithTrace do
       end
 
       label_keys = Google::Cloud::Trace::LabelKey
-      stubbed_span.labels[label_keys::RPC_REQUEST_SIZE].must_equal "grpc-test-message".bytesize.to_s
-      stubbed_span.labels[label_keys::RPC_HOST].must_equal "test-host.googleapi.com"
-      stubbed_span.labels[label_keys::RPC_RESPONSE_SIZE].must_equal "test-grpc-response-message".bytesize.to_s
-      stubbed_span.labels[label_keys::RPC_STATUS_CODE].must_equal "OK"
+      _(stubbed_span.labels[label_keys::RPC_REQUEST_SIZE]).must_equal "grpc-test-message".bytesize.to_s
+      _(stubbed_span.labels[label_keys::RPC_HOST]).must_equal "test-host.googleapi.com"
+      _(stubbed_span.labels[label_keys::RPC_RESPONSE_SIZE]).must_equal "test-grpc-response-message".bytesize.to_s
+      _(stubbed_span.labels[label_keys::RPC_STATUS_CODE]).must_equal "OK"
     end
   end
 
   describe ".status_code_to_label" do
     it "returns correct label" do
-      GRPC::Core::CallWithTrace.status_code_to_label(0).must_equal "OK"
-      GRPC::Core::CallWithTrace.status_code_to_label(7).must_equal "PERMISSION_DENIED"
+      _(GRPC::Core::CallWithTrace.status_code_to_label(0)).must_equal "OK"
+      _(GRPC::Core::CallWithTrace.status_code_to_label(7)).must_equal "PERMISSION_DENIED"
     end
   end
 end

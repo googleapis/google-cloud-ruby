@@ -9,6 +9,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/field_mask_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/iam/v1beta/workload_identity_pool.proto", :syntax => :proto3) do
     add_message "google.iam.v1beta.WorkloadIdentityPool" do

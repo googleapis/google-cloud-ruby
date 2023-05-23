@@ -57,6 +57,14 @@ module Google
         # @!attribute [rw] telemetry
         #   @return [::Google::Cloud::Monitoring::V3::Service::Telemetry]
         #     Configuration for how to query telemetry on a Service.
+        # @!attribute [rw] user_labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Labels which have been used to annotate the service. Label keys must start
+        #     with a letter. Label keys and values may contain lowercase letters,
+        #     numbers, underscores, and dashes. Label keys and values have a maximum
+        #     length of 63 characters, and must be less than 128 bytes in size. Up to 64
+        #     label entries may be stored. For labels which do not have a semantic value,
+        #     the empty string may be supplied for the label value.
         class Service
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -168,6 +176,15 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class UserLabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # A Service-Level Objective (SLO) describes a level of desired good service. It
@@ -202,9 +219,26 @@ module Google
         #     A calendar period, semantically "since the start of the current
         #     `<calendar_period>`". At this time, only `DAY`, `WEEK`, `FORTNIGHT`, and
         #     `MONTH` are supported.
+        # @!attribute [rw] user_labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Labels which have been used to annotate the service-level objective. Label
+        #     keys must start with a letter. Label keys and values may contain lowercase
+        #     letters, numbers, underscores, and dashes. Label keys and values have a
+        #     maximum length of 63 characters, and must be less than 128 bytes in size.
+        #     Up to 64 label entries may be stored. For labels which do not have a
+        #     semantic value, the empty string may be supplied for the label value.
         class ServiceLevelObjective
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class UserLabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # `ServiceLevelObjective.View` determines what form of
           # `ServiceLevelObjective` is returned from `GetServiceLevelObjective`,
@@ -309,9 +343,7 @@ module Google
           end
         end
 
-        # Range of numerical values, inclusive of `min` and exclusive of `max`. If the
-        # open range "< range.max" is desired, set `range.min = -infinity`. If the open
-        # range ">= range.min" is desired, set `range.max = infinity`.
+        # Range of numerical values within `min` and `max`.
         # @!attribute [rw] min
         #   @return [::Float]
         #     Range minimum.
@@ -373,8 +405,8 @@ module Google
         # A `DistributionCut` defines a `TimeSeries` and thresholds used for measuring
         # good service and total service. The `TimeSeries` must have `ValueType =
         # DISTRIBUTION` and `MetricKind = DELTA` or `MetricKind = CUMULATIVE`. The
-        # computed `good_service` will be the count of values x in the `Distribution`
-        # such that `range.min <= x < range.max`.
+        # computed `good_service` will be the estimated count of values in the
+        # `Distribution` that fall within the specified `min` and `max`.
         # @!attribute [rw] distribution_filter
         #   @return [::String]
         #     A [monitoring filter](https://cloud.google.com/monitoring/api/v3/filters)
@@ -433,7 +465,7 @@ module Google
           end
 
           # A `MetricRange` is used when each window is good when the value x of a
-          # single `TimeSeries` satisfies `range.min <= x < range.max`. The provided
+          # single `TimeSeries` satisfies `range.min <= x <= range.max`. The provided
           # `TimeSeries` must have `ValueType = INT64` or `ValueType = DOUBLE` and
           # `MetricKind = GAUGE`.
           # @!attribute [rw] time_series

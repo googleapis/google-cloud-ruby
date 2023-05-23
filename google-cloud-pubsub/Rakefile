@@ -206,3 +206,8 @@ def header str, token = "#"
   puts token * line_length
   puts ""
 end
+
+task :cloudrad do
+  ENV["CLOUDRAD_GEM_NAME"] = "google-cloud-pubsub"
+  sh "bundle exec yard doc --fail-on-warning --yardopts .yardopts-cloudrad --no-progress"
+end

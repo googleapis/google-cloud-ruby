@@ -1,5 +1,133 @@
 # Release History
 
+### 1.44.0 (2022-11-02)
+
+#### Features
+
+* support autoclass 
+
+### 1.43.0 (2022-09-30)
+
+#### Features
+
+* Add retry conformance test ([#18230](https://github.com/googleapis/google-cloud-ruby/issues/18230)) 
+
+### 1.42.0 (2022-09-21)
+
+#### Features
+
+* send invocation_id header in all requests ([#19161](https://github.com/googleapis/google-cloud-ruby/issues/19161)) 
+
+### 1.41.0 (2022-09-16)
+
+#### Features
+
+* add retry support for non-idempotent operations ([#19134](https://github.com/googleapis/google-cloud-ruby/issues/19134)) 
+#### Bug Fixes
+
+* Correct options checks in retry operations ([#19135](https://github.com/googleapis/google-cloud-ruby/issues/19135)) 
+* Update api for bucket update ([#19110](https://github.com/googleapis/google-cloud-ruby/issues/19110)) 
+
+### 1.40.0 (2022-09-13)
+
+#### Features
+
+* Update all patch bucket helper methods to accept preconditions ([#19117](https://github.com/googleapis/google-cloud-ruby/issues/19117)) 
+
+### 1.39.0 (2022-08-24)
+
+#### Features
+
+* add support for conditional idempotent operations ([#18834](https://github.com/googleapis/google-cloud-ruby/issues/18834)) 
+
+### 1.38.0 (2022-07-31)
+
+#### Features
+
+* Add support for dual region gcs buckets ([#18862](https://github.com/googleapis/google-cloud-ruby/issues/18862)) 
+
+### 1.37.0 (2022-06-30)
+
+#### Features
+
+* support OLM Prefix/Suffix ([#18190](https://github.com/googleapis/google-cloud-ruby/issues/18190)) 
+* allow retry options to be configurable on client initialization ([#18332](https://github.com/googleapis/google-cloud-ruby/issues/18332)) 
+#### Bug Fixes
+
+* update object path parsing to handle hashes in them 
+
+### 1.36.2 (2022-04-20)
+
+#### Documentation
+
+* Document support for dual region buckets
+
+### 1.36.1 / 2022-02-08
+
+#### Documentation
+
+* Update the RPO sample output. ([#17277](https://www.github.com/googleapis/google-cloud-ruby/issues/17277))
+
+### 1.36.0 / 2022-01-12
+
+#### Features
+
+* add support for RPO (turbo replication). ([#14407](https://www.github.com/googleapis/google-cloud-ruby/issues/14407))
+
+### 1.35.0 / 2021-12-08
+
+#### Features
+
+* changed PAP unspecified to inherited
+* support for more client timeout options
+
+#### Bug Fixes
+
+* Update dependency on the addressable gem to 2.8 to remediate a vulnerability
+
+### 1.34.1 / 2021-07-08
+
+#### Documentation
+
+* Update AUTHENTICATION.md in handwritten packages
+
+### 1.34.0 / 2021-06-30
+
+#### Features
+
+* Add support for automatic crc32c and md5 upload verification
+  * Add checksum to Bucket#create_file
+
+### 1.33.0 / 2021-06-29
+
+#### Features
+
+* Add support for PublicAccessPrevention
+  * Add Bucket#public_access_prevention
+  * Add Bucket#public_access_prevention=
+  * Add Bucket#public_access_prevention_enforced?
+  * Add Bucket#public_access_prevention_unspecified?
+  * Add samples for PublicAccessPrevention
+
+### 1.32.0 / 2021-06-22
+
+#### Features
+
+* Add sources_if_generation_match to Bucket#compose
+* Add support for (meta)generation preconditions to File operations
+  * Add if_(meta)generation_match options to Bucket#compose
+  * Add if_(meta)generation_(not_)match options to Bucket#create_file
+  * Add if_(meta)generation_(not_)match options to Bucket#file
+  * Add if_(meta)generation_(not_)match options to File#delete.
+  * Add if_(meta)generation_(not_)match options to File#rewrite
+  * Add generation and if_(meta)generation_(not_)match options to File#update
+  * Add generation and if_(meta)generation_(not_)match options to File::Acl predefined_acl methods
+
+#### Bug Fixes
+
+* Expand googleauth dependency to support future 1.x versions
+* Update File::Verifier to test for File#to_path
+
 ### 1.31.1 / 2021-05-19
 
 #### Documentation

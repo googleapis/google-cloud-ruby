@@ -23,6 +23,7 @@ require "gapic/config/method"
 require "google/cloud/container/v1/version"
 
 require "google/cloud/container/v1/cluster_manager/credentials"
+require "google/cloud/container/v1/cluster_manager/paths"
 require "google/cloud/container/v1/cluster_manager/client"
 
 module Google
@@ -32,7 +33,7 @@ module Google
         ##
         # Google Kubernetes Engine Cluster Manager v1
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/container/v1/cluster_manager"
         #     client = ::Google::Cloud::Container::V1::ClusterManager::Client.new

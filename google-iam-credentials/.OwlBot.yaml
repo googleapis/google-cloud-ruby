@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/iam/credentials/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-iam-credentials/$1

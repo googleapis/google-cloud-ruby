@@ -1,7 +1,18 @@
 {
-    "name": "clouddebugger",
-    "language": "ruby",
+    "api_id": "clouddebugger.googleapis.com",
+    "api_shortname": "clouddebugger",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-debugger/latest",
     "distribution_name": "google-cloud-debugger",
-    "client_documentation": "https://googleapis.dev/ruby/google-cloud-debugger/latest",
+    "language": "ruby",
+    "name": "clouddebugger",
+    "name_pretty": "Cloud Debugger API",
+    "product_documentation": "https://cloud.google.com/debugger",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "The Cloud Debugger API allows applications to interact with the Google Cloud Debugger backends. It provides two interfaces: the Debugger interface and the Controller interface. The Controller interface allows you to implement an agent that sends state data -- for example, the value of program variables and the call stack -- to Cloud Debugger when the application is running. The Debugger interface allows you to implement a Cloud Debugger client that allows users to set and delete the breakpoints at which the state data is collected, as well as read the data that is captured. Note that google-cloud-debugger-v2 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-debugger instead. See the readme for more details.",
+    "ruby-cloud-env-prefix": "DEBUGGER",
+    "ruby-cloud-product-url": "https://cloud.google.com/debugger",
+    "ruby-cloud-service-override": "Controller2=Controller;Debugger2=Debugger",
     "library_type": "INTEGRATION"
 }

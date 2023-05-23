@@ -209,7 +209,7 @@ module Google
         # RowFilter.Chain and RowFilter.Interleave documentation.
         #
         # The total serialized size of a RowFilter message must not
-        # exceed 4096 bytes, and RowFilters may not be nested within each other
+        # exceed 20480 bytes, and RowFilters may not be nested within each other
         # (in Chains or Interleaves) to a depth of more than 20.
         # @!attribute [rw] chain
         #   @return [::Google::Cloud::Bigtable::V2::RowFilter::Chain]
@@ -547,6 +547,42 @@ module Google
         #     Otherwise, the targeted cell must contain an 8-byte value (interpreted
         #     as a 64-bit big-endian signed integer), or the entire request will fail.
         class ReadModifyWriteRule
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # NOTE: This API is intended to be used by Apache Beam BigtableIO.
+        # A partition of a change stream.
+        # @!attribute [rw] row_range
+        #   @return [::Google::Cloud::Bigtable::V2::RowRange]
+        #     The row range covered by this partition and is specified by
+        #     [`start_key_closed`, `end_key_open`).
+        class StreamPartition
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # NOTE: This API is intended to be used by Apache Beam BigtableIO.
+        # The information required to continue reading the data from multiple
+        # `StreamPartitions` from where a previous read left off.
+        # @!attribute [rw] tokens
+        #   @return [::Array<::Google::Cloud::Bigtable::V2::StreamContinuationToken>]
+        #     List of continuation tokens.
+        class StreamContinuationTokens
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # NOTE: This API is intended to be used by Apache Beam BigtableIO.
+        # The information required to continue reading the data from a
+        # `StreamPartition` from where a previous read left off.
+        # @!attribute [rw] partition
+        #   @return [::Google::Cloud::Bigtable::V2::StreamPartition]
+        #     The partition that this token applies to.
+        # @!attribute [rw] token
+        #   @return [::String]
+        #     An encoded position in the stream to restart reading from.
+        class StreamContinuationToken
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

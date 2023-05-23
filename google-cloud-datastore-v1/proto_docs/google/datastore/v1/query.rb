@@ -30,12 +30,24 @@ module Google
         #     The version of the entity, a strictly positive number that monotonically
         #     increases with changes to the entity.
         #
-        #     This field is set for {::Google::Cloud::Datastore::V1::EntityResult::ResultType::FULL `FULL`} entity
-        #     results.
+        #     This field is set for
+        #     {::Google::Cloud::Datastore::V1::EntityResult::ResultType::FULL `FULL`} entity results.
         #
-        #     For {::Google::Cloud::Datastore::V1::LookupResponse#missing missing} entities in `LookupResponse`, this
-        #     is the version of the snapshot that was used to look up the entity, and it
-        #     is always set except for eventually consistent reads.
+        #     For {::Google::Cloud::Datastore::V1::LookupResponse#missing missing} entities in
+        #     `LookupResponse`, this is the version of the snapshot that was used to look
+        #     up the entity, and it is always set except for eventually consistent reads.
+        # @!attribute [rw] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time at which the entity was created.
+        #     This field is set for
+        #     {::Google::Cloud::Datastore::V1::EntityResult::ResultType::FULL `FULL`} entity results.
+        #     If this entity is missing, this field will not be set.
+        # @!attribute [rw] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time at which the entity was last changed.
+        #     This field is set for
+        #     {::Google::Cloud::Datastore::V1::EntityResult::ResultType::FULL `FULL`} entity results.
+        #     If this entity is missing, this field will not be set.
         # @!attribute [rw] cursor
         #   @return [::String]
         #     A cursor that points to the position after the result entity.
@@ -83,6 +95,11 @@ module Google
         #     The properties to make distinct. The query results will contain the first
         #     result for each distinct combination of values for the given properties
         #     (if empty, all results are returned).
+        #
+        #     Requires:
+        #
+        #     * If `order` is specified, the set of distinct on properties must appear
+        #     before the non-distinct on properties in `order`.
         # @!attribute [rw] start_cursor
         #   @return [::String]
         #     A starting point for the query results. Query cursors are
@@ -108,6 +125,101 @@ module Google
         class Query
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Datastore query for running an aggregation over a
+        # {::Google::Cloud::Datastore::V1::Query Query}.
+        # @!attribute [rw] nested_query
+        #   @return [::Google::Cloud::Datastore::V1::Query]
+        #     Nested query for aggregation
+        # @!attribute [rw] aggregations
+        #   @return [::Array<::Google::Cloud::Datastore::V1::AggregationQuery::Aggregation>]
+        #     Optional. Series of aggregations to apply over the results of the
+        #     `nested_query`.
+        #
+        #     Requires:
+        #
+        #     * A minimum of one and maximum of five aggregations per query.
+        class AggregationQuery
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Defines an aggregation that produces a single result.
+          # @!attribute [rw] count
+          #   @return [::Google::Cloud::Datastore::V1::AggregationQuery::Aggregation::Count]
+          #     Count aggregator.
+          # @!attribute [rw] alias
+          #   @return [::String]
+          #     Optional. Optional name of the property to store the result of the
+          #     aggregation.
+          #
+          #     If not provided, Datastore will pick a default name following the format
+          #     `property_<incremental_id++>`. For example:
+          #
+          #     ```
+          #     AGGREGATE
+          #       COUNT_UP_TO(1) AS count_up_to_1,
+          #       COUNT_UP_TO(2),
+          #       COUNT_UP_TO(3) AS count_up_to_3,
+          #       COUNT(*)
+          #     OVER (
+          #       ...
+          #     );
+          #     ```
+          #
+          #     becomes:
+          #
+          #     ```
+          #     AGGREGATE
+          #       COUNT_UP_TO(1) AS count_up_to_1,
+          #       COUNT_UP_TO(2) AS property_1,
+          #       COUNT_UP_TO(3) AS count_up_to_3,
+          #       COUNT(*) AS property_2
+          #     OVER (
+          #       ...
+          #     );
+          #     ```
+          #
+          #     Requires:
+          #
+          #     * Must be unique across all aggregation aliases.
+          #     * Conform to [entity property
+          #     name][google.datastore.v1.Entity.properties] limitations.
+          class Aggregation
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Count of entities that match the query.
+            #
+            # The `COUNT(*)` aggregation function operates on the entire entity
+            # so it does not require a field reference.
+            # @!attribute [rw] up_to
+            #   @return [::Google::Protobuf::Int64Value]
+            #     Optional. Optional constraint on the maximum number of entities to
+            #     count.
+            #
+            #     This provides a way to set an upper bound on the number of entities
+            #     to scan, limiting latency, and cost.
+            #
+            #     Unspecified is interpreted as no bound.
+            #
+            #     If a zero value is provided, a count result of zero should always be
+            #     expected.
+            #
+            #     High-Level Example:
+            #
+            #     ```
+            #     AGGREGATE COUNT_UP_TO(1000) OVER ( SELECT * FROM k );
+            #     ```
+            #
+            #     Requires:
+            #
+            #     * Must be non-negative when present.
+            class Count
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
         end
 
         # A representation of a kind.
@@ -181,7 +293,10 @@ module Google
         # @!attribute [rw] filters
         #   @return [::Array<::Google::Cloud::Datastore::V1::Filter>]
         #     The list of filters to combine.
-        #     Must contain at least one filter.
+        #
+        #     Requires:
+        #
+        #     * At least one filter is present.
         class CompositeFilter
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -193,6 +308,9 @@ module Google
 
             # The results are required to satisfy each of the combined filters.
             AND = 1
+
+            # Documents are required to satisfy at least one of the combined filters.
+            OR = 2
           end
         end
 
@@ -215,23 +333,69 @@ module Google
             # Unspecified. This value must not be used.
             OPERATOR_UNSPECIFIED = 0
 
-            # Less than.
+            # The given `property` is less than the given `value`.
+            #
+            # Requires:
+            #
+            # * That `property` comes first in `order_by`.
             LESS_THAN = 1
 
-            # Less than or equal.
+            # The given `property` is less than or equal to the given `value`.
+            #
+            # Requires:
+            #
+            # * That `property` comes first in `order_by`.
             LESS_THAN_OR_EQUAL = 2
 
-            # Greater than.
+            # The given `property` is greater than the given `value`.
+            #
+            # Requires:
+            #
+            # * That `property` comes first in `order_by`.
             GREATER_THAN = 3
 
-            # Greater than or equal.
+            # The given `property` is greater than or equal to the given `value`.
+            #
+            # Requires:
+            #
+            # * That `property` comes first in `order_by`.
             GREATER_THAN_OR_EQUAL = 4
 
-            # Equal.
+            # The given `property` is equal to the given `value`.
             EQUAL = 5
 
-            # Has ancestor.
+            # The given `property` is equal to at least one value in the given array.
+            #
+            # Requires:
+            #
+            # * That `value` is a non-empty `ArrayValue` with at most 10 values.
+            # * No other `IN` or `NOT_IN` is in the same query.
+            IN = 6
+
+            # The given `property` is not equal to the given `value`.
+            #
+            # Requires:
+            #
+            # * No other `NOT_EQUAL` or `NOT_IN` is in the same query.
+            # * That `property` comes first in the `order_by`.
+            NOT_EQUAL = 9
+
+            # Limit the result set to the given entity and its descendants.
+            #
+            # Requires:
+            #
+            # * That `value` is an entity key.
+            # * No other `HAS_ANCESTOR` is in the same query.
             HAS_ANCESTOR = 11
+
+            # The value of the `property` is not in the given array.
+            #
+            # Requires:
+            #
+            # * That `value` is a non-empty `ArrayValue` with at most 10 values.
+            # * No other `IN`, `NOT_IN`, `NOT_EQUAL` is in the same query.
+            # * That `field` comes first in the `order_by`.
+            NOT_IN = 13
           end
         end
 
@@ -319,6 +483,18 @@ module Google
         #     can have a greater snapshot version number. Each batch's snapshot version
         #     is valid for all preceding batches.
         #     The value will be zero for eventually consistent queries.
+        # @!attribute [rw] read_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Read timestamp this batch was returned from.
+        #     This applies to the range of results from the query's `start_cursor` (or
+        #     the beginning of the query if no cursor was given) to this batch's
+        #     `end_cursor` (not the query's `end_cursor`).
+        #
+        #     In a single transaction, subsequent query result batches for the same query
+        #     can have a greater timestamp. Each batch's read timestamp
+        #     is valid for all preceding batches.
+        #     This value will not be set for eventually consistent queries in Cloud
+        #     Datastore.
         class QueryResultBatch
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

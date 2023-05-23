@@ -29,10 +29,12 @@ gem "sinatra"
 
 group :test do
   gem "avro", "~> 1.10"
+  gem "google-cloud-bigquery"
   gem "google-style", "~> 1.25.1"
   gem "minitest", "~> 5.14"
   gem "minitest-focus", "~> 1.1"
   gem "minitest-hooks", "~> 1.5"
   gem "rack-test"
   gem "rake"
+  gem "toys-core"
 end

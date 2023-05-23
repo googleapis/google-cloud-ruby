@@ -8,6 +8,7 @@ require 'google/api/resource_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/rpc/status_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/bigtable/admin/v2/table.proto", :syntax => :proto3) do
     add_message "google.bigtable.admin.v2.RestoreInfo" do
@@ -22,6 +23,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       map :column_families, :string, :message, 3, "google.bigtable.admin.v2.ColumnFamily"
       optional :granularity, :enum, 4, "google.bigtable.admin.v2.Table.TimestampGranularity"
       optional :restore_info, :message, 6, "google.bigtable.admin.v2.RestoreInfo"
+      optional :deletion_protection, :bool, 9
     end
     add_message "google.bigtable.admin.v2.Table.ClusterState" do
       optional :replication_state, :enum, 1, "google.bigtable.admin.v2.Table.ClusterState.ReplicationState"

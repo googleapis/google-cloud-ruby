@@ -29,7 +29,7 @@ describe Google::Cloud::Bigquery::Model, :partial, :attributes, :mock_bigquery d
 
   it "can test its existence with force to load resource" do
     mock = Minitest::Mock.new
-    mock.expect :get_model, model_hash.to_json, [model.project_id, model.dataset_id, model.model_id, options: { skip_deserialization: true }]
+    mock.expect :get_model, model_hash.to_json, [model.project_id, model.dataset_id, model.model_id], options: { skip_deserialization: true }
     model.service.mocked_service = mock
 
     _(model.exists?(force: true)).must_equal true

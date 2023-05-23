@@ -118,7 +118,6 @@ module Google
           #   @return [::Google::Cloud::AutoML::V1::BoundingPoly]
           #     The position of the {::Google::Cloud::AutoML::V1::Document::Layout#text_segment text_segment} in the page.
           #     Contains exactly 4
-          #
           #     [normalized_vertices][google.cloud.automl.v1p1beta.BoundingPoly.normalized_vertices]
           #     and they are connected by edges in the order provided, which will
           #     represent a rectangle parallel to the frame. The

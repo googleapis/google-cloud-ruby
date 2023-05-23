@@ -1,0 +1,11 @@
+source "https://rubygems.org"
+master = ENV["GOOGLE_CLOUD_SAMPLES_TEST"] == "master"
+
+gem "google-cloud-compute-v1", path: master ? "../../google-cloud-compute-v1" : nil
+
+group :test do
+  gem "google-cloud-storage", path: master ? "../../google-cloud-storage" : nil
+  gem "google-style", "~> 1.25.1"
+  gem "minitest", "~> 5.14"
+  gem "rake", ">= 12.0"
+end

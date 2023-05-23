@@ -85,8 +85,8 @@ task :acceptance, :project, :keyfile do |t, args|
   if project.nil? || keyfile.nil?
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or ASSURED_WORKLOADS_TEST_PROJECT=test123 ASSURED_WORKLOADS_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
-  require "google/cloud/assured_workloads/v1beta1/assured_workloads_service/credentials"
-  ::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Credentials.env_vars.each do |path|
+  require "google/cloud/assured_workloads/v1/assured_workloads_service/credentials"
+  ::Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Credentials.env_vars.each do |path|
     ENV[path] = nil
   end
   ENV["ASSURED_WORKLOADS_PROJECT"] = project
@@ -157,11 +157,6 @@ end
 desc "Run yard-doctest example tests."
 task :doctest do
   puts "The google-cloud-assured_workloads gem does not have doctest tests."
-end
-
-task :cloudrad do
-  ENV["CLOUDRAD_GEM_NAME"] = "google-cloud-assured_workloads"
-  sh "bundle exec yard doc --fail-on-warning --yardopts .yardopts-cloudrad"
 end
 
 desc "Run the CI build"

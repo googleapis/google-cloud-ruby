@@ -34,7 +34,7 @@ module Google
         # Manages metric descriptors, monitored resource descriptors, and
         # time series data.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/monitoring/v3/metric_service"
         #     client = ::Google::Cloud::Monitoring::V3::MetricService::Client.new

@@ -9,7 +9,3 @@ gem "google-cloud-trace-v2", path: "../google-cloud-trace-v2"
 gem "stackdriver-core", path: "../stackdriver-core"
 
 gem "rake"
-
-# Pin minitest to 5.11.x to avoid warnings emitted by 5.12.
-# See https://github.com/googleapis/google-cloud-ruby/issues/4110
-gem "minitest", "~> 5.11.3"

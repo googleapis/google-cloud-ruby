@@ -26,14 +26,15 @@ module Google
         #   @return [::String]
         #     Required. The resource name of the log to delete:
         #
-        #         "projects/[PROJECT_ID]/logs/[LOG_ID]"
-        #         "organizations/[ORGANIZATION_ID]/logs/[LOG_ID]"
-        #         "billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]"
-        #         "folders/[FOLDER_ID]/logs/[LOG_ID]"
+        #     * `projects/[PROJECT_ID]/logs/[LOG_ID]`
+        #     * `organizations/[ORGANIZATION_ID]/logs/[LOG_ID]`
+        #     * `billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]`
+        #     * `folders/[FOLDER_ID]/logs/[LOG_ID]`
         #
         #     `[LOG_ID]` must be URL-encoded. For example,
         #     `"projects/my-project-id/logs/syslog"`,
-        #     `"organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"`.
+        #     `"organizations/123/logs/cloudaudit.googleapis.com%2Factivity"`.
+        #
         #     For more information about log names, see
         #     {::Google::Cloud::Logging::V2::LogEntry LogEntry}.
         class DeleteLogRequest
@@ -47,15 +48,15 @@ module Google
         #     Optional. A default log resource name that is assigned to all log entries
         #     in `entries` that do not specify a value for `log_name`:
         #
-        #         "projects/[PROJECT_ID]/logs/[LOG_ID]"
-        #         "organizations/[ORGANIZATION_ID]/logs/[LOG_ID]"
-        #         "billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]"
-        #         "folders/[FOLDER_ID]/logs/[LOG_ID]"
+        #     * `projects/[PROJECT_ID]/logs/[LOG_ID]`
+        #     * `organizations/[ORGANIZATION_ID]/logs/[LOG_ID]`
+        #     * `billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]`
+        #     * `folders/[FOLDER_ID]/logs/[LOG_ID]`
         #
         #     `[LOG_ID]` must be URL-encoded. For example:
         #
         #         "projects/my-project-id/logs/syslog"
-        #         "organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"
+        #         "organizations/123/logs/cloudaudit.googleapis.com%2Factivity"
         #
         #     The permission `logging.logEntries.create` is needed on each project,
         #     organization, billing account, or folder that is receiving new log
@@ -93,23 +94,25 @@ module Google
         #     the entries later in the list. See the `entries.list` method.
         #
         #     Log entries with timestamps that are more than the
-        #     [logs retention period](https://cloud.google.com/logging/quota-policy) in
+        #     [logs retention period](https://cloud.google.com/logging/quotas) in
         #     the past or more than 24 hours in the future will not be available when
         #     calling `entries.list`. However, those log entries can still be [exported
         #     with
         #     LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
         #
         #     To improve throughput and to avoid exceeding the
-        #     [quota limit](https://cloud.google.com/logging/quota-policy) for calls to
+        #     [quota limit](https://cloud.google.com/logging/quotas) for calls to
         #     `entries.write`, you should try to include several log entries in this
         #     list, rather than calling this method for each individual log entry.
         # @!attribute [rw] partial_success
         #   @return [::Boolean]
-        #     Optional. Whether valid entries should be written even if some other
-        #     entries fail due to INVALID_ARGUMENT or PERMISSION_DENIED errors. If any
-        #     entry is not written, then the response status is the error associated
-        #     with one of the failed entries and the response includes error details
-        #     keyed by the entries' zero-based index in the `entries.write` method.
+        #     Optional. Whether a batch's valid entries should be written even if some
+        #     other entry failed due to a permanent error such as INVALID_ARGUMENT or
+        #     PERMISSION_DENIED. If any entry failed, then the response status is the
+        #     response status of one of the failed entries. The response will include
+        #     error details in `WriteLogEntriesPartialErrors.log_entry_errors` keyed by
+        #     the entries' zero-based index in the `entries`. Failed requests for which
+        #     no entries are written will not include per-entry errors.
         # @!attribute [rw] dry_run
         #   @return [::Boolean]
         #     Optional. If true, the request should expect normal response, but the
@@ -164,27 +167,27 @@ module Google
         #     Required. Names of one or more parent resources from which to
         #     retrieve log entries:
         #
-        #         "projects/[PROJECT_ID]"
-        #         "organizations/[ORGANIZATION_ID]"
-        #         "billingAccounts/[BILLING_ACCOUNT_ID]"
-        #         "folders/[FOLDER_ID]"
+        #     *  `projects/[PROJECT_ID]`
+        #     *  `organizations/[ORGANIZATION_ID]`
+        #     *  `billingAccounts/[BILLING_ACCOUNT_ID]`
+        #     *  `folders/[FOLDER_ID]`
         #
-        #     May alternatively be one or more views
-        #       projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]
-        #       organization/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]
-        #       billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]
-        #       folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]
+        #     May alternatively be one or more views:
+        #
+        #      * `projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+        #      * `organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+        #      * `billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+        #      * `folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
         #
         #     Projects listed in the `project_ids` field are added to this list.
+        #     A maximum of 100 resources may be specified in a single request.
         # @!attribute [rw] filter
         #   @return [::String]
-        #     Optional. A filter that chooses which log entries to return.  See [Advanced
-        #     Logs Queries](https://cloud.google.com/logging/docs/view/advanced-queries).
-        #     Only log entries that match the filter are returned.  An empty filter
-        #     matches all log entries in the resources listed in `resource_names`.
+        #     Optional. Only log entries that match the filter are returned.  An empty
+        #     filter matches all log entries in the resources listed in `resource_names`.
         #     Referencing a parent resource that is not listed in `resource_names` will
-        #     cause the filter to return no results. The maximum length of the filter is
-        #     20000 characters.
+        #     cause the filter to return no results. The maximum length of a filter is
+        #     20,000 characters.
         # @!attribute [rw] order_by
         #   @return [::String]
         #     Optional. How the results should be sorted.  Presently, the only permitted
@@ -196,9 +199,9 @@ module Google
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. The maximum number of results to return from this request.
-        #     Default is 50. If the value is negative or exceeds 1000,
-        #     the request is rejected. The presence of `next_page_token` in the
-        #     response indicates that more results might be available.
+        #     Default is 50. If the value is negative or exceeds 1000, the request is
+        #     rejected. The presence of `next_page_token` in the response indicates that
+        #     more results might be available.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. If present, then retrieve the next batch of results from the
@@ -267,12 +270,29 @@ module Google
         # The parameters to ListLogs.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The resource name that owns the logs:
+        #     Required. The resource name to list logs for:
         #
-        #         "projects/[PROJECT_ID]"
-        #         "organizations/[ORGANIZATION_ID]"
-        #         "billingAccounts/[BILLING_ACCOUNT_ID]"
-        #         "folders/[FOLDER_ID]"
+        #     *  `projects/[PROJECT_ID]`
+        #     *  `organizations/[ORGANIZATION_ID]`
+        #     *  `billingAccounts/[BILLING_ACCOUNT_ID]`
+        #     *  `folders/[FOLDER_ID]`
+        # @!attribute [rw] resource_names
+        #   @return [::Array<::String>]
+        #     Optional. List of resource names to list logs for:
+        #
+        #      * `projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+        #      * `organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+        #      * `billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+        #      * `folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+        #
+        #     To support legacy queries, it could also be:
+        #
+        #     *  `projects/[PROJECT_ID]`
+        #     *  `organizations/[ORGANIZATION_ID]`
+        #     *  `billingAccounts/[BILLING_ACCOUNT_ID]`
+        #     *  `folders/[FOLDER_ID]`
+        #
+        #     The resource name in the `parent` field is added to this list.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. The maximum number of results to return from this request.
@@ -284,19 +304,6 @@ module Google
         #     preceding call to this method.  `pageToken` must be the value of
         #     `nextPageToken` from the previous response.  The values of other method
         #     parameters should be identical to those in the previous call.
-        # @!attribute [rw] resource_names
-        #   @return [::Array<::String>]
-        #     Optional. The resource name that owns the logs:
-        #       projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]
-        #       organization/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]
-        #       billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]
-        #       folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]
-        #
-        #     To support legacy queries, it could also be:
-        #         "projects/[PROJECT_ID]"
-        #         "organizations/[ORGANIZATION_ID]"
-        #         "billingAccounts/[BILLING_ACCOUNT_ID]"
-        #         "folders/[FOLDER_ID]"
         class ListLogsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -323,25 +330,24 @@ module Google
         #   @return [::Array<::String>]
         #     Required. Name of a parent resource from which to retrieve log entries:
         #
-        #         "projects/[PROJECT_ID]"
-        #         "organizations/[ORGANIZATION_ID]"
-        #         "billingAccounts/[BILLING_ACCOUNT_ID]"
-        #         "folders/[FOLDER_ID]"
+        #     *  `projects/[PROJECT_ID]`
+        #     *  `organizations/[ORGANIZATION_ID]`
+        #     *  `billingAccounts/[BILLING_ACCOUNT_ID]`
+        #     *  `folders/[FOLDER_ID]`
         #
         #     May alternatively be one or more views:
-        #         "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]"
-        #         "organization/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]"
-        #         "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]"
-        #         "folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]"
+        #
+        #      * `projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+        #      * `organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+        #      * `billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+        #      * `folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
         # @!attribute [rw] filter
         #   @return [::String]
-        #     Optional. A filter that chooses which log entries to return.  See [Advanced
-        #     Logs Filters](https://cloud.google.com/logging/docs/view/advanced_filters).
-        #     Only log entries that match the filter are returned.  An empty filter
-        #     matches all log entries in the resources listed in `resource_names`.
-        #     Referencing a parent resource that is not in `resource_names` will cause
-        #     the filter to return no results. The maximum length of the filter is 20000
-        #     characters.
+        #     Optional. Only log entries that match the filter are returned.  An empty
+        #     filter matches all log entries in the resources listed in `resource_names`.
+        #     Referencing a parent resource that is not listed in `resource_names` will
+        #     cause the filter to return no results. The maximum length of a filter is
+        #     20,000 characters.
         # @!attribute [rw] buffer_window
         #   @return [::Google::Protobuf::Duration]
         #     Optional. The amount of time to buffer log entries at the server before

@@ -3,9 +3,8 @@
 
 require 'google/protobuf'
 
-require 'google/protobuf/duration_pb'
 require 'google/protobuf/timestamp_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/spanner/v1/commit_response.proto", :syntax => :proto3) do
     add_message "google.spanner.v1.CommitResponse" do

@@ -182,11 +182,11 @@ module Google
               #   @return [::Array<::String>]
               #     Optional. Contains valid, fully-qualified host names. Glob patterns are also
               #     supported. To allow an explicit wildcard certificate, escape with
-              #     backlash (i.e. "\*").
-              #     E.g. for globbed entries: '*bar.com' will allow foo.bar.com, but not
-              #     *.bar.com, unless the {::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthority::CertificateAuthorityPolicy::AllowedSubjectAltNames#allow_globbing_dns_wildcards allow_globbing_dns_wildcards} field is set.
-              #     E.g. for wildcard entries: '\*.bar.com' will allow '*.bar.com', but not
-              #     'foo.bar.com'.
+              #     backlash (i.e. `\*`).
+              #     E.g. for globbed entries: `*bar.com` will allow `foo.bar.com`, but not
+              #     `*.bar.com`, unless the {::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthority::CertificateAuthorityPolicy::AllowedSubjectAltNames#allow_globbing_dns_wildcards allow_globbing_dns_wildcards} field is set.
+              #     E.g. for wildcard entries: `\*.bar.com` will allow `*.bar.com`, but not
+              #     `foo.bar.com`.
               # @!attribute [rw] allowed_uris
               #   @return [::Array<::String>]
               #     Optional. Contains valid RFC 3986 URIs. Glob patterns are also supported. To

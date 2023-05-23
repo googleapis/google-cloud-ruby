@@ -116,8 +116,8 @@ module Google
         ##
         # A unique ID for this routine, without the project name.
         #
-        # @return [String] The ID must contain only letters (a-z, A-Z), numbers (0-9), or underscores (_). The maximum
-        #   length is 256 characters.
+        # @return [String] The ID must contain only letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`). The
+        #   maximum length is 256 characters.
         #
         # @!group Attributes
         #

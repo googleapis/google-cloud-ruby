@@ -23,7 +23,9 @@ module Google
   module Cloud
     module Container
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
+      #
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/container/v1"
       #     client = ::Google::Cloud::Container::V1::ClusterManager::Client.new

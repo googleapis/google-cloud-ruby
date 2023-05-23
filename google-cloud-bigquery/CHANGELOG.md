@@ -1,5 +1,173 @@
 # Release History
 
+### 1.43.1 (2023-05-19)
+
+#### Bug Fixes
+
+* ensure schema for data parsing ([#21616](https://github.com/googleapis/google-cloud-ruby/issues/21616)) 
+
+### 1.43.0 (2023-05-10)
+
+#### Features
+
+* Added support for default value expression ([#21540](https://github.com/googleapis/google-cloud-ruby/issues/21540)) 
+
+### 1.42.0 (2023-01-15)
+
+#### Features
+
+* Added support for authorized dataset ([#19442](https://github.com/googleapis/google-cloud-ruby/issues/19442)) 
+* Added support for tags in dataset ([#19350](https://github.com/googleapis/google-cloud-ruby/issues/19350)) 
+
+### 1.41.0 (2023-01-05)
+
+#### Features
+
+* Add support for partial projection of table metadata 
+#### Bug Fixes
+
+* Fix querying of array of structs in named parameters ([#19466](https://github.com/googleapis/google-cloud-ruby/issues/19466)) 
+
+### 1.40.0 (2022-12-14)
+
+#### Features
+
+* support table snapshot and clone ([#19354](https://github.com/googleapis/google-cloud-ruby/issues/19354)) 
+
+### 1.39.0 (2022-07-27)
+
+#### Features
+
+* Update minimum Ruby version to 2.6 ([#18871](https://github.com/googleapis/google-cloud-ruby/issues/18871)) 
+
+### 1.38.1 / 2022-01-13
+
+#### Bug Fixes
+
+* Update Bigquery::Data#ddl? to support ALTER TABLE
+* Update Bigquery::QueryJob#ddl? to support ALTER TABLE
+* Remove newline character ('\n') from #ddl? statement types
+
+#### Documentation
+
+* Update Contributing docs
+
+### 1.38.0 / 2021-11-16
+
+#### Features
+
+* Add session support
+  * Add create_session and session_id params to Project#query_job
+  * Add create_session and session_id params to Dataset#query_job
+  * Add session_id param to Project#query
+  * Add session_id param to Dataset#query
+  * Add Job#session_id
+  * Add QueryJob::Updater#create_session=
+  * Add QueryJob::Updater#session_id=
+
+### 1.37.0 / 2021-10-21
+
+#### Features
+
+* Add support for Avro options to external data sources
+  * Add External::AvroSource
+
+### 1.36.0 / 2021-09-22
+
+#### Features
+
+* Add Job#delete
+
+#### Bug Fixes
+
+* Add precision and scale to Field#add_field
+
+### 1.35.1 / 2021-09-14
+
+#### Documentation
+
+* Wrap character class regex in backticks
+
+### 1.35.0 / 2021-08-12
+
+#### Features
+
+* Add GEOGRAPHY schema helpers
+  * Add LoadJob#geography
+  * Add Schema::Field#geography
+  * Add Table::Updater#geography
+* Add support for GEOGRAPHY type
+  * Add Schema#geography
+* Add support for multistatement transaction statistics in jobs
+  * Add Job#transaction_id
+
+### 1.34.0 / 2021-07-20
+
+#### Features
+
+* Add DmlStatistics
+  * Add QueryJob#deleted_row_count
+  * Add QueryJob#inserted_row_count
+  * Add QueryJob#updated_row_count
+  * Add Data#deleted_row_count
+  * Add Data#inserted_row_count
+  * Add Data#updated_row_count
+
+### 1.33.0 / 2021-07-14
+
+#### Features
+
+* Add policy tag support (Column ACLs)
+  * Add policy_tags to LoadJob field helper methods
+  * Add policy_tags to Schema field helper methods
+  * Add policy_tags to Schema::Field field helper methods
+  * Add policy_tags to Table field helper methods
+  * Add Schema::Field#policy_tags
+  * Add Schema::Field#policy_tags=
+* Add support for parameterized types
+  * Add max_length to LoadJob::Updater#bytes
+  * Add max_length to LoadJob::Updater#string
+  * Add max_length to Schema#bytes
+  * Add max_length to Schema#string
+  * Add max_length to Schema::Field#bytes
+  * Add max_length to Schema::Field#string
+  * Add max_length to Table::Updater#bytes
+  * Add max_length to Table::Updater#string
+  * Add precision and scale to LoadJob::Updater#bignumeric
+  * Add precision and scale to LoadJob::Updater#numeric
+  * Add precision and scale to Schema#bignumeric
+  * Add precision and scale to Schema#numeric
+  * Add precision and scale to Schema::Field#bignumeric
+  * Add precision and scale to Schema::Field#numeric
+  * Add precision and scale to Table::Updater#bignumeric
+  * Add precision and scale to Table::Updater#numeric
+  * Add Schema::Field#max_length
+  * Add Schema::Field#precision
+  * Add Schema::Field#scale
+
+### 1.32.1 / 2021-07-08
+
+#### Documentation
+
+* Update AUTHENTICATION.md in handwritten packages
+
+### 1.32.0 / 2021-06-21
+
+#### Features
+
+* Add support for Parquet options
+  * feat(bigquery): Add Bigquery::External::ParquetSource
+  * Add Parquet options to LoadJob
+    * Add LoadJob#parquet_options?
+    * Add LoadJob#parquet_enable_list_inference?
+    * Add LoadJob#parquet_enum_as_string?
+    * Add LoadJob::Updater#parquet_enable_list_inference=
+    * Add LoadJob::Updater#parquet_enum_as_string=
+
+#### Bug Fixes
+
+* Expand googleauth dependency to support future 1.x versions
+
 ### 1.31.0 / 2021-04-28
 
 #### Features

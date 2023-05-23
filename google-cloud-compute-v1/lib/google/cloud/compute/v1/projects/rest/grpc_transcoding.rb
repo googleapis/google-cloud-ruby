@@ -46,6 +46,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/disableXpnResource"
                 body = request_pb.projects_disable_xpn_resource_request_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -71,6 +72,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/enableXpnResource"
                 body = request_pb.projects_enable_xpn_resource_request_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -124,6 +126,11 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/listXpnHosts"
                 body = request_pb.projects_list_xpn_hosts_request_resource.to_json
                 query_string_params = {}
+                query_string_params["filter"] = request_pb.filter.to_s if request_pb.has_filter?
+                query_string_params["maxResults"] = request_pb.max_results.to_s if request_pb.has_max_results?
+                query_string_params["orderBy"] = request_pb.order_by.to_s if request_pb.has_order_by?
+                query_string_params["pageToken"] = request_pb.page_token.to_s if request_pb.has_page_token?
+                query_string_params["returnPartialSuccess"] = request_pb.return_partial_success.to_s if request_pb.has_return_partial_success?
 
                 [uri, body, query_string_params]
               end
@@ -136,6 +143,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/moveDisk"
                 body = request_pb.disk_move_request_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -148,6 +156,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/moveInstance"
                 body = request_pb.instance_move_request_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -160,6 +169,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/setCommonInstanceMetadata"
                 body = request_pb.metadata_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -172,6 +182,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/setDefaultNetworkTier"
                 body = request_pb.projects_set_default_network_tier_request_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -184,6 +195,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/setUsageExportBucket"
                 body = request_pb.usage_export_location_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end

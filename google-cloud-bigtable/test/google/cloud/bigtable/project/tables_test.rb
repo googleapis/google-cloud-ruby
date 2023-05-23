@@ -38,7 +38,7 @@ describe Google::Cloud::Bigtable::Project, :tables, :mock_bigtable do
   it "list tables" do
     get_res =  MockPagedEnumerable.new([first_page])
     mock = Minitest::Mock.new
-    mock.expect :list_tables, get_res, [parent: instance_path(instance_id), view: nil]
+    mock.expect :list_tables, get_res, parent: instance_path(instance_id), view: nil
     bigtable.service.mocked_tables = mock
 
     tables = bigtable.tables(instance_id)
@@ -51,7 +51,7 @@ describe Google::Cloud::Bigtable::Project, :tables, :mock_bigtable do
   it "paginates tables with next? and next" do
     get_res =  MockPagedEnumerable.new([first_page, last_page])
     mock = Minitest::Mock.new
-    mock.expect :list_tables, get_res, [parent: instance_path(instance_id), view: nil]
+    mock.expect :list_tables, get_res, parent: instance_path(instance_id), view: nil
     bigtable.service.mocked_tables = mock
 
     list = bigtable.tables(instance_id)
@@ -67,7 +67,7 @@ describe Google::Cloud::Bigtable::Project, :tables, :mock_bigtable do
   it "paginates tables with all" do
     get_res =  MockPagedEnumerable.new([first_page, last_page])
     mock = Minitest::Mock.new
-    mock.expect :list_tables, get_res, [parent: instance_path(instance_id), view: nil]
+    mock.expect :list_tables, get_res, parent: instance_path(instance_id), view: nil
     bigtable.service.mocked_tables = mock
 
     tables = bigtable.tables(instance_id).all.to_a
@@ -80,7 +80,7 @@ describe Google::Cloud::Bigtable::Project, :tables, :mock_bigtable do
   it "iterates tables with all using Enumerator" do
     get_res =  MockPagedEnumerable.new([first_page, last_page])
     mock = Minitest::Mock.new
-    mock.expect :list_tables, get_res, [parent: instance_path(instance_id), view: nil]
+    mock.expect :list_tables, get_res, parent: instance_path(instance_id), view: nil
     bigtable.service.mocked_tables = mock
 
     tables = bigtable.tables(instance_id).all.take(5)

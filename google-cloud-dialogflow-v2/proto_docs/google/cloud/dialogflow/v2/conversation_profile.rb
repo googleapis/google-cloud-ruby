@@ -63,15 +63,34 @@ module Google
         #     Settings for speech transcription.
         # @!attribute [rw] language_code
         #   @return [::String]
-        #     Language which represents the conversationProfile.
-        #     If unspecified, the default language code en-us applies. Users need to
-        #     create a ConversationProfile for each language they want to support.
+        #     Language code for the conversation profile. If not specified, the language
+        #     is en-US. Language at ConversationProfile should be set for all non en-US
+        #     languages.
+        #     This should be a [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt)
+        #     language tag. Example: "en-US".
+        # @!attribute [rw] time_zone
+        #   @return [::String]
+        #     The time zone of this conversational profile from the
+        #     [time zone database](https://www.iana.org/time-zones), e.g.,
+        #     America/New_York, Europe/Paris. Defaults to America/New_York.
+        # @!attribute [rw] security_settings
+        #   @return [::String]
+        #     Name of the CX SecuritySettings reference for the agent.
+        #     Format: `projects/<Project ID>/locations/<Location
+        #     ID>/securitySettings/<Security Settings ID>`.
+        # @!attribute [rw] tts_config
+        #   @return [::Google::Cloud::Dialogflow::V2::SynthesizeSpeechConfig]
+        #     Configuration for Text-to-Speech synthesization.
+        #
+        #     Used by Phone Gateway to specify synthesization options. If agent defines
+        #     synthesization options as well, agent settings overrides the option here.
         class ConversationProfile
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client#list_conversation_profiles ConversationProfiles.ListConversationProfiles}.
+        # The request message for
+        # {::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client#list_conversation_profiles ConversationProfiles.ListConversationProfiles}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The project to list all conversation profiles from.
@@ -88,7 +107,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response message for {::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client#list_conversation_profiles ConversationProfiles.ListConversationProfiles}.
+        # The response message for
+        # {::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client#list_conversation_profiles ConversationProfiles.ListConversationProfiles}.
         # @!attribute [rw] conversation_profiles
         #   @return [::Array<::Google::Cloud::Dialogflow::V2::ConversationProfile>]
         #     The list of project conversation profiles. There is a maximum number
@@ -102,7 +122,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client#get_conversation_profile ConversationProfiles.GetConversationProfile}.
+        # The request message for
+        # {::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client#get_conversation_profile ConversationProfiles.GetConversationProfile}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the conversation profile.
@@ -113,7 +134,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client#create_conversation_profile ConversationProfiles.CreateConversationProfile}.
+        # The request message for
+        # {::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client#create_conversation_profile ConversationProfiles.CreateConversationProfile}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The project to create a conversation profile for.
@@ -126,7 +148,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client#update_conversation_profile ConversationProfiles.UpdateConversationProfile}.
+        # The request message for
+        # {::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client#update_conversation_profile ConversationProfiles.UpdateConversationProfile}.
         # @!attribute [rw] conversation_profile
         #   @return [::Google::Cloud::Dialogflow::V2::ConversationProfile]
         #     Required. The conversation profile to update.
@@ -138,7 +161,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client#delete_conversation_profile ConversationProfiles.DeleteConversationProfile}.
+        # The request message for
+        # {::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client#delete_conversation_profile ConversationProfiles.DeleteConversationProfile}.
         #
         # This operation fails if the conversation profile is still referenced from
         # a phone number.
@@ -162,11 +186,16 @@ module Google
         #     Number>@gcp-sa-dialogflow.iam.gserviceaccount.com` the `Dialogflow API
         #     Service Agent` role in this project.
         #
-        #     Format: `projects/<Project ID>/locations/<Location
+        #     - For ES agents, use format: `projects/<Project ID>/locations/<Location
         #     ID>/agent/environments/<Environment ID or '-'>`. If environment is not
         #     specified, the default `draft` environment is used. Refer to
         #     [DetectIntentRequest](/dialogflow/docs/reference/rpc/google.cloud.dialogflow.v2#google.cloud.dialogflow.v2.DetectIntentRequest)
         #     for more details.
+        #
+        #     - For CX agents, use format `projects/<Project ID>/locations/<Location
+        #     ID>/agents/<Agent ID>/environments/<Environment ID
+        #     or '-'>`. If environment is not specified, the default `draft` environment
+        #     is used.
         class AutomatedAgentConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -226,6 +255,9 @@ module Google
           # @!attribute [rw] conversation_model_config
           #   @return [::Google::Cloud::Dialogflow::V2::HumanAgentAssistantConfig::ConversationModelConfig]
           #     Configs of custom conversation model.
+          # @!attribute [rw] conversation_process_config
+          #   @return [::Google::Cloud::Dialogflow::V2::HumanAgentAssistantConfig::ConversationProcessConfig]
+          #     Configs for processing conversation.
           class SuggestionFeatureConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -289,7 +321,7 @@ module Google
           #     If this field is not set, it defaults to 0.0, which means that all
           #     suggestions are returned.
           #
-          #     Supported features: ARTICLE_SUGGESTION.
+          #     Supported features: ARTICLE_SUGGESTION, FAQ, SMART_REPLY, SMART_COMPOSE.
           # @!attribute [rw] context_filter_settings
           #   @return [::Google::Cloud::Dialogflow::V2::HumanAgentAssistantConfig::SuggestionQueryConfig::ContextFilterSettings]
           #     Determines how recent conversation context is filtered when generating
@@ -331,8 +363,8 @@ module Google
             # Supported feature: DIALOGFLOW_ASSIST.
             # @!attribute [rw] agent
             #   @return [::String]
-            #     Required. The name of a Dialogflow virtual agent used for end user side intent
-            #     detection and suggestion. Format: `projects/<Project Number/
+            #     Required. The name of a Dialogflow virtual agent used for end user side
+            #     intent detection and suggestion. Format: `projects/<Project Number/
             #     ID>/locations/<Location ID>/agent`. When multiple agents are allowed in
             #     the same Dialogflow project.
             class DialogflowQuerySource
@@ -360,12 +392,33 @@ module Google
 
           # Custom conversation models used in agent assist feature.
           #
-          # Supported feature: ARTICLE_SUGGESTION, SMART_COMPOSE, SMART_REPLY.
+          # Supported feature: ARTICLE_SUGGESTION, SMART_COMPOSE, SMART_REPLY,
+          # CONVERSATION_SUMMARIZATION.
           # @!attribute [rw] model
           #   @return [::String]
           #     Conversation model resource name. Format: `projects/<Project
           #     ID>/conversationModels/<Model ID>`.
+          # @!attribute [rw] baseline_model_version
+          #   @return [::String]
+          #     Version of current baseline model. It will be ignored if
+          #     {::Google::Cloud::Dialogflow::V2::HumanAgentAssistantConfig::ConversationModelConfig#model model}
+          #     is set. Valid versions are:
+          #       Article Suggestion baseline model:
+          #         - 0.9
+          #         - 1.0 (default)
+          #       Summarization baseline model:
+          #         - 1.0
           class ConversationModelConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Config to process conversation.
+          # @!attribute [rw] recent_sentences_count
+          #   @return [::Integer]
+          #     Number of recent non-small-talk sentences to use as context for article
+          #     and FAQ suggestion
+          class ConversationProcessConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -387,11 +440,17 @@ module Google
           #     and identifies the prevailing subjective opinion, especially to determine
           #     a user's attitude as positive, negative, or neutral:
           #     https://cloud.google.com/natural-language/docs/basics#sentiment_analysis
-          #     For [Participants.StreamingAnalyzeContent][google.cloud.dialogflow.v2.Participants.StreamingAnalyzeContent] method, result will be in
-          #     [StreamingAnalyzeContentResponse.message.SentimentAnalysisResult][google.cloud.dialogflow.v2.StreamingAnalyzeContentResponse.message].
-          #     For {::Google::Cloud::Dialogflow::V2::Participants::Client#analyze_content Participants.AnalyzeContent} method, result will be in
+          #     For
+          #     {::Google::Cloud::Dialogflow::V2::Participants::Client#streaming_analyze_content Participants.StreamingAnalyzeContent}
+          #     method, result will be in
+          #     {::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentResponse#message StreamingAnalyzeContentResponse.message.SentimentAnalysisResult}.
+          #     For
+          #     {::Google::Cloud::Dialogflow::V2::Participants::Client#analyze_content Participants.AnalyzeContent}
+          #     method, result will be in
           #     {::Google::Cloud::Dialogflow::V2::AnalyzeContentResponse#message AnalyzeContentResponse.message.SentimentAnalysisResult}
-          #     For {::Google::Cloud::Dialogflow::V2::Conversations::Client#list_messages Conversations.ListMessages} method, result will be in
+          #     For
+          #     {::Google::Cloud::Dialogflow::V2::Conversations::Client#list_messages Conversations.ListMessages}
+          #     method, result will be in
           #     {::Google::Cloud::Dialogflow::V2::ListMessagesResponse#messages ListMessagesResponse.messages.SentimentAnalysisResult}
           #     If Pub/Sub notification is configured, result will be in
           #     {::Google::Cloud::Dialogflow::V2::ConversationEvent#new_message_payload ConversationEvent.new_message_payload.SentimentAnalysisResult}.
@@ -453,13 +512,18 @@ module Google
         #   @return [::String]
         #     Name of the Pub/Sub topic to publish conversation
         #     events like
-        #     {::Google::Cloud::Dialogflow::V2::ConversationEvent::Type::CONVERSATION_STARTED CONVERSATION_STARTED} as
-        #     serialized {::Google::Cloud::Dialogflow::V2::ConversationEvent ConversationEvent} protos.
+        #     {::Google::Cloud::Dialogflow::V2::ConversationEvent::Type::CONVERSATION_STARTED CONVERSATION_STARTED}
+        #     as serialized
+        #     {::Google::Cloud::Dialogflow::V2::ConversationEvent ConversationEvent} protos.
         #
-        #     Notification works for phone calls, if this topic either is in the same
-        #     project as the conversation or you grant `service-<Conversation Project
+        #     For telephony integration to receive notification, make sure either this
+        #     topic is in the same project as the conversation or you grant
+        #     `service-<Conversation Project
         #     Number>@gcp-sa-dialogflow.iam.gserviceaccount.com` the `Dialogflow Service
         #     Agent` role in the topic project.
+        #
+        #     For chat integration to receive notification, make sure API caller has been
+        #     granted the `Dialogflow Service Agent` role for the topic.
         #
         #     Format: `projects/<Project ID>/locations/<Location ID>/topics/<Topic ID>`.
         # @!attribute [rw] message_format
@@ -471,13 +535,13 @@ module Google
 
           # Format of cloud pub/sub message.
           module MessageFormat
-            # If it is unspeified, PROTO will be used.
+            # If it is unspecified, PROTO will be used.
             MESSAGE_FORMAT_UNSPECIFIED = 0
 
-            # Pubsub message will be serialized proto.
+            # Pub/Sub message will be serialized proto.
             PROTO = 1
 
-            # Pubsub message will be json.
+            # Pub/Sub message will be json.
             JSON = 2
           end
         end
@@ -486,8 +550,8 @@ module Google
         # @!attribute [rw] enable_stackdriver_logging
         #   @return [::Boolean]
         #     Whether to log conversation events like
-        #     {::Google::Cloud::Dialogflow::V2::ConversationEvent::Type::CONVERSATION_STARTED CONVERSATION_STARTED} to
-        #     Stackdriver in the conversation project as JSON format
+        #     {::Google::Cloud::Dialogflow::V2::ConversationEvent::Type::CONVERSATION_STARTED CONVERSATION_STARTED}
+        #     to Stackdriver in the conversation project as JSON format
         #     {::Google::Cloud::Dialogflow::V2::ConversationEvent ConversationEvent} protos.
         class LoggingConfig
           include ::Google::Protobuf::MessageExts
@@ -509,12 +573,96 @@ module Google
             # Unspecified feature type.
             TYPE_UNSPECIFIED = 0
 
-            # Run article suggestion model.
+            # Run article suggestion model for chat.
             ARTICLE_SUGGESTION = 1
 
-            # Run FAQ model.
+            # Run FAQ model for chat.
             FAQ = 2
+
+            # Run smart reply model for chat.
+            SMART_REPLY = 3
           end
+        end
+
+        # The request message for
+        # [ConversationProfiles.SetSuggestionFeature][].
+        # @!attribute [rw] conversation_profile
+        #   @return [::String]
+        #     Required. The Conversation Profile to add or update the suggestion feature
+        #     config. Format: `projects/<Project ID>/locations/<Location
+        #     ID>/conversationProfiles/<Conversation Profile ID>`.
+        # @!attribute [rw] participant_role
+        #   @return [::Google::Cloud::Dialogflow::V2::Participant::Role]
+        #     Required. The participant role to add or update the suggestion feature
+        #     config. Only HUMAN_AGENT or END_USER can be used.
+        # @!attribute [rw] suggestion_feature_config
+        #   @return [::Google::Cloud::Dialogflow::V2::HumanAgentAssistantConfig::SuggestionFeatureConfig]
+        #     Required. The suggestion feature config to add or update.
+        class SetSuggestionFeatureConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for [ConversationProfiles.ClearFeature][].
+        # @!attribute [rw] conversation_profile
+        #   @return [::String]
+        #     Required. The Conversation Profile to add or update the suggestion feature
+        #     config. Format: `projects/<Project ID>/locations/<Location
+        #     ID>/conversationProfiles/<Conversation Profile ID>`.
+        # @!attribute [rw] participant_role
+        #   @return [::Google::Cloud::Dialogflow::V2::Participant::Role]
+        #     Required. The participant role to remove the suggestion feature
+        #     config. Only HUMAN_AGENT or END_USER can be used.
+        # @!attribute [rw] suggestion_feature_type
+        #   @return [::Google::Cloud::Dialogflow::V2::SuggestionFeature::Type]
+        #     Required. The type of the suggestion feature to remove.
+        class ClearSuggestionFeatureConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Metadata for a [ConversationProfile.SetSuggestionFeatureConfig][]
+        # operation.
+        # @!attribute [rw] conversation_profile
+        #   @return [::String]
+        #     The resource name of the conversation profile. Format:
+        #     `projects/<Project ID>/locations/<Location
+        #     ID>/conversationProfiles/<Conversation Profile ID>`
+        # @!attribute [rw] participant_role
+        #   @return [::Google::Cloud::Dialogflow::V2::Participant::Role]
+        #     Required. The participant role to add or update the suggestion feature
+        #     config. Only HUMAN_AGENT or END_USER can be used.
+        # @!attribute [rw] suggestion_feature_type
+        #   @return [::Google::Cloud::Dialogflow::V2::SuggestionFeature::Type]
+        #     Required. The type of the suggestion feature to add or update.
+        # @!attribute [rw] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Timestamp whe the request was created. The time is measured on server side.
+        class SetSuggestionFeatureConfigOperationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Metadata for a [ConversationProfile.ClearSuggestionFeatureConfig][]
+        # operation.
+        # @!attribute [rw] conversation_profile
+        #   @return [::String]
+        #     The resource name of the conversation profile. Format:
+        #     `projects/<Project ID>/locations/<Location
+        #     ID>/conversationProfiles/<Conversation Profile ID>`
+        # @!attribute [rw] participant_role
+        #   @return [::Google::Cloud::Dialogflow::V2::Participant::Role]
+        #     Required. The participant role to remove the suggestion feature
+        #     config. Only HUMAN_AGENT or END_USER can be used.
+        # @!attribute [rw] suggestion_feature_type
+        #   @return [::Google::Cloud::Dialogflow::V2::SuggestionFeature::Type]
+        #     Required. The type of the suggestion feature to remove.
+        # @!attribute [rw] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Timestamp whe the request was created. The time is measured on server side.
+        class ClearSuggestionFeatureConfigOperationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

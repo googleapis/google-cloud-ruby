@@ -126,8 +126,10 @@ module Google
         # If only cron_spec + cron_job_duration are specified, the event is effective
         # starting at the local time specified by cron_spec, and is recurring.
         #
-        #   start_time|-------[cron job]-------[cron job]-------[cron job]---|end_time
-        #   cron job: cron spec start time + duration
+        # ```
+        # start_time|-------[cron job]-------[cron job]-------[cron job]---|end_time
+        # cron job: cron spec start time + duration
+        # ```
         # @!attribute [rw] start_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The start time of the event.
@@ -152,7 +154,6 @@ module Google
         # @!attribute [rw] game_server_config_name
         #   @return [::String]
         #     The game server config resource. Uses the form:
-        #
         #     `projects/{project}/locations/{location}/gameServerDeployments/{deployment_id}/configs/{config_id}`.
         # @!attribute [rw] name
         #   @return [::String]
@@ -167,12 +168,10 @@ module Google
         # @!attribute [rw] game_server_cluster_name
         #   @return [::String]
         #     The game server cluster name. Uses the form:
-        #
         #     `projects/{project}/locations/{location}/realms/{realm}/gameServerClusters/{cluster}`.
         # @!attribute [rw] game_server_deployment_name
         #   @return [::String]
         #     The game server deployment name. Uses the form:
-        #
         #     `projects/{project}/locations/{location}/gameServerDeployments/{deployment_id}`.
         # @!attribute [rw] fleet_details
         #   @return [::Array<::Google::Cloud::Gaming::V1::TargetDetails::TargetFleetDetails>]

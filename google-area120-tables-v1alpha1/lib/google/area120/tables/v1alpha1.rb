@@ -23,10 +23,17 @@ module Google
   module Area120
     module Tables
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
+      #
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/area120/tables/v1alpha1"
       #     client = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new
+      #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/area120/tables/v1alpha1"
+      #     client = ::Google::Area120::Tables::V1alpha1::TablesService::Rest::Client.new
       #
       module V1alpha1
       end

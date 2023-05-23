@@ -1,5 +1,5 @@
 --no-private
---title=Cloud Dataproc API
+--title="Cloud Dataproc API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

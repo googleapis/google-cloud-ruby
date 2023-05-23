@@ -5,6 +5,45 @@
   "protoPackage": "google.logging.v2",
   "libraryPackage": "::Google::Cloud::Logging::V2",
   "services": {
+    "LoggingServiceV2": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Logging::V2::LoggingService::Client",
+          "rpcs": {
+            "DeleteLog": {
+              "methods": [
+                "delete_log"
+              ]
+            },
+            "WriteLogEntries": {
+              "methods": [
+                "write_log_entries"
+              ]
+            },
+            "ListLogEntries": {
+              "methods": [
+                "list_log_entries"
+              ]
+            },
+            "ListMonitoredResourceDescriptors": {
+              "methods": [
+                "list_monitored_resource_descriptors"
+              ]
+            },
+            "ListLogs": {
+              "methods": [
+                "list_logs"
+              ]
+            },
+            "TailLogEntries": {
+              "methods": [
+                "tail_log_entries"
+              ]
+            }
+          }
+        }
+      }
+    },
     "ConfigServiceV2": {
       "clients": {
         "grpc": {
@@ -18,6 +57,16 @@
             "GetBucket": {
               "methods": [
                 "get_bucket"
+              ]
+            },
+            "CreateBucketAsync": {
+              "methods": [
+                "create_bucket_async"
+              ]
+            },
+            "UpdateBucketAsync": {
+              "methods": [
+                "update_bucket_async"
               ]
             },
             "CreateBucket": {
@@ -90,6 +139,26 @@
                 "delete_sink"
               ]
             },
+            "CreateLink": {
+              "methods": [
+                "create_link"
+              ]
+            },
+            "DeleteLink": {
+              "methods": [
+                "delete_link"
+              ]
+            },
+            "ListLinks": {
+              "methods": [
+                "list_links"
+              ]
+            },
+            "GetLink": {
+              "methods": [
+                "get_link"
+              ]
+            },
             "ListExclusions": {
               "methods": [
                 "list_exclusions"
@@ -124,44 +193,20 @@
               "methods": [
                 "update_cmek_settings"
               ]
-            }
-          }
-        }
-      }
-    },
-    "LoggingServiceV2": {
-      "clients": {
-        "grpc": {
-          "libraryClient": "::Google::Cloud::Logging::V2::LoggingService::Client",
-          "rpcs": {
-            "DeleteLog": {
+            },
+            "GetSettings": {
               "methods": [
-                "delete_log"
+                "get_settings"
               ]
             },
-            "WriteLogEntries": {
+            "UpdateSettings": {
               "methods": [
-                "write_log_entries"
+                "update_settings"
               ]
             },
-            "ListLogEntries": {
+            "CopyLogEntries": {
               "methods": [
-                "list_log_entries"
-              ]
-            },
-            "ListMonitoredResourceDescriptors": {
-              "methods": [
-                "list_monitored_resource_descriptors"
-              ]
-            },
-            "ListLogs": {
-              "methods": [
-                "list_logs"
-              ]
-            },
-            "TailLogEntries": {
-              "methods": [
-                "tail_log_entries"
+                "copy_log_entries"
               ]
             }
           }

@@ -1,5 +1,36 @@
 # Release History
 
+### 3.4.0 (2023-02-28)
+
+#### Features
+
+* Support REST transport ([#20524](https://github.com/googleapis/google-cloud-ruby/issues/20524)) 
+
+### 3.3.0 (2022-07-08)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+
+### 3.2.3 / 2022-01-11
+
+#### Documentation
+
+* Fix titles of documentation pages
+* Remove some broken images and fix outdated content in authentication documentation
+
+### 3.2.2 / 2021-07-12
+
+#### Documentation
+
+* Clarified some language around authentication configuration
+
+### 3.2.1 / 2021-06-30
+
+#### Bug Fixes
+
+* Expand dependencies to include future 1.x releases of versioned clients
+
 ### 3.2.0 / 2021-03-10
 
 #### Features

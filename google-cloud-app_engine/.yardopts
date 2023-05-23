@@ -1,5 +1,5 @@
 --no-private
---title=App Engine Admin API
+--title="App Engine Admin API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

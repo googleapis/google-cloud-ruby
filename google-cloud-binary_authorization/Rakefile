@@ -85,8 +85,8 @@ task :acceptance, :project, :keyfile do |t, args|
   if project.nil? || keyfile.nil?
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or BINARY_AUTHORIZATION_TEST_PROJECT=test123 BINARY_AUTHORIZATION_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
-  require "google/cloud/binary_authorization/v1beta1/binauthz_management_service/credentials"
-  ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Credentials.env_vars.each do |path|
+  require "google/cloud/binary_authorization/v1/binauthz_management_service/credentials"
+  ::Google::Cloud::BinaryAuthorization::V1::BinauthzManagementService::Credentials.env_vars.each do |path|
     ENV[path] = nil
   end
   ENV["BINARY_AUTHORIZATION_PROJECT"] = project
@@ -157,11 +157,6 @@ end
 desc "Run yard-doctest example tests."
 task :doctest do
   puts "The google-cloud-binary_authorization gem does not have doctest tests."
-end
-
-task :cloudrad do
-  ENV["CLOUDRAD_GEM_NAME"] = "google-cloud-binary_authorization"
-  sh "bundle exec yard doc --fail-on-warning --yardopts .yardopts-cloudrad"
 end
 
 desc "Run the CI build"

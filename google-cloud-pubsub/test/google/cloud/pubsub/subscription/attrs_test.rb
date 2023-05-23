@@ -17,6 +17,7 @@ require "helper"
 describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
   let(:labels) { { "foo" => "bar" } }
   let(:topic_name) { "topic-name-goes-here" }
+  let(:table_id) { "table_id" }
   let(:dead_letter_topic_path) { topic_path("topic-name-dead-letter") }
   let(:retry_minimum_backoff) { 12.123 }
   let(:retry_maximum_backoff) { 123.321 }
@@ -31,6 +32,15 @@ describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
   let(:sub_endpoint) { sub_hash[:push_config][:push_endpoint] }
   let(:sub_grpc) { Google::Cloud::PubSub::V1::Subscription.new(sub_hash) }
   let(:subscription) { Google::Cloud::PubSub::Subscription.from_grpc sub_grpc, pubsub.service }
+  let(:bq_subscription) do
+     Google::Cloud::PubSub::Subscription.from_grpc Google::Cloud::PubSub::V1::Subscription.new(sub_hash.merge!({
+                                                     bigquery_config: {
+                                                       table: table_id,
+                                                       write_metadata: true
+                                                     }
+                                                   })),
+                                                   pubsub.service       
+  end
 
   it "gets topic from the Google API object" do
     # No mocked service means no API calls are happening.
@@ -61,7 +71,7 @@ describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
     push_config = Google::Cloud::PubSub::V1::PushConfig.new(push_endpoint: new_push_endpoint)
     mpc_res = nil
     mock = Minitest::Mock.new
-    mock.expect :modify_push_config, mpc_res, [subscription: subscription_path(sub_name), push_config: push_config]
+    mock.expect :modify_push_config, mpc_res, subscription: subscription_path(sub_name), push_config: push_config
     pubsub.service.mocked_subscriber = mock
 
     subscription.endpoint = new_push_endpoint
@@ -75,6 +85,30 @@ describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
   end
 
   it "gets push_config from the Google API object" do
+    _(bq_subscription.bigquery_config).must_be_kind_of Google::Cloud::PubSub::V1::BigQueryConfig
+    _(bq_subscription.bigquery_config.table).must_equal table_id
+    _(bq_subscription.bigquery_config.write_metadata).must_equal true
+  end
+
+  it "can update bigquery config" do
+    mock = Minitest::Mock.new
+    mask = Google::Protobuf::FieldMask.new paths: ["bigquery_config"]
+    new_config = Google::Cloud::PubSub::V1::BigQueryConfig.new table: table_id, write_metadata: false
+    mock.expect :update_subscription, 
+                nil, 
+                subscription: Google::Cloud::PubSub::V1::Subscription.new(name: "projects/test/subscriptions/#{sub_name}", 
+                                                                          bigquery_config: new_config), 
+                update_mask: mask
+    pubsub.service.mocked_subscriber = mock
+
+    bq_subscription.bigquery_config do |bq_config|
+      bq_config.write_metadata = false
+    end
+
+    mock.verify
+  end
+
+  it "gets bigquery_config from the Google API object" do
     _(subscription.push_config).must_be_kind_of Google::Cloud::PubSub::Subscription::PushConfig
     _(subscription.push_config.endpoint).must_equal sub_endpoint
     _(subscription.push_config.authentication).must_be_kind_of Google::Cloud::PubSub::Subscription::PushConfig::OidcToken
@@ -120,7 +154,7 @@ describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
     it "makes an HTTP API call to retrieve topic" do
       get_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, sub_name)
       mock = Minitest::Mock.new
-      mock.expect :get_subscription, get_res, [subscription: subscription_path(sub_name)]
+      mock.expect :get_subscription, get_res, subscription: subscription_path(sub_name)
       subscription.service.mocked_subscriber = mock
 
       _(subscription.topic).must_be_kind_of Google::Cloud::PubSub::Topic
@@ -135,7 +169,7 @@ describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
     it "makes an HTTP API call to retrieve deadline" do
       get_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, sub_name)
       mock = Minitest::Mock.new
-      mock.expect :get_subscription, get_res, [subscription: subscription_path(sub_name)]
+      mock.expect :get_subscription, get_res, subscription: subscription_path(sub_name)
       subscription.service.mocked_subscriber = mock
 
       _(subscription.deadline).must_equal sub_deadline
@@ -146,7 +180,7 @@ describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
     it "makes an HTTP API call to retrieve retain_acked" do
       get_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, sub_name)
       mock = Minitest::Mock.new
-      mock.expect :get_subscription, get_res, [subscription: subscription_path(sub_name)]
+      mock.expect :get_subscription, get_res, subscription: subscription_path(sub_name)
       subscription.service.mocked_subscriber = mock
 
       assert subscription.retain_acked
@@ -157,7 +191,7 @@ describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
     it "makes an HTTP API call to retrieve endpoint" do
       get_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, sub_name)
       mock = Minitest::Mock.new
-      mock.expect :get_subscription, get_res, [subscription: subscription_path(sub_name)]
+      mock.expect :get_subscription, get_res, subscription: subscription_path(sub_name)
       subscription.service.mocked_subscriber = mock
 
       _(subscription.endpoint).must_equal sub_endpoint
@@ -170,7 +204,7 @@ describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
 
       get_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, sub_name)
       mock = Minitest::Mock.new
-      mock.expect :get_subscription, get_res, [subscription: subscription_path(sub_name)]
+      mock.expect :get_subscription, get_res, subscription: subscription_path(sub_name)
       subscription.service.mocked_subscriber = mock
 
       _(subscription.expires_in).must_equal two_days_seconds
@@ -181,7 +215,7 @@ describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
     it "makes an HTTP API call to retrieve labels" do
       get_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, sub_name, labels: labels)
       mock = Minitest::Mock.new
-      mock.expect :get_subscription, get_res, [subscription: subscription_path(sub_name)]
+      mock.expect :get_subscription, get_res, subscription: subscription_path(sub_name)
       subscription.service.mocked_subscriber = mock
 
       _(subscription.labels).must_equal labels
@@ -192,7 +226,7 @@ describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
     it "makes an HTTP API call to retrieve filter" do
       get_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, sub_name, filter: filter)
       mock = Minitest::Mock.new
-      mock.expect :get_subscription, get_res, [subscription: subscription_path(sub_name)]
+      mock.expect :get_subscription, get_res, subscription: subscription_path(sub_name)
       subscription.service.mocked_subscriber = mock
 
       _(subscription.filter).must_equal filter
@@ -203,7 +237,7 @@ describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
     it "makes an HTTP API call to retrieve dead_letter_topic and dead_letter_max_delivery_attempts" do
       get_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, sub_name, dead_letter_topic: dead_letter_topic_path, max_delivery_attempts: 7)
       mock = Minitest::Mock.new
-      mock.expect :get_subscription, get_res, [subscription: subscription_path(sub_name)]
+      mock.expect :get_subscription, get_res, subscription: subscription_path(sub_name)
       subscription.service.mocked_subscriber = mock
 
       _(subscription.dead_letter_topic.name).must_equal dead_letter_topic_path
@@ -215,7 +249,7 @@ describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
     it "makes an HTTP API call to retrieve retry_minimum_backoff" do
       get_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, sub_name, retry_minimum_backoff: retry_minimum_backoff)
       mock = Minitest::Mock.new
-      mock.expect :get_subscription, get_res, [subscription: subscription_path(sub_name)]
+      mock.expect :get_subscription, get_res, subscription: subscription_path(sub_name)
       subscription.service.mocked_subscriber = mock
 
       _(subscription.retry_policy.minimum_backoff).must_equal retry_minimum_backoff
@@ -226,7 +260,7 @@ describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
     it "makes an HTTP API call to retrieve retry_maximum_backoff" do
       get_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, sub_name, retry_maximum_backoff: retry_maximum_backoff)
       mock = Minitest::Mock.new
-      mock.expect :get_subscription, get_res, [subscription: subscription_path(sub_name)]
+      mock.expect :get_subscription, get_res, subscription: subscription_path(sub_name)
       subscription.service.mocked_subscriber = mock
 
       _(subscription.retry_policy.maximum_backoff).must_equal retry_maximum_backoff
@@ -237,7 +271,7 @@ describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
     it "makes an HTTP API call to retrieve detached" do
       get_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash(topic_name, sub_name, detached: true)
       mock = Minitest::Mock.new
-      mock.expect :get_subscription, get_res, [subscription: subscription_path(sub_name)]
+      mock.expect :get_subscription, get_res, subscription: subscription_path(sub_name)
       subscription.service.mocked_subscriber = mock
 
       _(subscription.detached?).must_equal true

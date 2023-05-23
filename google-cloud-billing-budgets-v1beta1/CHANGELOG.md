@@ -1,10 +1,51 @@
 # Release History
 
-### 0.6.0 / 2021-04-26
+### 0.7.0 (2022-07-01)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+
+### 0.6.5 / 2022-02-15
+
+#### Documentation
+
+* Various improvements to reference documentation
+
+### 0.6.4 / 2022-01-11
+
+#### Documentation
+
+* Fix titles of documentation pages
+* Remove some broken images and fix outdated content in authentication documentation
+
+### 0.6.3 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
+### 0.6.2 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
+### 0.6.1 / 2021-07-12
+
+#### Documentation
+
+* Clarify some language around authentication configuration
+
+### 0.6.0 / 2021-06-23
 
 #### Features
 
 * Added support for configurable budget time period
+
+#### Bug Fixes
+
+* Support future 1.x versions of gapic-common
 
 ### 0.5.0 / 2021-03-08
 

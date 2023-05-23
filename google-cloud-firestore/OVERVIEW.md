@@ -108,7 +108,7 @@ and it can't contain other collections. You do not need to "create" or "delete"
 collections. After you create the first document in a collection, the collection
 exists. If you delete all of the documents in a collection, it no longer exists.
 (For more information, see [Cloud Firestore Data
-Model](https://cloud.google.com/firestore/docs/data-model).
+Model](https://cloud.google.com/firestore/docs/data-model).)
 
 Use {Google::Cloud::Firestore::Client#cols Client#cols} to list the root-level
 collections:

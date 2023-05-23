@@ -26,6 +26,7 @@ require "google/cloud/firestore/admin/v1/firestore_admin/credentials"
 require "google/cloud/firestore/admin/v1/firestore_admin/paths"
 require "google/cloud/firestore/admin/v1/firestore_admin/operations"
 require "google/cloud/firestore/admin/v1/firestore_admin/client"
+require "google/cloud/firestore/admin/v1/firestore_admin/rest"
 
 module Google
   module Cloud
@@ -33,13 +34,44 @@ module Google
       module Admin
         module V1
           ##
+          # The Cloud Firestore Admin API.
+          #
+          # This API provides several administrative services for Cloud Firestore.
+          #
+          # Project, Database, Namespace, Collection, Collection Group, and Document are
+          # used as defined in the Google Cloud Firestore API.
+          #
+          # Operation: An Operation represents work being performed in the background.
+          #
+          # The index service manages Cloud Firestore indexes.
+          #
+          # Index creation is performed asynchronously.
+          # An Operation resource is created for each such asynchronous operation.
+          # The state of the operation (including any errors encountered)
+          # may be queried via the Operation resource.
+          #
+          # The Operations collection provides a record of actions performed for the
+          # specified Project (including any Operations in progress). Operations are not
+          # created directly but through calls on other collections or resources.
+          #
+          # An Operation that is done may be deleted so that it is no longer listed as
+          # part of the Operation collection. Operations are garbage collected after
+          # 30 days. By default, ListOperations will only return in progress and failed
+          # operations. To list completed operation, issue a ListOperations request with
+          # the filter `done: true`.
+          #
           # Operations are created by service `FirestoreAdmin`, but are accessed via
           # service `google.longrunning.Operations`.
           #
-          # To load this service and instantiate a client:
+          # @example Load this service and instantiate a gRPC client
           #
           #     require "google/cloud/firestore/admin/v1/firestore_admin"
           #     client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client.new
+          #
+          # @example Load this service and instantiate a REST client
+          #
+          #     require "google/cloud/firestore/admin/v1/firestore_admin/rest"
+          #     client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Rest::Client.new
           #
           module FirestoreAdmin
           end

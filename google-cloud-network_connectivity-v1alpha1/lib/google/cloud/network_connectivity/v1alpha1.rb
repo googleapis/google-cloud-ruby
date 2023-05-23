@@ -23,7 +23,9 @@ module Google
   module Cloud
     module NetworkConnectivity
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
+      #
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/network_connectivity/v1alpha1"
       #     client = ::Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Client.new

@@ -25,6 +25,7 @@ require "google/cloud/bigquery/data_transfer/v1/version"
 require "google/cloud/bigquery/data_transfer/v1/data_transfer_service/credentials"
 require "google/cloud/bigquery/data_transfer/v1/data_transfer_service/paths"
 require "google/cloud/bigquery/data_transfer/v1/data_transfer_service/client"
+require "google/cloud/bigquery/data_transfer/v1/data_transfer_service/rest"
 
 module Google
   module Cloud
@@ -32,15 +33,17 @@ module Google
       module DataTransfer
         module V1
           ##
-          # The Google BigQuery Data Transfer Service API enables BigQuery users to
-          # configure the transfer of their data from other Google Products into
-          # BigQuery. This service contains methods that are end user exposed. It backs
-          # up the frontend.
+          # This API allows users to manage their data transfers into BigQuery.
           #
-          # To load this service and instantiate a client:
+          # @example Load this service and instantiate a gRPC client
           #
           #     require "google/cloud/bigquery/data_transfer/v1/data_transfer_service"
           #     client = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client.new
+          #
+          # @example Load this service and instantiate a REST client
+          #
+          #     require "google/cloud/bigquery/data_transfer/v1/data_transfer_service/rest"
+          #     client = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Rest::Client.new
           #
           module DataTransferService
           end

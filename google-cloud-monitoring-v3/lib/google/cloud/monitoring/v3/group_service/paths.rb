@@ -105,6 +105,20 @@ module Google
             end
 
             ##
+            # Create a fully-qualified Project resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}`
+            #
+            # @param project [String]
+            #
+            # @return [::String]
+            def project_path project:
+              "projects/#{project}"
+            end
+
+            ##
             # Create a fully-qualified Workspace resource string.
             #
             # @overload workspace_path(project:)

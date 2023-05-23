@@ -4,7 +4,7 @@
 require 'google/protobuf'
 
 require 'google/protobuf/duration_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/appengine/v1/application.proto", :syntax => :proto3) do
     add_message "google.appengine.v1.Application" do
@@ -18,6 +18,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :serving_status, :enum, 10, "google.appengine.v1.Application.ServingStatus"
       optional :default_hostname, :string, 11
       optional :default_bucket, :string, 12
+      optional :service_account, :string, 13
       optional :iap, :message, 14, "google.appengine.v1.Application.IdentityAwareProxy"
       optional :gcr_domain, :string, 16
       optional :database_type, :enum, 17, "google.appengine.v1.Application.DatabaseType"

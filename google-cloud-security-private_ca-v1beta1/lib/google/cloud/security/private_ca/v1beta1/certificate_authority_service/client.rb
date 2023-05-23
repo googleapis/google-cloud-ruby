@@ -43,13 +43,12 @@ module Google
               # See {::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client::Configuration}
               # for a description of the configuration fields.
               #
-              # ## Example
+              # @example
               #
-              # To modify the configuration for all CertificateAuthorityService clients:
-              #
-              #     ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.configure do |config|
-              #       config.timeout = 10.0
-              #     end
+              #   # Modify the configuration for all CertificateAuthorityService clients
+              #   ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.configure do |config|
+              #     config.timeout = 10.0
+              #   end
               #
               # @yield [config] Configure the Client client.
               # @yieldparam config [Client::Configuration]
@@ -69,10 +68,7 @@ module Google
 
                   default_config.timeout = 60.0
                   default_config.retry_policy = {
-                    initial_delay: 0.1,
-                    max_delay: 60.0,
-                    multiplier: 1.3,
-                    retry_codes: [2, 14, 4]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [2, 14, 4]
                   }
 
                   default_config
@@ -104,19 +100,15 @@ module Google
               ##
               # Create a new CertificateAuthorityService client object.
               #
-              # ## Examples
+              # @example
               #
-              # To create a new CertificateAuthorityService client with the default
-              # configuration:
+              #   # Create a client using the default configuration
+              #   client = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new
               #
-              #     client = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new
-              #
-              # To create a new CertificateAuthorityService client with a custom
-              # configuration:
-              #
-              #     client = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
-              #       config.timeout = 10.0
-              #     end
+              #   # Create a client using a custom configuration
+              #   client = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
+              #     config.timeout = 10.0
+              #   end
               #
               # @yield [config] Configure the CertificateAuthorityService client.
               # @yieldparam config [Client::Configuration]
@@ -136,14 +128,13 @@ module Google
 
                 # Create credentials
                 credentials = @config.credentials
-                # Use self-signed JWT if the scope and endpoint are unchanged from default,
+                # Use self-signed JWT if the endpoint is unchanged from default,
                 # but only if the default endpoint does not have a region prefix.
-                enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                         @config.endpoint == Client.configure.endpoint &&
+                enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                          !@config.endpoint.split(".").first.include?("-")
                 credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
-                if credentials.is_a?(String) || credentials.is_a?(Hash)
+                if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                   credentials = Credentials.new credentials, scope: @config.scope
                 end
                 @quota_project_id = @config.quota_project
@@ -151,6 +142,7 @@ module Google
 
                 @operations_client = Operations.new do |config|
                   config.credentials = credentials
+                  config.quota_project = @quota_project_id
                   config.endpoint = @config.endpoint
                 end
 
@@ -225,6 +217,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/security/private_ca/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Security::PrivateCA::V1beta1::CreateCertificateRequest.new
+              #
+              #   # Call the create_certificate method.
+              #   result = client.create_certificate request
+              #
+              #   # The returned object is of type Google::Cloud::Security::PrivateCA::V1beta1::Certificate.
+              #   p result
+              #
               def create_certificate request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -242,16 +249,20 @@ module Google
                   gapic_version: ::Google::Cloud::Security::PrivateCA::V1beta1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "parent" => request.parent
-                }
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
                 options.apply_defaults timeout:      @config.rpcs.create_certificate.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.create_certificate.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @certificate_authority_service_stub.call_rpc :create_certificate, request, options: options do |response, operation|
@@ -291,6 +302,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/security/private_ca/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Security::PrivateCA::V1beta1::GetCertificateRequest.new
+              #
+              #   # Call the get_certificate method.
+              #   result = client.get_certificate request
+              #
+              #   # The returned object is of type Google::Cloud::Security::PrivateCA::V1beta1::Certificate.
+              #   p result
+              #
               def get_certificate request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -308,16 +334,20 @@ module Google
                   gapic_version: ::Google::Cloud::Security::PrivateCA::V1beta1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
                 options.apply_defaults timeout:      @config.rpcs.get_certificate.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.get_certificate.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @certificate_authority_service_stub.call_rpc :get_certificate, request, options: options do |response, operation|
@@ -377,6 +407,25 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/security/private_ca/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Security::PrivateCA::V1beta1::ListCertificatesRequest.new
+              #
+              #   # Call the list_certificates method.
+              #   result = client.list_certificates request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Security::PrivateCA::V1beta1::Certificate.
+              #     p item
+              #   end
+              #
               def list_certificates request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -394,16 +443,20 @@ module Google
                   gapic_version: ::Google::Cloud::Security::PrivateCA::V1beta1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "parent" => request.parent
-                }
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
                 options.apply_defaults timeout:      @config.rpcs.list_certificates.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.list_certificates.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @certificate_authority_service_stub.call_rpc :list_certificates, request, options: options do |response, operation|
@@ -461,6 +514,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/security/private_ca/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Security::PrivateCA::V1beta1::RevokeCertificateRequest.new
+              #
+              #   # Call the revoke_certificate method.
+              #   result = client.revoke_certificate request
+              #
+              #   # The returned object is of type Google::Cloud::Security::PrivateCA::V1beta1::Certificate.
+              #   p result
+              #
               def revoke_certificate request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -478,16 +546,20 @@ module Google
                   gapic_version: ::Google::Cloud::Security::PrivateCA::V1beta1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
                 options.apply_defaults timeout:      @config.rpcs.revoke_certificate.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.revoke_certificate.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @certificate_authority_service_stub.call_rpc :revoke_certificate, request, options: options do |response, operation|
@@ -544,6 +616,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/security/private_ca/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Security::PrivateCA::V1beta1::UpdateCertificateRequest.new
+              #
+              #   # Call the update_certificate method.
+              #   result = client.update_certificate request
+              #
+              #   # The returned object is of type Google::Cloud::Security::PrivateCA::V1beta1::Certificate.
+              #   p result
+              #
               def update_certificate request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -561,16 +648,20 @@ module Google
                   gapic_version: ::Google::Cloud::Security::PrivateCA::V1beta1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "certificate.name" => request.certificate.name
-                }
+                header_params = {}
+                if request.certificate&.name
+                  header_params["certificate.name"] = request.certificate.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
                 options.apply_defaults timeout:      @config.rpcs.update_certificate.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.update_certificate.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @certificate_authority_service_stub.call_rpc :update_certificate, request, options: options do |response, operation|
@@ -636,6 +727,28 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/security/private_ca/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Security::PrivateCA::V1beta1::ActivateCertificateAuthorityRequest.new
+              #
+              #   # Call the activate_certificate_authority method.
+              #   result = client.activate_certificate_authority request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def activate_certificate_authority request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -653,16 +766,20 @@ module Google
                   gapic_version: ::Google::Cloud::Security::PrivateCA::V1beta1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
                 options.apply_defaults timeout:      @config.rpcs.activate_certificate_authority.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.activate_certificate_authority.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @certificate_authority_service_stub.call_rpc :activate_certificate_authority, request, options: options do |response, operation|
@@ -724,6 +841,28 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/security/private_ca/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Security::PrivateCA::V1beta1::CreateCertificateAuthorityRequest.new
+              #
+              #   # Call the create_certificate_authority method.
+              #   result = client.create_certificate_authority request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def create_certificate_authority request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -741,16 +880,20 @@ module Google
                   gapic_version: ::Google::Cloud::Security::PrivateCA::V1beta1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "parent" => request.parent
-                }
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
                 options.apply_defaults timeout:      @config.rpcs.create_certificate_authority.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.create_certificate_authority.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @certificate_authority_service_stub.call_rpc :create_certificate_authority, request, options: options do |response, operation|
@@ -806,6 +949,28 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/security/private_ca/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Security::PrivateCA::V1beta1::DisableCertificateAuthorityRequest.new
+              #
+              #   # Call the disable_certificate_authority method.
+              #   result = client.disable_certificate_authority request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def disable_certificate_authority request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -823,16 +988,20 @@ module Google
                   gapic_version: ::Google::Cloud::Security::PrivateCA::V1beta1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
                 options.apply_defaults timeout:      @config.rpcs.disable_certificate_authority.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.disable_certificate_authority.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @certificate_authority_service_stub.call_rpc :disable_certificate_authority, request, options: options do |response, operation|
@@ -888,6 +1057,28 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/security/private_ca/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Security::PrivateCA::V1beta1::EnableCertificateAuthorityRequest.new
+              #
+              #   # Call the enable_certificate_authority method.
+              #   result = client.enable_certificate_authority request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def enable_certificate_authority request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -905,16 +1096,20 @@ module Google
                   gapic_version: ::Google::Cloud::Security::PrivateCA::V1beta1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
                 options.apply_defaults timeout:      @config.rpcs.enable_certificate_authority.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.enable_certificate_authority.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @certificate_authority_service_stub.call_rpc :enable_certificate_authority, request, options: options do |response, operation|
@@ -962,6 +1157,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/security/private_ca/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Security::PrivateCA::V1beta1::FetchCertificateAuthorityCsrRequest.new
+              #
+              #   # Call the fetch_certificate_authority_csr method.
+              #   result = client.fetch_certificate_authority_csr request
+              #
+              #   # The returned object is of type Google::Cloud::Security::PrivateCA::V1beta1::FetchCertificateAuthorityCsrResponse.
+              #   p result
+              #
               def fetch_certificate_authority_csr request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -979,16 +1189,20 @@ module Google
                   gapic_version: ::Google::Cloud::Security::PrivateCA::V1beta1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
                 options.apply_defaults timeout:      @config.rpcs.fetch_certificate_authority_csr.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.fetch_certificate_authority_csr.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @certificate_authority_service_stub.call_rpc :fetch_certificate_authority_csr, request, options: options do |response, operation|
@@ -1029,6 +1243,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/security/private_ca/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Security::PrivateCA::V1beta1::GetCertificateAuthorityRequest.new
+              #
+              #   # Call the get_certificate_authority method.
+              #   result = client.get_certificate_authority request
+              #
+              #   # The returned object is of type Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthority.
+              #   p result
+              #
               def get_certificate_authority request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1046,16 +1275,20 @@ module Google
                   gapic_version: ::Google::Cloud::Security::PrivateCA::V1beta1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
                 options.apply_defaults timeout:      @config.rpcs.get_certificate_authority.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.get_certificate_authority.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @certificate_authority_service_stub.call_rpc :get_certificate_authority, request, options: options do |response, operation|
@@ -1111,6 +1344,25 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/security/private_ca/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Security::PrivateCA::V1beta1::ListCertificateAuthoritiesRequest.new
+              #
+              #   # Call the list_certificate_authorities method.
+              #   result = client.list_certificate_authorities request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthority.
+              #     p item
+              #   end
+              #
               def list_certificate_authorities request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1128,16 +1380,20 @@ module Google
                   gapic_version: ::Google::Cloud::Security::PrivateCA::V1beta1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "parent" => request.parent
-                }
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
                 options.apply_defaults timeout:      @config.rpcs.list_certificate_authorities.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.list_certificate_authorities.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @certificate_authority_service_stub.call_rpc :list_certificate_authorities, request, options: options do |response, operation|
@@ -1193,6 +1449,28 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/security/private_ca/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Security::PrivateCA::V1beta1::RestoreCertificateAuthorityRequest.new
+              #
+              #   # Call the restore_certificate_authority method.
+              #   result = client.restore_certificate_authority request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def restore_certificate_authority request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1210,16 +1488,20 @@ module Google
                   gapic_version: ::Google::Cloud::Security::PrivateCA::V1beta1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
                 options.apply_defaults timeout:      @config.rpcs.restore_certificate_authority.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.restore_certificate_authority.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @certificate_authority_service_stub.call_rpc :restore_certificate_authority, request, options: options do |response, operation|
@@ -1275,6 +1557,28 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/security/private_ca/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Security::PrivateCA::V1beta1::ScheduleDeleteCertificateAuthorityRequest.new
+              #
+              #   # Call the schedule_delete_certificate_authority method.
+              #   result = client.schedule_delete_certificate_authority request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def schedule_delete_certificate_authority request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1292,16 +1596,20 @@ module Google
                   gapic_version: ::Google::Cloud::Security::PrivateCA::V1beta1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
                 options.apply_defaults timeout:      @config.rpcs.schedule_delete_certificate_authority.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.schedule_delete_certificate_authority.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @certificate_authority_service_stub.call_rpc :schedule_delete_certificate_authority, request, options: options do |response, operation|
@@ -1358,6 +1666,28 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/security/private_ca/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Security::PrivateCA::V1beta1::UpdateCertificateAuthorityRequest.new
+              #
+              #   # Call the update_certificate_authority method.
+              #   result = client.update_certificate_authority request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_certificate_authority request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1375,16 +1705,20 @@ module Google
                   gapic_version: ::Google::Cloud::Security::PrivateCA::V1beta1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "certificate_authority.name" => request.certificate_authority.name
-                }
+                header_params = {}
+                if request.certificate_authority&.name
+                  header_params["certificate_authority.name"] = request.certificate_authority.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
                 options.apply_defaults timeout:      @config.rpcs.update_certificate_authority.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.update_certificate_authority.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @certificate_authority_service_stub.call_rpc :update_certificate_authority, request, options: options do |response, operation|
@@ -1426,6 +1760,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/security/private_ca/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Security::PrivateCA::V1beta1::GetCertificateRevocationListRequest.new
+              #
+              #   # Call the get_certificate_revocation_list method.
+              #   result = client.get_certificate_revocation_list request
+              #
+              #   # The returned object is of type Google::Cloud::Security::PrivateCA::V1beta1::CertificateRevocationList.
+              #   p result
+              #
               def get_certificate_revocation_list request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1443,16 +1792,20 @@ module Google
                   gapic_version: ::Google::Cloud::Security::PrivateCA::V1beta1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
                 options.apply_defaults timeout:      @config.rpcs.get_certificate_revocation_list.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.get_certificate_revocation_list.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @certificate_authority_service_stub.call_rpc :get_certificate_revocation_list, request, options: options do |response, operation|
@@ -1508,6 +1861,25 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/security/private_ca/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Security::PrivateCA::V1beta1::ListCertificateRevocationListsRequest.new
+              #
+              #   # Call the list_certificate_revocation_lists method.
+              #   result = client.list_certificate_revocation_lists request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateRevocationList.
+              #     p item
+              #   end
+              #
               def list_certificate_revocation_lists request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1525,16 +1897,20 @@ module Google
                   gapic_version: ::Google::Cloud::Security::PrivateCA::V1beta1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "parent" => request.parent
-                }
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
                 options.apply_defaults timeout:      @config.rpcs.list_certificate_revocation_lists.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.list_certificate_revocation_lists.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @certificate_authority_service_stub.call_rpc :list_certificate_revocation_lists, request, options: options do |response, operation|
@@ -1591,6 +1967,28 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/security/private_ca/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Security::PrivateCA::V1beta1::UpdateCertificateRevocationListRequest.new
+              #
+              #   # Call the update_certificate_revocation_list method.
+              #   result = client.update_certificate_revocation_list request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
               def update_certificate_revocation_list request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1608,16 +2006,20 @@ module Google
                   gapic_version: ::Google::Cloud::Security::PrivateCA::V1beta1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "certificate_revocation_list.name" => request.certificate_revocation_list.name
-                }
+                header_params = {}
+                if request.certificate_revocation_list&.name
+                  header_params["certificate_revocation_list.name"] = request.certificate_revocation_list.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
                 options.apply_defaults timeout:      @config.rpcs.update_certificate_revocation_list.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.update_certificate_revocation_list.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @certificate_authority_service_stub.call_rpc :update_certificate_revocation_list, request, options: options do |response, operation|
@@ -1658,6 +2060,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/security/private_ca/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Security::PrivateCA::V1beta1::GetReusableConfigRequest.new
+              #
+              #   # Call the get_reusable_config method.
+              #   result = client.get_reusable_config request
+              #
+              #   # The returned object is of type Google::Cloud::Security::PrivateCA::V1beta1::ReusableConfig.
+              #   p result
+              #
               def get_reusable_config request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1675,16 +2092,20 @@ module Google
                   gapic_version: ::Google::Cloud::Security::PrivateCA::V1beta1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
                 options.apply_defaults timeout:      @config.rpcs.get_reusable_config.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.get_reusable_config.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @certificate_authority_service_stub.call_rpc :get_reusable_config, request, options: options do |response, operation|
@@ -1740,6 +2161,25 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/security/private_ca/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Security::PrivateCA::V1beta1::ListReusableConfigsRequest.new
+              #
+              #   # Call the list_reusable_configs method.
+              #   result = client.list_reusable_configs request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Security::PrivateCA::V1beta1::ReusableConfig.
+              #     p item
+              #   end
+              #
               def list_reusable_configs request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1757,16 +2197,20 @@ module Google
                   gapic_version: ::Google::Cloud::Security::PrivateCA::V1beta1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "parent" => request.parent
-                }
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
                 options.apply_defaults timeout:      @config.rpcs.list_reusable_configs.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.list_reusable_configs.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @certificate_authority_service_stub.call_rpc :list_reusable_configs, request, options: options do |response, operation|
@@ -1791,22 +2235,21 @@ module Google
               # Configuration can be applied globally to all clients, or to a single client
               # on construction.
               #
-              # # Examples
+              # @example
               #
-              # To modify the global config, setting the timeout for create_certificate
-              # to 20 seconds, and all remaining timeouts to 10 seconds:
+              #   # Modify the global config, setting the timeout for
+              #   # create_certificate to 20 seconds,
+              #   # and all remaining timeouts to 10 seconds.
+              #   ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.configure do |config|
+              #     config.timeout = 10.0
+              #     config.rpcs.create_certificate.timeout = 20.0
+              #   end
               #
-              #     ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.configure do |config|
-              #       config.timeout = 10.0
-              #       config.rpcs.create_certificate.timeout = 20.0
-              #     end
-              #
-              # To apply the above configuration only to a new client:
-              #
-              #     client = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
-              #       config.timeout = 10.0
-              #       config.rpcs.create_certificate.timeout = 20.0
-              #     end
+              #   # Apply the above configuration only to a new client.
+              #   client = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new do |config|
+              #     config.timeout = 10.0
+              #     config.rpcs.create_certificate.timeout = 20.0
+              #   end
               #
               # @!attribute [rw] endpoint
               #   The hostname or hostname:port of the service endpoint.
@@ -1817,9 +2260,9 @@ module Google
               #    *  (`String`) The path to a service account key file in JSON format
               #    *  (`Hash`) A service account key as a Hash
               #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-              #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+              #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
               #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-              #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+              #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
               #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
               #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
               #    *  (`nil`) indicating no credentials

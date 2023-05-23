@@ -24,10 +24,17 @@ module Google
     module Monitoring
       module Dashboard
         ##
-        # To load this package, including all its services, and instantiate a client:
+        # API client module.
+        #
+        # @example Load this package, including all its services, and instantiate a gRPC client
         #
         #     require "google/cloud/monitoring/dashboard/v1"
         #     client = ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client.new
+        #
+        # @example Load this package, including all its services, and instantiate a REST client
+        #
+        #     require "google/cloud/monitoring/dashboard/v1"
+        #     client = ::Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Rest::Client.new
         #
         module V1
         end

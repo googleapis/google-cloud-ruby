@@ -20,7 +20,6 @@ def query_create_examples project_id:, collection_path: "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START firestore_query_filter_dataset]
-  # [START fs_query_create_examples]
   cities_ref = firestore.col collection_path
   cities_ref.doc("SF").set(
     {
@@ -72,7 +71,6 @@ def query_create_examples project_id:, collection_path: "cities"
       regions:    ["jingjinji", "hebei"]
     }
   )
-  # [END fs_query_create_examples]
   # [END firestore_query_filter_dataset]
   puts "Added example cities data to the cities collection."
 end
@@ -83,7 +81,6 @@ def create_query_state project_id:, collection_path: "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START firestore_query_filter_eq_string]
-  # [START fs_create_query_state]
   cities_ref = firestore.col collection_path
 
   query = cities_ref.where "state", "=", "CA"
@@ -91,7 +88,6 @@ def create_query_state project_id:, collection_path: "cities"
   query.get do |city|
     puts "Document #{city.document_id} returned by query state=CA."
   end
-  # [END fs_create_query_state]
   # [END firestore_query_filter_eq_string]
 end
 
@@ -101,7 +97,6 @@ def create_query_capital project_id:, collection_path: "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START firestore_query_filter_eq_boolean]
-  # [START fs_create_query_capital]
   cities_ref = firestore.col collection_path
 
   query = cities_ref.where "capital", "=", true
@@ -109,7 +104,6 @@ def create_query_capital project_id:, collection_path: "cities"
   query.get do |city|
     puts "Document #{city.document_id} returned by query capital=true."
   end
-  # [END fs_create_query_capital]
   # [END firestore_query_filter_eq_boolean]
 end
 
@@ -121,11 +115,9 @@ def simple_queries project_id:, collection_path: "cities"
   cities_ref = firestore.col collection_path
 
   # [START firestore_query_filter_single_examples]
-  # [START fs_simple_queries]
   state_query      = cities_ref.where "state", "=", "CA"
   population_query = cities_ref.where "population", ">", 1_000_000
   name_query       = cities_ref.where "name", ">=", "San Francisco"
-  # [END fs_simple_queries]
   # [END firestore_query_filter_single_examples]
   state_query.get do |city|
     puts "Document #{city.document_id} returned by query state=CA."
@@ -145,9 +137,7 @@ def chained_query project_id:, collection_path: "cities"
   firestore  = Google::Cloud::Firestore.new project_id: project_id
   cities_ref = firestore.col collection_path
   # [START firestore_query_filter_compound_multi_eq]
-  # [START fs_chained_query]
   chained_query = cities_ref.where("state", "=", "CA").where("name", "=", "San Francisco")
-  # [END fs_chained_query]
   # [END firestore_query_filter_compound_multi_eq]
   chained_query.get do |city|
     puts "Document #{city.document_id} returned by query state=CA and name=San Francisco."
@@ -161,9 +151,7 @@ def composite_index_chained_query project_id:, collection_path: "cities"
   firestore  = Google::Cloud::Firestore.new project_id: project_id
   cities_ref = firestore.col collection_path
   # [START firestore_query_filter_compound_multi_eq_lt]
-  # [START fs_composite_index_chained_query]
   chained_query = cities_ref.where("state", "=", "CA").where("population", "<", 1_000_000)
-  # [END fs_composite_index_chained_query]
   # [END firestore_query_filter_compound_multi_eq_lt]
   chained_query.get do |city|
     puts "Document #{city.document_id} returned by query state=CA and population<1000000."
@@ -177,9 +165,7 @@ def range_query project_id:, collection_path: "cities"
   firestore  = Google::Cloud::Firestore.new project_id: project_id
   cities_ref = firestore.col collection_path
   # [START firestore_query_filter_range_valid]
-  # [START fs_range_query]
   range_query = cities_ref.where("state", ">=", "CA").where("state", "<=", "IN")
-  # [END fs_range_query]
   # [END firestore_query_filter_range_valid]
   range_query.get do |city|
     puts "Document #{city.document_id} returned by query CA<=state<=IN."
@@ -193,9 +179,7 @@ def invalid_range_query project_id:, collection_path: "cities"
   firestore  = Google::Cloud::Firestore.new project_id: project_id
   cities_ref = firestore.col collection_path
   # [START firestore_query_filter_range_invalid]
-  # [START fs_invalid_range_query]
   invalid_range_query = cities_ref.where("state", ">=", "CA").where("population", ">", 1_000_000)
-  # [END fs_invalid_range_query]
   # [END firestore_query_filter_range_invalid]
 end
 
@@ -205,10 +189,8 @@ def in_query_without_array project_id:, collection_path: "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START firestore_query_filter_in]
-  # [START fs_query_filter_in]
   cities_ref = firestore.col collection_path
   usr_or_japan = cities_ref.where "country", "in", ["USA", "Japan"]
-  # [END fs_query_filter_in]
   # [END firestore_query_filter_in]
   usr_or_japan.get do |city|
     puts "Document #{city.document_id} returned by query in ['USA','Japan']."
@@ -221,10 +203,8 @@ def in_query_with_array project_id:, collection_path: "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START firestore_query_filter_in_with_array]
-  # [START fs_query_filter_in_with_array]
   cities_ref = firestore.col collection_path
   exactly_one_cost = cities_ref.where "regions", "in", [["west_coast"], ["east_coast"]]
-  # [END fs_query_filter_in_with_array]
   # [END firestore_query_filter_in_with_array]
   exactly_one_cost.get do |city|
     puts "Document #{city.document_id} returned by query in [['west_coast'], ['east_coast']]."
@@ -237,10 +217,8 @@ def query_not_equals project_id:, collection_path: "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START firestore_query_filter_not_eq]
-  # [START fs_query_not_equals]
   cities_ref = firestore.col collection_path
   query = cities_ref.where "capital", "!=", false
-  # [END fs_query_not_equals]
   # [END firestore_query_filter_not_eq]
   query.get do |city|
     puts "Document #{city.document_id} returned by query capital!=false."
@@ -253,10 +231,8 @@ def filter_not_in project_id:, collection_path: "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START firestore_query_filter_not_in]
-  # [START fs_filter_not_in]
   cities_ref = firestore.col collection_path
   usr_or_japan = cities_ref.where "country", "not_in", ["USA", "Japan"]
-  # [END fs_filter_not_in]
   # [END firestore_query_filter_not_in]
   usr_or_japan.get do |city|
     puts "Document #{city.document_id} returned by query not_in ['USA','Japan']."
@@ -269,10 +245,8 @@ def array_contains_any_queries project_id:, collection_path: "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START firestore_query_filter_array_contains_any]
-  # [START fs_query_filter_array_contains_any]
   cities_ref = firestore.col collection_path
   costal_cities = cities_ref.where "regions", "array-contains-any", ["west_coast", "east_coast"]
-  # [END fs_query_filter_array_contains_any]
   # [END firestore_query_filter_array_contains_any]
   costal_cities.get do |city|
     puts "Document #{city.document_id} returned by query array-contains-any ['west_coast', 'east_coast']."
@@ -285,10 +259,8 @@ def array_contains_filter project_id:, collection_path: "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START firestore_query_filter_array_contains]
-  # [START fs_array_contains_filter]
   cities_ref = firestore.col collection_path
   cities = cities_ref.where "regions", "array-contains", "west_coast"
-  # [END fs_array_contains_filter]
   # [END firestore_query_filter_array_contains]
   cities.get do |city|
     puts "Document #{city.document_id} returned by query array-contains 'west_coast'."
@@ -301,7 +273,6 @@ def collection_group_query project_id:, collection_path: "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START firestore_query_collection_group_dataset]
-  # [START fs_collection_group_query_data_setup]
   cities_ref = firestore.col collection_path
 
   sf_landmarks = cities_ref.document("SF").collection("landmarks")
@@ -373,16 +344,13 @@ def collection_group_query project_id:, collection_path: "cities"
       type: "museum"
     }
   )
-  # [END fs_collection_group_query_data_setup]
   # [END firestore_query_collection_group_dataset]
 
   # [START firestore_query_collection_group_filter_eq]
-  # [START fs_collection_group_query]
   museums = firestore.collection_group("landmarks").where("type", "==", "museum")
   museums.get do |museum|
     puts "#{museum[:type]} name is #{museum[:name]}."
   end
-  # [END fs_collection_group_query]
   # [END firestore_query_collection_group_filter_eq]
 end
 

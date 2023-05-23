@@ -25,7 +25,7 @@ module Google
       module Reservation
         module V1
           module ReservationService
-            # This API allows users to manage their flat-rate BigQuery reservations.
+            # This API allows users to manage their BigQuery reservations.
             #
             # A reservation provides computational resource guarantees, in the form of
             # [slots](https://cloud.google.com/bigquery/docs/slots), to users. A slot is a
@@ -85,7 +85,7 @@ module Google
               #
               # For example, in order to downgrade from 10000 slots to 8000, you might
               # split a 10000 capacity commitment into commitments of 2000 and 8000. Then,
-              # you would change the plan of the first one to `FLEX` and then delete it.
+              # you delete the first one after the commitment end time passes.
               rpc :SplitCapacityCommitment, ::Google::Cloud::Bigquery::Reservation::V1::SplitCapacityCommitmentRequest, ::Google::Cloud::Bigquery::Reservation::V1::SplitCapacityCommitmentResponse
               # Merges capacity commitments of the same plan into a single commitment.
               #
@@ -118,6 +118,11 @@ module Google
               # * Assignments for all three entities (`organizationA`, `project1`, and
               #   `project2`) could all be created and mapped to the same or different
               #   reservations.
+              #
+              # "None" assignments represent an absence of the assignment. Projects
+              # assigned to None use on-demand pricing. To create a "None" assignment, use
+              # "none" as a reservation_id in the parent. Example parent:
+              # `projects/myproject/locations/US/reservations/none`.
               #
               # Returns `google.rpc.Code.PERMISSION_DENIED` if user does not have
               # 'bigquery.admin' permissions on the project using the reservation
@@ -164,8 +169,8 @@ module Google
               # queries from `project1` will still use `res1` while queries from
               # `project2` will switch to use on-demand mode.
               rpc :DeleteAssignment, ::Google::Cloud::Bigquery::Reservation::V1::DeleteAssignmentRequest, ::Google::Protobuf::Empty
-              # Looks up assignments for a specified resource for a particular region.
-              # If the request is about a project:
+              # Deprecated: Looks up assignments for a specified resource for a particular
+              # region. If the request is about a project:
               #
               # 1. Assignments created on the project will be returned if they exist.
               # 2. Otherwise assignments created on the closest ancestor will be
@@ -188,12 +193,37 @@ module Google
               # **Note** "-" cannot be used for projects
               # nor locations.
               rpc :SearchAssignments, ::Google::Cloud::Bigquery::Reservation::V1::SearchAssignmentsRequest, ::Google::Cloud::Bigquery::Reservation::V1::SearchAssignmentsResponse
+              # Looks up assignments for a specified resource for a particular region.
+              # If the request is about a project:
+              #
+              # 1. Assignments created on the project will be returned if they exist.
+              # 2. Otherwise assignments created on the closest ancestor will be
+              #    returned.
+              # 3. Assignments for different JobTypes will all be returned.
+              #
+              # The same logic applies if the request is about a folder.
+              #
+              # If the request is about an organization, then assignments created on the
+              # organization will be returned (organization doesn't have ancestors).
+              #
+              # Comparing to ListAssignments, there are some behavior
+              # differences:
+              #
+              # 1. permission on the assignee will be verified in this API.
+              # 2. Hierarchy lookup (project->folder->organization) happens in this API.
+              # 3. Parent here is `projects/*/locations/*`, instead of
+              #    `projects/*/locations/*reservations/*`.
+              rpc :SearchAllAssignments, ::Google::Cloud::Bigquery::Reservation::V1::SearchAllAssignmentsRequest, ::Google::Cloud::Bigquery::Reservation::V1::SearchAllAssignmentsResponse
               # Moves an assignment under a new reservation.
               #
               # This differs from removing an existing assignment and recreating a new one
               # by providing a transactional change that ensures an assignee always has an
               # associated reservation.
               rpc :MoveAssignment, ::Google::Cloud::Bigquery::Reservation::V1::MoveAssignmentRequest, ::Google::Cloud::Bigquery::Reservation::V1::Assignment
+              # Updates an existing assignment.
+              #
+              # Only the `priority` field can be updated.
+              rpc :UpdateAssignment, ::Google::Cloud::Bigquery::Reservation::V1::UpdateAssignmentRequest, ::Google::Cloud::Bigquery::Reservation::V1::Assignment
               # Retrieves a BI reservation.
               rpc :GetBiReservation, ::Google::Cloud::Bigquery::Reservation::V1::GetBiReservationRequest, ::Google::Cloud::Bigquery::Reservation::V1::BiReservation
               # Updates a BI reservation.

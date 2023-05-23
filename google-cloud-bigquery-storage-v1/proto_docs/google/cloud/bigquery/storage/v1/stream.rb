@@ -29,12 +29,14 @@ module Google
           #     `projects/{project_id}/locations/{location}/sessions/{session_id}`.
           # @!attribute [r] expire_time
           #   @return [::Google::Protobuf::Timestamp]
-          #     Output only. Time at which the session becomes invalid. After this time, subsequent
-          #     requests to read this Session will return errors. The expire_time is
-          #     automatically assigned and currently cannot be specified or updated.
+          #     Output only. Time at which the session becomes invalid. After this time,
+          #     subsequent requests to read this Session will return errors. The
+          #     expire_time is automatically assigned and currently cannot be specified or
+          #     updated.
           # @!attribute [rw] data_format
           #   @return [::Google::Cloud::Bigquery::Storage::V1::DataFormat]
-          #     Immutable. Data format of the output data.
+          #     Immutable. Data format of the output data. DATA_FORMAT_UNSPECIFIED not
+          #     supported.
           # @!attribute [r] avro_schema
           #   @return [::Google::Cloud::Bigquery::Storage::V1::AvroSchema]
           #     Output only. Avro schema.
@@ -47,7 +49,8 @@ module Google
           #     `projects/{project_id}/datasets/{dataset_id}/tables/{table_id}`
           # @!attribute [rw] table_modifiers
           #   @return [::Google::Cloud::Bigquery::Storage::V1::ReadSession::TableModifiers]
-          #     Optional. Any modifiers which are applied when reading from the specified table.
+          #     Optional. Any modifiers which are applied when reading from the specified
+          #     table.
           # @!attribute [rw] read_options
           #   @return [::Google::Cloud::Bigquery::Storage::V1::ReadSession::TableReadOptions]
           #     Optional. Read options for this session (e.g. column selection, filters).
@@ -59,6 +62,24 @@ module Google
           #     request_stream_count values *may* result in this list being unpopulated,
           #     in that case, the user will need to use a List method to get the streams
           #     instead, which is not yet available.
+          # @!attribute [r] estimated_total_bytes_scanned
+          #   @return [::Integer]
+          #     Output only. An estimate on the number of bytes this session will scan when
+          #     all streams are completely consumed. This estimate is based on
+          #     metadata from the table which might be incomplete or stale.
+          # @!attribute [r] estimated_row_count
+          #   @return [::Integer]
+          #     Output only. An estimate on the number of rows present in this session's
+          #     streams. This estimate is based on metadata from the table which might be
+          #     incomplete or stale.
+          # @!attribute [rw] trace_id
+          #   @return [::String]
+          #     Optional. ID set by client to annotate a session identity.  This does not
+          #     need to be strictly unique, but instead the same ID should be used to group
+          #     logically connected sessions (e.g. All using the same ID for all sessions
+          #     needed to complete a Spark SQL query is reasonable).
+          #
+          #     Maximum length is 256 bytes.
           class ReadSession
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -75,10 +96,53 @@ module Google
             # Options dictating how we read a table.
             # @!attribute [rw] selected_fields
             #   @return [::Array<::String>]
-            #     Names of the fields in the table that should be read. If empty, all
-            #     fields will be read. If the specified field is a nested field, all
-            #     the sub-fields in the field will be selected. The output field order is
-            #     unrelated to the order of fields in selected_fields.
+            #     Optional. The names of the fields in the table to be returned. If no
+            #     field names are specified, then all fields in the table are returned.
+            #
+            #     Nested fields -- the child elements of a STRUCT field -- can be selected
+            #     individually using their fully-qualified names, and will be returned as
+            #     record fields containing only the selected nested fields. If a STRUCT
+            #     field is specified in the selected fields list, all of the child elements
+            #     will be returned.
+            #
+            #     As an example, consider a table with the following schema:
+            #
+            #       {
+            #           "name": "struct_field",
+            #           "type": "RECORD",
+            #           "mode": "NULLABLE",
+            #           "fields": [
+            #               {
+            #                   "name": "string_field1",
+            #                   "type": "STRING",
+            #     .              "mode": "NULLABLE"
+            #               },
+            #               {
+            #                   "name": "string_field2",
+            #                   "type": "STRING",
+            #                   "mode": "NULLABLE"
+            #               }
+            #           ]
+            #       }
+            #
+            #     Specifying "struct_field" in the selected fields list will result in a
+            #     read session schema with the following logical structure:
+            #
+            #       struct_field {
+            #           string_field1
+            #           string_field2
+            #       }
+            #
+            #     Specifying "struct_field.string_field1" in the selected fields list will
+            #     result in a read session schema with the following logical structure:
+            #
+            #       struct_field {
+            #           string_field1
+            #       }
+            #
+            #     The order of the fields in the read session schema is derived from the
+            #     table schema and does not correspond to the order in which the fields are
+            #     specified in this list.
             # @!attribute [rw] row_restriction
             #   @return [::String]
             #     SQL text filtering statement, similar to a WHERE clause in a query.
@@ -94,6 +158,9 @@ module Google
             # @!attribute [rw] arrow_serialization_options
             #   @return [::Google::Cloud::Bigquery::Storage::V1::ArrowSerializationOptions]
             #     Optional. Options specific to the Apache Arrow output format.
+            # @!attribute [rw] avro_serialization_options
+            #   @return [::Google::Cloud::Bigquery::Storage::V1::AvroSerializationOptions]
+            #     Optional. Options specific to the Apache Avro output format
             class TableReadOptions
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -112,8 +179,72 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Information about a single stream that gets data inside the storage system.
+          # @!attribute [r] name
+          #   @return [::String]
+          #     Output only. Name of the stream, in the form
+          #     `projects/{project}/datasets/{dataset}/tables/{table}/streams/{stream}`.
+          # @!attribute [rw] type
+          #   @return [::Google::Cloud::Bigquery::Storage::V1::WriteStream::Type]
+          #     Immutable. Type of the stream.
+          # @!attribute [r] create_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. Create time of the stream. For the _default stream, this is
+          #     the creation_time of the table.
+          # @!attribute [r] commit_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. Commit time of the stream.
+          #     If a stream is of `COMMITTED` type, then it will have a commit_time same as
+          #     `create_time`. If the stream is of `PENDING` type, empty commit_time
+          #     means it is not committed.
+          # @!attribute [r] table_schema
+          #   @return [::Google::Cloud::Bigquery::Storage::V1::TableSchema]
+          #     Output only. The schema of the destination table. It is only returned in
+          #     `CreateWriteStream` response. Caller should generate data that's
+          #     compatible with this schema to send in initial `AppendRowsRequest`.
+          #     The table schema could go out of date during the life time of the stream.
+          # @!attribute [rw] write_mode
+          #   @return [::Google::Cloud::Bigquery::Storage::V1::WriteStream::WriteMode]
+          #     Immutable. Mode of the stream.
+          # @!attribute [rw] location
+          #   @return [::String]
+          #     Immutable. The geographic location where the stream's dataset resides. See
+          #     https://cloud.google.com/bigquery/docs/locations for supported
+          #     locations.
+          class WriteStream
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Type enum of the stream.
+            module Type
+              # Unknown type.
+              TYPE_UNSPECIFIED = 0
+
+              # Data will commit automatically and appear as soon as the write is
+              # acknowledged.
+              COMMITTED = 1
+
+              # Data is invisible until the stream is committed.
+              PENDING = 2
+
+              # Data is only visible up to the offset to which it was flushed.
+              BUFFERED = 3
+            end
+
+            # Mode enum of the stream.
+            module WriteMode
+              # Unknown type.
+              WRITE_MODE_UNSPECIFIED = 0
+
+              # Insert new records into the table.
+              # It is the default value if customers do not specify it.
+              INSERT = 1
+            end
+          end
+
           # Data format for input or output data.
           module DataFormat
+            # Data format is unspecified.
             DATA_FORMAT_UNSPECIFIED = 0
 
             # Avro is a standard open source row based file format.
@@ -123,6 +254,23 @@ module Google
             # Arrow is a standard open source column-based message format.
             # See https://arrow.apache.org/ for more details.
             ARROW = 2
+          end
+
+          # WriteStreamView is a view enum that controls what details about a write
+          # stream should be returned.
+          module WriteStreamView
+            # The default / unset value.
+            WRITE_STREAM_VIEW_UNSPECIFIED = 0
+
+            # The BASIC projection returns basic metadata about a write stream.  The
+            # basic view does not include schema information.  This is the default view
+            # returned by GetWriteStream.
+            BASIC = 1
+
+            # The FULL projection returns all available write stream metadata, including
+            # the schema.  CreateWriteStream returns the full projection of write stream
+            # metadata.
+            FULL = 2
           end
         end
       end

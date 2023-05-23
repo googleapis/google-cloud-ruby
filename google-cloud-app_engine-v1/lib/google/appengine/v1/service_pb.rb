@@ -4,13 +4,14 @@
 require 'google/protobuf'
 
 require 'google/appengine/v1/network_settings_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/appengine/v1/service.proto", :syntax => :proto3) do
     add_message "google.appengine.v1.Service" do
       optional :name, :string, 1
       optional :id, :string, 2
       optional :split, :message, 3, "google.appengine.v1.TrafficSplit"
+      map :labels, :string, :string, 4
       optional :network_settings, :message, 6, "google.appengine.v1.NetworkSettings"
     end
     add_message "google.appengine.v1.TrafficSplit" do

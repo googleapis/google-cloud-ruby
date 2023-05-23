@@ -188,7 +188,7 @@ describe Google::Cloud::Debugger::Breakpoint, :mock_debugger do
     it "calls breakpoint#set_error_state if Evaluator.eval_condition raises error" do
       stubbed_readonly_eval_expression = ->(_, _) { raise }
       mocked_set_error_state = Minitest::Mock.new
-      mocked_set_error_state.expect :call, nil, [String, {refers_to: :BREAKPOINT_CONDITION}]
+      mocked_set_error_state.expect :call, nil, [String], refers_to: :BREAKPOINT_CONDITION
 
       Google::Cloud::Debugger::Breakpoint::Evaluator.stub :readonly_eval_expression, stubbed_readonly_eval_expression do
         breakpoint.stub :set_error_state, mocked_set_error_state do
@@ -201,7 +201,7 @@ describe Google::Cloud::Debugger::Breakpoint, :mock_debugger do
 
     it "calls breakpoint#set_error_state if mutation is detected while evaluating condition" do
       mocked_set_error_state = Minitest::Mock.new
-      mocked_set_error_state.expect :call, nil, [String, {refers_to: :BREAKPOINT_CONDITION}]
+      mocked_set_error_state.expect :call, nil, [String], refers_to: :BREAKPOINT_CONDITION
       stubbed_condition_result = Google::Cloud::Debugger::MutationError.new
 
       Google::Cloud::Debugger::Breakpoint::Evaluator.stub :readonly_eval_expression, stubbed_condition_result do

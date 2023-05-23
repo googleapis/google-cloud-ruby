@@ -3,4 +3,3 @@ source "https://rubygems.org"
 gemspec
 
 gem "google-cloud-dataproc-v1", path: "../google-cloud-dataproc-v1"
-gem "google-cloud-dataproc-v1beta2", path: "../google-cloud-dataproc-v1beta2"

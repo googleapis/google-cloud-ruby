@@ -38,9 +38,9 @@ module Google
         #     "my-instance",
         #     display_name: "Instance for user data",
         #     type: :DEVELOPMENT,
-        #     labels: { "env" => "dev"}
+        #     labels: { "env" => "dev" }
         #   ) do |clusters|
-        #     clusters.add("test-cluster", "us-east1-b") # nodes not allowed
+        #     clusters.add "test-cluster", "us-east1-b" # nodes not allowed
         #   end
         #
         #   # Check and reload.
@@ -74,9 +74,9 @@ module Google
           #     "my-instance",
           #     display_name: "Instance for user data",
           #     type: :DEVELOPMENT,
-          #     labels: { "env" => "dev"}
+          #     labels: { "env" => "dev" }
           #   ) do |clusters|
-          #     clusters.add("test-cluster", "us-east1-b") # nodes not allowed
+          #     clusters.add "test-cluster", "us-east1-b" # nodes not allowed
           #   end
           #
           #   job.done? #=> false

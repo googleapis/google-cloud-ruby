@@ -1,0 +1,34 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-dlp.gemspec",
+    "lib/google-cloud-dlp.rb",
+    "lib/google/cloud/dlp.rb",
+    "lib/google/cloud/dlp/version.rb",
+    "test/google/cloud/dlp/client_test.rb",
+    "test/google/cloud/dlp/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml",
+    "MIGRATING.md",
+    "acceptance/google/cloud/dlp/v2/dlp_service_smoke_test.rb",
+    "samples/Gemfile",
+    "samples/README.md",
+    "samples/Rakefile",
+    "samples/acceptance/data/test.txt",
+    "samples/acceptance/quickstart_test.rb",
+    "samples/acceptance/sample_test.rb",
+    "samples/quickstart.rb",
+    "samples/sample.rb"
+  ]
+}

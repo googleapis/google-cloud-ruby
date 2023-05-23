@@ -75,6 +75,9 @@ module Google
           # @!attribute [rw] progress_bytes
           #   @return [::Google::Cloud::Firestore::Admin::V1::Progress]
           #     The progress, in bytes, of this operation.
+          # @!attribute [rw] ttl_config_delta
+          #   @return [::Google::Cloud::Firestore::Admin::V1::FieldOperationMetadata::TtlConfigDelta]
+          #     Describes the deltas of TTL configuration.
           class FieldOperationMetadata
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -99,6 +102,27 @@ module Google
                 ADD = 1
 
                 # The single field index is being removed.
+                REMOVE = 2
+              end
+            end
+
+            # Information about an TTL configuration change.
+            # @!attribute [rw] change_type
+            #   @return [::Google::Cloud::Firestore::Admin::V1::FieldOperationMetadata::TtlConfigDelta::ChangeType]
+            #     Specifies how the TTL configuration is changing.
+            class TtlConfigDelta
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Specifies how the TTL config is changing.
+              module ChangeType
+                # The type of change is not specified or known.
+                CHANGE_TYPE_UNSPECIFIED = 0
+
+                # The TTL config is being added.
+                ADD = 1
+
+                # The TTL config is being removed.
                 REMOVE = 2
               end
             end

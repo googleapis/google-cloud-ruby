@@ -39,6 +39,9 @@ module Google
 
             # SHA256 hash.
             SHA256 = 1
+
+            # MD5 hash.
+            MD5 = 2
           end
         end
 
@@ -46,7 +49,8 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     The name of the file, for example:
-        #     "projects/p1/locations/us-central1/repositories/repo1/files/a/b/c.txt".
+        #     "projects/p1/locations/us-central1/repositories/repo1/files/a%2Fb%2Fc.txt".
+        #     If the file ID part contains slashes, they are escaped.
         # @!attribute [rw] size_bytes
         #   @return [::Integer]
         #     The size of the File in bytes.
@@ -70,7 +74,8 @@ module Google
         # The request to list files.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     The name of the parent resource whose files will be listed.
+        #     The name of the repository whose files will be listed. For example:
+        #     "projects/p1/locations/us-central1/repositories/repo1
         # @!attribute [rw] filter
         #   @return [::String]
         #     An expression for filtering the results of the request. Filter rules are

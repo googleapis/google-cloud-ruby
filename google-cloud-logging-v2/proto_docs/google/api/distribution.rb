@@ -49,7 +49,7 @@ module Google
     #
     #         Sum[i=1..n]((x_i - mean)^2)
     #
-    #     Knuth, "The Art of Computer Programming", Vol. 2, page 323, 3rd edition
+    #     Knuth, "The Art of Computer Programming", Vol. 2, page 232, 3rd edition
     #     describes Welford's method for accumulating this sum in one pass.
     #
     #     If `count` is zero then this field must be zero.
@@ -133,6 +133,7 @@ module Google
         # following boundaries:
         #
         #    Upper bound (0 <= i < N-1):     offset + (width * i).
+        #
         #    Lower bound (1 <= i < N):       offset + (width * (i - 1)).
         # @!attribute [rw] num_finite_buckets
         #   @return [::Integer]
@@ -156,6 +157,7 @@ module Google
         # following boundaries:
         #
         #    Upper bound (0 <= i < N-1):     scale * (growth_factor ^ i).
+        #
         #    Lower bound (1 <= i < N):       scale * (growth_factor ^ (i - 1)).
         # @!attribute [rw] num_finite_buckets
         #   @return [::Integer]
@@ -207,7 +209,7 @@ module Google
       #   @return [::Array<::Google::Protobuf::Any>]
       #     Contextual information about the example value. Examples are:
       #
-      #       Trace ID: type.googleapis.com/google.devtools.cloudtrace.v1.Trace
+      #       Trace: type.googleapis.com/google.monitoring.v3.SpanContext
       #
       #       Literal string: type.googleapis.com/google.protobuf.StringValue
       #

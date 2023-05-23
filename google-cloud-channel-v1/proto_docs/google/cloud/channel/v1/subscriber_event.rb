@@ -35,7 +35,7 @@ module Google
 
           # Type of customer event.
           module Type
-            # Default value. This state doesn't show unless an error occurs.
+            # Not used.
             TYPE_UNSPECIFIED = 0
 
             # Primary domain for customer was changed.
@@ -60,7 +60,7 @@ module Google
 
           # Type of entitlement event.
           module Type
-            # Default value. This state doesn't show unless an error occurs.
+            # Not used.
             TYPE_UNSPECIFIED = 0
 
             # A new entitlement was created.
@@ -98,17 +98,20 @@ module Google
 
             # License was assigned to or revoked from a user.
             LICENSE_ASSIGNMENT_CHANGED = 12
+
+            # License cap was changed for the entitlement.
+            LICENSE_CAP_CHANGED = 13
           end
         end
 
         # Represents information which resellers will get as part of notification from
-        # Cloud Pub/Sub.
+        # Pub/Sub.
         # @!attribute [rw] customer_event
         #   @return [::Google::Cloud::Channel::V1::CustomerEvent]
-        #     Customer event send as part of Pub/Sub event to partners.
+        #     Customer event sent as part of Pub/Sub event to partners.
         # @!attribute [rw] entitlement_event
         #   @return [::Google::Cloud::Channel::V1::EntitlementEvent]
-        #     Entitlement event send as part of Pub/Sub event to partners.
+        #     Entitlement event sent as part of Pub/Sub event to partners.
         class SubscriberEvent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

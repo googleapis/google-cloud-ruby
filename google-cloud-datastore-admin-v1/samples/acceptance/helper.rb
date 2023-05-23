@@ -17,9 +17,17 @@ require "minitest/focus"
 require "securerandom"
 
 require "google/cloud/datastore/admin/v1"
+require "google/cloud/storage"
+    
 
 def storage_bucket_name
   ENV["GOOGLE_CLOUD_STORAGE_BUCKET"] || "ruby-samples-test"
+end
+
+def create_bucket
+  storage = Google::Cloud::Storage.new
+  bucket = storage.bucket storage_bucket_name
+  storage.create_bucket storage_bucket_name if bucket.nil? 
 end
 
 def random_storage_file_prefix

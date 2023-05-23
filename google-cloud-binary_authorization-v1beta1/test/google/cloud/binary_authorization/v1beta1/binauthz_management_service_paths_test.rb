@@ -44,6 +44,9 @@ class ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::
 
       path = client.policy_path project: "value0"
       assert_equal "projects/value0/policy", path
+
+      path = client.policy_path location: "value0"
+      assert_equal "locations/value0/policy", path
     end
   end
 

@@ -1,5 +1,71 @@
 # Release History
 
+### 2.7.1 (2023-05-18)
+
+#### Documentation
+
+* Fixed broken links in authentication documentation ([#21619](https://github.com/googleapis/google-cloud-ruby/issues/21619)) 
+
+### 2.7.0 (2023-04-12)
+
+#### Features
+
+* Support OR filter ([#21002](https://github.com/googleapis/google-cloud-ruby/issues/21002)) 
+
+### 2.6.0 (2023-02-13)
+
+#### Features
+
+* Added support for snapshot read ([#19422](https://github.com/googleapis/google-cloud-ruby/issues/19422)) 
+
+### 2.5.0 (2023-02-09)
+
+#### Features
+
+* Added support for multiple database ([#20038](https://github.com/googleapis/google-cloud-ruby/issues/20038)) 
+
+### 2.4.0 (2023-02-02)
+
+#### Features
+
+* Support query count for Datastore ([#20039](https://github.com/googleapis/google-cloud-ruby/issues/20039)) 
+
+### 2.3.1 (2022-12-14)
+
+#### Bug Fixes
+
+* fixed request limit 
+
+### 2.3.0 (2022-06-28)
+
+#### Features
+
+* Add support for operators "!=", "in" and "not_in" in datastore ([#18401](https://github.com/googleapis/google-cloud-ruby/issues/18401)) 
+
+### 2.2.4 / 2022-01-11
+
+#### Documentation
+
+* Update contributing docs
+
+### 2.2.3 / 2021-10-21
+
+#### Documentation
+
+* Add documentation for quota_project Configuration attribute
+
+### 2.2.2 / 2021-09-21
+
+#### Documentation
+
+* Fix typo in Emulator guide links
+
+### 2.2.1 / 2021-07-08
+
+#### Documentation
+
+* Update AUTHENTICATION.md in handwritten packages
+
 ### 2.2.0 / 2021-03-10
 
 #### Features

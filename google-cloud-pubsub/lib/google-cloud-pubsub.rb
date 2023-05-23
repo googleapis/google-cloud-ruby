@@ -41,7 +41,7 @@ module Google
     #   The default scope is:
     #
     #   * `https://www.googleapis.com/auth/pubsub`
-    # @param [Integer] timeout Default timeout to use in requests. Optional.
+    # @param [Numeric] timeout Default timeout to use in requests. Optional.
     #
     # @return [Google::Cloud::PubSub::Project]
     #
@@ -87,7 +87,7 @@ module Google
     #   The default scope is:
     #
     #   * `https://www.googleapis.com/auth/pubsub`
-    # @param [Integer] timeout Default timeout to use in requests. Optional.
+    # @param [Numeric] timeout Default timeout to use in requests. Optional.
     #
     # @return [Google::Cloud::PubSub::Project]
     #
@@ -133,7 +133,7 @@ Google::Cloud.configure.add_config! :pubsub do |config|
   config.add_alias! :keyfile, :credentials
   config.add_field! :scope, default_scopes, match: [String, Array]
   config.add_field! :quota_project, nil, match: String
-  config.add_field! :timeout, nil, match: Integer
+  config.add_field! :timeout, nil, match: Numeric
   config.add_field! :emulator_host, default_emulator, match: String, allow_nil: true
   config.add_field! :on_error, nil, match: Proc
   config.add_field! :endpoint, "pubsub.googleapis.com", match: String

@@ -1,5 +1,143 @@
 # Release History
 
+### 0.16.0 (2023-05-18)
+
+#### Features
+
+* add cloud storage subscription fields ([#21576](https://github.com/googleapis/google-cloud-ruby/issues/21576)) 
+
+### 0.15.1 (2023-02-23)
+
+#### Documentation
+
+* Minor updates ([#20492](https://github.com/googleapis/google-cloud-ruby/issues/20492)) 
+
+### 0.15.0 (2023-02-17)
+
+#### Features
+
+* ModifyAckDeadlineConfirmation includes a list of ack IDs that failed with temporary issues ([#20445](https://github.com/googleapis/google-cloud-ruby/issues/20445)) 
+#### Bug Fixes
+
+* Make INTERNAL a retryable error for the pull RPC 
+
+### 0.14.0 (2023-02-16)
+
+#### Features
+
+* AcknowledgeConfirmation includes a list of ack IDs that failed with temporary issues ([#20431](https://github.com/googleapis/google-cloud-ruby/issues/20431)) 
+#### Documentation
+
+* Various fixes and clarifications in reference documentation 
+
+### 0.13.1 (2023-02-13)
+
+#### Documentation
+
+* Deprecated the revision_id parameter to commit_schema_revision and delete_schema_revision ([#20139](https://github.com/googleapis/google-cloud-ruby/issues/20139)) 
+
+### 0.13.0 (2023-01-12)
+
+#### Features
+
+* Added support for schema evolution, including managing schema revisions, and schema commit and rollback ([#19981](https://github.com/googleapis/google-cloud-ruby/issues/19981)) 
+
+### 0.12.1 (2023-01-05)
+
+#### Documentation
+
+* Update some reference documents ([#19901](https://github.com/googleapis/google-cloud-ruby/issues/19901)) 
+
+### 0.12.0 (2022-10-21)
+
+#### Features
+
+* Provide easier access to IAM functionality via the standard IAMPolicy client class ([#19315](https://github.com/googleapis/google-cloud-ruby/issues/19315)) 
+
+### 0.11.0 (2022-07-07)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+
+### 0.10.0 (2022-05-19)
+
+#### Features
+
+* add BigQuery configuration and state for Subscriptions
+
+### 0.9.0 (2022-04-20)
+
+#### Features
+
+* Support for update masks when setting IAM policies
+
+### 0.8.0 / 2022-04-01
+
+#### Features
+
+* increase GRPC max metadata size to 4 MB
+
+### 0.7.1 / 2022-02-15
+
+#### Bug Fixes
+
+* Fix misspelled field name StreamingPullResponse#acknowledge_confirmation (was acknowlege_confirmation)
+
+### 0.7.0 / 2022-02-08
+
+#### Features
+
+* Support acknowledgment confirmations when exactly-once delivery is enabled
+* Support exactly-once delivery when creating a subscription
+
+### 0.6.2 / 2022-01-11
+
+#### Documentation
+
+* Fix titles of documentation pages
+* Remove some broken images and fix outdated content in authentication documentation
+
+### 0.6.1 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
+### 0.6.0 / 2021-08-11
+
+#### Features
+
+* Support setting message retention duration on a topic
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
+### 0.5.2 / 2021-07-12
+
+#### Documentation
+
+* Clarify some language around authentication configuration
+
+### 0.5.1 / 2021-07-08
+
+#### Bug Fixes
+
+* Removed a proto file that is duplicated from the iam-v1 gem
+
+### 0.5.0 / 2021-07-07
+
+#### Features
+
+* Add subscription properties to streaming pull response
+
+### 0.4.1 / 2021-06-17
+
+#### Bug Fixes
+
+* Support future 1.x versions of gapic-common
+
 ### 0.4.0 / 2021-03-08
 
 #### Features

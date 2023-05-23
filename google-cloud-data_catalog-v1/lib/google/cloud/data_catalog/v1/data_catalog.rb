@@ -24,20 +24,27 @@ require "google/cloud/data_catalog/v1/version"
 
 require "google/cloud/data_catalog/v1/data_catalog/credentials"
 require "google/cloud/data_catalog/v1/data_catalog/paths"
+require "google/cloud/data_catalog/v1/data_catalog/operations"
 require "google/cloud/data_catalog/v1/data_catalog/client"
+require "google/cloud/data_catalog/v1/data_catalog/rest"
 
 module Google
   module Cloud
     module DataCatalog
       module V1
         ##
-        # Data Catalog API service allows clients to discover, understand, and manage
-        # their data.
+        # Data Catalog API service allows you to discover, understand, and manage
+        # your data.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/data_catalog/v1/data_catalog"
         #     client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/data_catalog/v1/data_catalog/rest"
+        #     client = ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client.new
         #
         module DataCatalog
         end

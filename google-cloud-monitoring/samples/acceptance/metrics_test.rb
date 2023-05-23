@@ -22,6 +22,8 @@ describe "metrics", :monitoring do
   describe "create_metric_descriptor" do
     after do
       client.delete_metric_descriptor name: metric_name
+    rescue StandardError => e
+      warn "Unexpectedly failed to delete newly created metric: #{e}"
     end
 
     it "creates a metric descriptor" do
@@ -43,7 +45,9 @@ describe "metrics", :monitoring do
       client.create_metric_descriptor name: project_path, metric_descriptor: descriptor
 
       out, _err = capture_io do
-        delete_metric_descriptor project_id: project_id, metric_type: metric_type
+        retry_block 3 do
+          delete_metric_descriptor project_id: project_id, metric_type: metric_type
+        end
       end
       assert_match(/Deleted metric descriptor #{metric_name}/, out)
     end
@@ -64,7 +68,7 @@ describe "metrics", :monitoring do
       out, _err = capture_io do
         get_metric_descriptor project_id: project_id, metric_type: type
       end
-      assert_match(/Number of bytes in all log entries ingested/, out)
+      assert_match(/Number of bytes in ingested log entries. Excluded logs are not counted./, out)
     end
   end
 
@@ -82,7 +86,7 @@ describe "metrics", :monitoring do
       out, _err = capture_io do
         get_monitored_resource_descriptor project_id: project_id, resource_type: "gce_instance"
       end
-      assert_match(/GCE VM Instance/, out)
+      assert_match(/VM Instance/, out)
     end
   end
 
@@ -94,7 +98,9 @@ describe "metrics", :monitoring do
     it "writes time series data that can be read back" do
       start_secs = (Time.now - 2).to_i
       out, _err = capture_io do
-        write_time_series project_id: project_id, metric_type: metric_type
+        retry_block 3 do
+          write_time_series project_id: project_id, metric_type: metric_type
+        end
       end
       end_secs = (Time.now + 2).to_i
       assert_match(/Time series created/, out)

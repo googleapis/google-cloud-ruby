@@ -33,10 +33,10 @@ describe Google::Cloud::Bigquery::Model, :partial, :update, :mock_bigquery do
     mock = Minitest::Mock.new
     model_hash = random_model_full_hash dataset, model_id, name: new_model_name, description: description
     patched_model_full_gapi = Google::Apis::BigqueryV2::Model.new model_reference: model.model_ref, friendly_name: "My Updated Model"
-    mock.expect :get_model, random_model_full_hash(dataset, model_id).to_json, [project, dataset, model_id, options: { skip_deserialization: true }]
+    mock.expect :get_model, random_model_full_hash(dataset, model_id).to_json, [project, dataset, model_id], options: { skip_deserialization: true }
     mock.expect :patch_model, model_hash.to_json,
-      [project, dataset, model_id, patched_model_full_gapi, options: { skip_deserialization: true, header: { "If-Match" => etag } }]
-    mock.expect :get_model, model_hash.to_json, [project, dataset, model_id, options: { skip_deserialization: true }]
+      [project, dataset, model_id, patched_model_full_gapi], options: { skip_deserialization: true, header: { "If-Match" => etag } }
+    mock.expect :get_model, model_hash.to_json, [project, dataset, model_id], options: { skip_deserialization: true }
 
     model.service.mocked_service = mock
 
@@ -53,10 +53,10 @@ describe Google::Cloud::Bigquery::Model, :partial, :update, :mock_bigquery do
     mock = Minitest::Mock.new
     model_hash = random_model_full_hash dataset, model_id, name: model_name, description: new_description
     patched_model_full_gapi = Google::Apis::BigqueryV2::Model.new model_reference: model.model_ref, description: "This is my updated model"
-    mock.expect :get_model, random_model_full_hash(dataset, model_id).to_json, [project, dataset, model_id, options: { skip_deserialization: true }]
+    mock.expect :get_model, random_model_full_hash(dataset, model_id).to_json, [project, dataset, model_id], options: { skip_deserialization: true }
     mock.expect :patch_model, model_hash.to_json,
-      [project, dataset, model_id, patched_model_full_gapi, options: { skip_deserialization: true, header: { "If-Match" => etag } }]
-    mock.expect :get_model, model_hash.to_json, [project, dataset, model_id, options: { skip_deserialization: true }]
+      [project, dataset, model_id, patched_model_full_gapi], options: { skip_deserialization: true, header: { "If-Match" => etag } }
+    mock.expect :get_model, model_hash.to_json, [project, dataset, model_id], options: { skip_deserialization: true }
     model.service.mocked_service = mock
 
     model.description = new_description
@@ -74,10 +74,10 @@ describe Google::Cloud::Bigquery::Model, :partial, :update, :mock_bigquery do
     model_hash = random_model_full_hash dataset, model_id, name: model_name, description: description
     model_hash["labels"] = new_labels
     patched_model_full_gapi = Google::Apis::BigqueryV2::Model.new model_reference: model.model_ref, labels: new_labels
-    mock.expect :get_model, random_model_full_hash(dataset, model_id).to_json, [project, dataset, model_id, options: { skip_deserialization: true }]
+    mock.expect :get_model, random_model_full_hash(dataset, model_id).to_json, [project, dataset, model_id], options: { skip_deserialization: true }
     mock.expect :patch_model, model_hash.to_json,
-      [project, dataset, model_id, patched_model_full_gapi, options: { skip_deserialization: true, header: { "If-Match" => etag } }]
-    mock.expect :get_model, model_hash.to_json, [project, dataset, model_id, options: { skip_deserialization: true }]
+      [project, dataset, model_id, patched_model_full_gapi], options: { skip_deserialization: true, header: { "If-Match" => etag } }
+    mock.expect :get_model, model_hash.to_json, [project, dataset, model_id], options: { skip_deserialization: true }
     model.service.mocked_service = mock
 
     model.labels = new_labels
@@ -95,10 +95,10 @@ describe Google::Cloud::Bigquery::Model, :partial, :update, :mock_bigquery do
     model_hash = random_model_full_hash dataset, model_id, name: model_name, description: description
     model_hash["expirationTime"] = Google::Cloud::Bigquery::Convert.time_to_millis(one_hour_from_now)
     patched_model_full_gapi = Google::Apis::BigqueryV2::Model.new model_reference: model.model_ref, expiration_time: Google::Cloud::Bigquery::Convert.time_to_millis(one_hour_from_now)
-    mock.expect :get_model, random_model_full_hash(dataset, model_id).to_json, [project, dataset, model_id, options: { skip_deserialization: true }]
+    mock.expect :get_model, random_model_full_hash(dataset, model_id).to_json, [project, dataset, model_id], options: { skip_deserialization: true }
     mock.expect :patch_model, model_hash.to_json,
-      [project, dataset, model_id, patched_model_full_gapi, options: { skip_deserialization: true, header: { "If-Match" => etag } }]
-    mock.expect :get_model, model_hash.to_json, [project, dataset, model_id, options: { skip_deserialization: true }]
+      [project, dataset, model_id, patched_model_full_gapi], options: { skip_deserialization: true, header: { "If-Match" => etag } }
+    mock.expect :get_model, model_hash.to_json, [project, dataset, model_id], options: { skip_deserialization: true }
     model.service.mocked_service = mock
 
     model.expires_at = one_hour_from_now
@@ -114,10 +114,10 @@ describe Google::Cloud::Bigquery::Model, :partial, :update, :mock_bigquery do
     model_hash = random_model_full_hash dataset, model_id, name: model_name, description: description
     model_hash["expirationTime"] = nil
     patched_model_full_gapi = Google::Apis::BigqueryV2::Model.new model_reference: model.model_ref, expiration_time: nil
-    mock.expect :get_model, random_model_full_hash(dataset, model_id).to_json, [project, dataset, model_id, options: { skip_deserialization: true }]
+    mock.expect :get_model, random_model_full_hash(dataset, model_id).to_json, [project, dataset, model_id], options: { skip_deserialization: true }
     mock.expect :patch_model, model_hash.to_json,
-      [project, dataset, model_id, patched_model_full_gapi, options: { skip_deserialization: true, header: { "If-Match" => etag } }]
-    mock.expect :get_model, model_hash.to_json, [project, dataset, model_id, options: { skip_deserialization: true }]
+      [project, dataset, model_id, patched_model_full_gapi], options: { skip_deserialization: true, header: { "If-Match" => etag } }
+    mock.expect :get_model, model_hash.to_json, [project, dataset, model_id], options: { skip_deserialization: true }
     model.service.mocked_service = mock
 
     model.expires_at = nil
@@ -135,10 +135,10 @@ describe Google::Cloud::Bigquery::Model, :partial, :update, :mock_bigquery do
     model_hash = random_model_full_hash dataset, model_id, name: model_name, description: description
     model_hash["encryptionConfiguration"] = { kmsKeyName: kms_key }
     patched_model_gapi = Google::Apis::BigqueryV2::Model.new model_reference: model.model_ref, encryption_configuration: Google::Apis::BigqueryV2::EncryptionConfiguration.new(kms_key_name: kms_key)
-    mock.expect :get_model, random_model_full_hash(dataset, model_id).to_json, [project, dataset, model_id, options: { skip_deserialization: true }]
+    mock.expect :get_model, random_model_full_hash(dataset, model_id).to_json, [project, dataset, model_id], options: { skip_deserialization: true }
     mock.expect :patch_model, model_hash.to_json,
-      [project, dataset, model_id, patched_model_gapi, options: { skip_deserialization: true, header: { "If-Match" => etag } }]
-    mock.expect :get_model, model_hash.to_json, [project, dataset, model_id, options: { skip_deserialization: true }]
+      [project, dataset, model_id, patched_model_gapi], options: { skip_deserialization: true, header: { "If-Match" => etag } }
+    mock.expect :get_model, model_hash.to_json, [project, dataset, model_id], options: { skip_deserialization: true }
     model.service.mocked_service = mock
 
     _(model.encryption).must_be :nil?

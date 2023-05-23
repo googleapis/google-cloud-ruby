@@ -33,7 +33,7 @@ module Google
         ##
         # Service for reading from and writing to existing Bigtable tables.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/bigtable/v2/bigtable"
         #     client = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new

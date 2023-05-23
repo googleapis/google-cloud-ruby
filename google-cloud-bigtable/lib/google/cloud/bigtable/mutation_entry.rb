@@ -33,14 +33,14 @@ module Google
       #     See {Google::Cloud::Bigtable::Table#check_and_mutate_row}
       #
       # @example
-      #   entry = Google::Cloud::Bigtable::MutationEntry.new("user-1")
-      #   timestamp_micros = (Time.now.to_f * 1000000).round(-3)
+      #   entry = Google::Cloud::Bigtable::MutationEntry.new "user-1"
+      #   timestamp_micros = (Time.now.to_f * 1_000_000).round(-3)
       #   entry.set_cell(
       #     "cf1", "fiel01", "XYZ", timestamp: timestamp_micros
       #   ).delete_cells(
       #     "cf2",
       #     "field02",
-      #     timestamp_from: timestamp_micros - 5000000,
+      #     timestamp_from: timestamp_micros - 5_000_000,
       #     timestamp_to: timestamp_micros
       #   ).delete_from_family("cf3").delete_from_row
       #
@@ -48,10 +48,10 @@ module Google
       #   require "google/cloud/bigtable"
       #
       #   bigtable = Google::Cloud::Bigtable.new
-      #   table = bigtable.table("my-instance", "my-table")
+      #   table = bigtable.table "my-instance", "my-table"
       #
-      #   entry = table.new_mutation_entry("user-1")
-      #   timestamp_micros = (Time.now.to_f * 1000000).round(-3)
+      #   entry = table.new_mutation_entry "user-1"
+      #   timestamp_micros = (Time.now.to_f * 1_000_000).round(-3)
       #   entry.set_cell(
       #     "cf1", "fiel01", "XYZ", timestamp: timestamp_micros
       #   )
@@ -101,16 +101,16 @@ module Google
         # @return [MutationEntry]  `self` object of entry for chaining.
         #
         # @example
-        #   entry = Google::Cloud::Bigtable::MutationEntry.new("user-1")
-        #   entry.set_cell("cf1", "field01", "XYZ")
+        #   entry = Google::Cloud::Bigtable::MutationEntry.new "user-1"
+        #   entry.set_cell "cf1", "field01", "XYZ"
         #
         # @example With timestamp.
-        #   entry = Google::Cloud::Bigtable::MutationEntry.new("user-1")
+        #   entry = Google::Cloud::Bigtable::MutationEntry.new "user-1"
         #   entry.set_cell(
         #     "cf1",
         #     "field1",
         #     "XYZ",
-        #     timestamp: (Time.now.to_f * 1000000).round(-3) # microseconds
+        #     timestamp: (Time.now.to_f * 1_000_000).round(-3) # microseconds
         #   )
         #
         def set_cell family, qualifier, value, timestamp: nil
@@ -158,25 +158,25 @@ module Google
         # @return [MutationEntry] `self` object of entry for chaining.
         #
         # @example Without timestamp range.
-        #   entry = Google::Cloud::Bigtable::MutationEntry.new("user-1")
-        #   entry.delete_cells("cf1", "field1")
+        #   entry = Google::Cloud::Bigtable::MutationEntry.new "user-1"
+        #   entry.delete_cells "cf1", "field1"
         #
         # @example With timestamp range.
-        #   entry = Google::Cloud::Bigtable::MutationEntry.new("user-1")
-        #   timestamp_micros = (Time.now.to_f * 1000000).round(-3)
+        #   entry = Google::Cloud::Bigtable::MutationEntry.new "user-1"
+        #   timestamp_micros = (Time.now.to_f * 1_000_000).round(-3)
         #   entry.delete_cells(
         #     "cf1",
         #     "field1",
-        #     timestamp_from: timestamp_micros - 5000000,
+        #     timestamp_from: timestamp_micros - 5_000_000,
         #     timestamp_to: timestamp_micros
         #   )
         # @example With timestamp range with lower boundary only.
-        #   entry = Google::Cloud::Bigtable::MutationEntry.new("user-1")
-        #   timestamp_micros = (Time.now.to_f * 1000000).round(-3)
+        #   entry = Google::Cloud::Bigtable::MutationEntry.new "user-1"
+        #   timestamp_micros = (Time.now.to_f * 1_000_000).round(-3)
         #   entry.delete_cells(
         #     "cf1",
         #     "field1",
-        #     timestamp_from: timestamp_micros - 5000000
+        #     timestamp_from: timestamp_micros - 5_000_000
         #   )
         #
         def delete_cells family, qualifier, timestamp_from: nil, timestamp_to: nil
@@ -203,8 +203,8 @@ module Google
         # @return [MutationEntry] `self` object of entry for chaining.
         #
         # @example
-        #   entry = Google::Cloud::Bigtable::MutationEntry.new("user-1")
-        #   entry.delete_from_family("cf1")
+        #   entry = Google::Cloud::Bigtable::MutationEntry.new "user-1"
+        #   entry.delete_from_family "cf1"
         #
         def delete_from_family family
           @mutations << Google::Cloud::Bigtable::V2::Mutation.new(delete_from_family: { family_name: family })
@@ -219,7 +219,7 @@ module Google
         # @return [MutationEntry] `self` object of entry for chaining.
         #
         # @example
-        #   entry = Google::Cloud::Bigtable::MutationEntry.new("user-1")
+        #   entry = Google::Cloud::Bigtable::MutationEntry.new "user-1"
         #   entry.delete_from_row
         #
         def delete_from_row

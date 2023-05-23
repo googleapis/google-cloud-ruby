@@ -48,12 +48,14 @@ module Google
       # Create a new client object for AutoscalingPolicyService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client](https://googleapis.dev/ruby/google-cloud-dataproc-v1/latest/Google/Cloud/Dataproc/V1/AutoscalingPolicyService/Client.html)
-      # for version V1 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # [Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dataproc-v1/latest/Google-Cloud-Dataproc-V1-AutoscalingPolicyService-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the AutoscalingPolicyService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About AutoscalingPolicyService
       #
@@ -62,29 +64,67 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
-      # @return [AutoscalingPolicyService::Client] A client object for the specified version.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
       #
-      def self.autoscaling_policy_service version: :v1, &block
+      def self.autoscaling_policy_service version: :v1, transport: :grpc, &block
         require "google/cloud/dataproc/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Dataproc
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::Dataproc.const_get package_name
-        package_module.const_get(:AutoscalingPolicyService).const_get(:Client).new(&block)
+        service_module = Google::Cloud::Dataproc.const_get(package_name).const_get(:AutoscalingPolicyService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Create a new client object for BatchController.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Dataproc::V1::BatchController::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dataproc-v1/latest/Google-Cloud-Dataproc-V1-BatchController-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the BatchController service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
+      #
+      # ## About BatchController
+      #
+      # The BatchController provides methods to manage batch workloads.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.batch_controller version: :v1, transport: :grpc, &block
+        require "google/cloud/dataproc/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Dataproc
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::Dataproc.const_get(package_name).const_get(:BatchController)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
       # Create a new client object for ClusterController.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Dataproc::V1::ClusterController::Client](https://googleapis.dev/ruby/google-cloud-dataproc-v1/latest/Google/Cloud/Dataproc/V1/ClusterController/Client.html)
-      # for version V1 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # [Google::Cloud::Dataproc::V1::ClusterController::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dataproc-v1/latest/Google-Cloud-Dataproc-V1-ClusterController-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the ClusterController service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About ClusterController
       #
@@ -93,29 +133,33 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
-      # @return [ClusterController::Client] A client object for the specified version.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
       #
-      def self.cluster_controller version: :v1, &block
+      def self.cluster_controller version: :v1, transport: :grpc, &block
         require "google/cloud/dataproc/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Dataproc
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::Dataproc.const_get package_name
-        package_module.const_get(:ClusterController).const_get(:Client).new(&block)
+        service_module = Google::Cloud::Dataproc.const_get(package_name).const_get(:ClusterController)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
       # Create a new client object for JobController.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Dataproc::V1::JobController::Client](https://googleapis.dev/ruby/google-cloud-dataproc-v1/latest/Google/Cloud/Dataproc/V1/JobController/Client.html)
-      # for version V1 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # [Google::Cloud::Dataproc::V1::JobController::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dataproc-v1/latest/Google-Cloud-Dataproc-V1-JobController-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the JobController service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About JobController
       #
@@ -123,29 +167,68 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
-      # @return [JobController::Client] A client object for the specified version.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
       #
-      def self.job_controller version: :v1, &block
+      def self.job_controller version: :v1, transport: :grpc, &block
         require "google/cloud/dataproc/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Dataproc
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::Dataproc.const_get package_name
-        package_module.const_get(:JobController).const_get(:Client).new(&block)
+        service_module = Google::Cloud::Dataproc.const_get(package_name).const_get(:JobController)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
+      end
+
+      ##
+      # Create a new client object for NodeGroupController.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Dataproc::V1::NodeGroupController::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dataproc-v1/latest/Google-Cloud-Dataproc-V1-NodeGroupController-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the NodeGroupController service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
+      #
+      # ## About NodeGroupController
+      #
+      # The `NodeGroupControllerService` provides methods to manage node groups
+      # of Compute Engine managed instances.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.node_group_controller version: :v1, transport: :grpc, &block
+        require "google/cloud/dataproc/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Dataproc
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::Dataproc.const_get(package_name).const_get(:NodeGroupController)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
       # Create a new client object for WorkflowTemplateService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client](https://googleapis.dev/ruby/google-cloud-dataproc-v1/latest/Google/Cloud/Dataproc/V1/WorkflowTemplateService/Client.html)
-      # for version V1 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # [Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-dataproc-v1/latest/Google-Cloud-Dataproc-V1-WorkflowTemplateService-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the WorkflowTemplateService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About WorkflowTemplateService
       #
@@ -154,17 +237,19 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
-      # @return [WorkflowTemplateService::Client] A client object for the specified version.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
       #
-      def self.workflow_template_service version: :v1, &block
+      def self.workflow_template_service version: :v1, transport: :grpc, &block
         require "google/cloud/dataproc/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Dataproc
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::Dataproc.const_get package_name
-        package_module.const_get(:WorkflowTemplateService).const_get(:Client).new(&block)
+        service_module = Google::Cloud::Dataproc.const_get(package_name).const_get(:WorkflowTemplateService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -184,7 +269,7 @@ module Google
       # * `timeout` (*type:* `Numeric`) -
       #   Default timeout in seconds.
       # * `metadata` (*type:* `Hash{Symbol=>String}`) -
-      #   Additional gRPC headers to be sent with the call.
+      #   Additional headers to be sent with the call.
       # * `retry_policy` (*type:* `Hash`) -
       #   The retry policy. The value is a hash with the following keys:
       #     * `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.

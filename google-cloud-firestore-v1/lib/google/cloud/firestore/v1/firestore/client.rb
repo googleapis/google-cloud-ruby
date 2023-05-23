@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/firestore/v1/firestore_pb"
+require "google/cloud/location"
 
 module Google
   module Cloud
@@ -33,8 +34,8 @@ module Google
           # document database that simplifies storing, syncing, and querying data for
           # your mobile, web, and IoT apps at global scale. Its client libraries provide
           # live synchronization and offline support, while its security features and
-          # integrations with Firebase and Google Cloud Platform (GCP) accelerate
-          # building truly serverless apps.
+          # integrations with Firebase and Google Cloud Platform accelerate building
+          # truly serverless apps.
           #
           class Client
             # @private
@@ -46,13 +47,12 @@ module Google
             # See {::Google::Cloud::Firestore::V1::Firestore::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all Firestore clients:
-            #
-            #     ::Google::Cloud::Firestore::V1::Firestore::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all Firestore clients
+            #   ::Google::Cloud::Firestore::V1::Firestore::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -72,116 +72,79 @@ module Google
 
                 default_config.rpcs.get_document.timeout = 60.0
                 default_config.rpcs.get_document.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [8, 14, 13, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [8, 14, 13, 4]
                 }
 
                 default_config.rpcs.list_documents.timeout = 60.0
                 default_config.rpcs.list_documents.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [8, 14, 13, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [8, 14, 13, 4]
                 }
 
                 default_config.rpcs.update_document.timeout = 60.0
                 default_config.rpcs.update_document.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [8, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [8, 14]
                 }
 
                 default_config.rpcs.delete_document.timeout = 60.0
                 default_config.rpcs.delete_document.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [8, 14, 13, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [8, 14, 13, 4]
                 }
 
                 default_config.rpcs.batch_get_documents.timeout = 300.0
                 default_config.rpcs.batch_get_documents.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [8, 14, 13, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [8, 14, 13, 4]
                 }
 
                 default_config.rpcs.begin_transaction.timeout = 60.0
                 default_config.rpcs.begin_transaction.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [8, 14, 13, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [8, 14, 13, 4]
                 }
 
                 default_config.rpcs.commit.timeout = 60.0
                 default_config.rpcs.commit.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [8, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [8, 14]
                 }
 
                 default_config.rpcs.rollback.timeout = 60.0
                 default_config.rpcs.rollback.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [8, 14, 13, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [8, 14, 13, 4]
                 }
 
                 default_config.rpcs.run_query.timeout = 300.0
                 default_config.rpcs.run_query.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [8, 14, 13, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [8, 14, 13, 4]
+                }
+
+                default_config.rpcs.run_aggregation_query.timeout = 300.0
+                default_config.rpcs.run_aggregation_query.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [8, 14, 13, 4]
                 }
 
                 default_config.rpcs.partition_query.timeout = 300.0
                 default_config.rpcs.partition_query.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [8, 14, 13, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [8, 14, 13, 4]
                 }
 
                 default_config.rpcs.write.timeout = 86_400.0
 
                 default_config.rpcs.listen.timeout = 86_400.0
                 default_config.rpcs.listen.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [8, 14, 13, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [8, 14, 13, 4]
                 }
 
                 default_config.rpcs.list_collection_ids.timeout = 60.0
                 default_config.rpcs.list_collection_ids.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [8, 14, 13, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [8, 14, 13, 4]
                 }
 
                 default_config.rpcs.batch_write.timeout = 60.0
                 default_config.rpcs.batch_write.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [8, 14, 10]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [8, 14, 10]
                 }
 
                 default_config.rpcs.create_document.timeout = 60.0
                 default_config.rpcs.create_document.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [8, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [8, 14]
                 }
 
                 default_config
@@ -213,19 +176,15 @@ module Google
             ##
             # Create a new Firestore client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new Firestore client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Firestore::V1::Firestore::Client.new
             #
-            #     client = ::Google::Cloud::Firestore::V1::Firestore::Client.new
-            #
-            # To create a new Firestore client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Firestore::V1::Firestore::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Firestore::V1::Firestore::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Firestore client.
             # @yieldparam config [Client::Configuration]
@@ -245,18 +204,23 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
               @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
+
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
 
               @firestore_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::Firestore::V1::Firestore::Stub,
@@ -266,6 +230,13 @@ module Google
                 interceptors: @config.interceptors
               )
             end
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
 
             # Service calls
 
@@ -309,6 +280,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/firestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Firestore::V1::Firestore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Firestore::V1::GetDocumentRequest.new
+            #
+            #   # Call the get_document method.
+            #   result = client.get_document request
+            #
+            #   # The returned object is of type Google::Cloud::Firestore::V1::Document.
+            #   p result
+            #
             def get_document request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -326,16 +312,23 @@ module Google
                 gapic_version: ::Google::Cloud::Firestore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              if @config&.metadata&.key? :"google-cloud-resource-prefix"
+                metadata[:"x-goog-request-params"] ||= @config.metadata[:"google-cloud-resource-prefix"].split("/").each_slice(2).to_h.map { |k, v| "#{k}=#{v}" }.join("&")
+              end
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_document.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_document.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @firestore_stub.call_rpc :get_document, request, options: options do |response, operation|
@@ -368,36 +361,56 @@ module Google
             #     Required. The parent resource name. In the format:
             #     `projects/{project_id}/databases/{database_id}/documents` or
             #     `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
+            #
             #     For example:
             #     `projects/my-project/databases/my-database/documents` or
             #     `projects/my-project/databases/my-database/documents/chatrooms/my-chatroom`
             #   @param collection_id [::String]
-            #     Required. The collection ID, relative to `parent`, to list. For example: `chatrooms`
-            #     or `messages`.
+            #     Optional. The collection ID, relative to `parent`, to list.
+            #
+            #     For example: `chatrooms` or `messages`.
+            #
+            #     This is optional, and when not provided, Firestore will list documents
+            #     from all collections under the provided `parent`.
             #   @param page_size [::Integer]
-            #     The maximum number of documents to return.
+            #     Optional. The maximum number of documents to return in a single response.
+            #
+            #     Firestore may return fewer than this value.
             #   @param page_token [::String]
-            #     The `next_page_token` value returned from a previous List request, if any.
+            #     Optional. A page token, received from a previous `ListDocuments` response.
+            #
+            #     Provide this to retrieve the subsequent page. When paginating, all other
+            #     parameters (with the exception of `page_size`) must match the values set
+            #     in the request that generated the page token.
             #   @param order_by [::String]
-            #     The order to sort results by. For example: `priority desc, name`.
+            #     Optional. The optional ordering of the documents to return.
+            #
+            #     For example: `priority desc, __name__ desc`.
+            #
+            #     This mirrors the {::Google::Cloud::Firestore::V1::StructuredQuery#order_by `ORDER BY`}
+            #     used in Firestore queries but in a string representation. When absent,
+            #     documents are ordered based on `__name__ ASC`.
             #   @param mask [::Google::Cloud::Firestore::V1::DocumentMask, ::Hash]
-            #     The fields to return. If not set, returns all fields.
+            #     Optional. The fields to return. If not set, returns all fields.
             #
             #     If a document has a field that is not present in this mask, that field
             #     will not be returned in the response.
             #   @param transaction [::String]
-            #     Reads documents in a transaction.
+            #     Perform the read as part of an already active transaction.
             #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
-            #     Reads documents as they were at the given time.
+            #     Perform the read at the provided time.
+            #
             #     This may not be older than 270 seconds.
             #   @param show_missing [::Boolean]
-            #     If the list should show missing documents. A missing document is a
-            #     document that does not exist but has sub-documents. These documents will
-            #     be returned with a key but will not have fields, {::Google::Cloud::Firestore::V1::Document#create_time Document.create_time},
-            #     or {::Google::Cloud::Firestore::V1::Document#update_time Document.update_time} set.
+            #     If the list should show missing documents.
             #
-            #     Requests with `show_missing` may not specify `where` or
-            #     `order_by`.
+            #     A document is missing if it does not exist, but there are sub-documents
+            #     nested underneath it. When true, such missing documents will be returned
+            #     with a key but will not have fields,
+            #     {::Google::Cloud::Firestore::V1::Document#create_time `create_time`}, or
+            #     {::Google::Cloud::Firestore::V1::Document#update_time `update_time`} set.
+            #
+            #     Requests with `show_missing` may not specify `where` or `order_by`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Firestore::V1::Document>]
@@ -406,6 +419,25 @@ module Google
             # @return [::Gapic::PagedEnumerable<::Google::Cloud::Firestore::V1::Document>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/firestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Firestore::V1::Firestore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Firestore::V1::ListDocumentsRequest.new
+            #
+            #   # Call the list_documents method.
+            #   result = client.list_documents request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::Firestore::V1::Document.
+            #     p item
+            #   end
             #
             def list_documents request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -424,17 +456,26 @@ module Google
                 gapic_version: ::Google::Cloud::Firestore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent,
-                "collection_id" => request.collection_id
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+              if request.collection_id
+                header_params["collection_id"] = request.collection_id
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              if @config&.metadata&.key? :"google-cloud-resource-prefix"
+                metadata[:"x-goog-request-params"] ||= @config.metadata[:"google-cloud-resource-prefix"].split("/").each_slice(2).to_h.map { |k, v| "#{k}=#{v}" }.join("&")
+              end
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_documents.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_documents.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @firestore_stub.call_rpc :list_documents, request, options: options do |response, operation|
@@ -492,6 +533,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/firestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Firestore::V1::Firestore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Firestore::V1::UpdateDocumentRequest.new
+            #
+            #   # Call the update_document method.
+            #   result = client.update_document request
+            #
+            #   # The returned object is of type Google::Cloud::Firestore::V1::Document.
+            #   p result
+            #
             def update_document request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -509,16 +565,23 @@ module Google
                 gapic_version: ::Google::Cloud::Firestore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "document.name" => request.document.name
-              }
+              header_params = {}
+              if request.document&.name
+                header_params["document.name"] = request.document.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              if @config&.metadata&.key? :"google-cloud-resource-prefix"
+                metadata[:"x-goog-request-params"] ||= @config.metadata[:"google-cloud-resource-prefix"].split("/").each_slice(2).to_h.map { |k, v| "#{k}=#{v}" }.join("&")
+              end
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_document.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_document.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @firestore_stub.call_rpc :update_document, request, options: options do |response, operation|
@@ -562,6 +625,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/firestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Firestore::V1::Firestore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Firestore::V1::DeleteDocumentRequest.new
+            #
+            #   # Call the delete_document method.
+            #   result = client.delete_document request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_document request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -579,16 +657,23 @@ module Google
                 gapic_version: ::Google::Cloud::Firestore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              if @config&.metadata&.key? :"google-cloud-resource-prefix"
+                metadata[:"x-goog-request-params"] ||= @config.metadata[:"google-cloud-resource-prefix"].split("/").each_slice(2).to_h.map { |k, v| "#{k}=#{v}" }.join("&")
+              end
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_document.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_document.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @firestore_stub.call_rpc :delete_document, request, options: options do |response, operation|
@@ -652,6 +737,24 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/firestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Firestore::V1::Firestore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Firestore::V1::BatchGetDocumentsRequest.new
+            #
+            #   # Call the batch_get_documents method to start streaming.
+            #   output = client.batch_get_documents request
+            #
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::Firestore::V1::BatchGetDocumentsResponse
+            #   output.each do |current_response|
+            #     p current_response
+            #   end
+            #
             def batch_get_documents request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -669,16 +772,23 @@ module Google
                 gapic_version: ::Google::Cloud::Firestore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "database" => request.database
-              }
+              header_params = {}
+              if request.database
+                header_params["database"] = request.database
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              if @config&.metadata&.key? :"google-cloud-resource-prefix"
+                metadata[:"x-goog-request-params"] ||= @config.metadata[:"google-cloud-resource-prefix"].split("/").each_slice(2).to_h.map { |k, v| "#{k}=#{v}" }.join("&")
+              end
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.batch_get_documents.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.batch_get_documents.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @firestore_stub.call_rpc :batch_get_documents, request, options: options do |response, operation|
@@ -722,6 +832,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/firestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Firestore::V1::Firestore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Firestore::V1::BeginTransactionRequest.new
+            #
+            #   # Call the begin_transaction method.
+            #   result = client.begin_transaction request
+            #
+            #   # The returned object is of type Google::Cloud::Firestore::V1::BeginTransactionResponse.
+            #   p result
+            #
             def begin_transaction request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -739,16 +864,23 @@ module Google
                 gapic_version: ::Google::Cloud::Firestore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "database" => request.database
-              }
+              header_params = {}
+              if request.database
+                header_params["database"] = request.database
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              if @config&.metadata&.key? :"google-cloud-resource-prefix"
+                metadata[:"x-goog-request-params"] ||= @config.metadata[:"google-cloud-resource-prefix"].split("/").each_slice(2).to_h.map { |k, v| "#{k}=#{v}" }.join("&")
+              end
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.begin_transaction.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.begin_transaction.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @firestore_stub.call_rpc :begin_transaction, request, options: options do |response, operation|
@@ -795,6 +927,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/firestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Firestore::V1::Firestore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Firestore::V1::CommitRequest.new
+            #
+            #   # Call the commit method.
+            #   result = client.commit request
+            #
+            #   # The returned object is of type Google::Cloud::Firestore::V1::CommitResponse.
+            #   p result
+            #
             def commit request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -812,16 +959,23 @@ module Google
                 gapic_version: ::Google::Cloud::Firestore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "database" => request.database
-              }
+              header_params = {}
+              if request.database
+                header_params["database"] = request.database
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              if @config&.metadata&.key? :"google-cloud-resource-prefix"
+                metadata[:"x-goog-request-params"] ||= @config.metadata[:"google-cloud-resource-prefix"].split("/").each_slice(2).to_h.map { |k, v| "#{k}=#{v}" }.join("&")
+              end
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.commit.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.commit.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @firestore_stub.call_rpc :commit, request, options: options do |response, operation|
@@ -864,6 +1018,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/firestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Firestore::V1::Firestore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Firestore::V1::RollbackRequest.new
+            #
+            #   # Call the rollback method.
+            #   result = client.rollback request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def rollback request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -881,16 +1050,23 @@ module Google
                 gapic_version: ::Google::Cloud::Firestore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "database" => request.database
-              }
+              header_params = {}
+              if request.database
+                header_params["database"] = request.database
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              if @config&.metadata&.key? :"google-cloud-resource-prefix"
+                metadata[:"x-goog-request-params"] ||= @config.metadata[:"google-cloud-resource-prefix"].split("/").each_slice(2).to_h.map { |k, v| "#{k}=#{v}" }.join("&")
+              end
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.rollback.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.rollback.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @firestore_stub.call_rpc :rollback, request, options: options do |response, operation|
@@ -929,7 +1105,9 @@ module Google
             #   @param structured_query [::Google::Cloud::Firestore::V1::StructuredQuery, ::Hash]
             #     A structured query.
             #   @param transaction [::String]
-            #     Reads documents in a transaction.
+            #     Run the query within an already active transaction.
+            #
+            #     The value here is the opaque transaction ID to execute the query in.
             #   @param new_transaction [::Google::Cloud::Firestore::V1::TransactionOptions, ::Hash]
             #     Starts a new transaction and reads the documents.
             #     Defaults to a read-only transaction.
@@ -946,6 +1124,24 @@ module Google
             # @return [::Enumerable<::Google::Cloud::Firestore::V1::RunQueryResponse>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/firestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Firestore::V1::Firestore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Firestore::V1::RunQueryRequest.new
+            #
+            #   # Call the run_query method to start streaming.
+            #   output = client.run_query request
+            #
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::Firestore::V1::RunQueryResponse
+            #   output.each do |current_response|
+            #     p current_response
+            #   end
             #
             def run_query request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -964,19 +1160,151 @@ module Google
                 gapic_version: ::Google::Cloud::Firestore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              if @config&.metadata&.key? :"google-cloud-resource-prefix"
+                metadata[:"x-goog-request-params"] ||= @config.metadata[:"google-cloud-resource-prefix"].split("/").each_slice(2).to_h.map { |k, v| "#{k}=#{v}" }.join("&")
+              end
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.run_query.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.run_query.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @firestore_stub.call_rpc :run_query, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Runs an aggregation query.
+            #
+            # Rather than producing {::Google::Cloud::Firestore::V1::Document Document} results like
+            # {::Google::Cloud::Firestore::V1::Firestore::Client#run_query Firestore.RunQuery}, this API
+            # allows running an aggregation to produce a series of
+            # {::Google::Cloud::Firestore::V1::AggregationResult AggregationResult} server-side.
+            #
+            # High-Level Example:
+            #
+            # ```
+            # -- Return the number of documents in table given a filter.
+            # SELECT COUNT(*) FROM ( SELECT * FROM k where a = true );
+            # ```
+            #
+            # @overload run_aggregation_query(request, options = nil)
+            #   Pass arguments to `run_aggregation_query` via a request object, either of type
+            #   {::Google::Cloud::Firestore::V1::RunAggregationQueryRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Firestore::V1::RunAggregationQueryRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload run_aggregation_query(parent: nil, structured_aggregation_query: nil, transaction: nil, new_transaction: nil, read_time: nil)
+            #   Pass arguments to `run_aggregation_query` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent resource name. In the format:
+            #     `projects/{project_id}/databases/{database_id}/documents` or
+            #     `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
+            #     For example:
+            #     `projects/my-project/databases/my-database/documents` or
+            #     `projects/my-project/databases/my-database/documents/chatrooms/my-chatroom`
+            #   @param structured_aggregation_query [::Google::Cloud::Firestore::V1::StructuredAggregationQuery, ::Hash]
+            #     An aggregation query.
+            #   @param transaction [::String]
+            #     Run the aggregation within an already active transaction.
+            #
+            #     The value here is the opaque transaction ID to execute the query in.
+            #   @param new_transaction [::Google::Cloud::Firestore::V1::TransactionOptions, ::Hash]
+            #     Starts a new transaction as part of the query, defaulting to read-only.
+            #
+            #     The new transaction ID will be returned as the first response in the
+            #     stream.
+            #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
+            #     Executes the query at the given timestamp.
+            #
+            #     Requires:
+            #
+            #     * Cannot be more than 270 seconds in the past.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Enumerable<::Google::Cloud::Firestore::V1::RunAggregationQueryResponse>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Enumerable<::Google::Cloud::Firestore::V1::RunAggregationQueryResponse>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/firestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Firestore::V1::Firestore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Firestore::V1::RunAggregationQueryRequest.new
+            #
+            #   # Call the run_aggregation_query method to start streaming.
+            #   output = client.run_aggregation_query request
+            #
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::Firestore::V1::RunAggregationQueryResponse
+            #   output.each do |current_response|
+            #     p current_response
+            #   end
+            #
+            def run_aggregation_query request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Firestore::V1::RunAggregationQueryRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.run_aggregation_query.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Firestore::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              if @config&.metadata&.key? :"google-cloud-resource-prefix"
+                metadata[:"x-goog-request-params"] ||= @config.metadata[:"google-cloud-resource-prefix"].split("/").each_slice(2).to_h.map { |k, v| "#{k}=#{v}" }.join("&")
+              end
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.run_aggregation_query.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.run_aggregation_query.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @firestore_stub.call_rpc :run_aggregation_query, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -999,7 +1327,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload partition_query(parent: nil, structured_query: nil, partition_count: nil, page_token: nil, page_size: nil)
+            # @overload partition_query(parent: nil, structured_query: nil, partition_count: nil, page_token: nil, page_size: nil, read_time: nil)
             #   Pass arguments to `partition_query` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1045,6 +1373,9 @@ module Google
             #     to PartitionQuery will return up to 8 partitions and a `next_page_token`
             #     if more results exist. A second call to PartitionQuery will return up to
             #     2 partitions, to complete the total of 10 specified in `partition_count`.
+            #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
+            #     Reads documents as they were at the given time.
+            #     This may not be older than 270 seconds.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Firestore::V1::Cursor>]
@@ -1053,6 +1384,25 @@ module Google
             # @return [::Gapic::PagedEnumerable<::Google::Cloud::Firestore::V1::Cursor>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/firestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Firestore::V1::Firestore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Firestore::V1::PartitionQueryRequest.new
+            #
+            #   # Call the partition_query method.
+            #   result = client.partition_query request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::Firestore::V1::Cursor.
+            #     p item
+            #   end
             #
             def partition_query request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1071,16 +1421,23 @@ module Google
                 gapic_version: ::Google::Cloud::Firestore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              if @config&.metadata&.key? :"google-cloud-resource-prefix"
+                metadata[:"x-goog-request-params"] ||= @config.metadata[:"google-cloud-resource-prefix"].split("/").each_slice(2).to_h.map { |k, v| "#{k}=#{v}" }.join("&")
+              end
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.partition_query.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.partition_query.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @firestore_stub.call_rpc :partition_query, request, options: options do |response, operation|
@@ -1093,7 +1450,8 @@ module Google
             end
 
             ##
-            # Streams batches of document updates and deletes, in order.
+            # Streams batches of document updates and deletes, in order. This method is
+            # only available via gRPC or WebChannel (not REST).
             #
             # @param request [::Gapic::StreamInput, ::Enumerable<::Google::Cloud::Firestore::V1::WriteRequest, ::Hash>]
             #   An enumerable of {::Google::Cloud::Firestore::V1::WriteRequest} instances.
@@ -1107,6 +1465,30 @@ module Google
             # @return [::Enumerable<::Google::Cloud::Firestore::V1::WriteResponse>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/firestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Firestore::V1::Firestore::Client.new
+            #
+            #   # Create an input stream.
+            #   input = Gapic::StreamInput.new
+            #
+            #   # Call the write method to start streaming.
+            #   output = client.write input
+            #
+            #   # Send requests on the stream. For each request object, set fields by
+            #   # passing keyword arguments. Be sure to close the stream when done.
+            #   input << Google::Cloud::Firestore::V1::WriteRequest.new
+            #   input << Google::Cloud::Firestore::V1::WriteRequest.new
+            #   input.close
+            #
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::Firestore::V1::WriteResponse
+            #   output.each do |current_response|
+            #     p current_response
+            #   end
             #
             def write request, options = nil
               unless request.is_a? ::Enumerable
@@ -1133,7 +1515,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.write.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.write.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @firestore_stub.call_rpc :write, request, options: options do |response, operation|
@@ -1145,7 +1529,8 @@ module Google
             end
 
             ##
-            # Listens to changes.
+            # Listens to changes. This method is only available via gRPC or WebChannel
+            # (not REST).
             #
             # @param request [::Gapic::StreamInput, ::Enumerable<::Google::Cloud::Firestore::V1::ListenRequest, ::Hash>]
             #   An enumerable of {::Google::Cloud::Firestore::V1::ListenRequest} instances.
@@ -1159,6 +1544,30 @@ module Google
             # @return [::Enumerable<::Google::Cloud::Firestore::V1::ListenResponse>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/firestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Firestore::V1::Firestore::Client.new
+            #
+            #   # Create an input stream.
+            #   input = Gapic::StreamInput.new
+            #
+            #   # Call the listen method to start streaming.
+            #   output = client.listen input
+            #
+            #   # Send requests on the stream. For each request object, set fields by
+            #   # passing keyword arguments. Be sure to close the stream when done.
+            #   input << Google::Cloud::Firestore::V1::ListenRequest.new
+            #   input << Google::Cloud::Firestore::V1::ListenRequest.new
+            #   input.close
+            #
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::Firestore::V1::ListenResponse
+            #   output.each do |current_response|
+            #     p current_response
+            #   end
             #
             def listen request, options = nil
               unless request.is_a? ::Enumerable
@@ -1185,7 +1594,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.listen.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.listen.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @firestore_stub.call_rpc :listen, request, options: options do |response, operation|
@@ -1209,7 +1620,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_collection_ids(parent: nil, page_size: nil, page_token: nil)
+            # @overload list_collection_ids(parent: nil, page_size: nil, page_token: nil, read_time: nil)
             #   Pass arguments to `list_collection_ids` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1224,6 +1635,9 @@ module Google
             #   @param page_token [::String]
             #     A page token. Must be a value from
             #     {::Google::Cloud::Firestore::V1::ListCollectionIdsResponse ListCollectionIdsResponse}.
+            #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
+            #     Reads documents as they were at the given time.
+            #     This may not be older than 270 seconds.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Firestore::V1::ListCollectionIdsResponse]
@@ -1232,6 +1646,21 @@ module Google
             # @return [::Google::Cloud::Firestore::V1::ListCollectionIdsResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/firestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Firestore::V1::Firestore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Firestore::V1::ListCollectionIdsRequest.new
+            #
+            #   # Call the list_collection_ids method.
+            #   result = client.list_collection_ids request
+            #
+            #   # The returned object is of type Google::Cloud::Firestore::V1::ListCollectionIdsResponse.
+            #   p result
             #
             def list_collection_ids request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1250,16 +1679,23 @@ module Google
                 gapic_version: ::Google::Cloud::Firestore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              if @config&.metadata&.key? :"google-cloud-resource-prefix"
+                metadata[:"x-goog-request-params"] ||= @config.metadata[:"google-cloud-resource-prefix"].split("/").each_slice(2).to_h.map { |k, v| "#{k}=#{v}" }.join("&")
+              end
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_collection_ids.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_collection_ids.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @firestore_stub.call_rpc :list_collection_ids, request, options: options do |response, operation|
@@ -1276,7 +1712,8 @@ module Google
             # The BatchWrite method does not apply the write operations atomically
             # and can apply them out of order. Method does not allow more than one write
             # per document. Each write succeeds or fails independently. See the
-            # {::Google::Cloud::Firestore::V1::BatchWriteResponse BatchWriteResponse} for the success status of each write.
+            # {::Google::Cloud::Firestore::V1::BatchWriteResponse BatchWriteResponse} for the
+            # success status of each write.
             #
             # If you require an atomically applied set of writes, use
             # {::Google::Cloud::Firestore::V1::Firestore::Client#commit Commit} instead.
@@ -1316,6 +1753,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/firestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Firestore::V1::Firestore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Firestore::V1::BatchWriteRequest.new
+            #
+            #   # Call the batch_write method.
+            #   result = client.batch_write request
+            #
+            #   # The returned object is of type Google::Cloud::Firestore::V1::BatchWriteResponse.
+            #   p result
+            #
             def batch_write request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1333,16 +1785,23 @@ module Google
                 gapic_version: ::Google::Cloud::Firestore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "database" => request.database
-              }
+              header_params = {}
+              if request.database
+                header_params["database"] = request.database
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              if @config&.metadata&.key? :"google-cloud-resource-prefix"
+                metadata[:"x-goog-request-params"] ||= @config.metadata[:"google-cloud-resource-prefix"].split("/").each_slice(2).to_h.map { |k, v| "#{k}=#{v}" }.join("&")
+              end
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.batch_write.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.batch_write.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @firestore_stub.call_rpc :batch_write, request, options: options do |response, operation|
@@ -1376,7 +1835,8 @@ module Google
             #     `projects/{project_id}/databases/{database_id}/documents` or
             #     `projects/{project_id}/databases/{database_id}/documents/chatrooms/{chatroom_id}`
             #   @param collection_id [::String]
-            #     Required. The collection ID, relative to `parent`, to list. For example: `chatrooms`.
+            #     Required. The collection ID, relative to `parent`, to list. For example:
+            #     `chatrooms`.
             #   @param document_id [::String]
             #     The client-assigned document ID to use for this document.
             #
@@ -1397,6 +1857,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/firestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Firestore::V1::Firestore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Firestore::V1::CreateDocumentRequest.new
+            #
+            #   # Call the create_document method.
+            #   result = client.create_document request
+            #
+            #   # The returned object is of type Google::Cloud::Firestore::V1::Document.
+            #   p result
+            #
             def create_document request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1414,17 +1889,26 @@ module Google
                 gapic_version: ::Google::Cloud::Firestore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent,
-                "collection_id" => request.collection_id
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+              if request.collection_id
+                header_params["collection_id"] = request.collection_id
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              if @config&.metadata&.key? :"google-cloud-resource-prefix"
+                metadata[:"x-goog-request-params"] ||= @config.metadata[:"google-cloud-resource-prefix"].split("/").each_slice(2).to_h.map { |k, v| "#{k}=#{v}" }.join("&")
+              end
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_document.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_document.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @firestore_stub.call_rpc :create_document, request, options: options do |response, operation|
@@ -1448,22 +1932,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for get_document
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # get_document to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Firestore::V1::Firestore::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.get_document.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Firestore::V1::Firestore::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.get_document.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Firestore::V1::Firestore::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.get_document.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Firestore::V1::Firestore::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.get_document.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
@@ -1474,9 +1957,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -1617,6 +2100,11 @@ module Google
                 #
                 attr_reader :run_query
                 ##
+                # RPC-specific configuration for `run_aggregation_query`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :run_aggregation_query
+                ##
                 # RPC-specific configuration for `partition_query`
                 # @return [::Gapic::Config::Method]
                 #
@@ -1667,6 +2155,8 @@ module Google
                   @rollback = ::Gapic::Config::Method.new rollback_config
                   run_query_config = parent_rpcs.run_query if parent_rpcs.respond_to? :run_query
                   @run_query = ::Gapic::Config::Method.new run_query_config
+                  run_aggregation_query_config = parent_rpcs.run_aggregation_query if parent_rpcs.respond_to? :run_aggregation_query
+                  @run_aggregation_query = ::Gapic::Config::Method.new run_aggregation_query_config
                   partition_query_config = parent_rpcs.partition_query if parent_rpcs.respond_to? :partition_query
                   @partition_query = ::Gapic::Config::Method.new partition_query_config
                   write_config = parent_rpcs.write if parent_rpcs.respond_to? :write

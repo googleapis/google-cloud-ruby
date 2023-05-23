@@ -1,5 +1,48 @@
 # Release History
 
+### 1.6.0 (2023-03-09)
+
+#### Features
+
+* Support REST transport ([#20766](https://github.com/googleapis/google-cloud-ruby/issues/20766)) 
+
+### 1.5.0 (2022-07-02)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+
+### 1.4.0 (2022-05-03)
+
+#### Features
+
+* Added support for the ConversationDataset and ConversationModel services
+
+### 1.3.4 / 2022-01-11
+
+#### Documentation
+
+* Fix titles of documentation pages
+* Remove some broken images and fix outdated content in authentication documentation
+
+### 1.3.3 / 2021-08-24
+
+#### Documentation
+
+* Updated gem description to clarify this client is for Dialogflow ES
+
+### 1.3.2 / 2021-07-12
+
+#### Documentation
+
+* Clarified some language around authentication configuration
+
+### 1.3.1 / 2021-06-30
+
+#### Bug Fixes
+
+* Expand dependencies to include future 1.x releases of versioned clients
+
 ### 1.3.0 / 2021-05-19
 
 #### Features

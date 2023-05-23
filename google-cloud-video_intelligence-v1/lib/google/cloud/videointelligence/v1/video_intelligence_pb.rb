@@ -10,6 +10,7 @@ require 'google/longrunning/operations_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/rpc/status_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/videointelligence/v1/video_intelligence.proto", :syntax => :proto3) do
     add_message "google.cloud.videointelligence.v1.AnnotateVideoRequest" do

@@ -5,6 +5,30 @@
   "protoPackage": "google.cloud.channel.v1",
   "libraryPackage": "::Google::Cloud::Channel::V1",
   "services": {
+    "CloudChannelReportsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Channel::V1::CloudChannelReportsService::Client",
+          "rpcs": {
+            "RunReportJob": {
+              "methods": [
+                "run_report_job"
+              ]
+            },
+            "FetchReportResults": {
+              "methods": [
+                "fetch_report_results"
+              ]
+            },
+            "ListReports": {
+              "methods": [
+                "list_reports"
+              ]
+            }
+          }
+        }
+      }
+    },
     "CloudChannelService": {
       "clients": {
         "grpc": {
@@ -38,6 +62,11 @@
             "DeleteCustomer": {
               "methods": [
                 "delete_customer"
+              ]
+            },
+            "ImportCustomer": {
+              "methods": [
+                "import_customer"
               ]
             },
             "ProvisionCloudIdentity": {
@@ -135,6 +164,61 @@
                 "update_channel_partner_link"
               ]
             },
+            "GetCustomerRepricingConfig": {
+              "methods": [
+                "get_customer_repricing_config"
+              ]
+            },
+            "ListCustomerRepricingConfigs": {
+              "methods": [
+                "list_customer_repricing_configs"
+              ]
+            },
+            "CreateCustomerRepricingConfig": {
+              "methods": [
+                "create_customer_repricing_config"
+              ]
+            },
+            "UpdateCustomerRepricingConfig": {
+              "methods": [
+                "update_customer_repricing_config"
+              ]
+            },
+            "DeleteCustomerRepricingConfig": {
+              "methods": [
+                "delete_customer_repricing_config"
+              ]
+            },
+            "GetChannelPartnerRepricingConfig": {
+              "methods": [
+                "get_channel_partner_repricing_config"
+              ]
+            },
+            "ListChannelPartnerRepricingConfigs": {
+              "methods": [
+                "list_channel_partner_repricing_configs"
+              ]
+            },
+            "CreateChannelPartnerRepricingConfig": {
+              "methods": [
+                "create_channel_partner_repricing_config"
+              ]
+            },
+            "UpdateChannelPartnerRepricingConfig": {
+              "methods": [
+                "update_channel_partner_repricing_config"
+              ]
+            },
+            "DeleteChannelPartnerRepricingConfig": {
+              "methods": [
+                "delete_channel_partner_repricing_config"
+              ]
+            },
+            "LookupOffer": {
+              "methods": [
+                "lookup_offer"
+              ]
+            },
             "ListProducts": {
               "methods": [
                 "list_products"
@@ -173,6 +257,11 @@
             "ListSubscribers": {
               "methods": [
                 "list_subscribers"
+              ]
+            },
+            "ListEntitlementChanges": {
+              "methods": [
+                "list_entitlement_changes"
               ]
             }
           }

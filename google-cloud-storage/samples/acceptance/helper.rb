@@ -101,6 +101,11 @@ def random_bucket_name
   "ruby-storage-samples-test-#{t}-#{SecureRandom.hex 4}".downcase
 end
 
+def random_topic_name
+  t = Time.now.utc.iso8601.gsub ":", "-"
+  "ruby-storage-samples-test-topic-#{t}-#{SecureRandom.hex 4}".downcase
+end
+
 # Create fixture bucket to be shared with all the tests
 $fixture_bucket_name = random_bucket_name
 

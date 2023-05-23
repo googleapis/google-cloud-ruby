@@ -85,6 +85,25 @@ module Google
             #     the moment it is queried. If you are using this value to recover data, make
             #     sure to account for the time from the moment when the value is queried to
             #     the moment when you initiate the recovery.
+            # @!attribute [r] default_leader
+            #   @return [::String]
+            #     Output only. The read-write region which contains the database's leader
+            #     replicas.
+            #
+            #     This is the same as the value of default_leader
+            #     database option set using DatabaseAdmin.CreateDatabase or
+            #     DatabaseAdmin.UpdateDatabaseDdl. If not explicitly set, this is empty.
+            # @!attribute [r] database_dialect
+            #   @return [::Google::Cloud::Spanner::Admin::Database::V1::DatabaseDialect]
+            #     Output only. The dialect of the Cloud Spanner Database.
+            # @!attribute [rw] enable_drop_protection
+            #   @return [::Boolean]
+            #     Whether drop protection is enabled for this database. Defaults to false,
+            #     if not set.
+            # @!attribute [r] reconciling
+            #   @return [::Boolean]
+            #     Output only. If true, the database is being updated. If false, there are no
+            #     ongoing update operations for the database.
             class Database
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -169,6 +188,9 @@ module Google
             #     Optional. The encryption configuration for the database. If this field is not
             #     specified, Cloud Spanner will encrypt/decrypt all data at rest using
             #     Google default encryption.
+            # @!attribute [rw] database_dialect
+            #   @return [::Google::Cloud::Spanner::Admin::Database::V1::DatabaseDialect]
+            #     Optional. The dialect of the Cloud Spanner Database.
             class CreateDatabaseRequest
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -190,6 +212,42 @@ module Google
             #     Required. The name of the requested database. Values are of the form
             #     `projects/<project>/instances/<instance>/databases/<database>`.
             class GetDatabaseRequest
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The request for
+            # {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_database UpdateDatabase}.
+            # @!attribute [rw] database
+            #   @return [::Google::Cloud::Spanner::Admin::Database::V1::Database]
+            #     Required. The database to update.
+            #     The `name` field of the database is of the form
+            #     `projects/<project>/instances/<instance>/databases/<database>`.
+            # @!attribute [rw] update_mask
+            #   @return [::Google::Protobuf::FieldMask]
+            #     Required. The list of fields to update. Currently, only
+            #     `enable_drop_protection` field can be updated.
+            class UpdateDatabaseRequest
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Metadata type for the operation returned by
+            # {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_database UpdateDatabase}.
+            # @!attribute [rw] request
+            #   @return [::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseRequest]
+            #     The request for
+            #     {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_database UpdateDatabase}.
+            # @!attribute [rw] progress
+            #   @return [::Google::Cloud::Spanner::Admin::Database::V1::OperationProgress]
+            #     The progress of the
+            #     {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_database UpdateDatabase}
+            #     operation.
+            # @!attribute [rw] cancel_time
+            #   @return [::Google::Protobuf::Timestamp]
+            #     The time at which this operation was cancelled. If set, this operation is
+            #     in the process of undoing itself (which is best-effort).
+            class UpdateDatabaseMetadata
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
@@ -331,6 +389,8 @@ module Google
             #          for {::Google::Cloud::Spanner::Admin::Database::V1::RestoreDatabaseMetadata RestoreDatabaseMetadata} is
             #          `type.googleapis.com/google.spanner.admin.database.v1.RestoreDatabaseMetadata`.
             #       * `metadata.<field_name>` - any field in metadata.value.
+            #          `metadata.@type` must be specified first, if filtering on metadata
+            #          fields.
             #       * `error` - Error associated with the long-running operation.
             #       * `response.@type` - the type of response.
             #       * `response.<field_name>` - any field in response.value.
@@ -511,6 +571,53 @@ module Google
             #   @return [::Google::Cloud::Spanner::Admin::Database::V1::OperationProgress]
             #     The progress of the post-restore optimizations.
             class OptimizeRestoredDatabaseMetadata
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # A Cloud Spanner database role.
+            # @!attribute [rw] name
+            #   @return [::String]
+            #     Required. The name of the database role. Values are of the form
+            #     `projects/<project>/instances/<instance>/databases/<database>/databaseRoles/
+            #     \\{role}`, where `<role>` is as specified in the `CREATE ROLE`
+            #     DDL statement. This name can be passed to Get/Set IAMPolicy methods to
+            #     identify the database role.
+            class DatabaseRole
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The request for {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#list_database_roles ListDatabaseRoles}.
+            # @!attribute [rw] parent
+            #   @return [::String]
+            #     Required. The database whose roles should be listed.
+            #     Values are of the form
+            #     `projects/<project>/instances/<instance>/databases/<database>/databaseRoles`.
+            # @!attribute [rw] page_size
+            #   @return [::Integer]
+            #     Number of database roles to be returned in the response. If 0 or less,
+            #     defaults to the server's maximum allowed page size.
+            # @!attribute [rw] page_token
+            #   @return [::String]
+            #     If non-empty, `page_token` should contain a
+            #     {::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseRolesResponse#next_page_token next_page_token} from a
+            #     previous {::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseRolesResponse ListDatabaseRolesResponse}.
+            class ListDatabaseRolesRequest
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The response for {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#list_database_roles ListDatabaseRoles}.
+            # @!attribute [rw] database_roles
+            #   @return [::Array<::Google::Cloud::Spanner::Admin::Database::V1::DatabaseRole>]
+            #     Database roles that matched the request.
+            # @!attribute [rw] next_page_token
+            #   @return [::String]
+            #     `next_page_token` can be sent in a subsequent
+            #     {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#list_database_roles ListDatabaseRoles}
+            #     call to fetch more of the matching roles.
+            class ListDatabaseRolesResponse
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end

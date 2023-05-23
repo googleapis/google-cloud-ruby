@@ -25,6 +25,46 @@ module Google
           # Path helper methods for the CatalogService API.
           module Paths
             ##
+            # Create a fully-qualified AttributesConfig resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/catalogs/{catalog}/attributesConfig`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param catalog [String]
+            #
+            # @return [::String]
+            def attributes_config_path project:, location:, catalog:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/catalogs/#{catalog}/attributesConfig"
+            end
+
+            ##
+            # Create a fully-qualified Branch resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/catalogs/{catalog}/branches/{branch}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param catalog [String]
+            # @param branch [String]
+            #
+            # @return [::String]
+            def branch_path project:, location:, catalog:, branch:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "catalog cannot contain /" if catalog.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/catalogs/#{catalog}/branches/#{branch}"
+            end
+
+            ##
             # Create a fully-qualified Catalog resource string.
             #
             # The resource will be in the following format:
@@ -41,6 +81,25 @@ module Google
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/catalogs/#{catalog}"
+            end
+
+            ##
+            # Create a fully-qualified CompletionConfig resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/catalogs/{catalog}/completionConfig`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param catalog [String]
+            #
+            # @return [::String]
+            def completion_config_path project:, location:, catalog:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/catalogs/#{catalog}/completionConfig"
             end
 
             ##

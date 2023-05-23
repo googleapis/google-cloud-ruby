@@ -618,6 +618,182 @@ class ::Google::Cloud::OsConfig::V1::OsConfigService::ClientTest < Minitest::Tes
     end
   end
 
+  def test_update_patch_deployment
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::OsConfig::V1::PatchDeployment.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    patch_deployment = {}
+    update_mask = {}
+
+    update_patch_deployment_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_patch_deployment, name
+      assert_kind_of ::Google::Cloud::OsConfig::V1::UpdatePatchDeploymentRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::OsConfig::V1::PatchDeployment), request["patch_deployment"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_patch_deployment_client_stub do
+      # Create client
+      client = ::Google::Cloud::OsConfig::V1::OsConfigService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_patch_deployment({ patch_deployment: patch_deployment, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_patch_deployment patch_deployment: patch_deployment, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_patch_deployment ::Google::Cloud::OsConfig::V1::UpdatePatchDeploymentRequest.new(patch_deployment: patch_deployment, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_patch_deployment({ patch_deployment: patch_deployment, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_patch_deployment(::Google::Cloud::OsConfig::V1::UpdatePatchDeploymentRequest.new(patch_deployment: patch_deployment, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_patch_deployment_client_stub.call_rpc_count
+    end
+  end
+
+  def test_pause_patch_deployment
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::OsConfig::V1::PatchDeployment.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    pause_patch_deployment_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :pause_patch_deployment, name
+      assert_kind_of ::Google::Cloud::OsConfig::V1::PausePatchDeploymentRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, pause_patch_deployment_client_stub do
+      # Create client
+      client = ::Google::Cloud::OsConfig::V1::OsConfigService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.pause_patch_deployment({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.pause_patch_deployment name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.pause_patch_deployment ::Google::Cloud::OsConfig::V1::PausePatchDeploymentRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.pause_patch_deployment({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.pause_patch_deployment(::Google::Cloud::OsConfig::V1::PausePatchDeploymentRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, pause_patch_deployment_client_stub.call_rpc_count
+    end
+  end
+
+  def test_resume_patch_deployment
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::OsConfig::V1::PatchDeployment.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    resume_patch_deployment_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :resume_patch_deployment, name
+      assert_kind_of ::Google::Cloud::OsConfig::V1::ResumePatchDeploymentRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, resume_patch_deployment_client_stub do
+      # Create client
+      client = ::Google::Cloud::OsConfig::V1::OsConfigService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.resume_patch_deployment({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.resume_patch_deployment name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.resume_patch_deployment ::Google::Cloud::OsConfig::V1::ResumePatchDeploymentRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.resume_patch_deployment({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.resume_patch_deployment(::Google::Cloud::OsConfig::V1::ResumePatchDeploymentRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, resume_patch_deployment_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

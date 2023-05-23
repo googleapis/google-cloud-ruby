@@ -276,7 +276,7 @@ To follow along with these examples, you will need to set up billing on the
 [Google Developers Console](https://console.developers.google.com).
 
 In addition to CSV, data can be imported from files that are formatted as
-[Newline-delimited JSON](http://jsonlines.org/),
+[Newline-delimited JSON](https://jsonlines.org/),
 [Avro](http://avro.apache.org/),
 [ORC](https://cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc),
 [Parquet](https://parquet.apache.org/) or from a Google Cloud Datastore backup.

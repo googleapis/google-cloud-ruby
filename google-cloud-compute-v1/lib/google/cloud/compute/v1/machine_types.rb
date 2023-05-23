@@ -28,9 +28,12 @@ module Google
   module Cloud
     module Compute
       module V1
-        # To load this service and instantiate a REST client:
+        ##
+        # The MachineTypes API.
         #
-        #     require "google/cloud/compute/v1/machine_types"
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/compute/v1/machine_types/rest"
         #     client = ::Google::Cloud::Compute::V1::MachineTypes::Rest::Client.new
         #
         module MachineTypes

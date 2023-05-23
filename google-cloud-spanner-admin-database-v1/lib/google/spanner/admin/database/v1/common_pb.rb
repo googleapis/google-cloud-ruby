@@ -7,7 +7,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/rpc/status_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/spanner/admin/database/v1/common.proto", :syntax => :proto3) do
     add_message "google.spanner.admin.database.v1.OperationProgress" do
@@ -28,6 +28,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :GOOGLE_DEFAULT_ENCRYPTION, 1
       value :CUSTOMER_MANAGED_ENCRYPTION, 2
     end
+    add_enum "google.spanner.admin.database.v1.DatabaseDialect" do
+      value :DATABASE_DIALECT_UNSPECIFIED, 0
+      value :GOOGLE_STANDARD_SQL, 1
+      value :POSTGRESQL, 2
+    end
   end
 end
 
@@ -41,6 +46,7 @@ module Google
             EncryptionConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.EncryptionConfig").msgclass
             EncryptionInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.EncryptionInfo").msgclass
             EncryptionInfo::Type = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.EncryptionInfo.Type").enummodule
+            DatabaseDialect = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.DatabaseDialect").enummodule
           end
         end
       end

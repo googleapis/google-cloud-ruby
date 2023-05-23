@@ -1,0 +1,24 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-apigee_connect.gemspec",
+    "lib/google-cloud-apigee_connect.rb",
+    "lib/google/cloud/apigee_connect.rb",
+    "lib/google/cloud/apigee_connect/version.rb",
+    "test/google/cloud/apigee_connect/client_test.rb",
+    "test/google/cloud/apigee_connect/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}

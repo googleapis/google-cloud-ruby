@@ -8,6 +8,7 @@ require 'google/protobuf/duration_pb'
 require 'google/protobuf/struct_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/type/money_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/recommender/v1/recommendation.proto", :syntax => :proto3) do
     add_message "google.cloud.recommender.v1.Recommendation" do
@@ -17,16 +18,26 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :last_refresh_time, :message, 4, "google.protobuf.Timestamp"
       optional :primary_impact, :message, 5, "google.cloud.recommender.v1.Impact"
       repeated :additional_impact, :message, 6, "google.cloud.recommender.v1.Impact"
+      optional :priority, :enum, 17, "google.cloud.recommender.v1.Recommendation.Priority"
       optional :content, :message, 7, "google.cloud.recommender.v1.RecommendationContent"
       optional :state_info, :message, 10, "google.cloud.recommender.v1.RecommendationStateInfo"
       optional :etag, :string, 11
       repeated :associated_insights, :message, 14, "google.cloud.recommender.v1.Recommendation.InsightReference"
+      optional :xor_group_id, :string, 18
     end
     add_message "google.cloud.recommender.v1.Recommendation.InsightReference" do
       optional :insight, :string, 1
     end
+    add_enum "google.cloud.recommender.v1.Recommendation.Priority" do
+      value :PRIORITY_UNSPECIFIED, 0
+      value :P4, 1
+      value :P3, 2
+      value :P2, 3
+      value :P1, 4
+    end
     add_message "google.cloud.recommender.v1.RecommendationContent" do
       repeated :operation_groups, :message, 2, "google.cloud.recommender.v1.OperationGroup"
+      optional :overview, :message, 3, "google.protobuf.Struct"
     end
     add_message "google.cloud.recommender.v1.OperationGroup" do
       repeated :operations, :message, 1, "google.cloud.recommender.v1.Operation"
@@ -54,10 +65,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :cost, :message, 1, "google.type.Money"
       optional :duration, :message, 2, "google.protobuf.Duration"
     end
+    add_message "google.cloud.recommender.v1.SecurityProjection" do
+      optional :details, :message, 2, "google.protobuf.Struct"
+    end
     add_message "google.cloud.recommender.v1.Impact" do
       optional :category, :enum, 1, "google.cloud.recommender.v1.Impact.Category"
       oneof :projection do
         optional :cost_projection, :message, 100, "google.cloud.recommender.v1.CostProjection"
+        optional :security_projection, :message, 101, "google.cloud.recommender.v1.SecurityProjection"
       end
     end
     add_enum "google.cloud.recommender.v1.Impact.Category" do
@@ -88,11 +103,13 @@ module Google
       module V1
         Recommendation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.Recommendation").msgclass
         Recommendation::InsightReference = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.Recommendation.InsightReference").msgclass
+        Recommendation::Priority = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.Recommendation.Priority").enummodule
         RecommendationContent = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.RecommendationContent").msgclass
         OperationGroup = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.OperationGroup").msgclass
         Operation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.Operation").msgclass
         ValueMatcher = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.ValueMatcher").msgclass
         CostProjection = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.CostProjection").msgclass
+        SecurityProjection = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.SecurityProjection").msgclass
         Impact = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.Impact").msgclass
         Impact::Category = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.Impact.Category").enummodule
         RecommendationStateInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.RecommendationStateInfo").msgclass

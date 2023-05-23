@@ -46,7 +46,7 @@ module Google
       #
       #   bigtable = Google::Cloud::Bigtable.new
       #
-      #   instance = bigtable.instance("my-instance")
+      #   instance = bigtable.instance "my-instance"
       #   clusters = bigtable.clusters # All clusters in the project
       #
       class Project
@@ -117,7 +117,7 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   instance = bigtable.instance("my-instance")
+        #   instance = bigtable.instance "my-instance"
         #
         #   if instance
         #     puts instance.instance_id
@@ -181,9 +181,9 @@ module Google
         #     "my-instance",
         #     display_name: "Instance for user data",
         #     type: :DEVELOPMENT,
-        #     labels: { "env" => "dev"}
+        #     labels: { "env" => "dev" }
         #   ) do |clusters|
-        #     clusters.add("test-cluster", "us-east1-b") # nodes not allowed
+        #     clusters.add "test-cluster", "us-east1-b" # nodes not allowed
         #   end
         #
         #   job.done? #=> false
@@ -206,9 +206,9 @@ module Google
         #   job = bigtable.create_instance(
         #     "my-instance",
         #     display_name: "Instance for user data",
-        #     labels: { "env" => "dev"}
+        #     labels: { "env" => "dev" }
         #   ) do |clusters|
-        #     clusters.add("test-cluster", "us-east1-b", nodes: 3, storage_type: :SSD)
+        #     clusters.add "test-cluster", "us-east1-b", nodes: 3, storage_type: :SSD
         #   end
         #
         #   job.done? #=> false
@@ -224,9 +224,9 @@ module Google
         #   end
         #
         def create_instance instance_id, display_name: nil, type: nil, labels: nil, clusters: nil
-          labels = Hash[labels.map { |k, v| [String(k), String(v)] }] if labels
+          labels = labels.to_h { |k, v| [String(k), String(v)] } if labels
 
-          instance_attrs = { display_name: display_name, type: type, labels: labels }.delete_if { |_, v| v.nil? }
+          instance_attrs = { display_name: display_name, type: type, labels: labels }.compact
           instance = Google::Cloud::Bigtable::Admin::V2::Instance.new instance_attrs
           clusters ||= Instance::ClusterMap.new
           yield clusters if block_given?
@@ -314,14 +314,14 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.table("my-instance", "my-table")
+        #   table = bigtable.table "my-instance", "my-table"
         #
         # @example Retrieve a table with a schema-only view.
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.table("my-instance", "my-table", perform_lookup: true)
+        #   table = bigtable.table "my-instance", "my-table", perform_lookup: true
         #   if table
         #     puts table.name
         #     puts table.column_families
@@ -332,7 +332,7 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.table("my-instance", "my-table", view: :FULL, perform_lookup: true)
+        #   table = bigtable.table "my-instance", "my-table", view: :FULL, perform_lookup: true
         #   if table
         #     puts table.name
         #     puts table.column_families
@@ -402,7 +402,7 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.create_table("my-instance", "my-table")
+        #   table = bigtable.create_table "my-instance", "my-table"
         #   puts table.name
         #
         # @example Create a table with initial splits and column families.
@@ -411,15 +411,15 @@ module Google
         #   bigtable = Google::Cloud::Bigtable.new
         #
         #   initial_splits = ["user-00001", "user-100000", "others"]
-        #   table = bigtable.create_table("my-instance", "my-table", initial_splits: initial_splits) do |cfm|
-        #     cfm.add('cf1', gc_rule: Google::Cloud::Bigtable::GcRule.max_versions(5))
-        #     cfm.add('cf2', gc_rule: Google::Cloud::Bigtable::GcRule.max_age(600))
+        #   table = bigtable.create_table "my-instance", "my-table", initial_splits: initial_splits do |cfm|
+        #     cfm.add "cf1", gc_rule: Google::Cloud::Bigtable::GcRule.max_versions(5)
+        #     cfm.add "cf2", gc_rule: Google::Cloud::Bigtable::GcRule.max_age(600)
         #
         #     gc_rule = Google::Cloud::Bigtable::GcRule.union(
         #       Google::Cloud::Bigtable::GcRule.max_age(1800),
         #       Google::Cloud::Bigtable::GcRule.max_versions(3)
         #     )
-        #     cfm.add('cf3', gc_rule: gc_rule)
+        #     cfm.add "cf3", gc_rule: gc_rule
         #   end
         #
         #   puts table
@@ -450,7 +450,7 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   bigtable.delete_table("my-instance", "my-table")
+        #   bigtable.delete_table "my-instance", "my-table"
         #
         def delete_table instance_id, table_id
           service.delete_table instance_id, table_id

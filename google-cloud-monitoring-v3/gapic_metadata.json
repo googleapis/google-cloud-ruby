@@ -122,6 +122,11 @@
               "methods": [
                 "create_time_series"
               ]
+            },
+            "CreateServiceTimeSeries": {
+              "methods": [
+                "create_service_time_series"
+              ]
             }
           }
         }
@@ -253,6 +258,35 @@
             "DeleteServiceLevelObjective": {
               "methods": [
                 "delete_service_level_objective"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SnoozeService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Monitoring::V3::SnoozeService::Client",
+          "rpcs": {
+            "CreateSnooze": {
+              "methods": [
+                "create_snooze"
+              ]
+            },
+            "ListSnoozes": {
+              "methods": [
+                "list_snoozes"
+              ]
+            },
+            "GetSnooze": {
+              "methods": [
+                "get_snooze"
+              ]
+            },
+            "UpdateSnooze": {
+              "methods": [
+                "update_snooze"
               ]
             }
           }

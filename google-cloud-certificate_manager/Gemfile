@@ -1,0 +1,5 @@
+source "https://rubygems.org"
+
+gemspec
+
+gem "google-cloud-certificate_manager-v1", path: "../google-cloud-certificate_manager-v1"

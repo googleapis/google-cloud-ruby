@@ -16,10 +16,11 @@ require "helper"
 
 describe Google::Cloud::PubSub::Schema, :reference, :mock_pubsub do
   let(:schema_id) { "my-schema" }
-  let(:schema) { Google::Cloud::PubSub::Schema.from_name schema_id, :BASIC, pubsub.service }
+  let(:schema) { Google::Cloud::PubSub::Schema.from_name schema_id, :FULL, pubsub.service }
   let(:message_data) { { "name" => "Alaska", "post_abbr" => "AK" }.to_json }
   let(:message_data_invalid) { { "BAD_VALUE" => nil }.to_json }
   let(:message_encoding) { :JSON }
+  let(:definition) { "Schema definition" }
 
   it "knows its attributes" do
     _(schema.name).must_equal schema_path(schema_id)
@@ -37,7 +38,7 @@ describe Google::Cloud::PubSub::Schema, :reference, :mock_pubsub do
   it "validates a message" do
     mock = Minitest::Mock.new
     res = Google::Cloud::PubSub::V1::ValidateMessageResponse.new # always empty
-    mock.expect :validate_message, res, [parent: project_path, name: schema_path(schema_id), schema: nil, message: message_data, encoding: message_encoding.to_s]
+    mock.expect :validate_message, res, parent: project_path, name: schema_path(schema_id), schema: nil, message: message_data, encoding: message_encoding.to_s
     pubsub.service.mocked_schemas = mock
 
     _(schema.validate_message message_data, message_encoding).must_equal true
@@ -57,7 +58,7 @@ describe Google::Cloud::PubSub::Schema, :reference, :mock_pubsub do
 
   it "deletes itself" do
     mock = Minitest::Mock.new
-    mock.expect :delete_schema, nil, [name: schema_path(schema_id)]
+    mock.expect :delete_schema, nil, name: schema_path(schema_id)
     pubsub.service.mocked_schemas = mock
 
     schema.delete
@@ -66,28 +67,12 @@ describe Google::Cloud::PubSub::Schema, :reference, :mock_pubsub do
   end
 
   it "reloads itself" do
-    get_res = Google::Cloud::PubSub::V1::Schema.new schema_hash(schema_id, definition: nil)
+    get_res = Google::Cloud::PubSub::V1::Schema.new schema_hash(schema_id)
     mock = Minitest::Mock.new
-    mock.expect :get_schema, get_res, [name: schema_path(schema_id), view: 1]
+    mock.expect :get_schema, get_res, name: schema_path(schema_id), view: 2
     pubsub.service.mocked_schemas = mock
 
     schema.reload!
-
-    _(schema).wont_be :reference?
-    _(schema).must_be :resource?
-    _(schema.resource_partial?).must_equal true
-    _(schema.resource_full?).must_equal false
-
-    mock.verify
-  end
-
-  it "reloads itself with view option" do
-    get_res = Google::Cloud::PubSub::V1::Schema.new schema_hash(schema_id)
-    mock = Minitest::Mock.new
-    mock.expect :get_schema, get_res, [name: schema_path(schema_id), view: 2]
-    pubsub.service.mocked_schemas = mock
-
-    schema.reload! view: :full
 
     _(schema).wont_be :reference?
     _(schema).must_be :resource?
@@ -97,18 +82,34 @@ describe Google::Cloud::PubSub::Schema, :reference, :mock_pubsub do
     mock.verify
   end
 
-  it "checks if it exists without making RPC" do
+  it "reloads itself with view option" do
     get_res = Google::Cloud::PubSub::V1::Schema.new schema_hash(schema_id, definition: nil)
     mock = Minitest::Mock.new
-    mock.expect :get_schema, get_res, [name: schema_path(schema_id), view: 1]
+    mock.expect :get_schema, get_res, name: schema_path(schema_id), view: 1
+    pubsub.service.mocked_schemas = mock
+
+    schema.reload! view: :basic
+
+    _(schema).wont_be :reference?
+    _(schema).must_be :resource?
+    _(schema.resource_partial?).must_equal true
+    _(schema.resource_full?).must_equal false
+
+    mock.verify
+  end
+
+  it "checks if it exists with RPC" do
+    get_res = Google::Cloud::PubSub::V1::Schema.new schema_hash(schema_id, definition: definition)
+    mock = Minitest::Mock.new
+    mock.expect :get_schema, get_res, name: schema_path(schema_id), view: 2
     pubsub.service.mocked_schemas = mock
 
     _(schema.exists?).must_equal true
 
     _(schema).wont_be :reference?
     _(schema).must_be :resource?
-    _(schema.resource_partial?).must_equal true
-    _(schema.resource_full?).must_equal false
+    _(schema.resource_partial?).must_equal false
+    _(schema.resource_full?).must_equal true
 
     mock.verify
   end

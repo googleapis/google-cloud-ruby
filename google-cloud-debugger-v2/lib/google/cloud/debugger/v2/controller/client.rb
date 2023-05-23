@@ -58,13 +58,12 @@ module Google
             # See {::Google::Cloud::Debugger::V2::Controller::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all Controller clients:
-            #
-            #     ::Google::Cloud::Debugger::V2::Controller::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all Controller clients
+            #   ::Google::Cloud::Debugger::V2::Controller::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -86,18 +85,12 @@ module Google
 
                 default_config.rpcs.list_active_breakpoints.timeout = 600.0
                 default_config.rpcs.list_active_breakpoints.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.update_active_breakpoint.timeout = 600.0
                 default_config.rpcs.update_active_breakpoint.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config
@@ -129,19 +122,15 @@ module Google
             ##
             # Create a new Controller client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new Controller client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Debugger::V2::Controller::Client.new
             #
-            #     client = ::Google::Cloud::Debugger::V2::Controller::Client.new
-            #
-            # To create a new Controller client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Debugger::V2::Controller::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Debugger::V2::Controller::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Controller client.
             # @yieldparam config [Client::Configuration]
@@ -161,14 +150,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -225,6 +213,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/debugger/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Debugger::V2::Controller::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Debugger::V2::RegisterDebuggeeRequest.new
+            #
+            #   # Call the register_debuggee method.
+            #   result = client.register_debuggee request
+            #
+            #   # The returned object is of type Google::Cloud::Debugger::V2::RegisterDebuggeeResponse.
+            #   p result
+            #
             def register_debuggee request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -245,7 +248,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.register_debuggee.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.register_debuggee.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @controller_stub.call_rpc :register_debuggee, request, options: options do |response, operation|
@@ -309,6 +314,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/debugger/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Debugger::V2::Controller::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Debugger::V2::ListActiveBreakpointsRequest.new
+            #
+            #   # Call the list_active_breakpoints method.
+            #   result = client.list_active_breakpoints request
+            #
+            #   # The returned object is of type Google::Cloud::Debugger::V2::ListActiveBreakpointsResponse.
+            #   p result
+            #
             def list_active_breakpoints request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -326,16 +346,20 @@ module Google
                 gapic_version: ::Google::Cloud::Debugger::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "debuggee_id" => request.debuggee_id
-              }
+              header_params = {}
+              if request.debuggee_id
+                header_params["debuggee_id"] = request.debuggee_id
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_active_breakpoints.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_active_breakpoints.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @controller_stub.call_rpc :list_active_breakpoints, request, options: options do |response, operation|
@@ -386,6 +410,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/debugger/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Debugger::V2::Controller::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Debugger::V2::UpdateActiveBreakpointRequest.new
+            #
+            #   # Call the update_active_breakpoint method.
+            #   result = client.update_active_breakpoint request
+            #
+            #   # The returned object is of type Google::Cloud::Debugger::V2::UpdateActiveBreakpointResponse.
+            #   p result
+            #
             def update_active_breakpoint request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -403,17 +442,23 @@ module Google
                 gapic_version: ::Google::Cloud::Debugger::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "debuggee_id" => request.debuggee_id,
-                "breakpoint.id" => request.breakpoint.id
-              }
+              header_params = {}
+              if request.debuggee_id
+                header_params["debuggee_id"] = request.debuggee_id
+              end
+              if request.breakpoint&.id
+                header_params["breakpoint.id"] = request.breakpoint.id
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_active_breakpoint.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_active_breakpoint.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @controller_stub.call_rpc :update_active_breakpoint, request, options: options do |response, operation|
@@ -437,22 +482,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for register_debuggee
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # register_debuggee to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Debugger::V2::Controller::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.register_debuggee.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Debugger::V2::Controller::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.register_debuggee.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Debugger::V2::Controller::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.register_debuggee.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Debugger::V2::Controller::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.register_debuggee.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
@@ -463,9 +507,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials

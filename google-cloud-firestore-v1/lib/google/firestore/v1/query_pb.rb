@@ -3,9 +3,10 @@
 
 require 'google/protobuf'
 
+require 'google/api/field_behavior_pb'
 require 'google/firestore/v1/document_pb'
 require 'google/protobuf/wrappers_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/firestore/v1/query.proto", :syntax => :proto3) do
     add_message "google.firestore.v1.StructuredQuery" do
@@ -36,6 +37,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_enum "google.firestore.v1.StructuredQuery.CompositeFilter.Operator" do
       value :OPERATOR_UNSPECIFIED, 0
       value :AND, 1
+      value :OR, 2
     end
     add_message "google.firestore.v1.StructuredQuery.FieldFilter" do
       optional :field, :message, 1, "google.firestore.v1.StructuredQuery.FieldReference"
@@ -83,6 +85,21 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :ASCENDING, 1
       value :DESCENDING, 2
     end
+    add_message "google.firestore.v1.StructuredAggregationQuery" do
+      repeated :aggregations, :message, 3, "google.firestore.v1.StructuredAggregationQuery.Aggregation"
+      oneof :query_type do
+        optional :structured_query, :message, 1, "google.firestore.v1.StructuredQuery"
+      end
+    end
+    add_message "google.firestore.v1.StructuredAggregationQuery.Aggregation" do
+      optional :alias, :string, 7
+      oneof :operator do
+        optional :count, :message, 1, "google.firestore.v1.StructuredAggregationQuery.Aggregation.Count"
+      end
+    end
+    add_message "google.firestore.v1.StructuredAggregationQuery.Aggregation.Count" do
+      optional :up_to, :message, 1, "google.protobuf.Int64Value"
+    end
     add_message "google.firestore.v1.Cursor" do
       repeated :values, :message, 1, "google.firestore.v1.Value"
       optional :before, :bool, 2
@@ -107,6 +124,9 @@ module Google
         StructuredQuery::FieldReference = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1.StructuredQuery.FieldReference").msgclass
         StructuredQuery::Projection = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1.StructuredQuery.Projection").msgclass
         StructuredQuery::Direction = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1.StructuredQuery.Direction").enummodule
+        StructuredAggregationQuery = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1.StructuredAggregationQuery").msgclass
+        StructuredAggregationQuery::Aggregation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1.StructuredAggregationQuery.Aggregation").msgclass
+        StructuredAggregationQuery::Aggregation::Count = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1.StructuredAggregationQuery.Aggregation.Count").msgclass
         Cursor = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1.Cursor").msgclass
       end
     end

@@ -70,8 +70,8 @@ module Google
         # @!attribute [rw] sentiment
         #   @return [::Google::Cloud::Language::V1::Sentiment]
         #     For calls to [AnalyzeSentiment][] or if
-        #     {::Google::Cloud::Language::V1::AnnotateTextRequest::Features#extract_document_sentiment AnnotateTextRequest.Features.extract_document_sentiment} is set to
-        #     true, this field will contain the sentiment for the sentence.
+        #     {::Google::Cloud::Language::V1::AnnotateTextRequest::Features#extract_document_sentiment AnnotateTextRequest.Features.extract_document_sentiment}
+        #     is set to true, this field will contain the sentiment for the sentence.
         class Sentence
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -108,9 +108,9 @@ module Google
         # @!attribute [rw] sentiment
         #   @return [::Google::Cloud::Language::V1::Sentiment]
         #     For calls to [AnalyzeEntitySentiment][] or if
-        #     {::Google::Cloud::Language::V1::AnnotateTextRequest::Features#extract_entity_sentiment AnnotateTextRequest.Features.extract_entity_sentiment} is set to
-        #     true, this field will contain the aggregate sentiment expressed for this
-        #     entity in the provided document.
+        #     {::Google::Cloud::Language::V1::AnnotateTextRequest::Features#extract_entity_sentiment AnnotateTextRequest.Features.extract_entity_sentiment}
+        #     is set to true, this field will contain the aggregate sentiment expressed
+        #     for this entity in the provided document.
         class Entity
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -153,44 +153,53 @@ module Google
             # Other types of entities
             OTHER = 7
 
-            # Phone number<br><br>
+            # Phone number
+            #
             # The metadata lists the phone number, formatted according to local
-            # convention, plus whichever additional elements appear in the text:<ul>
-            # <li><code>number</code> &ndash; the actual number, broken down into
-            # sections as per local convention</li> <li><code>national_prefix</code>
-            # &ndash; country code, if detected</li> <li><code>area_code</code> &ndash;
-            # region or area code, if detected</li> <li><code>extension</code> &ndash;
-            # phone extension (to be dialed after connection), if detected</li></ul>
+            # convention, plus whichever additional elements appear in the text:
+            #
+            # * `number` - the actual number, broken down into sections as per local
+            # convention
+            # * `national_prefix` - country code, if detected
+            # * `area_code` - region or area code, if detected
+            # * `extension` - phone extension (to be dialed after connection), if
+            # detected
             PHONE_NUMBER = 9
 
-            # Address<br><br>
+            # Address
+            #
             # The metadata identifies the street number and locality plus whichever
-            # additional elements appear in the text:<ul>
-            # <li><code>street_number</code> &ndash; street number</li>
-            # <li><code>locality</code> &ndash; city or town</li>
-            # <li><code>street_name</code> &ndash; street/route name, if detected</li>
-            # <li><code>postal_code</code> &ndash; postal code, if detected</li>
-            # <li><code>country</code> &ndash; country, if detected</li>
-            # <li><code>broad_region</code> &ndash; administrative area, such as the
-            # state, if detected</li> <li><code>narrow_region</code> &ndash; smaller
-            # administrative area, such as county, if detected</li>
-            # <li><code>sublocality</code> &ndash; used in Asian addresses to demark a
-            # district within a city, if detected</li></ul>
+            # additional elements appear in the text:
+            #
+            # * `street_number` - street number
+            # * `locality` - city or town
+            # * `street_name` - street/route name, if detected
+            # * `postal_code` - postal code, if detected
+            # * `country` - country, if detected<
+            # * `broad_region` - administrative area, such as the state, if detected
+            # * `narrow_region` - smaller administrative area, such as county, if
+            # detected
+            # * `sublocality` - used in Asian addresses to demark a district within a
+            # city, if detected
             ADDRESS = 10
 
-            # Date<br><br>
-            # The metadata identifies the components of the date:<ul>
-            # <li><code>year</code> &ndash; four digit year, if detected</li>
-            # <li><code>month</code> &ndash; two digit month number, if detected</li>
-            # <li><code>day</code> &ndash; two digit day number, if detected</li></ul>
+            # Date
+            #
+            # The metadata identifies the components of the date:
+            #
+            # * `year` - four digit year, if detected
+            # * `month` - two digit month number, if detected
+            # * `day` - two digit day number, if detected
             DATE = 11
 
-            # Number<br><br>
+            # Number
+            #
             # The metadata is the number itself.
             NUMBER = 12
 
-            # Price<br><br>
-            # The metadata identifies the <code>value</code> and <code>currency</code>.
+            # Price
+            #
+            # The metadata identifies the `value` and `currency`.
             PRICE = 13
           end
         end
@@ -843,9 +852,9 @@ module Google
         # @!attribute [rw] sentiment
         #   @return [::Google::Cloud::Language::V1::Sentiment]
         #     For calls to [AnalyzeEntitySentiment][] or if
-        #     {::Google::Cloud::Language::V1::AnnotateTextRequest::Features#extract_entity_sentiment AnnotateTextRequest.Features.extract_entity_sentiment} is set to
-        #     true, this field will contain the sentiment expressed for this mention of
-        #     the entity in the provided document.
+        #     {::Google::Cloud::Language::V1::AnnotateTextRequest::Features#extract_entity_sentiment AnnotateTextRequest.Features.extract_entity_sentiment}
+        #     is set to true, this field will contain the sentiment expressed for this
+        #     mention of the entity in the provided document.
         class EntityMention
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -870,7 +879,9 @@ module Google
         # @!attribute [rw] begin_offset
         #   @return [::Integer]
         #     The API calculates the beginning offset of the content in the original
-        #     document according to the {::Google::Cloud::Language::V1::EncodingType EncodingType} specified in the API request.
+        #     document according to the
+        #     {::Google::Cloud::Language::V1::EncodingType EncodingType} specified in the API
+        #     request.
         class TextSpan
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -890,10 +901,53 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Model options available for classification requests.
+        # @!attribute [rw] v1_model
+        #   @return [::Google::Cloud::Language::V1::ClassificationModelOptions::V1Model]
+        #     Setting this field will use the V1 model and V1 content categories
+        #     version. The V1 model is a legacy model; support for this will be
+        #     discontinued in the future.
+        # @!attribute [rw] v2_model
+        #   @return [::Google::Cloud::Language::V1::ClassificationModelOptions::V2Model]
+        #     Setting this field will use the V2 model with the appropriate content
+        #     categories version. The V2 model is a better performing model.
+        class ClassificationModelOptions
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Options for the V1 model.
+          class V1Model
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Options for the V2 model.
+          # @!attribute [rw] content_categories_version
+          #   @return [::Google::Cloud::Language::V1::ClassificationModelOptions::V2Model::ContentCategoriesVersion]
+          #     The content categories used for classification.
+          class V2Model
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The content categories used for classification.
+            module ContentCategoriesVersion
+              # If `ContentCategoriesVersion` is not specified, this option will
+              # default to `V1`.
+              CONTENT_CATEGORIES_VERSION_UNSPECIFIED = 0
+
+              # Legacy content categories of our initial launch in 2017.
+              V1 = 1
+
+              # Updated content categories in 2022.
+              V2 = 2
+            end
+          end
+        end
+
         # The sentiment analysis request message.
         # @!attribute [rw] document
         #   @return [::Google::Cloud::Language::V1::Document]
-        #     Input document.
+        #     Required. Input document.
         # @!attribute [rw] encoding_type
         #   @return [::Google::Cloud::Language::V1::EncodingType]
         #     The encoding type used by the API to calculate sentence offsets.
@@ -910,7 +964,8 @@ module Google
         #   @return [::String]
         #     The language of the text, which will be the same as the language specified
         #     in the request or, if not specified, the automatically-detected language.
-        #     See {::Google::Cloud::Language::V1::Document#language Document.language} field for more details.
+        #     See {::Google::Cloud::Language::V1::Document#language Document.language} field
+        #     for more details.
         # @!attribute [rw] sentences
         #   @return [::Array<::Google::Cloud::Language::V1::Sentence>]
         #     The sentiment for all the sentences in the document.
@@ -922,7 +977,7 @@ module Google
         # The entity-level sentiment analysis request message.
         # @!attribute [rw] document
         #   @return [::Google::Cloud::Language::V1::Document]
-        #     Input document.
+        #     Required. Input document.
         # @!attribute [rw] encoding_type
         #   @return [::Google::Cloud::Language::V1::EncodingType]
         #     The encoding type used by the API to calculate offsets.
@@ -939,7 +994,8 @@ module Google
         #   @return [::String]
         #     The language of the text, which will be the same as the language specified
         #     in the request or, if not specified, the automatically-detected language.
-        #     See {::Google::Cloud::Language::V1::Document#language Document.language} field for more details.
+        #     See {::Google::Cloud::Language::V1::Document#language Document.language} field
+        #     for more details.
         class AnalyzeEntitySentimentResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -948,7 +1004,7 @@ module Google
         # The entity analysis request message.
         # @!attribute [rw] document
         #   @return [::Google::Cloud::Language::V1::Document]
-        #     Input document.
+        #     Required. Input document.
         # @!attribute [rw] encoding_type
         #   @return [::Google::Cloud::Language::V1::EncodingType]
         #     The encoding type used by the API to calculate offsets.
@@ -965,7 +1021,8 @@ module Google
         #   @return [::String]
         #     The language of the text, which will be the same as the language specified
         #     in the request or, if not specified, the automatically-detected language.
-        #     See {::Google::Cloud::Language::V1::Document#language Document.language} field for more details.
+        #     See {::Google::Cloud::Language::V1::Document#language Document.language} field
+        #     for more details.
         class AnalyzeEntitiesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -974,7 +1031,7 @@ module Google
         # The syntax analysis request message.
         # @!attribute [rw] document
         #   @return [::Google::Cloud::Language::V1::Document]
-        #     Input document.
+        #     Required. Input document.
         # @!attribute [rw] encoding_type
         #   @return [::Google::Cloud::Language::V1::EncodingType]
         #     The encoding type used by the API to calculate offsets.
@@ -994,7 +1051,8 @@ module Google
         #   @return [::String]
         #     The language of the text, which will be the same as the language specified
         #     in the request or, if not specified, the automatically-detected language.
-        #     See {::Google::Cloud::Language::V1::Document#language Document.language} field for more details.
+        #     See {::Google::Cloud::Language::V1::Document#language Document.language} field
+        #     for more details.
         class AnalyzeSyntaxResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1003,7 +1061,11 @@ module Google
         # The document classification request message.
         # @!attribute [rw] document
         #   @return [::Google::Cloud::Language::V1::Document]
-        #     Input document.
+        #     Required. Input document.
+        # @!attribute [rw] classification_model_options
+        #   @return [::Google::Cloud::Language::V1::ClassificationModelOptions]
+        #     Model options to use for classification. Defaults to v1 options if not
+        #     specified.
         class ClassifyTextRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1022,10 +1084,10 @@ module Google
         # analysis types (sentiment, entities, and syntax) in one call.
         # @!attribute [rw] document
         #   @return [::Google::Cloud::Language::V1::Document]
-        #     Input document.
+        #     Required. Input document.
         # @!attribute [rw] features
         #   @return [::Google::Cloud::Language::V1::AnnotateTextRequest::Features]
-        #     The enabled features.
+        #     Required. The enabled features.
         # @!attribute [rw] encoding_type
         #   @return [::Google::Cloud::Language::V1::EncodingType]
         #     The encoding type used by the API to calculate offsets.
@@ -1050,6 +1112,10 @@ module Google
           # @!attribute [rw] classify_text
           #   @return [::Boolean]
           #     Classify the full document into categories.
+          # @!attribute [rw] classification_model_options
+          #   @return [::Google::Cloud::Language::V1::ClassificationModelOptions]
+          #     The model options to use for classification. Defaults to v1 options
+          #     if not specified. Only used if `classify_text` is set to true.
           class Features
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1079,7 +1145,8 @@ module Google
         #   @return [::String]
         #     The language of the text, which will be the same as the language specified
         #     in the request or, if not specified, the automatically-detected language.
-        #     See {::Google::Cloud::Language::V1::Document#language Document.language} field for more details.
+        #     See {::Google::Cloud::Language::V1::Document#language Document.language} field
+        #     for more details.
         # @!attribute [rw] categories
         #   @return [::Array<::Google::Cloud::Language::V1::ClassificationCategory>]
         #     Categories identified in the input document.

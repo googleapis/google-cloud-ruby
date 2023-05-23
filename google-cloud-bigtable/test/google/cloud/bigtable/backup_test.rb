@@ -123,7 +123,7 @@ describe Google::Cloud::Bigtable::Backup, :mock_bigtable do
     )
 
     mock = Minitest::Mock.new
-    mock.expect :get_table, get_res, [name: table_path(instance_id, source_table_id), view: :FULL]
+    mock.expect :get_table, get_res, name: table_path(instance_id, source_table_id), view: :FULL
     bigtable.service.mocked_tables = mock
     table = backup.source_table perform_lookup: true, view: :FULL
 
@@ -151,7 +151,7 @@ describe Google::Cloud::Bigtable::Backup, :mock_bigtable do
     mock = Minitest::Mock.new
     update_grpc = backup_res.dup
     update_grpc.expire_time = expire_time_2
-    mock.expect :update_backup, update_grpc, [backup: update_grpc, update_mask: Google::Protobuf::FieldMask.new(paths: ["expire_time"])]
+    mock.expect :update_backup, update_grpc, backup: update_grpc, update_mask: Google::Protobuf::FieldMask.new(paths: ["expire_time"])
     bigtable.service.mocked_tables = mock
 
     backup.expire_time = expire_time_2
@@ -164,13 +164,10 @@ describe Google::Cloud::Bigtable::Backup, :mock_bigtable do
     mock = Minitest::Mock.new
     update_grpc = backup_res.dup
     update_grpc.expire_time = expire_time_2
-    mock.expect :restore_table,
-                operation_grpc(job_grpc, mock),
-                [
-                  parent: instance_path(instance_id),
-                  table_id: target_table_id,
-                  backup: backup_path(instance_id, cluster_id, backup_id)
-                ]
+    mock.expect :restore_table, operation_grpc(job_grpc, mock),
+                parent: instance_path(instance_id),
+                table_id: target_table_id,
+                backup: backup_path(instance_id, cluster_id, backup_id)
     mock.expect :get_operation, operation_grpc(job_done_grpc, mock), [{name: ops_name}, Gapic::CallOptions]
     bigtable.service.mocked_tables = mock
 
@@ -195,13 +192,10 @@ describe Google::Cloud::Bigtable::Backup, :mock_bigtable do
     mock = Minitest::Mock.new
     update_grpc = backup_res.dup
     update_grpc.expire_time = expire_time_2
-    mock.expect :restore_table,
-                operation_grpc(job_grpc, mock),
-                [
-                  parent: instance_path(instance_id_2),
-                  table_id: target_table_id,
-                  backup: backup_path(instance_id, cluster_id, backup_id)
-                ]
+    mock.expect :restore_table, operation_grpc(job_grpc, mock),
+                parent: instance_path(instance_id_2),
+                table_id: target_table_id,
+                backup: backup_path(instance_id, cluster_id, backup_id)
     mock.expect :get_operation, operation_grpc(job_done_grpc, mock), [{name: ops_name}, Gapic::CallOptions]
     bigtable.service.mocked_tables = mock
 
@@ -226,13 +220,10 @@ describe Google::Cloud::Bigtable::Backup, :mock_bigtable do
     mock = Minitest::Mock.new
     update_grpc = backup_res.dup
     update_grpc.expire_time = expire_time_2
-    mock.expect :restore_table,
-                operation_grpc(job_grpc, mock),
-                [
-                  parent: instance_path(instance_id_2),
-                  table_id: target_table_id,
-                  backup: backup_path(instance_id, cluster_id, backup_id)
-                ]
+    mock.expect :restore_table, operation_grpc(job_grpc, mock),
+                parent: instance_path(instance_id_2),
+                table_id: target_table_id,
+                backup: backup_path(instance_id, cluster_id, backup_id)
     mock.expect :get_operation, operation_grpc(job_done_grpc, mock), [{name: ops_name}, Gapic::CallOptions]
     bigtable.service.mocked_tables = mock
 
@@ -255,7 +246,7 @@ describe Google::Cloud::Bigtable::Backup, :mock_bigtable do
 
   it "reloads its state" do
     mock = Minitest::Mock.new
-    mock.expect :get_backup, backup_res, [name: backup_path(instance_id, cluster_id, backup_id)]
+    mock.expect :get_backup, backup_res, name: backup_path(instance_id, cluster_id, backup_id)
     bigtable.service.mocked_tables = mock
 
     backup.reload!
@@ -265,7 +256,7 @@ describe Google::Cloud::Bigtable::Backup, :mock_bigtable do
 
   it "deletes itself" do
     mock = Minitest::Mock.new
-    mock.expect :delete_backup, nil, [name: backup_path(instance_id, cluster_id, backup_id)]
+    mock.expect :delete_backup, nil, name: backup_path(instance_id, cluster_id, backup_id)
     bigtable.service.mocked_tables = mock
 
     backup.delete

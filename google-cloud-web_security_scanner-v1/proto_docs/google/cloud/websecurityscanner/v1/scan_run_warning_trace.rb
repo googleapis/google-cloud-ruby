@@ -54,6 +54,9 @@ module Google
 
             # Indicates that a scan is blocked by IAP.
             BLOCKED_BY_IAP = 4
+
+            # Indicates that no seeds is found for a scan
+            NO_STARTING_URL_FOUND_FOR_MANAGED_SCAN = 5
           end
         end
       end

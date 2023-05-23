@@ -60,17 +60,16 @@ module Acceptance
       super
     end
 
-    def pull_with_retry sub
-      received_messages = []
-      retries = 0
-      while retries <= 5 do
-        received_messages = sub.pull immediate: false
-        break if received_messages.any?
-        retries += 1
-        puts "the subscription does not have the message yet. sleeping for #{retries*retries} second(s) and retrying."
-        sleep retries*retries
+    def wait_for_condition description: nil, retries: 10, &callback
+      count = 0
+      while count <= retries do
+        result = callback.call
+        break if result
+        count += 1
+        puts "The #{description} callback has not been satisfied yet. Sleeping for #{count*count} second(s) and retrying."
+        sleep count*count
       end
-      received_messages
+      result
     end
 
     # Add spec DSL

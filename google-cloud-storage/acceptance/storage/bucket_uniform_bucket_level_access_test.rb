@@ -27,13 +27,18 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
   end
   let(:local_file) { File.new files[:logo][:path] }
 
-  let(:user_val) { "user-blowmage@gmail.com" }
+  let(:user_val) { "user-test@example.com" }
+
+  before do
+    sleep 1
+  end
 
   after do
-    # always reset the uniform_bucket_level_access
+    # always reset the uniform_bucket_level_access and public_access_prevention
     # always reset the bucket permissions
-    bucket.uniform_bucket_level_access = false if bucket.uniform_bucket_level_access?
-    bucket.default_acl.private!
+    safe_gcs_execute { bucket.uniform_bucket_level_access = false if bucket.uniform_bucket_level_access? }
+    safe_gcs_execute { bucket.public_access_prevention = :inherited if bucket.public_access_prevention_enforced? }
+    safe_gcs_execute { bucket.default_acl.private! }
     bucket.files.all { |f| f.delete rescue nil }
   end
 
@@ -159,7 +164,7 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
 
   it "sets DEPRECATED policy_only true and is unable to modify default ACL rules" do
     refute bucket.policy_only?
-    bucket.policy_only = true
+    safe_gcs_execute { bucket.policy_only = true }
     assert bucket.policy_only?
 
     err = expect do
@@ -197,5 +202,71 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
 
     file_default_acl.reload!
     _(file_default_acl.acl.readers).must_equal ["allUsers"]
+  end
+
+  it "creates new bucket with public_access_prevention enforced then sets public_access_prevention to enforced" do
+    # Insert a new bucket with Public Access Prevention Enforced.
+    bucket_pap = storage.create_bucket "#{$bucket_names[2]}-pap" do |b|
+      b.public_access_prevention = :enforced
+    end
+    begin
+      assert bucket_pap.public_access_prevention_enforced?
+      _(bucket_pap.public_access_prevention).must_equal "enforced"
+      # If PAP is enforced on a bucket, making the bucket public fails with a 412.
+      expect do
+        bucket_pap.acl.public!
+      end.must_raise Google::Cloud::FailedPreconditionError
+      # Verify the setting can be patched to inherited.
+      bucket_pap.public_access_prevention = :inherited
+      refute bucket_pap.public_access_prevention_enforced?
+      assert bucket_pap.public_access_prevention_inherited?
+      _(bucket_pap.public_access_prevention).must_equal "inherited"
+      bucket_pap.acl.public!
+    ensure
+      safe_gcs_execute { bucket_pap.delete } if bucket_pap
+    end
+  end
+
+  it "raises when creating new bucket with public_access_prevention set to unexpected value" do
+    # Insert and Patch requests using unexpected PAP enum values return 400 error.
+    expect do
+      storage.create_bucket "#{$bucket_names[2]}-deleteme" do |b|
+        b.public_access_prevention = "BAD VALUE"
+      end
+    end.must_raise Google::Cloud::InvalidArgumentError
+  end
+
+  it "sets public_access_prevention to enforced" do
+    # Insert a new bucket with Public Access Prevention Inherited.
+    refute bucket.public_access_prevention_enforced?
+    _(bucket.public_access_prevention).must_equal "inherited"
+    # Insert and Patch requests using unexpected PAP enum values return 400 error.
+    expect do
+      bucket.public_access_prevention = "BAD VALUE"
+    end.must_raise Google::Cloud::InvalidArgumentError
+    # Verify the setting can be patched to enforced.
+    safe_gcs_execute { bucket.public_access_prevention = :enforced }
+    assert bucket.public_access_prevention_enforced?
+    _(bucket.public_access_prevention).must_equal "enforced"
+    # If PAP is enforced on a bucket, making the bucket public fails with a 412.
+    expect do
+      bucket.acl.public!
+    end.must_raise Google::Cloud::FailedPreconditionError
+    # If PAP is enforced on a bucket, making an object in the bucket public fails with a 412.
+    expect do
+      file = bucket.create_file StringIO.new("not public"), "not_public.txt"
+      file.acl.public!
+    end.must_raise Google::Cloud::FailedPreconditionError
+    # Modifying UBLA on PAP bucket does not affect PAP setting.
+    bucket.uniform_bucket_level_access = true
+    assert bucket.uniform_bucket_level_access?
+    assert bucket.public_access_prevention_enforced?
+    _(bucket.public_access_prevention).must_equal "enforced"
+    # Modifying PAP on UBLA bucket does not affect UBLA setting.
+    bucket.public_access_prevention = :inherited
+    assert bucket.uniform_bucket_level_access?
+    refute bucket.public_access_prevention_enforced?
+    assert bucket.public_access_prevention_inherited?
+    _(bucket.public_access_prevention).must_equal "inherited"
   end
 end

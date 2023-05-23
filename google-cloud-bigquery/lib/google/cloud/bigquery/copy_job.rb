@@ -17,6 +17,24 @@ require "google/cloud/bigquery/encryption_configuration"
 module Google
   module Cloud
     module Bigquery
+      module OperationType
+        # Different operation types supported in table copy job.
+        # https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#operationtype
+
+        # The source and destination table have the same table type.
+        COPY = "COPY".freeze
+
+        # The source table type is TABLE and the destination table type is SNAPSHOT.
+        SNAPSHOT = "SNAPSHOT".freeze
+
+        # The source table type is SNAPSHOT and the destination table type is TABLE.
+        RESTORE = "RESTORE".freeze
+
+        # The source and destination table have the same table type, but only bill for
+        # unique data.
+        CLONE = "CLONE".freeze
+      end
+
       ##
       # # CopyJob
       #
@@ -46,23 +64,35 @@ module Google
         # The table from which data is copied. This is the table on
         # which {Table#copy_job} was called.
         #
+        # @param [String] view Specifies the view that determines which table information is returned.
+        #   By default, basic table information and storage statistics (STORAGE_STATS) are returned.
+        #   Accepted values include `:unspecified`, `:basic`, `:storage`, and
+        #   `:full`. For more information, see [BigQuery Classes](@todo: Update the link).
+        #   The default value is the `:unspecified` view type.
+        #
         # @return [Table] A table instance.
         #
-        def source
+        def source view: nil
           table = @gapi.configuration.copy.source_table
           return nil unless table
-          retrieve_table table.project_id, table.dataset_id, table.table_id
+          retrieve_table table.project_id, table.dataset_id, table.table_id, metadata_view: view
         end
 
         ##
         # The table to which data is copied.
         #
+        # @param [String] view Specifies the view that determines which table information is returned.
+        #   By default, basic table information and storage statistics (STORAGE_STATS) are returned.
+        #   Accepted values include `:unspecified`, `:basic`, `:storage`, and
+        #   `:full`. For more information, see [BigQuery Classes](@todo: Update the link).
+        #   The default value is the `:unspecified` view type.
+        #
         # @return [Table] A table instance.
         #
-        def destination
+        def destination view: nil
           table = @gapi.configuration.copy.destination_table
           return nil unless table
-          retrieve_table table.project_id, table.dataset_id, table.table_id
+          retrieve_table table.project_id, table.dataset_id, table.table_id, metadata_view: view
         end
 
         ##
@@ -157,7 +187,8 @@ module Google
             job_ref = service.job_ref_from options[:job_id], options[:prefix]
             copy_cfg = Google::Apis::BigqueryV2::JobConfigurationTableCopy.new(
               source_table:      source,
-              destination_table: target
+              destination_table: target,
+              operation_type:    options[:operation_type]
             )
             req = Google::Apis::BigqueryV2::Job.new(
               job_reference: job_ref,

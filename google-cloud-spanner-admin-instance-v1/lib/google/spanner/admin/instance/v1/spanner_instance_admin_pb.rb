@@ -13,6 +13,8 @@ require 'google/longrunning/operations_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
+require 'google/spanner/admin/instance/v1/common_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/spanner/admin/instance/v1/spanner_instance_admin.proto", :syntax => :proto3) do
     add_message "google.spanner.admin.instance.v1.ReplicaInfo" do
@@ -29,16 +31,37 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.spanner.admin.instance.v1.InstanceConfig" do
       optional :name, :string, 1
       optional :display_name, :string, 2
+      optional :config_type, :enum, 5, "google.spanner.admin.instance.v1.InstanceConfig.Type"
       repeated :replicas, :message, 3, "google.spanner.admin.instance.v1.ReplicaInfo"
+      repeated :optional_replicas, :message, 6, "google.spanner.admin.instance.v1.ReplicaInfo"
+      optional :base_config, :string, 7
+      map :labels, :string, :string, 8
+      optional :etag, :string, 9
+      repeated :leader_options, :string, 4
+      optional :reconciling, :bool, 10
+      optional :state, :enum, 11, "google.spanner.admin.instance.v1.InstanceConfig.State"
+    end
+    add_enum "google.spanner.admin.instance.v1.InstanceConfig.Type" do
+      value :TYPE_UNSPECIFIED, 0
+      value :GOOGLE_MANAGED, 1
+      value :USER_MANAGED, 2
+    end
+    add_enum "google.spanner.admin.instance.v1.InstanceConfig.State" do
+      value :STATE_UNSPECIFIED, 0
+      value :CREATING, 1
+      value :READY, 2
     end
     add_message "google.spanner.admin.instance.v1.Instance" do
       optional :name, :string, 1
       optional :config, :string, 2
       optional :display_name, :string, 3
       optional :node_count, :int32, 5
+      optional :processing_units, :int32, 9
       optional :state, :enum, 6, "google.spanner.admin.instance.v1.Instance.State"
       map :labels, :string, :string, 7
       repeated :endpoint_uris, :string, 8
+      optional :create_time, :message, 11, "google.protobuf.Timestamp"
+      optional :update_time, :message, 12, "google.protobuf.Timestamp"
     end
     add_enum "google.spanner.admin.instance.v1.Instance.State" do
       value :STATE_UNSPECIFIED, 0
@@ -56,6 +79,32 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.spanner.admin.instance.v1.GetInstanceConfigRequest" do
       optional :name, :string, 1
+    end
+    add_message "google.spanner.admin.instance.v1.CreateInstanceConfigRequest" do
+      optional :parent, :string, 1
+      optional :instance_config_id, :string, 2
+      optional :instance_config, :message, 3, "google.spanner.admin.instance.v1.InstanceConfig"
+      optional :validate_only, :bool, 4
+    end
+    add_message "google.spanner.admin.instance.v1.UpdateInstanceConfigRequest" do
+      optional :instance_config, :message, 1, "google.spanner.admin.instance.v1.InstanceConfig"
+      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
+      optional :validate_only, :bool, 3
+    end
+    add_message "google.spanner.admin.instance.v1.DeleteInstanceConfigRequest" do
+      optional :name, :string, 1
+      optional :etag, :string, 2
+      optional :validate_only, :bool, 3
+    end
+    add_message "google.spanner.admin.instance.v1.ListInstanceConfigOperationsRequest" do
+      optional :parent, :string, 1
+      optional :filter, :string, 2
+      optional :page_size, :int32, 3
+      optional :page_token, :string, 4
+    end
+    add_message "google.spanner.admin.instance.v1.ListInstanceConfigOperationsResponse" do
+      repeated :operations, :message, 1, "google.longrunning.Operation"
+      optional :next_page_token, :string, 2
     end
     add_message "google.spanner.admin.instance.v1.GetInstanceRequest" do
       optional :name, :string, 1
@@ -95,6 +144,16 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :cancel_time, :message, 3, "google.protobuf.Timestamp"
       optional :end_time, :message, 4, "google.protobuf.Timestamp"
     end
+    add_message "google.spanner.admin.instance.v1.CreateInstanceConfigMetadata" do
+      optional :instance_config, :message, 1, "google.spanner.admin.instance.v1.InstanceConfig"
+      optional :progress, :message, 2, "google.spanner.admin.instance.v1.OperationProgress"
+      optional :cancel_time, :message, 3, "google.protobuf.Timestamp"
+    end
+    add_message "google.spanner.admin.instance.v1.UpdateInstanceConfigMetadata" do
+      optional :instance_config, :message, 1, "google.spanner.admin.instance.v1.InstanceConfig"
+      optional :progress, :message, 2, "google.spanner.admin.instance.v1.OperationProgress"
+      optional :cancel_time, :message, 3, "google.protobuf.Timestamp"
+    end
   end
 end
 
@@ -107,11 +166,18 @@ module Google
             ReplicaInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.ReplicaInfo").msgclass
             ReplicaInfo::ReplicaType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.ReplicaInfo.ReplicaType").enummodule
             InstanceConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.InstanceConfig").msgclass
+            InstanceConfig::Type = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.InstanceConfig.Type").enummodule
+            InstanceConfig::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.InstanceConfig.State").enummodule
             Instance = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.Instance").msgclass
             Instance::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.Instance.State").enummodule
             ListInstanceConfigsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.ListInstanceConfigsRequest").msgclass
             ListInstanceConfigsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.ListInstanceConfigsResponse").msgclass
             GetInstanceConfigRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.GetInstanceConfigRequest").msgclass
+            CreateInstanceConfigRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.CreateInstanceConfigRequest").msgclass
+            UpdateInstanceConfigRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.UpdateInstanceConfigRequest").msgclass
+            DeleteInstanceConfigRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.DeleteInstanceConfigRequest").msgclass
+            ListInstanceConfigOperationsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.ListInstanceConfigOperationsRequest").msgclass
+            ListInstanceConfigOperationsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.ListInstanceConfigOperationsResponse").msgclass
             GetInstanceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.GetInstanceRequest").msgclass
             CreateInstanceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.CreateInstanceRequest").msgclass
             ListInstancesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.ListInstancesRequest").msgclass
@@ -120,6 +186,8 @@ module Google
             DeleteInstanceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.DeleteInstanceRequest").msgclass
             CreateInstanceMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.CreateInstanceMetadata").msgclass
             UpdateInstanceMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.UpdateInstanceMetadata").msgclass
+            CreateInstanceConfigMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.CreateInstanceConfigMetadata").msgclass
+            UpdateInstanceConfigMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.instance.v1.UpdateInstanceConfigMetadata").msgclass
           end
         end
       end

@@ -35,7 +35,7 @@ module Google
           # Executions is used to start and manage running instances of
           # [Workflows][google.cloud.workflows.v1beta.Workflow] called executions.
           #
-          # To load this service and instantiate a client:
+          # @example Load this service and instantiate a gRPC client
           #
           #     require "google/cloud/workflows/executions/v1beta/executions"
           #     client = ::Google::Cloud::Workflows::Executions::V1beta::Executions::Client.new

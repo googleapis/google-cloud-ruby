@@ -35,6 +35,11 @@
                 "retry_build"
               ]
             },
+            "ApproveBuild": {
+              "methods": [
+                "approve_build"
+              ]
+            },
             "CreateBuildTrigger": {
               "methods": [
                 "create_build_trigger"

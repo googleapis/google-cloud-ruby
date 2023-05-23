@@ -35,6 +35,13 @@ module Google
         #   @return [::String]
         #     Optional. Pagination token, returned earlier via
         #     {::Google::Cloud::SecretManager::V1::ListSecretsResponse#next_page_token ListSecretsResponse.next_page_token}.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Filter string, adhering to the rules in
+        #     [List-operation
+        #     filtering](https://cloud.google.com/secret-manager/docs/filtering). List
+        #     only secrets matching the filter. If filter is empty, all secrets are
+        #     listed.
         class ListSecretsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -114,6 +121,13 @@ module Google
         #   @return [::String]
         #     Optional. Pagination token, returned earlier via
         #     ListSecretVersionsResponse.next_page_token][].
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Filter string, adhering to the rules in
+        #     [List-operation
+        #     filtering](https://cloud.google.com/secret-manager/docs/filtering). List
+        #     only secret versions matching the filter. If filter is empty, all secret
+        #     versions are listed.
         class ListSecretVersionsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

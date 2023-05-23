@@ -54,6 +54,9 @@ module Google
         #     Optional set of additional impact that this recommendation may have when
         #     trying to optimize for the primary category. These may be positive
         #     or negative.
+        # @!attribute [rw] priority
+        #   @return [::Google::Cloud::Recommender::V1::Recommendation::Priority]
+        #     Recommendation's priority.
         # @!attribute [rw] content
         #   @return [::Google::Cloud::Recommender::V1::RecommendationContent]
         #     Content of the recommendation describing recommended changes to resources.
@@ -67,6 +70,12 @@ module Google
         # @!attribute [rw] associated_insights
         #   @return [::Array<::Google::Cloud::Recommender::V1::Recommendation::InsightReference>]
         #     Insights that led to this recommendation.
+        # @!attribute [rw] xor_group_id
+        #   @return [::String]
+        #     Corresponds to a mutually exclusive group ID within a recommender.
+        #     A non-empty ID indicates that the recommendation belongs to a mutually
+        #     exclusive group. This means that only one recommendation within the group
+        #     is suggested to be applied.
         class Recommendation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -80,6 +89,24 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+
+          # Recommendation priority levels.
+          module Priority
+            # Recommendation has unspecified priority.
+            PRIORITY_UNSPECIFIED = 0
+
+            # Recommendation has P4 priority (lowest priority).
+            P4 = 1
+
+            # Recommendation has P3 priority (second lowest priority).
+            P3 = 2
+
+            # Recommendation has P2 priority (second highest priority).
+            P2 = 3
+
+            # Recommendation has P1 priority (highest priority).
+            P1 = 4
+          end
         end
 
         # Contains what resources are changing and how they are changing.
@@ -88,6 +115,9 @@ module Google
         #     Operations to one or more Google Cloud resources grouped in such a way
         #     that, all operations within one group are expected to be performed
         #     atomically and in an order.
+        # @!attribute [rw] overview
+        #   @return [::Google::Protobuf::Struct]
+        #     Condensed overview information about the recommendation.
         class RecommendationContent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -114,7 +144,7 @@ module Google
         # See https://tools.ietf.org/html/rfc6902 for details on the original RFC.
         # @!attribute [rw] action
         #   @return [::String]
-        #     Type of this operation. Contains one of 'and', 'remove', 'replace', 'move',
+        #     Type of this operation. Contains one of 'add', 'remove', 'replace', 'move',
         #     'copy', 'test' and custom operations. This field is case-insensitive and
         #     always populated.
         # @!attribute [rw] resource_type
@@ -158,24 +188,33 @@ module Google
         #     This is intended to be an exact match per filter. To perform advanced
         #     matching, use path_value_matchers.
         #
-        #     * Example: {
+        #     * Example:
+        #     ```
+        #     {
         #       "/versions/*/name" : "it-123"
         #       "/versions/*/targetSize/percent": 20
-        #      }
-        #     * Example: {
+        #     }
+        #     ```
+        #     * Example:
+        #     ```
+        #     {
         #       "/bindings/*/role": "roles/owner"
         #       "/bindings/*/condition" : null
-        #      }
-        #     * Example: {
+        #     }
+        #     ```
+        #     * Example:
+        #     ```
+        #     {
         #       "/bindings/*/role": "roles/owner"
         #       "/bindings/*/members/*" : ["x@example.com", "y@example.com"]
-        #      }
+        #     }
+        #     ```
         #     When both path_filters and path_value_matchers are set, an implicit AND
         #     must be performed.
         # @!attribute [rw] path_value_matchers
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Recommender::V1::ValueMatcher}]
         #     Similar to path_filters, this contains set of filters to apply if `path`
-        #     field referes to array elements. This is meant to support value matching
+        #     field refers to array elements. This is meant to support value matching
         #     beyond exact match. To perform exact match, use path_filters.
         #     When both path_filters and path_value_matchers are set, an implicit AND
         #     must be performed.
@@ -219,10 +258,22 @@ module Google
         #     An approximate projection on amount saved or amount incurred. Negative cost
         #     units indicate cost savings and positive cost units indicate increase.
         #     See google.type.Money documentation for positive/negative units.
+        #
+        #     A user's permissions may affect whether the cost is computed using list
+        #     prices or custom contract prices.
         # @!attribute [rw] duration
         #   @return [::Google::Protobuf::Duration]
         #     Duration for which this cost applies.
         class CostProjection
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Contains various ways of describing the impact on Security.
+        # @!attribute [rw] details
+        #   @return [::Google::Protobuf::Struct]
+        #     Additional security impact details that is provided by the recommender.
+        class SecurityProjection
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -234,6 +285,9 @@ module Google
         # @!attribute [rw] cost_projection
         #   @return [::Google::Cloud::Recommender::V1::CostProjection]
         #     Use with CategoryType.COST
+        # @!attribute [rw] security_projection
+        #   @return [::Google::Cloud::Recommender::V1::SecurityProjection]
+        #     Use with CategoryType.SECURITY
         class Impact
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

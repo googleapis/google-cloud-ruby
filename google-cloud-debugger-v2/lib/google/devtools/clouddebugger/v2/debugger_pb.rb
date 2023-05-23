@@ -8,6 +8,7 @@ require 'google/api/field_behavior_pb'
 require 'google/devtools/clouddebugger/v2/data_pb'
 require 'google/protobuf/empty_pb'
 require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/devtools/clouddebugger/v2/debugger.proto", :syntax => :proto3) do
     add_message "google.devtools.clouddebugger.v2.SetBreakpointRequest" do

@@ -39,13 +39,12 @@ module Google
             # See {::Google::Cloud::AppEngine::V1::Applications::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all Applications clients:
-            #
-            #     ::Google::Cloud::AppEngine::V1::Applications::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all Applications clients
+            #   ::Google::Cloud::AppEngine::V1::Applications::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -92,19 +91,15 @@ module Google
             ##
             # Create a new Applications client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new Applications client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::AppEngine::V1::Applications::Client.new
             #
-            #     client = ::Google::Cloud::AppEngine::V1::Applications::Client.new
-            #
-            # To create a new Applications client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::AppEngine::V1::Applications::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::AppEngine::V1::Applications::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Applications client.
             # @yieldparam config [Client::Configuration]
@@ -124,14 +119,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -139,6 +133,7 @@ module Google
 
               @operations_client = Operations.new do |config|
                 config.credentials = credentials
+                config.quota_project = @quota_project_id
                 config.endpoint = @config.endpoint
               end
 
@@ -189,6 +184,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/app_engine/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AppEngine::V1::Applications::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AppEngine::V1::GetApplicationRequest.new
+            #
+            #   # Call the get_application method.
+            #   result = client.get_application request
+            #
+            #   # The returned object is of type Google::Cloud::AppEngine::V1::Application.
+            #   p result
+            #
             def get_application request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -206,16 +216,20 @@ module Google
                 gapic_version: ::Google::Cloud::AppEngine::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_application.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_application.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @applications_stub.call_rpc :get_application, request, options: options do |response, operation|
@@ -261,6 +275,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/app_engine/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AppEngine::V1::Applications::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AppEngine::V1::CreateApplicationRequest.new
+            #
+            #   # Call the create_application method.
+            #   result = client.create_application request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
             def create_application request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -281,7 +317,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.create_application.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_application.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @applications_stub.call_rpc :create_application, request, options: options do |response, operation|
@@ -299,6 +337,7 @@ module Google
             #
             # * `auth_domain` - Google authentication domain for controlling user access to the application.
             # * `default_cookie_expiration` - Cookie expiration policy for the application.
+            # * `iap` - Identity-Aware Proxy properties for the application.
             #
             # @overload update_application(request, options = nil)
             #   Pass arguments to `update_application` via a request object, either of type
@@ -320,7 +359,7 @@ module Google
             #   @param application [::Google::Cloud::AppEngine::V1::Application, ::Hash]
             #     An Application containing the updated resource.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Standard field mask for the set of fields to be updated.
+            #     Required. Standard field mask for the set of fields to be updated.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -329,6 +368,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/app_engine/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AppEngine::V1::Applications::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AppEngine::V1::UpdateApplicationRequest.new
+            #
+            #   # Call the update_application method.
+            #   result = client.update_application request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
             #
             def update_application request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -347,16 +408,20 @@ module Google
                 gapic_version: ::Google::Cloud::AppEngine::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_application.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_application.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @applications_stub.call_rpc :update_application, request, options: options do |response, operation|
@@ -406,6 +471,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/app_engine/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AppEngine::V1::Applications::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AppEngine::V1::RepairApplicationRequest.new
+            #
+            #   # Call the repair_application method.
+            #   result = client.repair_application request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
             def repair_application request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -423,16 +510,20 @@ module Google
                 gapic_version: ::Google::Cloud::AppEngine::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.repair_application.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.repair_application.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @applications_stub.call_rpc :repair_application, request, options: options do |response, operation|
@@ -457,22 +548,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for get_application
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # get_application to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::AppEngine::V1::Applications::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.get_application.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::AppEngine::V1::Applications::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.get_application.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::AppEngine::V1::Applications::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.get_application.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::AppEngine::V1::Applications::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.get_application.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
@@ -483,9 +573,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials

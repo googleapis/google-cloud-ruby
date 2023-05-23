@@ -70,6 +70,16 @@
                 "list_entries"
               ]
             },
+            "ModifyEntryOverview": {
+              "methods": [
+                "modify_entry_overview"
+              ]
+            },
+            "ModifyEntryContacts": {
+              "methods": [
+                "modify_entry_contacts"
+              ]
+            },
             "CreateTagTemplate": {
               "methods": [
                 "create_tag_template"
@@ -135,6 +145,21 @@
                 "list_tags"
               ]
             },
+            "ReconcileTags": {
+              "methods": [
+                "reconcile_tags"
+              ]
+            },
+            "StarEntry": {
+              "methods": [
+                "star_entry"
+              ]
+            },
+            "UnstarEntry": {
+              "methods": [
+                "unstar_entry"
+              ]
+            },
             "SetIamPolicy": {
               "methods": [
                 "set_iam_policy"
@@ -148,6 +173,11 @@
             "TestIamPermissions": {
               "methods": [
                 "test_iam_permissions"
+              ]
+            },
+            "ImportEntries": {
+              "methods": [
+                "import_entries"
               ]
             }
           }
@@ -233,6 +263,11 @@
         "grpc": {
           "libraryClient": "::Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::Client",
           "rpcs": {
+            "ReplaceTaxonomy": {
+              "methods": [
+                "replace_taxonomy"
+              ]
+            },
             "ImportTaxonomies": {
               "methods": [
                 "import_taxonomies"

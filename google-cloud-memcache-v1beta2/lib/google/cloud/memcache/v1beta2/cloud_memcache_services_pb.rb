@@ -67,6 +67,8 @@ module Google
             rpc :ApplyParameters, ::Google::Cloud::Memcache::V1beta2::ApplyParametersRequest, ::Google::Longrunning::Operation
             # Updates software on the selected nodes of the Instance.
             rpc :ApplySoftwareUpdate, ::Google::Cloud::Memcache::V1beta2::ApplySoftwareUpdateRequest, ::Google::Longrunning::Operation
+            # Performs the apply phase of the RescheduleMaintenance verb.
+            rpc :RescheduleMaintenance, ::Google::Cloud::Memcache::V1beta2::RescheduleMaintenanceRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

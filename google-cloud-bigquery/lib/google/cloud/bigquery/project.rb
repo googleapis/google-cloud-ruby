@@ -139,8 +139,8 @@ module Google
         #   * `empty` - An error will be returned if the destination table
         #     already contains data.
         # @param [String] job_id A user-defined ID for the copy job. The ID
-        #   must contain only letters (a-z, A-Z), numbers (0-9), underscores
-        #   (_), or dashes (-). The maximum length is 1,024 characters. If
+        #   must contain only letters (`[A-Za-z]`), numbers (`[0-9]`), underscores
+        #   (`_`), or dashes (`-`). The maximum length is 1,024 characters. If
         #   `job_id` is provided, then `prefix` will not be used.
         #
         #   See [Generating a job
@@ -149,8 +149,8 @@ module Google
         #   prepended to a generated value to produce a unique job ID. For
         #   example, the prefix `daily_import_job_` can be given to generate a
         #   job ID such as `daily_import_job_12vEDtMQ0mbp1Mo5Z7mzAFQJZazh`. The
-        #   prefix must contain only letters (a-z, A-Z), numbers (0-9),
-        #   underscores (_), or dashes (-). The maximum length of the entire ID
+        #   prefix must contain only letters (`[A-Za-z]`), numbers (`[0-9]`),
+        #   underscores (`_`), or dashes (`-`). The maximum length of the entire ID
         #   is 1,024 characters. If `job_id` is provided, then `prefix` will not
         #   be used.
         # @param [Hash] labels A hash of user-provided labels associated with
@@ -291,7 +291,7 @@ module Google
         #   use named query parameters. When set, `legacy_sql` will automatically be set to false and `standard_sql` to
         #   true.
         #
-        #   Ruby types are mapped to BigQuery types as follows:
+        #   BigQuery types are converted from Ruby types as follows:
         #
         #   | BigQuery     | Ruby                                 | Notes                                              |
         #   |--------------|--------------------------------------|----------------------------------------------------|
@@ -299,10 +299,11 @@ module Google
         #   | `INT64`      | `Integer`                            |                                                    |
         #   | `FLOAT64`    | `Float`                              |                                                    |
         #   | `NUMERIC`    | `BigDecimal`                         | `BigDecimal` values will be rounded to scale 9.    |
-        #   | `BIGNUMERIC` |                                      | Query param values must be mapped in `types`.      |
+        #   | `BIGNUMERIC` | `BigDecimal`                         | NOT AUTOMATIC: Must be mapped using `types`, below.|
         #   | `STRING`     | `String`                             |                                                    |
         #   | `DATETIME`   | `DateTime`                           | `DATETIME` does not support time zone.             |
         #   | `DATE`       | `Date`                               |                                                    |
+        #   | `GEOGRAPHY`  | `String` (WKT or GeoJSON)            | NOT AUTOMATIC: Must be mapped using `types`, below.|
         #   | `TIMESTAMP`  | `Time`                               |                                                    |
         #   | `TIME`       | `Google::Cloud::BigQuery::Time`      |                                                    |
         #   | `BYTES`      | `File`, `IO`, `StringIO`, or similar |                                                    |
@@ -310,7 +311,8 @@ module Google
         #   | `STRUCT`     | `Hash`                               | Hash keys may be strings or symbols.               |
         #
         #   See [Data Types](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types) for an overview
-        #   of each BigQuery data type, including allowed values.
+        #   of each BigQuery data type, including allowed values. For the `GEOGRAPHY` type, see [Working with BigQuery
+        #   GIS data](https://cloud.google.com/bigquery/docs/gis-data).
         # @param [Array, Hash] types Standard SQL only. Types of the SQL parameters in `params`. It is not always
         #   possible to infer the right SQL type from a value in `params`. In these cases, `types` must be used to
         #   specify the SQL type for these values.
@@ -327,6 +329,7 @@ module Google
         #   * `:STRING`
         #   * `:DATETIME`
         #   * `:DATE`
+        #   * `:GEOGRAPHY`
         #   * `:TIMESTAMP`
         #   * `:TIME`
         #   * `:BYTES`
@@ -399,13 +402,19 @@ module Google
         #   Flattens all nested and repeated fields in the query results. The
         #   default value is `true`. `large_results` parameter must be `true` if
         #   this is set to `false`.
+        # @param [Integer] maximum_billing_tier Limits the billing tier for this
+        #   job. Queries that have resource usage beyond this tier will fail
+        #   (without incurring a charge). WARNING: The billed byte amount can be
+        #   multiplied by an amount up to this number! Most users should not need
+        #   to alter this setting, and we recommend that you avoid introducing new
+        #   uses of it. Deprecated.
         # @param [Integer] maximum_bytes_billed Limits the bytes billed for this
         #   job. Queries that will have bytes billed beyond this limit will fail
         #   (without incurring a charge). Optional. If unspecified, this will be
         #   set to your project default.
         # @param [String] job_id A user-defined ID for the query job. The ID
-        #   must contain only letters (a-z, A-Z), numbers (0-9), underscores
-        #   (_), or dashes (-). The maximum length is 1,024 characters. If
+        #   must contain only letters (`[A-Za-z]`), numbers (`[0-9]`), underscores
+        #   (`_`), or dashes (`-`). The maximum length is 1,024 characters. If
         #   `job_id` is provided, then `prefix` will not be used.
         #
         #   See [Generating a job
@@ -414,8 +423,8 @@ module Google
         #   prepended to a generated value to produce a unique job ID. For
         #   example, the prefix `daily_import_job_` can be given to generate a
         #   job ID such as `daily_import_job_12vEDtMQ0mbp1Mo5Z7mzAFQJZazh`. The
-        #   prefix must contain only letters (a-z, A-Z), numbers (0-9),
-        #   underscores (_), or dashes (-). The maximum length of the entire ID
+        #   prefix must contain only letters (`[A-Za-z]`), numbers (`[0-9]`),
+        #   underscores (`_`), or dashes (`-`). The maximum length of the entire ID
         #   is 1,024 characters. If `job_id` is provided, then `prefix` will not
         #   be used.
         #
@@ -452,8 +461,13 @@ module Google
         #   For additional information on migrating, see: [Migrating to
         #   standard SQL - Differences in user-defined JavaScript
         #   functions](https://cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#differences_in_user-defined_javascript_functions)
-        # @param [Integer] maximum_billing_tier Deprecated: Change the billing
-        #   tier to allow high-compute queries.
+        # @param [Boolean] create_session If true, creates a new session, where the
+        #   session ID will be a server generated random id. If false, runs query
+        #   with an existing session ID when one is provided in the `session_id`
+        #   param, otherwise runs query in non-session mode. See {Job#session_id}.
+        #   The default value is false.
+        # @param [String] session_id The ID of an existing session. See also the
+        #   `create_session` param and {Job#session_id}.
         # @yield [job] a job configuration object
         # @yieldparam [Google::Cloud::Bigquery::QueryJob::Updater] job a job
         #   configuration object for setting query options.
@@ -465,8 +479,7 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
-        #   job = bigquery.query_job "SELECT name FROM " \
-        #                            "`my_project.my_dataset.my_table`"
+        #   job = bigquery.query_job "SELECT name FROM `my_project.my_dataset.my_table`"
         #
         #   job.wait_until_done!
         #   if !job.failed?
@@ -480,8 +493,7 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
-        #   job = bigquery.query_job "SELECT name FROM " \
-        #                            " [my_project:my_dataset.my_table]",
+        #   job = bigquery.query_job "SELECT name FROM [my_project:my_dataset.my_table]",
         #                            legacy_sql: true
         #
         #   job.wait_until_done!
@@ -496,9 +508,7 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
-        #   job = bigquery.query_job "SELECT name FROM " \
-        #                            "`my_dataset.my_table` " \
-        #                            "WHERE id = ?",
+        #   job = bigquery.query_job "SELECT name FROM `my_dataset.my_table` WHERE id = ?",
         #                            params: [1]
         #
         #   job.wait_until_done!
@@ -513,9 +523,7 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
-        #   job = bigquery.query_job "SELECT name FROM " \
-        #                            "`my_dataset.my_table` " \
-        #                            "WHERE id = @id",
+        #   job = bigquery.query_job "SELECT name FROM `my_dataset.my_table` WHERE id = @id",
         #                            params: { id: 1 }
         #
         #   job.wait_until_done!
@@ -530,9 +538,7 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
-        #   job = bigquery.query_job "SELECT name FROM " \
-        #                            "`my_dataset.my_table` " \
-        #                            "WHERE id IN UNNEST(@ids)",
+        #   job = bigquery.query_job "SELECT name FROM `my_dataset.my_table` WHERE id IN UNNEST(@ids)",
         #                            params: { ids: [] },
         #                            types: { ids: [:INT64] }
         #
@@ -548,9 +554,7 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
-        #   job = bigquery.query_job "CREATE TABLE " \
-        #                            "`my_dataset.my_table` " \
-        #                            "(x INT64)"
+        #   job = bigquery.query_job "CREATE TABLE`my_dataset.my_table` (x INT64)"
         #
         #   job.wait_until_done!
         #   if !job.failed?
@@ -562,10 +566,7 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
-        #   job = bigquery.query_job "UPDATE " \
-        #                            "`my_dataset.my_table` " \
-        #                            "SET x = x + 1 " \
-        #                            "WHERE x IS NOT NULL"
+        #   job = bigquery.query_job "UPDATE `my_dataset.my_table` SET x = x + 1 WHERE x IS NOT NULL"
         #
         #   job.wait_until_done!
         #   if !job.failed?
@@ -596,17 +597,56 @@ module Google
         #     end
         #   end
         #
-        def query_job query, params: nil, types: nil, external: nil, priority: "INTERACTIVE", cache: true, table: nil,
-                      create: nil, write: nil, dryrun: nil, dataset: nil, project: nil, standard_sql: nil,
-                      legacy_sql: nil, large_results: nil, flatten: nil, maximum_billing_tier: nil,
-                      maximum_bytes_billed: nil, job_id: nil, prefix: nil, labels: nil, udfs: nil
+        def query_job query,
+                      params: nil,
+                      types: nil,
+                      external: nil,
+                      priority: "INTERACTIVE",
+                      cache: true,
+                      table: nil,
+                      create: nil,
+                      write: nil,
+                      dryrun: nil,
+                      dataset: nil,
+                      project: nil,
+                      standard_sql: nil,
+                      legacy_sql: nil,
+                      large_results: nil,
+                      flatten: nil,
+                      maximum_billing_tier: nil,
+                      maximum_bytes_billed: nil,
+                      job_id: nil,
+                      prefix: nil,
+                      labels: nil,
+                      udfs: nil,
+                      create_session: nil,
+                      session_id: nil
           ensure_service!
-          options = { params: params, types: types, external: external, priority: priority, cache: cache, table: table,
-                      create: create, write: write, dryrun: dryrun, dataset: dataset,
-                      project: (project || self.project), standard_sql: standard_sql, legacy_sql: legacy_sql,
-                      large_results: large_results, flatten: flatten, maximum_billing_tier: maximum_billing_tier,
-                      maximum_bytes_billed: maximum_bytes_billed, job_id: job_id, prefix: prefix, labels: labels,
-                      udfs: udfs }
+          options = {
+            params: params,
+            types: types,
+            external: external,
+            priority: priority,
+            cache: cache,
+            table: table,
+            create: create,
+            write: write,
+            dryrun: dryrun,
+            dataset: dataset,
+            project: (project || self.project),
+            standard_sql: standard_sql,
+            legacy_sql: legacy_sql,
+            large_results: large_results,
+            flatten: flatten,
+            maximum_billing_tier: maximum_billing_tier,
+            maximum_bytes_billed: maximum_bytes_billed,
+            job_id: job_id,
+            prefix: prefix,
+            labels: labels,
+            udfs: udfs,
+            create_session: create_session,
+            session_id: session_id
+          }
 
           updater = QueryJob::Updater.from_options service, query, options
 
@@ -638,7 +678,7 @@ module Google
         #   use named query parameters. When set, `legacy_sql` will automatically be set to false and `standard_sql` to
         #   true.
         #
-        #   Ruby types are mapped to BigQuery types as follows:
+        #   BigQuery types are converted from Ruby types as follows:
         #
         #   | BigQuery     | Ruby                                 | Notes                                              |
         #   |--------------|--------------------------------------|----------------------------------------------------|
@@ -646,10 +686,11 @@ module Google
         #   | `INT64`      | `Integer`                            |                                                    |
         #   | `FLOAT64`    | `Float`                              |                                                    |
         #   | `NUMERIC`    | `BigDecimal`                         | `BigDecimal` values will be rounded to scale 9.    |
-        #   | `BIGNUMERIC` |                                      | Query param values must be mapped in `types`.      |
+        #   | `BIGNUMERIC` | `BigDecimal`                         | NOT AUTOMATIC: Must be mapped using `types`, below.|
         #   | `STRING`     | `String`                             |                                                    |
         #   | `DATETIME`   | `DateTime`                           | `DATETIME` does not support time zone.             |
         #   | `DATE`       | `Date`                               |                                                    |
+        #   | `GEOGRAPHY`  | `String` (WKT or GeoJSON)            | NOT AUTOMATIC: Must be mapped using `types`, below.|
         #   | `TIMESTAMP`  | `Time`                               |                                                    |
         #   | `TIME`       | `Google::Cloud::BigQuery::Time`      |                                                    |
         #   | `BYTES`      | `File`, `IO`, `StringIO`, or similar |                                                    |
@@ -657,7 +698,8 @@ module Google
         #   | `STRUCT`     | `Hash`                               | Hash keys may be strings or symbols.               |
         #
         #   See [Data Types](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types) for an overview
-        #   of each BigQuery data type, including allowed values.
+        #   of each BigQuery data type, including allowed values. For the `GEOGRAPHY` type, see [Working with BigQuery
+        #   GIS data](https://cloud.google.com/bigquery/docs/gis-data).
         # @param [Array, Hash] types Standard SQL only. Types of the SQL parameters in `params`. It is not always
         #   possible to infer the right SQL type from a value in `params`. In these cases, `types` must be used to
         #   specify the SQL type for these values.
@@ -674,6 +716,7 @@ module Google
         #   * `:STRING`
         #   * `:DATETIME`
         #   * `:DATE`
+        #   * `:GEOGRAPHY`
         #   * `:TIMESTAMP`
         #   * `:TIME`
         #   * `:BYTES`
@@ -724,6 +767,8 @@ module Google
         #   When set to false, the values of `large_results` and `flatten` are
         #   ignored; the query will be run as if `large_results` is true and
         #   `flatten` is false. Optional. The default value is false.
+        # @param [String] session_id The ID of an existing session. See the
+        #   `create_session` param in {#query_job} and {Job#session_id}.
         # @yield [job] a job configuration object
         # @yieldparam [Google::Cloud::Bigquery::QueryJob::Updater] job a job
         #   configuration object for setting additional options for the query.
@@ -776,9 +821,7 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
-        #   data = bigquery.query "SELECT name " \
-        #                         "FROM `my_dataset.my_table` " \
-        #                         "WHERE id = ?",
+        #   data = bigquery.query "SELECT name FROM `my_dataset.my_table` WHERE id = ?",
         #                         params: [1]
         #
         #   # Iterate over the first page of results
@@ -793,9 +836,7 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
-        #   data = bigquery.query "SELECT name " \
-        #                         "FROM `my_dataset.my_table` " \
-        #                         "WHERE id = @id",
+        #   data = bigquery.query "SELECT name FROM `my_dataset.my_table` WHERE id = @id",
         #                         params: { id: 1 }
         #
         #   # Iterate over the first page of results
@@ -810,9 +851,7 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
-        #   data = bigquery.query "SELECT name FROM " \
-        #                         "`my_dataset.my_table` " \
-        #                         "WHERE id IN UNNEST(@ids)",
+        #   data = bigquery.query "SELECT name FROM `my_dataset.my_table` WHERE id IN UNNEST(@ids)",
         #                         params: { ids: [] },
         #                         types: { ids: [:INT64] }
         #
@@ -837,9 +876,7 @@ module Google
         #
         #   bigquery = Google::Cloud::Bigquery.new
         #
-        #   data = bigquery.query "UPDATE `my_dataset.my_table` " \
-        #                         "SET x = x + 1 " \
-        #                         "WHERE x IS NOT NULL"
+        #   data = bigquery.query "UPDATE `my_dataset.my_table` SET x = x + 1 WHERE x IS NOT NULL"
         #
         #   puts data.num_dml_affected_rows
         #
@@ -867,10 +904,29 @@ module Google
         #   # Retrieve the next page of results
         #   data = data.next if data.next?
         #
-        def query query, params: nil, types: nil, external: nil, max: nil, cache: true, dataset: nil, project: nil,
-                  standard_sql: nil, legacy_sql: nil, &block
-          job = query_job query, params: params, types: types, external: external, cache: cache, dataset: dataset,
-                                 project: project, standard_sql: standard_sql, legacy_sql: legacy_sql, &block
+        def query query,
+                  params: nil,
+                  types: nil,
+                  external: nil,
+                  max: nil,
+                  cache: true,
+                  dataset: nil,
+                  project: nil,
+                  standard_sql: nil,
+                  legacy_sql: nil,
+                  session_id: nil,
+                  &block
+          job = query_job query,
+                          params: params,
+                          types: types,
+                          external: external,
+                          cache: cache,
+                          dataset: dataset,
+                          project: project,
+                          standard_sql: standard_sql,
+                          legacy_sql: legacy_sql,
+                          session_id: session_id,
+                          &block
           job.wait_until_done!
 
           if job.failed?
@@ -905,7 +961,7 @@ module Google
         #   The following values are supported:
         #
         #   * `csv` - CSV
-        #   * `json` - [Newline-delimited JSON](http://jsonlines.org/)
+        #   * `json` - [Newline-delimited JSON](https://jsonlines.org/)
         #   * `avro` - [Avro](http://avro.apache.org/)
         #   * `sheets` - Google Sheets
         #   * `datastore_backup` - Cloud Datastore backup
@@ -980,8 +1036,8 @@ module Google
         # Creates a new dataset.
         #
         # @param [String] dataset_id A unique ID for this dataset, without the
-        #   project name. The ID must contain only letters (a-z, A-Z), numbers
-        #   (0-9), or underscores (_). The maximum length is 1,024 characters.
+        #   project name. The ID must contain only letters (`[A-Za-z]`), numbers
+        #   (`[0-9]`), or underscores (`_`). The maximum length is 1,024 characters.
         # @param [String] name A descriptive name for the dataset.
         # @param [String] description A user-friendly description of the
         #   dataset.
@@ -1320,9 +1376,7 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #
         #   fourpm = bigquery.time 16, 0, 0
-        #   data = bigquery.query "SELECT name " \
-        #                         "FROM `my_dataset.my_table`" \
-        #                         "WHERE time_of_date = @time",
+        #   data = bigquery.query "SELECT name FROM `my_dataset.my_table` WHERE time_of_date = @time",
         #                         params: { time: fourpm }
         #
         #   # Iterate over the first page of results
@@ -1338,9 +1392,7 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #
         #   precise_time = bigquery.time 16, 35, 15.376541
-        #   data = bigquery.query "SELECT name " \
-        #                         "FROM `my_dataset.my_table`" \
-        #                         "WHERE time_of_date >= @time",
+        #   data = bigquery.query "SELECT name FROM `my_dataset.my_table` WHERE time_of_date >= @time",
         #                         params: { time: precise_time }
         #
         #   # Iterate over the first page of results
@@ -1502,7 +1554,7 @@ module Google
         #   Supported values for tables:
         #
         #   * `csv` - CSV
-        #   * `json` - [Newline-delimited JSON](http://jsonlines.org/)
+        #   * `json` - [Newline-delimited JSON](https://jsonlines.org/)
         #   * `avro` - [Avro](http://avro.apache.org/)
         #
         #   Supported values for models:
@@ -1518,8 +1570,8 @@ module Google
         # @param [Boolean] header Whether to print out a header row in table
         #   exports. Default is `true`. Not applicable when extracting models.
         # @param [String] job_id A user-defined ID for the extract job. The ID
-        #   must contain only letters (a-z, A-Z), numbers (0-9), underscores
-        #   (_), or dashes (-). The maximum length is 1,024 characters. If
+        #   must contain only letters (`[A-Za-z]`), numbers (`[0-9]`), underscores
+        #   (`_`), or dashes (`-`). The maximum length is 1,024 characters. If
         #   `job_id` is provided, then `prefix` will not be used.
         #
         #   See [Generating a job
@@ -1528,8 +1580,8 @@ module Google
         #   prepended to a generated value to produce a unique job ID. For
         #   example, the prefix `daily_import_job_` can be given to generate a
         #   job ID such as `daily_import_job_12vEDtMQ0mbp1Mo5Z7mzAFQJZazh`. The
-        #   prefix must contain only letters (a-z, A-Z), numbers (0-9),
-        #   underscores (_), or dashes (-). The maximum length of the entire ID
+        #   prefix must contain only letters (`[A-Za-z]`), numbers (`[0-9]`),
+        #   underscores (`_`), or dashes (`-`). The maximum length of the entire ID
         #   is 1,024 characters. If `job_id` is provided, then `prefix` will not
         #   be used.
         # @param [Hash] labels A hash of user-provided labels associated with
@@ -1631,7 +1683,7 @@ module Google
         #   Supported values for tables:
         #
         #   * `csv` - CSV
-        #   * `json` - [Newline-delimited JSON](http://jsonlines.org/)
+        #   * `json` - [Newline-delimited JSON](https://jsonlines.org/)
         #   * `avro` - [Avro](http://avro.apache.org/)
         #
         #   Supported values for models:

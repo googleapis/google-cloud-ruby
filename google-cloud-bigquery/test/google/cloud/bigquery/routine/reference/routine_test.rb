@@ -157,7 +157,7 @@ describe Google::Cloud::Bigquery::Routine, :reference, :mock_bigquery do
     updated_routine_gapi = routine_gapi.dup
     updated_routine_gapi.routine_type = new_routine_type
     mock.expect :update_routine, updated_routine_gapi,
-      [project, dataset, routine_id, updated_routine_gapi, options: { header: { "If-Match" => etag } }]
+      [project, dataset, routine_id, updated_routine_gapi], options: { header: { "If-Match" => etag } }
     routine.service.mocked_service = mock
 
     routine.routine_type = new_routine_type
@@ -173,7 +173,7 @@ describe Google::Cloud::Bigquery::Routine, :reference, :mock_bigquery do
     updated_routine_gapi = routine_gapi.dup
     updated_routine_gapi.language = new_language
     mock.expect :update_routine, updated_routine_gapi,
-      [project, dataset, routine_id, updated_routine_gapi, options: { header: { "If-Match" => etag } }]
+      [project, dataset, routine_id, updated_routine_gapi], options: { header: { "If-Match" => etag } }
     routine.service.mocked_service = mock
 
     routine.language = new_language
@@ -189,7 +189,7 @@ describe Google::Cloud::Bigquery::Routine, :reference, :mock_bigquery do
     updated_routine_gapi = routine_gapi.dup
     updated_routine_gapi.arguments = new_arguments_gapi
     mock.expect :update_routine, updated_routine_gapi,
-      [project, dataset, routine_id, updated_routine_gapi, options: { header: { "If-Match" => etag } }]
+      [project, dataset, routine_id, updated_routine_gapi], options: { header: { "If-Match" => etag } }
     routine.service.mocked_service = mock
 
     routine.arguments = new_arguments
@@ -205,7 +205,7 @@ describe Google::Cloud::Bigquery::Routine, :reference, :mock_bigquery do
     updated_routine_gapi = routine_gapi.dup
     updated_routine_gapi.return_type = Google::Apis::BigqueryV2::StandardSqlDataType.new type_kind: "STRING"
     mock.expect :update_routine, updated_routine_gapi,
-      [project, dataset, routine_id, updated_routine_gapi, options: { header: { "If-Match" => etag } }]
+      [project, dataset, routine_id, updated_routine_gapi], options: { header: { "If-Match" => etag } }
     routine.service.mocked_service = mock
 
     routine.return_type = new_return_type
@@ -221,7 +221,7 @@ describe Google::Cloud::Bigquery::Routine, :reference, :mock_bigquery do
     updated_routine_gapi = routine_gapi.dup
     updated_routine_gapi.return_type = Google::Apis::BigqueryV2::StandardSqlDataType.new type_kind: "STRING"
     mock.expect :update_routine, updated_routine_gapi,
-      [project, dataset, routine_id, updated_routine_gapi, options: { header: { "If-Match" => etag } }]
+      [project, dataset, routine_id, updated_routine_gapi], options: { header: { "If-Match" => etag } }
     routine.service.mocked_service = mock
 
     routine.return_type = "STRING"
@@ -237,7 +237,7 @@ describe Google::Cloud::Bigquery::Routine, :reference, :mock_bigquery do
     updated_routine_gapi = routine_gapi.dup
     updated_routine_gapi.return_type = nil
     mock.expect :update_routine, updated_routine_gapi,
-      [project, dataset, routine_id, updated_routine_gapi, options: { header: { "If-Match" => etag } }]
+      [project, dataset, routine_id, updated_routine_gapi], options: { header: { "If-Match" => etag } }
     routine.service.mocked_service = mock
 
     new_return_type = nil
@@ -255,7 +255,7 @@ describe Google::Cloud::Bigquery::Routine, :reference, :mock_bigquery do
     updated_routine_gapi = routine_gapi.dup
     updated_routine_gapi.imported_libraries = new_imported_libraries
     mock.expect :update_routine, updated_routine_gapi,
-      [project, dataset, routine_id, updated_routine_gapi, options: { header: { "If-Match" => etag } }]
+      [project, dataset, routine_id, updated_routine_gapi], options: { header: { "If-Match" => etag } }
     routine.service.mocked_service = mock
 
     routine.imported_libraries = new_imported_libraries
@@ -271,7 +271,7 @@ describe Google::Cloud::Bigquery::Routine, :reference, :mock_bigquery do
     updated_routine_gapi = routine_gapi.dup
     updated_routine_gapi.definition_body = new_body
     mock.expect :update_routine, updated_routine_gapi,
-      [project, dataset, routine_id, updated_routine_gapi, options: { header: { "If-Match" => etag } }]
+      [project, dataset, routine_id, updated_routine_gapi], options: { header: { "If-Match" => etag } }
     routine.service.mocked_service = mock
 
     routine.body = new_body
@@ -287,7 +287,7 @@ describe Google::Cloud::Bigquery::Routine, :reference, :mock_bigquery do
     updated_routine_gapi = routine_gapi.dup
     updated_routine_gapi.description = new_description
     mock.expect :update_routine, updated_routine_gapi,
-      [project, dataset, routine_id, updated_routine_gapi, options: { header: { "If-Match" => etag } }]
+      [project, dataset, routine_id, updated_routine_gapi], options: { header: { "If-Match" => etag } }
     routine.service.mocked_service = mock
 
     routine.description = new_description
@@ -303,7 +303,7 @@ describe Google::Cloud::Bigquery::Routine, :reference, :mock_bigquery do
     updated_routine_gapi = routine_gapi.dup
     updated_routine_gapi.determinism_level = new_determinism_level
     mock.expect :update_routine, updated_routine_gapi,
-      [project, dataset, routine_id, updated_routine_gapi, options: { header: { "If-Match" => etag } }]
+      [project, dataset, routine_id, updated_routine_gapi], options: { header: { "If-Match" => etag } }
     routine.service.mocked_service = mock
 
     routine.determinism_level = new_determinism_level
@@ -328,7 +328,7 @@ describe Google::Cloud::Bigquery::Routine, :reference, :mock_bigquery do
     updated_routine_gapi.description = new_description
     updated_routine_gapi.determinism_level = new_determinism_level
     mock.expect :update_routine, updated_routine_gapi,
-      [project, dataset, routine_id, updated_routine_gapi, options: { header: { "If-Match" => etag } }]
+      [project, dataset, routine_id, updated_routine_gapi], options: { header: { "If-Match" => etag } }
     routine.service.mocked_service = mock
 
     routine.update do |r|

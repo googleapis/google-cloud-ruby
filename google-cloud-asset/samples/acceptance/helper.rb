@@ -18,10 +18,12 @@ require "google/cloud/storage"
 require "minitest/autorun"
 require "securerandom"
 
+RESOURCE_EXHAUSTION_FAILURE_MESSAGE = "Maybe take a break from creating and deleting buckets for a bit".freeze
+
 def create_bucket_helper bucket_name
   storage_client = Google::Cloud::Storage.new
 
-  retry_resource_exhaustion do
+  retry_action Google::Cloud::ResourceExhaustedError, RESOURCE_EXHAUSTION_FAILURE_MESSAGE do
     return storage_client.create_bucket bucket_name
   end
 end
@@ -29,7 +31,7 @@ end
 def delete_bucket_helper bucket_name
   storage_client = Google::Cloud::Storage.new
 
-  retry_resource_exhaustion do
+  retry_action Google::Cloud::ResourceExhaustedError, RESOURCE_EXHAUSTION_FAILURE_MESSAGE do
     bucket = storage_client.bucket bucket_name
     return unless bucket
     bucket.files.each(&:release_event_based_hold!)
@@ -41,7 +43,7 @@ end
 def create_dataset_helper dataset_id
   bigquery_client = Google::Cloud::Bigquery.new
 
-  retry_resource_exhaustion do
+  retry_action Google::Cloud::ResourceExhaustedError, RESOURCE_EXHAUSTION_FAILURE_MESSAGE do
     return bigquery_client.create_dataset dataset_id, location: "US"
   end
 end
@@ -49,23 +51,23 @@ end
 def delete_dataset_helper dataset_id
   bigquery_client = Google::Cloud::Bigquery.new
 
-  retry_resource_exhaustion do
+  retry_action Google::Cloud::ResourceExhaustedError, RESOURCE_EXHAUSTION_FAILURE_MESSAGE do
     dataset = bigquery_client.dataset dataset_id
     return unless dataset
     dataset.delete
   end
 end
 
-def retry_resource_exhaustion
+def retry_action error, message = nil
   5.times do
     yield
     return
-  rescue Google::Cloud::ResourceExhaustedError => e
+  rescue error => e
     puts "\n#{e} Gonna try again"
     sleep rand(1..3)
   rescue StandardError => e
     puts "\n#{e}"
     return
   end
-  raise Google::Cloud::ResourceExhaustedError, "Maybe take a break from creating and deleting buckets for a bit"
+  raise error, message
 end

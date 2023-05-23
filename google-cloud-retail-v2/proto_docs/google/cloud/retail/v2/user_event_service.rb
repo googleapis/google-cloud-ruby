@@ -29,12 +29,22 @@ module Google
         # @!attribute [rw] user_event
         #   @return [::Google::Cloud::Retail::V2::UserEvent]
         #     Required. User event to write.
+        # @!attribute [rw] write_async
+        #   @return [::Boolean]
+        #     If set to true, the user event will be written asynchronously after
+        #     validation, and the API will respond without waiting for the write.
+        #     Therefore, silent failures can occur even if the API returns success. In
+        #     case of silent failures, error messages can be found in Stackdriver logs.
         class WriteUserEventRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for CollectUserEvent method.
+        # @!attribute [rw] prebuilt_rule
+        #   @return [::String]
+        #     The prebuilt rule name that can convert a specific type of raw_json.
+        #     For example: "ga4_bq" rule for the GA4 user event schema.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent catalog name, such as
@@ -54,6 +64,12 @@ module Google
         #     The event timestamp in milliseconds. This prevents browser caching of
         #     otherwise identical get requests. The name is abbreviated to reduce the
         #     payload bytes.
+        # @!attribute [rw] raw_json
+        #   @return [::String]
+        #     An arbitrary serialized JSON string that contains necessary information
+        #     that can comprise a user event. When this field is specified, the
+        #     user_event field will be ignored. Note: line-delimited JSON is not
+        #     supported, a single JSON only.
         class CollectUserEventRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -68,19 +84,19 @@ module Google
         #   @return [::Google::Cloud::Retail::V2::RejoinUserEventsRequest::UserEventRejoinScope]
         #     The type of the user event rejoin to define the scope and range of the user
         #     events to be rejoined with the latest product catalog. Defaults to
-        #     USER_EVENT_REJOIN_SCOPE_UNSPECIFIED if this field is not set, or set to an
-        #     invalid integer value.
+        #     `USER_EVENT_REJOIN_SCOPE_UNSPECIFIED` if this field is not set, or set to
+        #     an invalid integer value.
         class RejoinUserEventsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # The scope of user events to be rejoined with the latest product catalog.
           # If the rejoining aims at reducing number of unjoined events, set
-          # UserEventRejoinScope to UNJOINED_EVENTS.
+          # `UserEventRejoinScope` to `UNJOINED_EVENTS`.
           # If the rejoining aims at correcting product catalog information in joined
-          # events, set UserEventRejoinScope to JOINED_EVENTS.
-          # If all events needs to be rejoined, set UserEventRejoinScope to
-          # USER_EVENT_REJOIN_SCOPE_UNSPECIFIED.
+          # events, set `UserEventRejoinScope` to `JOINED_EVENTS`.
+          # If all events needs to be rejoined, set `UserEventRejoinScope` to
+          # `USER_EVENT_REJOIN_SCOPE_UNSPECIFIED`.
           module UserEventRejoinScope
             # Rejoin all events with the latest product catalog, including both joined
             # events and unjoined events.
@@ -94,7 +110,7 @@ module Google
           end
         end
 
-        # Response message for RejoinUserEvents method.
+        # Response message for `RejoinUserEvents` method.
         # @!attribute [rw] rejoined_user_events_count
         #   @return [::Integer]
         #     Number of user events that were joined with latest product catalog.
@@ -103,7 +119,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Metadata for RejoinUserEvents method.
+        # Metadata for `RejoinUserEvents` method.
         class RejoinUserEventsMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

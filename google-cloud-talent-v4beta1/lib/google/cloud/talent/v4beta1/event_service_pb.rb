@@ -8,6 +8,7 @@ require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/talent/v4beta1/event_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/talent/v4beta1/event_service.proto", :syntax => :proto3) do
     add_message "google.cloud.talent.v4beta1.CreateClientEventRequest" do

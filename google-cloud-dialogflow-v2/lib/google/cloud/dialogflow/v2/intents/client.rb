@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/dialogflow/v2/intent_pb"
+require "google/cloud/location"
 
 module Google
   module Cloud
@@ -41,13 +42,12 @@ module Google
             # See {::Google::Cloud::Dialogflow::V2::Intents::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all Intents clients:
-            #
-            #     ::Google::Cloud::Dialogflow::V2::Intents::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all Intents clients
+            #   ::Google::Cloud::Dialogflow::V2::Intents::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -67,10 +67,7 @@ module Google
 
                 default_config.timeout = 60.0
                 default_config.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config
@@ -102,19 +99,15 @@ module Google
             ##
             # Create a new Intents client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new Intents client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Dialogflow::V2::Intents::Client.new
             #
-            #     client = ::Google::Cloud::Dialogflow::V2::Intents::Client.new
-            #
-            # To create a new Intents client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Dialogflow::V2::Intents::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Dialogflow::V2::Intents::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Intents client.
             # @yieldparam config [Client::Configuration]
@@ -134,14 +127,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -149,6 +141,13 @@ module Google
 
               @operations_client = Operations.new do |config|
                 config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
                 config.endpoint = @config.endpoint
               end
 
@@ -167,6 +166,13 @@ module Google
             # @return [::Google::Cloud::Dialogflow::V2::Intents::Operations]
             #
             attr_reader :operations_client
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
 
             # Service calls
 
@@ -221,6 +227,25 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Intents::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::ListIntentsRequest.new
+            #
+            #   # Call the list_intents method.
+            #   result = client.list_intents request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::Dialogflow::V2::Intent.
+            #     p item
+            #   end
+            #
             def list_intents request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -238,16 +263,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_intents.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_intents.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @intents_stub.call_rpc :list_intents, request, options: options do |response, operation|
@@ -297,6 +326,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Intents::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::GetIntentRequest.new
+            #
+            #   # Call the get_intent method.
+            #   result = client.get_intent request
+            #
+            #   # The returned object is of type Google::Cloud::Dialogflow::V2::Intent.
+            #   p result
+            #
             def get_intent request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -314,16 +358,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_intent.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_intent.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @intents_stub.call_rpc :get_intent, request, options: options do |response, operation|
@@ -336,6 +384,10 @@ module Google
 
             ##
             # Creates an intent in the specified agent.
+            #
+            # Note: You should always train an agent prior to sending it queries. See the
+            # [training
+            # documentation](https://cloud.google.com/dialogflow/es/docs/training).
             #
             # @overload create_intent(request, options = nil)
             #   Pass arguments to `create_intent` via a request object, either of type
@@ -374,6 +426,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Intents::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::CreateIntentRequest.new
+            #
+            #   # Call the create_intent method.
+            #   result = client.create_intent request
+            #
+            #   # The returned object is of type Google::Cloud::Dialogflow::V2::Intent.
+            #   p result
+            #
             def create_intent request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -391,16 +458,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_intent.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_intent.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @intents_stub.call_rpc :create_intent, request, options: options do |response, operation|
@@ -413,6 +484,10 @@ module Google
 
             ##
             # Updates the specified intent.
+            #
+            # Note: You should always train an agent prior to sending it queries. See the
+            # [training
+            # documentation](https://cloud.google.com/dialogflow/es/docs/training).
             #
             # @overload update_intent(request, options = nil)
             #   Pass arguments to `update_intent` via a request object, either of type
@@ -450,6 +525,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Intents::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::UpdateIntentRequest.new
+            #
+            #   # Call the update_intent method.
+            #   result = client.update_intent request
+            #
+            #   # The returned object is of type Google::Cloud::Dialogflow::V2::Intent.
+            #   p result
+            #
             def update_intent request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -467,16 +557,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "intent.name" => request.intent.name
-              }
+              header_params = {}
+              if request.intent&.name
+                header_params["intent.name"] = request.intent.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_intent.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_intent.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @intents_stub.call_rpc :update_intent, request, options: options do |response, operation|
@@ -489,6 +583,10 @@ module Google
 
             ##
             # Deletes the specified intent and its direct or indirect followup intents.
+            #
+            # Note: You should always train an agent prior to sending it queries. See the
+            # [training
+            # documentation](https://cloud.google.com/dialogflow/es/docs/training).
             #
             # @overload delete_intent(request, options = nil)
             #   Pass arguments to `delete_intent` via a request object, either of type
@@ -518,6 +616,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Intents::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::DeleteIntentRequest.new
+            #
+            #   # Call the delete_intent method.
+            #   result = client.delete_intent request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_intent request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -535,16 +648,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_intent.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_intent.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @intents_stub.call_rpc :delete_intent, request, options: options do |response, operation|
@@ -558,7 +675,18 @@ module Google
             ##
             # Updates/Creates multiple intents in the specified agent.
             #
-            # Operation <response: {::Google::Cloud::Dialogflow::V2::BatchUpdateIntentsResponse BatchUpdateIntentsResponse}>
+            # This method is a [long-running
+            # operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
+            # The returned `Operation` type has the following method-specific fields:
+            #
+            # - `metadata`: An empty [Struct
+            #   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
+            # - `response`:
+            # {::Google::Cloud::Dialogflow::V2::BatchUpdateIntentsResponse BatchUpdateIntentsResponse}
+            #
+            # Note: You should always train an agent prior to sending it queries. See the
+            # [training
+            # documentation](https://cloud.google.com/dialogflow/es/docs/training).
             #
             # @overload batch_update_intents(request, options = nil)
             #   Pass arguments to `batch_update_intents` via a request object, either of type
@@ -603,6 +731,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Intents::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::BatchUpdateIntentsRequest.new
+            #
+            #   # Call the batch_update_intents method.
+            #   result = client.batch_update_intents request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
             def batch_update_intents request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -620,16 +770,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.batch_update_intents.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.batch_update_intents.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @intents_stub.call_rpc :batch_update_intents, request, options: options do |response, operation|
@@ -644,7 +798,18 @@ module Google
             ##
             # Deletes intents in the specified agent.
             #
-            # Operation <response: {::Google::Protobuf::Empty google.protobuf.Empty}>
+            # This method is a [long-running
+            # operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
+            # The returned `Operation` type has the following method-specific fields:
+            #
+            # - `metadata`: An empty [Struct
+            #   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
+            # - `response`: An [Empty
+            #   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)
+            #
+            # Note: You should always train an agent prior to sending it queries. See the
+            # [training
+            # documentation](https://cloud.google.com/dialogflow/es/docs/training).
             #
             # @overload batch_delete_intents(request, options = nil)
             #   Pass arguments to `batch_delete_intents` via a request object, either of type
@@ -676,6 +841,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Intents::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::BatchDeleteIntentsRequest.new
+            #
+            #   # Call the batch_delete_intents method.
+            #   result = client.batch_delete_intents request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
             def batch_delete_intents request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -693,16 +880,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.batch_delete_intents.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.batch_delete_intents.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @intents_stub.call_rpc :batch_delete_intents, request, options: options do |response, operation|
@@ -727,22 +918,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for list_intents
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # list_intents to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Dialogflow::V2::Intents::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_intents.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Dialogflow::V2::Intents::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_intents.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Dialogflow::V2::Intents::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_intents.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Dialogflow::V2::Intents::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_intents.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
@@ -753,9 +943,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials

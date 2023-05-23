@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/documentai/v1beta3/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-document_ai-v1beta3/$1

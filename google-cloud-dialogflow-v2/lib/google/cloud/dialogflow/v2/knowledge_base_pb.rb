@@ -9,6 +9,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/dialogflow/v2/knowledge_base.proto", :syntax => :proto3) do
     add_message "google.cloud.dialogflow.v2.KnowledgeBase" do
@@ -20,6 +21,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :parent, :string, 1
       optional :page_size, :int32, 2
       optional :page_token, :string, 3
+      optional :filter, :string, 4
     end
     add_message "google.cloud.dialogflow.v2.ListKnowledgeBasesResponse" do
       repeated :knowledge_bases, :message, 1, "google.cloud.dialogflow.v2.KnowledgeBase"

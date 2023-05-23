@@ -39,7 +39,13 @@ describe Google::Cloud::Logging::Logger, :add, :mock_logging do
                                                  text_payload: "Danger Will Robinson!",
                                                  severity: severity,
                                                  timestamp: timestamp_grpc)]
-    [entries: entries, log_name: "projects/test/logs/web_app_log", resource: resource.to_grpc, labels: labels, partial_success: nil]
+    {
+      entries: entries,
+      log_name: "projects/test/logs/web_app_log",
+      resource: resource.to_grpc,
+      labels: labels,
+      partial_success: nil
+    }
   end
 
   def apply_stubs
@@ -52,7 +58,7 @@ describe Google::Cloud::Logging::Logger, :add, :mock_logging do
 
   before do
     @mock = Minitest::Mock.new
-    @mock.expect :write_log_entries, write_res, write_req_args
+    @mock.expect :write_log_entries, write_res, **write_req_args
     logging.service.mocked_logging = @mock
   end
 

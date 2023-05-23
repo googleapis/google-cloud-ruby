@@ -32,8 +32,8 @@ module Google
           # document database that simplifies storing, syncing, and querying data for
           # your mobile, web, and IoT apps at global scale. Its client libraries provide
           # live synchronization and offline support, while its security features and
-          # integrations with Firebase and Google Cloud Platform (GCP) accelerate
-          # building truly serverless apps.
+          # integrations with Firebase and Google Cloud Platform accelerate building
+          # truly serverless apps.
           class Service
 
             include ::GRPC::GenericService
@@ -63,13 +63,29 @@ module Google
             rpc :Rollback, ::Google::Cloud::Firestore::V1::RollbackRequest, ::Google::Protobuf::Empty
             # Runs a query.
             rpc :RunQuery, ::Google::Cloud::Firestore::V1::RunQueryRequest, stream(::Google::Cloud::Firestore::V1::RunQueryResponse)
+            # Runs an aggregation query.
+            #
+            # Rather than producing [Document][google.firestore.v1.Document] results like
+            # [Firestore.RunQuery][google.firestore.v1.Firestore.RunQuery], this API
+            # allows running an aggregation to produce a series of
+            # [AggregationResult][google.firestore.v1.AggregationResult] server-side.
+            #
+            # High-Level Example:
+            #
+            # ```
+            # -- Return the number of documents in table given a filter.
+            # SELECT COUNT(*) FROM ( SELECT * FROM k where a = true );
+            # ```
+            rpc :RunAggregationQuery, ::Google::Cloud::Firestore::V1::RunAggregationQueryRequest, stream(::Google::Cloud::Firestore::V1::RunAggregationQueryResponse)
             # Partitions a query by returning partition cursors that can be used to run
             # the query in parallel. The returned partition cursors are split points that
             # can be used by RunQuery as starting/end points for the query results.
             rpc :PartitionQuery, ::Google::Cloud::Firestore::V1::PartitionQueryRequest, ::Google::Cloud::Firestore::V1::PartitionQueryResponse
-            # Streams batches of document updates and deletes, in order.
+            # Streams batches of document updates and deletes, in order. This method is
+            # only available via gRPC or WebChannel (not REST).
             rpc :Write, stream(::Google::Cloud::Firestore::V1::WriteRequest), stream(::Google::Cloud::Firestore::V1::WriteResponse)
-            # Listens to changes.
+            # Listens to changes. This method is only available via gRPC or WebChannel
+            # (not REST).
             rpc :Listen, stream(::Google::Cloud::Firestore::V1::ListenRequest), stream(::Google::Cloud::Firestore::V1::ListenResponse)
             # Lists all the collection IDs underneath a document.
             rpc :ListCollectionIds, ::Google::Cloud::Firestore::V1::ListCollectionIdsRequest, ::Google::Cloud::Firestore::V1::ListCollectionIdsResponse
@@ -78,7 +94,8 @@ module Google
             # The BatchWrite method does not apply the write operations atomically
             # and can apply them out of order. Method does not allow more than one write
             # per document. Each write succeeds or fails independently. See the
-            # [BatchWriteResponse][google.firestore.v1.BatchWriteResponse] for the success status of each write.
+            # [BatchWriteResponse][google.firestore.v1.BatchWriteResponse] for the
+            # success status of each write.
             #
             # If you require an atomically applied set of writes, use
             # [Commit][google.firestore.v1.Firestore.Commit] instead.

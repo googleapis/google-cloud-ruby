@@ -1,5 +1,181 @@
 # Release History
 
+### 0.21.1 (2023-05-19)
+
+#### Documentation
+
+* clarify release channel defaulting behavior 
+
+### 0.21.0 (2023-05-04)
+
+#### Features
+
+* support fleet registration via cluster update ([#21535](https://github.com/googleapis/google-cloud-ruby/issues/21535)) 
+
+### 0.20.0 (2023-04-24)
+
+#### Features
+
+* Add option RESIZE_CLUSTER to enum Operation Type ([#21471](https://github.com/googleapis/google-cloud-ruby/issues/21471)) 
+* Add state field to DatabaseEncryption ([#21471](https://github.com/googleapis/google-cloud-ruby/issues/21471)) 
+#### Documentation
+
+* Expand documentation for Operation Type ([#21471](https://github.com/googleapis/google-cloud-ruby/issues/21471)) 
+
+### 0.19.0 (2023-04-21)
+
+#### Features
+
+* Support additional pod IPv4 ranges ([#21442](https://github.com/googleapis/google-cloud-ruby/issues/21442)) 
+
+### 0.18.0 (2023-04-10)
+
+#### Features
+
+* support AdditionalPodRangesConfig for IPAllocationPolicy 
+
+### 0.17.0 (2023-03-29)
+
+#### Features
+
+* Added support for fleet registration ([#21020](https://github.com/googleapis/google-cloud-ruby/issues/21020)) 
+
+### 0.16.3 (2023-03-08)
+
+#### Documentation
+
+* minor typo fix ([#20606](https://github.com/googleapis/google-cloud-ruby/issues/20606)) 
+
+### 0.16.2 (2023-02-13)
+
+#### Documentation
+
+* Add clarification on whether NodePool.version is a required field ([#20118](https://github.com/googleapis/google-cloud-ruby/issues/20118)) 
+
+### 0.16.1 (2023-01-31)
+
+#### Documentation
+
+* clarify wording around the NodePoolUpdateStrategy default behavior ([#20099](https://github.com/googleapis/google-cloud-ruby/issues/20099)) 
+
+### 0.16.0 (2023-01-19)
+
+#### Features
+
+* Added support for viewing the subnet IPv6 CIDR and services IPv6 CIDR assigned to dual stack clusters ([#20035](https://github.com/googleapis/google-cloud-ruby/issues/20035)) 
+
+### 0.15.0 (2023-01-05)
+
+#### Features
+
+* Support for local SSD configs in a node config 
+* Support for setting etag and windows node config when updating a node pool ([#19908](https://github.com/googleapis/google-cloud-ruby/issues/19908)) 
+
+### 0.14.0 (2022-12-15)
+
+#### Features
+
+* Added support for specifying stack type for clusters ([#19881](https://github.com/googleapis/google-cloud-ruby/issues/19881)) 
+
+### 0.13.0 (2022-12-09)
+
+#### Features
+
+* Support for enabling NCCL Fast Sockets in a node pool ([#19475](https://github.com/googleapis/google-cloud-ruby/issues/19475)) 
+
+### 0.12.0 (2022-11-16)
+
+#### Features
+
+* support placement_policy 
+
+### 0.11.0 (2022-10-18)
+
+#### Features
+
+* add stacktype and IPV6AccessType to IPAllocationPolicy 
+* support cost management config 
+* support GKE backup agent config 
+
+### 0.10.0 (2022-09-16)
+
+#### Features
+
+* Support for high throughput logging config ([#19180](https://github.com/googleapis/google-cloud-ruby/issues/19180)) 
+
+### 0.9.1 (2022-08-04)
+
+#### Documentation
+
+* BinaryAuthorization.enabled field is marked as deprecated ([#18957](https://github.com/googleapis/google-cloud-ruby/issues/18957)) 
+
+### 0.9.0 (2022-07-02)
+
+#### Features
+
+* Support for ignoring the pod disruption budget when rolling back node pool upgrades 
+* Support for the complete_node_pool_upgrade call ([#18479](https://github.com/googleapis/google-cloud-ruby/issues/18479)) 
+* Support network config and conventional nodes during node pool updates 
+* Support updating tags, taints, and labels for node pools 
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+
+### 0.8.0 / 2022-02-16
+
+#### Features
+
+* Support for Linux kernel configuration
+* Support for node Kubelet configuration
+* Support for Google Container File System configuration
+* Support for enabling Virtual NIC on node pools
+* Support for several advanced machine features
+* Support for node pool-level network configuration
+* Support for additional CSI driver add-on configurations
+* Support for mesh certificates
+* Support for cluster logging, monitoring, and notifications
+* Support for configuring the cluster autoscaling profile
+* Support for Autopilot
+* Support for confidential nodes
+* Various additional cluster-level networking configurations
+
+### 0.7.3 / 2022-01-11
+
+#### Documentation
+
+* Fix titles of documentation pages
+* Remove some broken images and fix outdated content in authentication documentation
+
+### 0.7.2 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
+### 0.7.1 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
+### 0.7.0 / 2021-07-12
+
+#### Features
+
+* Support for configuring authenticator groups when updating a cluster
+
+#### Documentation
+
+* Clarify some language around authentication configuration
+
+### 0.6.0 / 2021-06-17
+
+#### Features
+
+* Support image_type for node autoprovisioning
+
+#### Bug Fixes
+
+* Support future 1.x versions of gapic-common
+
 ### 0.5.0 / 2021-03-08
 
 #### Features

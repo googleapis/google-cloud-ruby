@@ -62,12 +62,18 @@ module Google
         # The table into which the operation loads data. This is the table on
         # which {Table#load_job} was invoked.
         #
+        # @param [String] view Specifies the view that determines which table information is returned.
+        #   By default, basic table information and storage statistics (STORAGE_STATS) are returned.
+        #   Accepted values include `:unspecified`, `:basic`, `:storage`, and
+        #   `:full`. For more information, see [BigQuery Classes](@todo: Update the link).
+        #   The default value is the `:unspecified` view type.
+        #
         # @return [Table] A table instance.
         #
-        def destination
+        def destination view: nil
           table = @gapi.configuration.load.destination_table
           return nil unless table
-          retrieve_table table.project_id, table.dataset_id, table.table_id
+          retrieve_table table.project_id, table.dataset_id, table.table_id, metadata_view: view
         end
 
         ##
@@ -188,7 +194,7 @@ module Google
 
         ##
         # Checks if the format of the source data is [newline-delimited
-        # JSON](http://jsonlines.org/). The default is `false`.
+        # JSON](https://jsonlines.org/). The default is `false`.
         #
         # @return [Boolean] `true` when the source format is
         #   `NEWLINE_DELIMITED_JSON`, `false` otherwise.
@@ -414,6 +420,49 @@ module Google
         #
         def hive_partitioning_source_uri_prefix
           @gapi.configuration.load.hive_partitioning_options.source_uri_prefix if hive_partitioning?
+        end
+
+        ###
+        # Checks if Parquet options are set.
+        #
+        # @see https://cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet Loading Parquet data from Cloud
+        #   Storage
+        #
+        # @return [Boolean] `true` when Parquet options are set, or `false` otherwise.
+        #
+        # @!group Attributes
+        #
+        def parquet_options?
+          !@gapi.configuration.load.parquet_options.nil?
+        end
+
+        ###
+        # Indicates whether to use schema inference specifically for Parquet `LIST` logical type.
+        #
+        # @see https://cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet Loading Parquet data from Cloud
+        #   Storage
+        #
+        # @return [Boolean, nil] The `enable_list_inference` value in Parquet options, or `nil` if Parquet options are
+        #   not set.
+        #
+        # @!group Attributes
+        #
+        def parquet_enable_list_inference?
+          @gapi.configuration.load.parquet_options.enable_list_inference if parquet_options?
+        end
+
+        ###
+        # Indicates whether to infer Parquet `ENUM` logical type as `STRING` instead of `BYTES` by default.
+        #
+        # @see https://cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet Loading Parquet data from Cloud
+        #   Storage
+        #
+        # @return [Boolean, nil] The `enum_as_string` value in Parquet options, or `nil` if Parquet options are not set.
+        #
+        # @!group Attributes
+        #
+        def parquet_enum_as_string?
+          @gapi.configuration.load.parquet_options.enum_as_string if parquet_options?
         end
 
         ###
@@ -701,13 +750,35 @@ module Google
           # See {Schema#string}.
           #
           # @param [String] name The field name. The name must contain only
-          #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+          #   letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`), and must
           #   start with a letter or underscore. The maximum length is 128
           #   characters.
           # @param [String] description A description of the field.
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
+          # @param [Integer] max_length The maximum UTF-8 length of strings
+          #   allowed in the field.
+          # @param default_value_expression [String] The default value of a field
+          #   using a SQL expression. It can only be set for top level fields (columns).
+          #   Use a struct or array expression to specify default value for the entire struct or
+          #   array. The valid SQL expressions are:
+          #     - Literals for all data types, including STRUCT and ARRAY.
+          #     - The following functions:
+          #         `CURRENT_TIMESTAMP`
+          #         `CURRENT_TIME`
+          #         `CURRENT_DATE`
+          #         `CURRENT_DATETIME`
+          #         `GENERATE_UUID`
+          #         `RAND`
+          #         `SESSION_USER`
+          #         `ST_GEOPOINT`
+          #     - Struct or array composed with the above allowed functions, for example:
+          #         "[CURRENT_DATE(), DATE '2020-01-01'"]
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -718,9 +789,20 @@ module Google
           #     schema.string "first_name", mode: :required
           #   end
           #
+          # @example Add field with default value.
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   job = dataset.load_job "my_table", "gs://abc/file" do |schema|
+          #     schema.string "first_name", default_value_expression: "'name'"
+          #   end
+          #
           # @!group Schema
-          def string name, description: nil, mode: :nullable
-            schema.string name, description: description, mode: mode
+          def string name, description: nil, mode: :nullable, policy_tags: nil, max_length: nil,
+                     default_value_expression: nil
+            schema.string name, description: description, mode: mode, policy_tags: policy_tags, max_length: max_length,
+                          default_value_expression: default_value_expression
           end
 
           ##
@@ -729,13 +811,33 @@ module Google
           # See {Schema#integer}.
           #
           # @param [String] name The field name. The name must contain only
-          #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+          #   letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`), and must
           #   start with a letter or underscore. The maximum length is 128
           #   characters.
           # @param [String] description A description of the field.
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
+          # @param default_value_expression [String] The default value of a field
+          #   using a SQL expression. It can only be set for top level fields (columns).
+          #   Use a struct or array expression to specify default value for the entire struct or
+          #   array. The valid SQL expressions are:
+          #     - Literals for all data types, including STRUCT and ARRAY.
+          #     - The following functions:
+          #         `CURRENT_TIMESTAMP`
+          #         `CURRENT_TIME`
+          #         `CURRENT_DATE`
+          #         `CURRENT_DATETIME`
+          #         `GENERATE_UUID`
+          #         `RAND`
+          #         `SESSION_USER`
+          #         `ST_GEOPOINT`
+          #     - Struct or array composed with the above allowed functions, for example:
+          #         "[CURRENT_DATE(), DATE '2020-01-01'"]
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -746,9 +848,20 @@ module Google
           #     schema.integer "age", mode: :required
           #   end
           #
+          # @example Add field with default value.
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   job = dataset.load_job "my_table", "gs://abc/file" do |schema|
+          #     schema.integer "age", default_value_expression: "1"
+          #   end
+          #
           # @!group Schema
-          def integer name, description: nil, mode: :nullable
-            schema.integer name, description: description, mode: mode
+          def integer name, description: nil, mode: :nullable, policy_tags: nil,
+                      default_value_expression: nil
+            schema.integer name, description: description, mode: mode, policy_tags: policy_tags,
+                           default_value_expression: default_value_expression
           end
 
           ##
@@ -757,13 +870,33 @@ module Google
           # See {Schema#float}.
           #
           # @param [String] name The field name. The name must contain only
-          #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+          #   letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`), and must
           #   start with a letter or underscore. The maximum length is 128
           #   characters.
           # @param [String] description A description of the field.
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
+          # @param default_value_expression [String] The default value of a field
+          #   using a SQL expression. It can only be set for top level fields (columns).
+          #   Use a struct or array expression to specify default value for the entire struct or
+          #   array. The valid SQL expressions are:
+          #     - Literals for all data types, including STRUCT and ARRAY.
+          #     - The following functions:
+          #         `CURRENT_TIMESTAMP`
+          #         `CURRENT_TIME`
+          #         `CURRENT_DATE`
+          #         `CURRENT_DATETIME`
+          #         `GENERATE_UUID`
+          #         `RAND`
+          #         `SESSION_USER`
+          #         `ST_GEOPOINT`
+          #     - Struct or array composed with the above allowed functions, for example:
+          #         "[CURRENT_DATE(), DATE '2020-01-01'"]
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -774,9 +907,20 @@ module Google
           #     schema.float "price", mode: :required
           #   end
           #
+          # @example Add field with default value.
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   job = dataset.load_job "my_table", "gs://abc/file" do |schema|
+          #     schema.float "price", default_value_expression: "1.0"
+          #   end
+          #
           # @!group Schema
-          def float name, description: nil, mode: :nullable
-            schema.float name, description: description, mode: mode
+          def float name, description: nil, mode: :nullable, policy_tags: nil,
+                    default_value_expression: nil
+            schema.float name, description: description, mode: mode, policy_tags: policy_tags,
+                         default_value_expression: default_value_expression
           end
 
           ##
@@ -796,13 +940,43 @@ module Google
           # See {Schema#numeric}
           #
           # @param [String] name The field name. The name must contain only
-          #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+          #   letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`), and must
           #   start with a letter or underscore. The maximum length is 128
           #   characters.
           # @param [String] description A description of the field.
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
+          # @param [Integer] precision The precision (maximum number of total
+          #   digits) for the field. Acceptable values for precision must be:
+          #   `1 ≤ (precision - scale) ≤ 29`. Values for scale must be:
+          #   `0 ≤ scale ≤ 9`. If the scale value is set, the precision value
+          #   must be set as well.
+          # @param [Integer] scale The scale (maximum number of digits in the
+          #   fractional part) for the field. Acceptable values for precision
+          #   must be: `1 ≤ (precision - scale) ≤ 29`. Values for scale must
+          #   be: `0 ≤ scale ≤ 9`. If the scale value is set, the precision
+          #   value must be set as well.
+          # @param default_value_expression [String] The default value of a field
+          #   using a SQL expression. It can only be set for top level fields (columns).
+          #   Use a struct or array expression to specify default value for the entire struct or
+          #   array. The valid SQL expressions are:
+          #     - Literals for all data types, including STRUCT and ARRAY.
+          #     - The following functions:
+          #         `CURRENT_TIMESTAMP`
+          #         `CURRENT_TIME`
+          #         `CURRENT_DATE`
+          #         `CURRENT_DATETIME`
+          #         `GENERATE_UUID`
+          #         `RAND`
+          #         `SESSION_USER`
+          #         `ST_GEOPOINT`
+          #     - Struct or array composed with the above allowed functions, for example:
+          #         "[CURRENT_DATE(), DATE '2020-01-01'"]
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -813,9 +987,25 @@ module Google
           #     schema.numeric "total_cost", mode: :required
           #   end
           #
+          # @example Add field with default value.
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   job = dataset.load_job "my_table", "gs://abc/file" do |schema|
+          #     schema.numeric "total_cost", default_value_expression: "1.0e10"
+          #   end
+          #
           # @!group Schema
-          def numeric name, description: nil, mode: :nullable
-            schema.numeric name, description: description, mode: mode
+          def numeric name, description: nil, mode: :nullable, policy_tags: nil, precision: nil, scale: nil,
+                      default_value_expression: nil
+            schema.numeric name,
+                           description: description,
+                           mode: mode,
+                           policy_tags: policy_tags,
+                           precision: precision,
+                           scale: scale,
+                           default_value_expression: default_value_expression
           end
 
           ##
@@ -835,13 +1025,43 @@ module Google
           # See {Schema#bignumeric}
           #
           # @param [String] name The field name. The name must contain only
-          #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+          #   letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`), and must
           #   start with a letter or underscore. The maximum length is 128
           #   characters.
           # @param [String] description A description of the field.
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
+          # @param [Integer] precision The precision (maximum number of total
+          #   digits) for the field. Acceptable values for precision must be:
+          #   `1 ≤ (precision - scale) ≤ 38`. Values for scale must be:
+          #   `0 ≤ scale ≤ 38`. If the scale value is set, the precision value
+          #   must be set as well.
+          # @param [Integer] scale The scale (maximum number of digits in the
+          #   fractional part) for the field. Acceptable values for precision
+          #   must be: `1 ≤ (precision - scale) ≤ 38`. Values for scale must
+          #   be: `0 ≤ scale ≤ 38`. If the scale value is set, the precision
+          #   value must be set as well.
+          # @param default_value_expression [String] The default value of a field
+          #   using a SQL expression. It can only be set for top level fields (columns).
+          #   Use a struct or array expression to specify default value for the entire struct or
+          #   array. The valid SQL expressions are:
+          #     - Literals for all data types, including STRUCT and ARRAY.
+          #     - The following functions:
+          #         `CURRENT_TIMESTAMP`
+          #         `CURRENT_TIME`
+          #         `CURRENT_DATE`
+          #         `CURRENT_DATETIME`
+          #         `GENERATE_UUID`
+          #         `RAND`
+          #         `SESSION_USER`
+          #         `ST_GEOPOINT`
+          #     - Struct or array composed with the above allowed functions, for example:
+          #         "[CURRENT_DATE(), DATE '2020-01-01'"]
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -852,9 +1072,25 @@ module Google
           #     schema.bignumeric "total_cost", mode: :required
           #   end
           #
+          # @example Add field with default value.
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   job = dataset.load_job "my_table", "gs://abc/file" do |schema|
+          #     schema.bignumeric "total_cost", default_value_expression: "1.0e10"
+          #   end
+          #
           # @!group Schema
-          def bignumeric name, description: nil, mode: :nullable
-            schema.bignumeric name, description: description, mode: mode
+          def bignumeric name, description: nil, mode: :nullable, policy_tags: nil, precision: nil, scale: nil,
+                         default_value_expression: nil
+            schema.bignumeric name,
+                              description: description,
+                              mode: mode,
+                              policy_tags: policy_tags,
+                              precision: precision,
+                              scale: scale,
+                              default_value_expression: default_value_expression
           end
 
           ##
@@ -863,13 +1099,33 @@ module Google
           # See {Schema#boolean}.
           #
           # @param [String] name The field name. The name must contain only
-          #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+          #   letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`), and must
           #   start with a letter or underscore. The maximum length is 128
           #   characters.
           # @param [String] description A description of the field.
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
+          # @param default_value_expression [String] The default value of a field
+          #   using a SQL expression. It can only be set for top level fields (columns).
+          #   Use a struct or array expression to specify default value for the entire struct or
+          #   array. The valid SQL expressions are:
+          #     - Literals for all data types, including STRUCT and ARRAY.
+          #     - The following functions:
+          #         `CURRENT_TIMESTAMP`
+          #         `CURRENT_TIME`
+          #         `CURRENT_DATE`
+          #         `CURRENT_DATETIME`
+          #         `GENERATE_UUID`
+          #         `RAND`
+          #         `SESSION_USER`
+          #         `ST_GEOPOINT`
+          #     - Struct or array composed with the above allowed functions, for example:
+          #         "[CURRENT_DATE(), DATE '2020-01-01'"]
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -880,9 +1136,23 @@ module Google
           #     schema.boolean "active", mode: :required
           #   end
           #
+          # @example Add field with default value.
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   job = dataset.load_job "my_table", "gs://abc/file" do |schema|
+          #     schema.boolean "active", default_value_expression: "true"
+          #   end
+          #
           # @!group Schema
-          def boolean name, description: nil, mode: :nullable
-            schema.boolean name, description: description, mode: mode
+          def boolean name, description: nil, mode: :nullable, policy_tags: nil,
+                      default_value_expression: nil
+            schema.boolean name,
+                           description: description,
+                           mode: mode,
+                           policy_tags: policy_tags,
+                           default_value_expression: default_value_expression
           end
 
           ##
@@ -891,13 +1161,35 @@ module Google
           # See {Schema#bytes}.
           #
           # @param [String] name The field name. The name must contain only
-          #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+          #   letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`), and must
           #   start with a letter or underscore. The maximum length is 128
           #   characters.
           # @param [String] description A description of the field.
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
+          # @param [Integer] max_length The maximum the maximum number of
+          #   bytes in the field.
+          # @param default_value_expression [String] The default value of a field
+          #   using a SQL expression. It can only be set for top level fields (columns).
+          #   Use a struct or array expression to specify default value for the entire struct or
+          #   array. The valid SQL expressions are:
+          #     - Literals for all data types, including STRUCT and ARRAY.
+          #     - The following functions:
+          #         `CURRENT_TIMESTAMP`
+          #         `CURRENT_TIME`
+          #         `CURRENT_DATE`
+          #         `CURRENT_DATETIME`
+          #         `GENERATE_UUID`
+          #         `RAND`
+          #         `SESSION_USER`
+          #         `ST_GEOPOINT`
+          #     - Struct or array composed with the above allowed functions, for example:
+          #         "[CURRENT_DATE(), DATE '2020-01-01'"]
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -908,9 +1200,24 @@ module Google
           #     schema.bytes "avatar", mode: :required
           #   end
           #
+          # @example Add field with default value.
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   job = dataset.load_job "my_table", "gs://abc/file" do |schema|
+          #     schema.bytes "avatar", default_value_expression: "b'101'"
+          #   end
+          #
           # @!group Schema
-          def bytes name, description: nil, mode: :nullable
-            schema.bytes name, description: description, mode: mode
+          def bytes name, description: nil, mode: :nullable, policy_tags: nil, max_length: nil,
+                    default_value_expression: nil
+            schema.bytes name,
+                         description: description,
+                         mode: mode,
+                         policy_tags: policy_tags,
+                         max_length: max_length,
+                         default_value_expression: default_value_expression
           end
 
           ##
@@ -919,13 +1226,33 @@ module Google
           # See {Schema#timestamp}.
           #
           # @param [String] name The field name. The name must contain only
-          #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+          #   letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`), and must
           #   start with a letter or underscore. The maximum length is 128
           #   characters.
           # @param [String] description A description of the field.
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
+          # @param default_value_expression [String] The default value of a field
+          #   using a SQL expression. It can only be set for top level fields (columns).
+          #   Use a struct or array expression to specify default value for the entire struct or
+          #   array. The valid SQL expressions are:
+          #     - Literals for all data types, including STRUCT and ARRAY.
+          #     - The following functions:
+          #         `CURRENT_TIMESTAMP`
+          #         `CURRENT_TIME`
+          #         `CURRENT_DATE`
+          #         `CURRENT_DATETIME`
+          #         `GENERATE_UUID`
+          #         `RAND`
+          #         `SESSION_USER`
+          #         `ST_GEOPOINT`
+          #     - Struct or array composed with the above allowed functions, for example:
+          #         "[CURRENT_DATE(), DATE '2020-01-01'"]
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -936,9 +1263,20 @@ module Google
           #     schema.timestamp "creation_date", mode: :required
           #   end
           #
+          # @example Add field with default value.
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   job = dataset.load_job "my_table", "gs://abc/file" do |schema|
+          #     schema.timestamp "creation_date", default_value_expression: "CURRENT_TIMESTAMP"
+          #   end
+          #
           # @!group Schema
-          def timestamp name, description: nil, mode: :nullable
-            schema.timestamp name, description: description, mode: mode
+          def timestamp name, description: nil, mode: :nullable, policy_tags: nil,
+                        default_value_expression: nil
+            schema.timestamp name, description: description, mode: mode, policy_tags: policy_tags,
+                             default_value_expression: default_value_expression
           end
 
           ##
@@ -947,13 +1285,33 @@ module Google
           # See {Schema#time}.
           #
           # @param [String] name The field name. The name must contain only
-          #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+          #   letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`), and must
           #   start with a letter or underscore. The maximum length is 128
           #   characters.
           # @param [String] description A description of the field.
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
+          # @param default_value_expression [String] The default value of a field
+          #   using a SQL expression. It can only be set for top level fields (columns).
+          #   Use a struct or array expression to specify default value for the entire struct or
+          #   array. The valid SQL expressions are:
+          #     - Literals for all data types, including STRUCT and ARRAY.
+          #     - The following functions:
+          #         `CURRENT_TIMESTAMP`
+          #         `CURRENT_TIME`
+          #         `CURRENT_DATE`
+          #         `CURRENT_DATETIME`
+          #         `GENERATE_UUID`
+          #         `RAND`
+          #         `SESSION_USER`
+          #         `ST_GEOPOINT`
+          #     - Struct or array composed with the above allowed functions, for example:
+          #         "[CURRENT_DATE(), DATE '2020-01-01'"]
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -964,9 +1322,23 @@ module Google
           #     schema.time "duration", mode: :required
           #   end
           #
+          # @example Add field with default value.
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   job = dataset.load_job "my_table", "gs://abc/file" do |schema|
+          #     schema.time "duration", default_value_expression: "CURRENT_TIME"
+          #   end
+          #
           # @!group Schema
-          def time name, description: nil, mode: :nullable
-            schema.time name, description: description, mode: mode
+          def time name, description: nil, mode: :nullable, policy_tags: nil,
+                   default_value_expression: nil
+            schema.time name,
+                        description: description,
+                        mode: mode,
+                        policy_tags: policy_tags,
+                        default_value_expression: default_value_expression
           end
 
           ##
@@ -975,13 +1347,33 @@ module Google
           # See {Schema#datetime}.
           #
           # @param [String] name The field name. The name must contain only
-          #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+          #   letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`), and must
           #   start with a letter or underscore. The maximum length is 128
           #   characters.
           # @param [String] description A description of the field.
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
+          # @param default_value_expression [String] The default value of a field
+          #   using a SQL expression. It can only be set for top level fields (columns).
+          #   Use a struct or array expression to specify default value for the entire struct or
+          #   array. The valid SQL expressions are:
+          #     - Literals for all data types, including STRUCT and ARRAY.
+          #     - The following functions:
+          #         `CURRENT_TIMESTAMP`
+          #         `CURRENT_TIME`
+          #         `CURRENT_DATE`
+          #         `CURRENT_DATETIME`
+          #         `GENERATE_UUID`
+          #         `RAND`
+          #         `SESSION_USER`
+          #         `ST_GEOPOINT`
+          #     - Struct or array composed with the above allowed functions, for example:
+          #         "[CURRENT_DATE(), DATE '2020-01-01'"]
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -992,9 +1384,23 @@ module Google
           #     schema.datetime "target_end", mode: :required
           #   end
           #
+          # @example Add field with default value.
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   job = dataset.load_job "my_table", "gs://abc/file" do |schema|
+          #     schema.datetime "target_end", default_value_expression: "CURRENT_DATETIME"
+          #   end
+          #
           # @!group Schema
-          def datetime name, description: nil, mode: :nullable
-            schema.datetime name, description: description, mode: mode
+          def datetime name, description: nil, mode: :nullable, policy_tags: nil,
+                       default_value_expression: nil
+            schema.datetime name,
+                            description: description,
+                            mode: mode,
+                            policy_tags: policy_tags,
+                            default_value_expression: default_value_expression
           end
 
           ##
@@ -1003,13 +1409,33 @@ module Google
           # See {Schema#date}.
           #
           # @param [String] name The field name. The name must contain only
-          #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+          #   letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`), and must
           #   start with a letter or underscore. The maximum length is 128
           #   characters.
           # @param [String] description A description of the field.
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
+          # @param default_value_expression [String] The default value of a field
+          #   using a SQL expression. It can only be set for top level fields (columns).
+          #   Use a struct or array expression to specify default value for the entire struct or
+          #   array. The valid SQL expressions are:
+          #     - Literals for all data types, including STRUCT and ARRAY.
+          #     - The following functions:
+          #         `CURRENT_TIMESTAMP`
+          #         `CURRENT_TIME`
+          #         `CURRENT_DATE`
+          #         `CURRENT_DATETIME`
+          #         `GENERATE_UUID`
+          #         `RAND`
+          #         `SESSION_USER`
+          #         `ST_GEOPOINT`
+          #     - Struct or array composed with the above allowed functions, for example:
+          #         "[CURRENT_DATE(), DATE '2020-01-01'"]
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -1020,9 +1446,89 @@ module Google
           #     schema.date "birthday", mode: :required
           #   end
           #
+          # @example Add field with default value.
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   job = dataset.load_job "my_table", "gs://abc/file" do |schema|
+          #     schema.date "birthday", default_value_expression: "CURRENT_DATE"
+          #   end
+          #
           # @!group Schema
-          def date name, description: nil, mode: :nullable
-            schema.date name, description: description, mode: mode
+          def date name, description: nil, mode: :nullable, policy_tags: nil,
+                   default_value_expression: nil
+            schema.date name,
+                        description: description,
+                        mode: mode,
+                        policy_tags: policy_tags,
+                        default_value_expression: default_value_expression
+          end
+
+          ##
+          # Adds a geography field to the schema.
+          #
+          # See {Schema#geography}.
+          #
+          # @see https://cloud.google.com/bigquery/docs/gis-data Working with BigQuery GIS data
+          #
+          # @param [String] name The field name. The name must contain only
+          #   letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`), and must
+          #   start with a letter or underscore. The maximum length is 128
+          #   characters.
+          # @param [String] description A description of the field.
+          # @param [Symbol] mode The field's mode. The possible values are
+          #   `:nullable`, `:required`, and `:repeated`. The default value is
+          #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
+          # @param default_value_expression [String] The default value of a field
+          #   using a SQL expression. It can only be set for top level fields (columns).
+          #   Use a struct or array expression to specify default value for the entire struct or
+          #   array. The valid SQL expressions are:
+          #     - Literals for all data types, including STRUCT and ARRAY.
+          #     - The following functions:
+          #         `CURRENT_TIMESTAMP`
+          #         `CURRENT_TIME`
+          #         `CURRENT_DATE`
+          #         `CURRENT_DATETIME`
+          #         `GENERATE_UUID`
+          #         `RAND`
+          #         `SESSION_USER`
+          #         `ST_GEOPOINT`
+          #     - Struct or array composed with the above allowed functions, for example:
+          #         "[CURRENT_DATE(), DATE '2020-01-01'"]
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   job = dataset.load_job "my_table", "gs://abc/file" do |schema|
+          #     schema.record "cities_lived", mode: :repeated do |cities_lived|
+          #       cities_lived.geography "location", mode: :required
+          #       cities_lived.integer "number_of_years", mode: :required
+          #     end
+          #   end
+          #
+          # @example Add field with default value.
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   job = dataset.load_job "my_table", "gs://abc/file" do |schema|
+          #     schema.geography "location", default_value_expression: "ST_GEOGPOINT(-122.084801, 37.422131)"
+          #   end
+          #
+          def geography name, description: nil, mode: :nullable, policy_tags: nil,
+                        default_value_expression: nil
+            schema.geography name,
+                             description: description,
+                             mode: mode,
+                             policy_tags: policy_tags,
+                             default_value_expression: default_value_expression
           end
 
           ##
@@ -1035,13 +1541,30 @@ module Google
           # See {Schema#record}.
           #
           # @param [String] name The field name. The name must contain only
-          #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+          #   letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`), and must
           #   start with a letter or underscore. The maximum length is 128
           #   characters.
           # @param [String] description A description of the field.
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          # @param default_value_expression [String] The default value of a field
+          #   using a SQL expression. It can only be set for top level fields (columns).
+          #   Use a struct or array expression to specify default value for the entire struct or
+          #   array. The valid SQL expressions are:
+          #     - Literals for all data types, including STRUCT and ARRAY.
+          #     - The following functions:
+          #         `CURRENT_TIMESTAMP`
+          #         `CURRENT_TIME`
+          #         `CURRENT_DATE`
+          #         `CURRENT_DATETIME`
+          #         `GENERATE_UUID`
+          #         `RAND`
+          #         `SESSION_USER`
+          #         `ST_GEOPOINT`
+          #     - Struct or array composed with the above allowed functions, for example:
+          #         "[CURRENT_DATE(), DATE '2020-01-01'"]
+          #
           # @yield [nested_schema] a block for setting the nested schema
           # @yieldparam [Schema] nested_schema the object accepting the
           #   nested schema
@@ -1058,10 +1581,23 @@ module Google
           #     end
           #   end
           #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   job = dataset.load_job "my_table", "gs://abc/file" do |schema|
+          #     schema.record "cities_lived", default_value_expression: "STRUCT('place',10)" do |cities_lived|
+          #       cities_lived.string "place", mode: :required
+          #       cities_lived.integer "number_of_years", mode: :required
+          #     end
+          #   end
+          #
           # @!group Schema
           #
-          def record name, description: nil, mode: nil, &block
-            schema.record name, description: description, mode: mode, &block
+          def record name, description: nil, mode: nil, default_value_expression: nil, &block
+            schema.record name, description: description, mode: mode,
+                          default_value_expression: default_value_expression, &block
           end
 
           ##
@@ -1112,7 +1648,7 @@ module Google
           # The following values are supported:
           #
           # * `csv` - CSV
-          # * `json` - [Newline-delimited JSON](http://jsonlines.org/)
+          # * `json` - [Newline-delimited JSON](https://jsonlines.org/)
           # * `avro` - [Avro](http://avro.apache.org/)
           # * `orc` - [ORC](https://cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc)
           # * `parquet` - [Parquet](https://parquet.apache.org/)
@@ -1532,6 +2068,66 @@ module Google
           def hive_partitioning_source_uri_prefix= source_uri_prefix
             @gapi.configuration.load.hive_partitioning_options ||= Google::Apis::BigqueryV2::HivePartitioningOptions.new
             @gapi.configuration.load.hive_partitioning_options.source_uri_prefix = source_uri_prefix
+          end
+
+          ##
+          # Sets whether to use schema inference specifically for Parquet `LIST` logical type.
+          #
+          # @see https://cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet Loading Parquet data from
+          #   Cloud Storage
+          #
+          # @param [Boolean] enable_list_inference The `enable_list_inference` value to use in Parquet options.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   gcs_uris = ["gs://mybucket/00/*.parquet", "gs://mybucket/01/*.parquet"]
+          #   load_job = dataset.load_job "my_new_table", gcs_uris do |job|
+          #     job.format = :parquet
+          #     job.parquet_enable_list_inference = true
+          #   end
+          #
+          #   load_job.wait_until_done!
+          #   load_job.done? #=> true
+          #
+          # @!group Attributes
+          #
+          def parquet_enable_list_inference= enable_list_inference
+            @gapi.configuration.load.parquet_options ||= Google::Apis::BigqueryV2::ParquetOptions.new
+            @gapi.configuration.load.parquet_options.enable_list_inference = enable_list_inference
+          end
+
+          ##
+          # Sets whether to infer Parquet `ENUM` logical type as `STRING` instead of `BYTES` by default.
+          #
+          # @see https://cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet Loading Parquet data from
+          #   Cloud Storage
+          #
+          # @param [Boolean] enum_as_string The `enum_as_string` value to use in Parquet options.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #
+          #   gcs_uris = ["gs://mybucket/00/*.parquet", "gs://mybucket/01/*.parquet"]
+          #   load_job = dataset.load_job "my_new_table", gcs_uris do |job|
+          #     job.format = :parquet
+          #     job.parquet_enum_as_string = true
+          #   end
+          #
+          #   load_job.wait_until_done!
+          #   load_job.done? #=> true
+          #
+          # @!group Attributes
+          #
+          def parquet_enum_as_string= enum_as_string
+            @gapi.configuration.load.parquet_options ||= Google::Apis::BigqueryV2::ParquetOptions.new
+            @gapi.configuration.load.parquet_options.enum_as_string = enum_as_string
           end
 
           ##

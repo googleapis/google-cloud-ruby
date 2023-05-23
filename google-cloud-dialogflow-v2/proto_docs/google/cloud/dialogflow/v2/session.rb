@@ -61,12 +61,14 @@ module Google
         #     configured, no output audio is generated.
         # @!attribute [rw] output_audio_config_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Mask for {::Google::Cloud::Dialogflow::V2::DetectIntentRequest#output_audio_config output_audio_config} indicating which settings in this
-        #     request-level config should override speech synthesizer settings defined at
-        #     agent-level.
+        #     Mask for
+        #     {::Google::Cloud::Dialogflow::V2::DetectIntentRequest#output_audio_config output_audio_config}
+        #     indicating which settings in this request-level config should override
+        #     speech synthesizer settings defined at agent-level.
         #
-        #     If unspecified or empty, {::Google::Cloud::Dialogflow::V2::DetectIntentRequest#output_audio_config output_audio_config} replaces the agent-level
-        #     config in its entirety.
+        #     If unspecified or empty,
+        #     {::Google::Cloud::Dialogflow::V2::DetectIntentRequest#output_audio_config output_audio_config}
+        #     replaces the agent-level config in its entirety.
         # @!attribute [rw] input_audio
         #   @return [::String]
         #     The natural language speech audio to be processed. This field
@@ -181,7 +183,8 @@ module Google
         #     Instructs the speech recognizer how to process the speech audio.
         # @!attribute [rw] text
         #   @return [::Google::Cloud::Dialogflow::V2::TextInput]
-        #     The natural language text to be processed.
+        #     The natural language text to be processed. Text length must not exceed
+        #     256 character for virtual agent interactions.
         # @!attribute [rw] event
         #   @return [::Google::Cloud::Dialogflow::V2::EventInput]
         #     The event to be processed.
@@ -251,7 +254,8 @@ module Google
         # @!attribute [rw] cancels_slot_filling
         #   @return [::Boolean]
         #     Indicates whether the conversational query triggers a cancellation for slot
-        #     filling.
+        #     filling. For more information, see the [cancel slot filling
+        #     documentation](https://cloud.google.com/dialogflow/es/docs/intents-actions-parameters#cancel).
         # @!attribute [rw] fulfillment_text
         #   @return [::String]
         #     The text to be pronounced to the user or shown on the screen.
@@ -307,25 +311,29 @@ module Google
         end
 
         # The top-level message sent by the client to the
-        # {::Google::Cloud::Dialogflow::V2::Sessions::Client#streaming_detect_intent Sessions.StreamingDetectIntent} method.
+        # {::Google::Cloud::Dialogflow::V2::Sessions::Client#streaming_detect_intent Sessions.StreamingDetectIntent}
+        # method.
         #
         # Multiple request messages should be sent in order:
         #
         # 1.  The first message must contain
         # {::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#session session},
-        #     {::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#query_input query_input} plus optionally
-        #     {::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#query_params query_params}. If the client
-        #     wants to receive an audio response, it should also contain
+        #     {::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#query_input query_input}
+        #     plus optionally
+        #     {::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#query_params query_params}.
+        #     If the client wants to receive an audio response, it should also contain
         #     {::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#output_audio_config output_audio_config}.
         #     The message must not contain
         #     {::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#input_audio input_audio}.
-        # 2.  If {::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#query_input query_input} was set to
-        #     {::Google::Cloud::Dialogflow::V2::InputAudioConfig query_input.audio_config}, all subsequent
-        #     messages must contain
-        #     {::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#input_audio input_audio} to continue with
-        #     Speech recognition.
-        #     If you decide to rather detect an intent from text input after you
-        #     already started Speech recognition, please send a message with
+        # 2.  If
+        # {::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#query_input query_input}
+        # was set to
+        #     {::Google::Cloud::Dialogflow::V2::InputAudioConfig query_input.audio_config},
+        #     all subsequent messages must contain
+        #     {::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#input_audio input_audio}
+        #     to continue with Speech recognition. If you decide to rather detect an
+        #     intent from text input after you already started Speech recognition,
+        #     please send a message with
         #     {::Google::Cloud::Dialogflow::V2::QueryInput#text query_input.text}.
         #
         #     However, note that:
@@ -370,14 +378,15 @@ module Google
         #     3.  an event that specifies which intent to trigger.
         # @!attribute [rw] single_utterance
         #   @return [::Boolean]
-        #     Please use {::Google::Cloud::Dialogflow::V2::InputAudioConfig#single_utterance InputAudioConfig.single_utterance} instead.
-        #     If `false` (default), recognition does not cease until
-        #     the client closes the stream. If `true`, the recognizer will detect a
-        #     single spoken utterance in input audio. Recognition ceases when it detects
-        #     the audio's voice has stopped or paused. In this case, once a detected
-        #     intent is received, the client should close the stream and start a new
-        #     request with a new stream as needed.
-        #     This setting is ignored when `query_input` is a piece of text or an event.
+        #     Please use
+        #     {::Google::Cloud::Dialogflow::V2::InputAudioConfig#single_utterance InputAudioConfig.single_utterance}
+        #     instead. If `false` (default), recognition does not cease until the client
+        #     closes the stream. If `true`, the recognizer will detect a single spoken
+        #     utterance in input audio. Recognition ceases when it detects the audio's
+        #     voice has stopped or paused. In this case, once a detected intent is
+        #     received, the client should close the stream and start a new request with a
+        #     new stream as needed. This setting is ignored when `query_input` is a piece
+        #     of text or an event.
         # @!attribute [rw] output_audio_config
         #   @return [::Google::Cloud::Dialogflow::V2::OutputAudioConfig]
         #     Instructs the speech synthesizer how to generate the output
@@ -385,18 +394,91 @@ module Google
         #     configured, no output audio is generated.
         # @!attribute [rw] output_audio_config_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Mask for {::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#output_audio_config output_audio_config} indicating which settings in this
-        #     request-level config should override speech synthesizer settings defined at
-        #     agent-level.
+        #     Mask for
+        #     {::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#output_audio_config output_audio_config}
+        #     indicating which settings in this request-level config should override
+        #     speech synthesizer settings defined at agent-level.
         #
-        #     If unspecified or empty, {::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#output_audio_config output_audio_config} replaces the agent-level
-        #     config in its entirety.
+        #     If unspecified or empty,
+        #     {::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#output_audio_config output_audio_config}
+        #     replaces the agent-level config in its entirety.
         # @!attribute [rw] input_audio
         #   @return [::String]
         #     The input audio content to be recognized. Must be sent if
         #     `query_input` was set to a streaming input audio config. The complete audio
         #     over all streaming messages must not exceed 1 minute.
+        # @!attribute [rw] enable_debugging_info
+        #   @return [::Boolean]
+        #     if true, `StreamingDetectIntentResponse.debugging_info` will get populated.
         class StreamingDetectIntentRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Cloud conversation info for easier debugging.
+        # It will get populated in `StreamingDetectIntentResponse` or
+        # `StreamingAnalyzeContentResponse` when the flag `enable_debugging_info` is
+        # set to true in corresponding requests.
+        # @!attribute [rw] audio_data_chunks
+        #   @return [::Integer]
+        #     Number of input audio data chunks in streaming requests.
+        # @!attribute [rw] result_end_time_offset
+        #   @return [::Google::Protobuf::Duration]
+        #     Time offset of the end of speech utterance relative to the
+        #     beginning of the first audio chunk.
+        # @!attribute [rw] first_audio_duration
+        #   @return [::Google::Protobuf::Duration]
+        #     Duration of first audio chunk.
+        # @!attribute [rw] single_utterance
+        #   @return [::Boolean]
+        #     Whether client used single utterance mode.
+        # @!attribute [rw] speech_partial_results_end_times
+        #   @return [::Array<::Google::Protobuf::Duration>]
+        #     Time offsets of the speech partial results relative to the beginning of
+        #     the stream.
+        # @!attribute [rw] speech_final_results_end_times
+        #   @return [::Array<::Google::Protobuf::Duration>]
+        #     Time offsets of the speech final results (is_final=true) relative to the
+        #     beginning of the stream.
+        # @!attribute [rw] partial_responses
+        #   @return [::Integer]
+        #     Total number of partial responses.
+        # @!attribute [rw] speaker_id_passive_latency_ms_offset
+        #   @return [::Integer]
+        #     Time offset of Speaker ID stream close time relative to the Speech stream
+        #     close time in milliseconds. Only meaningful for conversations involving
+        #     passive verification.
+        # @!attribute [rw] bargein_event_triggered
+        #   @return [::Boolean]
+        #     Whether a barge-in event is triggered in this request.
+        # @!attribute [rw] speech_single_utterance
+        #   @return [::Boolean]
+        #     Whether speech uses single utterance mode.
+        # @!attribute [rw] dtmf_partial_results_times
+        #   @return [::Array<::Google::Protobuf::Duration>]
+        #     Time offsets of the DTMF partial results relative to the beginning of
+        #     the stream.
+        # @!attribute [rw] dtmf_final_results_times
+        #   @return [::Array<::Google::Protobuf::Duration>]
+        #     Time offsets of the DTMF final results relative to the beginning of
+        #     the stream.
+        # @!attribute [rw] single_utterance_end_time_offset
+        #   @return [::Google::Protobuf::Duration]
+        #     Time offset of the end-of-single-utterance signal relative to the
+        #     beginning of the stream.
+        # @!attribute [rw] no_speech_timeout
+        #   @return [::Google::Protobuf::Duration]
+        #     No speech timeout settings observed at runtime.
+        # @!attribute [rw] is_input_text
+        #   @return [::Boolean]
+        #     Whether the streaming terminates with an injected text query.
+        # @!attribute [rw] client_half_close_time_offset
+        #   @return [::Google::Protobuf::Duration]
+        #     Client half close time in terms of input audio duration.
+        # @!attribute [rw] client_half_close_streaming_time_offset
+        #   @return [::Google::Protobuf::Duration]
+        #     Client half close time in terms of API streaming duration.
+        class CloudConversationDebuggingInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -406,10 +488,12 @@ module Google
         #
         # Multiple response messages can be returned in order:
         #
-        # 1.  If the input was set to streaming audio, the first one or more messages
-        #     contain `recognition_result`. Each `recognition_result` represents a more
-        #     complete transcript of what the user said. The last `recognition_result`
-        #     has `is_final` set to `true`.
+        # 1.  If the `StreamingDetectIntentRequest.input_audio` field was
+        #     set, the `recognition_result` field is populated for one
+        #     or more messages.
+        #     See the
+        #     {::Google::Cloud::Dialogflow::V2::StreamingRecognitionResult StreamingRecognitionResult}
+        #     message for details about the result message sequence.
         #
         # 2.  The next message contains `response_id`, `query_result`
         #     and optionally `webhook_status` if a WebHook was called.
@@ -441,6 +525,10 @@ module Google
         # @!attribute [rw] output_audio_config
         #   @return [::Google::Cloud::Dialogflow::V2::OutputAudioConfig]
         #     The config used by the speech synthesizer to generate the output audio.
+        # @!attribute [rw] debugging_info
+        #   @return [::Google::Cloud::Dialogflow::V2::CloudConversationDebuggingInfo]
+        #     Debugging info that would get populated when
+        #     `StreamingDetectIntentRequest.enable_debugging_info` is set to true.
         class StreamingDetectIntentResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -450,35 +538,39 @@ module Google
         # that is currently being processed or an indication that this is the end
         # of the single requested utterance.
         #
-        # Example:
+        # While end-user audio is being processed, Dialogflow sends a series of
+        # results. Each result may contain a `transcript` value. A transcript
+        # represents a portion of the utterance. While the recognizer is processing
+        # audio, transcript values may be interim values or finalized values.
+        # Once a transcript is finalized, the `is_final` value is set to true and
+        # processing continues for the next transcript.
         #
-        # 1.  transcript: "tube"
+        # If `StreamingDetectIntentRequest.query_input.audio_config.single_utterance`
+        # was true, and the recognizer has completed processing audio,
+        # the `message_type` value is set to `END_OF_SINGLE_UTTERANCE and the
+        # following (last) result contains the last finalized transcript.
         #
-        # 2.  transcript: "to be a"
+        # The complete end-user utterance is determined by concatenating the
+        # finalized transcript values received for the series of results.
         #
-        # 3.  transcript: "to be"
+        # In the following example, single utterance is enabled. In the case where
+        # single utterance is not enabled, result 7 would not occur.
         #
-        # 4.  transcript: "to be or not to be"
-        #     is_final: true
+        # ```
+        # Num | transcript              | message_type            | is_final
+        # --- | ----------------------- | ----------------------- | --------
+        # 1   | "tube"                  | TRANSCRIPT              | false
+        # 2   | "to be a"               | TRANSCRIPT              | false
+        # 3   | "to be"                 | TRANSCRIPT              | false
+        # 4   | "to be or not to be"    | TRANSCRIPT              | true
+        # 5   | "that's"                | TRANSCRIPT              | false
+        # 6   | "that is                | TRANSCRIPT              | false
+        # 7   | unset                   | END_OF_SINGLE_UTTERANCE | unset
+        # 8   | " that is the question" | TRANSCRIPT              | true
+        # ```
         #
-        # 5.  transcript: " that's"
-        #
-        # 6.  transcript: " that is"
-        #
-        # 7.  message_type: `END_OF_SINGLE_UTTERANCE`
-        #
-        # 8.  transcript: " that is the question"
-        #     is_final: true
-        #
-        # Only two of the responses contain final results (#4 and #8 indicated by
-        # `is_final: true`). Concatenating these generates the full transcript: "to be
-        # or not to be that is the question".
-        #
-        # In each response we populate:
-        #
-        # *  for `TRANSCRIPT`: `transcript` and possibly `is_final`.
-        #
-        # *  for `END_OF_SINGLE_UTTERANCE`: only `message_type`.
+        # Concatenating the finalized transcripts with `is_final` set to true,
+        # the complete utterance becomes "to be or not to be that is the question".
         # @!attribute [rw] message_type
         #   @return [::Google::Cloud::Dialogflow::V2::StreamingRecognitionResult::MessageType]
         #     Type of the result message.
@@ -504,12 +596,16 @@ module Google
         # @!attribute [rw] speech_word_info
         #   @return [::Array<::Google::Cloud::Dialogflow::V2::SpeechWordInfo>]
         #     Word-specific information for the words recognized by Speech in
-        #     {::Google::Cloud::Dialogflow::V2::StreamingRecognitionResult#transcript transcript}. Populated if and only if `message_type` = `TRANSCRIPT` and
+        #     {::Google::Cloud::Dialogflow::V2::StreamingRecognitionResult#transcript transcript}.
+        #     Populated if and only if `message_type` = `TRANSCRIPT` and
         #     [InputAudioConfig.enable_word_info] is set.
         # @!attribute [rw] speech_end_offset
         #   @return [::Google::Protobuf::Duration]
         #     Time offset of the end of this Speech recognition result relative to the
         #     beginning of the audio. Only populated for `message_type` = `TRANSCRIPT`.
+        # @!attribute [rw] language_code
+        #   @return [::String]
+        #     Detected language code for the transcript.
         class StreamingRecognitionResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -524,20 +620,24 @@ module Google
 
             # Event indicates that the server has detected the end of the user's speech
             # utterance and expects no additional inputs.
-            # Therefore, the server will not process additional audio (although it may subsequently return additional results). The
-            # client should stop sending additional audio data, half-close the gRPC
-            # connection, and wait for any additional results until the server closes
-            # the gRPC connection. This message is only sent if `single_utterance` was
-            # set to `true`, and is not used otherwise.
+            # Therefore, the server will not process additional audio (although it may
+            # subsequently return additional results). The client should stop sending
+            # additional audio data, half-close the gRPC connection, and wait for any
+            # additional results until the server closes the gRPC connection. This
+            # message is only sent if `single_utterance` was set to `true`, and is not
+            # used otherwise.
             END_OF_SINGLE_UTTERANCE = 2
           end
         end
 
+        # ============================================================================
+        # Auxiliary proto messages.
+        #
         # Represents the natural language text to be processed.
         # @!attribute [rw] text
         #   @return [::String]
         #     Required. The UTF-8 encoded natural language text to be processed.
-        #     Text length must not exceed 256 characters.
+        #     Text length must not exceed 256 characters for virtual agent interactions.
         # @!attribute [rw] language_code
         #   @return [::String]
         #     Required. The language of this conversational query. See [Language
@@ -581,6 +681,11 @@ module Google
         #     Support](https://cloud.google.com/dialogflow/docs/reference/language)
         #     for a list of the currently supported language codes. Note that queries in
         #     the same session do not necessarily need to specify the same language.
+        #
+        #     This field is ignored when used in the context of a
+        #     {::Google::Cloud::Dialogflow::V2::WebhookResponse#followup_event_input WebhookResponse.followup_event_input}
+        #     field, because the language was already defined in the originating detect
+        #     intent request.
         class EventInput
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -601,11 +706,14 @@ module Google
         # and identifies the prevailing subjective opinion, especially to determine a
         # user's attitude as positive, negative, or neutral.
         # For [Participants.DetectIntent][], it needs to be configured in
-        # {::Google::Cloud::Dialogflow::V2::DetectIntentRequest#query_params DetectIntentRequest.query_params}. For
-        # [Participants.StreamingDetectIntent][], it needs to be configured in
+        # {::Google::Cloud::Dialogflow::V2::DetectIntentRequest#query_params DetectIntentRequest.query_params}.
+        # For [Participants.StreamingDetectIntent][], it needs to be configured in
         # {::Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest#query_params StreamingDetectIntentRequest.query_params}.
-        # And for {::Google::Cloud::Dialogflow::V2::Participants::Client#analyze_content Participants.AnalyzeContent} and
-        # [Participants.StreamingAnalyzeContent][google.cloud.dialogflow.v2.Participants.StreamingAnalyzeContent], it needs to be configured in
+        # And for
+        # {::Google::Cloud::Dialogflow::V2::Participants::Client#analyze_content Participants.AnalyzeContent}
+        # and
+        # {::Google::Cloud::Dialogflow::V2::Participants::Client#streaming_analyze_content Participants.StreamingAnalyzeContent},
+        # it needs to be configured in
         # {::Google::Cloud::Dialogflow::V2::ConversationProfile#human_agent_assistant_config ConversationProfile.human_agent_assistant_config}
         # @!attribute [rw] query_text_sentiment
         #   @return [::Google::Cloud::Dialogflow::V2::Sentiment]
@@ -616,7 +724,9 @@ module Google
         end
 
         # The sentiment, such as positive/negative feeling or association, for a unit
-        # of analysis, such as the query text.
+        # of analysis, such as the query text. See:
+        # https://cloud.google.com/natural-language/docs/basics#interpreting_sentiment_analysis_values
+        # for how to interpret the result.
         # @!attribute [rw] score
         #   @return [::Float]
         #     Sentiment score between -1.0 (negative sentiment) and 1.0 (positive

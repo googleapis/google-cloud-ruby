@@ -23,7 +23,9 @@ module Google
   module Cloud
     module ManagedIdentities
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
+      #
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/managed_identities/v1"
       #     client = ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new

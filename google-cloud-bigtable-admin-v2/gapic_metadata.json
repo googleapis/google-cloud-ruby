@@ -60,6 +60,11 @@
                 "update_cluster"
               ]
             },
+            "PartialUpdateCluster": {
+              "methods": [
+                "partial_update_cluster"
+              ]
+            },
             "DeleteCluster": {
               "methods": [
                 "delete_cluster"
@@ -104,6 +109,11 @@
               "methods": [
                 "test_iam_permissions"
               ]
+            },
+            "ListHotTablets": {
+              "methods": [
+                "list_hot_tablets"
+              ]
             }
           }
         }
@@ -134,9 +144,19 @@
                 "get_table"
               ]
             },
+            "UpdateTable": {
+              "methods": [
+                "update_table"
+              ]
+            },
             "DeleteTable": {
               "methods": [
                 "delete_table"
+              ]
+            },
+            "UndeleteTable": {
+              "methods": [
+                "undelete_table"
               ]
             },
             "ModifyColumnFamilies": {

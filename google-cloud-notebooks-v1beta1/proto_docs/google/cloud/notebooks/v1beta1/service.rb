@@ -42,8 +42,7 @@ module Google
         #     Identifies whether the user has requested cancellation
         #     of the operation. Operations that have successfully been cancelled
         #     have [Operation.error][] value with a
-        #     {::Google::Rpc::Status#code google.rpc.Status.code} of 1, corresponding to
-        #     `Code.CANCELLED`.
+        #     {::Google::Rpc::Status#code google.rpc.Status.code} of 1, corresponding to `Code.CANCELLED`.
         # @!attribute [rw] api_version
         #   @return [::String]
         #     API version used to start the operation.
@@ -83,7 +82,7 @@ module Google
         # @!attribute [rw] unreachable
         #   @return [::Array<::String>]
         #     Locations that could not be reached. For example,
-        #     ['us-west1-a', 'us-central1-b'].
+        #     `['us-west1-a', 'us-central1-b']`.
         #     A ListInstancesResponse will only contain either instances or unreachables,
         class ListInstancesResponse
           include ::Google::Protobuf::MessageExts
@@ -142,10 +141,10 @@ module Google
         #     Required. Type of this accelerator.
         # @!attribute [rw] core_count
         #   @return [::Integer]
-        #     Required. Count of cores of this accelerator. Note that not all
-        #     combinations of `type` and `core_count` are valid. Check [GPUs on Compute
-        #     Engine](https://cloud.google.com/compute/docs/gpus/#gpus-list) to find a
-        #     valid combination. TPUs are not supported.
+        #     Required. Count of cores of this accelerator. Note that not all combinations
+        #     of `type` and `core_count` are valid. Check [GPUs on
+        #     Compute Engine](https://cloud.google.com/compute/docs/gpus/#gpus-list) to
+        #     find a valid combination. TPUs are not supported.
         class SetInstanceAcceleratorRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -276,6 +275,11 @@ module Google
         # @!attribute [rw] upgrade_info
         #   @return [::String]
         #     Additional information about upgrade.
+        # @!attribute [rw] upgrade_image
+        #   @return [::String]
+        #     The new image self link this instance will be upgraded to if calling the
+        #     upgrade endpoint. This field will only be populated if field upgradeable
+        #     is true.
         class IsInstanceUpgradeableResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -353,10 +357,10 @@ module Google
         #     Required. Format: `projects/{project_id}/locations/{location}`
         # @!attribute [rw] environment_id
         #   @return [::String]
-        #     Required. User-defined unique ID of this environment. The `environment_id`
-        #     must be 1 to 63 characters long and contain only lowercase letters, numeric
-        #     characters, and dashes. The first character must be a lowercase letter and
-        #     the last character cannot be a dash.
+        #     Required. User-defined unique ID of this environment. The `environment_id` must
+        #     be 1 to 63 characters long and contain only lowercase letters,
+        #     numeric characters, and dashes. The first character must be a lowercase
+        #     letter and the last character cannot be a dash.
         # @!attribute [rw] environment
         #   @return [::Google::Cloud::Notebooks::V1beta1::Environment]
         #     Required. The environment to be created.

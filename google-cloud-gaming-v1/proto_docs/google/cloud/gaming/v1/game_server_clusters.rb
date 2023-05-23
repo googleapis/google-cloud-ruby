@@ -24,11 +24,11 @@ module Google
         # Request message for GameServerClustersService.ListGameServerClusters.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent resource name. Uses the form:
+        #     Required. The parent resource name, in the following form:
         #     "projects/\\{project}/locations/\\{location}/realms/\\{realm}".
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. The maximum number of items to return.  If unspecified, the server
+        #     Optional. The maximum number of items to return. If unspecified, the server
         #     will pick an appropriate default. The server may return fewer items than
         #     requested. A caller should only rely on response's
         #     {::Google::Cloud::Gaming::V1::ListGameServerClustersResponse#next_page_token next_page_token} to
@@ -43,6 +43,14 @@ module Google
         #   @return [::String]
         #     Optional. Specifies the ordering of results following syntax at
         #     https://cloud.google.com/apis/design/design_patterns#sorting_order.
+        # @!attribute [rw] view
+        #   @return [::Google::Cloud::Gaming::V1::GameServerClusterView]
+        #     Optional. View for the returned GameServerCluster objects. When `FULL` is
+        #     specified, the `cluster_state` field is also returned in the
+        #     GameServerCluster object, which includes the state of the referenced
+        #     Kubernetes cluster such as versions and provider info. The default/unset
+        #     value is GAME_SERVER_CLUSTER_VIEW_UNSPECIFIED, same as BASIC, which does
+        #     not return the `cluster_state` field.
         class ListGameServerClustersRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -67,9 +75,16 @@ module Google
         # Request message for GameServerClustersService.GetGameServerCluster.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The name of the game server cluster to retrieve. Uses the form:
-        #
+        #     Required. The name of the game server cluster to retrieve, in the following form:
         #     `projects/{project}/locations/{location}/realms/{realm-id}/gameServerClusters/{cluster}`.
+        # @!attribute [rw] view
+        #   @return [::Google::Cloud::Gaming::V1::GameServerClusterView]
+        #     Optional. View for the returned GameServerCluster objects. When `FULL` is
+        #     specified, the `cluster_state` field is also returned in the
+        #     GameServerCluster object, which includes the state of the referenced
+        #     Kubernetes cluster such as versions and provider info. The default/unset
+        #     value is GAME_SERVER_CLUSTER_VIEW_UNSPECIFIED, same as BASIC, which does
+        #     not return the `cluster_state` field.
         class GetGameServerClusterRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -78,7 +93,7 @@ module Google
         # Request message for GameServerClustersService.CreateGameServerCluster.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent resource name. Uses the form:
+        #     Required. The parent resource name, in the following form:
         #     `projects/{project}/locations/{location}/realms/{realm-id}`.
         # @!attribute [rw] game_server_cluster_id
         #   @return [::String]
@@ -94,7 +109,7 @@ module Google
         # Request message for GameServerClustersService.PreviewCreateGameServerCluster.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent resource name. Uses the form:
+        #     Required. The parent resource name, in the following form:
         #     `projects/{project}/locations/{location}/realms/{realm}`.
         # @!attribute [rw] game_server_cluster_id
         #   @return [::String]
@@ -105,6 +120,10 @@ module Google
         # @!attribute [rw] preview_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Optional. The target timestamp to compute the preview.
+        # @!attribute [rw] view
+        #   @return [::Google::Cloud::Gaming::V1::GameServerClusterView]
+        #     Optional. This field is deprecated, preview will always return
+        #     KubernetesClusterState.
         class PreviewCreateGameServerClusterRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -118,6 +137,10 @@ module Google
         # @!attribute [rw] target_state
         #   @return [::Google::Cloud::Gaming::V1::TargetState]
         #     The target state.
+        # @!attribute [r] cluster_state
+        #   @return [::Google::Cloud::Gaming::V1::KubernetesClusterState]
+        #     Output only. The state of the Kubernetes cluster in preview, this will be available if
+        #     'view' is set to `FULL` in the relevant List/Get/Preview request.
         class PreviewCreateGameServerClusterResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -126,7 +149,7 @@ module Google
         # Request message for GameServerClustersService.DeleteGameServerCluster.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The name of the game server cluster to delete. Uses the form:
+        #     Required. The name of the game server cluster to delete, in the following form:
         #     `projects/{project}/locations/{location}/gameServerClusters/{cluster}`.
         class DeleteGameServerClusterRequest
           include ::Google::Protobuf::MessageExts
@@ -136,7 +159,7 @@ module Google
         # Request message for GameServerClustersService.PreviewDeleteGameServerCluster.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The name of the game server cluster to delete. Uses the form:
+        #     Required. The name of the game server cluster to delete, in the following form:
         #     `projects/{project}/locations/{location}/gameServerClusters/{cluster}`.
         # @!attribute [rw] preview_time
         #   @return [::Google::Protobuf::Timestamp]
@@ -168,10 +191,7 @@ module Google
         #   @return [::Google::Protobuf::FieldMask]
         #     Required. Mask of fields to update. At least one path must be supplied in
         #     this field. For the `FieldMask` definition, see
-        #
-        #     https:
-        #     //developers.google.com/protocol-buffers
-        #     // /docs/reference/google.protobuf#fieldmask
+        #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
         class UpdateGameServerClusterRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -186,10 +206,7 @@ module Google
         #   @return [::Google::Protobuf::FieldMask]
         #     Required. Mask of fields to update. At least one path must be supplied in
         #     this field. For the `FieldMask` definition, see
-        #
-        #     https:
-        #     //developers.google.com/protocol-buffers
-        #     // /docs/reference/google.protobuf#fieldmask
+        #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
         # @!attribute [rw] preview_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Optional. The target timestamp to compute the preview.
@@ -243,11 +260,9 @@ module Google
         # A game server cluster resource.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The resource name of the game server cluster. Uses the form:
-        #
+        #     Required. The resource name of the game server cluster, in the following form:
         #     `projects/{project}/locations/{location}/realms/{realm}/gameServerClusters/{cluster}`.
         #     For example,
-        #
         #     `projects/my-project/locations/{location}/realms/zanzibar/gameServerClusters/my-onprem-cluster`.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
@@ -269,6 +284,10 @@ module Google
         # @!attribute [rw] description
         #   @return [::String]
         #     Human readable description of the cluster.
+        # @!attribute [r] cluster_state
+        #   @return [::Google::Cloud::Gaming::V1::KubernetesClusterState]
+        #     Output only. The state of the Kubernetes cluster, this will be available if
+        #     'view' is set to `FULL` in the relevant List/Get/Preview request.
         class GameServerCluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -281,6 +300,85 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # The state of the Kubernetes cluster.
+        # @!attribute [r] agones_version_installed
+        #   @return [::String]
+        #     Output only. The version of Agones currently installed in the registered Kubernetes
+        #     cluster.
+        # @!attribute [r] kubernetes_version_installed
+        #   @return [::String]
+        #     Output only. The version of Kubernetes that is currently used in the registered
+        #     Kubernetes cluster (as detected by the Cloud Game Servers service).
+        # @!attribute [r] installation_state
+        #   @return [::Google::Cloud::Gaming::V1::KubernetesClusterState::InstallationState]
+        #     Output only. The state for the installed versions of Agones/Kubernetes.
+        # @!attribute [r] version_installed_error_message
+        #   @return [::String]
+        #     Output only. The detailed error message for the installed versions of Agones/Kubernetes.
+        # @!attribute [r] provider
+        #   @return [::String]
+        #     Output only. The cloud provider type reported by the first node's providerID in the list
+        #     of nodes on the Kubernetes endpoint. On Kubernetes platforms that support
+        #     zero-node clusters (like GKE-on-GCP), the provider type will be empty.
+        # @!attribute [r] agones_version_targeted
+        #   @return [::String]
+        #     Output only. The version of Agones that is targeted to be installed in the cluster.
+        class KubernetesClusterState
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The state of the installed versions of Agones/Kubernetes. See also
+          # https://cloud.google.com/game-servers/docs/versions-and-upgrades.
+          module InstallationState
+            # The default value. This value is used if the state is omitted.
+            INSTALLATION_STATE_UNSPECIFIED = 0
+
+            # The combination of Agones and Kubernetes versions is supported by Google
+            # Cloud Game Servers.
+            AGONES_KUBERNETES_VERSION_SUPPORTED = 1
+
+            # The installed version of Agones is not supported by Google Cloud Game
+            # Servers.
+            AGONES_VERSION_UNSUPPORTED = 2
+
+            # The installed version of Agones is supported by Google Cloud Game
+            # Servers, but the installed version of Kubernetes is not recommended or
+            # supported by the version of Agones.
+            AGONES_KUBERNETES_VERSION_UNSUPPORTED = 3
+
+            # The installed version of Agones is not recognized because the Agones
+            # controller's image name does not have a version string reported as
+            # \\{major}.\\{minor}(.\\{patch}).
+            AGONES_VERSION_UNRECOGNIZED = 4
+
+            # The server version of Kubernetes cluster is not recognized because the
+            # API server didn't return parsable version info on path/version.
+            KUBERNETES_VERSION_UNRECOGNIZED = 5
+
+            # Failed to read or verify the version of Agones or Kubernetes. See
+            # version_installed_error_message for details.
+            VERSION_VERIFICATION_FAILED = 6
+
+            # Agones is not installed.
+            AGONES_NOT_INSTALLED = 7
+          end
+        end
+
+        # A view for GameServerCluster objects.
+        module GameServerClusterView
+          # The default / unset value.
+          # The API will default to the BASIC view.
+          GAME_SERVER_CLUSTER_VIEW_UNSPECIFIED = 0
+
+          # Include basic information of a GameServerCluster resource and omit
+          # `cluster_state`. This is the default value (for ListGameServerClusters,
+          # GetGameServerCluster and PreviewCreateGameServerCluster).
+          BASIC = 1
+
+          # Include everything.
+          FULL = 2
         end
       end
     end

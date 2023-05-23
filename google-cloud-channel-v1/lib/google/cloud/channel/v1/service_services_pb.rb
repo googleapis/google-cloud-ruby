@@ -34,15 +34,16 @@ module Google
           # 3. Resellers and distributors can manage customer entitlements.
           #
           # CloudChannelService exposes the following resources:
-          # - [Customer][google.cloud.channel.v1.Customer]s: An entity—usually an enterprise—managed by a reseller or
-          # distributor.
+          # - [Customer][google.cloud.channel.v1.Customer]s: An entity-usually an
+          # enterprise-managed by a reseller or distributor.
           #
-          # - [Entitlement][google.cloud.channel.v1.Entitlement]s: An entity that provides a customer with the means to use
-          # a service. Entitlements are created or updated as a result of a successful
-          # fulfillment.
+          # - [Entitlement][google.cloud.channel.v1.Entitlement]s: An entity that
+          # provides a customer with the means to use a service. Entitlements are created
+          # or updated as a result of a successful fulfillment.
           #
-          # - [ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink]s: An entity that identifies links between
-          # distributors and their indirect resellers in a channel.
+          # - [ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink]s: An
+          # entity that identifies links between distributors and their indirect
+          # resellers in a channel.
           class Service
 
             include ::GRPC::GenericService
@@ -60,9 +61,11 @@ module Google
             # * INVALID_ARGUMENT: Required request parameters are missing or invalid.
             #
             # Return value:
-            # List of [Customer][google.cloud.channel.v1.Customer]s, or an empty list if there are no customers.
+            # List of [Customer][google.cloud.channel.v1.Customer]s, or an empty list if
+            # there are no customers.
             rpc :ListCustomers, ::Google::Cloud::Channel::V1::ListCustomersRequest, ::Google::Cloud::Channel::V1::ListCustomersResponse
-            # Returns a requested [Customer][google.cloud.channel.v1.Customer] resource.
+            # Returns the requested [Customer][google.cloud.channel.v1.Customer]
+            # resource.
             #
             # Possible error codes:
             #
@@ -86,14 +89,17 @@ module Google
             # * INVALID_VALUE: Invalid domain value in the request.
             #
             # Return value:
-            # A list of [CloudIdentityCustomerAccount][google.cloud.channel.v1.CloudIdentityCustomerAccount] resources for the domain (may be
-            # empty)
+            # A list of
+            # [CloudIdentityCustomerAccount][google.cloud.channel.v1.CloudIdentityCustomerAccount]
+            # resources for the domain (may be empty)
             #
             # Note: in the v1alpha1 version of the API, a NOT_FOUND error returns if
-            # no [CloudIdentityCustomerAccount][google.cloud.channel.v1.CloudIdentityCustomerAccount] resources match the domain.
+            # no
+            # [CloudIdentityCustomerAccount][google.cloud.channel.v1.CloudIdentityCustomerAccount]
+            # resources match the domain.
             rpc :CheckCloudIdentityAccountsExist, ::Google::Cloud::Channel::V1::CheckCloudIdentityAccountsExistRequest, ::Google::Cloud::Channel::V1::CheckCloudIdentityAccountsExistResponse
-            # Creates a new [Customer][google.cloud.channel.v1.Customer] resource under the reseller or distributor
-            # account.
+            # Creates a new [Customer][google.cloud.channel.v1.Customer] resource under
+            # the reseller or distributor account.
             #
             # Possible error codes:
             #
@@ -106,20 +112,21 @@ module Google
             # Return value:
             # The newly created [Customer][google.cloud.channel.v1.Customer] resource.
             rpc :CreateCustomer, ::Google::Cloud::Channel::V1::CreateCustomerRequest, ::Google::Cloud::Channel::V1::Customer
-            # Updates an existing [Customer][google.cloud.channel.v1.Customer] resource for the reseller or
-            # distributor.
+            # Updates an existing [Customer][google.cloud.channel.v1.Customer] resource
+            # for the reseller or distributor.
             #
             # Possible error codes:
             #
             # * PERMISSION_DENIED: The reseller account making the request is different
             # from the reseller account in the API request.
             # * INVALID_ARGUMENT: Required request parameters are missing or invalid.
-            # * NOT_FOUND: No [Customer][google.cloud.channel.v1.Customer] resource found for the name in the request.
+            # * NOT_FOUND: No [Customer][google.cloud.channel.v1.Customer] resource found
+            # for the name in the request.
             #
             # Return value:
             # The updated [Customer][google.cloud.channel.v1.Customer] resource.
             rpc :UpdateCustomer, ::Google::Cloud::Channel::V1::UpdateCustomerRequest, ::Google::Cloud::Channel::V1::Customer
-            # Deletes the given [Customer][google.cloud.channel.v1.Customer] permanently and irreversibly.
+            # Deletes the given [Customer][google.cloud.channel.v1.Customer] permanently.
             #
             # Possible error codes:
             #
@@ -127,8 +134,27 @@ module Google
             # this customer.
             # * INVALID_ARGUMENT: Required request parameters are missing or invalid.
             # * FAILED_PRECONDITION: The customer has existing entitlements.
-            # * NOT_FOUND: No [Customer][google.cloud.channel.v1.Customer] resource found for the name in the request.
+            # * NOT_FOUND: No [Customer][google.cloud.channel.v1.Customer] resource found
+            # for the name in the request.
             rpc :DeleteCustomer, ::Google::Cloud::Channel::V1::DeleteCustomerRequest, ::Google::Protobuf::Empty
+            # Imports a [Customer][google.cloud.channel.v1.Customer] from the Cloud
+            # Identity associated with the provided Cloud Identity ID or domain before a
+            # TransferEntitlements call. If a linked Customer already exists and
+            # overwrite_if_exists is true, it will update that Customer's data.
+            #
+            # Possible error codes:
+            #
+            # * PERMISSION_DENIED: The reseller account making the request is different
+            # from the reseller account in the API request.
+            # * NOT_FOUND: Cloud Identity doesn't exist or was deleted.
+            # * INVALID_ARGUMENT: Required parameters are missing, or the auth_token is
+            # expired or invalid.
+            # * ALREADY_EXISTS: A customer already exists and has conflicting critical
+            # fields. Requires an overwrite.
+            #
+            # Return value:
+            # The [Customer][google.cloud.channel.v1.Customer].
+            rpc :ImportCustomer, ::Google::Cloud::Channel::V1::ImportCustomerRequest, ::Google::Cloud::Channel::V1::Customer
             # Creates a Cloud Identity for the given customer using the customer's
             # information, or the information provided here.
             #
@@ -151,7 +177,8 @@ module Google
             # CloudChannelOperationsService. The Operation metadata contains an
             # instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].
             rpc :ProvisionCloudIdentity, ::Google::Cloud::Channel::V1::ProvisionCloudIdentityRequest, ::Google::Longrunning::Operation
-            # Lists [Entitlement][google.cloud.channel.v1.Entitlement]s belonging to a customer.
+            # Lists [Entitlement][google.cloud.channel.v1.Entitlement]s belonging to a
+            # customer.
             #
             # Possible error codes:
             #
@@ -159,10 +186,11 @@ module Google
             # * INVALID_ARGUMENT: Required request parameters are missing or invalid.
             #
             # Return value:
-            # A list of the customer's [Entitlement][google.cloud.channel.v1.Entitlement]s.
+            # A list of the customer's
+            # [Entitlement][google.cloud.channel.v1.Entitlement]s.
             rpc :ListEntitlements, ::Google::Cloud::Channel::V1::ListEntitlementsRequest, ::Google::Cloud::Channel::V1::ListEntitlementsResponse
-            # List [TransferableSku][google.cloud.channel.v1.TransferableSku]s of a customer based on the Cloud Identity ID or
-            # Customer Name in the request.
+            # List [TransferableSku][google.cloud.channel.v1.TransferableSku]s of a
+            # customer based on the Cloud Identity ID or Customer Name in the request.
             #
             # Use this method to list the entitlements information of an
             # unowned customer. You should provide the customer's
@@ -178,10 +206,11 @@ module Google
             # * INVALID_ARGUMENT: Required request parameters are missing or invalid.
             #
             # Return value:
-            # A list of the customer's [TransferableSku][google.cloud.channel.v1.TransferableSku].
+            # A list of the customer's
+            # [TransferableSku][google.cloud.channel.v1.TransferableSku].
             rpc :ListTransferableSkus, ::Google::Cloud::Channel::V1::ListTransferableSkusRequest, ::Google::Cloud::Channel::V1::ListTransferableSkusResponse
-            # List [TransferableOffer][google.cloud.channel.v1.TransferableOffer]s of a customer based on Cloud Identity ID or
-            # Customer Name in the request.
+            # List [TransferableOffer][google.cloud.channel.v1.TransferableOffer]s of a
+            # customer based on Cloud Identity ID or Customer Name in the request.
             #
             # Use this method when a reseller gets the entitlement information of an
             # unowned customer. The reseller should provide the customer's
@@ -191,15 +220,18 @@ module Google
             #
             # * PERMISSION_DENIED:
             #     * The customer doesn't belong to the reseller and has no auth token.
-            #     * The supplied auth token is invalid.
+            #     * The customer provided incorrect reseller information when generating
+            #     auth token.
             #     * The reseller account making the request is different
             #     from the reseller account in the query.
             # * INVALID_ARGUMENT: Required request parameters are missing or invalid.
             #
             # Return value:
-            # List of [TransferableOffer][google.cloud.channel.v1.TransferableOffer] for the given customer and SKU.
+            # List of [TransferableOffer][google.cloud.channel.v1.TransferableOffer] for
+            # the given customer and SKU.
             rpc :ListTransferableOffers, ::Google::Cloud::Channel::V1::ListTransferableOffersRequest, ::Google::Cloud::Channel::V1::ListTransferableOffersResponse
-            # Returns a requested [Entitlement][google.cloud.channel.v1.Entitlement] resource.
+            # Returns the requested [Entitlement][google.cloud.channel.v1.Entitlement]
+            # resource.
             #
             # Possible error codes:
             #
@@ -479,8 +511,8 @@ module Google
             # google.protobuf.Empty on success. The Operation metadata will contain an
             # instance of [OperationMetadata][google.cloud.channel.v1.OperationMetadata].
             rpc :TransferEntitlementsToGoogle, ::Google::Cloud::Channel::V1::TransferEntitlementsToGoogleRequest, ::Google::Longrunning::Operation
-            # List [ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink]s belonging to a distributor.
-            # You must be a distributor to call this method.
+            # List [ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink]s
+            # belonging to a distributor. You must be a distributor to call this method.
             #
             # Possible error codes:
             #
@@ -489,9 +521,11 @@ module Google
             # * INVALID_ARGUMENT: Required request parameters are missing or invalid.
             #
             # Return value:
-            # The list of the distributor account's [ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink] resources.
+            # The list of the distributor account's
+            # [ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink] resources.
             rpc :ListChannelPartnerLinks, ::Google::Cloud::Channel::V1::ListChannelPartnerLinksRequest, ::Google::Cloud::Channel::V1::ListChannelPartnerLinksResponse
-            # Returns a requested [ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink] resource.
+            # Returns the requested
+            # [ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink] resource.
             # You must be a distributor to call this method.
             #
             # Possible error codes:
@@ -503,7 +537,8 @@ module Google
             # invalid channel partner link name.
             #
             # Return value:
-            # The [ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink] resource.
+            # The [ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink]
+            # resource.
             rpc :GetChannelPartnerLink, ::Google::Cloud::Channel::V1::GetChannelPartnerLinkRequest, ::Google::Cloud::Channel::V1::ChannelPartnerLink
             # Initiates a channel partner link between a distributor and a reseller, or
             # between resellers in an n-tier reseller channel.
@@ -526,7 +561,8 @@ module Google
             # Contact Cloud Channel support.
             #
             # Return value:
-            # The new [ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink] resource.
+            # The new [ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink]
+            # resource.
             rpc :CreateChannelPartnerLink, ::Google::Cloud::Channel::V1::CreateChannelPartnerLinkRequest, ::Google::Cloud::Channel::V1::ChannelPartnerLink
             # Updates a channel partner link. Distributors call this method to change a
             # link's status. For example, to suspend a partner link.
@@ -548,8 +584,294 @@ module Google
             # Contact Cloud Channel support.
             #
             # Return value:
-            # The updated [ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink] resource.
+            # The updated
+            # [ChannelPartnerLink][google.cloud.channel.v1.ChannelPartnerLink] resource.
             rpc :UpdateChannelPartnerLink, ::Google::Cloud::Channel::V1::UpdateChannelPartnerLinkRequest, ::Google::Cloud::Channel::V1::ChannelPartnerLink
+            # Gets information about how a Reseller modifies their bill before sending
+            # it to a Customer.
+            #
+            # Possible Error Codes:
+            #
+            # * PERMISSION_DENIED: If the account making the request and the account
+            # being queried are different.
+            # * NOT_FOUND: The
+            # [CustomerRepricingConfig][google.cloud.channel.v1.CustomerRepricingConfig]
+            # was not found.
+            # * INTERNAL: Any non-user error related to technical issues in the
+            # backend. In this case, contact Cloud Channel support.
+            #
+            # Return Value:
+            # If successful, the
+            # [CustomerRepricingConfig][google.cloud.channel.v1.CustomerRepricingConfig]
+            # resource, otherwise returns an error.
+            rpc :GetCustomerRepricingConfig, ::Google::Cloud::Channel::V1::GetCustomerRepricingConfigRequest, ::Google::Cloud::Channel::V1::CustomerRepricingConfig
+            # Lists information about how a Reseller modifies their bill before sending
+            # it to a Customer.
+            #
+            # Possible Error Codes:
+            #
+            # * PERMISSION_DENIED: If the account making the request and the account
+            # being queried are different.
+            # * NOT_FOUND: The
+            # [CustomerRepricingConfig][google.cloud.channel.v1.CustomerRepricingConfig]
+            # specified does not exist or is not associated with the given account.
+            # * INTERNAL: Any non-user error related to technical issues in the
+            # backend. In this case, contact Cloud Channel support.
+            #
+            # Return Value:
+            # If successful, the
+            # [CustomerRepricingConfig][google.cloud.channel.v1.CustomerRepricingConfig]
+            # resources. The data for each resource is displayed in the ascending order
+            # of:
+            #
+            # * Customer ID
+            # * [RepricingConfig.EntitlementGranularity.entitlement][google.cloud.channel.v1.RepricingConfig.EntitlementGranularity.entitlement]
+            # * [RepricingConfig.effective_invoice_month][google.cloud.channel.v1.RepricingConfig.effective_invoice_month]
+            # * [CustomerRepricingConfig.update_time][google.cloud.channel.v1.CustomerRepricingConfig.update_time]
+            #
+            # If unsuccessful, returns an error.
+            rpc :ListCustomerRepricingConfigs, ::Google::Cloud::Channel::V1::ListCustomerRepricingConfigsRequest, ::Google::Cloud::Channel::V1::ListCustomerRepricingConfigsResponse
+            # Creates a CustomerRepricingConfig. Call this method to set modifications
+            # for a specific customer's bill. You can only create configs if the
+            # [RepricingConfig.effective_invoice_month][google.cloud.channel.v1.RepricingConfig.effective_invoice_month]
+            # is a future month. If needed, you can create a config for the current
+            # month, with some restrictions.
+            #
+            # When creating a config for a future month, make sure there are no existing
+            # configs for that
+            # [RepricingConfig.effective_invoice_month][google.cloud.channel.v1.RepricingConfig.effective_invoice_month].
+            #
+            # The following restrictions are for creating configs in the current month.
+            #
+            # * This functionality is reserved for recovering from an erroneous config,
+            # and should not be used for regular business cases.
+            # * The new config will not modify exports used with other configs.
+            # Changes to the config may be immediate, but may take up to 24 hours.
+            # * There is a limit of ten configs for any
+            # [RepricingConfig.EntitlementGranularity.entitlement][google.cloud.channel.v1.RepricingConfig.EntitlementGranularity.entitlement]
+            # or
+            # [RepricingConfig.effective_invoice_month][google.cloud.channel.v1.RepricingConfig.effective_invoice_month].
+            # * The contained
+            # [CustomerRepricingConfig.repricing_config][google.cloud.channel.v1.CustomerRepricingConfig.repricing_config]
+            # vaule must be different from the value used in the current config for a
+            # [RepricingConfig.EntitlementGranularity.entitlement][google.cloud.channel.v1.RepricingConfig.EntitlementGranularity.entitlement].
+            #
+            # Possible Error Codes:
+            #
+            # * PERMISSION_DENIED: If the account making the request and the account
+            # being queried are different.
+            # * INVALID_ARGUMENT: Missing or invalid required parameters in the
+            # request. Also displays if the updated config is for the current month or
+            # past months.
+            # * NOT_FOUND: The
+            # [CustomerRepricingConfig][google.cloud.channel.v1.CustomerRepricingConfig]
+            # specified does not exist or is not associated with the given account.
+            # * INTERNAL: Any non-user error related to technical issues in the
+            # backend. In this case, contact Cloud Channel support.
+            #
+            # Return Value:
+            # If successful, the updated
+            # [CustomerRepricingConfig][google.cloud.channel.v1.CustomerRepricingConfig]
+            # resource, otherwise returns an error.
+            rpc :CreateCustomerRepricingConfig, ::Google::Cloud::Channel::V1::CreateCustomerRepricingConfigRequest, ::Google::Cloud::Channel::V1::CustomerRepricingConfig
+            # Updates a CustomerRepricingConfig. Call this method to set modifications
+            # for a specific customer's bill. This method overwrites the existing
+            # CustomerRepricingConfig.
+            #
+            # You can only update configs if the
+            # [RepricingConfig.effective_invoice_month][google.cloud.channel.v1.RepricingConfig.effective_invoice_month]
+            # is a future month. To make changes to configs for the current month, use
+            # [CreateCustomerRepricingConfig][google.cloud.channel.v1.CloudChannelService.CreateCustomerRepricingConfig],
+            # taking note of its restrictions. You cannot update the
+            # [RepricingConfig.effective_invoice_month][google.cloud.channel.v1.RepricingConfig.effective_invoice_month].
+            #
+            # When updating a config in the future:
+            #
+            # * This config must already exist.
+            #
+            # Possible Error Codes:
+            #
+            # * PERMISSION_DENIED: If the account making the request and the account
+            # being queried are different.
+            # * INVALID_ARGUMENT: Missing or invalid required parameters in the
+            # request. Also displays if the updated config is for the current month or
+            # past months.
+            # * NOT_FOUND: The
+            # [CustomerRepricingConfig][google.cloud.channel.v1.CustomerRepricingConfig]
+            # specified does not exist or is not associated with the given account.
+            # * INTERNAL: Any non-user error related to technical issues in the
+            # backend. In this case, contact Cloud Channel support.
+            #
+            # Return Value:
+            # If successful, the updated
+            # [CustomerRepricingConfig][google.cloud.channel.v1.CustomerRepricingConfig]
+            # resource, otherwise returns an error.
+            rpc :UpdateCustomerRepricingConfig, ::Google::Cloud::Channel::V1::UpdateCustomerRepricingConfigRequest, ::Google::Cloud::Channel::V1::CustomerRepricingConfig
+            # Deletes the given
+            # [CustomerRepricingConfig][google.cloud.channel.v1.CustomerRepricingConfig]
+            # permanently. You can only delete configs if their
+            # [RepricingConfig.effective_invoice_month][google.cloud.channel.v1.RepricingConfig.effective_invoice_month]
+            # is set to a date after the current month.
+            #
+            # Possible error codes:
+            #
+            # * PERMISSION_DENIED: The account making the request does not own
+            # this customer.
+            # * INVALID_ARGUMENT: Required request parameters are missing or invalid.
+            # * FAILED_PRECONDITION: The
+            # [CustomerRepricingConfig][google.cloud.channel.v1.CustomerRepricingConfig]
+            # is active or in the past.
+            # * NOT_FOUND: No
+            # [CustomerRepricingConfig][google.cloud.channel.v1.CustomerRepricingConfig]
+            # found for the name in the request.
+            rpc :DeleteCustomerRepricingConfig, ::Google::Cloud::Channel::V1::DeleteCustomerRepricingConfigRequest, ::Google::Protobuf::Empty
+            # Gets information about how a Distributor modifies their bill before sending
+            # it to a ChannelPartner.
+            #
+            # Possible Error Codes:
+            #
+            # * PERMISSION_DENIED: If the account making the request and the account
+            # being queried are different.
+            # * NOT_FOUND: The
+            # [ChannelPartnerRepricingConfig][google.cloud.channel.v1.ChannelPartnerRepricingConfig]
+            # was not found.
+            # * INTERNAL: Any non-user error related to technical issues in the
+            # backend. In this case, contact Cloud Channel support.
+            #
+            # Return Value:
+            # If successful, the
+            # [ChannelPartnerRepricingConfig][google.cloud.channel.v1.ChannelPartnerRepricingConfig]
+            # resource, otherwise returns an error.
+            rpc :GetChannelPartnerRepricingConfig, ::Google::Cloud::Channel::V1::GetChannelPartnerRepricingConfigRequest, ::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig
+            # Lists information about how a Reseller modifies their bill before sending
+            # it to a ChannelPartner.
+            #
+            # Possible Error Codes:
+            #
+            # * PERMISSION_DENIED: If the account making the request and the account
+            # being queried are different.
+            # * NOT_FOUND: The
+            # [ChannelPartnerRepricingConfig][google.cloud.channel.v1.ChannelPartnerRepricingConfig]
+            # specified does not exist or is not associated with the given account.
+            # * INTERNAL: Any non-user error related to technical issues in the
+            # backend. In this case, contact Cloud Channel support.
+            #
+            # Return Value:
+            # If successful, the
+            # [ChannelPartnerRepricingConfig][google.cloud.channel.v1.ChannelPartnerRepricingConfig]
+            # resources. The data for each resource is displayed in the ascending order
+            # of:
+            #
+            # * Channel Partner ID
+            # * [RepricingConfig.effective_invoice_month][google.cloud.channel.v1.RepricingConfig.effective_invoice_month]
+            # * [ChannelPartnerRepricingConfig.update_time][google.cloud.channel.v1.ChannelPartnerRepricingConfig.update_time]
+            #
+            # If unsuccessful, returns an error.
+            rpc :ListChannelPartnerRepricingConfigs, ::Google::Cloud::Channel::V1::ListChannelPartnerRepricingConfigsRequest, ::Google::Cloud::Channel::V1::ListChannelPartnerRepricingConfigsResponse
+            # Creates a ChannelPartnerRepricingConfig. Call this method to set
+            # modifications for a specific ChannelPartner's bill. You can only create
+            # configs if the
+            # [RepricingConfig.effective_invoice_month][google.cloud.channel.v1.RepricingConfig.effective_invoice_month]
+            # is a future month. If needed, you can create a config for the current
+            # month, with some restrictions.
+            #
+            # When creating a config for a future month, make sure there are no existing
+            # configs for that
+            # [RepricingConfig.effective_invoice_month][google.cloud.channel.v1.RepricingConfig.effective_invoice_month].
+            #
+            # The following restrictions are for creating configs in the current month.
+            #
+            # * This functionality is reserved for recovering from an erroneous config,
+            # and should not be used for regular business cases.
+            # * The new config will not modify exports used with other configs.
+            # Changes to the config may be immediate, but may take up to 24 hours.
+            # * There is a limit of ten configs for any ChannelPartner or
+            # [RepricingConfig.effective_invoice_month][google.cloud.channel.v1.RepricingConfig.effective_invoice_month].
+            # * The contained
+            # [ChannelPartnerRepricingConfig.repricing_config][google.cloud.channel.v1.ChannelPartnerRepricingConfig.repricing_config]
+            # vaule must be different from the value used in the current config for a
+            # ChannelPartner.
+            #
+            # Possible Error Codes:
+            #
+            # * PERMISSION_DENIED: If the account making the request and the account
+            # being queried are different.
+            # * INVALID_ARGUMENT: Missing or invalid required parameters in the
+            # request. Also displays if the updated config is for the current month or
+            # past months.
+            # * NOT_FOUND: The
+            # [ChannelPartnerRepricingConfig][google.cloud.channel.v1.ChannelPartnerRepricingConfig]
+            # specified does not exist or is not associated with the given account.
+            # * INTERNAL: Any non-user error related to technical issues in the
+            # backend. In this case, contact Cloud Channel support.
+            #
+            # Return Value:
+            # If successful, the updated
+            # [ChannelPartnerRepricingConfig][google.cloud.channel.v1.ChannelPartnerRepricingConfig]
+            # resource, otherwise returns an error.
+            rpc :CreateChannelPartnerRepricingConfig, ::Google::Cloud::Channel::V1::CreateChannelPartnerRepricingConfigRequest, ::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig
+            # Updates a ChannelPartnerRepricingConfig. Call this method to set
+            # modifications for a specific ChannelPartner's bill. This method overwrites
+            # the existing CustomerRepricingConfig.
+            #
+            # You can only update configs if the
+            # [RepricingConfig.effective_invoice_month][google.cloud.channel.v1.RepricingConfig.effective_invoice_month]
+            # is a future month. To make changes to configs for the current month, use
+            # [CreateChannelPartnerRepricingConfig][google.cloud.channel.v1.CloudChannelService.CreateChannelPartnerRepricingConfig],
+            # taking note of its restrictions. You cannot update the
+            # [RepricingConfig.effective_invoice_month][google.cloud.channel.v1.RepricingConfig.effective_invoice_month].
+            #
+            # When updating a config in the future:
+            #
+            # * This config must already exist.
+            #
+            # Possible Error Codes:
+            #
+            # * PERMISSION_DENIED: If the account making the request and the account
+            # being queried are different.
+            # * INVALID_ARGUMENT: Missing or invalid required parameters in the
+            # request. Also displays if the updated config is for the current month or
+            # past months.
+            # * NOT_FOUND: The
+            # [ChannelPartnerRepricingConfig][google.cloud.channel.v1.ChannelPartnerRepricingConfig]
+            # specified does not exist or is not associated with the given account.
+            # * INTERNAL: Any non-user error related to technical issues in the
+            # backend. In this case, contact Cloud Channel support.
+            #
+            # Return Value:
+            # If successful, the updated
+            # [ChannelPartnerRepricingConfig][google.cloud.channel.v1.ChannelPartnerRepricingConfig]
+            # resource, otherwise returns an error.
+            rpc :UpdateChannelPartnerRepricingConfig, ::Google::Cloud::Channel::V1::UpdateChannelPartnerRepricingConfigRequest, ::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig
+            # Deletes the given
+            # [ChannelPartnerRepricingConfig][google.cloud.channel.v1.ChannelPartnerRepricingConfig]
+            # permanently. You can only delete configs if their
+            # [RepricingConfig.effective_invoice_month][google.cloud.channel.v1.RepricingConfig.effective_invoice_month]
+            # is set to a date after the current month.
+            #
+            # Possible error codes:
+            #
+            # * PERMISSION_DENIED: The account making the request does not own
+            # this customer.
+            # * INVALID_ARGUMENT: Required request parameters are missing or invalid.
+            # * FAILED_PRECONDITION: The
+            # [ChannelPartnerRepricingConfig][google.cloud.channel.v1.ChannelPartnerRepricingConfig]
+            # is active or in the past.
+            # * NOT_FOUND: No
+            # [ChannelPartnerRepricingConfig][google.cloud.channel.v1.ChannelPartnerRepricingConfig]
+            # found for the name in the request.
+            rpc :DeleteChannelPartnerRepricingConfig, ::Google::Cloud::Channel::V1::DeleteChannelPartnerRepricingConfigRequest, ::Google::Protobuf::Empty
+            # Returns the requested [Offer][google.cloud.channel.v1.Offer] resource.
+            #
+            # Possible error codes:
+            #
+            # * PERMISSION_DENIED: The entitlement doesn't belong to the reseller.
+            # * INVALID_ARGUMENT: Required request parameters are missing or invalid.
+            # * NOT_FOUND: Entitlement or offer was not found.
+            #
+            # Return value:
+            # The [Offer][google.cloud.channel.v1.Offer] resource.
+            rpc :LookupOffer, ::Google::Cloud::Channel::V1::LookupOfferRequest, ::Google::Cloud::Channel::V1::Offer
             # Lists the Products the reseller is authorized to sell.
             #
             # Possible error codes:
@@ -590,7 +912,8 @@ module Google
             rpc :ListPurchasableOffers, ::Google::Cloud::Channel::V1::ListPurchasableOffersRequest, ::Google::Cloud::Channel::V1::ListPurchasableOffersResponse
             # Registers a service account with subscriber privileges on the Cloud Pub/Sub
             # topic for this Channel Services account. After you create a
-            # subscriber, you get the events through [SubscriberEvent][google.cloud.channel.v1.SubscriberEvent]
+            # subscriber, you get the events through
+            # [SubscriberEvent][google.cloud.channel.v1.SubscriberEvent]
             #
             # Possible error codes:
             #
@@ -646,6 +969,23 @@ module Google
             # Return value:
             # A list of service email addresses.
             rpc :ListSubscribers, ::Google::Cloud::Channel::V1::ListSubscribersRequest, ::Google::Cloud::Channel::V1::ListSubscribersResponse
+            # List entitlement history.
+            #
+            # Possible error codes:
+            #
+            # * PERMISSION_DENIED: The reseller account making the request and the
+            # provided reseller account are different.
+            # * INVALID_ARGUMENT: Missing or invalid required fields in the request.
+            # * NOT_FOUND: The parent resource doesn't exist. Usually the result of an
+            # invalid name parameter.
+            # * INTERNAL: Any non-user error related to a technical issue in the backend.
+            # In this case, contact CloudChannel support.
+            # * UNKNOWN: Any non-user error related to a technical issue in the backend.
+            # In this case, contact Cloud Channel support.
+            #
+            # Return value:
+            # List of [EntitlementChange][google.cloud.channel.v1.EntitlementChange]s.
+            rpc :ListEntitlementChanges, ::Google::Cloud::Channel::V1::ListEntitlementChangesRequest, ::Google::Cloud::Channel::V1::ListEntitlementChangesResponse
           end
 
           Stub = Service.rpc_stub_class

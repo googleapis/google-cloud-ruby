@@ -296,11 +296,13 @@ class ::Google::Cloud::Language::V1::LanguageService::ClientTest < Minitest::Tes
 
     # Create request parameters for a unary method.
     document = {}
+    classification_model_options = {}
 
     classify_text_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :classify_text, name
       assert_kind_of ::Google::Cloud::Language::V1::ClassifyTextRequest, request
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Language::V1::Document), request["document"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Language::V1::ClassificationModelOptions), request["classification_model_options"]
       refute_nil options
     end
 
@@ -311,31 +313,31 @@ class ::Google::Cloud::Language::V1::LanguageService::ClientTest < Minitest::Tes
       end
 
       # Use hash object
-      client.classify_text({ document: document }) do |response, operation|
+      client.classify_text({ document: document, classification_model_options: classification_model_options }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.classify_text document: document do |response, operation|
+      client.classify_text document: document, classification_model_options: classification_model_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.classify_text ::Google::Cloud::Language::V1::ClassifyTextRequest.new(document: document) do |response, operation|
+      client.classify_text ::Google::Cloud::Language::V1::ClassifyTextRequest.new(document: document, classification_model_options: classification_model_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.classify_text({ document: document }, grpc_options) do |response, operation|
+      client.classify_text({ document: document, classification_model_options: classification_model_options }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.classify_text(::Google::Cloud::Language::V1::ClassifyTextRequest.new(document: document), grpc_options) do |response, operation|
+      client.classify_text(::Google::Cloud::Language::V1::ClassifyTextRequest.new(document: document, classification_model_options: classification_model_options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

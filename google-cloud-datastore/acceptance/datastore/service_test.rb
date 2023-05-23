@@ -18,7 +18,7 @@
 require "datastore_helper"
 
 describe Google::Cloud::Datastore::Service, :datastore do
-  let(:config_metadata) { { "google-cloud-resource-prefix": "projects/#{dataset.project_id}" } }
+  let(:config_metadata) { { "google-cloud-resource-prefix": "projects/#{dataset.project_id}/databases/#{dataset.database_id}" } }
 
   it "passes the correct configuration to its v1 client" do
     _(dataset.project_id).wont_be :empty?

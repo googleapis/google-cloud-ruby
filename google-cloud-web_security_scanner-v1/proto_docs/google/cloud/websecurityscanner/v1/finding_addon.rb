@@ -163,6 +163,28 @@ module Google
             USER_CONTROLLABLE_URL = 15
           end
         end
+
+        # Information reported for an XXE.
+        # @!attribute [rw] payload_value
+        #   @return [::String]
+        #     The XML string that triggered the XXE vulnerability. Non-payload values
+        #     might be redacted.
+        # @!attribute [rw] payload_location
+        #   @return [::Google::Cloud::WebSecurityScanner::V1::Xxe::Location]
+        #     Location within the request where the payload was placed.
+        class Xxe
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Locations within a request where XML was substituted.
+          module Location
+            # Unknown Location.
+            LOCATION_UNSPECIFIED = 0
+
+            # The XML payload replaced the complete request body.
+            COMPLETE_REQUEST_BODY = 1
+          end
+        end
       end
     end
   end

@@ -49,9 +49,27 @@ module Google
         # @!attribute [rw] secondary_worker_config
         #   @return [::Google::Cloud::Dataproc::V1::InstanceGroupAutoscalingPolicyConfig]
         #     Optional. Describes how the autoscaler will operate for secondary workers.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. The labels to associate with this autoscaling policy.
+        #     Label **keys** must contain 1 to 63 characters, and must conform to
+        #     [RFC 1035](https://www.ietf.org/rfc/rfc1035.txt).
+        #     Label **values** may be empty, but, if present, must contain 1 to 63
+        #     characters, and must conform to [RFC
+        #     1035](https://www.ietf.org/rfc/rfc1035.txt). No more than 32 labels can be
+        #     associated with an autoscaling policy.
         class AutoscalingPolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Basic algorithm for autoscaling.
@@ -80,20 +98,20 @@ module Google
         #     Bounds: [0s, 1d].
         # @!attribute [rw] scale_up_factor
         #   @return [::Float]
-        #     Required. Fraction of average YARN pending memory in the last cooldown period
-        #     for which to add workers. A scale-up factor of 1.0 will result in scaling
-        #     up so that there is no pending memory remaining after the update (more
-        #     aggressive scaling). A scale-up factor closer to 0 will result in a smaller
-        #     magnitude of scaling up (less aggressive scaling).
-        #     See [How autoscaling
+        #     Required. Fraction of average YARN pending memory in the last cooldown
+        #     period for which to add workers. A scale-up factor of 1.0 will result in
+        #     scaling up so that there is no pending memory remaining after the update
+        #     (more aggressive scaling). A scale-up factor closer to 0 will result in a
+        #     smaller magnitude of scaling up (less aggressive scaling). See [How
+        #     autoscaling
         #     works](https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/autoscaling#how_autoscaling_works)
         #     for more information.
         #
         #     Bounds: [0.0, 1.0].
         # @!attribute [rw] scale_down_factor
         #   @return [::Float]
-        #     Required. Fraction of average YARN pending memory in the last cooldown period
-        #     for which to remove workers. A scale-down factor of 1 will result in
+        #     Required. Fraction of average YARN pending memory in the last cooldown
+        #     period for which to remove workers. A scale-down factor of 1 will result in
         #     scaling down so that there is no available memory remaining after the
         #     update (more aggressive scaling). A scale-down factor of 0 disables
         #     removing workers, which can be beneficial for autoscaling a single job.

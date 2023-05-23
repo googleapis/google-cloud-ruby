@@ -21,6 +21,37 @@ module Google
   module Cloud
     module Notebooks
       module V1beta1
+        # Reservation Affinity for consuming Zonal reservation.
+        # @!attribute [rw] consume_reservation_type
+        #   @return [::Google::Cloud::Notebooks::V1beta1::ReservationAffinity::Type]
+        #     Optional. Type of reservation to consume
+        # @!attribute [rw] key
+        #   @return [::String]
+        #     Optional. Corresponds to the label key of reservation resource.
+        # @!attribute [rw] values
+        #   @return [::Array<::String>]
+        #     Optional. Corresponds to the label values of reservation resource.
+        class ReservationAffinity
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Indicates whether to consume capacity from an reservation or not.
+          module Type
+            # Default type.
+            TYPE_UNSPECIFIED = 0
+
+            # Do not consume from any allocated capacity.
+            NO_RESERVATION = 1
+
+            # Consume any reservation available.
+            ANY_RESERVATION = 2
+
+            # Must consume from a specific reservation. Must specify key value fields
+            # for specifying the reservations.
+            SPECIFIC_RESERVATION = 3
+          end
+        end
+
         # The definition of a notebook instance.
         # @!attribute [r] name
         #   @return [::String]
@@ -39,12 +70,10 @@ module Google
         #     Cloud Storage path (`gs://path-to-file/file-name`).
         # @!attribute [r] proxy_uri
         #   @return [::String]
-        #     Output only. The proxy endpoint that is used to access the Jupyter
-        #     notebook.
+        #     Output only. The proxy endpoint that is used to access the Jupyter notebook.
         # @!attribute [rw] instance_owners
         #   @return [::Array<::String>]
-        #     Input only. The owner of this instance after creation. Format:
-        #     `alias@example.com`
+        #     Input only. The owner of this instance after creation. Format: `alias@example.com`
         #
         #     Currently supports one owner only. If not specified, all of the service
         #     account users of your VM instance's service account can use
@@ -68,8 +97,8 @@ module Google
         #   @return [::Google::Cloud::Notebooks::V1beta1::Instance::AcceleratorConfig]
         #     The hardware accelerator used on this instance. If you use
         #     accelerators, make sure that your configuration has
-        #     [enough vCPUs and memory to support the `machine_type` you
-        #     have selected](https://cloud.google.com/compute/docs/gpus/#gpus-list).
+        #     [enough vCPUs and memory to support the `machine_type` you have
+        #     selected](https://cloud.google.com/compute/docs/gpus/#gpus-list).
         # @!attribute [r] state
         #   @return [::Google::Cloud::Notebooks::V1beta1::Instance::State]
         #     Output only. The state of this instance.
@@ -85,39 +114,37 @@ module Google
         #     If not specified, we'll automatically choose from official GPU drivers.
         # @!attribute [rw] boot_disk_type
         #   @return [::Google::Cloud::Notebooks::V1beta1::Instance::DiskType]
-        #     Input only. The type of the boot disk attached to this instance, defaults
-        #     to standard persistent disk (`PD_STANDARD`).
+        #     Input only. The type of the boot disk attached to this instance, defaults to
+        #     standard persistent disk (`PD_STANDARD`).
         # @!attribute [rw] boot_disk_size_gb
         #   @return [::Integer]
-        #     Input only. The size of the boot disk in GB attached to this instance, up
-        #     to a maximum of 64000&nbsp;GB (64&nbsp;TB). The minimum recommended value
-        #     is 100&nbsp;GB. If not specified, this defaults to 100.
+        #     Input only. The size of the boot disk in GB attached to this instance, up to a maximum
+        #     of 64000 GB (64 TB). The minimum recommended value is 100 GB. If not
+        #     specified, this defaults to 100.
         # @!attribute [rw] data_disk_type
         #   @return [::Google::Cloud::Notebooks::V1beta1::Instance::DiskType]
-        #     Input only. The type of the data disk attached to this instance, defaults
-        #     to standard persistent disk (`PD_STANDARD`).
+        #     Input only. The type of the data disk attached to this instance, defaults to
+        #     standard persistent disk (`PD_STANDARD`).
         # @!attribute [rw] data_disk_size_gb
         #   @return [::Integer]
-        #     Input only. The size of the data disk in GB attached to this instance, up
-        #     to a maximum of 64000&nbsp;GB (64&nbsp;TB). You can choose the size of the
-        #     data disk based on how big your notebooks and data are. If not specified,
-        #     this defaults to 100.
+        #     Input only. The size of the data disk in GB attached to this instance, up to a maximum
+        #     of 64000 GB (64 TB). You can choose the size of the data disk based on how
+        #     big your notebooks and data are. If not specified, this defaults to 100.
         # @!attribute [rw] no_remove_data_disk
         #   @return [::Boolean]
-        #     Input only. If true, the data disk will not be auto deleted when deleting
-        #     the instance.
+        #     Input only. If true, the data disk will not be auto deleted when deleting the instance.
         # @!attribute [rw] disk_encryption
         #   @return [::Google::Cloud::Notebooks::V1beta1::Instance::DiskEncryption]
-        #     Input only. Disk encryption method used on the boot and data disks,
-        #     defaults to GMEK.
+        #     Input only. Disk encryption method used on the boot and data disks, defaults to GMEK.
         # @!attribute [rw] kms_key
         #   @return [::String]
-        #     Input only. The KMS key used to encrypt the disks, only applicable if
-        #     disk_encryption is CMEK. Format:
+        #     Input only. The KMS key used to encrypt the disks, only applicable if disk_encryption
+        #     is CMEK.
+        #     Format:
         #     `projects/{project_id}/locations/{location}/keyRings/{key_ring_id}/cryptoKeys/{key_id}`
         #
-        #     Learn more about [using your own encryption keys](
-        #     https://cloud.google.com/kms/docs/quickstart).
+        #     Learn more about [using your own encryption
+        #     keys](https://cloud.google.com/kms/docs/quickstart).
         # @!attribute [rw] no_public_ip
         #   @return [::Boolean]
         #     If true, no public IP will be assigned to this instance.
@@ -141,6 +168,20 @@ module Google
         # @!attribute [rw] metadata
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Custom metadata to apply to this instance.
+        # @!attribute [rw] nic_type
+        #   @return [::Google::Cloud::Notebooks::V1beta1::Instance::NicType]
+        #     Optional. The type of vNIC to be used on this interface. This may be gVNIC or
+        #     VirtioNet.
+        # @!attribute [rw] reservation_affinity
+        #   @return [::Google::Cloud::Notebooks::V1beta1::ReservationAffinity]
+        #     Optional. The optional reservation affinity. Setting this field will apply
+        #     the specified [Zonal Compute
+        #     Reservation](https://cloud.google.com/compute/docs/instances/reserving-zonal-resources)
+        #     to this notebook instance.
+        # @!attribute [rw] can_ip_forward
+        #   @return [::Boolean]
+        #     Optional. Flag to enable ip forwarding or not, default false/off.
+        #     https://cloud.google.com/vpc/docs/using-routes#canipforward
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Instance creation time.
@@ -152,9 +193,9 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Definition of a hardware accelerator. Note that not all combinations
-          # of `type` and `core_count` are valid. Check [GPUs on
-          # Compute Engine](/compute/docs/gpus/#gpus-list) to find a valid
-          # combination. TPUs are not supported.
+          # of `type` and `core_count` are valid. Check [GPUs on Compute
+          # Engine](https://cloud.google.com/compute/docs/gpus/#gpus-list) to find a
+          # valid combination. TPUs are not supported.
           # @!attribute [rw] type
           #   @return [::Google::Cloud::Notebooks::V1beta1::Instance::AcceleratorType]
           #     Type of this accelerator.
@@ -199,7 +240,7 @@ module Google
             # Accelerator type is Nvidia Tesla V100.
             NVIDIA_TESLA_V100 = 3
 
-            # Accelerator type is Nvidia Tesla P_4.
+            # Accelerator type is Nvidia Tesla P4.
             NVIDIA_TESLA_P4 = 4
 
             # Accelerator type is Nvidia Tesla T4.
@@ -211,7 +252,7 @@ module Google
             # Accelerator type is NVIDIA Tesla P100 Virtual Workstations.
             NVIDIA_TESLA_P100_VWS = 9
 
-            # Accelerator type is NVIDIA Tesla P_4 Virtual Workstations.
+            # Accelerator type is NVIDIA Tesla P4 Virtual Workstations.
             NVIDIA_TESLA_P4_VWS = 10
 
             # (Coming soon) Accelerator type is TPU V2.
@@ -253,6 +294,12 @@ module Google
 
             # The instance is getting registered.
             REGISTERING = 9
+
+            # The instance is suspending.
+            SUSPENDING = 10
+
+            # The instance is suspended.
+            SUSPENDED = 11
           end
 
           # Possible disk types for notebook instances.
@@ -280,6 +327,19 @@ module Google
 
             # Use customer managed encryption keys to encrypt the boot disk.
             CMEK = 2
+          end
+
+          # The type of vNIC driver.
+          module NicType
+            # No type specified. Default should be UNSPECIFIED_NIC_TYPE.
+            UNSPECIFIED_NIC_TYPE = 0
+
+            # VIRTIO. Default in Notebooks DLVM.
+            VIRTIO_NET = 1
+
+            # GVNIC. Alternative to VIRTIO.
+            # https://github.com/GoogleCloudPlatform/compute-virtual-ethernet-linux
+            GVNIC = 2
           end
         end
       end

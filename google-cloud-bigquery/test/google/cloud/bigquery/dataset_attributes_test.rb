@@ -64,6 +64,19 @@ describe Google::Cloud::Bigquery::Dataset, :attributes, :mock_bigquery do
     mock.verify
   end
 
+  it "gets full data for tags" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    mock.expect :get_dataset, dataset_full_gapi, [project, dataset_id]
+
+    _(dataset.tags).must_be_kind_of Array
+
+    # Subsequent calls to the method does not make a second HTTP API call
+    _(dataset.tags.first).must_be_kind_of Google::Cloud::Bigquery::Dataset::Tag
+    _(dataset.tags.first.tag_key).must_be_kind_of String
+    mock.verify
+  end
+
   def self.attr_test attr, val
     define_method "test_#{attr}" do
       mock = Minitest::Mock.new

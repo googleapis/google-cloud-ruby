@@ -44,13 +44,12 @@ module Google
             # See {::Google::Cloud::OsConfig::V1::OsConfigService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all OsConfigService clients:
-            #
-            #     ::Google::Cloud::OsConfig::V1::OsConfigService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all OsConfigService clients
+            #   ::Google::Cloud::OsConfig::V1::OsConfigService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -70,10 +69,7 @@ module Google
 
                 default_config.timeout = 60.0
                 default_config.retry_policy = {
-                  initial_delay: 1.0,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14]
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config
@@ -105,19 +101,15 @@ module Google
             ##
             # Create a new OsConfigService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new OsConfigService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::OsConfig::V1::OsConfigService::Client.new
             #
-            #     client = ::Google::Cloud::OsConfig::V1::OsConfigService::Client.new
-            #
-            # To create a new OsConfigService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::OsConfig::V1::OsConfigService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::OsConfig::V1::OsConfigService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the OsConfigService client.
             # @yieldparam config [Client::Configuration]
@@ -137,14 +129,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -209,6 +200,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/os_config/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsConfig::V1::OsConfigService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsConfig::V1::ExecutePatchJobRequest.new
+            #
+            #   # Call the execute_patch_job method.
+            #   result = client.execute_patch_job request
+            #
+            #   # The returned object is of type Google::Cloud::OsConfig::V1::PatchJob.
+            #   p result
+            #
             def execute_patch_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -226,16 +232,20 @@ module Google
                 gapic_version: ::Google::Cloud::OsConfig::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.execute_patch_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.execute_patch_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @os_config_service_stub.call_rpc :execute_patch_job, request, options: options do |response, operation|
@@ -276,6 +286,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/os_config/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsConfig::V1::OsConfigService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsConfig::V1::GetPatchJobRequest.new
+            #
+            #   # Call the get_patch_job method.
+            #   result = client.get_patch_job request
+            #
+            #   # The returned object is of type Google::Cloud::OsConfig::V1::PatchJob.
+            #   p result
+            #
             def get_patch_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -293,16 +318,20 @@ module Google
                 gapic_version: ::Google::Cloud::OsConfig::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_patch_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_patch_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @os_config_service_stub.call_rpc :get_patch_job, request, options: options do |response, operation|
@@ -343,6 +372,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/os_config/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsConfig::V1::OsConfigService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsConfig::V1::CancelPatchJobRequest.new
+            #
+            #   # Call the cancel_patch_job method.
+            #   result = client.cancel_patch_job request
+            #
+            #   # The returned object is of type Google::Cloud::OsConfig::V1::PatchJob.
+            #   p result
+            #
             def cancel_patch_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -360,16 +404,20 @@ module Google
                 gapic_version: ::Google::Cloud::OsConfig::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.cancel_patch_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.cancel_patch_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @os_config_service_stub.call_rpc :cancel_patch_job, request, options: options do |response, operation|
@@ -418,6 +466,25 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/os_config/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsConfig::V1::OsConfigService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsConfig::V1::ListPatchJobsRequest.new
+            #
+            #   # Call the list_patch_jobs method.
+            #   result = client.list_patch_jobs request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::OsConfig::V1::PatchJob.
+            #     p item
+            #   end
+            #
             def list_patch_jobs request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -435,16 +502,20 @@ module Google
                 gapic_version: ::Google::Cloud::OsConfig::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_patch_jobs.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_patch_jobs.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @os_config_service_stub.call_rpc :list_patch_jobs, request, options: options do |response, operation|
@@ -495,6 +566,25 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/os_config/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsConfig::V1::OsConfigService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsConfig::V1::ListPatchJobInstanceDetailsRequest.new
+            #
+            #   # Call the list_patch_job_instance_details method.
+            #   result = client.list_patch_job_instance_details request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::OsConfig::V1::PatchJobInstanceDetails.
+            #     p item
+            #   end
+            #
             def list_patch_job_instance_details request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -512,16 +602,20 @@ module Google
                 gapic_version: ::Google::Cloud::OsConfig::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_patch_job_instance_details.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_patch_job_instance_details.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @os_config_service_stub.call_rpc :list_patch_job_instance_details, request, options: options do |response, operation|
@@ -573,6 +667,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/os_config/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsConfig::V1::OsConfigService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsConfig::V1::CreatePatchDeploymentRequest.new
+            #
+            #   # Call the create_patch_deployment method.
+            #   result = client.create_patch_deployment request
+            #
+            #   # The returned object is of type Google::Cloud::OsConfig::V1::PatchDeployment.
+            #   p result
+            #
             def create_patch_deployment request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -590,16 +699,20 @@ module Google
                 gapic_version: ::Google::Cloud::OsConfig::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_patch_deployment.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_patch_deployment.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @os_config_service_stub.call_rpc :create_patch_deployment, request, options: options do |response, operation|
@@ -640,6 +753,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/os_config/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsConfig::V1::OsConfigService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsConfig::V1::GetPatchDeploymentRequest.new
+            #
+            #   # Call the get_patch_deployment method.
+            #   result = client.get_patch_deployment request
+            #
+            #   # The returned object is of type Google::Cloud::OsConfig::V1::PatchDeployment.
+            #   p result
+            #
             def get_patch_deployment request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -657,16 +785,20 @@ module Google
                 gapic_version: ::Google::Cloud::OsConfig::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_patch_deployment.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_patch_deployment.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @os_config_service_stub.call_rpc :get_patch_deployment, request, options: options do |response, operation|
@@ -713,6 +845,25 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/os_config/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsConfig::V1::OsConfigService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsConfig::V1::ListPatchDeploymentsRequest.new
+            #
+            #   # Call the list_patch_deployments method.
+            #   result = client.list_patch_deployments request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::OsConfig::V1::PatchDeployment.
+            #     p item
+            #   end
+            #
             def list_patch_deployments request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -730,16 +881,20 @@ module Google
                 gapic_version: ::Google::Cloud::OsConfig::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_patch_deployments.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_patch_deployments.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @os_config_service_stub.call_rpc :list_patch_deployments, request, options: options do |response, operation|
@@ -781,6 +936,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/os_config/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsConfig::V1::OsConfigService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsConfig::V1::DeletePatchDeploymentRequest.new
+            #
+            #   # Call the delete_patch_deployment method.
+            #   result = client.delete_patch_deployment request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_patch_deployment request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -798,19 +968,285 @@ module Google
                 gapic_version: ::Google::Cloud::OsConfig::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_patch_deployment.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_patch_deployment.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @os_config_service_stub.call_rpc :delete_patch_deployment, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Update an OS Config patch deployment.
+            #
+            # @overload update_patch_deployment(request, options = nil)
+            #   Pass arguments to `update_patch_deployment` via a request object, either of type
+            #   {::Google::Cloud::OsConfig::V1::UpdatePatchDeploymentRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::OsConfig::V1::UpdatePatchDeploymentRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_patch_deployment(patch_deployment: nil, update_mask: nil)
+            #   Pass arguments to `update_patch_deployment` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param patch_deployment [::Google::Cloud::OsConfig::V1::PatchDeployment, ::Hash]
+            #     Required. The patch deployment to Update.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Optional. Field mask that controls which fields of the patch deployment
+            #     should be updated.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::OsConfig::V1::PatchDeployment]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::OsConfig::V1::PatchDeployment]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/os_config/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsConfig::V1::OsConfigService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsConfig::V1::UpdatePatchDeploymentRequest.new
+            #
+            #   # Call the update_patch_deployment method.
+            #   result = client.update_patch_deployment request
+            #
+            #   # The returned object is of type Google::Cloud::OsConfig::V1::PatchDeployment.
+            #   p result
+            #
+            def update_patch_deployment request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OsConfig::V1::UpdatePatchDeploymentRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_patch_deployment.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::OsConfig::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.patch_deployment&.name
+                header_params["patch_deployment.name"] = request.patch_deployment.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_patch_deployment.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_patch_deployment.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @os_config_service_stub.call_rpc :update_patch_deployment, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Change state of patch deployment to "PAUSED".
+            # Patch deployment in paused state doesn't generate patch jobs.
+            #
+            # @overload pause_patch_deployment(request, options = nil)
+            #   Pass arguments to `pause_patch_deployment` via a request object, either of type
+            #   {::Google::Cloud::OsConfig::V1::PausePatchDeploymentRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::OsConfig::V1::PausePatchDeploymentRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload pause_patch_deployment(name: nil)
+            #   Pass arguments to `pause_patch_deployment` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The resource name of the patch deployment in the form
+            #     `projects/*/patchDeployments/*`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::OsConfig::V1::PatchDeployment]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::OsConfig::V1::PatchDeployment]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/os_config/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsConfig::V1::OsConfigService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsConfig::V1::PausePatchDeploymentRequest.new
+            #
+            #   # Call the pause_patch_deployment method.
+            #   result = client.pause_patch_deployment request
+            #
+            #   # The returned object is of type Google::Cloud::OsConfig::V1::PatchDeployment.
+            #   p result
+            #
+            def pause_patch_deployment request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OsConfig::V1::PausePatchDeploymentRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.pause_patch_deployment.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::OsConfig::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.pause_patch_deployment.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.pause_patch_deployment.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @os_config_service_stub.call_rpc :pause_patch_deployment, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Change state of patch deployment back to "ACTIVE".
+            # Patch deployment in active state continues to generate patch jobs.
+            #
+            # @overload resume_patch_deployment(request, options = nil)
+            #   Pass arguments to `resume_patch_deployment` via a request object, either of type
+            #   {::Google::Cloud::OsConfig::V1::ResumePatchDeploymentRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::OsConfig::V1::ResumePatchDeploymentRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload resume_patch_deployment(name: nil)
+            #   Pass arguments to `resume_patch_deployment` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The resource name of the patch deployment in the form
+            #     `projects/*/patchDeployments/*`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::OsConfig::V1::PatchDeployment]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::OsConfig::V1::PatchDeployment]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/os_config/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsConfig::V1::OsConfigService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsConfig::V1::ResumePatchDeploymentRequest.new
+            #
+            #   # Call the resume_patch_deployment method.
+            #   result = client.resume_patch_deployment request
+            #
+            #   # The returned object is of type Google::Cloud::OsConfig::V1::PatchDeployment.
+            #   p result
+            #
+            def resume_patch_deployment request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OsConfig::V1::ResumePatchDeploymentRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.resume_patch_deployment.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::OsConfig::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.resume_patch_deployment.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.resume_patch_deployment.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @os_config_service_stub.call_rpc :resume_patch_deployment, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -831,22 +1267,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for execute_patch_job
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # execute_patch_job to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::OsConfig::V1::OsConfigService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.execute_patch_job.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::OsConfig::V1::OsConfigService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.execute_patch_job.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::OsConfig::V1::OsConfigService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.execute_patch_job.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::OsConfig::V1::OsConfigService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.execute_patch_job.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
@@ -857,9 +1292,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -999,6 +1434,21 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_patch_deployment
+                ##
+                # RPC-specific configuration for `update_patch_deployment`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_patch_deployment
+                ##
+                # RPC-specific configuration for `pause_patch_deployment`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :pause_patch_deployment
+                ##
+                # RPC-specific configuration for `resume_patch_deployment`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :resume_patch_deployment
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -1020,6 +1470,12 @@ module Google
                   @list_patch_deployments = ::Gapic::Config::Method.new list_patch_deployments_config
                   delete_patch_deployment_config = parent_rpcs.delete_patch_deployment if parent_rpcs.respond_to? :delete_patch_deployment
                   @delete_patch_deployment = ::Gapic::Config::Method.new delete_patch_deployment_config
+                  update_patch_deployment_config = parent_rpcs.update_patch_deployment if parent_rpcs.respond_to? :update_patch_deployment
+                  @update_patch_deployment = ::Gapic::Config::Method.new update_patch_deployment_config
+                  pause_patch_deployment_config = parent_rpcs.pause_patch_deployment if parent_rpcs.respond_to? :pause_patch_deployment
+                  @pause_patch_deployment = ::Gapic::Config::Method.new pause_patch_deployment_config
+                  resume_patch_deployment_config = parent_rpcs.resume_patch_deployment if parent_rpcs.respond_to? :resume_patch_deployment
+                  @resume_patch_deployment = ::Gapic::Config::Method.new resume_patch_deployment_config
 
                   yield self if block_given?
                 end

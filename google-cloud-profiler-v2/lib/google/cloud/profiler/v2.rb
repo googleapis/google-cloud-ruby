@@ -23,10 +23,17 @@ module Google
   module Cloud
     module Profiler
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
+      #
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/profiler/v2"
       #     client = ::Google::Cloud::Profiler::V2::ProfilerService::Client.new
+      #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/profiler/v2"
+      #     client = ::Google::Cloud::Profiler::V2::ProfilerService::Rest::Client.new
       #
       module V2
       end

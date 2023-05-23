@@ -8,10 +8,12 @@ require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/longrunning/operations_pb'
+require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/protobuf/wrappers_pb'
 require 'google/type/dayofweek_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/metastore/v1beta/metastore.proto", :syntax => :proto3) do
     add_message "google.cloud.metastore.v1beta.Service" do
@@ -31,6 +33,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :uid, :string, 16
       optional :metadata_management_activity, :message, 17, "google.cloud.metastore.v1beta.MetadataManagementActivity"
       optional :release_channel, :enum, 19, "google.cloud.metastore.v1beta.Service.ReleaseChannel"
+      optional :encryption_config, :message, 20, "google.cloud.metastore.v1beta.EncryptionConfig"
+      optional :network_config, :message, 21, "google.cloud.metastore.v1beta.NetworkConfig"
+      optional :database_type, :enum, 22, "google.cloud.metastore.v1beta.Service.DatabaseType"
+      optional :telemetry_config, :message, 23, "google.cloud.metastore.v1beta.TelemetryConfig"
+      optional :scaling_config, :message, 24, "google.cloud.metastore.v1beta.ScalingConfig"
       oneof :metastore_config do
         optional :hive_metastore_config, :message, 5, "google.cloud.metastore.v1beta.HiveMetastoreConfig"
       end
@@ -55,11 +62,23 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :CANARY, 1
       value :STABLE, 2
     end
+    add_enum "google.cloud.metastore.v1beta.Service.DatabaseType" do
+      value :DATABASE_TYPE_UNSPECIFIED, 0
+      value :MYSQL, 1
+      value :SPANNER, 2
+    end
     add_message "google.cloud.metastore.v1beta.MetadataIntegration" do
       optional :data_catalog_config, :message, 1, "google.cloud.metastore.v1beta.DataCatalogConfig"
+      optional :dataplex_config, :message, 2, "google.cloud.metastore.v1beta.DataplexConfig"
     end
     add_message "google.cloud.metastore.v1beta.DataCatalogConfig" do
       optional :enabled, :bool, 2
+    end
+    add_message "google.cloud.metastore.v1beta.DataplexConfig" do
+      map :lake_resources, :string, :message, 1, "google.cloud.metastore.v1beta.Lake"
+    end
+    add_message "google.cloud.metastore.v1beta.Lake" do
+      optional :name, :string, 1
     end
     add_message "google.cloud.metastore.v1beta.MaintenanceWindow" do
       optional :hour_of_day, :message, 1, "google.protobuf.Int32Value"
@@ -69,6 +88,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :version, :string, 1
       map :config_overrides, :string, :string, 2
       optional :kerberos_config, :message, 3, "google.cloud.metastore.v1beta.KerberosConfig"
+      optional :endpoint_protocol, :enum, 4, "google.cloud.metastore.v1beta.HiveMetastoreConfig.EndpointProtocol"
+      map :auxiliary_versions, :string, :message, 5, "google.cloud.metastore.v1beta.AuxiliaryVersionConfig"
+    end
+    add_enum "google.cloud.metastore.v1beta.HiveMetastoreConfig.EndpointProtocol" do
+      value :ENDPOINT_PROTOCOL_UNSPECIFIED, 0
+      value :THRIFT, 1
+      value :GRPC, 2
     end
     add_message "google.cloud.metastore.v1beta.KerberosConfig" do
       optional :keytab, :message, 1, "google.cloud.metastore.v1beta.Secret"
@@ -80,6 +106,32 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :cloud_secret, :string, 2
       end
     end
+    add_message "google.cloud.metastore.v1beta.EncryptionConfig" do
+      optional :kms_key, :string, 1
+    end
+    add_message "google.cloud.metastore.v1beta.AuxiliaryVersionConfig" do
+      optional :version, :string, 1
+      map :config_overrides, :string, :string, 2
+      optional :network_config, :message, 3, "google.cloud.metastore.v1beta.NetworkConfig"
+    end
+    add_message "google.cloud.metastore.v1beta.NetworkConfig" do
+      repeated :consumers, :message, 1, "google.cloud.metastore.v1beta.NetworkConfig.Consumer"
+      optional :custom_routes_enabled, :bool, 2
+    end
+    add_message "google.cloud.metastore.v1beta.NetworkConfig.Consumer" do
+      optional :endpoint_uri, :string, 3
+      oneof :vpc_resource do
+        optional :subnetwork, :string, 1
+      end
+    end
+    add_message "google.cloud.metastore.v1beta.TelemetryConfig" do
+      optional :log_format, :enum, 1, "google.cloud.metastore.v1beta.TelemetryConfig.LogFormat"
+    end
+    add_enum "google.cloud.metastore.v1beta.TelemetryConfig.LogFormat" do
+      value :LOG_FORMAT_UNSPECIFIED, 0
+      value :LEGACY, 1
+      value :JSON, 2
+    end
     add_message "google.cloud.metastore.v1beta.MetadataManagementActivity" do
       repeated :metadata_exports, :message, 1, "google.cloud.metastore.v1beta.MetadataExport"
       repeated :restores, :message, 2, "google.cloud.metastore.v1beta.Restore"
@@ -89,6 +141,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :description, :string, 2
       optional :create_time, :message, 3, "google.protobuf.Timestamp"
       optional :update_time, :message, 4, "google.protobuf.Timestamp"
+      optional :end_time, :message, 7, "google.protobuf.Timestamp"
       optional :state, :enum, 5, "google.cloud.metastore.v1beta.MetadataImport.State"
       oneof :metadata do
         optional :database_dump, :message, 6, "google.cloud.metastore.v1beta.MetadataImport.DatabaseDump"
@@ -134,6 +187,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :state, :enum, 4, "google.cloud.metastore.v1beta.Backup.State"
       optional :service_revision, :message, 5, "google.cloud.metastore.v1beta.Service"
       optional :description, :string, 6
+      repeated :restoring_services, :string, 7
     end
     add_enum "google.cloud.metastore.v1beta.Backup.State" do
       value :STATE_UNSPECIFIED, 0
@@ -141,6 +195,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :DELETING, 2
       value :ACTIVE, 3
       value :FAILED, 4
+      value :RESTORING, 5
     end
     add_message "google.cloud.metastore.v1beta.Restore" do
       optional :start_time, :message, 1, "google.protobuf.Timestamp"
@@ -161,6 +216,20 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :RESTORE_TYPE_UNSPECIFIED, 0
       value :FULL, 1
       value :METADATA_ONLY, 2
+    end
+    add_message "google.cloud.metastore.v1beta.ScalingConfig" do
+      oneof :scaling_model do
+        optional :instance_size, :enum, 1, "google.cloud.metastore.v1beta.ScalingConfig.InstanceSize"
+        optional :scaling_factor, :float, 2
+      end
+    end
+    add_enum "google.cloud.metastore.v1beta.ScalingConfig.InstanceSize" do
+      value :INSTANCE_SIZE_UNSPECIFIED, 0
+      value :EXTRA_SMALL, 1
+      value :SMALL, 2
+      value :MEDIUM, 3
+      value :LARGE, 4
+      value :EXTRA_LARGE, 5
     end
     add_message "google.cloud.metastore.v1beta.ListServicesRequest" do
       optional :parent, :string, 1
@@ -278,6 +347,36 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_enum "google.cloud.metastore.v1beta.DatabaseDumpSpec.Type" do
       value :TYPE_UNSPECIFIED, 0
       value :MYSQL, 1
+      value :AVRO, 2
+    end
+    add_message "google.cloud.metastore.v1beta.RemoveIamPolicyRequest" do
+      optional :resource, :string, 1
+      optional :asynchronous, :bool, 2
+    end
+    add_message "google.cloud.metastore.v1beta.RemoveIamPolicyResponse" do
+      optional :success, :bool, 1
+    end
+    add_message "google.cloud.metastore.v1beta.QueryMetadataRequest" do
+      optional :service, :string, 1
+      optional :query, :string, 2
+    end
+    add_message "google.cloud.metastore.v1beta.QueryMetadataResponse" do
+      optional :result_manifest_uri, :string, 1
+    end
+    add_message "google.cloud.metastore.v1beta.MoveTableToDatabaseRequest" do
+      optional :service, :string, 1
+      optional :table_name, :string, 2
+      optional :db_name, :string, 3
+      optional :destination_db_name, :string, 4
+    end
+    add_message "google.cloud.metastore.v1beta.MoveTableToDatabaseResponse" do
+    end
+    add_message "google.cloud.metastore.v1beta.AlterMetadataResourceLocationRequest" do
+      optional :service, :string, 1
+      optional :resource_name, :string, 2
+      optional :location_uri, :string, 3
+    end
+    add_message "google.cloud.metastore.v1beta.AlterMetadataResourceLocationResponse" do
     end
   end
 end
@@ -290,12 +389,22 @@ module Google
         Service::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.Service.State").enummodule
         Service::Tier = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.Service.Tier").enummodule
         Service::ReleaseChannel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.Service.ReleaseChannel").enummodule
+        Service::DatabaseType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.Service.DatabaseType").enummodule
         MetadataIntegration = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.MetadataIntegration").msgclass
         DataCatalogConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.DataCatalogConfig").msgclass
+        DataplexConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.DataplexConfig").msgclass
+        Lake = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.Lake").msgclass
         MaintenanceWindow = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.MaintenanceWindow").msgclass
         HiveMetastoreConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.HiveMetastoreConfig").msgclass
+        HiveMetastoreConfig::EndpointProtocol = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.HiveMetastoreConfig.EndpointProtocol").enummodule
         KerberosConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.KerberosConfig").msgclass
         Secret = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.Secret").msgclass
+        EncryptionConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.EncryptionConfig").msgclass
+        AuxiliaryVersionConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.AuxiliaryVersionConfig").msgclass
+        NetworkConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.NetworkConfig").msgclass
+        NetworkConfig::Consumer = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.NetworkConfig.Consumer").msgclass
+        TelemetryConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.TelemetryConfig").msgclass
+        TelemetryConfig::LogFormat = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.TelemetryConfig.LogFormat").enummodule
         MetadataManagementActivity = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.MetadataManagementActivity").msgclass
         MetadataImport = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.MetadataImport").msgclass
         MetadataImport::DatabaseDump = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.MetadataImport.DatabaseDump").msgclass
@@ -308,6 +417,8 @@ module Google
         Restore = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.Restore").msgclass
         Restore::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.Restore.State").enummodule
         Restore::RestoreType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.Restore.RestoreType").enummodule
+        ScalingConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.ScalingConfig").msgclass
+        ScalingConfig::InstanceSize = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.ScalingConfig.InstanceSize").enummodule
         ListServicesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.ListServicesRequest").msgclass
         ListServicesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.ListServicesResponse").msgclass
         GetServiceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.GetServiceRequest").msgclass
@@ -331,6 +442,14 @@ module Google
         LocationMetadata::HiveMetastoreVersion = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.LocationMetadata.HiveMetastoreVersion").msgclass
         DatabaseDumpSpec = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.DatabaseDumpSpec").msgclass
         DatabaseDumpSpec::Type = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.DatabaseDumpSpec.Type").enummodule
+        RemoveIamPolicyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.RemoveIamPolicyRequest").msgclass
+        RemoveIamPolicyResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.RemoveIamPolicyResponse").msgclass
+        QueryMetadataRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.QueryMetadataRequest").msgclass
+        QueryMetadataResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.QueryMetadataResponse").msgclass
+        MoveTableToDatabaseRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.MoveTableToDatabaseRequest").msgclass
+        MoveTableToDatabaseResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.MoveTableToDatabaseResponse").msgclass
+        AlterMetadataResourceLocationRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.AlterMetadataResourceLocationRequest").msgclass
+        AlterMetadataResourceLocationResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.metastore.v1beta.AlterMetadataResourceLocationResponse").msgclass
       end
     end
   end

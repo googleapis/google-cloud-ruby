@@ -6,9 +6,11 @@ require 'google/protobuf'
 require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
+require 'google/api/resource_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/accessapproval/v1/accessapproval.proto", :syntax => :proto3) do
     add_message "google.cloud.accessapproval.v1.AccessLocations" do
@@ -24,13 +26,26 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :CUSTOMER_INITIATED_SUPPORT, 1
       value :GOOGLE_INITIATED_SERVICE, 2
       value :GOOGLE_INITIATED_REVIEW, 3
+      value :THIRD_PARTY_DATA_REQUEST, 4
+      value :GOOGLE_RESPONSE_TO_PRODUCTION_ALERT, 5
+    end
+    add_message "google.cloud.accessapproval.v1.SignatureInfo" do
+      optional :signature, :bytes, 1
+      oneof :verification_info do
+        optional :google_public_key_pem, :string, 2
+        optional :customer_kms_key_version, :string, 3
+      end
     end
     add_message "google.cloud.accessapproval.v1.ApproveDecision" do
       optional :approve_time, :message, 1, "google.protobuf.Timestamp"
       optional :expire_time, :message, 2, "google.protobuf.Timestamp"
+      optional :invalidate_time, :message, 3, "google.protobuf.Timestamp"
+      optional :signature_info, :message, 4, "google.cloud.accessapproval.v1.SignatureInfo"
+      optional :auto_approved, :bool, 5
     end
     add_message "google.cloud.accessapproval.v1.DismissDecision" do
       optional :dismiss_time, :message, 1, "google.protobuf.Timestamp"
+      optional :implicit, :bool, 2
     end
     add_message "google.cloud.accessapproval.v1.ResourceProperties" do
       optional :excludes_descendants, :bool, 1
@@ -57,6 +72,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :notification_emails, :string, 2
       repeated :enrolled_services, :message, 3, "google.cloud.accessapproval.v1.EnrolledService"
       optional :enrolled_ancestor, :bool, 4
+      optional :active_key_version, :string, 6
+      optional :ancestor_has_active_key_version, :bool, 7
+      optional :invalid_key_version, :bool, 8
+    end
+    add_message "google.cloud.accessapproval.v1.AccessApprovalServiceAccount" do
+      optional :name, :string, 1
+      optional :account_email, :string, 2
     end
     add_message "google.cloud.accessapproval.v1.ListApprovalRequestsMessage" do
       optional :parent, :string, 1
@@ -78,6 +100,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.accessapproval.v1.DismissApprovalRequestMessage" do
       optional :name, :string, 1
     end
+    add_message "google.cloud.accessapproval.v1.InvalidateApprovalRequestMessage" do
+      optional :name, :string, 1
+    end
     add_message "google.cloud.accessapproval.v1.GetAccessApprovalSettingsMessage" do
       optional :name, :string, 1
     end
@@ -86,6 +111,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :update_mask, :message, 2, "google.protobuf.FieldMask"
     end
     add_message "google.cloud.accessapproval.v1.DeleteAccessApprovalSettingsMessage" do
+      optional :name, :string, 1
+    end
+    add_message "google.cloud.accessapproval.v1.GetAccessApprovalServiceAccountMessage" do
       optional :name, :string, 1
     end
     add_enum "google.cloud.accessapproval.v1.EnrollmentLevel" do
@@ -102,20 +130,24 @@ module Google
         AccessLocations = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.accessapproval.v1.AccessLocations").msgclass
         AccessReason = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.accessapproval.v1.AccessReason").msgclass
         AccessReason::Type = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.accessapproval.v1.AccessReason.Type").enummodule
+        SignatureInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.accessapproval.v1.SignatureInfo").msgclass
         ApproveDecision = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.accessapproval.v1.ApproveDecision").msgclass
         DismissDecision = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.accessapproval.v1.DismissDecision").msgclass
         ResourceProperties = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.accessapproval.v1.ResourceProperties").msgclass
         ApprovalRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.accessapproval.v1.ApprovalRequest").msgclass
         EnrolledService = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.accessapproval.v1.EnrolledService").msgclass
         AccessApprovalSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.accessapproval.v1.AccessApprovalSettings").msgclass
+        AccessApprovalServiceAccount = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.accessapproval.v1.AccessApprovalServiceAccount").msgclass
         ListApprovalRequestsMessage = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.accessapproval.v1.ListApprovalRequestsMessage").msgclass
         ListApprovalRequestsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.accessapproval.v1.ListApprovalRequestsResponse").msgclass
         GetApprovalRequestMessage = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.accessapproval.v1.GetApprovalRequestMessage").msgclass
         ApproveApprovalRequestMessage = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.accessapproval.v1.ApproveApprovalRequestMessage").msgclass
         DismissApprovalRequestMessage = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.accessapproval.v1.DismissApprovalRequestMessage").msgclass
+        InvalidateApprovalRequestMessage = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.accessapproval.v1.InvalidateApprovalRequestMessage").msgclass
         GetAccessApprovalSettingsMessage = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.accessapproval.v1.GetAccessApprovalSettingsMessage").msgclass
         UpdateAccessApprovalSettingsMessage = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.accessapproval.v1.UpdateAccessApprovalSettingsMessage").msgclass
         DeleteAccessApprovalSettingsMessage = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.accessapproval.v1.DeleteAccessApprovalSettingsMessage").msgclass
+        GetAccessApprovalServiceAccountMessage = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.accessapproval.v1.GetAccessApprovalServiceAccountMessage").msgclass
         EnrollmentLevel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.accessapproval.v1.EnrollmentLevel").enummodule
       end
     end

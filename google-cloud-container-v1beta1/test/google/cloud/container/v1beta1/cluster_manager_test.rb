@@ -321,8 +321,20 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
     workload_metadata_config = {}
     name = "hello world"
     upgrade_settings = {}
+    tags = {}
+    taints = {}
+    labels = {}
     linux_node_config = {}
     kubelet_config = {}
+    node_network_config = {}
+    gcfs_config = {}
+    confidential_nodes = {}
+    gvnic = {}
+    etag = "hello world"
+    fast_socket = {}
+    logging_config = {}
+    resource_labels = {}
+    windows_node_config = {}
 
     update_node_pool_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :update_node_pool, name
@@ -337,8 +349,20 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Container::V1beta1::WorkloadMetadataConfig), request["workload_metadata_config"]
       assert_equal "hello world", request["name"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Container::V1beta1::NodePool::UpgradeSettings), request["upgrade_settings"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Container::V1beta1::NetworkTags), request["tags"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Container::V1beta1::NodeTaints), request["taints"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Container::V1beta1::NodeLabels), request["labels"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Container::V1beta1::LinuxNodeConfig), request["linux_node_config"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Container::V1beta1::NodeKubeletConfig), request["kubelet_config"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Container::V1beta1::NodeNetworkConfig), request["node_network_config"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Container::V1beta1::GcfsConfig), request["gcfs_config"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Container::V1beta1::ConfidentialNodes), request["confidential_nodes"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Container::V1beta1::VirtualNIC), request["gvnic"]
+      assert_equal "hello world", request["etag"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Container::V1beta1::FastSocket), request["fast_socket"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Container::V1beta1::NodePoolLoggingConfig), request["logging_config"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Container::V1beta1::ResourceLabels), request["resource_labels"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Container::V1beta1::WindowsNodeConfig), request["windows_node_config"]
       refute_nil options
     end
 
@@ -349,31 +373,31 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
       end
 
       # Use hash object
-      client.update_node_pool({ project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, node_version: node_version, image_type: image_type, locations: locations, workload_metadata_config: workload_metadata_config, name: name, upgrade_settings: upgrade_settings, linux_node_config: linux_node_config, kubelet_config: kubelet_config }) do |response, operation|
+      client.update_node_pool({ project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, node_version: node_version, image_type: image_type, locations: locations, workload_metadata_config: workload_metadata_config, name: name, upgrade_settings: upgrade_settings, tags: tags, taints: taints, labels: labels, linux_node_config: linux_node_config, kubelet_config: kubelet_config, node_network_config: node_network_config, gcfs_config: gcfs_config, confidential_nodes: confidential_nodes, gvnic: gvnic, etag: etag, fast_socket: fast_socket, logging_config: logging_config, resource_labels: resource_labels, windows_node_config: windows_node_config }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.update_node_pool project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, node_version: node_version, image_type: image_type, locations: locations, workload_metadata_config: workload_metadata_config, name: name, upgrade_settings: upgrade_settings, linux_node_config: linux_node_config, kubelet_config: kubelet_config do |response, operation|
+      client.update_node_pool project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, node_version: node_version, image_type: image_type, locations: locations, workload_metadata_config: workload_metadata_config, name: name, upgrade_settings: upgrade_settings, tags: tags, taints: taints, labels: labels, linux_node_config: linux_node_config, kubelet_config: kubelet_config, node_network_config: node_network_config, gcfs_config: gcfs_config, confidential_nodes: confidential_nodes, gvnic: gvnic, etag: etag, fast_socket: fast_socket, logging_config: logging_config, resource_labels: resource_labels, windows_node_config: windows_node_config do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.update_node_pool ::Google::Cloud::Container::V1beta1::UpdateNodePoolRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, node_version: node_version, image_type: image_type, locations: locations, workload_metadata_config: workload_metadata_config, name: name, upgrade_settings: upgrade_settings, linux_node_config: linux_node_config, kubelet_config: kubelet_config) do |response, operation|
+      client.update_node_pool ::Google::Cloud::Container::V1beta1::UpdateNodePoolRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, node_version: node_version, image_type: image_type, locations: locations, workload_metadata_config: workload_metadata_config, name: name, upgrade_settings: upgrade_settings, tags: tags, taints: taints, labels: labels, linux_node_config: linux_node_config, kubelet_config: kubelet_config, node_network_config: node_network_config, gcfs_config: gcfs_config, confidential_nodes: confidential_nodes, gvnic: gvnic, etag: etag, fast_socket: fast_socket, logging_config: logging_config, resource_labels: resource_labels, windows_node_config: windows_node_config) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.update_node_pool({ project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, node_version: node_version, image_type: image_type, locations: locations, workload_metadata_config: workload_metadata_config, name: name, upgrade_settings: upgrade_settings, linux_node_config: linux_node_config, kubelet_config: kubelet_config }, grpc_options) do |response, operation|
+      client.update_node_pool({ project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, node_version: node_version, image_type: image_type, locations: locations, workload_metadata_config: workload_metadata_config, name: name, upgrade_settings: upgrade_settings, tags: tags, taints: taints, labels: labels, linux_node_config: linux_node_config, kubelet_config: kubelet_config, node_network_config: node_network_config, gcfs_config: gcfs_config, confidential_nodes: confidential_nodes, gvnic: gvnic, etag: etag, fast_socket: fast_socket, logging_config: logging_config, resource_labels: resource_labels, windows_node_config: windows_node_config }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.update_node_pool(::Google::Cloud::Container::V1beta1::UpdateNodePoolRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, node_version: node_version, image_type: image_type, locations: locations, workload_metadata_config: workload_metadata_config, name: name, upgrade_settings: upgrade_settings, linux_node_config: linux_node_config, kubelet_config: kubelet_config), grpc_options) do |response, operation|
+      client.update_node_pool(::Google::Cloud::Container::V1beta1::UpdateNodePoolRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, node_version: node_version, image_type: image_type, locations: locations, workload_metadata_config: workload_metadata_config, name: name, upgrade_settings: upgrade_settings, tags: tags, taints: taints, labels: labels, linux_node_config: linux_node_config, kubelet_config: kubelet_config, node_network_config: node_network_config, gcfs_config: gcfs_config, confidential_nodes: confidential_nodes, gvnic: gvnic, etag: etag, fast_socket: fast_socket, logging_config: logging_config, resource_labels: resource_labels, windows_node_config: windows_node_config), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1165,6 +1189,64 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
     end
   end
 
+  def test_get_json_web_keys
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Container::V1beta1::GetJSONWebKeysResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+
+    get_json_web_keys_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_json_web_keys, name
+      assert_kind_of ::Google::Cloud::Container::V1beta1::GetJSONWebKeysRequest, request
+      assert_equal "hello world", request["parent"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_json_web_keys_client_stub do
+      # Create client
+      client = ::Google::Cloud::Container::V1beta1::ClusterManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_json_web_keys({ parent: parent }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_json_web_keys parent: parent do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_json_web_keys ::Google::Cloud::Container::V1beta1::GetJSONWebKeysRequest.new(parent: parent) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_json_web_keys({ parent: parent }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_json_web_keys(::Google::Cloud::Container::V1beta1::GetJSONWebKeysRequest.new(parent: parent), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_json_web_keys_client_stub.call_rpc_count
+    end
+  end
+
   def test_list_node_pools
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::Container::V1beta1::ListNodePoolsResponse.new
@@ -1226,64 +1308,6 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
 
       # Verify method calls
       assert_equal 5, list_node_pools_client_stub.call_rpc_count
-    end
-  end
-
-  def test_get_json_web_keys
-    # Create GRPC objects.
-    grpc_response = ::Google::Cloud::Container::V1beta1::GetJSONWebKeysResponse.new
-    grpc_operation = GRPC::ActiveCall::Operation.new nil
-    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    grpc_options = {}
-
-    # Create request parameters for a unary method.
-    parent = "hello world"
-
-    get_json_web_keys_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
-      assert_equal :get_json_web_keys, name
-      assert_kind_of ::Google::Cloud::Container::V1beta1::GetJSONWebKeysRequest, request
-      assert_equal "hello world", request["parent"]
-      refute_nil options
-    end
-
-    Gapic::ServiceStub.stub :new, get_json_web_keys_client_stub do
-      # Create client
-      client = ::Google::Cloud::Container::V1beta1::ClusterManager::Client.new do |config|
-        config.credentials = grpc_channel
-      end
-
-      # Use hash object
-      client.get_json_web_keys({ parent: parent }) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use named arguments
-      client.get_json_web_keys parent: parent do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object
-      client.get_json_web_keys ::Google::Cloud::Container::V1beta1::GetJSONWebKeysRequest.new(parent: parent) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use hash object with options
-      client.get_json_web_keys({ parent: parent }, grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object with options
-      client.get_json_web_keys(::Google::Cloud::Container::V1beta1::GetJSONWebKeysRequest.new(parent: parent), grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Verify method calls
-      assert_equal 5, get_json_web_keys_client_stub.call_rpc_count
     end
   end
 
@@ -1485,6 +1509,64 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
     end
   end
 
+  def test_complete_node_pool_upgrade
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    complete_node_pool_upgrade_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :complete_node_pool_upgrade, name
+      assert_kind_of ::Google::Cloud::Container::V1beta1::CompleteNodePoolUpgradeRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, complete_node_pool_upgrade_client_stub do
+      # Create client
+      client = ::Google::Cloud::Container::V1beta1::ClusterManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.complete_node_pool_upgrade({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.complete_node_pool_upgrade name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.complete_node_pool_upgrade ::Google::Cloud::Container::V1beta1::CompleteNodePoolUpgradeRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.complete_node_pool_upgrade({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.complete_node_pool_upgrade(::Google::Cloud::Container::V1beta1::CompleteNodePoolUpgradeRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, complete_node_pool_upgrade_client_stub.call_rpc_count
+    end
+  end
+
   def test_rollback_node_pool_upgrade
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::Container::V1beta1::Operation.new
@@ -1498,6 +1580,7 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
     cluster_id = "hello world"
     node_pool_id = "hello world"
     name = "hello world"
+    respect_pdb = true
 
     rollback_node_pool_upgrade_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :rollback_node_pool_upgrade, name
@@ -1507,6 +1590,7 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
       assert_equal "hello world", request["cluster_id"]
       assert_equal "hello world", request["node_pool_id"]
       assert_equal "hello world", request["name"]
+      assert_equal true, request["respect_pdb"]
       refute_nil options
     end
 
@@ -1517,31 +1601,31 @@ class ::Google::Cloud::Container::V1beta1::ClusterManager::ClientTest < Minitest
       end
 
       # Use hash object
-      client.rollback_node_pool_upgrade({ project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, name: name }) do |response, operation|
+      client.rollback_node_pool_upgrade({ project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, name: name, respect_pdb: respect_pdb }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.rollback_node_pool_upgrade project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, name: name do |response, operation|
+      client.rollback_node_pool_upgrade project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, name: name, respect_pdb: respect_pdb do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.rollback_node_pool_upgrade ::Google::Cloud::Container::V1beta1::RollbackNodePoolUpgradeRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, name: name) do |response, operation|
+      client.rollback_node_pool_upgrade ::Google::Cloud::Container::V1beta1::RollbackNodePoolUpgradeRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, name: name, respect_pdb: respect_pdb) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.rollback_node_pool_upgrade({ project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, name: name }, grpc_options) do |response, operation|
+      client.rollback_node_pool_upgrade({ project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, name: name, respect_pdb: respect_pdb }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.rollback_node_pool_upgrade(::Google::Cloud::Container::V1beta1::RollbackNodePoolUpgradeRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, name: name), grpc_options) do |response, operation|
+      client.rollback_node_pool_upgrade(::Google::Cloud::Container::V1beta1::RollbackNodePoolUpgradeRequest.new(project_id: project_id, zone: zone, cluster_id: cluster_id, node_pool_id: node_pool_id, name: name, respect_pdb: respect_pdb), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

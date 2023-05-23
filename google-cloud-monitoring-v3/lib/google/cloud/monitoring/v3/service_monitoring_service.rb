@@ -36,7 +36,7 @@ module Google
         # `Service`'s monitored resources, its Service-Level Objectives, and a taxonomy
         # of categorized Health Metrics.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/monitoring/v3/service_monitoring_service"
         #     client = ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new

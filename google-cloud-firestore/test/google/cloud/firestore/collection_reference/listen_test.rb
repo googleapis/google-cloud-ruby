@@ -400,7 +400,7 @@ describe Google::Cloud::Firestore::CollectionReference, :listen, :watch_firestor
         errors_2 << error
       end
 
-      wait_until { query_snapshots.count == 1 }
+      wait_until { query_snapshots.count == 1 && errors_1.count == 1 && errors_2.count == 1 }
 
       listener.stop
     end

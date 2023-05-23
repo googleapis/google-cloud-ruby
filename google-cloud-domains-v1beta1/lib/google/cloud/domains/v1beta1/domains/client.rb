@@ -41,13 +41,12 @@ module Google
             # See {::Google::Cloud::Domains::V1beta1::Domains::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all Domains clients:
-            #
-            #     ::Google::Cloud::Domains::V1beta1::Domains::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all Domains clients
+            #   ::Google::Cloud::Domains::V1beta1::Domains::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -94,19 +93,15 @@ module Google
             ##
             # Create a new Domains client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new Domains client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Domains::V1beta1::Domains::Client.new
             #
-            #     client = ::Google::Cloud::Domains::V1beta1::Domains::Client.new
-            #
-            # To create a new Domains client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Domains::V1beta1::Domains::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Domains::V1beta1::Domains::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Domains client.
             # @yieldparam config [Client::Configuration]
@@ -126,14 +121,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -141,6 +135,7 @@ module Google
 
               @operations_client = Operations.new do |config|
                 config.credentials = credentials
+                config.quota_project = @quota_project_id
                 config.endpoint = @config.endpoint
               end
 
@@ -197,6 +192,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/domains/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Domains::V1beta1::Domains::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Domains::V1beta1::SearchDomainsRequest.new
+            #
+            #   # Call the search_domains method.
+            #   result = client.search_domains request
+            #
+            #   # The returned object is of type Google::Cloud::Domains::V1beta1::SearchDomainsResponse.
+            #   p result
+            #
             def search_domains request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -214,16 +224,20 @@ module Google
                 gapic_version: ::Google::Cloud::Domains::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "location" => request.location
-              }
+              header_params = {}
+              if request.location
+                header_params["location"] = request.location
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.search_domains.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.search_domains.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @domains_stub.call_rpc :search_domains, request, options: options do |response, operation|
@@ -266,6 +280,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/domains/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Domains::V1beta1::Domains::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Domains::V1beta1::RetrieveRegisterParametersRequest.new
+            #
+            #   # Call the retrieve_register_parameters method.
+            #   result = client.retrieve_register_parameters request
+            #
+            #   # The returned object is of type Google::Cloud::Domains::V1beta1::RetrieveRegisterParametersResponse.
+            #   p result
+            #
             def retrieve_register_parameters request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -283,16 +312,20 @@ module Google
                 gapic_version: ::Google::Cloud::Domains::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "location" => request.location
-              }
+              header_params = {}
+              if request.location
+                header_params["location"] = request.location
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.retrieve_register_parameters.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.retrieve_register_parameters.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @domains_stub.call_rpc :retrieve_register_parameters, request, options: options do |response, operation|
@@ -343,14 +376,14 @@ module Google
             #     `RetrieveRegisterParameters` to see the notices that need acknowledgement.
             #   @param contact_notices [::Array<::Google::Cloud::Domains::V1beta1::ContactNotice>]
             #     The list of contact notices that the caller acknowledges. The notices
-            #     required here depend on the values specified in
+            #     needed here depend on the values specified in
             #     `registration.contact_settings`.
             #   @param yearly_price [::Google::Type::Money, ::Hash]
             #     Required. Yearly price to register or renew the domain.
             #     The value that should be put here can be obtained from
             #     RetrieveRegisterParameters or SearchDomains calls.
             #   @param validate_only [::Boolean]
-            #     When true, only validation will be performed, without actually registering
+            #     When true, only validation is performed, without actually registering
             #     the domain. Follows:
             #     https://cloud.google.com/apis/design/design_patterns#request_validation
             #
@@ -361,6 +394,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/domains/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Domains::V1beta1::Domains::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Domains::V1beta1::RegisterDomainRequest.new
+            #
+            #   # Call the register_domain method.
+            #   result = client.register_domain request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
             #
             def register_domain request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -379,19 +434,250 @@ module Google
                 gapic_version: ::Google::Cloud::Domains::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.register_domain.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.register_domain.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @domains_stub.call_rpc :register_domain, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets parameters needed to transfer a domain name from another registrar to
+            # Cloud Domains. For domains managed by Google Domains, transferring to Cloud
+            # Domains is not supported.
+            #
+            #
+            # Use the returned values to call `TransferDomain`.
+            #
+            # @overload retrieve_transfer_parameters(request, options = nil)
+            #   Pass arguments to `retrieve_transfer_parameters` via a request object, either of type
+            #   {::Google::Cloud::Domains::V1beta1::RetrieveTransferParametersRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Domains::V1beta1::RetrieveTransferParametersRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload retrieve_transfer_parameters(domain_name: nil, location: nil)
+            #   Pass arguments to `retrieve_transfer_parameters` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param domain_name [::String]
+            #     Required. The domain name. Unicode domain names must be expressed in Punycode format.
+            #   @param location [::String]
+            #     Required. The location. Must be in the format `projects/*/locations/*`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Domains::V1beta1::RetrieveTransferParametersResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Domains::V1beta1::RetrieveTransferParametersResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/domains/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Domains::V1beta1::Domains::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Domains::V1beta1::RetrieveTransferParametersRequest.new
+            #
+            #   # Call the retrieve_transfer_parameters method.
+            #   result = client.retrieve_transfer_parameters request
+            #
+            #   # The returned object is of type Google::Cloud::Domains::V1beta1::RetrieveTransferParametersResponse.
+            #   p result
+            #
+            def retrieve_transfer_parameters request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Domains::V1beta1::RetrieveTransferParametersRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.retrieve_transfer_parameters.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Domains::V1beta1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.location
+                header_params["location"] = request.location
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.retrieve_transfer_parameters.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.retrieve_transfer_parameters.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @domains_stub.call_rpc :retrieve_transfer_parameters, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Transfers a domain name from another registrar to Cloud Domains.  For
+            # domains managed by Google Domains, transferring to Cloud Domains is not
+            # supported.
+            #
+            #
+            # Before calling this method, go to the domain's current registrar to unlock
+            # the domain for transfer and retrieve the domain's transfer authorization
+            # code. Then call `RetrieveTransferParameters` to confirm that the domain is
+            # unlocked and to get values needed to build a call to this method.
+            #
+            # A successful call creates a `Registration` resource in state
+            # `TRANSFER_PENDING`. It can take several days to complete the transfer
+            # process. The registrant can often speed up this process by approving the
+            # transfer through the current registrar, either by clicking a link in an
+            # email from the registrar or by visiting the registrar's website.
+            #
+            # A few minutes after transfer approval, the resource transitions to state
+            # `ACTIVE`, indicating that the transfer was successful. If the transfer is
+            # rejected or the request expires without being approved, the resource can
+            # end up in state `TRANSFER_FAILED`. If transfer fails, you can safely delete
+            # the resource and retry the transfer.
+            #
+            # @overload transfer_domain(request, options = nil)
+            #   Pass arguments to `transfer_domain` via a request object, either of type
+            #   {::Google::Cloud::Domains::V1beta1::TransferDomainRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Domains::V1beta1::TransferDomainRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload transfer_domain(parent: nil, registration: nil, contact_notices: nil, yearly_price: nil, authorization_code: nil, validate_only: nil)
+            #   Pass arguments to `transfer_domain` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent resource of the `Registration`. Must be in the
+            #     format `projects/*/locations/*`.
+            #   @param registration [::Google::Cloud::Domains::V1beta1::Registration, ::Hash]
+            #     Required. The complete `Registration` resource to be created.
+            #
+            #     You can leave `registration.dns_settings` unset to import the
+            #     domain's current DNS configuration from its current registrar. Use this
+            #     option only if you are sure that the domain's current DNS service
+            #     does not cease upon transfer, as is often the case for DNS services
+            #     provided for free by the registrar.
+            #   @param contact_notices [::Array<::Google::Cloud::Domains::V1beta1::ContactNotice>]
+            #     The list of contact notices that you acknowledge. The notices
+            #     needed here depend on the values specified in
+            #     `registration.contact_settings`.
+            #   @param yearly_price [::Google::Type::Money, ::Hash]
+            #     Required. Acknowledgement of the price to transfer or renew the domain for one year.
+            #     Call `RetrieveTransferParameters` to obtain the price, which you must
+            #     acknowledge.
+            #   @param authorization_code [::Google::Cloud::Domains::V1beta1::AuthorizationCode, ::Hash]
+            #     The domain's transfer authorization code. You can obtain this from the
+            #     domain's current registrar.
+            #   @param validate_only [::Boolean]
+            #     Validate the request without actually transferring the domain.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/domains/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Domains::V1beta1::Domains::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Domains::V1beta1::TransferDomainRequest.new
+            #
+            #   # Call the transfer_domain method.
+            #   result = client.transfer_domain request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def transfer_domain request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Domains::V1beta1::TransferDomainRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.transfer_domain.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Domains::V1beta1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.transfer_domain.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.transfer_domain.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @domains_stub.call_rpc :transfer_domain, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
@@ -452,6 +738,25 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/domains/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Domains::V1beta1::Domains::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Domains::V1beta1::ListRegistrationsRequest.new
+            #
+            #   # Call the list_registrations method.
+            #   result = client.list_registrations request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::Domains::V1beta1::Registration.
+            #     p item
+            #   end
+            #
             def list_registrations request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -469,16 +774,20 @@ module Google
                 gapic_version: ::Google::Cloud::Domains::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_registrations.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_registrations.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @domains_stub.call_rpc :list_registrations, request, options: options do |response, operation|
@@ -520,6 +829,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/domains/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Domains::V1beta1::Domains::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Domains::V1beta1::GetRegistrationRequest.new
+            #
+            #   # Call the get_registration method.
+            #   result = client.get_registration request
+            #
+            #   # The returned object is of type Google::Cloud::Domains::V1beta1::Registration.
+            #   p result
+            #
             def get_registration request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -537,16 +861,20 @@ module Google
                 gapic_version: ::Google::Cloud::Domains::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_registration.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_registration.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @domains_stub.call_rpc :get_registration, request, options: options do |response, operation|
@@ -584,8 +912,8 @@ module Google
             #     Fields of the `Registration` to update.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Required. The field mask describing which fields to update as a comma-separated list.
-            #     For example, if only the labels are being updated, the `update_mask` would
-            #     be `"labels"`.
+            #     For example, if only the labels are being updated, the `update_mask` is
+            #     `"labels"`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -594,6 +922,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/domains/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Domains::V1beta1::Domains::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Domains::V1beta1::UpdateRegistrationRequest.new
+            #
+            #   # Call the update_registration method.
+            #   result = client.update_registration request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
             #
             def update_registration request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -612,16 +962,20 @@ module Google
                 gapic_version: ::Google::Cloud::Domains::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "registration.name" => request.registration.name
-              }
+              header_params = {}
+              if request.registration&.name
+                header_params["registration.name"] = request.registration.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_registration.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_registration.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @domains_stub.call_rpc :update_registration, request, options: options do |response, operation|
@@ -659,7 +1013,7 @@ module Google
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Required. The field mask describing which fields to update as a comma-separated list.
             #     For example, if only the transfer lock is being updated, the `update_mask`
-            #     would be `"transfer_lock_state"`.
+            #     is `"transfer_lock_state"`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -668,6 +1022,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/domains/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Domains::V1beta1::Domains::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Domains::V1beta1::ConfigureManagementSettingsRequest.new
+            #
+            #   # Call the configure_management_settings method.
+            #   result = client.configure_management_settings request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
             #
             def configure_management_settings request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -686,16 +1062,20 @@ module Google
                 gapic_version: ::Google::Cloud::Domains::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "registration" => request.registration
-              }
+              header_params = {}
+              if request.registration
+                header_params["registration"] = request.registration
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.configure_management_settings.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.configure_management_settings.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @domains_stub.call_rpc :configure_management_settings, request, options: options do |response, operation|
@@ -733,13 +1113,13 @@ module Google
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Required. The field mask describing which fields to update as a comma-separated list.
             #     For example, if only the name servers are being updated for an existing
-            #     Custom DNS configuration, the `update_mask` would be
+            #     Custom DNS configuration, the `update_mask` is
             #     `"custom_dns.name_servers"`.
             #
             #     When changing the DNS provider from one type to another, pass the new
             #     provider's field name as part of the field mask. For example, when changing
             #     from a Google Domains DNS configuration to a Custom DNS configuration, the
-            #     `update_mask` would be `"custom_dns"`. //
+            #     `update_mask` is `"custom_dns"`. //
             #   @param validate_only [::Boolean]
             #     Validate the request without actually updating the DNS settings.
             #
@@ -750,6 +1130,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/domains/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Domains::V1beta1::Domains::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Domains::V1beta1::ConfigureDnsSettingsRequest.new
+            #
+            #   # Call the configure_dns_settings method.
+            #   result = client.configure_dns_settings request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
             #
             def configure_dns_settings request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -768,16 +1170,20 @@ module Google
                 gapic_version: ::Google::Cloud::Domains::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "registration" => request.registration
-              }
+              header_params = {}
+              if request.registration
+                header_params["registration"] = request.registration
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.configure_dns_settings.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.configure_dns_settings.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @domains_stub.call_rpc :configure_dns_settings, request, options: options do |response, operation|
@@ -816,10 +1222,10 @@ module Google
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Required. The field mask describing which fields to update as a comma-separated list.
             #     For example, if only the registrant contact is being updated, the
-            #     `update_mask` would be `"registrant_contact"`.
+            #     `update_mask` is `"registrant_contact"`.
             #   @param contact_notices [::Array<::Google::Cloud::Domains::V1beta1::ContactNotice>]
             #     The list of contact notices that the caller acknowledges. The notices
-            #     required here depend on the values specified in `contact_settings`.
+            #     needed here depend on the values specified in `contact_settings`.
             #   @param validate_only [::Boolean]
             #     Validate the request without actually updating the contact settings.
             #
@@ -830,6 +1236,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/domains/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Domains::V1beta1::Domains::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Domains::V1beta1::ConfigureContactSettingsRequest.new
+            #
+            #   # Call the configure_contact_settings method.
+            #   result = client.configure_contact_settings request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
             #
             def configure_contact_settings request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -848,16 +1276,20 @@ module Google
                 gapic_version: ::Google::Cloud::Domains::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "registration" => request.registration
-              }
+              header_params = {}
+              if request.registration
+                header_params["registration"] = request.registration
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.configure_contact_settings.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.configure_contact_settings.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @domains_stub.call_rpc :configure_contact_settings, request, options: options do |response, operation|
@@ -870,20 +1302,15 @@ module Google
             end
 
             ##
-            # Exports a `Registration` that you no longer want to use with
-            # Cloud Domains. You can continue to use the domain in
-            # [Google Domains](https://domains.google/) until it expires.
+            # Exports a `Registration` resource, such that it is no longer managed by
+            # Cloud Domains.
             #
-            # If the export is successful:
-            #
-            # * The resource's `state` becomes `EXPORTED`, meaning that it is no longer
-            # managed by Cloud Domains
-            # * Because individual users can own domains in Google Domains, the calling
-            # user becomes the domain's sole owner. Permissions for the domain are
-            # subsequently managed in Google Domains.
-            # * Without further action, the domain does not renew automatically.
-            # The new owner can set up billing in Google Domains to renew the domain
-            # if needed.
+            # When an active domain is successfully exported, you can continue to use the
+            # domain in [Google Domains](https://domains.google/) until it expires. The
+            # calling user becomes the domain's sole owner in Google Domains, and
+            # permissions for the domain are subsequently managed there. The domain does
+            # not renew automatically unless the new owner sets up billing in Google
+            # Domains.
             #
             # @overload export_registration(request, options = nil)
             #   Pass arguments to `export_registration` via a request object, either of type
@@ -912,6 +1339,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/domains/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Domains::V1beta1::Domains::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Domains::V1beta1::ExportRegistrationRequest.new
+            #
+            #   # Call the export_registration method.
+            #   result = client.export_registration request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
             def export_registration request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -929,16 +1378,20 @@ module Google
                 gapic_version: ::Google::Cloud::Domains::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.export_registration.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.export_registration.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @domains_stub.call_rpc :export_registration, request, options: options do |response, operation|
@@ -953,10 +1406,23 @@ module Google
             ##
             # Deletes a `Registration` resource.
             #
-            # This method only works on resources in one of the following states:
+            # This method works on any `Registration` resource using [Subscription or
+            # Commitment billing](/domains/pricing#billing-models), provided that the
+            # resource was created at least 1 day in the past.
+            #
+            # For `Registration` resources using
+            # [Monthly billing](/domains/pricing#billing-models), this method works if:
             #
             # * `state` is `EXPORTED` with `expire_time` in the past
             # * `state` is `REGISTRATION_FAILED`
+            # * `state` is `TRANSFER_FAILED`
+            #
+            # When an active registration is successfully deleted, you can continue to
+            # use the domain in [Google Domains](https://domains.google/) until it
+            # expires. The calling user becomes the domain's sole owner in Google
+            # Domains, and permissions for the domain are subsequently managed there. The
+            # domain does not renew automatically unless the new owner sets up billing in
+            # Google Domains.
             #
             # @overload delete_registration(request, options = nil)
             #   Pass arguments to `delete_registration` via a request object, either of type
@@ -985,6 +1451,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/domains/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Domains::V1beta1::Domains::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Domains::V1beta1::DeleteRegistrationRequest.new
+            #
+            #   # Call the delete_registration method.
+            #   result = client.delete_registration request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
             def delete_registration request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1002,16 +1490,20 @@ module Google
                 gapic_version: ::Google::Cloud::Domains::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_registration.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_registration.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @domains_stub.call_rpc :delete_registration, request, options: options do |response, operation|
@@ -1057,6 +1549,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/domains/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Domains::V1beta1::Domains::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Domains::V1beta1::RetrieveAuthorizationCodeRequest.new
+            #
+            #   # Call the retrieve_authorization_code method.
+            #   result = client.retrieve_authorization_code request
+            #
+            #   # The returned object is of type Google::Cloud::Domains::V1beta1::AuthorizationCode.
+            #   p result
+            #
             def retrieve_authorization_code request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1074,16 +1581,20 @@ module Google
                 gapic_version: ::Google::Cloud::Domains::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "registration" => request.registration
-              }
+              header_params = {}
+              if request.registration
+                header_params["registration"] = request.registration
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.retrieve_authorization_code.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.retrieve_authorization_code.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @domains_stub.call_rpc :retrieve_authorization_code, request, options: options do |response, operation|
@@ -1127,6 +1638,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/domains/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Domains::V1beta1::Domains::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Domains::V1beta1::ResetAuthorizationCodeRequest.new
+            #
+            #   # Call the reset_authorization_code method.
+            #   result = client.reset_authorization_code request
+            #
+            #   # The returned object is of type Google::Cloud::Domains::V1beta1::AuthorizationCode.
+            #   p result
+            #
             def reset_authorization_code request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1144,16 +1670,20 @@ module Google
                 gapic_version: ::Google::Cloud::Domains::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "registration" => request.registration
-              }
+              header_params = {}
+              if request.registration
+                header_params["registration"] = request.registration
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.reset_authorization_code.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.reset_authorization_code.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @domains_stub.call_rpc :reset_authorization_code, request, options: options do |response, operation|
@@ -1177,22 +1707,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for search_domains
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # search_domains to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Domains::V1beta1::Domains::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.search_domains.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Domains::V1beta1::Domains::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.search_domains.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Domains::V1beta1::Domains::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.search_domains.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Domains::V1beta1::Domains::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.search_domains.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
@@ -1203,9 +1732,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -1316,6 +1845,16 @@ module Google
                 #
                 attr_reader :register_domain
                 ##
+                # RPC-specific configuration for `retrieve_transfer_parameters`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :retrieve_transfer_parameters
+                ##
+                # RPC-specific configuration for `transfer_domain`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :transfer_domain
+                ##
                 # RPC-specific configuration for `list_registrations`
                 # @return [::Gapic::Config::Method]
                 #
@@ -1374,6 +1913,10 @@ module Google
                   @retrieve_register_parameters = ::Gapic::Config::Method.new retrieve_register_parameters_config
                   register_domain_config = parent_rpcs.register_domain if parent_rpcs.respond_to? :register_domain
                   @register_domain = ::Gapic::Config::Method.new register_domain_config
+                  retrieve_transfer_parameters_config = parent_rpcs.retrieve_transfer_parameters if parent_rpcs.respond_to? :retrieve_transfer_parameters
+                  @retrieve_transfer_parameters = ::Gapic::Config::Method.new retrieve_transfer_parameters_config
+                  transfer_domain_config = parent_rpcs.transfer_domain if parent_rpcs.respond_to? :transfer_domain
+                  @transfer_domain = ::Gapic::Config::Method.new transfer_domain_config
                   list_registrations_config = parent_rpcs.list_registrations if parent_rpcs.respond_to? :list_registrations
                   @list_registrations = ::Gapic::Config::Method.new list_registrations_config
                   get_registration_config = parent_rpcs.get_registration if parent_rpcs.respond_to? :get_registration

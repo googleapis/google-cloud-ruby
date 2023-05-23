@@ -1,5 +1,76 @@
 # Release History
 
+### 0.6.0 (2023-02-22)
+
+#### Features
+
+* Added display_name field to Glossary 
+* Support for removing the shadow text for native PDF translation 
+* Support translating only native PDF pages 
+* Support user-customized attribution flag ([#20490](https://github.com/googleapis/google-cloud-ruby/issues/20490)) 
+
+### 0.5.2 (2023-02-17)
+
+#### Bug Fixes
+
+* Fixed routing headers sent with long-running operation calls ([#20453](https://github.com/googleapis/google-cloud-ruby/issues/20453)) 
+
+### 0.5.1 (2022-12-09)
+
+#### Documentation
+
+* Minor fix to reference documentation formatting ([#19831](https://github.com/googleapis/google-cloud-ruby/issues/19831)) 
+
+### 0.5.0 (2022-07-08)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+#### Bug Fixes
+
+* Fixed a crash when making certain long-running-operations status calls ([#18441](https://github.com/googleapis/google-cloud-ruby/issues/18441)) 
+
+### 0.4.2 / 2022-01-11
+
+#### Bug Fixes
+
+* Honor quota project in auxiliary operations clients
+
+#### Documentation
+
+* Fix titles of documentation pages
+* Remove some broken images and fix outdated content in authentication documentation
+
+### 0.4.1 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
+### 0.4.0 / 2021-08-31
+
+#### Features
+
+* Support translate_document and batch_translate_document RPCs
+
+### 0.3.3 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
+### 0.3.2 / 2021-07-12
+
+#### Documentation
+
+* Clarify some language around authentication configuration
+
+### 0.3.1 / 2021-06-17
+
+#### Bug Fixes
+
+* Support future 1.x versions of gapic-common
+
 ### 0.3.0 / 2021-03-08
 
 #### Features

@@ -1,0 +1,24 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-datastream.gemspec",
+    "lib/google-cloud-datastream.rb",
+    "lib/google/cloud/datastream.rb",
+    "lib/google/cloud/datastream/version.rb",
+    "test/google/cloud/datastream/client_test.rb",
+    "test/google/cloud/datastream/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}

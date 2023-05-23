@@ -18,6 +18,7 @@ require "google/cloud/firestore/document_snapshot"
 require "google/cloud/firestore/collection_reference"
 require "google/cloud/firestore/document_listener"
 require "google/cloud/firestore/document_reference/list"
+require "google/cloud/firestore/resource_path"
 
 module Google
   module Cloud
@@ -72,6 +73,9 @@ module Google
         ##
         # Retrieves an enumerator for the collections nested under the document snapshot.
         #
+        # @param [Time] read_time Reads documents as they were at the given time.
+        #   This may not be older than 270 seconds. Optional
+        #
         # @yield [collections] The block for accessing the collections.
         # @yieldparam [CollectionReference] collection A collection reference object.
         #
@@ -90,10 +94,24 @@ module Google
         #     puts col.collection_id
         #   end
         #
-        def cols &block
+        # @example Get collection with read time
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   read_time = Time.now
+        #
+        #   # Get a document reference
+        #   nyc_ref = firestore.doc "cities/NYC"
+        #
+        #   nyc_ref.cols(read_time: read_time).each do |col|
+        #     puts col.collection_id
+        #   end
+        #
+        def cols read_time: nil, &block
           ensure_service!
-          grpc = service.list_collections path
-          cols_enum = CollectionReferenceList.from_grpc(grpc, client, path).all
+          grpc = service.list_collections path, read_time: read_time
+          cols_enum = CollectionReferenceList.from_grpc(grpc, client, path, read_time: read_time).all
           cols_enum.each(&block) if block_given?
           cols_enum
         end
@@ -458,6 +476,12 @@ module Google
         end
 
         # @!endgroup
+
+        # @private
+        def <=> other
+          return nil unless other.is_a? self.class
+          ResourcePath.from_path(path) <=> ResourcePath.from_path(other.path)
+        end
 
         ##
         # @private New DocumentReference object from a path.

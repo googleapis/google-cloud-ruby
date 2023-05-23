@@ -24,21 +24,27 @@ require "google/cloud/service_control/v1/version"
 
 require "google/cloud/service_control/v1/service_controller/credentials"
 require "google/cloud/service_control/v1/service_controller/client"
+require "google/cloud/service_control/v1/service_controller/rest"
 
 module Google
   module Cloud
     module ServiceControl
       module V1
         ##
-        # [Google Service Control API](https://cloud.google.com/service-control/overview)
+        # [Google Service Control API](/service-control/overview)
         #
         # Lets clients check and report operations against a [managed
         # service](https://cloud.google.com/service-management/reference/rpc/google.api/servicemanagement.v1#google.api.servicemanagement.v1.ManagedService).
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/service_control/v1/service_controller"
         #     client = ::Google::Cloud::ServiceControl::V1::ServiceController::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/service_control/v1/service_controller/rest"
+        #     client = ::Google::Cloud::ServiceControl::V1::ServiceController::Rest::Client.new
         #
         module ServiceController
         end

@@ -45,7 +45,19 @@ module Google
     #   * `https://www.googleapis.com/auth/devstorage.full_control`
     # @param [Integer] retries Number of times to retry requests on server
     #   error. The default value is `3`. Optional.
-    # @param [Integer] timeout Default timeout to use in requests. Optional.
+    # @param [Integer] max_elapsed_time Total time in seconds that requests are allowed to keep being retried.
+    # @param [Float] base_interval The initial interval in seconds between tries.
+    # @param [Integer] max_interval The maximum interval in seconds that any individual retry can reach.
+    # @param [Integer] multiplier Each successive interval grows by this factor. A multipler of 1.5 means the next
+    #                  interval will be 1.5x the current interval.
+    # @param [Integer] timeout (default timeout) The max duration, in seconds, to wait before timing out. Optional.
+    #                  If left blank, the wait will be at most the time permitted by the underlying HTTP/RPC protocol.
+    # @param [Integer] open_timeout How long, in seconds, before failed connections time out. Optional.
+    # @param [Integer] read_timeout How long, in seconds, before requests time out. Optional.
+    # @param [Integer] send_timeout How long, in seconds, before receiving response from server times out. Optional.
+    # @param [Integer] upload_chunk_size The chunk size of storage upload, in bytes.
+    #                  The default value is 100 MB, i.e. 104_857_600 bytes. To disable chunking and upload
+    #                  the complete file regardless of size, pass 0 as the chunk size.
     #
     # @return [Google::Cloud::Storage::Project]
     #
@@ -64,10 +76,19 @@ module Google
     #   readonly_scope = "https://www.googleapis.com/auth/devstorage.read_only"
     #   readonly_storage = gcloud.storage scope: readonly_scope
     #
-    def storage scope: nil, retries: nil, timeout: nil
+    def storage scope: nil, retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil,
+                max_elapsed_time: nil, base_interval: nil, max_interval: nil, multiplier: nil, upload_chunk_size: nil
       Google::Cloud.storage @project, @keyfile, scope: scope,
                                                 retries: (retries || @retries),
-                                                timeout: (timeout || @timeout)
+                                                timeout: (timeout || @timeout),
+                                                open_timeout: (open_timeout || timeout),
+                                                read_timeout: (read_timeout || timeout),
+                                                send_timeout: (send_timeout || timeout),
+                                                max_elapsed_time: max_elapsed_time,
+                                                base_interval: base_interval,
+                                                max_interval: max_interval,
+                                                multiplier: multiplier,
+                                                upload_chunk_size: upload_chunk_size
     end
 
     ##
@@ -93,7 +114,19 @@ module Google
     #   * `https://www.googleapis.com/auth/devstorage.full_control`
     # @param [Integer] retries Number of times to retry requests on server
     #   error. The default value is `3`. Optional.
-    # @param [Integer] timeout Default timeout to use in requests. Optional.
+    # @param [Integer] max_elapsed_time Total time in seconds that requests are allowed to keep being retried.
+    # @param [Float] base_interval The initial interval in seconds between tries.
+    # @param [Integer] max_interval The maximum interval in seconds that any individual retry can reach.
+    # @param [Integer] multiplier Each successive interval grows by this factor. A multipler of 1.5 means the next
+    #                  interval will be 1.5x the current interval.
+    # @param [Integer] timeout (default timeout) The max duration, in seconds, to wait before timing out. Optional.
+    #    If left blank, the wait will be at most the time permitted by the underlying HTTP/RPC protocol.
+    # @param [Integer] open_timeout How long, in seconds, before failed connections time out. Optional.
+    # @param [Integer] read_timeout How long, in seconds, before requests time out. Optional.
+    # @param [Integer] send_timeout How long, in seconds, before receiving response from server times out. Optional.
+    # @param [Integer] upload_chunk_size The chunk size of storage upload, in bytes.
+    #                  The default value is 100 MB, i.e. 104_857_600 bytes. To disable chunking and upload
+    #                  the complete file regardless of size, pass 0 as the chunk size.
     #
     # @return [Google::Cloud::Storage::Project]
     #
@@ -107,17 +140,29 @@ module Google
     #   file = bucket.file "path/to/my-file.ext"
     #
     def self.storage project_id = nil, credentials = nil, scope: nil,
-                     retries: nil, timeout: nil
+                     retries: nil, timeout: nil, open_timeout: nil, read_timeout: nil, send_timeout: nil,
+                     max_elapsed_time: nil, base_interval: nil, max_interval: nil, multiplier: nil,
+                     upload_chunk_size: nil
       require "google/cloud/storage"
       Google::Cloud::Storage.new project_id: project_id,
                                  credentials: credentials,
-                                 scope: scope, retries: retries,
-                                 timeout: timeout
+                                 scope: scope,
+                                 retries: retries,
+                                 timeout: timeout,
+                                 open_timeout: (open_timeout || timeout),
+                                 read_timeout: (read_timeout || timeout),
+                                 send_timeout: (send_timeout || timeout),
+                                 max_elapsed_time: max_elapsed_time,
+                                 base_interval: base_interval,
+                                 max_interval: max_interval,
+                                 multiplier: multiplier,
+                                 upload_chunk_size: upload_chunk_size
     end
   end
 end
 
 # Set the default storage configuration
+# rubocop:disable Metrics/BlockLength
 Google::Cloud.configure.add_config! :storage do |config|
   default_project = Google::Cloud::Config.deferred do
     ENV["STORAGE_PROJECT"]
@@ -138,7 +183,16 @@ Google::Cloud.configure.add_config! :storage do |config|
   config.add_field! :scope, nil, match: [String, Array]
   config.add_field! :quota_project, nil, match: String
   config.add_field! :retries, nil, match: Integer
+  config.add_field! :max_elapsed_time, nil, match: Integer
+  config.add_field! :base_interval, nil, match: Float
+  config.add_field! :max_interval, nil, match: Integer
+  config.add_field! :multiplier, nil, match: Integer
   config.add_field! :timeout, nil, match: Integer
+  config.add_field! :open_timeout, nil, match: Integer
+  config.add_field! :read_timeout, nil, match: Integer
+  config.add_field! :send_timeout, nil, match: Integer
+  config.add_field! :upload_chunk_size, nil, match: Integer
   # TODO: Remove once discovery document is updated.
   config.add_field! :endpoint, "https://storage.googleapis.com/", match: String
 end
+# rubocop:enable Metrics/BlockLength

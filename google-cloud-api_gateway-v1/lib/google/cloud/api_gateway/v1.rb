@@ -23,10 +23,17 @@ module Google
   module Cloud
     module ApiGateway
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
+      #
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/api_gateway/v1"
       #     client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new
+      #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/api_gateway/v1"
+      #     client = ::Google::Cloud::ApiGateway::V1::ApiGatewayService::Rest::Client.new
       #
       module V1
       end

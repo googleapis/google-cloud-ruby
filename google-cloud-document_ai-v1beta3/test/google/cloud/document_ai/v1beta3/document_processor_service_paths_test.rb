@@ -23,6 +23,18 @@ require "gapic/grpc/service_stub"
 require "google/cloud/document_ai/v1beta3/document_processor_service"
 
 class ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::ClientPathsTest < Minitest::Test
+  def test_evaluation_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.evaluation_path project: "value0", location: "value1", processor: "value2", processor_version: "value3", evaluation: "value4"
+      assert_equal "projects/value0/locations/value1/processors/value2/processorVersions/value3/evaluations/value4", path
+    end
+  end
+
   def test_human_review_config_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do
@@ -35,6 +47,18 @@ class ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::ClientPath
     end
   end
 
+  def test_location_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.location_path project: "value0", location: "value1"
+      assert_equal "projects/value0/locations/value1", path
+    end
+  end
+
   def test_processor_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do
@@ -44,6 +68,30 @@ class ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::ClientPath
 
       path = client.processor_path project: "value0", location: "value1", processor: "value2"
       assert_equal "projects/value0/locations/value1/processors/value2", path
+    end
+  end
+
+  def test_processor_type_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.processor_type_path project: "value0", location: "value1", processor_type: "value2"
+      assert_equal "projects/value0/locations/value1/processorTypes/value2", path
+    end
+  end
+
+  def test_processor_version_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.processor_version_path project: "value0", location: "value1", processor: "value2", processor_version: "value3"
+      assert_equal "projects/value0/locations/value1/processors/value2/processorVersions/value3", path
     end
   end
 end

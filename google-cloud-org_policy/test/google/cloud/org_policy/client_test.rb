@@ -20,15 +20,25 @@ require "helper"
 require "google/cloud/org_policy"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Cloud::OrgPolicy::ClientConstructionMinitest < Minitest::Test
-  def test_org_policy
+  def test_org_policy_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::OrgPolicy.org_policy do |config|
+      client = Google::Cloud::OrgPolicy.org_policy transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::OrgPolicy::V2::OrgPolicy::Client, client
+    end
+  end
+
+  def test_org_policy_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::OrgPolicy.org_policy transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::OrgPolicy::V2::OrgPolicy::Rest::Client, client
     end
   end
 end

@@ -79,6 +79,11 @@
               "methods": [
                 "check_valid_creds"
               ]
+            },
+            "EnrollDataSources": {
+              "methods": [
+                "enroll_data_sources"
+              ]
             }
           }
         }

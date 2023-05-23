@@ -3,7 +3,6 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/vision/v1p3beta1/geometry.proto", :syntax => :proto3) do
     add_message "google.cloud.vision.v1p3beta1.Vertex" do
@@ -17,9 +16,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.vision.v1p3beta1.BoundingPoly" do
       repeated :vertices, :message, 1, "google.cloud.vision.v1p3beta1.Vertex"
       repeated :normalized_vertices, :message, 2, "google.cloud.vision.v1p3beta1.NormalizedVertex"
-    end
-    add_message "google.cloud.vision.v1p3beta1.NormalizedBoundingPoly" do
-      repeated :vertices, :message, 1, "google.cloud.vision.v1p3beta1.NormalizedVertex"
     end
     add_message "google.cloud.vision.v1p3beta1.Position" do
       optional :x, :float, 1
@@ -36,7 +32,6 @@ module Google
         Vertex = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1p3beta1.Vertex").msgclass
         NormalizedVertex = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1p3beta1.NormalizedVertex").msgclass
         BoundingPoly = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1p3beta1.BoundingPoly").msgclass
-        NormalizedBoundingPoly = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1p3beta1.NormalizedBoundingPoly").msgclass
         Position = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1p3beta1.Position").msgclass
       end
     end

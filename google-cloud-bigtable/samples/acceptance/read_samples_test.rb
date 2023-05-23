@@ -44,6 +44,10 @@ describe Google::Cloud::Bigtable, "Read Samples", :bigtable do
             .set_cell("stats_summary", "os_build", "PQ2A.190401.002", timestamp: @timestamp) <<
         @table.new_mutation_entry("phone#5c10102#20190502").set_cell("stats_summary", "connected_cell", "1", timestamp: @timestamp)
             .set_cell("stats_summary", "connected_wifi", "0", timestamp: @timestamp)
+            .set_cell("stats_summary", "os_build", "PQ2A.190406.000", timestamp: @timestamp) <<
+        # extra mutation to validate reads_prefix of "phone#" correctness
+        @table.new_mutation_entry("phone001#5c10102#20190502").set_cell("stats_summary", "connected_cell", "1", timestamp: @timestamp)
+            .set_cell("stats_summary", "connected_wifi", "0", timestamp: @timestamp)
             .set_cell("stats_summary", "os_build", "PQ2A.190406.000", timestamp: @timestamp)
 
     @table.mutate_rows entries

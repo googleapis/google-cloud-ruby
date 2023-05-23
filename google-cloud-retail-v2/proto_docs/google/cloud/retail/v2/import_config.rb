@@ -22,7 +22,6 @@ module Google
     module Retail
       module V2
         # Google Cloud Storage location for input content.
-        # format.
         # @!attribute [rw] input_uris
         #   @return [::Array<::String>]
         #     Required. Google Cloud Storage URIs to input files. URI can be up to
@@ -31,7 +30,7 @@ module Google
         #     files, such as `gs://bucket/directory/*.json`. A request can
         #     contain at most 100 files, and each file can be up to 2 GB. See
         #     [Importing product
-        #     information](https://cloud.google.com/recommendations-ai/docs/upload-catalog)
+        #     information](https://cloud.google.com/retail/recommendations-ai/docs/upload-catalog)
         #     for the expected file format and setup instructions.
         # @!attribute [rw] data_schema
         #   @return [::String]
@@ -50,18 +49,34 @@ module Google
         #     * `user_event` (default): One JSON
         #     {::Google::Cloud::Retail::V2::UserEvent UserEvent} per line.
         #     * `user_event_ga360`: Using
-        #       https://support.google.com/analytics/answer/3437719?hl=en.
+        #       https://support.google.com/analytics/answer/3437719.
+        #
+        #     Supported values for control imports:
+        #
+        #     * `control` (default): One JSON {::Google::Cloud::Retail::V2::Control Control}
+        #     per line.
+        #
+        #     Supported values for catalog attribute imports:
+        #
+        #     * `catalog_attribute` (default): One CSV
+        #     {::Google::Cloud::Retail::V2::CatalogAttribute CatalogAttribute} per line.
         class GcsSource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # BigQuery source import data from.
+        # @!attribute [rw] partition_date
+        #   @return [::Google::Type::Date]
+        #     BigQuery time partitioned table's _PARTITIONDATE in YYYY-MM-DD format.
+        #
+        #     Only supported in
+        #     {::Google::Cloud::Retail::V2::ImportProductsRequest ImportProductsRequest}.
         # @!attribute [rw] project_id
         #   @return [::String]
-        #     The project id (can be project # or id) that the BigQuery source is in with
+        #     The project ID (can be project # or ID) that the BigQuery source is in with
         #     a length limit of 128 characters. If not specified, inherits the project
-        #     id from the parent request.
+        #     ID from the parent request.
         # @!attribute [rw] dataset_id
         #   @return [::String]
         #     Required. The BigQuery data set to copy the data from with a length limit
@@ -91,8 +106,18 @@ module Google
         #
         #     * `user_event` (default): One JSON
         #     {::Google::Cloud::Retail::V2::UserEvent UserEvent} per line.
-        #     * `user_event_ga360`: Using
-        #       https://support.google.com/analytics/answer/3437719?hl=en.
+        #     * `user_event_ga360`:
+        #       The schema is available here:
+        #       https://support.google.com/analytics/answer/3437719.
+        #     * `user_event_ga4`:
+        #       The schema is available here:
+        #       https://support.google.com/analytics/answer/7029846.
+        #
+        #     Supported values for autocomplete imports:
+        #
+        #     * `suggestions` (default): One JSON completion suggestion per line.
+        #     * `denylist`:  One JSON deny suggestion per line.
+        #     * `allowlist`:  One JSON allow suggestion per line.
         class BigQuerySource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -103,7 +128,7 @@ module Google
         #   @return [::Array<::Google::Cloud::Retail::V2::Product>]
         #     Required. A list of products to update/create. Each product must have a
         #     valid {::Google::Cloud::Retail::V2::Product#id Product.id}. Recommended max of
-        #     10k items.
+        #     100 items.
         class ProductInlineSource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -121,9 +146,9 @@ module Google
         # Configuration of destination for Import related errors.
         # @!attribute [rw] gcs_prefix
         #   @return [::String]
-        #     Google Cloud Storage path for import errors. This must be an empty,
-        #     existing Cloud Storage bucket. Import errors will be written to a file in
-        #     this bucket, one per line, as a JSON-encoded
+        #     Google Cloud Storage prefix for import errors. This must be an empty,
+        #     existing Cloud Storage directory. Import errors are written to
+        #     sharded files in this directory, one per line, as a JSON-encoded
         #     `google.rpc.Status` message.
         class ImportErrorsConfig
           include ::Google::Protobuf::MessageExts
@@ -138,6 +163,9 @@ module Google
         #
         #     If no updateMask is specified, requires products.create permission.
         #     If updateMask is specified, requires products.update permission.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Deprecated. This field has no effect.
         # @!attribute [rw] input_config
         #   @return [::Google::Cloud::Retail::V2::ProductInputConfig]
         #     Required. The desired input location of the data.
@@ -146,11 +174,43 @@ module Google
         #     The desired location of errors incurred during the Import.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Indicates which fields in the provided imported 'products' to update. If
-        #     not set, will by default update all fields.
+        #     Indicates which fields in the provided imported `products` to update. If
+        #     not set, all fields are updated.
+        # @!attribute [rw] reconciliation_mode
+        #   @return [::Google::Cloud::Retail::V2::ImportProductsRequest::ReconciliationMode]
+        #     The mode of reconciliation between existing products and the products to be
+        #     imported. Defaults to
+        #     {::Google::Cloud::Retail::V2::ImportProductsRequest::ReconciliationMode::INCREMENTAL ReconciliationMode.INCREMENTAL}.
+        # @!attribute [rw] notification_pubsub_topic
+        #   @return [::String]
+        #     Full Pub/Sub topic name for receiving notification. If this field is set,
+        #     when the import is finished, a notification is sent to
+        #     specified Pub/Sub topic. The message data is JSON string of a
+        #     {::Google::Longrunning::Operation Operation}.
+        #
+        #     Format of the Pub/Sub topic is `projects/{project}/topics/{topic}`. It has
+        #     to be within the same project as
+        #     {::Google::Cloud::Retail::V2::ImportProductsRequest#parent ImportProductsRequest.parent}.
+        #     Make sure that `service-<project
+        #     number>@gcp-sa-retail.iam.gserviceaccount.com` has the
+        #     `pubsub.topics.publish` IAM permission on the topic.
         class ImportProductsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Indicates how imported products are reconciled with the existing products
+          # created or imported before.
+          module ReconciliationMode
+            # Defaults to INCREMENTAL.
+            RECONCILIATION_MODE_UNSPECIFIED = 0
+
+            # Inserts new products or updates existing products.
+            INCREMENTAL = 1
+
+            # Calculates diff and replaces the entire product dataset. Existing
+            # products may be deleted if they are not present in the source location.
+            FULL = 2
+          end
         end
 
         # Request message for the ImportUserEvents request.
@@ -165,6 +225,27 @@ module Google
         #     The desired location of errors incurred during the Import. Cannot be set
         #     for inline user event imports.
         class ImportUserEventsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ImportCompletionData methods.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The catalog which the suggestions dataset belongs to.
+        #
+        #     Format: `projects/1234/locations/global/catalogs/default_catalog`.
+        # @!attribute [rw] input_config
+        #   @return [::Google::Cloud::Retail::V2::CompletionDataInputConfig]
+        #     Required. The desired input location of the data.
+        # @!attribute [rw] notification_pubsub_topic
+        #   @return [::String]
+        #     Pub/Sub topic for receiving notification. If this field is set,
+        #     when the import is finished, a notification is sent to
+        #     specified Pub/Sub topic. The message data is JSON string of a
+        #     {::Google::Longrunning::Operation Operation}.
+        #     Format of the Pub/Sub topic is `projects/{project}/topics/{topic}`.
+        class ImportCompletionDataRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -199,7 +280,20 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Metadata related to the progress of the Import operation. This will be
+        # The input config source for completion data.
+        # @!attribute [rw] big_query_source
+        #   @return [::Google::Cloud::Retail::V2::BigQuerySource]
+        #     Required. BigQuery input source.
+        #
+        #     Add the IAM permission "BigQuery Data Viewer" for
+        #     cloud-retail-customer-data-access@system.gserviceaccount.com before
+        #     using this feature otherwise an error is thrown.
+        class CompletionDataInputConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Metadata related to the progress of the Import operation. This is
         # returned by the google.longrunning.Operation.metadata field.
         # @!attribute [rw] create_time
         #   @return [::Google::Protobuf::Timestamp]
@@ -214,6 +308,16 @@ module Google
         # @!attribute [rw] failure_count
         #   @return [::Integer]
         #     Count of entries that encountered errors while processing.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Deprecated. This field is never set.
+        # @!attribute [rw] notification_pubsub_topic
+        #   @return [::String]
+        #     Pub/Sub topic for receiving notification. If this field is set,
+        #     when the import is finished, a notification is sent to
+        #     specified Pub/Sub topic. The message data is JSON string of a
+        #     {::Google::Longrunning::Operation Operation}.
+        #     Format of the Pub/Sub topic is `projects/{project}/topics/{topic}`.
         class ImportMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -262,6 +366,18 @@ module Google
         #     Count of user events imported, but with catalog information not found
         #     in the imported catalog.
         class UserEventImportSummary
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response of the
+        # {::Google::Cloud::Retail::V2::ImportCompletionDataRequest ImportCompletionDataRequest}.
+        # If the long running operation is done, this message is returned by the
+        # google.longrunning.Operations.response field if the operation is successful.
+        # @!attribute [rw] error_samples
+        #   @return [::Array<::Google::Rpc::Status>]
+        #     A sample of errors encountered while processing the request.
+        class ImportCompletionDataResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

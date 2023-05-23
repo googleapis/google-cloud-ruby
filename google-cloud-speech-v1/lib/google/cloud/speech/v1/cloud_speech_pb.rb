@@ -6,11 +6,13 @@ require 'google/protobuf'
 require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
+require 'google/cloud/speech/v1/resource_pb'
 require 'google/longrunning/operations_pb'
-require 'google/protobuf/any_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/timestamp_pb'
+require 'google/protobuf/wrappers_pb'
 require 'google/rpc/status_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/speech/v1/cloud_speech.proto", :syntax => :proto3) do
     add_message "google.cloud.speech.v1.RecognizeRequest" do
@@ -20,6 +22,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.speech.v1.LongRunningRecognizeRequest" do
       optional :config, :message, 1, "google.cloud.speech.v1.RecognitionConfig"
       optional :audio, :message, 2, "google.cloud.speech.v1.RecognitionAudio"
+      optional :output_config, :message, 4, "google.cloud.speech.v1.TranscriptOutputConfig"
+    end
+    add_message "google.cloud.speech.v1.TranscriptOutputConfig" do
+      oneof :output_type do
+        optional :gcs_uri, :string, 1
+      end
     end
     add_message "google.cloud.speech.v1.StreamingRecognizeRequest" do
       oneof :streaming_request do
@@ -31,6 +39,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :config, :message, 1, "google.cloud.speech.v1.RecognitionConfig"
       optional :single_utterance, :bool, 2
       optional :interim_results, :bool, 3
+      optional :enable_voice_activity_events, :bool, 5
+      optional :voice_activity_timeout, :message, 6, "google.cloud.speech.v1.StreamingRecognitionConfig.VoiceActivityTimeout"
+    end
+    add_message "google.cloud.speech.v1.StreamingRecognitionConfig.VoiceActivityTimeout" do
+      optional :speech_start_timeout, :message, 1, "google.protobuf.Duration"
+      optional :speech_end_timeout, :message, 2, "google.protobuf.Duration"
     end
     add_message "google.cloud.speech.v1.RecognitionConfig" do
       optional :encoding, :enum, 1, "google.cloud.speech.v1.RecognitionConfig.AudioEncoding"
@@ -38,11 +52,16 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :audio_channel_count, :int32, 7
       optional :enable_separate_recognition_per_channel, :bool, 12
       optional :language_code, :string, 3
+      repeated :alternative_language_codes, :string, 18
       optional :max_alternatives, :int32, 4
       optional :profanity_filter, :bool, 5
+      optional :adaptation, :message, 20, "google.cloud.speech.v1.SpeechAdaptation"
       repeated :speech_contexts, :message, 6, "google.cloud.speech.v1.SpeechContext"
       optional :enable_word_time_offsets, :bool, 8
+      optional :enable_word_confidence, :bool, 15
       optional :enable_automatic_punctuation, :bool, 11
+      optional :enable_spoken_punctuation, :message, 22, "google.protobuf.BoolValue"
+      optional :enable_spoken_emojis, :message, 23, "google.protobuf.BoolValue"
       optional :diarization_config, :message, 19, "google.cloud.speech.v1.SpeakerDiarizationConfig"
       optional :metadata, :message, 9, "google.cloud.speech.v1.RecognitionMetadata"
       optional :model, :string, 13
@@ -57,6 +76,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :AMR_WB, 5
       value :OGG_OPUS, 6
       value :SPEEX_WITH_HEADER_BYTE, 7
+      value :WEBM_OPUS, 9
     end
     add_message "google.cloud.speech.v1.SpeakerDiarizationConfig" do
       optional :enable_speaker_diarization, :bool, 1
@@ -107,6 +127,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.speech.v1.SpeechContext" do
       repeated :phrases, :string, 1
+      optional :boost, :float, 4
     end
     add_message "google.cloud.speech.v1.RecognitionAudio" do
       oneof :audio_source do
@@ -116,23 +137,39 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.speech.v1.RecognizeResponse" do
       repeated :results, :message, 2, "google.cloud.speech.v1.SpeechRecognitionResult"
+      optional :total_billed_time, :message, 3, "google.protobuf.Duration"
+      optional :speech_adaptation_info, :message, 7, "google.cloud.speech.v1.SpeechAdaptationInfo"
+      optional :request_id, :int64, 8
     end
     add_message "google.cloud.speech.v1.LongRunningRecognizeResponse" do
       repeated :results, :message, 2, "google.cloud.speech.v1.SpeechRecognitionResult"
+      optional :total_billed_time, :message, 3, "google.protobuf.Duration"
+      optional :output_config, :message, 6, "google.cloud.speech.v1.TranscriptOutputConfig"
+      optional :output_error, :message, 7, "google.rpc.Status"
+      optional :speech_adaptation_info, :message, 8, "google.cloud.speech.v1.SpeechAdaptationInfo"
+      optional :request_id, :int64, 9
     end
     add_message "google.cloud.speech.v1.LongRunningRecognizeMetadata" do
       optional :progress_percent, :int32, 1
       optional :start_time, :message, 2, "google.protobuf.Timestamp"
       optional :last_update_time, :message, 3, "google.protobuf.Timestamp"
+      optional :uri, :string, 4
     end
     add_message "google.cloud.speech.v1.StreamingRecognizeResponse" do
       optional :error, :message, 1, "google.rpc.Status"
       repeated :results, :message, 2, "google.cloud.speech.v1.StreamingRecognitionResult"
       optional :speech_event_type, :enum, 4, "google.cloud.speech.v1.StreamingRecognizeResponse.SpeechEventType"
+      optional :speech_event_time, :message, 8, "google.protobuf.Duration"
+      optional :total_billed_time, :message, 5, "google.protobuf.Duration"
+      optional :speech_adaptation_info, :message, 9, "google.cloud.speech.v1.SpeechAdaptationInfo"
+      optional :request_id, :int64, 10
     end
     add_enum "google.cloud.speech.v1.StreamingRecognizeResponse.SpeechEventType" do
       value :SPEECH_EVENT_UNSPECIFIED, 0
       value :END_OF_SINGLE_UTTERANCE, 1
+      value :SPEECH_ACTIVITY_BEGIN, 2
+      value :SPEECH_ACTIVITY_END, 3
+      value :SPEECH_ACTIVITY_TIMEOUT, 4
     end
     add_message "google.cloud.speech.v1.StreamingRecognitionResult" do
       repeated :alternatives, :message, 1, "google.cloud.speech.v1.SpeechRecognitionAlternative"
@@ -145,6 +182,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.speech.v1.SpeechRecognitionResult" do
       repeated :alternatives, :message, 1, "google.cloud.speech.v1.SpeechRecognitionAlternative"
       optional :channel_tag, :int32, 2
+      optional :result_end_time, :message, 4, "google.protobuf.Duration"
+      optional :language_code, :string, 5
     end
     add_message "google.cloud.speech.v1.SpeechRecognitionAlternative" do
       optional :transcript, :string, 1
@@ -155,7 +194,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :start_time, :message, 1, "google.protobuf.Duration"
       optional :end_time, :message, 2, "google.protobuf.Duration"
       optional :word, :string, 3
+      optional :confidence, :float, 4
       optional :speaker_tag, :int32, 5
+    end
+    add_message "google.cloud.speech.v1.SpeechAdaptationInfo" do
+      optional :adaptation_timeout, :bool, 1
+      optional :timeout_message, :string, 4
     end
   end
 end
@@ -166,8 +210,10 @@ module Google
       module V1
         RecognizeRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v1.RecognizeRequest").msgclass
         LongRunningRecognizeRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v1.LongRunningRecognizeRequest").msgclass
+        TranscriptOutputConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v1.TranscriptOutputConfig").msgclass
         StreamingRecognizeRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v1.StreamingRecognizeRequest").msgclass
         StreamingRecognitionConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v1.StreamingRecognitionConfig").msgclass
+        StreamingRecognitionConfig::VoiceActivityTimeout = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v1.StreamingRecognitionConfig.VoiceActivityTimeout").msgclass
         RecognitionConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v1.RecognitionConfig").msgclass
         RecognitionConfig::AudioEncoding = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v1.RecognitionConfig.AudioEncoding").enummodule
         SpeakerDiarizationConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v1.SpeakerDiarizationConfig").msgclass
@@ -187,6 +233,7 @@ module Google
         SpeechRecognitionResult = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v1.SpeechRecognitionResult").msgclass
         SpeechRecognitionAlternative = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v1.SpeechRecognitionAlternative").msgclass
         WordInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v1.WordInfo").msgclass
+        SpeechAdaptationInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.speech.v1.SpeechAdaptationInfo").msgclass
       end
     end
   end

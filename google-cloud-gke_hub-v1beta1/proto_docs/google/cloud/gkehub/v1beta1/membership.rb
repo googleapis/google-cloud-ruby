@@ -24,8 +24,9 @@ module Google
         # Membership contains information about a member cluster.
         # @!attribute [r] name
         #   @return [::String]
-        #     Output only. The full, unique name of this Membership resource in the format
-        #     `projects/*/locations/*/memberships/{membership_id}`, set during creation.
+        #     Output only. The full, unique name of this Membership resource in the
+        #     format `projects/*/locations/*/memberships/{membership_id}`, set during
+        #     creation.
         #
         #     `membership_id` must be a valid RFC 1123 compliant DNS label:
         #
@@ -40,7 +41,7 @@ module Google
         #     Optional. GCP labels for this membership.
         # @!attribute [rw] description
         #   @return [::String]
-        #     Required. Description of this membership, limited to 63 characters.
+        #     Optional. Description of this membership, limited to 63 characters.
         #     Must match the regex: `[a-zA-Z0-9][a-zA-Z0-9_\-\.\ ]*`
         # @!attribute [rw] endpoint
         #   @return [::Google::Cloud::GkeHub::V1beta1::MembershipEndpoint]
@@ -64,9 +65,10 @@ module Google
         #     Output only. When the Membership was deleted.
         # @!attribute [rw] external_id
         #   @return [::String]
-        #     Optional. An externally-generated and managed ID for this Membership. This ID may
-        #     be modified after creation, but this is not recommended. For GKE clusters,
-        #     external_id is managed by the Hub API and updates will be ignored.
+        #     Optional. An externally-generated and managed ID for this Membership. This
+        #     ID may be modified after creation, but this is not recommended. For GKE
+        #     clusters, external_id is managed by the Hub API and updates will be
+        #     ignored.
         #
         #     The ID must match the regex: `[a-zA-Z0-9][a-zA-Z0-9_\-\.]*`
         #
@@ -74,18 +76,22 @@ module Google
         #     set to the UID of the `kube-system` namespace object.
         # @!attribute [r] last_connection_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. For clusters using Connect, the timestamp of the most recent connection
-        #     established with Google Cloud. This time is updated every several minutes,
-        #     not continuously. For clusters that do not use GKE Connect, or that have
-        #     never connected successfully, this field will be unset.
+        #     Output only. For clusters using Connect, the timestamp of the most recent
+        #     connection established with Google Cloud. This time is updated every
+        #     several minutes, not continuously. For clusters that do not use GKE
+        #     Connect, or that have never connected successfully, this field will be
+        #     unset.
         # @!attribute [r] unique_id
         #   @return [::String]
-        #     Output only. Google-generated UUID for this resource. This is unique across all
-        #     Membership resources. If a Membership resource is deleted and another
+        #     Output only. Google-generated UUID for this resource. This is unique across
+        #     all Membership resources. If a Membership resource is deleted and another
         #     resource with the same name is created, it gets a different unique_id.
         # @!attribute [rw] infrastructure_type
         #   @return [::Google::Cloud::GkeHub::V1beta1::Membership::InfrastructureType]
         #     Optional. The infrastructure type this Membership is running on.
+        # @!attribute [rw] monitoring_config
+        #   @return [::Google::Cloud::GkeHub::V1beta1::MonitoringConfig]
+        #     Optional. The monitoring config information for this membership.
         class Membership
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -123,14 +129,28 @@ module Google
         # endpoint and any additional Kubernetes metadata.
         # @!attribute [rw] gke_cluster
         #   @return [::Google::Cloud::GkeHub::V1beta1::GkeCluster]
-        #     Optional. GKE-specific information. Only present if this Membership is a GKE cluster.
+        #     Optional. Specific information for a GKE-on-GCP cluster.
+        # @!attribute [rw] on_prem_cluster
+        #   @return [::Google::Cloud::GkeHub::V1beta1::OnPremCluster]
+        #     Optional. Specific information for a GKE On-Prem cluster. An onprem
+        #     user-cluster who has no resourceLink is not allowed to use this field, it
+        #     should have a nil "type" instead.
+        # @!attribute [rw] multi_cloud_cluster
+        #   @return [::Google::Cloud::GkeHub::V1beta1::MultiCloudCluster]
+        #     Optional. Specific information for a GKE Multi-Cloud cluster.
+        # @!attribute [rw] edge_cluster
+        #   @return [::Google::Cloud::GkeHub::V1beta1::EdgeCluster]
+        #     Optional. Specific information for a Google Edge cluster.
+        # @!attribute [rw] appliance_cluster
+        #   @return [::Google::Cloud::GkeHub::V1beta1::ApplianceCluster]
+        #     Optional. Specific information for a GDC Edge Appliance cluster.
         # @!attribute [r] kubernetes_metadata
         #   @return [::Google::Cloud::GkeHub::V1beta1::KubernetesMetadata]
         #     Output only. Useful Kubernetes-specific metadata.
         # @!attribute [rw] kubernetes_resource
         #   @return [::Google::Cloud::GkeHub::V1beta1::KubernetesResource]
-        #     Optional. The in-cluster Kubernetes Resources that should be applied for a correctly
-        #     registered cluster, in the steady state. These resources:
+        #     Optional. The in-cluster Kubernetes Resources that should be applied for a
+        #     correctly registered cluster, in the steady state. These resources:
         #
         #       * Ensure that the cluster is exclusively registered to one and only one
         #         Hub Membership.
@@ -147,8 +167,8 @@ module Google
         # UpdateMembership, these resources should be re-applied in the cluster.
         # @!attribute [rw] membership_cr_manifest
         #   @return [::String]
-        #     Input only. The YAML representation of the Membership CR. This field is ignored for GKE
-        #     clusters where Hub can read the CR directly.
+        #     Input only. The YAML representation of the Membership CR. This field is
+        #     ignored for GKE clusters where Hub can read the CR directly.
         #
         #     Callers should provide the CR that is currently present in the cluster
         #     during CreateMembership or UpdateMembership, or leave this field empty if
@@ -156,8 +176,8 @@ module Google
         #     registered with another Membership.
         # @!attribute [r] membership_resources
         #   @return [::Array<::Google::Cloud::GkeHub::V1beta1::ResourceManifest>]
-        #     Output only. Additional Kubernetes resources that need to be applied to the cluster
-        #     after Membership creation, and after every update.
+        #     Output only. Additional Kubernetes resources that need to be applied to the
+        #     cluster after Membership creation, and after every update.
         #
         #     This field is only populated in the Membership returned from a successful
         #     long-running operation from CreateMembership or UpdateMembership. It is not
@@ -184,15 +204,20 @@ module Google
         # ResourceOptions represent options for Kubernetes resource generation.
         # @!attribute [rw] connect_version
         #   @return [::String]
-        #     Optional. The Connect agent version to use for connect_resources. Defaults to the
-        #     latest GKE Connect version. The version must be a currently supported
-        #     version, obsolete versions will be rejected.
+        #     Optional. The Connect agent version to use for connect_resources. Defaults
+        #     to the latest GKE Connect version. The version must be a currently
+        #     supported version, obsolete versions will be rejected.
         # @!attribute [rw] v1beta1_crd
         #   @return [::Boolean]
         #     Optional. Use `apiextensions/v1beta1` instead of `apiextensions/v1` for
         #     CustomResourceDefinition resources.
         #     This option should be set for clusters with Kubernetes apiserver versions
         #     <1.16.
+        # @!attribute [rw] k8s_version
+        #   @return [::String]
+        #     Optional. Major version of the Kubernetes cluster. This is only used to
+        #     determine which version to use for the CustomResourceDefinition resources,
+        #     `apiextensions/v1beta1` or`apiextensions/v1`.
         class ResourceOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -220,10 +245,100 @@ module Google
         #   @return [::String]
         #     Immutable. Self-link of the GCP resource for the GKE cluster. For example:
         #
-        #     > container.googleapis.com/projects/my-project/locations/us-west1-a/clusters/my-cluster
+        #         //container.googleapis.com/projects/my-project/locations/us-west1-a/clusters/my-cluster
         #
         #     Zonal clusters are also supported.
+        # @!attribute [r] cluster_missing
+        #   @return [::Boolean]
+        #     Output only. If cluster_missing is set then it denotes that the GKE cluster
+        #     no longer exists in the GKE Control Plane.
         class GkeCluster
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # OnPremCluster contains information specific to GKE On-Prem clusters.
+        # @!attribute [rw] resource_link
+        #   @return [::String]
+        #     Immutable. Self-link of the GCP resource for the GKE On-Prem cluster. For
+        #     example:
+        #
+        #      //gkeonprem.googleapis.com/projects/my-project/locations/us-west1-a/vmwareClusters/my-cluster
+        #      //gkeonprem.googleapis.com/projects/my-project/locations/us-west1-a/bareMetalClusters/my-cluster
+        # @!attribute [r] cluster_missing
+        #   @return [::Boolean]
+        #     Output only. If cluster_missing is set then it denotes that
+        #     API(gkeonprem.googleapis.com) resource for this GKE On-Prem cluster no
+        #     longer exists.
+        # @!attribute [rw] admin_cluster
+        #   @return [::Boolean]
+        #     Immutable. Whether the cluster is an admin cluster.
+        # @!attribute [rw] cluster_type
+        #   @return [::Google::Cloud::GkeHub::V1beta1::OnPremCluster::ClusterType]
+        #     Immutable. The on prem cluster's type.
+        class OnPremCluster
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # ClusterType describes on prem cluster's type.
+          module ClusterType
+            # The ClusterType is not set.
+            CLUSTERTYPE_UNSPECIFIED = 0
+
+            # The ClusterType is bootstrap cluster.
+            BOOTSTRAP = 1
+
+            # The ClusterType is baremetal hybrid cluster.
+            HYBRID = 2
+
+            # The ClusterType is baremetal standalone cluster.
+            STANDALONE = 3
+
+            # The ClusterType is user cluster.
+            USER = 4
+          end
+        end
+
+        # MultiCloudCluster contains information specific to GKE Multi-Cloud clusters.
+        # @!attribute [rw] resource_link
+        #   @return [::String]
+        #     Immutable. Self-link of the GCP resource for the GKE Multi-Cloud cluster.
+        #     For example:
+        #
+        #      //gkemulticloud.googleapis.com/projects/my-project/locations/us-west1-a/awsClusters/my-cluster
+        #      //gkemulticloud.googleapis.com/projects/my-project/locations/us-west1-a/azureClusters/my-cluster
+        #      //gkemulticloud.googleapis.com/projects/my-project/locations/us-west1-a/attachedClusters/my-cluster
+        # @!attribute [r] cluster_missing
+        #   @return [::Boolean]
+        #     Output only. If cluster_missing is set then it denotes that
+        #     API(gkemulticloud.googleapis.com) resource for this GKE Multi-Cloud cluster
+        #     no longer exists.
+        class MultiCloudCluster
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # EdgeCluster contains information specific to Google Edge Clusters.
+        # @!attribute [rw] resource_link
+        #   @return [::String]
+        #     Immutable. Self-link of the GCP resource for the Edge Cluster. For
+        #     example:
+        #
+        #     //edgecontainer.googleapis.com/projects/my-project/locations/us-west1-a/clusters/my-cluster
+        class EdgeCluster
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # ApplianceCluster contains information specific to GDC Edge Appliance
+        # Clusters.
+        # @!attribute [rw] resource_link
+        #   @return [::String]
+        #     Immutable. Self-link of the GCP resource for the Appliance Cluster. For
+        #     example:
+        #
+        #     //transferappliance.googleapis.com/projects/my-project/locations/us-west1-a/appliances/my-appliance
+        class ApplianceCluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -232,12 +347,13 @@ module Google
         # representing Kubernetes clusters.
         # @!attribute [r] kubernetes_api_server_version
         #   @return [::String]
-        #     Output only. Kubernetes API server version string as reported by '/version'.
+        #     Output only. Kubernetes API server version string as reported by
+        #     '/version'.
         # @!attribute [r] node_provider_id
         #   @return [::String]
-        #     Output only. Node providerID as reported by the first node in the list of nodes on
-        #     the Kubernetes endpoint. On Kubernetes platforms that support zero-node
-        #     clusters (like GKE-on-GCP), the node_count will be zero and the
+        #     Output only. Node providerID as reported by the first node in the list of
+        #     nodes on the Kubernetes endpoint. On Kubernetes platforms that support
+        #     zero-node clusters (like GKE-on-GCP), the node_count will be zero and the
         #     node_provider_id will be empty.
         # @!attribute [r] node_count
         #   @return [::Integer]
@@ -247,13 +363,13 @@ module Google
         #     Output only. vCPU count as reported by Kubernetes nodes resources.
         # @!attribute [r] memory_mb
         #   @return [::Integer]
-        #     Output only. The total memory capacity as reported by the sum of all Kubernetes nodes
-        #     resources, defined in MB.
+        #     Output only. The total memory capacity as reported by the sum of all
+        #     Kubernetes nodes resources, defined in MB.
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The time at which these details were last updated. This update_time is
-        #     different from the Membership-level update_time since EndpointDetails are
-        #     updated internally for API consumers.
+        #     Output only. The time at which these details were last updated. This
+        #     update_time is different from the Membership-level update_time since
+        #     EndpointDetails are updated internally for API consumers.
         class KubernetesMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -264,8 +380,8 @@ module Google
         # https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity
         # @!attribute [rw] issuer
         #   @return [::String]
-        #     Optional. A JSON Web Token (JWT) issuer URI. `issuer` must start with `https://` and
-        #     be a valid URL with length <2000 characters.
+        #     Optional. A JSON Web Token (JWT) issuer URI. `issuer` must start with
+        #     `https://` and be a valid URL with length <2000 characters.
         #
         #     If set, then Google will allow valid OIDC tokens from this issuer to
         #     authenticate within the workload_identity_pool. OIDC discovery will be
@@ -276,8 +392,8 @@ module Google
         #     a new issuer (and re-enabling Workload Identity).
         # @!attribute [r] workload_identity_pool
         #   @return [::String]
-        #     Output only. The name of the workload identity pool in which `issuer` will be
-        #     recognized.
+        #     Output only. The name of the workload identity pool in which `issuer` will
+        #     be recognized.
         #
         #     There is a single Workload Identity Pool per Hub that is shared
         #     between all Memberships that belong to that Hub. For a Hub hosted in
@@ -285,15 +401,48 @@ module Google
         #     although this is subject to change in newer versions of this API.
         # @!attribute [r] identity_provider
         #   @return [::String]
-        #     Output only. An identity provider that reflects the `issuer` in the workload identity
-        #     pool.
+        #     Output only. An identity provider that reflects the `issuer` in the
+        #     workload identity pool.
         # @!attribute [rw] oidc_jwks
         #   @return [::String]
-        #     Optional. OIDC verification keys for this Membership in JWKS format (RFC 7517).
+        #     Optional. OIDC verification keys for this Membership in JWKS format (RFC
+        #     7517).
         #
         #     When this field is set, OIDC discovery will NOT be performed on `issuer`,
         #     and instead OIDC tokens will be validated using this field.
         class Authority
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # This field informs Fleet-based applications/services/UIs with the necessary
+        # information for where each underlying Cluster reports its metrics.
+        # @!attribute [rw] project_id
+        #   @return [::String]
+        #     Immutable. Project used to report Metrics
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Immutable. Location used to report Metrics
+        # @!attribute [rw] cluster
+        #   @return [::String]
+        #     Immutable. Cluster name used to report metrics.
+        #     For Anthos on VMWare/Baremetal, it would be in format
+        #     `memberClusters/cluster_name`; And for Anthos on MultiCloud, it would be in
+        #     format
+        #     `{azureClusters, awsClusters}/cluster_name`.
+        # @!attribute [rw] kubernetes_metrics_prefix
+        #   @return [::String]
+        #     Kubernetes system metrics, if available, are written to this prefix.
+        #     This defaults to kubernetes.io for GKE, and kubernetes.io/anthos for Anthos
+        #     eventually. Noted: Anthos MultiCloud will have kubernetes.io prefix today
+        #     but will migration to be under kubernetes.io/anthos
+        # @!attribute [rw] cluster_hash
+        #   @return [::String]
+        #     Immutable. Cluster hash, this is a unique string generated by google code,
+        #     which does not contain any PII, which we can use to reference the cluster.
+        #     This is expected to be created by the monitoring stack and persisted into
+        #     the Cluster object as well as to GKE-Hub.
+        class MonitoringConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -337,13 +486,14 @@ module Google
         # Request message for `GkeHubMembershipService.ListMemberships` method.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent (project and location) where the Memberships will be listed.
-        #     Specified in the format `projects/*/locations/*`.
+        #     Required. The parent (project and location) where the Memberships will be
+        #     listed. Specified in the format `projects/*/locations/*`.
+        #     `projects/*/locations/-` list memberships in all the regions.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. When requesting a 'page' of resources, `page_size` specifies number of
-        #     resources to return. If unspecified or set to 0, all resources will
-        #     be returned.
+        #     Optional. When requesting a 'page' of resources, `page_size` specifies
+        #     number of resources to return. If unspecified or set to 0, all resources
+        #     will be returned.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. Token returned by previous call to `ListMemberships` which
@@ -351,8 +501,8 @@ module Google
         #     resources.
         # @!attribute [rw] filter
         #   @return [::String]
-        #     Optional. Lists Memberships that match the filter expression, following the syntax
-        #     outlined in https://google.aip.dev/160.
+        #     Optional. Lists Memberships that match the filter expression, following the
+        #     syntax outlined in https://google.aip.dev/160.
         #
         #     Examples:
         #
@@ -410,12 +560,12 @@ module Google
         # Request message for the `GkeHubMembershipService.CreateMembership` method.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent (project and location) where the Memberships will be created.
-        #     Specified in the format `projects/*/locations/*`.
+        #     Required. The parent (project and location) where the Memberships will be
+        #     created. Specified in the format `projects/*/locations/*`.
         # @!attribute [rw] membership_id
         #   @return [::String]
-        #     Required. Client chosen ID for the membership. `membership_id` must be a valid RFC
-        #     1123 compliant DNS label:
+        #     Required. Client chosen ID for the membership. `membership_id` must be a
+        #     valid RFC 1123 compliant DNS label:
         #
         #       1. At most 63 characters in length
         #       2. It must consist of lower case alphanumeric characters or `-`
@@ -426,6 +576,21 @@ module Google
         # @!attribute [rw] resource
         #   @return [::Google::Cloud::GkeHub::V1beta1::Membership]
         #     Required. The membership to create.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A request ID to identify requests. Specify a unique request ID
+        #     so that if you must retry your request, the server will know to ignore
+        #     the request if it has already been completed. The server will guarantee
+        #     that for at least 60 minutes after the first request.
+        #
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same request
+        #     ID, the server can check if original operation with the same request ID
+        #     was received, and if so, will ignore the second request. This prevents
+        #     clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
         class CreateMembershipRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -436,6 +601,26 @@ module Google
         #   @return [::String]
         #     Required. The Membership resource name in the format
         #     `projects/*/locations/*/memberships/*`.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A request ID to identify requests. Specify a unique request ID
+        #     so that if you must retry your request, the server will know to ignore
+        #     the request if it has already been completed. The server will guarantee
+        #     that for at least 60 minutes after the first request.
+        #
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same request
+        #     ID, the server can check if original operation with the same request ID
+        #     was received, and if so, will ignore the second request. This prevents
+        #     clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] force
+        #   @return [::Boolean]
+        #     Optional. If set to true, any subresource from this Membership will also be
+        #     deleted. Otherwise, the request will only work if the Membership has no
+        #     subresource.
         class DeleteMembershipRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -448,8 +633,8 @@ module Google
         #     `projects/[project_id]/locations/global/memberships/[membership_id]`
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. Mask of fields to update. At least one field path must be specified in this
-        #     mask.
+        #     Required. Mask of fields to update. At least one field path must be
+        #     specified in this mask.
         # @!attribute [rw] resource
         #   @return [::Google::Cloud::GkeHub::V1beta1::Membership]
         #     Required. Only fields specified in update_mask are updated.
@@ -458,6 +643,23 @@ module Google
         #     If you are updating a map field, set the value of a key to null or empty
         #     string to delete the key from the map. It's not possible to update a key's
         #     value to the empty string.
+        #     If you specify the update_mask to be a special path "*", fully replaces all
+        #     user-modifiable fields to match `resource`.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A request ID to identify requests. Specify a unique request ID
+        #     so that if you must retry your request, the server will know to ignore
+        #     the request if it has already been completed. The server will guarantee
+        #     that for at least 60 minutes after the first request.
+        #
+        #     For example, consider a situation where you make an initial request and
+        #     the request times out. If you make the request again with the same request
+        #     ID, the server can check if original operation with the same request ID
+        #     was received, and if so, will ignore the second request. This prevents
+        #     clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
         class UpdateMembershipRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -465,17 +667,17 @@ module Google
 
         # Request message for `GkeHubMembershipService.GenerateConnectManifest`
         # method.
-        # .
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The Membership resource name the Agent will associate with, in the format
-        #     `projects/*/locations/*/memberships/*`.
+        #     Required. The Membership resource name the Agent will associate with, in
+        #     the format `projects/*/locations/*/memberships/*`.
         # @!attribute [rw] connect_agent
         #   @return [::Google::Cloud::GkeHub::V1beta1::ConnectAgent]
         #     Optional. The connect agent to generate manifest for.
         # @!attribute [rw] version
         #   @return [::String]
-        #     Optional. The Connect agent version to use. Defaults to the most current version.
+        #     Optional. The Connect agent version to use. Defaults to the most current
+        #     version.
         # @!attribute [rw] is_upgrade
         #   @return [::Boolean]
         #     Optional. If true, generate the resources for upgrade only. Some resources
@@ -535,14 +737,15 @@ module Google
         #     Do not set.
         # @!attribute [rw] proxy
         #   @return [::String]
-        #     Optional. URI of a proxy if connectivity from the agent to gkeconnect.googleapis.com
-        #     requires the use of a proxy. Format must be in the form
-        #     `http(s)://{proxy_address}`, depending on the HTTP/HTTPS protocol
+        #     Optional. URI of a proxy if connectivity from the agent to
+        #     gkeconnect.googleapis.com requires the use of a proxy. Format must be in
+        #     the form `http(s)://{proxy_address}`, depending on the HTTP/HTTPS protocol
         #     supported by the proxy. This will direct the connect agent's outbound
         #     traffic through a HTTP(S) proxy.
         # @!attribute [rw] namespace
         #   @return [::String]
-        #     Optional. Namespace for GKE Connect agent resources. Defaults to `gke-connect`.
+        #     Optional. Namespace for GKE Connect agent resources. Defaults to
+        #     `gke-connect`.
         #
         #     The Connect Agent is authorized automatically when run in the default
         #     namespace. Otherwise, explicit authorization must be granted with an
@@ -556,16 +759,17 @@ module Google
         # cluster.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent (project and location) where the Memberships will be created.
-        #     Specified in the format `projects/*/locations/*`.
+        #     Required. The parent (project and location) where the Memberships will be
+        #     created. Specified in the format `projects/*/locations/*`.
         # @!attribute [rw] cr_manifest
         #   @return [::String]
-        #     Optional. The YAML of the membership CR in the cluster. Empty if the membership
-        #     CR does not exist.
+        #     Optional. The YAML of the membership CR in the cluster. Empty if the
+        #     membership CR does not exist.
         # @!attribute [rw] intended_membership
         #   @return [::String]
-        #     Required. The intended membership name under the `parent`. This method only does
-        #     validation in anticipation of a CreateMembership call with the same name.
+        #     Required. The intended membership name under the `parent`. This method only
+        #     does validation in anticipation of a CreateMembership call with the same
+        #     name.
         class ValidateExclusivityRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -639,8 +843,9 @@ module Google
         #   @return [::Boolean]
         #     Output only. Identifies whether the user has requested cancellation
         #     of the operation. Operations that have successfully been cancelled
-        #     have [Operation.error][] value with a {::Google::Rpc::Status#code google.rpc.Status.code} of 1,
-        #     corresponding to `Code.CANCELLED`.
+        #     have [Operation.error][] value with a
+        #     {::Google::Rpc::Status#code google.rpc.Status.code} of 1, corresponding to
+        #     `Code.CANCELLED`.
         # @!attribute [r] api_version
         #   @return [::String]
         #     Output only. API version used to start the operation.

@@ -49,6 +49,11 @@
               "methods": [
                 "apply_software_update"
               ]
+            },
+            "RescheduleMaintenance": {
+              "methods": [
+                "reschedule_maintenance"
+              ]
             }
           }
         }

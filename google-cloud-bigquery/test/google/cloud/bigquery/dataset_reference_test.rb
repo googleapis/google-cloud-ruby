@@ -74,7 +74,7 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :mock_bigquery do
   it "can delete itself" do
     mock = Minitest::Mock.new
     mock.expect :delete_dataset, nil,
-      [project, dataset.dataset_id, delete_contents: nil]
+      [project, dataset.dataset_id], delete_contents: nil
     dataset.service.mocked_service = mock
 
     _(dataset.delete).must_equal true
@@ -87,7 +87,7 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :mock_bigquery do
   it "can delete itself and all table data" do
     mock = Minitest::Mock.new
     mock.expect :delete_dataset, nil,
-      [project, dataset.dataset_id, delete_contents: true]
+      [project, dataset.dataset_id], delete_contents: true
     dataset.service.mocked_service = mock
 
     _(dataset.delete(force: true)).must_equal true
@@ -182,7 +182,7 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :mock_bigquery do
   it "lists tables" do
     mock = Minitest::Mock.new
     mock.expect :list_tables, list_tables_gapi(3),
-      [project, dataset_id, max_results: nil, page_token: nil]
+      [project, dataset_id], max_results: nil, page_token: nil
     dataset.service.mocked_service = mock
 
     tables = dataset.tables
@@ -196,9 +196,9 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :mock_bigquery do
   it "paginates tables" do
     mock = Minitest::Mock.new
     mock.expect :list_tables, list_tables_gapi(3, "next_page_token", 5),
-      [project, dataset_id, max_results: nil, page_token: nil]
+      [project, dataset_id], max_results: nil, page_token: nil
     mock.expect :list_tables, list_tables_gapi(2, nil, 5),
-      [project, dataset_id, max_results: nil, page_token: "next_page_token"]
+      [project, dataset_id], max_results: nil, page_token: "next_page_token"
     dataset.service.mocked_service = mock
 
     first_tables = dataset.tables
@@ -222,7 +222,7 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :mock_bigquery do
     found_table_id = "found_table"
 
     mock = Minitest::Mock.new
-    mock.expect :get_table, find_table_gapi(found_table_id), [project, dataset_id, found_table_id]
+    mock.expect :get_table, find_table_gapi(found_table_id), [project, dataset_id, found_table_id], **patch_table_args
     dataset.service.mocked_service = mock
 
     table = dataset.table found_table_id

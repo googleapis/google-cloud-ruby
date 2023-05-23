@@ -7,8 +7,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/talent/v4beta1/common_pb'
 require 'google/protobuf/timestamp_pb'
-require 'google/type/postal_address_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/talent/v4beta1/job.proto", :syntax => :proto3) do
     add_message "google.cloud.talent.v4beta1.Job" do

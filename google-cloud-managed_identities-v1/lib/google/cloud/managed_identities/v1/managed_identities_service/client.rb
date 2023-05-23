@@ -72,13 +72,12 @@ module Google
             # See {::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all ManagedIdentitiesService clients:
-            #
-            #     ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all ManagedIdentitiesService clients
+            #   ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -145,19 +144,15 @@ module Google
             ##
             # Create a new ManagedIdentitiesService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new ManagedIdentitiesService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new
             #
-            #     client = ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new
-            #
-            # To create a new ManagedIdentitiesService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the ManagedIdentitiesService client.
             # @yieldparam config [Client::Configuration]
@@ -177,14 +172,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -192,6 +186,7 @@ module Google
 
               @operations_client = Operations.new do |config|
                 config.credentials = credentials
+                config.quota_project = @quota_project_id
                 config.endpoint = @config.endpoint
               end
 
@@ -258,6 +253,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/managed_identities/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ManagedIdentities::V1::CreateMicrosoftAdDomainRequest.new
+            #
+            #   # Call the create_microsoft_ad_domain method.
+            #   result = client.create_microsoft_ad_domain request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
             def create_microsoft_ad_domain request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -275,16 +292,20 @@ module Google
                 gapic_version: ::Google::Cloud::ManagedIdentities::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_microsoft_ad_domain.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_microsoft_ad_domain.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @managed_identities_service_stub.call_rpc :create_microsoft_ad_domain, request, options: options do |response, operation|
@@ -326,6 +347,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/managed_identities/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ManagedIdentities::V1::ResetAdminPasswordRequest.new
+            #
+            #   # Call the reset_admin_password method.
+            #   result = client.reset_admin_password request
+            #
+            #   # The returned object is of type Google::Cloud::ManagedIdentities::V1::ResetAdminPasswordResponse.
+            #   p result
+            #
             def reset_admin_password request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -343,16 +379,20 @@ module Google
                 gapic_version: ::Google::Cloud::ManagedIdentities::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.reset_admin_password.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.reset_admin_password.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @managed_identities_service_stub.call_rpc :reset_admin_password, request, options: options do |response, operation|
@@ -411,6 +451,25 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/managed_identities/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ManagedIdentities::V1::ListDomainsRequest.new
+            #
+            #   # Call the list_domains method.
+            #   result = client.list_domains request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::ManagedIdentities::V1::Domain.
+            #     p item
+            #   end
+            #
             def list_domains request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -428,16 +487,20 @@ module Google
                 gapic_version: ::Google::Cloud::ManagedIdentities::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_domains.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_domains.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @managed_identities_service_stub.call_rpc :list_domains, request, options: options do |response, operation|
@@ -479,6 +542,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/managed_identities/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ManagedIdentities::V1::GetDomainRequest.new
+            #
+            #   # Call the get_domain method.
+            #   result = client.get_domain request
+            #
+            #   # The returned object is of type Google::Cloud::ManagedIdentities::V1::Domain.
+            #   p result
+            #
             def get_domain request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -496,16 +574,20 @@ module Google
                 gapic_version: ::Google::Cloud::ManagedIdentities::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_domain.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_domain.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @managed_identities_service_stub.call_rpc :get_domain, request, options: options do |response, operation|
@@ -553,6 +635,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/managed_identities/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ManagedIdentities::V1::UpdateDomainRequest.new
+            #
+            #   # Call the update_domain method.
+            #   result = client.update_domain request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
             def update_domain request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -570,16 +674,20 @@ module Google
                 gapic_version: ::Google::Cloud::ManagedIdentities::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "domain.name" => request.domain.name
-              }
+              header_params = {}
+              if request.domain&.name
+                header_params["domain.name"] = request.domain.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_domain.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_domain.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @managed_identities_service_stub.call_rpc :update_domain, request, options: options do |response, operation|
@@ -621,6 +729,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/managed_identities/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ManagedIdentities::V1::DeleteDomainRequest.new
+            #
+            #   # Call the delete_domain method.
+            #   result = client.delete_domain request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
             def delete_domain request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -638,16 +768,20 @@ module Google
                 gapic_version: ::Google::Cloud::ManagedIdentities::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_domain.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_domain.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @managed_identities_service_stub.call_rpc :delete_domain, request, options: options do |response, operation|
@@ -691,6 +825,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/managed_identities/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ManagedIdentities::V1::AttachTrustRequest.new
+            #
+            #   # Call the attach_trust method.
+            #   result = client.attach_trust request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
             def attach_trust request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -708,16 +864,20 @@ module Google
                 gapic_version: ::Google::Cloud::ManagedIdentities::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.attach_trust.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.attach_trust.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @managed_identities_service_stub.call_rpc :attach_trust, request, options: options do |response, operation|
@@ -765,6 +925,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/managed_identities/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ManagedIdentities::V1::ReconfigureTrustRequest.new
+            #
+            #   # Call the reconfigure_trust method.
+            #   result = client.reconfigure_trust request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
             def reconfigure_trust request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -782,16 +964,20 @@ module Google
                 gapic_version: ::Google::Cloud::ManagedIdentities::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.reconfigure_trust.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.reconfigure_trust.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @managed_identities_service_stub.call_rpc :reconfigure_trust, request, options: options do |response, operation|
@@ -835,6 +1021,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/managed_identities/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ManagedIdentities::V1::DetachTrustRequest.new
+            #
+            #   # Call the detach_trust method.
+            #   result = client.detach_trust request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
             def detach_trust request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -852,16 +1060,20 @@ module Google
                 gapic_version: ::Google::Cloud::ManagedIdentities::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.detach_trust.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.detach_trust.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @managed_identities_service_stub.call_rpc :detach_trust, request, options: options do |response, operation|
@@ -906,6 +1118,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/managed_identities/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ManagedIdentities::V1::ValidateTrustRequest.new
+            #
+            #   # Call the validate_trust method.
+            #   result = client.validate_trust request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
             def validate_trust request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -923,16 +1157,20 @@ module Google
                 gapic_version: ::Google::Cloud::ManagedIdentities::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.validate_trust.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.validate_trust.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @managed_identities_service_stub.call_rpc :validate_trust, request, options: options do |response, operation|
@@ -957,22 +1195,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for create_microsoft_ad_domain
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # create_microsoft_ad_domain to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_microsoft_ad_domain.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_microsoft_ad_domain.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_microsoft_ad_domain.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_microsoft_ad_domain.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
@@ -983,9 +1220,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials

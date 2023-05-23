@@ -59,6 +59,7 @@ class ::Google::Cloud::Dataproc::V1::ClusterController::ClientTest < Minitest::T
     region = "hello world"
     cluster = {}
     request_id = "hello world"
+    action_on_failed_primary_workers = :FAILURE_ACTION_UNSPECIFIED
 
     create_cluster_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_cluster, name
@@ -67,6 +68,7 @@ class ::Google::Cloud::Dataproc::V1::ClusterController::ClientTest < Minitest::T
       assert_equal "hello world", request["region"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dataproc::V1::Cluster), request["cluster"]
       assert_equal "hello world", request["request_id"]
+      assert_equal :FAILURE_ACTION_UNSPECIFIED, request["action_on_failed_primary_workers"]
       refute_nil options
     end
 
@@ -77,35 +79,35 @@ class ::Google::Cloud::Dataproc::V1::ClusterController::ClientTest < Minitest::T
       end
 
       # Use hash object
-      client.create_cluster({ project_id: project_id, region: region, cluster: cluster, request_id: request_id }) do |response, operation|
+      client.create_cluster({ project_id: project_id, region: region, cluster: cluster, request_id: request_id, action_on_failed_primary_workers: action_on_failed_primary_workers }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_cluster project_id: project_id, region: region, cluster: cluster, request_id: request_id do |response, operation|
+      client.create_cluster project_id: project_id, region: region, cluster: cluster, request_id: request_id, action_on_failed_primary_workers: action_on_failed_primary_workers do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_cluster ::Google::Cloud::Dataproc::V1::CreateClusterRequest.new(project_id: project_id, region: region, cluster: cluster, request_id: request_id) do |response, operation|
+      client.create_cluster ::Google::Cloud::Dataproc::V1::CreateClusterRequest.new(project_id: project_id, region: region, cluster: cluster, request_id: request_id, action_on_failed_primary_workers: action_on_failed_primary_workers) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_cluster({ project_id: project_id, region: region, cluster: cluster, request_id: request_id }, grpc_options) do |response, operation|
+      client.create_cluster({ project_id: project_id, region: region, cluster: cluster, request_id: request_id, action_on_failed_primary_workers: action_on_failed_primary_workers }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_cluster(::Google::Cloud::Dataproc::V1::CreateClusterRequest.new(project_id: project_id, region: region, cluster: cluster, request_id: request_id), grpc_options) do |response, operation|
+      client.create_cluster(::Google::Cloud::Dataproc::V1::CreateClusterRequest.new(project_id: project_id, region: region, cluster: cluster, request_id: request_id, action_on_failed_primary_workers: action_on_failed_primary_workers), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

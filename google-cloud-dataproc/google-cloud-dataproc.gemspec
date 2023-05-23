@@ -20,17 +20,16 @@ Gem::Specification.new do |gem|
                       ["README.md", "AUTHENTICATION.md", "LICENSE.md", ".yardopts", "MIGRATING.md"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 2.5"
+  gem.required_ruby_version = ">= 2.6"
 
-  gem.add_dependency "google-cloud-core", "~> 1.5"
-  gem.add_dependency "google-cloud-dataproc-v1", "~> 0.0"
-  gem.add_dependency "google-cloud-dataproc-v1beta2", "~> 0.0"
+  gem.add_dependency "google-cloud-core", "~> 1.6"
+  gem.add_dependency "google-cloud-dataproc-v1", ">= 0.17", "< 2.a"
 
-  gem.add_development_dependency "google-style", "~> 1.25.1"
-  gem.add_development_dependency "minitest", "~> 5.14"
+  gem.add_development_dependency "google-style", "~> 1.26.1"
+  gem.add_development_dependency "minitest", "~> 5.16"
   gem.add_development_dependency "minitest-focus", "~> 1.1"
   gem.add_development_dependency "minitest-rg", "~> 5.2"
-  gem.add_development_dependency "rake", ">= 12.0"
+  gem.add_development_dependency "rake", ">= 13.0"
   gem.add_development_dependency "redcarpet", "~> 3.0"
   gem.add_development_dependency "simplecov", "~> 0.9"
   gem.add_development_dependency "yard", "~> 0.9"

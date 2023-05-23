@@ -14,10 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "json"
-require "set"
-
 TASKS = ["test", "rubocop", "build", "yard", "linkinator", "acceptance", "samples-master", "samples-latest"]
+ISSUE_TASKS = ["bundle", "test", "rubocop", "build", "yard", "linkinator"]
+FAILURES_REPORT_PATH = "tmp/ci-failures.json"
 
 desc "Run CI tasks."
 
@@ -58,6 +57,12 @@ end
 flag :load_kokoro_context do |f|
   f.desc "Load Kokoro credentials and environment info"
 end
+flag :failures_report, "--failures-report[=PATH]" do |f|
+  f.desc "Generate failures report file"
+end
+flag :bundle_retry, "--bundle-retry=RETRIES", accept: Integer, default: 3 do |f|
+  f.desc "Number of times to retry bundler network operations (default: 3)"
+end
 
 at_least_one_required desc: "Tasks" do
   flag :do_bundle, "--[no-]bundle" do |f|
@@ -78,8 +83,15 @@ end
 
 include :exec
 include :terminal, styled: true
+include :fileutils
 
 def run
+  require "json"
+  require "set"
+
+  set :failures_report, true if github_event_name == "schedule"
+  set :failures_report, FAILURES_REPORT_PATH if failures_report == true
+
   if load_kokoro_context
     require "repo_context"
     RepoContext.load_kokoro_env
@@ -101,26 +113,20 @@ def run
   end
 
   dirs.shuffle.each { |dir| run_in_dir dir }
-  puts
-  if @errors.empty?
-    puts "CI passed", :bold, :green
-  else
-    puts "FAILURES:", :bold, :red
-    @errors.each { |err| puts err, :yellow }
-    exit 1
-  end
+
+  handle_results
 end
 
 def setup_auth_env
   final_project = project || ENV["GCLOUD_TEST_PROJECT"] || ENV["GOOGLE_CLOUD_PROJECT"]
-  final_keyfile = keyfile || ENV["GCLOUD_TEST_KEYFILE"] || ENV["GOOGLE_APPLICATION_CREDENTIALS"]
+  final_keyfile = keyfile || ENV["GCLOUD_TEST_KEYFILE"]
   logger.info "Project for integration tests: #{final_project.inspect}"
   logger.info "Set keyfile for integration tests." if final_keyfile
   {
     "GCLOUD_TEST_PROJECT" => final_project,
     "GOOGLE_CLOUD_PROJECT" => final_project,
     "GCLOUD_TEST_KEYFILE" => final_keyfile,
-    "GOOGLE_APPLICATION_CREDENTIALS" => final_keyfile
+    "GOOGLE_APPLICATION_CREDENTIALS" => ENV["GOOGLE_APPLICATION_CREDENTIALS"]
   }
 end
 
@@ -265,7 +271,14 @@ def find_changed_directories files
   dirs = Set.new
   files.each do |file|
     if file =~ %r{^([^/]+)/.+$}
-      dirs << Regexp.last_match[1]
+      dir = Regexp.last_match[1]
+      dirs << dir
+      if dir =~ %r{^(.+)-v\d[^-]*$}
+        wrapper_dir = Regexp.last_match[1]
+        if Dir.exist? wrapper_dir
+          dirs << wrapper_dir
+        end
+      end
     end
   end
   filter_gem_dirs dirs.to_a
@@ -274,17 +287,11 @@ end
 def filter_gem_dirs dirs
   dirs.find_all do |dir|
     if ["Rakefile", "Gemfile", "#{dir}.gemspec"].all? { |file| File.file?(File.join(dir, file)) }
-      if ::Toys::Compat.allow_fork?
-        func = proc do
-          Dir.chdir dir do
-            spec = Gem::Specification.load "#{dir}.gemspec"
-            puts spec.required_ruby_version.satisfied_by?(Gem::Version.new(RUBY_VERSION)).to_s
-          end
-        end
-        capture_proc(func).strip == "true"
-      else
-        true
+      result = capture_ruby([], in: :controller) do |controller|
+        controller.in.puts "spec = Gem::Specification.load '#{dir}/#{dir}.gemspec'"
+        controller.in.puts "puts spec.required_ruby_version.satisfied_by? Gem::Version.new(#{RUBY_VERSION.inspect})"
       end
+      result.strip == "true"
     else
       false
     end
@@ -296,9 +303,9 @@ def run_in_dir dir
     if @bundle_task
       puts
       puts "#{dir}: bundle ...", :bold, :cyan
-      result = exec ["bundle", @bundle_task]
+      result = exec ["bundle", @bundle_task, "--retry=#{bundle_retry}"]
       unless result.success?
-        @errors << "#{dir}: bundle"
+        @errors << [dir, "bundle"]
         next
       end
     end
@@ -306,23 +313,134 @@ def run_in_dir dir
       puts
       puts "#{dir}: #{task} ...", :bold, :cyan
       success = if task == "linkinator"
-        run_linkinator
+        run_linkinator dir
       else
         exec(["bundle", "exec", "rake", task.tr("-", ":")], env: @auth_env).success?
       end
-      @errors << "#{dir}: #{task}" unless success
+      @errors << [dir, task] unless success
     end
   end
 end
 
-def run_linkinator
-  linkinator_cmd = ["npx", "linkinator", "./doc", "--skip", "\\w+\\.md$"]
+def run_linkinator dir
+  allowed_http_codes = ["200", "202"]
+  dir_without_version = dir.sub(/-v\d\w*$/, "")
+  skip_regexes = [
+    "\\w+\\.md$",
+    "^https://rubygems\\.org/gems/#{dir_without_version}",
+    "^https://cloud\\.google\\.com/ruby/docs/reference/#{dir}/latest$"
+  ]
+  if dir == dir_without_version
+    skip_regexes << "^https://cloud\\.google\\.com/ruby/docs/reference/#{dir}-v\\d\\w*/latest$"
+  end
+  linkinator_cmd = ["npx", "linkinator", "./doc", "--retry-errors", "--skip", skip_regexes.join(" ")]
   result = exec linkinator_cmd, out: :capture, err: [:child, :out]
   puts result.captured_out
   checked_links = result.captured_out.split "\n"
-  checked_links.select! { |link| link =~ /^\[(\d+)\]/ && ::Regexp.last_match[1] != "200" }
+  checked_links.select! { |link| link =~ /^\[(\d+)\]/ && !allowed_http_codes.include?(::Regexp.last_match[1]) }
   checked_links.each do |link|
     puts link, :yellow
   end
   checked_links.empty?
+end
+
+def handle_results
+  puts
+  if @errors.empty?
+    puts "CI passed", :bold, :green
+  else
+    puts "FAILURES:", :bold, :red
+    @errors.each { |dir, task| puts "#{dir}: #{task}", :yellow }
+    if failures_report
+      mkdir_p File.dirname failures_report
+      File.write failures_report, generate_failures_json
+    end
+    puts "Wrote failures report file to #{failures_report}"
+    exit 1
+  end
+end
+
+def generate_failures_json
+  failures_by_dir = {}
+  @errors.each do |dir, task|
+    (failures_by_dir[dir] ||= []) << task if ISSUE_TASKS.include? task
+  end
+  JSON.generate failures_by_dir
+end
+
+tool "report-failures" do
+  flag :report_path, "--report-path=PATH", default: FAILURES_REPORT_PATH
+  flag :github_action_id, "--github-action-id=ACTION_ID" do |f|
+    f.desc "Github Action ID under which the CI is running. Optional."
+  end
+
+  include :exec, e: true
+  include :terminal
+
+  def run
+    require "digest/md5"
+    require "json"
+    failures_json = File.read report_path rescue ""
+    if failures_json.empty?
+      puts "No failures report at #{report_path}", :yellow
+      exit 1
+    end
+    failures_by_dir = JSON.parse failures_json
+    failures_by_dir.each do |dir, tasks|
+      issue_id = find_existing_issue dir
+      if issue_id
+        update_issue issue_id, dir, tasks
+      else
+        create_new_issue dir, tasks
+      end
+    end
+  end
+
+  def find_existing_issue dir
+    encoded_dir = encode_str dir
+    result = capture [
+      "gh", "issue", "list",
+      "--repo", "googleapis/google-cloud-ruby",
+      "--search", "#{encoded_dir} in:body state:open type:issue label:\"nightly failure\"",
+      "--json", "number"
+    ]
+    result = JSON.parse result rescue []
+    result.first["number"] unless result.empty?
+  end
+  
+  def update_issue issue_id, dir, tasks
+    body = create_body dir, tasks
+    exec [
+      "gh", "issue", "comment", issue_id.to_s,
+      "--repo", "googleapis/google-cloud-ruby",
+      "--body", body
+    ]
+    puts "Added to issue #{issue_id}: reported #{dir}: #{tasks.join ', '}", :yellow
+  end
+  
+  def create_new_issue dir, tasks
+    body = "#{create_body dir, tasks}\n\n#{encode_str dir}"
+    exec [
+      "gh", "issue", "create",
+      "--repo", "googleapis/google-cloud-ruby",
+      "--title", "[Nightly CI Failures] Failures detected for #{dir}",
+      "--label", "type: bug,priority: p1,nightly failure",
+      "--body", body,
+    ]
+    puts "Created new issue for #{dir}: #{tasks.join ', '}", :yellow
+  end
+  
+  def encode_str str
+    "report_key_#{Digest::MD5.hexdigest str}"
+  end
+  
+  def create_body dir, tasks
+    now = Time.now.utc.strftime "%Y-%m-%d %H:%M:%S"
+    messages = []
+    messages << "At #{now} UTC, detected failures in #{dir} for: #{tasks.join ', '}."
+    unless github_action_id.nil?
+      messages << "The CI logs can be found [here](https://github.com/googleapis/google-cloud-ruby/actions/runs/#{github_action_id})"
+    end
+    messages.join "\n\n"
+  end
 end

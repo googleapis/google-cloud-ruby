@@ -45,7 +45,7 @@ describe Google::Cloud::Storage::Project, :anonymous, :mock_storage do
     bucket_name = "found-bucket"
 
     mock = Minitest::Mock.new
-    mock.expect :get_bucket, find_bucket_gapi(bucket_name), [bucket_name, {user_project: nil}]
+    mock.expect :get_bucket, find_bucket_gapi(bucket_name), [bucket_name], **get_bucket_args
 
     anonymous_storage.service.mocked_service = mock
 
@@ -61,9 +61,9 @@ describe Google::Cloud::Storage::Project, :anonymous, :mock_storage do
     num_files = 3
 
     mock = Minitest::Mock.new
-    mock.expect :get_bucket, find_bucket_gapi(bucket_name), [bucket_name, {user_project: nil}]
+    mock.expect :get_bucket, find_bucket_gapi(bucket_name), [bucket_name], **get_bucket_args
     mock.expect :list_objects, list_files_gapi(num_files),
-      [bucket_name, delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: nil, user_project: nil]
+      [bucket_name], delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: nil, user_project: nil, options: {}
     anonymous_storage.service.mocked_service = mock
 
     bucket = anonymous_storage.bucket bucket_name
@@ -82,9 +82,8 @@ describe Google::Cloud::Storage::Project, :anonymous, :mock_storage do
     file_name = "file.ext"
 
     mock = Minitest::Mock.new
-    mock.expect :get_bucket, find_bucket_gapi(bucket_name), [bucket_name, {user_project: nil}]
-    mock.expect :get_object, find_file_gapi(bucket_name, file_name),
-      [bucket_name, file_name, generation: nil, user_project: nil, options: {}]
+    mock.expect :get_bucket, find_bucket_gapi(bucket_name), [bucket_name], **get_bucket_args
+    mock.expect :get_object, find_file_gapi(bucket_name, file_name), [bucket_name, file_name], **get_object_args
 
     anonymous_storage.service.mocked_service = mock
 
@@ -105,11 +104,10 @@ describe Google::Cloud::Storage::Project, :anonymous, :mock_storage do
       tmpfile.write "yay!"
 
       mock = Minitest::Mock.new
-      mock.expect :get_bucket, find_bucket_gapi(bucket_name), [bucket_name, {user_project: nil}]
-      mock.expect :get_object, find_file_gapi(bucket_name, file_name),
-        [bucket_name, file_name, generation: nil, user_project: nil, options: {}]
-      mock.expect :get_object_with_response, [tmpfile, download_http_resp],
-        [bucket_name, file_name, download_dest: tmpfile, generation: 1234567890, user_project: nil, options: {}]
+      mock.expect :get_bucket, find_bucket_gapi(bucket_name), [bucket_name], **get_bucket_args
+      mock.expect :get_object, find_file_gapi(bucket_name, file_name), [bucket_name, file_name], **get_object_args
+      mock.expect :get_object, [tmpfile, download_http_resp],
+        [bucket_name, file_name], download_dest: tmpfile, generation: 1234567890, user_project: nil, options: {}
 
       anonymous_storage.service.mocked_service = mock
 
@@ -129,7 +127,7 @@ describe Google::Cloud::Storage::Project, :anonymous, :mock_storage do
   end
 
   def find_bucket_gapi name = nil
-    Google::Apis::StorageV1::Bucket.from_json random_bucket_hash(name).to_json
+    Google::Apis::StorageV1::Bucket.from_json random_bucket_hash(name: name).to_json
   end
 
   def find_file_gapi bucket=nil, name = nil

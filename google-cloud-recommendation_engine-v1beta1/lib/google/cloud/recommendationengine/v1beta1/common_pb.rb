@@ -3,7 +3,6 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/recommendationengine/v1beta1/common.proto", :syntax => :proto3) do
     add_message "google.cloud.recommendationengine.v1beta1.FeatureMap" do

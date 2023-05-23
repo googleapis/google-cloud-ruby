@@ -25,10 +25,17 @@ module Google
       module Admin
         module Instance
           ##
-          # To load this package, including all its services, and instantiate a client:
+          # API client module.
+          #
+          # @example Load this package, including all its services, and instantiate a gRPC client
           #
           #     require "google/cloud/spanner/admin/instance/v1"
           #     client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new
+          #
+          # @example Load this package, including all its services, and instantiate a REST client
+          #
+          #     require "google/cloud/spanner/admin/instance/v1"
+          #     client = ::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Rest::Client.new
           #
           module V1
           end

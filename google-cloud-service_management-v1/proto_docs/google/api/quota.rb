@@ -22,7 +22,7 @@ module Google
     # Quota configuration helps to achieve fairness and budgeting in service
     # usage.
     #
-    # The quota configuration works this way:
+    # The metric based quota configuration works this way:
     # - The service configuration defines a set of metrics.
     # - For API calls, the quota.metric_rules maps methods to metrics with
     #   corresponding costs.
@@ -40,10 +40,11 @@ module Google
     #        values:
     #          STANDARD: 10000
     #
-    #      # The metric rules bind all methods to the read_calls metric,
-    #      # except for the UpdateBook and DeleteBook methods. These two methods
-    #      # are mapped to the write_calls metric, with the UpdateBook method
-    #      # consuming at twice rate as the DeleteBook method.
+    #
+    #      (The metric rules bind all methods to the read_calls metric,
+    #       except for the UpdateBook and DeleteBook methods. These two methods
+    #       are mapped to the write_calls metric, with the UpdateBook method
+    #       consuming at twice rate as the DeleteBook method.)
     #      metric_rules:
     #      - selector: "*"
     #        metric_costs:
@@ -69,30 +70,24 @@ module Google
     #        value_type: INT64
     # @!attribute [rw] limits
     #   @return [::Array<::Google::Api::QuotaLimit>]
-    #     List of `QuotaLimit` definitions for the service.
-    #
-    #     Used by metric-based quotas only.
+    #     List of QuotaLimit definitions for the service.
     # @!attribute [rw] metric_rules
     #   @return [::Array<::Google::Api::MetricRule>]
-    #     List of `MetricRule` definitions, each one mapping a selected method to one
+    #     List of MetricRule definitions, each one mapping a selected method to one
     #     or more metrics.
-    #
-    #     Used by metric-based quotas only.
     class Quota
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
     end
 
     # Bind API methods to metrics. Binding a method to a metric causes that
-    # metric's configured quota, billing, and monitoring behaviors to apply to the
-    # method call.
-    #
-    # Used by metric-based quotas only.
+    # metric's configured quota behaviors to apply to the method call.
     # @!attribute [rw] selector
     #   @return [::String]
     #     Selects the methods to which this rule applies.
     #
-    #     Refer to {::Google::Api::DocumentationRule#selector selector} for syntax details.
+    #     Refer to {::Google::Api::DocumentationRule#selector selector} for syntax
+    #     details.
     # @!attribute [rw] metric_costs
     #   @return [::Google::Protobuf::Map{::String => ::Integer}]
     #     Metrics to update when the selected methods are called, and the associated
@@ -120,24 +115,12 @@ module Google
     # type combination defined within a `QuotaGroup`.
     # @!attribute [rw] name
     #   @return [::String]
-    #     Name of the quota limit. The name is used to refer to the limit when
-    #     overriding the default limit on per-consumer basis.
+    #     Name of the quota limit.
     #
-    #     For group-based quota limits, the name must be unique within the quota
-    #     group. If a name is not provided, it will be generated from the limit_by
-    #     and duration fields.
-    #
-    #     For metric-based quota limits, the name must be provided, and it must be
-    #     unique within the service. The name can only include alphanumeric
-    #     characters as well as '-'.
+    #     The name must be provided, and it must be unique within the service. The
+    #     name can only include alphanumeric characters as well as '-'.
     #
     #     The maximum length of the limit name is 64 characters.
-    #
-    #     The name of a limit is used as a unique identifier for this limit.
-    #     Therefore, once a limit has been put into use, its name should be
-    #     immutable. You can use the display_name field to provide a user-friendly
-    #     name for the limit. The display name can be evolved over time without
-    #     affecting the identity of the limit.
     # @!attribute [rw] description
     #   @return [::String]
     #     Optional. User-visible, extended description for this quota limit.
@@ -178,10 +161,7 @@ module Google
     #     Used by group-based quotas only.
     # @!attribute [rw] duration
     #   @return [::String]
-    #     Duration of this limit in textual notation. Example: "100s", "24h", "1d".
-    #     For duration longer than a day, only multiple of days is supported. We
-    #     support only "100s" and "1d" for now. Additional support will be added in
-    #     the future. "0" indicates indefinite duration.
+    #     Duration of this limit in textual notation. Must be "100s" or "1d".
     #
     #     Used by group-based quotas only.
     # @!attribute [rw] metric
@@ -189,75 +169,22 @@ module Google
     #     The name of the metric this quota limit applies to. The quota limits with
     #     the same metric will be checked together during runtime. The metric must be
     #     defined within the service config.
-    #
-    #     Used by metric-based quotas only.
     # @!attribute [rw] unit
     #   @return [::String]
     #     Specify the unit of the quota limit. It uses the same syntax as
     #     [Metric.unit][]. The supported unit kinds are determined by the quota
     #     backend system.
     #
-    #     The [Google Service Control](https://cloud.google.com/service-control)
-    #     supports the following unit components:
-    #     * One of the time intevals:
-    #       * "/min"  for quota every minute.
-    #       * "/d"  for quota every 24 hours, starting 00:00 US Pacific Time.
-    #       * Otherwise the quota won't be reset by time, such as storage limit.
-    #     * One and only one of the granted containers:
-    #       * "/\\{organization}" quota for an organization.
-    #       * "/\\{project}" quota for a project.
-    #       * "/\\{folder}" quota for a folder.
-    #       * "/\\{resource}" quota for a universal resource.
-    #     * Zero or more quota segmentation dimension. Not all combos are valid.
-    #       * "/\\{region}" quota for every region. Not to be used with time intervals.
-    #       * Otherwise the resources granted on the target is not segmented.
-    #       * "/\\{zone}" quota for every zone. Not to be used with time intervals.
-    #       * Otherwise the resources granted on the target is not segmented.
-    #       * "/\\{resource}" quota for a resource associated with a project or org.
-    #
     #     Here are some examples:
     #     * "1/min/\\{project}" for quota per minute per project.
-    #     * "1/min/\\{user}" for quota per minute per user.
-    #     * "1/min/\\{organization}" for quota per minute per organization.
     #
     #     Note: the order of unit components is insignificant.
     #     The "1" at the beginning is required to follow the metric unit syntax.
-    #
-    #     Used by metric-based quotas only.
     # @!attribute [rw] values
     #   @return [::Google::Protobuf::Map{::String => ::Integer}]
-    #     Tiered limit values. Also allows for regional or zone overrides for these
-    #     values if "/\\{region}" or "/\\{zone}" is specified in the unit field.
-    #
-    #     Currently supported tiers from low to high:
-    #     VERY_LOW, LOW, STANDARD, HIGH, VERY_HIGH
-    #
-    #     To apply different limit values for users according to their tiers, specify
-    #     the values for the tiers you want to differentiate. For example:
-    #     \\{LOW:100, STANDARD:500, HIGH:1000, VERY_HIGH:5000}
-    #
-    #     The limit value for each tier is optional except for the tier STANDARD.
-    #     The limit value for an unspecified tier falls to the value of its next
-    #     tier towards tier STANDARD. For the above example, the limit value for tier
-    #     STANDARD is 500.
-    #
-    #     To apply the same limit value for all users, just specify limit value for
-    #     tier STANDARD. For example: \\{STANDARD:500}.
-    #
-    #     To apply a regional overide for a tier, add a map entry with key
-    #     "<TIER>/<region>", where <region> is a region name. Similarly, for a zone
-    #     override, add a map entry with key "<TIER>/\\{zone}".
-    #     Further, a wildcard can be used at the end of a zone name in order to
-    #     specify zone level overrides. For example:
-    #     LOW: 10, STANDARD: 50, HIGH: 100,
-    #     LOW/us-central1: 20, STANDARD/us-central1: 60, HIGH/us-central1: 200,
-    #     LOW/us-central1-*: 10, STANDARD/us-central1-*: 20, HIGH/us-central1-*: 80
-    #
-    #     The regional overrides tier set for each region must be the same as
-    #     the tier set for default limit values. Same rule applies for zone overrides
-    #     tier as well.
-    #
-    #     Used by metric-based quotas only.
+    #     Tiered limit values. You must specify this as a key:value pair, with an
+    #     integer value that is the maximum number of requests allowed for the
+    #     specified unit. Currently only STANDARD is supported.
     # @!attribute [rw] display_name
     #   @return [::String]
     #     User-visible display name for this limit.

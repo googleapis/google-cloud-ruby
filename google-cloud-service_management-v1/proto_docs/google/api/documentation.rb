@@ -76,8 +76,10 @@ module Google
     # and is documented together with service config validation.
     # @!attribute [rw] summary
     #   @return [::String]
-    #     A short summary of what the service does. Can only be provided by
-    #     plain text.
+    #     A short description of what the service does. The summary must be plain
+    #     text. It becomes the overview of the service displayed in Google Cloud
+    #     Console.
+    #     NOTE: This field is equivalent to the standard field `description`.
     # @!attribute [rw] pages
     #   @return [::Array<::Google::Api::Page>]
     #     The top level pages for the documentation set.
@@ -89,6 +91,12 @@ module Google
     # @!attribute [rw] documentation_root_url
     #   @return [::String]
     #     The URL to the root of documentation.
+    # @!attribute [rw] service_root_url
+    #   @return [::String]
+    #     Specifies the service root url if the default one (the service name
+    #     from the yaml file) is not suitable. This can be seen in any fully
+    #     specified service urls as well as sections that show a base that other
+    #     urls are relative to.
     # @!attribute [rw] overview
     #   @return [::String]
     #     Declares a single overview page. For example:
@@ -112,19 +120,22 @@ module Google
     # A documentation rule provides information about individual API elements.
     # @!attribute [rw] selector
     #   @return [::String]
-    #     The selector is a comma-separated list of patterns. Each pattern is a
-    #     qualified name of the element which may end in "*", indicating a wildcard.
-    #     Wildcards are only allowed at the end and for a whole component of the
-    #     qualified name, i.e. "foo.*" is ok, but not "foo.b*" or "foo.*.bar". To
-    #     specify a default for all applicable elements, the whole pattern "*"
-    #     is used.
+    #     The selector is a comma-separated list of patterns for any element such as
+    #     a method, a field, an enum value. Each pattern is a qualified name of the
+    #     element which may end in "*", indicating a wildcard. Wildcards are only
+    #     allowed at the end and for a whole component of the qualified name,
+    #     i.e. "foo.*" is ok, but not "foo.b*" or "foo.*.bar". A wildcard will match
+    #     one or more components. To specify a default for all applicable elements,
+    #     the whole pattern "*" is used.
     # @!attribute [rw] description
     #   @return [::String]
-    #     Description of the selected API(s).
+    #     Description of the selected proto element (e.g. a message, a method, a
+    #     'service' definition, or a field). Defaults to leading & trailing comments
+    #     taken from the proto source definition of the proto element.
     # @!attribute [rw] deprecation_description
     #   @return [::String]
-    #     Deprecation description of the selected element(s). It can be provided if an
-    #     element is marked as `deprecated`.
+    #     Deprecation description of the selected element(s). It can be provided if
+    #     an element is marked as `deprecated`.
     class DocumentationRule
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -150,8 +161,9 @@ module Google
     #     `[Java][Tutorial.Java]`.
     # @!attribute [rw] content
     #   @return [::String]
-    #     The Markdown content of the page. You can use <code>&#40;== include \\{path} ==&#41;</code>
-    #     to include content from a Markdown file.
+    #     The Markdown content of the page. You can use <code>&#40;== include \\{path}
+    #     ==&#41;</code> to include content from a Markdown file. The content can be
+    #     used to produce the documentation page such as HTML format page.
     # @!attribute [rw] subpages
     #   @return [::Array<::Google::Api::Page>]
     #     Subpages of this page. The order of subpages specified here will be

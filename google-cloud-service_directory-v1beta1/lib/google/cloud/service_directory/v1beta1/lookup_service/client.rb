@@ -41,13 +41,12 @@ module Google
             # See {::Google::Cloud::ServiceDirectory::V1beta1::LookupService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all LookupService clients:
-            #
-            #     ::Google::Cloud::ServiceDirectory::V1beta1::LookupService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all LookupService clients
+            #   ::Google::Cloud::ServiceDirectory::V1beta1::LookupService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -67,10 +66,7 @@ module Google
 
                 default_config.timeout = 15.0
                 default_config.retry_policy = {
-                  initial_delay: 1.0,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 2]
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 2]
                 }
 
                 default_config
@@ -102,19 +98,15 @@ module Google
             ##
             # Create a new LookupService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new LookupService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::ServiceDirectory::V1beta1::LookupService::Client.new
             #
-            #     client = ::Google::Cloud::ServiceDirectory::V1beta1::LookupService::Client.new
-            #
-            # To create a new LookupService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::ServiceDirectory::V1beta1::LookupService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::ServiceDirectory::V1beta1::LookupService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the LookupService client.
             # @yieldparam config [Client::Configuration]
@@ -134,14 +126,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -187,22 +178,37 @@ module Google
             #   @param endpoint_filter [::String]
             #     Optional. The filter applied to the endpoints of the resolved service.
             #
-            #     General filter string syntax:
-            #     <field> <operator> <value> (<logical connector>)
-            #     <field> can be "name" or "metadata.<key>" for map field.
-            #     <operator> can be "<, >, <=, >=, !=, =, :". Of which ":" means HAS and is
-            #     roughly the same as "=".
-            #     <value> must be the same data type as the field.
-            #     <logical connector> can be "AND, OR, NOT".
+            #     General `filter` string syntax:
+            #     `<field> <operator> <value> (<logical connector>)`
+            #
+            #     *   `<field>` can be `name`, `address`, `port`, or `metadata.<key>` for
+            #         map field
+            #     *   `<operator>` can be `<`, `>`, `<=`, `>=`, `!=`, `=`, `:`. Of which `:`
+            #         means `HAS`, and is roughly the same as `=`
+            #     *   `<value>` must be the same data type as field
+            #     *   `<logical connector>` can be `AND`, `OR`, `NOT`
             #
             #     Examples of valid filters:
-            #     * "metadata.owner" returns Endpoints that have a label with the
-            #       key "owner", this is the same as "metadata:owner"
-            #     * "metadata.protocol=gRPC" returns Endpoints that have key/value
-            #       "protocol=gRPC"
-            #     * "metadata.owner!=sd AND metadata.foo=bar" returns
-            #       Endpoints that have "owner" field in metadata with a value that is not
-            #       "sd" AND have the key/value foo=bar.
+            #
+            #     *   `metadata.owner` returns endpoints that have a annotation with the key
+            #         `owner`, this is the same as `metadata:owner`
+            #     *   `metadata.protocol=gRPC` returns endpoints that have key/value
+            #         `protocol=gRPC`
+            #     *   `address=192.108.1.105` returns endpoints that have this address
+            #     *   `port>8080` returns endpoints that have port number larger than 8080
+            #     *
+            #     `name>projects/my-project/locations/us-east1/namespaces/my-namespace/services/my-service/endpoints/endpoint-c`
+            #         returns endpoints that have name that is alphabetically later than the
+            #         string, so "endpoint-e" is returned but "endpoint-a" is not
+            #     *   `metadata.owner!=sd AND metadata.foo=bar` returns endpoints that have
+            #         `owner` in annotation key but value is not `sd` AND have key/value
+            #          `foo=bar`
+            #     *   `doesnotexist.foo=bar` returns an empty list. Note that endpoint
+            #         doesn't have a field called "doesnotexist". Since the filter does not
+            #         match any endpoint, it returns no results
+            #
+            #     For more information about filtering, see
+            #     [API Filtering](https://aip.dev/160).
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::ServiceDirectory::V1beta1::ResolveServiceResponse]
@@ -211,6 +217,21 @@ module Google
             # @return [::Google::Cloud::ServiceDirectory::V1beta1::ResolveServiceResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/service_directory/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ServiceDirectory::V1beta1::LookupService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ServiceDirectory::V1beta1::ResolveServiceRequest.new
+            #
+            #   # Call the resolve_service method.
+            #   result = client.resolve_service request
+            #
+            #   # The returned object is of type Google::Cloud::ServiceDirectory::V1beta1::ResolveServiceResponse.
+            #   p result
             #
             def resolve_service request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -229,16 +250,20 @@ module Google
                 gapic_version: ::Google::Cloud::ServiceDirectory::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.resolve_service.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.resolve_service.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @lookup_service_stub.call_rpc :resolve_service, request, options: options do |response, operation|
@@ -262,22 +287,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for resolve_service
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # resolve_service to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::ServiceDirectory::V1beta1::LookupService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.resolve_service.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::ServiceDirectory::V1beta1::LookupService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.resolve_service.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::ServiceDirectory::V1beta1::LookupService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.resolve_service.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::ServiceDirectory::V1beta1::LookupService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.resolve_service.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
@@ -288,9 +312,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials

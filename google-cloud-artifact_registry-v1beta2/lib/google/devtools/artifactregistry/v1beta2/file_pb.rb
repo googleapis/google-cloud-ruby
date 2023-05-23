@@ -5,7 +5,7 @@ require 'google/protobuf'
 
 require 'google/api/resource_pb'
 require 'google/protobuf/timestamp_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/devtools/artifactregistry/v1beta2/file.proto", :syntax => :proto3) do
     add_message "google.devtools.artifactregistry.v1beta2.Hash" do
@@ -15,6 +15,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_enum "google.devtools.artifactregistry.v1beta2.Hash.HashType" do
       value :HASH_TYPE_UNSPECIFIED, 0
       value :SHA256, 1
+      value :MD5, 2
     end
     add_message "google.devtools.artifactregistry.v1beta2.File" do
       optional :name, :string, 1

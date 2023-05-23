@@ -1,0 +1,35 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-scheduler.gemspec",
+    "lib/google-cloud-scheduler.rb",
+    "lib/google/cloud/scheduler.rb",
+    "lib/google/cloud/scheduler/version.rb",
+    "test/google/cloud/scheduler/client_test.rb",
+    "test/google/cloud/scheduler/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml",
+    "MIGRATING.md",
+    "samples/.rubocop.yml",
+    "samples/Gemfile",
+    "samples/README.md",
+    "samples/Rakefile",
+    "samples/acceptance/sample_server_test.rb",
+    "samples/acceptance/scheduler_test.rb",
+    "samples/app.rb",
+    "samples/app.yaml",
+    "samples/create_job.rb",
+    "samples/delete_job.rb"
+  ]
+}

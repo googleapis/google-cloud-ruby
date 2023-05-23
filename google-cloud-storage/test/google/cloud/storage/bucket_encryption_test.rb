@@ -16,7 +16,7 @@ require "helper"
 
 describe Google::Cloud::Storage::Bucket, :encryption, :mock_storage do
   let(:bucket_name) { "new-bucket-#{Time.now.to_i}" }
-  let(:bucket_hash) { random_bucket_hash bucket_name }
+  let(:bucket_hash) { random_bucket_hash name: bucket_name }
   let(:bucket_json) { bucket_hash.to_json }
   let(:bucket_gapi) { Google::Apis::StorageV1::Bucket.from_json bucket_json }
   let(:bucket) { Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service }
@@ -40,7 +40,7 @@ describe Google::Cloud::Storage::Bucket, :encryption, :mock_storage do
 
         mock = Minitest::Mock.new
         mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-                    [bucket.name, empty_file_gapi, name: new_file_name, predefined_acl: nil, upload_source: tmpfile, content_encoding: nil, content_type: "text/plain", kms_key_name: nil, user_project: nil, options: key_options]
+          [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: tmpfile, options: key_options.merge(retries: 0))
 
         bucket.service.mocked_service = mock
 
@@ -55,7 +55,7 @@ describe Google::Cloud::Storage::Bucket, :encryption, :mock_storage do
 
       mock = Minitest::Mock.new
       mock.expect :get_object, find_file_gapi(bucket.name, file_name),
-                  [bucket.name, file_name, generation: nil, user_project: nil, options: key_options]
+        [bucket.name, file_name], **get_object_args(options: key_options)
 
       bucket.service.mocked_service = mock
 
@@ -75,8 +75,7 @@ describe Google::Cloud::Storage::Bucket, :encryption, :mock_storage do
     it "gets and sets its encryption config" do
       mock = Minitest::Mock.new
       patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new encryption: encryption_gapi(kms_key)
-      mock.expect :patch_bucket, patch_bucket_gapi,
-                  [bucket_name, patch_bucket_gapi, predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil]
+      mock.expect :patch_bucket, patch_bucket_gapi, [bucket_name, patch_bucket_gapi], **patch_bucket_args(options: {retries: 0})
 
       bucket.service.mocked_service = mock
 
@@ -93,8 +92,7 @@ describe Google::Cloud::Storage::Bucket, :encryption, :mock_storage do
       bucket_with_key = Google::Cloud::Storage::Bucket.from_gapi bucket_gapi_with_key, storage.service
       patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new encryption: encryption_gapi(nil)
       mock = Minitest::Mock.new
-      mock.expect :patch_bucket, bucket_gapi,
-                  [bucket_name, patch_bucket_gapi, predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil]
+      mock.expect :patch_bucket, bucket_gapi, [bucket_name, patch_bucket_gapi], **patch_bucket_args(options: {retries: 0})
 
       bucket_with_key.service.mocked_service = mock
 
@@ -113,7 +111,7 @@ describe Google::Cloud::Storage::Bucket, :encryption, :mock_storage do
 
         mock = Minitest::Mock.new
         mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-                    [bucket.name, empty_file_gapi, name: new_file_name, predefined_acl: nil, upload_source: tmpfile, content_encoding: nil, content_type: "text/plain", kms_key_name: kms_key, user_project: nil, options: {}]
+          [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: tmpfile, kms_key_name: kms_key, options: {retries: 0})
 
         bucket.service.mocked_service = mock
 

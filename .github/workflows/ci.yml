@@ -2,10 +2,10 @@ name: CI
 on:
   pull_request:
     branches:
-      - master
+      - main
   push:
     branches:
-      - master
+      - main
   schedule:
     - cron: "20 8 * * *"
   workflow_dispatch:
@@ -16,6 +16,9 @@ on:
       base:
         description: "Commit reference from which to evaluate diffs"
         required: false
+      flags:
+        description: "Extra flags to pass to toys ci"
+        required: false
 
 jobs:
   CI:
@@ -24,40 +27,50 @@ jobs:
       matrix:
         include:
           - os: ubuntu-latest
-            ruby: "2.5"
-            task: "--test"
-          - os: ubuntu-latest
             ruby: "2.6"
             task: "--test"
           - os: ubuntu-latest
             ruby: "2.7"
-            task: "--rubocop --build --test"
-          - os: ubuntu-latest
-            ruby: "2.7"
-            task: "--yard --linkinator"
+            task: "--test"
           - os: ubuntu-latest
             ruby: "3.0"
             task: "--test"
+          - os: ubuntu-latest
+            ruby: "3.1"
+            task: "--test"
+          - os: ubuntu-latest
+            ruby: "3.2"
+            task: "--rubocop --build --test"
+          - os: ubuntu-latest
+            ruby: "3.2"
+            task: "--yard --linkinator"
           - os: macos-latest
-            ruby: "2.7"
+            ruby: "3.2"
             task: "--test"
           - os: windows-latest
-            ruby: "2.7"
+            ruby: "3.2"
             task: "--test"
       fail-fast: false
     runs-on: ${{ matrix.os }}
     steps:
     - name: Checkout repo
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
     - name: Install Ruby ${{ matrix.ruby }}
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: "${{ matrix.ruby }}"
-    - name: Install NodeJS 12.x
-      uses: actions/setup-node@v2
+    - name: Install NodeJS 16.x
+      uses: actions/setup-node@v3
       with:
-        node-version: "12.x"
+        node-version: "16.x"
     - name: Install tools
       run: "gem install --no-document toys && npm install linkinator"
     - name: Test ${{ matrix.task }}
-      run: toys ci -v ${{ matrix.task }} --github-event-name=${{ github.event_name }} --github-event-payload=${{ github.event_path }}
+      run: |
+        toys ci -v ${{ matrix.task }} --github-event-name=${{ github.event_name }} --github-event-payload=${{ github.event_path }} ${{ github.event.inputs.flags }}
+    - name: Open Issues
+      if: ${{ failure() }}
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        toys ci report-failures --github-action-id=${{ github.run_id }} -v

@@ -28,9 +28,12 @@ module Google
   module Cloud
     module Compute
       module V1
-        # To load this service and instantiate a REST client:
+        ##
+        # The ZoneOperations API.
         #
-        #     require "google/cloud/compute/v1/zone_operations"
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/compute/v1/zone_operations/rest"
         #     client = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::Client.new
         #
         module ZoneOperations

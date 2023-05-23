@@ -19,6 +19,7 @@ require_relative "../storage_change_default_storage_class"
 require_relative "../storage_cors_configuration"
 require_relative "../storage_create_bucket"
 require_relative "../storage_create_bucket_class_location"
+require_relative "../storage_create_bucket_dual_region"
 require_relative "../storage_define_bucket_website_configuration"
 require_relative "../storage_delete_bucket"
 require_relative "../storage_disable_bucket_lifecycle_management"
@@ -33,6 +34,8 @@ require_relative "../storage_enable_uniform_bucket_level_access"
 require_relative "../storage_enable_versioning"
 require_relative "../storage_get_bucket_metadata"
 require_relative "../storage_get_default_event_based_hold"
+require_relative "../storage_get_public_access_prevention"
+require_relative "../storage_get_requester_pays_status"
 require_relative "../storage_get_retention_policy"
 require_relative "../storage_get_uniform_bucket_level_access"
 require_relative "../storage_list_buckets"
@@ -41,7 +44,11 @@ require_relative "../storage_remove_bucket_label"
 require_relative "../storage_remove_cors_configuration"
 require_relative "../storage_remove_retention_policy"
 require_relative "../storage_set_bucket_default_kms_key"
+require_relative "../storage_set_public_access_prevention_enforced"
+require_relative "../storage_set_public_access_prevention_inherited"
 require_relative "../storage_set_retention_policy"
+require_relative "../storage_get_autoclass"
+require_relative "../storage_set_autoclass"
 
 describe "Buckets Snippets" do
   let(:storage_client)   { Google::Cloud::Storage.new }
@@ -86,7 +93,7 @@ describe "Buckets Snippets" do
         list_buckets
       end
 
-      assert_includes out, "ruby_storage_sample_"
+      assert_includes out, "ruby-storage-samples-"
 
       # get_bucket_metadata
       out, _err = capture_io do
@@ -100,11 +107,59 @@ describe "Buckets Snippets" do
         delete_bucket bucket_name: bucket_name
       end
 
-      refute storage_client.bucket bucket_name
 
+      refute storage_client.bucket bucket_name
 
       delete_bucket_helper bucket_name
       delete_bucket_helper secondary_bucket_name
+    end
+  end
+
+  describe "storage_create_bucket_dual_region" do
+    it "creates dual region bucket" do
+      location = "US"
+      region_1 = "US-EAST1"
+      region_2 = "US-WEST1"
+      location_type = "dual-region"
+      bucket_name = random_bucket_name
+      refute storage_client.bucket bucket_name
+
+      expected = "Bucket #{bucket_name} created:\n"
+      expected += "- location: #{location}\n"
+      expected += "- location_type: #{location_type}\n"
+      expected += "- custom_placement_config:\n"
+      expected += "  - data_locations: #{[region_1, region_2]}\n"
+
+      retry_resource_exhaustion do
+        assert_output expected do
+          StorageCreateBucketDualRegion.new.storage_create_bucket_dual_region bucket_name: bucket_name,
+                                                                              region_1: region_1,
+                                                                              region_2: region_2
+        end
+      end
+
+      refute_nil storage_client.bucket bucket_name
+
+      delete_bucket_helper bucket_name
+    end
+  end
+
+  describe "autoclass" do
+    it "get_autoclass, set_autoclass" do
+      bucket_name = random_bucket_name
+      refute storage_client.bucket bucket_name
+
+      storage_client.create_bucket bucket_name, autoclass_enabled: true
+
+      assert_output(/autoclass config set to true./) do
+        get_autoclass bucket_name: bucket_name
+      end
+
+      assert_output(/autoclass config set to false./) do
+        set_autoclass bucket_name: bucket_name, toggle: false
+      end
+
+      delete_bucket_helper bucket_name
     end
   end
 
@@ -136,7 +191,7 @@ describe "Buckets Snippets" do
   end
 
   describe "requester_pays" do
-    it "enable_requester_pays, disable_requester_pays" do
+    it "enable_requester_pays, disable_requester_pays, get_requester_pays_status" do
       # enable_requester_pays
       bucket.requester_pays = false
 
@@ -146,11 +201,23 @@ describe "Buckets Snippets" do
       bucket.refresh!
       assert bucket.requester_pays?
 
+      # get_requester_pays_status
+      assert_output "Requester pays status is enabled for #{bucket.name}\n" do
+        get_requester_pays_status bucket_name: bucket.name
+      end
+      assert bucket.requester_pays?
+
       # disable_requester_pays
       assert_output "Requester pays has been disabled for #{bucket.name}\n" do
         disable_requester_pays bucket_name: bucket.name
       end
       bucket.refresh!
+      refute bucket.requester_pays?
+
+      # get_requester_pays_status
+      assert_output "Requester pays status is disabled for #{bucket.name}\n" do
+        get_requester_pays_status bucket_name: bucket.name
+      end
       refute bucket.requester_pays?
     end
   end
@@ -237,7 +304,7 @@ describe "Buckets Snippets" do
       end
 
       bucket.refresh!
-      assert bucket.labels.empty?
+      assert bucket.labels[label_key].empty?
     end
   end
 
@@ -395,6 +462,38 @@ describe "Buckets Snippets" do
       bucket.refresh!
       assert_equal main_page_suffix, bucket.website_main
       assert_equal not_found_page, bucket.website_404
+    end
+  end
+
+  describe "public_access_prevention" do
+    it "set_public_access_prevention_enforced, get_public_access_prevention, " \
+       "set_public_access_prevention_inherited" do
+      bucket.public_access_prevention = :inherited
+      bucket.refresh!
+      _(bucket.public_access_prevention).must_equal "inherited"
+
+      # set_public_access_prevention_enforced
+      assert_output "Public access prevention is set to enforced for #{bucket.name}.\n" do
+        set_public_access_prevention_enforced bucket_name: bucket.name
+      end
+
+      bucket.refresh!
+      _(bucket.public_access_prevention).must_equal "enforced"
+
+      # get_public_access_prevention
+      assert_output "Public access prevention is 'enforced' for #{bucket.name}.\n" do
+        get_public_access_prevention bucket_name: bucket.name
+      end
+      _(bucket.public_access_prevention).must_equal "enforced"
+
+      # set_public_access_prevention_inherited
+      assert_output "Public access prevention is 'inherited' for #{bucket.name}.\n" do
+        set_public_access_prevention_inherited bucket_name: bucket.name
+      end
+
+      bucket.refresh!
+      _(bucket.public_access_prevention).must_equal "inherited"
+      bucket.public_access_prevention = :inherited
     end
   end
 end

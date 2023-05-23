@@ -10,8 +10,8 @@ require 'google/api/resource_pb'
 require 'google/cloud/automl/v1/annotation_payload_pb'
 require 'google/cloud/automl/v1/data_items_pb'
 require 'google/cloud/automl/v1/io_pb'
-require 'google/cloud/automl/v1/operations_pb'
 require 'google/longrunning/operations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/automl/v1/prediction_service.proto", :syntax => :proto3) do
     add_message "google.cloud.automl.v1.PredictRequest" do

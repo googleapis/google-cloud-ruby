@@ -25,6 +25,7 @@ require "google/cloud/error_reporting/v1beta1/version"
 require "google/cloud/error_reporting/v1beta1/report_errors_service/credentials"
 require "google/cloud/error_reporting/v1beta1/report_errors_service/paths"
 require "google/cloud/error_reporting/v1beta1/report_errors_service/client"
+require "google/cloud/error_reporting/v1beta1/report_errors_service/rest"
 
 module Google
   module Cloud
@@ -33,10 +34,15 @@ module Google
         ##
         # An API for reporting error events.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/error_reporting/v1beta1/report_errors_service"
         #     client = ::Google::Cloud::ErrorReporting::V1beta1::ReportErrorsService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/error_reporting/v1beta1/report_errors_service/rest"
+        #     client = ::Google::Cloud::ErrorReporting::V1beta1::ReportErrorsService::Rest::Client.new
         #
         module ReportErrorsService
         end

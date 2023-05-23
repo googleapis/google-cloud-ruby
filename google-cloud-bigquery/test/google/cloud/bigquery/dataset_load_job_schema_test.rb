@@ -35,28 +35,53 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
 
   let(:table_name) { "My Table" }
   let(:table_description) { "This is my table" }
-  let(:table_schema) {
-    {
-      fields: [
-        { mode: "REQUIRED", name: "name", type: "STRING", description: nil, fields: [] },
-        { mode: "NULLABLE", name: "age", type: "INTEGER", description: nil, fields: [] },
-        { mode: "NULLABLE", name: "score", type: "FLOAT", description: "A score from 0.0 to 10.0", fields: [] },
-        { mode: "NULLABLE", name: "price", type: "NUMERIC", description: nil, fields: [] },
-        { mode: "NULLABLE", name: "my_bignumeric", type: "BIGNUMERIC", description: nil, fields: [] },
-        { mode: "NULLABLE", name: "active", type: "BOOLEAN", description: nil, fields: [] },
-        { mode: "NULLABLE", name: "avatar", type: "BYTES", description: nil, fields: [] },
-        { mode: "REQUIRED", name: "dob", type: "TIMESTAMP", description: nil, fields: [] }
-      ]
-    }
-  }
-  let(:table_schema_gapi) do
-    gapi = Google::Apis::BigqueryV2::TableSchema.from_json table_schema.to_json
-    gapi.fields.each do |f|
-      f.update! fields: []
-    end
-    gapi
+  let(:schema_gapi_fields) do
+    [
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REQUIRED", name: "name",          type: "STRING", description: nil, fields: [], max_length: max_length_string),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "age",           type: "INTEGER", policy_tags: policy_tags_gapi, description: nil, fields: []),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "score",         type: "FLOAT", description: "A score from 0.0 to 10.0", fields: []),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "cost",          type: "NUMERIC", description: nil, fields: [], precision: precision_numeric, scale: scale_numeric),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "my_bignumeric", type: "BIGNUMERIC", description: nil, fields: [], precision: precision_bignumeric, scale: scale_bignumeric),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "active",        type: "BOOLEAN", description: nil, fields: []),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "avatar",        type: "BYTES", description: nil, fields: [], max_length: max_length_bytes),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "creation_date", type: "TIMESTAMP", description: nil, fields: []),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "duration",      type: "TIME", description: nil, fields: []),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "target_end",    type: "DATETIME", description: nil, fields: []),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "birthday",      type: "DATE", description: nil, fields: []),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "home",          type: "GEOGRAPHY", description: nil, fields: []),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REPEATED", name: "cities_lived",  type: "RECORD", description: nil, fields: [
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "place",                type: "STRING",  description: nil, fields: []),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "location",             type: "GEOGRAPHY",  description: nil, fields: []),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "number_of_years",      type: "INTEGER", description: nil, fields: []),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "my_nested_numeric",    type: "NUMERIC", description: nil, fields: [], precision: precision_numeric, scale: scale_numeric),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "my_nested_bignumeric", type: "BIGNUMERIC", description: nil, fields: [], precision: precision_bignumeric, scale: scale_bignumeric)
+      ])
+    ]
   end
 
+  let(:schema_gapi_fields_default) do
+    [
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REQUIRED", name: "name",          type: "STRING", description: nil, fields: [], max_length: max_length_string, default_value_expression: "'name'"),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "age",           type: "INTEGER", policy_tags: policy_tags_gapi, description: nil, fields: [], default_value_expression: "10"),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "score",         type: "FLOAT", description: "A score from 0.0 to 10.0", fields: [], default_value_expression: "1.0"),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "cost",          type: "NUMERIC", description: nil, fields: [], precision: precision_numeric, scale: scale_numeric, default_value_expression: "100"),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "my_bignumeric", type: "BIGNUMERIC", description: nil, fields: [], precision: precision_bignumeric, scale: scale_bignumeric, default_value_expression: "1000"),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "active",        type: "BOOLEAN", description: nil, fields: [], default_value_expression: "false"),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "avatar",        type: "BYTES", description: nil, fields: [], max_length: max_length_bytes, default_value_expression: "b'101'"),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "creation_date", type: "TIMESTAMP", description: nil, fields: [], default_value_expression: "CURRENT_TIMESTAMP"),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "duration",      type: "TIME", description: nil, fields: [], default_value_expression: "CURRENT_TIME"),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "target_end",    type: "DATETIME", description: nil, fields: [], default_value_expression: "CURRENT_DATETIME"),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "birthday",      type: "DATE", description: nil, fields: [], default_value_expression: "CURRENT_DATE"),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "home",          type: "GEOGRAPHY", description: nil, fields: [], default_value_expression: "ST_GEOGPOINT(-122.084801, 37.422131)"),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REPEATED", name: "cities_lived",  type: "RECORD", description: nil, default_value_expression: "[STRUCT('place',10)]", fields: [
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "place",                type: "STRING",  description: nil, fields: []),
+        Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "number_of_years",      type: "INTEGER", description: nil, fields: [])
+      ])
+    ]
+  end
+
+  let(:schema_gapi) { Google::Apis::BigqueryV2::TableSchema.new fields: schema_gapi_fields }
+  let(:schema_gapi_defaults) { Google::Apis::BigqueryV2::TableSchema.new fields: schema_gapi_fields_default }
   let(:schema_update_options) { ["ALLOW_FIELD_ADDITION", "ALLOW_FIELD_RELAXATION"] }
   let(:range_partitioning) do
     Google::Apis::BigqueryV2::RangePartitioning.new(
@@ -75,6 +100,16 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
   let(:clustering) do
     Google::Apis::BigqueryV2::Clustering.new fields: clustering_fields
   end
+  let(:policy_tag) { "projects/#{project}/locations/us/taxonomies/1/policyTags/1" }
+  let(:policy_tag_2) { "projects/#{project}/locations/us/taxonomies/1/policyTags/2" }
+  let(:policy_tags) { [ policy_tag, policy_tag_2 ] }
+  let(:policy_tags_gapi) { Google::Apis::BigqueryV2::TableFieldSchema::PolicyTags.new names: policy_tags }
+  let(:max_length_string) { 50 }
+  let(:max_length_bytes) { 1024 }
+  let(:precision_numeric) { 10 }
+  let(:precision_bignumeric) { 38 }
+  let(:scale_numeric) { 9 }
+  let(:scale_bignumeric) { 37 }
 
   def storage_file path = nil
     gapi = Google::Apis::StorageV1::Object.from_json random_file_hash(load_bucket.name, path).to_json
@@ -84,7 +119,7 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
   it "can specify range partitioning and a schema in a block during load" do
     mock = Minitest::Mock.new
     job_gapi = load_job_url_gapi table_reference, load_url
-    job_gapi.configuration.load.schema = table_schema_gapi
+    job_gapi.configuration.load.schema = schema_gapi
     job_gapi.configuration.load.create_disposition = "CREATE_IF_NEEDED"
     job_gapi.configuration.load.schema_update_options = schema_update_options
     job_gapi.configuration.load.range_partitioning = range_partitioning
@@ -97,14 +132,25 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
     dataset.service.mocked_service = mock
 
     job = dataset.load_job table_id, load_file, create: :needed do |job|
-      job.schema.string "name", mode: :required
-      job.schema.integer "age"
+      job.schema.string "name", mode: :required, max_length: max_length_string
+      job.schema.integer "age", policy_tags: policy_tags
       job.schema.float "score", description: "A score from 0.0 to 10.0"
-      job.schema.numeric "price"
-      job.schema.bignumeric "my_bignumeric"
+      job.schema.numeric "cost", precision: precision_numeric, scale: scale_numeric
+      job.schema.bignumeric "my_bignumeric", precision: precision_bignumeric, scale: scale_bignumeric
       job.schema.boolean "active"
-      job.schema.bytes "avatar"
-      job.schema.timestamp "dob", mode: :required
+      job.schema.bytes "avatar", max_length: max_length_bytes
+      job.schema.timestamp "creation_date"
+      job.schema.time "duration"
+      job.schema.datetime "target_end"
+      job.schema.date "birthday"
+      job.schema.geography "home"
+      job.schema.record "cities_lived", mode: :repeated do |nested_schema|
+        nested_schema.string "place"
+        nested_schema.geography "location"
+        nested_schema.integer "number_of_years"
+        nested_schema.numeric "my_nested_numeric", precision: precision_numeric, scale: scale_numeric
+        nested_schema.bignumeric "my_nested_bignumeric", precision: precision_bignumeric, scale: scale_bignumeric
+      end
       job.schema_update_options = schema_update_options
       job.range_partitioning_field = "age"
       job.range_partitioning_start = 0
@@ -131,7 +177,7 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
   it "can specify time partitioning and a schema in a block during load" do
     mock = Minitest::Mock.new
     job_gapi = load_job_url_gapi table_reference, load_url
-    job_gapi.configuration.load.schema = table_schema_gapi
+    job_gapi.configuration.load.schema = schema_gapi
     job_gapi.configuration.load.create_disposition = "CREATE_IF_NEEDED"
     job_gapi.configuration.load.schema_update_options = schema_update_options
     job_gapi.configuration.load.time_partitioning = time_partitioning
@@ -146,14 +192,25 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
     dataset.service.mocked_service = mock
 
     job = dataset.load_job table_id, load_file, create: :needed do |job|
-      job.schema.string "name", mode: :required
-      job.schema.integer "age"
+      job.schema.string "name", mode: :required, max_length: max_length_string
+      job.schema.integer "age", policy_tags: policy_tags
       job.schema.float "score", description: "A score from 0.0 to 10.0"
-      job.schema.numeric "price"
-      job.schema.bignumeric "my_bignumeric"
+      job.schema.numeric "cost", precision: precision_numeric, scale: scale_numeric
+      job.schema.bignumeric "my_bignumeric", precision: precision_bignumeric, scale: scale_bignumeric
       job.schema.boolean "active"
-      job.schema.bytes "avatar"
-      job.schema.timestamp "dob", mode: :required
+      job.schema.bytes "avatar", max_length: max_length_bytes
+      job.schema.timestamp "creation_date"
+      job.schema.time "duration"
+      job.schema.datetime "target_end"
+      job.schema.date "birthday"
+      job.schema.geography "home"
+      job.schema.record "cities_lived", mode: :repeated do |nested_schema|
+        nested_schema.string "place"
+        nested_schema.geography "location"
+        nested_schema.integer "number_of_years"
+        nested_schema.numeric "my_nested_numeric", precision: precision_numeric, scale: scale_numeric
+        nested_schema.bignumeric "my_nested_bignumeric", precision: precision_bignumeric, scale: scale_bignumeric
+      end
       job.schema_update_options = schema_update_options
       job.time_partitioning_type = "DAY"
       job.time_partitioning_field = "dob"
@@ -183,21 +240,114 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
   it "can specify a schema as an option during load" do
     mock = Minitest::Mock.new
     job_gapi = load_job_url_gapi table_reference, load_url
-    job_gapi.configuration.load.schema = table_schema_gapi
+    job_gapi.configuration.load.schema = schema_gapi
     job_gapi.configuration.load.create_disposition = "CREATE_IF_NEEDED"
     mock.expect :insert_job, load_job_resp_gapi(table_reference, load_url),
       [project, job_gapi]
     dataset.service.mocked_service = mock
 
     schema = bigquery.schema
-    schema.string "name", mode: :required
-    schema.integer "age"
+    schema.string "name", mode: :required, max_length: max_length_string
+    schema.integer "age", policy_tags: policy_tags
     schema.float "score", description: "A score from 0.0 to 10.0"
-    schema.numeric "price"
-    schema.bignumeric "my_bignumeric"
+    schema.numeric "cost", precision: precision_numeric, scale: scale_numeric
+    schema.bignumeric "my_bignumeric", precision: precision_bignumeric, scale: scale_bignumeric
     schema.boolean "active"
-    schema.bytes "avatar"
-    schema.timestamp "dob", mode: :required
+    schema.bytes "avatar", max_length: max_length_bytes
+    schema.timestamp "creation_date"
+    schema.time "duration"
+    schema.datetime "target_end"
+    schema.date "birthday"
+    schema.geography "home"
+    schema.record "cities_lived", mode: :repeated do |nested_schema|
+      nested_schema.string "place"
+      nested_schema.geography "location"
+      nested_schema.integer "number_of_years"
+      nested_schema.numeric "my_nested_numeric", precision: precision_numeric, scale: scale_numeric
+      nested_schema.bignumeric "my_nested_bignumeric", precision: precision_bignumeric, scale: scale_bignumeric
+    end
+
+    job = dataset.load_job table_id, load_file, create: :needed, schema: schema
+    _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    _(job.schema_update_options).must_be_kind_of Array
+    _(job.schema_update_options).must_be :empty?
+    _(job.range_partitioning?).must_equal false
+    _(job.range_partitioning_field).must_be_nil
+    _(job.range_partitioning_start).must_be_nil
+    _(job.range_partitioning_interval).must_be_nil
+    _(job.range_partitioning_end).must_be_nil
+    _(job.time_partitioning?).must_equal false
+    _(job.time_partitioning_type).must_be :nil?
+    _(job.time_partitioning_field).must_be :nil?
+    _(job.time_partitioning_expiration).must_be :nil?
+    _(job.time_partitioning_require_filter?).must_equal false
+    _(job.clustering?).must_equal false
+    _(job.clustering_fields).must_be :nil?
+
+    mock.verify
+  end
+
+  it "can specify the schema in a block with default values during load" do
+    mock = Minitest::Mock.new
+    job_gapi = load_job_url_gapi table_reference, load_url
+    job_gapi.configuration.load.schema = schema_gapi_defaults
+    job_gapi.configuration.load.create_disposition = "CREATE_IF_NEEDED"
+
+    mock.expect :insert_job, load_job_resp_gapi(table_reference, load_url), [project, job_gapi]
+    dataset.service.mocked_service = mock
+
+    job = dataset.load_job table_id, load_file, create: :needed do |job|
+      job.schema.string "name", mode: :required, max_length: max_length_string, default_value_expression: "'name'"
+      job.schema.integer "age", policy_tags: policy_tags, default_value_expression: "10"
+      job.schema.float "score", description: "A score from 0.0 to 10.0", default_value_expression: "1.0"
+      job.schema.numeric "cost", precision: precision_numeric, scale: scale_numeric, default_value_expression: "100"
+      job.schema.bignumeric "my_bignumeric", precision: precision_bignumeric, scale: scale_bignumeric, default_value_expression: "1000"
+      job.schema.boolean "active", default_value_expression: "false"
+      job.schema.bytes "avatar", max_length: max_length_bytes, default_value_expression: "b'101'"
+      job.schema.timestamp "creation_date", default_value_expression: "CURRENT_TIMESTAMP"
+      job.schema.time "duration", default_value_expression: "CURRENT_TIME"
+      job.schema.datetime "target_end", default_value_expression: "CURRENT_DATETIME"
+      job.schema.date "birthday", default_value_expression: "CURRENT_DATE"
+      job.schema.geography "home", default_value_expression: "ST_GEOGPOINT(-122.084801, 37.422131)"
+      job.schema.record "cities_lived", mode: :repeated, default_value_expression: "[STRUCT('place',10)]" do |nested_schema|
+        nested_schema.string "place"
+        nested_schema.integer "number_of_years"
+      end
+    end
+
+    _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    _(job.clustering?).must_equal false
+    _(job.clustering_fields).must_be :nil?
+
+    mock.verify
+  end
+
+  it "can specify a schema as an option with default value expression during load" do
+    mock = Minitest::Mock.new
+    job_gapi = load_job_url_gapi table_reference, load_url
+    job_gapi.configuration.load.schema = schema_gapi_defaults
+    job_gapi.configuration.load.create_disposition = "CREATE_IF_NEEDED"
+    mock.expect :insert_job, load_job_resp_gapi(table_reference, load_url),
+                [project, job_gapi]
+    dataset.service.mocked_service = mock
+
+    schema = bigquery.schema
+    schema.string "name", mode: :required, max_length: max_length_string, default_value_expression: "'name'"
+    schema.integer "age", policy_tags: policy_tags, default_value_expression: "10"
+    schema.float "score", description: "A score from 0.0 to 10.0", default_value_expression: "1.0"
+    schema.numeric "cost", precision: precision_numeric, scale: scale_numeric, default_value_expression: "100"
+    schema.bignumeric "my_bignumeric", precision: precision_bignumeric, scale: scale_bignumeric, default_value_expression: "1000"
+    schema.boolean "active", default_value_expression: "false"
+    schema.bytes "avatar", max_length: max_length_bytes, default_value_expression: "b'101'"
+    schema.timestamp "creation_date", default_value_expression: "CURRENT_TIMESTAMP"
+    schema.time "duration", default_value_expression: "CURRENT_TIME"
+    schema.datetime "target_end", default_value_expression: "CURRENT_DATETIME"
+    schema.date "birthday", default_value_expression: "CURRENT_DATE"
+    schema.geography "home", default_value_expression: "ST_GEOGPOINT(-122.084801, 37.422131)"
+    schema.record "cities_lived", mode: :repeated, default_value_expression: "[STRUCT('place',10)]" do |nested_schema|
+      nested_schema.string "place"
+      nested_schema.integer "number_of_years"
+    end
 
     job = dataset.load_job table_id, load_file, create: :needed, schema: schema
     _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
@@ -222,7 +372,7 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
   it "can specify a schema both as an option and in a block during load" do
     mock = Minitest::Mock.new
     job_gapi = load_job_url_gapi table_reference, load_url
-    job_gapi.configuration.load.schema = table_schema_gapi
+    job_gapi.configuration.load.schema = schema_gapi
     job_gapi.configuration.load.create_disposition = "CREATE_IF_NEEDED"
     job_gapi.configuration.load.schema_update_options = schema_update_options
 
@@ -236,12 +386,25 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :schema, :mock_bigquery do
     schema.integer "age"
 
     job = dataset.load_job table_id, load_file, create: :needed, schema: schema do |schema|
+      schema.string "name", mode: :required, max_length: max_length_string
+      schema.integer "age", policy_tags: policy_tags
       schema.float "score", description: "A score from 0.0 to 10.0"
-      schema.numeric "price"
-      schema.bignumeric "my_bignumeric"
+      schema.numeric "cost", precision: precision_numeric, scale: scale_numeric
+      schema.bignumeric "my_bignumeric", precision: precision_bignumeric, scale: scale_bignumeric
       schema.boolean "active"
-      schema.bytes "avatar"
-      schema.timestamp "dob", mode: :required
+      schema.bytes "avatar", max_length: max_length_bytes
+      schema.timestamp "creation_date"
+      schema.time "duration"
+      schema.datetime "target_end"
+      schema.date "birthday"
+      schema.geography "home"
+      schema.record "cities_lived", mode: :repeated do |nested_schema|
+        nested_schema.string "place"
+        nested_schema.geography "location"
+        nested_schema.integer "number_of_years"
+        nested_schema.numeric "my_nested_numeric", precision: precision_numeric, scale: scale_numeric
+        nested_schema.bignumeric "my_nested_bignumeric", precision: precision_bignumeric, scale: scale_bignumeric
+      end
       schema.schema_update_options = schema_update_options
     end
     _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob

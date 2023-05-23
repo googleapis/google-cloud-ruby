@@ -24,7 +24,7 @@ module Google
     module DataCatalog
       module V1
         module PolicyTagManager
-          # Policy Tag Manager API service allows clients to manage their policy tags and
+          # Policy Tag Manager API service allows you to manage your policy tags and
           # taxonomies.
           #
           # Policy tags are used to tag BigQuery columns and apply additional access
@@ -38,31 +38,32 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.cloud.datacatalog.v1.PolicyTagManager'
 
-            # Creates a taxonomy in a specified project. The taxonomy is initially empty,
-            # i.e., does not contain policy tags.
+            # Creates a taxonomy in a specified project.
+            #
+            # The taxonomy is initially empty, that is, it doesn't contain policy tags.
             rpc :CreateTaxonomy, ::Google::Cloud::DataCatalog::V1::CreateTaxonomyRequest, ::Google::Cloud::DataCatalog::V1::Taxonomy
-            # Deletes a taxonomy. This method will also delete all policy tags in this
+            # Deletes a taxonomy, including all policy tags in this
             # taxonomy, their associated policies, and the policy tags references from
             # BigQuery columns.
             rpc :DeleteTaxonomy, ::Google::Cloud::DataCatalog::V1::DeleteTaxonomyRequest, ::Google::Protobuf::Empty
-            # Updates a taxonomy. This method can update the taxonomy's display name,
+            # Updates a taxonomy, including its display name,
             # description, and activated policy types.
             rpc :UpdateTaxonomy, ::Google::Cloud::DataCatalog::V1::UpdateTaxonomyRequest, ::Google::Cloud::DataCatalog::V1::Taxonomy
-            # Lists all taxonomies in a project in a particular location that the caller
-            # has permission to view.
+            # Lists all taxonomies in a project in a particular location that you
+            # have a permission to view.
             rpc :ListTaxonomies, ::Google::Cloud::DataCatalog::V1::ListTaxonomiesRequest, ::Google::Cloud::DataCatalog::V1::ListTaxonomiesResponse
             # Gets a taxonomy.
             rpc :GetTaxonomy, ::Google::Cloud::DataCatalog::V1::GetTaxonomyRequest, ::Google::Cloud::DataCatalog::V1::Taxonomy
             # Creates a policy tag in a taxonomy.
             rpc :CreatePolicyTag, ::Google::Cloud::DataCatalog::V1::CreatePolicyTagRequest, ::Google::Cloud::DataCatalog::V1::PolicyTag
-            # Deletes a policy tag. This method also deletes:
+            # Deletes a policy tag together with the following:
             #
-            # * all of its descendant policy tags, if any
-            # * the policies associated with the policy tag and its descendants
-            # * references from BigQuery table schema of the policy tag and its
-            #   descendants.
+            # * All of its descendant policy tags, if any
+            # * Policies associated with the policy tag and its descendants
+            # * References from BigQuery table schema of the policy tag and its
+            #   descendants
             rpc :DeletePolicyTag, ::Google::Cloud::DataCatalog::V1::DeletePolicyTagRequest, ::Google::Protobuf::Empty
-            # Updates a policy tag. This method can update the policy tag's display
+            # Updates a policy tag, including its display
             # name, description, and parent policy tag.
             rpc :UpdatePolicyTag, ::Google::Cloud::DataCatalog::V1::UpdatePolicyTagRequest, ::Google::Cloud::DataCatalog::V1::PolicyTag
             # Lists all policy tags in a taxonomy.
@@ -73,7 +74,7 @@ module Google
             rpc :GetIamPolicy, ::Google::Iam::V1::GetIamPolicyRequest, ::Google::Iam::V1::Policy
             # Sets the IAM policy for a policy tag or a taxonomy.
             rpc :SetIamPolicy, ::Google::Iam::V1::SetIamPolicyRequest, ::Google::Iam::V1::Policy
-            # Returns the permissions that a caller has on a specified policy tag or
+            # Returns your permissions on a specified policy tag or
             # taxonomy.
             rpc :TestIamPermissions, ::Google::Iam::V1::TestIamPermissionsRequest, ::Google::Iam::V1::TestIamPermissionsResponse
           end

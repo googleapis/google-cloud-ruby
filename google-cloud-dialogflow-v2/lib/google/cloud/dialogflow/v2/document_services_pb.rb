@@ -24,7 +24,8 @@ module Google
     module Dialogflow
       module V2
         module Documents
-          # Service for managing knowledge [Documents][google.cloud.dialogflow.v2.Document].
+          # Service for managing knowledge
+          # [Documents][google.cloud.dialogflow.v2.Document].
           class Service
 
             include ::GRPC::GenericService
@@ -39,30 +40,75 @@ module Google
             rpc :GetDocument, ::Google::Cloud::Dialogflow::V2::GetDocumentRequest, ::Google::Cloud::Dialogflow::V2::Document
             # Creates a new document.
             #
-            # Operation <response: [Document][google.cloud.dialogflow.v2.Document],
-            #            metadata: [KnowledgeOperationMetadata][google.cloud.dialogflow.v2.KnowledgeOperationMetadata]>
+            # This method is a [long-running
+            # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+            # The returned `Operation` type has the following method-specific fields:
+            #
+            # - `metadata`:
+            # [KnowledgeOperationMetadata][google.cloud.dialogflow.v2.KnowledgeOperationMetadata]
+            # - `response`: [Document][google.cloud.dialogflow.v2.Document]
             rpc :CreateDocument, ::Google::Cloud::Dialogflow::V2::CreateDocumentRequest, ::Google::Longrunning::Operation
+            # Creates documents by importing data from external sources.
+            # Dialogflow supports up to 350 documents in each request. If you try to
+            # import more, Dialogflow will return an error.
+            #
+            # This method is a [long-running
+            # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+            # The returned `Operation` type has the following method-specific fields:
+            #
+            # - `metadata`:
+            # [KnowledgeOperationMetadata][google.cloud.dialogflow.v2.KnowledgeOperationMetadata]
+            # - `response`:
+            # [ImportDocumentsResponse][google.cloud.dialogflow.v2.ImportDocumentsResponse]
+            rpc :ImportDocuments, ::Google::Cloud::Dialogflow::V2::ImportDocumentsRequest, ::Google::Longrunning::Operation
             # Deletes the specified document.
             #
-            # Operation <response: [google.protobuf.Empty][google.protobuf.Empty],
-            #            metadata: [KnowledgeOperationMetadata][google.cloud.dialogflow.v2.KnowledgeOperationMetadata]>
+            # This method is a [long-running
+            # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+            # The returned `Operation` type has the following method-specific fields:
+            #
+            # - `metadata`:
+            # [KnowledgeOperationMetadata][google.cloud.dialogflow.v2.KnowledgeOperationMetadata]
+            # - `response`: An [Empty
+            #   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)
             rpc :DeleteDocument, ::Google::Cloud::Dialogflow::V2::DeleteDocumentRequest, ::Google::Longrunning::Operation
             # Updates the specified document.
             #
-            # Operation <response: [Document][google.cloud.dialogflow.v2.Document],
-            #            metadata: [KnowledgeOperationMetadata][google.cloud.dialogflow.v2.KnowledgeOperationMetadata]>
+            # This method is a [long-running
+            # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+            # The returned `Operation` type has the following method-specific fields:
+            #
+            # - `metadata`:
+            # [KnowledgeOperationMetadata][google.cloud.dialogflow.v2.KnowledgeOperationMetadata]
+            # - `response`: [Document][google.cloud.dialogflow.v2.Document]
             rpc :UpdateDocument, ::Google::Cloud::Dialogflow::V2::UpdateDocumentRequest, ::Google::Longrunning::Operation
             # Reloads the specified document from its specified source, content_uri or
             # content. The previously loaded content of the document will be deleted.
             # Note: Even when the content of the document has not changed, there still
             # may be side effects because of internal implementation changes.
             #
+            # This method is a [long-running
+            # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+            # The returned `Operation` type has the following method-specific fields:
+            #
+            # - `metadata`:
+            # [KnowledgeOperationMetadata][google.cloud.dialogflow.v2.KnowledgeOperationMetadata]
+            # - `response`: [Document][google.cloud.dialogflow.v2.Document]
+            #
             # Note: The `projects.agent.knowledgeBases.documents` resource is deprecated;
             # only use `projects.knowledgeBases.documents`.
-            #
-            # Operation <response: [Document][google.cloud.dialogflow.v2.Document],
-            #            metadata: [KnowledgeOperationMetadata][google.cloud.dialogflow.v2.KnowledgeOperationMetadata]>
             rpc :ReloadDocument, ::Google::Cloud::Dialogflow::V2::ReloadDocumentRequest, ::Google::Longrunning::Operation
+            # Exports a smart messaging candidate document into the specified
+            # destination.
+            #
+            # This method is a [long-running
+            # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+            # The returned `Operation` type has the following method-specific fields:
+            #
+            # - `metadata`:
+            # [KnowledgeOperationMetadata][google.cloud.dialogflow.v2.KnowledgeOperationMetadata]
+            # - `response`: [Document][google.cloud.dialogflow.v2.Document]
+            rpc :ExportDocument, ::Google::Cloud::Dialogflow::V2::ExportDocumentRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

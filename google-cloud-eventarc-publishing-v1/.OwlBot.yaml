@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/eventarc/publishing/v1/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-eventarc-publishing-v1/$1

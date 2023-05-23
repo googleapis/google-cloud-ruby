@@ -14,9 +14,9 @@
 
 
 require "google/cloud/firestore/v1"
+require "google/cloud/firestore/query"
 require "google/cloud/firestore/document_reference"
 require "google/cloud/firestore/document_snapshot"
-require "google/cloud/firestore/query"
 require "google/cloud/firestore/generate"
 require "google/cloud/firestore/collection_reference_list"
 
@@ -46,6 +46,13 @@ module Google
         ##
         # @private The firestore client object.
         attr_accessor :client
+
+        ##
+        # @private Creates a new CollectionReference.
+        def initialize query, path, client
+          super query, nil, client # Pass nil parent_path arg since this class implements #parent_path
+          @path = path
+        end
 
         ##
         # The collection identifier for the collection resource.
@@ -140,6 +147,8 @@ module Google
         # @param [String] token A previously-returned page token representing
         #   part of the larger set of results to view.
         # @param [Integer] max Maximum number of results to return.
+        # @param [Time] read_time Reads documents as they were at the given time.
+        #   This may not be older than 270 seconds. Optional
         #
         # @return [Array<DocumentReference>] An array of document references.
         #
@@ -154,10 +163,23 @@ module Google
         #     puts doc_ref.document_id
         #   end
         #
-        def list_documents token: nil, max: nil
+        # @example List documents with read time
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   read_time = Time.now
+        #
+        #   col = firestore.col "cities"
+        #
+        #   col.list_documents(read_time: read_time).each do |doc_ref|
+        #     puts doc_ref.document_id
+        #   end
+        #
+        def list_documents token: nil, max: nil, read_time: nil
           ensure_client!
           client.list_documents \
-            parent_path, collection_id, token: token, max: max
+            parent_path, collection_id, token: token, max: max, read_time: read_time
         end
 
         ##
@@ -257,11 +279,7 @@ module Google
             ]
           )
 
-          new.tap do |c|
-            c.client = client
-            c.instance_variable_set :@path, path
-            c.instance_variable_set :@query, query
-          end
+          CollectionReference.new query, path, client
         end
 
         protected

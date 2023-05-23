@@ -26,6 +26,7 @@ require "google/cloud/automl/v1/prediction_service/credentials"
 require "google/cloud/automl/v1/prediction_service/paths"
 require "google/cloud/automl/v1/prediction_service/operations"
 require "google/cloud/automl/v1/prediction_service/client"
+require "google/cloud/automl/v1/prediction_service/rest"
 
 module Google
   module Cloud
@@ -35,12 +36,17 @@ module Google
         # AutoML Prediction API.
         #
         # On any input that is documented to expect a string parameter in
-        # snake_case or kebab-case, either of those cases is accepted.
+        # snake_case or dash-case, either of those cases is accepted.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/automl/v1/prediction_service"
         #     client = ::Google::Cloud::AutoML::V1::PredictionService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/automl/v1/prediction_service/rest"
+        #     client = ::Google::Cloud::AutoML::V1::PredictionService::Rest::Client.new
         #
         module PredictionService
         end

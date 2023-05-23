@@ -54,7 +54,9 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
         labels: labels
       )
     end
-    [entries: entries, log_name: nil, resource: nil, labels: nil, partial_success: true]
+    {
+      entries: entries, log_name: nil, resource: nil, labels: nil, partial_success: true
+    }
   end
 
   it "does not raise error on empty entries" do
@@ -82,7 +84,7 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
     mock = Minitest::Mock.new
     logging.service.mocked_logging = mock
 
-    mock.expect :write_log_entries, write_res, write_req_args("payload1")
+    mock.expect :write_log_entries, write_res, **write_req_args("payload1")
 
     async_writer.write_entries(
       entries("payload1"),
@@ -100,7 +102,7 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
     mock = Minitest::Mock.new
     logging.service.mocked_logging = mock
 
-    mock.expect :write_log_entries, write_res, write_req_args(["payload1", "payload2"], labels1)
+    mock.expect :write_log_entries, write_res, **write_req_args(["payload1", "payload2"], labels1)
 
     async_writer.write_entries(
       entries("payload1"),
@@ -127,10 +129,10 @@ describe Google::Cloud::Logging::AsyncWriter, :mock_logging do
     payload1_request = write_req_args(["payload1"], labels1)
     payload2_request = write_req_args("payload2", labels2)
     combined_request = payload1_request.dup.tap do |req|
-      req.first[:entries].concat payload2_request.first[:entries]
+      req[:entries].concat payload2_request[:entries]
     end
 
-    mock.expect :write_log_entries, write_res, combined_request
+    mock.expect :write_log_entries, write_res, **combined_request
 
     async_writer.write_entries(
       entries("payload1", labels1),

@@ -1,5 +1,5 @@
 --no-private
---title=Web Risk API
+--title="Web Risk API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

@@ -34,18 +34,32 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
 
   let(:new_table_hash) { random_table_hash dataset, table_id, table_name, description }
 
-  let(:field_string_required_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "first_name", type: "STRING", mode: "REQUIRED", description: nil, fields: [] }
+  let(:policy_tag) { "projects/#{project}/locations/us/taxonomies/1/policyTags/1" }
+  let(:policy_tag_2) { "projects/#{project}/locations/us/taxonomies/1/policyTags/2" }
+  let(:policy_tags) { [ policy_tag, policy_tag_2 ] }
+  let(:policy_tags_gapi) { Google::Apis::BigqueryV2::TableFieldSchema::PolicyTags.new names: policy_tags }
+  let(:max_length_string) { 50 }
+  let(:max_length_bytes) { 1024 }
+  let(:precision_numeric) { 10 }
+  let(:precision_bignumeric) { 38 }
+  let(:scale_numeric) { 9 }
+  let(:scale_bignumeric) { 37 }
+
+  let(:field_string_required_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "first_name", type: "STRING", mode: "REQUIRED", description: nil, fields: [], max_length: max_length_string }
   let(:field_integer_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "rank", type: "INTEGER", description: "An integer value from 1 to 100", mode: "NULLABLE", fields: [] }
   let(:field_float_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "accuracy", type: "FLOAT", mode: "NULLABLE", description: nil, fields: [] }
-  let(:field_numeric_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "pi", type: "NUMERIC", mode: "NULLABLE", description: nil, fields: [] }
-  let(:field_bignumeric_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "my_bignumeric", type: "BIGNUMERIC", mode: "NULLABLE", description: nil, fields: [] }
+  let(:field_numeric_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "pi", type: "NUMERIC", mode: "NULLABLE", description: nil, fields: [], precision: precision_numeric, scale: scale_numeric }
+  let(:field_bignumeric_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "my_bignumeric", type: "BIGNUMERIC", mode: "NULLABLE", description: nil, fields: [], precision: precision_bignumeric, scale: scale_bignumeric }
   let(:field_boolean_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "approved", type: "BOOLEAN", mode: "NULLABLE", description: nil, fields: [] }
-  let(:field_bytes_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "avatar", type: "BYTES", mode: "NULLABLE", description: nil, fields: [] }
-  let(:field_timestamp_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "started_at", type: "TIMESTAMP", mode: "NULLABLE", description: nil, fields: [] }
+  let(:field_bytes_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "avatar", type: "BYTES", mode: "NULLABLE", description: nil, fields: [], max_length: max_length_bytes }
+  let(:field_timestamp_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "started_at", type: "TIMESTAMP", mode: "NULLABLE", policy_tags: policy_tags_gapi, description: nil, fields: [] }
   let(:field_time_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "duration", type: "TIME", mode: "NULLABLE", description: nil, fields: [] }
   let(:field_datetime_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "target_end", type: "DATETIME", mode: "NULLABLE", description: nil, fields: [] }
   let(:field_date_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "birthday", type: "DATE", mode: "NULLABLE", description: nil, fields: [] }
+  let(:field_geography_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "home", type: "GEOGRAPHY", mode: "NULLABLE", description: nil, fields: [] }
   let(:field_record_repeated_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "cities_lived", type: "RECORD", mode: "REPEATED", description: nil, fields: [ field_integer_gapi, field_timestamp_gapi ] }
+
+  let(:field_string_required_gapi_default) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "first_name", type: "STRING", mode: "REQUIRED", description: nil, fields: [], max_length: max_length_string, default_value_expression: "'name'" }
 
   let(:short_field_string_required_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "first_name", type: "STRING", mode: "REQUIRED" }
   let(:short_field_integer_gapi) { Google::Apis::BigqueryV2::TableFieldSchema.new name: "rank", type: "INTEGER", description: "An integer value from 1 to 100", mode: "NULLABLE" }
@@ -70,10 +84,16 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
     JSON
   end
 
+  let(:schema_fields_default) do
+    [
+      Google::Apis::BigqueryV2::TableFieldSchema.new(name: "first_name", type: "STRING", ),
+    ]
+  end
+
   it "gets the schema, fields, and headers" do
     _(table.schema).must_be_kind_of Google::Cloud::Bigquery::Schema
     _(table.schema).must_be :frozen?
-    _(table.schema.fields.count).must_equal 11
+    _(table.schema.fields.count).must_equal 12
 
     _(table.schema.fields[0].name).must_equal "name"
     _(table.schema.fields[0].type).must_equal "STRING"
@@ -130,10 +150,15 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
     _(table.schema.fields[10].description).must_be :nil?
     _(table.schema.fields[10].mode).must_equal "NULLABLE"
 
-    _(table.fields.count).must_equal 11
+    _(table.schema.fields[11].name).must_equal "home"
+    _(table.schema.fields[11].type).must_equal "GEOGRAPHY"
+    _(table.schema.fields[11].description).must_be :nil?
+    _(table.schema.fields[11].mode).must_equal "NULLABLE"
+
+    _(table.fields.count).must_equal 12
     _(table.fields.map(&:name)).must_equal table.schema.fields.map(&:name)
-    _(table.headers).must_equal [:name, :age, :score, :pi, :my_bignumeric, :active, :avatar, :started_at, :duration, :target_end, :birthday]
-    _(table.param_types).must_equal({ name: :STRING, age: :INTEGER, score: :FLOAT, pi: :NUMERIC, my_bignumeric: :BIGNUMERIC, active: :BOOLEAN, avatar: :BYTES, started_at: :TIMESTAMP, duration: :TIME, target_end: :DATETIME, birthday: :DATE })
+    _(table.headers).must_equal [:name, :age, :score, :pi, :my_bignumeric, :active, :avatar, :started_at, :duration, :target_end, :birthday, :home]
+    _(table.param_types).must_equal({ name: :STRING, age: :INTEGER, score: :FLOAT, pi: :NUMERIC, my_bignumeric: :BIGNUMERIC, active: :BOOLEAN, avatar: :BYTES, started_at: :TIMESTAMP, duration: :TIME, target_end: :DATETIME, birthday: :DATE, home: :GEOGRAPHY })
   end
 
   it "sets a flat schema via a block with replace option true" do
@@ -148,30 +173,42 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
                field_timestamp_gapi,
                field_time_gapi,
                field_datetime_gapi,
-               field_date_gapi])
+               field_date_gapi,
+               field_geography_gapi])
 
     mock = Minitest::Mock.new
     returned_table_gapi = table_gapi.dup
     returned_table_gapi.schema = new_schema_gapi
     patch_table_gapi = Google::Apis::BigqueryV2::Table.new schema: new_schema_gapi, etag: etag
     mock.expect :patch_table, returned_table_gapi,
-      [table.project_id, table.dataset_id, table.table_id, patch_table_gapi, {options: {header: {"If-Match" => etag}}}]
-    mock.expect :get_table, returned_table_gapi, [table.project_id, table.dataset_id, table.table_id]
+      [table.project_id, table.dataset_id, table.table_id, patch_table_gapi], options: {header: {"If-Match" => etag}}
+    mock.expect :get_table, returned_table_gapi, [table.project_id, table.dataset_id, table.table_id], **patch_table_args
     table.service.mocked_service = mock
 
     table.schema replace: true do |schema|
-      schema.string "first_name", mode: :required
+      schema.string "first_name", mode: :required, max_length: max_length_string
       schema.integer "rank", description: "An integer value from 1 to 100"
       schema.float "accuracy"
-      schema.numeric "pi"
-      schema.bignumeric "my_bignumeric"
+      schema.numeric "pi", precision: precision_numeric, scale: scale_numeric
+      schema.bignumeric "my_bignumeric", precision: precision_bignumeric, scale: scale_bignumeric
       schema.boolean "approved"
-      schema.bytes "avatar"
-      schema.timestamp "started_at"
+      schema.bytes "avatar", max_length: max_length_bytes
+      schema.timestamp "started_at", policy_tags: policy_tags
       schema.time "duration"
       schema.datetime "target_end"
       schema.date "birthday"
+      schema.geography "home"
     end
+
+    _(table.schema.field("rank").max_length).must_be :nil?
+    _(table.schema.field("first_name").max_length).must_equal max_length_string
+    _(table.schema.field("avatar").max_length).must_equal max_length_bytes
+    _(table.schema.field("rank").precision).must_be :nil?
+    _(table.schema.field("rank").scale).must_be :nil?
+    _(table.schema.field("pi").precision).must_equal precision_numeric
+    _(table.schema.field("pi").scale).must_equal scale_numeric
+    _(table.schema.field("my_bignumeric").precision).must_equal precision_bignumeric
+    _(table.schema.field("my_bignumeric").scale).must_equal scale_bignumeric
 
     mock.verify
   end
@@ -187,12 +224,12 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
     returned_table_gapi.schema = new_schema_gapi
     patch_table_gapi = Google::Apis::BigqueryV2::Table.new schema: new_schema_gapi, etag: etag
     mock.expect :patch_table, returned_table_gapi,
-      [table.project_id, table.dataset_id, table.table_id, patch_table_gapi, {options: {header: {"If-Match" => etag}}}]
-    mock.expect :get_table, returned_table_gapi, [table.project_id, table.dataset_id, table.table_id]
+      [table.project_id, table.dataset_id, table.table_id, patch_table_gapi], options: {header: {"If-Match" => etag}}
+    mock.expect :get_table, returned_table_gapi, [table.project_id, table.dataset_id, table.table_id], **patch_table_args
     table.service.mocked_service = mock
 
     table.schema do |schema|
-      schema.timestamp "end_date"
+      schema.timestamp "end_date", policy_tags: policy_tags
     end
 
     mock.verify
@@ -208,12 +245,12 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
     returned_table_gapi.schema = new_schema_gapi
     patch_table_gapi = Google::Apis::BigqueryV2::Table.new schema: new_schema_gapi, etag: etag
     mock.expect :patch_table, returned_table_gapi,
-      [table.project_id, table.dataset_id, table.table_id, patch_table_gapi, {options: {header: {"If-Match" => etag}}}]
-    mock.expect :get_table, returned_table_gapi, [table.project_id, table.dataset_id, table.table_id]
+      [table.project_id, table.dataset_id, table.table_id, patch_table_gapi], options: {header: {"If-Match" => etag}}
+    mock.expect :get_table, returned_table_gapi, [table.project_id, table.dataset_id, table.table_id], **patch_table_args
     table.service.mocked_service = mock
 
     table.schema replace: true do |schema|
-      schema.timestamp "started_at"
+      schema.timestamp "started_at", policy_tags: policy_tags
     end
 
     mock.verify
@@ -231,8 +268,8 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
     returned_table_gapi.schema = new_schema_gapi
     patch_table_gapi = Google::Apis::BigqueryV2::Table.new schema: new_schema_gapi, etag: etag
     mock.expect :patch_table, returned_table_gapi,
-                [table.project_id, table.dataset_id, table.table_id, patch_table_gapi, {options: {header: {"If-Match" => etag}}}]
-    mock.expect :get_table, returned_table_gapi, [table.project_id, table.dataset_id, table.table_id]
+                [table.project_id, table.dataset_id, table.table_id, patch_table_gapi], options: {header: {"If-Match" => etag}}
+    mock.expect :get_table, returned_table_gapi, [table.project_id, table.dataset_id, table.table_id], **patch_table_args
     table.service.mocked_service = mock
     io = StringIO.new(rank_schema_json)
 
@@ -251,15 +288,15 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
     returned_table_gapi.schema = new_schema_gapi
     patch_table_gapi = Google::Apis::BigqueryV2::Table.new schema: new_schema_gapi, etag: etag
     mock.expect :patch_table, returned_table_gapi,
-      [table.project_id, table.dataset_id, table.table_id, patch_table_gapi, {options: {header: {"If-Match" => etag}}}]
-    mock.expect :get_table, returned_table_gapi, [table.project_id, table.dataset_id, table.table_id]
+      [table.project_id, table.dataset_id, table.table_id, patch_table_gapi], options: {header: {"If-Match" => etag}}
+    mock.expect :get_table, returned_table_gapi, [table.project_id, table.dataset_id, table.table_id], **patch_table_args
     table.service.mocked_service = mock
 
     table.schema replace: true do |schema|
-      schema.string "first_name", mode: :required
+      schema.string "first_name", mode: :required, max_length: max_length_string
       schema.record "cities_lived", mode: :repeated do |nested|
         nested.integer "rank", description: "An integer value from 1 to 100"
-        nested.timestamp "started_at"
+        nested.timestamp "started_at", policy_tags: policy_tags
       end
     end
 
@@ -278,15 +315,15 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
     returned_table_gapi.schema = new_schema_gapi
     patch_table_gapi = Google::Apis::BigqueryV2::Table.new schema: new_schema_gapi, etag: etag
     mock.expect :patch_table, returned_table_gapi,
-      [table.project_id, table.dataset_id, table.table_id, patch_table_gapi, {options: {header: {"If-Match" => etag}}}]
-    mock.expect :get_table, returned_table_gapi, [table.project_id, table.dataset_id, table.table_id]
+      [table.project_id, table.dataset_id, table.table_id, patch_table_gapi], options: {header: {"If-Match" => etag}}
+    mock.expect :get_table, returned_table_gapi, [table.project_id, table.dataset_id, table.table_id], **patch_table_args
     table.service.mocked_service = mock
 
     table.schema replace: true do |schema|
-      schema.string "first_name", mode: :required
+      schema.string "first_name", mode: :required, max_length: max_length_string
       schema.record "cities_lived", mode: :repeated do |nested|
         nested.integer "rank", description: "An integer value from 1 to 100"
-        nested.timestamp "started_at"
+        nested.timestamp "started_at", policy_tags: policy_tags
       end
     end
 
@@ -300,15 +337,15 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
     next_table_gapi.schema = next_schema_gapi
     patch_next_table_gapi = Google::Apis::BigqueryV2::Table.new schema: next_schema_gapi, etag: etag
     mock.expect :patch_table, next_table_gapi,
-      [table.project_id, table.dataset_id, table.table_id, patch_next_table_gapi, {options: {header: {"If-Match" => etag}}}]
-    mock.expect :get_table, returned_table_gapi, [table.project_id, table.dataset_id, table.table_id]
+      [table.project_id, table.dataset_id, table.table_id, patch_next_table_gapi], options: {header: {"If-Match" => etag}}
+    mock.expect :get_table, returned_table_gapi, [table.project_id, table.dataset_id, table.table_id], **patch_table_args
     table.service.mocked_service = mock
 
     table.schema do |schema|
       _(schema.field("first_name").mode).must_equal "REQUIRED"
       schema.field "cities_lived" do |nested|
         # Add a new field to the existing record
-        nested.string "first_name", mode: :required
+        nested.string "first_name", mode: :required, max_length: max_length_string
       end
     end
 
@@ -328,7 +365,9 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
         { name: "first_name", type: "STRING", mode: "REQUIRED", description: nil, fields: [] },
         { name: "countries_lived", type: "RECORD", mode: "REPEATED", description: nil, fields: [
             { name: "cities_lived", type: "RECORD", mode: "REPEATED", description: nil, fields: [
-                { mode: "NULLABLE", name: "rank", type: "INTEGER", description: "An integer value from 1 to 100", fields: [] }
+                { mode: "NULLABLE", name: "rank", type: "INTEGER", description: "An integer value from 1 to 100", fields: [] },
+                { mode: "NULLABLE", name: "my_nested_numeric", type: "NUMERIC", description: nil, fields: [], precision: precision_numeric, scale: scale_numeric },
+                { mode: "NULLABLE", name: "my_nested_bignumeric", type: "BIGNUMERIC", description: nil, fields: [], precision: precision_bignumeric, scale: scale_bignumeric }
               ]
             }
           ]
@@ -340,8 +379,8 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
     returned_table_gapi.schema = nested_schema_gapi
     patch_table_gapi = Google::Apis::BigqueryV2::Table.new schema: nested_schema_gapi, etag: etag
     mock.expect :patch_table, returned_table_gapi,
-      [table.project_id, table.dataset_id, table.table_id, patch_table_gapi, {options: {header: {"If-Match" => etag}}}]
-    mock.expect :get_table, returned_table_gapi, [table.project_id, table.dataset_id, table.table_id]
+      [table.project_id, table.dataset_id, table.table_id, patch_table_gapi], options: {header: {"If-Match" => etag}}
+    mock.expect :get_table, returned_table_gapi, [table.project_id, table.dataset_id, table.table_id], **patch_table_args
     table.service.mocked_service = mock
 
     table.schema replace: true do |schema|
@@ -349,10 +388,33 @@ describe Google::Cloud::Bigquery::Table, :mock_bigquery do
       schema.record "countries_lived", mode: :repeated do |nested|
         nested.record "cities_lived", mode: :repeated do |nested_2|
           nested_2.integer "rank", description: "An integer value from 1 to 100"
+          nested_2.numeric "my_nested_numeric", precision: precision_numeric, scale: scale_numeric
+          nested_2.bignumeric "my_nested_bignumeric", precision: precision_bignumeric, scale: scale_bignumeric
         end
       end
     end
 
     mock.verify
+  end
+
+  it "updates the table schema with new field having default value" do
+    mock = Minitest::Mock.new
+    new_schema_gapi = Google::Apis::BigqueryV2::TableSchema.new(
+      fields: [field_string_required_gapi_default])
+    returned_table_gapi = table_gapi.dup
+    returned_table_gapi.schema = new_schema_gapi
+    patch_table_gapi = Google::Apis::BigqueryV2::Table.new schema: new_schema_gapi, etag: etag
+    mock.expect :patch_table, returned_table_gapi,
+                [table.project_id, table.dataset_id, table.table_id, patch_table_gapi], options: {header: {"If-Match" => etag}}
+    mock.expect :get_table, returned_table_gapi, [table.project_id, table.dataset_id, table.table_id], **patch_table_args
+    table.service.mocked_service = mock
+
+    table.schema replace: true do |schema|
+      schema.string "first_name", mode: :required, max_length: max_length_string, default_value_expression: "'name'"
+    end
+
+    mock.verify
+
+    _(table.schema.fields.map(&:default_value_expression)).must_be :==, [field_string_required_gapi_default.default_value_expression]
   end
 end

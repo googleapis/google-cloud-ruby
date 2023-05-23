@@ -23,10 +23,17 @@ module Google
   module Cloud
     module Translate
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
+      #
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/translate/v3"
       #     client = ::Google::Cloud::Translate::V3::TranslationService::Client.new
+      #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/translate/v3"
+      #     client = ::Google::Cloud::Translate::V3::TranslationService::Rest::Client.new
       #
       module V3
       end

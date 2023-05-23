@@ -3,22 +3,23 @@
 
 require 'google/protobuf'
 
+require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/distribution_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/metric_pb'
 require 'google/api/resource_pb'
-require 'google/protobuf/duration_pb'
 require 'google/protobuf/empty_pb'
-require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/logging/v2/logging_metrics.proto", :syntax => :proto3) do
     add_message "google.logging.v2.LogMetric" do
       optional :name, :string, 1
       optional :description, :string, 2
       optional :filter, :string, 3
+      optional :bucket_name, :string, 13
+      optional :disabled, :bool, 12
       optional :metric_descriptor, :message, 5, "google.api.MetricDescriptor"
       optional :value_extractor, :string, 6
       map :label_extractors, :string, :string, 7

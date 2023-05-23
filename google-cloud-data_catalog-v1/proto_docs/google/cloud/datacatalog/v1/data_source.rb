@@ -21,19 +21,26 @@ module Google
   module Cloud
     module DataCatalog
       module V1
-        # Describes the physical location of an entry.
+        # Physical location of an entry.
         # @!attribute [rw] service
         #   @return [::Google::Cloud::DataCatalog::V1::DataSource::Service]
-        #     Service in which the data is physically stored.
+        #     Service that physically stores the data.
         # @!attribute [rw] resource
         #   @return [::String]
-        #     Full name of the resource as defined by the service, e.g.
-        #     //bigquery.googleapis.com/projects/\\{project_id}/locations/\\{location}/datasets/\\{dataset_id}/tables/\\{table_id}
+        #     Full name of a resource as defined by the service. For example:
+        #
+        #     `//bigquery.googleapis.com/projects/{PROJECT_ID}/locations/{LOCATION}/datasets/{DATASET_ID}/tables/{TABLE_ID}`
+        # @!attribute [r] source_entry
+        #   @return [::String]
+        #     Output only. Data Catalog entry name, if applicable.
+        # @!attribute [rw] storage_properties
+        #   @return [::Google::Cloud::DataCatalog::V1::StorageProperties]
+        #     Detailed properties of the underlying storage.
         class DataSource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Service name where the data is stored.
+          # Name of a service that stores the data.
           module Service
             # Default unknown service.
             SERVICE_UNSPECIFIED = 0
@@ -44,6 +51,37 @@ module Google
             # BigQuery service.
             BIGQUERY = 2
           end
+        end
+
+        # Details the properties of the underlying storage.
+        # @!attribute [rw] file_pattern
+        #   @return [::Array<::String>]
+        #     Patterns to identify a set of files for this fileset.
+        #
+        #     Examples of a valid `file_pattern`:
+        #
+        #      * `gs://bucket_name/dir/*`: matches all files in the `bucket_name/dir`
+        #                                  directory
+        #      * `gs://bucket_name/dir/**`: matches all files in the `bucket_name/dir`
+        #                                   and all subdirectories recursively
+        #      * `gs://bucket_name/file*`: matches files prefixed by `file` in
+        #                                  `bucket_name`
+        #      * `gs://bucket_name/??.txt`: matches files with two characters followed by
+        #                                   `.txt` in `bucket_name`
+        #      * `gs://bucket_name/[aeiou].txt`: matches files that contain a single
+        #                                        vowel character followed by `.txt` in
+        #                                        `bucket_name`
+        #      * `gs://bucket_name/[a-m].txt`: matches files that contain `a`, `b`, ...
+        #                                      or `m` followed by `.txt` in `bucket_name`
+        #      * `gs://bucket_name/a/*/b`: matches all files in `bucket_name` that match
+        #                                  the `a/*/b` pattern, such as `a/c/b`, `a/d/b`
+        #      * `gs://another_bucket/a.txt`: matches `gs://another_bucket/a.txt`
+        # @!attribute [rw] file_type
+        #   @return [::String]
+        #     File type in MIME format, for example, `text/plain`.
+        class StorageProperties
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

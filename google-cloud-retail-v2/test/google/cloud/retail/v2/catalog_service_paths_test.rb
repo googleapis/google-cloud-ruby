@@ -23,6 +23,30 @@ require "gapic/grpc/service_stub"
 require "google/cloud/retail/v2/catalog_service"
 
 class ::Google::Cloud::Retail::V2::CatalogService::ClientPathsTest < Minitest::Test
+  def test_attributes_config_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Retail::V2::CatalogService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.attributes_config_path project: "value0", location: "value1", catalog: "value2"
+      assert_equal "projects/value0/locations/value1/catalogs/value2/attributesConfig", path
+    end
+  end
+
+  def test_branch_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Retail::V2::CatalogService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.branch_path project: "value0", location: "value1", catalog: "value2", branch: "value3"
+      assert_equal "projects/value0/locations/value1/catalogs/value2/branches/value3", path
+    end
+  end
+
   def test_catalog_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do
@@ -32,6 +56,18 @@ class ::Google::Cloud::Retail::V2::CatalogService::ClientPathsTest < Minitest::T
 
       path = client.catalog_path project: "value0", location: "value1", catalog: "value2"
       assert_equal "projects/value0/locations/value1/catalogs/value2", path
+    end
+  end
+
+  def test_completion_config_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Retail::V2::CatalogService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.completion_config_path project: "value0", location: "value1", catalog: "value2"
+      assert_equal "projects/value0/locations/value1/catalogs/value2/completionConfig", path
     end
   end
 

@@ -26,7 +26,6 @@ module Google
         #   @return [::String]
         #     Output only. Resource name of the annotation spec.
         #     Form:
-        #
         #     'projects/\\{project_id}/locations/\\{location_id}/datasets/\\{dataset_id}/annotationSpecs/\\{annotation_spec_id}'
         # @!attribute [rw] display_name
         #   @return [::String]

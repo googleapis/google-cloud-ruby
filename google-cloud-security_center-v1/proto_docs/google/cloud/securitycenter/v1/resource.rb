@@ -26,12 +26,18 @@ module Google
         #   @return [::String]
         #     The full resource name of the resource. See:
         #     https://cloud.google.com/apis/design/resource_names#full_resource_name
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     The human readable name of the resource.
+        # @!attribute [rw] type
+        #   @return [::String]
+        #     The full resource type of the resource.
         # @!attribute [rw] project
         #   @return [::String]
         #     The full resource name of project that the resource belongs to.
         # @!attribute [rw] project_display_name
         #   @return [::String]
-        #     The human readable name of project that the resource belongs to.
+        #     The project ID that the resource belongs to.
         # @!attribute [rw] parent
         #   @return [::String]
         #     The full resource name of resource's parent.
@@ -40,9 +46,9 @@ module Google
         #     The human readable name of resource's parent.
         # @!attribute [r] folders
         #   @return [::Array<::Google::Cloud::SecurityCenter::V1::Folder>]
-        #     Output only. Contains a Folder message for each folder in the assets ancestry.
-        #     The first folder is the deepest nested folder, and the last folder is the
-        #     folder directly under the Organization.
+        #     Output only. Contains a Folder message for each folder in the assets
+        #     ancestry. The first folder is the deepest nested folder, and the last
+        #     folder is the folder directly under the Organization.
         class Resource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

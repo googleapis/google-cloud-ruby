@@ -32,7 +32,7 @@ describe Google::Cloud::PubSub::Topic, :exists, :mock_pubsub do
     it "checks if the topic exists by making an HTTP call" do
       get_res = Google::Cloud::PubSub::V1::Topic.new topic_hash(topic_name)
       mock = Minitest::Mock.new
-      mock.expect :get_topic, get_res, [topic: topic_path(topic_name)]
+      mock.expect :get_topic, get_res, topic: topic_path(topic_name)
       topic.service.mocked_publisher = mock
 
       _(topic).must_be :exists?

@@ -36,6 +36,25 @@ module Google
     #
     # Available context types are defined in package
     # `google.rpc.context`.
+    #
+    # This also provides mechanism to allowlist any protobuf message extension that
+    # can be sent in grpc metadata using “x-goog-ext-<extension_id>-bin” and
+    # “x-goog-ext-<extension_id>-jspb” format. For example, list any service
+    # specific protobuf types that can appear in grpc metadata as follows in your
+    # yaml file:
+    #
+    # Example:
+    #
+    #     context:
+    #       rules:
+    #        - selector: "google.example.library.v1.LibraryService.CreateBook"
+    #          allowed_request_extensions:
+    #          - google.foo.v1.NewExtension
+    #          allowed_response_extensions:
+    #          - google.foo.v1.NewExtension
+    #
+    # You can also specify extension ID instead of fully qualified extension name
+    # here.
     # @!attribute [rw] rules
     #   @return [::Array<::Google::Api::ContextRule>]
     #     A list of RPC context rules that apply to individual API methods.
@@ -52,13 +71,22 @@ module Google
     #   @return [::String]
     #     Selects the methods to which this rule applies.
     #
-    #     Refer to {::Google::Api::DocumentationRule#selector selector} for syntax details.
+    #     Refer to {::Google::Api::DocumentationRule#selector selector} for syntax
+    #     details.
     # @!attribute [rw] requested
     #   @return [::Array<::String>]
     #     A list of full type names of requested contexts.
     # @!attribute [rw] provided
     #   @return [::Array<::String>]
     #     A list of full type names of provided contexts.
+    # @!attribute [rw] allowed_request_extensions
+    #   @return [::Array<::String>]
+    #     A list of full type names or extension IDs of extensions allowed in grpc
+    #     side channel from client to backend.
+    # @!attribute [rw] allowed_response_extensions
+    #   @return [::Array<::String>]
+    #     A list of full type names or extension IDs of extensions allowed in grpc
+    #     side channel from backend to client.
     class ContextRule
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods

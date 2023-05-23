@@ -33,7 +33,9 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Optional. The unique identifier of this intent.
-        #     Required for {::Google::Cloud::Dialogflow::V2::Intents::Client#update_intent Intents.UpdateIntent} and {::Google::Cloud::Dialogflow::V2::Intents::Client#batch_update_intents Intents.BatchUpdateIntents}
+        #     Required for
+        #     {::Google::Cloud::Dialogflow::V2::Intents::Client#update_intent Intents.UpdateIntent} and
+        #     {::Google::Cloud::Dialogflow::V2::Intents::Client#batch_update_intents Intents.BatchUpdateIntents}
         #     methods.
         #     Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
         # @!attribute [rw] display_name
@@ -113,8 +115,9 @@ module Google
         #   @return [::Array<::Google::Cloud::Dialogflow::V2::Intent::Message::Platform>]
         #     Optional. The list of platforms for which the first responses will be
         #     copied from the messages in PLATFORM_UNSPECIFIED (i.e. default platform).
-        # @!attribute [rw] root_followup_intent_name
+        # @!attribute [r] root_followup_intent_name
         #   @return [::String]
+        #     Output only.
         #     Read-only. The unique identifier of the root intent in the chain of
         #     followup intents. It identifies the correct followup intents chain for
         #     this intent. We populate this field only in the output.
@@ -124,16 +127,18 @@ module Google
         #   @return [::String]
         #     Read-only after creation. The unique identifier of the parent intent in the
         #     chain of followup intents. You can set this field when creating an intent,
-        #     for example with {::Google::Cloud::Dialogflow::V2::Intents::Client#create_intent CreateIntent} or
-        #     {::Google::Cloud::Dialogflow::V2::Intents::Client#batch_update_intents BatchUpdateIntents}, in order to make this
-        #     intent a followup intent.
+        #     for example with
+        #     {::Google::Cloud::Dialogflow::V2::Intents::Client#create_intent CreateIntent} or
+        #     {::Google::Cloud::Dialogflow::V2::Intents::Client#batch_update_intents BatchUpdateIntents},
+        #     in order to make this intent a followup intent.
         #
         #     It identifies the parent followup intent.
         #     Format: `projects/<Project ID>/agent/intents/<Intent ID>`.
-        # @!attribute [rw] followup_intent_info
+        # @!attribute [r] followup_intent_info
         #   @return [::Array<::Google::Cloud::Dialogflow::V2::Intent::FollowupIntentInfo>]
-        #     Read-only. Information about all followup intents that have this intent as
-        #     a direct or indirect parent. We populate this field only in the output.
+        #     Output only. Read-only. Information about all followup intents that have
+        #     this intent as a direct or indirect parent. We populate this field only in
+        #     the output.
         class Intent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -157,7 +162,9 @@ module Google
           #     so the training phrase is well formatted when the parts are concatenated.
           #
           #     If the training phrase does not need to be annotated with parameters,
-          #     you just need a single part with only the {::Google::Cloud::Dialogflow::V2::Intent::TrainingPhrase::Part#text Part.text} field set.
+          #     you just need a single part with only the
+          #     {::Google::Cloud::Dialogflow::V2::Intent::TrainingPhrase::Part#text Part.text}
+          #     field set.
           #
           #     If you want to annotate the training phrase, you must create multiple
           #     parts, where the fields of each part are populated in one of two ways:
@@ -720,7 +727,8 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
-            # Column properties for {::Google::Cloud::Dialogflow::V2::Intent::Message::TableCard TableCard}.
+            # Column properties for
+            # {::Google::Cloud::Dialogflow::V2::Intent::Message::TableCard TableCard}.
             # @!attribute [rw] header
             #   @return [::String]
             #     Required. Column heading.
@@ -759,7 +767,8 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
-            # Cell of {::Google::Cloud::Dialogflow::V2::Intent::Message::TableCardRow TableCardRow}.
+            # Cell of
+            # {::Google::Cloud::Dialogflow::V2::Intent::Message::TableCardRow TableCardRow}.
             # @!attribute [rw] text
             #   @return [::String]
             #     Required. Text in this cell.
@@ -833,7 +842,8 @@ module Google
           end
         end
 
-        # The request message for {::Google::Cloud::Dialogflow::V2::Intents::Client#list_intents Intents.ListIntents}.
+        # The request message for
+        # {::Google::Cloud::Dialogflow::V2::Intents::Client#list_intents Intents.ListIntents}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The agent to list all intents from.
@@ -868,7 +878,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response message for {::Google::Cloud::Dialogflow::V2::Intents::Client#list_intents Intents.ListIntents}.
+        # The response message for
+        # {::Google::Cloud::Dialogflow::V2::Intents::Client#list_intents Intents.ListIntents}.
         # @!attribute [rw] intents
         #   @return [::Array<::Google::Cloud::Dialogflow::V2::Intent>]
         #     The list of agent intents. There will be a maximum number of items
@@ -882,7 +893,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {::Google::Cloud::Dialogflow::V2::Intents::Client#get_intent Intents.GetIntent}.
+        # The request message for
+        # {::Google::Cloud::Dialogflow::V2::Intents::Client#get_intent Intents.GetIntent}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the intent.
@@ -902,7 +914,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {::Google::Cloud::Dialogflow::V2::Intents::Client#create_intent Intents.CreateIntent}.
+        # The request message for
+        # {::Google::Cloud::Dialogflow::V2::Intents::Client#create_intent Intents.CreateIntent}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The agent to create a intent for.
@@ -925,7 +938,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {::Google::Cloud::Dialogflow::V2::Intents::Client#update_intent Intents.UpdateIntent}.
+        # The request message for
+        # {::Google::Cloud::Dialogflow::V2::Intents::Client#update_intent Intents.UpdateIntent}.
         # @!attribute [rw] intent
         #   @return [::Google::Cloud::Dialogflow::V2::Intent]
         #     Required. The intent to update.
@@ -947,7 +961,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {::Google::Cloud::Dialogflow::V2::Intents::Client#delete_intent Intents.DeleteIntent}.
+        # The request message for
+        # {::Google::Cloud::Dialogflow::V2::Intents::Client#delete_intent Intents.DeleteIntent}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the intent to delete. If this intent has direct or
@@ -988,7 +1003,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response message for {::Google::Cloud::Dialogflow::V2::Intents::Client#batch_update_intents Intents.BatchUpdateIntents}.
+        # The response message for
+        # {::Google::Cloud::Dialogflow::V2::Intents::Client#batch_update_intents Intents.BatchUpdateIntents}.
         # @!attribute [rw] intents
         #   @return [::Array<::Google::Cloud::Dialogflow::V2::Intent>]
         #     The collection of updated or created intents.
@@ -997,7 +1013,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {::Google::Cloud::Dialogflow::V2::Intents::Client#batch_delete_intents Intents.BatchDeleteIntents}.
+        # The request message for
+        # {::Google::Cloud::Dialogflow::V2::Intents::Client#batch_delete_intents Intents.BatchDeleteIntents}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The name of the agent to delete all entities types for. Format:

@@ -22,7 +22,8 @@ module Google
     module Bigquery
       module Connection
         module V1
-          # The request for {::Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client#create_connection ConnectionService.CreateConnection}.
+          # The request for
+          # {::Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client#create_connection ConnectionService.CreateConnection}.
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. Parent resource name.
@@ -38,7 +39,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request for {::Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client#get_connection ConnectionService.GetConnection}.
+          # The request for
+          # {::Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client#get_connection ConnectionService.GetConnection}.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. Name of the requested connection, for example:
@@ -48,7 +50,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request for {::Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client#list_connections ConnectionService.ListConnections}.
+          # The request for
+          # {::Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client#list_connections ConnectionService.ListConnections}.
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. Parent resource name.
@@ -64,7 +67,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The response for {::Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client#list_connections ConnectionService.ListConnections}.
+          # The response for
+          # {::Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client#list_connections ConnectionService.ListConnections}.
           # @!attribute [rw] next_page_token
           #   @return [::String]
           #     Next page token.
@@ -76,7 +80,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request for {::Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client#update_connection ConnectionService.UpdateConnection}.
+          # The request for
+          # {::Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client#update_connection ConnectionService.UpdateConnection}.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. Name of the connection to update, for example:
@@ -120,6 +125,18 @@ module Google
           # @!attribute [rw] aws
           #   @return [::Google::Cloud::Bigquery::Connection::V1::AwsProperties]
           #     Amazon Web Services (AWS) properties.
+          # @!attribute [rw] azure
+          #   @return [::Google::Cloud::Bigquery::Connection::V1::AzureProperties]
+          #     Azure properties.
+          # @!attribute [rw] cloud_spanner
+          #   @return [::Google::Cloud::Bigquery::Connection::V1::CloudSpannerProperties]
+          #     Cloud Spanner properties.
+          # @!attribute [rw] cloud_resource
+          #   @return [::Google::Cloud::Bigquery::Connection::V1::CloudResourceProperties]
+          #     Cloud Resource properties.
+          # @!attribute [rw] spark
+          #   @return [::Google::Cloud::Bigquery::Connection::V1::SparkProperties]
+          #     Spark properties.
           # @!attribute [r] creation_time
           #   @return [::Integer]
           #     Output only. The creation timestamp of the connection.
@@ -147,6 +164,14 @@ module Google
           # @!attribute [rw] credential
           #   @return [::Google::Cloud::Bigquery::Connection::V1::CloudSqlCredential]
           #     Input only. Cloud SQL credential.
+          # @!attribute [r] service_account_id
+          #   @return [::String]
+          #     Output only. The account ID of the service used for the purpose of this
+          #     connection.
+          #
+          #     When the connection is used in the context of an operation in
+          #     BigQuery, this service account will serve as the identity being used for
+          #     connecting to the CloudSQL instance specified in this connection.
           class CloudSqlProperties
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -176,11 +201,47 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Connection properties specific to Cloud Spanner.
+          # @!attribute [rw] database
+          #   @return [::String]
+          #     Cloud Spanner database in the form `project/instance/database'
+          # @!attribute [rw] use_parallelism
+          #   @return [::Boolean]
+          #     If parallelism should be used when reading from Cloud Spanner
+          # @!attribute [rw] use_serverless_analytics
+          #   @return [::Boolean]
+          #     If the serverless analytics service should be used to read data from Cloud
+          #     Spanner.
+          #     Note: `use_parallelism` must be set when using serverless analytics.
+          # @!attribute [rw] database_role
+          #   @return [::String]
+          #     Optional. Cloud Spanner database role for fine-grained access control.
+          #     A database role is a collection of fine-grained access privileges. Example:
+          #     Admin predefines roles that provides user a set of permissions (SELECT,
+          #     INSERT, ..). The user can then specify a predefined role on a connection to
+          #     execute their Cloud Spanner query. The role is passthrough here. If the
+          #     user is not authorized to use the specified role, they get an error. This
+          #     validation happens on Cloud Spanner.
+          #
+          #     See https://cloud.google.com/spanner/docs/fgac-about for more details.
+          #
+          #     REQUIRES: database role name must start with uppercase/lowercase letter
+          #     and only contain uppercase/lowercase letters, numbers, and underscores.
+          class CloudSpannerProperties
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Connection properties specific to Amazon Web Services (AWS).
           # @!attribute [rw] cross_account_role
           #   @return [::Google::Cloud::Bigquery::Connection::V1::AwsCrossAccountRole]
           #     Authentication using Google owned AWS IAM user's access key to assume
           #     into customer's AWS IAM Role.
+          #     Deprecated, do not use.
+          # @!attribute [rw] access_role
+          #   @return [::Google::Cloud::Bigquery::Connection::V1::AwsAccessRole]
+          #     Authentication using Google owned service account to assume into
+          #     customer's AWS IAM Role.
           class AwsProperties
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -197,10 +258,130 @@ module Google
           #     Output only. Google-owned AWS IAM User for a Connection.
           # @!attribute [r] external_id
           #   @return [::String]
-          #     Output only. A Google-generated id for representing Connection’s identity in AWS.
-          #     External Id is also used for preventing the Confused Deputy Problem. See
+          #     Output only. A Google-generated id for representing Connection’s identity
+          #     in AWS. External Id is also used for preventing the Confused Deputy
+          #     Problem. See
           #     https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html
           class AwsCrossAccountRole
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Authentication method for Amazon Web Services (AWS) that uses Google owned
+          # Google service account to assume into customer's AWS IAM Role.
+          # @!attribute [rw] iam_role_id
+          #   @return [::String]
+          #     The user’s AWS IAM Role that trusts the Google-owned AWS IAM user
+          #     Connection.
+          # @!attribute [rw] identity
+          #   @return [::String]
+          #     A unique Google-owned and Google-generated identity for the Connection.
+          #     This identity will be used to access the user's AWS IAM Role.
+          class AwsAccessRole
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Container for connection properties specific to Azure.
+          # @!attribute [r] application
+          #   @return [::String]
+          #     Output only. The name of the Azure Active Directory Application.
+          # @!attribute [r] client_id
+          #   @return [::String]
+          #     Output only. The client id of the Azure Active Directory Application.
+          # @!attribute [r] object_id
+          #   @return [::String]
+          #     Output only. The object id of the Azure Active Directory Application.
+          # @!attribute [rw] customer_tenant_id
+          #   @return [::String]
+          #     The id of customer's directory that host the data.
+          # @!attribute [rw] redirect_uri
+          #   @return [::String]
+          #     The URL user will be redirected to after granting consent during connection
+          #     setup.
+          # @!attribute [rw] federated_application_client_id
+          #   @return [::String]
+          #     The client ID of the user's Azure Active Directory Application used for a
+          #     federated connection.
+          # @!attribute [r] identity
+          #   @return [::String]
+          #     Output only. A unique Google-owned and Google-generated identity for the
+          #     Connection. This identity will be used to access the user's Azure Active
+          #     Directory Application.
+          class AzureProperties
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Container for connection properties for delegation of access to GCP
+          # resources.
+          # @!attribute [r] service_account_id
+          #   @return [::String]
+          #     Output only. The account ID of the service created for the purpose of this
+          #     connection.
+          #
+          #     The service account does not have any permissions associated with it
+          #     when it is created. After creation, customers delegate permissions
+          #     to the service account. When the connection is used in the context of an
+          #     operation in BigQuery, the service account will be used to connect to the
+          #     desired resources in GCP.
+          #
+          #     The account ID is in the form of:
+          #       <service-1234>@gcp-sa-bigquery-cloudresource.iam.gserviceaccount.com
+          class CloudResourceProperties
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Configuration of the Dataproc Metastore Service.
+          # @!attribute [rw] metastore_service
+          #   @return [::String]
+          #     Optional. Resource name of an existing Dataproc Metastore service.
+          #
+          #     Example:
+          #
+          #     * `projects/[project_id]/locations/[region]/services/[service_id]`
+          class MetastoreServiceConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Configuration of the Spark History Server.
+          # @!attribute [rw] dataproc_cluster
+          #   @return [::String]
+          #     Optional. Resource name of an existing Dataproc Cluster to act as a Spark
+          #     History Server for the connection.
+          #
+          #     Example:
+          #
+          #     * `projects/[project_id]/regions/[region]/clusters/[cluster_name]`
+          class SparkHistoryServerConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Container for connection properties to execute stored procedures for Apache
+          # Spark.
+          # @!attribute [r] service_account_id
+          #   @return [::String]
+          #     Output only. The account ID of the service created for the purpose of this
+          #     connection.
+          #
+          #     The service account does not have any permissions associated with it when
+          #     it is created. After creation, customers delegate permissions to the
+          #     service account. When the connection is used in the context of a stored
+          #     procedure for Apache Spark in BigQuery, the service account will be used to
+          #     connect to the desired resources in Google Cloud.
+          #
+          #     The account ID is in the form of:
+          #     bqcx-<projectnumber>-<uniqueid>@gcp-sa-bigquery-consp.iam.gserviceaccount.com
+          # @!attribute [rw] metastore_service_config
+          #   @return [::Google::Cloud::Bigquery::Connection::V1::MetastoreServiceConfig]
+          #     Optional. Dataproc Metastore Service configuration for the connection.
+          # @!attribute [rw] spark_history_server_config
+          #   @return [::Google::Cloud::Bigquery::Connection::V1::SparkHistoryServerConfig]
+          #     Optional. Spark History Server configuration for the connection.
+          class SparkProperties
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

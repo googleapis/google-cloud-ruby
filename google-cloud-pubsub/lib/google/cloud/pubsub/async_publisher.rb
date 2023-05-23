@@ -16,6 +16,7 @@
 require "monitor"
 require "concurrent"
 require "google/cloud/pubsub/errors"
+require "google/cloud/pubsub/flow_controller"
 require "google/cloud/pubsub/async_publisher/batch"
 require "google/cloud/pubsub/publish_result"
 require "google/cloud/pubsub/service"
@@ -65,14 +66,24 @@ module Google
         attr_reader :interval
         attr_reader :publish_threads
         attr_reader :callback_threads
+        attr_reader :flow_control
         ##
         # @private Implementation accessors
         attr_reader :service, :batch, :publish_thread_pool,
-                    :callback_thread_pool
+                    :callback_thread_pool, :flow_controller,
+                    :compress, :compression_bytes_threshold
 
         ##
         # @private Create a new instance of the object.
-        def initialize topic_name, service, max_bytes: 1_000_000, max_messages: 100, interval: 0.01, threads: {}
+        def initialize topic_name,
+                       service,
+                       max_bytes: 1_000_000,
+                       max_messages: 100,
+                       interval: 0.01,
+                       threads: {},
+                       flow_control: {},
+                       compress: nil,
+                       compression_bytes_threshold: nil
           # init MonitorMixin
           super()
           @topic_name = service.topic_path topic_name
@@ -83,6 +94,10 @@ module Google
           @interval         = interval
           @publish_threads  = (threads[:publish] || 2).to_i
           @callback_threads = (threads[:callback] || 4).to_i
+          @flow_control = {
+            message_limit: 10 * @max_messages,
+            byte_limit: 10 * @max_bytes
+          }.merge(flow_control).freeze
 
           @published_at = nil
           @publish_thread_pool = Concurrent::ThreadPoolExecutor.new max_threads: @publish_threads
@@ -91,8 +106,11 @@ module Google
           @ordered = false
           @batches = {}
           @cond = new_cond
-
+          @flow_controller = FlowController.new(**@flow_control)
           @thread = Thread.new { run_background }
+          @compress = compress || Google::Cloud::PubSub::DEFAULT_COMPRESS
+          @compression_bytes_threshold = compression_bytes_threshold ||
+                                         Google::Cloud::PubSub::DEFAULT_COMPRESSION_BYTES_THRESHOLD
         end
 
         ##
@@ -121,13 +139,22 @@ module Google
         #
         def publish data = nil, attributes = nil, ordering_key: nil, **extra_attrs, &callback
           msg = Convert.pubsub_message data, attributes, ordering_key, extra_attrs
+          begin
+            @flow_controller.acquire msg.to_proto.bytesize
+          rescue FlowControlLimitError => e
+            stop_publish ordering_key, e if ordering_key
+            raise
+          end
 
           synchronize do
             raise AsyncPublisherStopped if @stopped
             raise OrderedMessagesDisabled if !@ordered && !msg.ordering_key.empty? # default is empty string
 
             batch = resolve_batch_for_message msg
-            raise OrderingKeyError, batch.ordering_key if batch.canceled?
+            if batch.canceled?
+              @flow_controller.release msg.to_proto.bytesize
+              raise OrderingKeyError, batch.ordering_key
+            end
             batch_action = batch.add msg, callback
             if batch_action == :full
               publish_batches!
@@ -305,6 +332,21 @@ module Google
           @batches[ordering_key]
         end
 
+        def stop_publish ordering_key, err
+          synchronize do
+            batch = resolve_batch_for_ordering_key ordering_key
+            return if batch.nil?
+            items = batch.cancel!
+            items.each do |item|
+              @flow_controller.release item.bytesize
+              next unless item.callback
+
+              publish_result = PublishResult.from_error item.msg, err
+              execute_callback_async item.callback, publish_result
+            end
+          end
+        end
+
         def publish_batches! stop: nil
           @batches.reject! { |_ordering_key, batch| batch.empty? }
           @batches.each_value do |batch|
@@ -325,7 +367,6 @@ module Google
         end
 
         # rubocop:disable Metrics/AbcSize
-        # rubocop:disable Metrics/MethodLength
 
         def publish_batch_sync topic_name, batch
           # The only batch methods that are safe to call from the loop are
@@ -335,8 +376,11 @@ module Google
             items = batch.rebalance!
 
             unless items.empty?
-              grpc = @service.publish topic_name, items.map(&:msg)
+              grpc = @service.publish topic_name,
+                                      items.map(&:msg),
+                                      compress: compress && batch.total_message_bytes >= compression_bytes_threshold
               items.zip Array(grpc.message_ids) do |item, id|
+                @flow_controller.release item.bytesize
                 next unless item.callback
 
                 item.msg.message_id = id
@@ -363,6 +407,7 @@ module Google
           end
 
           items.each do |item|
+            @flow_controller.release item.bytesize
             next unless item.callback
 
             publish_result = PublishResult.from_error item.msg, e
@@ -374,7 +419,6 @@ module Google
         end
 
         # rubocop:enable Metrics/AbcSize
-        # rubocop:enable Metrics/MethodLength
 
         PUBLISH_RETRY_ERRORS = [
           GRPC::Cancelled, GRPC::DeadlineExceeded, GRPC::Internal,

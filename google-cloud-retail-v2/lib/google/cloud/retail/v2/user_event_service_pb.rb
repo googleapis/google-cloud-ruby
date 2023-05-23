@@ -7,21 +7,28 @@ require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/httpbody_pb'
+require 'google/api/resource_pb'
 require 'google/cloud/retail/v2/import_config_pb'
 require 'google/cloud/retail/v2/purge_config_pb'
 require 'google/cloud/retail/v2/user_event_pb'
 require 'google/longrunning/operations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/retail/v2/user_event_service.proto", :syntax => :proto3) do
     add_message "google.cloud.retail.v2.WriteUserEventRequest" do
       optional :parent, :string, 1
       optional :user_event, :message, 2, "google.cloud.retail.v2.UserEvent"
+      optional :write_async, :bool, 3
     end
     add_message "google.cloud.retail.v2.CollectUserEventRequest" do
       optional :parent, :string, 1
       optional :user_event, :string, 2
       optional :uri, :string, 3
       optional :ets, :int64, 4
+      optional :raw_json, :string, 5
+      oneof :conversion_rule do
+        optional :prebuilt_rule, :string, 6
+      end
     end
     add_message "google.cloud.retail.v2.RejoinUserEventsRequest" do
       optional :parent, :string, 1

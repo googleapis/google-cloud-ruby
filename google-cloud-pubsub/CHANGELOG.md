@@ -1,5 +1,153 @@
 # Release History
 
+### 2.15.4 (2023-05-19)
+
+#### Documentation
+
+* Fixed broken links in authentication documentation ([#21619](https://github.com/googleapis/google-cloud-ruby/issues/21619)) 
+
+### 2.15.4 (2023-05-18)
+
+#### Documentation
+
+* Fixed broken links in authentication documentation ([#21619](https://github.com/googleapis/google-cloud-ruby/issues/21619)) 
+
+### 2.15.3 (2023-04-19)
+
+#### Bug Fixes
+
+* wait for successful receipt modack when exactly once delivery enabled ([#21431](https://github.com/googleapis/google-cloud-ruby/issues/21431)) 
+
+### 2.15.2 (2023-03-19)
+
+#### Bug Fixes
+
+* make batch handle publish interval ([#20913](https://github.com/googleapis/google-cloud-ruby/issues/20913)) 
+
+### 2.15.1 (2023-02-23)
+
+#### Documentation
+
+* Correct default value for streams ([#20485](https://github.com/googleapis/google-cloud-ruby/issues/20485)) 
+
+### 2.15.0 (2023-01-22)
+
+#### Features
+
+* support publisher compression ([#19910](https://github.com/googleapis/google-cloud-ruby/issues/19910)) 
+
+### 2.14.0 (2023-01-12)
+
+#### Features
+
+* Added support for schema evolution, including managing schema revisions, and schema commit and rollback ([#19981](https://github.com/googleapis/google-cloud-ruby/issues/19981)) 
+
+### 2.13.0 (2022-10-18)
+
+#### Features
+
+* Added support for bigquery subscription ([#19221](https://github.com/googleapis/google-cloud-ruby/issues/19221)) 
+
+### 2.12.1 (2022-08-21)
+
+#### Bug Fixes
+
+* update non EOS ack to return Success always ([#19023](https://github.com/googleapis/google-cloud-ruby/issues/19023)) 
+
+### 2.12.0 (2022-08-09)
+
+#### Features
+
+* bump the minimum required version of pubsub v1 ([#18983](https://github.com/googleapis/google-cloud-ruby/issues/18983)) 
+#### Bug Fixes
+
+* honour async options of topic ([#18953](https://github.com/googleapis/google-cloud-ruby/issues/18953)) 
+
+### 2.11.0 (2022-08-01)
+
+#### Features
+
+* create exactly once delivery enabled subscription ([#18824](https://github.com/googleapis/google-cloud-ruby/issues/18824)) 
+* Let user register callback and get acknowledgement result ([#18702](https://github.com/googleapis/google-cloud-ruby/issues/18702)) 
+* retry transient failures in ack/modack in timed unary buffer ([#18395](https://github.com/googleapis/google-cloud-ruby/issues/18395)) 
+
+### 2.10.0 (2022-06-14)
+
+#### Features
+
+* introduce min_duration_per_lease_extension
+
+### 2.9.2 (2022-04-28)
+
+#### Bug Fixes
+
+* ignore grpc errors on ack/modack   
+
+### 2.9.1 / 2022-01-11
+
+#### Documentation
+
+* Update contributing docs
+* Add section on gRPC interceptors to the logging docs
+
+### 2.9.0 / 2021-10-28
+
+#### Features
+
+* Expand timeout type from Integer to Numeric
+  * feat: Expand timeout type from Integer to Numeric. This is backwards-compatible.
+    * Change timeout from Integer to Numeric in Google::Cloud.pubsub
+    * Change timeout from Integer to Numeric in Google::Cloud#pubsub
+    * Change timeout from Integer to Numeric in Google::Cloud::PubSub.configure
+    * Change timeout from Integer to Numeric in Google::Cloud::PubSub.new
+  * fix: Propagate timeout to client RPC configs.
+
+#### Documentation
+
+* Add documentation for quota_project Configuration attribute
+* Fix documentation for PubSub.configure
+  * Remove retries property that does not exist in code.
+
+### 2.8.1 / 2021-09-22
+
+#### Bug Fixes
+
+* Change IAM and Schema client metadata hash keys to symbols
+
+#### Documentation
+
+* Fix typo in Emulator guide links
+
+### 2.8.0 / 2021-08-30
+
+#### Features
+
+* Add Pub/Sub topic retention fields
+  * Add retention to Project#create_topic
+  * Add Topic#retention
+  * Add Topic#retention=
+  * Add Subscription#topic_retention
+
+### 2.7.1 / 2021-07-08
+
+#### Documentation
+
+* Update AUTHENTICATION.md in handwritten packages
+
+### 2.7.0 / 2021-06-15
+
+#### Features
+
+* Add Publisher Flow Control
+  * Add flow_control to async options in Project#create_topic and Project#topic
+  * Add FlowControlLimitError
+
+#### Bug Fixes
+
+* Fix Project#schema and #schemas to return full resource
+  * Include schema definition in default return values.
+  * Fix Schema#definition to return nil instead of empty string when not present.
+
 ### 2.6.1 / 2021-04-28
 
 #### Bug Fixes

@@ -7,7 +7,7 @@ require 'google/protobuf/struct_pb'
 require 'google/spanner/v1/query_plan_pb'
 require 'google/spanner/v1/transaction_pb'
 require 'google/spanner/v1/type_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/spanner/v1/result_set.proto", :syntax => :proto3) do
     add_message "google.spanner.v1.ResultSet" do
@@ -25,6 +25,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.spanner.v1.ResultSetMetadata" do
       optional :row_type, :message, 1, "google.spanner.v1.StructType"
       optional :transaction, :message, 2, "google.spanner.v1.Transaction"
+      optional :undeclared_parameters, :message, 3, "google.spanner.v1.StructType"
     end
     add_message "google.spanner.v1.ResultSetStats" do
       optional :query_plan, :message, 1, "google.spanner.v1.QueryPlan"

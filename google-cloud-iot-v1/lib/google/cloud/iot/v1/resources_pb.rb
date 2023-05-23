@@ -6,6 +6,7 @@ require 'google/protobuf'
 require 'google/api/resource_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/rpc/status_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/iot/v1/resources.proto", :syntax => :proto3) do
     add_message "google.cloud.iot.v1.Device" do

@@ -54,13 +54,12 @@ module Google
             # See {::Google::Cloud::AutoML::V1beta1::AutoML::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all AutoMl clients:
-            #
-            #     ::Google::Cloud::AutoML::V1beta1::AutoML::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all AutoMl clients
+            #   ::Google::Cloud::AutoML::V1beta1::AutoML::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -82,28 +81,19 @@ module Google
 
                 default_config.rpcs.get_dataset.timeout = 5.0
                 default_config.rpcs.get_dataset.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_datasets.timeout = 5.0
                 default_config.rpcs.list_datasets.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.update_dataset.timeout = 5.0
 
                 default_config.rpcs.delete_dataset.timeout = 5.0
                 default_config.rpcs.delete_dataset.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.import_data.timeout = 5.0
@@ -112,44 +102,29 @@ module Google
 
                 default_config.rpcs.get_annotation_spec.timeout = 5.0
                 default_config.rpcs.get_annotation_spec.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.get_table_spec.timeout = 5.0
                 default_config.rpcs.get_table_spec.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_table_specs.timeout = 5.0
                 default_config.rpcs.list_table_specs.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.update_table_spec.timeout = 5.0
 
                 default_config.rpcs.get_column_spec.timeout = 5.0
                 default_config.rpcs.get_column_spec.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_column_specs.timeout = 5.0
                 default_config.rpcs.list_column_specs.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.update_column_spec.timeout = 5.0
@@ -158,26 +133,17 @@ module Google
 
                 default_config.rpcs.get_model.timeout = 5.0
                 default_config.rpcs.get_model.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_models.timeout = 5.0
                 default_config.rpcs.list_models.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.delete_model.timeout = 5.0
                 default_config.rpcs.delete_model.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.deploy_model.timeout = 5.0
@@ -190,10 +156,7 @@ module Google
 
                 default_config.rpcs.get_model_evaluation.timeout = 5.0
                 default_config.rpcs.get_model_evaluation.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_model_evaluations.timeout = 5.0
@@ -227,19 +190,15 @@ module Google
             ##
             # Create a new AutoMl client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new AutoMl client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::AutoML::V1beta1::AutoML::Client.new
             #
-            #     client = ::Google::Cloud::AutoML::V1beta1::AutoML::Client.new
-            #
-            # To create a new AutoMl client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the AutoMl client.
             # @yieldparam config [Client::Configuration]
@@ -259,14 +218,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -274,6 +232,7 @@ module Google
 
               @operations_client = Operations.new do |config|
                 config.credentials = credentials
+                config.quota_project = @quota_project_id
                 config.endpoint = @config.endpoint
               end
 
@@ -326,6 +285,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/automl/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AutoML::V1beta1::CreateDatasetRequest.new
+            #
+            #   # Call the create_dataset method.
+            #   result = client.create_dataset request
+            #
+            #   # The returned object is of type Google::Cloud::AutoML::V1beta1::Dataset.
+            #   p result
+            #
             def create_dataset request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -343,16 +317,20 @@ module Google
                 gapic_version: ::Google::Cloud::AutoML::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_dataset.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_dataset.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @auto_ml_stub.call_rpc :create_dataset, request, options: options do |response, operation|
@@ -392,6 +370,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/automl/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AutoML::V1beta1::GetDatasetRequest.new
+            #
+            #   # Call the get_dataset method.
+            #   result = client.get_dataset request
+            #
+            #   # The returned object is of type Google::Cloud::AutoML::V1beta1::Dataset.
+            #   p result
+            #
             def get_dataset request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -409,16 +402,20 @@ module Google
                 gapic_version: ::Google::Cloud::AutoML::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_dataset.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_dataset.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @auto_ml_stub.call_rpc :get_dataset, request, options: options do |response, operation|
@@ -453,10 +450,11 @@ module Google
             #     An expression for filtering the results of the request.
             #
             #       * `dataset_metadata` - for existence of the case (e.g.
-            #                 image_classification_dataset_metadata:*). Some examples of using the filter are:
+            #                 `image_classification_dataset_metadata:*`). Some examples of
+            #                 using the filter are:
             #
             #       * `translation_dataset_metadata:*` --> The dataset has
-            #                                              translation_dataset_metadata.
+            #                                              `translation_dataset_metadata`.
             #   @param page_size [::Integer]
             #     Requested page size. Server may return fewer results than requested.
             #     If unspecified, server will pick a default size.
@@ -473,6 +471,25 @@ module Google
             # @return [::Gapic::PagedEnumerable<::Google::Cloud::AutoML::V1beta1::Dataset>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/automl/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AutoML::V1beta1::ListDatasetsRequest.new
+            #
+            #   # Call the list_datasets method.
+            #   result = client.list_datasets request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::AutoML::V1beta1::Dataset.
+            #     p item
+            #   end
             #
             def list_datasets request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -491,16 +508,20 @@ module Google
                 gapic_version: ::Google::Cloud::AutoML::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_datasets.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_datasets.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @auto_ml_stub.call_rpc :list_datasets, request, options: options do |response, operation|
@@ -543,6 +564,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/automl/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AutoML::V1beta1::UpdateDatasetRequest.new
+            #
+            #   # Call the update_dataset method.
+            #   result = client.update_dataset request
+            #
+            #   # The returned object is of type Google::Cloud::AutoML::V1beta1::Dataset.
+            #   p result
+            #
             def update_dataset request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -560,16 +596,20 @@ module Google
                 gapic_version: ::Google::Cloud::AutoML::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "dataset.name" => request.dataset.name
-              }
+              header_params = {}
+              if request.dataset&.name
+                header_params["dataset.name"] = request.dataset.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_dataset.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_dataset.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @auto_ml_stub.call_rpc :update_dataset, request, options: options do |response, operation|
@@ -613,6 +653,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/automl/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AutoML::V1beta1::DeleteDatasetRequest.new
+            #
+            #   # Call the delete_dataset method.
+            #   result = client.delete_dataset request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
             def delete_dataset request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -630,16 +692,20 @@ module Google
                 gapic_version: ::Google::Cloud::AutoML::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_dataset.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_dataset.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @auto_ml_stub.call_rpc :delete_dataset, request, options: options do |response, operation|
@@ -692,6 +758,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/automl/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AutoML::V1beta1::ImportDataRequest.new
+            #
+            #   # Call the import_data method.
+            #   result = client.import_data request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
             def import_data request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -709,16 +797,20 @@ module Google
                 gapic_version: ::Google::Cloud::AutoML::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.import_data.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.import_data.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @auto_ml_stub.call_rpc :import_data, request, options: options do |response, operation|
@@ -763,6 +855,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/automl/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AutoML::V1beta1::ExportDataRequest.new
+            #
+            #   # Call the export_data method.
+            #   result = client.export_data request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
             def export_data request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -780,16 +894,20 @@ module Google
                 gapic_version: ::Google::Cloud::AutoML::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.export_data.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.export_data.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @auto_ml_stub.call_rpc :export_data, request, options: options do |response, operation|
@@ -830,6 +948,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/automl/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AutoML::V1beta1::GetAnnotationSpecRequest.new
+            #
+            #   # Call the get_annotation_spec method.
+            #   result = client.get_annotation_spec request
+            #
+            #   # The returned object is of type Google::Cloud::AutoML::V1beta1::AnnotationSpec.
+            #   p result
+            #
             def get_annotation_spec request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -847,16 +980,20 @@ module Google
                 gapic_version: ::Google::Cloud::AutoML::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_annotation_spec.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_annotation_spec.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @auto_ml_stub.call_rpc :get_annotation_spec, request, options: options do |response, operation|
@@ -898,6 +1035,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/automl/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AutoML::V1beta1::GetTableSpecRequest.new
+            #
+            #   # Call the get_table_spec method.
+            #   result = client.get_table_spec request
+            #
+            #   # The returned object is of type Google::Cloud::AutoML::V1beta1::TableSpec.
+            #   p result
+            #
             def get_table_spec request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -915,16 +1067,20 @@ module Google
                 gapic_version: ::Google::Cloud::AutoML::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_table_spec.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_table_spec.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @auto_ml_stub.call_rpc :get_table_spec, request, options: options do |response, operation|
@@ -976,6 +1132,25 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/automl/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AutoML::V1beta1::ListTableSpecsRequest.new
+            #
+            #   # Call the list_table_specs method.
+            #   result = client.list_table_specs request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::AutoML::V1beta1::TableSpec.
+            #     p item
+            #   end
+            #
             def list_table_specs request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -993,16 +1168,20 @@ module Google
                 gapic_version: ::Google::Cloud::AutoML::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_table_specs.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_table_specs.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @auto_ml_stub.call_rpc :list_table_specs, request, options: options do |response, operation|
@@ -1045,6 +1224,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/automl/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AutoML::V1beta1::UpdateTableSpecRequest.new
+            #
+            #   # Call the update_table_spec method.
+            #   result = client.update_table_spec request
+            #
+            #   # The returned object is of type Google::Cloud::AutoML::V1beta1::TableSpec.
+            #   p result
+            #
             def update_table_spec request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1062,16 +1256,20 @@ module Google
                 gapic_version: ::Google::Cloud::AutoML::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "table_spec.name" => request.table_spec.name
-              }
+              header_params = {}
+              if request.table_spec&.name
+                header_params["table_spec.name"] = request.table_spec.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_table_spec.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_table_spec.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @auto_ml_stub.call_rpc :update_table_spec, request, options: options do |response, operation|
@@ -1113,6 +1311,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/automl/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AutoML::V1beta1::GetColumnSpecRequest.new
+            #
+            #   # Call the get_column_spec method.
+            #   result = client.get_column_spec request
+            #
+            #   # The returned object is of type Google::Cloud::AutoML::V1beta1::ColumnSpec.
+            #   p result
+            #
             def get_column_spec request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1130,16 +1343,20 @@ module Google
                 gapic_version: ::Google::Cloud::AutoML::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_column_spec.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_column_spec.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @auto_ml_stub.call_rpc :get_column_spec, request, options: options do |response, operation|
@@ -1191,6 +1408,25 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/automl/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AutoML::V1beta1::ListColumnSpecsRequest.new
+            #
+            #   # Call the list_column_specs method.
+            #   result = client.list_column_specs request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::AutoML::V1beta1::ColumnSpec.
+            #     p item
+            #   end
+            #
             def list_column_specs request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1208,16 +1444,20 @@ module Google
                 gapic_version: ::Google::Cloud::AutoML::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_column_specs.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_column_specs.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @auto_ml_stub.call_rpc :list_column_specs, request, options: options do |response, operation|
@@ -1260,6 +1500,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/automl/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AutoML::V1beta1::UpdateColumnSpecRequest.new
+            #
+            #   # Call the update_column_spec method.
+            #   result = client.update_column_spec request
+            #
+            #   # The returned object is of type Google::Cloud::AutoML::V1beta1::ColumnSpec.
+            #   p result
+            #
             def update_column_spec request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1277,16 +1532,20 @@ module Google
                 gapic_version: ::Google::Cloud::AutoML::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "column_spec.name" => request.column_spec.name
-              }
+              header_params = {}
+              if request.column_spec&.name
+                header_params["column_spec.name"] = request.column_spec.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_column_spec.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_column_spec.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @auto_ml_stub.call_rpc :update_column_spec, request, options: options do |response, operation|
@@ -1332,6 +1591,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/automl/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AutoML::V1beta1::CreateModelRequest.new
+            #
+            #   # Call the create_model method.
+            #   result = client.create_model request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
             def create_model request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1349,16 +1630,20 @@ module Google
                 gapic_version: ::Google::Cloud::AutoML::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_model.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_model.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @auto_ml_stub.call_rpc :create_model, request, options: options do |response, operation|
@@ -1399,6 +1684,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/automl/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AutoML::V1beta1::GetModelRequest.new
+            #
+            #   # Call the get_model method.
+            #   result = client.get_model request
+            #
+            #   # The returned object is of type Google::Cloud::AutoML::V1beta1::Model.
+            #   p result
+            #
             def get_model request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1416,16 +1716,20 @@ module Google
                 gapic_version: ::Google::Cloud::AutoML::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_model.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_model.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @auto_ml_stub.call_rpc :get_model, request, options: options do |response, operation|
@@ -1460,11 +1764,11 @@ module Google
             #     An expression for filtering the results of the request.
             #
             #       * `model_metadata` - for existence of the case (e.g.
-            #                 video_classification_model_metadata:*).
+            #                 `video_classification_model_metadata:*`).
             #       * `dataset_id` - for = or !=. Some examples of using the filter are:
             #
             #       * `image_classification_model_metadata:*` --> The model has
-            #                                            image_classification_model_metadata.
+            #                                          `image_classification_model_metadata`.
             #       * `dataset_id=5` --> The model was created from a dataset with ID 5.
             #   @param page_size [::Integer]
             #     Requested page size.
@@ -1481,6 +1785,25 @@ module Google
             # @return [::Gapic::PagedEnumerable<::Google::Cloud::AutoML::V1beta1::Model>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/automl/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AutoML::V1beta1::ListModelsRequest.new
+            #
+            #   # Call the list_models method.
+            #   result = client.list_models request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::AutoML::V1beta1::Model.
+            #     p item
+            #   end
             #
             def list_models request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1499,16 +1822,20 @@ module Google
                 gapic_version: ::Google::Cloud::AutoML::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_models.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_models.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @auto_ml_stub.call_rpc :list_models, request, options: options do |response, operation|
@@ -1553,6 +1880,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/automl/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AutoML::V1beta1::DeleteModelRequest.new
+            #
+            #   # Call the delete_model method.
+            #   result = client.delete_model request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
             def delete_model request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1570,16 +1919,20 @@ module Google
                 gapic_version: ::Google::Cloud::AutoML::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_model.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_model.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @auto_ml_stub.call_rpc :delete_model, request, options: options do |response, operation|
@@ -1635,6 +1988,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/automl/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AutoML::V1beta1::DeployModelRequest.new
+            #
+            #   # Call the deploy_model method.
+            #   result = client.deploy_model request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
             def deploy_model request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1652,16 +2027,20 @@ module Google
                 gapic_version: ::Google::Cloud::AutoML::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.deploy_model.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.deploy_model.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @auto_ml_stub.call_rpc :deploy_model, request, options: options do |response, operation|
@@ -1708,6 +2087,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/automl/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AutoML::V1beta1::UndeployModelRequest.new
+            #
+            #   # Call the undeploy_model method.
+            #   result = client.undeploy_model request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
             def undeploy_model request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1725,16 +2126,20 @@ module Google
                 gapic_version: ::Google::Cloud::AutoML::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.undeploy_model.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.undeploy_model.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @auto_ml_stub.call_rpc :undeploy_model, request, options: options do |response, operation|
@@ -1784,6 +2189,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/automl/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AutoML::V1beta1::ExportModelRequest.new
+            #
+            #   # Call the export_model method.
+            #   result = client.export_model request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
             def export_model request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1801,16 +2228,20 @@ module Google
                 gapic_version: ::Google::Cloud::AutoML::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.export_model.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.export_model.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @auto_ml_stub.call_rpc :export_model, request, options: options do |response, operation|
@@ -1867,6 +2298,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/automl/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AutoML::V1beta1::ExportEvaluatedExamplesRequest.new
+            #
+            #   # Call the export_evaluated_examples method.
+            #   result = client.export_evaluated_examples request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
             def export_evaluated_examples request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1884,16 +2337,20 @@ module Google
                 gapic_version: ::Google::Cloud::AutoML::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.export_evaluated_examples.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.export_evaluated_examples.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @auto_ml_stub.call_rpc :export_evaluated_examples, request, options: options do |response, operation|
@@ -1934,6 +2391,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/automl/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AutoML::V1beta1::GetModelEvaluationRequest.new
+            #
+            #   # Call the get_model_evaluation method.
+            #   result = client.get_model_evaluation request
+            #
+            #   # The returned object is of type Google::Cloud::AutoML::V1beta1::ModelEvaluation.
+            #   p result
+            #
             def get_model_evaluation request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1951,16 +2423,20 @@ module Google
                 gapic_version: ::Google::Cloud::AutoML::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_model_evaluation.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_model_evaluation.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @auto_ml_stub.call_rpc :get_model_evaluation, request, options: options do |response, operation|
@@ -2021,6 +2497,25 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/automl/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AutoML::V1beta1::ListModelEvaluationsRequest.new
+            #
+            #   # Call the list_model_evaluations method.
+            #   result = client.list_model_evaluations request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::AutoML::V1beta1::ModelEvaluation.
+            #     p item
+            #   end
+            #
             def list_model_evaluations request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2038,16 +2533,20 @@ module Google
                 gapic_version: ::Google::Cloud::AutoML::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_model_evaluations.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_model_evaluations.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @auto_ml_stub.call_rpc :list_model_evaluations, request, options: options do |response, operation|
@@ -2072,22 +2571,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for create_dataset
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # create_dataset to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::AutoML::V1beta1::AutoML::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_dataset.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::AutoML::V1beta1::AutoML::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_dataset.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_dataset.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::AutoML::V1beta1::AutoML::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_dataset.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
@@ -2098,9 +2596,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials

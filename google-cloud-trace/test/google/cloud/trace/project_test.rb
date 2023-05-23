@@ -110,49 +110,49 @@ describe Google::Cloud::Trace::Project, :mock_trace do
   }
 
   it "knows the project identifier" do
-    tracer.must_be_kind_of Google::Cloud::Trace::Project
-    tracer.project.must_equal project
+    _(tracer).must_be_kind_of Google::Cloud::Trace::Project
+    _(tracer.project).must_equal project
   end
 
   it "gets a single trace" do
     mock = Minitest::Mock.new
-    mock.expect :get_trace, simple_trace_proto, [{project_id: project, trace_id: simple_trace_id}]
+    mock.expect :get_trace, simple_trace_proto, project_id: project, trace_id: simple_trace_id
     tracer.service.mocked_lowlevel_client = mock
 
     actual_trace = tracer.get_trace simple_trace_id
 
     mock.verify
-    actual_trace.must_equal simple_trace
+    _(actual_trace).must_equal simple_trace
   end
 
   it "lists traces" do
     mock = Minitest::Mock.new
     mock.expect :list_traces, gapic_paged_enum,
-                [{ project_id: project,
-                   start_time: range_start_proto,
-                   end_time: range_end_proto,
-                   view: nil,
-                   page_size: nil,
-                   filter: nil,
-                   order_by: nil,
-                   page_token: nil }]
+                project_id: project,
+                start_time: range_start_proto,
+                end_time: range_end_proto,
+                view: nil,
+                page_size: nil,
+                filter: nil,
+                order_by: nil,
+                page_token: nil
     tracer.service.mocked_lowlevel_client = mock
 
     actual_result = tracer.list_traces range_start, range_end
 
     mock.verify
-    actual_result.must_be_kind_of Google::Cloud::Trace::ResultSet
-    actual_result.project.must_equal project
-    actual_result.next_page_token.must_equal next_page_token
-    actual_result.start_time.must_equal range_start
-    actual_result.end_time.must_equal range_end
-    actual_result.results_pending?.must_equal true
-    actual_result.to_a.must_equal [simple_trace, second_trace]
+    _(actual_result).must_be_kind_of Google::Cloud::Trace::ResultSet
+    _(actual_result.project).must_equal project
+    _(actual_result.next_page_token).must_equal next_page_token
+    _(actual_result.start_time).must_equal range_start
+    _(actual_result.end_time).must_equal range_end
+    _(actual_result.results_pending?).must_equal true
+    _(actual_result.to_a).must_equal [simple_trace, second_trace]
   end
 
   it "patches a trace" do
     mock = Minitest::Mock.new
-    mock.expect :patch_traces, nil, [{project_id: project, traces: simple_traces_proto}]
+    mock.expect :patch_traces, nil, project_id: project, traces: simple_traces_proto
     tracer.service.mocked_lowlevel_client = mock
 
     tracer.patch_traces simple_trace

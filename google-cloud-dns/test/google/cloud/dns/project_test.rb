@@ -64,7 +64,7 @@ describe Google::Cloud::Dns::Project, :mock_dns do
   it "lists zones" do
     num_zones = 3
     mock = Minitest::Mock.new
-    mock.expect :list_managed_zones, list_zones_gapi(num_zones), [project, {max_results: nil, page_token: nil}]
+    mock.expect :list_managed_zones, list_zones_gapi(num_zones), [project], max_results: nil, page_token: nil
 
     dns.service.mocked_service = mock
     zones = dns.zones
@@ -76,8 +76,8 @@ describe Google::Cloud::Dns::Project, :mock_dns do
 
   it "paginates zones" do
     mock = Minitest::Mock.new
-    mock.expect :list_managed_zones, list_zones_gapi(3, "next_page_token"), [project, {max_results: nil, page_token: nil}]
-    mock.expect :list_managed_zones, list_zones_gapi(2), [project, {max_results: nil, page_token: "next_page_token"}]
+    mock.expect :list_managed_zones, list_zones_gapi(3, "next_page_token"), [project], max_results: nil, page_token: nil
+    mock.expect :list_managed_zones, list_zones_gapi(2), [project], max_results: nil, page_token: "next_page_token"
 
     dns.service.mocked_service = mock
     first_zones = dns.zones
@@ -96,7 +96,7 @@ describe Google::Cloud::Dns::Project, :mock_dns do
 
   it "paginates zones with max set" do
     mock = Minitest::Mock.new
-    mock.expect :list_managed_zones, list_zones_gapi(3, "next_page_token"), [project, {max_results: 3, page_token: nil}]
+    mock.expect :list_managed_zones, list_zones_gapi(3, "next_page_token"), [project], max_results: 3, page_token: nil
 
     dns.service.mocked_service = mock
     zones = dns.zones max: 3
@@ -110,7 +110,7 @@ describe Google::Cloud::Dns::Project, :mock_dns do
 
   it "paginates zones without max set" do
     mock = Minitest::Mock.new
-    mock.expect :list_managed_zones, list_zones_gapi(3, "next_page_token"), [project, {max_results: nil, page_token: nil}]
+    mock.expect :list_managed_zones, list_zones_gapi(3, "next_page_token"), [project], max_results: nil, page_token: nil
 
     dns.service.mocked_service = mock
     zones = dns.zones
@@ -124,8 +124,8 @@ describe Google::Cloud::Dns::Project, :mock_dns do
 
   it "paginates zones with next? and next" do
     mock = Minitest::Mock.new
-    mock.expect :list_managed_zones, list_zones_gapi(3, "next_page_token"), [project, {max_results: nil, page_token: nil}]
-    mock.expect :list_managed_zones, list_zones_gapi(2), [project, {max_results: nil, page_token: "next_page_token"}]
+    mock.expect :list_managed_zones, list_zones_gapi(3, "next_page_token"), [project], max_results: nil, page_token: nil
+    mock.expect :list_managed_zones, list_zones_gapi(2), [project], max_results: nil, page_token: "next_page_token"
 
     dns.service.mocked_service = mock
     first_zones = dns.zones
@@ -143,8 +143,8 @@ describe Google::Cloud::Dns::Project, :mock_dns do
 
   it "paginates zones with next? and next and max set" do
     mock = Minitest::Mock.new
-    mock.expect :list_managed_zones, list_zones_gapi(3, "next_page_token"), [project, {max_results: 3, page_token: nil}]
-    mock.expect :list_managed_zones, list_zones_gapi(2), [project, {max_results: 3, page_token: "next_page_token"}]
+    mock.expect :list_managed_zones, list_zones_gapi(3, "next_page_token"), [project], max_results: 3, page_token: nil
+    mock.expect :list_managed_zones, list_zones_gapi(2), [project], max_results: 3, page_token: "next_page_token"
 
     dns.service.mocked_service = mock
     first_zones = dns.zones max: 3
@@ -162,8 +162,8 @@ describe Google::Cloud::Dns::Project, :mock_dns do
 
   it "paginates zones with all" do
     mock = Minitest::Mock.new
-    mock.expect :list_managed_zones, list_zones_gapi(3, "next_page_token"), [project, {max_results: nil, page_token: nil}]
-    mock.expect :list_managed_zones, list_zones_gapi(2), [project, {max_results: nil, page_token: "next_page_token"}]
+    mock.expect :list_managed_zones, list_zones_gapi(3, "next_page_token"), [project], max_results: nil, page_token: nil
+    mock.expect :list_managed_zones, list_zones_gapi(2), [project], max_results: nil, page_token: "next_page_token"
 
     dns.service.mocked_service = mock
     zones = dns.zones.all.to_a
@@ -175,8 +175,8 @@ describe Google::Cloud::Dns::Project, :mock_dns do
 
   it "paginates zones with all and max set" do
     mock = Minitest::Mock.new
-    mock.expect :list_managed_zones, list_zones_gapi(3, "next_page_token"), [project, {max_results: 3, page_token: nil}]
-    mock.expect :list_managed_zones, list_zones_gapi(2), [project, {max_results: 3, page_token: "next_page_token"}]
+    mock.expect :list_managed_zones, list_zones_gapi(3, "next_page_token"), [project], max_results: 3, page_token: nil
+    mock.expect :list_managed_zones, list_zones_gapi(2), [project], max_results: 3, page_token: "next_page_token"
 
     dns.service.mocked_service = mock
     zones = dns.zones(max: 3).all.to_a
@@ -188,8 +188,8 @@ describe Google::Cloud::Dns::Project, :mock_dns do
 
   it "iterates all zones with all using Enumerator" do
     mock = Minitest::Mock.new
-    mock.expect :list_managed_zones, list_zones_gapi(3, "next_page_token"), [project, {max_results: nil, page_token: nil}]
-    mock.expect :list_managed_zones, list_zones_gapi(3, "second_page_token"), [project, {max_results: nil, page_token: "next_page_token"}]
+    mock.expect :list_managed_zones, list_zones_gapi(3, "next_page_token"), [project], max_results: nil, page_token: nil
+    mock.expect :list_managed_zones, list_zones_gapi(3, "second_page_token"), [project], max_results: nil, page_token: "next_page_token"
 
     dns.service.mocked_service = mock
     zones = dns.zones.all.take(5)
@@ -201,8 +201,8 @@ describe Google::Cloud::Dns::Project, :mock_dns do
 
   it "iterates all zones with all with request_limit set" do
     mock = Minitest::Mock.new
-    mock.expect :list_managed_zones, list_zones_gapi(3, "next_page_token"), [project, {max_results: nil, page_token: nil}]
-    mock.expect :list_managed_zones, list_zones_gapi(3, "second_page_token"), [project, {max_results: nil, page_token: "next_page_token"}]
+    mock.expect :list_managed_zones, list_zones_gapi(3, "next_page_token"), [project], max_results: nil, page_token: nil
+    mock.expect :list_managed_zones, list_zones_gapi(3, "second_page_token"), [project], max_results: nil, page_token: "next_page_token"
 
     dns.service.mocked_service = mock
     zones = dns.zones.all(request_limit: 1).to_a

@@ -21,53 +21,109 @@ module Google
   module Cloud
     module Logging
       module V2
-        # Describes a repository of logs.
-        # @!attribute [rw] name
+        # Configuration for an indexed field.
+        # @!attribute [rw] field_path
         #   @return [::String]
-        #     The resource name of the bucket.
-        #     For example:
-        #     "projects/my-project-id/locations/my-location/buckets/my-bucket-id The
-        #     supported locations are:
-        #       "global"
+        #     Required. The LogEntry field path to index.
         #
-        #     For the location of `global` it is unspecified where logs are actually
-        #     stored.
-        #     Once a bucket has been created, the location can not be changed.
+        #     Note that some paths are automatically indexed, and other paths are not
+        #     eligible for indexing. See [indexing documentation](
+        #     https://cloud.google.com/logging/docs/view/advanced-queries#indexed-fields)
+        #     for details.
+        #
+        #     For example: `jsonPayload.request.status`
+        # @!attribute [rw] type
+        #   @return [::Google::Cloud::Logging::V2::IndexType]
+        #     Required. The type of data in this index.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The timestamp when the index was last modified.
+        #
+        #     This is used to return the timestamp, and will be ignored if supplied
+        #     during update.
+        class IndexConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Describes a repository in which log entries are stored.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. The resource name of the bucket.
+        #
+        #     For example:
+        #
+        #       `projects/my-project/locations/global/buckets/my-bucket`
+        #
+        #     For a list of supported locations, see [Supported
+        #     Regions](https://cloud.google.com/logging/docs/region-support)
+        #
+        #     For the location of `global` it is unspecified where log entries are
+        #     actually stored.
+        #
+        #     After a bucket has been created, the location cannot be changed.
         # @!attribute [rw] description
         #   @return [::String]
         #     Describes this bucket.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The creation timestamp of the bucket. This is not set for any of the
-        #     default buckets.
+        #     Output only. The creation timestamp of the bucket. This is not set for any
+        #     of the default buckets.
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The last update timestamp of the bucket.
         # @!attribute [rw] retention_days
         #   @return [::Integer]
         #     Logs will be retained by default for this amount of time, after which they
-        #     will automatically be deleted. The minimum retention period is 1 day.
-        #     If this value is set to zero at bucket creation time, the default time of
-        #     30 days will be used.
+        #     will automatically be deleted. The minimum retention period is 1 day. If
+        #     this value is set to zero at bucket creation time, the default time of 30
+        #     days will be used.
         # @!attribute [rw] locked
         #   @return [::Boolean]
-        #     Whether the bucket has been locked.
-        #     The retention period on a locked bucket may not be changed.
-        #     Locked buckets may only be deleted if they are empty.
+        #     Whether the bucket is locked.
+        #
+        #     The retention period on a locked bucket cannot be changed. Locked buckets
+        #     may only be deleted if they are empty.
         # @!attribute [r] lifecycle_state
         #   @return [::Google::Cloud::Logging::V2::LifecycleState]
         #     Output only. The bucket lifecycle state.
+        # @!attribute [rw] analytics_enabled
+        #   @return [::Boolean]
+        #     Whether log analytics is enabled for this bucket.
+        #
+        #     Once enabled, log analytics features cannot be disabled.
+        # @!attribute [rw] restricted_fields
+        #   @return [::Array<::String>]
+        #     Log entry field paths that are denied access in this bucket.
+        #
+        #     The following fields and their children are eligible: `textPayload`,
+        #     `jsonPayload`, `protoPayload`, `httpRequest`, `labels`, `sourceLocation`.
+        #
+        #     Restricting a repeated field will restrict all values. Adding a parent will
+        #     block all child fields. (e.g. `foo.bar` will block `foo.bar.baz`)
+        # @!attribute [rw] index_configs
+        #   @return [::Array<::Google::Cloud::Logging::V2::IndexConfig>]
+        #     A list of indexed fields and related configuration data.
+        # @!attribute [rw] cmek_settings
+        #   @return [::Google::Cloud::Logging::V2::CmekSettings]
+        #     The CMEK settings of the log bucket. If present, new log entries written to
+        #     this log bucket are encrypted using the CMEK key provided in this
+        #     configuration. If a log bucket has CMEK settings, the CMEK settings cannot
+        #     be disabled later by updating the log bucket. Changing the KMS key is
+        #     allowed.
         class LogBucket
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Describes a view over logs in a bucket.
+        # Describes a view over log entries in a bucket.
         # @!attribute [rw] name
         #   @return [::String]
         #     The resource name of the view.
-        #     For example
-        #     "projects/my-project-id/locations/my-location/buckets/my-bucket-id/views/my-view
+        #
+        #     For example:
+        #
+        #       `projects/my-project/locations/global/buckets/my-bucket/views/my-view`
         # @!attribute [rw] description
         #   @return [::String]
         #     Describes this view.
@@ -80,28 +136,35 @@ module Google
         # @!attribute [rw] filter
         #   @return [::String]
         #     Filter that restricts which log entries in a bucket are visible in this
-        #     view. Filters are restricted to be a logical AND of ==/!= of any of the
+        #     view.
+        #
+        #     Filters are restricted to be a logical AND of ==/!= of any of the
         #     following:
-        #       originating project/folder/organization/billing account.
-        #       resource type
-        #       log id
-        #     Example: SOURCE("projects/myproject") AND resource.type = "gce_instance"
-        #                 AND LOG_ID("stdout")
+        #
+        #       - originating project/folder/organization/billing account.
+        #       - resource type
+        #       - log id
+        #
+        #     For example:
+        #
+        #       SOURCE("projects/myproject") AND resource.type = "gce_instance"
+        #                                    AND LOG_ID("stdout")
         class LogView
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Describes a sink used to export log entries to one of the following
-        # destinations in any project: a Cloud Storage bucket, a BigQuery dataset, or a
-        # Cloud Pub/Sub topic. A logs filter controls which log entries are exported.
-        # The sink must be created within a project, organization, billing account, or
-        # folder.
+        # destinations in any project: a Cloud Storage bucket, a BigQuery dataset, a
+        # Pub/Sub topic or a Cloud Logging log bucket. A logs filter controls which log
+        # entries are exported. The sink must be created within a project,
+        # organization, billing account, or folder.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The client-assigned sink identifier, unique within the project. Example:
-        #     `"my-syslog-errors-to-pubsub"`. Sink identifiers are limited to 100
-        #     characters and can include only the following characters: upper and
+        #     Required. The client-assigned sink identifier, unique within the project.
+        #
+        #     For example: `"my-syslog-errors-to-pubsub"`. Sink identifiers are limited
+        #     to 100 characters and can include only the following characters: upper and
         #     lower-case alphanumeric characters, underscores, hyphens, and periods.
         #     First character has to be alphanumeric.
         # @!attribute [rw] destination
@@ -112,9 +175,9 @@ module Google
         #         "bigquery.googleapis.com/projects/[PROJECT_ID]/datasets/[DATASET]"
         #         "pubsub.googleapis.com/projects/[PROJECT_ID]/topics/[TOPIC_ID]"
         #
-        #     The sink's `writer_identity`, set when the sink is created, must
-        #     have permission to write to the destination or else the log
-        #     entries are not exported. For more information, see
+        #     The sink's `writer_identity`, set when the sink is created, must have
+        #     permission to write to the destination or else the log entries are not
+        #     exported. For more information, see
         #     [Exporting Logs with
         #     Sinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
         # @!attribute [rw] filter
@@ -122,20 +185,25 @@ module Google
         #     Optional. An [advanced logs
         #     filter](https://cloud.google.com/logging/docs/view/advanced-queries). The
         #     only exported log entries are those that are in the resource owning the
-        #     sink and that match the filter. For example:
+        #     sink and that match the filter.
         #
-        #         logName="projects/[PROJECT_ID]/logs/[LOG_ID]" AND severity>=ERROR
+        #     For example:
+        #
+        #       `logName="projects/[PROJECT_ID]/logs/[LOG_ID]" AND severity>=ERROR`
         # @!attribute [rw] description
         #   @return [::String]
         #     Optional. A description of this sink.
+        #
         #     The maximum length of the description is 8000 characters.
         # @!attribute [rw] disabled
         #   @return [::Boolean]
-        #     Optional. If set to True, then this sink is disabled and it does not
-        #     export any log entries.
+        #     Optional. If set to true, then this sink is disabled and it does not export
+        #     any log entries.
         # @!attribute [rw] exclusions
         #   @return [::Array<::Google::Cloud::Logging::V2::LogExclusion>]
-        #     Optional. Log entries that match any of the exclusion filters will not be exported.
+        #     Optional. Log entries that match any of these exclusion filters will not be
+        #     exported.
+        #
         #     If a log entry is matched by both `filter` and one of `exclusion_filters`
         #     it will not be exported.
         # @!attribute [rw] output_version_format
@@ -143,33 +211,43 @@ module Google
         #     Deprecated. This field is unused.
         # @!attribute [r] writer_identity
         #   @return [::String]
-        #     Output only. An IAM identity&mdash;a service account or group&mdash;under which Logging
-        #     writes the exported log entries to the sink's destination. This field is
-        #     set by {::Google::Cloud::Logging::V2::ConfigServiceV2::Client#create_sink sinks.create} and
-        #     {::Google::Cloud::Logging::V2::ConfigServiceV2::Client#update_sink sinks.update} based on the
+        #     Output only. An IAM identity&mdash;a service account or group&mdash;under
+        #     which Cloud Logging writes the exported log entries to the sink's
+        #     destination. This field is either set by specifying
+        #     `custom_writer_identity` or set automatically by
+        #     {::Google::Cloud::Logging::V2::ConfigService::Client#create_sink sinks.create} and
+        #     {::Google::Cloud::Logging::V2::ConfigService::Client#update_sink sinks.update} based on the
         #     value of `unique_writer_identity` in those methods.
         #
         #     Until you grant this identity write-access to the destination, log entry
-        #     exports from this sink will fail. For more information,
-        #     see [Granting Access for a
+        #     exports from this sink will fail. For more information, see [Granting
+        #     Access for a
         #     Resource](https://cloud.google.com/iam/docs/granting-roles-to-service-accounts#granting_access_to_a_service_account_for_a_resource).
         #     Consult the destination service's documentation to determine the
         #     appropriate IAM roles to assign to the identity.
+        #
+        #     Sinks that have a destination that is a log bucket in the same project as
+        #     the sink cannot have a writer_identity and no additional permissions are
+        #     required.
         # @!attribute [rw] include_children
         #   @return [::Boolean]
         #     Optional. This field applies only to sinks owned by organizations and
         #     folders. If the field is false, the default, only the logs owned by the
         #     sink's parent resource are available for export. If the field is true, then
-        #     logs from all the projects, folders, and billing accounts contained in the
-        #     sink's parent resource are also available for export. Whether a particular
-        #     log entry from the children is exported depends on the sink's filter
-        #     expression. For example, if this field is true, then the filter
-        #     `resource.type=gce_instance` would export all Compute Engine VM instance
-        #     log entries from all projects in the sink's parent. To only export entries
-        #     from certain child projects, filter on the project part of the log name:
+        #     log entries from all the projects, folders, and billing accounts contained
+        #     in the sink's parent resource are also available for export. Whether a
+        #     particular log entry from the children is exported depends on the sink's
+        #     filter expression.
         #
-        #         logName:("projects/test-project1/" OR "projects/test-project2/") AND
-        #         resource.type=gce_instance
+        #     For example, if this field is true, then the filter
+        #     `resource.type=gce_instance` would export all Compute Engine VM instance
+        #     log entries from all projects in the sink's parent.
+        #
+        #     To only export entries from certain child projects, filter on the project
+        #     part of the log name:
+        #
+        #       logName:("projects/test-project1/" OR "projects/test-project2/") AND
+        #       resource.type=gce_instance
         # @!attribute [rw] bigquery_options
         #   @return [::Google::Cloud::Logging::V2::BigQueryOptions]
         #     Optional. Options that affect sinks exporting data to BigQuery.
@@ -200,14 +278,66 @@ module Google
           end
         end
 
+        # Describes a BigQuery dataset that was created by a link.
+        # @!attribute [r] dataset_id
+        #   @return [::String]
+        #     Output only. The full resource name of the BigQuery dataset. The DATASET_ID
+        #     will match the ID of the link, so the link must match the naming
+        #     restrictions of BigQuery datasets (alphanumeric characters and underscores
+        #     only).
+        #
+        #     The dataset will have a resource path of
+        #       "bigquery.googleapis.com/projects/[PROJECT_ID]/datasets/[DATASET_ID]"
+        class BigQueryDataset
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Describes a link connected to an analytics enabled bucket.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     The resource name of the link. The name can have up to 100 characters.
+        #     A valid link id (at the end of the link name) must only have alphanumeric
+        #     characters and underscores within it.
+        #
+        #         "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/links/[LINK_ID]"
+        #         "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/links/[LINK_ID]"
+        #         "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/links/[LINK_ID]"
+        #         "folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/links/[LINK_ID]"
+        #
+        #     For example:
+        #
+        #       `projects/my-project/locations/global/buckets/my-bucket/links/my_link
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     Describes this link.
+        #
+        #     The maximum length of the description is 8000 characters.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The creation timestamp of the link.
+        # @!attribute [r] lifecycle_state
+        #   @return [::Google::Cloud::Logging::V2::LifecycleState]
+        #     Output only. The resource lifecycle state.
+        # @!attribute [rw] bigquery_dataset
+        #   @return [::Google::Cloud::Logging::V2::BigQueryDataset]
+        #     The information of a BigQuery Dataset. When a link is created, a BigQuery
+        #     dataset is created along with it, in the same project as the LogBucket it's
+        #     linked to. This dataset will also have BigQuery Views corresponding to the
+        #     LogViews in the bucket.
+        class Link
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Options that change functionality of a sink exporting data to BigQuery.
         # @!attribute [rw] use_partitioned_tables
         #   @return [::Boolean]
         #     Optional. Whether to use [BigQuery's partition
         #     tables](https://cloud.google.com/bigquery/docs/partitioned-tables). By
-        #     default, Logging creates dated tables based on the log entries' timestamps,
-        #     e.g. syslog_20170523. With partitioned tables the date suffix is no longer
-        #     present and [special query
+        #     default, Cloud Logging creates dated tables based on the log entries'
+        #     timestamps, e.g. syslog_20170523. With partitioned tables the date suffix
+        #     is no longer present and [special query
         #     syntax](https://cloud.google.com/bigquery/docs/querying-partitioned-tables)
         #     has to be used instead. In both cases, tables are sharded based on UTC
         #     timezone.
@@ -215,6 +345,7 @@ module Google
         #   @return [::Boolean]
         #     Output only. True if new timestamp column based partitioning is in use,
         #     false if legacy ingestion-time partitioning is in use.
+        #
         #     All new sinks will have this field set true and will use timestamp column
         #     based partitioning. If use_partitioned_tables is false, this value has no
         #     meaning and will be false. Legacy sinks using partitioned tables will have
@@ -270,21 +401,23 @@ module Google
         # The parameters to `CreateBucket`.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The resource in which to create the bucket:
+        #     Required. The resource in which to create the log bucket:
         #
         #         "projects/[PROJECT_ID]/locations/[LOCATION_ID]"
         #
-        #     Example: `"projects/my-logging-project/locations/global"`
+        #     For example:
+        #
+        #       `"projects/my-project/locations/global"`
         # @!attribute [rw] bucket_id
         #   @return [::String]
-        #     Required. A client-assigned identifier such as `"my-bucket"`. Identifiers are
-        #     limited to 100 characters and can include only letters, digits,
+        #     Required. A client-assigned identifier such as `"my-bucket"`. Identifiers
+        #     are limited to 100 characters and can include only letters, digits,
         #     underscores, hyphens, and periods.
         # @!attribute [rw] bucket
         #   @return [::Google::Cloud::Logging::V2::LogBucket]
-        #     Required. The new bucket. The region specified in the new bucket must be compliant
-        #     with any Location Restriction Org Policy. The name field in the bucket is
-        #     ignored.
+        #     Required. The new bucket. The region specified in the new bucket must be
+        #     compliant with any Location Restriction Org Policy. The name field in the
+        #     bucket is ignored.
         class CreateBucketRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -300,23 +433,22 @@ module Google
         #         "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
         #         "folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
         #
-        #     Example:
-        #     `"projects/my-project-id/locations/my-location/buckets/my-bucket-id"`. Also
-        #     requires permission "resourcemanager.projects.updateLiens" to set the
-        #     locked property
+        #     For example:
+        #
+        #       `"projects/my-project/locations/global/buckets/my-bucket"`
         # @!attribute [rw] bucket
         #   @return [::Google::Cloud::Logging::V2::LogBucket]
         #     Required. The updated bucket.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. Field mask that specifies the fields in `bucket` that need an update. A
-        #     bucket field will be overwritten if, and only if, it is in the update
-        #     mask. `name` and output only fields cannot be updated.
+        #     Required. Field mask that specifies the fields in `bucket` that need an
+        #     update. A bucket field will be overwritten if, and only if, it is in the
+        #     update mask. `name` and output only fields cannot be updated.
         #
-        #     For a detailed `FieldMask` definition, see
+        #     For a detailed `FieldMask` definition, see:
         #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
         #
-        #     Example: `updateMask=retention_days`.
+        #     For example: `updateMask=retention_days`
         class UpdateBucketRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -332,8 +464,9 @@ module Google
         #         "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
         #         "folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
         #
-        #     Example:
-        #     `"projects/my-project-id/locations/my-location/buckets/my-bucket-id"`.
+        #     For example:
+        #
+        #       `"projects/my-project/locations/global/buckets/my-bucket"`
         class GetBucketRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -349,8 +482,9 @@ module Google
         #         "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
         #         "folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
         #
-        #     Example:
-        #     `"projects/my-project-id/locations/my-location/buckets/my-bucket-id"`.
+        #     For example:
+        #
+        #       `"projects/my-project/locations/global/buckets/my-bucket"`
         class DeleteBucketRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -366,8 +500,9 @@ module Google
         #         "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
         #         "folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
         #
-        #     Example:
-        #     `"projects/my-project-id/locations/my-location/buckets/my-bucket-id"`.
+        #     For example:
+        #
+        #       `"projects/my-project/locations/global/buckets/my-bucket"`
         class UndeleteBucketRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -388,6 +523,7 @@ module Google
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. The maximum number of results to return from this request.
+        #
         #     Non-positive values are ignored. The presence of `nextPageToken` in the
         #     response indicates that more results might be available.
         class ListViewsRequest
@@ -414,13 +550,16 @@ module Google
         #   @return [::String]
         #     Required. The bucket in which to create the view
         #
-        #         "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+        #         `"projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"`
         #
-        #     Example:
-        #     `"projects/my-logging-project/locations/my-location/buckets/my-bucket"`
+        #     For example:
+        #
+        #       `"projects/my-project/locations/global/buckets/my-bucket"`
         # @!attribute [rw] view_id
         #   @return [::String]
-        #     Required. The id to use for this view.
+        #     Required. A client-assigned identifier such as `"my-view"`. Identifiers are
+        #     limited to 100 characters and can include only letters, digits,
+        #     underscores, hyphens, and periods.
         # @!attribute [rw] view
         #   @return [::Google::Cloud::Logging::V2::LogView]
         #     Required. The new view.
@@ -436,8 +575,9 @@ module Google
         #
         #         "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]"
         #
-        #     Example:
-        #       `"projects/my-project-id/locations/my-location/buckets/my-bucket-id/views/my-view-id"`.
+        #     For example:
+        #
+        #       `"projects/my-project/locations/global/buckets/my-bucket/views/my-view"`
         # @!attribute [rw] view
         #   @return [::Google::Cloud::Logging::V2::LogView]
         #     Required. The updated view.
@@ -450,7 +590,7 @@ module Google
         #     For a detailed `FieldMask` definition, see
         #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
         #
-        #     Example: `updateMask=filter`.
+        #     For example: `updateMask=filter`
         class UpdateViewRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -463,8 +603,9 @@ module Google
         #
         #         "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]"
         #
-        #     Example:
-        #     `"projects/my-project-id/locations/my-location/buckets/my-bucket-id/views/my-view-id"`.
+        #     For example:
+        #
+        #       `"projects/my-project/locations/global/buckets/my-bucket/views/my-view"`
         class GetViewRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -477,8 +618,9 @@ module Google
         #
         #         "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]"
         #
-        #     Example:
-        #        `"projects/my-project-id/locations/my-location/buckets/my-bucket-id/views/my-view-id"`.
+        #     For example:
+        #
+        #        `"projects/my-project/locations/global/buckets/my-bucket/views/my-view"`
         class DeleteViewRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -533,7 +675,9 @@ module Google
         #         "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
         #         "folders/[FOLDER_ID]/sinks/[SINK_ID]"
         #
-        #     Example: `"projects/my-project-id/sinks/my-sink-id"`.
+        #     For example:
+        #
+        #       `"projects/my-project/sinks/my-sink"`
         class GetSinkRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -549,7 +693,10 @@ module Google
         #         "billingAccounts/[BILLING_ACCOUNT_ID]"
         #         "folders/[FOLDER_ID]"
         #
-        #     Examples: `"projects/my-logging-project"`, `"organizations/123456789"`.
+        #     For examples:
+        #
+        #       `"projects/my-project"`
+        #       `"organizations/123456789"`
         # @!attribute [rw] sink
         #   @return [::Google::Cloud::Logging::V2::LogSink]
         #     Required. The new sink, whose `name` parameter is a sink identifier that
@@ -559,14 +706,15 @@ module Google
         #     Optional. Determines the kind of IAM identity returned as `writer_identity`
         #     in the new sink. If this value is omitted or set to false, and if the
         #     sink's parent is a project, then the value returned as `writer_identity` is
-        #     the same group or service account used by Logging before the addition of
-        #     writer identities to this API. The sink's destination must be in the same
-        #     project as the sink itself.
+        #     the same group or service account used by Cloud Logging before the addition
+        #     of writer identities to this API. The sink's destination must be in the
+        #     same project as the sink itself.
         #
         #     If this field is set to true, or if the sink is owned by a non-project
         #     resource such as an organization, then the value of `writer_identity` will
         #     be a unique service account used only for exports from the new sink. For
-        #     more information, see `writer_identity` in {::Google::Cloud::Logging::V2::LogSink LogSink}.
+        #     more information, see `writer_identity` in
+        #     {::Google::Cloud::Logging::V2::LogSink LogSink}.
         class CreateSinkRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -575,22 +723,24 @@ module Google
         # The parameters to `UpdateSink`.
         # @!attribute [rw] sink_name
         #   @return [::String]
-        #     Required. The full resource name of the sink to update, including the parent
-        #     resource and the sink identifier:
+        #     Required. The full resource name of the sink to update, including the
+        #     parent resource and the sink identifier:
         #
         #         "projects/[PROJECT_ID]/sinks/[SINK_ID]"
         #         "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
         #         "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
         #         "folders/[FOLDER_ID]/sinks/[SINK_ID]"
         #
-        #     Example: `"projects/my-project-id/sinks/my-sink-id"`.
+        #     For example:
+        #
+        #       `"projects/my-project/sinks/my-sink"`
         # @!attribute [rw] sink
         #   @return [::Google::Cloud::Logging::V2::LogSink]
-        #     Required. The updated sink, whose name is the same identifier that appears as part
-        #     of `sink_name`.
+        #     Required. The updated sink, whose name is the same identifier that appears
+        #     as part of `sink_name`.
         # @!attribute [rw] unique_writer_identity
         #   @return [::Boolean]
-        #     Optional. See {::Google::Cloud::Logging::V2::ConfigServiceV2::Client#create_sink sinks.create}
+        #     Optional. See {::Google::Cloud::Logging::V2::ConfigService::Client#create_sink sinks.create}
         #     for a description of this field. When updating a sink, the effect of this
         #     field on the value of `writer_identity` in the updated sink depends on both
         #     the old and new values of this field:
@@ -607,16 +757,18 @@ module Google
         #     an update. A sink field will be overwritten if, and only if, it is
         #     in the update mask. `name` and output only fields cannot be updated.
         #
-        #     An empty updateMask is temporarily treated as using the following mask
+        #     An empty `updateMask` is temporarily treated as using the following mask
         #     for backwards compatibility purposes:
-        #       destination,filter,includeChildren
+        #
+        #       `destination,filter,includeChildren`
+        #
         #     At some point in the future, behavior will be removed and specifying an
-        #     empty updateMask will be an error.
+        #     empty `updateMask` will be an error.
         #
         #     For a detailed `FieldMask` definition, see
         #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#google.protobuf.FieldMask
         #
-        #     Example: `updateMask=filter`.
+        #     For example: `updateMask=filter`
         class UpdateSinkRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -625,32 +777,119 @@ module Google
         # The parameters to `DeleteSink`.
         # @!attribute [rw] sink_name
         #   @return [::String]
-        #     Required. The full resource name of the sink to delete, including the parent
-        #     resource and the sink identifier:
+        #     Required. The full resource name of the sink to delete, including the
+        #     parent resource and the sink identifier:
         #
         #         "projects/[PROJECT_ID]/sinks/[SINK_ID]"
         #         "organizations/[ORGANIZATION_ID]/sinks/[SINK_ID]"
         #         "billingAccounts/[BILLING_ACCOUNT_ID]/sinks/[SINK_ID]"
         #         "folders/[FOLDER_ID]/sinks/[SINK_ID]"
         #
-        #     Example: `"projects/my-project-id/sinks/my-sink-id"`.
+        #     For example:
+        #
+        #       `"projects/my-project/sinks/my-sink"`
         class DeleteSinkRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Specifies a set of log entries that are not to be stored in
-        # Logging. If your GCP resource receives a large volume of logs, you can
-        # use exclusions to reduce your chargeable logs. Exclusions are
-        # processed after log sinks, so you can export log entries before they are
-        # excluded. Note that organization-level and folder-level exclusions don't
-        # apply to child resources, and that you can't exclude audit log entries.
+        # The parameters to CreateLink.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The full resource name of the bucket to create a link for.
+        #
+        #         "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+        #         "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+        #         "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+        #         "folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]"
+        # @!attribute [rw] link
+        #   @return [::Google::Cloud::Logging::V2::Link]
+        #     Required. The new link.
+        # @!attribute [rw] link_id
+        #   @return [::String]
+        #     Required. The ID to use for the link. The link_id can have up to 100
+        #     characters. A valid link_id must only have alphanumeric characters and
+        #     underscores within it.
+        class CreateLinkRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The parameters to DeleteLink.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. A client-assigned identifier, such as `"load-balancer-exclusion"`.
-        #     Identifiers are limited to 100 characters and can include only letters,
-        #     digits, underscores, hyphens, and periods. First character has to be
-        #     alphanumeric.
+        #     Required. The full resource name of the link to delete.
+        #
+        #      "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/links/[LINK_ID]"
+        #       "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/links/[LINK_ID]"
+        #       "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/links/[LINK_ID]"
+        #       "folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/links/[LINK_ID]"
+        class DeleteLinkRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The parameters to ListLinks.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource whose links are to be listed:
+        #
+        #       "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/links/"
+        #       "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/"
+        #       "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/"
+        #       "folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. If present, then retrieve the next batch of results from the
+        #     preceding call to this method. `pageToken` must be the value of
+        #     `nextPageToken` from the previous response.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of results to return from this request.
+        class ListLinksRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response from ListLinks.
+        # @!attribute [rw] links
+        #   @return [::Array<::Google::Cloud::Logging::V2::Link>]
+        #     A list of links.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     If there might be more results than those appearing in this response, then
+        #     `nextPageToken` is included. To get the next set of results, call the same
+        #     method again using the value of `nextPageToken` as `pageToken`.
+        class ListLinksResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The parameters to GetLink.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the link:
+        #
+        #       "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/links/[LINK_ID]"
+        #       "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/links/[LINK_ID]"
+        #       "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/links/[LINK_ID]"
+        #       "folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/links/[LINK_ID]
+        class GetLinkRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Specifies a set of log entries that are filtered out by a sink. If
+        # your Google Cloud resource receives a large volume of log entries, you can
+        # use exclusions to reduce your chargeable logs. Note that exclusions on
+        # organization-level and folder-level sinks don't apply to child resources.
+        # Note also that you cannot modify the _Required sink or exclude logs from it.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. A client-assigned identifier, such as
+        #     `"load-balancer-exclusion"`. Identifiers are limited to 100 characters and
+        #     can include only letters, digits, underscores, hyphens, and periods. First
+        #     character has to be alphanumeric.
         # @!attribute [rw] description
         #   @return [::String]
         #     Optional. A description of this exclusion.
@@ -661,10 +900,11 @@ module Google
         #     matches the log entries to be excluded. By using the [sample
         #     function](https://cloud.google.com/logging/docs/view/advanced-queries#sample),
         #     you can exclude less than 100% of the matching log entries.
-        #     For example, the following query matches 99% of low-severity log
-        #     entries from Google Cloud Storage buckets:
         #
-        #     `"resource.type=gcs_bucket severity<ERROR sample(insertId, 0.99)"`
+        #     For example, the following query matches 99% of low-severity log entries
+        #     from Google Cloud Storage buckets:
+        #
+        #       `resource.type=gcs_bucket severity<ERROR sample(insertId, 0.99)`
         # @!attribute [rw] disabled
         #   @return [::Boolean]
         #     Optional. If set to True, then this exclusion is disabled and it does not
@@ -735,7 +975,9 @@ module Google
         #         "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]"
         #         "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
         #
-        #     Example: `"projects/my-project-id/exclusions/my-exclusion-id"`.
+        #     For example:
+        #
+        #       `"projects/my-project/exclusions/my-exclusion"`
         class GetExclusionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -751,7 +993,10 @@ module Google
         #         "billingAccounts/[BILLING_ACCOUNT_ID]"
         #         "folders/[FOLDER_ID]"
         #
-        #     Examples: `"projects/my-logging-project"`, `"organizations/123456789"`.
+        #     For examples:
+        #
+        #       `"projects/my-logging-project"`
+        #       `"organizations/123456789"`
         # @!attribute [rw] exclusion
         #   @return [::Google::Cloud::Logging::V2::LogExclusion]
         #     Required. The new exclusion, whose `name` parameter is an exclusion name
@@ -771,17 +1016,20 @@ module Google
         #         "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]"
         #         "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
         #
-        #     Example: `"projects/my-project-id/exclusions/my-exclusion-id"`.
+        #     For example:
+        #
+        #       `"projects/my-project/exclusions/my-exclusion"`
         # @!attribute [rw] exclusion
         #   @return [::Google::Cloud::Logging::V2::LogExclusion]
-        #     Required. New values for the existing exclusion. Only the fields specified in
-        #     `update_mask` are relevant.
+        #     Required. New values for the existing exclusion. Only the fields specified
+        #     in `update_mask` are relevant.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. A non-empty list of fields to change in the existing exclusion. New values
-        #     for the fields are taken from the corresponding fields in the
-        #     {::Google::Cloud::Logging::V2::LogExclusion LogExclusion} included in this request. Fields not mentioned in
-        #     `update_mask` are not changed and are ignored in the request.
+        #     Required. A non-empty list of fields to change in the existing exclusion.
+        #     New values for the fields are taken from the corresponding fields in the
+        #     {::Google::Cloud::Logging::V2::LogExclusion LogExclusion} included in this request.
+        #     Fields not mentioned in `update_mask` are not changed and are ignored in
+        #     the request.
         #
         #     For example, to change the filter and description of an exclusion,
         #     specify an `update_mask` of `"filter,description"`.
@@ -800,16 +1048,18 @@ module Google
         #         "billingAccounts/[BILLING_ACCOUNT_ID]/exclusions/[EXCLUSION_ID]"
         #         "folders/[FOLDER_ID]/exclusions/[EXCLUSION_ID]"
         #
-        #     Example: `"projects/my-project-id/exclusions/my-exclusion-id"`.
+        #     For example:
+        #
+        #       `"projects/my-project/exclusions/my-exclusion"`
         class DeleteExclusionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The parameters to
-        # {::Google::Cloud::Logging::V2::ConfigServiceV2::Client#get_cmek_settings GetCmekSettings}.
+        # {::Google::Cloud::Logging::V2::ConfigService::Client#get_cmek_settings GetCmekSettings}.
         #
-        # See [Enabling CMEK for Logs
+        # See [Enabling CMEK for Log
         # Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for
         # more information.
         # @!attribute [rw] name
@@ -821,20 +1071,23 @@ module Google
         #         "billingAccounts/[BILLING_ACCOUNT_ID]/cmekSettings"
         #         "folders/[FOLDER_ID]/cmekSettings"
         #
-        #     Example: `"organizations/12345/cmekSettings"`.
+        #     For example:
         #
-        #     Note: CMEK for the Logs Router can currently only be configured for GCP
-        #     organizations. Once configured, it applies to all projects and folders in
-        #     the GCP organization.
+        #       `"organizations/12345/cmekSettings"`
+        #
+        #     Note: CMEK for the Log Router can be configured for Google Cloud projects,
+        #     folders, organizations and billing accounts. Once configured for an
+        #     organization, it applies to all projects and folders in the Google Cloud
+        #     organization.
         class GetCmekSettingsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The parameters to
-        # {::Google::Cloud::Logging::V2::ConfigServiceV2::Client#update_cmek_settings UpdateCmekSettings}.
+        # {::Google::Cloud::Logging::V2::ConfigService::Client#update_cmek_settings UpdateCmekSettings}.
         #
-        # See [Enabling CMEK for Logs
+        # See [Enabling CMEK for Log
         # Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for
         # more information.
         # @!attribute [rw] name
@@ -846,16 +1099,18 @@ module Google
         #         "billingAccounts/[BILLING_ACCOUNT_ID]/cmekSettings"
         #         "folders/[FOLDER_ID]/cmekSettings"
         #
-        #     Example: `"organizations/12345/cmekSettings"`.
+        #     For example:
         #
-        #     Note: CMEK for the Logs Router can currently only be configured for GCP
-        #     organizations. Once configured, it applies to all projects and folders in
-        #     the GCP organization.
+        #       `"organizations/12345/cmekSettings"`
+        #
+        #     Note: CMEK for the Log Router can currently only be configured for Google
+        #     Cloud organizations. Once configured, it applies to all projects and
+        #     folders in the Google Cloud organization.
         # @!attribute [rw] cmek_settings
         #   @return [::Google::Cloud::Logging::V2::CmekSettings]
         #     Required. The CMEK settings to update.
         #
-        #     See [Enabling CMEK for Logs
+        #     See [Enabling CMEK for Log
         #     Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
         #     for more information.
         # @!attribute [rw] update_mask
@@ -866,7 +1121,7 @@ module Google
         #
         #     See {::Google::Protobuf::FieldMask FieldMask} for more information.
         #
-        #     Example: `"updateMask=kmsKeyName"`
+        #     For example: `"updateMask=kmsKeyName"`
         class UpdateCmekSettingsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -875,11 +1130,11 @@ module Google
         # Describes the customer-managed encryption key (CMEK) settings associated with
         # a project, folder, organization, billing account, or flexible resource.
         #
-        # Note: CMEK for the Logs Router can currently only be configured for GCP
-        # organizations. Once configured, it applies to all projects and folders in the
-        # GCP organization.
+        # Note: CMEK for the Log Router can currently only be configured for Google
+        # Cloud organizations. Once configured, it applies to all projects and folders
+        # in the Google Cloud organization.
         #
-        # See [Enabling CMEK for Logs
+        # See [Enabling CMEK for Log
         # Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for
         # more information.
         # @!attribute [r] name
@@ -890,14 +1145,157 @@ module Google
         #     The resource name for the configured Cloud KMS key.
         #
         #     KMS key name format:
+        #
         #         "projects/[PROJECT_ID]/locations/[LOCATION]/keyRings/[KEYRING]/cryptoKeys/[KEY]"
         #
         #     For example:
-        #         `"projects/my-project-id/locations/my-region/keyRings/key-ring-name/cryptoKeys/key-name"`
+        #
+        #       `"projects/my-project/locations/us-central1/keyRings/my-ring/cryptoKeys/my-key"`
         #
         #
         #
-        #     To enable CMEK for the Logs Router, set this field to a valid
+        #     To enable CMEK for the Log Router, set this field to a valid
+        #     `kms_key_name` for which the associated service account has the required
+        #     cloudkms.cryptoKeyEncrypterDecrypter roles assigned for the key.
+        #
+        #     The Cloud KMS key used by the Log Router can be updated by changing the
+        #     `kms_key_name` to a new valid key name or disabled by setting the key name
+        #     to an empty string. Encryption operations that are in progress will be
+        #     completed with the key that was in use when they started. Decryption
+        #     operations will be completed using the key that was used at the time of
+        #     encryption unless access to that key has been revoked.
+        #
+        #     To disable CMEK for the Log Router, set this field to an empty string.
+        #
+        #     See [Enabling CMEK for Log
+        #     Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
+        #     for more information.
+        # @!attribute [rw] kms_key_version_name
+        #   @return [::String]
+        #     The CryptoKeyVersion resource name for the configured Cloud KMS key.
+        #
+        #     KMS key name format:
+        #
+        #         "projects/[PROJECT_ID]/locations/[LOCATION]/keyRings/[KEYRING]/cryptoKeys/[KEY]/cryptoKeyVersions/[VERSION]"
+        #
+        #     For example:
+        #
+        #       `"projects/my-project/locations/us-central1/keyRings/my-ring/cryptoKeys/my-key/cryptoKeyVersions/1"`
+        #
+        #     This is a read-only field used to convey the specific configured
+        #     CryptoKeyVersion of `kms_key` that has been configured. It will be
+        #     populated in cases where the CMEK settings are bound to a single key
+        #     version.
+        #
+        #     If this field is populated, the `kms_key` is tied to a specific
+        #     CryptoKeyVersion.
+        # @!attribute [r] service_account_id
+        #   @return [::String]
+        #     Output only. The service account that will be used by the Log Router to
+        #     access your Cloud KMS key.
+        #
+        #     Before enabling CMEK for Log Router, you must first assign the
+        #     cloudkms.cryptoKeyEncrypterDecrypter role to the service account that
+        #     the Log Router will use to access your Cloud KMS key. Use
+        #     {::Google::Cloud::Logging::V2::ConfigService::Client#get_cmek_settings GetCmekSettings} to
+        #     obtain the service account ID.
+        #
+        #     See [Enabling CMEK for Log
+        #     Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
+        #     for more information.
+        class CmekSettings
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The parameters to
+        # {::Google::Cloud::Logging::V2::ConfigService::Client#get_settings GetSettings}.
+        #
+        # See [Enabling CMEK for Log
+        # Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for
+        # more information.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource for which to retrieve settings.
+        #
+        #         "projects/[PROJECT_ID]/settings"
+        #         "organizations/[ORGANIZATION_ID]/settings"
+        #         "billingAccounts/[BILLING_ACCOUNT_ID]/settings"
+        #         "folders/[FOLDER_ID]/settings"
+        #
+        #     For example:
+        #
+        #       `"organizations/12345/settings"`
+        #
+        #     Note: Settings for the Log Router can be get for Google Cloud projects,
+        #     folders, organizations and billing accounts. Currently it can only be
+        #     configured for organizations. Once configured for an organization, it
+        #     applies to all projects and folders in the Google Cloud organization.
+        class GetSettingsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The parameters to
+        # {::Google::Cloud::Logging::V2::ConfigService::Client#update_settings UpdateSettings}.
+        #
+        # See [Enabling CMEK for Log
+        # Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for
+        # more information.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name for the settings to update.
+        #
+        #         "organizations/[ORGANIZATION_ID]/settings"
+        #
+        #     For example:
+        #
+        #       `"organizations/12345/settings"`
+        #
+        #     Note: Settings for the Log Router can currently only be configured for
+        #     Google Cloud organizations. Once configured, it applies to all projects and
+        #     folders in the Google Cloud organization.
+        # @!attribute [rw] settings
+        #   @return [::Google::Cloud::Logging::V2::Settings]
+        #     Required. The settings to update.
+        #
+        #     See [Enabling CMEK for Log
+        #     Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
+        #     for more information.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. Field mask identifying which fields from `settings` should
+        #     be updated. A field will be overwritten if and only if it is in the update
+        #     mask. Output only fields cannot be updated.
+        #
+        #     See {::Google::Protobuf::FieldMask FieldMask} for more information.
+        #
+        #     For example: `"updateMask=kmsKeyName"`
+        class UpdateSettingsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Describes the settings associated with a project, folder, organization,
+        # billing account, or flexible resource.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. The resource name of the settings.
+        # @!attribute [rw] kms_key_name
+        #   @return [::String]
+        #     Optional. The resource name for the configured Cloud KMS key.
+        #
+        #     KMS key name format:
+        #
+        #         "projects/[PROJECT_ID]/locations/[LOCATION]/keyRings/[KEYRING]/cryptoKeys/[KEY]"
+        #
+        #     For example:
+        #
+        #       `"projects/my-project/locations/us-central1/keyRings/my-ring/cryptoKeys/my-key"`
+        #
+        #
+        #
+        #     To enable CMEK for the Log Router, set this field to a valid
         #     `kms_key_name` for which the associated service account has the required
         #     `roles/cloudkms.cryptoKeyEncrypterDecrypter` role assigned for the key.
         #
@@ -907,41 +1305,219 @@ module Google
         #     Decryption operations will be completed using the key that was used at the
         #     time of encryption unless access to that key has been revoked.
         #
-        #     To disable CMEK for the Logs Router, set this field to an empty string.
+        #     To disable CMEK for the Log Router, set this field to an empty string.
         #
-        #     See [Enabling CMEK for Logs
+        #     See [Enabling CMEK for Log
         #     Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
         #     for more information.
-        # @!attribute [r] service_account_id
+        # @!attribute [r] kms_service_account_id
         #   @return [::String]
-        #     Output only. The service account that will be used by the Logs Router to access your
-        #     Cloud KMS key.
+        #     Output only. The service account that will be used by the Log Router to
+        #     access your Cloud KMS key.
         #
-        #     Before enabling CMEK for Logs Router, you must first assign the role
+        #     Before enabling CMEK for Log Router, you must first assign the role
         #     `roles/cloudkms.cryptoKeyEncrypterDecrypter` to the service account that
-        #     the Logs Router will use to access your Cloud KMS key. Use
-        #     {::Google::Cloud::Logging::V2::ConfigServiceV2::Client#get_cmek_settings GetCmekSettings} to
+        #     the Log Router will use to access your Cloud KMS key. Use
+        #     {::Google::Cloud::Logging::V2::ConfigService::Client#get_settings GetSettings} to
         #     obtain the service account ID.
         #
-        #     See [Enabling CMEK for Logs
+        #     See [Enabling CMEK for Log
         #     Router](https://cloud.google.com/logging/docs/routing/managed-encryption)
         #     for more information.
-        class CmekSettings
+        # @!attribute [rw] storage_location
+        #   @return [::String]
+        #     Optional. The Cloud region that will be used for _Default and _Required log
+        #     buckets for newly created projects and folders. For example `europe-west1`.
+        #     This setting does not affect the location of custom log buckets.
+        # @!attribute [rw] disable_default_sink
+        #   @return [::Boolean]
+        #     Optional. If set to true, the _Default sink in newly created projects and
+        #     folders will created in a disabled state. This can be used to automatically
+        #     disable log ingestion if there is already an aggregated sink configured in
+        #     the hierarchy. The _Default sink can be re-enabled manually if needed.
+        class Settings
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # The parameters to CopyLogEntries.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Log bucket from which to copy log entries.
+        #
+        #     For example:
+        #
+        #       `"projects/my-project/locations/global/buckets/my-source-bucket"`
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. A filter specifying which log entries to copy. The filter must be
+        #     no more than 20k characters. An empty filter matches all log entries.
+        # @!attribute [rw] destination
+        #   @return [::String]
+        #     Required. Destination to which to copy log entries.
+        class CopyLogEntriesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Metadata for CopyLogEntries long running operations.
+        # @!attribute [rw] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The create time of an operation.
+        # @!attribute [rw] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The end time of an operation.
+        # @!attribute [rw] state
+        #   @return [::Google::Cloud::Logging::V2::OperationState]
+        #     State of an operation.
+        # @!attribute [rw] cancellation_requested
+        #   @return [::Boolean]
+        #     Identifies whether the user has requested cancellation of the operation.
+        # @!attribute [rw] request
+        #   @return [::Google::Cloud::Logging::V2::CopyLogEntriesRequest]
+        #     CopyLogEntries RPC request.
+        # @!attribute [rw] progress
+        #   @return [::Integer]
+        #     Estimated progress of the operation (0 - 100%).
+        # @!attribute [rw] writer_identity
+        #   @return [::String]
+        #     The IAM identity of a service account that must be granted access to the
+        #     destination.
+        #
+        #     If the service account is not granted permission to the destination within
+        #     an hour, the operation will be cancelled.
+        #
+        #     For example: `"serviceAccount:foo@bar.com"`
+        class CopyLogEntriesMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response type for CopyLogEntries long running operations.
+        # @!attribute [rw] log_entries_copied_count
+        #   @return [::Integer]
+        #     Number of log entries copied.
+        class CopyLogEntriesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Metadata for LongRunningUpdateBucket Operations.
+        # @!attribute [rw] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The create time of an operation.
+        # @!attribute [rw] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The end time of an operation.
+        # @!attribute [rw] state
+        #   @return [::Google::Cloud::Logging::V2::OperationState]
+        #     State of an operation.
+        # @!attribute [rw] create_bucket_request
+        #   @return [::Google::Cloud::Logging::V2::CreateBucketRequest]
+        #     LongRunningCreateBucket RPC request.
+        # @!attribute [rw] update_bucket_request
+        #   @return [::Google::Cloud::Logging::V2::UpdateBucketRequest]
+        #     LongRunningUpdateBucket RPC request.
+        class BucketMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Metadata for long running Link operations.
+        # @!attribute [rw] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The start time of an operation.
+        # @!attribute [rw] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The end time of an operation.
+        # @!attribute [rw] state
+        #   @return [::Google::Cloud::Logging::V2::OperationState]
+        #     State of an operation.
+        # @!attribute [rw] create_link_request
+        #   @return [::Google::Cloud::Logging::V2::CreateLinkRequest]
+        #     CreateLink RPC request.
+        # @!attribute [rw] delete_link_request
+        #   @return [::Google::Cloud::Logging::V2::DeleteLinkRequest]
+        #     DeleteLink RPC request.
+        class LinkMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Cloud Logging specific location metadata.
+        # @!attribute [rw] log_analytics_enabled
+        #   @return [::Boolean]
+        #     Indicates whether or not Log Analytics features are supported in the given
+        #     location.
+        class LocationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # List of different operation states.
+        # High level state of the operation. This is used to report the job's
+        # current state to the user. Once a long running operation is created,
+        # the current state of the operation can be queried even before the
+        # operation is finished and the final result is available.
+        module OperationState
+          # Should not be used.
+          OPERATION_STATE_UNSPECIFIED = 0
+
+          # The operation is scheduled.
+          OPERATION_STATE_SCHEDULED = 1
+
+          # Waiting for necessary permissions.
+          OPERATION_STATE_WAITING_FOR_PERMISSIONS = 2
+
+          # The operation is running.
+          OPERATION_STATE_RUNNING = 3
+
+          # The operation was completed successfully.
+          OPERATION_STATE_SUCCEEDED = 4
+
+          # The operation failed.
+          OPERATION_STATE_FAILED = 5
+
+          # The operation was cancelled by the user.
+          OPERATION_STATE_CANCELLED = 6
+        end
+
         # LogBucket lifecycle states.
         module LifecycleState
-          # Unspecified state.  This is only used/useful for distinguishing
-          # unset values.
+          # Unspecified state. This is only used/useful for distinguishing unset
+          # values.
           LIFECYCLE_STATE_UNSPECIFIED = 0
 
           # The normal and active state.
           ACTIVE = 1
 
-          # The bucket has been marked for deletion by the user.
+          # The resource has been marked for deletion by the user. For some resources
+          # (e.g. buckets), this can be reversed by an un-delete operation.
           DELETE_REQUESTED = 2
+
+          # The resource has been marked for an update by the user. It will remain in
+          # this state until the update is complete.
+          UPDATING = 3
+
+          # The resource has been marked for creation by the user. It will remain in
+          # this state until the creation is complete.
+          CREATING = 4
+
+          # The resource is in an INTERNAL error state.
+          FAILED = 5
+        end
+
+        # IndexType is used for custom indexing. It describes the type of an indexed
+        # field.
+        module IndexType
+          # The index's type is unspecified.
+          INDEX_TYPE_UNSPECIFIED = 0
+
+          # The index is a string-type index.
+          INDEX_TYPE_STRING = 1
+
+          # The index is a integer-type index.
+          INDEX_TYPE_INTEGER = 2
         end
       end
     end

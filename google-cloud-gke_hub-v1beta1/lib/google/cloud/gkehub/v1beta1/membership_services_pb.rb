@@ -24,8 +24,16 @@ module Google
     module GkeHub
       module V1beta1
         module GkeHubMembershipService
-          # GKE Hub CRUD API for the Membership resource.
-          # The Membership service is currently only available in the global location.
+          # The GKE Hub MembershipService handles the registration of many Kubernetes
+          # clusters to Google Cloud, represented with the
+          # [Membership][google.cloud.gkehub.v1beta1.Membership] resource.
+          #
+          # GKE Hub is currently available in the global region and all regions in
+          # https://cloud.google.com/compute/docs/regions-zones.
+          #
+          # **Membership management may be non-trivial:** it is recommended to use one
+          # of the Google-provided client libraries or tools where possible when working
+          # with Membership resources.
           class Service
 
             include ::GRPC::GenericService
@@ -38,13 +46,24 @@ module Google
             rpc :ListMemberships, ::Google::Cloud::GkeHub::V1beta1::ListMembershipsRequest, ::Google::Cloud::GkeHub::V1beta1::ListMembershipsResponse
             # Gets the details of a Membership.
             rpc :GetMembership, ::Google::Cloud::GkeHub::V1beta1::GetMembershipRequest, ::Google::Cloud::GkeHub::V1beta1::Membership
-            # Adds a new Membership.
+            # Creates a new Membership.
+            #
+            # **This is currently only supported for GKE clusters on Google Cloud**.
+            # To register other clusters, follow the instructions at
+            # https://cloud.google.com/anthos/multicluster-management/connect/registering-a-cluster.
             rpc :CreateMembership, ::Google::Cloud::GkeHub::V1beta1::CreateMembershipRequest, ::Google::Longrunning::Operation
             # Removes a Membership.
+            #
+            # **This is currently only supported for GKE clusters on Google Cloud**.
+            # To unregister other clusters, follow the instructions at
+            # https://cloud.google.com/anthos/multicluster-management/connect/unregistering-a-cluster.
             rpc :DeleteMembership, ::Google::Cloud::GkeHub::V1beta1::DeleteMembershipRequest, ::Google::Longrunning::Operation
             # Updates an existing Membership.
             rpc :UpdateMembership, ::Google::Cloud::GkeHub::V1beta1::UpdateMembershipRequest, ::Google::Longrunning::Operation
             # Generates the manifest for deployment of the GKE connect agent.
+            #
+            # **This method is used internally by Google-provided libraries.**
+            # Most clients should not need to call this method directly.
             rpc :GenerateConnectManifest, ::Google::Cloud::GkeHub::V1beta1::GenerateConnectManifestRequest, ::Google::Cloud::GkeHub::V1beta1::GenerateConnectManifestResponse
             # ValidateExclusivity validates the state of exclusivity in the cluster.
             # The validation does not depend on an existing Hub membership resource.

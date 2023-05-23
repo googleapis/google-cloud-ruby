@@ -13,6 +13,7 @@ require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/protobuf/wrappers_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/bigquery/datatransfer/v1/datatransfer.proto", :syntax => :proto3) do
     add_message "google.cloud.bigquery.datatransfer.v1.DataSourceParameter" do
@@ -174,6 +175,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsResponse" do
       repeated :runs, :message, 1, "google.cloud.bigquery.datatransfer.v1.TransferRun"
     end
+    add_message "google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest" do
+      optional :name, :string, 1
+      repeated :data_source_ids, :string, 2
+    end
   end
 end
 
@@ -210,6 +215,7 @@ module Google
           StartManualTransferRunsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsRequest").msgclass
           StartManualTransferRunsRequest::TimeRange = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsRequest.TimeRange").msgclass
           StartManualTransferRunsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsResponse").msgclass
+          EnrollDataSourcesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest").msgclass
         end
       end
     end

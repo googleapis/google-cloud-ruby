@@ -8,7 +8,7 @@ require 'google/cloud/talent/v4/common_pb'
 require 'google/protobuf/duration_pb'
 require 'google/type/latlng_pb'
 require 'google/type/timeofday_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/talent/v4/filters.proto", :syntax => :proto3) do
     add_message "google.cloud.talent.v4.JobQuery" do
@@ -38,6 +38,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :TELECOMMUTE_PREFERENCE_UNSPECIFIED, 0
       value :TELECOMMUTE_EXCLUDED, 1
       value :TELECOMMUTE_ALLOWED, 2
+      value :TELECOMMUTE_JOBS_EXCLUDED, 3
     end
     add_message "google.cloud.talent.v4.CompensationFilter" do
       optional :type, :enum, 1, "google.cloud.talent.v4.CompensationFilter.FilterType"

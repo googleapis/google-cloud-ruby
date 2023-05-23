@@ -53,6 +53,8 @@ module Google
         #   rule.storage_class #=> "COLDLINE"
         #   rule.age #=> 10
         #   rule.matches_storage_class #=> ["STANDARD", "NEARLINE"]
+        #   rule.matches_prefix #=> ["myprefix/foo"]
+        #   rule.matches_suffix #=> [".jpg", ".png"]
         #
         # @example Updating the bucket's lifecycle management rules in a block.
         #   require "google/cloud/storage"
@@ -138,6 +140,12 @@ module Google
           #   files. If the value is N, this condition is satisfied when there
           #   are at least N versions (including the live version) newer than
           #   this version of the file.
+          # @param [Array<String,Symbol>] matches_prefix
+          #  Files having their name with the specified list of prefixs will be matched.
+          #  Arguments will be converted from symbols to strings.
+          # @param [Array<String,Symbol>] matches_suffix
+          #  Files having their name with the specified list of suffixes will be matched.
+          #  Arguments will be converted from symbols to strings.
           #
           # @example
           #   require "google/cloud/storage"
@@ -157,7 +165,9 @@ module Google
                                          is_live: nil,
                                          matches_storage_class: nil,
                                          noncurrent_time_before: nil,
-                                         num_newer_versions: nil
+                                         num_newer_versions: nil,
+                                         matches_prefix: nil,
+                                         matches_suffix: nil
             push Rule.new(
               "SetStorageClass",
               storage_class: storage_class_for(storage_class),
@@ -169,12 +179,14 @@ module Google
               is_live: is_live,
               matches_storage_class: storage_class_for(matches_storage_class),
               noncurrent_time_before: noncurrent_time_before,
-              num_newer_versions: num_newer_versions
+              num_newer_versions: num_newer_versions,
+              matches_prefix: Array(matches_prefix),
+              matches_suffix: Array(matches_suffix)
             )
           end
 
           ##
-          # Adds a SetStorageClass lifecycle rule to the Object Lifecycle
+          # Adds a Delete lifecycle rule to the Object Lifecycle
           # Management rules for a bucket.
           #
           # @see https://cloud.google.com/storage/docs/lifecycle Object
@@ -221,6 +233,12 @@ module Google
           #   files. If the value is N, this condition is satisfied when there
           #   are at least N versions (including the live version) newer than
           #   this version of the file.
+          # @param [Array<String,Symbol>] matches_prefix
+          #  Files having their name with the specified list of prefixs will be matched.
+          #  Arguments will be converted from symbols to strings.
+          # @param [Array<String,Symbol>] matches_suffix
+          #  Files having their name with the specified list of suffixes will be matched.
+          #  Arguments will be converted from symbols to strings.
           #
           # @example
           #   require "google/cloud/storage"
@@ -239,7 +257,9 @@ module Google
                               is_live: nil,
                               matches_storage_class: nil,
                               noncurrent_time_before: nil,
-                              num_newer_versions: nil
+                              num_newer_versions: nil,
+                              matches_prefix: nil,
+                              matches_suffix: nil
             push Rule.new(
               "Delete",
               age: age,
@@ -250,7 +270,49 @@ module Google
               is_live: is_live,
               matches_storage_class: storage_class_for(matches_storage_class),
               noncurrent_time_before: noncurrent_time_before,
-              num_newer_versions: num_newer_versions
+              num_newer_versions: num_newer_versions,
+              matches_prefix: Array(matches_prefix),
+              matches_suffix: Array(matches_suffix)
+            )
+          end
+
+          ##
+          # Adds a AbortIncompleteMultipartUpload lifecycle rule to the Object Lifecycle
+          # Management rules for a bucket.
+          #
+          # @see https://cloud.google.com/storage/docs/lifecycle Object
+          #   Lifecycle Management
+          # @see https://cloud.google.com/storage/docs/managing-lifecycles
+          #   Managing Object Lifecycles
+          #
+          # @param [Integer] age The age of a file (in days). This condition is
+          #   satisfied when a file reaches the specified age.
+          # @param [Array<String,Symbol>] matches_prefix
+          #  Files having their name with the specified list of prefixs will be matched.
+          #  Arguments will be converted from symbols to strings.
+          # @param [Array<String,Symbol>] matches_suffix
+          #  Files having their name with the specified list of suffixes will be matched.
+          #  Arguments will be converted from symbols to strings.
+          #
+          # @example
+          #   require "google/cloud/storage"
+          #
+          #   storage = Google::Cloud::Storage.new
+          #
+          #   bucket = storage.create_bucket "my-bucket" do |b|
+          #     b.lifecycle.add_abort_incomplete_multipart_upload_rule age: 10,
+          #                                                            matches_prefix: ["images/"],
+          #                                                            matches_suffix: [".pdf"]
+          #   end
+          #
+          def add_abort_incomplete_multipart_upload_rule age: nil,
+                                                         matches_prefix: nil,
+                                                         matches_suffix: nil
+            push Rule.new(
+              "AbortIncompleteMultipartUpload",
+              age: age,
+              matches_prefix: Array(matches_prefix),
+              matches_suffix: Array(matches_suffix)
             )
           end
 
@@ -346,6 +408,8 @@ module Google
           #   rule.storage_class #=> "COLDLINE"
           #   rule.age #=> 10
           #   rule.matches_storage_class #=> ["STANDARD", "NEARLINE"]
+          #   rule.matches_prefix #=> ["myprefix/foo"]
+          #   rule.matches_suffix #=> [".jpg", ".png"]
           #
           # @example Updating the bucket's lifecycle rules in a block.
           #   require "google/cloud/storage"
@@ -382,6 +446,8 @@ module Google
             attr_accessor :matches_storage_class
             attr_accessor :noncurrent_time_before
             attr_accessor :num_newer_versions
+            attr_accessor :matches_prefix
+            attr_accessor :matches_suffix
 
             # @private
             def initialize action,
@@ -394,7 +460,9 @@ module Google
                            is_live: nil,
                            matches_storage_class: nil,
                            noncurrent_time_before: nil,
-                           num_newer_versions: nil
+                           num_newer_versions: nil,
+                           matches_prefix: nil,
+                           matches_suffix: nil
               @action = action
               @storage_class = storage_class
               @age = age
@@ -406,6 +474,8 @@ module Google
               @matches_storage_class = Array(matches_storage_class)
               @noncurrent_time_before = noncurrent_time_before
               @num_newer_versions = num_newer_versions
+              @matches_prefix = Array(matches_prefix)
+              @matches_suffix = Array(matches_suffix)
             end
 
             # @private
@@ -420,7 +490,9 @@ module Google
                 is_live,
                 matches_storage_class,
                 noncurrent_time_before,
-                num_newer_versions
+                num_newer_versions,
+                matches_prefix,
+                matches_suffix
               )
               Google::Apis::StorageV1::Bucket::Lifecycle::Rule.new(
                 action: action_gapi(action, storage_class),
@@ -445,7 +517,9 @@ module Google
                                is_live,
                                matches_storage_class,
                                noncurrent_time_before,
-                               num_newer_versions
+                               num_newer_versions,
+                               matches_prefix,
+                               matches_suffix
               Google::Apis::StorageV1::Bucket::Lifecycle::Rule::Condition.new(
                 age: age,
                 created_before: created_before,
@@ -455,7 +529,9 @@ module Google
                 is_live: is_live,
                 matches_storage_class: Array(matches_storage_class),
                 noncurrent_time_before: noncurrent_time_before,
-                num_newer_versions: num_newer_versions
+                num_newer_versions: num_newer_versions,
+                matches_prefix: Array(matches_prefix),
+                matches_suffix: Array(matches_suffix)
               )
             end
 
@@ -475,7 +551,9 @@ module Google
                 is_live: c.is_live,
                 matches_storage_class: c.matches_storage_class,
                 noncurrent_time_before: c.noncurrent_time_before,
-                num_newer_versions: c.num_newer_versions
+                num_newer_versions: c.num_newer_versions,
+                matches_prefix: c.matches_prefix,
+                matches_suffix: c.matches_suffix
               )
             end
 

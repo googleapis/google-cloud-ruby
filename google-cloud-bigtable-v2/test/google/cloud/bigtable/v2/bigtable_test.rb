@@ -60,6 +60,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
     rows = {}
     filter = {}
     rows_limit = 42
+    request_stats_view = :REQUEST_STATS_VIEW_UNSPECIFIED
 
     read_rows_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
       assert_equal :read_rows, name
@@ -69,6 +70,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigtable::V2::RowSet), request["rows"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigtable::V2::RowFilter), request["filter"]
       assert_equal 42, request["rows_limit"]
+      assert_equal :REQUEST_STATS_VIEW_UNSPECIFIED, request["request_stats_view"]
       refute_nil options
     end
 
@@ -79,7 +81,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.read_rows({ table_name: table_name, app_profile_id: app_profile_id, rows: rows, filter: filter, rows_limit: rows_limit }) do |response, operation|
+      client.read_rows({ table_name: table_name, app_profile_id: app_profile_id, rows: rows, filter: filter, rows_limit: rows_limit, request_stats_view: request_stats_view }) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::ReadRowsResponse, r
@@ -88,7 +90,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use named arguments
-      client.read_rows table_name: table_name, app_profile_id: app_profile_id, rows: rows, filter: filter, rows_limit: rows_limit do |response, operation|
+      client.read_rows table_name: table_name, app_profile_id: app_profile_id, rows: rows, filter: filter, rows_limit: rows_limit, request_stats_view: request_stats_view do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::ReadRowsResponse, r
@@ -97,7 +99,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.read_rows ::Google::Cloud::Bigtable::V2::ReadRowsRequest.new(table_name: table_name, app_profile_id: app_profile_id, rows: rows, filter: filter, rows_limit: rows_limit) do |response, operation|
+      client.read_rows ::Google::Cloud::Bigtable::V2::ReadRowsRequest.new(table_name: table_name, app_profile_id: app_profile_id, rows: rows, filter: filter, rows_limit: rows_limit, request_stats_view: request_stats_view) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::ReadRowsResponse, r
@@ -106,7 +108,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use hash object with options
-      client.read_rows({ table_name: table_name, app_profile_id: app_profile_id, rows: rows, filter: filter, rows_limit: rows_limit }, grpc_options) do |response, operation|
+      client.read_rows({ table_name: table_name, app_profile_id: app_profile_id, rows: rows, filter: filter, rows_limit: rows_limit, request_stats_view: request_stats_view }, grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::ReadRowsResponse, r
@@ -115,7 +117,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.read_rows(::Google::Cloud::Bigtable::V2::ReadRowsRequest.new(table_name: table_name, app_profile_id: app_profile_id, rows: rows, filter: filter, rows_limit: rows_limit), grpc_options) do |response, operation|
+      client.read_rows(::Google::Cloud::Bigtable::V2::ReadRowsRequest.new(table_name: table_name, app_profile_id: app_profile_id, rows: rows, filter: filter, rows_limit: rows_limit, request_stats_view: request_stats_view), grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::ReadRowsResponse, r
@@ -412,6 +414,66 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
     end
   end
 
+  def test_ping_and_warm
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Bigtable::V2::PingAndWarmResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    app_profile_id = "hello world"
+
+    ping_and_warm_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :ping_and_warm, name
+      assert_kind_of ::Google::Cloud::Bigtable::V2::PingAndWarmRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["app_profile_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, ping_and_warm_client_stub do
+      # Create client
+      client = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.ping_and_warm({ name: name, app_profile_id: app_profile_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.ping_and_warm name: name, app_profile_id: app_profile_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.ping_and_warm ::Google::Cloud::Bigtable::V2::PingAndWarmRequest.new(name: name, app_profile_id: app_profile_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.ping_and_warm({ name: name, app_profile_id: app_profile_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.ping_and_warm(::Google::Cloud::Bigtable::V2::PingAndWarmRequest.new(name: name, app_profile_id: app_profile_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, ping_and_warm_client_stub.call_rpc_count
+    end
+  end
+
   def test_read_modify_write_row
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::Bigtable::V2::ReadModifyWriteRowResponse.new
@@ -473,6 +535,165 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
 
       # Verify method calls
       assert_equal 5, read_modify_write_row_client_stub.call_rpc_count
+    end
+  end
+
+  def test_generate_initial_change_stream_partitions
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Bigtable::V2::GenerateInitialChangeStreamPartitionsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a server streaming method.
+    table_name = "hello world"
+    app_profile_id = "hello world"
+
+    generate_initial_change_stream_partitions_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
+      assert_equal :generate_initial_change_stream_partitions, name
+      assert_kind_of ::Google::Cloud::Bigtable::V2::GenerateInitialChangeStreamPartitionsRequest, request
+      assert_equal "hello world", request["table_name"]
+      assert_equal "hello world", request["app_profile_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, generate_initial_change_stream_partitions_client_stub do
+      # Create client
+      client = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.generate_initial_change_stream_partitions({ table_name: table_name, app_profile_id: app_profile_id }) do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Bigtable::V2::GenerateInitialChangeStreamPartitionsResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.generate_initial_change_stream_partitions table_name: table_name, app_profile_id: app_profile_id do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Bigtable::V2::GenerateInitialChangeStreamPartitionsResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.generate_initial_change_stream_partitions ::Google::Cloud::Bigtable::V2::GenerateInitialChangeStreamPartitionsRequest.new(table_name: table_name, app_profile_id: app_profile_id) do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Bigtable::V2::GenerateInitialChangeStreamPartitionsResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.generate_initial_change_stream_partitions({ table_name: table_name, app_profile_id: app_profile_id }, grpc_options) do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Bigtable::V2::GenerateInitialChangeStreamPartitionsResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.generate_initial_change_stream_partitions(::Google::Cloud::Bigtable::V2::GenerateInitialChangeStreamPartitionsRequest.new(table_name: table_name, app_profile_id: app_profile_id), grpc_options) do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Bigtable::V2::GenerateInitialChangeStreamPartitionsResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, generate_initial_change_stream_partitions_client_stub.call_rpc_count
+    end
+  end
+
+  def test_read_change_stream
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Bigtable::V2::ReadChangeStreamResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a server streaming method.
+    table_name = "hello world"
+    app_profile_id = "hello world"
+    partition = {}
+    start_time = {}
+    end_time = {}
+    heartbeat_duration = {}
+
+    read_change_stream_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
+      assert_equal :read_change_stream, name
+      assert_kind_of ::Google::Cloud::Bigtable::V2::ReadChangeStreamRequest, request
+      assert_equal "hello world", request["table_name"]
+      assert_equal "hello world", request["app_profile_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigtable::V2::StreamPartition), request["partition"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["start_time"]
+      assert_equal :start_time, request.start_from
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["end_time"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Duration), request["heartbeat_duration"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, read_change_stream_client_stub do
+      # Create client
+      client = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.read_change_stream({ table_name: table_name, app_profile_id: app_profile_id, partition: partition, start_time: start_time, end_time: end_time, heartbeat_duration: heartbeat_duration }) do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Bigtable::V2::ReadChangeStreamResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.read_change_stream table_name: table_name, app_profile_id: app_profile_id, partition: partition, start_time: start_time, end_time: end_time, heartbeat_duration: heartbeat_duration do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Bigtable::V2::ReadChangeStreamResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.read_change_stream ::Google::Cloud::Bigtable::V2::ReadChangeStreamRequest.new(table_name: table_name, app_profile_id: app_profile_id, partition: partition, start_time: start_time, end_time: end_time, heartbeat_duration: heartbeat_duration) do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Bigtable::V2::ReadChangeStreamResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.read_change_stream({ table_name: table_name, app_profile_id: app_profile_id, partition: partition, start_time: start_time, end_time: end_time, heartbeat_duration: heartbeat_duration }, grpc_options) do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Bigtable::V2::ReadChangeStreamResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.read_change_stream(::Google::Cloud::Bigtable::V2::ReadChangeStreamRequest.new(table_name: table_name, app_profile_id: app_profile_id, partition: partition, start_time: start_time, end_time: end_time, heartbeat_duration: heartbeat_duration), grpc_options) do |response, operation|
+        assert_kind_of Enumerable, response
+        response.to_a.each do |r|
+          assert_kind_of ::Google::Cloud::Bigtable::V2::ReadChangeStreamResponse, r
+        end
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, read_change_stream_client_stub.call_rpc_count
     end
   end
 

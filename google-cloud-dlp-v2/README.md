@@ -1,6 +1,6 @@
 # Ruby Client for the Cloud Data Loss Prevention (DLP) V2 API
 
-API Client library for the Cloud Data Loss Prevention (DLP) V2 API
+Provides methods for detection, risk analysis, and de-identification of privacy-sensitive fragments in text, images, and Google Cloud Platform storage repositories.
 
 Provides methods for detection of privacy-sensitive fragments in text, images, and Google Cloud Platform storage repositories.
 
@@ -33,11 +33,11 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/dlp/v2"
 
 client = ::Google::Cloud::Dlp::V2::DlpService::Client.new
-request = my_create_request
+request = ::Google::Cloud::Dlp::V2::InspectContentRequest.new # (request fields as keyword arguments...)
 response = client.inspect_content request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-dlp-v2/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-dlp-v2/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/dlp)
@@ -46,8 +46,8 @@ for general usage information.
 ## Enabling Logging
 
 To enable logging for this library, set the logger for the underlying [gRPC](https://github.com/grpc/grpc/tree/master/src/ruby) library.
-The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/stdlib/libdoc/logger/rdoc/Logger.html) as shown below,
-or a [`Google::Cloud::Logging::Logger`](https://googleapis.dev/ruby/google-cloud-logging/latest)
+The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/current/stdlibs/logger/Logger.html) as shown below,
+or a [`Google::Cloud::Logging::Logger`](https://cloud.google.com/ruby/docs/reference/google-cloud-logging/latest)
 that will write logs to [Cloud Logging](https://cloud.google.com/logging/). See [grpc/logconfig.rb](https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb)
 and the gRPC [spec_helper.rb](https://github.com/grpc/grpc/blob/master/src/ruby/spec/spec_helper.rb) for additional information.
 
@@ -69,16 +69,21 @@ module GRPC
 end
 ```
 
+
+## Google Cloud Samples
+
+To browse ready to use code samples check [Google Cloud Samples](https://cloud.google.com/docs/samples).
+
 ## Supported Ruby Versions
 
-This library is supported on Ruby 2.5+.
+This library is supported on Ruby 2.6+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or
-in security maintenance, and not end of life. Currently, this means Ruby 2.5
-and later. Older versions of Ruby _may_ still work, but are unsupported and not
-recommended. See https://www.ruby-lang.org/en/downloads/branches/ for details
-about the Ruby support schedule.
+in security maintenance, and not end of life. Older versions of Ruby _may_
+still work, but are unsupported and not recommended. See
+https://www.ruby-lang.org/en/downloads/branches/ for details about the Ruby
+support schedule.
 
 ## Which client should I use?
 

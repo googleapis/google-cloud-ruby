@@ -10,7 +10,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
   gem.description   = "Pre-release client for the WorkloadIdentityPools service. Note that google-iam-v1beta is a version-specific client library. For most uses, we recommend installing the main client library google-iam instead. See the readme for more details."
-  gem.summary       = "API Client library for the Google IAM V1beta API"
+  gem.summary       = "Manages identity and access control for Google Cloud Platform resources, including the creation of service accounts, which you can use to authenticate to Google and make API calls. Note: This API is tied to the IAM service account credentials API (iamcredentials.googleapis.com). Enabling or disabling this API will also enable or disable the IAM service account credentials API."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
@@ -21,16 +21,16 @@ Gem::Specification.new do |gem|
                       ["README.md", "LICENSE.md", "AUTHENTICATION.md", ".yardopts"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 2.5"
+  gem.required_ruby_version = ">= 2.6"
 
-  gem.add_dependency "gapic-common", "~> 0.4"
+  gem.add_dependency "gapic-common", ">= 0.18.0", "< 2.a"
   gem.add_dependency "google-cloud-errors", "~> 1.0"
 
-  gem.add_development_dependency "google-style", "~> 1.25.1"
-  gem.add_development_dependency "minitest", "~> 5.14"
+  gem.add_development_dependency "google-style", "~> 1.26.3"
+  gem.add_development_dependency "minitest", "~> 5.16"
   gem.add_development_dependency "minitest-focus", "~> 1.1"
   gem.add_development_dependency "minitest-rg", "~> 5.2"
-  gem.add_development_dependency "rake", ">= 12.0"
+  gem.add_development_dependency "rake", ">= 13.0"
   gem.add_development_dependency "redcarpet", "~> 3.0"
   gem.add_development_dependency "simplecov", "~> 0.18"
   gem.add_development_dependency "yard", "~> 0.9"

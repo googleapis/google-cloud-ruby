@@ -17,6 +17,9 @@ require "minitest/focus"
 require "minitest/hooks/default"
 require "google/cloud/pubsub"
 require "securerandom"
+require "toys/utils/git_cache"
+require Toys::Utils::GitCache.new.get "https://github.com/googleapis/ruby-common-tools.git",
+                                      path: "lib/sample_loader.rb", update: 300
 
 def random_topic_id
   "ruby-pubsub-samples-test-topic-#{SecureRandom.hex 4}"
@@ -28,6 +31,35 @@ end
 
 def random_subscription_id
   "ruby-pubsub-samples-test-subscription-#{SecureRandom.hex 4}"
+end
+
+def random_dataset_id
+  "rubypubsubsamplestestdataset#{SecureRandom.hex 4}"
+end
+
+def random_table_id
+  "ruby-pubsub-samples-test-table-#{SecureRandom.hex 4}"
+end
+
+def create_table
+  bigquery = Google::Cloud::Bigquery.new
+  @dataset = bigquery.create_dataset random_dataset_id
+  table_id = random_table_id
+
+  @table = @dataset.create_table table_id do |updater|
+    updater.string "data",  mode: :required
+    updater.string "message_id",  mode: :required
+    updater.string "attributes",  mode: :required
+    updater.string "subscription_name",  mode: :required
+    updater.timestamp "publish_time",  mode: :required
+  end
+
+  @table.id
+end
+
+def cleanup_bq table, dataset
+  table.delete
+  dataset.delete
 end
 
 # Pub/Sub calls may not respond immediately.

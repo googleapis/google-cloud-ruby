@@ -43,7 +43,7 @@ describe Google::Cloud::Error, :wrapped_gapi do
     _(error.body).must_equal "invalid body"
     _(error.header).must_equal ["invalid headers"]
 
-    _(error.code).must_be :nil?
+    _(error.code).must_equal 3
     _(error.details).must_be :nil?
     _(error.metadata).must_be :nil?
     _(error.status_details).must_be :nil?
@@ -60,7 +60,7 @@ describe Google::Cloud::Error, :wrapped_gapi do
     _(error.body).must_equal "precondition body"
     _(error.header).must_equal ["precondition headers"]
 
-    _(error.code).must_be :nil?
+    _(error.code).must_equal 9
     _(error.details).must_be :nil?
     _(error.metadata).must_be :nil?
     _(error.status_details).must_be :nil?
@@ -77,7 +77,7 @@ describe Google::Cloud::Error, :wrapped_gapi do
     _(error.body).must_equal "out of range body"
     _(error.header).must_equal ["out of range headers"]
 
-    _(error.code).must_be :nil?
+    _(error.code).must_equal 11
     _(error.details).must_be :nil?
     _(error.metadata).must_be :nil?
     _(error.status_details).must_be :nil?
@@ -92,7 +92,7 @@ describe Google::Cloud::Error, :wrapped_gapi do
     _(error.body).must_equal "unauthenticated body"
     _(error.header).must_equal ["unauthenticated headers"]
 
-    _(error.code).must_be :nil?
+    _(error.code).must_equal 16
     _(error.details).must_be :nil?
     _(error.metadata).must_be :nil?
     _(error.status_details).must_be :nil?
@@ -107,7 +107,7 @@ describe Google::Cloud::Error, :wrapped_gapi do
     _(error.body).must_equal "denied body"
     _(error.header).must_equal ["denied headers"]
 
-    _(error.code).must_be :nil?
+    _(error.code).must_equal 7
     _(error.details).must_be :nil?
     _(error.metadata).must_be :nil?
     _(error.status_details).must_be :nil?
@@ -122,7 +122,7 @@ describe Google::Cloud::Error, :wrapped_gapi do
     _(error.body).must_equal "notfound body"
     _(error.header).must_equal ["notfound headers"]
 
-    _(error.code).must_be :nil?
+    _(error.code).must_equal 5
     _(error.details).must_be :nil?
     _(error.metadata).must_be :nil?
     _(error.status_details).must_be :nil?
@@ -137,7 +137,7 @@ describe Google::Cloud::Error, :wrapped_gapi do
     _(error.body).must_equal "exists body"
     _(error.header).must_equal ["exists headers"]
 
-    _(error.code).must_be :nil?
+    _(error.code).must_equal 6
     _(error.details).must_be :nil?
     _(error.metadata).must_be :nil?
     _(error.status_details).must_be :nil?
@@ -154,7 +154,7 @@ describe Google::Cloud::Error, :wrapped_gapi do
     _(error.body).must_equal "aborted body"
     _(error.header).must_equal ["aborted headers"]
 
-    _(error.code).must_be :nil?
+    _(error.code).must_equal 10
     _(error.details).must_be :nil?
     _(error.metadata).must_be :nil?
     _(error.status_details).must_be :nil?
@@ -185,7 +185,7 @@ describe Google::Cloud::Error, :wrapped_gapi do
     _(error.body).must_equal "conditionNotMet body"
     _(error.header).must_equal ["conditionNotMet headers"]
 
-    _(error.code).must_be :nil?
+    _(error.code).must_equal 9
     _(error.details).must_be :nil?
     _(error.metadata).must_be :nil?
     _(error.status_details).must_be :nil?
@@ -200,7 +200,7 @@ describe Google::Cloud::Error, :wrapped_gapi do
     _(error.body).must_equal "exhausted body"
     _(error.header).must_equal ["exhausted headers"]
 
-    _(error.code).must_be :nil?
+    _(error.code).must_equal 8
     _(error.details).must_be :nil?
     _(error.metadata).must_be :nil?
     _(error.status_details).must_be :nil?
@@ -215,7 +215,7 @@ describe Google::Cloud::Error, :wrapped_gapi do
     _(error.body).must_equal "canceled body"
     _(error.header).must_equal ["canceled headers"]
 
-    _(error.code).must_be :nil?
+    _(error.code).must_equal 1
     _(error.details).must_be :nil?
     _(error.metadata).must_be :nil?
     _(error.status_details).must_be :nil?
@@ -230,7 +230,7 @@ describe Google::Cloud::Error, :wrapped_gapi do
     _(error.body).must_equal "internal body"
     _(error.header).must_equal ["internal headers"]
 
-    _(error.code).must_be :nil?
+    _(error.code).must_equal 13
     _(error.details).must_be :nil?
     _(error.metadata).must_be :nil?
     _(error.status_details).must_be :nil?
@@ -247,7 +247,7 @@ describe Google::Cloud::Error, :wrapped_gapi do
     _(error.body).must_equal "invalid body"
     _(error.header).must_equal ["invalid headers"]
 
-    _(error.code).must_be :nil?
+    _(error.code).must_equal 2
     _(error.details).must_be :nil?
     _(error.metadata).must_be :nil?
     _(error.status_details).must_be :nil?
@@ -264,7 +264,7 @@ describe Google::Cloud::Error, :wrapped_gapi do
     _(error.body).must_equal "data loss body"
     _(error.header).must_equal ["data loss headers"]
 
-    _(error.code).must_be :nil?
+    _(error.code).must_equal 15
     _(error.details).must_be :nil?
     _(error.metadata).must_be :nil?
     _(error.status_details).must_be :nil?
@@ -279,7 +279,7 @@ describe Google::Cloud::Error, :wrapped_gapi do
     _(error.body).must_equal "unimplemented body"
     _(error.header).must_equal ["unimplemented headers"]
 
-    _(error.code).must_be :nil?
+    _(error.code).must_equal 12
     _(error.details).must_be :nil?
     _(error.metadata).must_be :nil?
     _(error.status_details).must_be :nil?
@@ -294,7 +294,7 @@ describe Google::Cloud::Error, :wrapped_gapi do
     _(error.body).must_equal "unavailable body"
     _(error.header).must_equal ["unavailable headers"]
 
-    _(error.code).must_be :nil?
+    _(error.code).must_equal 14
     _(error.details).must_be :nil?
     _(error.metadata).must_be :nil?
     _(error.status_details).must_be :nil?
@@ -309,20 +309,20 @@ describe Google::Cloud::Error, :wrapped_gapi do
     _(error.body).must_equal "exceeded body"
     _(error.header).must_equal ["exceeded headers"]
 
-    _(error.code).must_be :nil?
+    _(error.code).must_equal 4
     _(error.details).must_be :nil?
     _(error.metadata).must_be :nil?
     _(error.status_details).must_be :nil?
   end
 
-  it "wraps unknown error" do
-    error = wrapped_error "unknown", 999, "unknown body", ["unknown headers"]
+  it "wraps unmapped error" do
+    error = wrapped_error "unmapped", 999, "some body", ["some headers"]
     _(error).must_be_kind_of Google::Cloud::Error
 
-    _(error.message).must_equal "unknown"
+    _(error.message).must_equal "unmapped"
     _(error.status_code).must_equal 999
-    _(error.body).must_equal "unknown body"
-    _(error.header).must_equal ["unknown headers"]
+    _(error.body).must_equal "some body"
+    _(error.header).must_equal ["some headers"]
 
     _(error.code).must_be :nil?
     _(error.details).must_be :nil?

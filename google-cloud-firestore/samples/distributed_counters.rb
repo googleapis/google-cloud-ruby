@@ -15,7 +15,6 @@
 
 def create_counter project_id:, num_shards:, collection_path: "shards"
   # [START firestore_solution_sharded_counter_create]
-  # [START fs_create_counter]
   # project_id = "Your Google Cloud Project ID"
   # num_shards = "Number of shards for distributed counter"
   # collection_path = "shards"
@@ -32,13 +31,11 @@ def create_counter project_id:, num_shards:, collection_path: "shards"
   end
 
   puts "Distributed counter shards collection created."
-  # [END fs_create_counter]
   # [END firestore_solution_sharded_counter_create]
 end
 
 def increment_counter project_id:, num_shards:, collection_path: "shards"
   # [START firestore_solution_sharded_counter_increment]
-  # [START fs_increment_counter]
   # project_id = "Your Google Cloud Project ID"
   # num_shards = "Number of shards for distributed counter"
   # collection_path = "shards"
@@ -55,13 +52,11 @@ def increment_counter project_id:, num_shards:, collection_path: "shards"
   shard_ref.update({ count: firestore.field_increment(1) })
 
   puts "Counter incremented."
-  # [END fs_increment_counter]
   # [END firestore_solution_sharded_counter_increment]
 end
 
 def get_count project_id:, collection_path: "shards"
   # [START firestore_solution_sharded_counter_get]
-  # [START fs_get_count]
   # project_id = "Your Google Cloud Project ID"
   # collection_path = "shards"
 
@@ -77,7 +72,6 @@ def get_count project_id:, collection_path: "shards"
   end
 
   puts "Count value is #{count}."
-  # [END fs_get_count]
   # [END firestore_solution_sharded_counter_get]
 end
 

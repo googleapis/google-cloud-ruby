@@ -40,4 +40,58 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientPathsTest < Minitest::Test
       assert_equal "organizations/value0/feeds/value1", path
     end
   end
+
+  def test_folder_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Asset::V1::AssetService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.folder_path folder: "value0"
+      assert_equal "folders/value0", path
+    end
+  end
+
+  def test_organization_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Asset::V1::AssetService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.organization_path organization: "value0"
+      assert_equal "organizations/value0", path
+    end
+  end
+
+  def test_project_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Asset::V1::AssetService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.project_path project: "value0"
+      assert_equal "projects/value0", path
+    end
+  end
+
+  def test_saved_query_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Asset::V1::AssetService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.saved_query_path project: "value0", saved_query: "value1"
+      assert_equal "projects/value0/savedQueries/value1", path
+
+      path = client.saved_query_path folder: "value0", saved_query: "value1"
+      assert_equal "folders/value0/savedQueries/value1", path
+
+      path = client.saved_query_path organization: "value0", saved_query: "value1"
+      assert_equal "organizations/value0/savedQueries/value1", path
+    end
+  end
 end

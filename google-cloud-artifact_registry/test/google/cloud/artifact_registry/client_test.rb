@@ -20,15 +20,25 @@ require "helper"
 require "google/cloud/artifact_registry"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Cloud::ArtifactRegistry::ClientConstructionMinitest < Minitest::Test
-  def test_artifact_registry
+  def test_artifact_registry_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::ArtifactRegistry.artifact_registry do |config|
+      client = Google::Cloud::ArtifactRegistry.artifact_registry transport: :grpc do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client, client
+      assert_kind_of Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client, client
+    end
+  end
+
+  def test_artifact_registry_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::ArtifactRegistry.artifact_registry transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Rest::Client, client
     end
   end
 end

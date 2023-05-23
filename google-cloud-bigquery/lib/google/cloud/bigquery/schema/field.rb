@@ -40,14 +40,31 @@ module Google
           MODES = ["NULLABLE", "REQUIRED", "REPEATED"].freeze
 
           # @private
-          TYPES = ["STRING", "INTEGER", "INT64", "FLOAT", "FLOAT64", "NUMERIC", "BIGNUMERIC", "BOOLEAN", "BOOL",
-                   "BYTES", "TIMESTAMP", "TIME", "DATETIME", "DATE", "RECORD", "STRUCT"].freeze
+          TYPES = [
+            "BIGNUMERIC",
+            "BOOL",
+            "BOOLEAN",
+            "BYTES",
+            "DATE",
+            "DATETIME",
+            "FLOAT",
+            "FLOAT64",
+            "GEOGRAPHY",
+            "INTEGER",
+            "INT64",
+            "NUMERIC",
+            "RECORD",
+            "STRING",
+            "STRUCT",
+            "TIME",
+            "TIMESTAMP"
+          ].freeze
 
           ##
           # The name of the field.
           #
           # @return [String] The field name. The name must contain only
-          #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+          #   letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`), and must
           #   start with a letter or underscore. The maximum length is 128
           #   characters.
           #
@@ -59,7 +76,7 @@ module Google
           # Updates the name of the field.
           #
           # @param [String] new_name The field name. The name must contain only
-          #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+          #   letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`), and must
           #   start with a letter or underscore. The maximum length is 128
           #   characters.
           #
@@ -70,12 +87,25 @@ module Google
           ##
           # The data type of the field.
           #
-          # @return [String] The field data type. Possible values include
-          #   `STRING`, `BYTES`, `INTEGER`, `INT64` (same as `INTEGER`),
-          #   `FLOAT`, `FLOAT64` (same as `FLOAT`), `NUMERIC`, `BIGNUMERIC`,
-          #   `BOOLEAN`, `BOOL` (same as `BOOLEAN`), `TIMESTAMP`, `DATE`,
-          #   `TIME`, `DATETIME`, `RECORD` (where `RECORD` indicates that the
-          #   field contains a nested schema) or `STRUCT` (same as `RECORD`).
+          # @return [String] The field data type. Possible values include:
+          #
+          #   * `BIGNUMERIC`
+          #   * `BOOL`
+          #   * `BOOLEAN` (same as `BOOL`)
+          #   * `BYTES`
+          #   * `DATE`
+          #   * `DATETIME`
+          #   * `FLOAT`
+          #   * `FLOAT64` (same as `FLOAT`)
+          #   * `GEOGRAPHY`
+          #   * `INTEGER`
+          #   * `INT64` (same as `INTEGER`)
+          #   * `NUMERIC`
+          #   * `RECORD` (where `RECORD` indicates that the field contains a nested schema)
+          #   * `STRING`
+          #   * `STRUCT` (same as `RECORD`)
+          #   * `TIME`
+          #   * `TIMESTAMP`
           #
           def type
             @gapi.type
@@ -84,12 +114,25 @@ module Google
           ##
           # Updates the data type of the field.
           #
-          # @param [String] new_type The data type. Possible values include
-          #   `STRING`, `BYTES`, `INTEGER`, `INT64` (same as `INTEGER`),
-          #   `FLOAT`, `FLOAT64` (same as `FLOAT`), `NUMERIC`, `BIGNUMERIC`,
-          #   `BOOLEAN`, `BOOL` (same as `BOOLEAN`), `TIMESTAMP`, `DATE`,
-          #   `TIME`, `DATETIME`, `RECORD` (where `RECORD` indicates that the
-          #   field contains a nested schema) or `STRUCT` (same as `RECORD`).
+          # @param [String] new_type The data type. Possible values include:
+          #
+          #   * `BIGNUMERIC`
+          #   * `BOOL`
+          #   * `BOOLEAN` (same as `BOOL`)
+          #   * `BYTES`
+          #   * `DATE`
+          #   * `DATETIME`
+          #   * `FLOAT`
+          #   * `FLOAT64` (same as `FLOAT`)
+          #   * `GEOGRAPHY`
+          #   * `INTEGER`
+          #   * `INT64` (same as `INTEGER`)
+          #   * `NUMERIC`
+          #   * `RECORD` (where `RECORD` indicates that the field contains a nested schema)
+          #   * `STRING`
+          #   * `STRUCT` (same as `RECORD`)
+          #   * `TIME`
+          #   * `TIMESTAMP`
           #
           def type= new_type
             @gapi.update! type: verify_type(new_type)
@@ -161,6 +204,148 @@ module Google
           #
           def mode= new_mode
             @gapi.update! mode: verify_mode(new_mode)
+          end
+
+          ##
+          # The policy tag list for the field. Policy tag identifiers are of the form
+          # `projects/*/locations/*/taxonomies/*/policyTags/*`. At most 1 policy tag
+          # is currently allowed.
+          #
+          # @see https://cloud.google.com/bigquery/docs/column-level-security-intro
+          #   Introduction to BigQuery column-level security
+          #
+          # @return [Array<String>, nil] The policy tag list for the field, or `nil`.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   table = dataset.table "my_table"
+          #
+          #   table.schema.field("age").policy_tags
+          #
+          def policy_tags
+            names = @gapi.policy_tags&.names
+            names.to_a if names && !names.empty?
+          end
+
+          ##
+          # Updates the policy tag list for the field.
+          #
+          # @see https://cloud.google.com/bigquery/docs/column-level-security-intro
+          #   Introduction to BigQuery column-level security
+          #
+          # @param [Array<String>, String, nil] new_policy_tags The policy tag list or
+          #   single policy tag for the field, or `nil` to remove the existing policy tags.
+          #   Policy tag identifiers are of the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   table = dataset.table "my_table"
+          #
+          #   policy_tag = "projects/my-project/locations/us/taxonomies/my-taxonomy/policyTags/my-policy-tag"
+          #   table.schema do |schema|
+          #     schema.field("age").policy_tags = policy_tag
+          #   end
+          #
+          #   table.schema.field("age").policy_tags
+          #
+          def policy_tags= new_policy_tags
+            # If new_policy_tags is nil, send an empty array.
+            # Sending a nil value for policy_tags results in no change.
+            new_policy_tags = Array(new_policy_tags)
+            policy_tag_list = Google::Apis::BigqueryV2::TableFieldSchema::PolicyTags.new names: new_policy_tags
+            @gapi.update! policy_tags: policy_tag_list
+          end
+
+          ##
+          # The default value of a field using a SQL expression. It can only
+          # be set for top level fields (columns). Default value for the entire struct or
+          # array is set using a struct or array expression. The valid SQL expressions are:
+          #     - Literals for all data types, including STRUCT and ARRAY.
+          #     - The following functions:
+          #         `CURRENT_TIMESTAMP`
+          #         `CURRENT_TIME`
+          #         `CURRENT_DATE`
+          #         `CURRENT_DATETIME`
+          #         `GENERATE_UUID`
+          #         `RAND`
+          #         `SESSION_USER`
+          #         `ST_GEOPOINT`
+          #     - Struct or array composed with the above allowed functions, for example:
+          #         "[CURRENT_DATE(), DATE '2020-01-01'"]
+          #
+          # @return [String] The default value expression of the field.
+          #
+          def default_value_expression
+            @gapi.default_value_expression
+          end
+
+          ##
+          # Updates the default value expression of the field.
+          #
+          # @param default_value_expression [String] The default value of a field
+          #   using a SQL expression. It can only be set for top level fields (columns).
+          #   Use a struct or array expression to specify default value for the entire struct or
+          #   array. The valid SQL expressions are:
+          #     - Literals for all data types, including STRUCT and ARRAY.
+          #     - The following functions:
+          #         `CURRENT_TIMESTAMP`
+          #         `CURRENT_TIME`
+          #         `CURRENT_DATE`
+          #         `CURRENT_DATETIME`
+          #         `GENERATE_UUID`
+          #         `RAND`
+          #         `SESSION_USER`
+          #         `ST_GEOPOINT`
+          #     - Struct or array composed with the above allowed functions, for example:
+          #         "[CURRENT_DATE(), DATE '2020-01-01'"]
+          #
+          def default_value_expression= default_value_expression
+            @gapi.update! default_value_expression: default_value_expression
+          end
+
+          ##
+          # The maximum length of values of this field for {#string?} or {bytes?} fields. If `max_length` is not
+          # specified, no maximum length constraint is imposed on this field. If type = `STRING`, then `max_length`
+          # represents the maximum UTF-8 length of strings in this field. If type = `BYTES`, then `max_length`
+          # represents the maximum number of bytes in this field.
+          #
+          # @return [Integer, nil] The maximum length of values of this field, or `nil`.
+          #
+          def max_length
+            @gapi.max_length
+          end
+
+          ##
+          # The precision (maximum number of total digits) for `NUMERIC` or `BIGNUMERIC` types. For {#numeric?} fields,
+          # acceptable values for precision must be `1 ≤ (precision - scale) ≤ 29` and values for scale must be `0 ≤
+          # scale ≤ 9`. For {#bignumeric?} fields, acceptable values for precision must be `1 ≤ (precision - scale) ≤
+          # 38` and values for scale must be `0 ≤ scale ≤ 38`. If the scale value is set, the precision value must be
+          # set as well.
+          #
+          # @return [Integer, nil] The precision for the field, or `nil`.
+          #
+          def precision
+            @gapi.precision
+          end
+
+          ##
+          # The scale (maximum number of digits in the fractional part) for `NUMERIC` or `BIGNUMERIC` types. For
+          # {#numeric?} fields, acceptable values for precision must be `1 ≤ (precision - scale) ≤ 29` and values for
+          # scale must be `0 ≤ scale ≤ 9`. For {#bignumeric?} fields, acceptable values for precision must be `1 ≤
+          # (precision - scale) ≤ 38` and values for scale must be `0 ≤ scale ≤ 38`. If the scale value is set, the
+          # precision value must be set as well.
+          #
+          # @return [Integer, nil] The scale for the field, or `nil`.
+          #
+          def scale
+            @gapi.scale
           end
 
           ##
@@ -263,6 +448,15 @@ module Google
           end
 
           ##
+          # Checks if the type of the field is `GEOGRAPHY`.
+          #
+          # @return [Boolean] `true` when `GEOGRAPHY`, `false` otherwise.
+          #
+          def geography?
+            type == "GEOGRAPHY"
+          end
+
+          ##
           # Checks if the type of the field is `RECORD`.
           #
           # @return [Boolean] `true` when `RECORD`, `false` otherwise.
@@ -324,7 +518,7 @@ module Google
           #
           def param_type
             param_type = type.to_sym
-            param_type = Hash[fields.map { |field| [field.name.to_sym, field.param_type] }] if record?
+            param_type = fields.to_h { |field| [field.name.to_sym, field.param_type] } if record?
             param_type = [param_type] if repeated?
             param_type
           end
@@ -348,18 +542,29 @@ module Google
           # This can only be called on fields that are of type `RECORD`.
           #
           # @param [String] name The field name. The name must contain only
-          #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+          #   letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`), and must
           #   start with a letter or underscore. The maximum length is 128
           #   characters.
           # @param [String] description A description of the field.
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
+          # @param [Integer] max_length The maximum UTF-8 length of strings
+          #   allowed in the field.
           #
-          def string name, description: nil, mode: :nullable
+          def string name, description: nil, mode: :nullable, policy_tags: nil, max_length: nil
             record_check!
 
-            add_field name, :string, description: description, mode: mode
+            add_field name,
+                      :string,
+                      description: description,
+                      mode: mode,
+                      policy_tags: policy_tags,
+                      max_length: max_length
           end
 
           ##
@@ -368,18 +573,22 @@ module Google
           # This can only be called on fields that are of type `RECORD`.
           #
           # @param [String] name The field name. The name must contain only
-          #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+          #   letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`), and must
           #   start with a letter or underscore. The maximum length is 128
           #   characters.
           # @param [String] description A description of the field.
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
           #
-          def integer name, description: nil, mode: :nullable
+          def integer name, description: nil, mode: :nullable, policy_tags: nil
             record_check!
 
-            add_field name, :integer, description: description, mode: mode
+            add_field name, :integer, description: description, mode: mode, policy_tags: policy_tags
           end
 
           ##
@@ -389,18 +598,22 @@ module Google
           # This can only be called on fields that are of type `RECORD`.
           #
           # @param [String] name The field name. The name must contain only
-          #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+          #   letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`), and must
           #   start with a letter or underscore. The maximum length is 128
           #   characters.
           # @param [String] description A description of the field.
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
           #
-          def float name, description: nil, mode: :nullable
+          def float name, description: nil, mode: :nullable, policy_tags: nil
             record_check!
 
-            add_field name, :float, description: description, mode: mode
+            add_field name, :float, description: description, mode: mode, policy_tags: policy_tags
           end
 
           ##
@@ -420,18 +633,38 @@ module Google
           # This can only be called on fields that are of type `RECORD`.
           #
           # @param [String] name The field name. The name must contain only
-          #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+          #   letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`), and must
           #   start with a letter or underscore. The maximum length is 128
           #   characters.
           # @param [String] description A description of the field.
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
+          # @param [Integer] precision The precision (maximum number of total
+          #   digits) for the field. Acceptable values for precision must be:
+          #   `1 ≤ (precision - scale) ≤ 29`. Values for scale must be:
+          #   `0 ≤ scale ≤ 9`. If the scale value is set, the precision value
+          #   must be set as well.
+          # @param [Integer] scale The scale (maximum number of digits in the
+          #   fractional part) for the field. Acceptable values for precision
+          #   must be: `1 ≤ (precision - scale) ≤ 29`. Values for scale must
+          #   be: `0 ≤ scale ≤ 9`. If the scale value is set, the precision
+          #   value must be set as well.
           #
-          def numeric name, description: nil, mode: :nullable
+          def numeric name, description: nil, mode: :nullable, policy_tags: nil, precision: nil, scale: nil
             record_check!
 
-            add_field name, :numeric, description: description, mode: mode
+            add_field name,
+                      :numeric,
+                      description: description,
+                      mode: mode,
+                      policy_tags: policy_tags,
+                      precision: precision,
+                      scale: scale
           end
 
           ##
@@ -451,18 +684,38 @@ module Google
           # This can only be called on fields that are of type `RECORD`.
           #
           # @param [String] name The field name. The name must contain only
-          #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+          #   letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`), and must
           #   start with a letter or underscore. The maximum length is 128
           #   characters.
           # @param [String] description A description of the field.
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
+          # @param [Integer] precision The precision (maximum number of total
+          #   digits) for the field. Acceptable values for precision must be:
+          #   `1 ≤ (precision - scale) ≤ 38`. Values for scale must be:
+          #   `0 ≤ scale ≤ 38`. If the scale value is set, the precision value
+          #   must be set as well.
+          # @param [Integer] scale The scale (maximum number of digits in the
+          #   fractional part) for the field. Acceptable values for precision
+          #   must be: `1 ≤ (precision - scale) ≤ 38`. Values for scale must
+          #   be: `0 ≤ scale ≤ 38`. If the scale value is set, the precision
+          #   value must be set as well.
           #
-          def bignumeric name, description: nil, mode: :nullable
+          def bignumeric name, description: nil, mode: :nullable, policy_tags: nil, precision: nil, scale: nil
             record_check!
 
-            add_field name, :bignumeric, description: description, mode: mode
+            add_field name,
+                      :bignumeric,
+                      description: description,
+                      mode: mode,
+                      policy_tags: policy_tags,
+                      precision: precision,
+                      scale: scale
           end
 
           ##
@@ -471,18 +724,22 @@ module Google
           # This can only be called on fields that are of type `RECORD`.
           #
           # @param [String] name The field name. The name must contain only
-          #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+          #   letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`), and must
           #   start with a letter or underscore. The maximum length is 128
           #   characters.
           # @param [String] description A description of the field.
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
           #
-          def boolean name, description: nil, mode: :nullable
+          def boolean name, description: nil, mode: :nullable, policy_tags: nil
             record_check!
 
-            add_field name, :boolean, description: description, mode: mode
+            add_field name, :boolean, description: description, mode: mode, policy_tags: policy_tags
           end
 
           ##
@@ -491,18 +748,29 @@ module Google
           # This can only be called on fields that are of type `RECORD`.
           #
           # @param [String] name The field name. The name must contain only
-          #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+          #   letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`), and must
           #   start with a letter or underscore. The maximum length is 128
           #   characters.
           # @param [String] description A description of the field.
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
+          # @param [Integer] max_length The maximum the maximum number of
+          #   bytes in the field.
           #
-          def bytes name, description: nil, mode: :nullable
+          def bytes name, description: nil, mode: :nullable, policy_tags: nil, max_length: nil
             record_check!
 
-            add_field name, :bytes, description: description, mode: mode
+            add_field name,
+                      :bytes,
+                      description: description,
+                      mode: mode,
+                      policy_tags: policy_tags,
+                      max_length: max_length
           end
 
           ##
@@ -511,18 +779,22 @@ module Google
           # This can only be called on fields that are of type `RECORD`.
           #
           # @param [String] name The field name. The name must contain only
-          #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+          #   letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`), and must
           #   start with a letter or underscore. The maximum length is 128
           #   characters.
           # @param [String] description A description of the field.
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
           #
-          def timestamp name, description: nil, mode: :nullable
+          def timestamp name, description: nil, mode: :nullable, policy_tags: nil
             record_check!
 
-            add_field name, :timestamp, description: description, mode: mode
+            add_field name, :timestamp, description: description, mode: mode, policy_tags: policy_tags
           end
 
           ##
@@ -531,18 +803,22 @@ module Google
           # This can only be called on fields that are of type `RECORD`.
           #
           # @param [String] name The field name. The name must contain only
-          #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+          #   letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`), and must
           #   start with a letter or underscore. The maximum length is 128
           #   characters.
           # @param [String] description A description of the field.
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
           #
-          def time name, description: nil, mode: :nullable
+          def time name, description: nil, mode: :nullable, policy_tags: nil
             record_check!
 
-            add_field name, :time, description: description, mode: mode
+            add_field name, :time, description: description, mode: mode, policy_tags: policy_tags
           end
 
           ##
@@ -551,18 +827,22 @@ module Google
           # This can only be called on fields that are of type `RECORD`.
           #
           # @param [String] name The field name. The name must contain only
-          #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+          #   letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`), and must
           #   start with a letter or underscore. The maximum length is 128
           #   characters.
           # @param [String] description A description of the field.
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
           #
-          def datetime name, description: nil, mode: :nullable
+          def datetime name, description: nil, mode: :nullable, policy_tags: nil
             record_check!
 
-            add_field name, :datetime, description: description, mode: mode
+            add_field name, :datetime, description: description, mode: mode, policy_tags: policy_tags
           end
 
           ##
@@ -571,18 +851,46 @@ module Google
           # This can only be called on fields that are of type `RECORD`.
           #
           # @param [String] name The field name. The name must contain only
-          #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+          #   letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`), and must
           #   start with a letter or underscore. The maximum length is 128
           #   characters.
           # @param [String] description A description of the field.
           # @param [Symbol] mode The field's mode. The possible values are
           #   `:nullable`, `:required`, and `:repeated`. The default value is
           #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
           #
-          def date name, description: nil, mode: :nullable
+          def date name, description: nil, mode: :nullable, policy_tags: nil
             record_check!
 
-            add_field name, :date, description: description, mode: mode
+            add_field name, :date, description: description, mode: mode, policy_tags: policy_tags
+          end
+
+          ##
+          # Adds a geography field to the nested schema of a record field.
+          #
+          # @see https://cloud.google.com/bigquery/docs/gis-data Working with BigQuery GIS data
+          #
+          # @param [String] name The field name. The name must contain only
+          #   letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`), and must
+          #   start with a letter or underscore. The maximum length is 128
+          #   characters.
+          # @param [String] description A description of the field.
+          # @param [Symbol] mode The field's mode. The possible values are
+          #   `:nullable`, `:required`, and `:repeated`. The default value is
+          #   `:nullable`.
+          # @param [Array<String>, String] policy_tags The policy tag list or
+          #   single policy tag for the field. Policy tag identifiers are of
+          #   the form `projects/*/locations/*/taxonomies/*/policyTags/*`.
+          #   At most 1 policy tag is currently allowed.
+          #
+          def geography name, description: nil, mode: :nullable, policy_tags: nil
+            record_check!
+
+            add_field name, :geography, description: description, mode: mode, policy_tags: policy_tags
           end
 
           ##
@@ -594,7 +902,7 @@ module Google
           # This can only be called on fields that are of type `RECORD`.
           #
           # @param [String] name The field name. The name must contain only
-          #   letters (a-z, A-Z), numbers (0-9), or underscores (_), and must
+          #   letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`), and must
           #   start with a letter or underscore. The maximum length is 128
           #   characters.
           # @param [String] description A description of the field.
@@ -678,7 +986,14 @@ module Google
                   "Cannot add fields to a non-RECORD field (#{type})"
           end
 
-          def add_field name, type, description: nil, mode: :nullable
+          def add_field name,
+                        type,
+                        description: nil,
+                        mode: :nullable,
+                        policy_tags: nil,
+                        max_length: nil,
+                        precision: nil,
+                        scale: nil
             frozen_check!
 
             new_gapi = Google::Apis::BigqueryV2::TableFieldSchema.new(
@@ -688,7 +1003,13 @@ module Google
               mode:        verify_mode(mode),
               fields:      []
             )
-
+            if policy_tags
+              policy_tags = Array(policy_tags)
+              new_gapi.policy_tags = Google::Apis::BigqueryV2::TableFieldSchema::PolicyTags.new names: policy_tags
+            end
+            new_gapi.max_length = max_length if max_length
+            new_gapi.precision = precision if precision
+            new_gapi.scale = scale if scale
             # Remove any existing field of this name
             @gapi.fields ||= []
             @gapi.fields.reject! { |f| f.name == new_gapi.name }

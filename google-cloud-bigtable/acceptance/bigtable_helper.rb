@@ -156,12 +156,25 @@ end
 def clean_up_bigtable_objects instance_id, table_ids = []
   p "=> Deleting acceptance test tables from instance #{instance_id}."
 
-  begin
-    table_ids.each do |table_id|
+  table_ids.each do |table_id|
+    begin
       $bigtable.delete_table(instance_id, table_id)
+      puts "Cleaned up #{instance_id}:#{table_id}"
+      sleep 1
+    rescue StandardError => e
+      puts "Error while cleaning up #{instance_id}:#{table_id}.\n\n#{e}"
     end
-  rescue StandardError => e
-    puts "Error while cleaning up #{instance_id} instance tables.\n\n#{e}"
+  end
+
+  instance = $bigtable.instance instance_id
+  instance.tables.each do |table|
+    begin
+      table.delete if table.table_id.start_with? "test-table"
+      puts "Cleaned up #{instance_id}:#{table.table_id}"
+      sleep 2
+    rescue StandardError => e
+      puts "Error while cleaning up #{instance_id}:#{table.table_id}.\n\n#{e}"
+    end
   end
 end
 
@@ -189,7 +202,7 @@ def bigtable_cluster_id
 end
 
 def bigtable_cluster_id_2
-  "#{$bigtable_instance_id}-clstr2"
+  "#{bigtable_instance_id}-clstr2"
 end
 
 def bigtable_kms_key

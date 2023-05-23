@@ -34,6 +34,127 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Describes an event in the lifecycle of a payment transaction.
+        # @!attribute [rw] event_type
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::TransactionEvent::TransactionEventType]
+        #     Optional. The type of this transaction event.
+        # @!attribute [rw] reason
+        #   @return [::String]
+        #     Optional. The reason or standardized code that corresponds with this
+        #     transaction event, if one exists. For example, a CHARGEBACK event with code
+        #     6005.
+        # @!attribute [rw] value
+        #   @return [::Float]
+        #     Optional. The value that corresponds with this transaction event, if one
+        #     exists. For example, a refund event where $5.00 was refunded. Currency is
+        #     obtained from the original transaction data.
+        # @!attribute [rw] event_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Optional. Timestamp when this transaction event occurred; otherwise assumed
+        #     to be the time of the API call.
+        class TransactionEvent
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Enum that represents an event in the payment transaction lifecycle.
+          module TransactionEventType
+            # Default, unspecified event type.
+            TRANSACTION_EVENT_TYPE_UNSPECIFIED = 0
+
+            # Indicates that the transaction is approved by the merchant. The
+            # accompanying reasons can include terms such as 'INHOUSE', 'ACCERTIFY',
+            # 'CYBERSOURCE', or 'MANUAL_REVIEW'.
+            MERCHANT_APPROVE = 1
+
+            # Indicates that the transaction is denied and concluded due to risks
+            # detected by the merchant. The accompanying reasons can include terms such
+            # as 'INHOUSE',  'ACCERTIFY',  'CYBERSOURCE', or 'MANUAL_REVIEW'.
+            MERCHANT_DENY = 2
+
+            # Indicates that the transaction is being evaluated by a human, due to
+            # suspicion or risk.
+            MANUAL_REVIEW = 3
+
+            # Indicates that the authorization attempt with the card issuer succeeded.
+            AUTHORIZATION = 4
+
+            # Indicates that the authorization attempt with the card issuer failed.
+            # The accompanying reasons can include Visa's '54' indicating that the card
+            # is expired, or '82' indicating that the CVV is incorrect.
+            AUTHORIZATION_DECLINE = 5
+
+            # Indicates that the transaction is completed because the funds were
+            # settled.
+            PAYMENT_CAPTURE = 6
+
+            # Indicates that the transaction could not be completed because the funds
+            # were not settled.
+            PAYMENT_CAPTURE_DECLINE = 7
+
+            # Indicates that the transaction has been canceled. Specify the reason
+            # for the cancellation. For example, 'INSUFFICIENT_INVENTORY'.
+            CANCEL = 8
+
+            # Indicates that the merchant has received a chargeback inquiry due to
+            # fraud for the transaction, requesting additional information before a
+            # fraud chargeback is officially issued and a formal chargeback
+            # notification is sent.
+            CHARGEBACK_INQUIRY = 9
+
+            # Indicates that the merchant has received a chargeback alert due to fraud
+            # for the transaction. The process of resolving the dispute without
+            # involving the payment network is started.
+            CHARGEBACK_ALERT = 10
+
+            # Indicates that a fraud notification is issued for the transaction, sent
+            # by the payment instrument's issuing bank because the transaction appears
+            # to be fraudulent. We recommend including TC40 or SAFE data in the
+            # `reason` field for this event type. For partial chargebacks, we recommend
+            # that you include an amount in the `value` field.
+            FRAUD_NOTIFICATION = 11
+
+            # Indicates that the merchant is informed by the payment network that the
+            # transaction has entered the chargeback process due to fraud. Reason code
+            # examples include Discover's '6005' and '6041'. For partial chargebacks,
+            # we recommend that you include an amount in the `value` field.
+            CHARGEBACK = 12
+
+            # Indicates that the transaction has entered the chargeback process due to
+            # fraud, and that the merchant has chosen to enter representment. Reason
+            # examples include Discover's '6005' and '6041'. For partial chargebacks,
+            # we recommend that you include an amount in the `value` field.
+            CHARGEBACK_REPRESENTMENT = 13
+
+            # Indicates that the transaction has had a fraud chargeback which was
+            # illegitimate and was reversed as a result. For partial chargebacks, we
+            # recommend that you include an amount in the `value` field.
+            CHARGEBACK_REVERSE = 14
+
+            # Indicates that the merchant has received a refund for a completed
+            # transaction. For partial refunds, we recommend that you include an amount
+            # in the `value` field. Reason example: 'TAX_EXEMPT' (partial refund of
+            # exempt tax)
+            REFUND_REQUEST = 15
+
+            # Indicates that the merchant has received a refund request for this
+            # transaction, but that they have declined it. For partial refunds, we
+            # recommend that you include an amount in the `value` field. Reason
+            # example: 'TAX_EXEMPT' (partial refund of exempt tax)
+            REFUND_DECLINE = 16
+
+            # Indicates that the completed transaction was refunded by the merchant.
+            # For partial refunds, we recommend that you include an amount in the
+            # `value` field. Reason example: 'TAX_EXEMPT' (partial refund of exempt
+            # tax)
+            REFUND = 17
+
+            # Indicates that the completed transaction was refunded by the merchant,
+            # and that this refund was reversed. For partial refunds, we recommend that
+            # you include an amount in the `value` field.
+            REFUND_REVERSE = 18
+          end
+        end
+
         # The request message to annotate an Assessment.
         # @!attribute [rw] name
         #   @return [::String]
@@ -41,12 +162,29 @@ module Google
         #     "projects/\\{project_number}/assessments/\\{assessment_id}".
         # @!attribute [rw] annotation
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::AnnotateAssessmentRequest::Annotation]
-        #     Required. The annotation that will be assigned to the Event.
+        #     Optional. The annotation that will be assigned to the Event. This field can
+        #     be left empty to provide reasons that apply to an event without concluding
+        #     whether the event is legitimate or fraudulent.
+        # @!attribute [rw] reasons
+        #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1beta1::AnnotateAssessmentRequest::Reason>]
+        #     Optional. Optional reasons for the annotation that will be assigned to the
+        #     Event.
+        # @!attribute [rw] hashed_account_id
+        #   @return [::String]
+        #     Optional. Optional unique stable hashed user identifier to apply to the
+        #     assessment. This is an alternative to setting the hashed_account_id in
+        #     CreateAssessment, for example when the account identifier is not yet known
+        #     in the initial request. It is recommended that the identifier is hashed
+        #     using hmac-sha256 with stable secret.
+        # @!attribute [rw] transaction_event
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::TransactionEvent]
+        #     Optional. If the assessment is part of a payment transaction, provide
+        #     details on payment lifecycle events that occur in the transaction.
         class AnnotateAssessmentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Enum that reprensents the types of annotations.
+          # Enum that represents the types of annotations.
           module Annotation
             # Default unspecified type.
             ANNOTATION_UNSPECIFIED = 0
@@ -56,6 +194,81 @@ module Google
 
             # Provides information that the event turned out to be fraudulent.
             FRAUDULENT = 2
+
+            # Provides information that the event was related to a login event in which
+            # the user typed the correct password. Deprecated, prefer indicating
+            # CORRECT_PASSWORD through the reasons field instead.
+            PASSWORD_CORRECT = 3
+
+            # Provides information that the event was related to a login event in which
+            # the user typed the incorrect password. Deprecated, prefer indicating
+            # INCORRECT_PASSWORD through the reasons field instead.
+            PASSWORD_INCORRECT = 4
+          end
+
+          # Enum that represents potential reasons for annotating an assessment.
+          module Reason
+            # Default unspecified reason.
+            REASON_UNSPECIFIED = 0
+
+            # Indicates that the transaction had a chargeback issued with no other
+            # details. When possible, specify the type by using CHARGEBACK_FRAUD or
+            # CHARGEBACK_DISPUTE instead.
+            CHARGEBACK = 1
+
+            # Indicates that the transaction had a chargeback issued related to an
+            # alleged unauthorized transaction from the cardholder's perspective (for
+            # example, the card number was stolen).
+            CHARGEBACK_FRAUD = 8
+
+            # Indicates that the transaction had a chargeback issued related to the
+            # cardholder having provided their card details but allegedly not being
+            # satisfied with the purchase (for example, misrepresentation, attempted
+            # cancellation).
+            CHARGEBACK_DISPUTE = 9
+
+            # Indicates that the completed payment transaction was refunded by the
+            # seller.
+            REFUND = 10
+
+            # Indicates that the completed payment transaction was determined to be
+            # fraudulent by the seller, and was cancelled and refunded as a result.
+            REFUND_FRAUD = 11
+
+            # Indicates that the payment transaction was accepted, and the user was
+            # charged.
+            TRANSACTION_ACCEPTED = 12
+
+            # Indicates that the payment transaction was declined, for example due to
+            # invalid card details.
+            TRANSACTION_DECLINED = 13
+
+            # Indicates the transaction associated with the assessment is suspected of
+            # being fraudulent based on the payment method, billing details, shipping
+            # address or other transaction information.
+            PAYMENT_HEURISTICS = 2
+
+            # Indicates that the user was served a 2FA challenge. An old assessment
+            # with `ENUM_VALUES.INITIATED_TWO_FACTOR` reason that has not been
+            # overwritten with `PASSED_TWO_FACTOR` is treated as an abandoned 2FA flow.
+            # This is equivalent to `FAILED_TWO_FACTOR`.
+            INITIATED_TWO_FACTOR = 7
+
+            # Indicates that the user passed a 2FA challenge.
+            PASSED_TWO_FACTOR = 3
+
+            # Indicates that the user failed a 2FA challenge.
+            FAILED_TWO_FACTOR = 4
+
+            # Indicates the user provided the correct password.
+            CORRECT_PASSWORD = 5
+
+            # Indicates the user provided an incorrect password.
+            INCORRECT_PASSWORD = 6
+
+            # Indicates that the user sent unwanted and abusive messages to other users
+            # of the platform, such as spam, scams, phishing, or social engineering.
+            SOCIAL_SPAM = 14
           end
         end
 
@@ -65,7 +278,26 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A recaptcha assessment resource.
+        # Password leak verification info.
+        # @!attribute [rw] hashed_user_credentials
+        #   @return [::String]
+        #     Optional. Scrypt hash of the username+password that the customer wants to
+        #     verify against a known password leak.
+        # @!attribute [r] credentials_leaked
+        #   @return [::Boolean]
+        #     Output only. Whether or not the user's credentials are present in a known
+        #     leak.
+        # @!attribute [rw] canonicalized_username
+        #   @return [::String]
+        #     Optional. The username part of the user credentials for which we want to
+        #     trigger a leak check in canonicalized form. This is the same data used to
+        #     create the hashed_user_credentials on the customer side.
+        class PasswordLeakVerification
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A reCAPTCHA Enterprise assessment resource.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The resource name for the Assessment in the format
@@ -84,11 +316,23 @@ module Google
         # @!attribute [r] reasons
         #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1beta1::Assessment::ClassificationReason>]
         #     Output only. Reasons contributing to the risk analysis verdict.
+        # @!attribute [rw] password_leak_verification
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::PasswordLeakVerification]
+        #     Information about the user's credentials used to check for leaks.
+        #     This feature is part of the Early Access Program (EAP). Exercise caution,
+        #     and do not deploy integrations based on this feature in a production
+        #     environment.
+        # @!attribute [rw] account_defender_assessment
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::AccountDefenderAssessment]
+        #     Assessment returned by account defender when a hashed_account_id is
+        #     provided.
+        # @!attribute [rw] fraud_prevention_assessment
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::FraudPreventionAssessment]
+        #     Assessment returned by Fraud Prevention when TransactionData is provided.
         class Assessment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # LINT.IfChange(classification_reason)
           # Reasons contributing to the risk analysis verdict.
           module ClassificationReason
             # Default unspecified type.
@@ -110,37 +354,209 @@ module Google
             # Too little traffic has been received from this site thus far to generate
             # quality risk analysis.
             LOW_CONFIDENCE_SCORE = 5
+
+            # The request matches behavioral characteristics of a carding attack.
+            SUSPECTED_CARDING = 6
+
+            # The request matches behavioral characteristics of chargebacks for fraud.
+            SUSPECTED_CHARGEBACK = 7
           end
         end
 
         # @!attribute [rw] token
         #   @return [::String]
-        #     Optional. The user response token provided by the reCAPTCHA client-side integration
-        #     on your site.
+        #     Optional. The user response token provided by the reCAPTCHA Enterprise
+        #     client-side integration on your site.
         # @!attribute [rw] site_key
         #   @return [::String]
-        #     Optional. The site key that was used to invoke reCAPTCHA on your site and generate
-        #     the token.
+        #     Optional. The site key that was used to invoke reCAPTCHA Enterprise on your
+        #     site and generate the token.
         # @!attribute [rw] user_agent
         #   @return [::String]
-        #     Optional. The user agent present in the request from the user's device related to
-        #     this event.
+        #     Optional. The user agent present in the request from the user's device
+        #     related to this event.
         # @!attribute [rw] user_ip_address
         #   @return [::String]
-        #     Optional. The IP address in the request from the user's device related to this event.
+        #     Optional. The IP address in the request from the user's device related to
+        #     this event.
         # @!attribute [rw] expected_action
         #   @return [::String]
-        #     Optional. The expected action for this type of event. This should be the same action
-        #     provided at token generation time on client-side platforms already
-        #     integrated with recaptcha enterprise.
+        #     Optional. The expected action for this type of event. This should be the
+        #     same action provided at token generation time on client-side platforms
+        #     already integrated with recaptcha enterprise.
+        # @!attribute [rw] hashed_account_id
+        #   @return [::String]
+        #     Optional. Unique stable hashed user identifier for the request. The
+        #     identifier must be hashed using hmac-sha256 with stable secret.
+        # @!attribute [rw] transaction_data
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::TransactionData]
+        #     Optional. Data describing a payment transaction to be assessed. Sending
+        #     this data enables reCAPTCHA Enterprise Fraud Prevention and the
+        #     FraudPreventionAssessment component in the response.
         class Event
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Transaction data associated with a payment protected by reCAPTCHA Enterprise.
+        # All fields are optional.
+        # @!attribute [rw] transaction_id
+        #   @return [::String]
+        #     Unique identifier for the transaction. This custom identifier can be used
+        #     to reference this transaction in the future, for example, labeling a refund
+        #     or chargeback event. Two attempts at the same transaction should use the
+        #     same transaction id.
+        # @!attribute [rw] payment_method
+        #   @return [::String]
+        #     The payment method for the transaction. The allowed values are:
+        #
+        #     * credit-card
+        #     * debit-card
+        #     * gift-card
+        #     * processor-\\{name} (If a third-party is used, for example,
+        #     processor-paypal)
+        #     * custom-\\{name} (If an alternative method is used, for example,
+        #     custom-crypto)
+        # @!attribute [rw] card_bin
+        #   @return [::String]
+        #     The Bank Identification Number - generally the first 6 or 8 digits of the
+        #     card.
+        # @!attribute [rw] card_last_four
+        #   @return [::String]
+        #     The last four digits of the card.
+        # @!attribute [rw] currency_code
+        #   @return [::String]
+        #     The currency code in ISO-4217 format.
+        # @!attribute [rw] value
+        #   @return [::Float]
+        #     The decimal value of the transaction in the specified currency.
+        # @!attribute [rw] shipping_value
+        #   @return [::Float]
+        #     The value of shipping in the specified currency. 0 for free or no shipping.
+        # @!attribute [rw] shipping_address
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::TransactionData::Address]
+        #     Destination address if this transaction involves shipping a physical item.
+        # @!attribute [rw] billing_address
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::TransactionData::Address]
+        #     Address associated with the payment method when applicable.
+        # @!attribute [rw] user
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::TransactionData::User]
+        #     Information about the user paying/initiating the transaction.
+        # @!attribute [rw] merchants
+        #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1beta1::TransactionData::User>]
+        #     Information about the user or users fulfilling the transaction.
+        # @!attribute [rw] items
+        #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1beta1::TransactionData::Item>]
+        #     Items purchased in this transaction.
+        # @!attribute [rw] gateway_info
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::TransactionData::GatewayInfo]
+        #     Information about the payment gateway's response to the transaction.
+        class TransactionData
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Structured address format for billing and shipping addresses.
+          # @!attribute [rw] recipient
+          #   @return [::String]
+          #     The recipient name, potentially including information such as "care of".
+          # @!attribute [rw] address
+          #   @return [::Array<::String>]
+          #     The first lines of the address. The first line generally contains the
+          #     street name and number, and further lines may include information such as
+          #     an apartment number.
+          # @!attribute [rw] locality
+          #   @return [::String]
+          #     The town/city of the address.
+          # @!attribute [rw] administrative_area
+          #   @return [::String]
+          #     The state, province, or otherwise administrative area of the address.
+          # @!attribute [rw] region_code
+          #   @return [::String]
+          #     The CLDR country/region of the address.
+          # @!attribute [rw] postal_code
+          #   @return [::String]
+          #     The postal or ZIP code of the address.
+          class Address
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Details about a user's account involved in the transaction.
+          # @!attribute [rw] account_id
+          #   @return [::String]
+          #     Unique account identifier for this user. If using account defender,
+          #     this should match the hashed_account_id field. Otherwise, a unique and
+          #     persistent identifier for this account.
+          # @!attribute [rw] creation_ms
+          #   @return [::Integer]
+          #     The epoch milliseconds of the user's account creation.
+          # @!attribute [rw] email
+          #   @return [::String]
+          #     The email address of the user.
+          # @!attribute [rw] email_verified
+          #   @return [::Boolean]
+          #     Whether the email has been verified to be accessible by the user (OTP or
+          #     similar).
+          # @!attribute [rw] phone_number
+          #   @return [::String]
+          #     The phone number of the user, with country code.
+          # @!attribute [rw] phone_verified
+          #   @return [::Boolean]
+          #     Whether the phone number has been verified to be accessible by the user
+          #     (OTP or similar).
+          class User
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Line items being purchased in this transaction.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     The full name of the item.
+          # @!attribute [rw] value
+          #   @return [::Float]
+          #     The value per item that the user is paying, in the transaction currency,
+          #     after discounts.
+          # @!attribute [rw] quantity
+          #   @return [::Integer]
+          #     The quantity of this item that is being purchased.
+          # @!attribute [rw] merchant_account_id
+          #   @return [::String]
+          #     When a merchant is specified, its corresponding account_id. Necessary to
+          #     populate marketplace-style transactions.
+          class Item
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Details about the transaction from the gateway.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Name of the gateway service (for example, stripe, square, paypal).
+          # @!attribute [rw] gateway_response_code
+          #   @return [::String]
+          #     Gateway response code describing the state of the transaction.
+          # @!attribute [rw] avs_response_code
+          #   @return [::String]
+          #     AVS response code from the gateway
+          #     (available only when reCAPTCHA Enterprise is called after authorization).
+          # @!attribute [rw] cvv_response_code
+          #   @return [::String]
+          #     CVV response code from the gateway
+          #     (available only when reCAPTCHA Enterprise is called after authorization).
+          class GatewayInfo
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # @!attribute [rw] valid
         #   @return [::Boolean]
-        #     Whether the provided user response token is valid.
+        #     Whether the provided user response token is valid. When valid = false, the
+        #     reason could be specified in invalid_reason or it could also be due to
+        #     a user failing to solve a challenge or a sitekey mismatch (i.e the sitekey
+        #     used to generate the token was different than the one specified in the
+        #     assessment).
         # @!attribute [rw] invalid_reason
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::TokenProperties::InvalidReason]
         #     Reason associated with the response when valid = false.
@@ -157,7 +573,6 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # LINT.IfChange
           # Enum that represents the types of invalid token reasons.
           module InvalidReason
             # Default unspecified type.
@@ -176,196 +591,88 @@ module Google
             DUPE = 4
 
             # The user verification token did not match the provided site key.
-            # This may be a configuration error (e.g. development keys used in
+            # This may be a configuration error (for example, development keys used in
             # production) or end users trying to use verification tokens from other
             # sites.
             SITE_MISMATCH = 5
 
             # The user verification token was not present.  It is a required input.
             MISSING = 6
+
+            # A retriable error (such as network failure) occurred on the browser.
+            # Could easily be simulated by an attacker.
+            BROWSER_ERROR = 7
           end
         end
 
-        # The create key request message.
-        # @!attribute [rw] parent
-        #   @return [::String]
-        #     Required. The name of the project in which the key will be created, in the
-        #     format "projects/\\{project_number}".
-        # @!attribute [rw] key
-        #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::Key]
-        #     Required. Information to create a reCAPTCHA Enterprise key.
-        class CreateKeyRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # The list keys request message.
-        # @!attribute [rw] parent
-        #   @return [::String]
-        #     Required. The name of the project that contains the keys that will be
-        #     listed, in the format "projects/\\{project_number}".
-        # @!attribute [rw] page_size
-        #   @return [::Integer]
-        #     Optional. The maximum number of keys to return. Default is 10. Max limit is
-        #     1000.
-        # @!attribute [rw] page_token
-        #   @return [::String]
-        #     Optional. The next_page_token value returned from a previous.
-        #     ListKeysRequest, if any.
-        class ListKeysRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Response to request to list keys in a project.
-        # @!attribute [rw] keys
-        #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1beta1::Key>]
-        #     Key details.
-        # @!attribute [rw] next_page_token
-        #   @return [::String]
-        #     Token to retrieve the next page of results. It is set to empty if no keys
-        #     remain in results.
-        class ListKeysResponse
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # The get key request message.
-        # @!attribute [rw] name
-        #   @return [::String]
-        #     Required. The name of the requested key, in the format
-        #     "projects/\\{project_number}/keys/\\{key_id}".
-        class GetKeyRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # The update key request message.
-        # @!attribute [rw] key
-        #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::Key]
-        #     Required. The key to update.
-        # @!attribute [rw] update_mask
-        #   @return [::Google::Protobuf::FieldMask]
-        #     Optional. The mask to control which field of the key get updated. If the mask is not
-        #     present, all fields will be updated.
-        class UpdateKeyRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # The delete key request message.
-        # @!attribute [rw] name
-        #   @return [::String]
-        #     Required. The name of the key to be deleted, in the format
-        #     "projects/\\{project_number}/keys/\\{key_id}".
-        class DeleteKeyRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # A key used to identify and configure applications (web and/or mobile) that
-        # use reCAPTCHA Enterprise.
-        # @!attribute [rw] name
-        #   @return [::String]
-        #     The resource name for the Key in the format
-        #     "projects/\\{project_number}/keys/\\{key_id}".
-        # @!attribute [rw] display_name
-        #   @return [::String]
-        #     Human-readable display name of this key. Modifiable by user.
-        # @!attribute [rw] web_settings
-        #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::WebKeySettings]
-        #     Settings for keys that can be used by websites.
-        # @!attribute [rw] android_settings
-        #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::AndroidKeySettings]
-        #     Settings for keys that can be used by Android apps.
-        # @!attribute [rw] ios_settings
-        #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::IOSKeySettings]
-        #     Settings for keys that can be used by iOS apps.
-        class Key
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Settings specific to keys that can be used by websites.
-        # @!attribute [rw] enforce_allowed_domains
-        #   @return [::Boolean]
-        #     Whether allowed_domains is enforced or not.
-        # @!attribute [rw] allowed_domains
-        #   @return [::Array<::String>]
-        #     Domains or subdomains of websites allowed to use the key. All subdomains
-        #     of an allowed domain are automatically allowed. A valid domain requires a
-        #     host and must not include any path, port, query or fragment.
-        #     Examples: 'example.com' or 'subdomain.example.com'
-        # @!attribute [rw] allow_amp_traffic
-        #   @return [::Boolean]
-        #     Whether this key can be used on AMP (Accelerated Mobile Pages) websites.
-        # @!attribute [rw] integration_type
-        #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::WebKeySettings::IntegrationType]
-        #     Required. Describes how this key is integrated with the website.
-        # @!attribute [rw] challenge_security_preference
-        #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::WebKeySettings::ChallengeSecurityPreference]
-        #     Settings for the frequency and difficulty at which this key triggers
-        #     captcha challenges. This should only be specified for IntegrationTypes
-        #     CHECKBOX_CHALLENGE and INVISIBLE_CHALLENGE.
-        class WebKeySettings
+        # Assessment for Fraud Prevention.
+        # @!attribute [rw] transaction_risk
+        #   @return [::Float]
+        #     Probability (0-1) of this transaction being fraudulent. Summarizes the
+        #     combined risk of attack vectors below.
+        # @!attribute [rw] stolen_instrument_verdict
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::FraudPreventionAssessment::StolenInstrumentVerdict]
+        #     Assessment of this transaction for risk of a stolen instrument.
+        # @!attribute [rw] card_testing_verdict
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1beta1::FraudPreventionAssessment::CardTestingVerdict]
+        #     Assessment of this transaction for risk of being part of a card testing
+        #     attack.
+        class FraudPreventionAssessment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Enum that represents the integration types for web keys.
-          module IntegrationType
-            # Default type that indicates this enum hasn't been specified. This is not
-            # a valid IntegrationType, one of the other types must be specified
-            # instead.
-            INTEGRATION_TYPE_UNSPECIFIED = 0
-
-            # Only used to produce scores. It doesn't display the "I'm not a robot"
-            # checkbox and never shows captcha challenges.
-            SCORE_ONLY = 1
-
-            # Displays the "I'm not a robot" checkbox and may show captcha challenges
-            # after it is checked.
-            CHECKBOX_CHALLENGE = 2
-
-            # Doesn't display the "I'm not a robot" checkbox, but may show captcha
-            # challenges after risk analysis.
-            INVISIBLE_CHALLENGE = 3
+          # Information about stolen instrument fraud, where the user is not the
+          # legitimate owner of the instrument being used for the purchase.
+          # @!attribute [rw] risk
+          #   @return [::Float]
+          #     Probability (0-1) of this transaction being executed with a stolen
+          #     instrument.
+          class StolenInstrumentVerdict
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Enum that represents the possible challenge frequency and difficulty
-          # configurations for a web key.
-          module ChallengeSecurityPreference
-            # Default type that indicates this enum hasn't been specified.
-            CHALLENGE_SECURITY_PREFERENCE_UNSPECIFIED = 0
-
-            # Key tends to show fewer and easier challenges.
-            USABILITY = 1
-
-            # Key tends to show balanced (in amount and difficulty) challenges.
-            BALANCED = 2
-
-            # Key tends to show more and harder challenges.
-            SECURITY = 3
+          # Information about card testing fraud, where an adversary is testing
+          # fraudulently obtained cards or brute forcing their details.
+          # @!attribute [rw] risk
+          #   @return [::Float]
+          #     Probability (0-1) of this transaction attempt being part of a card
+          #     testing attack.
+          class CardTestingVerdict
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
-        # Settings specific to keys that can be used by Android apps.
-        # @!attribute [rw] allowed_package_names
-        #   @return [::Array<::String>]
-        #     Android package names of apps allowed to use the key.
-        #     Example: 'com.companyname.appname'
-        class AndroidKeySettings
+        # Account defender risk assessment.
+        # @!attribute [rw] labels
+        #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1beta1::AccountDefenderAssessment::AccountDefenderLabel>]
+        #     Labels for this request.
+        class AccountDefenderAssessment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
 
-        # Settings specific to keys that can be used by iOS apps.
-        # @!attribute [rw] allowed_bundle_ids
-        #   @return [::Array<::String>]
-        #     iOS bundle ids of apps allowed to use the key.
-        #     Example: 'com.companyname.productname.appname'
-        class IOSKeySettings
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
+          # Labels returned by account defender for this request.
+          module AccountDefenderLabel
+            # Default unspecified type.
+            ACCOUNT_DEFENDER_LABEL_UNSPECIFIED = 0
+
+            # The request matches a known good profile for the user.
+            PROFILE_MATCH = 1
+
+            # The request is potentially a suspicious login event and should be further
+            # verified either via multi-factor authentication or another system.
+            SUSPICIOUS_LOGIN_ACTIVITY = 2
+
+            # The request matched a profile that previously had suspicious account
+            # creation behavior. This could mean this is a fake account.
+            SUSPICIOUS_ACCOUNT_CREATION = 3
+
+            # The account in the request has a high number of related accounts. It does
+            # not necessarily imply that the account is bad but could require
+            # investigating.
+            RELATED_ACCOUNTS_NUMBER_HIGH = 4
+          end
         end
       end
     end

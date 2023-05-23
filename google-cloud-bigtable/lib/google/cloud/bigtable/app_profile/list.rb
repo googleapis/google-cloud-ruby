@@ -47,7 +47,7 @@ module Google
           #
           #   bigtable = Google::Cloud::Bigtable.new
           #
-          #   instance = bigtable.instance("my-instance")
+          #   instance = bigtable.instance "my-instance"
           #   app_profiles = instance.app_profiles
           #
           #   if app_profiles.next?
@@ -68,7 +68,7 @@ module Google
           #
           #   bigtable = Google::Cloud::Bigtable.new
           #
-          #   instance = bigtable.instance("my-instance")
+          #   instance = bigtable.instance "my-instance"
           #   app_profiles = instance.app_profiles
           #
           #   if app_profiles.next?
@@ -104,7 +104,7 @@ module Google
           #
           #   bigtable = Google::Cloud::Bigtable.new
           #
-          #   instance = bigtable.instance("my-instance")
+          #   instance = bigtable.instance "my-instance"
           #   app_profiles = instance.app_profiles
           #
           #   instance.app_profiles.all do |app_profile|
@@ -116,11 +116,9 @@ module Google
           #
           #   bigtable = Google::Cloud::Bigtable.new
           #
-          #   instance = bigtable.instance("my-instance")
+          #   instance = bigtable.instance "my-instance"
           #
-          #   all_app_profile_ids = instance.app_profiles.all.map do |app_profile|
-          #     app_profile.name
-          #   end
+          #   all_app_profile_ids = instance.app_profiles.all.map(&:name)
           #
           def all &block
             return enum_for :all unless block_given?

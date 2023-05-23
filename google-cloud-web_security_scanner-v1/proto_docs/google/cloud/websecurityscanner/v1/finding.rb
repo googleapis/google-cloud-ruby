@@ -86,6 +86,9 @@ module Google
         # @!attribute [rw] xss
         #   @return [::Google::Cloud::WebSecurityScanner::V1::Xss]
         #     Output only. An addon containing information reported for an XSS, if any.
+        # @!attribute [r] xxe
+        #   @return [::Google::Cloud::WebSecurityScanner::V1::Xxe]
+        #     Output only. An addon containing information reported for an XXE, if any.
         class Finding
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

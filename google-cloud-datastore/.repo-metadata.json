@@ -1,7 +1,17 @@
 {
-    "name": "datastore",
-    "language": "ruby",
+    "api_id": "datastore.googleapis.com",
+    "api_shortname": "datastore",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-datastore/latest",
     "distribution_name": "google-cloud-datastore",
-    "client_documentation": "https://googleapis.dev/ruby/google-cloud-datastore/latest",
+    "language": "ruby",
+    "name": "datastore",
+    "name_pretty": "Firestore in Datastore mode API",
+    "product_documentation": "https://cloud.google.com/datastore",
+    "release_level": "stable",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Firestore in Datastore mode is a NoSQL document database built for automatic scaling, high performance, and ease of application development. Note that google-cloud-datastore-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-datastore instead. See the readme for more details.",
+    "ruby-cloud-env-prefix": "DATASTORE",
+    "ruby-cloud-product-url": "https://cloud.google.com/datastore",
     "library_type": "GAPIC_MANUAL"
 }

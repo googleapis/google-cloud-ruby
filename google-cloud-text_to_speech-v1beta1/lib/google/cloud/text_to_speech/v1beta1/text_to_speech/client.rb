@@ -30,6 +30,8 @@ module Google
           # Service that implements Google Cloud Text-to-Speech API.
           #
           class Client
+            include Paths
+
             # @private
             attr_reader :text_to_speech_stub
 
@@ -39,13 +41,12 @@ module Google
             # See {::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all TextToSpeech clients:
-            #
-            #     ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all TextToSpeech clients
+            #   ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -65,10 +66,7 @@ module Google
 
                 default_config.timeout = 300.0
                 default_config.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config
@@ -100,19 +98,15 @@ module Google
             ##
             # Create a new TextToSpeech client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new TextToSpeech client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Client.new
             #
-            #     client = ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Client.new
-            #
-            # To create a new TextToSpeech client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the TextToSpeech client.
             # @yieldparam config [Client::Configuration]
@@ -132,14 +126,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -179,11 +172,10 @@ module Google
             #     [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag.
             #     If not specified, the API will return all supported voices.
             #     If specified, the ListVoices call will only return voices that can be used
-            #     to synthesize this language_code. E.g. when specifying "en-NZ", you will
-            #     get supported "en-NZ" voices; when specifying "no", you will get supported
-            #     "no-\*" (Norwegian) and "nb-\*" (Norwegian Bokmal) voices; specifying "zh"
-            #     will also get supported "cmn-\*" voices; specifying "zh-hk" will also get
-            #     supported "yue-hk" voices.
+            #     to synthesize this language_code. For example, if you specify `"en-NZ"`,
+            #     all `"en-NZ"` voices will be returned. If you specify `"no"`, both
+            #     `"no-\*"` (Norwegian) and `"nb-\*"` (Norwegian Bokmal) voices will be
+            #     returned.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::TextToSpeech::V1beta1::ListVoicesResponse]
@@ -192,6 +184,21 @@ module Google
             # @return [::Google::Cloud::TextToSpeech::V1beta1::ListVoicesResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/text_to_speech/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::TextToSpeech::V1beta1::ListVoicesRequest.new
+            #
+            #   # Call the list_voices method.
+            #   result = client.list_voices request
+            #
+            #   # The returned object is of type Google::Cloud::TextToSpeech::V1beta1::ListVoicesResponse.
+            #   p result
             #
             def list_voices request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -213,7 +220,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_voices.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_voices.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @text_to_speech_stub.call_rpc :list_voices, request, options: options do |response, operation|
@@ -260,6 +269,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/text_to_speech/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::TextToSpeech::V1beta1::SynthesizeSpeechRequest.new
+            #
+            #   # Call the synthesize_speech method.
+            #   result = client.synthesize_speech request
+            #
+            #   # The returned object is of type Google::Cloud::TextToSpeech::V1beta1::SynthesizeSpeechResponse.
+            #   p result
+            #
             def synthesize_speech request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -280,7 +304,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.synthesize_speech.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.synthesize_speech.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @text_to_speech_stub.call_rpc :synthesize_speech, request, options: options do |response, operation|
@@ -304,22 +330,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for list_voices
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # list_voices to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_voices.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_voices.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_voices.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_voices.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
@@ -330,9 +355,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials

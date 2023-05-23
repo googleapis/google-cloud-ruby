@@ -8,7 +8,7 @@ require 'google/api/resource_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/protobuf/wrappers_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/kms/v1/resources.proto", :syntax => :proto3) do
     add_message "google.cloud.kms.v1.KeyRing" do
@@ -23,6 +23,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :next_rotation_time, :message, 7, "google.protobuf.Timestamp"
       optional :version_template, :message, 11, "google.cloud.kms.v1.CryptoKeyVersionTemplate"
       map :labels, :string, :string, 10
+      optional :import_only, :bool, 13
+      optional :destroy_scheduled_duration, :message, 14, "google.protobuf.Duration"
+      optional :crypto_key_backend, :string, 15
       oneof :rotation_schedule do
         optional :rotation_period, :message, 8, "google.protobuf.Duration"
       end
@@ -32,6 +35,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :ENCRYPT_DECRYPT, 1
       value :ASYMMETRIC_SIGN, 5
       value :ASYMMETRIC_DECRYPT, 6
+      value :MAC, 9
     end
     add_message "google.cloud.kms.v1.CryptoKeyVersionTemplate" do
       optional :protection_level, :enum, 1, "google.cloud.kms.v1.ProtectionLevel"
@@ -40,6 +44,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.kms.v1.KeyOperationAttestation" do
       optional :format, :enum, 4, "google.cloud.kms.v1.KeyOperationAttestation.AttestationFormat"
       optional :content, :bytes, 5
+      optional :cert_chains, :message, 6, "google.cloud.kms.v1.KeyOperationAttestation.CertificateChains"
+    end
+    add_message "google.cloud.kms.v1.KeyOperationAttestation.CertificateChains" do
+      repeated :cavium_certs, :string, 1
+      repeated :google_card_certs, :string, 2
+      repeated :google_partition_certs, :string, 3
     end
     add_enum "google.cloud.kms.v1.KeyOperationAttestation.AttestationFormat" do
       value :ATTESTATION_FORMAT_UNSPECIFIED, 0
@@ -59,7 +69,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :import_job, :string, 14
       optional :import_time, :message, 15, "google.protobuf.Timestamp"
       optional :import_failure_reason, :string, 16
+      optional :generation_failure_reason, :string, 19
+      optional :external_destruction_failure_reason, :string, 20
       optional :external_protection_level_options, :message, 17, "google.cloud.kms.v1.ExternalProtectionLevelOptions"
+      optional :reimport_eligible, :bool, 18
     end
     add_enum "google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm" do
       value :CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED, 0
@@ -72,12 +85,24 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :RSA_SIGN_PKCS1_3072_SHA256, 6
       value :RSA_SIGN_PKCS1_4096_SHA256, 7
       value :RSA_SIGN_PKCS1_4096_SHA512, 16
+      value :RSA_SIGN_RAW_PKCS1_2048, 28
+      value :RSA_SIGN_RAW_PKCS1_3072, 29
+      value :RSA_SIGN_RAW_PKCS1_4096, 30
       value :RSA_DECRYPT_OAEP_2048_SHA256, 8
       value :RSA_DECRYPT_OAEP_3072_SHA256, 9
       value :RSA_DECRYPT_OAEP_4096_SHA256, 10
       value :RSA_DECRYPT_OAEP_4096_SHA512, 17
+      value :RSA_DECRYPT_OAEP_2048_SHA1, 37
+      value :RSA_DECRYPT_OAEP_3072_SHA1, 38
+      value :RSA_DECRYPT_OAEP_4096_SHA1, 39
       value :EC_SIGN_P256_SHA256, 12
       value :EC_SIGN_P384_SHA384, 13
+      value :EC_SIGN_SECP256K1_SHA256, 31
+      value :HMAC_SHA256, 32
+      value :HMAC_SHA1, 33
+      value :HMAC_SHA384, 34
+      value :HMAC_SHA512, 35
+      value :HMAC_SHA224, 36
       value :EXTERNAL_SYMMETRIC_ENCRYPTION, 18
     end
     add_enum "google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState" do
@@ -89,6 +114,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :DESTROY_SCHEDULED, 4
       value :PENDING_IMPORT, 6
       value :IMPORT_FAILED, 7
+      value :GENERATION_FAILED, 8
+      value :PENDING_EXTERNAL_DESTRUCTION, 9
+      value :EXTERNAL_DESTRUCTION_FAILED, 10
     end
     add_enum "google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionView" do
       value :CRYPTO_KEY_VERSION_VIEW_UNSPECIFIED, 0
@@ -99,6 +127,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :algorithm, :enum, 2, "google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm"
       optional :pem_crc32c, :message, 3, "google.protobuf.Int64Value"
       optional :name, :string, 4
+      optional :protection_level, :enum, 5, "google.cloud.kms.v1.ProtectionLevel"
     end
     add_message "google.cloud.kms.v1.ImportJob" do
       optional :name, :string, 1
@@ -119,6 +148,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :IMPORT_METHOD_UNSPECIFIED, 0
       value :RSA_OAEP_3072_SHA1_AES_256, 1
       value :RSA_OAEP_4096_SHA1_AES_256, 2
+      value :RSA_OAEP_3072_SHA256_AES_256, 3
+      value :RSA_OAEP_4096_SHA256_AES_256, 4
+      value :RSA_OAEP_3072_SHA256, 5
+      value :RSA_OAEP_4096_SHA256, 6
     end
     add_enum "google.cloud.kms.v1.ImportJob.ImportJobState" do
       value :IMPORT_JOB_STATE_UNSPECIFIED, 0
@@ -128,12 +161,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.kms.v1.ExternalProtectionLevelOptions" do
       optional :external_key_uri, :string, 1
+      optional :ekm_connection_key_path, :string, 2
     end
     add_enum "google.cloud.kms.v1.ProtectionLevel" do
       value :PROTECTION_LEVEL_UNSPECIFIED, 0
       value :SOFTWARE, 1
       value :HSM, 2
       value :EXTERNAL, 3
+      value :EXTERNAL_VPC, 4
     end
   end
 end
@@ -147,6 +182,7 @@ module Google
         CryptoKey::CryptoKeyPurpose = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose").enummodule
         CryptoKeyVersionTemplate = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.CryptoKeyVersionTemplate").msgclass
         KeyOperationAttestation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.KeyOperationAttestation").msgclass
+        KeyOperationAttestation::CertificateChains = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.KeyOperationAttestation.CertificateChains").msgclass
         KeyOperationAttestation::AttestationFormat = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.KeyOperationAttestation.AttestationFormat").enummodule
         CryptoKeyVersion = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.CryptoKeyVersion").msgclass
         CryptoKeyVersion::CryptoKeyVersionAlgorithm = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm").enummodule

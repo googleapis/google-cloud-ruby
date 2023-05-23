@@ -19,22 +19,30 @@ require "bigtable_helper"
 
 describe "Table drop rows", :bigtable do
   it "delete all rows" do
-    table = create_table("test-table-#{random_str}", row_count: 2)
+    begin
+      table = create_table("test-table-#{random_str}", row_count: 2)
 
-    _(table.delete_all_rows(timeout: 300)).must_equal true
+      _(table.delete_all_rows(timeout: 300)).must_equal true
 
-    sleep 2
-    rows = table.read_rows.to_a
-    _(rows).must_be_empty
+      sleep 2
+      rows = table.read_rows.to_a
+      _(rows).must_be_empty
+    ensure
+      table&.delete
+    end
   end
 
   it "delete rows by prefix" do
-    table = create_table("test-table-#{random_str}", row_count: 2)
+    begin
+      table = create_table("test-table-#{random_str}", row_count: 2)
 
-    _(table.delete_rows_by_prefix("test-1", timeout: 300)).must_equal true
+      _(table.delete_rows_by_prefix("test-1", timeout: 300)).must_equal true
 
-    sleep 2
-    rows = table.read_rows.to_a
-    _(rows.length).must_equal 1
+      sleep 2
+      rows = table.read_rows.to_a
+      _(rows.length).must_equal 1
+    ensure
+      table&.delete
+    end
   end
 end

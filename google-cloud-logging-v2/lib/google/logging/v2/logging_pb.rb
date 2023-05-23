@@ -3,18 +3,16 @@
 
 require 'google/protobuf'
 
+require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/monitored_resource_pb'
 require 'google/api/resource_pb'
 require 'google/logging/v2/log_entry_pb'
-require 'google/logging/v2/logging_config_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/empty_pb'
-require 'google/protobuf/field_mask_pb'
-require 'google/protobuf/timestamp_pb'
 require 'google/rpc/status_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/logging/v2/logging.proto", :syntax => :proto3) do
     add_message "google.logging.v2.DeleteLogRequest" do
@@ -54,9 +52,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.logging.v2.ListLogsRequest" do
       optional :parent, :string, 1
+      repeated :resource_names, :string, 8
       optional :page_size, :int32, 2
       optional :page_token, :string, 3
-      repeated :resource_names, :string, 8
     end
     add_message "google.logging.v2.ListLogsResponse" do
       repeated :log_names, :string, 3

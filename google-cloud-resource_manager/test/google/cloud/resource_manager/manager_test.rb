@@ -70,7 +70,7 @@ describe Google::Cloud::ResourceManager::Manager, :mock_res_man do
 
   it "lists projects" do
     mock = Minitest::Mock.new
-    mock.expect :list_projects, list_projects_response(3), [{ page_token: nil, page_size: nil, filter: nil }]
+    mock.expect :list_projects, list_projects_response(3), page_token: nil, page_size: nil, filter: nil
 
     resource_manager.service.mocked_service = mock
     projects = resource_manager.projects
@@ -82,7 +82,7 @@ describe Google::Cloud::ResourceManager::Manager, :mock_res_man do
 
   it "lists projects with max set" do
     mock = Minitest::Mock.new
-    mock.expect :list_projects, list_projects_response(3, "next_page_token"), [{ page_token: nil, page_size: 3, filter: nil }]
+    mock.expect :list_projects, list_projects_response(3, "next_page_token"), page_token: nil, page_size: 3, filter: nil
 
     resource_manager.service.mocked_service = mock
     projects = resource_manager.projects max: 3
@@ -96,7 +96,7 @@ describe Google::Cloud::ResourceManager::Manager, :mock_res_man do
 
   it "lists projects with filter set" do
     mock = Minitest::Mock.new
-    mock.expect :list_projects, list_projects_response(3, "next_page_token"), [{ page_token: nil, page_size: nil, filter: "labels.env:production" }]
+    mock.expect :list_projects, list_projects_response(3, "next_page_token"), page_token: nil, page_size: nil, filter: "labels.env:production"
 
     resource_manager.service.mocked_service = mock
     projects = resource_manager.projects filter: "labels.env:production"
@@ -110,8 +110,8 @@ describe Google::Cloud::ResourceManager::Manager, :mock_res_man do
 
   it "paginates projects" do
     mock = Minitest::Mock.new
-    mock.expect :list_projects, list_projects_response(3, "next_page_token"), [{ page_token: nil, page_size: nil, filter: nil }]
-    mock.expect :list_projects, list_projects_response(2),                    [{ page_token: "next_page_token", page_size: nil, filter: nil }]
+    mock.expect :list_projects, list_projects_response(3, "next_page_token"), page_token: nil, page_size: nil, filter: nil
+    mock.expect :list_projects, list_projects_response(2),                    page_token: "next_page_token", page_size: nil, filter: nil
 
     resource_manager.service.mocked_service = mock
     first_projects = resource_manager.projects
@@ -130,8 +130,8 @@ describe Google::Cloud::ResourceManager::Manager, :mock_res_man do
 
   it "paginates projects with next? and next" do
     mock = Minitest::Mock.new
-    mock.expect :list_projects, list_projects_response(3, "next_page_token"), [{ page_token: nil, page_size: nil, filter: nil }]
-    mock.expect :list_projects, list_projects_response(2),                    [{ page_token: "next_page_token", page_size: nil, filter: nil }]
+    mock.expect :list_projects, list_projects_response(3, "next_page_token"), page_token: nil, page_size: nil, filter: nil
+    mock.expect :list_projects, list_projects_response(2),                    page_token: "next_page_token", page_size: nil, filter: nil
 
     resource_manager.service.mocked_service = mock
     first_projects = resource_manager.projects
@@ -149,8 +149,8 @@ describe Google::Cloud::ResourceManager::Manager, :mock_res_man do
 
   it "paginates projects with next? and next and max set" do
     mock = Minitest::Mock.new
-    mock.expect :list_projects, list_projects_response(3, "next_page_token"), [{ page_token: nil, page_size: 3, filter: nil }]
-    mock.expect :list_projects, list_projects_response(2),                    [{ page_token: "next_page_token", page_size: 3, filter: nil }]
+    mock.expect :list_projects, list_projects_response(3, "next_page_token"), page_token: nil, page_size: 3, filter: nil
+    mock.expect :list_projects, list_projects_response(2),                    page_token: "next_page_token", page_size: 3, filter: nil
 
     resource_manager.service.mocked_service = mock
     first_projects = resource_manager.projects max: 3
@@ -168,8 +168,8 @@ describe Google::Cloud::ResourceManager::Manager, :mock_res_man do
 
   it "paginates projects with next? and next and filter set" do
     mock = Minitest::Mock.new
-    mock.expect :list_projects, list_projects_response(3, "next_page_token"), [{ page_token: nil, page_size: nil, filter: "labels.env:production" }]
-    mock.expect :list_projects, list_projects_response(2),                    [{ page_token: "next_page_token", page_size: nil, filter: "labels.env:production" }]
+    mock.expect :list_projects, list_projects_response(3, "next_page_token"), page_token: nil, page_size: nil, filter: "labels.env:production"
+    mock.expect :list_projects, list_projects_response(2),                    page_token: "next_page_token", page_size: nil, filter: "labels.env:production"
 
     resource_manager.service.mocked_service = mock
     first_projects = resource_manager.projects filter: "labels.env:production"
@@ -187,8 +187,8 @@ describe Google::Cloud::ResourceManager::Manager, :mock_res_man do
 
   it "paginates projects with all" do
     mock = Minitest::Mock.new
-    mock.expect :list_projects, list_projects_response(3, "next_page_token"), [{ page_token: nil, page_size: nil, filter: nil }]
-    mock.expect :list_projects, list_projects_response(2),                    [{ page_token: "next_page_token", page_size: nil, filter: nil }]
+    mock.expect :list_projects, list_projects_response(3, "next_page_token"), page_token: nil, page_size: nil, filter: nil
+    mock.expect :list_projects, list_projects_response(2),                    page_token: "next_page_token", page_size: nil, filter: nil
 
     resource_manager.service.mocked_service = mock
     projects = resource_manager.projects.all.to_a
@@ -200,8 +200,8 @@ describe Google::Cloud::ResourceManager::Manager, :mock_res_man do
 
   it "paginates projects with all and max set" do
     mock = Minitest::Mock.new
-    mock.expect :list_projects, list_projects_response(3, "next_page_token"), [{ page_token: nil, page_size: 3, filter: nil }]
-    mock.expect :list_projects, list_projects_response(2),                    [{ page_token: "next_page_token", page_size: 3, filter: nil }]
+    mock.expect :list_projects, list_projects_response(3, "next_page_token"), page_token: nil, page_size: 3, filter: nil
+    mock.expect :list_projects, list_projects_response(2),                    page_token: "next_page_token", page_size: 3, filter: nil
 
     resource_manager.service.mocked_service = mock
     projects = resource_manager.projects(max: 3).all.to_a
@@ -213,8 +213,8 @@ describe Google::Cloud::ResourceManager::Manager, :mock_res_man do
 
   it "paginates projects with all and filter set" do
     mock = Minitest::Mock.new
-    mock.expect :list_projects, list_projects_response(3, "next_page_token"), [{ page_token: nil, page_size: nil, filter: "labels.env:production" }]
-    mock.expect :list_projects, list_projects_response(2),                    [{ page_token: "next_page_token", page_size: nil, filter: "labels.env:production" }]
+    mock.expect :list_projects, list_projects_response(3, "next_page_token"), page_token: nil, page_size: nil, filter: "labels.env:production"
+    mock.expect :list_projects, list_projects_response(2),                    page_token: "next_page_token", page_size: nil, filter: "labels.env:production"
 
     resource_manager.service.mocked_service = mock
     projects = resource_manager.projects(filter: "labels.env:production").all.to_a
@@ -226,8 +226,8 @@ describe Google::Cloud::ResourceManager::Manager, :mock_res_man do
 
   it "paginates projects with all using Enumerator" do
     mock = Minitest::Mock.new
-    mock.expect :list_projects, list_projects_response(3, "next_page_token"),   [{ page_token: nil, page_size: nil, filter: nil }]
-    mock.expect :list_projects, list_projects_response(3, "second_page_token"), [{ page_token: "next_page_token", page_size: nil, filter: nil }]
+    mock.expect :list_projects, list_projects_response(3, "next_page_token"),   page_token: nil, page_size: nil, filter: nil
+    mock.expect :list_projects, list_projects_response(3, "second_page_token"), page_token: "next_page_token", page_size: nil, filter: nil
 
     resource_manager.service.mocked_service = mock
     projects = resource_manager.projects.all.take(5)
@@ -239,8 +239,8 @@ describe Google::Cloud::ResourceManager::Manager, :mock_res_man do
 
   it "paginates projects with all and request_limit set" do
     mock = Minitest::Mock.new
-    mock.expect :list_projects, list_projects_response(3, "next_page_token"),   [{ page_token: nil, page_size: nil, filter: nil }]
-    mock.expect :list_projects, list_projects_response(3, "second_page_token"), [{ page_token: "next_page_token", page_size: nil, filter: nil }]
+    mock.expect :list_projects, list_projects_response(3, "next_page_token"),   page_token: nil, page_size: nil, filter: nil
+    mock.expect :list_projects, list_projects_response(3, "second_page_token"), page_token: "next_page_token", page_size: nil, filter: nil
 
     resource_manager.service.mocked_service = mock
     projects = resource_manager.projects.all(request_limit: 1).to_a

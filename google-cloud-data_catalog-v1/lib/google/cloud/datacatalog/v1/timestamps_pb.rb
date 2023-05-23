@@ -5,6 +5,7 @@ require 'google/protobuf'
 
 require 'google/api/field_behavior_pb'
 require 'google/protobuf/timestamp_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/datacatalog/v1/timestamps.proto", :syntax => :proto3) do
     add_message "google.cloud.datacatalog.v1.SystemTimestamps" do

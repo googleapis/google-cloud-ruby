@@ -24,7 +24,8 @@ module Google
         # A unit of scheduled work.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Optionally caller-specified in {::Google::Cloud::Tasks::V2::CloudTasks::Client#create_task CreateTask}.
+        #     Optionally caller-specified in
+        #     {::Google::Cloud::Tasks::V2::CloudTasks::Client#create_task CreateTask}.
         #
         #     The task name.
         #
@@ -48,12 +49,14 @@ module Google
         #   @return [::Google::Cloud::Tasks::V2::AppEngineHttpRequest]
         #     HTTP request that is sent to the App Engine app handler.
         #
-        #     An App Engine task is a task that has {::Google::Cloud::Tasks::V2::AppEngineHttpRequest AppEngineHttpRequest} set.
+        #     An App Engine task is a task that has
+        #     {::Google::Cloud::Tasks::V2::AppEngineHttpRequest AppEngineHttpRequest} set.
         # @!attribute [rw] http_request
         #   @return [::Google::Cloud::Tasks::V2::HttpRequest]
         #     HTTP request that is sent to the worker.
         #
-        #     An HTTP task is a task that has {::Google::Cloud::Tasks::V2::HttpRequest HttpRequest} set.
+        #     An HTTP task is a task that has
+        #     {::Google::Cloud::Tasks::V2::HttpRequest HttpRequest} set.
         # @!attribute [rw] schedule_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The time when the task is scheduled to be attempted or retried.
@@ -78,10 +81,12 @@ module Google
         #
         #     The default and maximum values depend on the type of request:
         #
-        #     * For {::Google::Cloud::Tasks::V2::HttpRequest HTTP tasks}, the default is 10 minutes. The deadline
+        #     * For {::Google::Cloud::Tasks::V2::HttpRequest HTTP tasks}, the default is 10
+        #     minutes. The deadline
         #       must be in the interval [15 seconds, 30 minutes].
         #
-        #     * For {::Google::Cloud::Tasks::V2::AppEngineHttpRequest App Engine tasks}, 0 indicates that the
+        #     * For {::Google::Cloud::Tasks::V2::AppEngineHttpRequest App Engine tasks}, 0
+        #     indicates that the
         #       request has the default deadline. The default deadline depends on the
         #       [scaling
         #       type](https://cloud.google.com/appengine/docs/standard/go/how-instances-are-managed#instance_scaling)
@@ -110,15 +115,16 @@ module Google
         #   @return [::Google::Cloud::Tasks::V2::Attempt]
         #     Output only. The status of the task's first attempt.
         #
-        #     Only {::Google::Cloud::Tasks::V2::Attempt#dispatch_time dispatch_time} will be set.
-        #     The other {::Google::Cloud::Tasks::V2::Attempt Attempt} information is not retained by Cloud Tasks.
+        #     Only {::Google::Cloud::Tasks::V2::Attempt#dispatch_time dispatch_time} will be
+        #     set. The other {::Google::Cloud::Tasks::V2::Attempt Attempt} information is not
+        #     retained by Cloud Tasks.
         # @!attribute [rw] last_attempt
         #   @return [::Google::Cloud::Tasks::V2::Attempt]
         #     Output only. The status of the task's last attempt.
         # @!attribute [rw] view
         #   @return [::Google::Cloud::Tasks::V2::Task::View]
-        #     Output only. The view specifies which subset of the {::Google::Cloud::Tasks::V2::Task Task} has
-        #     been returned.
+        #     Output only. The view specifies which subset of the
+        #     {::Google::Cloud::Tasks::V2::Task Task} has been returned.
         class Task
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -138,7 +144,8 @@ module Google
             # sensitive data.
             #
             # This view does not include the
-            # {::Google::Cloud::Tasks::V2::AppEngineHttpRequest#body body in AppEngineHttpRequest}.
+            # [body in
+            # AppEngineHttpRequest][google.cloud.tasks.v2.AppEngineHttpRequest.body].
             # Bodies are desirable to return only when needed, because they
             # can be large and because of the sensitivity of the data that you
             # choose to store in it.

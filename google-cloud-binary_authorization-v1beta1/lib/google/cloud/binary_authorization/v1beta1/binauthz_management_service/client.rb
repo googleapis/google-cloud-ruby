@@ -47,13 +47,12 @@ module Google
             # See {::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all BinauthzManagementService clients:
-            #
-            #     ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all BinauthzManagementService clients
+            #   ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -73,52 +72,34 @@ module Google
 
                 default_config.rpcs.get_policy.timeout = 600.0
                 default_config.rpcs.get_policy.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.update_policy.timeout = 600.0
                 default_config.rpcs.update_policy.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.create_attestor.timeout = 600.0
 
                 default_config.rpcs.get_attestor.timeout = 600.0
                 default_config.rpcs.get_attestor.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.update_attestor.timeout = 600.0
                 default_config.rpcs.update_attestor.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_attestors.timeout = 600.0
                 default_config.rpcs.list_attestors.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.delete_attestor.timeout = 600.0
                 default_config.rpcs.delete_attestor.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config
@@ -150,19 +131,15 @@ module Google
             ##
             # Create a new BinauthzManagementService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new BinauthzManagementService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client.new
             #
-            #     client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client.new
-            #
-            # To create a new BinauthzManagementService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the BinauthzManagementService client.
             # @yieldparam config [Client::Configuration]
@@ -182,14 +159,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -207,16 +183,13 @@ module Google
             # Service calls
 
             ##
-            # A {::Google::Cloud::BinaryAuthorization::V1beta1::Policy policy} specifies the
-            # {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestors} that must
-            # attest to a container image, before the project is allowed to deploy that
+            # A {::Google::Cloud::BinaryAuthorization::V1beta1::Policy policy} specifies the {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestors} that must attest to
+            # a container image, before the project is allowed to deploy that
             # image. There is at most one policy per project. All image admission
             # requests are permitted if a project has no policy.
             #
-            # Gets the {::Google::Cloud::BinaryAuthorization::V1beta1::Policy policy} for this
-            # project. Returns a default
-            # {::Google::Cloud::BinaryAuthorization::V1beta1::Policy policy} if the project
-            # does not have one.
+            # Gets the {::Google::Cloud::BinaryAuthorization::V1beta1::Policy policy} for this project. Returns a default
+            # {::Google::Cloud::BinaryAuthorization::V1beta1::Policy policy} if the project does not have one.
             #
             # @overload get_policy(request, options = nil)
             #   Pass arguments to `get_policy` via a request object, either of type
@@ -234,9 +207,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The resource name of the
-            #     {::Google::Cloud::BinaryAuthorization::V1beta1::Policy policy} to retrieve, in
-            #     the format `projects/*/policy`.
+            #     Required. The resource name of the {::Google::Cloud::BinaryAuthorization::V1beta1::Policy policy} to retrieve,
+            #     in the format `projects/*/policy`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::BinaryAuthorization::V1beta1::Policy]
@@ -245,6 +217,21 @@ module Google
             # @return [::Google::Cloud::BinaryAuthorization::V1beta1::Policy]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/binary_authorization/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::BinaryAuthorization::V1beta1::GetPolicyRequest.new
+            #
+            #   # Call the get_policy method.
+            #   result = client.get_policy request
+            #
+            #   # The returned object is of type Google::Cloud::BinaryAuthorization::V1beta1::Policy.
+            #   p result
             #
             def get_policy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -263,16 +250,20 @@ module Google
                 gapic_version: ::Google::Cloud::BinaryAuthorization::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_policy.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_policy.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @binauthz_management_service_stub.call_rpc :get_policy, request, options: options do |response, operation|
@@ -284,13 +275,11 @@ module Google
             end
 
             ##
-            # Creates or updates a project's
-            # {::Google::Cloud::BinaryAuthorization::V1beta1::Policy policy}, and returns a
-            # copy of the new {::Google::Cloud::BinaryAuthorization::V1beta1::Policy policy}.
-            # A policy is always updated as a whole, to avoid race conditions with
-            # concurrent policy enforcement (or management!) requests. Returns NOT_FOUND
-            # if the project does not exist, INVALID_ARGUMENT if the request is
-            # malformed.
+            # Creates or updates a project's {::Google::Cloud::BinaryAuthorization::V1beta1::Policy policy}, and returns a copy of the
+            # new {::Google::Cloud::BinaryAuthorization::V1beta1::Policy policy}. A policy is always updated as a whole, to avoid race
+            # conditions with concurrent policy enforcement (or management!)
+            # requests. Returns NOT_FOUND if the project does not exist, INVALID_ARGUMENT
+            # if the request is malformed.
             #
             # @overload update_policy(request, options = nil)
             #   Pass arguments to `update_policy` via a request object, either of type
@@ -308,11 +297,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param policy [::Google::Cloud::BinaryAuthorization::V1beta1::Policy, ::Hash]
-            #     Required. A new or updated
-            #     {::Google::Cloud::BinaryAuthorization::V1beta1::Policy policy} value. The
-            #     service will overwrite the [policy
-            #     name][google.cloud.binaryauthorization.v1beta1.Policy.name] field with the
-            #     resource name in the request URL, in the format `projects/*/policy`.
+            #     Required. A new or updated {::Google::Cloud::BinaryAuthorization::V1beta1::Policy policy} value. The service will
+            #     overwrite the {::Google::Cloud::BinaryAuthorization::V1beta1::Policy#name policy name} field with the resource name in
+            #     the request URL, in the format `projects/*/policy`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::BinaryAuthorization::V1beta1::Policy]
@@ -321,6 +308,21 @@ module Google
             # @return [::Google::Cloud::BinaryAuthorization::V1beta1::Policy]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/binary_authorization/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::BinaryAuthorization::V1beta1::UpdatePolicyRequest.new
+            #
+            #   # Call the update_policy method.
+            #   result = client.update_policy request
+            #
+            #   # The returned object is of type Google::Cloud::BinaryAuthorization::V1beta1::Policy.
+            #   p result
             #
             def update_policy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -339,16 +341,20 @@ module Google
                 gapic_version: ::Google::Cloud::BinaryAuthorization::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "policy.name" => request.policy.name
-              }
+              header_params = {}
+              if request.policy&.name
+                header_params["policy.name"] = request.policy.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_policy.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_policy.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @binauthz_management_service_stub.call_rpc :update_policy, request, options: options do |response, operation|
@@ -360,13 +366,10 @@ module Google
             end
 
             ##
-            # Creates an {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor},
-            # and returns a copy of the new
-            # {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor}. Returns
-            # NOT_FOUND if the project does not exist, INVALID_ARGUMENT if the request is
-            # malformed, ALREADY_EXISTS if the
-            # {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor} already
-            # exists.
+            # Creates an {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor}, and returns a copy of the new
+            # {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor}. Returns NOT_FOUND if the project does not exist,
+            # INVALID_ARGUMENT if the request is malformed, ALREADY_EXISTS if the
+            # {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor} already exists.
             #
             # @overload create_attestor(request, options = nil)
             #   Pass arguments to `create_attestor` via a request object, either of type
@@ -384,17 +387,13 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent of this
-            #     {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor}.
+            #     Required. The parent of this {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor}.
             #   @param attestor_id [::String]
-            #     Required. The
-            #     {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestors} ID.
+            #     Required. The {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestors} ID.
             #   @param attestor [::Google::Cloud::BinaryAuthorization::V1beta1::Attestor, ::Hash]
-            #     Required. The initial
-            #     {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor} value. The
-            #     service will overwrite the [attestor
-            #     name][google.cloud.binaryauthorization.v1beta1.Attestor.name] field with
-            #     the resource name, in the format `projects/*/attestors/*`.
+            #     Required. The initial {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor} value. The service will
+            #     overwrite the {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor#name attestor name} field with the resource name,
+            #     in the format `projects/*/attestors/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::BinaryAuthorization::V1beta1::Attestor]
@@ -403,6 +402,21 @@ module Google
             # @return [::Google::Cloud::BinaryAuthorization::V1beta1::Attestor]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/binary_authorization/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::BinaryAuthorization::V1beta1::CreateAttestorRequest.new
+            #
+            #   # Call the create_attestor method.
+            #   result = client.create_attestor request
+            #
+            #   # The returned object is of type Google::Cloud::BinaryAuthorization::V1beta1::Attestor.
+            #   p result
             #
             def create_attestor request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -421,16 +435,20 @@ module Google
                 gapic_version: ::Google::Cloud::BinaryAuthorization::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_attestor.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_attestor.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @binauthz_management_service_stub.call_rpc :create_attestor, request, options: options do |response, operation|
@@ -443,9 +461,7 @@ module Google
 
             ##
             # Gets an {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor}.
-            # Returns NOT_FOUND if the
-            # {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor} does not
-            # exist.
+            # Returns NOT_FOUND if the {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor} does not exist.
             #
             # @overload get_attestor(request, options = nil)
             #   Pass arguments to `get_attestor` via a request object, either of type
@@ -463,9 +479,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the
-            #     {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor} to retrieve,
-            #     in the format `projects/*/attestors/*`.
+            #     Required. The name of the {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor} to retrieve, in the format
+            #     `projects/*/attestors/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::BinaryAuthorization::V1beta1::Attestor]
@@ -474,6 +489,21 @@ module Google
             # @return [::Google::Cloud::BinaryAuthorization::V1beta1::Attestor]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/binary_authorization/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::BinaryAuthorization::V1beta1::GetAttestorRequest.new
+            #
+            #   # Call the get_attestor method.
+            #   result = client.get_attestor request
+            #
+            #   # The returned object is of type Google::Cloud::BinaryAuthorization::V1beta1::Attestor.
+            #   p result
             #
             def get_attestor request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -492,16 +522,20 @@ module Google
                 gapic_version: ::Google::Cloud::BinaryAuthorization::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_attestor.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_attestor.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @binauthz_management_service_stub.call_rpc :get_attestor, request, options: options do |response, operation|
@@ -514,9 +548,7 @@ module Google
 
             ##
             # Updates an {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor}.
-            # Returns NOT_FOUND if the
-            # {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor} does not
-            # exist.
+            # Returns NOT_FOUND if the {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor} does not exist.
             #
             # @overload update_attestor(request, options = nil)
             #   Pass arguments to `update_attestor` via a request object, either of type
@@ -534,12 +566,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param attestor [::Google::Cloud::BinaryAuthorization::V1beta1::Attestor, ::Hash]
-            #     Required. The updated
-            #     {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor} value. The
-            #     service will overwrite the [attestor
-            #     name][google.cloud.binaryauthorization.v1beta1.Attestor.name] field with
-            #     the resource name in the request URL, in the format
-            #     `projects/*/attestors/*`.
+            #     Required. The updated {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor} value. The service will
+            #     overwrite the {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor#name attestor name} field with the resource name
+            #     in the request URL, in the format `projects/*/attestors/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::BinaryAuthorization::V1beta1::Attestor]
@@ -548,6 +577,21 @@ module Google
             # @return [::Google::Cloud::BinaryAuthorization::V1beta1::Attestor]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/binary_authorization/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::BinaryAuthorization::V1beta1::UpdateAttestorRequest.new
+            #
+            #   # Call the update_attestor method.
+            #   result = client.update_attestor request
+            #
+            #   # The returned object is of type Google::Cloud::BinaryAuthorization::V1beta1::Attestor.
+            #   p result
             #
             def update_attestor request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -566,16 +610,20 @@ module Google
                 gapic_version: ::Google::Cloud::BinaryAuthorization::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "attestor.name" => request.attestor.name
-              }
+              header_params = {}
+              if request.attestor&.name
+                header_params["attestor.name"] = request.attestor.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_attestor.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_attestor.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @binauthz_management_service_stub.call_rpc :update_attestor, request, options: options do |response, operation|
@@ -607,16 +655,14 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The resource name of the project associated with the
-            #     {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestors}, in the
-            #     format `projects/*`.
+            #     {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestors}, in the format `projects/*`.
             #   @param page_size [::Integer]
             #     Requested page size. The server may return fewer results than requested. If
             #     unspecified, the server will pick an appropriate default.
             #   @param page_token [::String]
             #     A token identifying a page of results the server should return. Typically,
-            #     this is the value of
-            #     {::Google::Cloud::BinaryAuthorization::V1beta1::ListAttestorsResponse#next_page_token ListAttestorsResponse.next_page_token}
-            #     returned from the previous call to the `ListAttestors` method.
+            #     this is the value of {::Google::Cloud::BinaryAuthorization::V1beta1::ListAttestorsResponse#next_page_token ListAttestorsResponse.next_page_token} returned
+            #     from the previous call to the `ListAttestors` method.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::BinaryAuthorization::V1beta1::Attestor>]
@@ -625,6 +671,25 @@ module Google
             # @return [::Gapic::PagedEnumerable<::Google::Cloud::BinaryAuthorization::V1beta1::Attestor>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/binary_authorization/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::BinaryAuthorization::V1beta1::ListAttestorsRequest.new
+            #
+            #   # Call the list_attestors method.
+            #   result = client.list_attestors request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::BinaryAuthorization::V1beta1::Attestor.
+            #     p item
+            #   end
             #
             def list_attestors request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -643,16 +708,20 @@ module Google
                 gapic_version: ::Google::Cloud::BinaryAuthorization::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_attestors.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_attestors.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @binauthz_management_service_stub.call_rpc :list_attestors, request, options: options do |response, operation|
@@ -665,10 +734,8 @@ module Google
             end
 
             ##
-            # Deletes an {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor}.
-            # Returns NOT_FOUND if the
-            # {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor} does not
-            # exist.
+            # Deletes an {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor}. Returns NOT_FOUND if the
+            # {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestor} does not exist.
             #
             # @overload delete_attestor(request, options = nil)
             #   Pass arguments to `delete_attestor` via a request object, either of type
@@ -686,9 +753,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the
-            #     {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestors} to delete,
-            #     in the format `projects/*/attestors/*`.
+            #     Required. The name of the {::Google::Cloud::BinaryAuthorization::V1beta1::Attestor attestors} to delete, in the format
+            #     `projects/*/attestors/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]
@@ -697,6 +763,21 @@ module Google
             # @return [::Google::Protobuf::Empty]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/binary_authorization/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::BinaryAuthorization::V1beta1::DeleteAttestorRequest.new
+            #
+            #   # Call the delete_attestor method.
+            #   result = client.delete_attestor request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
             #
             def delete_attestor request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -715,16 +796,20 @@ module Google
                 gapic_version: ::Google::Cloud::BinaryAuthorization::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_attestor.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_attestor.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @binauthz_management_service_stub.call_rpc :delete_attestor, request, options: options do |response, operation|
@@ -748,22 +833,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for get_policy
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # get_policy to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.get_policy.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.get_policy.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.get_policy.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::BinaryAuthorization::V1beta1::BinauthzManagementService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.get_policy.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
@@ -774,9 +858,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials

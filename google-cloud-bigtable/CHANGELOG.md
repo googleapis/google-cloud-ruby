@@ -1,5 +1,41 @@
 # Release History
 
+### 2.7.0 (2022-07-01)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18453](https://github.com/googleapis/google-cloud-ruby/issues/18453)) 
+
+### 2.6.5 / 2022-01-11
+
+#### Documentation
+
+* Update contributing doc
+
+### 2.6.4 / 2021-10-21
+
+#### Documentation
+
+* Add documentation for quota_project Configuration attribute
+
+### 2.6.3 / 2021-09-21
+
+#### Documentation
+
+* Fix typo in Emulator guide links
+
+### 2.6.2 / 2021-08-02
+
+#### Documentation
+
+* Update inline doc samples to match library code style
+
+### 2.6.1 / 2021-07-08
+
+#### Documentation
+
+* Update AUTHENTICATION.md in handwritten packages
+
 ### 2.6.0 / 2021-05-03
 
 #### Features

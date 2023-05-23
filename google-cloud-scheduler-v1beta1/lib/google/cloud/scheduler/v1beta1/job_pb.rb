@@ -3,12 +3,13 @@
 
 require 'google/protobuf'
 
+require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/scheduler/v1beta1/target_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/rpc/status_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/scheduler/v1beta1/job.proto", :syntax => :proto3) do
     add_message "google.cloud.scheduler.v1beta1.Job" do
@@ -23,6 +24,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :last_attempt_time, :message, 18, "google.protobuf.Timestamp"
       optional :retry_config, :message, 19, "google.cloud.scheduler.v1beta1.RetryConfig"
       optional :attempt_deadline, :message, 22, "google.protobuf.Duration"
+      optional :legacy_app_engine_cron, :bool, 23
       oneof :target do
         optional :pubsub_target, :message, 4, "google.cloud.scheduler.v1beta1.PubsubTarget"
         optional :app_engine_http_target, :message, 5, "google.cloud.scheduler.v1beta1.AppEngineHttpTarget"

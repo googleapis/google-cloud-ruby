@@ -85,8 +85,8 @@ task :acceptance, :project, :keyfile do |t, args|
   if project.nil? || keyfile.nil?
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or CHANNEL_TEST_PROJECT=test123 CHANNEL_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
-  require "google/cloud/channel/v1/cloud_channel_service/credentials"
-  ::Google::Cloud::Channel::V1::CloudChannelService::Credentials.env_vars.each do |path|
+  require "google/cloud/channel/v1/cloud_channel_reports_service/credentials"
+  ::Google::Cloud::Channel::V1::CloudChannelReportsService::Credentials.env_vars.each do |path|
     ENV[path] = nil
   end
   ENV["CHANNEL_PROJECT"] = project
@@ -157,11 +157,6 @@ end
 desc "Run yard-doctest example tests."
 task :doctest do
   puts "The google-cloud-channel-v1 gem does not have doctest tests."
-end
-
-task :cloudrad do
-  ENV["CLOUDRAD_GEM_NAME"] = "google-cloud-channel-v1"
-  sh "bundle exec yard doc --fail-on-warning --yardopts .yardopts-cloudrad"
 end
 
 desc "Run the CI build"

@@ -3,17 +3,10 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
 require 'google/api/config_change_pb'
 require 'google/api/field_behavior_pb'
-require 'google/api/metric_pb'
-require 'google/api/quota_pb'
-require 'google/api/service_pb'
-require 'google/longrunning/operations_pb'
-require 'google/protobuf/any_pb'
-require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
-require 'google/rpc/status_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/api/servicemanagement/v1/resources.proto", :syntax => :proto3) do
     add_message "google.api.servicemanagement.v1.ManagedService" do

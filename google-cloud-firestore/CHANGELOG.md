@@ -1,5 +1,125 @@
 # Release History
 
+### 2.13.0 (2023-05-10)
+
+#### Features
+
+* Added support for bulk writer ([#21426](https://github.com/googleapis/google-cloud-ruby/issues/21426)) 
+
+### 2.12.0 (2023-04-20)
+
+#### Features
+
+* Add support for OR query ([#20920](https://github.com/googleapis/google-cloud-ruby/issues/20920)) 
+
+### 2.11.0 (2023-02-23)
+
+#### Features
+
+* Support REST transport ([#20446](https://github.com/googleapis/google-cloud-ruby/issues/20446)) 
+
+### 2.10.1 (2023-02-16)
+
+#### Bug Fixes
+
+* update version of firestore-v1 in gemspec ([#20433](https://github.com/googleapis/google-cloud-ruby/issues/20433)) 
+
+### 2.10.0 (2023-02-09)
+
+#### Features
+
+* Added support for multiple databases ([#20029](https://github.com/googleapis/google-cloud-ruby/issues/20029)) 
+
+### 2.9.1 (2023-02-03)
+
+#### Bug Fixes
+
+* Change "aggregate_alias" to optional param ([#20082](https://github.com/googleapis/google-cloud-ruby/issues/20082)) 
+
+### 2.9.0 (2023-01-26)
+
+#### Features
+
+* Added support for read time ([#19851](https://github.com/googleapis/google-cloud-ruby/issues/19851)) 
+
+### 2.8.0 (2023-01-05)
+
+#### Features
+
+* Support query count for Firestore ([#19457](https://github.com/googleapis/google-cloud-ruby/issues/19457)) 
+#### Bug Fixes
+
+* Add support for merging null field in a document ([#19918](https://github.com/googleapis/google-cloud-ruby/issues/19918)) 
+
+### 2.7.2 (2022-08-24)
+
+#### Documentation
+
+* fix firestore emulator guide ([#19045](https://github.com/googleapis/google-cloud-ruby/issues/19045)) 
+
+### 2.7.1 (2022-07-15)
+
+#### Bug Fixes
+
+* Fix a regression in fields conversion ([#18833](https://github.com/googleapis/google-cloud-ruby/issues/18833)) 
+#### Documentation
+
+* Fix typo in data model reference ([#18835](https://github.com/googleapis/google-cloud-ruby/issues/18835)) 
+
+### 2.7.0 (2022-07-02)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18446](https://github.com/googleapis/google-cloud-ruby/issues/18446)) 
+
+### 2.6.6 / 2022-01-11
+
+#### Documentation
+
+* Fix samples/CONTRIBUTING.md
+* Update version managers list in CONTRIBUTING.md
+
+### 2.6.5 / 2021-10-25
+
+#### Documentation
+
+* Add documentation for quota_project Configuration attribute
+
+### 2.6.4 / 2021-08-26
+
+#### Bug Fixes
+
+* Fix google-cloud-resource-prefix header
+
+### 2.6.3 / 2021-08-24
+
+#### Bug Fixes
+
+* Fix transaction retry behavior
+
+### 2.6.2 / 2021-07-26
+
+#### Bug Fixes
+
+* Update FieldPath#formatted_string to correctly escape non-simple characters
+
+### 2.6.1 / 2021-07-08
+
+#### Documentation
+
+* Update AUTHENTICATION.md in handwritten packages
+
+### 2.6.0 / 2021-06-15
+
+#### Features
+
+* Add support for Query Partitions
+  * Add CollectionGroup
+  * Update Client#col_group to return CollectionGroup (subclass of Query)
+  * Add QueryPartition
+  * Add QueryPartition::List
+  * Add Query#to_json and Query.from_json
+
 ### 2.5.1 / 2021-04-19
 
 #### Bug Fixes

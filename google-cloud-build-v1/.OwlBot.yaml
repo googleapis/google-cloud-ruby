@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/devtools/cloudbuild/v1/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-build-v1/$1

@@ -23,10 +23,17 @@ module Google
   module Cloud
     module Recommender
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
+      #
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/recommender/v1"
       #     client = ::Google::Cloud::Recommender::V1::Recommender::Client.new
+      #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/recommender/v1"
+      #     client = ::Google::Cloud::Recommender::V1::Recommender::Rest::Client.new
       #
       module V1
       end

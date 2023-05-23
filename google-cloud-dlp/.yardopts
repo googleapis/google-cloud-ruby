@@ -1,5 +1,5 @@
 --no-private
---title=Cloud Data Loss Prevention (DLP) API
+--title="Cloud Data Loss Prevention (DLP) API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

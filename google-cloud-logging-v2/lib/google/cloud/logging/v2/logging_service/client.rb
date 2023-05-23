@@ -41,13 +41,12 @@ module Google
             # See {::Google::Cloud::Logging::V2::LoggingService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all LoggingService clients:
-            #
-            #     ::Google::Cloud::Logging::V2::LoggingService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all LoggingService clients
+            #   ::Google::Cloud::Logging::V2::LoggingService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -67,50 +66,32 @@ module Google
 
                 default_config.rpcs.delete_log.timeout = 60.0
                 default_config.rpcs.delete_log.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 13, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
                 }
 
                 default_config.rpcs.write_log_entries.timeout = 60.0
                 default_config.rpcs.write_log_entries.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 13, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
                 }
 
                 default_config.rpcs.list_log_entries.timeout = 60.0
                 default_config.rpcs.list_log_entries.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 13, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
                 }
 
                 default_config.rpcs.list_monitored_resource_descriptors.timeout = 60.0
                 default_config.rpcs.list_monitored_resource_descriptors.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 13, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
                 }
 
                 default_config.rpcs.list_logs.timeout = 60.0
                 default_config.rpcs.list_logs.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 13, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
                 }
 
                 default_config.rpcs.tail_log_entries.timeout = 3600.0
                 default_config.rpcs.tail_log_entries.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 13, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 13, 14]
                 }
 
                 default_config
@@ -142,19 +123,15 @@ module Google
             ##
             # Create a new LoggingService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new LoggingService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Logging::V2::LoggingService::Client.new
             #
-            #     client = ::Google::Cloud::Logging::V2::LoggingService::Client.new
-            #
-            # To create a new LoggingService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Logging::V2::LoggingService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Logging::V2::LoggingService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the LoggingService client.
             # @yieldparam config [Client::Configuration]
@@ -174,14 +151,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -199,10 +175,10 @@ module Google
             # Service calls
 
             ##
-            # Deletes all the log entries in a log. The log reappears if it receives new
-            # entries. Log entries written shortly before the delete operation might not
-            # be deleted. Entries received after the delete operation with a timestamp
-            # before the operation will be deleted.
+            # Deletes all the log entries in a log for the _Default Log Bucket. The log
+            # reappears if it receives new entries. Log entries written shortly before
+            # the delete operation might not be deleted. Entries received after the
+            # delete operation with a timestamp before the operation will be deleted.
             #
             # @overload delete_log(request, options = nil)
             #   Pass arguments to `delete_log` via a request object, either of type
@@ -222,14 +198,15 @@ module Google
             #   @param log_name [::String]
             #     Required. The resource name of the log to delete:
             #
-            #         "projects/[PROJECT_ID]/logs/[LOG_ID]"
-            #         "organizations/[ORGANIZATION_ID]/logs/[LOG_ID]"
-            #         "billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]"
-            #         "folders/[FOLDER_ID]/logs/[LOG_ID]"
+            #     * `projects/[PROJECT_ID]/logs/[LOG_ID]`
+            #     * `organizations/[ORGANIZATION_ID]/logs/[LOG_ID]`
+            #     * `billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]`
+            #     * `folders/[FOLDER_ID]/logs/[LOG_ID]`
             #
             #     `[LOG_ID]` must be URL-encoded. For example,
             #     `"projects/my-project-id/logs/syslog"`,
-            #     `"organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"`.
+            #     `"organizations/123/logs/cloudaudit.googleapis.com%2Factivity"`.
+            #
             #     For more information about log names, see
             #     {::Google::Cloud::Logging::V2::LogEntry LogEntry}.
             #
@@ -240,6 +217,21 @@ module Google
             # @return [::Google::Protobuf::Empty]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/logging/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Logging::V2::LoggingService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Logging::V2::DeleteLogRequest.new
+            #
+            #   # Call the delete_log method.
+            #   result = client.delete_log request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
             #
             def delete_log request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -258,16 +250,20 @@ module Google
                 gapic_version: ::Google::Cloud::Logging::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "log_name" => request.log_name
-              }
+              header_params = {}
+              if request.log_name
+                header_params["log_name"] = request.log_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_log.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_log.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @logging_service_stub.call_rpc :delete_log, request, options: options do |response, operation|
@@ -306,15 +302,15 @@ module Google
             #     Optional. A default log resource name that is assigned to all log entries
             #     in `entries` that do not specify a value for `log_name`:
             #
-            #         "projects/[PROJECT_ID]/logs/[LOG_ID]"
-            #         "organizations/[ORGANIZATION_ID]/logs/[LOG_ID]"
-            #         "billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]"
-            #         "folders/[FOLDER_ID]/logs/[LOG_ID]"
+            #     * `projects/[PROJECT_ID]/logs/[LOG_ID]`
+            #     * `organizations/[ORGANIZATION_ID]/logs/[LOG_ID]`
+            #     * `billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]`
+            #     * `folders/[FOLDER_ID]/logs/[LOG_ID]`
             #
             #     `[LOG_ID]` must be URL-encoded. For example:
             #
             #         "projects/my-project-id/logs/syslog"
-            #         "organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"
+            #         "organizations/123/logs/cloudaudit.googleapis.com%2Factivity"
             #
             #     The permission `logging.logEntries.create` is needed on each project,
             #     organization, billing account, or folder that is receiving new log
@@ -349,22 +345,24 @@ module Google
             #     the entries later in the list. See the `entries.list` method.
             #
             #     Log entries with timestamps that are more than the
-            #     [logs retention period](https://cloud.google.com/logging/quota-policy) in
+            #     [logs retention period](https://cloud.google.com/logging/quotas) in
             #     the past or more than 24 hours in the future will not be available when
             #     calling `entries.list`. However, those log entries can still be [exported
             #     with
             #     LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
             #
             #     To improve throughput and to avoid exceeding the
-            #     [quota limit](https://cloud.google.com/logging/quota-policy) for calls to
+            #     [quota limit](https://cloud.google.com/logging/quotas) for calls to
             #     `entries.write`, you should try to include several log entries in this
             #     list, rather than calling this method for each individual log entry.
             #   @param partial_success [::Boolean]
-            #     Optional. Whether valid entries should be written even if some other
-            #     entries fail due to INVALID_ARGUMENT or PERMISSION_DENIED errors. If any
-            #     entry is not written, then the response status is the error associated
-            #     with one of the failed entries and the response includes error details
-            #     keyed by the entries' zero-based index in the `entries.write` method.
+            #     Optional. Whether a batch's valid entries should be written even if some
+            #     other entry failed due to a permanent error such as INVALID_ARGUMENT or
+            #     PERMISSION_DENIED. If any entry failed, then the response status is the
+            #     response status of one of the failed entries. The response will include
+            #     error details in `WriteLogEntriesPartialErrors.log_entry_errors` keyed by
+            #     the entries' zero-based index in the `entries`. Failed requests for which
+            #     no entries are written will not include per-entry errors.
             #   @param dry_run [::Boolean]
             #     Optional. If true, the request should expect normal response, but the
             #     entries won't be persisted nor exported. Useful for checking whether the
@@ -377,6 +375,21 @@ module Google
             # @return [::Google::Cloud::Logging::V2::WriteLogEntriesResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/logging/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Logging::V2::LoggingService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Logging::V2::WriteLogEntriesRequest.new
+            #
+            #   # Call the write_log_entries method.
+            #   result = client.write_log_entries request
+            #
+            #   # The returned object is of type Google::Cloud::Logging::V2::WriteLogEntriesResponse.
+            #   p result
             #
             def write_log_entries request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -398,7 +411,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.write_log_entries.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.write_log_entries.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @logging_service_stub.call_rpc :write_log_entries, request, options: options do |response, operation|
@@ -434,26 +449,26 @@ module Google
             #     Required. Names of one or more parent resources from which to
             #     retrieve log entries:
             #
-            #         "projects/[PROJECT_ID]"
-            #         "organizations/[ORGANIZATION_ID]"
-            #         "billingAccounts/[BILLING_ACCOUNT_ID]"
-            #         "folders/[FOLDER_ID]"
+            #     *  `projects/[PROJECT_ID]`
+            #     *  `organizations/[ORGANIZATION_ID]`
+            #     *  `billingAccounts/[BILLING_ACCOUNT_ID]`
+            #     *  `folders/[FOLDER_ID]`
             #
-            #     May alternatively be one or more views
-            #       projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]
-            #       organization/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]
-            #       billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]
-            #       folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]
+            #     May alternatively be one or more views:
+            #
+            #      * `projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+            #      * `organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+            #      * `billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+            #      * `folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
             #
             #     Projects listed in the `project_ids` field are added to this list.
+            #     A maximum of 100 resources may be specified in a single request.
             #   @param filter [::String]
-            #     Optional. A filter that chooses which log entries to return.  See [Advanced
-            #     Logs Queries](https://cloud.google.com/logging/docs/view/advanced-queries).
-            #     Only log entries that match the filter are returned.  An empty filter
-            #     matches all log entries in the resources listed in `resource_names`.
+            #     Optional. Only log entries that match the filter are returned.  An empty
+            #     filter matches all log entries in the resources listed in `resource_names`.
             #     Referencing a parent resource that is not listed in `resource_names` will
-            #     cause the filter to return no results. The maximum length of the filter is
-            #     20000 characters.
+            #     cause the filter to return no results. The maximum length of a filter is
+            #     20,000 characters.
             #   @param order_by [::String]
             #     Optional. How the results should be sorted.  Presently, the only permitted
             #     values are `"timestamp asc"` (default) and `"timestamp desc"`. The first
@@ -463,9 +478,9 @@ module Google
             #     timestamps are returned in order of their `insert_id` values.
             #   @param page_size [::Integer]
             #     Optional. The maximum number of results to return from this request.
-            #     Default is 50. If the value is negative or exceeds 1000,
-            #     the request is rejected. The presence of `next_page_token` in the
-            #     response indicates that more results might be available.
+            #     Default is 50. If the value is negative or exceeds 1000, the request is
+            #     rejected. The presence of `next_page_token` in the response indicates that
+            #     more results might be available.
             #   @param page_token [::String]
             #     Optional. If present, then retrieve the next batch of results from the
             #     preceding call to this method.  `page_token` must be the value of
@@ -479,6 +494,25 @@ module Google
             # @return [::Gapic::PagedEnumerable<::Google::Cloud::Logging::V2::LogEntry>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/logging/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Logging::V2::LoggingService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Logging::V2::ListLogEntriesRequest.new
+            #
+            #   # Call the list_log_entries method.
+            #   result = client.list_log_entries request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::Logging::V2::LogEntry.
+            #     p item
+            #   end
             #
             def list_log_entries request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -500,7 +534,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_log_entries.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_log_entries.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @logging_service_stub.call_rpc :list_log_entries, request, options: options do |response, operation|
@@ -548,6 +584,25 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/logging/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Logging::V2::LoggingService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Logging::V2::ListMonitoredResourceDescriptorsRequest.new
+            #
+            #   # Call the list_monitored_resource_descriptors method.
+            #   result = client.list_monitored_resource_descriptors request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Api::MonitoredResourceDescriptor.
+            #     p item
+            #   end
+            #
             def list_monitored_resource_descriptors request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -568,7 +623,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_monitored_resource_descriptors.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_monitored_resource_descriptors.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @logging_service_stub.call_rpc :list_monitored_resource_descriptors, request, options: options do |response, operation|
@@ -594,18 +651,34 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_logs(parent: nil, page_size: nil, page_token: nil, resource_names: nil)
+            # @overload list_logs(parent: nil, resource_names: nil, page_size: nil, page_token: nil)
             #   Pass arguments to `list_logs` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The resource name that owns the logs:
+            #     Required. The resource name to list logs for:
             #
-            #         "projects/[PROJECT_ID]"
-            #         "organizations/[ORGANIZATION_ID]"
-            #         "billingAccounts/[BILLING_ACCOUNT_ID]"
-            #         "folders/[FOLDER_ID]"
+            #     *  `projects/[PROJECT_ID]`
+            #     *  `organizations/[ORGANIZATION_ID]`
+            #     *  `billingAccounts/[BILLING_ACCOUNT_ID]`
+            #     *  `folders/[FOLDER_ID]`
+            #   @param resource_names [::Array<::String>]
+            #     Optional. List of resource names to list logs for:
+            #
+            #      * `projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+            #      * `organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+            #      * `billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+            #      * `folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+            #
+            #     To support legacy queries, it could also be:
+            #
+            #     *  `projects/[PROJECT_ID]`
+            #     *  `organizations/[ORGANIZATION_ID]`
+            #     *  `billingAccounts/[BILLING_ACCOUNT_ID]`
+            #     *  `folders/[FOLDER_ID]`
+            #
+            #     The resource name in the `parent` field is added to this list.
             #   @param page_size [::Integer]
             #     Optional. The maximum number of results to return from this request.
             #     Non-positive values are ignored.  The presence of `nextPageToken` in the
@@ -615,18 +688,6 @@ module Google
             #     preceding call to this method.  `pageToken` must be the value of
             #     `nextPageToken` from the previous response.  The values of other method
             #     parameters should be identical to those in the previous call.
-            #   @param resource_names [::Array<::String>]
-            #     Optional. The resource name that owns the logs:
-            #       projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]
-            #       organization/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]
-            #       billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]
-            #       folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]
-            #
-            #     To support legacy queries, it could also be:
-            #         "projects/[PROJECT_ID]"
-            #         "organizations/[ORGANIZATION_ID]"
-            #         "billingAccounts/[BILLING_ACCOUNT_ID]"
-            #         "folders/[FOLDER_ID]"
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Logging::V2::ListLogsResponse]
@@ -635,6 +696,21 @@ module Google
             # @return [::Google::Cloud::Logging::V2::ListLogsResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/logging/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Logging::V2::LoggingService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Logging::V2::ListLogsRequest.new
+            #
+            #   # Call the list_logs method.
+            #   result = client.list_logs request
+            #
+            #   # The returned object is of type Google::Cloud::Logging::V2::ListLogsResponse.
+            #   p result
             #
             def list_logs request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -653,16 +729,20 @@ module Google
                 gapic_version: ::Google::Cloud::Logging::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_logs.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_logs.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @logging_service_stub.call_rpc :list_logs, request, options: options do |response, operation|
@@ -690,6 +770,30 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/logging/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Logging::V2::LoggingService::Client.new
+            #
+            #   # Create an input stream.
+            #   input = Gapic::StreamInput.new
+            #
+            #   # Call the tail_log_entries method to start streaming.
+            #   output = client.tail_log_entries input
+            #
+            #   # Send requests on the stream. For each request object, set fields by
+            #   # passing keyword arguments. Be sure to close the stream when done.
+            #   input << Google::Cloud::Logging::V2::TailLogEntriesRequest.new
+            #   input << Google::Cloud::Logging::V2::TailLogEntriesRequest.new
+            #   input.close
+            #
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::Logging::V2::TailLogEntriesResponse
+            #   output.each do |current_response|
+            #     p current_response
+            #   end
+            #
             def tail_log_entries request, options = nil
               unless request.is_a? ::Enumerable
                 raise ::ArgumentError, "request must be an Enumerable" unless request.respond_to? :to_enum
@@ -715,7 +819,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.tail_log_entries.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.tail_log_entries.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @logging_service_stub.call_rpc :tail_log_entries, request, options: options do |response, operation|
@@ -739,22 +845,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for delete_log
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # delete_log to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Logging::V2::LoggingService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.delete_log.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Logging::V2::LoggingService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.delete_log.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Logging::V2::LoggingService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.delete_log.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Logging::V2::LoggingService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.delete_log.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
@@ -765,9 +870,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials

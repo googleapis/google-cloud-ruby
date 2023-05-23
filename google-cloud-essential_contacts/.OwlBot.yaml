@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/essentialcontacts/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-essential_contacts/$1

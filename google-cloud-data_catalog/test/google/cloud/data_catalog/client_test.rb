@@ -20,35 +20,63 @@ require "helper"
 require "google/cloud/data_catalog"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Cloud::DataCatalog::ClientConstructionMinitest < Minitest::Test
-  def test_data_catalog
+  def test_data_catalog_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::DataCatalog.data_catalog do |config|
+      client = Google::Cloud::DataCatalog.data_catalog transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::DataCatalog::V1::DataCatalog::Client, client
     end
   end
 
-  def test_policy_tag_manager
+  def test_data_catalog_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::DataCatalog.data_catalog transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::DataCatalog::V1::DataCatalog::Rest::Client, client
+    end
+  end
+
+  def test_policy_tag_manager_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::DataCatalog.policy_tag_manager do |config|
+      client = Google::Cloud::DataCatalog.policy_tag_manager transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::DataCatalog::V1::PolicyTagManager::Client, client
     end
   end
 
-  def test_policy_tag_manager_serialization
+  def test_policy_tag_manager_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::DataCatalog.policy_tag_manager transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::DataCatalog::V1::PolicyTagManager::Rest::Client, client
+    end
+  end
+
+  def test_policy_tag_manager_serialization_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::DataCatalog.policy_tag_manager_serialization do |config|
+      client = Google::Cloud::DataCatalog.policy_tag_manager_serialization transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::Client, client
+    end
+  end
+
+  def test_policy_tag_manager_serialization_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::DataCatalog.policy_tag_manager_serialization transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::DataCatalog::V1::PolicyTagManagerSerialization::Rest::Client, client
     end
   end
 end

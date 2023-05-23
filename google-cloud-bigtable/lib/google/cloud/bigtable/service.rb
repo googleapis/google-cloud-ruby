@@ -282,12 +282,12 @@ module Google
           initial_splits = initial_splits.map { |key| { key: key } } if initial_splits
 
           tables.create_table(
-            {
+            **{
               parent:         instance_path(instance_id),
               table_id:       table_id,
               table:          table,
               initial_splits: initial_splits
-            }.delete_if { |_, v| v.nil? }
+            }.compact
           )
         end
 
@@ -649,11 +649,15 @@ module Google
         end
 
         def read_rows instance_id, table_id, app_profile_id: nil, rows: nil, filter: nil, rows_limit: nil
-          client.read_rows table_name:     table_path(instance_id, table_id),
-                           rows:           rows,
-                           filter:         filter,
-                           rows_limit:     rows_limit,
-                           app_profile_id: app_profile_id
+          client.read_rows(
+            **{
+              table_name:     table_path(instance_id, table_id),
+              rows:           rows,
+              filter:         filter,
+              rows_limit:     rows_limit,
+              app_profile_id: app_profile_id
+            }
+          )
         end
 
         def sample_row_keys table_name, app_profile_id: nil
@@ -662,22 +666,22 @@ module Google
 
         def mutate_row table_name, row_key, mutations, app_profile_id: nil
           client.mutate_row(
-            {
+            **{
               table_name:     table_name,
               app_profile_id: app_profile_id,
               row_key:        row_key,
               mutations:      mutations
-            }.delete_if { |_, v| v.nil? }
+            }.compact
           )
         end
 
         def mutate_rows table_name, entries, app_profile_id: nil
           client.mutate_rows(
-            {
+            **{
               table_name:     table_name,
               app_profile_id: app_profile_id,
               entries:        entries
-            }.delete_if { |_, v| v.nil? }
+            }.compact
           )
         end
 
@@ -688,25 +692,25 @@ module Google
                                  true_mutations: nil,
                                  false_mutations: nil
           client.check_and_mutate_row(
-            {
+            **{
               table_name:       table_name,
               app_profile_id:   app_profile_id,
               row_key:          row_key,
               predicate_filter: predicate_filter,
               true_mutations:   true_mutations,
               false_mutations:  false_mutations
-            }.delete_if { |_, v| v.nil? }
+            }.compact
           )
         end
 
         def read_modify_write_row table_name, row_key, rules, app_profile_id: nil
           client.read_modify_write_row(
-            {
+            **{
               table_name:     table_name,
               app_profile_id: app_profile_id,
               row_key:        row_key,
               rules:          rules
-            }.delete_if { |_, v| v.nil? }
+            }.compact
           )
         end
 

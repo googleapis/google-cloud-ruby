@@ -54,6 +54,12 @@ module Google
         #     Output only. Resource name of this property.
         #     Format: properties/\\{property_id}
         #     Example: "properties/1000"
+        # @!attribute [rw] property_type
+        #   @return [::Google::Analytics::Admin::V1alpha::PropertyType]
+        #     Immutable. The property type for this Property resource. When creating a
+        #     property, if the type is "PROPERTY_TYPE_UNSPECIFIED", then
+        #     "ORDINARY_PROPERTY" will be implied. "SUBPROPERTY" and "ROLLUP_PROPERTY"
+        #     types cannot yet be created with the Google Analytics Admin API.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time when the entity was originally created.
@@ -65,8 +71,8 @@ module Google
         #     Immutable. Resource name of this property's logical parent.
         #
         #     Note: The Property-Moving UI can be used to change the parent.
-        #     Format: accounts/\\{account}
-        #     Example: "accounts/100"
+        #     Format: accounts/\\{account}, properties/\\{property}
+        #     Example: "accounts/100", "properties/101"
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Required. Human-readable display name for this property.
@@ -78,9 +84,9 @@ module Google
         #     Example: AUTOMOTIVE, FOOD_AND_DRINK
         # @!attribute [rw] time_zone
         #   @return [::String]
-        #     Required. Reporting Time Zone, used as the day boundary for reports, regardless of
-        #     where the data originates. If the time zone honors DST, Analytics will
-        #     automatically adjust for the changes.
+        #     Required. Reporting Time Zone, used as the day boundary for reports,
+        #     regardless of where the data originates. If the time zone honors DST,
+        #     Analytics will automatically adjust for the changes.
         #
         #     NOTE: Changing the time zone only affects data going forward, and is not
         #     applied retroactively.
@@ -94,112 +100,127 @@ module Google
         #
         #     Format: https://en.wikipedia.org/wiki/ISO_4217
         #     Examples: "USD", "EUR", "JPY"
+        # @!attribute [r] service_level
+        #   @return [::Google::Analytics::Admin::V1alpha::ServiceLevel]
+        #     Output only. The Google Analytics service level that applies to this
+        #     property.
         # @!attribute [r] delete_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. If set, the time at which this property was trashed. If not set, then this
-        #     property is not currently in the trash can.
+        #     Output only. If set, the time at which this property was trashed. If not
+        #     set, then this property is not currently in the trash can.
         # @!attribute [r] expire_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. If set, the time at which this trashed property will be permanently
-        #     deleted. If not set, then this property is not currently in the trash can
-        #     and is not slated to be deleted.
+        #     Output only. If set, the time at which this trashed property will be
+        #     permanently deleted. If not set, then this property is not currently in the
+        #     trash can and is not slated to be deleted.
+        # @!attribute [rw] account
+        #   @return [::String]
+        #     Immutable. The resource name of the parent account
+        #     Format: accounts/\\{account_id}
+        #     Example: "accounts/123"
         class Property
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A resource message representing a Google Analytics Android app stream.
+        # A resource message representing a data stream.
+        # @!attribute [rw] web_stream_data
+        #   @return [::Google::Analytics::Admin::V1alpha::DataStream::WebStreamData]
+        #     Data specific to web streams. Must be populated if type is
+        #     WEB_DATA_STREAM.
+        # @!attribute [rw] android_app_stream_data
+        #   @return [::Google::Analytics::Admin::V1alpha::DataStream::AndroidAppStreamData]
+        #     Data specific to Android app streams. Must be populated if type is
+        #     ANDROID_APP_DATA_STREAM.
+        # @!attribute [rw] ios_app_stream_data
+        #   @return [::Google::Analytics::Admin::V1alpha::DataStream::IosAppStreamData]
+        #     Data specific to iOS app streams. Must be populated if type is
+        #     IOS_APP_DATA_STREAM.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. Resource name of this Data Stream.
-        #     Format: properties/\\{property_id}/androidAppDataStreams/\\{stream_id}
-        #     Example: "properties/1000/androidAppDataStreams/2000"
-        # @!attribute [r] firebase_app_id
-        #   @return [::String]
-        #     Output only. ID of the corresponding Android app in Firebase, if any.
-        #     This ID can change if the Android app is deleted and recreated.
-        # @!attribute [r] create_time
-        #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. Time when this stream was originally created.
-        # @!attribute [r] update_time
-        #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. Time when stream payload fields were last updated.
-        # @!attribute [rw] package_name
-        #   @return [::String]
-        #     Immutable. The package name for the app being measured.
-        #     Example: "com.example.myandroidapp"
+        #     Format: properties/\\{property_id}/dataStreams/\\{stream_id}
+        #     Example: "properties/1000/dataStreams/2000"
+        # @!attribute [rw] type
+        #   @return [::Google::Analytics::Admin::V1alpha::DataStream::DataStreamType]
+        #     Required. Immutable. The type of this DataStream resource.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Human-readable display name for the Data Stream.
         #
+        #     Required for web data streams.
+        #
         #     The max allowed display name length is 255 UTF-16 code units.
-        class AndroidAppDataStream
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # A resource message representing a Google Analytics IOS app stream.
-        # @!attribute [r] name
-        #   @return [::String]
-        #     Output only. Resource name of this Data Stream.
-        #     Format: properties/\\{property_id}/iosAppDataStreams/\\{stream_id}
-        #     Example: "properties/1000/iosAppDataStreams/2000"
-        # @!attribute [r] firebase_app_id
-        #   @return [::String]
-        #     Output only. ID of the corresponding iOS app in Firebase, if any.
-        #     This ID can change if the iOS app is deleted and recreated.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time when this stream was originally created.
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time when stream payload fields were last updated.
-        # @!attribute [rw] bundle_id
-        #   @return [::String]
-        #     Required. Immutable. The Apple App Store Bundle ID for the app
-        #     Example: "com.example.myiosapp"
-        # @!attribute [rw] display_name
-        #   @return [::String]
-        #     Human-readable display name for the Data Stream.
-        #
-        #     The max allowed display name length is 255 UTF-16 code units.
-        class IosAppDataStream
+        class DataStream
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
 
-        # A resource message representing a Google Analytics web stream.
-        # @!attribute [r] name
-        #   @return [::String]
-        #     Output only. Resource name of this Data Stream.
-        #     Format: properties/\\{property_id}/webDataStreams/\\{stream_id}
-        #     Example: "properties/1000/webDataStreams/2000"
-        # @!attribute [r] measurement_id
-        #   @return [::String]
-        #     Output only. Analytics "Measurement ID", without the "G-" prefix.
-        #     Example: "G-1A2BCD345E" would just be "1A2BCD345E"
-        # @!attribute [r] firebase_app_id
-        #   @return [::String]
-        #     Output only. ID of the corresponding web app in Firebase, if any.
-        #     This ID can change if the web app is deleted and recreated.
-        # @!attribute [r] create_time
-        #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. Time when this stream was originally created.
-        # @!attribute [r] update_time
-        #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. Time when stream payload fields were last updated.
-        # @!attribute [rw] default_uri
-        #   @return [::String]
-        #     Immutable. Domain name of the web app being measured, or empty.
-        #     Example: "http://www.google.com", "https://www.google.com"
-        # @!attribute [rw] display_name
-        #   @return [::String]
-        #     Required. Human-readable display name for the Data Stream.
-        #
-        #     The max allowed display name length is 100 UTF-16 code units.
-        class WebDataStream
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
+          # Data specific to web streams.
+          # @!attribute [r] measurement_id
+          #   @return [::String]
+          #     Output only. Analytics "Measurement ID", without the "G-" prefix.
+          #     Example: "G-1A2BCD345E" would just be "1A2BCD345E"
+          # @!attribute [r] firebase_app_id
+          #   @return [::String]
+          #     Output only. ID of the corresponding web app in Firebase, if any.
+          #     This ID can change if the web app is deleted and recreated.
+          # @!attribute [rw] default_uri
+          #   @return [::String]
+          #     Immutable. Domain name of the web app being measured, or empty.
+          #     Example: "http://www.google.com", "https://www.google.com"
+          class WebStreamData
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Data specific to Android app streams.
+          # @!attribute [r] firebase_app_id
+          #   @return [::String]
+          #     Output only. ID of the corresponding Android app in Firebase, if any.
+          #     This ID can change if the Android app is deleted and recreated.
+          # @!attribute [rw] package_name
+          #   @return [::String]
+          #     Immutable. The package name for the app being measured.
+          #     Example: "com.example.myandroidapp"
+          class AndroidAppStreamData
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Data specific to iOS app streams.
+          # @!attribute [r] firebase_app_id
+          #   @return [::String]
+          #     Output only. ID of the corresponding iOS app in Firebase, if any.
+          #     This ID can change if the iOS app is deleted and recreated.
+          # @!attribute [rw] bundle_id
+          #   @return [::String]
+          #     Required. Immutable. The Apple App Store Bundle ID for the app
+          #     Example: "com.example.myiosapp"
+          class IosAppStreamData
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The type of the data stream.
+          module DataStreamType
+            # Type unknown or not specified.
+            DATA_STREAM_TYPE_UNSPECIFIED = 0
+
+            # Web data stream.
+            WEB_DATA_STREAM = 1
+
+            # Android app data stream.
+            ANDROID_APP_DATA_STREAM = 2
+
+            # iOS app data stream.
+            IOS_APP_DATA_STREAM = 3
+          end
         end
 
         # A resource message representing a user's permissions on an Account or
@@ -215,10 +236,12 @@ module Google
         #     Roles directly assigned to this user for this account or property.
         #
         #     Valid values:
-        #     predefinedRoles/read
-        #     predefinedRoles/collaborate
-        #     predefinedRoles/edit
-        #     predefinedRoles/manage-users
+        #     predefinedRoles/viewer
+        #     predefinedRoles/analyst
+        #     predefinedRoles/editor
+        #     predefinedRoles/admin
+        #     predefinedRoles/no-cost-data
+        #     predefinedRoles/no-revenue-data
         #
         #     Excludes roles that are inherited from a higher-level entity, group,
         #     or organization admin role.
@@ -241,7 +264,7 @@ module Google
         #   @return [::Array<::String>]
         #     Roles directly assigned to this user for this entity.
         #
-        #     Format: predefinedRoles/read
+        #     Format: predefinedRoles/viewer
         #
         #     Excludes roles that are inherited from an account (if this is for a
         #     property), group, or organization admin role.
@@ -250,80 +273,21 @@ module Google
         #     Union of all permissions a user has at this account or property (includes
         #     direct permissions, group-inherited permissions, etc.).
         #
-        #     Format: predefinedRoles/read
+        #     Format: predefinedRoles/viewer
         class AuditUserLink
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Singleton resource under a WebDataStream, configuring measurement of
-        # additional site interactions and content.
-        # @!attribute [r] name
-        #   @return [::String]
-        #     Output only. Resource name of this Data Stream.
-        #     Format:
-        #     properties/\\{property_id}/webDataStreams/\\{stream_id}/enhancedMeasurementSettings
-        #     Example: "properties/1000/webDataStreams/2000/enhancedMeasurementSettings"
-        # @!attribute [rw] stream_enabled
-        #   @return [::Boolean]
-        #     Indicates whether Enhanced Measurement Settings will be used to
-        #     automatically measure interactions and content on this web stream.
-        #
-        #     Changing this value does not affect the settings themselves, but determines
-        #     whether they are respected.
-        # @!attribute [r] page_views_enabled
-        #   @return [::Boolean]
-        #     Output only. If enabled, capture a page view event each time a page loads or the
-        #     website changes the browser history state.
-        # @!attribute [rw] scrolls_enabled
-        #   @return [::Boolean]
-        #     If enabled, capture scroll events each time a visitor gets to the bottom of
-        #     a page.
-        # @!attribute [rw] outbound_clicks_enabled
-        #   @return [::Boolean]
-        #     If enabled, capture an outbound click event each time a visitor clicks a
-        #     link that leads them away from your domain.
-        # @!attribute [rw] site_search_enabled
-        #   @return [::Boolean]
-        #     If enabled, capture a view search results event each time a visitor
-        #     performs a search on your site (based on a query parameter).
-        # @!attribute [rw] video_engagement_enabled
-        #   @return [::Boolean]
-        #     If enabled, capture video play, progress, and complete events as visitors
-        #     view embedded videos on your site.
-        # @!attribute [rw] file_downloads_enabled
-        #   @return [::Boolean]
-        #     If enabled, capture a file download event each time a link is clicked with
-        #     a common document, compressed file, application, video, or audio extension.
-        # @!attribute [r] page_loads_enabled
-        #   @return [::Boolean]
-        #     Output only. If enabled, capture a page view event each time a page loads.
-        # @!attribute [rw] page_changes_enabled
-        #   @return [::Boolean]
-        #     If enabled, capture a page view event each time the website changes the
-        #     browser history state.
-        # @!attribute [rw] search_query_parameter
-        #   @return [::String]
-        #     Required. URL query parameters to interpret as site search parameters.
-        #     Max length is 1024 characters. Must not be empty.
-        # @!attribute [rw] uri_query_parameter
-        #   @return [::String]
-        #     Additional URL query parameters.
-        #     Max length is 1024 characters.
-        class EnhancedMeasurementSettings
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # A link between an GA4 property and a Firebase project.
+        # A link between a GA4 property and a Firebase project.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. Example format: properties/1234/firebaseLinks/5678
         # @!attribute [rw] project
         #   @return [::String]
-        #     Immutable. Firebase project resource name. When creating a FirebaseLink, you may
-        #     provide this resource name using either a project number or project ID.
-        #     Once this resource has been created, returned FirebaseLinks will always
+        #     Immutable. Firebase project resource name. When creating a FirebaseLink,
+        #     you may provide this resource name using either a project number or project
+        #     ID. Once this resource has been created, returned FirebaseLinks will always
         #     have a project_name that contains a project number.
         #
         #     Format: 'projects/\\{project number}'
@@ -331,34 +295,32 @@ module Google
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time when this FirebaseLink was originally created.
-        # @!attribute [rw] maximum_user_access
-        #   @return [::Google::Analytics::Admin::V1alpha::MaximumUserAccess]
-        #     Maximum user access to the GA4 property allowed to admins of
-        #     the linked Firebase project.
         class FirebaseLink
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Read-only resource with the tag for sending data from a website to a
-        # WebDataStream.
+        # DataStream. Only present for web DataStream resources.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. Resource name for this GlobalSiteTag resource.
-        #     Format: properties/\\{propertyId}/globalSiteTag
+        #     Format: properties/\\{property_id}/dataStreams/\\{stream_id}/globalSiteTag
+        #     Example: "properties/123/dataStreams/456/globalSiteTag"
         # @!attribute [rw] snippet
         #   @return [::String]
-        #     Immutable. JavaScript code snippet to be pasted as the first item into the head tag of
-        #     every webpage to measure.
+        #     Immutable. JavaScript code snippet to be pasted as the first item into the
+        #     head tag of every webpage to measure.
         class GlobalSiteTag
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A link between an GA4 property and a Google Ads account.
+        # A link between a GA4 property and a Google Ads account.
         # @!attribute [r] name
         #   @return [::String]
-        #     Output only. Format: properties/\\{propertyId}/googleAdsLinks/\\{googleAdsLinkId}
+        #     Output only. Format:
+        #     properties/\\{propertyId}/googleAdsLinks/\\{googleAdsLinkId}
         #
         #     Note: googleAdsLinkId is not the Google Ads customer ID.
         # @!attribute [rw] customer_id
@@ -373,16 +335,16 @@ module Google
         #     Automatically publish my Google Analytics audience lists and Google
         #     Analytics remarketing events/parameters to the linked Google Ads account.
         #     If this field is not set on create/update, it will be defaulted to true.
-        # @!attribute [r] email_address
-        #   @return [::String]
-        #     Output only. Email address of the user that created the link.
-        #     An empty string will be returned if the email address can't be retrieved.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time when this link was originally created.
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time when this link was last updated.
+        # @!attribute [r] creator_email_address
+        #   @return [::String]
+        #     Output only. Email address of the user that created the link.
+        #     An empty string will be returned if the email address can't be retrieved.
         class GoogleAdsLink
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -442,7 +404,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A virtual resource representing metadata for an GA4 property.
+        # A virtual resource representing metadata for a GA4 property.
         # @!attribute [rw] property
         #   @return [::String]
         #     Resource name of property referred to by this property summary
@@ -450,7 +412,17 @@ module Google
         #     Example: "properties/1000"
         # @!attribute [rw] display_name
         #   @return [::String]
-        #     Display name for the property referred to in this account summary.
+        #     Display name for the property referred to in this property summary.
+        # @!attribute [rw] property_type
+        #   @return [::Google::Analytics::Admin::V1alpha::PropertyType]
+        #     The property's property type.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Resource name of this property's logical parent.
+        #
+        #     Note: The Property-Moving UI can be used to change the parent.
+        #     Format: accounts/\\{account}, properties/\\{property}
+        #     Example: "accounts/100", "properties/200"
         class PropertySummary
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -459,17 +431,16 @@ module Google
         # A secret value used for sending hits to Measurement Protocol.
         # @!attribute [r] name
         #   @return [::String]
-        #     Output only. Resource name of this secret. This secret may be a child of any type of
-        #     stream.
-        #     Format:
-        #     properties/\\{property}/webDataStreams/\\{webDataStream}/measurementProtocolSecrets/\\{measurementProtocolSecret}
+        #     Output only. Resource name of this secret. This secret may be a child of
+        #     any type of stream. Format:
+        #     properties/\\{property}/dataStreams/\\{dataStream}/measurementProtocolSecrets/\\{measurementProtocolSecret}
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Required. Human-readable display name for this secret.
         # @!attribute [r] secret_value
         #   @return [::String]
-        #     Output only. The measurement protocol secret value. Pass this value to the api_secret
-        #     field of the Measurement Protocol API when sending hits to this
+        #     Output only. The measurement protocol secret value. Pass this value to the
+        #     api_secret field of the Measurement Protocol API when sending hits to this
         #     secret's parent property.
         class MeasurementProtocolSecret
           include ::Google::Protobuf::MessageExts
@@ -534,15 +505,6 @@ module Google
           # @!attribute [rw] property
           #   @return [::Google::Analytics::Admin::V1alpha::Property]
           #     A snapshot of a Property resource in change history.
-          # @!attribute [rw] web_data_stream
-          #   @return [::Google::Analytics::Admin::V1alpha::WebDataStream]
-          #     A snapshot of a WebDataStream resource in change history.
-          # @!attribute [rw] android_app_data_stream
-          #   @return [::Google::Analytics::Admin::V1alpha::AndroidAppDataStream]
-          #     A snapshot of an AndroidAppDataStream resource in change history.
-          # @!attribute [rw] ios_app_data_stream
-          #   @return [::Google::Analytics::Admin::V1alpha::IosAppDataStream]
-          #     A snapshot of an IosAppDataStream resource in change history.
           # @!attribute [rw] firebase_link
           #   @return [::Google::Analytics::Admin::V1alpha::FirebaseLink]
           #     A snapshot of a FirebaseLink resource in change history.
@@ -552,6 +514,14 @@ module Google
           # @!attribute [rw] google_signals_settings
           #   @return [::Google::Analytics::Admin::V1alpha::GoogleSignalsSettings]
           #     A snapshot of a GoogleSignalsSettings resource in change history.
+          # @!attribute [rw] display_video_360_advertiser_link
+          #   @return [::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink]
+          #     A snapshot of a DisplayVideo360AdvertiserLink resource in change
+          #     history.
+          # @!attribute [rw] display_video_360_advertiser_link_proposal
+          #   @return [::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLinkProposal]
+          #     A snapshot of a DisplayVideo360AdvertiserLinkProposal resource in
+          #     change history.
           # @!attribute [rw] conversion_event
           #   @return [::Google::Analytics::Admin::V1alpha::ConversionEvent]
           #     A snapshot of a ConversionEvent resource in change history.
@@ -564,10 +534,184 @@ module Google
           # @!attribute [rw] custom_metric
           #   @return [::Google::Analytics::Admin::V1alpha::CustomMetric]
           #     A snapshot of a CustomMetric resource in change history.
+          # @!attribute [rw] data_retention_settings
+          #   @return [::Google::Analytics::Admin::V1alpha::DataRetentionSettings]
+          #     A snapshot of a data retention settings resource in change history.
+          # @!attribute [rw] search_ads_360_link
+          #   @return [::Google::Analytics::Admin::V1alpha::SearchAds360Link]
+          #     A snapshot of a SearchAds360Link resource in change history.
+          # @!attribute [rw] data_stream
+          #   @return [::Google::Analytics::Admin::V1alpha::DataStream]
+          #     A snapshot of a DataStream resource in change history.
+          # @!attribute [rw] attribution_settings
+          #   @return [::Google::Analytics::Admin::V1alpha::AttributionSettings]
+          #     A snapshot of AttributionSettings resource in change history.
+          # @!attribute [rw] expanded_data_set
+          #   @return [::Google::Analytics::Admin::V1alpha::ExpandedDataSet]
+          #     A snapshot of an ExpandedDataSet resource in change history.
+          # @!attribute [rw] channel_group
+          #   @return [::Google::Analytics::Admin::V1alpha::ChannelGroup]
+          #     A snapshot of a ChannelGroup resource in change history.
+          # @!attribute [rw] bigquery_link
+          #   @return [::Google::Analytics::Admin::V1alpha::BigQueryLink]
+          #     A snapshot of a BigQuery link resource in change history.
+          # @!attribute [rw] enhanced_measurement_settings
+          #   @return [::Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings]
+          #     A snapshot of EnhancedMeasurementSettings resource in change history.
+          # @!attribute [rw] adsense_link
+          #   @return [::Google::Analytics::Admin::V1alpha::AdSenseLink]
+          #     A snapshot of an AdSenseLink resource in change history.
+          # @!attribute [rw] audience
+          #   @return [::Google::Analytics::Admin::V1alpha::Audience]
+          #     A snapshot of an Audience resource in change history.
+          # @!attribute [rw] event_create_rule
+          #   @return [::Google::Analytics::Admin::V1alpha::EventCreateRule]
+          #     A snapshot of an EventCreateRule resource in change history.
           class ChangeHistoryResource
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # A link between a GA4 property and a Display & Video 360 advertiser.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. The resource name for this DisplayVideo360AdvertiserLink
+        #     resource. Format:
+        #     properties/\\{propertyId}/displayVideo360AdvertiserLinks/\\{linkId}
+        #
+        #     Note: linkId is not the Display & Video 360 Advertiser ID
+        # @!attribute [rw] advertiser_id
+        #   @return [::String]
+        #     Immutable. The Display & Video 360 Advertiser's advertiser ID.
+        # @!attribute [r] advertiser_display_name
+        #   @return [::String]
+        #     Output only. The display name of the Display & Video 360 Advertiser.
+        # @!attribute [rw] ads_personalization_enabled
+        #   @return [::Google::Protobuf::BoolValue]
+        #     Enables personalized advertising features with this integration.
+        #     If this field is not set on create/update, it will be defaulted to true.
+        # @!attribute [rw] campaign_data_sharing_enabled
+        #   @return [::Google::Protobuf::BoolValue]
+        #     Immutable. Enables the import of campaign data from Display & Video 360
+        #     into the GA4 property. After link creation, this can only be updated from
+        #     the Display & Video 360 product. If this field is not set on create, it
+        #     will be defaulted to true.
+        # @!attribute [rw] cost_data_sharing_enabled
+        #   @return [::Google::Protobuf::BoolValue]
+        #     Immutable. Enables the import of cost data from Display & Video 360 into
+        #     the GA4 property. This can only be enabled if campaign_data_sharing_enabled
+        #     is enabled. After link creation, this can only be updated from the Display
+        #     & Video 360 product. If this field is not set on create, it will be
+        #     defaulted to true.
+        class DisplayVideo360AdvertiserLink
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A proposal for a link between a GA4 property and a Display & Video 360
+        # advertiser.
+        #
+        # A proposal is converted to a DisplayVideo360AdvertiserLink once approved.
+        # Google Analytics admins approve inbound proposals while Display & Video 360
+        # admins approve outbound proposals.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. The resource name for this
+        #     DisplayVideo360AdvertiserLinkProposal resource. Format:
+        #     properties/\\{propertyId}/displayVideo360AdvertiserLinkProposals/\\{proposalId}
+        #
+        #     Note: proposalId is not the Display & Video 360 Advertiser ID
+        # @!attribute [rw] advertiser_id
+        #   @return [::String]
+        #     Immutable. The Display & Video 360 Advertiser's advertiser ID.
+        # @!attribute [r] link_proposal_status_details
+        #   @return [::Google::Analytics::Admin::V1alpha::LinkProposalStatusDetails]
+        #     Output only. The status information for this link proposal.
+        # @!attribute [r] advertiser_display_name
+        #   @return [::String]
+        #     Output only. The display name of the Display & Video Advertiser.
+        #     Only populated for proposals that originated from Display & Video 360.
+        # @!attribute [rw] validation_email
+        #   @return [::String]
+        #     Input only. On a proposal being sent to Display & Video 360, this field
+        #     must be set to the email address of an admin on the target advertiser. This
+        #     is used to verify that the Google Analytics admin is aware of at least one
+        #     admin on the Display & Video 360 Advertiser. This does not restrict
+        #     approval of the proposal to a single user. Any admin on the Display & Video
+        #     360 Advertiser may approve the proposal.
+        # @!attribute [rw] ads_personalization_enabled
+        #   @return [::Google::Protobuf::BoolValue]
+        #     Immutable. Enables personalized advertising features with this integration.
+        #     If this field is not set on create, it will be defaulted to true.
+        # @!attribute [rw] campaign_data_sharing_enabled
+        #   @return [::Google::Protobuf::BoolValue]
+        #     Immutable. Enables the import of campaign data from Display & Video 360.
+        #     If this field is not set on create, it will be defaulted to true.
+        # @!attribute [rw] cost_data_sharing_enabled
+        #   @return [::Google::Protobuf::BoolValue]
+        #     Immutable. Enables the import of cost data from Display & Video 360.
+        #     This can only be enabled if campaign_data_sharing_enabled is enabled.
+        #     If this field is not set on create, it will be defaulted to true.
+        class DisplayVideo360AdvertiserLinkProposal
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A link between a GA4 property and a Search Ads 360 entity.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. The resource name for this SearchAds360Link resource.
+        #     Format: properties/\\{propertyId}/searchAds360Links/\\{linkId}
+        #
+        #     Note: linkId is not the Search Ads 360 advertiser ID
+        # @!attribute [rw] advertiser_id
+        #   @return [::String]
+        #     Immutable. This field represents the Advertiser ID of the Search Ads 360
+        #     Advertiser. that has been linked.
+        # @!attribute [rw] campaign_data_sharing_enabled
+        #   @return [::Google::Protobuf::BoolValue]
+        #     Immutable. Enables the import of campaign data from Search Ads 360 into the
+        #     GA4 property. After link creation, this can only be updated from the Search
+        #     Ads 360 product.
+        #     If this field is not set on create, it will be defaulted to true.
+        # @!attribute [rw] cost_data_sharing_enabled
+        #   @return [::Google::Protobuf::BoolValue]
+        #     Immutable. Enables the import of cost data from Search Ads 360 to the GA4
+        #     property. This can only be enabled if campaign_data_sharing_enabled is
+        #     enabled. After link creation, this can only be updated from
+        #     the Search Ads 360 product.
+        #     If this field is not set on create, it will be defaulted to true.
+        # @!attribute [r] advertiser_display_name
+        #   @return [::String]
+        #     Output only. The display name of the Search Ads 360 Advertiser.
+        #     Allows users to easily identify the linked resource.
+        # @!attribute [rw] ads_personalization_enabled
+        #   @return [::Google::Protobuf::BoolValue]
+        #     Enables personalized advertising features with this integration.
+        #     If this field is not set on create, it will be defaulted to true.
+        # @!attribute [rw] site_stats_sharing_enabled
+        #   @return [::Google::Protobuf::BoolValue]
+        #     Enables export of site stats with this integration.
+        #     If this field is not set on create, it will be defaulted to true.
+        class SearchAds360Link
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Status information for a link proposal.
+        # @!attribute [r] link_proposal_initiating_product
+        #   @return [::Google::Analytics::Admin::V1alpha::LinkProposalInitiatingProduct]
+        #     Output only. The source of this proposal.
+        # @!attribute [r] requestor_email
+        #   @return [::String]
+        #     Output only. The email address of the user that proposed this linkage.
+        # @!attribute [r] link_proposal_state
+        #   @return [::Google::Analytics::Admin::V1alpha::LinkProposalState]
+        #     Output only. The state of this proposal.
+        class LinkProposalStatusDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A conversion event in a Google Analytics property.
@@ -582,9 +726,18 @@ module Google
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time when this conversion event was created in the property.
-        # @!attribute [r] is_deletable
+        # @!attribute [r] deletable
         #   @return [::Boolean]
-        #     Output only. If set, this event can currently be deleted via DeleteConversionEvent.
+        #     Output only. If set, this event can currently be deleted with
+        #     DeleteConversionEvent.
+        # @!attribute [r] custom
+        #   @return [::Boolean]
+        #     Output only. If set to true, this conversion event refers to a custom
+        #     event.  If set to false, this conversion event refers to a default event in
+        #     GA. Default events typically have special meaning in GA. Default events are
+        #     usually created for you by the GA system, but in some cases can be created
+        #     by property admins. Custom events count towards the maximum number of
+        #     custom conversion events that may be created per property.
         class ConversionEvent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -620,26 +773,30 @@ module Google
         #     If this is an event-scoped dimension, then this is the event parameter
         #     name.
         #
+        #     If this is an item-scoped dimension, then this is the parameter
+        #     name found in the eCommerce items array.
+        #
         #     May only contain alphanumeric and underscore characters, starting with a
         #     letter. Max length of 24 characters for user-scoped dimensions, 40
         #     characters for event-scoped dimensions.
         # @!attribute [rw] display_name
         #   @return [::String]
-        #     Required. Display name for this custom dimension as shown in the Analytics UI.
-        #     Max length of 82 characters, alphanumeric plus space and underscore
+        #     Required. Display name for this custom dimension as shown in the Analytics
+        #     UI. Max length of 82 characters, alphanumeric plus space and underscore
         #     starting with a letter. Legacy system-generated display names may contain
         #     square brackets, but updates to this field will never permit square
         #     brackets.
         # @!attribute [rw] description
         #   @return [::String]
-        #     Optional. Description for this custom dimension. Max length of 150 characters.
+        #     Optional. Description for this custom dimension. Max length of 150
+        #     characters.
         # @!attribute [rw] scope
         #   @return [::Google::Analytics::Admin::V1alpha::CustomDimension::DimensionScope]
         #     Required. Immutable. The scope of this dimension.
         # @!attribute [rw] disallow_ads_personalization
         #   @return [::Boolean]
-        #     Optional. If set to true, sets this dimension as NPA and excludes it from ads
-        #     personalization.
+        #     Optional. If set to true, sets this dimension as NPA and excludes it from
+        #     ads personalization.
         #
         #     This is currently only supported by user-scoped custom dimensions.
         class CustomDimension
@@ -656,6 +813,9 @@ module Google
 
             # Dimension scoped to a user.
             USER = 2
+
+            # Dimension scoped to eCommerce items
+            ITEM = 3
           end
         end
 
@@ -686,10 +846,15 @@ module Google
         #     Max length of 150 characters.
         # @!attribute [rw] measurement_unit
         #   @return [::Google::Analytics::Admin::V1alpha::CustomMetric::MeasurementUnit]
-        #     Required. Immutable. The type for the custom metric's value.
+        #     Required. The type for the custom metric's value.
         # @!attribute [rw] scope
         #   @return [::Google::Analytics::Admin::V1alpha::CustomMetric::MetricScope]
         #     Required. Immutable. The scope of this custom metric.
+        # @!attribute [rw] restricted_metric_type
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::CustomMetric::RestrictedMetricType>]
+        #     Optional. Types of restricted data that this metric may contain. Required
+        #     for metrics with CURRENCY measurement unit. Must be empty for metrics with
+        #     a non-CURRENCY measurement unit.
         class CustomMetric
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -741,27 +906,320 @@ module Google
             # Metric scoped to an event.
             EVENT = 1
           end
+
+          # Labels that mark the data in this custom metric as data that should be
+          # restricted to specific users.
+          module RestrictedMetricType
+            # Type unknown or unspecified.
+            RESTRICTED_METRIC_TYPE_UNSPECIFIED = 0
+
+            # Metric reports cost data.
+            COST_DATA = 1
+
+            # Metric reports revenue data.
+            REVENUE_DATA = 2
+          end
         end
 
-        # Maximum access settings that Firebase user receive on the linked Analytics
-        # property.
-        module MaximumUserAccess
-          # Unspecified maximum user access.
-          MAXIMUM_USER_ACCESS_UNSPECIFIED = 0
+        # Settings values for data retention. This is a singleton resource.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. Resource name for this DataRetentionSetting resource.
+        #     Format: properties/\\{property}/dataRetentionSettings
+        # @!attribute [rw] event_data_retention
+        #   @return [::Google::Analytics::Admin::V1alpha::DataRetentionSettings::RetentionDuration]
+        #     The length of time that event-level data is retained.
+        # @!attribute [rw] reset_user_data_on_new_activity
+        #   @return [::Boolean]
+        #     If true, reset the retention period for the user identifier with every
+        #     event from that user.
+        class DataRetentionSettings
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Firebase users have no access to the Analytics property.
-          NO_ACCESS = 1
+          # Valid values for the data retention duration.
+          module RetentionDuration
+            # Data retention time duration is not specified.
+            RETENTION_DURATION_UNSPECIFIED = 0
 
-          # Firebase users have Read & Analyze access to the Analytics property.
-          READ_AND_ANALYZE = 2
+            # The data retention time duration is 2 months.
+            TWO_MONTHS = 1
 
-          # Firebase users have edit access to the Analytics property, but may not
-          # manage the Firebase link.
-          EDITOR_WITHOUT_LINK_MANAGEMENT = 3
+            # The data retention time duration is 14 months.
+            FOURTEEN_MONTHS = 3
 
-          # Firebase users have edit access to the Analytics property and may manage
-          # the Firebase link.
-          EDITOR_INCLUDING_LINK_MANAGEMENT = 4
+            # The data retention time duration is 26 months.
+            # Available to 360 properties only.
+            TWENTY_SIX_MONTHS = 4
+
+            # The data retention time duration is 38 months.
+            # Available to 360 properties only.
+            THIRTY_EIGHT_MONTHS = 5
+
+            # The data retention time duration is 50 months.
+            # Available to 360 properties only.
+            FIFTY_MONTHS = 6
+          end
+        end
+
+        # The attribution settings used for a given property. This is a singleton
+        # resource.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. Resource name of this attribution settings resource.
+        #     Format: properties/\\{property_id}/attributionSettings
+        #     Example: "properties/1000/attributionSettings"
+        # @!attribute [rw] acquisition_conversion_event_lookback_window
+        #   @return [::Google::Analytics::Admin::V1alpha::AttributionSettings::AcquisitionConversionEventLookbackWindow]
+        #     Required. The lookback window configuration for acquisition conversion
+        #     events. The default window size is 30 days.
+        # @!attribute [rw] other_conversion_event_lookback_window
+        #   @return [::Google::Analytics::Admin::V1alpha::AttributionSettings::OtherConversionEventLookbackWindow]
+        #     Required. The lookback window for all other, non-acquisition conversion
+        #     events. The default window size is 90 days.
+        # @!attribute [rw] reporting_attribution_model
+        #   @return [::Google::Analytics::Admin::V1alpha::AttributionSettings::ReportingAttributionModel]
+        #     Required. The reporting attribution model used to calculate conversion
+        #     credit in this property's reports.
+        #
+        #     Changing the attribution model will apply to both historical and future
+        #     data. These changes will be reflected in reports with conversion and
+        #     revenue data. User and session data will be unaffected.
+        class AttributionSettings
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # How far back in time events should be considered for inclusion in a
+          # converting path which leads to the first install of an app or the first
+          # visit to a site.
+          module AcquisitionConversionEventLookbackWindow
+            # Lookback window size unspecified.
+            ACQUISITION_CONVERSION_EVENT_LOOKBACK_WINDOW_UNSPECIFIED = 0
+
+            # 7-day lookback window.
+            ACQUISITION_CONVERSION_EVENT_LOOKBACK_WINDOW_7_DAYS = 1
+
+            # 30-day lookback window.
+            ACQUISITION_CONVERSION_EVENT_LOOKBACK_WINDOW_30_DAYS = 2
+          end
+
+          # How far back in time events should be considered for inclusion in a
+          # converting path for all conversions other than first app install/first site
+          # visit.
+          module OtherConversionEventLookbackWindow
+            # Lookback window size unspecified.
+            OTHER_CONVERSION_EVENT_LOOKBACK_WINDOW_UNSPECIFIED = 0
+
+            # 30-day lookback window.
+            OTHER_CONVERSION_EVENT_LOOKBACK_WINDOW_30_DAYS = 1
+
+            # 60-day lookback window.
+            OTHER_CONVERSION_EVENT_LOOKBACK_WINDOW_60_DAYS = 2
+
+            # 90-day lookback window.
+            OTHER_CONVERSION_EVENT_LOOKBACK_WINDOW_90_DAYS = 3
+          end
+
+          # The reporting attribution model used to calculate conversion credit in this
+          # property's reports.
+          module ReportingAttributionModel
+            # Reporting attribution model unspecified.
+            REPORTING_ATTRIBUTION_MODEL_UNSPECIFIED = 0
+
+            # Data-driven attribution distributes credit for the conversion based on
+            # data for each conversion event. Each Data-driven model is specific to
+            # each advertiser and each conversion event.
+            CROSS_CHANNEL_DATA_DRIVEN = 1
+
+            # Ignores direct traffic and attributes 100% of the conversion value to the
+            # last channel that the customer clicked through (or engaged view through
+            # for YouTube) before converting.
+            CROSS_CHANNEL_LAST_CLICK = 2
+
+            # Gives all credit for the conversion to the first channel that a customer
+            # clicked (or engaged view through for YouTube) before converting.
+            CROSS_CHANNEL_FIRST_CLICK = 3
+
+            # Distributes the credit for the conversion equally across all the channels
+            # a customer clicked (or engaged view through for YouTube) before
+            # converting.
+            CROSS_CHANNEL_LINEAR = 4
+
+            # Attributes 40% credit to the first and last interaction, and the
+            # remaining 20% credit is distributed evenly to the middle interactions.
+            CROSS_CHANNEL_POSITION_BASED = 5
+
+            # Gives more credit to the touchpoints that happened closer in time to
+            # the conversion.
+            CROSS_CHANNEL_TIME_DECAY = 6
+
+            # Attributes 100% of the conversion value to the last Google Ads channel
+            # that the customer clicked through before converting.
+            ADS_PREFERRED_LAST_CLICK = 7
+          end
+        end
+
+        # A binding of a user to a set of roles.
+        # @!attribute [rw] user
+        #   @return [::String]
+        #     If set, the email address of the user to set roles for.
+        #     Format: "someuser@gmail.com"
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. Resource name of this binding.
+        #
+        #     Format: accounts/\\{account}/accessBindings/\\{access_binding} or
+        #     properties/\\{property}/accessBindings/\\{access_binding}
+        #
+        #     Example:
+        #     "accounts/100/accessBindings/200"
+        # @!attribute [rw] roles
+        #   @return [::Array<::String>]
+        #     A list of roles for to grant to the parent resource.
+        #
+        #     Valid values:
+        #     predefinedRoles/viewer
+        #     predefinedRoles/analyst
+        #     predefinedRoles/editor
+        #     predefinedRoles/admin
+        #     predefinedRoles/no-cost-data
+        #     predefinedRoles/no-revenue-data
+        #
+        #     For users, if an empty list of roles is set, this AccessBinding will be
+        #     deleted.
+        class AccessBinding
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A link between a GA4 Property and BigQuery project.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. Resource name of this BigQuery link.
+        #     Format: 'properties/\\{property_id}/bigQueryLinks/\\{bigquery_link_id}'
+        #     Format: 'properties/1234/bigQueryLinks/abc567'
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Immutable. The linked Google Cloud project. When creating a BigQueryLink,
+        #     you may provide this resource name using either a project number or project
+        #     ID. Once this resource has been created, the returned project will always
+        #     have a project that contains a project number.
+        #     Format: 'projects/\\{project number}'
+        #     Example: 'projects/1234'
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Time when the link was created.
+        # @!attribute [rw] daily_export_enabled
+        #   @return [::Boolean]
+        #     If set true, enables daily data export to the linked Google Cloud project.
+        # @!attribute [rw] streaming_export_enabled
+        #   @return [::Boolean]
+        #     If set true, enables streaming export to the linked Google Cloud project.
+        # @!attribute [rw] intraday_export_enabled
+        #   @return [::Boolean]
+        #     If set true, enables intraday export to the linked Google Cloud project.
+        # @!attribute [rw] include_advertising_id
+        #   @return [::Boolean]
+        #     If set true, exported data will include advertising identifiers for mobile
+        #     app streams.
+        # @!attribute [rw] export_streams
+        #   @return [::Array<::String>]
+        #     The list of streams under the parent property for which data will be
+        #     exported.
+        #     Format: properties/\\{property_id}/dataStreams/\\{stream_id}
+        #     Example: ['properties/1000/dataStreams/2000']
+        # @!attribute [rw] excluded_events
+        #   @return [::Array<::String>]
+        #     The list of event names that will be excluded from exports.
+        class BigQueryLink
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Singleton resource under a WebDataStream, configuring measurement of
+        # additional site interactions and content.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. Resource name of the Enhanced Measurement Settings.
+        #     Format:
+        #     properties/\\{property_id}/dataStreams/\\{data_stream}/enhancedMeasurementSettings
+        #     Example: "properties/1000/dataStreams/2000/enhancedMeasurementSettings"
+        # @!attribute [rw] stream_enabled
+        #   @return [::Boolean]
+        #     Indicates whether Enhanced Measurement Settings will be used to
+        #     automatically measure interactions and content on this web stream.
+        #
+        #     Changing this value does not affect the settings themselves, but determines
+        #     whether they are respected.
+        # @!attribute [rw] scrolls_enabled
+        #   @return [::Boolean]
+        #     If enabled, capture scroll events each time a visitor gets to the bottom of
+        #     a page.
+        # @!attribute [rw] outbound_clicks_enabled
+        #   @return [::Boolean]
+        #     If enabled, capture an outbound click event each time a visitor clicks a
+        #     link that leads them away from your domain.
+        # @!attribute [rw] site_search_enabled
+        #   @return [::Boolean]
+        #     If enabled, capture a view search results event each time a visitor
+        #     performs a search on your site (based on a query parameter).
+        # @!attribute [rw] video_engagement_enabled
+        #   @return [::Boolean]
+        #     If enabled, capture video play, progress, and complete events as visitors
+        #     view embedded videos on your site.
+        # @!attribute [rw] file_downloads_enabled
+        #   @return [::Boolean]
+        #     If enabled, capture a file download event each time a link is clicked with
+        #     a common document, compressed file, application, video, or audio extension.
+        # @!attribute [rw] page_changes_enabled
+        #   @return [::Boolean]
+        #     If enabled, capture a page view event each time the website changes the
+        #     browser history state.
+        # @!attribute [rw] form_interactions_enabled
+        #   @return [::Boolean]
+        #     If enabled, capture a form interaction event each time a visitor interacts
+        #     with a form on your website.
+        #     False by default.
+        # @!attribute [rw] search_query_parameter
+        #   @return [::String]
+        #     Required. URL query parameters to interpret as site search parameters.
+        #     Max length is 1024 characters. Must not be empty.
+        # @!attribute [rw] uri_query_parameter
+        #   @return [::String]
+        #     Additional URL query parameters.
+        #     Max length is 1024 characters.
+        class EnhancedMeasurementSettings
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration for a specific Connected Site Tag.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     Required. User-provided display name for the connected site tag. Must be
+        #     less than 256 characters.
+        # @!attribute [rw] tag_id
+        #   @return [::String]
+        #     Required. "Tag ID to forward events to. Also known as the Measurement ID,
+        #     or the "G-ID"  (For example: G-12345).
+        class ConnectedSiteTag
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A link between a GA4 Property and an AdSense for Content ad client.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. The resource name for this AdSense Link resource.
+        #     Format: properties/\\{propertyId}/adSenseLinks/\\{linkId}
+        #     Example: properties/1234/adSenseLinks/6789
+        # @!attribute [rw] ad_client_code
+        #   @return [::String]
+        #     Immutable. The AdSense ad client code that the GA4 property is linked to.
+        #     Example format: "ca-pub-1234567890"
+        class AdSenseLink
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The category selected for this property, used for industry benchmarking.
@@ -848,6 +1306,18 @@ module Google
           SHOPPING = 26
         end
 
+        # Various levels of service for Google Analytics.
+        module ServiceLevel
+          # Service level not specified or invalid.
+          SERVICE_LEVEL_UNSPECIFIED = 0
+
+          # The standard version of Google Analytics.
+          GOOGLE_ANALYTICS_STANDARD = 1
+
+          # The paid, premium version of Google Analytics.
+          GOOGLE_ANALYTICS_360 = 2
+        end
+
         # Different kinds of actors that can make changes to Google Analytics
         # resources.
         module ActorType
@@ -890,15 +1360,6 @@ module Google
           # Property resource
           PROPERTY = 2
 
-          # WebDataStream resource
-          WEB_DATA_STREAM = 3
-
-          # AndroidAppDataStream resource
-          ANDROID_APP_DATA_STREAM = 4
-
-          # IosAppDataStream resource
-          IOS_APP_DATA_STREAM = 5
-
           # FirebaseLink resource
           FIREBASE_LINK = 6
 
@@ -919,10 +1380,45 @@ module Google
 
           # CustomMetric resource
           CUSTOM_METRIC = 12
+
+          # DataRetentionSettings resource
+          DATA_RETENTION_SETTINGS = 13
+
+          # DisplayVideo360AdvertiserLink resource
+          DISPLAY_VIDEO_360_ADVERTISER_LINK = 14
+
+          # DisplayVideo360AdvertiserLinkProposal resource
+          DISPLAY_VIDEO_360_ADVERTISER_LINK_PROPOSAL = 15
+
+          # SearchAds360Link resource
+          SEARCH_ADS_360_LINK = 16
+
+          # DataStream resource
+          DATA_STREAM = 18
+
+          # AttributionSettings resource
+          ATTRIBUTION_SETTINGS = 20
+
+          # ExpandedDataSet resource
+          EXPANDED_DATA_SET = 21
+
+          # ChannelGroup resource
+          CHANNEL_GROUP = 22
+
+          # EnhancedMeasurementSettings resource
+          ENHANCED_MEASUREMENT_SETTINGS = 24
+
+          # AdSenseLink resource
+          ADSENSE_LINK = 27
+
+          # Audience resource
+          AUDIENCE = 28
+
+          # EventCreateRule resource
+          EVENT_CREATE_RULE = 29
         end
 
-        # Status of the Google Signals settings (i.e., whether this feature has been
-        # enabled for the property).
+        # Status of the Google Signals settings.
         module GoogleSignalsState
           # Google Signals status defaults to GOOGLE_SIGNALS_STATE_UNSPECIFIED to
           # represent that the user has not made an explicit choice.
@@ -935,8 +1431,7 @@ module Google
           GOOGLE_SIGNALS_DISABLED = 2
         end
 
-        # Consent field of the Google Signals settings (i.e., whether the user has
-        # consented to the Google Signals terms of service.)
+        # Consent field of the Google Signals settings.
         module GoogleSignalsConsent
           # Google Signals consent value defaults to
           # GOOGLE_SIGNALS_CONSENT_UNSPECIFIED.  This will be treated as
@@ -948,6 +1443,66 @@ module Google
 
           # Terms of service have not been accepted
           GOOGLE_SIGNALS_CONSENT_NOT_CONSENTED = 1
+        end
+
+        # An indication of which product the user initiated a link proposal from.
+        module LinkProposalInitiatingProduct
+          # Unspecified product.
+          LINK_PROPOSAL_INITIATING_PRODUCT_UNSPECIFIED = 0
+
+          # This proposal was created by a user from Google Analytics.
+          GOOGLE_ANALYTICS = 1
+
+          # This proposal was created by a user from a linked product (not Google
+          # Analytics).
+          LINKED_PRODUCT = 2
+        end
+
+        # The state of a link proposal resource.
+        module LinkProposalState
+          # Unspecified state
+          LINK_PROPOSAL_STATE_UNSPECIFIED = 0
+
+          # This proposal is awaiting review from a Google Analytics user. This
+          # proposal will automatically expire after some time.
+          AWAITING_REVIEW_FROM_GOOGLE_ANALYTICS = 1
+
+          # This proposal is awaiting review from a user of a linked product. This
+          # proposal will automatically expire after some time.
+          AWAITING_REVIEW_FROM_LINKED_PRODUCT = 2
+
+          # This proposal has been withdrawn by an admin on the initiating product.
+          # This proposal will be automatically deleted after some time.
+          WITHDRAWN = 3
+
+          # This proposal has been declined by an admin on the receiving product. This
+          # proposal will be automatically deleted after some time.
+          DECLINED = 4
+
+          # This proposal expired due to lack of response from an admin on the
+          # receiving product. This proposal will be automatically deleted after some
+          # time.
+          EXPIRED = 5
+
+          # This proposal has become obsolete because a link was directly created to
+          # the same external product resource that this proposal specifies. This
+          # proposal will be automatically deleted after some time.
+          OBSOLETE = 6
+        end
+
+        # Types of Property resources.
+        module PropertyType
+          # Unknown or unspecified property type
+          PROPERTY_TYPE_UNSPECIFIED = 0
+
+          # Ordinary GA4 property
+          PROPERTY_TYPE_ORDINARY = 1
+
+          # GA4 subproperty
+          PROPERTY_TYPE_SUBPROPERTY = 2
+
+          # GA4 rollup property
+          PROPERTY_TYPE_ROLLUP = 3
         end
       end
     end

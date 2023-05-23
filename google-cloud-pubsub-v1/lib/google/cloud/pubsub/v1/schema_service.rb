@@ -33,7 +33,7 @@ module Google
         ##
         # Service for doing schema-related operations.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/pubsub/v1/schema_service"
         #     client = ::Google::Cloud::PubSub::V1::SchemaService::Client.new

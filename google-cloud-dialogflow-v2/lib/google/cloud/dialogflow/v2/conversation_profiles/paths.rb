@@ -61,22 +61,63 @@ module Google
             end
 
             ##
-            # Create a fully-qualified ConversationModel resource string.
+            # Create a fully-qualified CXSecuritySettings resource string.
             #
             # The resource will be in the following format:
             #
-            # `projects/{project}/locations/{location}/conversationModels/{conversation_model}`
+            # `projects/{project}/locations/{location}/securitySettings/{security_settings}`
             #
             # @param project [String]
             # @param location [String]
-            # @param conversation_model [String]
+            # @param security_settings [String]
             #
             # @return [::String]
-            def conversation_model_path project:, location:, conversation_model:
+            def cx_security_settings_path project:, location:, security_settings:
               raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
-              "projects/#{project}/locations/#{location}/conversationModels/#{conversation_model}"
+              "projects/#{project}/locations/#{location}/securitySettings/#{security_settings}"
+            end
+
+            ##
+            # Create a fully-qualified ConversationModel resource string.
+            #
+            # @overload conversation_model_path(project:, location:, conversation_model:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/conversationModels/{conversation_model}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param conversation_model [String]
+            #
+            # @overload conversation_model_path(project:, conversation_model:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/conversationModels/{conversation_model}`
+            #
+            #   @param project [String]
+            #   @param conversation_model [String]
+            #
+            # @return [::String]
+            def conversation_model_path **args
+              resources = {
+                "conversation_model:location:project" => (proc do |project:, location:, conversation_model:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/conversationModels/#{conversation_model}"
+                end),
+                "conversation_model:project" => (proc do |project:, conversation_model:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+                  "projects/#{project}/conversationModels/#{conversation_model}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
             end
 
             ##

@@ -26,6 +26,7 @@ require "google/cloud/translate/v3/translation_service/credentials"
 require "google/cloud/translate/v3/translation_service/paths"
 require "google/cloud/translate/v3/translation_service/operations"
 require "google/cloud/translate/v3/translation_service/client"
+require "google/cloud/translate/v3/translation_service/rest"
 
 module Google
   module Cloud
@@ -34,10 +35,15 @@ module Google
         ##
         # Provides natural language translation operations.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/translate/v3/translation_service"
         #     client = ::Google::Cloud::Translate::V3::TranslationService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/translate/v3/translation_service/rest"
+        #     client = ::Google::Cloud::Translate::V3::TranslationService::Rest::Client.new
         #
         module TranslationService
         end

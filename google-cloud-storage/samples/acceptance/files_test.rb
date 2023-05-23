@@ -20,8 +20,10 @@ require_relative "../storage_copy_file"
 require_relative "../storage_copy_file_archived_generation"
 require_relative "../storage_delete_file"
 require_relative "../storage_delete_file_archived_generation"
+require_relative "../storage_download_byte_range"
 require_relative "../storage_download_encrypted_file"
 require_relative "../storage_download_file"
+require_relative "../storage_download_file_into_memory"
 require_relative "../storage_download_file_requester_pays"
 require_relative "../storage_download_public_file"
 require_relative "../storage_generate_encryption_key"
@@ -41,8 +43,11 @@ require_relative "../storage_rotate_encryption_key"
 require_relative "../storage_set_event_based_hold"
 require_relative "../storage_set_metadata"
 require_relative "../storage_set_temporary_hold"
+require_relative "../storage_stream_file_download"
+require_relative "../storage_stream_file_upload"
 require_relative "../storage_upload_encrypted_file"
 require_relative "../storage_upload_file"
+require_relative "../storage_upload_from_memory"
 require_relative "../storage_upload_with_kms_key"
 
 describe "Files Snippets" do
@@ -56,6 +61,7 @@ describe "Files Snippets" do
   let(:file_2_name) { "path/file_2_name_#{SecureRandom.hex}.txt" }
   let(:bucket) { @bucket }
   let(:secondary_bucket) { @secondary_bucket }
+  let(:file_content) { "some content" }
 
   before :all do
     @bucket = create_bucket_helper random_bucket_name
@@ -139,6 +145,14 @@ describe "Files Snippets" do
     assert_equal bucket.files.first.name, remote_file_name
   end
 
+  it "upload_file_from_memory" do
+    assert_output "Uploaded file #{remote_file_name} to bucket #{bucket.name} with content: #{file_content}\n" do
+      upload_file_from_memory bucket_name: bucket.name,
+                              file_name: remote_file_name,
+                              file_content: file_content
+    end
+  end
+
   it "upload_encrypted_file" do
     assert_output "Uploaded #{remote_file_name} with encryption key\n" do
       upload_encrypted_file bucket_name:     bucket.name,
@@ -176,6 +190,15 @@ describe "Files Snippets" do
       end
 
       assert File.file? tmpfile
+    end
+  end
+
+  it "download_file_into_memory" do
+    bucket.create_file StringIO.new(file_content), remote_file_name
+
+    assert_output "Contents of storage object #{remote_file_name} in bucket #{bucket.name} are: #{file_content}\n" do
+      download_file_into_memory bucket_name: bucket.name,
+                                file_name: remote_file_name
     end
   end
 
@@ -594,5 +617,42 @@ describe "Files Snippets" do
     end
 
     assert_equal "NEARLINE", bucket.file(remote_file_name).storage_class
+  end
+
+  it "storage_download_byte_range" do
+    bucket.create_file local_file, remote_file_name
+
+    Tempfile.open [downloaded_file] do |tmpfile|
+      tmpfile.binmode
+
+      assert_output "Downloaded bytes 0 to 3 of object #{remote_file_name} from bucket #{bucket.name}" \
+                    + " to local file #{tmpfile}.\n" do
+        StorageDownloadByteRange.new.storage_download_byte_range bucket_name: bucket.name,
+                                                                 file_name: remote_file_name,
+                                                                 start_byte: 0,
+                                                                 end_byte: 3,
+                                                                 local_file_path: tmpfile
+      end
+
+      assert File.file? tmpfile
+    end
+  end
+
+  it "storage_stream_file_upload" do
+    file_obj = StringIO.new file_content
+    assert_output "Stream data uploaded to #{remote_file_name} in bucket #{bucket.name}\n" do
+      StorageStreamFileUpload.new.storage_stream_file_upload bucket_name: bucket.name,
+                                                             local_file_obj: file_obj,
+                                                             file_name: remote_file_name
+    end
+  end
+
+  it "storage_stream_file_download" do
+    bucket.create_file StringIO.new(file_content), remote_file_name
+    assert_output "The full downloaded file contents are: \"#{file_content}\"\n" do
+      StorageStreamFileDownload.new.storage_stream_file_download bucket_name: bucket.name,
+                                                                 file_name: remote_file_name,
+                                                                 local_file_obj: StringIO.new
+    end
   end
 end

@@ -49,15 +49,15 @@ module Google
       #
       #   bigtable = Google::Cloud::Bigtable.new
       #
-      #   table = bigtable.create_table("my-instance", "my-table") do |cfm|
-      #     cfm.add("cf1", gc_rule: Google::Cloud::Bigtable::GcRule.max_versions(5))
-      #     cfm.add("cf2", gc_rule: Google::Cloud::Bigtable::GcRule.max_age(600))
+      #   table = bigtable.create_table "my-instance", "my-table" do |cfm|
+      #     cfm.add "cf1", gc_rule: Google::Cloud::Bigtable::GcRule.max_versions(5)
+      #     cfm.add "cf2", gc_rule: Google::Cloud::Bigtable::GcRule.max_age(600)
       #
       #     gc_rule = Google::Cloud::Bigtable::GcRule.union(
       #       Google::Cloud::Bigtable::GcRule.max_age(1800),
       #       Google::Cloud::Bigtable::GcRule.max_versions(3)
       #     )
-      #     cfm.add("cf3", gc_rule: gc_rule)
+      #     cfm.add "cf3", gc_rule: gc_rule
       #   end
       #
       #   puts table.column_families["cf1"].gc_rule.max_versions
@@ -95,8 +95,8 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.create_table("my-instance", "my-table") do |cfm|
-        #     cfm.add("cf1", gc_rule: Google::Cloud::Bigtable::GcRule.max_versions(5))
+        #   table = bigtable.create_table "my-instance", "my-table" do |cfm|
+        #     cfm.add "cf1", gc_rule: Google::Cloud::Bigtable::GcRule.max_versions(5)
         #   end
         #
         #   puts table.column_families["cf1"].gc_rule.max_versions
@@ -131,8 +131,8 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.create_table("my-instance", "my-table") do |cfm|
-        #     cfm.add("cf1", gc_rule: Google::Cloud::Bigtable::GcRule.max_age(600))
+        #   table = bigtable.create_table "my-instance", "my-table" do |cfm|
+        #     cfm.add "cf1", gc_rule: Google::Cloud::Bigtable::GcRule.max_age(600)
         #   end
         #
         #   puts table.column_families["cf1"].gc_rule.max_age
@@ -162,12 +162,12 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.create_table("my-instance", "my-table") do |cfm|
+        #   table = bigtable.create_table "my-instance", "my-table" do |cfm|
         #     gc_rule = Google::Cloud::Bigtable::GcRule.intersection(
         #       Google::Cloud::Bigtable::GcRule.max_age(1800),
         #       Google::Cloud::Bigtable::GcRule.max_versions(3)
         #     )
-        #     cfm.add("cf1", gc_rule: gc_rule)
+        #     cfm.add "cf1", gc_rule: gc_rule
         #   end
         #
         #   puts table.column_families["cf1"].gc_rule.intersection
@@ -203,12 +203,12 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.create_table("my-instance", "my-table") do |cfm|
+        #   table = bigtable.create_table "my-instance", "my-table" do |cfm|
         #     gc_rule = Google::Cloud::Bigtable::GcRule.union(
         #       Google::Cloud::Bigtable::GcRule.max_age(1800),
         #       Google::Cloud::Bigtable::GcRule.max_versions(3)
         #     )
-        #     cfm.add("cf1", gc_rule: gc_rule)
+        #     cfm.add "cf1", gc_rule: gc_rule
         #   end
         #
         #   puts table.column_families["cf1"].gc_rule.union
@@ -231,8 +231,8 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.create_table("my-instance", "my-table") do |cfm|
-        #     cfm.add("cf1", gc_rule: Google::Cloud::Bigtable::GcRule.max_versions(5))
+        #   table = bigtable.create_table "my-instance", "my-table" do |cfm|
+        #     cfm.add "cf1", gc_rule: Google::Cloud::Bigtable::GcRule.max_versions(5)
         #   end
         #
         def self.max_versions versions
@@ -252,8 +252,8 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.create_table("my-instance", "my-table") do |cfm|
-        #     cfm.add("cf1", gc_rule: Google::Cloud::Bigtable::GcRule.max_age(600))
+        #   table = bigtable.create_table "my-instance", "my-table" do |cfm|
+        #     cfm.add "cf1", gc_rule: Google::Cloud::Bigtable::GcRule.max_age(600)
         #   end
         #
         def self.max_age age
@@ -274,12 +274,12 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.create_table("my-instance", "my-table") do |cfm|
+        #   table = bigtable.create_table "my-instance", "my-table" do |cfm|
         #     gc_rule = Google::Cloud::Bigtable::GcRule.union(
         #       Google::Cloud::Bigtable::GcRule.max_age(1800),
         #       Google::Cloud::Bigtable::GcRule.max_versions(3)
         #     )
-        #     cfm.add("cf1", gc_rule: gc_rule)
+        #     cfm.add "cf1", gc_rule: gc_rule
         #   end
         #
         def self.union *rules
@@ -300,12 +300,12 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.create_table("my-instance", "my-table") do |cfm|
+        #   table = bigtable.create_table "my-instance", "my-table" do |cfm|
         #     gc_rule = Google::Cloud::Bigtable::GcRule.intersection(
         #       Google::Cloud::Bigtable::GcRule.max_age(1800),
         #       Google::Cloud::Bigtable::GcRule.max_versions(3)
         #     )
-        #     cfm.add("cf1", gc_rule: gc_rule)
+        #     cfm.add "cf1", gc_rule: gc_rule
         #   end
         #
         def self.intersection *rules

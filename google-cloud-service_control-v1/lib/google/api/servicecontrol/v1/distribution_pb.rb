@@ -3,6 +3,8 @@
 
 require 'google/protobuf'
 
+require 'google/api/distribution_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/api/servicecontrol/v1/distribution.proto", :syntax => :proto3) do
     add_message "google.api.servicecontrol.v1.Distribution" do
@@ -12,6 +14,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :maximum, :double, 4
       optional :sum_of_squared_deviation, :double, 5
       repeated :bucket_counts, :int64, 6
+      repeated :exemplars, :message, 10, "google.api.Distribution.Exemplar"
       oneof :bucket_option do
         optional :linear_buckets, :message, 7, "google.api.servicecontrol.v1.Distribution.LinearBuckets"
         optional :exponential_buckets, :message, 8, "google.api.servicecontrol.v1.Distribution.ExponentialBuckets"

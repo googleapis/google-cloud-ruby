@@ -39,6 +39,14 @@ module Google
             rpc :GetSchema, ::Google::Cloud::PubSub::V1::GetSchemaRequest, ::Google::Cloud::PubSub::V1::Schema
             # Lists schemas in a project.
             rpc :ListSchemas, ::Google::Cloud::PubSub::V1::ListSchemasRequest, ::Google::Cloud::PubSub::V1::ListSchemasResponse
+            # Lists all schema revisions for the named schema.
+            rpc :ListSchemaRevisions, ::Google::Cloud::PubSub::V1::ListSchemaRevisionsRequest, ::Google::Cloud::PubSub::V1::ListSchemaRevisionsResponse
+            # Commits a new schema revision to an existing schema.
+            rpc :CommitSchema, ::Google::Cloud::PubSub::V1::CommitSchemaRequest, ::Google::Cloud::PubSub::V1::Schema
+            # Creates a new schema revision that is a copy of the provided revision_id.
+            rpc :RollbackSchema, ::Google::Cloud::PubSub::V1::RollbackSchemaRequest, ::Google::Cloud::PubSub::V1::Schema
+            # Deletes a specific schema revision.
+            rpc :DeleteSchemaRevision, ::Google::Cloud::PubSub::V1::DeleteSchemaRevisionRequest, ::Google::Cloud::PubSub::V1::Schema
             # Deletes a schema.
             rpc :DeleteSchema, ::Google::Cloud::PubSub::V1::DeleteSchemaRequest, ::Google::Protobuf::Empty
             # Validates a schema.

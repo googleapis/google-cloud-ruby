@@ -41,9 +41,8 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
     patch_versioning_gapi = Google::Apis::StorageV1::Bucket::Versioning.new enabled: true
     patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new versioning: patch_versioning_gapi
     returned_bucket_gapi = Google::Apis::StorageV1::Bucket.from_json \
-      random_bucket_hash(bucket_name, bucket_url, bucket_location, bucket_storage_class, true).to_json
-    mock.expect :patch_bucket, returned_bucket_gapi,
-      [bucket_name, patch_bucket_gapi, predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil]
+      random_bucket_hash(name: bucket_name, url_root: bucket_url, location: bucket_location, storage_class: bucket_storage_class, versioning: true).to_json
+    mock.expect :patch_bucket, returned_bucket_gapi, [bucket_name, patch_bucket_gapi], **patch_bucket_args(options: {retries: 0})
 
     bucket.service.mocked_service = mock
 
@@ -59,9 +58,8 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
     patch_versioning_gapi = Google::Apis::StorageV1::Bucket::Versioning.new enabled: true
     patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new versioning: patch_versioning_gapi
     returned_bucket_gapi = Google::Apis::StorageV1::Bucket.from_json \
-      random_bucket_hash(bucket_name, bucket_url, bucket_location, bucket_storage_class, true).to_json
-    mock.expect :patch_bucket, returned_bucket_gapi,
-      [bucket_name, patch_bucket_gapi, predefined_acl: nil, predefined_default_object_acl: nil, user_project: "test"]
+      random_bucket_hash(name: bucket_name, url_root: bucket_url, location: bucket_location, storage_class: bucket_storage_class, versioning: true).to_json
+    mock.expect :patch_bucket, returned_bucket_gapi, [bucket_name, patch_bucket_gapi], **patch_bucket_args(user_project: "test", options: {retries: 0})
 
     bucket.service.mocked_service = mock
     bucket.user_project = true
@@ -78,9 +76,8 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
     patch_logging_gapi = Google::Apis::StorageV1::Bucket::Logging.new log_bucket: bucket_logging_bucket
     patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new logging: patch_logging_gapi
     returned_bucket_gapi = Google::Apis::StorageV1::Bucket.from_json \
-      random_bucket_hash(bucket_name, bucket_url, bucket_location, bucket_storage_class, nil, bucket_logging_bucket).to_json
-    mock.expect :patch_bucket, returned_bucket_gapi,
-      [bucket_name, patch_bucket_gapi, predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil]
+      random_bucket_hash(name: bucket_name, url_root: bucket_url, location: bucket_location, storage_class: bucket_storage_class, logging_bucket: bucket_logging_bucket).to_json
+    mock.expect :patch_bucket, returned_bucket_gapi, [bucket_name, patch_bucket_gapi], **patch_bucket_args(options: {retries: 0})
 
     bucket.service.mocked_service = mock
 
@@ -96,9 +93,8 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
     patch_logging_gapi = Google::Apis::StorageV1::Bucket::Logging.new log_object_prefix: bucket_logging_prefix
     patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new logging: patch_logging_gapi
     returned_bucket_gapi = Google::Apis::StorageV1::Bucket.from_json \
-      random_bucket_hash(bucket_name, bucket_url, bucket_location, bucket_storage_class, nil, nil, bucket_logging_prefix).to_json
-    mock.expect :patch_bucket, returned_bucket_gapi,
-      [bucket_name, patch_bucket_gapi, predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil]
+      random_bucket_hash(name: bucket_name, url_root: bucket_url, location: bucket_location, storage_class: bucket_storage_class, logging_prefix: bucket_logging_prefix).to_json
+    mock.expect :patch_bucket, returned_bucket_gapi, [bucket_name, patch_bucket_gapi], **patch_bucket_args(options: {retries: 0})
 
     bucket.service.mocked_service = mock
 
@@ -114,9 +110,8 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
     patch_logging_gapi = Google::Apis::StorageV1::Bucket::Logging.new log_bucket: bucket_logging_bucket, log_object_prefix: bucket_logging_prefix
     patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new logging: patch_logging_gapi
     returned_bucket_gapi = Google::Apis::StorageV1::Bucket.from_json \
-      random_bucket_hash(bucket_name, bucket_url, bucket_location, bucket_storage_class, nil, bucket_logging_bucket, bucket_logging_prefix).to_json
-    mock.expect :patch_bucket, returned_bucket_gapi,
-      [bucket_name, patch_bucket_gapi.class, predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil]
+      random_bucket_hash(name: bucket_name, url_root: bucket_url, location: bucket_location, storage_class: bucket_storage_class, logging_bucket: bucket_logging_bucket, logging_prefix: bucket_logging_prefix).to_json
+    mock.expect :update_bucket, returned_bucket_gapi, [bucket_name, patch_bucket_gapi.class], **update_bucket_args(options: {retries: 0})
 
     bucket.service.mocked_service = mock
 
@@ -138,9 +133,8 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
     mock = Minitest::Mock.new
     patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new storage_class: "NEARLINE"
     returned_bucket_gapi = Google::Apis::StorageV1::Bucket.from_json \
-      random_bucket_hash(bucket_name, bucket_url, bucket_location, "NEARLINE", nil, nil, bucket_logging_prefix).to_json
-    mock.expect :patch_bucket, returned_bucket_gapi,
-      [bucket_name, patch_bucket_gapi, predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil]
+      random_bucket_hash(name: bucket_name, url_root: bucket_url, location: bucket_location, storage_class: "NEARLINE", logging_prefix: bucket_logging_prefix).to_json
+    mock.expect :patch_bucket, returned_bucket_gapi, [bucket_name, patch_bucket_gapi], **patch_bucket_args(options: {retries: 0})
 
     bucket.service.mocked_service = mock
 
@@ -156,9 +150,8 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
     patch_website_gapi = Google::Apis::StorageV1::Bucket::Website.new main_page_suffix: bucket_website_main
     patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new website: patch_website_gapi
     returned_bucket_gapi = Google::Apis::StorageV1::Bucket.from_json \
-      random_bucket_hash(bucket_name, bucket_url, bucket_location, bucket_storage_class, nil, nil, nil, bucket_website_main).to_json
-    mock.expect :patch_bucket, returned_bucket_gapi,
-      [bucket_name, patch_bucket_gapi, predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil]
+      random_bucket_hash(name: bucket_name, url_root: bucket_url, location: bucket_location, storage_class: bucket_storage_class, website_main: bucket_website_main).to_json
+    mock.expect :patch_bucket, returned_bucket_gapi, [bucket_name, patch_bucket_gapi], **patch_bucket_args(options: {retries: 0})
 
     bucket.service.mocked_service = mock
 
@@ -174,9 +167,8 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
     patch_website_gapi = Google::Apis::StorageV1::Bucket::Website.new not_found_page: bucket_website_404
     patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new website: patch_website_gapi
     returned_bucket_gapi = Google::Apis::StorageV1::Bucket.from_json \
-      random_bucket_hash(bucket_name, bucket_url, bucket_location, bucket_storage_class, nil, nil, nil, nil, bucket_website_404).to_json
-    mock.expect :patch_bucket, returned_bucket_gapi,
-      [bucket_name, patch_bucket_gapi, predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil]
+      random_bucket_hash(name: bucket_name, url_root: bucket_url, location: bucket_location, storage_class: bucket_storage_class, website_404: bucket_website_404).to_json
+    mock.expect :patch_bucket, returned_bucket_gapi, [bucket_name, patch_bucket_gapi], **patch_bucket_args(options: {retries: 0})
 
     bucket.service.mocked_service = mock
 
@@ -192,9 +184,8 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
     patch_website_gapi = Google::Apis::StorageV1::Bucket::Website.new main_page_suffix: bucket_website_main, not_found_page: bucket_website_404
     patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new website: patch_website_gapi
     returned_bucket_gapi = Google::Apis::StorageV1::Bucket.from_json \
-      random_bucket_hash(bucket_name, bucket_url, bucket_location, bucket_storage_class, nil, nil, nil, bucket_website_main, bucket_website_404).to_json
-    mock.expect :patch_bucket, returned_bucket_gapi,
-      [bucket_name, patch_bucket_gapi, predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil]
+      random_bucket_hash(name: bucket_name, url_root: bucket_url, location: bucket_location, storage_class: bucket_storage_class, website_main: bucket_website_main, website_404: bucket_website_404).to_json
+    mock.expect :update_bucket, returned_bucket_gapi, [bucket_name, patch_bucket_gapi], **update_bucket_args(options: {retries: 0})
 
     bucket.service.mocked_service = mock
 
@@ -217,9 +208,8 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
     patch_billing_gapi = Google::Apis::StorageV1::Bucket::Billing.new requester_pays: bucket_requester_pays
     patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new billing: patch_billing_gapi
     returned_bucket_gapi = Google::Apis::StorageV1::Bucket.from_json \
-      random_bucket_hash(bucket_name, bucket_url, bucket_location, bucket_storage_class, nil, nil, nil, nil, nil, [], bucket_requester_pays).to_json
-    mock.expect :patch_bucket, returned_bucket_gapi,
-      [bucket_name, patch_bucket_gapi, predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil]
+      random_bucket_hash(name: bucket_name, url_root: bucket_url, location: bucket_location, storage_class: bucket_storage_class, cors: [], requester_pays: bucket_requester_pays).to_json
+    mock.expect :patch_bucket, returned_bucket_gapi, [bucket_name, patch_bucket_gapi], **patch_bucket_args(options: {retries: 0})
 
     bucket.service.mocked_service = mock
 
@@ -241,11 +231,10 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
     mock = Minitest::Mock.new
     new_labels = { "env" => "production", "foo" => "bar" }
     patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new labels: new_labels
-    returned_bucket_hash = random_bucket_hash bucket_name, bucket_url, bucket_location, bucket_storage_class
+    returned_bucket_hash = random_bucket_hash name: bucket_name, url_root: bucket_url, location: bucket_location, storage_class: bucket_storage_class
     returned_bucket_hash[:labels] = new_labels
     returned_bucket_gapi = Google::Apis::StorageV1::Bucket.from_json returned_bucket_hash.to_json
-    mock.expect :patch_bucket, returned_bucket_gapi,
-      [bucket_name, patch_bucket_gapi, predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil]
+    mock.expect :patch_bucket, returned_bucket_gapi, [bucket_name, patch_bucket_gapi], **patch_bucket_args(options: {retries: 0})
 
     bucket.service.mocked_service = mock
 
@@ -263,11 +252,10 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
     patch_website_gapi = Google::Apis::StorageV1::Bucket::Website.new main_page_suffix: bucket_website_main, not_found_page: bucket_website_404
     patch_billing_gapi = Google::Apis::StorageV1::Bucket::Billing.new requester_pays: bucket_requester_pays
     patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new(versioning: patch_versioning_gapi, logging: patch_logging_gapi, storage_class: "NEARLINE", website: patch_website_gapi, billing: patch_billing_gapi, labels: { "env" => "production" })
-    returned_bucket_hash = random_bucket_hash bucket_name, bucket_url, bucket_location, "NEARLINE", true, bucket_logging_bucket, bucket_logging_prefix, bucket_website_main, bucket_website_404, [], bucket_requester_pays
+    returned_bucket_hash = random_bucket_hash name: bucket_name, url_root: bucket_url, location: bucket_location, storage_class: "NEARLINE", versioning: true, logging_bucket: bucket_logging_bucket, logging_prefix: bucket_logging_prefix, website_main: bucket_website_main, website_404: bucket_website_404, cors: [], requester_pays: bucket_requester_pays
     returned_bucket_hash[:labels] = { "env" => "production" }
     returned_bucket_gapi = Google::Apis::StorageV1::Bucket.from_json returned_bucket_hash.to_json
-    mock.expect :patch_bucket, returned_bucket_gapi,
-      [bucket_name, patch_bucket_gapi, predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil]
+    mock.expect :update_bucket, returned_bucket_gapi, [bucket_name, patch_bucket_gapi], **update_bucket_args(options: {retries: 0})
 
     bucket.service.mocked_service = mock
 
@@ -308,9 +296,8 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
       mock = Minitest::Mock.new
       patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new cors_configurations: [bucket_cors_gapi]
       returned_bucket_gapi = Google::Apis::StorageV1::Bucket.from_json \
-        random_bucket_hash(bucket_name, bucket_url, bucket_location, bucket_storage_class, nil, nil, nil, nil, nil, [bucket_cors_hash]).to_json
-      mock.expect :patch_bucket, returned_bucket_gapi,
-        [bucket_name, patch_bucket_gapi, predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil]
+        random_bucket_hash(name: bucket_name, url_root: bucket_url, location: bucket_location, storage_class: bucket_storage_class, cors: [bucket_cors_hash]).to_json
+      mock.expect :patch_bucket, returned_bucket_gapi, [bucket_name, patch_bucket_gapi], **patch_bucket_args(options: {retries: 0})
       bucket.service.mocked_service = mock
 
       _(bucket.cors).must_equal []
@@ -345,9 +332,8 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
         )
       ]
       returned_bucket_gapi = Google::Apis::StorageV1::Bucket.from_json \
-        random_bucket_hash(bucket_name, bucket_url, bucket_location, bucket_storage_class, nil, nil, nil, nil, nil, [bucket_cors_hash]).to_json
-      mock.expect :patch_bucket, returned_bucket_gapi,
-        [bucket_name, patch_bucket_gapi, predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil]
+        random_bucket_hash(name: bucket_name, url_root: bucket_url, location: bucket_location, storage_class: bucket_storage_class, cors: [bucket_cors_hash]).to_json
+      mock.expect :update_bucket, returned_bucket_gapi, [bucket_name, patch_bucket_gapi], **update_bucket_args(options: {retries: 0})
       bucket.service.mocked_service = mock
 
       _(bucket.cors).must_be :frozen?
@@ -380,9 +366,8 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
         )
       ]
       returned_bucket_gapi = Google::Apis::StorageV1::Bucket.from_json \
-        random_bucket_hash(bucket_name, bucket_url, bucket_location, bucket_storage_class, nil, nil, nil, nil, nil, [bucket_cors_hash]).to_json
-      mock.expect :patch_bucket, returned_bucket_gapi,
-        [bucket_name, patch_bucket_gapi, predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil]
+        random_bucket_hash(name: bucket_name, url_root: bucket_url, location: bucket_location, storage_class: bucket_storage_class, cors: [bucket_cors_hash]).to_json
+      mock.expect :update_bucket, returned_bucket_gapi, [bucket_name, patch_bucket_gapi], **update_bucket_args(options: {retries: 0})
       bucket.service.mocked_service = mock
 
       bucket.update do |b|
@@ -416,9 +401,8 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
         )
       ]
       returned_bucket_gapi = Google::Apis::StorageV1::Bucket.from_json \
-        random_bucket_hash(bucket_name, bucket_url, bucket_location, bucket_storage_class, nil, nil, nil, nil, nil, [bucket_cors_hash]).to_json
-      mock.expect :patch_bucket, returned_bucket_gapi,
-        [bucket_name, patch_bucket_gapi, predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil]
+        random_bucket_hash(name: bucket_name, url_root: bucket_url, location: bucket_location, storage_class: bucket_storage_class, cors: [bucket_cors_hash]).to_json
+      mock.expect :patch_bucket, returned_bucket_gapi, [bucket_name, patch_bucket_gapi], **patch_bucket_args(options: {retries: 0})
       bucket.service.mocked_service = mock
 
       returned_cors = bucket.cors do |c|
@@ -448,9 +432,8 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
           )
       )
       returned_bucket_gapi = Google::Apis::StorageV1::Bucket.from_json \
-        random_bucket_hash(bucket_name, bucket_url, bucket_location, bucket_storage_class, nil, nil, nil, nil, nil, nil, nil, bucket_lifecycle_hash).to_json
-      mock.expect :patch_bucket, returned_bucket_gapi,
-                  [bucket_name, patch_bucket_gapi, predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil]
+        random_bucket_hash(name: bucket_name, url_root: bucket_url, location: bucket_location, storage_class: bucket_storage_class, lifecycle: bucket_lifecycle_hash).to_json
+      mock.expect :patch_bucket, returned_bucket_gapi, [bucket_name, patch_bucket_gapi], **patch_bucket_args(options: {retries: 0})
       bucket.service.mocked_service = mock
 
       _(bucket.lifecycle).must_equal []
@@ -476,9 +459,8 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
           )
       )
       returned_bucket_gapi = Google::Apis::StorageV1::Bucket.from_json \
-        random_bucket_hash(bucket_name, bucket_url, bucket_location, bucket_storage_class, nil, nil, nil, nil, nil, nil, nil, bucket_lifecycle_hash).to_json
-      mock.expect :patch_bucket, returned_bucket_gapi,
-                  [bucket_name, patch_bucket_gapi, predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil]
+        random_bucket_hash(name: bucket_name, url_root: bucket_url, location: bucket_location, storage_class: bucket_storage_class, lifecycle: bucket_lifecycle_hash).to_json
+      mock.expect :update_bucket, returned_bucket_gapi, [bucket_name, patch_bucket_gapi], **update_bucket_args(options: {retries: 0})
       bucket.service.mocked_service = mock
 
       _(bucket.lifecycle).must_be :frozen?
@@ -500,9 +482,8 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
           )
       )
       returned_bucket_gapi = Google::Apis::StorageV1::Bucket.from_json \
-        random_bucket_hash(bucket_name, bucket_url, bucket_location, bucket_storage_class, nil, nil, nil, nil, nil, nil, nil, bucket_lifecycle_hash).to_json
-      mock.expect :patch_bucket, returned_bucket_gapi,
-                  [bucket_name, patch_bucket_gapi, predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil]
+        random_bucket_hash(name: bucket_name, url_root: bucket_url, location: bucket_location, storage_class: bucket_storage_class, lifecycle: bucket_lifecycle_hash).to_json
+      mock.expect :update_bucket, returned_bucket_gapi, [bucket_name, patch_bucket_gapi], **update_bucket_args(options: {retries: 0})
       bucket.service.mocked_service = mock
 
       bucket.update do |b|
@@ -525,9 +506,8 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
           )
       )
       returned_bucket_gapi = Google::Apis::StorageV1::Bucket.from_json \
-        random_bucket_hash(bucket_name, bucket_url, bucket_location, bucket_storage_class, nil, nil, nil, nil, nil, nil, nil, bucket_lifecycle_hash).to_json
-      mock.expect :patch_bucket, returned_bucket_gapi,
-                  [bucket_name, patch_bucket_gapi, predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil]
+        random_bucket_hash(name: bucket_name, url_root: bucket_url, location: bucket_location, storage_class: bucket_storage_class, cors: nil, lifecycle: bucket_lifecycle_hash).to_json
+      mock.expect :update_bucket, returned_bucket_gapi, [bucket_name, patch_bucket_gapi], **update_bucket_args(options: {retries: 0})
       bucket.service.mocked_service = mock
 
       _(bucket.lifecycle).must_be :frozen?
@@ -549,9 +529,8 @@ describe Google::Cloud::Storage::Bucket, :update, :lazy, :mock_storage do
           )
       )
       returned_bucket_gapi = Google::Apis::StorageV1::Bucket.from_json \
-        random_bucket_hash(bucket_name, bucket_url, bucket_location, bucket_storage_class, nil, nil, nil, nil, nil, nil, nil, bucket_lifecycle_hash).to_json
-      mock.expect :patch_bucket, returned_bucket_gapi,
-                  [bucket_name, patch_bucket_gapi, predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil]
+        random_bucket_hash(name: bucket_name, url_root: bucket_url, location: bucket_location, storage_class: bucket_storage_class, lifecycle: bucket_lifecycle_hash).to_json
+      mock.expect :patch_bucket, returned_bucket_gapi, [bucket_name, patch_bucket_gapi], **patch_bucket_args(options: {retries: 0})
       bucket.service.mocked_service = mock
 
       _(bucket.lifecycle).must_be :frozen?

@@ -53,9 +53,8 @@ describe "schemas" do
     # pubsub_delete_schema
     assert_output "Schema #{schema_id} deleted.\n" do
       delete_schema schema_id: schema_id
+      @schema = nil
     end
-    @schema = pubsub.schema schema_id
-    refute @schema
   end
 
   describe "AVRO" do

@@ -48,7 +48,7 @@ module Google
           #
           #   bigtable = Google::Cloud::Bigtable.new
           #
-          #   tables = bigtable.tables("my-instance")
+          #   tables = bigtable.tables "my-instance"
           #   if tables.next?
           #     next_tables = tables.next
           #   end
@@ -67,7 +67,7 @@ module Google
           #
           #   bigtable = Google::Cloud::Bigtable.new
           #
-          #   tables = bigtable.tables("my-instance")
+          #   tables = bigtable.tables "my-instance"
           #   if tables.next?
           #     next_tables = tables.next
           #   end

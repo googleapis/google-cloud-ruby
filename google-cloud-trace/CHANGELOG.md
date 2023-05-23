@@ -1,5 +1,49 @@
 # Release History
 
+### 0.42.2 (2023-05-19)
+
+#### Documentation
+
+* Fixed broken links in authentication documentation ([#21619](https://github.com/googleapis/google-cloud-ruby/issues/21619)) 
+
+### 0.42.1 (2022-07-28)
+
+#### Documentation
+
+* Fix example in FaradayMiddleware ([#18850](https://github.com/googleapis/google-cloud-ruby/issues/18850)) 
+
+### 0.42.0 (2022-07-08)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18455](https://github.com/googleapis/google-cloud-ruby/issues/18455)) 
+
+### 0.41.4 (2022-05-27)
+
+#### Bug Fixes
+
+* normalize span time based on rails version
+* wrap patched methods into class to ignore yard parsing
+
+### 0.41.3 / 2021-07-08
+
+#### Documentation
+
+* Update AUTHENTICATION.md in handwritten packages
+
+### 0.41.2 / 2021-06-22
+
+#### Bug Fixes
+
+* Error reporting no longer fails due to loading the wrong constant
+* Fixed a crash in the gRPC patch when no span is present in the current trace
+
+### 0.41.1 / 2021-06-17
+
+#### Bug Fixes
+
+* Fixed Ruby 3 keyword argument error in GRPC::ActiveCallWithTrace patch
+
 ### 0.41.0 / 2021-03-11
 
 #### Features

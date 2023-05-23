@@ -563,6 +563,38 @@ require "google/cloud/storage"
 storage = Google::Cloud::Storage.new retries: 10, timeout: 120
 ```
 
+The library by default retries all API requests which are always idempotent on a
+"transient" error.
+
+For API requests which are idempotent only if the some conditions are satisfied
+(For ex. a file has the same "generation"), the library retries only if the
+condition is specified.
+
+Rather than using this default behaviour, you may choose to disable the retries
+on your own.
+
+You can pass `retries` as `0` to disable retries for all operations regardless
+of their idempotencies.
+
+```ruby
+require "google/cloud/storage"
+
+storage = Google::Cloud::Storage.new retries: 0
+```
+
+You can also disable retries for a particular operation by passing `retries` as
+`0` in the `options` field.
+
+```ruby
+require "google/cloud/storage"
+
+storage = Google::Cloud::Storage.new
+service = storage.service
+service.get_bucket bucket_name, options: {retries: 0}
+```
+
+For those API requests which are never idempotent, the library passes retries=0 by default, suppressing any retries.
+
 See the [Storage status and error
 codes](https://cloud.google.com/storage/docs/json_api/v1/status-codes)
 for a list of error conditions.

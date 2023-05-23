@@ -1,5 +1,5 @@
 --no-private
---title=Cloud Firestore V1 API
+--title="Cloud Firestore V1 API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

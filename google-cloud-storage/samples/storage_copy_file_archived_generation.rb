@@ -37,9 +37,9 @@ def copy_file_archived_generation source_bucket_name:,
 
   storage = Google::Cloud::Storage.new
 
-  source_bucket = storage.bucket source_bucket_name
+  source_bucket = storage.bucket source_bucket_name, skip_lookup: true
   source_file = source_bucket.file source_file_name
-  destination_bucket = storage.bucket destination_bucket_name
+  destination_bucket = storage.bucket destination_bucket_name, skip_lookup: true
 
   destination_file = source_file.copy destination_bucket, destination_file_name, generation: generation
 

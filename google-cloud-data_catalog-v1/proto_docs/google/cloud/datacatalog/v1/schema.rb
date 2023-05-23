@@ -21,7 +21,7 @@ module Google
   module Cloud
     module DataCatalog
       module V1
-        # Represents a schema (e.g. BigQuery, GoogleSQL, Avro schema).
+        # Represents a schema, for example, a BigQuery, GoogleSQL, or Avro schema.
         # @!attribute [rw] columns
         #   @return [::Array<::Google::Cloud::DataCatalog::V1::ColumnSchema>]
         #     The unified GoogleSQL-like schema of columns.
@@ -33,7 +33,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Representation of a column within a schema. Columns could be nested inside
+        # A column within a schema. Columns can be nested inside
         # other columns.
         # @!attribute [rw] column
         #   @return [::String]
@@ -54,17 +54,82 @@ module Google
         #     bytes.
         # @!attribute [rw] mode
         #   @return [::String]
-        #     Optional. A column's mode indicates if values in this column are required,
-        #     nullable, or repeated.
+        #     Optional. A column's mode indicates whether values in this column are
+        #     required, nullable, or repeated.
         #
         #     Only `NULLABLE`, `REQUIRED`, and `REPEATED` values are supported.
         #     Default mode is `NULLABLE`.
+        # @!attribute [rw] default_value
+        #   @return [::String]
+        #     Optional. Default value for the column.
+        # @!attribute [rw] ordinal_position
+        #   @return [::Integer]
+        #     Optional. Ordinal position
+        # @!attribute [rw] highest_indexing_type
+        #   @return [::Google::Cloud::DataCatalog::V1::ColumnSchema::IndexingType]
+        #     Optional. Most important inclusion of this column.
         # @!attribute [rw] subcolumns
         #   @return [::Array<::Google::Cloud::DataCatalog::V1::ColumnSchema>]
-        #     Optional. Schema of sub-columns. A column can have zero or more sub-columns.
+        #     Optional. Schema of sub-columns. A column can have zero or more
+        #     sub-columns.
+        # @!attribute [rw] looker_column_spec
+        #   @return [::Google::Cloud::DataCatalog::V1::ColumnSchema::LookerColumnSpec]
+        #     Looker specific column info of this column.
+        # @!attribute [rw] gc_rule
+        #   @return [::String]
+        #     Optional. Garbage collection policy for the column or column family.
+        #     Applies to systems like Cloud Bigtable.
         class ColumnSchema
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Column info specific to Looker System.
+          # @!attribute [rw] type
+          #   @return [::Google::Cloud::DataCatalog::V1::ColumnSchema::LookerColumnSpec::LookerColumnType]
+          #     Looker specific column type of this column.
+          class LookerColumnSpec
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Column type in Looker.
+            module LookerColumnType
+              # Unspecified.
+              LOOKER_COLUMN_TYPE_UNSPECIFIED = 0
+
+              # Dimension.
+              DIMENSION = 1
+
+              # Dimension group - parent for Dimension.
+              DIMENSION_GROUP = 2
+
+              # Filter.
+              FILTER = 3
+
+              # Measure.
+              MEASURE = 4
+
+              # Parameter.
+              PARAMETER = 5
+            end
+          end
+
+          # Specifies inclusion of the column in an index
+          module IndexingType
+            # Unspecified.
+            INDEXING_TYPE_UNSPECIFIED = 0
+
+            # Column not a part of an index.
+            INDEXING_TYPE_NONE = 1
+
+            # Column Part of non unique index.
+            INDEXING_TYPE_NON_UNIQUE = 2
+
+            # Column part of unique index.
+            INDEXING_TYPE_UNIQUE = 3
+
+            # Column part of the primary key.
+            INDEXING_TYPE_PRIMARY_KEY = 4
+          end
         end
       end
     end

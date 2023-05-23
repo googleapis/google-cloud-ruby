@@ -25,10 +25,10 @@ module Google
         # points. It contains the size of the population of sample points plus
         # additional optional information:
         #
-        #   - the arithmetic mean of the samples
-        #   - the minimum and maximum of the samples
-        #   - the sum-squared-deviation of the samples, used to compute variance
-        #   - a histogram of the values of the sample points
+        # * the arithmetic mean of the samples
+        # * the minimum and maximum of the samples
+        # * the sum-squared-deviation of the samples, used to compute variance
+        # * a histogram of the values of the sample points
         # @!attribute [rw] count
         #   @return [::Integer]
         #     The total number of samples in the distribution. Must be >= 0.
@@ -70,6 +70,9 @@ module Google
         # @!attribute [rw] explicit_buckets
         #   @return [::Google::Cloud::ServiceControl::V1::Distribution::ExplicitBuckets]
         #     Buckets with arbitrary user-provided width.
+        # @!attribute [rw] exemplars
+        #   @return [::Array<::Google::Api::Distribution::Exemplar>]
+        #     Example points. Must be in increasing order of `value` field.
         class Distribution
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

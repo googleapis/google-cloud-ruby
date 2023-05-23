@@ -236,7 +236,7 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::PubSub::Project#schema" do
     mock_pubsub do |mock_publisher, mock_subscriber, mock_iam, mock_schema|
-      mock_schema.expect :get_schema, schema_resp("my-schema"), [name: schema_path("my-schema"), view: 1]
+      mock_schema.expect :get_schema, schema_resp("my-schema"), [name: schema_path("my-schema"), view: 2]
     end
   end
 
@@ -246,9 +246,9 @@ YARD::Doctest.configure do |doctest|
     end
   end
 
-  doctest.before "Google::Cloud::PubSub::Project#schema@Get the schema definition with `view: :full`:" do
+  doctest.before "Google::Cloud::PubSub::Project#schema@Omit the schema definition with `view: :basic`:" do
     mock_pubsub do |mock_publisher, mock_subscriber, mock_iam, mock_schema|
-      mock_schema.expect :get_schema, schema_resp("my-schema", definition: "the schema definition"), [name: schema_path("my-schema"), view: 2]
+      mock_schema.expect :get_schema, schema_resp("my-schema"), [name: schema_path("my-schema"), view: 1]
     end
   end
 
@@ -346,24 +346,24 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::PubSub::Schema" do
     mock_pubsub do |mock_publisher, mock_subscriber, mock_iam, mock_schema|
-      mock_schema.expect :get_schema, schema_resp("my-schema"), [name: schema_path("my-schema"), view: 1]
+      mock_schema.expect :get_schema, schema_resp("my-schema"), [name: schema_path("my-schema"), view: 2]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Schema#delete" do
     mock_pubsub do |mock_publisher, mock_subscriber, mock_iam, mock_schema|
-      mock_schema.expect :get_schema, schema_resp("my-schema"), [name: schema_path("my-schema"), view: 1]
+      mock_schema.expect :get_schema, schema_resp("my-schema"), [name: schema_path("my-schema"), view: 2]
       mock_schema.expect :delete_schema, nil, [name: schema_path("my-schema")]
     end
   end
 
   doctest.before "Google::Cloud::PubSub::Schema#reload!" do
     mock_pubsub do |mock_publisher, mock_subscriber, mock_iam, mock_schema|
-      mock_schema.expect :get_schema, schema_resp("my-schema", definition: "the schema definition"), [name: schema_path("my-schema"), view: 1]
+      mock_schema.expect :get_schema, schema_resp("my-schema", definition: "the schema definition"), [name: schema_path("my-schema"), view: 2]
     end
   end
 
-  doctest.before "Google::Cloud::PubSub::Schema#reload!@Use the `view` option to load the full resource:" do
+  doctest.before "Google::Cloud::PubSub::Schema#reload!@Use the `view` option to load the basic or full resource:" do
     mock_pubsub do |mock_publisher, mock_subscriber, mock_iam, mock_schema|
       mock_schema.expect :get_schema, schema_resp("my-schema"), [name: schema_path("my-schema"), view: 1]
       mock_schema.expect :get_schema, schema_resp("my-schema", definition: "the schema definition"), [name: schema_path("my-schema"), view: 2]
@@ -385,7 +385,7 @@ YARD::Doctest.configure do |doctest|
 
   doctest.before "Google::Cloud::PubSub::Schema#validate_message" do
     mock_pubsub do |mock_publisher, mock_subscriber, mock_iam, mock_schema|
-      mock_schema.expect :get_schema, schema_resp("my-schema"), [name: schema_path("my-schema"), view: 1]
+      mock_schema.expect :get_schema, schema_resp("my-schema"), [name: schema_path("my-schema"), view: 2]
       message_data = { "name" => "Alaska", "post_abbr" => "AK" }.to_json
       mock_schema.expect :validate_message, nil, [parent: project_path, name: schema_path("my-schema"), schema: nil, message: message_data, encoding: "JSON"]
     end

@@ -28,7 +28,7 @@ module Google
             ##
             # Client for the ReservationService service.
             #
-            # This API allows users to manage their flat-rate BigQuery reservations.
+            # This API allows users to manage their BigQuery reservations.
             #
             # A reservation provides computational resource guarantees, in the form of
             # [slots](https://cloud.google.com/bigquery/docs/slots), to users. A slot is a
@@ -56,13 +56,12 @@ module Google
               # See {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client::Configuration}
               # for a description of the configuration fields.
               #
-              # ## Example
+              # @example
               #
-              # To modify the configuration for all ReservationService clients:
-              #
-              #     ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.configure do |config|
-              #       config.timeout = 10.0
-              #     end
+              #   # Modify the configuration for all ReservationService clients
+              #   ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.configure do |config|
+              #     config.timeout = 10.0
+              #   end
               #
               # @yield [config] Configure the Client client.
               # @yieldparam config [Client::Configuration]
@@ -80,103 +79,73 @@ module Google
                                   end
                   default_config = Client::Configuration.new parent_config
 
-                  default_config.rpcs.create_reservation.timeout = 60.0
+                  default_config.rpcs.create_reservation.timeout = 300.0
 
-                  default_config.rpcs.list_reservations.timeout = 60.0
+                  default_config.rpcs.list_reservations.timeout = 300.0
                   default_config.rpcs.list_reservations.retry_policy = {
-                    initial_delay: 0.1,
-                    max_delay: 60.0,
-                    multiplier: 1.3,
-                    retry_codes: [4, 14]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.get_reservation.timeout = 60.0
+                  default_config.rpcs.get_reservation.timeout = 300.0
                   default_config.rpcs.get_reservation.retry_policy = {
-                    initial_delay: 0.1,
-                    max_delay: 60.0,
-                    multiplier: 1.3,
-                    retry_codes: [4, 14]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.delete_reservation.timeout = 60.0
+                  default_config.rpcs.delete_reservation.timeout = 300.0
                   default_config.rpcs.delete_reservation.retry_policy = {
-                    initial_delay: 0.1,
-                    max_delay: 60.0,
-                    multiplier: 1.3,
-                    retry_codes: [4, 14]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.update_reservation.timeout = 60.0
+                  default_config.rpcs.update_reservation.timeout = 300.0
 
-                  default_config.rpcs.create_capacity_commitment.timeout = 60.0
+                  default_config.rpcs.create_capacity_commitment.timeout = 300.0
 
-                  default_config.rpcs.list_capacity_commitments.timeout = 60.0
+                  default_config.rpcs.list_capacity_commitments.timeout = 300.0
                   default_config.rpcs.list_capacity_commitments.retry_policy = {
-                    initial_delay: 0.1,
-                    max_delay: 60.0,
-                    multiplier: 1.3,
-                    retry_codes: [4, 14]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.get_capacity_commitment.timeout = 60.0
+                  default_config.rpcs.get_capacity_commitment.timeout = 300.0
                   default_config.rpcs.get_capacity_commitment.retry_policy = {
-                    initial_delay: 0.1,
-                    max_delay: 60.0,
-                    multiplier: 1.3,
-                    retry_codes: [4, 14]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.delete_capacity_commitment.timeout = 60.0
+                  default_config.rpcs.delete_capacity_commitment.timeout = 300.0
                   default_config.rpcs.delete_capacity_commitment.retry_policy = {
-                    initial_delay: 0.1,
-                    max_delay: 60.0,
-                    multiplier: 1.3,
-                    retry_codes: [4, 14]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.update_capacity_commitment.timeout = 60.0
+                  default_config.rpcs.update_capacity_commitment.timeout = 300.0
 
-                  default_config.rpcs.split_capacity_commitment.timeout = 60.0
+                  default_config.rpcs.split_capacity_commitment.timeout = 300.0
 
-                  default_config.rpcs.merge_capacity_commitments.timeout = 60.0
+                  default_config.rpcs.merge_capacity_commitments.timeout = 300.0
 
-                  default_config.rpcs.create_assignment.timeout = 60.0
+                  default_config.rpcs.create_assignment.timeout = 300.0
 
-                  default_config.rpcs.list_assignments.timeout = 60.0
+                  default_config.rpcs.list_assignments.timeout = 300.0
                   default_config.rpcs.list_assignments.retry_policy = {
-                    initial_delay: 0.1,
-                    max_delay: 60.0,
-                    multiplier: 1.3,
-                    retry_codes: [4, 14]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.delete_assignment.timeout = 60.0
+                  default_config.rpcs.delete_assignment.timeout = 300.0
                   default_config.rpcs.delete_assignment.retry_policy = {
-                    initial_delay: 0.1,
-                    max_delay: 60.0,
-                    multiplier: 1.3,
-                    retry_codes: [4, 14]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.search_assignments.timeout = 60.0
+                  default_config.rpcs.search_assignments.timeout = 300.0
                   default_config.rpcs.search_assignments.retry_policy = {
-                    initial_delay: 0.1,
-                    max_delay: 60.0,
-                    multiplier: 1.3,
-                    retry_codes: [4, 14]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.move_assignment.timeout = 60.0
+                  default_config.rpcs.move_assignment.timeout = 300.0
 
-                  default_config.rpcs.get_bi_reservation.timeout = 60.0
+                  default_config.rpcs.get_bi_reservation.timeout = 300.0
                   default_config.rpcs.get_bi_reservation.retry_policy = {
-                    initial_delay: 0.1,
-                    max_delay: 60.0,
-                    multiplier: 1.3,
-                    retry_codes: [4, 14]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.update_bi_reservation.timeout = 60.0
+                  default_config.rpcs.update_bi_reservation.timeout = 300.0
 
                   default_config
                 end
@@ -207,19 +176,15 @@ module Google
               ##
               # Create a new ReservationService client object.
               #
-              # ## Examples
+              # @example
               #
-              # To create a new ReservationService client with the default
-              # configuration:
+              #   # Create a client using the default configuration
+              #   client = ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new
               #
-              #     client = ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new
-              #
-              # To create a new ReservationService client with a custom
-              # configuration:
-              #
-              #     client = ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new do |config|
-              #       config.timeout = 10.0
-              #     end
+              #   # Create a client using a custom configuration
+              #   client = ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new do |config|
+              #     config.timeout = 10.0
+              #   end
               #
               # @yield [config] Configure the ReservationService client.
               # @yieldparam config [Client::Configuration]
@@ -239,14 +204,13 @@ module Google
 
                 # Create credentials
                 credentials = @config.credentials
-                # Use self-signed JWT if the scope and endpoint are unchanged from default,
+                # Use self-signed JWT if the endpoint is unchanged from default,
                 # but only if the default endpoint does not have a region prefix.
-                enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                         @config.endpoint == Client.configure.endpoint &&
+                enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                          !@config.endpoint.split(".").first.include?("-")
                 credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
-                if credentials.is_a?(String) || credentials.is_a?(Hash)
+                if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                   credentials = Credentials.new credentials, scope: @config.scope
                 end
                 @quota_project_id = @config.quota_project
@@ -285,8 +249,9 @@ module Google
               #     Required. Project, location. E.g.,
               #     `projects/myproject/locations/US`
               #   @param reservation_id [::String]
-              #     The reservation ID. This field must only contain lower case alphanumeric
-              #     characters or dash. Max length is 64 characters.
+              #     The reservation ID. It must only contain lower case alphanumeric
+              #     characters or dashes. It must start with a letter and must not end
+              #     with a dash. Its maximum length is 64 characters.
               #   @param reservation [::Google::Cloud::Bigquery::Reservation::V1::Reservation, ::Hash]
               #     Definition of the new reservation to create.
               #
@@ -297,6 +262,21 @@ module Google
               # @return [::Google::Cloud::Bigquery::Reservation::V1::Reservation]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigquery/reservation/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::Reservation::V1::CreateReservationRequest.new
+              #
+              #   # Call the create_reservation method.
+              #   result = client.create_reservation request
+              #
+              #   # The returned object is of type Google::Cloud::Bigquery::Reservation::V1::Reservation.
+              #   p result
               #
               def create_reservation request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
@@ -315,16 +295,20 @@ module Google
                   gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "parent" => request.parent
-                }
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
                 options.apply_defaults timeout:      @config.rpcs.create_reservation.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.create_reservation.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @reservation_service_stub.call_rpc :create_reservation, request, options: options do |response, operation|
@@ -369,6 +353,25 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/bigquery/reservation/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::Reservation::V1::ListReservationsRequest.new
+              #
+              #   # Call the list_reservations method.
+              #   result = client.list_reservations request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Bigquery::Reservation::V1::Reservation.
+              #     p item
+              #   end
+              #
               def list_reservations request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -386,16 +389,20 @@ module Google
                   gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "parent" => request.parent
-                }
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
                 options.apply_defaults timeout:      @config.rpcs.list_reservations.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.list_reservations.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @reservation_service_stub.call_rpc :list_reservations, request, options: options do |response, operation|
@@ -437,6 +444,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/bigquery/reservation/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::Reservation::V1::GetReservationRequest.new
+              #
+              #   # Call the get_reservation method.
+              #   result = client.get_reservation request
+              #
+              #   # The returned object is of type Google::Cloud::Bigquery::Reservation::V1::Reservation.
+              #   p result
+              #
               def get_reservation request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -454,16 +476,20 @@ module Google
                   gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
                 options.apply_defaults timeout:      @config.rpcs.get_reservation.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.get_reservation.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @reservation_service_stub.call_rpc :get_reservation, request, options: options do |response, operation|
@@ -506,6 +532,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/bigquery/reservation/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::Reservation::V1::DeleteReservationRequest.new
+              #
+              #   # Call the delete_reservation method.
+              #   result = client.delete_reservation request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_reservation request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -523,16 +564,20 @@ module Google
                   gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
                 options.apply_defaults timeout:      @config.rpcs.delete_reservation.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.delete_reservation.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @reservation_service_stub.call_rpc :delete_reservation, request, options: options do |response, operation|
@@ -574,6 +619,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/bigquery/reservation/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::Reservation::V1::UpdateReservationRequest.new
+              #
+              #   # Call the update_reservation method.
+              #   result = client.update_reservation request
+              #
+              #   # The returned object is of type Google::Cloud::Bigquery::Reservation::V1::Reservation.
+              #   p result
+              #
               def update_reservation request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -591,16 +651,20 @@ module Google
                   gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "reservation.name" => request.reservation.name
-                }
+                header_params = {}
+                if request.reservation&.name
+                  header_params["reservation.name"] = request.reservation.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
                 options.apply_defaults timeout:      @config.rpcs.update_reservation.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.update_reservation.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @reservation_service_stub.call_rpc :update_reservation, request, options: options do |response, operation|
@@ -624,7 +688,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload create_capacity_commitment(parent: nil, capacity_commitment: nil, enforce_single_admin_project_per_org: nil)
+              # @overload create_capacity_commitment(parent: nil, capacity_commitment: nil, enforce_single_admin_project_per_org: nil, capacity_commitment_id: nil)
               #   Pass arguments to `create_capacity_commitment` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -637,6 +701,12 @@ module Google
               #   @param enforce_single_admin_project_per_org [::Boolean]
               #     If true, fail the request if another project in the organization has a
               #     capacity commitment.
+              #   @param capacity_commitment_id [::String]
+              #     The optional capacity commitment ID. Capacity commitment name will be
+              #     generated automatically if this field is empty.
+              #     This field must only contain lower case alphanumeric characters or dashes.
+              #     The first and last character cannot be a dash. Max length is 64 characters.
+              #     NOTE: this ID won't be kept if the capacity commitment is split or merged.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Bigquery::Reservation::V1::CapacityCommitment]
@@ -645,6 +715,21 @@ module Google
               # @return [::Google::Cloud::Bigquery::Reservation::V1::CapacityCommitment]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigquery/reservation/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::Reservation::V1::CreateCapacityCommitmentRequest.new
+              #
+              #   # Call the create_capacity_commitment method.
+              #   result = client.create_capacity_commitment request
+              #
+              #   # The returned object is of type Google::Cloud::Bigquery::Reservation::V1::CapacityCommitment.
+              #   p result
               #
               def create_capacity_commitment request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
@@ -663,16 +748,20 @@ module Google
                   gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "parent" => request.parent
-                }
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
                 options.apply_defaults timeout:      @config.rpcs.create_capacity_commitment.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.create_capacity_commitment.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @reservation_service_stub.call_rpc :create_capacity_commitment, request, options: options do |response, operation|
@@ -717,6 +806,25 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/bigquery/reservation/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::Reservation::V1::ListCapacityCommitmentsRequest.new
+              #
+              #   # Call the list_capacity_commitments method.
+              #   result = client.list_capacity_commitments request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Bigquery::Reservation::V1::CapacityCommitment.
+              #     p item
+              #   end
+              #
               def list_capacity_commitments request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -734,16 +842,20 @@ module Google
                   gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "parent" => request.parent
-                }
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
                 options.apply_defaults timeout:      @config.rpcs.list_capacity_commitments.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.list_capacity_commitments.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @reservation_service_stub.call_rpc :list_capacity_commitments, request, options: options do |response, operation|
@@ -785,6 +897,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/bigquery/reservation/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::Reservation::V1::GetCapacityCommitmentRequest.new
+              #
+              #   # Call the get_capacity_commitment method.
+              #   result = client.get_capacity_commitment request
+              #
+              #   # The returned object is of type Google::Cloud::Bigquery::Reservation::V1::CapacityCommitment.
+              #   p result
+              #
               def get_capacity_commitment request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -802,16 +929,20 @@ module Google
                   gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
                 options.apply_defaults timeout:      @config.rpcs.get_capacity_commitment.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.get_capacity_commitment.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @reservation_service_stub.call_rpc :get_capacity_commitment, request, options: options do |response, operation|
@@ -837,7 +968,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload delete_capacity_commitment(name: nil)
+              # @overload delete_capacity_commitment(name: nil, force: nil)
               #   Pass arguments to `delete_capacity_commitment` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -845,6 +976,10 @@ module Google
               #   @param name [::String]
               #     Required. Resource name of the capacity commitment to delete. E.g.,
               #        `projects/myproject/locations/US/capacityCommitments/123`
+              #   @param force [::Boolean]
+              #     Can be used to force delete commitments even if assignments exist. Deleting
+              #     commitments with assignments may cause queries to fail if they no longer
+              #     have access to slots.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Protobuf::Empty]
@@ -853,6 +988,21 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigquery/reservation/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::Reservation::V1::DeleteCapacityCommitmentRequest.new
+              #
+              #   # Call the delete_capacity_commitment method.
+              #   result = client.delete_capacity_commitment request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
               #
               def delete_capacity_commitment request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
@@ -871,16 +1021,20 @@ module Google
                   gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
                 options.apply_defaults timeout:      @config.rpcs.delete_capacity_commitment.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.delete_capacity_commitment.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @reservation_service_stub.call_rpc :delete_capacity_commitment, request, options: options do |response, operation|
@@ -928,6 +1082,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/bigquery/reservation/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::Reservation::V1::UpdateCapacityCommitmentRequest.new
+              #
+              #   # Call the update_capacity_commitment method.
+              #   result = client.update_capacity_commitment request
+              #
+              #   # The returned object is of type Google::Cloud::Bigquery::Reservation::V1::CapacityCommitment.
+              #   p result
+              #
               def update_capacity_commitment request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -945,16 +1114,20 @@ module Google
                   gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "capacity_commitment.name" => request.capacity_commitment.name
-                }
+                header_params = {}
+                if request.capacity_commitment&.name
+                  header_params["capacity_commitment.name"] = request.capacity_commitment.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
                 options.apply_defaults timeout:      @config.rpcs.update_capacity_commitment.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.update_capacity_commitment.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @reservation_service_stub.call_rpc :update_capacity_commitment, request, options: options do |response, operation|
@@ -973,7 +1146,7 @@ module Google
               #
               # For example, in order to downgrade from 10000 slots to 8000, you might
               # split a 10000 capacity commitment into commitments of 2000 and 8000. Then,
-              # you would change the plan of the first one to `FLEX` and then delete it.
+              # you delete the first one after the commitment end time passes.
               #
               # @overload split_capacity_commitment(request, options = nil)
               #   Pass arguments to `split_capacity_commitment` via a request object, either of type
@@ -1004,6 +1177,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/bigquery/reservation/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::Reservation::V1::SplitCapacityCommitmentRequest.new
+              #
+              #   # Call the split_capacity_commitment method.
+              #   result = client.split_capacity_commitment request
+              #
+              #   # The returned object is of type Google::Cloud::Bigquery::Reservation::V1::SplitCapacityCommitmentResponse.
+              #   p result
+              #
               def split_capacity_commitment request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1021,16 +1209,20 @@ module Google
                   gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
                 options.apply_defaults timeout:      @config.rpcs.split_capacity_commitment.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.split_capacity_commitment.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @reservation_service_stub.call_rpc :split_capacity_commitment, request, options: options do |response, operation|
@@ -1083,6 +1275,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/bigquery/reservation/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::Reservation::V1::MergeCapacityCommitmentsRequest.new
+              #
+              #   # Call the merge_capacity_commitments method.
+              #   result = client.merge_capacity_commitments request
+              #
+              #   # The returned object is of type Google::Cloud::Bigquery::Reservation::V1::CapacityCommitment.
+              #   p result
+              #
               def merge_capacity_commitments request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1100,16 +1307,20 @@ module Google
                   gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "parent" => request.parent
-                }
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
                 options.apply_defaults timeout:      @config.rpcs.merge_capacity_commitments.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.merge_capacity_commitments.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @reservation_service_stub.call_rpc :merge_capacity_commitments, request, options: options do |response, operation|
@@ -1145,6 +1356,11 @@ module Google
               #   `project2`) could all be created and mapped to the same or different
               #   reservations.
               #
+              # "None" assignments represent an absence of the assignment. Projects
+              # assigned to None use on-demand pricing. To create a "None" assignment, use
+              # "none" as a reservation_id in the parent. Example parent:
+              # `projects/myproject/locations/US/reservations/none`.
+              #
               # Returns `google.rpc.Code.PERMISSION_DENIED` if user does not have
               # 'bigquery.admin' permissions on the project using the reservation
               # and the project that owns this reservation.
@@ -1162,7 +1378,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload create_assignment(parent: nil, assignment: nil)
+              # @overload create_assignment(parent: nil, assignment: nil, assignment_id: nil)
               #   Pass arguments to `create_assignment` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1172,6 +1388,11 @@ module Google
               #     E.g. `projects/myproject/locations/US/reservations/team1-prod`
               #   @param assignment [::Google::Cloud::Bigquery::Reservation::V1::Assignment, ::Hash]
               #     Assignment resource to create.
+              #   @param assignment_id [::String]
+              #     The optional assignment ID. Assignment name will be generated automatically
+              #     if this field is empty.
+              #     This field must only contain lower case alphanumeric characters or dashes.
+              #     Max length is 64 characters.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Bigquery::Reservation::V1::Assignment]
@@ -1180,6 +1401,21 @@ module Google
               # @return [::Google::Cloud::Bigquery::Reservation::V1::Assignment]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigquery/reservation/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::Reservation::V1::CreateAssignmentRequest.new
+              #
+              #   # Call the create_assignment method.
+              #   result = client.create_assignment request
+              #
+              #   # The returned object is of type Google::Cloud::Bigquery::Reservation::V1::Assignment.
+              #   p result
               #
               def create_assignment request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1198,16 +1434,20 @@ module Google
                   gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "parent" => request.parent
-                }
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
                 options.apply_defaults timeout:      @config.rpcs.create_assignment.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.create_assignment.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @reservation_service_stub.call_rpc :create_assignment, request, options: options do |response, operation|
@@ -1277,6 +1517,25 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/bigquery/reservation/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::Reservation::V1::ListAssignmentsRequest.new
+              #
+              #   # Call the list_assignments method.
+              #   result = client.list_assignments request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Bigquery::Reservation::V1::Assignment.
+              #     p item
+              #   end
+              #
               def list_assignments request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1294,16 +1553,20 @@ module Google
                   gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "parent" => request.parent
-                }
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
                 options.apply_defaults timeout:      @config.rpcs.list_assignments.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.list_assignments.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @reservation_service_stub.call_rpc :list_assignments, request, options: options do |response, operation|
@@ -1359,6 +1622,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/bigquery/reservation/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::Reservation::V1::DeleteAssignmentRequest.new
+              #
+              #   # Call the delete_assignment method.
+              #   result = client.delete_assignment request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_assignment request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1376,19 +1654,151 @@ module Google
                   gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
                 options.apply_defaults timeout:      @config.rpcs.delete_assignment.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.delete_assignment.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @reservation_service_stub.call_rpc :delete_assignment, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deprecated: Looks up assignments for a specified resource for a particular
+              # region. If the request is about a project:
+              #
+              # 1. Assignments created on the project will be returned if they exist.
+              # 2. Otherwise assignments created on the closest ancestor will be
+              #    returned.
+              # 3. Assignments for different JobTypes will all be returned.
+              #
+              # The same logic applies if the request is about a folder.
+              #
+              # If the request is about an organization, then assignments created on the
+              # organization will be returned (organization doesn't have ancestors).
+              #
+              # Comparing to ListAssignments, there are some behavior
+              # differences:
+              #
+              # 1. permission on the assignee will be verified in this API.
+              # 2. Hierarchy lookup (project->folder->organization) happens in this API.
+              # 3. Parent here is `projects/*/locations/*`, instead of
+              #    `projects/*/locations/*reservations/*`.
+              #
+              # **Note** "-" cannot be used for projects
+              # nor locations.
+              #
+              # @deprecated This method is deprecated and may be removed in the next major version update.
+              #
+              # @overload search_assignments(request, options = nil)
+              #   Pass arguments to `search_assignments` via a request object, either of type
+              #   {::Google::Cloud::Bigquery::Reservation::V1::SearchAssignmentsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigquery::Reservation::V1::SearchAssignmentsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload search_assignments(parent: nil, query: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `search_assignments` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The resource name of the admin project(containing project and
+              #     location), e.g.:
+              #       `projects/myproject/locations/US`.
+              #   @param query [::String]
+              #     Please specify resource name as assignee in the query.
+              #
+              #     Examples:
+              #
+              #     * `assignee=projects/myproject`
+              #     * `assignee=folders/123`
+              #     * `assignee=organizations/456`
+              #   @param page_size [::Integer]
+              #     The maximum number of items to return per page.
+              #   @param page_token [::String]
+              #     The next_page_token value returned from a previous List request, if any.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Bigquery::Reservation::V1::Assignment>]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::PagedEnumerable<::Google::Cloud::Bigquery::Reservation::V1::Assignment>]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigquery/reservation/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::Reservation::V1::SearchAssignmentsRequest.new
+              #
+              #   # Call the search_assignments method.
+              #   result = client.search_assignments request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Bigquery::Reservation::V1::Assignment.
+              #     p item
+              #   end
+              #
+              def search_assignments request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigquery::Reservation::V1::SearchAssignmentsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.search_assignments.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.search_assignments.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.search_assignments.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @reservation_service_stub.call_rpc :search_assignments, request, options: options do |response, operation|
+                  response = ::Gapic::PagedEnumerable.new @reservation_service_stub, :search_assignments, request, response, operation, options
                   yield response, operation if block_given?
                   return response
                 end
@@ -1418,28 +1828,25 @@ module Google
               # 3. Parent here is `projects/*/locations/*`, instead of
               #    `projects/*/locations/*reservations/*`.
               #
-              # **Note** "-" cannot be used for projects
-              # nor locations.
+              # @overload search_all_assignments(request, options = nil)
+              #   Pass arguments to `search_all_assignments` via a request object, either of type
+              #   {::Google::Cloud::Bigquery::Reservation::V1::SearchAllAssignmentsRequest} or an equivalent Hash.
               #
-              # @overload search_assignments(request, options = nil)
-              #   Pass arguments to `search_assignments` via a request object, either of type
-              #   {::Google::Cloud::Bigquery::Reservation::V1::SearchAssignmentsRequest} or an equivalent Hash.
-              #
-              #   @param request [::Google::Cloud::Bigquery::Reservation::V1::SearchAssignmentsRequest, ::Hash]
+              #   @param request [::Google::Cloud::Bigquery::Reservation::V1::SearchAllAssignmentsRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload search_assignments(parent: nil, query: nil, page_size: nil, page_token: nil)
-              #   Pass arguments to `search_assignments` via keyword arguments. Note that at
+              # @overload search_all_assignments(parent: nil, query: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `search_all_assignments` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The resource name of the admin project(containing project and location),
-              #     e.g.:
-              #       `projects/myproject/locations/US`.
+              #     Required. The resource name with location (project name could be the
+              #     wildcard '-'), e.g.:
+              #       `projects/-/locations/US`.
               #   @param query [::String]
               #     Please specify resource name as assignee in the query.
               #
@@ -1461,16 +1868,35 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
-              def search_assignments request, options = nil
+              # @example Basic example
+              #   require "google/cloud/bigquery/reservation/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::Reservation::V1::SearchAllAssignmentsRequest.new
+              #
+              #   # Call the search_all_assignments method.
+              #   result = client.search_all_assignments request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Bigquery::Reservation::V1::Assignment.
+              #     p item
+              #   end
+              #
+              def search_all_assignments request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigquery::Reservation::V1::SearchAssignmentsRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigquery::Reservation::V1::SearchAllAssignmentsRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                metadata = @config.rpcs.search_assignments.metadata.to_h
+                metadata = @config.rpcs.search_all_assignments.metadata.to_h
 
                 # Set x-goog-api-client and x-goog-user-project headers
                 metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
@@ -1478,20 +1904,24 @@ module Google
                   gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "parent" => request.parent
-                }
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
-                options.apply_defaults timeout:      @config.rpcs.search_assignments.timeout,
+                options.apply_defaults timeout:      @config.rpcs.search_all_assignments.timeout,
                                        metadata:     metadata,
-                                       retry_policy: @config.rpcs.search_assignments.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+                                       retry_policy: @config.rpcs.search_all_assignments.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
-                @reservation_service_stub.call_rpc :search_assignments, request, options: options do |response, operation|
-                  response = ::Gapic::PagedEnumerable.new @reservation_service_stub, :search_assignments, request, response, operation, options
+                @reservation_service_stub.call_rpc :search_all_assignments, request, options: options do |response, operation|
+                  response = ::Gapic::PagedEnumerable.new @reservation_service_stub, :search_all_assignments, request, response, operation, options
                   yield response, operation if block_given?
                   return response
                 end
@@ -1516,7 +1946,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload move_assignment(name: nil, destination_id: nil)
+              # @overload move_assignment(name: nil, destination_id: nil, assignment_id: nil)
               #   Pass arguments to `move_assignment` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1528,6 +1958,12 @@ module Google
               #   @param destination_id [::String]
               #     The new reservation ID, e.g.:
               #       `projects/myotherproject/locations/US/reservations/team2-prod`
+              #   @param assignment_id [::String]
+              #     The optional assignment ID. A new assignment name is generated if this
+              #     field is empty.
+              #
+              #     This field can contain only lowercase alphanumeric characters or dashes.
+              #     Max length is 64 characters.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Bigquery::Reservation::V1::Assignment]
@@ -1536,6 +1972,21 @@ module Google
               # @return [::Google::Cloud::Bigquery::Reservation::V1::Assignment]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigquery/reservation/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::Reservation::V1::MoveAssignmentRequest.new
+              #
+              #   # Call the move_assignment method.
+              #   result = client.move_assignment request
+              #
+              #   # The returned object is of type Google::Cloud::Bigquery::Reservation::V1::Assignment.
+              #   p result
               #
               def move_assignment request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1554,19 +2005,112 @@ module Google
                   gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
                 options.apply_defaults timeout:      @config.rpcs.move_assignment.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.move_assignment.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @reservation_service_stub.call_rpc :move_assignment, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates an existing assignment.
+              #
+              # Only the `priority` field can be updated.
+              #
+              # @overload update_assignment(request, options = nil)
+              #   Pass arguments to `update_assignment` via a request object, either of type
+              #   {::Google::Cloud::Bigquery::Reservation::V1::UpdateAssignmentRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigquery::Reservation::V1::UpdateAssignmentRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload update_assignment(assignment: nil, update_mask: nil)
+              #   Pass arguments to `update_assignment` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param assignment [::Google::Cloud::Bigquery::Reservation::V1::Assignment, ::Hash]
+              #     Content of the assignment to update.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Standard field mask for the set of fields to be updated.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Cloud::Bigquery::Reservation::V1::Assignment]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Cloud::Bigquery::Reservation::V1::Assignment]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigquery/reservation/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::Reservation::V1::UpdateAssignmentRequest.new
+              #
+              #   # Call the update_assignment method.
+              #   result = client.update_assignment request
+              #
+              #   # The returned object is of type Google::Cloud::Bigquery::Reservation::V1::Assignment.
+              #   p result
+              #
+              def update_assignment request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigquery::Reservation::V1::UpdateAssignmentRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.update_assignment.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.assignment&.name
+                  header_params["assignment.name"] = request.assignment.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.update_assignment.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.update_assignment.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @reservation_service_stub.call_rpc :update_assignment, request, options: options do |response, operation|
                   yield response, operation if block_given?
                   return response
                 end
@@ -1594,7 +2138,7 @@ module Google
               #
               #   @param name [::String]
               #     Required. Name of the requested reservation, for example:
-              #     `projects/{project_id}/locations/{location_id}/bireservation`
+              #     `projects/{project_id}/locations/{location_id}/biReservation`
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Bigquery::Reservation::V1::BiReservation]
@@ -1603,6 +2147,21 @@ module Google
               # @return [::Google::Cloud::Bigquery::Reservation::V1::BiReservation]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigquery/reservation/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::Reservation::V1::GetBiReservationRequest.new
+              #
+              #   # Call the get_bi_reservation method.
+              #   result = client.get_bi_reservation request
+              #
+              #   # The returned object is of type Google::Cloud::Bigquery::Reservation::V1::BiReservation.
+              #   p result
               #
               def get_bi_reservation request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1621,16 +2180,20 @@ module Google
                   gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
                 options.apply_defaults timeout:      @config.rpcs.get_bi_reservation.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.get_bi_reservation.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @reservation_service_stub.call_rpc :get_bi_reservation, request, options: options do |response, operation|
@@ -1679,6 +2242,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/bigquery/reservation/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::Reservation::V1::UpdateBiReservationRequest.new
+              #
+              #   # Call the update_bi_reservation method.
+              #   result = client.update_bi_reservation request
+              #
+              #   # The returned object is of type Google::Cloud::Bigquery::Reservation::V1::BiReservation.
+              #   p result
+              #
               def update_bi_reservation request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1696,16 +2274,20 @@ module Google
                   gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "bi_reservation.name" => request.bi_reservation.name
-                }
+                header_params = {}
+                if request.bi_reservation&.name
+                  header_params["bi_reservation.name"] = request.bi_reservation.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
                 options.apply_defaults timeout:      @config.rpcs.update_bi_reservation.timeout,
                                        metadata:     metadata,
                                        retry_policy: @config.rpcs.update_bi_reservation.retry_policy
-                options.apply_defaults metadata:     @config.metadata,
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
                                        retry_policy: @config.retry_policy
 
                 @reservation_service_stub.call_rpc :update_bi_reservation, request, options: options do |response, operation|
@@ -1729,22 +2311,21 @@ module Google
               # Configuration can be applied globally to all clients, or to a single client
               # on construction.
               #
-              # # Examples
+              # @example
               #
-              # To modify the global config, setting the timeout for create_reservation
-              # to 20 seconds, and all remaining timeouts to 10 seconds:
+              #   # Modify the global config, setting the timeout for
+              #   # create_reservation to 20 seconds,
+              #   # and all remaining timeouts to 10 seconds.
+              #   ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.configure do |config|
+              #     config.timeout = 10.0
+              #     config.rpcs.create_reservation.timeout = 20.0
+              #   end
               #
-              #     ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.configure do |config|
-              #       config.timeout = 10.0
-              #       config.rpcs.create_reservation.timeout = 20.0
-              #     end
-              #
-              # To apply the above configuration only to a new client:
-              #
-              #     client = ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new do |config|
-              #       config.timeout = 10.0
-              #       config.rpcs.create_reservation.timeout = 20.0
-              #     end
+              #   # Apply the above configuration only to a new client.
+              #   client = ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new do |config|
+              #     config.timeout = 10.0
+              #     config.rpcs.create_reservation.timeout = 20.0
+              #   end
               #
               # @!attribute [rw] endpoint
               #   The hostname or hostname:port of the service endpoint.
@@ -1755,9 +2336,9 @@ module Google
               #    *  (`String`) The path to a service account key file in JSON format
               #    *  (`Hash`) A service account key as a Hash
               #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-              #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+              #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
               #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-              #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+              #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
               #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
               #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
               #    *  (`nil`) indicating no credentials
@@ -1933,10 +2514,20 @@ module Google
                   #
                   attr_reader :search_assignments
                   ##
+                  # RPC-specific configuration for `search_all_assignments`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :search_all_assignments
+                  ##
                   # RPC-specific configuration for `move_assignment`
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :move_assignment
+                  ##
+                  # RPC-specific configuration for `update_assignment`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_assignment
                   ##
                   # RPC-specific configuration for `get_bi_reservation`
                   # @return [::Gapic::Config::Method]
@@ -1982,8 +2573,12 @@ module Google
                     @delete_assignment = ::Gapic::Config::Method.new delete_assignment_config
                     search_assignments_config = parent_rpcs.search_assignments if parent_rpcs.respond_to? :search_assignments
                     @search_assignments = ::Gapic::Config::Method.new search_assignments_config
+                    search_all_assignments_config = parent_rpcs.search_all_assignments if parent_rpcs.respond_to? :search_all_assignments
+                    @search_all_assignments = ::Gapic::Config::Method.new search_all_assignments_config
                     move_assignment_config = parent_rpcs.move_assignment if parent_rpcs.respond_to? :move_assignment
                     @move_assignment = ::Gapic::Config::Method.new move_assignment_config
+                    update_assignment_config = parent_rpcs.update_assignment if parent_rpcs.respond_to? :update_assignment
+                    @update_assignment = ::Gapic::Config::Method.new update_assignment_config
                     get_bi_reservation_config = parent_rpcs.get_bi_reservation if parent_rpcs.respond_to? :get_bi_reservation
                     @get_bi_reservation = ::Gapic::Config::Method.new get_bi_reservation_config
                     update_bi_reservation_config = parent_rpcs.update_bi_reservation if parent_rpcs.respond_to? :update_bi_reservation

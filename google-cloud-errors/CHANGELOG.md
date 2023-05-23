@@ -1,5 +1,23 @@
 # Release History
 
+### 1.3.1 (2023-02-28)
+
+#### Bug Fixes
+
+* add error_codes for google cloud errors ([#20535](https://github.com/googleapis/google-cloud-ruby/issues/20535)) 
+
+### 1.3.0 (2022-09-13)
+
+#### Features
+
+* surface error info from details in addition to status_details ([#19138](https://github.com/googleapis/google-cloud-ruby/issues/19138)) 
+
+### 1.2.0 / 2021-09-20
+
+#### Features
+
+* Surface ErrorInfo fields in Google::Cloud::Error
+
 ### 1.1.0 / 2021-03-10
 
 #### Features

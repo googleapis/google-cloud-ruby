@@ -41,7 +41,7 @@ describe Google::Cloud::Bigtable::Instance, :cluster, :mock_bigtable do
     )
 
     mock = Minitest::Mock.new
-    mock.expect :get_cluster, get_res, [name: cluster_path(instance_id, cluster_id)]
+    mock.expect :get_cluster, get_res, name: cluster_path(instance_id, cluster_id)
     bigtable.service.mocked_instances = mock
     cluster = instance.cluster(cluster_id)
 

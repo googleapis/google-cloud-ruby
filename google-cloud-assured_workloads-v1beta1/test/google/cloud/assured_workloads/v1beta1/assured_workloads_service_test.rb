@@ -20,8 +20,8 @@ require "helper"
 
 require "gapic/grpc/service_stub"
 
-require "google/cloud/assuredworkloads/v1beta1/assuredworkloads_v1beta1_pb"
-require "google/cloud/assuredworkloads/v1beta1/assuredworkloads_v1beta1_services_pb"
+require "google/cloud/assuredworkloads/v1beta1/assuredworkloads_service_pb"
+require "google/cloud/assuredworkloads/v1beta1/assuredworkloads_service_services_pb"
 require "google/cloud/assured_workloads/v1beta1/assured_workloads_service"
 
 class ::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::ClientTest < Minitest::Test
@@ -174,6 +174,66 @@ class ::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Clien
     end
   end
 
+  def test_restrict_allowed_resources
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::AssuredWorkloads::V1beta1::RestrictAllowedResourcesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    restriction_type = :RESTRICTION_TYPE_UNSPECIFIED
+
+    restrict_allowed_resources_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :restrict_allowed_resources, name
+      assert_kind_of ::Google::Cloud::AssuredWorkloads::V1beta1::RestrictAllowedResourcesRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal :RESTRICTION_TYPE_UNSPECIFIED, request["restriction_type"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, restrict_allowed_resources_client_stub do
+      # Create client
+      client = ::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.restrict_allowed_resources({ name: name, restriction_type: restriction_type }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.restrict_allowed_resources name: name, restriction_type: restriction_type do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.restrict_allowed_resources ::Google::Cloud::AssuredWorkloads::V1beta1::RestrictAllowedResourcesRequest.new(name: name, restriction_type: restriction_type) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.restrict_allowed_resources({ name: name, restriction_type: restriction_type }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.restrict_allowed_resources(::Google::Cloud::AssuredWorkloads::V1beta1::RestrictAllowedResourcesRequest.new(name: name, restriction_type: restriction_type), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, restrict_allowed_resources_client_stub.call_rpc_count
+    end
+  end
+
   def test_delete_workload
     # Create GRPC objects.
     grpc_response = ::Google::Protobuf::Empty.new
@@ -289,6 +349,67 @@ class ::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Clien
 
       # Verify method calls
       assert_equal 5, get_workload_client_stub.call_rpc_count
+    end
+  end
+
+  def test_analyze_workload_move
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::AssuredWorkloads::V1beta1::AnalyzeWorkloadMoveResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    source = "hello world"
+    target = "hello world"
+
+    analyze_workload_move_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :analyze_workload_move, name
+      assert_kind_of ::Google::Cloud::AssuredWorkloads::V1beta1::AnalyzeWorkloadMoveRequest, request
+      assert_equal "hello world", request["source"]
+      assert_equal :source, request.projectOrWorkloadResource
+      assert_equal "hello world", request["target"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, analyze_workload_move_client_stub do
+      # Create client
+      client = ::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.analyze_workload_move({ source: source, target: target }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.analyze_workload_move source: source, target: target do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.analyze_workload_move ::Google::Cloud::AssuredWorkloads::V1beta1::AnalyzeWorkloadMoveRequest.new(source: source, target: target) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.analyze_workload_move({ source: source, target: target }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.analyze_workload_move(::Google::Cloud::AssuredWorkloads::V1beta1::AnalyzeWorkloadMoveRequest.new(source: source, target: target), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, analyze_workload_move_client_stub.call_rpc_count
     end
   end
 

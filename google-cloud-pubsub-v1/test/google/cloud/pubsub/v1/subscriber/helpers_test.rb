@@ -33,6 +33,7 @@ class ::Google::Cloud::PubSub::V1::Subscriber::HelpersTest < Minitest::Test
           assert_equal -1, channel_args["grpc.max_receive_message_length"]
           assert_equal 300_000, channel_args["grpc.keepalive_time_ms"]
           assert_equal 1, channel_args["grpc.service_config_disable_resolution"]
+          assert_equal 4 * 1024 * 1024, channel_args["grpc.max_metadata_size"]
         end
       end
     end

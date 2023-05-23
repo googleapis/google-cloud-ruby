@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/video/stitcher/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-video-stitcher/$1

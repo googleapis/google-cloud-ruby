@@ -48,66 +48,74 @@ module Google
       # Create a new client object for QuotaController.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::ServiceControl::V1::QuotaController::Client](https://googleapis.dev/ruby/google-cloud-service_control-v1/latest/Google/Cloud/ServiceControl/V1/QuotaController/Client.html)
-      # for version V1 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # [Google::Cloud::ServiceControl::V1::QuotaController::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-service_control-v1/latest/Google-Cloud-ServiceControl-V1-QuotaController-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the QuotaController service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About QuotaController
       #
-      # [Google Quota Control API](https://cloud.google.com/service-control/overview)
+      # [Google Quota Control API](/service-control/overview)
       #
       # Allows clients to allocate and release quota against a [managed
       # service](https://cloud.google.com/service-management/reference/rpc/google.api/servicemanagement.v1#google.api.servicemanagement.v1.ManagedService).
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
-      # @return [QuotaController::Client] A client object for the specified version.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
       #
-      def self.quota_controller version: :v1, &block
+      def self.quota_controller version: :v1, transport: :grpc, &block
         require "google/cloud/service_control/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::ServiceControl
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::ServiceControl.const_get package_name
-        package_module.const_get(:QuotaController).const_get(:Client).new(&block)
+        service_module = Google::Cloud::ServiceControl.const_get(package_name).const_get(:QuotaController)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
       # Create a new client object for ServiceController.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::ServiceControl::V1::ServiceController::Client](https://googleapis.dev/ruby/google-cloud-service_control-v1/latest/Google/Cloud/ServiceControl/V1/ServiceController/Client.html)
-      # for version V1 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # [Google::Cloud::ServiceControl::V1::ServiceController::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-service_control-v1/latest/Google-Cloud-ServiceControl-V1-ServiceController-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the ServiceController service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About ServiceController
       #
-      # [Google Service Control API](https://cloud.google.com/service-control/overview)
+      # [Google Service Control API](/service-control/overview)
       #
       # Lets clients check and report operations against a [managed
       # service](https://cloud.google.com/service-management/reference/rpc/google.api/servicemanagement.v1#google.api.servicemanagement.v1.ManagedService).
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
-      # @return [ServiceController::Client] A client object for the specified version.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
       #
-      def self.service_controller version: :v1, &block
+      def self.service_controller version: :v1, transport: :grpc, &block
         require "google/cloud/service_control/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::ServiceControl
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::ServiceControl.const_get package_name
-        package_module.const_get(:ServiceController).const_get(:Client).new(&block)
+        service_module = Google::Cloud::ServiceControl.const_get(package_name).const_get(:ServiceController)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -127,7 +135,7 @@ module Google
       # * `timeout` (*type:* `Numeric`) -
       #   Default timeout in seconds.
       # * `metadata` (*type:* `Hash{Symbol=>String}`) -
-      #   Additional gRPC headers to be sent with the call.
+      #   Additional headers to be sent with the call.
       # * `retry_policy` (*type:* `Hash`) -
       #   The retry policy. The value is a hash with the following keys:
       #     * `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.

@@ -237,9 +237,62 @@ module Google
           # @!attribute [rw] finish_time
           #   @return [::Google::Protobuf::Timestamp]
           #     The time at which the operation failed or was completed successfully.
+          # @!attribute [rw] tables
+          #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Bigtable::Admin::V2::CreateClusterMetadata::TableProgress}]
+          #     Keys: the full `name` of each table that existed in the instance when
+          #     CreateCluster was first called, i.e.
+          #     `projects/<project>/instances/<instance>/tables/<table>`. Any table added
+          #     to the instance by a later API call will be created in the new cluster by
+          #     that API call, not this one.
+          #
+          #     Values: information on how much of a table's data has been copied to the
+          #     newly-created cluster so far.
           class CreateClusterMetadata
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Progress info for copying a table's data to the new cluster.
+            # @!attribute [rw] estimated_size_bytes
+            #   @return [::Integer]
+            #     Estimate of the size of the table to be copied.
+            # @!attribute [rw] estimated_copied_bytes
+            #   @return [::Integer]
+            #     Estimate of the number of bytes copied so far for this table.
+            #     This will eventually reach 'estimated_size_bytes' unless the table copy
+            #     is CANCELLED.
+            # @!attribute [rw] state
+            #   @return [::Google::Cloud::Bigtable::Admin::V2::CreateClusterMetadata::TableProgress::State]
+            class TableProgress
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              module State
+                STATE_UNSPECIFIED = 0
+
+                # The table has not yet begun copying to the new cluster.
+                PENDING = 1
+
+                # The table is actively being copied to the new cluster.
+                COPYING = 2
+
+                # The table has been fully copied to the new cluster.
+                COMPLETED = 3
+
+                # The table was deleted before it finished copying to the new cluster.
+                # Note that tables deleted after completion will stay marked as
+                # COMPLETED, not CANCELLED.
+                CANCELLED = 4
+              end
+            end
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::Google::Cloud::Bigtable::Admin::V2::CreateClusterMetadata::TableProgress]
+            class TablesEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
 
           # The metadata for the Operation returned by UpdateCluster.
@@ -253,6 +306,34 @@ module Google
           #   @return [::Google::Protobuf::Timestamp]
           #     The time at which the operation failed or was completed successfully.
           class UpdateClusterMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The metadata for the Operation returned by PartialUpdateCluster.
+          # @!attribute [rw] request_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The time at which the original request was received.
+          # @!attribute [rw] finish_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The time at which the operation failed or was completed successfully.
+          # @!attribute [rw] original_request
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::PartialUpdateClusterRequest]
+          #     The original request for PartialUpdateCluster.
+          class PartialUpdateClusterMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for BigtableInstanceAdmin.PartialUpdateCluster.
+          # @!attribute [rw] cluster
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::Cluster]
+          #     Required. The Cluster which contains the partial updates to be applied, subject to
+          #     the update_mask.
+          # @!attribute [rw] update_mask
+          #   @return [::Google::Protobuf::FieldMask]
+          #     Required. The subset of Cluster fields which should be replaced.
+          class PartialUpdateClusterRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -368,6 +449,60 @@ module Google
 
           # The metadata for the Operation returned by UpdateAppProfile.
           class UpdateAppProfileMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for BigtableInstanceAdmin.ListHotTablets.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The cluster name to list hot tablets.
+          #     Value is in the following form:
+          #     `projects/{project}/instances/{instance}/clusters/{cluster}`.
+          # @!attribute [rw] start_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The start time to list hot tablets. The hot tablets in the response will
+          #     have start times between the requested start time and end time. Start time
+          #     defaults to Now if it is unset, and end time defaults to Now - 24 hours if
+          #     it is unset. The start time should be less than the end time, and the
+          #     maximum allowed time range between start time and end time is 48 hours.
+          #     Start time and end time should have values between Now and Now - 14 days.
+          # @!attribute [rw] end_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The end time to list hot tablets.
+          # @!attribute [rw] page_size
+          #   @return [::Integer]
+          #     Maximum number of results per page.
+          #
+          #     A page_size that is empty or zero lets the server choose the number of
+          #     items to return. A page_size which is strictly positive will return at most
+          #     that many items. A negative page_size will cause an error.
+          #
+          #     Following the first request, subsequent paginated calls do not need a
+          #     page_size field. If a page_size is set in subsequent calls, it must match
+          #     the page_size given in the first request.
+          # @!attribute [rw] page_token
+          #   @return [::String]
+          #     The value of `next_page_token` returned by a previous call.
+          class ListHotTabletsRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Response message for BigtableInstanceAdmin.ListHotTablets.
+          # @!attribute [rw] hot_tablets
+          #   @return [::Array<::Google::Cloud::Bigtable::Admin::V2::HotTablet>]
+          #     List of hot tablets in the tables of the requested cluster that fall
+          #     within the requested time range. Hot tablets are ordered by node cpu usage
+          #     percent. If there are multiple hot tablets that correspond to the same
+          #     tablet within a 15-minute interval, only the hot tablet with the highest
+          #     node cpu usage will be included in the response.
+          # @!attribute [rw] next_page_token
+          #   @return [::String]
+          #     Set if not all hot tablets could be returned in a single response.
+          #     Pass this value to `page_token` in another request to get the next
+          #     page of results.
+          class ListHotTabletsResponse
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

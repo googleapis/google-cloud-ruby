@@ -197,13 +197,37 @@ describe Google::Cloud::Bigquery, :named_params, :bigquery do
     # rows.first[:value].must_equal now.to_s
   end
 
-  it "queries the data with a nil parameter and boolean type" do
+  it "queries the data with a nil parameter and datetime type" do
     rows = bigquery.query "SELECT @value AS value", params: { value: nil }, types: { value: :DATETIME }
 
     _(rows.class).must_equal Google::Cloud::Bigquery::Data
     _(rows.fields.count).must_equal 1
     _(rows.fields.first.name).must_equal "value"
     _(rows.fields.first).must_be :datetime?
+    _(rows.count).must_equal 1
+    _(rows.first[:value]).must_be_nil
+  end
+
+  it "queries the data with a WKT geography parameter and geography type" do
+    rows = bigquery.query "SELECT @value AS value", 
+                          params: { value: "POINT(-122.335503 47.625536)" },
+                          types: { value: :GEOGRAPHY }
+
+    _(rows.class).must_equal Google::Cloud::Bigquery::Data
+    _(rows.fields.count).must_equal 1
+    _(rows.fields.first.name).must_equal "value"
+    _(rows.fields.first).must_be :geography?
+    _(rows.count).must_equal 1
+    _(rows.first[:value]).must_equal "POINT(-122.335503 47.625536)"
+  end
+
+  it "queries the data with a nil parameter and geography type" do
+    rows = bigquery.query "SELECT @value AS value", params: { value: nil }, types: { value: :GEOGRAPHY }
+
+    _(rows.class).must_equal Google::Cloud::Bigquery::Data
+    _(rows.fields.count).must_equal 1
+    _(rows.fields.first.name).must_equal "value"
+    _(rows.fields.first).must_be :geography?
     _(rows.count).must_equal 1
     _(rows.first[:value]).must_be_nil
   end
@@ -413,5 +437,23 @@ describe Google::Cloud::Bigquery, :named_params, :bigquery do
     _(rows.fields.first.fields.last).must_be :integer?
     _(rows.count).must_equal 1
     _(rows.first[:value]).must_equal({ message: "hello", repeat: 1 })
+  end
+
+  it "queries the data with array of structs" do
+    rows = bigquery.query "SELECT @value AS value",
+               params: { value: [{ message: "hello", repeat: 1 }, { message: "world", repeat: 2 }] },
+               types:  { value: [{ message: :STRING, repeat: :INT64 }] }
+
+    _(rows.class).must_equal Google::Cloud::Bigquery::Data
+    _(rows.fields.count).must_equal 1
+    _(rows.fields.first.name).must_equal "value"
+    _(rows.fields.first).must_be :record?
+    _(rows.fields.first.fields.count).must_equal 2
+    _(rows.fields.first.fields.first.name).must_equal "message"
+    _(rows.fields.first.fields.first).must_be :string?
+    _(rows.fields.first.fields.last.name).must_equal "repeat"
+    _(rows.fields.first.fields.last).must_be :integer?
+    _(rows.first[:value].first).must_equal({ message: "hello", repeat: 1 })
+    _(rows.first[:value].last).must_equal({ message: "world", repeat: 2 })
   end
 end

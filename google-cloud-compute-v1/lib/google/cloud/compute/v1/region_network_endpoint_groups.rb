@@ -28,9 +28,12 @@ module Google
   module Cloud
     module Compute
       module V1
-        # To load this service and instantiate a REST client:
+        ##
+        # The RegionNetworkEndpointGroups API.
         #
-        #     require "google/cloud/compute/v1/region_network_endpoint_groups"
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/compute/v1/region_network_endpoint_groups/rest"
         #     client = ::Google::Cloud::Compute::V1::RegionNetworkEndpointGroups::Rest::Client.new
         #
         module RegionNetworkEndpointGroups

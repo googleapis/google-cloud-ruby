@@ -23,7 +23,7 @@ describe Google::Cloud::Bigquery::Table, :policy, :bigquery do
     end
     d
   end
-  let(:table_id) { "kittens" }
+  let(:table_id) { "kittens_policy" }
   let(:table) do
     t = dataset.table table_id
     if t.nil?

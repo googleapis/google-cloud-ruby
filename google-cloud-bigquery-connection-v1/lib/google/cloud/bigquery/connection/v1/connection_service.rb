@@ -25,6 +25,7 @@ require "google/cloud/bigquery/connection/v1/version"
 require "google/cloud/bigquery/connection/v1/connection_service/credentials"
 require "google/cloud/bigquery/connection/v1/connection_service/paths"
 require "google/cloud/bigquery/connection/v1/connection_service/client"
+require "google/cloud/bigquery/connection/v1/connection_service/rest"
 
 module Google
   module Cloud
@@ -34,10 +35,15 @@ module Google
           ##
           # Manages external data source connections and credentials.
           #
-          # To load this service and instantiate a client:
+          # @example Load this service and instantiate a gRPC client
           #
           #     require "google/cloud/bigquery/connection/v1/connection_service"
           #     client = ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client.new
+          #
+          # @example Load this service and instantiate a REST client
+          #
+          #     require "google/cloud/bigquery/connection/v1/connection_service/rest"
+          #     client = ::Google::Cloud::Bigquery::Connection::V1::ConnectionService::Rest::Client.new
           #
           module ConnectionService
           end

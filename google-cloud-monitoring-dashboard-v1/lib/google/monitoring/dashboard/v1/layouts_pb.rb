@@ -4,6 +4,7 @@
 require 'google/protobuf'
 
 require 'google/monitoring/dashboard/v1/widget_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/monitoring/dashboard/v1/layouts.proto", :syntax => :proto3) do
     add_message "google.monitoring.dashboard.v1.GridLayout" do

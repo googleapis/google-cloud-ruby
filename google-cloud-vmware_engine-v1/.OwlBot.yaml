@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/vmwareengine/v1/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-vmware_engine-v1/$1

@@ -25,6 +25,7 @@ require "google/cloud/iot/v1/version"
 require "google/cloud/iot/v1/device_manager/credentials"
 require "google/cloud/iot/v1/device_manager/paths"
 require "google/cloud/iot/v1/device_manager/client"
+require "google/cloud/iot/v1/device_manager/rest"
 
 module Google
   module Cloud
@@ -33,10 +34,15 @@ module Google
         ##
         # Internet of Things (IoT) service. Securely connect and manage IoT devices.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/iot/v1/device_manager"
         #     client = ::Google::Cloud::Iot::V1::DeviceManager::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/iot/v1/device_manager/rest"
+        #     client = ::Google::Cloud::Iot::V1::DeviceManager::Rest::Client.new
         #
         module DeviceManager
         end

@@ -44,13 +44,12 @@ module Google
             # See {::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all ServiceMonitoringService clients:
-            #
-            #     ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all ServiceMonitoringService clients
+            #   ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -72,56 +71,38 @@ module Google
 
                 default_config.rpcs.get_service.timeout = 30.0
                 default_config.rpcs.get_service.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 30.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.list_services.timeout = 30.0
                 default_config.rpcs.list_services.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 30.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.update_service.timeout = 30.0
 
                 default_config.rpcs.delete_service.timeout = 30.0
                 default_config.rpcs.delete_service.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 30.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.create_service_level_objective.timeout = 30.0
 
                 default_config.rpcs.get_service_level_objective.timeout = 30.0
                 default_config.rpcs.get_service_level_objective.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 30.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.list_service_level_objectives.timeout = 30.0
                 default_config.rpcs.list_service_level_objectives.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 30.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.update_service_level_objective.timeout = 30.0
 
                 default_config.rpcs.delete_service_level_objective.timeout = 30.0
                 default_config.rpcs.delete_service_level_objective.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 30.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config
@@ -153,19 +134,15 @@ module Google
             ##
             # Create a new ServiceMonitoringService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new ServiceMonitoringService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new
             #
-            #     client = ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new
-            #
-            # To create a new ServiceMonitoringService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the ServiceMonitoringService client.
             # @yieldparam config [Client::Configuration]
@@ -185,14 +162,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -228,7 +204,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. Resource name of the parent workspace. The format is:
+            #     Required. Resource [name](https://cloud.google.com/monitoring/api/v3#project_name) of
+            #     the parent workspace. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
             #   @param service_id [::String]
@@ -244,6 +221,21 @@ module Google
             # @return [::Google::Cloud::Monitoring::V3::Service]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::CreateServiceRequest.new
+            #
+            #   # Call the create_service method.
+            #   result = client.create_service request
+            #
+            #   # The returned object is of type Google::Cloud::Monitoring::V3::Service.
+            #   p result
             #
             def create_service request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -262,16 +254,20 @@ module Google
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_service.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_service.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @service_monitoring_service_stub.call_rpc :create_service, request, options: options do |response, operation|
@@ -313,6 +309,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::GetServiceRequest.new
+            #
+            #   # Call the get_service method.
+            #   result = client.get_service request
+            #
+            #   # The returned object is of type Google::Cloud::Monitoring::V3::Service.
+            #   p result
+            #
             def get_service request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -330,16 +341,20 @@ module Google
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_service.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_service.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @service_monitoring_service_stub.call_rpc :get_service, request, options: options do |response, operation|
@@ -370,7 +385,8 @@ module Google
             #
             #   @param parent [::String]
             #     Required. Resource name of the parent containing the listed services, either a
-            #     project or a Monitoring Workspace. The formats are:
+            #     [project](https://cloud.google.com/monitoring/api/v3#project_name) or a
+            #     Monitoring Workspace. The formats are:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
             #         workspaces/[HOST_PROJECT_ID_OR_NUMBER]
@@ -410,6 +426,25 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::ListServicesRequest.new
+            #
+            #   # Call the list_services method.
+            #   result = client.list_services request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::Monitoring::V3::Service.
+            #     p item
+            #   end
+            #
             def list_services request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -427,16 +462,20 @@ module Google
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_services.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_services.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @service_monitoring_service_stub.call_rpc :list_services, request, options: options do |response, operation|
@@ -480,6 +519,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::UpdateServiceRequest.new
+            #
+            #   # Call the update_service method.
+            #   result = client.update_service request
+            #
+            #   # The returned object is of type Google::Cloud::Monitoring::V3::Service.
+            #   p result
+            #
             def update_service request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -497,16 +551,20 @@ module Google
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "service.name" => request.service.name
-              }
+              header_params = {}
+              if request.service&.name
+                header_params["service.name"] = request.service.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_service.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_service.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @service_monitoring_service_stub.call_rpc :update_service, request, options: options do |response, operation|
@@ -548,6 +606,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::DeleteServiceRequest.new
+            #
+            #   # Call the delete_service method.
+            #   result = client.delete_service request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_service request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -565,16 +638,20 @@ module Google
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_service.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_service.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @service_monitoring_service_stub.call_rpc :delete_service, request, options: options do |response, operation|
@@ -624,6 +701,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::CreateServiceLevelObjectiveRequest.new
+            #
+            #   # Call the create_service_level_objective method.
+            #   result = client.create_service_level_objective request
+            #
+            #   # The returned object is of type Google::Cloud::Monitoring::V3::ServiceLevelObjective.
+            #   p result
+            #
             def create_service_level_objective request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -641,16 +733,20 @@ module Google
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_service_level_objective.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_service_level_objective.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @service_monitoring_service_stub.call_rpc :create_service_level_objective, request, options: options do |response, operation|
@@ -697,6 +793,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::GetServiceLevelObjectiveRequest.new
+            #
+            #   # Call the get_service_level_objective method.
+            #   result = client.get_service_level_objective request
+            #
+            #   # The returned object is of type Google::Cloud::Monitoring::V3::ServiceLevelObjective.
+            #   p result
+            #
             def get_service_level_objective request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -714,16 +825,20 @@ module Google
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_service_level_objective.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_service_level_objective.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @service_monitoring_service_stub.call_rpc :get_service_level_objective, request, options: options do |response, operation|
@@ -781,6 +896,25 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::ListServiceLevelObjectivesRequest.new
+            #
+            #   # Call the list_service_level_objectives method.
+            #   result = client.list_service_level_objectives request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::Monitoring::V3::ServiceLevelObjective.
+            #     p item
+            #   end
+            #
             def list_service_level_objectives request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -798,16 +932,20 @@ module Google
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_service_level_objectives.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_service_level_objectives.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @service_monitoring_service_stub.call_rpc :list_service_level_objectives, request, options: options do |response, operation|
@@ -851,6 +989,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::UpdateServiceLevelObjectiveRequest.new
+            #
+            #   # Call the update_service_level_objective method.
+            #   result = client.update_service_level_objective request
+            #
+            #   # The returned object is of type Google::Cloud::Monitoring::V3::ServiceLevelObjective.
+            #   p result
+            #
             def update_service_level_objective request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -868,16 +1021,20 @@ module Google
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "service_level_objective.name" => request.service_level_objective.name
-              }
+              header_params = {}
+              if request.service_level_objective&.name
+                header_params["service_level_objective.name"] = request.service_level_objective.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_service_level_objective.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_service_level_objective.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @service_monitoring_service_stub.call_rpc :update_service_level_objective, request, options: options do |response, operation|
@@ -919,6 +1076,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::DeleteServiceLevelObjectiveRequest.new
+            #
+            #   # Call the delete_service_level_objective method.
+            #   result = client.delete_service_level_objective request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_service_level_objective request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -936,16 +1108,20 @@ module Google
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_service_level_objective.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_service_level_objective.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @service_monitoring_service_stub.call_rpc :delete_service_level_objective, request, options: options do |response, operation|
@@ -969,22 +1145,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for create_service
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # create_service to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_service.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_service.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_service.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_service.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
@@ -995,9 +1170,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials

@@ -1,0 +1,3581 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.compute.v1",
+  "libraryPackage": "::Google::Cloud::Compute::V1",
+  "services": {
+    "AcceleratorTypes": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::AcceleratorTypes::Client",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregated_list"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Addresses": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::Addresses::Client",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregated_list"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Autoscalers": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::Autoscalers::Client",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregated_list"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "BackendBuckets": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::BackendBuckets::Client",
+          "rpcs": {
+            "AddSignedUrlKey": {
+              "methods": [
+                "add_signed_url_key"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "DeleteSignedUrlKey": {
+              "methods": [
+                "delete_signed_url_key"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "BackendServices": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::BackendServices::Client",
+          "rpcs": {
+            "AddSignedUrlKey": {
+              "methods": [
+                "add_signed_url_key"
+              ]
+            },
+            "AggregatedList": {
+              "methods": [
+                "aggregated_list"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "DeleteSignedUrlKey": {
+              "methods": [
+                "delete_signed_url_key"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetHealth": {
+              "methods": [
+                "get_health"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "SetSecurityPolicy": {
+              "methods": [
+                "set_security_policy"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "DiskTypes": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::DiskTypes::Client",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregated_list"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Disks": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::Disks::Client",
+          "rpcs": {
+            "AddResourcePolicies": {
+              "methods": [
+                "add_resource_policies"
+              ]
+            },
+            "AggregatedList": {
+              "methods": [
+                "aggregated_list"
+              ]
+            },
+            "CreateSnapshot": {
+              "methods": [
+                "create_snapshot"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "RemoveResourcePolicies": {
+              "methods": [
+                "remove_resource_policies"
+              ]
+            },
+            "Resize": {
+              "methods": [
+                "resize"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            },
+            "SetLabels": {
+              "methods": [
+                "set_labels"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ExternalVpnGateways": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::ExternalVpnGateways::Client",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "SetLabels": {
+              "methods": [
+                "set_labels"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "FirewallPolicies": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::FirewallPolicies::Client",
+          "rpcs": {
+            "AddAssociation": {
+              "methods": [
+                "add_association"
+              ]
+            },
+            "AddRule": {
+              "methods": [
+                "add_rule"
+              ]
+            },
+            "CloneRules": {
+              "methods": [
+                "clone_rules"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetAssociation": {
+              "methods": [
+                "get_association"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "GetRule": {
+              "methods": [
+                "get_rule"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "ListAssociations": {
+              "methods": [
+                "list_associations"
+              ]
+            },
+            "Move": {
+              "methods": [
+                "move"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "PatchRule": {
+              "methods": [
+                "patch_rule"
+              ]
+            },
+            "RemoveAssociation": {
+              "methods": [
+                "remove_association"
+              ]
+            },
+            "RemoveRule": {
+              "methods": [
+                "remove_rule"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Firewalls": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::Firewalls::Client",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ForwardingRules": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::ForwardingRules::Client",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregated_list"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "SetLabels": {
+              "methods": [
+                "set_labels"
+              ]
+            },
+            "SetTarget": {
+              "methods": [
+                "set_target"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "GlobalAddresses": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::GlobalAddresses::Client",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "GlobalForwardingRules": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::GlobalForwardingRules::Client",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "SetLabels": {
+              "methods": [
+                "set_labels"
+              ]
+            },
+            "SetTarget": {
+              "methods": [
+                "set_target"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "GlobalNetworkEndpointGroups": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::GlobalNetworkEndpointGroups::Client",
+          "rpcs": {
+            "AttachNetworkEndpoints": {
+              "methods": [
+                "attach_network_endpoints"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "DetachNetworkEndpoints": {
+              "methods": [
+                "detach_network_endpoints"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "ListNetworkEndpoints": {
+              "methods": [
+                "list_network_endpoints"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "GlobalOperations": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::GlobalOperations::Client",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregated_list"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Wait": {
+              "methods": [
+                "wait"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "GlobalOrganizationOperations": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Client",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "GlobalPublicDelegatedPrefixes": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::GlobalPublicDelegatedPrefixes::Client",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "HealthChecks": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::HealthChecks::Client",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregated_list"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Images": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::Images::Client",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Deprecate": {
+              "methods": [
+                "deprecate"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetFromFamily": {
+              "methods": [
+                "get_from_family"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            },
+            "SetLabels": {
+              "methods": [
+                "set_labels"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "InstanceGroupManagers": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::InstanceGroupManagers::Client",
+          "rpcs": {
+            "AbandonInstances": {
+              "methods": [
+                "abandon_instances"
+              ]
+            },
+            "AggregatedList": {
+              "methods": [
+                "aggregated_list"
+              ]
+            },
+            "ApplyUpdatesToInstances": {
+              "methods": [
+                "apply_updates_to_instances"
+              ]
+            },
+            "CreateInstances": {
+              "methods": [
+                "create_instances"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "DeleteInstances": {
+              "methods": [
+                "delete_instances"
+              ]
+            },
+            "DeletePerInstanceConfigs": {
+              "methods": [
+                "delete_per_instance_configs"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "ListErrors": {
+              "methods": [
+                "list_errors"
+              ]
+            },
+            "ListManagedInstances": {
+              "methods": [
+                "list_managed_instances"
+              ]
+            },
+            "ListPerInstanceConfigs": {
+              "methods": [
+                "list_per_instance_configs"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "PatchPerInstanceConfigs": {
+              "methods": [
+                "patch_per_instance_configs"
+              ]
+            },
+            "RecreateInstances": {
+              "methods": [
+                "recreate_instances"
+              ]
+            },
+            "Resize": {
+              "methods": [
+                "resize"
+              ]
+            },
+            "SetInstanceTemplate": {
+              "methods": [
+                "set_instance_template"
+              ]
+            },
+            "SetTargetPools": {
+              "methods": [
+                "set_target_pools"
+              ]
+            },
+            "UpdatePerInstanceConfigs": {
+              "methods": [
+                "update_per_instance_configs"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "InstanceGroups": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::InstanceGroups::Client",
+          "rpcs": {
+            "AddInstances": {
+              "methods": [
+                "add_instances"
+              ]
+            },
+            "AggregatedList": {
+              "methods": [
+                "aggregated_list"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "ListInstances": {
+              "methods": [
+                "list_instances"
+              ]
+            },
+            "RemoveInstances": {
+              "methods": [
+                "remove_instances"
+              ]
+            },
+            "SetNamedPorts": {
+              "methods": [
+                "set_named_ports"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "InstanceTemplates": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::InstanceTemplates::Client",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Instances": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::Instances::Client",
+          "rpcs": {
+            "AddAccessConfig": {
+              "methods": [
+                "add_access_config"
+              ]
+            },
+            "AddResourcePolicies": {
+              "methods": [
+                "add_resource_policies"
+              ]
+            },
+            "AggregatedList": {
+              "methods": [
+                "aggregated_list"
+              ]
+            },
+            "AttachDisk": {
+              "methods": [
+                "attach_disk"
+              ]
+            },
+            "BulkInsert": {
+              "methods": [
+                "bulk_insert"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "DeleteAccessConfig": {
+              "methods": [
+                "delete_access_config"
+              ]
+            },
+            "DetachDisk": {
+              "methods": [
+                "detach_disk"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetEffectiveFirewalls": {
+              "methods": [
+                "get_effective_firewalls"
+              ]
+            },
+            "GetGuestAttributes": {
+              "methods": [
+                "get_guest_attributes"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "GetScreenshot": {
+              "methods": [
+                "get_screenshot"
+              ]
+            },
+            "GetSerialPortOutput": {
+              "methods": [
+                "get_serial_port_output"
+              ]
+            },
+            "GetShieldedInstanceIdentity": {
+              "methods": [
+                "get_shielded_instance_identity"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "ListReferrers": {
+              "methods": [
+                "list_referrers"
+              ]
+            },
+            "RemoveResourcePolicies": {
+              "methods": [
+                "remove_resource_policies"
+              ]
+            },
+            "Reset": {
+              "methods": [
+                "reset"
+              ]
+            },
+            "SetDeletionProtection": {
+              "methods": [
+                "set_deletion_protection"
+              ]
+            },
+            "SetDiskAutoDelete": {
+              "methods": [
+                "set_disk_auto_delete"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            },
+            "SetLabels": {
+              "methods": [
+                "set_labels"
+              ]
+            },
+            "SetMachineResources": {
+              "methods": [
+                "set_machine_resources"
+              ]
+            },
+            "SetMachineType": {
+              "methods": [
+                "set_machine_type"
+              ]
+            },
+            "SetMetadata": {
+              "methods": [
+                "set_metadata"
+              ]
+            },
+            "SetMinCpuPlatform": {
+              "methods": [
+                "set_min_cpu_platform"
+              ]
+            },
+            "SetScheduling": {
+              "methods": [
+                "set_scheduling"
+              ]
+            },
+            "SetServiceAccount": {
+              "methods": [
+                "set_service_account"
+              ]
+            },
+            "SetShieldedInstanceIntegrityPolicy": {
+              "methods": [
+                "set_shielded_instance_integrity_policy"
+              ]
+            },
+            "SetTags": {
+              "methods": [
+                "set_tags"
+              ]
+            },
+            "SimulateMaintenanceEvent": {
+              "methods": [
+                "simulate_maintenance_event"
+              ]
+            },
+            "Start": {
+              "methods": [
+                "start"
+              ]
+            },
+            "StartWithEncryptionKey": {
+              "methods": [
+                "start_with_encryption_key"
+              ]
+            },
+            "Stop": {
+              "methods": [
+                "stop"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
+              ]
+            },
+            "UpdateAccessConfig": {
+              "methods": [
+                "update_access_config"
+              ]
+            },
+            "UpdateDisplayDevice": {
+              "methods": [
+                "update_display_device"
+              ]
+            },
+            "UpdateNetworkInterface": {
+              "methods": [
+                "update_network_interface"
+              ]
+            },
+            "UpdateShieldedInstanceConfig": {
+              "methods": [
+                "update_shielded_instance_config"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "InterconnectAttachments": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::InterconnectAttachments::Client",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregated_list"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "InterconnectLocations": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::InterconnectLocations::Client",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Interconnects": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::Interconnects::Client",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetDiagnostics": {
+              "methods": [
+                "get_diagnostics"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "LicenseCodes": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::LicenseCodes::Client",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Licenses": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::Licenses::Client",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "MachineTypes": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::MachineTypes::Client",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregated_list"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "NetworkEndpointGroups": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::NetworkEndpointGroups::Client",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregated_list"
+              ]
+            },
+            "AttachNetworkEndpoints": {
+              "methods": [
+                "attach_network_endpoints"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "DetachNetworkEndpoints": {
+              "methods": [
+                "detach_network_endpoints"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "ListNetworkEndpoints": {
+              "methods": [
+                "list_network_endpoints"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Networks": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::Networks::Client",
+          "rpcs": {
+            "AddPeering": {
+              "methods": [
+                "add_peering"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetEffectiveFirewalls": {
+              "methods": [
+                "get_effective_firewalls"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "ListPeeringRoutes": {
+              "methods": [
+                "list_peering_routes"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "RemovePeering": {
+              "methods": [
+                "remove_peering"
+              ]
+            },
+            "SwitchToCustomMode": {
+              "methods": [
+                "switch_to_custom_mode"
+              ]
+            },
+            "UpdatePeering": {
+              "methods": [
+                "update_peering"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "NodeGroups": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::NodeGroups::Client",
+          "rpcs": {
+            "AddNodes": {
+              "methods": [
+                "add_nodes"
+              ]
+            },
+            "AggregatedList": {
+              "methods": [
+                "aggregated_list"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "DeleteNodes": {
+              "methods": [
+                "delete_nodes"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "ListNodes": {
+              "methods": [
+                "list_nodes"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            },
+            "SetNodeTemplate": {
+              "methods": [
+                "set_node_template"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "NodeTemplates": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::NodeTemplates::Client",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregated_list"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "NodeTypes": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::NodeTypes::Client",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregated_list"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "PacketMirrorings": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::PacketMirrorings::Client",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregated_list"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Projects": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::Projects::Client",
+          "rpcs": {
+            "DisableXpnHost": {
+              "methods": [
+                "disable_xpn_host"
+              ]
+            },
+            "DisableXpnResource": {
+              "methods": [
+                "disable_xpn_resource"
+              ]
+            },
+            "EnableXpnHost": {
+              "methods": [
+                "enable_xpn_host"
+              ]
+            },
+            "EnableXpnResource": {
+              "methods": [
+                "enable_xpn_resource"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetXpnHost": {
+              "methods": [
+                "get_xpn_host"
+              ]
+            },
+            "GetXpnResources": {
+              "methods": [
+                "get_xpn_resources"
+              ]
+            },
+            "ListXpnHosts": {
+              "methods": [
+                "list_xpn_hosts"
+              ]
+            },
+            "MoveDisk": {
+              "methods": [
+                "move_disk"
+              ]
+            },
+            "MoveInstance": {
+              "methods": [
+                "move_instance"
+              ]
+            },
+            "SetCommonInstanceMetadata": {
+              "methods": [
+                "set_common_instance_metadata"
+              ]
+            },
+            "SetDefaultNetworkTier": {
+              "methods": [
+                "set_default_network_tier"
+              ]
+            },
+            "SetUsageExportBucket": {
+              "methods": [
+                "set_usage_export_bucket"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "PublicAdvertisedPrefixes": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::PublicAdvertisedPrefixes::Client",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "PublicDelegatedPrefixes": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::PublicDelegatedPrefixes::Client",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregated_list"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RegionAutoscalers": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::RegionAutoscalers::Client",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RegionBackendServices": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::RegionBackendServices::Client",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetHealth": {
+              "methods": [
+                "get_health"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RegionCommitments": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::RegionCommitments::Client",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregated_list"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RegionDiskTypes": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::RegionDiskTypes::Client",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RegionDisks": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::RegionDisks::Client",
+          "rpcs": {
+            "AddResourcePolicies": {
+              "methods": [
+                "add_resource_policies"
+              ]
+            },
+            "CreateSnapshot": {
+              "methods": [
+                "create_snapshot"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "RemoveResourcePolicies": {
+              "methods": [
+                "remove_resource_policies"
+              ]
+            },
+            "Resize": {
+              "methods": [
+                "resize"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            },
+            "SetLabels": {
+              "methods": [
+                "set_labels"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RegionHealthCheckServices": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::RegionHealthCheckServices::Client",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RegionHealthChecks": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::RegionHealthChecks::Client",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RegionInstanceGroupManagers": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::RegionInstanceGroupManagers::Client",
+          "rpcs": {
+            "AbandonInstances": {
+              "methods": [
+                "abandon_instances"
+              ]
+            },
+            "ApplyUpdatesToInstances": {
+              "methods": [
+                "apply_updates_to_instances"
+              ]
+            },
+            "CreateInstances": {
+              "methods": [
+                "create_instances"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "DeleteInstances": {
+              "methods": [
+                "delete_instances"
+              ]
+            },
+            "DeletePerInstanceConfigs": {
+              "methods": [
+                "delete_per_instance_configs"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "ListErrors": {
+              "methods": [
+                "list_errors"
+              ]
+            },
+            "ListManagedInstances": {
+              "methods": [
+                "list_managed_instances"
+              ]
+            },
+            "ListPerInstanceConfigs": {
+              "methods": [
+                "list_per_instance_configs"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "PatchPerInstanceConfigs": {
+              "methods": [
+                "patch_per_instance_configs"
+              ]
+            },
+            "RecreateInstances": {
+              "methods": [
+                "recreate_instances"
+              ]
+            },
+            "Resize": {
+              "methods": [
+                "resize"
+              ]
+            },
+            "SetInstanceTemplate": {
+              "methods": [
+                "set_instance_template"
+              ]
+            },
+            "SetTargetPools": {
+              "methods": [
+                "set_target_pools"
+              ]
+            },
+            "UpdatePerInstanceConfigs": {
+              "methods": [
+                "update_per_instance_configs"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RegionInstanceGroups": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::RegionInstanceGroups::Client",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "ListInstances": {
+              "methods": [
+                "list_instances"
+              ]
+            },
+            "SetNamedPorts": {
+              "methods": [
+                "set_named_ports"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RegionInstances": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::RegionInstances::Client",
+          "rpcs": {
+            "BulkInsert": {
+              "methods": [
+                "bulk_insert"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RegionNetworkEndpointGroups": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::RegionNetworkEndpointGroups::Client",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RegionNotificationEndpoints": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::RegionNotificationEndpoints::Client",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RegionOperations": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::RegionOperations::Client",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Wait": {
+              "methods": [
+                "wait"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RegionSslCertificates": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::RegionSslCertificates::Client",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RegionTargetHttpProxies": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::RegionTargetHttpProxies::Client",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "SetUrlMap": {
+              "methods": [
+                "set_url_map"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RegionTargetHttpsProxies": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::RegionTargetHttpsProxies::Client",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "SetSslCertificates": {
+              "methods": [
+                "set_ssl_certificates"
+              ]
+            },
+            "SetUrlMap": {
+              "methods": [
+                "set_url_map"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RegionUrlMaps": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::RegionUrlMaps::Client",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
+              ]
+            },
+            "Validate": {
+              "methods": [
+                "validate"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Regions": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::Regions::Client",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Reservations": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::Reservations::Client",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregated_list"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Resize": {
+              "methods": [
+                "resize"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ResourcePolicies": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::ResourcePolicies::Client",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregated_list"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Routers": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::Routers::Client",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregated_list"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetNatMappingInfo": {
+              "methods": [
+                "get_nat_mapping_info"
+              ]
+            },
+            "GetRouterStatus": {
+              "methods": [
+                "get_router_status"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "Preview": {
+              "methods": [
+                "preview"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Routes": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::Routes::Client",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SecurityPolicies": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::SecurityPolicies::Client",
+          "rpcs": {
+            "AddRule": {
+              "methods": [
+                "add_rule"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetRule": {
+              "methods": [
+                "get_rule"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "ListPreconfiguredExpressionSets": {
+              "methods": [
+                "list_preconfigured_expression_sets"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "PatchRule": {
+              "methods": [
+                "patch_rule"
+              ]
+            },
+            "RemoveRule": {
+              "methods": [
+                "remove_rule"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Snapshots": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::Snapshots::Client",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            },
+            "SetLabels": {
+              "methods": [
+                "set_labels"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SslCertificates": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::SslCertificates::Client",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregated_list"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SslPolicies": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::SslPolicies::Client",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "ListAvailableFeatures": {
+              "methods": [
+                "list_available_features"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Subnetworks": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::Subnetworks::Client",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregated_list"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "ExpandIpCidrRange": {
+              "methods": [
+                "expand_ip_cidr_range"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "ListUsable": {
+              "methods": [
+                "list_usable"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            },
+            "SetPrivateIpGoogleAccess": {
+              "methods": [
+                "set_private_ip_google_access"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "TargetGrpcProxies": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::TargetGrpcProxies::Client",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "TargetHttpProxies": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::TargetHttpProxies::Client",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregated_list"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "SetUrlMap": {
+              "methods": [
+                "set_url_map"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "TargetHttpsProxies": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::TargetHttpsProxies::Client",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregated_list"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "SetQuicOverride": {
+              "methods": [
+                "set_quic_override"
+              ]
+            },
+            "SetSslCertificates": {
+              "methods": [
+                "set_ssl_certificates"
+              ]
+            },
+            "SetSslPolicy": {
+              "methods": [
+                "set_ssl_policy"
+              ]
+            },
+            "SetUrlMap": {
+              "methods": [
+                "set_url_map"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "TargetInstances": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::TargetInstances::Client",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregated_list"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "TargetPools": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::TargetPools::Client",
+          "rpcs": {
+            "AddHealthCheck": {
+              "methods": [
+                "add_health_check"
+              ]
+            },
+            "AddInstance": {
+              "methods": [
+                "add_instance"
+              ]
+            },
+            "AggregatedList": {
+              "methods": [
+                "aggregated_list"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetHealth": {
+              "methods": [
+                "get_health"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "RemoveHealthCheck": {
+              "methods": [
+                "remove_health_check"
+              ]
+            },
+            "RemoveInstance": {
+              "methods": [
+                "remove_instance"
+              ]
+            },
+            "SetBackup": {
+              "methods": [
+                "set_backup"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "TargetSslProxies": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::TargetSslProxies::Client",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "SetBackendService": {
+              "methods": [
+                "set_backend_service"
+              ]
+            },
+            "SetProxyHeader": {
+              "methods": [
+                "set_proxy_header"
+              ]
+            },
+            "SetSslCertificates": {
+              "methods": [
+                "set_ssl_certificates"
+              ]
+            },
+            "SetSslPolicy": {
+              "methods": [
+                "set_ssl_policy"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "TargetTcpProxies": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::TargetTcpProxies::Client",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "SetBackendService": {
+              "methods": [
+                "set_backend_service"
+              ]
+            },
+            "SetProxyHeader": {
+              "methods": [
+                "set_proxy_header"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "TargetVpnGateways": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::TargetVpnGateways::Client",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregated_list"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "UrlMaps": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::UrlMaps::Client",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregated_list"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "InvalidateCache": {
+              "methods": [
+                "invalidate_cache"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
+              ]
+            },
+            "Validate": {
+              "methods": [
+                "validate"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "VpnGateways": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::VpnGateways::Client",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregated_list"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetStatus": {
+              "methods": [
+                "get_status"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "SetLabels": {
+              "methods": [
+                "set_labels"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "VpnTunnels": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::VpnTunnels::Client",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregated_list"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ZoneOperations": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::ZoneOperations::Client",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Wait": {
+              "methods": [
+                "wait"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Zones": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Compute::V1::Zones::Client",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

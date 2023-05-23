@@ -8,6 +8,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/dataqna/v1alpha/annotated_string_pb'
 require 'google/api/client_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/dataqna/v1alpha/auto_suggestion_service.proto", :syntax => :proto3) do
     add_message "google.cloud.dataqna.v1alpha.SuggestQueriesRequest" do

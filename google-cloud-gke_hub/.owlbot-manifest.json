@@ -1,0 +1,25 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-gke_hub.gemspec",
+    "lib/google-cloud-gke_hub.rb",
+    "lib/google/cloud/gke_hub.rb",
+    "lib/google/cloud/gke_hub/version.rb",
+    "test/google/cloud/gke_hub/client_test.rb",
+    "test/google/cloud/gke_hub/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml",
+    "lib/google/cloud/gke_hub/helpers.rb"
+  ]
+}

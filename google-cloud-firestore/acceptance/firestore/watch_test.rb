@@ -15,6 +15,8 @@
 require "firestore_helper"
 
 describe "Watch", :firestore_acceptance do
+  before { skip if Google::Cloud.configure.firestore.transport == :rest }
+
   it "watches a limit query" do
     watch_col = root_col.doc("watch-limit-#{SecureRandom.hex(4)}").col("watch-query")
 
@@ -188,9 +190,9 @@ describe "Watch", :firestore_acceptance do
   def wait_until &block
     wait_count = 0
     until block.call
-      fail "wait_until criterial was not met" if wait_count > 200
+      fail "wait_until criteria was not met" if wait_count > 6
       wait_count += 1
-      sleep 0.01
+      sleep (2**wait_count) + rand(0..wait_count)
     end
   end
 end

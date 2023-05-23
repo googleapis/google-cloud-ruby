@@ -6,6 +6,8 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/bigtable/admin/v2/common_pb'
+require 'google/protobuf/timestamp_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/bigtable/admin/v2/instance.proto", :syntax => :proto3) do
     add_message "google.bigtable.admin.v2.Instance" do
@@ -14,6 +16,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :state, :enum, 3, "google.bigtable.admin.v2.Instance.State"
       optional :type, :enum, 4, "google.bigtable.admin.v2.Instance.Type"
       map :labels, :string, :string, 5
+      optional :create_time, :message, 7, "google.protobuf.Timestamp"
+      proto3_optional :satisfies_pzs, :bool, 8
     end
     add_enum "google.bigtable.admin.v2.Instance.State" do
       value :STATE_NOT_KNOWN, 0
@@ -25,6 +29,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :PRODUCTION, 1
       value :DEVELOPMENT, 2
     end
+    add_message "google.bigtable.admin.v2.AutoscalingTargets" do
+      optional :cpu_utilization_percent, :int32, 2
+      optional :storage_utilization_gib_per_node, :int32, 3
+    end
+    add_message "google.bigtable.admin.v2.AutoscalingLimits" do
+      optional :min_serve_nodes, :int32, 1
+      optional :max_serve_nodes, :int32, 2
+    end
     add_message "google.bigtable.admin.v2.Cluster" do
       optional :name, :string, 1
       optional :location, :string, 2
@@ -32,6 +44,16 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :serve_nodes, :int32, 4
       optional :default_storage_type, :enum, 5, "google.bigtable.admin.v2.StorageType"
       optional :encryption_config, :message, 6, "google.bigtable.admin.v2.Cluster.EncryptionConfig"
+      oneof :config do
+        optional :cluster_config, :message, 7, "google.bigtable.admin.v2.Cluster.ClusterConfig"
+      end
+    end
+    add_message "google.bigtable.admin.v2.Cluster.ClusterAutoscalingConfig" do
+      optional :autoscaling_limits, :message, 1, "google.bigtable.admin.v2.AutoscalingLimits"
+      optional :autoscaling_targets, :message, 2, "google.bigtable.admin.v2.AutoscalingTargets"
+    end
+    add_message "google.bigtable.admin.v2.Cluster.ClusterConfig" do
+      optional :cluster_autoscaling_config, :message, 1, "google.bigtable.admin.v2.Cluster.ClusterAutoscalingConfig"
     end
     add_message "google.bigtable.admin.v2.Cluster.EncryptionConfig" do
       optional :kms_key_name, :string, 1
@@ -53,10 +75,20 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       end
     end
     add_message "google.bigtable.admin.v2.AppProfile.MultiClusterRoutingUseAny" do
+      repeated :cluster_ids, :string, 1
     end
     add_message "google.bigtable.admin.v2.AppProfile.SingleClusterRouting" do
       optional :cluster_id, :string, 1
       optional :allow_transactional_writes, :bool, 2
+    end
+    add_message "google.bigtable.admin.v2.HotTablet" do
+      optional :name, :string, 1
+      optional :table_name, :string, 2
+      optional :start_time, :message, 3, "google.protobuf.Timestamp"
+      optional :end_time, :message, 4, "google.protobuf.Timestamp"
+      optional :start_key, :string, 5
+      optional :end_key, :string, 6
+      optional :node_cpu_usage_percent, :float, 7
     end
   end
 end
@@ -69,12 +101,17 @@ module Google
           Instance = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Instance").msgclass
           Instance::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Instance.State").enummodule
           Instance::Type = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Instance.Type").enummodule
+          AutoscalingTargets = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.AutoscalingTargets").msgclass
+          AutoscalingLimits = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.AutoscalingLimits").msgclass
           Cluster = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Cluster").msgclass
+          Cluster::ClusterAutoscalingConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Cluster.ClusterAutoscalingConfig").msgclass
+          Cluster::ClusterConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Cluster.ClusterConfig").msgclass
           Cluster::EncryptionConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Cluster.EncryptionConfig").msgclass
           Cluster::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.Cluster.State").enummodule
           AppProfile = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.AppProfile").msgclass
           AppProfile::MultiClusterRoutingUseAny = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.AppProfile.MultiClusterRoutingUseAny").msgclass
           AppProfile::SingleClusterRouting = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.AppProfile.SingleClusterRouting").msgclass
+          HotTablet = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.HotTablet").msgclass
         end
       end
     end

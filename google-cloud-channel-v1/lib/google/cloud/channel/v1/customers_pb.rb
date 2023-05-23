@@ -8,7 +8,7 @@ require 'google/api/resource_pb'
 require 'google/cloud/channel/v1/common_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/type/postal_address_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/channel/v1/customers.proto", :syntax => :proto3) do
     add_message "google.cloud.channel.v1.Customer" do
@@ -24,6 +24,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :language_code, :string, 10
       optional :cloud_identity_info, :message, 12, "google.cloud.channel.v1.CloudIdentityInfo"
       optional :channel_partner_id, :string, 13
+      optional :correlation_id, :string, 14
     end
     add_message "google.cloud.channel.v1.ContactInfo" do
       optional :first_name, :string, 1

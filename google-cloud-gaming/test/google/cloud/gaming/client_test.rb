@@ -20,45 +20,82 @@ require "helper"
 require "google/cloud/gaming"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Cloud::Gaming::ClientConstructionMinitest < Minitest::Test
-  def test_game_server_clusters_service
+  def test_game_server_clusters_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Gaming.game_server_clusters_service do |config|
+      client = Google::Cloud::Gaming.game_server_clusters_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Gaming::V1::GameServerClustersService::Client, client
     end
   end
 
-  def test_game_server_configs_service
+  def test_game_server_clusters_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Gaming.game_server_clusters_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Gaming::V1::GameServerClustersService::Rest::Client, client
+    end
+  end
+
+  def test_game_server_configs_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Gaming.game_server_configs_service do |config|
+      client = Google::Cloud::Gaming.game_server_configs_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Gaming::V1::GameServerConfigsService::Client, client
     end
   end
 
-  def test_game_server_deployments_service
+  def test_game_server_configs_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Gaming.game_server_configs_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Gaming::V1::GameServerConfigsService::Rest::Client, client
+    end
+  end
+
+  def test_game_server_deployments_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Gaming.game_server_deployments_service do |config|
+      client = Google::Cloud::Gaming.game_server_deployments_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Gaming::V1::GameServerDeploymentsService::Client, client
     end
   end
 
-  def test_realms_service
+  def test_game_server_deployments_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Gaming.game_server_deployments_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Gaming::V1::GameServerDeploymentsService::Rest::Client, client
+    end
+  end
+
+  def test_realms_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Gaming.realms_service do |config|
+      client = Google::Cloud::Gaming.realms_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Gaming::V1::RealmsService::Client, client
+    end
+  end
+
+  def test_realms_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Gaming.realms_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Gaming::V1::RealmsService::Rest::Client, client
     end
   end
 end

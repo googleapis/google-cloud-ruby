@@ -26,19 +26,33 @@ require "google/cloud/gke_hub/v1beta1/gke_hub_membership_service/credentials"
 require "google/cloud/gke_hub/v1beta1/gke_hub_membership_service/paths"
 require "google/cloud/gke_hub/v1beta1/gke_hub_membership_service/operations"
 require "google/cloud/gke_hub/v1beta1/gke_hub_membership_service/client"
+require "google/cloud/gke_hub/v1beta1/gke_hub_membership_service/rest"
 
 module Google
   module Cloud
     module GkeHub
       module V1beta1
         ##
-        # GKE Hub CRUD API for the Membership resource.
-        # The Membership service is currently only available in the global location.
+        # The GKE Hub MembershipService handles the registration of many Kubernetes
+        # clusters to Google Cloud, represented with the
+        # {::Google::Cloud::GkeHub::V1beta1::Membership Membership} resource.
         #
-        # To load this service and instantiate a client:
+        # GKE Hub is currently available in the global region and all regions in
+        # https://cloud.google.com/compute/docs/regions-zones.
+        #
+        # **Membership management may be non-trivial:** it is recommended to use one
+        # of the Google-provided client libraries or tools where possible when working
+        # with Membership resources.
+        #
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/gke_hub/v1beta1/gke_hub_membership_service"
         #     client = ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/gke_hub/v1beta1/gke_hub_membership_service/rest"
+        #     client = ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Rest::Client.new
         #
         module GkeHubMembershipService
         end

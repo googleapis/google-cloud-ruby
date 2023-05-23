@@ -3,49 +3,39 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/vision/v1p3beta1/geometry_pb'
 require 'google/cloud/vision/v1p3beta1/product_search_service_pb'
 require 'google/protobuf/timestamp_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/vision/v1p3beta1/product_search.proto", :syntax => :proto3) do
     add_message "google.cloud.vision.v1p3beta1.ProductSearchParams" do
-      optional :catalog_name, :string, 1
-      optional :category, :enum, 2, "google.cloud.vision.v1p3beta1.ProductSearchCategory"
-      optional :product_category, :string, 5
-      optional :normalized_bounding_poly, :message, 3, "google.cloud.vision.v1p3beta1.NormalizedBoundingPoly"
       optional :bounding_poly, :message, 9, "google.cloud.vision.v1p3beta1.BoundingPoly"
-      optional :view, :enum, 4, "google.cloud.vision.v1p3beta1.ProductSearchResultsView"
       optional :product_set, :string, 6
       repeated :product_categories, :string, 7
       optional :filter, :string, 8
     end
     add_message "google.cloud.vision.v1p3beta1.ProductSearchResults" do
-      optional :category, :enum, 1, "google.cloud.vision.v1p3beta1.ProductSearchCategory"
-      optional :product_category, :string, 4
       optional :index_time, :message, 2, "google.protobuf.Timestamp"
-      repeated :products, :message, 3, "google.cloud.vision.v1p3beta1.ProductSearchResults.ProductInfo"
       repeated :results, :message, 5, "google.cloud.vision.v1p3beta1.ProductSearchResults.Result"
-    end
-    add_message "google.cloud.vision.v1p3beta1.ProductSearchResults.ProductInfo" do
-      optional :product_id, :string, 1
-      optional :image_uri, :string, 2
-      optional :score, :float, 3
+      repeated :product_grouped_results, :message, 6, "google.cloud.vision.v1p3beta1.ProductSearchResults.GroupedResult"
     end
     add_message "google.cloud.vision.v1p3beta1.ProductSearchResults.Result" do
       optional :product, :message, 1, "google.cloud.vision.v1p3beta1.Product"
       optional :score, :float, 2
       optional :image, :string, 3
     end
-    add_enum "google.cloud.vision.v1p3beta1.ProductSearchCategory" do
-      value :PRODUCT_SEARCH_CATEGORY_UNSPECIFIED, 0
-      value :SHOES, 1
-      value :BAGS, 2
+    add_message "google.cloud.vision.v1p3beta1.ProductSearchResults.ObjectAnnotation" do
+      optional :mid, :string, 1
+      optional :language_code, :string, 2
+      optional :name, :string, 3
+      optional :score, :float, 4
     end
-    add_enum "google.cloud.vision.v1p3beta1.ProductSearchResultsView" do
-      value :BASIC, 0
-      value :FULL, 1
+    add_message "google.cloud.vision.v1p3beta1.ProductSearchResults.GroupedResult" do
+      optional :bounding_poly, :message, 1, "google.cloud.vision.v1p3beta1.BoundingPoly"
+      repeated :results, :message, 2, "google.cloud.vision.v1p3beta1.ProductSearchResults.Result"
+      repeated :object_annotations, :message, 3, "google.cloud.vision.v1p3beta1.ProductSearchResults.ObjectAnnotation"
     end
   end
 end
@@ -56,10 +46,9 @@ module Google
       module V1p3beta1
         ProductSearchParams = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1p3beta1.ProductSearchParams").msgclass
         ProductSearchResults = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1p3beta1.ProductSearchResults").msgclass
-        ProductSearchResults::ProductInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1p3beta1.ProductSearchResults.ProductInfo").msgclass
         ProductSearchResults::Result = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1p3beta1.ProductSearchResults.Result").msgclass
-        ProductSearchCategory = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1p3beta1.ProductSearchCategory").enummodule
-        ProductSearchResultsView = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1p3beta1.ProductSearchResultsView").enummodule
+        ProductSearchResults::ObjectAnnotation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1p3beta1.ProductSearchResults.ObjectAnnotation").msgclass
+        ProductSearchResults::GroupedResult = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vision.v1p3beta1.ProductSearchResults.GroupedResult").msgclass
       end
     end
   end

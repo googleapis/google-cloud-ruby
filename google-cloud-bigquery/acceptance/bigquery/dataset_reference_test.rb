@@ -76,6 +76,13 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :bigquery do
   end
   let(:local_file) { "acceptance/data/kitten-test-data.json" }
   let(:user_val) { "blowmage@gmail.com" }
+  let(:rows) do
+    [
+      { name: "silvano", breed: "the cat kind",      id: 4, dob: Time.now.utc },
+      { name: "ryan",    breed: "golden retriever?", id: 5, dob: Time.now.utc },
+      { name: "stephen", breed: "idkanycatbreeds",   id: 6, dob: Time.now.utc }
+    ]
+  end
 
   before do
     table
@@ -108,11 +115,20 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :bigquery do
   end
 
   it "deletes itself and knows it no longer exists" do
-    _(dataset.exists?).must_equal true
-    dataset.tables.all(&:delete)
-    _(dataset.delete).must_equal true
-    _(dataset.exists?).must_equal false
-    _(dataset.exists?(force: true)).must_equal false
+    dataset_2_id = "#{prefix}_dataset_delete"
+    dataset_2 = bigquery.create_dataset dataset_2_id
+    _(dataset_2.exists?).must_equal true
+    _(dataset_2.delete).must_equal true
+    _(dataset_2.exists?).must_equal false
+    _(dataset_2.exists?(force: true)).must_equal false
+  end
+
+  it "loads table with partial projection of table metadata" do
+    %w[unspecified basic storage full].each do |view|
+      table = dataset.table table_id, view: view
+      _(table.table_id).must_equal table_id
+      verify_table_metadata table, view
+    end
   end
 
   it "should set & get metadata" do
@@ -217,6 +233,7 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :bigquery do
     query_job = dataset.query_job query, job_id: job_id
     _(query_job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
     _(query_job.job_id).must_equal job_id
+    _(query_job.session_id).must_be :nil?
     query_job.wait_until_done!
     _(query_job.done?).must_equal true
     _(query_job.data.total).wont_be_nil
@@ -224,5 +241,24 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :bigquery do
     data = dataset.query query
     _(data.class).must_equal Google::Cloud::Bigquery::Data
     _(data.total).wont_be_nil
+  end
+
+  it "inserts rows asynchronously and gets its data" do
+    %w[unspecified basic storage full].each do |view|
+      insert_result = nil
+      inserter = dataset.insert_async(table_id, view: view) do |result|
+        insert_result = result
+      end
+      inserter.insert rows
+
+      inserter.flush
+      inserter.stop.wait!
+
+      _(insert_result).must_be_kind_of Google::Cloud::Bigquery::Table::AsyncInserter::Result
+      _(insert_result).must_be :success?
+      _(insert_result.insert_count).must_equal 3
+      _(insert_result.insert_errors).must_be :empty?
+      _(insert_result.error_rows).must_be :empty?
+    end
   end
 end

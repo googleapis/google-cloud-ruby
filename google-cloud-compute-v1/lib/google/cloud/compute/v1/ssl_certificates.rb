@@ -28,9 +28,12 @@ module Google
   module Cloud
     module Compute
       module V1
-        # To load this service and instantiate a REST client:
+        ##
+        # The SslCertificates API.
         #
-        #     require "google/cloud/compute/v1/ssl_certificates"
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/compute/v1/ssl_certificates/rest"
         #     client = ::Google::Cloud::Compute::V1::SslCertificates::Rest::Client.new
         #
         module SslCertificates

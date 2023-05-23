@@ -7,7 +7,9 @@ require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
+require 'google/longrunning/operations_pb'
 require 'google/protobuf/timestamp_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/webrisk/v1/webrisk.proto", :syntax => :proto3) do
     add_message "google.cloud.webrisk.v1.ComputeThreatListDiffRequest" do
@@ -83,16 +85,81 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.webrisk.v1.Submission" do
       optional :uri, :string, 1
+      repeated :threat_types, :enum, 2, "google.cloud.webrisk.v1.ThreatType"
+    end
+    add_message "google.cloud.webrisk.v1.ThreatInfo" do
+      optional :abuse_type, :enum, 1, "google.cloud.webrisk.v1.ThreatInfo.AbuseType"
+      optional :threat_confidence, :message, 2, "google.cloud.webrisk.v1.ThreatInfo.Confidence"
+      optional :threat_justification, :message, 3, "google.cloud.webrisk.v1.ThreatInfo.ThreatJustification"
+    end
+    add_message "google.cloud.webrisk.v1.ThreatInfo.Confidence" do
+      oneof :value do
+        optional :score, :float, 1
+        optional :level, :enum, 2, "google.cloud.webrisk.v1.ThreatInfo.Confidence.ConfidenceLevel"
+      end
+    end
+    add_enum "google.cloud.webrisk.v1.ThreatInfo.Confidence.ConfidenceLevel" do
+      value :CONFIDENCE_LEVEL_UNSPECIFIED, 0
+      value :LOW, 1
+      value :MEDIUM, 2
+      value :HIGH, 3
+    end
+    add_message "google.cloud.webrisk.v1.ThreatInfo.ThreatJustification" do
+      repeated :labels, :enum, 1, "google.cloud.webrisk.v1.ThreatInfo.ThreatJustification.JustificationLabel"
+      repeated :comments, :string, 2
+    end
+    add_enum "google.cloud.webrisk.v1.ThreatInfo.ThreatJustification.JustificationLabel" do
+      value :JUSTIFICATION_LABEL_UNSPECIFIED, 0
+      value :MANUAL_VERIFICATION, 1
+      value :USER_REPORT, 2
+      value :AUTOMATED_REPORT, 3
+    end
+    add_enum "google.cloud.webrisk.v1.ThreatInfo.AbuseType" do
+      value :ABUSE_TYPE_UNSPECIFIED, 0
+      value :MALWARE, 1
+      value :SOCIAL_ENGINEERING, 2
+      value :UNWANTED_SOFTWARE, 3
+    end
+    add_message "google.cloud.webrisk.v1.ThreatDiscovery" do
+      optional :platform, :enum, 1, "google.cloud.webrisk.v1.ThreatDiscovery.Platform"
+      repeated :region_codes, :string, 2
+    end
+    add_enum "google.cloud.webrisk.v1.ThreatDiscovery.Platform" do
+      value :PLATFORM_UNSPECIFIED, 0
+      value :ANDROID, 1
+      value :IOS, 2
+      value :MACOS, 3
+      value :WINDOWS, 4
     end
     add_message "google.cloud.webrisk.v1.CreateSubmissionRequest" do
       optional :parent, :string, 1
       optional :submission, :message, 2, "google.cloud.webrisk.v1.Submission"
+    end
+    add_message "google.cloud.webrisk.v1.SubmitUriRequest" do
+      optional :parent, :string, 1
+      optional :submission, :message, 2, "google.cloud.webrisk.v1.Submission"
+      optional :threat_info, :message, 3, "google.cloud.webrisk.v1.ThreatInfo"
+      optional :threat_discovery, :message, 4, "google.cloud.webrisk.v1.ThreatDiscovery"
+    end
+    add_message "google.cloud.webrisk.v1.SubmitUriMetadata" do
+      optional :state, :enum, 1, "google.cloud.webrisk.v1.SubmitUriMetadata.State"
+      optional :create_time, :message, 2, "google.protobuf.Timestamp"
+      optional :update_time, :message, 3, "google.protobuf.Timestamp"
+    end
+    add_enum "google.cloud.webrisk.v1.SubmitUriMetadata.State" do
+      value :STATE_UNSPECIFIED, 0
+      value :RUNNING, 1
+      value :SUCCEEDED, 2
+      value :CANCELLED, 3
+      value :FAILED, 4
+      value :CLOSED, 5
     end
     add_enum "google.cloud.webrisk.v1.ThreatType" do
       value :THREAT_TYPE_UNSPECIFIED, 0
       value :MALWARE, 1
       value :SOCIAL_ENGINEERING, 2
       value :UNWANTED_SOFTWARE, 3
+      value :SOCIAL_ENGINEERING_EXTENDED_COVERAGE, 4
     end
     add_enum "google.cloud.webrisk.v1.CompressionType" do
       value :COMPRESSION_TYPE_UNSPECIFIED, 0
@@ -123,7 +190,18 @@ module Google
         RawHashes = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1.RawHashes").msgclass
         RiceDeltaEncoding = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1.RiceDeltaEncoding").msgclass
         Submission = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1.Submission").msgclass
+        ThreatInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1.ThreatInfo").msgclass
+        ThreatInfo::Confidence = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1.ThreatInfo.Confidence").msgclass
+        ThreatInfo::Confidence::ConfidenceLevel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1.ThreatInfo.Confidence.ConfidenceLevel").enummodule
+        ThreatInfo::ThreatJustification = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1.ThreatInfo.ThreatJustification").msgclass
+        ThreatInfo::ThreatJustification::JustificationLabel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1.ThreatInfo.ThreatJustification.JustificationLabel").enummodule
+        ThreatInfo::AbuseType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1.ThreatInfo.AbuseType").enummodule
+        ThreatDiscovery = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1.ThreatDiscovery").msgclass
+        ThreatDiscovery::Platform = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1.ThreatDiscovery.Platform").enummodule
         CreateSubmissionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1.CreateSubmissionRequest").msgclass
+        SubmitUriRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1.SubmitUriRequest").msgclass
+        SubmitUriMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1.SubmitUriMetadata").msgclass
+        SubmitUriMetadata::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1.SubmitUriMetadata.State").enummodule
         ThreatType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1.ThreatType").enummodule
         CompressionType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.webrisk.v1.CompressionType").enummodule
       end

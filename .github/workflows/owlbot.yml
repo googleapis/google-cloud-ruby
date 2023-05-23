@@ -1,0 +1,34 @@
+name: OwlBot Manual Run
+
+on:
+  workflow_dispatch:
+    inputs:
+      gems:
+        description: "List of gems, or --all for all gems"
+        required: true
+      flags:
+        description: "Extra flags to pass to toys owlbot"
+        required: false
+
+jobs:
+  OwlBot:
+    if: ${{ github.repository == 'googleapis/google-cloud-ruby' }}
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.YOSHI_CODE_BOT_TOKEN }}
+      GOOGLEAPIS_GEN_GITHUB_TOKEN: ${{ secrets.YOSHI_APPROVER_PRIVATE_TOKEN }}
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+    - name: Install Ruby 3.0
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: "3.0"
+    - name: Install tools
+      run: |
+        git config --global user.email "70984784+yoshi-code-bot@users.noreply.github.com"
+        git config --global user.name "Yoshi Code Bot"
+        gem install --no-document toys
+    - name: OwlBot
+      run: |
+        toys owlbot -v --pull --remote=origin ${{ github.event.inputs.flags }} ${{ github.event.inputs.gems }}

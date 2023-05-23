@@ -52,13 +52,12 @@ module Google
             # See {::Google::Area120::Tables::V1alpha1::TablesService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all TablesService clients:
-            #
-            #     ::Google::Area120::Tables::V1alpha1::TablesService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all TablesService clients
+            #   ::Google::Area120::Tables::V1alpha1::TablesService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -78,10 +77,7 @@ module Google
 
                 default_config.timeout = 60.0
                 default_config.retry_policy = {
-                  initial_delay: 1.0,
-                  max_delay: 10.0,
-                  multiplier: 1.3,
-                  retry_codes: [14]
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.get_table.timeout = 60.0
@@ -137,19 +133,15 @@ module Google
             ##
             # Create a new TablesService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new TablesService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new
             #
-            #     client = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new
-            #
-            # To create a new TablesService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the TablesService client.
             # @yieldparam config [Client::Configuration]
@@ -169,14 +161,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -223,6 +214,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/area120/tables/v1alpha1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Area120::Tables::V1alpha1::TablesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Area120::Tables::V1alpha1::GetTableRequest.new
+            #
+            #   # Call the get_table method.
+            #   result = client.get_table request
+            #
+            #   # The returned object is of type Google::Area120::Tables::V1alpha1::Table.
+            #   p result
+            #
             def get_table request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -240,16 +246,20 @@ module Google
                 gapic_version: ::Google::Area120::Tables::V1alpha1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_table.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_table.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @tables_service_stub.call_rpc :get_table, request, options: options do |response, operation|
@@ -299,6 +309,25 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/area120/tables/v1alpha1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Area120::Tables::V1alpha1::TablesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Area120::Tables::V1alpha1::ListTablesRequest.new
+            #
+            #   # Call the list_tables method.
+            #   result = client.list_tables request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Area120::Tables::V1alpha1::Table.
+            #     p item
+            #   end
+            #
             def list_tables request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -319,7 +348,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_tables.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_tables.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @tables_service_stub.call_rpc :list_tables, request, options: options do |response, operation|
@@ -361,6 +392,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/area120/tables/v1alpha1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Area120::Tables::V1alpha1::TablesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Area120::Tables::V1alpha1::GetWorkspaceRequest.new
+            #
+            #   # Call the get_workspace method.
+            #   result = client.get_workspace request
+            #
+            #   # The returned object is of type Google::Area120::Tables::V1alpha1::Workspace.
+            #   p result
+            #
             def get_workspace request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -378,16 +424,20 @@ module Google
                 gapic_version: ::Google::Area120::Tables::V1alpha1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_workspace.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_workspace.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @tables_service_stub.call_rpc :get_workspace, request, options: options do |response, operation|
@@ -437,6 +487,25 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/area120/tables/v1alpha1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Area120::Tables::V1alpha1::TablesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Area120::Tables::V1alpha1::ListWorkspacesRequest.new
+            #
+            #   # Call the list_workspaces method.
+            #   result = client.list_workspaces request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Area120::Tables::V1alpha1::Workspace.
+            #     p item
+            #   end
+            #
             def list_workspaces request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -457,7 +526,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.list_workspaces.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_workspaces.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @tables_service_stub.call_rpc :list_workspaces, request, options: options do |response, operation|
@@ -502,6 +573,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/area120/tables/v1alpha1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Area120::Tables::V1alpha1::TablesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Area120::Tables::V1alpha1::GetRowRequest.new
+            #
+            #   # Call the get_row method.
+            #   result = client.get_row request
+            #
+            #   # The returned object is of type Google::Area120::Tables::V1alpha1::Row.
+            #   p result
+            #
             def get_row request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -519,16 +605,20 @@ module Google
                 gapic_version: ::Google::Area120::Tables::V1alpha1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_row.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_row.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @tables_service_stub.call_rpc :get_row, request, options: options do |response, operation|
@@ -588,6 +678,25 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/area120/tables/v1alpha1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Area120::Tables::V1alpha1::TablesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Area120::Tables::V1alpha1::ListRowsRequest.new
+            #
+            #   # Call the list_rows method.
+            #   result = client.list_rows request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Area120::Tables::V1alpha1::Row.
+            #     p item
+            #   end
+            #
             def list_rows request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -605,16 +714,20 @@ module Google
                 gapic_version: ::Google::Area120::Tables::V1alpha1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_rows.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_rows.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @tables_service_stub.call_rpc :list_rows, request, options: options do |response, operation|
@@ -661,6 +774,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/area120/tables/v1alpha1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Area120::Tables::V1alpha1::TablesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Area120::Tables::V1alpha1::CreateRowRequest.new
+            #
+            #   # Call the create_row method.
+            #   result = client.create_row request
+            #
+            #   # The returned object is of type Google::Area120::Tables::V1alpha1::Row.
+            #   p result
+            #
             def create_row request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -678,16 +806,20 @@ module Google
                 gapic_version: ::Google::Area120::Tables::V1alpha1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_row.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_row.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @tables_service_stub.call_rpc :create_row, request, options: options do |response, operation|
@@ -732,6 +864,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/area120/tables/v1alpha1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Area120::Tables::V1alpha1::TablesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Area120::Tables::V1alpha1::BatchCreateRowsRequest.new
+            #
+            #   # Call the batch_create_rows method.
+            #   result = client.batch_create_rows request
+            #
+            #   # The returned object is of type Google::Area120::Tables::V1alpha1::BatchCreateRowsResponse.
+            #   p result
+            #
             def batch_create_rows request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -749,16 +896,20 @@ module Google
                 gapic_version: ::Google::Area120::Tables::V1alpha1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.batch_create_rows.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.batch_create_rows.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @tables_service_stub.call_rpc :batch_create_rows, request, options: options do |response, operation|
@@ -803,6 +954,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/area120/tables/v1alpha1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Area120::Tables::V1alpha1::TablesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Area120::Tables::V1alpha1::UpdateRowRequest.new
+            #
+            #   # Call the update_row method.
+            #   result = client.update_row request
+            #
+            #   # The returned object is of type Google::Area120::Tables::V1alpha1::Row.
+            #   p result
+            #
             def update_row request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -820,16 +986,20 @@ module Google
                 gapic_version: ::Google::Area120::Tables::V1alpha1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "row.name" => request.row.name
-              }
+              header_params = {}
+              if request.row&.name
+                header_params["row.name"] = request.row.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_row.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_row.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @tables_service_stub.call_rpc :update_row, request, options: options do |response, operation|
@@ -874,6 +1044,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/area120/tables/v1alpha1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Area120::Tables::V1alpha1::TablesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Area120::Tables::V1alpha1::BatchUpdateRowsRequest.new
+            #
+            #   # Call the batch_update_rows method.
+            #   result = client.batch_update_rows request
+            #
+            #   # The returned object is of type Google::Area120::Tables::V1alpha1::BatchUpdateRowsResponse.
+            #   p result
+            #
             def batch_update_rows request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -891,16 +1076,20 @@ module Google
                 gapic_version: ::Google::Area120::Tables::V1alpha1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.batch_update_rows.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.batch_update_rows.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @tables_service_stub.call_rpc :batch_update_rows, request, options: options do |response, operation|
@@ -941,6 +1130,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/area120/tables/v1alpha1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Area120::Tables::V1alpha1::TablesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Area120::Tables::V1alpha1::DeleteRowRequest.new
+            #
+            #   # Call the delete_row method.
+            #   result = client.delete_row request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_row request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -958,16 +1162,20 @@ module Google
                 gapic_version: ::Google::Area120::Tables::V1alpha1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_row.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_row.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @tables_service_stub.call_rpc :delete_row, request, options: options do |response, operation|
@@ -1013,6 +1221,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/area120/tables/v1alpha1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Area120::Tables::V1alpha1::TablesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Area120::Tables::V1alpha1::BatchDeleteRowsRequest.new
+            #
+            #   # Call the batch_delete_rows method.
+            #   result = client.batch_delete_rows request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def batch_delete_rows request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1030,16 +1253,20 @@ module Google
                 gapic_version: ::Google::Area120::Tables::V1alpha1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.batch_delete_rows.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.batch_delete_rows.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @tables_service_stub.call_rpc :batch_delete_rows, request, options: options do |response, operation|
@@ -1063,22 +1290,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for get_table
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # get_table to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Area120::Tables::V1alpha1::TablesService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.get_table.timeout = 20.0
+            #   end
             #
-            #     ::Google::Area120::Tables::V1alpha1::TablesService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.get_table.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.get_table.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.get_table.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
@@ -1089,9 +1315,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials

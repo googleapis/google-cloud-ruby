@@ -25,6 +25,7 @@ require "google/cloud/secret_manager/v1/version"
 require "google/cloud/secret_manager/v1/secret_manager_service/credentials"
 require "google/cloud/secret_manager/v1/secret_manager_service/paths"
 require "google/cloud/secret_manager/v1/secret_manager_service/client"
+require "google/cloud/secret_manager/v1/secret_manager_service/rest"
 
 module Google
   module Cloud
@@ -39,10 +40,15 @@ module Google
         # * {::Google::Cloud::SecretManager::V1::Secret Secret}
         # * {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/secret_manager/v1/secret_manager_service"
         #     client = ::Google::Cloud::SecretManager::V1::SecretManagerService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/secret_manager/v1/secret_manager_service/rest"
+        #     client = ::Google::Cloud::SecretManager::V1::SecretManagerService::Rest::Client.new
         #
         module SecretManagerService
         end

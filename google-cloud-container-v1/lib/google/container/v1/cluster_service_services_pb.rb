@@ -107,6 +107,9 @@ module Google
             rpc :CreateNodePool, ::Google::Cloud::Container::V1::CreateNodePoolRequest, ::Google::Cloud::Container::V1::Operation
             # Deletes a node pool from a cluster.
             rpc :DeleteNodePool, ::Google::Cloud::Container::V1::DeleteNodePoolRequest, ::Google::Cloud::Container::V1::Operation
+            # CompleteNodePoolUpgrade will signal an on-going node pool upgrade to
+            # complete.
+            rpc :CompleteNodePoolUpgrade, ::Google::Cloud::Container::V1::CompleteNodePoolUpgradeRequest, ::Google::Protobuf::Empty
             # Rolls back a previously Aborted or Failed NodePool upgrade.
             # This makes no changes if the last upgrade successfully completed.
             rpc :RollbackNodePoolUpgrade, ::Google::Cloud::Container::V1::RollbackNodePoolUpgradeRequest, ::Google::Cloud::Container::V1::Operation
@@ -120,7 +123,9 @@ module Google
             rpc :StartIPRotation, ::Google::Cloud::Container::V1::StartIPRotationRequest, ::Google::Cloud::Container::V1::Operation
             # Completes master IP rotation.
             rpc :CompleteIPRotation, ::Google::Cloud::Container::V1::CompleteIPRotationRequest, ::Google::Cloud::Container::V1::Operation
-            # Sets the size for a specific node pool.
+            # Sets the size for a specific node pool. The new size will be used for all
+            # replicas, including future replicas created by modifying
+            # [NodePool.locations][google.container.v1.NodePool.locations].
             rpc :SetNodePoolSize, ::Google::Cloud::Container::V1::SetNodePoolSizeRequest, ::Google::Cloud::Container::V1::Operation
             # Enables or disables Network Policy for a cluster.
             rpc :SetNetworkPolicy, ::Google::Cloud::Container::V1::SetNetworkPolicyRequest, ::Google::Cloud::Container::V1::Operation

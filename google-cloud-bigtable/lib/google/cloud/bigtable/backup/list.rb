@@ -46,8 +46,8 @@ module Google
           #
           #   bigtable = Google::Cloud::Bigtable.new
           #
-          #   instance = bigtable.instance("my-instance")
-          #   cluster = instance.cluster("my-cluster")
+          #   instance = bigtable.instance "my-instance"
+          #   cluster = instance.cluster "my-cluster"
           #
           #   backups = cluster.backups
           #
@@ -69,8 +69,8 @@ module Google
           #
           #   bigtable = Google::Cloud::Bigtable.new
           #
-          #   instance = bigtable.instance("my-instance")
-          #   cluster = instance.cluster("my-cluster")
+          #   instance = bigtable.instance "my-instance"
+          #   cluster = instance.cluster "my-cluster"
           #
           #   backups = cluster.backups
           #
@@ -105,8 +105,8 @@ module Google
           #
           #   bigtable = Google::Cloud::Bigtable.new
           #
-          #   instance = bigtable.instance("my-instance")
-          #   cluster = instance.cluster("my-cluster")
+          #   instance = bigtable.instance "my-instance"
+          #   cluster = instance.cluster "my-cluster"
           #
           #   cluster.backups.all do |backup|
           #     puts backup.backup_id
@@ -117,12 +117,10 @@ module Google
           #
           #   bigtable = Google::Cloud::Bigtable.new
           #
-          #   instance = bigtable.instance("my-instance")
-          #   cluster = instance.cluster("my-cluster")
+          #   instance = bigtable.instance "my-instance"
+          #   cluster = instance.cluster "my-cluster"
           #
-          #   all_backup_ids = cluster.backups.all.map do |backup|
-          #     backup.backup_id
-          #   end
+          #   all_backup_ids = cluster.backups.all.map(&:backup_id)
           #
           def all &block
             return enum_for :all unless block_given?

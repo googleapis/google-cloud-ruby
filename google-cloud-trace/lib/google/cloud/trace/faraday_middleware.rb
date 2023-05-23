@@ -33,7 +33,7 @@ module Google
         # ```ruby
         # conn = Faraday.new(:url => 'http://example.com') do |faraday|
         #   # enable cross project tracing with option to true
-        #   faraday.use Google::Cloud::Trace, enable_cross_project_tracing: true
+        #   faraday.use Google::Cloud::Trace::FaradayMiddleware, enable_cross_project_tracing: true
         #   faraday.request  :url_encoded             # form-encode POST params
         #   faraday.response :logger                  # log requests to $stdout
         #   faraday.adapter  Faraday.default_adapter  # use Net::HTTP adapter

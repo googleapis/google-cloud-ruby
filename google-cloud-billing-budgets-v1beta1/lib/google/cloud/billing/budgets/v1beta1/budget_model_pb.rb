@@ -8,6 +8,7 @@ require 'google/api/resource_pb'
 require 'google/protobuf/struct_pb'
 require 'google/type/date_pb'
 require 'google/type/money_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/billing/budgets/v1beta1/budget_model.proto", :syntax => :proto3) do
     add_message "google.cloud.billing.budgets.v1beta1.Budget" do

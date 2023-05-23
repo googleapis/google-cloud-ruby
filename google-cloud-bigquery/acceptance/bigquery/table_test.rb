@@ -23,7 +23,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     end
     d
   end
-  let(:table_id) { "kittens" }
+  let(:table_id) { "kittens_table" }
   let(:table) do
     t = dataset.table table_id
     if t.nil?
@@ -35,6 +35,14 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
       end
     end
     t
+  end
+  let(:schema_fields_default) do
+    [
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REQUIRED", name: "id", type: "INTEGER", description: "id description"),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REQUIRED", name: "breed", type: "STRING", description: "breed description"),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REQUIRED", name: "name", type: "STRING", description: "name description", default_value_expression: "'name'"),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REQUIRED", name: "dob", type: "TIMESTAMP", description: "dob description", default_value_expression: "CURRENT_TIMESTAMP"),
+    ]
   end
   let(:time_partitioned_table_id) { "daily_kittens"}
   let(:seven_days) { 7 * 24 * 60 * 60 }
@@ -96,6 +104,8 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
   let(:target_table_2_id) { "kittens_copy_2" }
   let(:target_table_3_id) { "kittens_copy_3" }
   let(:target_table_4_id) { "kittens_copy_4" }
+  let(:target_snapshot_table) { "kittens_copy_5" }
+  let(:target_clone_table) { "kittens_copy_6" }
   let(:labels) { { "foo" => "bar" } }
 
   it "has the attributes of a table" do
@@ -148,10 +158,11 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
   end
 
   it "deletes itself and knows it no longer exists" do
-    _(table.exists?).must_equal true
-    _(table.delete).must_equal true
-    _(table.exists?).must_equal false
-    _(table.exists?(force: true)).must_equal false
+    test_table = dataset.create_table "kittens_delete_table"
+    _(test_table.exists?).must_equal true
+    _(test_table.delete).must_equal true
+    _(test_table.exists?).must_equal false
+    _(test_table.exists?(force: true)).must_equal false
   end
 
   it "gets and sets metadata" do
@@ -168,6 +179,27 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     _(table.name).must_equal new_name
     _(table.description).must_equal new_desc
     _(table.labels).must_equal new_labels
+  end
+
+  it "loads and reloads table with partial projection of table metadata" do
+    %w[unspecified basic storage full].each do |view|
+      table = dataset.table table_id, view: view
+      _(table.table_id).must_equal table_id
+      verify_table_metadata table, view
+
+      rand_str = SecureRandom.urlsafe_base64(4)
+      new_name = "New_name_#{rand_str}"
+      new_desc = "New_description_#{rand_str}"
+
+      table.name = new_name
+      table.description = new_desc
+
+      table.reload!
+      _(table.table_id).must_equal table_id
+      _(table.name).must_equal new_name
+      _(table.description).must_equal new_desc
+      verify_table_metadata table, view
+    end
   end
 
   it "should fail to set metadata with stale etag" do
@@ -225,17 +257,17 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
 
   it "creates a table, loading the schema from a File" do
     begin
-      table = dataset.create_table "schema_kittens" do |t|
+      schema_kittens_table = dataset.create_table "schema_kittens" do |t|
         t.schema.load File.open("acceptance/data/schema.json")
       end
 
-      _(table.schema).must_be_kind_of Google::Cloud::Bigquery::Schema
-      _(table.schema).wont_be :empty?
+      _(schema_kittens_table.schema).must_be_kind_of Google::Cloud::Bigquery::Schema
+      _(schema_kittens_table.schema).wont_be :empty?
       %i[id breed name dob features].each do |k|
-        _(table.headers).must_include k
+        _(schema_kittens_table.headers).must_include k
       end
 
-      fields = table.schema.fields
+      fields = schema_kittens_table.schema.fields
       fields.each do |f|
         _(f.name).wont_be :nil?
         _(f.type).wont_be :nil?
@@ -259,18 +291,18 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
 
   it "creates a table, loading the schema from a JSON string" do
     begin
-      table = dataset.create_table "schema_kittens" do |t|
+      schema_kittens_table = dataset.create_table "schema_kittens" do |t|
         json = File.read("acceptance/data/schema.json")
         t.schema.load json
       end
 
-      _(table.schema).must_be_kind_of Google::Cloud::Bigquery::Schema
-      _(table.schema).wont_be :empty?
+      _(schema_kittens_table.schema).must_be_kind_of Google::Cloud::Bigquery::Schema
+      _(schema_kittens_table.schema).wont_be :empty?
       %i[id breed name dob features].each do |k|
-        _(table.headers).must_include k
+        _(schema_kittens_table.headers).must_include k
       end
 
-      fields = table.schema.fields
+      fields = schema_kittens_table.schema.fields
       fields.each do |f|
         _(f.name).wont_be :nil?
         _(f.type).wont_be :nil?
@@ -294,18 +326,18 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
 
   it "creates a table, loading the schema from an Array of Hashes" do
     begin
-      table = dataset.create_table "schema_kittens" do |t|
+      schema_kittens_table = dataset.create_table "schema_kittens" do |t|
         json = JSON.parse(File.read("acceptance/data/schema.json"))
         t.schema.load json
       end
 
-      _(table.schema).must_be_kind_of Google::Cloud::Bigquery::Schema
-      _(table.schema).wont_be :empty?
+      _(schema_kittens_table.schema).must_be_kind_of Google::Cloud::Bigquery::Schema
+      _(schema_kittens_table.schema).wont_be :empty?
       %i[id breed name dob features].each do |k|
-        _(table.headers).must_include k
+        _(schema_kittens_table.headers).must_include k
       end
 
-      fields = table.schema.fields
+      fields = schema_kittens_table.schema.fields
       fields.each do |f|
         _(f.name).wont_be :nil?
         _(f.type).wont_be :nil?
@@ -484,18 +516,18 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
 
   it "allows tables to be created and updated with time_partitioning and clustering" do
     begin
-      table = time_partitioned_table
-      _(table.time_partitioning?).must_equal true
-      _(table.time_partitioning_type).must_equal "DAY"
-      _(table.time_partitioning_field).must_equal "dob"
-      _(table.time_partitioning_expiration).must_equal seven_days
-      _(table.clustering_fields).must_equal clustering_fields
+      tp_table = time_partitioned_table
+      _(tp_table.time_partitioning?).must_equal true
+      _(tp_table.time_partitioning_type).must_equal "DAY"
+      _(tp_table.time_partitioning_field).must_equal "dob"
+      _(tp_table.time_partitioning_expiration).must_equal seven_days
+      _(tp_table.clustering_fields).must_equal clustering_fields
 
       new_clustering_fields = ["last_name"]
-      table.clustering_fields = new_clustering_fields
-      _(table.clustering_fields).must_equal new_clustering_fields
+      tp_table.clustering_fields = new_clustering_fields
+      _(tp_table.clustering_fields).must_equal new_clustering_fields
 
-      table.clustering_fields = nil
+      tp_table.clustering_fields = nil
       _(table.clustering_fields).must_be :nil?
     ensure
       time_partitioned_table.delete
@@ -503,12 +535,12 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
   end
 
   it "allows tables to be created with range_partitioning" do
-    table = range_partitioned_table
-    _(table.range_partitioning?).must_equal true
-    _(table.range_partitioning_field).must_equal "my_table_id"
-    _(table.range_partitioning_start).must_equal 0
-    _(table.range_partitioning_interval).must_equal 10
-    _(table.range_partitioning_end).must_equal 100
+    rp_table = range_partitioned_table
+    _(rp_table.range_partitioning?).must_equal true
+    _(rp_table.range_partitioning_field).must_equal "my_table_id"
+    _(rp_table.range_partitioning_start).must_equal 0
+    _(rp_table.range_partitioning_interval).must_equal 10
+    _(rp_table.range_partitioning_end).must_equal 100
   end
 
   it "inserts rows directly and gets its data" do
@@ -714,6 +746,23 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     _(data.next).must_be :nil?
   end
 
+  it "inserts and query the data with partial projection of destination table metadata" do
+    inserter = table.insert_async
+    inserter.insert rows
+    inserter.flush
+    inserter.stop.wait!
+
+    job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
+    query_job = dataset.query_job query, job_id: job_id
+    query_job.wait_until_done!
+
+    %w[unspecified basic storage full].each do |view|
+      destination_table = query_job.destination view: view
+      verify_table_metadata destination_table, view
+    end
+
+  end
+
   it "inserts rows asynchronously with insert_ids option" do
     insert_result = nil
 
@@ -748,6 +797,10 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     _(job.hive_partitioning?).must_equal false
     _(job.hive_partitioning_mode).must_be_nil
     _(job.hive_partitioning_source_uri_prefix).must_be_nil
+
+    _(job.parquet_options?).must_equal false
+    _(job.parquet_enable_list_inference?).must_be_nil
+    _(job.parquet_enum_as_string?).must_be_nil
 
     _(job.range_partitioning?).must_equal false
     _(job.range_partitioning_field).must_be_nil
@@ -806,7 +859,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     gs_url = "gs://#{file2.bucket}/#{file2.name}"
 
     # Test both by file object and URL as string
-    result = table.load [file1, gs_url]
+    result = safe_gcs_execute { table.load [file1, gs_url] }
     _(result).must_equal true
   end
 
@@ -827,6 +880,33 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     _(copy_job.write_truncate?).must_equal false
     _(copy_job.write_append?).must_equal false
     _(copy_job.write_empty?).must_equal true
+  end
+
+  it "copies itself and fetches partial projection of affected table's metadata" do
+    destination_table_id = target_table_id + SecureRandom.urlsafe_base64(4)
+    job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
+    copy_job = table.copy_job destination_table_id, create: :needed, write: :empty, job_id: job_id, labels: labels
+
+    _(copy_job).must_be_kind_of Google::Cloud::Bigquery::CopyJob
+    _(copy_job.job_id).must_equal job_id
+    _(copy_job.labels).must_equal labels
+    copy_job.wait_until_done!
+
+    _(copy_job).wont_be :failed?
+    _(copy_job.create_if_needed?).must_equal true
+    _(copy_job.create_never?).must_equal false
+    _(copy_job.write_truncate?).must_equal false
+    _(copy_job.write_append?).must_equal false
+    _(copy_job.write_empty?).must_equal true
+
+    %w[unspecified basic storage full].each do |view|
+      source_table = copy_job.source view: view
+      _(source_table.table_id).must_equal table.table_id
+      verify_table_metadata source_table, view
+      destination_table = copy_job.destination view: view
+      _(destination_table.table_id).must_equal destination_table_id
+      verify_table_metadata destination_table, view
+    end
   end
 
   it "copies itself to another table with copy_job block updater" do
@@ -928,9 +1008,11 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     Tempfile.open "empty_extract_file.json" do |tmp|
       dest_file_name = random_file_destination_name
       extract_url = "gs://#{bucket.name}/#{dest_file_name}"
-      extract_job = table.extract_job extract_url do |j|
-        j.labels = labels
-      end
+      extract_job = safe_gcs_execute do
+                      table.extract_job extract_url do |j|
+                        j.labels = labels
+                      end
+                    end
 
       _(extract_job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
       _(extract_job.labels).must_equal labels
@@ -952,6 +1034,37 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     end
   end
 
+  it "load jobs test with partial projection of table metadata" do
+    load_job = table.load_job local_file
+    load_job.wait_until_done!
+
+    %w[unspecified basic storage full].each do |view|
+      destination_table = load_job.destination view: view
+      _(destination_table.table_id).must_equal table.table_id
+      verify_table_metadata destination_table, view
+    end
+  end
+
+  it "extract jobs test with partial projection of table metadata" do
+    Tempfile.open "empty_extract_file.json" do |tmp|
+      dest_file_name = random_file_destination_name
+      extract_url = "gs://#{bucket.name}/#{dest_file_name}"
+      extract_job = table.extract_job extract_url do |j|
+        j.labels = labels
+      end
+
+      _(extract_job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
+      _(extract_job.labels).must_equal labels
+      extract_job.wait_until_done!
+
+      %w[unspecified basic storage full].each do |view|
+        source_table = extract_job.source view: view
+        _(source_table.table_id).must_equal table.table_id
+        verify_table_metadata source_table, view
+      end
+    end
+  end
+
   it "extracts data to a file in your bucket with extract_job" do
     # Make sure there is data to extract...
     load_job = table.load_job local_file
@@ -962,7 +1075,9 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
       extract_file = bucket.create_file tmp, dest_file_name
       job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
 
-      extract_job = table.extract_job extract_file, job_id: job_id
+      extract_job = safe_gcs_execute do 
+                      table.extract_job extract_file, job_id: job_id
+                    end
       _(extract_job.job_id).must_equal job_id
       extract_job.wait_until_done!
       _(extract_job).wont_be :failed?
@@ -981,7 +1096,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     Tempfile.open "empty_extract_file.json" do |tmp|
       dest_file_name = random_file_destination_name
       extract_url = "gs://#{bucket.name}/#{dest_file_name}"
-      result = table.extract extract_url
+      result = safe_gcs_execute { table.extract extract_url } 
       _(result).must_equal true
 
       extract_file = bucket.file dest_file_name
@@ -999,12 +1114,59 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
       dest_file_name = random_file_destination_name
       extract_file = bucket.create_file tmp, dest_file_name
 
-      result = table.extract extract_file
+      result = safe_gcs_execute { table.extract extract_file } 
       _(result).must_equal true
       # Refresh to get the latest file data
       extract_file = bucket.file dest_file_name
       downloaded_file = extract_file.download tmp.path
       _(downloaded_file.size).must_be :>, 0
+    end
+  end
+
+  it "creates snapshot of a table" do
+    begin
+      result = table.snapshot target_snapshot_table
+      _(result).must_equal true
+      table_snapshot = dataset.table target_snapshot_table
+      _(table_snapshot.snapshot?).must_equal true
+    ensure
+      table_snapshot.delete  
+    end
+  end
+
+  it "creates clone of a table" do
+    begin
+      result = table.clone target_clone_table
+      _(result).must_equal true
+      table_clone = dataset.table target_clone_table
+      _(table_clone.clone?).must_equal true
+    ensure
+      table_clone.delete  
+    end
+  end
+
+  it "updates the table schema with default values" do
+    table.schema do |schema|
+      schema.field "name" do |field|
+        field.default_value_expression = "'name'"
+      end
+      schema.field "dob" do |field|
+        field.default_value_expression = "CURRENT_TIMESTAMP"
+      end
+    end
+
+    table = dataset.table table_id
+    _(table.schema.fields.map(&:default_value_expression)).must_be :==, schema_fields_default.map(&:default_value_expression)
+  end
+
+  it "restores snapshot into a table" do
+    begin
+      result = table.clone target_clone_table
+      _(result).must_equal true
+      restored_table = dataset.table target_clone_table
+      _(restored_table.table?).must_equal true
+    ensure
+      restored_table.delete  
     end
   end
 end

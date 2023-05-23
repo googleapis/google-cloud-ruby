@@ -53,7 +53,7 @@ module Google
       # @attr_reader [Boolean] message_ordering Whether message ordering has
       #   been enabled.
       # @attr_reader [Integer] streams The number of concurrent streams to open
-      #   to pull messages from the subscription. Default is 4.
+      #   to pull messages from the subscription. Default is 2.
       # @attr_reader [Integer] callback_threads The number of threads used to
       #   handle the received messages. Default is 8.
       # @attr_reader [Integer] push_threads The number of threads to handle
@@ -77,6 +77,10 @@ module Google
         attr_reader :stream_pool, :thread_pool, :buffer, :service
 
         ##
+        # @private Implementation attributes.
+        attr_accessor :exactly_once_delivery_enabled
+
+        ##
         # @private Create an empty {Subscriber} object.
         def initialize subscription_name, callback, deadline: nil, message_ordering: nil, streams: nil, inventory: nil,
                        threads: {}, service: nil
@@ -91,6 +95,7 @@ module Google
           @message_ordering = message_ordering
           @callback_threads = Integer(threads[:callback] || 8)
           @push_threads = Integer(threads[:push] || 4)
+          @exactly_once_delivery_enabled = nil
 
           @service = service
 
@@ -332,6 +337,16 @@ module Google
         end
 
         ##
+        # The minimum amount of time in seconds for a single lease extension attempt. Bounds the delay before a message
+        # redelivery if the subscriber fails to extend the deadline. Default is 0 (disabled).
+        #
+        # @return [Integer] The minimum number of seconds.
+        #
+        def min_duration_per_lease_extension
+          @inventory[:min_duration_per_lease_extension]
+        end
+
+        ##
         # @private
         def stream_inventory
           {
@@ -339,6 +354,7 @@ module Google
             bytesize:                         @inventory[:max_outstanding_bytes].fdiv(@streams).ceil,
             extension:                        @inventory[:max_total_lease_duration],
             max_duration_per_lease_extension: @inventory[:max_duration_per_lease_extension],
+            min_duration_per_lease_extension: @inventory[:min_duration_per_lease_extension],
             use_legacy_flow_control:          @inventory[:use_legacy_flow_control]
           }
         end
@@ -394,6 +410,7 @@ module Google
           @inventory[:max_outstanding_bytes] = Integer(@inventory[:max_outstanding_bytes] || 100_000_000)
           @inventory[:max_total_lease_duration] = Integer(@inventory[:max_total_lease_duration] || 3600)
           @inventory[:max_duration_per_lease_extension] = Integer(@inventory[:max_duration_per_lease_extension] || 0)
+          @inventory[:min_duration_per_lease_extension] = Integer(@inventory[:min_duration_per_lease_extension] || 0)
           @inventory[:use_legacy_flow_control] = @inventory[:use_legacy_flow_control] || false
         end
 

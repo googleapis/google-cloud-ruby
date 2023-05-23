@@ -12,6 +12,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :serialized_binary_rows, :bytes, 1
       optional :row_count, :int64, 2
     end
+    add_message "google.cloud.bigquery.storage.v1.AvroSerializationOptions" do
+      optional :enable_display_name_attribute, :bool, 1
+    end
   end
 end
 
@@ -22,6 +25,7 @@ module Google
         module V1
           AvroSchema = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.storage.v1.AvroSchema").msgclass
           AvroRows = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.storage.v1.AvroRows").msgclass
+          AvroSerializationOptions = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.storage.v1.AvroSerializationOptions").msgclass
         end
       end
     end

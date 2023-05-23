@@ -21,7 +21,7 @@ module Google
   module Cloud
     module VideoIntelligence
       module V1p2beta1
-        VERSION = "0.4.0"
+        VERSION = "0.7.0"
       end
     end
   end

@@ -168,9 +168,8 @@ module Google
         # backlog, from the moment a message is published. If
         # {#retain_acked} is `true`, then this also configures the retention of
         # acknowledged messages, and thus configures how far back in time a
-        # {#seek} can be done. Cannot be more than 604,800 seconds (7 days) or
-        # less than 600 seconds (10 minutes). Default is 604,800 seconds (7
-        # days).
+        # {#seek} can be done. Cannot be less than 600 (10 minutes) or more
+        # than 604,800 (7 days). Default is 604,800 seconds (7 days).
         #
         # Makes an API call to retrieve the retention value when called on a
         # reference object. See {#reference?}.
@@ -193,6 +192,24 @@ module Google
                                                                     message_retention_duration: new_retention_duration
           @grpc = service.update_subscription update_grpc, :message_retention_duration
           @resource_name = nil
+        end
+
+        ##
+        # Indicates the minimum duration for which a message is retained after
+        # it is published to the subscription's topic. If this field is set,
+        # messages published to the subscription's topic in the last
+        # `topic_message_retention_duration` are always available to subscribers.
+        # Output only. See {Topic#retention}.
+        #
+        # Makes an API call to retrieve the retention value when called on a
+        # reference object. See {#reference?}.
+        #
+        # @return [Numeric, nil] The topic message retention duration in seconds,
+        #   or `nil` if not set.
+        #
+        def topic_retention
+          ensure_grpc!
+          Convert.duration_to_number @grpc.topic_message_retention_duration
         end
 
         ##
@@ -280,6 +297,56 @@ module Google
             if old_config != new_config # has the object been changed?
               update_grpc = Google::Cloud::PubSub::V1::Subscription.new name: name, push_config: new_config
               @grpc = service.update_subscription update_grpc, :push_config
+            end
+          end
+
+          config.freeze
+        end
+
+        ##
+        # Inspect the Subscription's bigquery configuration settings. The
+        # configuration can be changed by modifying the values in the method's
+        # block.
+        #
+        # @yield [bigquery_config] a block for modifying the bigquery configuration
+        # @yieldparam [Google::Cloud::PubSub::V1::BigQueryConfig] bigquery_config
+        #
+        # @return [Google::Cloud::PubSub::V1::BigQueryConfig]
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   sub = pubsub.subscription "my-topic-sub"
+        #   sub.bigquery_config.table #=> "my-project:dataset-id.table-id"
+        #   sub.bigquery_config.use_topic_schema #=> true
+        #   sub.bigquery_config.write_metadata #=> false
+        #
+        # @example Update the bigquery configuration by passing a block:
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #   sub = pubsub.subscription "my-subscription"
+        #
+        #   sub.bigquery_config do |bc|
+        #     bc.write_metadata = true
+        #     bc.use_topic_schema = false
+        #   end
+        #
+        def bigquery_config
+          ensure_service!
+
+          config = reference? ? Google::Cloud::PubSub::V1::BigQueryConfig.new : @grpc.bigquery_config
+
+          if block_given?
+            old_config = config.dup
+            yield config
+            new_config = config
+
+            if old_config != new_config # has the object been changed?
+              update_grpc = Google::Cloud::PubSub::V1::Subscription.new name: name, bigquery_config: new_config
+              @grpc = service.update_subscription update_grpc, :bigquery_config
             end
           end
 
@@ -408,7 +475,7 @@ module Google
         # Sets the {Topic} to which dead letter messages for the subscription should be published. Dead lettering is
         # done on a best effort basis. The same message might be dead lettered multiple times.
         # The Cloud Pub/Sub service account associated with the enclosing subscription's parent project (i.e.,
-        # `service-\\{project_number}@gcp-sa-pubsub.iam.gserviceaccount.com`) must have permission to Publish() to this
+        # `service-{project_number}@gcp-sa-pubsub.iam.gserviceaccount.com`) must have permission to Publish() to this
         # topic.
         #
         # The operation will fail if the topic does not exist. Users should ensure that there is a subscription attached
@@ -870,7 +937,7 @@ module Google
         #   the default message_ordering value for the subscription when this
         #   argument is not provided. See {#reference?}.
         # @param [Integer] streams The number of concurrent streams to open to
-        #   pull messages from the subscription. Default is 4. Optional.
+        #   pull messages from the subscription. Default is 2. Optional.
         # @param [Hash, Integer] inventory The settings to control how received messages are to be handled by the
         #   subscriber. When provided as an Integer instead of a Hash only `max_outstanding_messages` will be set.
         #   Optional.

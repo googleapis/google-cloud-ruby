@@ -7,10 +7,8 @@ require 'google/cloud/automl/v1beta1/geometry_pb'
 require 'google/cloud/automl/v1beta1/io_pb'
 require 'google/cloud/automl/v1beta1/temporal_pb'
 require 'google/cloud/automl/v1beta1/text_segment_pb'
-require 'google/protobuf/any_pb'
-require 'google/protobuf/duration_pb'
 require 'google/protobuf/struct_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/automl/v1beta1/data_items.proto", :syntax => :proto3) do
     add_message "google.cloud.automl.v1beta1.Image" do

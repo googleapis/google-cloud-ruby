@@ -1,5 +1,120 @@
 # Release History
 
+### 0.12.1 (2023-03-23)
+
+#### Documentation
+
+* fix the resource name format for CreatePhraseSetRequest ([#20950](https://github.com/googleapis/google-cloud-ruby/issues/20950)) 
+
+### 0.12.0 (2023-02-28)
+
+#### Features
+
+* Support for voice activity events during streaming recognition ([#20521](https://github.com/googleapis/google-cloud-ruby/issues/20521)) 
+
+### 0.11.0 (2023-02-23)
+
+#### Features
+
+* Added support for REST transport ([#20498](https://github.com/googleapis/google-cloud-ruby/issues/20498)) 
+
+### 0.10.2 (2023-02-17)
+
+#### Bug Fixes
+
+* Fixed routing headers sent with long-running operation calls ([#20451](https://github.com/googleapis/google-cloud-ruby/issues/20451)) 
+
+### 0.10.1 (2023-02-03)
+
+#### Documentation
+
+* Clarify boost usage ([#20107](https://github.com/googleapis/google-cloud-ruby/issues/20107)) 
+
+### 0.10.0 (2023-01-05)
+
+#### Features
+
+* Support for ABNF grammars in speech adaptation ([#19954](https://github.com/googleapis/google-cloud-ruby/issues/19954)) 
+
+### 0.9.0 (2022-07-08)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+#### Bug Fixes
+
+* Fixed a crash when making certain long-running-operations status calls ([#18441](https://github.com/googleapis/google-cloud-ruby/issues/18441)) 
+
+### 0.8.0 (2022-05-12)
+
+#### Features
+
+* Added a client for the Speech Adaptation API
+
+### 0.7.3 (2022-05-03)
+
+#### Documentation
+
+* Document the latest_long and latest_short recognition models
+
+### 0.7.2 (2022-04-16)
+
+#### Bug Fixes
+
+* Removed some unused requires
+
+### 0.7.1 / 2022-01-11
+
+#### Bug Fixes
+
+* Honor quota project in auxiliary operations clients
+
+#### Documentation
+
+* Fix titles of documentation pages
+* Remove some broken images and fix outdated content in authentication documentation
+
+### 0.7.0 / 2021-12-07
+
+#### Features
+
+* Support for alternative language codes
+* Support for speech adaptation
+* Support for word confidence
+* Support for spoken punctuation and spoken emojis
+* Support for the WEBM_OPUS encoding
+* Support for hint boosts
+
+### 0.6.1 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
+### 0.6.0 / 2021-09-21
+
+#### Features
+
+* Support for transcript output configs
+
+### 0.5.0 / 2021-08-11
+
+#### Features
+
+* Report total billed time, and honor client-level timeout configuration
+
+### 0.4.2 / 2021-07-12
+
+#### Documentation
+
+* Clarify some language around authentication configuration
+
+### 0.4.1 / 2021-06-17
+
+#### Bug Fixes
+
+* Support future 1.x versions of gapic-common
+
 ### 0.4.0 / 2021-03-08
 
 #### Features

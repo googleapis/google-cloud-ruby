@@ -21,14 +21,14 @@ Gem::Specification.new do |gem|
                        "TROUBLESHOOTING.md", "CHANGELOG.md", "CODE_OF_CONDUCT.md", "LICENSE", ".yardopts"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 2.5"
+  gem.required_ruby_version = ">= 2.6"
 
   gem.add_dependency "google-cloud-bigtable-admin-v2", "~> 0.0"
   gem.add_dependency "google-cloud-bigtable-v2", "~> 0.0"
   gem.add_dependency "google-cloud-core", "~> 1.5"
 
-  gem.add_development_dependency "google-style", "~> 1.25.1"
-  gem.add_development_dependency "minitest", "~> 5.14"
+  gem.add_development_dependency "google-style", "~> 1.26.1"
+  gem.add_development_dependency "minitest", "~> 5.16"
   gem.add_development_dependency "minitest-focus", "~> 1.1"
   gem.add_development_dependency "minitest-rg", "~> 5.2"
   gem.add_development_dependency "redcarpet", "~> 3.0"

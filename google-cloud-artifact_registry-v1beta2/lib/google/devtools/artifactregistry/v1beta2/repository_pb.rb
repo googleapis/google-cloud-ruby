@@ -3,10 +3,11 @@
 
 require 'google/protobuf'
 
+require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/devtools/artifactregistry/v1beta2/repository.proto", :syntax => :proto3) do
     add_message "google.devtools.artifactregistry.v1beta2.Repository" do
@@ -17,10 +18,27 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :create_time, :message, 5, "google.protobuf.Timestamp"
       optional :update_time, :message, 6, "google.protobuf.Timestamp"
       optional :kms_key_name, :string, 8
+      oneof :format_config do
+        optional :maven_config, :message, 9, "google.devtools.artifactregistry.v1beta2.Repository.MavenRepositoryConfig"
+      end
+    end
+    add_message "google.devtools.artifactregistry.v1beta2.Repository.MavenRepositoryConfig" do
+      optional :allow_snapshot_overwrites, :bool, 1
+      optional :version_policy, :enum, 2, "google.devtools.artifactregistry.v1beta2.Repository.MavenRepositoryConfig.VersionPolicy"
+    end
+    add_enum "google.devtools.artifactregistry.v1beta2.Repository.MavenRepositoryConfig.VersionPolicy" do
+      value :VERSION_POLICY_UNSPECIFIED, 0
+      value :RELEASE, 1
+      value :SNAPSHOT, 2
     end
     add_enum "google.devtools.artifactregistry.v1beta2.Repository.Format" do
       value :FORMAT_UNSPECIFIED, 0
       value :DOCKER, 1
+      value :MAVEN, 2
+      value :NPM, 3
+      value :APT, 5
+      value :YUM, 6
+      value :PYTHON, 8
     end
     add_message "google.devtools.artifactregistry.v1beta2.ListRepositoriesRequest" do
       optional :parent, :string, 1
@@ -54,6 +72,8 @@ module Google
     module ArtifactRegistry
       module V1beta2
         Repository = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.artifactregistry.v1beta2.Repository").msgclass
+        Repository::MavenRepositoryConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.artifactregistry.v1beta2.Repository.MavenRepositoryConfig").msgclass
+        Repository::MavenRepositoryConfig::VersionPolicy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.artifactregistry.v1beta2.Repository.MavenRepositoryConfig.VersionPolicy").enummodule
         Repository::Format = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.artifactregistry.v1beta2.Repository.Format").enummodule
         ListRepositoriesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.artifactregistry.v1beta2.ListRepositoriesRequest").msgclass
         ListRepositoriesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.artifactregistry.v1beta2.ListRepositoriesResponse").msgclass

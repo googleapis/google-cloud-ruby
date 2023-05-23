@@ -28,9 +28,12 @@ module Google
   module Cloud
     module Compute
       module V1
-        # To load this service and instantiate a REST client:
+        ##
+        # The RegionDisks API.
         #
-        #     require "google/cloud/compute/v1/region_disks"
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/compute/v1/region_disks/rest"
         #     client = ::Google::Cloud::Compute::V1::RegionDisks::Rest::Client.new
         #
         module RegionDisks

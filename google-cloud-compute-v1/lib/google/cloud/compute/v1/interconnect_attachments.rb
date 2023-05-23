@@ -28,9 +28,12 @@ module Google
   module Cloud
     module Compute
       module V1
-        # To load this service and instantiate a REST client:
+        ##
+        # The InterconnectAttachments API.
         #
-        #     require "google/cloud/compute/v1/interconnect_attachments"
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/compute/v1/interconnect_attachments/rest"
         #     client = ::Google::Cloud::Compute::V1::InterconnectAttachments::Rest::Client.new
         #
         module InterconnectAttachments

@@ -192,13 +192,13 @@ module Google
             end
           rescue Exception => e
             $stdout.puts "Note: Google::Cloud::Trace is disabled because " \
-              "it failed to authorize with the service. (#{e.message})"
+                         "it failed to authorize with the service. (#{e.message})"
             return false
           end
 
           if project_id.to_s.empty?
             $stdout.puts "Note: Google::Cloud::Trace is disabled because " \
-              "the project ID could not be determined."
+                         "the project ID could not be determined."
             return false
           end
 

@@ -60,12 +60,21 @@ module Google
         attr_accessor :service
 
         ##
+        # Reads entities at the given time.
+        # This may not be older than 60 seconds.
+        attr_reader :read_time
+
+        ##
         # @private Creates a new ReadOnlyTransaction instance.
         # Takes a Service instead of project and Credentials.
         #
-        def initialize service
+        # @param [Time] read_time Reads documents as they were at the given time.
+        #   This may not be older than 270 seconds. Optional
+        #
+        def initialize service, read_time: nil
           @service = service
           reset!
+          @read_time = read_time
           start
         end
 
@@ -158,14 +167,44 @@ module Google
         alias run_query run
 
         ##
+        # Retrieve aggregate query results specified by an AggregateQuery. The query is run within the
+        # transaction.
+        #
+        # @param [AggregateQuery, GqlQuery] query The Query object with the search criteria.
+        # @param [String] namespace The namespace the query is to run within.
+        #
+        # @return [Google::Cloud::Datastore::Dataset::AggregateQueryResults]
+        #
+        # @example
+        #   require "google/cloud/datastore"
+        #
+        #   datastore = Google::Cloud::Datastore.new
+        #
+        #   datastore.read_only_transaction do |tx|
+        #     query = tx.query("Task")
+        #               .where("done", "=", false)
+        #     aggregate_query = query.aggregate_query
+        #                            .add_count
+        #     res = tx.run_aggregation aggregate_query
+        #   end
+        #
+        def run_aggregation aggregate_query, namespace: nil
+          ensure_service!
+          unless aggregate_query.is_a?(AggregateQuery) || aggregate_query.is_a?(GqlQuery)
+            raise ArgumentError, "Cannot run a #{aggregate_query.class} object."
+          end
+          aggregate_query_results = service.run_aggregation_query aggregate_query.to_grpc, namespace, transaction: @id
+          Dataset::AggregateQueryResults.from_grpc aggregate_query_results
+        end
+
+        ##
         # Begins a transaction.
         # This method is run when a new ReadOnlyTransaction is created.
         #
         def start
           raise TransactionError, "Transaction already opened." unless @id.nil?
-
           ensure_service!
-          tx_res = service.begin_transaction read_only: true
+          tx_res = service.begin_transaction read_only: true, read_time: @read_time
           @id = tx_res.transaction
         end
         alias begin_transaction start

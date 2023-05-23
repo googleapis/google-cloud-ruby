@@ -18,6 +18,8 @@
 
 require "google/cloud/errors"
 require "google/cloud/notebooks/v1beta1/service_pb"
+require "google/cloud/location"
+require "google/iam/v1"
 
 module Google
   module Cloud
@@ -41,13 +43,12 @@ module Google
             # See {::Google::Cloud::Notebooks::V1beta1::NotebookService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all NotebookService clients:
-            #
-            #     ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all NotebookService clients
+            #   ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -67,10 +68,7 @@ module Google
 
                 default_config.timeout = 60.0
                 default_config.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.list_instances.timeout = 60.0
@@ -140,19 +138,15 @@ module Google
             ##
             # Create a new NotebookService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new NotebookService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new
             #
-            #     client = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new
-            #
-            # To create a new NotebookService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the NotebookService client.
             # @yieldparam config [Client::Configuration]
@@ -172,14 +166,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -187,6 +180,19 @@ module Google
 
               @operations_client = Operations.new do |config|
                 config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
+              @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
                 config.endpoint = @config.endpoint
               end
 
@@ -205,6 +211,20 @@ module Google
             # @return [::Google::Cloud::Notebooks::V1beta1::NotebookService::Operations]
             #
             attr_reader :operations_client
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
+
+            ##
+            # Get the associated client for mix-in of the IAMPolicy.
+            #
+            # @return [Google::Iam::V1::IAMPolicy::Client]
+            #
+            attr_reader :iam_policy_client
 
             # Service calls
 
@@ -243,6 +263,25 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/notebooks/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Notebooks::V1beta1::ListInstancesRequest.new
+            #
+            #   # Call the list_instances method.
+            #   result = client.list_instances request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::Notebooks::V1beta1::Instance.
+            #     p item
+            #   end
+            #
             def list_instances request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -260,16 +299,20 @@ module Google
                 gapic_version: ::Google::Cloud::Notebooks::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_instances.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_instances.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @notebook_service_stub.call_rpc :list_instances, request, options: options do |response, operation|
@@ -311,6 +354,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/notebooks/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Notebooks::V1beta1::GetInstanceRequest.new
+            #
+            #   # Call the get_instance method.
+            #   result = client.get_instance request
+            #
+            #   # The returned object is of type Google::Cloud::Notebooks::V1beta1::Instance.
+            #   p result
+            #
             def get_instance request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -328,16 +386,20 @@ module Google
                 gapic_version: ::Google::Cloud::Notebooks::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_instance.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_instance.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @notebook_service_stub.call_rpc :get_instance, request, options: options do |response, operation|
@@ -382,6 +444,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/notebooks/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Notebooks::V1beta1::CreateInstanceRequest.new
+            #
+            #   # Call the create_instance method.
+            #   result = client.create_instance request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
             def create_instance request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -399,16 +483,20 @@ module Google
                 gapic_version: ::Google::Cloud::Notebooks::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_instance.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_instance.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @notebook_service_stub.call_rpc :create_instance, request, options: options do |response, operation|
@@ -458,6 +546,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/notebooks/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Notebooks::V1beta1::RegisterInstanceRequest.new
+            #
+            #   # Call the register_instance method.
+            #   result = client.register_instance request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
             def register_instance request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -475,16 +585,20 @@ module Google
                 gapic_version: ::Google::Cloud::Notebooks::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.register_instance.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.register_instance.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @notebook_service_stub.call_rpc :register_instance, request, options: options do |response, operation|
@@ -520,10 +634,10 @@ module Google
             #   @param type [::Google::Cloud::Notebooks::V1beta1::Instance::AcceleratorType]
             #     Required. Type of this accelerator.
             #   @param core_count [::Integer]
-            #     Required. Count of cores of this accelerator. Note that not all
-            #     combinations of `type` and `core_count` are valid. Check [GPUs on Compute
-            #     Engine](https://cloud.google.com/compute/docs/gpus/#gpus-list) to find a
-            #     valid combination. TPUs are not supported.
+            #     Required. Count of cores of this accelerator. Note that not all combinations
+            #     of `type` and `core_count` are valid. Check [GPUs on
+            #     Compute Engine](https://cloud.google.com/compute/docs/gpus/#gpus-list) to
+            #     find a valid combination. TPUs are not supported.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -532,6 +646,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/notebooks/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Notebooks::V1beta1::SetInstanceAcceleratorRequest.new
+            #
+            #   # Call the set_instance_accelerator method.
+            #   result = client.set_instance_accelerator request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
             #
             def set_instance_accelerator request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -550,16 +686,20 @@ module Google
                 gapic_version: ::Google::Cloud::Notebooks::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.set_instance_accelerator.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.set_instance_accelerator.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @notebook_service_stub.call_rpc :set_instance_accelerator, request, options: options do |response, operation|
@@ -604,6 +744,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/notebooks/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Notebooks::V1beta1::SetInstanceMachineTypeRequest.new
+            #
+            #   # Call the set_instance_machine_type method.
+            #   result = client.set_instance_machine_type request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
             def set_instance_machine_type request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -621,16 +783,20 @@ module Google
                 gapic_version: ::Google::Cloud::Notebooks::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.set_instance_machine_type.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.set_instance_machine_type.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @notebook_service_stub.call_rpc :set_instance_machine_type, request, options: options do |response, operation|
@@ -675,6 +841,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/notebooks/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Notebooks::V1beta1::SetInstanceLabelsRequest.new
+            #
+            #   # Call the set_instance_labels method.
+            #   result = client.set_instance_labels request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
             def set_instance_labels request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -692,16 +880,20 @@ module Google
                 gapic_version: ::Google::Cloud::Notebooks::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.set_instance_labels.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.set_instance_labels.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @notebook_service_stub.call_rpc :set_instance_labels, request, options: options do |response, operation|
@@ -743,6 +935,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/notebooks/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Notebooks::V1beta1::DeleteInstanceRequest.new
+            #
+            #   # Call the delete_instance method.
+            #   result = client.delete_instance request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
             def delete_instance request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -760,16 +974,20 @@ module Google
                 gapic_version: ::Google::Cloud::Notebooks::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_instance.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_instance.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @notebook_service_stub.call_rpc :delete_instance, request, options: options do |response, operation|
@@ -811,6 +1029,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/notebooks/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Notebooks::V1beta1::StartInstanceRequest.new
+            #
+            #   # Call the start_instance method.
+            #   result = client.start_instance request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
             def start_instance request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -828,16 +1068,20 @@ module Google
                 gapic_version: ::Google::Cloud::Notebooks::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.start_instance.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.start_instance.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @notebook_service_stub.call_rpc :start_instance, request, options: options do |response, operation|
@@ -879,6 +1123,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/notebooks/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Notebooks::V1beta1::StopInstanceRequest.new
+            #
+            #   # Call the stop_instance method.
+            #   result = client.stop_instance request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
             def stop_instance request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -896,16 +1162,20 @@ module Google
                 gapic_version: ::Google::Cloud::Notebooks::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.stop_instance.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.stop_instance.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @notebook_service_stub.call_rpc :stop_instance, request, options: options do |response, operation|
@@ -947,6 +1217,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/notebooks/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Notebooks::V1beta1::ResetInstanceRequest.new
+            #
+            #   # Call the reset_instance method.
+            #   result = client.reset_instance request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
             def reset_instance request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -964,16 +1256,20 @@ module Google
                 gapic_version: ::Google::Cloud::Notebooks::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.reset_instance.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.reset_instance.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @notebook_service_stub.call_rpc :reset_instance, request, options: options do |response, operation|
@@ -1024,6 +1320,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/notebooks/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Notebooks::V1beta1::ReportInstanceInfoRequest.new
+            #
+            #   # Call the report_instance_info method.
+            #   result = client.report_instance_info request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
             def report_instance_info request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1041,16 +1359,20 @@ module Google
                 gapic_version: ::Google::Cloud::Notebooks::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.report_instance_info.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.report_instance_info.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @notebook_service_stub.call_rpc :report_instance_info, request, options: options do |response, operation|
@@ -1064,6 +1386,9 @@ module Google
 
             ##
             # Check if a notebook instance is upgradable.
+            # Deprecated. Please consider using v1.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload is_instance_upgradeable(request, options = nil)
             #   Pass arguments to `is_instance_upgradeable` via a request object, either of type
@@ -1092,6 +1417,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/notebooks/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Notebooks::V1beta1::IsInstanceUpgradeableRequest.new
+            #
+            #   # Call the is_instance_upgradeable method.
+            #   result = client.is_instance_upgradeable request
+            #
+            #   # The returned object is of type Google::Cloud::Notebooks::V1beta1::IsInstanceUpgradeableResponse.
+            #   p result
+            #
             def is_instance_upgradeable request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1109,16 +1449,20 @@ module Google
                 gapic_version: ::Google::Cloud::Notebooks::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "notebook_instance" => request.notebook_instance
-              }
+              header_params = {}
+              if request.notebook_instance
+                header_params["notebook_instance"] = request.notebook_instance
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.is_instance_upgradeable.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.is_instance_upgradeable.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @notebook_service_stub.call_rpc :is_instance_upgradeable, request, options: options do |response, operation|
@@ -1131,6 +1475,9 @@ module Google
 
             ##
             # Upgrades a notebook instance to the latest version.
+            # Deprecated. Please consider using v1.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload upgrade_instance(request, options = nil)
             #   Pass arguments to `upgrade_instance` via a request object, either of type
@@ -1159,6 +1506,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/notebooks/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Notebooks::V1beta1::UpgradeInstanceRequest.new
+            #
+            #   # Call the upgrade_instance method.
+            #   result = client.upgrade_instance request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
             def upgrade_instance request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1176,16 +1545,20 @@ module Google
                 gapic_version: ::Google::Cloud::Notebooks::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.upgrade_instance.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.upgrade_instance.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @notebook_service_stub.call_rpc :upgrade_instance, request, options: options do |response, operation|
@@ -1200,6 +1573,9 @@ module Google
             ##
             # Allows notebook instances to
             # call this endpoint to upgrade themselves. Do not use this method directly.
+            # Deprecated. Please consider using v1.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload upgrade_instance_internal(request, options = nil)
             #   Pass arguments to `upgrade_instance_internal` via a request object, either of type
@@ -1231,6 +1607,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/notebooks/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Notebooks::V1beta1::UpgradeInstanceInternalRequest.new
+            #
+            #   # Call the upgrade_instance_internal method.
+            #   result = client.upgrade_instance_internal request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
             def upgrade_instance_internal request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1248,16 +1646,20 @@ module Google
                 gapic_version: ::Google::Cloud::Notebooks::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.upgrade_instance_internal.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.upgrade_instance_internal.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @notebook_service_stub.call_rpc :upgrade_instance_internal, request, options: options do |response, operation|
@@ -1303,6 +1705,25 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/notebooks/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Notebooks::V1beta1::ListEnvironmentsRequest.new
+            #
+            #   # Call the list_environments method.
+            #   result = client.list_environments request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::Notebooks::V1beta1::Environment.
+            #     p item
+            #   end
+            #
             def list_environments request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1320,16 +1741,20 @@ module Google
                 gapic_version: ::Google::Cloud::Notebooks::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_environments.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_environments.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @notebook_service_stub.call_rpc :list_environments, request, options: options do |response, operation|
@@ -1371,6 +1796,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/notebooks/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Notebooks::V1beta1::GetEnvironmentRequest.new
+            #
+            #   # Call the get_environment method.
+            #   result = client.get_environment request
+            #
+            #   # The returned object is of type Google::Cloud::Notebooks::V1beta1::Environment.
+            #   p result
+            #
             def get_environment request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1388,16 +1828,20 @@ module Google
                 gapic_version: ::Google::Cloud::Notebooks::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_environment.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_environment.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @notebook_service_stub.call_rpc :get_environment, request, options: options do |response, operation|
@@ -1429,10 +1873,10 @@ module Google
             #   @param parent [::String]
             #     Required. Format: `projects/{project_id}/locations/{location}`
             #   @param environment_id [::String]
-            #     Required. User-defined unique ID of this environment. The `environment_id`
-            #     must be 1 to 63 characters long and contain only lowercase letters, numeric
-            #     characters, and dashes. The first character must be a lowercase letter and
-            #     the last character cannot be a dash.
+            #     Required. User-defined unique ID of this environment. The `environment_id` must
+            #     be 1 to 63 characters long and contain only lowercase letters,
+            #     numeric characters, and dashes. The first character must be a lowercase
+            #     letter and the last character cannot be a dash.
             #   @param environment [::Google::Cloud::Notebooks::V1beta1::Environment, ::Hash]
             #     Required. The environment to be created.
             #
@@ -1443,6 +1887,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/notebooks/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Notebooks::V1beta1::CreateEnvironmentRequest.new
+            #
+            #   # Call the create_environment method.
+            #   result = client.create_environment request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
             #
             def create_environment request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1461,16 +1927,20 @@ module Google
                 gapic_version: ::Google::Cloud::Notebooks::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_environment.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_environment.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @notebook_service_stub.call_rpc :create_environment, request, options: options do |response, operation|
@@ -1512,6 +1982,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/notebooks/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Notebooks::V1beta1::DeleteEnvironmentRequest.new
+            #
+            #   # Call the delete_environment method.
+            #   result = client.delete_environment request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
             def delete_environment request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1529,16 +2021,20 @@ module Google
                 gapic_version: ::Google::Cloud::Notebooks::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_environment.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_environment.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @notebook_service_stub.call_rpc :delete_environment, request, options: options do |response, operation|
@@ -1563,22 +2059,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for list_instances
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # list_instances to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_instances.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_instances.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_instances.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_instances.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
@@ -1589,9 +2084,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials

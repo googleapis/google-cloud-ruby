@@ -27,7 +27,7 @@ module GRPC
     # Override GRPC::ActiveCall#request_response method. Wrap the original
     # method with a trace span that will get submitted with the overall request
     # trace span tree.
-    def request_response *args
+    def request_response *args, **kwargs
       Google::Cloud::Trace.in_span SPAN_NAME do |span|
         if span && !args.empty?
           grpc_request = args[0]
@@ -41,5 +41,8 @@ module GRPC
   end
 
   # Patch GRPC::ActiveCall#request_response method
-  ::GRPC::ActiveCall.prepend ActiveCallWithTrace
+  # @private
+  class ActiveCall
+    prepend ActiveCallWithTrace
+  end
 end

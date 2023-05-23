@@ -30,7 +30,7 @@ describe Google::Cloud::Bigquery::Table, :load_job, :local, :mock_bigquery do
 
     temp_csv do |file|
       mock.expect :insert_job, load_job_resp_gapi(table, "some/file/path.csv"),
-        [project, load_job_gapi(table_gapi.table_reference, "CSV"), upload_source: file, content_type: "text/csv"]
+        [project, load_job_gapi(table_gapi.table_reference, "CSV")], upload_source: file, content_type: "text/csv"
 
       job = table.load_job file, format: :csv
       _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
@@ -45,7 +45,7 @@ describe Google::Cloud::Bigquery::Table, :load_job, :local, :mock_bigquery do
 
     temp_csv do |file|
       mock.expect :insert_job, load_job_resp_gapi(table, "some/file/path.csv"),
-        [project, load_job_csv_options_gapi(table_gapi.table_reference), upload_source: file, content_type: "text/csv"]
+        [project, load_job_csv_options_gapi(table_gapi.table_reference)], upload_source: file, content_type: "text/csv"
 
       job = table.load_job file, format: :csv, jagged_rows: true, quoted_newlines: true, autodetect: true,
         encoding: "ISO-8859-1", delimiter: "\t", ignore_unknown: true, max_bad_records: 42, null_marker: "\N",
@@ -66,7 +66,7 @@ describe Google::Cloud::Bigquery::Table, :load_job, :local, :mock_bigquery do
 
     temp_json do |file|
       mock.expect :insert_job, load_job_resp_gapi(table, "some/file/path.json"),
-        [project, load_job_gapi(table_gapi.table_reference), upload_source: file, content_type: "application/json"]
+        [project, load_job_gapi(table_gapi.table_reference)], upload_source: file, content_type: "application/json"
 
       job = table.load_job file, format: "JSON"
       _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
@@ -78,7 +78,7 @@ describe Google::Cloud::Bigquery::Table, :load_job, :local, :mock_bigquery do
   it "can upload a json file and derive the format" do
     mock = Minitest::Mock.new
     mock.expect :insert_job, load_job_resp_gapi(table, "some/file/path.json"),
-      [project, load_job_gapi(table_gapi.table_reference), upload_source: "acceptance/data/kitten-test-data.json", content_type: "application/json"]
+      [project, load_job_gapi(table_gapi.table_reference)], upload_source: "acceptance/data/kitten-test-data.json", content_type: "application/json"
     table.service.mocked_service = mock
 
     local_json = "acceptance/data/kitten-test-data.json"
@@ -96,7 +96,7 @@ describe Google::Cloud::Bigquery::Table, :load_job, :local, :mock_bigquery do
 
     temp_json do |file|
       mock.expect :insert_job, load_job_resp_gapi(table, "some/file/path.json", job_id: job_id),
-        [project, job_gapi, upload_source: file, content_type: "application/json"]
+        [project, job_gapi], upload_source: file, content_type: "application/json"
 
       job = table.load_job file, format: "JSON", job_id: job_id
       _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
@@ -117,7 +117,7 @@ describe Google::Cloud::Bigquery::Table, :load_job, :local, :mock_bigquery do
 
     temp_json do |file|
       mock.expect :insert_job, load_job_resp_gapi(table, "some/file/path.json", job_id: job_id),
-        [project, job_gapi, upload_source: file, content_type: "application/json"]
+        [project, job_gapi], upload_source: file, content_type: "application/json"
 
       job = table.load_job file, format: "JSON", prefix: prefix
       _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
@@ -135,7 +135,7 @@ describe Google::Cloud::Bigquery::Table, :load_job, :local, :mock_bigquery do
 
     temp_json do |file|
       mock.expect :insert_job, load_job_resp_gapi(table, "some/file/path.json", job_id: job_id),
-        [project, job_gapi, upload_source: file, content_type: "application/json"]
+        [project, job_gapi], upload_source: file, content_type: "application/json"
 
       job = table.load_job file, format: "JSON", job_id: job_id, prefix: "IGNORED"
       _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
@@ -153,7 +153,7 @@ describe Google::Cloud::Bigquery::Table, :load_job, :local, :mock_bigquery do
 
     temp_json do |file|
       mock.expect :insert_job, load_job_resp_gapi(table, "some/file/path.json", labels: labels),
-        [project, job_gapi, upload_source: file, content_type: "application/json"]
+        [project, job_gapi], upload_source: file, content_type: "application/json"
 
       job = table.load_job file, format: "JSON", labels: labels
       _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob

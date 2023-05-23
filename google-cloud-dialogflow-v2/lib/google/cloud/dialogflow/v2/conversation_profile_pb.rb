@@ -13,6 +13,7 @@ require 'google/longrunning/operations_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/dialogflow/v2/conversation_profile.proto", :syntax => :proto3) do
     add_message "google.cloud.dialogflow.v2.ConversationProfile" do
@@ -28,6 +29,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :new_message_event_notification_config, :message, 8, "google.cloud.dialogflow.v2.NotificationConfig"
       optional :stt_config, :message, 9, "google.cloud.dialogflow.v2.SpeechToTextConfig"
       optional :language_code, :string, 10
+      optional :time_zone, :string, 14
+      optional :security_settings, :string, 13
+      optional :tts_config, :message, 18, "google.cloud.dialogflow.v2.SynthesizeSpeechConfig"
     end
     add_message "google.cloud.dialogflow.v2.ListConversationProfilesRequest" do
       optional :parent, :string, 1
@@ -71,6 +75,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :suggestion_trigger_settings, :message, 10, "google.cloud.dialogflow.v2.HumanAgentAssistantConfig.SuggestionTriggerSettings"
       optional :query_config, :message, 6, "google.cloud.dialogflow.v2.HumanAgentAssistantConfig.SuggestionQueryConfig"
       optional :conversation_model_config, :message, 7, "google.cloud.dialogflow.v2.HumanAgentAssistantConfig.ConversationModelConfig"
+      optional :conversation_process_config, :message, 8, "google.cloud.dialogflow.v2.HumanAgentAssistantConfig.ConversationProcessConfig"
     end
     add_message "google.cloud.dialogflow.v2.HumanAgentAssistantConfig.SuggestionConfig" do
       repeated :feature_configs, :message, 2, "google.cloud.dialogflow.v2.HumanAgentAssistantConfig.SuggestionFeatureConfig"
@@ -102,6 +107,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.dialogflow.v2.HumanAgentAssistantConfig.ConversationModelConfig" do
       optional :model, :string, 1
+      optional :baseline_model_version, :string, 8
+    end
+    add_message "google.cloud.dialogflow.v2.HumanAgentAssistantConfig.ConversationProcessConfig" do
+      optional :recent_sentences_count, :int32, 2
     end
     add_message "google.cloud.dialogflow.v2.HumanAgentAssistantConfig.MessageAnalysisConfig" do
       optional :enable_entity_extraction, :bool, 2
@@ -141,6 +150,29 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :TYPE_UNSPECIFIED, 0
       value :ARTICLE_SUGGESTION, 1
       value :FAQ, 2
+      value :SMART_REPLY, 3
+    end
+    add_message "google.cloud.dialogflow.v2.SetSuggestionFeatureConfigRequest" do
+      optional :conversation_profile, :string, 1
+      optional :participant_role, :enum, 2, "google.cloud.dialogflow.v2.Participant.Role"
+      optional :suggestion_feature_config, :message, 3, "google.cloud.dialogflow.v2.HumanAgentAssistantConfig.SuggestionFeatureConfig"
+    end
+    add_message "google.cloud.dialogflow.v2.ClearSuggestionFeatureConfigRequest" do
+      optional :conversation_profile, :string, 1
+      optional :participant_role, :enum, 2, "google.cloud.dialogflow.v2.Participant.Role"
+      optional :suggestion_feature_type, :enum, 3, "google.cloud.dialogflow.v2.SuggestionFeature.Type"
+    end
+    add_message "google.cloud.dialogflow.v2.SetSuggestionFeatureConfigOperationMetadata" do
+      optional :conversation_profile, :string, 1
+      optional :participant_role, :enum, 2, "google.cloud.dialogflow.v2.Participant.Role"
+      optional :suggestion_feature_type, :enum, 3, "google.cloud.dialogflow.v2.SuggestionFeature.Type"
+      optional :create_time, :message, 4, "google.protobuf.Timestamp"
+    end
+    add_message "google.cloud.dialogflow.v2.ClearSuggestionFeatureConfigOperationMetadata" do
+      optional :conversation_profile, :string, 1
+      optional :participant_role, :enum, 2, "google.cloud.dialogflow.v2.Participant.Role"
+      optional :suggestion_feature_type, :enum, 3, "google.cloud.dialogflow.v2.SuggestionFeature.Type"
+      optional :create_time, :message, 4, "google.protobuf.Timestamp"
     end
   end
 end
@@ -167,6 +199,7 @@ module Google
         HumanAgentAssistantConfig::SuggestionQueryConfig::DialogflowQuerySource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.HumanAgentAssistantConfig.SuggestionQueryConfig.DialogflowQuerySource").msgclass
         HumanAgentAssistantConfig::SuggestionQueryConfig::ContextFilterSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.HumanAgentAssistantConfig.SuggestionQueryConfig.ContextFilterSettings").msgclass
         HumanAgentAssistantConfig::ConversationModelConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.HumanAgentAssistantConfig.ConversationModelConfig").msgclass
+        HumanAgentAssistantConfig::ConversationProcessConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.HumanAgentAssistantConfig.ConversationProcessConfig").msgclass
         HumanAgentAssistantConfig::MessageAnalysisConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.HumanAgentAssistantConfig.MessageAnalysisConfig").msgclass
         HumanAgentHandoffConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.HumanAgentHandoffConfig").msgclass
         HumanAgentHandoffConfig::LivePersonConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.HumanAgentHandoffConfig.LivePersonConfig").msgclass
@@ -176,6 +209,10 @@ module Google
         LoggingConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.LoggingConfig").msgclass
         SuggestionFeature = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.SuggestionFeature").msgclass
         SuggestionFeature::Type = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.SuggestionFeature.Type").enummodule
+        SetSuggestionFeatureConfigRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.SetSuggestionFeatureConfigRequest").msgclass
+        ClearSuggestionFeatureConfigRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.ClearSuggestionFeatureConfigRequest").msgclass
+        SetSuggestionFeatureConfigOperationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.SetSuggestionFeatureConfigOperationMetadata").msgclass
+        ClearSuggestionFeatureConfigOperationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.ClearSuggestionFeatureConfigOperationMetadata").msgclass
       end
     end
   end

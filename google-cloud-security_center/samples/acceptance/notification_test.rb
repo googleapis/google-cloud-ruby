@@ -42,8 +42,8 @@ describe "Google Cloud Security Center Notifications Sample" do
     last_error = nil
     3.times do
       create_notification_config org_id:       @org_id,
-                                  config_id:    @config_id,
-                                  pubsub_topic: @pubsub_topic
+                                 config_id:    @config_id,
+                                 pubsub_topic: @pubsub_topic
       return
     rescue Google::Cloud::FailedPreconditionError => e
       # Creating this fixture occasionally raises a precondition error.

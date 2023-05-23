@@ -1,5 +1,133 @@
 # Release History
 
+### 0.17.1 (2023-03-23)
+
+#### Documentation
+
+* Fix the resource name format for CreatePhraseSetRequest ([#20949](https://github.com/googleapis/google-cloud-ruby/issues/20949)) 
+
+### 0.17.0 (2023-02-28)
+
+#### Features
+
+* Support for voice activity events during streaming recognition ([#20520](https://github.com/googleapis/google-cloud-ruby/issues/20520)) 
+
+### 0.16.0 (2023-02-23)
+
+#### Features
+
+* Added support for REST transport ([#20498](https://github.com/googleapis/google-cloud-ruby/issues/20498)) 
+
+### 0.15.3 (2023-02-17)
+
+#### Bug Fixes
+
+* Fixed routing headers sent with long-running operation calls ([#20452](https://github.com/googleapis/google-cloud-ruby/issues/20452)) 
+
+### 0.15.2 (2023-02-09)
+
+#### Documentation
+
+* Clarify boost usage ([#20106](https://github.com/googleapis/google-cloud-ruby/issues/20106)) 
+
+### 0.15.1 (2023-01-26)
+
+#### Documentation
+
+* Clarify boost usage in Phrase and PhraseSet ([#20066](https://github.com/googleapis/google-cloud-ruby/issues/20066)) 
+
+### 0.15.0 (2023-01-05)
+
+#### Features
+
+* Support ABNF grammars in speech adaptation ([#19953](https://github.com/googleapis/google-cloud-ruby/issues/19953)) 
+
+### 0.14.0 (2022-12-09)
+
+#### Features
+
+* Responses now provide information on adaptation behavior ([#19486](https://github.com/googleapis/google-cloud-ruby/issues/19486)) 
+
+### 0.13.0 (2022-07-08)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+#### Bug Fixes
+
+* Fixed a crash when making certain long-running-operations status calls ([#18441](https://github.com/googleapis/google-cloud-ruby/issues/18441)) 
+
+### 0.12.4 (2022-05-12)
+
+#### Documentation
+
+* Various updates to reference documentation
+
+### 0.12.3 (2022-05-03)
+
+#### Documentation
+
+* Document the latest_long and latest_short recognition models
+
+### 0.12.2 (2022-04-20)
+
+#### Documentation
+
+* Fix broken links in reference documentation
+
+### 0.12.1 / 2022-01-11
+
+#### Bug Fixes
+
+* Honor quota project in auxiliary operations clients
+
+#### Documentation
+
+* Fix titles of documentation pages
+* Remove some broken images and fix outdated content in authentication documentation
+
+### 0.12.0 / 2021-12-07
+
+#### Features
+
+* Speech recognition results include the end time relative to the start of the audio clip
+
+### 0.11.1 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
+### 0.11.0 / 2021-08-23
+
+#### Features
+
+* Support for transcript normalization
+
+### 0.10.1 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
+### 0.10.0 / 2021-07-29
+
+#### Features
+
+* Provide information on how much billed time an operation consumed
+
+### 0.9.2 / 2021-07-12
+
+#### Documentation
+
+* Clarify some language around authentication configuration
+
+### 0.9.1 / 2021-06-17
+
+#### Bug Fixes
+
+* Support future 1.x versions of gapic-common
+
 ### 0.9.0 / 2021-05-06
 
 #### Features

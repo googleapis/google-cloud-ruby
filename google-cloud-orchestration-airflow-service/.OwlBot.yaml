@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/orchestration/airflow/service/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-orchestration-airflow-service/$1

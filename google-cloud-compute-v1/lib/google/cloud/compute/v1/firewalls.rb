@@ -28,9 +28,12 @@ module Google
   module Cloud
     module Compute
       module V1
-        # To load this service and instantiate a REST client:
+        ##
+        # The Firewalls API.
         #
-        #     require "google/cloud/compute/v1/firewalls"
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/compute/v1/firewalls/rest"
         #     client = ::Google::Cloud::Compute::V1::Firewalls::Rest::Client.new
         #
         module Firewalls

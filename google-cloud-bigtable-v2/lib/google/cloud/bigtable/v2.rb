@@ -23,7 +23,9 @@ module Google
   module Cloud
     module Bigtable
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
+      #
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/bigtable/v2"
       #     client = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new

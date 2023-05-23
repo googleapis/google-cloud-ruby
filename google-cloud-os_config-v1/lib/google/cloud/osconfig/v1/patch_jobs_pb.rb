@@ -8,6 +8,7 @@ require 'google/api/resource_pb'
 require 'google/cloud/osconfig/v1/osconfig_common_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/timestamp_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/osconfig/v1/patch_jobs.proto", :syntax => :proto3) do
     add_message "google.cloud.osconfig.v1.ExecutePatchJobRequest" do
@@ -103,6 +104,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :windows_update, :message, 7, "google.cloud.osconfig.v1.WindowsUpdateSettings"
       optional :pre_step, :message, 8, "google.cloud.osconfig.v1.ExecStep"
       optional :post_step, :message, 9, "google.cloud.osconfig.v1.ExecStep"
+      optional :mig_instances_allowed, :bool, 10
     end
     add_enum "google.cloud.osconfig.v1.PatchConfig.RebootConfig" do
       value :REBOOT_CONFIG_UNSPECIFIED, 0

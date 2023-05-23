@@ -37,7 +37,7 @@ module Google
           # * As such, Redis instances are resources of the form:
           #   `/projects/{project_id}/locations/{location_id}/instances/{instance_id}`
           #
-          # Note that location_id must be refering to a GCP `region`; for example:
+          # Note that location_id must be referring to a GCP `region`; for example:
           # * `projects/redpepper-1290/locations/us-central1/instances/my-redis`
           class Service
 
@@ -59,6 +59,10 @@ module Google
             rpc :ListInstances, ::Google::Cloud::Redis::V1beta1::ListInstancesRequest, ::Google::Cloud::Redis::V1beta1::ListInstancesResponse
             # Gets the details of a specific Redis instance.
             rpc :GetInstance, ::Google::Cloud::Redis::V1beta1::GetInstanceRequest, ::Google::Cloud::Redis::V1beta1::Instance
+            # Gets the AUTH string for a Redis instance. If AUTH is not enabled for the
+            # instance the response will be empty. This information is not included in
+            # the details returned to GetInstance.
+            rpc :GetInstanceAuthString, ::Google::Cloud::Redis::V1beta1::GetInstanceAuthStringRequest, ::Google::Cloud::Redis::V1beta1::InstanceAuthString
             # Creates a Redis instance based on the specified tier and memory size.
             #
             # By default, the instance is accessible from the project's
@@ -66,7 +70,7 @@ module Google
             #
             # The creation is executed asynchronously and callers may check the returned
             # operation to track its progress. Once the operation is completed the Redis
-            # instance will be fully functional. Completed longrunning.Operation will
+            # instance will be fully functional. The completed longrunning.Operation will
             # contain the new instance object in the response field.
             #
             # The returned operation is automatically deleted after a few hours, so there
@@ -97,12 +101,15 @@ module Google
             # The returned operation is automatically deleted after a few hours, so
             # there is no need to call DeleteOperation.
             rpc :ExportInstance, ::Google::Cloud::Redis::V1beta1::ExportInstanceRequest, ::Google::Longrunning::Operation
-            # Initiates a failover of the master node to current replica node for a
+            # Initiates a failover of the primary node to current replica node for a
             # specific STANDARD tier Cloud Memorystore for Redis instance.
             rpc :FailoverInstance, ::Google::Cloud::Redis::V1beta1::FailoverInstanceRequest, ::Google::Longrunning::Operation
             # Deletes a specific Redis instance.  Instance stops serving and data is
             # deleted.
             rpc :DeleteInstance, ::Google::Cloud::Redis::V1beta1::DeleteInstanceRequest, ::Google::Longrunning::Operation
+            # Reschedule maintenance for a given instance in a given project and
+            # location.
+            rpc :RescheduleMaintenance, ::Google::Cloud::Redis::V1beta1::RescheduleMaintenanceRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

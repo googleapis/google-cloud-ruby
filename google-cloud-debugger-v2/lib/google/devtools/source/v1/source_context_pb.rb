@@ -3,7 +3,6 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/devtools/source/v1/source_context.proto", :syntax => :proto3) do
     add_message "google.devtools.source.v1.SourceContext" do

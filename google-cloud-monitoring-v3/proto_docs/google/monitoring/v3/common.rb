@@ -44,7 +44,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A closed time interval. It extends from the start time to the end time, and includes both: `[startTime, endTime]`. Valid time intervals depend on the [`MetricKind`](/monitoring/api/ref_v3/rest/v3/projects.metricDescriptors#MetricKind) of the metric value. The end time must not be earlier than the start time. When writing data points, the start time must not be more than 25 hours in the past and the end time must not be more than five minutes in the future.
+        # A closed time interval. It extends from the start time to the end time, and includes both: `[startTime, endTime]`. Valid time intervals depend on the [`MetricKind`](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.metricDescriptors#MetricKind) of the metric value. The end time must not be earlier than the start time. When writing data points, the start time must not be more than 25 hours in the past and the end time must not be more than five minutes in the future.
         #
         # * For `GAUGE` metrics, the `startTime` value is technically optional; if
         #   no value is specified, the start time defaults to the value of the
@@ -61,7 +61,7 @@ module Google
         #   of the previous interval.
         #
         # * For `CUMULATIVE` metrics, the start time and end time must specify a
-        #   a non-zero interval, with subsequent points specifying the same
+        #   non-zero interval, with subsequent points specifying the same
         #   start time and increasing end times, until an event resets the
         #   cumulative value to zero and sets a new start time for the following
         #   points. The new start time must be at least a millisecond after the
@@ -460,15 +460,27 @@ module Google
           COMPARISON_NE = 6
         end
 
-        # Obsolete.
+        # The tier of service for a Workspace. Please see the
+        # [service tiers
+        # documentation](https://cloud.google.com/monitoring/workspaces/tiers) for more
+        # details.
         module ServiceTier
-          # Obsolete.
+          # An invalid sentinel value, used to indicate that a tier has not
+          # been provided explicitly.
           SERVICE_TIER_UNSPECIFIED = 0
 
-          # Obsolete.
+          # The Stackdriver Basic tier, a free tier of service that provides basic
+          # features, a moderate allotment of logs, and access to built-in metrics.
+          # A number of features are not available in this tier. For more details,
+          # see [the service tiers
+          # documentation](https://cloud.google.com/monitoring/workspaces/tiers).
           SERVICE_TIER_BASIC = 1
 
-          # Obsolete.
+          # The Stackdriver Premium tier, a higher, more expensive tier of service
+          # that provides access to all Stackdriver features, lets you use Stackdriver
+          # with AWS accounts, and has a larger allotments for logs and metrics. For
+          # more details, see [the service tiers
+          # documentation](https://cloud.google.com/monitoring/workspaces/tiers).
           SERVICE_TIER_PREMIUM = 2
         end
       end

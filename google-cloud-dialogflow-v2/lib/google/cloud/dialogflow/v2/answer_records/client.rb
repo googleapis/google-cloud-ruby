@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/dialogflow/v2/answer_record_pb"
+require "google/cloud/location"
 
 module Google
   module Cloud
@@ -27,7 +28,8 @@ module Google
           ##
           # Client for the AnswerRecords service.
           #
-          # Service for managing {::Google::Cloud::Dialogflow::V2::AnswerRecord AnswerRecords}.
+          # Service for managing
+          # {::Google::Cloud::Dialogflow::V2::AnswerRecord AnswerRecords}.
           #
           class Client
             include Paths
@@ -41,13 +43,12 @@ module Google
             # See {::Google::Cloud::Dialogflow::V2::AnswerRecords::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all AnswerRecords clients:
-            #
-            #     ::Google::Cloud::Dialogflow::V2::AnswerRecords::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all AnswerRecords clients
+            #   ::Google::Cloud::Dialogflow::V2::AnswerRecords::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -67,10 +68,7 @@ module Google
 
                 default_config.timeout = 60.0
                 default_config.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config
@@ -102,19 +100,15 @@ module Google
             ##
             # Create a new AnswerRecords client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new AnswerRecords client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Dialogflow::V2::AnswerRecords::Client.new
             #
-            #     client = ::Google::Cloud::Dialogflow::V2::AnswerRecords::Client.new
-            #
-            # To create a new AnswerRecords client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Dialogflow::V2::AnswerRecords::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Dialogflow::V2::AnswerRecords::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the AnswerRecords client.
             # @yieldparam config [Client::Configuration]
@@ -134,18 +128,23 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
               @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
+
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
 
               @answer_records_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::Dialogflow::V2::AnswerRecords::Stub,
@@ -155,6 +154,13 @@ module Google
                 interceptors: @config.interceptors
               )
             end
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
 
             # Service calls
 
@@ -182,9 +188,9 @@ module Google
             #     chronological order. Format: `projects/<Project ID>/locations/<Location
             #     ID>`.
             #   @param filter [::String]
-            #     Required. Filters to restrict results to specific answer records.
-            #     Filter on answer record type. Currently predicates on `type` is supported,
-            #     valid values are `ARTICLE_ANSWER`, `FAQ_ANSWER`.
+            #     Optional. Filters to restrict results to specific answer records.
+            #
+            #     Marked deprecated as it hasn't been, and isn't currently, supported.
             #
             #     For more information about filtering, see
             #     [API Filtering](https://aip.dev/160).
@@ -206,6 +212,25 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::AnswerRecords::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::ListAnswerRecordsRequest.new
+            #
+            #   # Call the list_answer_records method.
+            #   result = client.list_answer_records request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::Dialogflow::V2::AnswerRecord.
+            #     p item
+            #   end
+            #
             def list_answer_records request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -223,16 +248,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_answer_records.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_answer_records.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @answer_records_stub.call_rpc :list_answer_records, request, options: options do |response, operation|
@@ -275,6 +304,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::AnswerRecords::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::UpdateAnswerRecordRequest.new
+            #
+            #   # Call the update_answer_record method.
+            #   result = client.update_answer_record request
+            #
+            #   # The returned object is of type Google::Cloud::Dialogflow::V2::AnswerRecord.
+            #   p result
+            #
             def update_answer_record request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -292,16 +336,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "answer_record.name" => request.answer_record.name
-              }
+              header_params = {}
+              if request.answer_record&.name
+                header_params["answer_record.name"] = request.answer_record.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_answer_record.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_answer_record.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @answer_records_stub.call_rpc :update_answer_record, request, options: options do |response, operation|
@@ -325,22 +373,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for list_answer_records
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # list_answer_records to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Dialogflow::V2::AnswerRecords::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_answer_records.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Dialogflow::V2::AnswerRecords::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_answer_records.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Dialogflow::V2::AnswerRecords::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_answer_records.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Dialogflow::V2::AnswerRecords::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_answer_records.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
@@ -351,9 +398,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials

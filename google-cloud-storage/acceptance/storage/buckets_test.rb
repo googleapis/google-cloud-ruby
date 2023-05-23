@@ -22,7 +22,7 @@ describe "Storage", :buckets, :storage do
     end
   end
   let(:bucket_names) { $bucket_names }
-
+    
   before do
     buckets # always create the buckets
   end

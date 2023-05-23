@@ -24,7 +24,7 @@ module Google
         # Request to get a vulnerability summary for some set of occurrences.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     The name of the project to get a vulnerability summary for in the form of
+        #     Required. The name of the project to get a vulnerability summary for in the form of
         #     `projects/[PROJECT_ID]`.
         # @!attribute [rw] filter
         #   @return [::String]

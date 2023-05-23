@@ -35,9 +35,24 @@
                 "check_and_mutate_row"
               ]
             },
+            "PingAndWarm": {
+              "methods": [
+                "ping_and_warm"
+              ]
+            },
             "ReadModifyWriteRow": {
               "methods": [
                 "read_modify_write_row"
+              ]
+            },
+            "GenerateInitialChangeStreamPartitions": {
+              "methods": [
+                "generate_initial_change_stream_partitions"
+              ]
+            },
+            "ReadChangeStream": {
+              "methods": [
+                "read_change_stream"
               ]
             }
           }

@@ -7,7 +7,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/timestamp_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/secretmanager/v1/resources.proto", :syntax => :proto3) do
     add_message "google.cloud.secretmanager.v1.Secret" do
@@ -18,6 +18,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :topics, :message, 5, "google.cloud.secretmanager.v1.Topic"
       optional :etag, :string, 8
       optional :rotation, :message, 9, "google.cloud.secretmanager.v1.Rotation"
+      map :version_aliases, :string, :int64, 11
+      map :annotations, :string, :string, 13
       oneof :expiration do
         optional :expire_time, :message, 6, "google.protobuf.Timestamp"
         optional :ttl, :message, 7, "google.protobuf.Duration"
@@ -30,6 +32,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :state, :enum, 4, "google.cloud.secretmanager.v1.SecretVersion.State"
       optional :replication_status, :message, 5, "google.cloud.secretmanager.v1.ReplicationStatus"
       optional :etag, :string, 6
+      optional :client_specified_payload_checksum, :bool, 7
     end
     add_enum "google.cloud.secretmanager.v1.SecretVersion.State" do
       value :STATE_UNSPECIFIED, 0
@@ -84,6 +87,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.secretmanager.v1.SecretPayload" do
       optional :data, :bytes, 1
+      proto3_optional :data_crc32c, :int64, 2
     end
   end
 end

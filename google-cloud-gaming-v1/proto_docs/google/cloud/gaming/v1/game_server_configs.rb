@@ -24,8 +24,7 @@ module Google
         # Request message for GameServerConfigsService.ListGameServerConfigs.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent resource name. Uses the form:
-        #
+        #     Required. The parent resource name, in the following form:
         #     `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/*`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
@@ -68,8 +67,7 @@ module Google
         # Request message for GameServerConfigsService.GetGameServerConfig.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The name of the game server config to retrieve. Uses the form:
-        #
+        #     Required. The name of the game server config to retrieve, in the following form:
         #     `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/{config}`.
         class GetGameServerConfigRequest
           include ::Google::Protobuf::MessageExts
@@ -79,8 +77,7 @@ module Google
         # Request message for GameServerConfigsService.CreateGameServerConfig.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent resource name. Uses the form:
-        #
+        #     Required. The parent resource name, in the following form:
         #     `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/`.
         # @!attribute [rw] config_id
         #   @return [::String]
@@ -96,8 +93,7 @@ module Google
         # Request message for GameServerConfigsService.DeleteGameServerConfig.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The name of the game server config to delete. Uses the form:
-        #
+        #     Required. The name of the game server config to delete, in the following form:
         #     `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/{config}`.
         class DeleteGameServerConfigRequest
           include ::Google::Protobuf::MessageExts
@@ -141,11 +137,9 @@ module Google
         # A game server config resource.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The resource name of the game server config. Uses the form:
-        #
+        #     The resource name of the game server config, in the following form:
         #     `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/{config}`.
         #     For example,
-        #
         #     `projects/my-project/locations/global/gameServerDeployments/my-game/configs/my-config`.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]

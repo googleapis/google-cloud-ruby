@@ -1,5 +1,58 @@
 # Release History
 
+### 0.7.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20628](https://github.com/googleapis/google-cloud-ruby/issues/20628)) 
+
+### 0.6.0 (2022-12-14)
+
+#### Features
+
+* Added support for the locations mixin client ([#19858](https://github.com/googleapis/google-cloud-ruby/issues/19858)) 
+* Support for deleting legacy App Engine crons 
+* Support for filters when listing jobs 
+* Support for force-running a legacy App Engine cron 
+* Support for including legacy App Engine crons in job listings 
+
+### 0.5.0 (2022-07-07)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+
+### 0.4.5 / 2022-01-11
+
+#### Documentation
+
+* Fix titles of documentation pages
+* Remove some broken images and fix outdated content in authentication documentation
+
+### 0.4.4 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
+### 0.4.3 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
+### 0.4.2 / 2021-07-12
+
+#### Documentation
+
+* Clarify some language around authentication configuration
+
+### 0.4.1 / 2021-06-17
+
+#### Bug Fixes
+
+* Support future 1.x versions of gapic-common
+
 ### 0.4.0 / 2021-03-08
 
 #### Features

@@ -4,6 +4,7 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/client_pb'
 require 'google/cloud/websecurityscanner/v1/crawled_url_pb'
 require 'google/cloud/websecurityscanner/v1/finding_pb'
 require 'google/cloud/websecurityscanner/v1/finding_type_stats_pb'
@@ -11,7 +12,7 @@ require 'google/cloud/websecurityscanner/v1/scan_config_pb'
 require 'google/cloud/websecurityscanner/v1/scan_run_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
-require 'google/api/client_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/websecurityscanner/v1/web_security_scanner.proto", :syntax => :proto3) do
     add_message "google.cloud.websecurityscanner.v1.CreateScanConfigRequest" do

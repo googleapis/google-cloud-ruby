@@ -19,41 +19,46 @@
 
 module Google
   module Api
-    # `Endpoint` describes a network endpoint that serves a set of APIs.
-    # A service may expose any number of endpoints, and all endpoints share the
-    # same service configuration, such as quota configuration and monitoring
-    # configuration.
+    # `Endpoint` describes a network address of a service that serves a set of
+    # APIs. It is commonly known as a service endpoint. A service may expose
+    # any number of service endpoints, and all service endpoints share the same
+    # service definition, such as quota limits and monitoring metrics.
     #
-    # Example service configuration:
+    # Example:
     #
+    #     type: google.api.Service
     #     name: library-example.googleapis.com
     #     endpoints:
-    #       # Below entry makes 'google.example.library.v1.Library'
-    #       # API be served from endpoint address library-example.googleapis.com.
-    #       # It also allows HTTP OPTIONS calls to be passed to the backend, for
-    #       # it to decide whether the subsequent cross-origin request is
-    #       # allowed to proceed.
+    #       # Declares network address `https://library-example.googleapis.com`
+    #       # for service `library-example.googleapis.com`. The `https` scheme
+    #       # is implicit for all service endpoints. Other schemes may be
+    #       # supported in the future.
     #     - name: library-example.googleapis.com
+    #       allow_cors: false
+    #     - name: content-staging-library-example.googleapis.com
+    #       # Allows HTTP OPTIONS calls to be passed to the API frontend, for it
+    #       # to decide whether the subsequent cross-origin request is allowed
+    #       # to proceed.
     #       allow_cors: true
     # @!attribute [rw] name
     #   @return [::String]
     #     The canonical name of this endpoint.
     # @!attribute [rw] aliases
     #   @return [::Array<::String>]
+    #     Unimplemented. Dot not use.
+    #
     #     DEPRECATED: This field is no longer supported. Instead of using aliases,
-    #     please specify multiple {::Google::Api::Endpoint google.api.Endpoint} for each of the intended
-    #     aliases.
+    #     please specify multiple {::Google::Api::Endpoint google.api.Endpoint} for each
+    #     of the intended aliases.
     #
     #     Additional names that this endpoint will be hosted on.
-    # @!attribute [rw] features
-    #   @return [::Array<::String>]
-    #     The list of features enabled on this endpoint.
     # @!attribute [rw] target
     #   @return [::String]
     #     The specification of an Internet routable address of API frontend that will
-    #     handle requests to this [API Endpoint](https://cloud.google.com/apis/design/glossary).
-    #     It should be either a valid IPv4 address or a fully-qualified domain name.
-    #     For example, "8.8.8.8" or "myservice.appspot.com".
+    #     handle requests to this [API
+    #     Endpoint](https://cloud.google.com/apis/design/glossary). It should be
+    #     either a valid IPv4 address or a fully-qualified domain name. For example,
+    #     "8.8.8.8" or "myservice.appspot.com".
     # @!attribute [rw] allow_cors
     #   @return [::Boolean]
     #     Allowing

@@ -39,7 +39,7 @@ describe Google::Cloud::Storage::Project, :hmac_keys, :mock_storage do
 
   it "creates an HMAC key" do
     mock = Minitest::Mock.new
-    mock.expect :create_project_hmac_key, hmac_key_gapi, ["test", service_account_email, user_project: nil]
+    mock.expect :create_project_hmac_key, hmac_key_gapi, ["test", service_account_email], user_project: nil, options: {retries: 0}
     storage.service.mocked_service = mock
 
     hmac_key = storage.create_hmac_key service_account_email
@@ -53,7 +53,7 @@ describe Google::Cloud::Storage::Project, :hmac_keys, :mock_storage do
   it "creates an HMAC key with project_id set to another project ID" do
     mock = Minitest::Mock.new
     hmac_key_gapi.metadata.project_id = other_project_id
-    mock.expect :create_project_hmac_key, hmac_key_gapi, [other_project_id, service_account_email, user_project: nil]
+    mock.expect :create_project_hmac_key, hmac_key_gapi, [other_project_id, service_account_email], user_project: nil, options: {retries: 0}
     storage.service.mocked_service = mock
 
     hmac_key = storage.create_hmac_key service_account_email, project_id: other_project_id
@@ -66,7 +66,7 @@ describe Google::Cloud::Storage::Project, :hmac_keys, :mock_storage do
 
   it "creates an HMAC key with user_project set to another project ID" do
     mock = Minitest::Mock.new
-    mock.expect :create_project_hmac_key, hmac_key_gapi, ["test", service_account_email, user_project: other_project_id]
+    mock.expect :create_project_hmac_key, hmac_key_gapi, ["test", service_account_email], user_project: other_project_id, options: {retries: 0}
     storage.service.mocked_service = mock
 
     hmac_key = storage.create_hmac_key service_account_email, user_project: other_project_id
@@ -79,7 +79,7 @@ describe Google::Cloud::Storage::Project, :hmac_keys, :mock_storage do
 
   it "lists HMAC keys" do
     mock = Minitest::Mock.new
-    mock.expect :list_project_hmac_keys, hmac_keys_metadata_gapi, [project, max_results: nil, page_token: nil, service_account_email: nil, show_deleted_keys: nil, user_project: nil]
+    mock.expect :list_project_hmac_keys, hmac_keys_metadata_gapi, [project], max_results: nil, page_token: nil, service_account_email: nil, show_deleted_keys: nil, user_project: nil, options: {}
     storage.service.mocked_service = mock
 
     hmac_keys = storage.hmac_keys
@@ -91,7 +91,7 @@ describe Google::Cloud::Storage::Project, :hmac_keys, :mock_storage do
 
   it "lists HMAC keys with project_id set to another project ID" do
     mock = Minitest::Mock.new
-    mock.expect :list_project_hmac_keys, hmac_keys_metadata_gapi, [other_project_id, max_results: nil, page_token: nil, service_account_email: nil, show_deleted_keys: nil, user_project: nil]
+    mock.expect :list_project_hmac_keys, hmac_keys_metadata_gapi, [other_project_id], max_results: nil, page_token: nil, service_account_email: nil, show_deleted_keys: nil, user_project: nil, options: {}
     storage.service.mocked_service = mock
 
     hmac_keys = storage.hmac_keys project_id: other_project_id
@@ -103,7 +103,7 @@ describe Google::Cloud::Storage::Project, :hmac_keys, :mock_storage do
 
   it "lists HMAC keys with service_account_email, show_deleted_keys and user_project options" do
     mock = Minitest::Mock.new
-    mock.expect :list_project_hmac_keys, hmac_keys_metadata_gapi, [project, max_results: nil, page_token: nil, service_account_email: service_account_email, show_deleted_keys: true, user_project: other_project_id]
+    mock.expect :list_project_hmac_keys, hmac_keys_metadata_gapi, [project], max_results: nil, page_token: nil, service_account_email: service_account_email, show_deleted_keys: true, user_project: other_project_id, options: {}
     storage.service.mocked_service = mock
 
     hmac_keys = storage.hmac_keys service_account_email: service_account_email, show_deleted_keys: true, user_project: other_project_id
@@ -117,8 +117,8 @@ describe Google::Cloud::Storage::Project, :hmac_keys, :mock_storage do
     mock = Minitest::Mock.new
     hmac_keys_metadata_gapi_with_token = hmac_keys_metadata_gapi.dup
     hmac_keys_metadata_gapi_with_token.next_page_token = "next_page_token"
-    mock.expect :list_project_hmac_keys, hmac_keys_metadata_gapi_with_token, [project, max_results: 3, page_token: nil, service_account_email: nil, show_deleted_keys: nil, user_project: nil]
-    mock.expect :list_project_hmac_keys, hmac_keys_metadata_gapi, [project, max_results: 3, page_token: "next_page_token", service_account_email: nil, show_deleted_keys: nil, user_project: nil]
+    mock.expect :list_project_hmac_keys, hmac_keys_metadata_gapi_with_token, [project], max_results: 3, page_token: nil, service_account_email: nil, show_deleted_keys: nil, user_project: nil, options: {}
+    mock.expect :list_project_hmac_keys, hmac_keys_metadata_gapi, [project], max_results: 3, page_token: "next_page_token", service_account_email: nil, show_deleted_keys: nil, user_project: nil, options: {}
     storage.service.mocked_service = mock
 
     hmac_keys_1 = storage.hmac_keys max: 3
@@ -138,8 +138,8 @@ describe Google::Cloud::Storage::Project, :hmac_keys, :mock_storage do
     mock = Minitest::Mock.new
     hmac_keys_metadata_gapi_with_token = hmac_keys_metadata_gapi.dup
     hmac_keys_metadata_gapi_with_token.next_page_token = "next_page_token"
-    mock.expect :list_project_hmac_keys, hmac_keys_metadata_gapi_with_token, [project, max_results: nil, page_token: nil, service_account_email: nil, show_deleted_keys: nil, user_project: nil]
-    mock.expect :list_project_hmac_keys, hmac_keys_metadata_gapi, [project, max_results: nil, page_token: "next_page_token", service_account_email: nil, show_deleted_keys: nil, user_project: nil]
+    mock.expect :list_project_hmac_keys, hmac_keys_metadata_gapi_with_token, [project], max_results: nil, page_token: nil, service_account_email: nil, show_deleted_keys: nil, user_project: nil, options: {}
+    mock.expect :list_project_hmac_keys, hmac_keys_metadata_gapi, [project], max_results: nil, page_token: "next_page_token", service_account_email: nil, show_deleted_keys: nil, user_project: nil, options: {}
     storage.service.mocked_service = mock
 
     hmac_keys_1 = storage.hmac_keys
@@ -160,8 +160,8 @@ describe Google::Cloud::Storage::Project, :hmac_keys, :mock_storage do
     mock = Minitest::Mock.new
     hmac_keys_metadata_gapi_with_token = hmac_keys_metadata_gapi.dup
     hmac_keys_metadata_gapi_with_token.next_page_token = "next_page_token"
-    mock.expect :list_project_hmac_keys, hmac_keys_metadata_gapi_with_token, [project, max_results: nil, page_token: nil, service_account_email: nil, show_deleted_keys: nil, user_project: nil]
-    mock.expect :list_project_hmac_keys, hmac_keys_metadata_gapi, [project, max_results: nil, page_token: "next_page_token", service_account_email: nil, show_deleted_keys: nil, user_project: nil]
+    mock.expect :list_project_hmac_keys, hmac_keys_metadata_gapi_with_token, [project], max_results: nil, page_token: nil, service_account_email: nil, show_deleted_keys: nil, user_project: nil, options: {}
+    mock.expect :list_project_hmac_keys, hmac_keys_metadata_gapi, [project], max_results: nil, page_token: "next_page_token", service_account_email: nil, show_deleted_keys: nil, user_project: nil, options: {}
     storage.service.mocked_service = mock
 
     hmac_keys = storage.hmac_keys.all.to_a
@@ -175,8 +175,8 @@ describe Google::Cloud::Storage::Project, :hmac_keys, :mock_storage do
     mock = Minitest::Mock.new
     hmac_keys_metadata_gapi_with_token = hmac_keys_metadata_gapi.dup
     hmac_keys_metadata_gapi_with_token.next_page_token = "next_page_token"
-    mock.expect :list_project_hmac_keys, hmac_keys_metadata_gapi_with_token, [project, max_results: nil, page_token: nil, service_account_email: nil, show_deleted_keys: nil, user_project: nil]
-    mock.expect :list_project_hmac_keys, hmac_keys_metadata_gapi, [project, max_results: nil, page_token: "next_page_token", service_account_email: nil, show_deleted_keys: nil, user_project: nil]
+    mock.expect :list_project_hmac_keys, hmac_keys_metadata_gapi_with_token, [project], max_results: nil, page_token: nil, service_account_email: nil, show_deleted_keys: nil, user_project: nil, options: {}
+    mock.expect :list_project_hmac_keys, hmac_keys_metadata_gapi, [project], max_results: nil, page_token: "next_page_token", service_account_email: nil, show_deleted_keys: nil, user_project: nil, options: {}
     storage.service.mocked_service = mock
 
     hmac_keys = storage.hmac_keys.all.take 5
@@ -190,8 +190,8 @@ describe Google::Cloud::Storage::Project, :hmac_keys, :mock_storage do
     mock = Minitest::Mock.new
     hmac_keys_metadata_gapi_with_token = hmac_keys_metadata_gapi.dup
     hmac_keys_metadata_gapi_with_token.next_page_token = "next_page_token"
-    mock.expect :list_project_hmac_keys, hmac_keys_metadata_gapi_with_token, [project, max_results: nil, page_token: nil, service_account_email: nil, show_deleted_keys: nil, user_project: other_project_id]
-    mock.expect :list_project_hmac_keys, hmac_keys_metadata_gapi, [project, max_results: nil, page_token: "next_page_token", service_account_email: nil, show_deleted_keys: nil, user_project: other_project_id]
+    mock.expect :list_project_hmac_keys, hmac_keys_metadata_gapi_with_token, [project], max_results: nil, page_token: nil, service_account_email: nil, show_deleted_keys: nil, user_project: other_project_id, options: {}
+    mock.expect :list_project_hmac_keys, hmac_keys_metadata_gapi, [project], max_results: nil, page_token: "next_page_token", service_account_email: nil, show_deleted_keys: nil, user_project: other_project_id, options: {}
     storage.service.mocked_service = mock
 
     hmac_keys = storage.hmac_keys(user_project: other_project_id).all(request_limit: 1).to_a
@@ -203,7 +203,7 @@ describe Google::Cloud::Storage::Project, :hmac_keys, :mock_storage do
 
   it "finds an HMAC key" do
     mock = Minitest::Mock.new
-    mock.expect :get_project_hmac_key, hmac_key_metadata_gapi, [project, access_id, user_project: nil]
+    mock.expect :get_project_hmac_key, hmac_key_metadata_gapi, [project, access_id], user_project: nil, options: {}
     storage.service.mocked_service = mock
 
     hmac_key = storage.hmac_key access_id
@@ -216,7 +216,7 @@ describe Google::Cloud::Storage::Project, :hmac_keys, :mock_storage do
   it "finds an HMAC key with project_id set to another project ID" do
     mock = Minitest::Mock.new
     hmac_key_metadata_gapi.project_id = other_project_id
-    mock.expect :get_project_hmac_key, hmac_key_metadata_gapi, [other_project_id, access_id, user_project: nil]
+    mock.expect :get_project_hmac_key, hmac_key_metadata_gapi, [other_project_id, access_id], user_project: nil, options: {}
     storage.service.mocked_service = mock
 
     hmac_key = storage.hmac_key access_id, project_id: other_project_id
@@ -228,7 +228,7 @@ describe Google::Cloud::Storage::Project, :hmac_keys, :mock_storage do
 
   it "finds an HMAC key with user_project set to another project ID" do
     mock = Minitest::Mock.new
-    mock.expect :get_project_hmac_key, hmac_key_metadata_gapi, [project, access_id, user_project: other_project_id]
+    mock.expect :get_project_hmac_key, hmac_key_metadata_gapi, [project, access_id], user_project: other_project_id, options: {}
     storage.service.mocked_service = mock
 
     hmac_key = storage.hmac_key access_id, user_project: other_project_id

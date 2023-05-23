@@ -1,5 +1,66 @@
 # Release History
 
+### 0.8.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20624](https://github.com/googleapis/google-cloud-ruby/issues/20624)) 
+
+### 0.7.1 (2022-08-26)
+
+#### Documentation
+
+* Added Dataproc and Secret Manager to the list of supported services ([#19084](https://github.com/googleapis/google-cloud-ruby/issues/19084)) 
+
+### 0.7.0 (2022-07-01)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+
+### 0.6.0 (2022-05-22)
+
+#### Features
+
+* add support for invalidate_approval_request and get_access_approval_service_account
+
+### 0.5.0 / 2022-02-15
+
+#### Features
+
+* Provided several additional path helpers
+
+### 0.4.5 / 2022-01-11
+
+#### Documentation
+
+* Fix titles of documentation pages
+* Remove some broken images and fix outdated content in authentication documentation
+
+### 0.4.4 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
+### 0.4.3 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
+### 0.4.2 / 2021-07-12
+
+#### Documentation
+
+* Clarified some language around authentication configuration
+
+### 0.4.1 / 2021-06-18
+
+#### Bug Fixes
+
+* Support future 1.x releases of gapic-common
+
 ### 0.4.0 / 2021-03-08
 
 #### Features

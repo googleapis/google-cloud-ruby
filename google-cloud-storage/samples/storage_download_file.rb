@@ -26,7 +26,7 @@ def download_file bucket_name:, file_name:, local_file_path:
   require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new
-  bucket  = storage.bucket bucket_name
+  bucket  = storage.bucket bucket_name, skip_lookup: true
   file    = bucket.file file_name
 
   file.download local_file_path

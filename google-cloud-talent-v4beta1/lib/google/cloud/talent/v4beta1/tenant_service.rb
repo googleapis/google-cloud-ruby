@@ -25,6 +25,7 @@ require "google/cloud/talent/v4beta1/version"
 require "google/cloud/talent/v4beta1/tenant_service/credentials"
 require "google/cloud/talent/v4beta1/tenant_service/paths"
 require "google/cloud/talent/v4beta1/tenant_service/client"
+require "google/cloud/talent/v4beta1/tenant_service/rest"
 
 module Google
   module Cloud
@@ -33,10 +34,15 @@ module Google
         ##
         # A service that handles tenant management, including CRUD and enumeration.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/talent/v4beta1/tenant_service"
         #     client = ::Google::Cloud::Talent::V4beta1::TenantService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/talent/v4beta1/tenant_service/rest"
+        #     client = ::Google::Cloud::Talent::V4beta1::TenantService::Rest::Client.new
         #
         module TenantService
         end

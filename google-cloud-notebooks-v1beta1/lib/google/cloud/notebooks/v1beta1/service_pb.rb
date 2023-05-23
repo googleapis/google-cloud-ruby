@@ -4,12 +4,13 @@
 require 'google/protobuf'
 
 require 'google/api/annotations_pb'
+require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/cloud/notebooks/v1beta1/environment_pb'
 require 'google/cloud/notebooks/v1beta1/instance_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/timestamp_pb'
-require 'google/api/client_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/notebooks/v1beta1/service.proto", :syntax => :proto3) do
     add_message "google.cloud.notebooks.v1beta1.OperationMetadata" do
@@ -81,6 +82,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :upgradeable, :bool, 1
       optional :upgrade_version, :string, 2
       optional :upgrade_info, :string, 3
+      optional :upgrade_image, :string, 4
     end
     add_message "google.cloud.notebooks.v1beta1.UpgradeInstanceRequest" do
       optional :name, :string, 1

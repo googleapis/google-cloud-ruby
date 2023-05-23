@@ -48,12 +48,14 @@ module Google
       # Create a new client object for CloudScheduler.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Scheduler::V1::CloudScheduler::Client](https://googleapis.dev/ruby/google-cloud-scheduler-v1/latest/Google/Cloud/Scheduler/V1/CloudScheduler/Client.html)
-      # for version V1 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # [Google::Cloud::Scheduler::V1::CloudScheduler::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-scheduler-v1/latest/Google-Cloud-Scheduler-V1-CloudScheduler-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the CloudScheduler service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About CloudScheduler
       #
@@ -62,17 +64,19 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
-      # @return [CloudScheduler::Client] A client object for the specified version.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
       #
-      def self.cloud_scheduler version: :v1, &block
+      def self.cloud_scheduler version: :v1, transport: :grpc, &block
         require "google/cloud/scheduler/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Scheduler
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::Scheduler.const_get package_name
-        package_module.const_get(:CloudScheduler).const_get(:Client).new(&block)
+        service_module = Google::Cloud::Scheduler.const_get(package_name).const_get(:CloudScheduler)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -92,7 +96,7 @@ module Google
       # * `timeout` (*type:* `Numeric`) -
       #   Default timeout in seconds.
       # * `metadata` (*type:* `Hash{Symbol=>String}`) -
-      #   Additional gRPC headers to be sent with the call.
+      #   Additional headers to be sent with the call.
       # * `retry_policy` (*type:* `Hash`) -
       #   The retry policy. The value is a hash with the following keys:
       #     * `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.

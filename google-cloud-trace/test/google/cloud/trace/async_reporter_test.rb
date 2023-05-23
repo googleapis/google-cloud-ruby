@@ -38,43 +38,75 @@ describe Google::Cloud::Trace::AsyncReporter, :mock_trace do
     end
   end
 
-  before do
-    async_reporter.on_error do |error|
-      raise error.inspect
+  describe "success cases" do
+    before do
+      async_reporter.on_error do |error|
+        raise error.inspect
+      end
+    end
+
+    it "patches a single trace" do
+      mocked_service.expect :project, "my-project"
+      mocked_service.expect :patch_traces, nil, [[trace1]]
+
+      async_reporter.patch_traces trace1
+
+      async_reporter.stop! 1
+
+      mocked_service.verify
+    end
+
+    it "patches multiple traces" do
+      mocked_service.expect :project, "my-project"
+      mocked_service.expect :patch_traces, nil, [[trace1, trace2]]
+
+      async_reporter.patch_traces [trace1, trace2]
+
+      async_reporter.stop! 1
+
+      mocked_service.verify
+    end
+
+    it "buffers multiple patch_traces calls" do
+      mocked_service.expect :project, "my-project"
+      mocked_service.expect :patch_traces, nil, [[trace1, trace2]]
+
+      async_reporter.patch_traces trace1
+      async_reporter.patch_traces [trace2]
+
+      async_reporter.stop! 1
+
+      mocked_service.verify
     end
   end
 
-  it "patches a single trace" do
-    mocked_service.expect :project, "my-project"
-    mocked_service.expect :patch_traces, nil, [[trace1]]
+  describe "error cases" do
+    after do
+      Google::Cloud::Trace.configure.on_error = nil
+    end
 
-    async_reporter.patch_traces trace1
+    it "reports a service error" do
+      got_error = false
+      async_reporter.on_error do |error|
+        got_error = true
+      end
+      mocked_service.expect :project, "my-project"
+      mocked_service.expect :patch_traces, nil, [[:whoops]]
+      async_reporter.patch_traces trace1
+      async_reporter.stop! 1
+      assert got_error
+    end
 
-    async_reporter.stop! 1
-
-    mocked_service.verify
-  end
-
-  it "patches multiple traces" do
-    mocked_service.expect :project, "my-project"
-    mocked_service.expect :patch_traces, nil, [[trace1, trace2]]
-
-    async_reporter.patch_traces [trace1, trace2]
-
-    async_reporter.stop! 1
-
-    mocked_service.verify
-  end
-
-  it "buffers multiple patch_traces calls" do
-    mocked_service.expect :project, "my-project"
-    mocked_service.expect :patch_traces, nil, [[trace1, trace2]]
-
-    async_reporter.patch_traces trace1
-    async_reporter.patch_traces [trace2]
-
-    async_reporter.stop! 1
-
-    mocked_service.verify
+    it "uses the config's error handler" do
+      got_error = false
+      Google::Cloud::Trace.configure.on_error = proc do |error|
+        got_error = true
+      end
+      mocked_service.expect :project, "my-project"
+      mocked_service.expect :patch_traces, nil, [[:whoops]]
+      async_reporter.patch_traces trace1
+      async_reporter.stop! 1
+      assert got_error
+    end
   end
 end

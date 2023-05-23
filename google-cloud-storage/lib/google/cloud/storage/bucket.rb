@@ -110,6 +110,15 @@ module Google
         end
 
         ##
+        # The autoclass configuration of the bucket
+        #
+        # @return [Google::Apis::StorageV1::Bucket::Autoclass]
+        #
+        def autoclass
+          @gapi.autoclass
+        end
+
+        ##
         # The name of the bucket.
         #
         # @return [String]
@@ -279,7 +288,7 @@ module Google
         #
         # @return [String]
         #
-        # @see https://cloud.google.com/storage/docs/concepts-techniques
+        # @see https://cloud.google.com/storage/docs/locations
         #
         def location
           @gapi.location
@@ -302,6 +311,20 @@ module Google
         end
 
         ##
+        # Returns the list of regional locations for custom dual-region buckets.
+        #
+        # @return [String, nil] Returns nil if the property has not been set before creation,
+        # if the bucket's resource has not been loaded from the server,
+        # or if the bucket is not a dual-regions bucket.
+
+        # @see https://cloud.google.com/storage/docs/json_api/v1/buckets and
+        # https://cloud.google.com/storage/docs/locations
+        #
+        def data_locations
+          @gapi.custom_placement_config&.data_locations
+        end
+
+        ##
         # The destination bucket name for the bucket's logs.
         #
         # @return [String]
@@ -314,6 +337,9 @@ module Google
 
         ##
         # Updates the destination bucket for the bucket's logs.
+        #
+        # To pass metageneration preconditions, call this method within a
+        # block passed to {#update}.
         #
         # @see https://cloud.google.com/storage/docs/access-logs Access Logs
         #
@@ -343,6 +369,9 @@ module Google
         # name](https://cloud.google.com/storage/docs/bucket-naming#objectnames).
         # By default, the object prefix is the name of the bucket for which the
         # logs are enabled.
+        #
+        # To pass metageneration preconditions, call this method within a
+        # block passed to {#update}.
         #
         # @see https://cloud.google.com/storage/docs/access-logs Access Logs
         #
@@ -377,11 +406,51 @@ module Google
         # For more information, see [Storage
         # Classes](https://cloud.google.com/storage/docs/storage-classes).
         #
+        # To pass metageneration preconditions, call this method within a
+        # block passed to {#update}.
+        #
         # @param [Symbol, String] new_storage_class Storage class of the bucket.
         #
         def storage_class= new_storage_class
           @gapi.storage_class = storage_class_for new_storage_class
           patch_gapi! :storage_class
+        end
+
+        ##
+        # Whether Autoclass is enabled for the bucket.
+        #
+        # @return [Boolean]
+        #
+        def autoclass_enabled
+          @gapi.autoclass&.enabled?
+        end
+
+        ##
+        # Toggle time of the autoclass
+        #
+        # @return [DateTime]
+        #
+        def autoclass_toggle_time
+          @gapi.autoclass&.toggle_time
+        end
+
+        ##
+        # Updates bucket's autoclass configuration. This defines the default class for objects in the
+        # bucket and down/up-grades the storage class of objects based on the access patterns.
+        # Accepted values are `:false`, and `:true`.
+        #
+        # For more information, see [Storage
+        # Classes](https://cloud.google.com/storage/docs/using-autoclass).
+        #
+        # Note: Only patch requests that disable autoclass are currently supported.
+        # To enable autoclass, you must set it at bucket creation time.
+        #
+        # @param [Boolean] toggle for autoclass configuration of the bucket.
+        #
+        def autoclass_enabled= toggle
+          @gapi.autoclass ||= API::Bucket::Autoclass.new
+          @gapi.autoclass.enabled = toggle
+          patch_gapi! :autoclass
         end
 
         ##
@@ -399,6 +468,9 @@ module Google
         # Updates whether [Object
         # Versioning](https://cloud.google.com/storage/docs/object-versioning)
         # is enabled for the bucket.
+        #
+        # To pass metageneration preconditions, call this method within a
+        # block passed to {#update}.
         #
         # @param [Boolean] new_versioning true if versioning is to be enabled
         #   for the bucket.
@@ -427,6 +499,9 @@ module Google
 
         ##
         # Updates the main page suffix for a static website.
+        #
+        # To pass metageneration preconditions, call this method within a
+        # block passed to {#update}.
         #
         # @see https://cloud.google.com/storage/docs/website-configuration#step4
         #   How to Host a Static Website
@@ -467,6 +542,9 @@ module Google
         ##
         # Updates the hash of user-provided labels.
         #
+        # To pass metageneration preconditions, call this method within a
+        # block passed to {#update}.
+        #
         # @param [Hash(String => String)] labels The user-provided labels.
         #
         def labels= labels
@@ -477,6 +555,9 @@ module Google
         ##
         # Updates the page returned from a static website served from the bucket
         # when a site visitor requests a resource that does not exist.
+        #
+        # To pass metageneration preconditions, call this method within a
+        # block passed to {#update}.
         #
         # @see https://cloud.google.com/storage/docs/website-configuration#step4
         #   How to Host a Static Website
@@ -508,6 +589,9 @@ module Google
         # to the access. The requester must pass the `user_project` option to
         # {Project#bucket} and {Project#buckets} to indicate the project to
         # which the access costs should be billed.
+        #
+        # To pass metageneration preconditions, call this method within a
+        # block passed to {#update}.
         #
         # @param [Boolean] new_requester_pays When set to `true`, requester pays
         #   is enabled for the bucket.
@@ -556,6 +640,9 @@ module Google
         ##
         # Set the Cloud KMS encryption key that will be used to protect files.
         # For example: `projects/a/locations/b/keyRings/c/cryptoKeys/d`
+        #
+        # To pass metageneration preconditions, call this method within a
+        # block passed to {#update}.
         #
         # @param [String, nil] new_default_kms_key New Cloud KMS key name, or
         #   `nil` to delete the Cloud KMS encryption key.
@@ -616,6 +703,9 @@ module Google
         #
         # See also: {#lock_retention_policy!}, {#retention_period},
         # {#retention_effective_at}, and {#retention_policy_locked?}.
+        #
+        # To pass metageneration preconditions, call this method within a
+        # block passed to {#update}.
         #
         # @param [Integer, nil] new_retention_period The retention period
         #   defined in seconds. The value must be between 0 and 100 years (in
@@ -714,6 +804,9 @@ module Google
         # newly-created files in the bucket.
         #
         # See {File#event_based_hold?} and {File#set_event_based_hold!}.
+        #
+        # To pass metageneration preconditions, call this method within a
+        # block passed to {#update}.
         #
         # @param [Boolean] new_default_event_based_hold The default event-based
         #   hold field for the bucket.
@@ -823,6 +916,9 @@ module Google
         # Before enabling uniform bucket-level access please review [uniform bucket-level
         # access](https://cloud.google.com/storage/docs/uniform-bucket-level-access).
         #
+        # To pass metageneration preconditions, call this method within a
+        # block passed to {#update}.
+        #
         # @param [Boolean] new_uniform_bucket_level_access When set to `true`, uniform bucket-level access is enabled in
         #   the bucket's IAM configuration.
         #
@@ -896,6 +992,166 @@ module Google
         end
 
         ##
+        # The value for Public Access Prevention in the bucket's IAM configuration. Currently, `inherited` and
+        # `enforced` are supported. When set to `enforced`, Public Access Prevention is enforced in the bucket's IAM
+        # configuration. This value can be modified by calling {#public_access_prevention=}.
+        #
+        # @return [String, nil] Currently, `inherited` and `enforced` are supported. Returns `nil` if the bucket has
+        #    no IAM configuration.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.public_access_prevention = :enforced
+        #   bucket.public_access_prevention #=> "enforced"
+        #
+        def public_access_prevention
+          @gapi.iam_configuration&.public_access_prevention
+        end
+
+        ##
+        # Sets the value for Public Access Prevention in the bucket's IAM configuration. This value can be queried by
+        # calling {#public_access_prevention}.
+        #
+        # @param [Symbol, String] new_public_access_prevention The bucket's new Public Access Prevention configuration.
+        #   Currently, `inherited` and `enforced` are supported. When set to `enforced`, Public Access
+        #   Prevention is enforced in the bucket's IAM configuration.
+        #
+        # @example Set Public Access Prevention to enforced:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.public_access_prevention = :enforced
+        #   bucket.public_access_prevention #=> "enforced"
+        #
+        # @example Set Public Access Prevention to inherited:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.public_access_prevention = :inherited
+        #   bucket.public_access_prevention #=> "inherited"
+        #
+        def public_access_prevention= new_public_access_prevention
+          @gapi.iam_configuration ||= API::Bucket::IamConfiguration.new
+          @gapi.iam_configuration.public_access_prevention = new_public_access_prevention.to_s
+          patch_gapi! :iam_configuration
+        end
+
+        ##
+        # Whether the bucket's file IAM configuration enforces Public Access Prevention. The default is `false`. This
+        # value can be modified by calling {Bucket#public_access_prevention=}.
+        #
+        # @return [Boolean] Returns `false` if the bucket has no IAM configuration or if Public Access Prevention is
+        #   not `enforced` in the IAM configuration. Returns `true` if Public Access Prevention is `enforced` in the IAM
+        #   configuration.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.public_access_prevention = :enforced
+        #   bucket.public_access_prevention_enforced? # true
+        #
+        def public_access_prevention_enforced?
+          return false unless @gapi.iam_configuration&.public_access_prevention
+          @gapi.iam_configuration.public_access_prevention.to_s == "enforced"
+        end
+
+        ##
+        # Whether the value for Public Access Prevention in the bucket's IAM configuration is `inherited`. The default
+        # is `false`. This value can be modified by calling {Bucket#public_access_prevention=}.
+        #
+        # @return [Boolean] Returns `false` if the bucket has no IAM configuration or if Public Access Prevention is
+        #   not `inherited` in the IAM configuration. Returns `true` if Public Access Prevention is `inherited` in
+        #   the IAM configuration.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.public_access_prevention = :inherited
+        #   bucket.public_access_prevention_inherited? # true
+        #
+        def public_access_prevention_inherited?
+          return false unless @gapi.iam_configuration&.public_access_prevention
+          ["inherited", "unspecified"].include? @gapi.iam_configuration.public_access_prevention.to_s
+        end
+
+        alias public_access_prevention_unspecified? public_access_prevention_inherited?
+
+        ##
+        # Recovery Point Objective (RPO) is another attribute of a bucket, it measures how long it takes for a set of
+        # updates to be asynchronously copied to the other region.
+        # Currently, `DEFAULT` and `ASYNC_TURBO` are supported. When set to `ASYNC_TURBO`, Turbo Replication is enabled
+        # for a bucket. `DEFAULT` is used to reset rpo on an existing bucket with rpo set to `ASYNC_TURBO`.
+        # This value can be modified by calling {#rpo=}.
+        #
+        # @return [String, nil] Currently, `DEFAULT` and `ASYNC_TURBO` are supported. Returns `nil` if the bucket has
+        #    no RPO.
+        #
+        # @example
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.rpo = :DEFAULT
+        #   bucket.rpo #=> "DEFAULT"
+        #
+        def rpo
+          @gapi.rpo
+        end
+
+        ##
+        # Sets the value for Recovery Point Objective (RPO) in the bucket. This value can be queried by calling {#rpo}.
+        #
+        # @param [Symbol, String] new_rpo The bucket's new Recovery Point Objective metadata.
+        #   Currently, `DEFAULT` and `ASYNC_TURBO` are supported. When set to `ASYNC_TURBO`, Turbo Replication
+        #   is enabled for a bucket.
+        #
+        # @example Set RPO to DEFAULT:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.rpo = :DEFAULT
+        #   bucket.rpo #=> "DEFAULT"
+        #
+        # @example Set RPO to ASYNC_TURBO:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-bucket"
+        #
+        #   bucket.rpo = :ASYNC_TURBO
+        #   bucket.rpo #=> "ASYNC_TURBO"
+        #
+        def rpo= new_rpo
+          @gapi.rpo = new_rpo&.to_s
+          patch_gapi! :rpo
+        end
+
+        ##
         # Updates the bucket with changes made in the given block in a single
         # PATCH request. The following attributes may be set: {#cors},
         # {#logging_bucket=}, {#logging_prefix=}, {#versioning=},
@@ -904,6 +1160,12 @@ module Google
         # In addition, the #cors configuration accessible in the block is
         # completely mutable and will be included in the request. (See
         # {Bucket::Cors})
+        #
+        # @param [Integer] if_metageneration_match Makes the operation conditional
+        #   on whether the bucket's current metageneration matches the given value.
+        # @param [Integer] if_metageneration_not_match Makes the operation
+        #   conditional on whether the bucket's current metageneration does not
+        #   match the given value.
         #
         # @yield [bucket] a block yielding a delegate object for updating the
         #   file
@@ -936,14 +1198,27 @@ module Google
         #     end
         #   end
         #
-        def update
+        # @example With a `if_metageneration_match` precondition:
+        #   require "google/cloud/storage"
+        #
+        #   storage = Google::Cloud::Storage.new
+        #
+        #   bucket = storage.bucket "my-todo-app"
+        #   bucket.update if_metageneration_match: 6 do |b|
+        #     b.website_main = "index.html"
+        #   end
+        #
+        def update if_metageneration_match: nil, if_metageneration_not_match: nil
           updater = Updater.new @gapi
           yield updater
           # Add check for mutable cors
           updater.check_for_changed_labels!
           updater.check_for_mutable_cors!
           updater.check_for_mutable_lifecycle!
-          patch_gapi! updater.updates unless updater.updates.empty?
+          return if updater.updates.empty?
+          update_gapi! updater.updates,
+                       if_metageneration_match: if_metageneration_match,
+                       if_metageneration_not_match: if_metageneration_not_match
         end
 
         ##
@@ -952,6 +1227,12 @@ module Google
         #
         # The API call to delete the bucket may be retried under certain
         # conditions. See {Google::Cloud#storage} to control this behavior.
+        #
+        # @param [Integer] if_metageneration_match Makes the operation conditional
+        #   on whether the bucket's current metageneration matches the given value.
+        # @param [Integer] if_metageneration_not_match Makes the operation
+        #   conditional on whether the bucket's current metageneration does not
+        #   match the given value.
         #
         # @return [Boolean] Returns `true` if the bucket was deleted.
         #
@@ -963,10 +1244,12 @@ module Google
         #   bucket = storage.bucket "my-bucket"
         #   bucket.delete
         #
-        def delete
+        def delete if_metageneration_match: nil, if_metageneration_not_match: nil
           ensure_service!
-          service.delete_bucket name, user_project: user_project
-          true
+          service.delete_bucket name,
+                                if_metageneration_match: if_metageneration_match,
+                                if_metageneration_not_match: if_metageneration_not_match,
+                                user_project: user_project
         end
 
         ##
@@ -1040,6 +1323,19 @@ module Google
         # @param [String] path Name (path) of the file.
         # @param [Integer] generation When present, selects a specific revision
         #   of this object. Default is the latest version.
+        # @param [Integer] if_generation_match Makes the operation conditional
+        #   on whether the file's current generation matches the given value.
+        #   Setting to 0 makes the operation succeed only if there are no live
+        #   versions of the file.
+        # @param [Integer] if_generation_not_match Makes the operation conditional
+        #   on whether the file's current generation does not match the given
+        #   value. If no live file exists, the precondition fails. Setting to 0
+        #   makes the operation succeed only if there is a live version of the file.
+        # @param [Integer] if_metageneration_match Makes the operation conditional
+        #   on whether the file's current metageneration matches the given value.
+        # @param [Integer] if_metageneration_not_match Makes the operation
+        #   conditional on whether the file's current metageneration does not
+        #   match the given value.
         # @param [Boolean] skip_lookup Optionally create a Bucket object
         #   without verifying the bucket resource exists on the Storage service.
         #   Calls made on this object will raise errors if the bucket resource
@@ -1061,7 +1357,14 @@ module Google
         #   file = bucket.file "path/to/my-file.ext"
         #   puts file.name
         #
-        def file path, generation: nil, skip_lookup: nil, encryption_key: nil
+        def file path,
+                 generation: nil,
+                 if_generation_match: nil,
+                 if_generation_not_match: nil,
+                 if_metageneration_match: nil,
+                 if_metageneration_not_match: nil,
+                 skip_lookup: nil,
+                 encryption_key: nil
           ensure_service!
           if skip_lookup
             return File.new_lazy name, path, service,
@@ -1069,6 +1372,10 @@ module Google
                                  user_project: user_project
           end
           gapi = service.get_file name, path, generation: generation,
+                                              if_generation_match: if_generation_match,
+                                              if_generation_not_match: if_generation_not_match,
+                                              if_metageneration_match: if_metageneration_match,
+                                              if_metageneration_not_match: if_metageneration_not_match,
                                               key: encryption_key,
                                               user_project: user_project
           File.from_gapi gapi, service, user_project: user_project
@@ -1143,16 +1450,34 @@ module Google
         #   changed to a time in the future. If custom_time must be unset, you
         #   must either perform a rewrite operation, or upload the data again
         #   and create a new file.
+        # @param [Symbol, nil] checksum The type of checksum for the client to
+        #   automatically calculate and send with the create request to verify
+        #   the integrity of the object. If provided, Cloud Storage will only
+        #   create the file if the value calculated by the client matches the
+        #   value calculated by the service.
+        #
+        #   Acceptable values are:
+        #
+        #   * `md5` - Calculate and provide a checksum using the MD5 hash.
+        #   * `crc32c` - Calculate and provide a checksum using the CRC32c hash.
+        #   * `all` - Calculate and provide checksums for all available verifications.
+        #
+        #   Optional. The default is `nil`. Do not provide if also providing a
+        #   corresponding `crc32c` or `md5` argument. See
+        #   [Validation](https://cloud.google.com/storage/docs/hashes-etags)
+        #   for more information.
         # @param [String] crc32c The CRC32c checksum of the file data, as
         #   described in [RFC 4960, Appendix
         #   B](http://tools.ietf.org/html/rfc4960#appendix-B).
         #   If provided, Cloud Storage will only create the file if the value
-        #   matches the value calculated by the service. See
+        #   matches the value calculated by the service. Do not provide if also
+        #   providing a `checksum: :crc32c` or `checksum: :all` argument. See
         #   [Validation](https://cloud.google.com/storage/docs/hashes-etags)
         #   for more information.
         # @param [String] md5 The MD5 hash of the file data. If provided, Cloud
         #   Storage will only create the file if the value matches the value
-        #   calculated by the service. See
+        #   calculated by the service. Do not provide if also providing a
+        #   `checksum: :md5` or `checksum: :all` argument. See
         #   [Validation](https://cloud.google.com/storage/docs/hashes-etags) for
         #   more information.
         # @param [Hash] metadata A hash of custom, user-provided web-safe keys
@@ -1179,6 +1504,19 @@ module Google
         #   the same location as the bucket.The Service Account associated with
         #   your project requires access to this encryption key. Do not provide
         #   if `encryption_key` is used.
+        # @param [Integer] if_generation_match Makes the operation conditional
+        #   on whether the file's current generation matches the given value.
+        #   Setting to 0 makes the operation succeed only if there are no live
+        #   versions of the file.
+        # @param [Integer] if_generation_not_match Makes the operation conditional
+        #   on whether the file's current generation does not match the given
+        #   value. If no live file exists, the precondition fails. Setting to 0
+        #   makes the operation succeed only if there is a live version of the file.
+        # @param [Integer] if_metageneration_match Makes the operation conditional
+        #   on whether the file's current metageneration matches the given value.
+        # @param [Integer] if_metageneration_not_match Makes the operation
+        #   conditional on whether the file's current metageneration does not
+        #   match the given value.
         #
         # @return [Google::Cloud::Storage::File]
         #
@@ -1262,35 +1600,59 @@ module Google
         #   file.download "path/to/downloaded/gzipped.txt",
         #                 skip_decompress: true
         #
-        def create_file file, path = nil, acl: nil, cache_control: nil,
-                        content_disposition: nil, content_encoding: nil,
-                        content_language: nil, content_type: nil, custom_time: nil,
-                        crc32c: nil, md5: nil, metadata: nil,
-                        storage_class: nil, encryption_key: nil, kms_key: nil,
-                        temporary_hold: nil, event_based_hold: nil
+        def create_file file,
+                        path = nil,
+                        acl: nil,
+                        cache_control: nil,
+                        content_disposition: nil,
+                        content_encoding: nil,
+                        content_language: nil,
+                        content_type: nil,
+                        custom_time: nil,
+                        checksum: nil,
+                        crc32c: nil,
+                        md5: nil,
+                        metadata: nil,
+                        storage_class: nil,
+                        encryption_key: nil,
+                        kms_key: nil,
+                        temporary_hold: nil,
+                        event_based_hold: nil,
+                        if_generation_match: nil,
+                        if_generation_not_match: nil,
+                        if_metageneration_match: nil,
+                        if_metageneration_not_match: nil
           ensure_service!
           ensure_io_or_file_exists! file
           path ||= file.path if file.respond_to? :path
           path ||= file if file.is_a? String
           raise ArgumentError, "must provide path" if path.nil?
+          crc32c = crc32c_for file, checksum, crc32c
+          md5 = md5_for file, checksum, md5
 
-
-          gapi = service.insert_file name, file, path, acl: File::Acl.predefined_rule_for(acl),
-                                                       md5: md5,
-                                                       cache_control: cache_control,
-                                                       content_type: content_type,
-                                                       custom_time: custom_time,
-                                                       content_disposition: content_disposition,
-                                                       crc32c: crc32c,
-                                                       content_encoding: content_encoding,
-                                                       metadata: metadata,
-                                                       content_language: content_language,
-                                                       key: encryption_key,
-                                                       kms_key: kms_key,
-                                                       storage_class: storage_class_for(storage_class),
-                                                       temporary_hold: temporary_hold,
-                                                       event_based_hold: event_based_hold,
-                                                       user_project: user_project
+          gapi = service.insert_file name,
+                                     file,
+                                     path,
+                                     acl: File::Acl.predefined_rule_for(acl),
+                                     md5: md5,
+                                     cache_control: cache_control,
+                                     content_type: content_type,
+                                     custom_time: custom_time,
+                                     content_disposition: content_disposition,
+                                     crc32c: crc32c,
+                                     content_encoding: content_encoding,
+                                     metadata: metadata,
+                                     content_language: content_language,
+                                     key: encryption_key,
+                                     kms_key: kms_key,
+                                     storage_class: storage_class_for(storage_class),
+                                     temporary_hold: temporary_hold,
+                                     event_based_hold: event_based_hold,
+                                     if_generation_match: if_generation_match,
+                                     if_generation_not_match: if_generation_not_match,
+                                     if_metageneration_match: if_metageneration_match,
+                                     if_metageneration_not_match: if_metageneration_not_match,
+                                     user_project: user_project
           File.from_gapi gapi, service, user_project: user_project
         end
         alias upload_file create_file
@@ -1334,6 +1696,16 @@ module Google
         #   used. All source files must have been encrypted with the same key,
         #   and the resulting destination file will also be encrypted with the
         #   key.
+        # @param [Array<Integer>] if_source_generation_match Makes the operation
+        #   conditional on whether the source files' current generations match the
+        #   given values. The list must match `sources` item-to-item.
+        # @param [Integer] if_generation_match Makes the operation conditional
+        #   on whether the destination file's current generation matches the
+        #   given value. Setting to 0 makes the operation succeed only if there
+        #   are no live versions of the file.
+        # @param [Integer] if_metageneration_match Makes the operation conditional
+        #   on whether the destination file's current metageneration matches the
+        #   given value.
         #
         # @yield [file] A block yielding a delegate file object for setting the
         #   properties of the destination file.
@@ -1382,7 +1754,13 @@ module Google
         #
         #   new_file = bucket.compose [file_1, file_2], "path/to/new-file.ext"
         #
-        def compose sources, destination, acl: nil, encryption_key: nil
+        def compose sources,
+                    destination,
+                    acl: nil,
+                    encryption_key: nil,
+                    if_source_generation_match: nil,
+                    if_generation_match: nil,
+                    if_metageneration_match: nil
           ensure_service!
           sources = Array sources
           if sources.size < 2
@@ -1398,9 +1776,16 @@ module Google
           end
 
           acl_rule = File::Acl.predefined_rule_for acl
-          gapi = service.compose_file name, sources, destination, destination_gapi, acl: acl_rule,
-                                                                                    key: encryption_key,
-                                                                                    user_project: user_project
+          gapi = service.compose_file name,
+                                      sources,
+                                      destination,
+                                      destination_gapi,
+                                      acl: acl_rule,
+                                      key: encryption_key,
+                                      if_source_generation_match: if_source_generation_match,
+                                      if_generation_match: if_generation_match,
+                                      if_metageneration_match: if_metageneration_match,
+                                      user_project: user_project
           File.from_gapi gapi, service, user_project: user_project
         end
         alias compose_file compose
@@ -2546,7 +2931,10 @@ module Google
           reload!
         end
 
-        def patch_gapi! *attributes
+        def patch_gapi! attributes,
+                        if_metageneration_match: nil,
+                        if_metageneration_not_match: nil
+          attributes = Array(attributes)
           attributes.flatten!
           return if attributes.empty?
           ensure_service!
@@ -2554,8 +2942,31 @@ module Google
             [attr, @gapi.send(attr)]
           end]
           patch_gapi = API::Bucket.new(**patch_args)
-          @gapi = service.patch_bucket name, patch_gapi,
+          @gapi = service.patch_bucket name,
+                                       patch_gapi,
+                                       if_metageneration_match: if_metageneration_match,
+                                       if_metageneration_not_match: if_metageneration_not_match,
                                        user_project: user_project
+          @lazy = nil
+          self
+        end
+
+        def update_gapi! attributes,
+                         if_metageneration_match: nil,
+                         if_metageneration_not_match: nil
+          attributes = Array(attributes)
+          attributes.flatten!
+          return if attributes.empty?
+          ensure_service!
+          update_args = Hash[attributes.map do |attr|
+            [attr, @gapi.send(attr)]
+          end]
+          update_gapi = API::Bucket.new(**update_args)
+          @gapi = service.update_bucket name,
+                                        update_gapi,
+                                        if_metageneration_match: if_metageneration_match,
+                                        if_metageneration_not_match: if_metageneration_not_match,
+                                        user_project: user_project
           @lazy = nil
           self
         end
@@ -2566,6 +2977,18 @@ module Google
           return if file.respond_to?(:read) && file.respond_to?(:rewind)
           return if ::File.file? file
           raise ArgumentError, "cannot find file #{file}"
+        end
+
+        def crc32c_for source, checksum, crc32c
+          return crc32c unless [:crc32c, :all].include? checksum
+          raise ArgumentError, "'checksum: :crc32c' or 'checksum: :all' is present with 'crc32c' arg" if crc32c
+          File::Verifier.crc32c_for source
+        end
+
+        def md5_for source, checksum, md5
+          return md5 unless [:md5, :all].include? checksum
+          raise ArgumentError, "'checksum: :md5' or 'checksum: :all' is present with 'md5' arg" if md5
+          File::Verifier.md5_for source
         end
 
         ##

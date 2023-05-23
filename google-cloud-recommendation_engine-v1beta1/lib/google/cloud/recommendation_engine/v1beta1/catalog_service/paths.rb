@@ -48,7 +48,7 @@ module Google
             #
             # The resource will be in the following format:
             #
-            # `projects/{project}/locations/{location}/catalogs/{catalog}/catalogItems/{catalog_item_path=**}`
+            # `projects/{project}/locations/{location}/catalogs/{catalog}/catalogItems/{catalog_item_path}`
             #
             # @param project [String]
             # @param location [String]

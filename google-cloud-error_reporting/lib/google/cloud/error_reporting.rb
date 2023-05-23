@@ -27,7 +27,7 @@ module Google
     ##
     # # Error Reporting
     #
-    # Stackdriver Error Reporting counts, analyzes and aggregates the crashes in
+    # Error Reporting counts, analyzes and aggregates the crashes in
     # your running cloud services.
     #
     # See {file:OVERVIEW.md Error Reporting Overview}.
@@ -40,14 +40,14 @@ module Google
       @default_reporter_mutex = Monitor.new
 
       ##
-      # Creates a new object for connecting to the Stackdriver Error Reporting
+      # Creates a new object for connecting to the Error Reporting
       # service. Each call creates a new connection.
       #
       # For more information on connecting to Google Cloud see the
       # {file:AUTHENTICATION.md Authentication Guide}.
       #
       # @param [String] project_id Google Cloud Platform project identifier for
-      #   the Stackdriver Error Reporting service you are connecting to. If not
+      #   the Error Reporting service you are connecting to. If not
       #   present, the default project for the credentials is used.
       # @param [String, Hash, Google::Auth::Credentials] credentials The path to
       #   the keyfile as a String, the contents of the keyfile as a Hash, or a
@@ -102,11 +102,11 @@ module Google
       # client, allows the {.report} public method to reuse these
       # configured parameters.
       #
-      # The following Stackdriver ErrorReporting configuration parameters are
+      # The following ErrorReporting configuration parameters are
       # supported:
       #
       # * `project_id` - (String)  Google Cloud Platform project identifier for
-      #   the Stackdriver Error Reporting service you are connecting to. (The
+      #   the Error Reporting service you are connecting to. (The
       #   parameter `project` is considered deprecated, but may also be used.)
       # * `credentials` - (String, Hash, Google::Auth::Credentials) The path to
       #   the keyfile as a String, the contents of the keyfile as a Hash, or a
@@ -115,6 +115,8 @@ module Google
       #   used.)
       # * `scope` - (String, Array<String>) The OAuth 2.0 scopes controlling
       #   the set of resources and operations that the connection can access.
+      # * `quota_project` - (String) The project ID for a project that can be
+      #   used by client libraries for quota and billing purposes.
       # * `timeout` - (Integer) Default timeout to use in requests.
       # * `endpoint` - (String) Override of the endpoint host name, or `nil`
       #   to use the default endpoint.
@@ -163,13 +165,13 @@ module Google
 
       ##
       # Provides an easy-to-use interface to Report a Ruby exception object to
-      # Stackdriver ErrorReporting service. This method helps users to
-      # transform the Ruby exception into an Stackdriver ErrorReporting
+      # Error Reporting service. This method helps users to
+      # transform the Ruby exception into an Error Reporting
       # ErrorEvent gRPC structure, so users don't need to. This should be the
       # prefered method to use when users wish to report captured exception in
       # applications.
       #
-      # This public method creates a default Stackdriver ErrorReporting client
+      # This public method creates a default Error Reporting client
       # and reuse that between calls. The default client is initialized with
       # parameters defined in {.configure}.
       #

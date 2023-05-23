@@ -11,8 +11,7 @@ require 'google/logging/type/log_severity_pb'
 require 'google/protobuf/any_pb'
 require 'google/protobuf/struct_pb'
 require 'google/protobuf/timestamp_pb'
-require 'google/rpc/status_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/logging/v2/log_entry.proto", :syntax => :proto3) do
     add_message "google.logging.v2.LogEntry" do
@@ -29,6 +28,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :span_id, :string, 27
       optional :trace_sampled, :bool, 30
       optional :source_location, :message, 23, "google.logging.v2.LogEntrySourceLocation"
+      optional :split, :message, 35, "google.logging.v2.LogSplit"
       oneof :payload do
         optional :proto_payload, :message, 2, "google.protobuf.Any"
         optional :text_payload, :string, 3
@@ -46,6 +46,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :line, :int64, 2
       optional :function, :string, 3
     end
+    add_message "google.logging.v2.LogSplit" do
+      optional :uid, :string, 1
+      optional :index, :int32, 2
+      optional :total_splits, :int32, 3
+    end
   end
 end
 
@@ -56,6 +61,7 @@ module Google
         LogEntry = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LogEntry").msgclass
         LogEntryOperation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LogEntryOperation").msgclass
         LogEntrySourceLocation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LogEntrySourceLocation").msgclass
+        LogSplit = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LogSplit").msgclass
       end
     end
   end

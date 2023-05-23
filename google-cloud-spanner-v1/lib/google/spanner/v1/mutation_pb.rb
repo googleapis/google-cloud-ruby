@@ -3,9 +3,10 @@
 
 require 'google/protobuf'
 
+require 'google/api/field_behavior_pb'
 require 'google/protobuf/struct_pb'
 require 'google/spanner/v1/keys_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/spanner/v1/mutation.proto", :syntax => :proto3) do
     add_message "google.spanner.v1.Mutation" do

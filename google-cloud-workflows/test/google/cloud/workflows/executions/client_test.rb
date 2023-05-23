@@ -22,13 +22,13 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::Workflows::Executions::ClientConstructionMinitest < Minitest::Test
-  def test_executions
+  def test_executions_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Google::Cloud::Workflows::Executions.executions do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Cloud::Workflows::Executions::V1beta::Executions::Client, client
+      assert_kind_of Google::Cloud::Workflows::Executions::V1::Executions::Client, client
     end
   end
 end

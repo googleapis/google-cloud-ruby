@@ -1,5 +1,105 @@
 # Release History
 
+### 0.16.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20626](https://github.com/googleapis/google-cloud-ruby/issues/20626)) 
+
+### 0.15.0 (2023-02-17)
+
+#### Features
+
+* Include the location mixin client ([#20455](https://github.com/googleapis/google-cloud-ruby/issues/20455)) 
+
+### 0.14.0 (2022-11-11)
+
+#### Features
+
+* support ExcludeByHotword and add :NEW_ZEALAND to LocationCategory 
+
+### 0.13.1 (2022-10-03)
+
+#### Documentation
+
+* Deprecate InfoTypeSummary#estimated_prevalence ([#19237](https://github.com/googleapis/google-cloud-ruby/issues/19237)) 
+
+### 0.13.0 (2022-09-07)
+
+#### Features
+
+* add support for deidentify 
+* add VersionDescription to InfoTypeDescription 
+* move sensitivityscore to storage 
+#### Documentation
+
+* update auth doc with application-default 
+
+### 0.12.0 (2022-07-19)
+
+#### Features
+
+* Support for InfoType categories ([#18828](https://github.com/googleapis/google-cloud-ruby/issues/18828)) 
+
+### 0.11.0 (2022-07-02)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+
+### 0.10.0 / 2022-04-01
+
+#### Features
+
+* Add data types for DataProfile PubSub messages
+
+### 0.9.0 / 2022-03-29
+
+#### Features
+
+* Support for PowerPoint and Excel document types
+
+### 0.8.1 / 2022-01-11
+
+#### Documentation
+
+* Fix titles of documentation pages
+* Remove some broken images and fix outdated content in authentication documentation
+
+### 0.8.0 / 2021-12-07
+
+#### Features
+
+* Deidentify supports replacement dictionaries
+* Support setting the type of job when listing triggers
+* Findings include a unique finding ID
+* Support for InfoType versioning
+* Support for BigQuery inspect template inclusion lists
+
+### 0.7.4 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
+### 0.7.3 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
+### 0.7.2 / 2021-07-12
+
+#### Documentation
+
+* Clarify some language around authentication configuration
+
+### 0.7.1 / 2021-06-17
+
+#### Bug Fixes
+
+* Support future 1.x versions of gapic-common
+
 ### 0.7.0 / 2021-03-08
 
 #### Features

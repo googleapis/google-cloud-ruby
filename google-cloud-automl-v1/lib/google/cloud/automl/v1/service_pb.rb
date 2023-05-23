@@ -14,9 +14,9 @@ require 'google/cloud/automl/v1/image_pb'
 require 'google/cloud/automl/v1/io_pb'
 require 'google/cloud/automl/v1/model_pb'
 require 'google/cloud/automl/v1/model_evaluation_pb'
-require 'google/cloud/automl/v1/operations_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/field_mask_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/automl/v1/service.proto", :syntax => :proto3) do
     add_message "google.cloud.automl.v1.CreateDatasetRequest" do

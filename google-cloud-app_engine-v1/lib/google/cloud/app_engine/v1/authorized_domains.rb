@@ -24,6 +24,7 @@ require "google/cloud/app_engine/v1/version"
 
 require "google/cloud/app_engine/v1/authorized_domains/credentials"
 require "google/cloud/app_engine/v1/authorized_domains/client"
+require "google/cloud/app_engine/v1/authorized_domains/rest"
 
 module Google
   module Cloud
@@ -34,10 +35,15 @@ module Google
         # domain, verify ownership via
         # [Webmaster Central](https://www.google.com/webmasters/verification/home).
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/app_engine/v1/authorized_domains"
         #     client = ::Google::Cloud::AppEngine::V1::AuthorizedDomains::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/app_engine/v1/authorized_domains/rest"
+        #     client = ::Google::Cloud::AppEngine::V1::AuthorizedDomains::Rest::Client.new
         #
         module AuthorizedDomains
         end

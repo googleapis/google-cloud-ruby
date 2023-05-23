@@ -26,6 +26,7 @@ require "google/cloud/gaming/v1/game_server_deployments_service/credentials"
 require "google/cloud/gaming/v1/game_server_deployments_service/paths"
 require "google/cloud/gaming/v1/game_server_deployments_service/operations"
 require "google/cloud/gaming/v1/game_server_deployments_service/client"
+require "google/cloud/gaming/v1/game_server_deployments_service/rest"
 
 module Google
   module Cloud
@@ -35,10 +36,15 @@ module Google
         # The game server deployment is used to control the deployment of Agones
         # fleets.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/gaming/v1/game_server_deployments_service"
         #     client = ::Google::Cloud::Gaming::V1::GameServerDeploymentsService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/gaming/v1/game_server_deployments_service/rest"
+        #     client = ::Google::Cloud::Gaming::V1::GameServerDeploymentsService::Rest::Client.new
         #
         module GameServerDeploymentsService
         end

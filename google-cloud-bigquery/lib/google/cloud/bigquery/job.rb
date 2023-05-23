@@ -74,8 +74,8 @@ module Google
         ##
         # The ID of the job.
         #
-        # @return [String] The ID must contain only letters (a-z, A-Z), numbers
-        #   (0-9), underscores (_), or dashes (-). The maximum length is 1,024
+        # @return [String] The ID must contain only letters (`[A-Za-z]`), numbers
+        #   (`[0-9]`), underscores (`_`), or dashes (`-`). The maximum length is 1,024
         #   characters.
         #
         def job_id
@@ -224,6 +224,25 @@ module Google
         def reservation_usage
           return nil unless @gapi.statistics.reservation_usage
           Array(@gapi.statistics.reservation_usage).map { |g| ReservationUsage.from_gapi g }
+        end
+
+        ##
+        # The ID of the session if this job is part of one. See the `create_session` param in {Project#query_job} and
+        # {Dataset#query_job}.
+        #
+        # @return [String, nil] The session ID, or `nil` if not associated with a session.
+        #
+        def session_id
+          @gapi.statistics.session_info&.session_id
+        end
+
+        ##
+        # The ID of a multi-statement transaction.
+        #
+        # @return [String, nil] The transaction ID, or `nil` if not associated with a transaction.
+        #
+        def transaction_id
+          @gapi.statistics.transaction_info&.transaction_id
         end
 
         ##
@@ -384,6 +403,28 @@ module Google
         end
 
         ##
+        # Requests that a job is deleted. This call will return when the job is deleted.
+        #
+        # @return [Boolean] Returns `true` if the job was deleted.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   job = bigquery.job "my_job"
+        #
+        #   job.delete
+        #
+        # @!group Lifecycle
+        #
+        def delete
+          ensure_service!
+          service.delete_job job_id, location: location
+          true
+        end
+
+        ##
         # Created a new job with the current configuration.
         #
         # @example
@@ -448,7 +489,7 @@ module Google
         #
         def wait_until_done!
           backoff = lambda do |retries|
-            delay = [retries**2 + 5, 60].min # Maximum delay is 60
+            delay = [(retries**2) + 5, 60].min # Maximum delay is 60
             sleep delay
           end
           retries = 0
@@ -669,9 +710,9 @@ module Google
           raise "Must have active connection" unless service
         end
 
-        def retrieve_table project_id, dataset_id, table_id
+        def retrieve_table project_id, dataset_id, table_id, metadata_view: nil
           ensure_service!
-          gapi = service.get_project_table project_id, dataset_id, table_id
+          gapi = service.get_project_table project_id, dataset_id, table_id, metadata_view: metadata_view
           Table.from_gapi gapi, service
         rescue Google::Cloud::NotFoundError
           nil

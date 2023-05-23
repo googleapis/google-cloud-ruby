@@ -1,5 +1,54 @@
 # Release History
 
+### 2.5.1 (2023-02-21)
+
+#### Bug Fixes
+
+* Update the dependency on google-cloud-kms-v1 to require the version with REST support ([#20480](https://github.com/googleapis/google-cloud-ruby/issues/20480)) 
+
+### 2.5.0 (2023-02-17)
+
+#### Features
+
+* Added support for REST transport ([#20442](https://github.com/googleapis/google-cloud-ruby/issues/20442)) 
+
+### 2.4.0 (2022-07-02)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+
+### 2.3.0 / 2022-02-16
+
+#### Features
+
+* Support for managing EKM connections
+
+### 2.2.1 / 2022-01-11
+
+#### Documentation
+
+* Fix titles of documentation pages
+* Remove some broken images and fix outdated content in authentication documentation
+
+### 2.2.0 / 2021-11-09
+
+#### Features
+
+* Add a factory method for the IAM client
+
+### 2.1.2 / 2021-07-12
+
+#### Documentation
+
+* Clarified some language around authentication configuration
+
+### 2.1.1 / 2021-06-30
+
+#### Bug Fixes
+
+* Expand dependencies to include future 1.x releases of versioned clients
+
 ### 2.1.0 / 2021-03-08
 
 #### Features

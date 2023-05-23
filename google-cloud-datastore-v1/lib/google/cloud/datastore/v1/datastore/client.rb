@@ -44,13 +44,12 @@ module Google
             # See {::Google::Cloud::Datastore::V1::Datastore::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all Datastore clients:
-            #
-            #     ::Google::Cloud::Datastore::V1::Datastore::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all Datastore clients
+            #   ::Google::Cloud::Datastore::V1::Datastore::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -70,18 +69,17 @@ module Google
 
                 default_config.rpcs.lookup.timeout = 60.0
                 default_config.rpcs.lookup.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.run_query.timeout = 60.0
                 default_config.rpcs.run_query.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                }
+
+                default_config.rpcs.run_aggregation_query.timeout = 60.0
+                default_config.rpcs.run_aggregation_query.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.begin_transaction.timeout = 60.0
@@ -94,10 +92,7 @@ module Google
 
                 default_config.rpcs.reserve_ids.timeout = 60.0
                 default_config.rpcs.reserve_ids.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config
@@ -129,19 +124,15 @@ module Google
             ##
             # Create a new Datastore client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new Datastore client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Datastore::V1::Datastore::Client.new
             #
-            #     client = ::Google::Cloud::Datastore::V1::Datastore::Client.new
-            #
-            # To create a new Datastore client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Datastore::V1::Datastore::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Datastore::V1::Datastore::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Datastore client.
             # @yieldparam config [Client::Configuration]
@@ -161,14 +152,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -198,13 +188,18 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload lookup(project_id: nil, read_options: nil, keys: nil)
+            # @overload lookup(project_id: nil, database_id: nil, read_options: nil, keys: nil)
             #   Pass arguments to `lookup` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param project_id [::String]
             #     Required. The ID of the project against which to make the request.
+            #   @param database_id [::String]
+            #     The ID of the database against which to make the request.
+            #
+            #     '(default)' is not allowed; please use empty string '' to refer the default
+            #     database.
             #   @param read_options [::Google::Cloud::Datastore::V1::ReadOptions, ::Hash]
             #     The options for this lookup request.
             #   @param keys [::Array<::Google::Cloud::Datastore::V1::Key, ::Hash>]
@@ -217,6 +212,21 @@ module Google
             # @return [::Google::Cloud::Datastore::V1::LookupResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/datastore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Datastore::V1::Datastore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Datastore::V1::LookupRequest.new
+            #
+            #   # Call the lookup method.
+            #   result = client.lookup request
+            #
+            #   # The returned object is of type Google::Cloud::Datastore::V1::LookupResponse.
+            #   p result
             #
             def lookup request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -235,16 +245,23 @@ module Google
                 gapic_version: ::Google::Cloud::Datastore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id
-              }
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              header_params = {}
+              if request.project_id && !request.project_id.empty?
+                header_params["project_id"] = request.project_id
+              end
+              if request.database_id && !request.database_id.empty?
+                header_params["database_id"] = request.database_id
+              end
+
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.lookup.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.lookup.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @datastore_stub.call_rpc :lookup, request, options: options do |response, operation|
@@ -268,13 +285,18 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload run_query(project_id: nil, partition_id: nil, read_options: nil, query: nil, gql_query: nil)
+            # @overload run_query(project_id: nil, database_id: nil, partition_id: nil, read_options: nil, query: nil, gql_query: nil)
             #   Pass arguments to `run_query` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param project_id [::String]
             #     Required. The ID of the project against which to make the request.
+            #   @param database_id [::String]
+            #     The ID of the database against which to make the request.
+            #
+            #     '(default)' is not allowed; please use empty string '' to refer the default
+            #     database.
             #   @param partition_id [::Google::Cloud::Datastore::V1::PartitionId, ::Hash]
             #     Entities are partitioned into subsets, identified by a partition ID.
             #     Queries are scoped to a single partition.
@@ -285,7 +307,7 @@ module Google
             #   @param query [::Google::Cloud::Datastore::V1::Query, ::Hash]
             #     The query to run.
             #   @param gql_query [::Google::Cloud::Datastore::V1::GqlQuery, ::Hash]
-            #     The GQL query to run.
+            #     The GQL query to run. This query must be a non-aggregation query.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Datastore::V1::RunQueryResponse]
@@ -294,6 +316,21 @@ module Google
             # @return [::Google::Cloud::Datastore::V1::RunQueryResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/datastore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Datastore::V1::Datastore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Datastore::V1::RunQueryRequest.new
+            #
+            #   # Call the run_query method.
+            #   result = client.run_query request
+            #
+            #   # The returned object is of type Google::Cloud::Datastore::V1::RunQueryResponse.
+            #   p result
             #
             def run_query request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -312,19 +349,130 @@ module Google
                 gapic_version: ::Google::Cloud::Datastore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id
-              }
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              header_params = {}
+              if request.project_id && !request.project_id.empty?
+                header_params["project_id"] = request.project_id
+              end
+              if request.database_id && !request.database_id.empty?
+                header_params["database_id"] = request.database_id
+              end
+
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.run_query.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.run_query.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @datastore_stub.call_rpc :run_query, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Runs an aggregation query.
+            #
+            # @overload run_aggregation_query(request, options = nil)
+            #   Pass arguments to `run_aggregation_query` via a request object, either of type
+            #   {::Google::Cloud::Datastore::V1::RunAggregationQueryRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Datastore::V1::RunAggregationQueryRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload run_aggregation_query(project_id: nil, database_id: nil, partition_id: nil, read_options: nil, aggregation_query: nil, gql_query: nil)
+            #   Pass arguments to `run_aggregation_query` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param project_id [::String]
+            #     Required. The ID of the project against which to make the request.
+            #   @param database_id [::String]
+            #     The ID of the database against which to make the request.
+            #
+            #     '(default)' is not allowed; please use empty string '' to refer the default
+            #     database.
+            #   @param partition_id [::Google::Cloud::Datastore::V1::PartitionId, ::Hash]
+            #     Entities are partitioned into subsets, identified by a partition ID.
+            #     Queries are scoped to a single partition.
+            #     This partition ID is normalized with the standard default context
+            #     partition ID.
+            #   @param read_options [::Google::Cloud::Datastore::V1::ReadOptions, ::Hash]
+            #     The options for this query.
+            #   @param aggregation_query [::Google::Cloud::Datastore::V1::AggregationQuery, ::Hash]
+            #     The query to run.
+            #   @param gql_query [::Google::Cloud::Datastore::V1::GqlQuery, ::Hash]
+            #     The GQL query to run. This query must be an aggregation query.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Datastore::V1::RunAggregationQueryResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Datastore::V1::RunAggregationQueryResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/datastore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Datastore::V1::Datastore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Datastore::V1::RunAggregationQueryRequest.new
+            #
+            #   # Call the run_aggregation_query method.
+            #   result = client.run_aggregation_query request
+            #
+            #   # The returned object is of type Google::Cloud::Datastore::V1::RunAggregationQueryResponse.
+            #   p result
+            #
+            def run_aggregation_query request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Datastore::V1::RunAggregationQueryRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.run_aggregation_query.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Datastore::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.project_id && !request.project_id.empty?
+                header_params["project_id"] = request.project_id
+              end
+              if request.database_id && !request.database_id.empty?
+                header_params["database_id"] = request.database_id
+              end
+
+              request_params_header = URI.encode_www_form header_params
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.run_aggregation_query.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.run_aggregation_query.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @datastore_stub.call_rpc :run_aggregation_query, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -345,13 +493,18 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload begin_transaction(project_id: nil, transaction_options: nil)
+            # @overload begin_transaction(project_id: nil, database_id: nil, transaction_options: nil)
             #   Pass arguments to `begin_transaction` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param project_id [::String]
             #     Required. The ID of the project against which to make the request.
+            #   @param database_id [::String]
+            #     The ID of the database against which to make the request.
+            #
+            #     '(default)' is not allowed; please use empty string '' to refer the default
+            #     database.
             #   @param transaction_options [::Google::Cloud::Datastore::V1::TransactionOptions, ::Hash]
             #     Options for a new transaction.
             #
@@ -362,6 +515,21 @@ module Google
             # @return [::Google::Cloud::Datastore::V1::BeginTransactionResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/datastore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Datastore::V1::Datastore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Datastore::V1::BeginTransactionRequest.new
+            #
+            #   # Call the begin_transaction method.
+            #   result = client.begin_transaction request
+            #
+            #   # The returned object is of type Google::Cloud::Datastore::V1::BeginTransactionResponse.
+            #   p result
             #
             def begin_transaction request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -380,16 +548,23 @@ module Google
                 gapic_version: ::Google::Cloud::Datastore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id
-              }
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              header_params = {}
+              if request.project_id && !request.project_id.empty?
+                header_params["project_id"] = request.project_id
+              end
+              if request.database_id && !request.database_id.empty?
+                header_params["database_id"] = request.database_id
+              end
+
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.begin_transaction.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.begin_transaction.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @datastore_stub.call_rpc :begin_transaction, request, options: options do |response, operation|
@@ -414,19 +589,29 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload commit(project_id: nil, mode: nil, transaction: nil, mutations: nil)
+            # @overload commit(project_id: nil, database_id: nil, mode: nil, transaction: nil, single_use_transaction: nil, mutations: nil)
             #   Pass arguments to `commit` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param project_id [::String]
             #     Required. The ID of the project against which to make the request.
+            #   @param database_id [::String]
+            #     The ID of the database against which to make the request.
+            #
+            #     '(default)' is not allowed; please use empty string '' to refer the default
+            #     database.
             #   @param mode [::Google::Cloud::Datastore::V1::CommitRequest::Mode]
             #     The type of commit to perform. Defaults to `TRANSACTIONAL`.
             #   @param transaction [::String]
             #     The identifier of the transaction associated with the commit. A
             #     transaction identifier is returned by a call to
             #     {::Google::Cloud::Datastore::V1::Datastore::Client#begin_transaction Datastore.BeginTransaction}.
+            #   @param single_use_transaction [::Google::Cloud::Datastore::V1::TransactionOptions, ::Hash]
+            #     Options for beginning a new transaction for this request.
+            #     The transaction is committed when the request completes. If specified,
+            #     {::Google::Cloud::Datastore::V1::TransactionOptions TransactionOptions.mode} must be
+            #     {::Google::Cloud::Datastore::V1::TransactionOptions::ReadWrite TransactionOptions.ReadWrite}.
             #   @param mutations [::Array<::Google::Cloud::Datastore::V1::Mutation, ::Hash>]
             #     The mutations to perform.
             #
@@ -450,6 +635,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/datastore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Datastore::V1::Datastore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Datastore::V1::CommitRequest.new
+            #
+            #   # Call the commit method.
+            #   result = client.commit request
+            #
+            #   # The returned object is of type Google::Cloud::Datastore::V1::CommitResponse.
+            #   p result
+            #
             def commit request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -467,16 +667,23 @@ module Google
                 gapic_version: ::Google::Cloud::Datastore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id
-              }
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              header_params = {}
+              if request.project_id && !request.project_id.empty?
+                header_params["project_id"] = request.project_id
+              end
+              if request.database_id && !request.database_id.empty?
+                header_params["database_id"] = request.database_id
+              end
+
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.commit.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.commit.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @datastore_stub.call_rpc :commit, request, options: options do |response, operation|
@@ -500,13 +707,18 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload rollback(project_id: nil, transaction: nil)
+            # @overload rollback(project_id: nil, database_id: nil, transaction: nil)
             #   Pass arguments to `rollback` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param project_id [::String]
             #     Required. The ID of the project against which to make the request.
+            #   @param database_id [::String]
+            #     The ID of the database against which to make the request.
+            #
+            #     '(default)' is not allowed; please use empty string '' to refer the default
+            #     database.
             #   @param transaction [::String]
             #     Required. The transaction identifier, returned by a call to
             #     {::Google::Cloud::Datastore::V1::Datastore::Client#begin_transaction Datastore.BeginTransaction}.
@@ -518,6 +730,21 @@ module Google
             # @return [::Google::Cloud::Datastore::V1::RollbackResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/datastore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Datastore::V1::Datastore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Datastore::V1::RollbackRequest.new
+            #
+            #   # Call the rollback method.
+            #   result = client.rollback request
+            #
+            #   # The returned object is of type Google::Cloud::Datastore::V1::RollbackResponse.
+            #   p result
             #
             def rollback request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -536,16 +763,23 @@ module Google
                 gapic_version: ::Google::Cloud::Datastore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id
-              }
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              header_params = {}
+              if request.project_id && !request.project_id.empty?
+                header_params["project_id"] = request.project_id
+              end
+              if request.database_id && !request.database_id.empty?
+                header_params["database_id"] = request.database_id
+              end
+
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.rollback.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.rollback.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @datastore_stub.call_rpc :rollback, request, options: options do |response, operation|
@@ -570,16 +804,21 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload allocate_ids(project_id: nil, keys: nil)
+            # @overload allocate_ids(project_id: nil, database_id: nil, keys: nil)
             #   Pass arguments to `allocate_ids` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param project_id [::String]
             #     Required. The ID of the project against which to make the request.
+            #   @param database_id [::String]
+            #     The ID of the database against which to make the request.
+            #
+            #     '(default)' is not allowed; please use empty string '' to refer the default
+            #     database.
             #   @param keys [::Array<::Google::Cloud::Datastore::V1::Key, ::Hash>]
-            #     Required. A list of keys with incomplete key paths for which to allocate IDs.
-            #     No key may be reserved/read-only.
+            #     Required. A list of keys with incomplete key paths for which to allocate
+            #     IDs. No key may be reserved/read-only.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Datastore::V1::AllocateIdsResponse]
@@ -588,6 +827,21 @@ module Google
             # @return [::Google::Cloud::Datastore::V1::AllocateIdsResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/datastore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Datastore::V1::Datastore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Datastore::V1::AllocateIdsRequest.new
+            #
+            #   # Call the allocate_ids method.
+            #   result = client.allocate_ids request
+            #
+            #   # The returned object is of type Google::Cloud::Datastore::V1::AllocateIdsResponse.
+            #   p result
             #
             def allocate_ids request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -606,16 +860,23 @@ module Google
                 gapic_version: ::Google::Cloud::Datastore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id
-              }
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              header_params = {}
+              if request.project_id && !request.project_id.empty?
+                header_params["project_id"] = request.project_id
+              end
+              if request.database_id && !request.database_id.empty?
+                header_params["database_id"] = request.database_id
+              end
+
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.allocate_ids.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.allocate_ids.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @datastore_stub.call_rpc :allocate_ids, request, options: options do |response, operation|
@@ -648,10 +909,13 @@ module Google
             #   @param project_id [::String]
             #     Required. The ID of the project against which to make the request.
             #   @param database_id [::String]
-            #     If not empty, the ID of the database against which to make the request.
+            #     The ID of the database against which to make the request.
+            #
+            #     '(default)' is not allowed; please use empty string '' to refer the default
+            #     database.
             #   @param keys [::Array<::Google::Cloud::Datastore::V1::Key, ::Hash>]
-            #     Required. A list of keys with complete key paths whose numeric IDs should not be
-            #     auto-allocated.
+            #     Required. A list of keys with complete key paths whose numeric IDs should
+            #     not be auto-allocated.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Datastore::V1::ReserveIdsResponse]
@@ -660,6 +924,21 @@ module Google
             # @return [::Google::Cloud::Datastore::V1::ReserveIdsResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/datastore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Datastore::V1::Datastore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Datastore::V1::ReserveIdsRequest.new
+            #
+            #   # Call the reserve_ids method.
+            #   result = client.reserve_ids request
+            #
+            #   # The returned object is of type Google::Cloud::Datastore::V1::ReserveIdsResponse.
+            #   p result
             #
             def reserve_ids request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -678,16 +957,23 @@ module Google
                 gapic_version: ::Google::Cloud::Datastore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id
-              }
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              header_params = {}
+              if request.project_id && !request.project_id.empty?
+                header_params["project_id"] = request.project_id
+              end
+              if request.database_id && !request.database_id.empty?
+                header_params["database_id"] = request.database_id
+              end
+
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.reserve_ids.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.reserve_ids.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @datastore_stub.call_rpc :reserve_ids, request, options: options do |response, operation|
@@ -711,22 +997,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for lookup
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # lookup to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Datastore::V1::Datastore::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.lookup.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Datastore::V1::Datastore::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.lookup.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Datastore::V1::Datastore::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.lookup.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Datastore::V1::Datastore::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.lookup.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
@@ -737,9 +1022,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -845,6 +1130,11 @@ module Google
                 #
                 attr_reader :run_query
                 ##
+                # RPC-specific configuration for `run_aggregation_query`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :run_aggregation_query
+                ##
                 # RPC-specific configuration for `begin_transaction`
                 # @return [::Gapic::Config::Method]
                 #
@@ -876,6 +1166,8 @@ module Google
                   @lookup = ::Gapic::Config::Method.new lookup_config
                   run_query_config = parent_rpcs.run_query if parent_rpcs.respond_to? :run_query
                   @run_query = ::Gapic::Config::Method.new run_query_config
+                  run_aggregation_query_config = parent_rpcs.run_aggregation_query if parent_rpcs.respond_to? :run_aggregation_query
+                  @run_aggregation_query = ::Gapic::Config::Method.new run_aggregation_query_config
                   begin_transaction_config = parent_rpcs.begin_transaction if parent_rpcs.respond_to? :begin_transaction
                   @begin_transaction = ::Gapic::Config::Method.new begin_transaction_config
                   commit_config = parent_rpcs.commit if parent_rpcs.respond_to? :commit

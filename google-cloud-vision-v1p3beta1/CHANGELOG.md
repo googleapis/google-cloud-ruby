@@ -1,5 +1,72 @@
 # Release History
 
+### 0.9.0 (2023-02-23)
+
+#### Features
+
+* Added support for REST transport ([#20498](https://github.com/googleapis/google-cloud-ruby/issues/20498)) 
+
+### 0.8.0 (2022-08-09)
+
+#### Features
+
+* Added advanced OCR options to TextDetectionParams ([#18979](https://github.com/googleapis/google-cloud-ruby/issues/18979)) 
+
+### 0.7.0 (2022-07-08)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+#### Bug Fixes
+
+* Fixed a crash when making certain long-running-operations status calls ([#18441](https://github.com/googleapis/google-cloud-ruby/issues/18441)) 
+
+### 0.6.0 (2022-05-12)
+
+#### Features
+
+* Add product_grouped_results field to ProductSearchResults
+
+#### Bug Fixes
+
+* BREAKING CHANGE: Remove unused catalog_name, category, product_category, view, and normalized_bounding_poly fields from ProductSearchParams
+* BREAKING CHANGE: Remove unused category, product_category, and products fields from ProductSearchResults
+
+### 0.5.5 / 2022-01-11
+
+#### Bug Fixes
+
+* Honor quota project in auxiliary operations clients
+
+#### Documentation
+
+* Fix titles of documentation pages
+* Remove some broken images and fix outdated content in authentication documentation
+
+### 0.5.4 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
+### 0.5.3 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
+### 0.5.2 / 2021-07-12
+
+#### Documentation
+
+* Clarify some language around authentication configuration
+
+### 0.5.1 / 2021-06-17
+
+#### Bug Fixes
+
+* Support future 1.x versions of gapic-common
+
 ### 0.5.0 / 2021-03-08
 
 #### Features

@@ -20,15 +20,44 @@ require "helper"
 require "google/cloud/channel"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Cloud::Channel::ClientConstructionMinitest < Minitest::Test
-  def test_cloud_channel_service
+  def test_cloud_channel_reports_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Channel.cloud_channel_service do |config|
+      client = Google::Cloud::Channel.cloud_channel_reports_service transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Channel::V1::CloudChannelReportsService::Client, client
+    end
+  end
+
+  def test_cloud_channel_reports_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Channel.cloud_channel_reports_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Channel::V1::CloudChannelReportsService::Rest::Client, client
+    end
+  end
+
+  def test_cloud_channel_service_grpc
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Channel.cloud_channel_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Channel::V1::CloudChannelService::Client, client
+    end
+  end
+
+  def test_cloud_channel_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Channel.cloud_channel_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Channel::V1::CloudChannelService::Rest::Client, client
     end
   end
 end

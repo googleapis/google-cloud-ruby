@@ -21,7 +21,6 @@ def listen_document project_id:, collection_path: "cities", document_path: "SF"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START firestore_listen_document]
-  # [START fs_listen_document]
   doc_ref = firestore.col(collection_path).doc document_path
   snapshots = []
 
@@ -30,7 +29,6 @@ def listen_document project_id:, collection_path: "cities", document_path: "SF"
     puts "Received document snapshot: #{snapshot.document_id}"
     snapshots << snapshot
   end
-  # [END fs_listen_document]
   # [END firestore_listen_document]
 
   # Create the document.
@@ -48,9 +46,7 @@ def listen_document project_id:, collection_path: "cities", document_path: "SF"
   wait_until { !snapshots.empty? }
 
   # [START firestore_listen_detach]
-  # [START fs_detach_listener]
   listener.stop
-  # [END fs_detach_listener]
   # [END firestore_listen_detach]
 end
 
@@ -60,7 +56,6 @@ def listen_changes project_id:, collection_path: "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START firestore_listen_query_changes]
-  # [START fs_listen_changes]
   query = firestore.col(collection_path).where :state, :==, "CA"
   added = []
   modified = []
@@ -83,7 +78,6 @@ def listen_changes project_id:, collection_path: "cities"
       end
     end
   end
-  # [END fs_listen_changes]
   # [END firestore_listen_query_changes]
 
   mtv_doc = firestore.col(collection_path).doc("MTV")
@@ -128,7 +122,6 @@ def listen_errors project_id:, collection_path: "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START firestore_listen_handle_error]
-  # [START fs_listen_errors]
   listener = firestore.col(collection_path).listen do |snapshot|
     snapshot.changes.each do |change|
       puts "New city: #{change.doc.document_id}" if change.added?
@@ -139,7 +132,6 @@ def listen_errors project_id:, collection_path: "cities"
   listener.on_error do |error|
     puts "Listen failed: #{error.message}"
   end
-  # [END fs_listen_errors]
   # [END firestore_listen_handle_error]
 
   listener.stop
@@ -151,7 +143,6 @@ def listen_multiple project_id:, collection_path: "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START firestore_listen_query_snapshots]
-  # [START fs_listen_multiple]
   query = firestore.col(collection_path).where :state, :==, "CA"
   docs = []
 
@@ -164,7 +155,6 @@ def listen_multiple project_id:, collection_path: "cities"
       docs << doc
     end
   end
-  # [END fs_listen_multiple]
   # [END firestore_listen_query_snapshots]
 
   # Create the document.
@@ -187,9 +177,9 @@ end
 def wait_until &block
   wait_count = 0
   until block.call
-    raise "wait_until criteria was not met." if wait_count > 200
+    raise "wait_until criteria was not met." if wait_count > 6
     wait_count += 1
-    sleep 0.1
+    sleep (2**wait_count) + rand(0..wait_count)
   end
 end
 

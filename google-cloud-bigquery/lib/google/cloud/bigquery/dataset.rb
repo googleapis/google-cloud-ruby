@@ -22,6 +22,7 @@ require "google/cloud/bigquery/routine"
 require "google/cloud/bigquery/external"
 require "google/cloud/bigquery/dataset/list"
 require "google/cloud/bigquery/dataset/access"
+require "google/cloud/bigquery/dataset/tag"
 require "google/cloud/bigquery/convert"
 require "google/apis/bigquery_v2"
 
@@ -69,8 +70,8 @@ module Google
         ##
         # A unique ID for this dataset, without the project name.
         #
-        # @return [String] The ID must contain only letters (a-z, A-Z), numbers
-        #   (0-9), or underscores (_). The maximum length is 1,024 characters.
+        # @return [String] The ID must contain only letters (`[A-Za-z]`), numbers
+        #   (`[0-9]`), or underscores (`_`). The maximum length is 1,024 characters.
         #
         # @!group Attributes
         #
@@ -467,6 +468,21 @@ module Google
         end
 
         ##
+        # Retrieves the tags associated with this dataset. Tag keys are
+        # globally unique, and managed via the resource manager API.
+        #
+        # @see https://cloud.google.com/resource-manager/docs/tags/tags-overview
+        # for more information.
+        #
+        # @return [Google::Cloud::Bigquery::Dataset::Tag] The list of tags.
+        #
+        def tags
+          ensure_full_data!
+          return nil if @gapi.tags.nil?
+          @gapi.tags.map { |gapi| Tag.from_gapi(gapi) }
+        end
+
+        ##
         # Permanently deletes the dataset. The dataset must be empty before it
         # can be deleted unless the `force` option is set to `true`.
         #
@@ -501,7 +517,7 @@ module Google
         # you can pass the table's schema as a hash (see example.)
         #
         # @param [String] table_id The ID of the table. The ID must contain only
-        #   letters (a-z, A-Z), numbers (0-9), or underscores (_). The maximum
+        #   letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`). The maximum
         #   length is 1,024 characters.
         # @param [String] name A descriptive name for the table.
         # @param [String] description A user-friendly description of the table.
@@ -630,7 +646,7 @@ module Google
         # @see https://cloud.google.com/bigquery/docs/views Creating views
         #
         # @param [String] table_id The ID of the view table. The ID must contain
-        #   only letters (a-z, A-Z), numbers (0-9), or underscores (_). The
+        #   only letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`). The
         #   maximum length is 1,024 characters.
         # @param [String] query The query that BigQuery executes when the view
         #   is referenced.
@@ -704,7 +720,7 @@ module Google
               use_legacy_sql:                  use_legacy_sql,
               user_defined_function_resources: udfs_gapi(udfs)
             )
-          }.delete_if { |_, v| v.nil? }
+          }.compact
           new_view = Google::Apis::BigqueryV2::Table.new(**new_view_opts)
 
           gapi = service.insert_table dataset_id, new_view
@@ -726,8 +742,8 @@ module Google
         #
         # @see https://cloud.google.com/bigquery/docs/materialized-views-intro Introduction to materialized views
         #
-        # @param [String] table_id The ID of the materialized view table. The ID must contain only letters (a-z, A-Z),
-        #   numbers (0-9), or underscores (_). The maximum length is 1,024 characters.
+        # @param [String] table_id The ID of the materialized view table. The ID must contain only letters (`[A-Za-z]`),
+        #   numbers (`[0-9]`), or underscores (`_`). The maximum length is 1,024 characters.
         # @param [String] query The query that BigQuery executes when the materialized view is referenced.
         # @param [String] name A descriptive name for the table.
         # @param [String] description A user-friendly description of the table.
@@ -778,7 +794,7 @@ module Google
               query:               query,
               refresh_interval_ms: refresh_interval_ms
             )
-          }.delete_if { |_, v| v.nil? }
+          }.compact
           new_view = Google::Apis::BigqueryV2::Table.new(**new_view_opts)
 
           gapi = service.insert_table dataset_id, new_view
@@ -793,6 +809,11 @@ module Google
         #   object without verifying that the resource exists on the BigQuery
         #   service. Calls made on this object will raise errors if the resource
         #   does not exist. Default is `false`. Optional.
+        # @param [String] view Specifies the view that determines which table information is returned.
+        #   By default, basic table information and storage statistics (STORAGE_STATS) are returned.
+        #   Accepted values include `:unspecified`, `:basic`, `:storage`, and
+        #   `:full`. For more information, see [BigQuery Classes](@todo: Update the link).
+        #   The default value is the `:unspecified` view type.
         #
         # @return [Google::Cloud::Bigquery::Table, nil] Returns `nil` if the
         #   table does not exist.
@@ -815,13 +836,22 @@ module Google
         #
         #   table = dataset.table "my_table", skip_lookup: true
         #
+        # @example Avoid retrieving transient stats of the table with `view`:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   table = dataset.table "my_table", view: "basic"
+        #
         # @!group Table
         #
-        def table table_id, skip_lookup: nil
+        def table table_id, skip_lookup: nil, view: nil
           ensure_service!
           return Table.new_reference project_id, dataset_id, table_id, service if skip_lookup
-          gapi = service.get_table dataset_id, table_id
-          Table.from_gapi gapi, service
+          gapi = service.get_table dataset_id, table_id, metadata_view: view
+          Table.from_gapi gapi, service, metadata_view: view
         rescue Google::Cloud::NotFoundError
           nil
         end
@@ -954,7 +984,7 @@ module Google
         # {Routine::Updater#description=}.
         #
         # @param [String] routine_id The ID of the routine. The ID must contain only
-        #   letters (a-z, A-Z), numbers (0-9), or underscores (_). The maximum length
+        #   letters (`[A-Za-z]`), numbers (`[0-9]`), or underscores (`_`). The maximum length
         #   is 256 characters.
         # @yield [routine] A block for setting properties on the routine.
         # @yieldparam [Google::Cloud::Bigquery::Routine::Updater] routine An updater to set additional properties on the
@@ -1138,7 +1168,7 @@ module Google
         #   use named query parameters. When set, `legacy_sql` will automatically be set to false and `standard_sql` to
         #   true.
         #
-        #   Ruby types are mapped to BigQuery types as follows:
+        #   BigQuery types are converted from Ruby types as follows:
         #
         #   | BigQuery     | Ruby                                 | Notes                                              |
         #   |--------------|--------------------------------------|----------------------------------------------------|
@@ -1146,10 +1176,11 @@ module Google
         #   | `INT64`      | `Integer`                            |                                                    |
         #   | `FLOAT64`    | `Float`                              |                                                    |
         #   | `NUMERIC`    | `BigDecimal`                         | `BigDecimal` values will be rounded to scale 9.    |
-        #   | `BIGNUMERIC` |                                      | Query param values must be mapped in `types`.      |
+        #   | `BIGNUMERIC` | `BigDecimal`                         | NOT AUTOMATIC: Must be mapped using `types`, below.|
         #   | `STRING`     | `String`                             |                                                    |
         #   | `DATETIME`   | `DateTime`                           | `DATETIME` does not support time zone.             |
         #   | `DATE`       | `Date`                               |                                                    |
+        #   | `GEOGRAPHY`  | `String` (WKT or GeoJSON)            | NOT AUTOMATIC: Must be mapped using `types`, below.|
         #   | `TIMESTAMP`  | `Time`                               |                                                    |
         #   | `TIME`       | `Google::Cloud::BigQuery::Time`      |                                                    |
         #   | `BYTES`      | `File`, `IO`, `StringIO`, or similar |                                                    |
@@ -1157,7 +1188,8 @@ module Google
         #   | `STRUCT`     | `Hash`                               | Hash keys may be strings or symbols.               |
         #
         #   See [Data Types](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types) for an overview
-        #   of each BigQuery data type, including allowed values.
+        #   of each BigQuery data type, including allowed values. For the `GEOGRAPHY` type, see [Working with BigQuery
+        #   GIS data](https://cloud.google.com/bigquery/docs/gis-data).
         # @param [Array, Hash] types Standard SQL only. Types of the SQL parameters in `params`. It is not always
         #   possible to infer the right SQL type from a value in `params`. In these cases, `types` must be used to
         #   specify the SQL type for these values.
@@ -1174,6 +1206,7 @@ module Google
         #   * `:STRING`
         #   * `:DATETIME`
         #   * `:DATE`
+        #   * `:GEOGRAPHY`
         #   * `:TIMESTAMP`
         #   * `:TIME`
         #   * `:BYTES`
@@ -1241,13 +1274,19 @@ module Google
         #   Flattens all nested and repeated fields in the query results. The
         #   default value is `true`. `large_results` parameter must be `true` if
         #   this is set to `false`.
+        # @param [Integer] maximum_billing_tier Limits the billing tier for this
+        #   job. Queries that have resource usage beyond this tier will fail
+        #   (without incurring a charge). WARNING: The billed byte amount can be
+        #   multiplied by an amount up to this number! Most users should not need
+        #   to alter this setting, and we recommend that you avoid introducing new
+        #   uses of it. Deprecated.
         # @param [Integer] maximum_bytes_billed Limits the bytes billed for this
         #   job. Queries that will have bytes billed beyond this limit will fail
         #   (without incurring a charge). Optional. If unspecified, this will be
         #   set to your project default.
         # @param [String] job_id A user-defined ID for the query job. The ID
-        #   must contain only letters (a-z, A-Z), numbers (0-9), underscores
-        #   (_), or dashes (-). The maximum length is 1,024 characters. If
+        #   must contain only letters (`[A-Za-z]`), numbers (`[0-9]`), underscores
+        #   (`_`), or dashes (`-`). The maximum length is 1,024 characters. If
         #   `job_id` is provided, then `prefix` will not be used.
         #
         #   See [Generating a job
@@ -1256,8 +1295,8 @@ module Google
         #   prepended to a generated value to produce a unique job ID. For
         #   example, the prefix `daily_import_job_` can be given to generate a
         #   job ID such as `daily_import_job_12vEDtMQ0mbp1Mo5Z7mzAFQJZazh`. The
-        #   prefix must contain only letters (a-z, A-Z), numbers (0-9),
-        #   underscores (_), or dashes (-). The maximum length of the entire ID
+        #   prefix must contain only letters (`[A-Za-z]`), numbers (`[0-9]`),
+        #   underscores (`_`), or dashes (`-`). The maximum length of the entire ID
         #   is 1,024 characters. If `job_id` is provided, then `prefix` will not
         #   be used.
         # @param [Hash] labels A hash of user-provided labels associated with
@@ -1291,8 +1330,13 @@ module Google
         #   For additional information on migrating, see: [Migrating to
         #   standard SQL - Differences in user-defined JavaScript
         #   functions](https://cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#differences_in_user-defined_javascript_functions)
-        # @param [Integer] maximum_billing_tier Deprecated: Change the billing
-        #   tier to allow high-compute queries.
+        # @param [Boolean] create_session If true, creates a new session, where the
+        #   session ID will be a server generated random id. If false, runs query
+        #   with an existing session ID when one is provided in the `session_id`
+        #   param, otherwise runs query in non-session mode. See {Job#session_id}.
+        #   The default value is false.
+        # @param [String] session_id The ID of an existing session. See also the
+        #   `create_session` param and {Job#session_id}.
         # @yield [job] a job configuration object
         # @yieldparam [Google::Cloud::Bigquery::QueryJob::Updater] job a job
         #   configuration object for setting additional options for the query.
@@ -1368,8 +1412,7 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
-        #   job = dataset.query_job "SELECT name FROM my_table " \
-        #                           "WHERE id IN UNNEST(@ids)",
+        #   job = dataset.query_job "SELECT name FROM my_table WHERE id IN UNNEST(@ids)",
         #                           params: { ids: [] },
         #                           types: { ids: [:INT64] }
         #
@@ -1384,8 +1427,9 @@ module Google
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
         #
-        #   job = bigquery.query_job "CREATE TABLE my_table (x INT64)"
+        #   job = dataset.query_job "CREATE TABLE my_table (x INT64)"
         #
         #   job.wait_until_done!
         #   if !job.failed?
@@ -1396,15 +1440,27 @@ module Google
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
         #
-        #   job = bigquery.query_job "UPDATE my_table " \
-        #                            "SET x = x + 1 " \
-        #                            "WHERE x IS NOT NULL"
+        #   job = dataset.query_job "UPDATE my_table SET x = x + 1 WHERE x IS NOT NULL"
         #
         #   job.wait_until_done!
         #   if !job.failed?
         #     puts job.num_dml_affected_rows
         #   end
+        #
+        # @example Run query in a session:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   job = dataset.query_job "CREATE TEMPORARY TABLE temptable AS SELECT 17 as foo", create_session: true
+        #
+        #   job.wait_until_done!
+        #
+        #   session_id = job.session_id
+        #   data = dataset.query "SELECT * FROM temptable", session_id: session_id
         #
         # @example Query using external data source, set destination:
         #   require "google/cloud/bigquery"
@@ -1432,16 +1488,52 @@ module Google
         #
         # @!group Data
         #
-        def query_job query, params: nil, types: nil, external: nil, priority: "INTERACTIVE", cache: true, table: nil,
-                      create: nil, write: nil, dryrun: nil, standard_sql: nil, legacy_sql: nil, large_results: nil,
-                      flatten: nil, maximum_billing_tier: nil, maximum_bytes_billed: nil, job_id: nil, prefix: nil,
-                      labels: nil, udfs: nil
+        def query_job query,
+                      params: nil,
+                      types: nil,
+                      external: nil,
+                      priority: "INTERACTIVE",
+                      cache: true,
+                      table: nil,
+                      create: nil,
+                      write: nil,
+                      dryrun: nil,
+                      standard_sql: nil,
+                      legacy_sql: nil,
+                      large_results: nil,
+                      flatten: nil,
+                      maximum_billing_tier: nil,
+                      maximum_bytes_billed: nil,
+                      job_id: nil,
+                      prefix: nil,
+                      labels: nil,
+                      udfs: nil,
+                      create_session: nil,
+                      session_id: nil
           ensure_service!
-          options = { params: params, types: types, external: external, priority: priority, cache: cache, table: table,
-                      create: create, write: write, dryrun: dryrun, standard_sql: standard_sql, legacy_sql: legacy_sql,
-                      large_results: large_results, flatten: flatten, maximum_billing_tier: maximum_billing_tier,
-                      maximum_bytes_billed: maximum_bytes_billed, job_id: job_id, prefix: prefix, labels: labels,
-                      udfs: udfs }
+          options = {
+            params: params,
+            types: types,
+            external: external,
+            priority: priority,
+            cache: cache,
+            table: table,
+            create: create,
+            write: write,
+            dryrun: dryrun,
+            standard_sql: standard_sql,
+            legacy_sql: legacy_sql,
+            large_results: large_results,
+            flatten: flatten,
+            maximum_billing_tier: maximum_billing_tier,
+            maximum_bytes_billed: maximum_bytes_billed,
+            job_id: job_id,
+            prefix: prefix,
+            labels: labels,
+            udfs: udfs,
+            create_session: create_session,
+            session_id: session_id
+          }
 
           updater = QueryJob::Updater.from_options service, query, options
           updater.dataset = self
@@ -1481,7 +1573,7 @@ module Google
         #   use named query parameters. When set, `legacy_sql` will automatically be set to false and `standard_sql` to
         #   true.
         #
-        #   Ruby types are mapped to BigQuery types as follows:
+        #   BigQuery types are converted from Ruby types as follows:
         #
         #   | BigQuery     | Ruby                                 | Notes                                              |
         #   |--------------|--------------------------------------|----------------------------------------------------|
@@ -1489,10 +1581,11 @@ module Google
         #   | `INT64`      | `Integer`                            |                                                    |
         #   | `FLOAT64`    | `Float`                              |                                                    |
         #   | `NUMERIC`    | `BigDecimal`                         | `BigDecimal` values will be rounded to scale 9.    |
-        #   | `BIGNUMERIC` |                                      | Query param values must be mapped in `types`.      |
+        #   | `BIGNUMERIC` | `BigDecimal`                         | NOT AUTOMATIC: Must be mapped using `types`, below.|
         #   | `STRING`     | `String`                             |                                                    |
         #   | `DATETIME`   | `DateTime`                           | `DATETIME` does not support time zone.             |
         #   | `DATE`       | `Date`                               |                                                    |
+        #   | `GEOGRAPHY`  | `String` (WKT or GeoJSON)            | NOT AUTOMATIC: Must be mapped using `types`, below.|
         #   | `TIMESTAMP`  | `Time`                               |                                                    |
         #   | `TIME`       | `Google::Cloud::BigQuery::Time`      |                                                    |
         #   | `BYTES`      | `File`, `IO`, `StringIO`, or similar |                                                    |
@@ -1500,7 +1593,8 @@ module Google
         #   | `STRUCT`     | `Hash`                               | Hash keys may be strings or symbols.               |
         #
         #   See [Data Types](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-types) for an overview
-        #   of each BigQuery data type, including allowed values.
+        #   of each BigQuery data type, including allowed values. For the `GEOGRAPHY` type, see [Working with BigQuery
+        #   GIS data](https://cloud.google.com/bigquery/docs/gis-data).
         # @param [Array, Hash] types Standard SQL only. Types of the SQL parameters in `params`. It is not always
         #   possible to infer the right SQL type from a value in `params`. In these cases, `types` must be used to
         #   specify the SQL type for these values.
@@ -1517,6 +1611,7 @@ module Google
         #   * `:STRING`
         #   * `:DATETIME`
         #   * `:DATE`
+        #   * `:GEOGRAPHY`
         #   * `:TIMESTAMP`
         #   * `:TIME`
         #   * `:BYTES`
@@ -1560,6 +1655,8 @@ module Google
         #   When set to false, the values of `large_results` and `flatten` are
         #   ignored; the query will be run as if `large_results` is true and
         #   `flatten` is false. Optional. The default value is false.
+        # @param [String] session_id The ID of an existing session. See the
+        #   `create_session` param in {#query_job} and {Job#session_id}.
         # @yield [job] a job configuration object
         # @yieldparam [Google::Cloud::Bigquery::QueryJob::Updater] job a job
         #   configuration object for setting additional options for the query.
@@ -1635,8 +1732,7 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
-        #   data = dataset.query "SELECT name FROM my_table " \
-        #                        "WHERE id IN UNNEST(@ids)",
+        #   data = dataset.query "SELECT name FROM my_table WHERE id IN UNNEST(@ids)",
         #                        params: { ids: [] },
         #                        types: { ids: [:INT64] }
         #
@@ -1651,8 +1747,9 @@ module Google
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
         #
-        #   data = bigquery.query "CREATE TABLE my_table (x INT64)"
+        #   data = dataset.query "CREATE TABLE my_table (x INT64)"
         #
         #   table_ref = data.ddl_target_table # Or ddl_target_routine for CREATE/DROP FUNCTION/PROCEDURE
         #
@@ -1660,12 +1757,24 @@ module Google
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
         #
-        #   data = bigquery.query "UPDATE my_table " \
-        #                         "SET x = x + 1 " \
-        #                         "WHERE x IS NOT NULL"
+        #   data = dataset.query "UPDATE my_table SET x = x + 1 WHERE x IS NOT NULL"
         #
         #   puts data.num_dml_affected_rows
+        #
+        # @example Run query in a session:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   job = dataset.query_job "CREATE TEMPORARY TABLE temptable AS SELECT 17 as foo", create_session: true
+        #
+        #   job.wait_until_done!
+        #
+        #   session_id = job.session_id
+        #   data = dataset.query "SELECT * FROM temptable", session_id: session_id
         #
         # @example Query using external data source, set destination:
         #   require "google/cloud/bigquery"
@@ -1693,10 +1802,25 @@ module Google
         #
         # @!group Data
         #
-        def query query, params: nil, types: nil, external: nil, max: nil, cache: true,
-                  standard_sql: nil, legacy_sql: nil, &block
-          job = query_job query, params: params, types: types, external: external, cache: cache,
-                                 standard_sql: standard_sql, legacy_sql: legacy_sql, &block
+        def query query,
+                  params: nil,
+                  types: nil,
+                  external: nil,
+                  max: nil,
+                  cache: true,
+                  standard_sql: nil,
+                  legacy_sql: nil,
+                  session_id: nil,
+                  &block
+          job = query_job query,
+                          params: params,
+                          types: types,
+                          external: external,
+                          cache: cache,
+                          standard_sql: standard_sql,
+                          legacy_sql: legacy_sql,
+                          session_id: session_id,
+                          &block
           job.wait_until_done!
           ensure_job_succeeded! job
 
@@ -1722,7 +1846,7 @@ module Google
         #   The following values are supported:
         #
         #   * `csv` - CSV
-        #   * `json` - [Newline-delimited JSON](http://jsonlines.org/)
+        #   * `json` - [Newline-delimited JSON](https://jsonlines.org/)
         #   * `avro` - [Avro](http://avro.apache.org/)
         #   * `sheets` - Google Sheets
         #   * `datastore_backup` - Cloud Datastore backup
@@ -1785,7 +1909,7 @@ module Google
         #   The following values are supported:
         #
         #   * `csv` - CSV
-        #   * `json` - [Newline-delimited JSON](http://jsonlines.org/)
+        #   * `json` - [Newline-delimited JSON](https://jsonlines.org/)
         #   * `avro` - [Avro](http://avro.apache.org/)
         #   * `orc` - [ORC](https://cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc)
         #   * `parquet` - [Parquet](https://parquet.apache.org/)
@@ -1877,8 +2001,8 @@ module Google
         #   this option. Also note that for most use cases, the block yielded by
         #   this method is a more convenient way to configure the schema.
         # @param [String] job_id A user-defined ID for the load job. The ID
-        #   must contain only letters (a-z, A-Z), numbers (0-9), underscores
-        #   (_), or dashes (-). The maximum length is 1,024 characters. If
+        #   must contain only letters (`[A-Za-z]`), numbers (`[0-9]`), underscores
+        #   (`_`), or dashes (`-`). The maximum length is 1,024 characters. If
         #   `job_id` is provided, then `prefix` will not be used.
         #
         #   See [Generating a job
@@ -1887,8 +2011,8 @@ module Google
         #   prepended to a generated value to produce a unique job ID. For
         #   example, the prefix `daily_import_job_` can be given to generate a
         #   job ID such as `daily_import_job_12vEDtMQ0mbp1Mo5Z7mzAFQJZazh`. The
-        #   prefix must contain only letters (a-z, A-Z), numbers (0-9),
-        #   underscores (_), or dashes (-). The maximum length of the entire ID
+        #   prefix must contain only letters (`[A-Za-z]`), numbers (`[0-9]`),
+        #   underscores (`_`), or dashes (`-`). The maximum length of the entire ID
         #   is 1,024 characters. If `job_id` is provided, then `prefix` will not
         #   be used.
         # @param [Hash] labels A hash of user-provided labels associated with
@@ -2047,7 +2171,7 @@ module Google
         #   The following values are supported:
         #
         #   * `csv` - CSV
-        #   * `json` - [Newline-delimited JSON](http://jsonlines.org/)
+        #   * `json` - [Newline-delimited JSON](https://jsonlines.org/)
         #   * `avro` - [Avro](http://avro.apache.org/)
         #   * `orc` - [ORC](https://cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc)
         #   * `parquet` - [Parquet](https://parquet.apache.org/)
@@ -2421,6 +2545,7 @@ module Google
         # | `BIGNUMERIC` | `String`                             | Pass as `String` to avoid rounding to scale 9.     |
         # | `DATETIME`   | `DateTime`                           | `DATETIME` does not support time zone.             |
         # | `DATE`       | `Date`                               |                                                    |
+        # | `GEOGRAPHY`  | `String`                             |                                                    |
         # | `TIMESTAMP`  | `Time`                               |                                                    |
         # | `TIME`       | `Google::Cloud::BigQuery::Time`      |                                                    |
         # | `BYTES`      | `File`, `IO`, `StringIO`, or similar |                                                    |
@@ -2563,6 +2688,11 @@ module Google
         #   messages before the batch is published. Default is 10.
         # @attr_reader [Numeric] threads The number of threads used to insert
         #   batches of rows. Default is 4.
+        # @param [String] view Specifies the view that determines which table information is returned.
+        #   By default, basic table information and storage statistics (STORAGE_STATS) are returned.
+        #   Accepted values include `:unspecified`, `:basic`, `:storage`, and
+        #   `:full`. For more information, see [BigQuery Classes](@todo: Update the link).
+        #   The default value is the `:unspecified` view type.
         # @yield [response] the callback for when a batch of rows is inserted
         # @yieldparam [Table::AsyncInserter::Result] result the result of the
         #   asynchronous insert
@@ -2591,18 +2721,63 @@ module Google
         #
         #   inserter.stop.wait!
         #
+        # @example Avoid retrieving transient stats of the table with while inserting :
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   inserter = dataset.insert_async("my_table", view: "basic") do |result|
+        #     if result.error?
+        #       log_error result.error
+        #     else
+        #       log_insert "inserted #{result.insert_count} rows " \
+        #         "with #{result.error_count} errors"
+        #     end
+        #   end
+        #
+        #   rows = [
+        #     { "first_name" => "Alice", "age" => 21 },
+        #     { "first_name" => "Bob", "age" => 22 }
+        #   ]
+        #   inserter.insert rows
+        #
+        #   inserter.stop.wait!
+        #
         def insert_async table_id, skip_invalid: nil, ignore_unknown: nil, max_bytes: 10_000_000, max_rows: 500,
-                         interval: 10, threads: 4, &block
+                         interval: 10, threads: 4, view: nil, &block
           ensure_service!
 
           # Get table, don't use Dataset#table which handles NotFoundError
-          gapi = service.get_table dataset_id, table_id
-          table = Table.from_gapi gapi, service
+          gapi = service.get_table dataset_id, table_id, metadata_view: view
+          table = Table.from_gapi gapi, service, metadata_view: view
           # Get the AsyncInserter from the table
           table.insert_async skip_invalid: skip_invalid,
                              ignore_unknown: ignore_unknown,
                              max_bytes: max_bytes, max_rows: max_rows,
                              interval: interval, threads: threads, &block
+        end
+
+        ##
+        # Build an object of type Google::Apis::BigqueryV2::DatasetAccessEntry from
+        # the self.
+        #
+        # @param [Array<String>] target_types The list of target types within the dataset.
+        #
+        # @return [Google::Apis::BigqueryV2::DatasetAccessEntry] Returns a DatasetAccessEntry object.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #   dataset_access_entry = dataset.access_entry target_types: ["VIEWS"]
+        #
+        def build_access_entry target_types: nil
+          params = {
+            dataset: dataset_ref,
+            target_types: target_types
+          }.compact
+          Google::Apis::BigqueryV2::DatasetAccessEntry.new(**params)
         end
 
         protected
@@ -2659,7 +2834,7 @@ module Google
         def patch_gapi! *attributes
           return if attributes.empty?
           ensure_service!
-          patch_args = Hash[attributes.map { |attr| [attr, @gapi.send(attr)] }]
+          patch_args = attributes.to_h { |attr| [attr, @gapi.send(attr)] }
           patch_gapi = Google::Apis::BigqueryV2::Dataset.new(**patch_args)
           patch_gapi.etag = etag if etag
           @gapi = service.patch_dataset dataset_id, patch_gapi
@@ -2849,8 +3024,6 @@ module Google
             @access
           end
 
-          # rubocop:disable Style/MethodDefParentheses
-
           ##
           # @raise [RuntimeError] not implemented
           def delete(*)
@@ -2953,8 +3126,6 @@ module Google
             raise "not implemented in #{self.class}"
           end
           alias refresh! reload!
-
-          # rubocop:enable Style/MethodDefParentheses
 
           ##
           # @private Make sure any access changes are saved

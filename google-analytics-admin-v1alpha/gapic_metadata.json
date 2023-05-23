@@ -115,89 +115,9 @@
                 "batch_delete_user_links"
               ]
             },
-            "GetWebDataStream": {
-              "methods": [
-                "get_web_data_stream"
-              ]
-            },
-            "DeleteWebDataStream": {
-              "methods": [
-                "delete_web_data_stream"
-              ]
-            },
-            "UpdateWebDataStream": {
-              "methods": [
-                "update_web_data_stream"
-              ]
-            },
-            "CreateWebDataStream": {
-              "methods": [
-                "create_web_data_stream"
-              ]
-            },
-            "ListWebDataStreams": {
-              "methods": [
-                "list_web_data_streams"
-              ]
-            },
-            "GetIosAppDataStream": {
-              "methods": [
-                "get_ios_app_data_stream"
-              ]
-            },
-            "DeleteIosAppDataStream": {
-              "methods": [
-                "delete_ios_app_data_stream"
-              ]
-            },
-            "UpdateIosAppDataStream": {
-              "methods": [
-                "update_ios_app_data_stream"
-              ]
-            },
-            "ListIosAppDataStreams": {
-              "methods": [
-                "list_ios_app_data_streams"
-              ]
-            },
-            "GetAndroidAppDataStream": {
-              "methods": [
-                "get_android_app_data_stream"
-              ]
-            },
-            "DeleteAndroidAppDataStream": {
-              "methods": [
-                "delete_android_app_data_stream"
-              ]
-            },
-            "UpdateAndroidAppDataStream": {
-              "methods": [
-                "update_android_app_data_stream"
-              ]
-            },
-            "ListAndroidAppDataStreams": {
-              "methods": [
-                "list_android_app_data_streams"
-              ]
-            },
-            "GetEnhancedMeasurementSettings": {
-              "methods": [
-                "get_enhanced_measurement_settings"
-              ]
-            },
-            "UpdateEnhancedMeasurementSettings": {
-              "methods": [
-                "update_enhanced_measurement_settings"
-              ]
-            },
             "CreateFirebaseLink": {
               "methods": [
                 "create_firebase_link"
-              ]
-            },
-            "UpdateFirebaseLink": {
-              "methods": [
-                "update_firebase_link"
               ]
             },
             "DeleteFirebaseLink": {
@@ -265,6 +185,11 @@
                 "update_measurement_protocol_secret"
               ]
             },
+            "AcknowledgeUserDataCollection": {
+              "methods": [
+                "acknowledge_user_data_collection"
+              ]
+            },
             "SearchChangeHistoryEvents": {
               "methods": [
                 "search_change_history_events"
@@ -298,6 +223,61 @@
             "ListConversionEvents": {
               "methods": [
                 "list_conversion_events"
+              ]
+            },
+            "GetDisplayVideo360AdvertiserLink": {
+              "methods": [
+                "get_display_video360_advertiser_link"
+              ]
+            },
+            "ListDisplayVideo360AdvertiserLinks": {
+              "methods": [
+                "list_display_video360_advertiser_links"
+              ]
+            },
+            "CreateDisplayVideo360AdvertiserLink": {
+              "methods": [
+                "create_display_video360_advertiser_link"
+              ]
+            },
+            "DeleteDisplayVideo360AdvertiserLink": {
+              "methods": [
+                "delete_display_video360_advertiser_link"
+              ]
+            },
+            "UpdateDisplayVideo360AdvertiserLink": {
+              "methods": [
+                "update_display_video360_advertiser_link"
+              ]
+            },
+            "GetDisplayVideo360AdvertiserLinkProposal": {
+              "methods": [
+                "get_display_video360_advertiser_link_proposal"
+              ]
+            },
+            "ListDisplayVideo360AdvertiserLinkProposals": {
+              "methods": [
+                "list_display_video360_advertiser_link_proposals"
+              ]
+            },
+            "CreateDisplayVideo360AdvertiserLinkProposal": {
+              "methods": [
+                "create_display_video360_advertiser_link_proposal"
+              ]
+            },
+            "DeleteDisplayVideo360AdvertiserLinkProposal": {
+              "methods": [
+                "delete_display_video360_advertiser_link_proposal"
+              ]
+            },
+            "ApproveDisplayVideo360AdvertiserLinkProposal": {
+              "methods": [
+                "approve_display_video360_advertiser_link_proposal"
+              ]
+            },
+            "CancelDisplayVideo360AdvertiserLinkProposal": {
+              "methods": [
+                "cancel_display_video360_advertiser_link_proposal"
               ]
             },
             "CreateCustomDimension": {
@@ -348,6 +328,296 @@
             "GetCustomMetric": {
               "methods": [
                 "get_custom_metric"
+              ]
+            },
+            "GetDataRetentionSettings": {
+              "methods": [
+                "get_data_retention_settings"
+              ]
+            },
+            "UpdateDataRetentionSettings": {
+              "methods": [
+                "update_data_retention_settings"
+              ]
+            },
+            "CreateDataStream": {
+              "methods": [
+                "create_data_stream"
+              ]
+            },
+            "DeleteDataStream": {
+              "methods": [
+                "delete_data_stream"
+              ]
+            },
+            "UpdateDataStream": {
+              "methods": [
+                "update_data_stream"
+              ]
+            },
+            "ListDataStreams": {
+              "methods": [
+                "list_data_streams"
+              ]
+            },
+            "GetDataStream": {
+              "methods": [
+                "get_data_stream"
+              ]
+            },
+            "GetAudience": {
+              "methods": [
+                "get_audience"
+              ]
+            },
+            "ListAudiences": {
+              "methods": [
+                "list_audiences"
+              ]
+            },
+            "CreateAudience": {
+              "methods": [
+                "create_audience"
+              ]
+            },
+            "UpdateAudience": {
+              "methods": [
+                "update_audience"
+              ]
+            },
+            "ArchiveAudience": {
+              "methods": [
+                "archive_audience"
+              ]
+            },
+            "GetSearchAds360Link": {
+              "methods": [
+                "get_search_ads360_link"
+              ]
+            },
+            "ListSearchAds360Links": {
+              "methods": [
+                "list_search_ads360_links"
+              ]
+            },
+            "CreateSearchAds360Link": {
+              "methods": [
+                "create_search_ads360_link"
+              ]
+            },
+            "DeleteSearchAds360Link": {
+              "methods": [
+                "delete_search_ads360_link"
+              ]
+            },
+            "UpdateSearchAds360Link": {
+              "methods": [
+                "update_search_ads360_link"
+              ]
+            },
+            "GetAttributionSettings": {
+              "methods": [
+                "get_attribution_settings"
+              ]
+            },
+            "UpdateAttributionSettings": {
+              "methods": [
+                "update_attribution_settings"
+              ]
+            },
+            "RunAccessReport": {
+              "methods": [
+                "run_access_report"
+              ]
+            },
+            "CreateAccessBinding": {
+              "methods": [
+                "create_access_binding"
+              ]
+            },
+            "GetAccessBinding": {
+              "methods": [
+                "get_access_binding"
+              ]
+            },
+            "UpdateAccessBinding": {
+              "methods": [
+                "update_access_binding"
+              ]
+            },
+            "DeleteAccessBinding": {
+              "methods": [
+                "delete_access_binding"
+              ]
+            },
+            "ListAccessBindings": {
+              "methods": [
+                "list_access_bindings"
+              ]
+            },
+            "BatchCreateAccessBindings": {
+              "methods": [
+                "batch_create_access_bindings"
+              ]
+            },
+            "BatchGetAccessBindings": {
+              "methods": [
+                "batch_get_access_bindings"
+              ]
+            },
+            "BatchUpdateAccessBindings": {
+              "methods": [
+                "batch_update_access_bindings"
+              ]
+            },
+            "BatchDeleteAccessBindings": {
+              "methods": [
+                "batch_delete_access_bindings"
+              ]
+            },
+            "GetExpandedDataSet": {
+              "methods": [
+                "get_expanded_data_set"
+              ]
+            },
+            "ListExpandedDataSets": {
+              "methods": [
+                "list_expanded_data_sets"
+              ]
+            },
+            "CreateExpandedDataSet": {
+              "methods": [
+                "create_expanded_data_set"
+              ]
+            },
+            "UpdateExpandedDataSet": {
+              "methods": [
+                "update_expanded_data_set"
+              ]
+            },
+            "DeleteExpandedDataSet": {
+              "methods": [
+                "delete_expanded_data_set"
+              ]
+            },
+            "GetChannelGroup": {
+              "methods": [
+                "get_channel_group"
+              ]
+            },
+            "ListChannelGroups": {
+              "methods": [
+                "list_channel_groups"
+              ]
+            },
+            "CreateChannelGroup": {
+              "methods": [
+                "create_channel_group"
+              ]
+            },
+            "UpdateChannelGroup": {
+              "methods": [
+                "update_channel_group"
+              ]
+            },
+            "DeleteChannelGroup": {
+              "methods": [
+                "delete_channel_group"
+              ]
+            },
+            "SetAutomatedGa4ConfigurationOptOut": {
+              "methods": [
+                "set_automated_ga4_configuration_opt_out"
+              ]
+            },
+            "FetchAutomatedGa4ConfigurationOptOut": {
+              "methods": [
+                "fetch_automated_ga4_configuration_opt_out"
+              ]
+            },
+            "GetBigQueryLink": {
+              "methods": [
+                "get_big_query_link"
+              ]
+            },
+            "ListBigQueryLinks": {
+              "methods": [
+                "list_big_query_links"
+              ]
+            },
+            "GetEnhancedMeasurementSettings": {
+              "methods": [
+                "get_enhanced_measurement_settings"
+              ]
+            },
+            "UpdateEnhancedMeasurementSettings": {
+              "methods": [
+                "update_enhanced_measurement_settings"
+              ]
+            },
+            "CreateConnectedSiteTag": {
+              "methods": [
+                "create_connected_site_tag"
+              ]
+            },
+            "DeleteConnectedSiteTag": {
+              "methods": [
+                "delete_connected_site_tag"
+              ]
+            },
+            "ListConnectedSiteTags": {
+              "methods": [
+                "list_connected_site_tags"
+              ]
+            },
+            "FetchConnectedGa4Property": {
+              "methods": [
+                "fetch_connected_ga4_property"
+              ]
+            },
+            "GetAdSenseLink": {
+              "methods": [
+                "get_ad_sense_link"
+              ]
+            },
+            "CreateAdSenseLink": {
+              "methods": [
+                "create_ad_sense_link"
+              ]
+            },
+            "DeleteAdSenseLink": {
+              "methods": [
+                "delete_ad_sense_link"
+              ]
+            },
+            "ListAdSenseLinks": {
+              "methods": [
+                "list_ad_sense_links"
+              ]
+            },
+            "GetEventCreateRule": {
+              "methods": [
+                "get_event_create_rule"
+              ]
+            },
+            "ListEventCreateRules": {
+              "methods": [
+                "list_event_create_rules"
+              ]
+            },
+            "CreateEventCreateRule": {
+              "methods": [
+                "create_event_create_rule"
+              ]
+            },
+            "UpdateEventCreateRule": {
+              "methods": [
+                "update_event_create_rule"
+              ]
+            },
+            "DeleteEventCreateRule": {
+              "methods": [
+                "delete_event_create_rule"
               ]
             }
           }

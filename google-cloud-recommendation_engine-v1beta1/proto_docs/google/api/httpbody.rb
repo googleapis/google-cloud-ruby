@@ -39,11 +39,15 @@ module Google
     #
     #       // The raw HTTP body is bound to this field.
     #       google.api.HttpBody http_body = 2;
+    #
     #     }
     #
     #     service ResourceService {
-    #       rpc GetResource(GetResourceRequest) returns (google.api.HttpBody);
-    #       rpc UpdateResource(google.api.HttpBody) returns (google.protobuf.Empty);
+    #       rpc GetResource(GetResourceRequest)
+    #         returns (google.api.HttpBody);
+    #       rpc UpdateResource(google.api.HttpBody)
+    #         returns (google.protobuf.Empty);
+    #
     #     }
     #
     # Example with streaming methods:
@@ -53,16 +57,17 @@ module Google
     #         returns (stream google.api.HttpBody);
     #       rpc UpdateCalendar(stream google.api.HttpBody)
     #         returns (stream google.api.HttpBody);
+    #
     #     }
     #
     # Use of this type only changes how the request and response bodies are
     # handled, all other features will continue to work unchanged.
     # @!attribute [rw] content_type
     #   @return [::String]
-    #     The HTTP Content-Type string representing the content type of the body.
+    #     The HTTP Content-Type header value specifying the content type of the body.
     # @!attribute [rw] data
     #   @return [::String]
-    #     HTTP body binary data.
+    #     The HTTP request/response body as raw binary.
     # @!attribute [rw] extensions
     #   @return [::Array<::Google::Protobuf::Any>]
     #     Application specific response metadata. Must be set in the first response

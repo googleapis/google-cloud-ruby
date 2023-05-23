@@ -102,10 +102,12 @@ module Google
         #     the same session do not necessarily need to specify the same language.
         # @!attribute [rw] enable_word_info
         #   @return [::Boolean]
-        #     If `true`, Dialogflow returns {::Google::Cloud::Dialogflow::V2::SpeechWordInfo SpeechWordInfo} in
-        #     {::Google::Cloud::Dialogflow::V2::StreamingRecognitionResult StreamingRecognitionResult} with information about the recognized speech
-        #     words, e.g. start and end time offsets. If false or unspecified, Speech
-        #     doesn't return any word-level information.
+        #     If `true`, Dialogflow returns
+        #     {::Google::Cloud::Dialogflow::V2::SpeechWordInfo SpeechWordInfo} in
+        #     {::Google::Cloud::Dialogflow::V2::StreamingRecognitionResult StreamingRecognitionResult}
+        #     with information about the recognized speech words, e.g. start and end time
+        #     offsets. If false or unspecified, Speech doesn't return any word-level
+        #     information.
         # @!attribute [rw] phrase_hints
         #   @return [::Array<::String>]
         #     A list of strings containing words and phrases that the speech
@@ -138,9 +140,16 @@ module Google
         #     [Cloud Speech API
         #     documentation](https://cloud.google.com/speech-to-text/docs/basics#select-model)
         #     for more details.
+        #     If you specify a model, the following models typically have the best
+        #     performance:
+        #
+        #     - phone_call (best for Agent Assist and telephony)
+        #     - latest_short (best for Dialogflow non-telephony)
+        #     - command_and_search (best for very short utterances and commands)
         # @!attribute [rw] model_variant
         #   @return [::Google::Cloud::Dialogflow::V2::SpeechModelVariant]
-        #     Which variant of the {::Google::Cloud::Dialogflow::V2::InputAudioConfig#model Speech model} to use.
+        #     Which variant of the [Speech
+        #     model][google.cloud.dialogflow.v2.InputAudioConfig.model] to use.
         # @!attribute [rw] single_utterance
         #   @return [::Boolean]
         #     If `false` (default), recognition does not cease until the
@@ -155,10 +164,15 @@ module Google
         #     over StreamingDetectIntentRequest.single_utterance.
         # @!attribute [rw] disable_no_speech_recognized_event
         #   @return [::Boolean]
-        #     Only used in {::Google::Cloud::Dialogflow::V2::Participants::Client#analyze_content Participants.AnalyzeContent} and
-        #     [Participants.StreamingAnalyzeContent][google.cloud.dialogflow.v2.Participants.StreamingAnalyzeContent].
+        #     Only used in
+        #     {::Google::Cloud::Dialogflow::V2::Participants::Client#analyze_content Participants.AnalyzeContent}
+        #     and
+        #     {::Google::Cloud::Dialogflow::V2::Participants::Client#streaming_analyze_content Participants.StreamingAnalyzeContent}.
         #     If `false` and recognition doesn't return any result, trigger
         #     `NO_SPEECH_RECOGNIZED` event to Dialogflow agent.
+        # @!attribute [rw] enable_automatic_punctuation
+        #   @return [::Boolean]
+        #     Enable automatic punctuation option at the speech backend.
         class InputAudioConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -174,9 +188,10 @@ module Google
         #   @return [::Google::Cloud::Dialogflow::V2::SsmlVoiceGender]
         #     Optional. The preferred gender of the voice. If not set, the service will
         #     choose a voice based on the other parameters such as language_code and
-        #     {::Google::Cloud::Dialogflow::V2::VoiceSelectionParams#name name}. Note that this is only a preference, not requirement. If a
-        #     voice of the appropriate gender is not available, the synthesizer should
-        #     substitute a voice with a different gender rather than failing the request.
+        #     {::Google::Cloud::Dialogflow::V2::VoiceSelectionParams#name name}. Note that
+        #     this is only a preference, not requirement. If a voice of the appropriate
+        #     gender is not available, the synthesizer should substitute a voice with a
+        #     different gender rather than failing the request.
         class VoiceSelectionParams
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -238,13 +253,37 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Configures speech transcription for {::Google::Cloud::Dialogflow::V2::ConversationProfile ConversationProfile}.
+        # A wrapper of repeated TelephonyDtmf digits.
+        # @!attribute [rw] dtmf_events
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::TelephonyDtmf>]
+        #     A sequence of TelephonyDtmf digits.
+        class TelephonyDtmfEvents
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configures speech transcription for
+        # {::Google::Cloud::Dialogflow::V2::ConversationProfile ConversationProfile}.
         # @!attribute [rw] speech_model_variant
         #   @return [::Google::Cloud::Dialogflow::V2::SpeechModelVariant]
-        #     Optional. The speech model used in speech to text.
+        #     The speech model used in speech to text.
         #     `SPEECH_MODEL_VARIANT_UNSPECIFIED`, `USE_BEST_AVAILABLE` will be treated as
-        #     `USE_ENHANCED`. It can be overridden in {::Google::Cloud::Dialogflow::V2::AnalyzeContentRequest AnalyzeContentRequest} and
-        #     [StreamingAnalyzeContentRequest][google.cloud.dialogflow.v2.StreamingAnalyzeContentRequest] request.
+        #     `USE_ENHANCED`. It can be overridden in
+        #     {::Google::Cloud::Dialogflow::V2::AnalyzeContentRequest AnalyzeContentRequest}
+        #     and
+        #     {::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentRequest StreamingAnalyzeContentRequest}
+        #     request. If enhanced model variant is specified and an enhanced version of
+        #     the specified model for the language does not exist, then it would emit an
+        #     error.
+        # @!attribute [rw] model
+        #   @return [::String]
+        #     Which Speech model to select. Select the model best suited to your domain
+        #     to get best results. If a model is not explicitly specified, then a default
+        #     model is used.
+        #     Refer to
+        #     [Cloud Speech API
+        #     documentation](https://cloud.google.com/speech-to-text/docs/basics#select-model)
+        #     for more details.
         class SpeechToTextConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -299,7 +338,8 @@ module Google
           AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7
         end
 
-        # Variant of the specified {::Google::Cloud::Dialogflow::V2::InputAudioConfig#model Speech model} to use.
+        # Variant of the specified [Speech
+        # model][google.cloud.dialogflow.v2.InputAudioConfig.model] to use.
         #
         # See the [Cloud Speech
         # documentation](https://cloud.google.com/speech-to-text/docs/enhanced-models)
@@ -328,8 +368,8 @@ module Google
           # Use an enhanced model variant:
           #
           # * If an enhanced variant does not exist for the given
-          #   {::Google::Cloud::Dialogflow::V2::InputAudioConfig#model model} and request language, Dialogflow falls
-          #   back to the standard variant.
+          #   {::Google::Cloud::Dialogflow::V2::InputAudioConfig#model model} and request
+          #   language, Dialogflow falls back to the standard variant.
           #
           #   The [Cloud Speech
           #   documentation](https://cloud.google.com/speech-to-text/docs/enhanced-models)
@@ -382,6 +422,61 @@ module Google
 
           # 8-bit samples that compand 14-bit audio samples using G.711 PCMU/mu-law.
           OUTPUT_AUDIO_ENCODING_MULAW = 5
+        end
+
+        # [DTMF](https://en.wikipedia.org/wiki/Dual-tone_multi-frequency_signaling)
+        # digit in Telephony Gateway.
+        module TelephonyDtmf
+          # Not specified. This value may be used to indicate an absent digit.
+          TELEPHONY_DTMF_UNSPECIFIED = 0
+
+          # Number: '1'.
+          DTMF_ONE = 1
+
+          # Number: '2'.
+          DTMF_TWO = 2
+
+          # Number: '3'.
+          DTMF_THREE = 3
+
+          # Number: '4'.
+          DTMF_FOUR = 4
+
+          # Number: '5'.
+          DTMF_FIVE = 5
+
+          # Number: '6'.
+          DTMF_SIX = 6
+
+          # Number: '7'.
+          DTMF_SEVEN = 7
+
+          # Number: '8'.
+          DTMF_EIGHT = 8
+
+          # Number: '9'.
+          DTMF_NINE = 9
+
+          # Number: '0'.
+          DTMF_ZERO = 10
+
+          # Letter: 'A'.
+          DTMF_A = 11
+
+          # Letter: 'B'.
+          DTMF_B = 12
+
+          # Letter: 'C'.
+          DTMF_C = 13
+
+          # Letter: 'D'.
+          DTMF_D = 14
+
+          # Asterisk/star: '*'.
+          DTMF_STAR = 15
+
+          # Pound/diamond/hash/square/gate/octothorpe: '#'.
+          DTMF_POUND = 16
         end
       end
     end

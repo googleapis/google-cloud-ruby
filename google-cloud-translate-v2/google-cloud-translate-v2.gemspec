@@ -17,16 +17,16 @@ Gem::Specification.new do |gem|
                       ["README.md", "LICENSE.md", "AUTHENTICATION.md", "CHANGELOG.md", ".yardopts"]
   gem.require_paths = ["lib"]
 
-  gem.required_ruby_version = ">= 2.5"
+  gem.required_ruby_version = ">= 2.6"
 
-  gem.add_dependency "faraday", ">= 0.17.3", "< 2.0"
-  gem.add_dependency "googleapis-common-protos", ">= 1.3.10", "< 2.0"
-  gem.add_dependency "googleapis-common-protos-types", ">= 1.0.5", "< 2.0"
-  gem.add_dependency "googleauth", "~> 0.12"
-  gem.add_dependency "google-cloud-core", "~> 1.5"
+  gem.add_dependency "faraday", ">= 0.17.3", "< 2.a"
+  gem.add_dependency "googleapis-common-protos", ">= 1.3.10", "< 2.a"
+  gem.add_dependency "googleapis-common-protos-types", ">= 1.0.5", "< 2.a"
+  gem.add_dependency "googleauth", ">= 0.16.2", "< 2.a"
+  gem.add_dependency "google-cloud-core", "~> 1.6"
 
-  gem.add_development_dependency "google-style", "~> 1.25.1"
-  gem.add_development_dependency "minitest", "~> 5.14"
+  gem.add_development_dependency "google-style", "~> 1.26.1"
+  gem.add_development_dependency "minitest", "~> 5.16"
   gem.add_development_dependency "minitest-focus", "~> 1.1"
   gem.add_development_dependency "minitest-rg", "~> 5.2"
   gem.add_development_dependency "rake", ">= 12.0"

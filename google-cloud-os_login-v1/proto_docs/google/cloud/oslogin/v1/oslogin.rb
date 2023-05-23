@@ -46,12 +46,24 @@ module Google
           end
         end
 
+        # A request message for creating an SSH public key.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The unique ID for the user in format `users/{user}`.
+        # @!attribute [rw] ssh_public_key
+        #   @return [::Google::Cloud::OsLogin::Common::SshPublicKey]
+        #     Required. The SSH public key and expiration time.
+        class CreateSshPublicKeyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for deleting a POSIX account entry.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. A reference to the POSIX account to update. POSIX accounts are identified
-        #     by the project ID they are associated with. A reference to the POSIX
-        #     account is in format `users/{user}/projects/{project}`.
+        #     Required. A reference to the POSIX account to update. POSIX accounts are
+        #     identified by the project ID they are associated with. A reference to the
+        #     POSIX account is in format `users/{user}/projects/{project}`.
         class DeletePosixAccountRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -60,9 +72,9 @@ module Google
         # A request message for deleting an SSH public key.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The fingerprint of the public key to update. Public keys are identified by
-        #     their SHA-256 fingerprint. The fingerprint of the public key is in format
-        #     `users/{user}/sshPublicKeys/{fingerprint}`.
+        #     Required. The fingerprint of the public key to update. Public keys are
+        #     identified by their SHA-256 fingerprint. The fingerprint of the public key
+        #     is in format `users/{user}/sshPublicKeys/{fingerprint}`.
         class DeleteSshPublicKeyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -86,9 +98,9 @@ module Google
         # A request message for retrieving an SSH public key.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The fingerprint of the public key to retrieve. Public keys are identified
-        #     by their SHA-256 fingerprint. The fingerprint of the public key is in
-        #     format `users/{user}/sshPublicKeys/{fingerprint}`.
+        #     Required. The fingerprint of the public key to retrieve. Public keys are
+        #     identified by their SHA-256 fingerprint. The fingerprint of the public key
+        #     is in format `users/{user}/sshPublicKeys/{fingerprint}`.
         class GetSshPublicKeyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -113,6 +125,9 @@ module Google
         # @!attribute [rw] login_profile
         #   @return [::Google::Cloud::OsLogin::V1::LoginProfile]
         #     The login profile information for the user.
+        # @!attribute [rw] details
+        #   @return [::String]
+        #     Detailed information about import results.
         class ImportSshPublicKeyResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -121,9 +136,9 @@ module Google
         # A request message for updating an SSH public key.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The fingerprint of the public key to update. Public keys are identified by
-        #     their SHA-256 fingerprint. The fingerprint of the public key is in format
-        #     `users/{user}/sshPublicKeys/{fingerprint}`.
+        #     Required. The fingerprint of the public key to update. Public keys are
+        #     identified by their SHA-256 fingerprint. The fingerprint of the public key
+        #     is in format `users/{user}/sshPublicKeys/{fingerprint}`.
         # @!attribute [rw] ssh_public_key
         #   @return [::Google::Cloud::OsLogin::Common::SshPublicKey]
         #     Required. The SSH public key and expiration time.

@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/pubsub/v1/pubsub_pb"
+require "google/iam/v1"
 
 module Google
   module Cloud
@@ -43,13 +44,12 @@ module Google
             # See {::Google::Cloud::PubSub::V1::Subscriber::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all Subscriber clients:
-            #
-            #     ::Google::Cloud::PubSub::V1::Subscriber::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all Subscriber clients
+            #   ::Google::Cloud::PubSub::V1::Subscriber::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -69,130 +69,82 @@ module Google
 
                 default_config.rpcs.create_subscription.timeout = 60.0
                 default_config.rpcs.create_subscription.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [2, 10, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [2, 10, 14]
                 }
 
                 default_config.rpcs.get_subscription.timeout = 60.0
                 default_config.rpcs.get_subscription.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [2, 10, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [2, 10, 14]
                 }
 
                 default_config.rpcs.update_subscription.timeout = 60.0
                 default_config.rpcs.update_subscription.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.list_subscriptions.timeout = 60.0
                 default_config.rpcs.list_subscriptions.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [2, 10, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [2, 10, 14]
                 }
 
                 default_config.rpcs.delete_subscription.timeout = 60.0
                 default_config.rpcs.delete_subscription.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.modify_ack_deadline.timeout = 60.0
                 default_config.rpcs.modify_ack_deadline.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.acknowledge.timeout = 60.0
                 default_config.rpcs.acknowledge.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.pull.timeout = 60.0
                 default_config.rpcs.pull.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [2, 10, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [2, 10, 14, 13]
                 }
 
                 default_config.rpcs.streaming_pull.timeout = 900.0
                 default_config.rpcs.streaming_pull.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 8, 10, 13, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 8, 10, 13, 14]
                 }
 
                 default_config.rpcs.modify_push_config.timeout = 60.0
                 default_config.rpcs.modify_push_config.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.get_snapshot.timeout = 60.0
                 default_config.rpcs.get_snapshot.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [2, 10, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [2, 10, 14]
                 }
 
                 default_config.rpcs.list_snapshots.timeout = 60.0
                 default_config.rpcs.list_snapshots.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [2, 10, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [2, 10, 14]
                 }
 
                 default_config.rpcs.create_snapshot.timeout = 60.0
                 default_config.rpcs.create_snapshot.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.update_snapshot.timeout = 60.0
                 default_config.rpcs.update_snapshot.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.delete_snapshot.timeout = 60.0
                 default_config.rpcs.delete_snapshot.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.seek.timeout = 60.0
                 default_config.rpcs.seek.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [2, 10, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [2, 10, 14]
                 }
 
                 default_config
@@ -224,19 +176,15 @@ module Google
             ##
             # Create a new Subscriber client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new Subscriber client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::PubSub::V1::Subscriber::Client.new
             #
-            #     client = ::Google::Cloud::PubSub::V1::Subscriber::Client.new
-            #
-            # To create a new Subscriber client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::PubSub::V1::Subscriber::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::PubSub::V1::Subscriber::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Subscriber client.
             # @yieldparam config [Client::Configuration]
@@ -256,18 +204,23 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
               @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
+
+              @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
 
               @subscriber_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::PubSub::V1::Subscriber::Stub,
@@ -277,6 +230,13 @@ module Google
                 interceptors: @config.interceptors
               )
             end
+
+            ##
+            # Get the associated client for mix-in of the IAMPolicy.
+            #
+            # @return [Google::Iam::V1::IAMPolicy::Client]
+            #
+            attr_reader :iam_policy_client
 
             # Service calls
 
@@ -303,7 +263,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload create_subscription(name: nil, topic: nil, push_config: nil, ack_deadline_seconds: nil, retain_acked_messages: nil, message_retention_duration: nil, labels: nil, enable_message_ordering: nil, expiration_policy: nil, filter: nil, dead_letter_policy: nil, retry_policy: nil, detached: nil)
+            # @overload create_subscription(name: nil, topic: nil, push_config: nil, bigquery_config: nil, cloud_storage_config: nil, ack_deadline_seconds: nil, retain_acked_messages: nil, message_retention_duration: nil, labels: nil, enable_message_ordering: nil, expiration_policy: nil, filter: nil, dead_letter_policy: nil, retry_policy: nil, detached: nil, enable_exactly_once_delivery: nil)
             #   Pass arguments to `create_subscription` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -321,13 +281,18 @@ module Google
             #     field will be `_deleted-topic_` if the topic has been deleted.
             #   @param push_config [::Google::Cloud::PubSub::V1::PushConfig, ::Hash]
             #     If push delivery is used with this subscription, this field is
-            #     used to configure it. An empty `pushConfig` signifies that the subscriber
-            #     will pull and ack messages using API methods.
+            #     used to configure it.
+            #   @param bigquery_config [::Google::Cloud::PubSub::V1::BigQueryConfig, ::Hash]
+            #     If delivery to BigQuery is used with this subscription, this field is
+            #     used to configure it.
+            #   @param cloud_storage_config [::Google::Cloud::PubSub::V1::CloudStorageConfig, ::Hash]
+            #     If delivery to Google Cloud Storage is used with this subscription, this
+            #     field is used to configure it.
             #   @param ack_deadline_seconds [::Integer]
             #     The approximate amount of time (on a best-effort basis) Pub/Sub waits for
             #     the subscriber to acknowledge receipt before resending the message. In the
             #     interval after the message is delivered and before it is acknowledged, it
-            #     is considered to be <i>outstanding</i>. During that time period, the
+            #     is considered to be _outstanding_. During that time period, the
             #     message will not be redelivered (on a best-effort basis).
             #
             #     For pull subscriptions, this value is used as the initial value for the ack
@@ -348,8 +313,9 @@ module Google
             #     Indicates whether to retain acknowledged messages. If true, then
             #     messages are not expunged from the subscription's backlog, even if they are
             #     acknowledged, until they fall out of the `message_retention_duration`
-            #     window. This must be true if you would like to [Seek to a timestamp]
-            #     (https://cloud.google.com/pubsub/docs/replay-overview#seek_to_a_time).
+            #     window. This must be true if you would like to [`Seek` to a timestamp]
+            #     (https://cloud.google.com/pubsub/docs/replay-overview#seek_to_a_time) in
+            #     the past to replay previously-acknowledged messages.
             #   @param message_retention_duration [::Google::Protobuf::Duration, ::Hash]
             #     How long to retain unacknowledged messages in the subscription's backlog,
             #     from the moment a message is published.
@@ -358,8 +324,8 @@ module Google
             #     can be done. Defaults to 7 days. Cannot be more than 7 days or less than 10
             #     minutes.
             #   @param labels [::Hash{::String => ::String}]
-            #     See <a href="https://cloud.google.com/pubsub/docs/labels"> Creating and
-            #     managing labels</a>.
+            #     See [Creating and managing
+            #     labels](https://cloud.google.com/pubsub/docs/labels).
             #   @param enable_message_ordering [::Boolean]
             #     If true, messages published with the same `ordering_key` in `PubsubMessage`
             #     will be delivered to the subscribers in the order in which they
@@ -371,7 +337,8 @@ module Google
             #     successfully consuming messages from the subscription or is issuing
             #     operations on the subscription. If `expiration_policy` is not set, a
             #     *default policy* with `ttl` of 31 days will be used. The minimum allowed
-            #     value for `expiration_policy.ttl` is 1 day.
+            #     value for `expiration_policy.ttl` is 1 day. If `expiration_policy` is set,
+            #     but `expiration_policy.ttl` is not set, the subscription never expires.
             #   @param filter [::String]
             #     An expression written in the Pub/Sub [filter
             #     language](https://cloud.google.com/pubsub/docs/filtering). If non-empty,
@@ -401,6 +368,18 @@ module Google
             #     backlog. `Pull` and `StreamingPull` requests will return
             #     FAILED_PRECONDITION. If the subscription is a push subscription, pushes to
             #     the endpoint will not be made.
+            #   @param enable_exactly_once_delivery [::Boolean]
+            #     If true, Pub/Sub provides the following guarantees for the delivery of
+            #     a message with a given value of `message_id` on this subscription:
+            #
+            #     * The message sent to a subscriber is guaranteed not to be resent
+            #     before the message's acknowledgement deadline expires.
+            #     * An acknowledged message will not be resent to a subscriber.
+            #
+            #     Note that subscribers may still receive multiple copies of a message
+            #     when `enable_exactly_once_delivery` is true if the message was published
+            #     multiple times by a publisher client. These copies are  considered distinct
+            #     by Pub/Sub and have distinct `message_id` values.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::PubSub::V1::Subscription]
@@ -409,6 +388,21 @@ module Google
             # @return [::Google::Cloud::PubSub::V1::Subscription]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Subscriber::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::Subscription.new
+            #
+            #   # Call the create_subscription method.
+            #   result = client.create_subscription request
+            #
+            #   # The returned object is of type Google::Cloud::PubSub::V1::Subscription.
+            #   p result
             #
             def create_subscription request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -427,16 +421,20 @@ module Google
                 gapic_version: ::Google::Cloud::PubSub::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_subscription.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_subscription.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @subscriber_stub.call_rpc :create_subscription, request, options: options do |response, operation|
@@ -477,6 +475,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Subscriber::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::GetSubscriptionRequest.new
+            #
+            #   # Call the get_subscription method.
+            #   result = client.get_subscription request
+            #
+            #   # The returned object is of type Google::Cloud::PubSub::V1::Subscription.
+            #   p result
+            #
             def get_subscription request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -494,16 +507,20 @@ module Google
                 gapic_version: ::Google::Cloud::PubSub::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "subscription" => request.subscription
-              }
+              header_params = {}
+              if request.subscription
+                header_params["subscription"] = request.subscription
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_subscription.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_subscription.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @subscriber_stub.call_rpc :get_subscription, request, options: options do |response, operation|
@@ -547,6 +564,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Subscriber::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::UpdateSubscriptionRequest.new
+            #
+            #   # Call the update_subscription method.
+            #   result = client.update_subscription request
+            #
+            #   # The returned object is of type Google::Cloud::PubSub::V1::Subscription.
+            #   p result
+            #
             def update_subscription request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -564,16 +596,20 @@ module Google
                 gapic_version: ::Google::Cloud::PubSub::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "subscription.name" => request.subscription.name
-              }
+              header_params = {}
+              if request.subscription&.name
+                header_params["subscription.name"] = request.subscription.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_subscription.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_subscription.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @subscriber_stub.call_rpc :update_subscription, request, options: options do |response, operation|
@@ -620,6 +656,25 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Subscriber::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::ListSubscriptionsRequest.new
+            #
+            #   # Call the list_subscriptions method.
+            #   result = client.list_subscriptions request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::PubSub::V1::Subscription.
+            #     p item
+            #   end
+            #
             def list_subscriptions request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -637,16 +692,20 @@ module Google
                 gapic_version: ::Google::Cloud::PubSub::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project" => request.project
-              }
+              header_params = {}
+              if request.project
+                header_params["project"] = request.project
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_subscriptions.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_subscriptions.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @subscriber_stub.call_rpc :list_subscriptions, request, options: options do |response, operation|
@@ -692,6 +751,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Subscriber::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::DeleteSubscriptionRequest.new
+            #
+            #   # Call the delete_subscription method.
+            #   result = client.delete_subscription request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_subscription request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -709,16 +783,20 @@ module Google
                 gapic_version: ::Google::Cloud::PubSub::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "subscription" => request.subscription
-              }
+              header_params = {}
+              if request.subscription
+                header_params["subscription"] = request.subscription
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_subscription.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_subscription.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @subscriber_stub.call_rpc :delete_subscription, request, options: options do |response, operation|
@@ -774,6 +852,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Subscriber::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::ModifyAckDeadlineRequest.new
+            #
+            #   # Call the modify_ack_deadline method.
+            #   result = client.modify_ack_deadline request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def modify_ack_deadline request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -791,16 +884,20 @@ module Google
                 gapic_version: ::Google::Cloud::PubSub::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "subscription" => request.subscription
-              }
+              header_params = {}
+              if request.subscription
+                header_params["subscription"] = request.subscription
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.modify_ack_deadline.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.modify_ack_deadline.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @subscriber_stub.call_rpc :modify_ack_deadline, request, options: options do |response, operation|
@@ -851,6 +948,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Subscriber::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::AcknowledgeRequest.new
+            #
+            #   # Call the acknowledge method.
+            #   result = client.acknowledge request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def acknowledge request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -868,16 +980,20 @@ module Google
                 gapic_version: ::Google::Cloud::PubSub::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "subscription" => request.subscription
-              }
+              header_params = {}
+              if request.subscription
+                header_params["subscription"] = request.subscription
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.acknowledge.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.acknowledge.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @subscriber_stub.call_rpc :acknowledge, request, options: options do |response, operation|
@@ -889,9 +1005,7 @@ module Google
             end
 
             ##
-            # Pulls messages from the server. The server may return `UNAVAILABLE` if
-            # there are too many concurrent pull requests pending for the given
-            # subscription.
+            # Pulls messages from the server.
             #
             # @overload pull(request, options = nil)
             #   Pass arguments to `pull` via a request object, either of type
@@ -932,6 +1046,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Subscriber::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::PullRequest.new
+            #
+            #   # Call the pull method.
+            #   result = client.pull request
+            #
+            #   # The returned object is of type Google::Cloud::PubSub::V1::PullResponse.
+            #   p result
+            #
             def pull request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -949,16 +1078,20 @@ module Google
                 gapic_version: ::Google::Cloud::PubSub::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "subscription" => request.subscription
-              }
+              header_params = {}
+              if request.subscription
+                header_params["subscription"] = request.subscription
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.pull.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.pull.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @subscriber_stub.call_rpc :pull, request, options: options do |response, operation|
@@ -991,6 +1124,30 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Subscriber::Client.new
+            #
+            #   # Create an input stream.
+            #   input = Gapic::StreamInput.new
+            #
+            #   # Call the streaming_pull method to start streaming.
+            #   output = client.streaming_pull input
+            #
+            #   # Send requests on the stream. For each request object, set fields by
+            #   # passing keyword arguments. Be sure to close the stream when done.
+            #   input << Google::Cloud::PubSub::V1::StreamingPullRequest.new
+            #   input << Google::Cloud::PubSub::V1::StreamingPullRequest.new
+            #   input.close
+            #
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::PubSub::V1::StreamingPullResponse
+            #   output.each do |current_response|
+            #     p current_response
+            #   end
+            #
             def streaming_pull request, options = nil
               unless request.is_a? ::Enumerable
                 raise ::ArgumentError, "request must be an Enumerable" unless request.respond_to? :to_enum
@@ -1016,7 +1173,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.streaming_pull.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.streaming_pull.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @subscriber_stub.call_rpc :streaming_pull, request, options: options do |response, operation|
@@ -1069,6 +1228,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Subscriber::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::ModifyPushConfigRequest.new
+            #
+            #   # Call the modify_push_config method.
+            #   result = client.modify_push_config request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def modify_push_config request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1086,16 +1260,20 @@ module Google
                 gapic_version: ::Google::Cloud::PubSub::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "subscription" => request.subscription
-              }
+              header_params = {}
+              if request.subscription
+                header_params["subscription"] = request.subscription
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.modify_push_config.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.modify_push_config.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @subscriber_stub.call_rpc :modify_push_config, request, options: options do |response, operation|
@@ -1108,10 +1286,10 @@ module Google
 
             ##
             # Gets the configuration details of a snapshot. Snapshots are used in
-            # <a href="https://cloud.google.com/pubsub/docs/replay-overview">Seek</a>
-            # operations, which allow you to manage message acknowledgments in bulk. That
-            # is, you can set the acknowledgment state of messages in an existing
-            # subscription to the state captured by a snapshot.
+            # [Seek](https://cloud.google.com/pubsub/docs/replay-overview) operations,
+            # which allow you to manage message acknowledgments in bulk. That is, you can
+            # set the acknowledgment state of messages in an existing subscription to the
+            # state captured by a snapshot.
             #
             # @overload get_snapshot(request, options = nil)
             #   Pass arguments to `get_snapshot` via a request object, either of type
@@ -1140,6 +1318,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Subscriber::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::GetSnapshotRequest.new
+            #
+            #   # Call the get_snapshot method.
+            #   result = client.get_snapshot request
+            #
+            #   # The returned object is of type Google::Cloud::PubSub::V1::Snapshot.
+            #   p result
+            #
             def get_snapshot request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1157,16 +1350,20 @@ module Google
                 gapic_version: ::Google::Cloud::PubSub::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "snapshot" => request.snapshot
-              }
+              header_params = {}
+              if request.snapshot
+                header_params["snapshot"] = request.snapshot
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_snapshot.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_snapshot.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @subscriber_stub.call_rpc :get_snapshot, request, options: options do |response, operation|
@@ -1217,6 +1414,25 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Subscriber::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::ListSnapshotsRequest.new
+            #
+            #   # Call the list_snapshots method.
+            #   result = client.list_snapshots request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::PubSub::V1::Snapshot.
+            #     p item
+            #   end
+            #
             def list_snapshots request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1234,16 +1450,20 @@ module Google
                 gapic_version: ::Google::Cloud::PubSub::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project" => request.project
-              }
+              header_params = {}
+              if request.project
+                header_params["project"] = request.project
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_snapshots.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_snapshots.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @subscriber_stub.call_rpc :list_snapshots, request, options: options do |response, operation|
@@ -1292,9 +1512,9 @@ module Google
             #     Required. User-provided name for this snapshot. If the name is not provided
             #     in the request, the server will assign a random name for this snapshot on
             #     the same project as the subscription. Note that for REST API requests, you
-            #     must specify a name.  See the <a
-            #     href="https://cloud.google.com/pubsub/docs/admin#resource_names"> resource
-            #     name rules</a>. Format is `projects/{project}/snapshots/{snap}`.
+            #     must specify a name.  See the [resource name
+            #     rules](https://cloud.google.com/pubsub/docs/admin#resource_names). Format
+            #     is `projects/{project}/snapshots/{snap}`.
             #   @param subscription [::String]
             #     Required. The subscription whose backlog the snapshot retains.
             #     Specifically, the created snapshot is guaranteed to retain:
@@ -1306,8 +1526,8 @@ module Google
             #          successful completion of the CreateSnapshot request.
             #     Format is `projects/{project}/subscriptions/{sub}`.
             #   @param labels [::Hash{::String => ::String}]
-            #     See <a href="https://cloud.google.com/pubsub/docs/labels"> Creating and
-            #     managing labels</a>.
+            #     See [Creating and managing
+            #     labels](https://cloud.google.com/pubsub/docs/labels).
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::PubSub::V1::Snapshot]
@@ -1316,6 +1536,21 @@ module Google
             # @return [::Google::Cloud::PubSub::V1::Snapshot]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Subscriber::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::CreateSnapshotRequest.new
+            #
+            #   # Call the create_snapshot method.
+            #   result = client.create_snapshot request
+            #
+            #   # The returned object is of type Google::Cloud::PubSub::V1::Snapshot.
+            #   p result
             #
             def create_snapshot request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1334,16 +1569,20 @@ module Google
                 gapic_version: ::Google::Cloud::PubSub::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_snapshot.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_snapshot.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @subscriber_stub.call_rpc :create_snapshot, request, options: options do |response, operation|
@@ -1356,11 +1595,10 @@ module Google
 
             ##
             # Updates an existing snapshot. Snapshots are used in
-            # <a href="https://cloud.google.com/pubsub/docs/replay-overview">Seek</a>
-            # operations, which allow
-            # you to manage message acknowledgments in bulk. That is, you can set the
-            # acknowledgment state of messages in an existing subscription to the state
-            # captured by a snapshot.
+            # [Seek](https://cloud.google.com/pubsub/docs/replay-overview) operations,
+            # which allow you to manage message acknowledgments in bulk. That is, you can
+            # set the acknowledgment state of messages in an existing subscription to the
+            # state captured by a snapshot.
             #
             # @overload update_snapshot(request, options = nil)
             #   Pass arguments to `update_snapshot` via a request object, either of type
@@ -1391,6 +1629,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Subscriber::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::UpdateSnapshotRequest.new
+            #
+            #   # Call the update_snapshot method.
+            #   result = client.update_snapshot request
+            #
+            #   # The returned object is of type Google::Cloud::PubSub::V1::Snapshot.
+            #   p result
+            #
             def update_snapshot request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1408,16 +1661,20 @@ module Google
                 gapic_version: ::Google::Cloud::PubSub::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "snapshot.name" => request.snapshot.name
-              }
+              header_params = {}
+              if request.snapshot&.name
+                header_params["snapshot.name"] = request.snapshot.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_snapshot.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_snapshot.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @subscriber_stub.call_rpc :update_snapshot, request, options: options do |response, operation|
@@ -1466,6 +1723,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Subscriber::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::DeleteSnapshotRequest.new
+            #
+            #   # Call the delete_snapshot method.
+            #   result = client.delete_snapshot request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_snapshot request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1483,16 +1755,20 @@ module Google
                 gapic_version: ::Google::Cloud::PubSub::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "snapshot" => request.snapshot
-              }
+              header_params = {}
+              if request.snapshot
+                header_params["snapshot"] = request.snapshot
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_snapshot.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_snapshot.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @subscriber_stub.call_rpc :delete_snapshot, request, options: options do |response, operation|
@@ -1554,6 +1830,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Subscriber::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::SeekRequest.new
+            #
+            #   # Call the seek method.
+            #   result = client.seek request
+            #
+            #   # The returned object is of type Google::Cloud::PubSub::V1::SeekResponse.
+            #   p result
+            #
             def seek request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1571,16 +1862,20 @@ module Google
                 gapic_version: ::Google::Cloud::PubSub::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "subscription" => request.subscription
-              }
+              header_params = {}
+              if request.subscription
+                header_params["subscription"] = request.subscription
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.seek.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.seek.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @subscriber_stub.call_rpc :seek, request, options: options do |response, operation|
@@ -1604,22 +1899,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for create_subscription
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # create_subscription to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::PubSub::V1::Subscriber::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_subscription.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::PubSub::V1::Subscriber::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_subscription.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::PubSub::V1::Subscriber::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_subscription.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::PubSub::V1::Subscriber::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_subscription.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
@@ -1630,9 +1924,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials

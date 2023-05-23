@@ -20,45 +20,177 @@ require "helper"
 require "google/cloud/retail"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Cloud::Retail::ClientConstructionMinitest < Minitest::Test
-  def test_catalog_service
+  def test_catalog_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Retail.catalog_service do |config|
+      client = Google::Cloud::Retail.catalog_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Retail::V2::CatalogService::Client, client
     end
   end
 
-  def test_prediction_service
+  def test_catalog_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Retail.catalog_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Retail::V2::CatalogService::Rest::Client, client
+    end
+  end
+
+  def test_completion_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Retail.prediction_service do |config|
+      client = Google::Cloud::Retail.completion_service transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Retail::V2::CompletionService::Client, client
+    end
+  end
+
+  def test_completion_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Retail.completion_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Retail::V2::CompletionService::Rest::Client, client
+    end
+  end
+
+  def test_control_service_grpc
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Retail.control_service transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Retail::V2::ControlService::Client, client
+    end
+  end
+
+  def test_control_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Retail.control_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Retail::V2::ControlService::Rest::Client, client
+    end
+  end
+
+  def test_model_service_grpc
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Retail.model_service transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Retail::V2::ModelService::Client, client
+    end
+  end
+
+  def test_model_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Retail.model_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Retail::V2::ModelService::Rest::Client, client
+    end
+  end
+
+  def test_prediction_service_grpc
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Retail.prediction_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Retail::V2::PredictionService::Client, client
     end
   end
 
-  def test_product_service
+  def test_prediction_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Retail.prediction_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Retail::V2::PredictionService::Rest::Client, client
+    end
+  end
+
+  def test_product_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Retail.product_service do |config|
+      client = Google::Cloud::Retail.product_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Retail::V2::ProductService::Client, client
     end
   end
 
-  def test_user_event_service
+  def test_product_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Retail.product_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Retail::V2::ProductService::Rest::Client, client
+    end
+  end
+
+  def test_search_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Retail.user_event_service do |config|
+      client = Google::Cloud::Retail.search_service transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Retail::V2::SearchService::Client, client
+    end
+  end
+
+  def test_search_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Retail.search_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Retail::V2::SearchService::Rest::Client, client
+    end
+  end
+
+  def test_serving_config_service_grpc
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Retail.serving_config_service transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Retail::V2::ServingConfigService::Client, client
+    end
+  end
+
+  def test_serving_config_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Retail.serving_config_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Retail::V2::ServingConfigService::Rest::Client, client
+    end
+  end
+
+  def test_user_event_service_grpc
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Retail.user_event_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::Retail::V2::UserEventService::Client, client
+    end
+  end
+
+  def test_user_event_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Retail.user_event_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Retail::V2::UserEventService::Rest::Client, client
     end
   end
 end

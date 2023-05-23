@@ -1,6 +1,6 @@
 # google-cloud-error_reporting
 
-[Stackdriver Error Reporting](https://cloud.google.com/error-reporting/) counts,
+[Error Reporting](https://cloud.google.com/error-reporting/) counts,
 analyzes and aggregates errors raised in your running cloud services. A
 centralized error management interface displays the results with sorting and
 filtering capabilities. A dedicated view shows the error details: time chart,
@@ -10,7 +10,7 @@ exception stack trace. Opt-in to receive email and mobile alerts on new errors.
 - [google-cloud-error_reporting API documentation](https://googleapis.dev/ruby/google-cloud-error_reporting/latest)
 - [google-cloud-error_reporting instrumentation documentation](https://googleapis.dev/ruby/google-cloud-error_reporting/latest/file.INSTRUMENTATION.html)
 - [google-cloud-error_reporting on RubyGems](https://rubygems.org/gems/google-cloud-error_reporting)
-- [Stackdriver ErrorReporting documentation](https://cloud.google.com/error-reporting/docs/)
+- [Error Reporting documentation](https://cloud.google.com/error-reporting/docs/)
 
 ## Quick Start
 
@@ -38,17 +38,17 @@ Alternatively, check out the
 [`stackdriver`](https://googleapis.dev/ruby/stackdriver)
 gem that includes the `google-cloud-error_reporting` gem.
 
-## Enable Stackdriver Error Reporting API
+## Enable Error Reporting API
 
-The Stackdriver Error Reporting library needs the [Stackdriver Error Reporting
+The Error Reporting library needs the [Error Reporting
 API](https://console.cloud.google.com/apis/library/clouderrorreporting.googleapis.com)
 to be enabled on your Google Cloud project. Make sure it's enabled if not
 already.
 
 ## Reporting errors in Rack-based frameworks
 
-The Stackdriver Error Reporting library for Ruby makes it easy to integrate
-Stackdriver Error Reporting into popular Rack-based Ruby web frameworks such as
+The Error Reporting library for Ruby makes it easy to integrate
+Error Reporting into popular Rack-based Ruby web frameworks such as
 Ruby on Rails and Sinatra. When the library integration is enabled, it
 automatically reports exceptions captured from the application's Rack stack.
 
@@ -90,22 +90,22 @@ end
 
 ## Configuring the library
 
-You can customize the behavior of the Stackdriver Error Reporting library for
+You can customize the behavior of the Error Reporting library for
 Ruby. See the [configuration
 guide](https://googleapis.dev/ruby/stackdriver/latest/file.INSTRUMENTATION_CONFIGURATION.html)
 for a list of possible configuration options.
 
 ## Running on Google Cloud Platform
 
-The Stackdriver Error Reporting library for Ruby should work without you
+The Error Reporting library for Ruby should work without you
 manually providing authentication credentials for instances running on Google
-Cloud Platform, as long as the Stackdriver Error Reporting API access scope is
+Cloud Platform, as long as the Error Reporting API access scope is
 enabled on that instance.
 
 ### App Engine
 
-On Google App Engine, the Stackdriver Error Reporting API access scope is
-enabled by default, and the Stackdriver Error Reporting library for Ruby can be
+On Google App Engine, the Error Reporting API access scope is
+enabled by default, and the Error Reporting library for Ruby can be
 used without providing credentials or a project ID.
 
 ### Container Engine
@@ -130,9 +130,9 @@ full access to all Cloud APIs" under Access scopes.
 
 ## Running locally and elsewhere
 
-To run the Stackdriver Error Reporting outside of Google Cloud Platform, you
+To run the Error Reporting outside of Google Cloud Platform, you
 must supply your GCP project ID and appropriate service account credentials
-directly to the Stackdriver Error Reporting. This applies to running the library
+directly to the Error Reporting. This applies to running the library
 on your own workstation, on your datacenter's computers, or on the VM instances
 of another cloud provider. See the [Authentication section](#authentication) for
 instructions on how to do so.
@@ -153,7 +153,7 @@ Rails.application.configure do |config|
   # Shared parameters
   config.google_cloud.project_id = "your-project-id"
   config.google_cloud.keyfile = "/path/to/key.json"
-  # Or Stackdriver Error Reporting specific parameters
+  # Or Error Reporting specific parameters
   config.google_cloud.error_reporting.project_id = "your-project-id"
   config.google_cloud.error_reporting.keyfile = "/path/to/key.json"
 end
@@ -168,7 +168,7 @@ Google::Cloud.configure do |config|
   # Shared parameters
   config.project_id = "your-project-id"
   config.keyfile = "/path/to/key.json"
-  # Or Stackdriver Error Reporting specific parameters
+  # Or Error Reporting specific parameters
   config.error_reporting.project_id = "your-project-id"
   config.error_reporting.keyfile = "/path/to/key.json"
 end
@@ -184,11 +184,10 @@ Guide](https://googleapis.dev/ruby/google-cloud-error_reporting/latest/file.AUTH
 To enable logging for this library, set the logger for the underlying
 [gRPC](https://github.com/grpc/grpc/tree/master/src/ruby) library. The logger
 that you set may be a Ruby stdlib
-[`Logger`](https://ruby-doc.org/stdlib/libdoc/logger/rdoc/Logger.html) as
+[`Logger`](https://ruby-doc.org/current/stdlibs/logger/Logger.html) as
 shown below, or a
 [`Google::Cloud::Logging::Logger`](https://googleapis.dev/ruby/google-cloud-logging/latest)
-that will write logs to [Stackdriver
-Logging](https://cloud.google.com/logging/). See
+that will write logs to [Cloud Logging](https://cloud.google.com/logging/). See
 [grpc/logconfig.rb](https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb)
 and the gRPC
 [spec_helper.rb](https://github.com/grpc/grpc/blob/master/src/ruby/spec/spec_helper.rb)

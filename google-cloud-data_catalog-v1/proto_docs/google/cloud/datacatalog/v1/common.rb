@@ -21,8 +21,19 @@ module Google
   module Cloud
     module DataCatalog
       module V1
-        # This enum describes all the possible systems that Data Catalog integrates
-        # with.
+        # Entry metadata relevant only to the user and private to them.
+        # @!attribute [rw] starred
+        #   @return [::Boolean]
+        #     True if the entry is starred by the user; false otherwise.
+        # @!attribute [rw] star_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Set if the entry is starred; unset otherwise.
+        class PersonalDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # This enum lists all the systems that Data Catalog integrates with.
         module IntegratedSystem
           # Default unknown system.
           INTEGRATED_SYSTEM_UNSPECIFIED = 0
@@ -35,6 +46,28 @@ module Google
 
           # Dataproc Metastore.
           DATAPROC_METASTORE = 3
+
+          # Dataplex.
+          DATAPLEX = 4
+
+          # Cloud Sql
+          CLOUD_SQL = 8
+
+          # Looker
+          LOOKER = 9
+        end
+
+        # This enum describes all the systems that manage
+        # Taxonomy and PolicyTag resources in DataCatalog.
+        module ManagingSystem
+          # Default value
+          MANAGING_SYSTEM_UNSPECIFIED = 0
+
+          # Dataplex.
+          MANAGING_SYSTEM_DATAPLEX = 1
+
+          # Other
+          MANAGING_SYSTEM_OTHER = 2
         end
       end
     end

@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/alloydb/v1beta/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-alloy_db-v1beta/$1

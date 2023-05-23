@@ -51,7 +51,7 @@ module Google
           return mocked_subscriber if mocked_subscriber
           @subscriber ||= V1::Subscriber::Client.new do |config|
             config.credentials = credentials if credentials
-            config.timeout = timeout if timeout
+            override_client_config_timeouts config if timeout
             config.endpoint = host if host
             config.lib_name = "gccl"
             config.lib_version = Google::Cloud::PubSub::VERSION
@@ -64,7 +64,7 @@ module Google
           return mocked_publisher if mocked_publisher
           @publisher ||= V1::Publisher::Client.new do |config|
             config.credentials = credentials if credentials
-            config.timeout = timeout if timeout
+            override_client_config_timeouts config if timeout
             config.endpoint = host if host
             config.lib_name = "gccl"
             config.lib_version = Google::Cloud::PubSub::VERSION
@@ -77,11 +77,11 @@ module Google
           return mocked_iam if mocked_iam
           @iam ||= V1::IAMPolicy::Client.new do |config|
             config.credentials = credentials if credentials
-            config.timeout = timeout if timeout
+            override_client_config_timeouts config if timeout
             config.endpoint = host if host
             config.lib_name = "gccl"
             config.lib_version = Google::Cloud::PubSub::VERSION
-            config.metadata = { "google-cloud-resource-prefix" => "projects/#{@project}" }
+            config.metadata = { "google-cloud-resource-prefix": "projects/#{@project}" }
           end
         end
         attr_accessor :mocked_iam
@@ -90,11 +90,11 @@ module Google
           return mocked_schemas if mocked_schemas
           @schemas ||= V1::SchemaService::Client.new do |config|
             config.credentials = credentials if credentials
-            config.timeout = timeout if timeout
+            override_client_config_timeouts config if timeout
             config.endpoint = host if host
             config.lib_name = "gccl"
             config.lib_version = Google::Cloud::PubSub::VERSION
-            config.metadata = { "google-cloud-resource-prefix" => "projects/#{@project}" }
+            config.metadata = { "google-cloud-resource-prefix": "projects/#{@project}" }
           end
         end
         attr_accessor :mocked_schemas
@@ -127,6 +127,7 @@ module Google
                          persistence_regions: nil,
                          schema_name: nil,
                          message_encoding: nil,
+                         retention: nil,
                          options: {}
           if persistence_regions
             message_storage_policy = Google::Cloud::PubSub::V1::MessageStoragePolicy.new(
@@ -145,11 +146,12 @@ module Google
           end
 
           publisher.create_topic \
-            name:                   topic_path(topic_name, options),
-            labels:                 labels,
-            kms_key_name:           kms_key_name,
-            message_storage_policy: message_storage_policy,
-            schema_settings:        schema_settings
+            name:                       topic_path(topic_name, options),
+            labels:                     labels,
+            kms_key_name:               kms_key_name,
+            message_storage_policy:     message_storage_policy,
+            schema_settings:            schema_settings,
+            message_retention_duration: Convert.number_to_duration(retention)
         end
 
         def update_topic topic_obj, *fields
@@ -171,8 +173,10 @@ module Google
         # Raises GRPC status code 5 if the topic does not exist.
         # The messages parameter is an array of arrays.
         # The first element is the data, second is attributes hash.
-        def publish topic, messages
-          publisher.publish topic: topic_path(topic), messages: messages
+        def publish topic, messages, compress: false
+          request = { topic: topic_path(topic), messages: messages }
+          compress_options = ::Gapic::CallOptions.new metadata: { "grpc-internal-encoding-request": "gzip" }
+          compress ? (publisher.publish request, compress_options) : (publisher.publish request)
         end
 
         ##
@@ -202,18 +206,8 @@ module Google
         ##
         # Creates a subscription on a given topic for a given subscriber.
         def create_subscription topic, subscription_name, options = {}
-          subscriber.create_subscription \
-            name:                       subscription_path(subscription_name, options),
-            topic:                      topic_path(topic),
-            push_config:                options[:push_config],
-            ack_deadline_seconds:       options[:deadline],
-            retain_acked_messages:      options[:retain_acked],
-            message_retention_duration: Convert.number_to_duration(options[:retention]),
-            labels:                     options[:labels],
-            enable_message_ordering:    options[:message_ordering],
-            filter:                     options[:filter],
-            dead_letter_policy:         dead_letter_policy(options),
-            retry_policy:               options[:retry_policy]
+          updated_option = construct_create_subscription_options topic, subscription_name, options
+          subscriber.create_subscription(**updated_option)
         end
 
         def update_subscription subscription_obj, *fields
@@ -459,6 +453,18 @@ module Google
 
         protected
 
+        # Set the timeout in the client config.
+        # Override the default timeout in each individual RPC config as well, since when they are non-nil, these
+        # defaults have precedence over the top-level config.timeout. See Gapic::CallOptions#apply_defaults.
+        def override_client_config_timeouts config
+          config.timeout = timeout
+          rpc_names = config.rpcs.methods - Object.methods
+          rpc_names.each do |rpc_name|
+            rpc = config.rpcs.send rpc_name
+            rpc.timeout = timeout if rpc.respond_to? :timeout=
+          end
+        end
+
         def a_time? obj
           return false unless obj.respond_to? :to_time
           # Rails' String#to_time returns nil if the string doesn't parse.
@@ -473,6 +479,30 @@ module Google
             policy.max_delivery_attempts = options[:dead_letter_max_delivery_attempts]
           end
           policy
+        end
+
+        private
+
+        def construct_create_subscription_options topic, subscription_name, options
+          excess_options = [:deadline,
+                            :retention,
+                            :retain_acked,
+                            :message_ordering,
+                            :endpoint,
+                            :dead_letter_topic_name,
+                            :dead_letter_max_delivery_attempts,
+                            :dead_letter_topic]
+
+          new_options = options.filter { |k, v| !v.nil? && !excess_options.include?(k) }
+          new_options[:name] = subscription_path subscription_name, options
+          new_options[:topic] = topic_path topic
+          new_options[:message_retention_duration] = Convert.number_to_duration options[:retention]
+          new_options[:dead_letter_policy] = dead_letter_policy options
+          new_options[:ack_deadline_seconds] = options[:deadline]
+          new_options[:retain_acked_messages] = options[:retain_acked]
+          new_options[:enable_message_ordering] = options[:message_ordering]
+
+          new_options.compact
         end
       end
     end

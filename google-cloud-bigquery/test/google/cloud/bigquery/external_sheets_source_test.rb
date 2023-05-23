@@ -15,7 +15,7 @@
 require "helper"
 
 describe Google::Cloud::Bigquery::External::SheetsSource do
-  it "can be used for CSV" do
+  it "can be used for GOOGLE_SHEETS" do
     table = Google::Cloud::Bigquery::External::SheetsSource.new.tap do |e|
       e.gapi.source_uris = ["https://docs.google.com/spreadsheets/d/1234567980"]
       e.gapi.source_format = "GOOGLE_SHEETS"

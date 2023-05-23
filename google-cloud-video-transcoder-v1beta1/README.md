@@ -33,11 +33,11 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/video/transcoder/v1beta1"
 
 client = ::Google::Cloud::Video::Transcoder::V1beta1::TranscoderService::Client.new
-request = my_create_request
+request = ::Google::Cloud::Video::Transcoder::V1beta1::CreateJobRequest.new # (request fields as keyword arguments...)
 response = client.create_job request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-video-transcoder-v1beta1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-video-transcoder-v1beta1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/transcoder/)
@@ -46,7 +46,7 @@ for general usage information.
 ## Enabling Logging
 
 To enable logging for this library, set the logger for the underlying [gRPC](https://github.com/grpc/grpc/tree/master/src/ruby) library.
-The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/stdlib/libdoc/logger/rdoc/Logger.html) as shown below,
+The logger that you set may be a Ruby stdlib [`Logger`](https://ruby-doc.org/current/stdlibs/logger/Logger.html) as shown below,
 or a [`Google::Cloud::Logging::Logger`](https://googleapis.dev/ruby/google-cloud-logging/latest)
 that will write logs to [Cloud Logging](https://cloud.google.com/logging/). See [grpc/logconfig.rb](https://github.com/grpc/grpc/blob/master/src/ruby/lib/grpc/logconfig.rb)
 and the gRPC [spec_helper.rb](https://github.com/grpc/grpc/blob/master/src/ruby/spec/spec_helper.rb) for additional information.

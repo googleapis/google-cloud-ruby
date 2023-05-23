@@ -28,9 +28,12 @@ module Google
   module Cloud
     module Compute
       module V1
-        # To load this service and instantiate a REST client:
+        ##
+        # The PacketMirrorings API.
         #
-        #     require "google/cloud/compute/v1/packet_mirrorings"
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/compute/v1/packet_mirrorings/rest"
         #     client = ::Google::Cloud::Compute::V1::PacketMirrorings::Rest::Client.new
         #
         module PacketMirrorings

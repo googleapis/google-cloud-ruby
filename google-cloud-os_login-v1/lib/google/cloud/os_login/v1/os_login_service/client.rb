@@ -44,13 +44,12 @@ module Google
             # See {::Google::Cloud::OsLogin::V1::OsLoginService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all OsLoginService clients:
-            #
-            #     ::Google::Cloud::OsLogin::V1::OsLoginService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all OsLoginService clients
+            #   ::Google::Cloud::OsLogin::V1::OsLoginService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -70,50 +69,32 @@ module Google
 
                 default_config.rpcs.delete_posix_account.timeout = 10.0
                 default_config.rpcs.delete_posix_account.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.delete_ssh_public_key.timeout = 10.0
                 default_config.rpcs.delete_ssh_public_key.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.get_login_profile.timeout = 10.0
                 default_config.rpcs.get_login_profile.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.get_ssh_public_key.timeout = 10.0
                 default_config.rpcs.get_ssh_public_key.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.import_ssh_public_key.timeout = 10.0
                 default_config.rpcs.import_ssh_public_key.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.update_ssh_public_key.timeout = 10.0
                 default_config.rpcs.update_ssh_public_key.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config
@@ -145,19 +126,15 @@ module Google
             ##
             # Create a new OsLoginService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new OsLoginService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::OsLogin::V1::OsLoginService::Client.new
             #
-            #     client = ::Google::Cloud::OsLogin::V1::OsLoginService::Client.new
-            #
-            # To create a new OsLoginService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::OsLogin::V1::OsLoginService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::OsLogin::V1::OsLoginService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the OsLoginService client.
             # @yieldparam config [Client::Configuration]
@@ -177,14 +154,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -200,6 +176,93 @@ module Google
             end
 
             # Service calls
+
+            ##
+            # Create an SSH public key
+            #
+            # @overload create_ssh_public_key(request, options = nil)
+            #   Pass arguments to `create_ssh_public_key` via a request object, either of type
+            #   {::Google::Cloud::OsLogin::V1::CreateSshPublicKeyRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::OsLogin::V1::CreateSshPublicKeyRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_ssh_public_key(parent: nil, ssh_public_key: nil)
+            #   Pass arguments to `create_ssh_public_key` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The unique ID for the user in format `users/{user}`.
+            #   @param ssh_public_key [::Google::Cloud::OsLogin::Common::SshPublicKey, ::Hash]
+            #     Required. The SSH public key and expiration time.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::OsLogin::Common::SshPublicKey]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::OsLogin::Common::SshPublicKey]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/os_login/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsLogin::V1::OsLoginService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsLogin::V1::CreateSshPublicKeyRequest.new
+            #
+            #   # Call the create_ssh_public_key method.
+            #   result = client.create_ssh_public_key request
+            #
+            #   # The returned object is of type Google::Cloud::OsLogin::Common::SshPublicKey.
+            #   p result
+            #
+            def create_ssh_public_key request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::OsLogin::V1::CreateSshPublicKeyRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_ssh_public_key.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::OsLogin::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_ssh_public_key.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_ssh_public_key.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @os_login_service_stub.call_rpc :create_ssh_public_key, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
 
             ##
             # Deletes a POSIX account.
@@ -220,9 +283,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. A reference to the POSIX account to update. POSIX accounts are identified
-            #     by the project ID they are associated with. A reference to the POSIX
-            #     account is in format `users/{user}/projects/{project}`.
+            #     Required. A reference to the POSIX account to update. POSIX accounts are
+            #     identified by the project ID they are associated with. A reference to the
+            #     POSIX account is in format `users/{user}/projects/{project}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]
@@ -231,6 +294,21 @@ module Google
             # @return [::Google::Protobuf::Empty]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/os_login/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsLogin::V1::OsLoginService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsLogin::V1::DeletePosixAccountRequest.new
+            #
+            #   # Call the delete_posix_account method.
+            #   result = client.delete_posix_account request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
             #
             def delete_posix_account request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -249,16 +327,20 @@ module Google
                 gapic_version: ::Google::Cloud::OsLogin::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_posix_account.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_posix_account.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @os_login_service_stub.call_rpc :delete_posix_account, request, options: options do |response, operation|
@@ -288,9 +370,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The fingerprint of the public key to update. Public keys are identified by
-            #     their SHA-256 fingerprint. The fingerprint of the public key is in format
-            #     `users/{user}/sshPublicKeys/{fingerprint}`.
+            #     Required. The fingerprint of the public key to update. Public keys are
+            #     identified by their SHA-256 fingerprint. The fingerprint of the public key
+            #     is in format `users/{user}/sshPublicKeys/{fingerprint}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]
@@ -299,6 +381,21 @@ module Google
             # @return [::Google::Protobuf::Empty]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/os_login/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsLogin::V1::OsLoginService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsLogin::V1::DeleteSshPublicKeyRequest.new
+            #
+            #   # Call the delete_ssh_public_key method.
+            #   result = client.delete_ssh_public_key request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
             #
             def delete_ssh_public_key request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -317,16 +414,20 @@ module Google
                 gapic_version: ::Google::Cloud::OsLogin::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_ssh_public_key.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_ssh_public_key.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @os_login_service_stub.call_rpc :delete_ssh_public_key, request, options: options do |response, operation|
@@ -371,6 +472,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/os_login/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsLogin::V1::OsLoginService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsLogin::V1::GetLoginProfileRequest.new
+            #
+            #   # Call the get_login_profile method.
+            #   result = client.get_login_profile request
+            #
+            #   # The returned object is of type Google::Cloud::OsLogin::V1::LoginProfile.
+            #   p result
+            #
             def get_login_profile request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -388,16 +504,20 @@ module Google
                 gapic_version: ::Google::Cloud::OsLogin::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_login_profile.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_login_profile.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @os_login_service_stub.call_rpc :get_login_profile, request, options: options do |response, operation|
@@ -427,9 +547,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The fingerprint of the public key to retrieve. Public keys are identified
-            #     by their SHA-256 fingerprint. The fingerprint of the public key is in
-            #     format `users/{user}/sshPublicKeys/{fingerprint}`.
+            #     Required. The fingerprint of the public key to retrieve. Public keys are
+            #     identified by their SHA-256 fingerprint. The fingerprint of the public key
+            #     is in format `users/{user}/sshPublicKeys/{fingerprint}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::OsLogin::Common::SshPublicKey]
@@ -438,6 +558,21 @@ module Google
             # @return [::Google::Cloud::OsLogin::Common::SshPublicKey]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/os_login/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsLogin::V1::OsLoginService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsLogin::V1::GetSshPublicKeyRequest.new
+            #
+            #   # Call the get_ssh_public_key method.
+            #   result = client.get_ssh_public_key request
+            #
+            #   # The returned object is of type Google::Cloud::OsLogin::Common::SshPublicKey.
+            #   p result
             #
             def get_ssh_public_key request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -456,16 +591,20 @@ module Google
                 gapic_version: ::Google::Cloud::OsLogin::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_ssh_public_key.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_ssh_public_key.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @os_login_service_stub.call_rpc :get_ssh_public_key, request, options: options do |response, operation|
@@ -511,6 +650,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/os_login/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsLogin::V1::OsLoginService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsLogin::V1::ImportSshPublicKeyRequest.new
+            #
+            #   # Call the import_ssh_public_key method.
+            #   result = client.import_ssh_public_key request
+            #
+            #   # The returned object is of type Google::Cloud::OsLogin::V1::ImportSshPublicKeyResponse.
+            #   p result
+            #
             def import_ssh_public_key request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -528,16 +682,20 @@ module Google
                 gapic_version: ::Google::Cloud::OsLogin::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.import_ssh_public_key.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.import_ssh_public_key.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @os_login_service_stub.call_rpc :import_ssh_public_key, request, options: options do |response, operation|
@@ -568,9 +726,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The fingerprint of the public key to update. Public keys are identified by
-            #     their SHA-256 fingerprint. The fingerprint of the public key is in format
-            #     `users/{user}/sshPublicKeys/{fingerprint}`.
+            #     Required. The fingerprint of the public key to update. Public keys are
+            #     identified by their SHA-256 fingerprint. The fingerprint of the public key
+            #     is in format `users/{user}/sshPublicKeys/{fingerprint}`.
             #   @param ssh_public_key [::Google::Cloud::OsLogin::Common::SshPublicKey, ::Hash]
             #     Required. The SSH public key and expiration time.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
@@ -583,6 +741,21 @@ module Google
             # @return [::Google::Cloud::OsLogin::Common::SshPublicKey]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/os_login/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsLogin::V1::OsLoginService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsLogin::V1::UpdateSshPublicKeyRequest.new
+            #
+            #   # Call the update_ssh_public_key method.
+            #   result = client.update_ssh_public_key request
+            #
+            #   # The returned object is of type Google::Cloud::OsLogin::Common::SshPublicKey.
+            #   p result
             #
             def update_ssh_public_key request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -601,16 +774,20 @@ module Google
                 gapic_version: ::Google::Cloud::OsLogin::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_ssh_public_key.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_ssh_public_key.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @os_login_service_stub.call_rpc :update_ssh_public_key, request, options: options do |response, operation|
@@ -634,22 +811,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for delete_posix_account
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # create_ssh_public_key to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::OsLogin::V1::OsLoginService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_ssh_public_key.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::OsLogin::V1::OsLoginService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.delete_posix_account.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::OsLogin::V1::OsLoginService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.delete_posix_account.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::OsLogin::V1::OsLoginService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_ssh_public_key.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
@@ -660,9 +836,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -758,6 +934,11 @@ module Google
               #
               class Rpcs
                 ##
+                # RPC-specific configuration for `create_ssh_public_key`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_ssh_public_key
+                ##
                 # RPC-specific configuration for `delete_posix_account`
                 # @return [::Gapic::Config::Method]
                 #
@@ -790,6 +971,8 @@ module Google
 
                 # @private
                 def initialize parent_rpcs = nil
+                  create_ssh_public_key_config = parent_rpcs.create_ssh_public_key if parent_rpcs.respond_to? :create_ssh_public_key
+                  @create_ssh_public_key = ::Gapic::Config::Method.new create_ssh_public_key_config
                   delete_posix_account_config = parent_rpcs.delete_posix_account if parent_rpcs.respond_to? :delete_posix_account
                   @delete_posix_account = ::Gapic::Config::Method.new delete_posix_account_config
                   delete_ssh_public_key_config = parent_rpcs.delete_ssh_public_key if parent_rpcs.respond_to? :delete_ssh_public_key

@@ -59,6 +59,10 @@ module Google
       #   If the param is nil, uses the default endpoint.
       # @param [String] emulator_host Firestore emulator host. Optional.
       #   If the param is nil, uses the value of the `emulator_host` config.
+      # @param [String] database_id Identifier for a Firestore database. If not
+      #   present, the default database of the project is used.
+      # @param [:grpc,:rest] transport Which transport to use to communicate
+      #   with the server. Defaults to `:grpc`.
       # @param [String] project Alias for the `project_id` argument. Deprecated.
       # @param [String] keyfile Alias for the `credentials` argument.
       #   Deprecated.
@@ -76,19 +80,24 @@ module Google
                    timeout: nil,
                    endpoint: nil,
                    emulator_host: nil,
+                   database_id: nil,
+                   transport: nil,
                    project: nil,
                    keyfile: nil
-        project_id    ||= (project || default_project_id)
-        scope         ||= configure.scope
-        timeout       ||= configure.timeout
-        endpoint      ||= configure.endpoint
+        project_id ||= (project || default_project_id)
+        scope ||= configure.scope
+        timeout ||= configure.timeout
+        endpoint ||= configure.endpoint
         emulator_host ||= configure.emulator_host
+        database_id ||= configure.database_id
+        transport ||= configure.transport
 
         if emulator_host
           project_id = project_id.to_s
           raise ArgumentError, "project_id is missing" if project_id.empty?
 
-          service = Firestore::Service.new project_id, :this_channel_is_insecure, host: emulator_host, timeout: timeout
+          service = Firestore::Service.new project_id, :this_channel_is_insecure, host: emulator_host,
+                                           timeout: timeout, database: database_id, transport: transport
           return Firestore::Client.new service
         end
 
@@ -103,7 +112,8 @@ module Google
         project_id = project_id.to_s
         raise ArgumentError, "project_id is missing" if project_id.empty?
 
-        service = Firestore::Service.new project_id, credentials, host: endpoint, timeout: timeout
+        service = Firestore::Service.new project_id, credentials, host: endpoint,
+                                         timeout: timeout, database: database_id, transport: transport
         Firestore::Client.new service
       end
 
@@ -122,6 +132,8 @@ module Google
       #   parameter `keyfile` is considered deprecated, but may also be used.)
       # * `scope` - (String, Array<String>) The OAuth 2.0 scopes controlling
       #   the set of resources and operations that the connection can access.
+      # * `quota_project` - (String) The project ID for a project that can be
+      #   used by client libraries for quota and billing purposes.
       # * `timeout` - (Integer) Default timeout to use in requests.
       # * `endpoint` - (String) Override of the endpoint host name, or `nil`
       #   to use the default endpoint.

@@ -1,0 +1,24 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-bare_metal_solution.gemspec",
+    "lib/google-cloud-bare_metal_solution.rb",
+    "lib/google/cloud/bare_metal_solution.rb",
+    "lib/google/cloud/bare_metal_solution/version.rb",
+    "test/google/cloud/bare_metal_solution/client_test.rb",
+    "test/google/cloud/bare_metal_solution/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}

@@ -3,8 +3,6 @@
 
 require 'google/protobuf'
 
-require 'google/type/latlng_pb'
-require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/firestore/admin/v1/location.proto", :syntax => :proto3) do
     add_message "google.firestore.admin.v1.LocationMetadata" do

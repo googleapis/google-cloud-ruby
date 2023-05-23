@@ -25,6 +25,7 @@ require "google/cloud/kms/v1/version"
 require "google/cloud/kms/v1/key_management_service/credentials"
 require "google/cloud/kms/v1/key_management_service/paths"
 require "google/cloud/kms/v1/key_management_service/client"
+require "google/cloud/kms/v1/key_management_service/rest"
 
 module Google
   module Cloud
@@ -44,10 +45,15 @@ module Google
         # If you are using manual gRPC libraries, see
         # [Using gRPC with Cloud KMS](https://cloud.google.com/kms/docs/grpc).
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/kms/v1/key_management_service"
         #     client = ::Google::Cloud::Kms::V1::KeyManagementService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/kms/v1/key_management_service/rest"
+        #     client = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new
         #
         module KeyManagementService
         end

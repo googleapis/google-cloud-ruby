@@ -1,5 +1,52 @@
 # Release History
 
+### 2.3.0 (2023-03-09)
+
+#### Features
+
+* Support REST transport ([#20766](https://github.com/googleapis/google-cloud-ruby/issues/20766)) 
+
+### 2.2.0 (2023-01-05)
+
+#### Features
+
+* Support for NodeGroupController client ([#19852](https://github.com/googleapis/google-cloud-ruby/issues/19852)) 
+
+### 2.1.0 (2022-07-02)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+
+### 2.0.0 (2022-05-05)
+
+* BREAKING CHANGE: Removed the obsolete google-cloud-dataproc-v1beta2 from the dependencies
+
+### 1.3.1 / 2022-01-11
+
+#### Documentation
+
+* Fix titles of documentation pages
+* Remove some broken images and fix outdated content in authentication documentation
+
+### 1.3.0 / 2021-10-25
+
+#### Features
+
+* Add support for batch workloads
+
+### 1.2.2 / 2021-07-12
+
+#### Documentation
+
+* Clarified some language around authentication configuration
+
+### 1.2.1 / 2021-06-30
+
+#### Bug Fixes
+
+* Expand dependencies to include future 1.x releases of versioned clients
+
 ### 1.2.0 / 2021-03-08
 
 #### Features

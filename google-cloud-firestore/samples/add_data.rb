@@ -21,7 +21,6 @@ def set_document project_id:, collection_path: "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START firestore_data_set_from_map]
-  # [START fs_set_document]
   city_ref = firestore.doc "#{collection_path}/LA"
 
   data = {
@@ -31,7 +30,6 @@ def set_document project_id:, collection_path: "cities"
   }
 
   city_ref.set data
-  # [END fs_set_document]
   # [END firestore_data_set_from_map]
   puts "Set data for the LA document in the cities collection."
 end
@@ -42,10 +40,8 @@ def update_create_if_missing project_id:, collection_path: "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START firestore_data_set_doc_upsert]
-  # [START fs_update_create_if_missing]
   city_ref = firestore.doc "#{collection_path}/LA"
   city_ref.set({ capital: false }, merge: true)
-  # [END fs_update_create_if_missing]
   # [END firestore_data_set_doc_upsert]
   puts "Merged data into the LA document in the cities collection."
 end
@@ -56,7 +52,6 @@ def set_document_data_types project_id:, collection_path: "data"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START firestore_data_set_from_map_nested]
-  # [START fs_set_document_data_types]
   doc_ref = firestore.doc "#{collection_path}/one"
 
   data = {
@@ -73,7 +68,6 @@ def set_document_data_types project_id:, collection_path: "data"
   }
 
   doc_ref.set data
-  # [END fs_set_document_data_types]
   # [END firestore_data_set_from_map_nested]
   puts "Set multiple data-type data for the one document in the data collection."
 end
@@ -89,10 +83,8 @@ def set_requires_id project_id:, collection_path: "cities"
     country: "Thailand"
   }
   # [START firestore_data_set_id_specified]
-  # [START fs_set_requires_id]
   city_ref = firestore.doc "#{collection_path}/new-city-id"
   city_ref.set data
-  # [END fs_set_requires_id]
   # [END firestore_data_set_id_specified]
   puts "Added document with ID: new-city-id."
 end
@@ -103,7 +95,6 @@ def add_doc_data_with_auto_id project_id:, collection_path: "cities"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START firestore_data_set_id_random_collection]
-  # [START fs_add_doc_data_with_auto_id]
   data = {
     name:    "Tokyo",
     country: "Japan"
@@ -113,7 +104,6 @@ def add_doc_data_with_auto_id project_id:, collection_path: "cities"
 
   added_doc_ref = cities_ref.add data
   puts "Added document with ID: #{added_doc_ref.document_id}."
-  # [END fs_add_doc_data_with_auto_id]
   # [END firestore_data_set_id_random_collection]
 end
 
@@ -128,14 +118,12 @@ def add_doc_data_after_auto_id project_id:, collection_path: "cities"
     country: "Russia"
   }
   # [START firestore_data_set_id_random_document_ref]
-  # [START fs_add_doc_data_after_auto_id]
   cities_ref = firestore.col collection_path
 
   added_doc_ref = cities_ref.doc
   puts "Added document with ID: #{added_doc_ref.document_id}."
 
   added_doc_ref.set data
-  # [END fs_add_doc_data_after_auto_id]
   # [END firestore_data_set_id_random_document_ref]
   puts "Added data to the #{added_doc_ref.document_id} document in the cities collection."
 end
@@ -154,12 +142,36 @@ def update_doc project_id:, collection_path: "cities"
   }
   doc_ref.set data
   # [START firestore_data_set_field]
-  # [START fs_update_doc]
   city_ref = firestore.doc "#{collection_path}/DC"
   city_ref.update({ capital: true })
-  # [END fs_update_doc]
   # [END firestore_data_set_field]
   puts "Updated the capital field of the DC document in the cities collection."
+end
+
+def update_doc_array project_id:, collection_path: "cities"
+  # project_id = "Your Google Cloud Project ID"
+  # collection_path = "cities"
+
+  firestore = Google::Cloud::Firestore.new project_id: project_id
+
+  doc_ref = firestore.doc "#{collection_path}/DC"
+
+  data = {
+    name:    "Washington D.C.",
+    country: "USA",
+    regions: ["east_coast"]
+  }
+  doc_ref.set data
+  # [START firestore_data_set_array_operations]
+  city_ref = firestore.doc "#{collection_path}/DC"
+
+  # Atomically add a new region to the 'regions' array field.
+  city_ref.update({ regions: firestore.field_array_union("greater_virginia") })
+
+  # Atomically remove a region from the 'regions' array field.
+  city_ref.update({ regions: firestore.field_array_delete("east_coast") })
+  # [END firestore_data_set_array_operations]
+  puts "Updated the regions field of the DC document in the cities collection."
 end
 
 def update_nested_fields project_id:, collection_path: "users"
@@ -168,7 +180,6 @@ def update_nested_fields project_id:, collection_path: "users"
 
   firestore = Google::Cloud::Firestore.new project_id: project_id
   # [START firestore_data_set_nested_fields]
-  # [START fs_update_nested_fields]
   # Create an initial document to update
   frank_ref = firestore.doc "#{collection_path}/frank"
   frank_ref.set(
@@ -185,7 +196,6 @@ def update_nested_fields project_id:, collection_path: "users"
 
   # Update age and favorite color
   frank_ref.update({ age: 13, "favorites.color": "Red" })
-  # [END fs_update_nested_fields]
   # [END firestore_data_set_nested_fields]
   puts "Updated the age and favorite color fields of the frank document in the users collection."
 end
@@ -205,10 +215,8 @@ def update_server_timestamp project_id:, collection_path: "cities"
     }
   )
   # [START firestore_data_set_server_timestamp]
-  # [START fs_update_server_timestamp]
   city_ref = firestore.doc "#{collection_path}/new-city-id"
   city_ref.update({ timestamp: firestore.field_server_time })
-  # [END fs_update_server_timestamp]
   # [END firestore_data_set_server_timestamp]
   puts "Updated the timestamp field of the new-city-id document in the cities collection."
 end
@@ -228,10 +236,8 @@ def update_document_increment project_id:, collection_path: "cities"
     }
   )
   # [START firestore_data_set_numeric_increment]
-  # [START fs_update_document_increment]
   city_ref = firestore.doc "#{collection_path}/DC"
   city_ref.update({ population: firestore.field_increment(50) })
-  # [END fs_update_document_increment]
   # [END firestore_data_set_numeric_increment]
   puts "Updated the population of the DC document in the cities collection."
 end
@@ -253,6 +259,8 @@ if $PROGRAM_NAME == __FILE__
     add_doc_data_after_auto_id project_id: project
   when "update_doc"
     update_doc project_id: project
+  when "update_doc_array"
+    update_doc_array project_id: project
   when "update_nested_fields"
     update_nested_fields project_id: project
   when "update_server_timestamp"
@@ -271,6 +279,7 @@ if $PROGRAM_NAME == __FILE__
         add_doc_data_with_auto_id   Add document data with autogenerated id.
         add_doc_data_after_auto_id  Generate id, then add document data.
         update_doc                  Update a document.
+        update_doc_array            Update an array field in a document.
         update_nested_fields        Update fields in nested data.
         update_server_timestamp     Update field with server timestamp.
         update_document_increment   Update a document number field using Increment.

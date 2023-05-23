@@ -1,0 +1,22 @@
+require File.expand_path("<%= namespace_dir %>/version", __dir__)
+
+Gem::Specification.new do |gem|
+  gem.name = "<%= gem_name %>"
+  gem.version = <%= namespace %>::VERSION
+  gem.authors = ["Google LLC"]
+  gem.email = "googleapis-packages@google.com"
+  gem.description =
+    "Placeholder for the future Google-authored gem <%= gem_name %>. " \
+    "This placeholder is being released on <%= cur_date %> in order to reserve the name. " \
+    "The final gem should be available shortly after that date. If it has not been " \
+    "released in a timely manner, or if this placeholder interferes with your work, " \
+    "you can contact the Google Ruby team by opening an issue in the GitHub " \
+    "repository https://github.com/googleapis/google-cloud-ruby."
+  gem.summary = "Placeholder for the future Google-authored gem <%= gem_name %>"
+  gem.homepage = "https://github.com/googleapis/google-cloud-ruby"
+  gem.license = "Apache-2.0"
+  gem.platform = Gem::Platform::RUBY
+  gem.files = ["README.md", "LICENSE.md", "<%= namespace_dir %>/version.rb"]
+  gem.require_paths = ["lib"]
+  gem.required_ruby_version = ">= 3.0"
+end

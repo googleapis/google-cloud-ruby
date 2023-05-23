@@ -21,7 +21,8 @@ module Google
   module Cloud
     module Channel
       module V1
-        # Provides contextual information about a {::Google::Longrunning::Operation google.longrunning.Operation}.
+        # Provides contextual information about a
+        # {::Google::Longrunning::Operation google.longrunning.Operation}.
         # @!attribute [rw] operation_type
         #   @return [::Google::Cloud::Channel::V1::OperationMetadata::OperationType]
         #     The RPC that initiated this Long Running Operation.
@@ -31,7 +32,7 @@ module Google
 
           # RPCs that return a Long Running Operation.
           module OperationType
-            # Default value. This state doesn't show unless an error occurs.
+            # Not used.
             OPERATION_TYPE_UNSPECIFIED = 0
 
             # Long Running Operation was triggered by CreateEntitlement.

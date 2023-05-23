@@ -6,6 +6,7 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 require 'google/rpc/status_pb'
 require 'google/api/client_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/mediatranslation/v1beta1/media_translation.proto", :syntax => :proto3) do
     add_message "google.cloud.mediatranslation.v1beta1.TranslateSpeechConfig" do

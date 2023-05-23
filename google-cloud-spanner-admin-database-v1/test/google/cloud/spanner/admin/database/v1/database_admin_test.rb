@@ -126,6 +126,7 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
     create_statement = "hello world"
     extra_statements = ["hello world"]
     encryption_config = {}
+    database_dialect = :DATABASE_DIALECT_UNSPECIFIED
 
     create_database_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_database, name
@@ -134,6 +135,7 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
       assert_equal "hello world", request["create_statement"]
       assert_equal ["hello world"], request["extra_statements"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::Admin::Database::V1::EncryptionConfig), request["encryption_config"]
+      assert_equal :DATABASE_DIALECT_UNSPECIFIED, request["database_dialect"]
       refute_nil options
     end
 
@@ -144,35 +146,35 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
       end
 
       # Use hash object
-      client.create_database({ parent: parent, create_statement: create_statement, extra_statements: extra_statements, encryption_config: encryption_config }) do |response, operation|
+      client.create_database({ parent: parent, create_statement: create_statement, extra_statements: extra_statements, encryption_config: encryption_config, database_dialect: database_dialect }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_database parent: parent, create_statement: create_statement, extra_statements: extra_statements, encryption_config: encryption_config do |response, operation|
+      client.create_database parent: parent, create_statement: create_statement, extra_statements: extra_statements, encryption_config: encryption_config, database_dialect: database_dialect do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_database ::Google::Cloud::Spanner::Admin::Database::V1::CreateDatabaseRequest.new(parent: parent, create_statement: create_statement, extra_statements: extra_statements, encryption_config: encryption_config) do |response, operation|
+      client.create_database ::Google::Cloud::Spanner::Admin::Database::V1::CreateDatabaseRequest.new(parent: parent, create_statement: create_statement, extra_statements: extra_statements, encryption_config: encryption_config, database_dialect: database_dialect) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_database({ parent: parent, create_statement: create_statement, extra_statements: extra_statements, encryption_config: encryption_config }, grpc_options) do |response, operation|
+      client.create_database({ parent: parent, create_statement: create_statement, extra_statements: extra_statements, encryption_config: encryption_config, database_dialect: database_dialect }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_database(::Google::Cloud::Spanner::Admin::Database::V1::CreateDatabaseRequest.new(parent: parent, create_statement: create_statement, extra_statements: extra_statements, encryption_config: encryption_config), grpc_options) do |response, operation|
+      client.create_database(::Google::Cloud::Spanner::Admin::Database::V1::CreateDatabaseRequest.new(parent: parent, create_statement: create_statement, extra_statements: extra_statements, encryption_config: encryption_config, database_dialect: database_dialect), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -238,6 +240,71 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
 
       # Verify method calls
       assert_equal 5, get_database_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_database
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    database = {}
+    update_mask = {}
+
+    update_database_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_database, name
+      assert_kind_of ::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::Admin::Database::V1::Database), request["database"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_database_client_stub do
+      # Create client
+      client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_database({ database: database, update_mask: update_mask }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_database database: database, update_mask: update_mask do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_database ::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseRequest.new(database: database, update_mask: update_mask) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_database({ database: database, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_database(::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseRequest.new(database: database, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_database_client_stub.call_rpc_count
     end
   end
 
@@ -434,12 +501,14 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
     # Create request parameters for a unary method.
     resource = "hello world"
     policy = {}
+    update_mask = {}
 
     set_iam_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :set_iam_policy, name
       assert_kind_of ::Google::Iam::V1::SetIamPolicyRequest, request
       assert_equal "hello world", request["resource"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Iam::V1::Policy), request["policy"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
       refute_nil options
     end
 
@@ -450,31 +519,31 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
       end
 
       # Use hash object
-      client.set_iam_policy({ resource: resource, policy: policy }) do |response, operation|
+      client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.set_iam_policy resource: resource, policy: policy do |response, operation|
+      client.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy) do |response, operation|
+      client.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.set_iam_policy({ resource: resource, policy: policy }, grpc_options) do |response, operation|
+      client.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy), grpc_options) do |response, operation|
+      client.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -670,6 +739,77 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
 
       # Verify method calls
       assert_equal 5, create_backup_client_stub.call_rpc_count
+    end
+  end
+
+  def test_copy_backup
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    backup_id = "hello world"
+    source_backup = "hello world"
+    expire_time = {}
+    encryption_config = {}
+
+    copy_backup_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :copy_backup, name
+      assert_kind_of ::Google::Cloud::Spanner::Admin::Database::V1::CopyBackupRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["backup_id"]
+      assert_equal "hello world", request["source_backup"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["expire_time"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::Admin::Database::V1::CopyBackupEncryptionConfig), request["encryption_config"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, copy_backup_client_stub do
+      # Create client
+      client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.copy_backup({ parent: parent, backup_id: backup_id, source_backup: source_backup, expire_time: expire_time, encryption_config: encryption_config }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.copy_backup parent: parent, backup_id: backup_id, source_backup: source_backup, expire_time: expire_time, encryption_config: encryption_config do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.copy_backup ::Google::Cloud::Spanner::Admin::Database::V1::CopyBackupRequest.new(parent: parent, backup_id: backup_id, source_backup: source_backup, expire_time: expire_time, encryption_config: encryption_config) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.copy_backup({ parent: parent, backup_id: backup_id, source_backup: source_backup, expire_time: expire_time, encryption_config: encryption_config }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.copy_backup(::Google::Cloud::Spanner::Admin::Database::V1::CopyBackupRequest.new(parent: parent, backup_id: backup_id, source_backup: source_backup, expire_time: expire_time, encryption_config: encryption_config), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, copy_backup_client_stub.call_rpc_count
     end
   end
 
@@ -1123,6 +1263,73 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
 
       # Verify method calls
       assert_equal 5, list_backup_operations_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_database_roles
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseRolesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_database_roles_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_database_roles, name
+      assert_kind_of ::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseRolesRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_database_roles_client_stub do
+      # Create client
+      client = ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_database_roles({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_database_roles parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_database_roles ::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseRolesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_database_roles({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_database_roles(::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseRolesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_database_roles_client_stub.call_rpc_count
     end
   end
 

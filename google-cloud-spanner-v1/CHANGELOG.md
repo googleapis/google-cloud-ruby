@@ -1,10 +1,96 @@
 # Release History
 
-### 0.6.1 / 2021-04-23
+### 0.14.1 (2023-03-20)
+
+#### Bug Fixes
+
+* Correct the proto ID for the data_boost_enabled field ([#20922](https://github.com/googleapis/google-cloud-ruby/issues/20922)) 
+
+### 0.14.0 (2023-03-05)
+
+#### Features
+
+* add support for data_boost_enabled ([#20592](https://github.com/googleapis/google-cloud-ruby/issues/20592)) 
+
+### 0.13.0 (2022-10-24)
+
+#### Features
+
+* Support for specifying a read lock mode for a read-write transaction ([#19311](https://github.com/googleapis/google-cloud-ruby/issues/19311)) 
+
+### 0.12.0 (2022-10-18)
+
+#### Features
+
+* support undeclared_parameters in result set 
+
+### 0.11.0 (2022-08-29)
+
+#### Features
+
+* Added a type annotation for PostgreSQL compatible JSONB ([#19086](https://github.com/googleapis/google-cloud-ruby/issues/19086)) 
+
+### 0.10.0 (2022-07-08)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+
+### 0.9.0 (2022-06-08)
+
+#### Features
+
+* Added creator_role field to Session
+
+### 0.8.1 / 2022-03-21
+
+#### Bug Fixes
+
+* remove unused imports
+
+### 0.8.0 / 2022-02-15
+
+#### Features
+
+* Support for database dialects
+
+### 0.7.4 / 2022-01-11
+
+#### Documentation
+
+* Fix titles of documentation pages
+* Remove some broken images and fix outdated content in authentication documentation
+
+### 0.7.3 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
+### 0.7.2 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
+### 0.7.1 / 2021-07-12
+
+#### Documentation
+
+* Clarify some language around authentication configuration
+
+### 0.7.0 / 2021-06-24
+
+#### Features
+
+* Add support for the JSON type
+
+### 0.6.1 / 2021-06-23
 
 #### Bug Fixes
 
 * Moved CommitResponse into a separate proto file
+* Support future 1.x versions of gapic-common
 
 ### 0.6.0 / 2021-04-05
 

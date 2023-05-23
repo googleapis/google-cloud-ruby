@@ -19,7 +19,7 @@ require "google/cloud/vision/v1"
 
 class ImageAnnotatorHelpersSmokeTest < Minitest::Test
   def gs_image
-    "gs://gapic-toolkit/President_Barack_Obama.jpg"
+    "gs://gcloud-ruby-acceptance-public-read/obama-happy.jpg"
   end
 
   def image_annotator_client
@@ -29,7 +29,7 @@ class ImageAnnotatorHelpersSmokeTest < Minitest::Test
   def options
     {
       images: [],
-      image: "gs://gapic-toolkit/President_Barack_Obama.jpg",
+      image: gs_image,
       max_results: 10,
       async: false,
       mime_type: nil,

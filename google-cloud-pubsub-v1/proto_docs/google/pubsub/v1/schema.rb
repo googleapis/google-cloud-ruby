@@ -34,6 +34,12 @@ module Google
         #     The definition of the schema. This should contain a string representing
         #     the full definition of the schema that is a valid schema definition of
         #     the type specified in `type`.
+        # @!attribute [r] revision_id
+        #   @return [::String]
+        #     Output only. Immutable. The revision ID of the schema.
+        # @!attribute [r] revision_create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The timestamp that the revision was created.
         class Schema
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -83,8 +89,7 @@ module Google
         # @!attribute [rw] view
         #   @return [::Google::Cloud::PubSub::V1::SchemaView]
         #     The set of fields to return in the response. If not set, returns a Schema
-        #     with `name` and `type`, but not `definition`. Set to `FULL` to retrieve all
-        #     fields.
+        #     with all fields filled out. Set to `BASIC` to omit the `definition`.
         class GetSchemaRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -126,6 +131,85 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request for the `ListSchemaRevisions` method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the schema to list revisions for.
+        # @!attribute [rw] view
+        #   @return [::Google::Cloud::PubSub::V1::SchemaView]
+        #     The set of Schema fields to return in the response. If not set, returns
+        #     Schemas with `name` and `type`, but not `definition`. Set to `FULL` to
+        #     retrieve all fields.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of revisions to return per page.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     The page token, received from a previous ListSchemaRevisions call.
+        #     Provide this to retrieve the subsequent page.
+        class ListSchemaRevisionsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response for the `ListSchemaRevisions` method.
+        # @!attribute [rw] schemas
+        #   @return [::Array<::Google::Cloud::PubSub::V1::Schema>]
+        #     The revisions of the schema.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token that can be sent as `page_token` to retrieve the next page.
+        #     If this field is empty, there are no subsequent pages.
+        class ListSchemaRevisionsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for CommitSchema method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the schema we are revising.
+        #     Format is `projects/{project}/schemas/{schema}`.
+        # @!attribute [rw] schema
+        #   @return [::Google::Cloud::PubSub::V1::Schema]
+        #     Required. The schema revision to commit.
+        class CommitSchemaRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for the `RollbackSchema` method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The schema being rolled back with revision id.
+        # @!attribute [rw] revision_id
+        #   @return [::String]
+        #     Required. The revision ID to roll back to.
+        #     It must be a revision of the same schema.
+        #
+        #       Example: c7cfa2a8
+        class RollbackSchemaRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for the `DeleteSchemaRevision` method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the schema revision to be deleted, with a revision ID
+        #     explicitly included.
+        #
+        #     Example: `projects/123/schemas/my-schema@c7cfa2a8`
+        # @!attribute [rw] revision_id
+        #   @return [::String]
+        #     Optional. This field is deprecated and should not be used for specifying
+        #     the revision ID. The revision ID should be specified via the `name`
+        #     parameter.
+        class DeleteSchemaRevisionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request for the `DeleteSchema` method.
         # @!attribute [rw] name
         #   @return [::String]
@@ -150,6 +234,7 @@ module Google
         end
 
         # Response for the `ValidateSchema` method.
+        # Empty for now.
         class ValidateSchemaResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -180,6 +265,7 @@ module Google
         end
 
         # Response for the `ValidateMessage` method.
+        # Empty for now.
         class ValidateMessageResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

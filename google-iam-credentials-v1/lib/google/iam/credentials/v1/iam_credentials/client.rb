@@ -49,13 +49,12 @@ module Google
             # See {::Google::Iam::Credentials::V1::IAMCredentials::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all IAMCredentials clients:
-            #
-            #     ::Google::Iam::Credentials::V1::IAMCredentials::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all IAMCredentials clients
+            #   ::Google::Iam::Credentials::V1::IAMCredentials::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -75,34 +74,22 @@ module Google
 
                 default_config.rpcs.generate_access_token.timeout = 60.0
                 default_config.rpcs.generate_access_token.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.generate_id_token.timeout = 60.0
                 default_config.rpcs.generate_id_token.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.sign_blob.timeout = 60.0
                 default_config.rpcs.sign_blob.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.sign_jwt.timeout = 60.0
                 default_config.rpcs.sign_jwt.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config
@@ -134,19 +121,15 @@ module Google
             ##
             # Create a new IAMCredentials client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new IAMCredentials client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Iam::Credentials::V1::IAMCredentials::Client.new
             #
-            #     client = ::Google::Iam::Credentials::V1::IAMCredentials::Client.new
-            #
-            # To create a new IAMCredentials client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Iam::Credentials::V1::IAMCredentials::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Iam::Credentials::V1::IAMCredentials::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the IAMCredentials client.
             # @yieldparam config [Client::Configuration]
@@ -166,14 +149,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -243,6 +225,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/iam/credentials/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Iam::Credentials::V1::IAMCredentials::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Iam::Credentials::V1::GenerateAccessTokenRequest.new
+            #
+            #   # Call the generate_access_token method.
+            #   result = client.generate_access_token request
+            #
+            #   # The returned object is of type Google::Iam::Credentials::V1::GenerateAccessTokenResponse.
+            #   p result
+            #
             def generate_access_token request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -260,16 +257,20 @@ module Google
                 gapic_version: ::Google::Iam::Credentials::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.generate_access_token.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.generate_access_token.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @iam_credentials_stub.call_rpc :generate_access_token, request, options: options do |response, operation|
@@ -329,6 +330,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/iam/credentials/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Iam::Credentials::V1::IAMCredentials::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Iam::Credentials::V1::GenerateIdTokenRequest.new
+            #
+            #   # Call the generate_id_token method.
+            #   result = client.generate_id_token request
+            #
+            #   # The returned object is of type Google::Iam::Credentials::V1::GenerateIdTokenResponse.
+            #   p result
+            #
             def generate_id_token request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -346,16 +362,20 @@ module Google
                 gapic_version: ::Google::Iam::Credentials::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.generate_id_token.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.generate_id_token.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @iam_credentials_stub.call_rpc :generate_id_token, request, options: options do |response, operation|
@@ -411,6 +431,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/iam/credentials/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Iam::Credentials::V1::IAMCredentials::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Iam::Credentials::V1::SignBlobRequest.new
+            #
+            #   # Call the sign_blob method.
+            #   result = client.sign_blob request
+            #
+            #   # The returned object is of type Google::Iam::Credentials::V1::SignBlobResponse.
+            #   p result
+            #
             def sign_blob request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -428,16 +463,20 @@ module Google
                 gapic_version: ::Google::Iam::Credentials::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.sign_blob.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.sign_blob.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @iam_credentials_stub.call_rpc :sign_blob, request, options: options do |response, operation|
@@ -493,6 +532,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/iam/credentials/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Iam::Credentials::V1::IAMCredentials::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Iam::Credentials::V1::SignJwtRequest.new
+            #
+            #   # Call the sign_jwt method.
+            #   result = client.sign_jwt request
+            #
+            #   # The returned object is of type Google::Iam::Credentials::V1::SignJwtResponse.
+            #   p result
+            #
             def sign_jwt request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -510,16 +564,20 @@ module Google
                 gapic_version: ::Google::Iam::Credentials::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.sign_jwt.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.sign_jwt.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @iam_credentials_stub.call_rpc :sign_jwt, request, options: options do |response, operation|
@@ -543,22 +601,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for generate_access_token
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # generate_access_token to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Iam::Credentials::V1::IAMCredentials::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.generate_access_token.timeout = 20.0
+            #   end
             #
-            #     ::Google::Iam::Credentials::V1::IAMCredentials::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.generate_access_token.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Iam::Credentials::V1::IAMCredentials::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.generate_access_token.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Iam::Credentials::V1::IAMCredentials::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.generate_access_token.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
@@ -569,9 +626,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials

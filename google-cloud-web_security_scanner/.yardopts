@@ -1,5 +1,5 @@
 --no-private
---title=Web Security Scanner API
+--title="Web Security Scanner API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

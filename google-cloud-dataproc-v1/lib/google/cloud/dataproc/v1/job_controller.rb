@@ -25,6 +25,7 @@ require "google/cloud/dataproc/v1/version"
 require "google/cloud/dataproc/v1/job_controller/credentials"
 require "google/cloud/dataproc/v1/job_controller/operations"
 require "google/cloud/dataproc/v1/job_controller/client"
+require "google/cloud/dataproc/v1/job_controller/rest"
 
 module Google
   module Cloud
@@ -33,10 +34,15 @@ module Google
         ##
         # The JobController provides methods to manage jobs.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/dataproc/v1/job_controller"
         #     client = ::Google::Cloud::Dataproc::V1::JobController::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/dataproc/v1/job_controller/rest"
+        #     client = ::Google::Cloud::Dataproc::V1::JobController::Rest::Client.new
         #
         module JobController
         end

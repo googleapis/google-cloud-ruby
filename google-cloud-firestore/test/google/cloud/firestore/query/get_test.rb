@@ -50,6 +50,18 @@ describe Google::Cloud::Firestore::Query, :get, :mock_firestore do
     assert_results_enum results_enum
   end
 
+  it "gets a query with a single select and read time set" do
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      select: Google::Cloud::Firestore::V1::StructuredQuery::Projection.new(
+        fields: [Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "name")])
+    )
+    firestore_mock.expect :run_query, query_results_enum, run_query_args(expected_query, read_time: read_time)
+
+    results_enum = query.select(:name).get read_time: read_time
+
+    assert_results_enum results_enum
+  end
+
   it "gets a query with multiple select values" do
     expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
       select: Google::Cloud::Firestore::V1::StructuredQuery::Projection.new(
@@ -249,6 +261,43 @@ describe Google::Cloud::Firestore::Query, :get, :mock_firestore do
     firestore_mock.expect :run_query, query_results_enum, run_query_args(expected_query)
 
     results_enum = firestore.col(:users).select(:name).offset(3).limit(42).order(:name).order(firestore.document_id, :desc).start_after(:foo).end_before(:bar).get
+
+    assert_results_enum results_enum
+  end
+
+  it "gets a complex query after serialization and deserialization" do
+    expected_query = Google::Cloud::Firestore::V1::StructuredQuery.new(
+      select: Google::Cloud::Firestore::V1::StructuredQuery::Projection.new(
+        fields: [Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "name")]),
+      from: [Google::Cloud::Firestore::V1::StructuredQuery::CollectionSelector.new(collection_id: "users", all_descendants: false)],
+      offset: 3,
+      limit: Google::Protobuf::Int32Value.new(value: 42),
+      order_by: [
+        Google::Cloud::Firestore::V1::StructuredQuery::Order.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "name"),
+          direction: :ASCENDING),
+        Google::Cloud::Firestore::V1::StructuredQuery::Order.new(
+          field: Google::Cloud::Firestore::V1::StructuredQuery::FieldReference.new(field_path: "__name__"),
+          direction: :DESCENDING)],
+      start_at: Google::Cloud::Firestore::V1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("foo")], before: false),
+      end_at: Google::Cloud::Firestore::V1::Cursor.new(values: [Google::Cloud::Firestore::Convert.raw_to_value("bar")], before: true)
+    )
+    firestore_mock.expect :run_query, query_results_enum, run_query_args(expected_query)
+
+    original_query = firestore.col(:users).select(:name).offset(3).limit(42).order(:name).order(firestore.document_id, :desc).start_after(:foo).end_before(:bar)
+
+    json = original_query.to_json
+    _(json).must_be_instance_of String
+
+    deserialized_query = Google::Cloud::Firestore::Query.from_json json, firestore
+    _(deserialized_query).must_be_instance_of Google::Cloud::Firestore::Query
+
+    _(deserialized_query.query).must_equal expected_query # Private field
+    _(deserialized_query.parent_path).must_equal original_query.parent_path # Private field
+    _(deserialized_query.limit_type).must_equal original_query.limit_type # Private field
+    _(deserialized_query.client).must_equal original_query.client # Private field
+
+    results_enum = deserialized_query.get
 
     assert_results_enum results_enum
   end

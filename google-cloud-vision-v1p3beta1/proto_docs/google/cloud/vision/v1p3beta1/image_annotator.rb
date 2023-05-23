@@ -35,7 +35,8 @@ module Google
         #   @return [::String]
         #     Model to use for the feature.
         #     Supported values: "builtin/stable" (the default if unset) and
-        #     "builtin/latest".
+        #     "builtin/latest". `DOCUMENT_TEXT_DETECTION` and `TEXT_DETECTION` also
+        #     support "builtin/weekly" for the bleeding edge release updated weekly.
         class Feature
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -557,6 +558,9 @@ module Google
         #     By default, Cloud Vision API only includes confidence score for
         #     DOCUMENT_TEXT_DETECTION result. Set the flag to true to include confidence
         #     score for TEXT_DETECTION as well.
+        # @!attribute [rw] advanced_ocr_options
+        #   @return [::Array<::String>]
+        #     A list of advanced OCR options to fine-tune OCR behavior.
         class TextDetectionParams
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

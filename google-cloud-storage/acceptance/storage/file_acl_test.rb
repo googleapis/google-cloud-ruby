@@ -27,11 +27,11 @@ describe Google::Cloud::Storage::File, :acl, :storage do
   end
   let(:local_file) { File.new files[:logo][:path] }
 
-  let(:user_val) { "user-blowmage@gmail.com" }
+  let(:user_val) { "user-test@example.com" }
 
   before do
     # always create the bucket and set default acl to auth
-    bucket.default_acl.auth!
+    safe_gcs_execute { bucket.default_acl.auth! }
   end
 
   after do
@@ -40,7 +40,7 @@ describe Google::Cloud::Storage::File, :acl, :storage do
 
   it "adds a reader" do
     file = bucket.create_file local_file, "ReaderTest.png"
-    user_val = "user-blowmage@gmail.com"
+    user_val = "user-test@example.com"
     _(file.acl.readers).wont_include user_val
     file.acl.add_reader user_val
     _(file.acl.readers).must_include user_val
@@ -52,7 +52,7 @@ describe Google::Cloud::Storage::File, :acl, :storage do
 
   it "adds an owner" do
     file = bucket.create_file local_file, "OwnerTest.png"
-    user_val = "user-blowmage@gmail.com"
+    user_val = "user-test@example.com"
     _(file.acl.owners).wont_include user_val
     file.acl.add_owner user_val
     _(file.acl.owners).must_include user_val
@@ -122,21 +122,22 @@ describe Google::Cloud::Storage::File, :acl, :storage do
   end
 
   it "sets predefined ACL rules" do
-    file = bucket.create_file local_file, "PredefinedTest.png"
-    file.acl.authenticatedRead!
-    file.acl.auth!
-    file.acl.auth_read!
-    file.acl.authenticated!
-    file.acl.authenticated_read!
-    file.acl.bucketOwnerFullControl!
-    file.acl.owner_full!
-    file.acl.bucketOwnerRead!
-    file.acl.owner_read!
-    file.acl.private!
-    file.acl.projectPrivate!
-    file.acl.project_private!
-    file.acl.publicRead!
-    file.acl.public!
-    file.acl.public_read!
+    file = nil
+    safe_gcs_execute { file = bucket.create_file local_file, "PredefinedTest.png" }
+    safe_gcs_execute { file.acl.authenticatedRead! }
+    safe_gcs_execute { file.acl.auth! }
+    safe_gcs_execute { file.acl.auth_read! }
+    safe_gcs_execute { file.acl.authenticated! }
+    safe_gcs_execute { file.acl.authenticated_read! }
+    safe_gcs_execute { file.acl.bucketOwnerFullControl! }
+    safe_gcs_execute { file.acl.owner_full! }
+    safe_gcs_execute { file.acl.bucketOwnerRead! }
+    safe_gcs_execute { file.acl.owner_read! }
+    safe_gcs_execute { file.acl.private! }
+    safe_gcs_execute { file.acl.projectPrivate! }
+    safe_gcs_execute { file.acl.project_private! }
+    safe_gcs_execute { file.acl.publicRead! }
+    safe_gcs_execute { file.acl.public! }
+    safe_gcs_execute { file.acl.public_read! }
   end
 end

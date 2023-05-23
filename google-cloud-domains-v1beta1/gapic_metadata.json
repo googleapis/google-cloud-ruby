@@ -25,6 +25,16 @@
                 "register_domain"
               ]
             },
+            "RetrieveTransferParameters": {
+              "methods": [
+                "retrieve_transfer_parameters"
+              ]
+            },
+            "TransferDomain": {
+              "methods": [
+                "transfer_domain"
+              ]
+            },
             "ListRegistrations": {
               "methods": [
                 "list_registrations"

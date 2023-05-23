@@ -6,7 +6,7 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 require 'google/monitoring/dashboard/v1/metrics_pb'
 require 'google/protobuf/duration_pb'
-require 'google/protobuf/empty_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/monitoring/dashboard/v1/scorecard.proto", :syntax => :proto3) do
     add_message "google.monitoring.dashboard.v1.Scorecard" do

@@ -40,7 +40,7 @@ describe Google::Cloud::Bigtable::Cluster, :backup, :mock_bigtable do
 
   it "gets a backup" do
     mock = Minitest::Mock.new
-    mock.expect :get_backup, backup_grpc, [name: backup_path(instance_id, cluster_id, backup_id)]
+    mock.expect :get_backup, backup_grpc, name: backup_path(instance_id, cluster_id, backup_id)
     bigtable.service.mocked_tables = mock
 
     backup = cluster.backup backup_id

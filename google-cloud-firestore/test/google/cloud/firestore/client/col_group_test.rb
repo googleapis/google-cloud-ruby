@@ -19,10 +19,10 @@ describe Google::Cloud::Firestore::Client, :col_group, :mock_firestore do
   let(:collection_id_bad) { "a/b/my-collection-id" }
 
   it "creates a collection group query" do
-    query = firestore.col_group(collection_id).where "foo", "==", "bar"
+    collection_group = firestore.col_group(collection_id)
 
-    _(query).must_be_kind_of Google::Cloud::Firestore::Query
-    query_gapi = query.query
+    _(collection_group).must_be_kind_of Google::Cloud::Firestore::Query
+    query_gapi = collection_group.query
     _(query_gapi).must_be_kind_of Google::Cloud::Firestore::V1::StructuredQuery
     _(query_gapi.from.size).must_equal 1
     _(query_gapi.from.first).must_be_kind_of Google::Cloud::Firestore::V1::StructuredQuery::CollectionSelector
@@ -31,10 +31,10 @@ describe Google::Cloud::Firestore::Client, :col_group, :mock_firestore do
   end
 
   it "creates a collection group query using collection_group alias" do
-    query = firestore.collection_group(collection_id).where "foo", "==", "bar"
+    collection_group = firestore.collection_group(collection_id)
 
-    _(query).must_be_kind_of Google::Cloud::Firestore::Query
-    query_gapi = query.query
+    _(collection_group).must_be_kind_of Google::Cloud::Firestore::Query
+    query_gapi = collection_group.query
     _(query_gapi).must_be_kind_of Google::Cloud::Firestore::V1::StructuredQuery
     _(query_gapi.from.size).must_equal 1
     _(query_gapi.from.first).must_be_kind_of Google::Cloud::Firestore::V1::StructuredQuery::CollectionSelector

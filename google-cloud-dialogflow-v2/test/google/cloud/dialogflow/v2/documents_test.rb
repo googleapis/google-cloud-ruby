@@ -58,6 +58,7 @@ class ::Google::Cloud::Dialogflow::V2::Documents::ClientTest < Minitest::Test
     parent = "hello world"
     page_size = 42
     page_token = "hello world"
+    filter = "hello world"
 
     list_documents_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_documents, name
@@ -65,6 +66,7 @@ class ::Google::Cloud::Dialogflow::V2::Documents::ClientTest < Minitest::Test
       assert_equal "hello world", request["parent"]
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
       refute_nil options
     end
 
@@ -75,35 +77,35 @@ class ::Google::Cloud::Dialogflow::V2::Documents::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.list_documents({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      client.list_documents({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_documents parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      client.list_documents parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_documents ::Google::Cloud::Dialogflow::V2::ListDocumentsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_documents ::Google::Cloud::Dialogflow::V2::ListDocumentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_documents({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      client.list_documents({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_documents(::Google::Cloud::Dialogflow::V2::ListDocumentsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      client.list_documents(::Google::Cloud::Dialogflow::V2::ListDocumentsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -234,6 +236,76 @@ class ::Google::Cloud::Dialogflow::V2::Documents::ClientTest < Minitest::Test
 
       # Verify method calls
       assert_equal 5, create_document_client_stub.call_rpc_count
+    end
+  end
+
+  def test_import_documents
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    gcs_source = {}
+    document_template = {}
+    import_gcs_custom_metadata = true
+
+    import_documents_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :import_documents, name
+      assert_kind_of ::Google::Cloud::Dialogflow::V2::ImportDocumentsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::GcsSources), request["gcs_source"]
+      assert_equal :gcs_source, request.source
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::ImportDocumentTemplate), request["document_template"]
+      assert_equal true, request["import_gcs_custom_metadata"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, import_documents_client_stub do
+      # Create client
+      client = ::Google::Cloud::Dialogflow::V2::Documents::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.import_documents({ parent: parent, gcs_source: gcs_source, document_template: document_template, import_gcs_custom_metadata: import_gcs_custom_metadata }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.import_documents parent: parent, gcs_source: gcs_source, document_template: document_template, import_gcs_custom_metadata: import_gcs_custom_metadata do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.import_documents ::Google::Cloud::Dialogflow::V2::ImportDocumentsRequest.new(parent: parent, gcs_source: gcs_source, document_template: document_template, import_gcs_custom_metadata: import_gcs_custom_metadata) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.import_documents({ parent: parent, gcs_source: gcs_source, document_template: document_template, import_gcs_custom_metadata: import_gcs_custom_metadata }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.import_documents(::Google::Cloud::Dialogflow::V2::ImportDocumentsRequest.new(parent: parent, gcs_source: gcs_source, document_template: document_template, import_gcs_custom_metadata: import_gcs_custom_metadata), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, import_documents_client_stub.call_rpc_count
     end
   end
 
@@ -375,6 +447,8 @@ class ::Google::Cloud::Dialogflow::V2::Documents::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     name = "hello world"
     content_uri = "hello world"
+    import_gcs_custom_metadata = true
+    smart_messaging_partial_update = true
 
     reload_document_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :reload_document, name
@@ -382,6 +456,8 @@ class ::Google::Cloud::Dialogflow::V2::Documents::ClientTest < Minitest::Test
       assert_equal "hello world", request["name"]
       assert_equal "hello world", request["content_uri"]
       assert_equal :content_uri, request.source
+      assert_equal true, request["import_gcs_custom_metadata"]
+      assert_equal true, request["smart_messaging_partial_update"]
       refute_nil options
     end
 
@@ -392,35 +468,35 @@ class ::Google::Cloud::Dialogflow::V2::Documents::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.reload_document({ name: name, content_uri: content_uri }) do |response, operation|
+      client.reload_document({ name: name, content_uri: content_uri, import_gcs_custom_metadata: import_gcs_custom_metadata, smart_messaging_partial_update: smart_messaging_partial_update }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.reload_document name: name, content_uri: content_uri do |response, operation|
+      client.reload_document name: name, content_uri: content_uri, import_gcs_custom_metadata: import_gcs_custom_metadata, smart_messaging_partial_update: smart_messaging_partial_update do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.reload_document ::Google::Cloud::Dialogflow::V2::ReloadDocumentRequest.new(name: name, content_uri: content_uri) do |response, operation|
+      client.reload_document ::Google::Cloud::Dialogflow::V2::ReloadDocumentRequest.new(name: name, content_uri: content_uri, import_gcs_custom_metadata: import_gcs_custom_metadata, smart_messaging_partial_update: smart_messaging_partial_update) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.reload_document({ name: name, content_uri: content_uri }, grpc_options) do |response, operation|
+      client.reload_document({ name: name, content_uri: content_uri, import_gcs_custom_metadata: import_gcs_custom_metadata, smart_messaging_partial_update: smart_messaging_partial_update }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.reload_document(::Google::Cloud::Dialogflow::V2::ReloadDocumentRequest.new(name: name, content_uri: content_uri), grpc_options) do |response, operation|
+      client.reload_document(::Google::Cloud::Dialogflow::V2::ReloadDocumentRequest.new(name: name, content_uri: content_uri, import_gcs_custom_metadata: import_gcs_custom_metadata, smart_messaging_partial_update: smart_messaging_partial_update), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -428,6 +504,76 @@ class ::Google::Cloud::Dialogflow::V2::Documents::ClientTest < Minitest::Test
 
       # Verify method calls
       assert_equal 5, reload_document_client_stub.call_rpc_count
+    end
+  end
+
+  def test_export_document
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    gcs_destination = {}
+    export_full_content = true
+    smart_messaging_partial_update = true
+
+    export_document_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :export_document, name
+      assert_kind_of ::Google::Cloud::Dialogflow::V2::ExportDocumentRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::GcsDestination), request["gcs_destination"]
+      assert_equal :gcs_destination, request.destination
+      assert_equal true, request["export_full_content"]
+      assert_equal true, request["smart_messaging_partial_update"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, export_document_client_stub do
+      # Create client
+      client = ::Google::Cloud::Dialogflow::V2::Documents::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.export_document({ name: name, gcs_destination: gcs_destination, export_full_content: export_full_content, smart_messaging_partial_update: smart_messaging_partial_update }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.export_document name: name, gcs_destination: gcs_destination, export_full_content: export_full_content, smart_messaging_partial_update: smart_messaging_partial_update do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.export_document ::Google::Cloud::Dialogflow::V2::ExportDocumentRequest.new(name: name, gcs_destination: gcs_destination, export_full_content: export_full_content, smart_messaging_partial_update: smart_messaging_partial_update) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.export_document({ name: name, gcs_destination: gcs_destination, export_full_content: export_full_content, smart_messaging_partial_update: smart_messaging_partial_update }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.export_document(::Google::Cloud::Dialogflow::V2::ExportDocumentRequest.new(name: name, gcs_destination: gcs_destination, export_full_content: export_full_content, smart_messaging_partial_update: smart_messaging_partial_update), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, export_document_client_stub.call_rpc_count
     end
   end
 

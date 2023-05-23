@@ -36,7 +36,7 @@ describe Google::Cloud::PubSub::Project, :schemas, :mock_pubsub do
     validate_req = Google::Cloud::PubSub::V1::Schema.new type: type, definition: definition
     validate_res = Google::Cloud::PubSub::V1::ValidateSchemaResponse.new
     mock = Minitest::Mock.new
-    mock.expect :validate_schema, validate_res, [parent: project_path, schema: validate_req]
+    mock.expect :validate_schema, validate_res, parent: project_path, schema: validate_req
     pubsub.service.mocked_schemas = mock
 
     res = pubsub.valid_schema? type, definition
@@ -50,7 +50,7 @@ describe Google::Cloud::PubSub::Project, :schemas, :mock_pubsub do
     validate_req = Google::Cloud::PubSub::V1::Schema.new type: type, definition: definition
     validate_res = Google::Cloud::PubSub::V1::ValidateSchemaResponse.new
     mock = Minitest::Mock.new
-    mock.expect :validate_schema, validate_res, [parent: project_2_path, schema: validate_req]
+    mock.expect :validate_schema, validate_res, parent: project_2_path, schema: validate_req
     pubsub.service.mocked_schemas = mock
 
     res = pubsub.valid_schema? type, definition, project: project_2
@@ -64,7 +64,7 @@ describe Google::Cloud::PubSub::Project, :schemas, :mock_pubsub do
     validate_req = Google::Cloud::PubSub::V1::Schema.new type: type, definition: definition
     validate_res = Google::Cloud::PubSub::V1::ValidateSchemaResponse.new
     mock = Minitest::Mock.new
-    mock.expect :validate_schema, validate_res, [parent: project_path, schema: validate_req]
+    mock.expect :validate_schema, validate_res, parent: project_path, schema: validate_req
     pubsub.service.mocked_schemas = mock
 
     res = pubsub.validate_schema type, definition
@@ -92,7 +92,7 @@ describe Google::Cloud::PubSub::Project, :schemas, :mock_pubsub do
     create_req = Google::Cloud::PubSub::V1::Schema.new type: type, definition: definition
     create_res = Google::Cloud::PubSub::V1::Schema.new schema_hash(new_schema_id)
     mock = Minitest::Mock.new
-    mock.expect :create_schema, create_res, [parent: project_path, schema: create_req, schema_id: new_schema_id]
+    mock.expect :create_schema, create_res, parent: project_path, schema: create_req, schema_id: new_schema_id
     pubsub.service.mocked_schemas = mock
 
     schema = pubsub.create_schema new_schema_id, type, definition
@@ -111,7 +111,7 @@ describe Google::Cloud::PubSub::Project, :schemas, :mock_pubsub do
     create_req = Google::Cloud::PubSub::V1::Schema.new type: type, definition: definition
     create_res = Google::Cloud::PubSub::V1::Schema.new schema_hash(new_schema_path)
     mock = Minitest::Mock.new
-    mock.expect :create_schema, create_res, [parent: project_2_path, schema: create_req, schema_id: new_schema_id]
+    mock.expect :create_schema, create_res, parent: project_2_path, schema: create_req, schema_id: new_schema_id
     pubsub.service.mocked_schemas = mock
 
     schema = pubsub.new_schema new_schema_id, type, definition, project: project_2
@@ -129,7 +129,7 @@ describe Google::Cloud::PubSub::Project, :schemas, :mock_pubsub do
     create_req = Google::Cloud::PubSub::V1::Schema.new type: type, definition: definition
     create_res = Google::Cloud::PubSub::V1::Schema.new schema_hash(new_schema_id)
     mock = Minitest::Mock.new
-    mock.expect :create_schema, create_res, [parent: project_path, schema: create_req, schema_id: new_schema_id]
+    mock.expect :create_schema, create_res, parent: project_path, schema: create_req, schema_id: new_schema_id
     pubsub.service.mocked_schemas = mock
 
     schema = pubsub.new_schema new_schema_id, type, definition
@@ -146,7 +146,7 @@ describe Google::Cloud::PubSub::Project, :schemas, :mock_pubsub do
 
     get_res = Google::Cloud::PubSub::V1::Schema.new schema_hash(schema_id, definition: nil)
     mock = Minitest::Mock.new
-    mock.expect :get_schema, get_res, [name: schema_path(schema_id), view: 1]
+    mock.expect :get_schema, get_res, name: schema_path(schema_id), view: 2
     pubsub.service.mocked_schemas = mock
 
     schema = pubsub.schema schema_id
@@ -163,7 +163,7 @@ describe Google::Cloud::PubSub::Project, :schemas, :mock_pubsub do
 
     get_res = Google::Cloud::PubSub::V1::Schema.new schema_hash(schema_full_path, definition: nil)
     mock = Minitest::Mock.new
-    mock.expect :get_schema, get_res, [name: schema_path(schema_full_path), view: 1]
+    mock.expect :get_schema, get_res, name: schema_path(schema_full_path), view: 2
     pubsub.service.mocked_schemas = mock
 
     schema = pubsub.schema schema_full_path
@@ -178,7 +178,7 @@ describe Google::Cloud::PubSub::Project, :schemas, :mock_pubsub do
 
     get_res = Google::Cloud::PubSub::V1::Schema.new schema_hash(schema_id, definition: nil)
     mock = Minitest::Mock.new
-    mock.expect :get_schema, get_res, [name: schema_path(schema_id), view: 1]
+    mock.expect :get_schema, get_res, name: schema_path(schema_id), view: 2
     pubsub.service.mocked_schemas = mock
 
     schema = pubsub.get_schema schema_id
@@ -195,7 +195,7 @@ describe Google::Cloud::PubSub::Project, :schemas, :mock_pubsub do
 
     get_res = Google::Cloud::PubSub::V1::Schema.new schema_hash(schema_id, definition: nil)
     mock = Minitest::Mock.new
-    mock.expect :get_schema, get_res, [name: schema_path(schema_id), view: 1]
+    mock.expect :get_schema, get_res, name: schema_path(schema_id), view: 2
     pubsub.service.mocked_schemas = mock
 
     schema = pubsub.find_schema schema_id
@@ -225,10 +225,10 @@ describe Google::Cloud::PubSub::Project, :schemas, :mock_pubsub do
 
     get_res = Google::Cloud::PubSub::V1::Schema.new schema_hash(schema_id)
     mock = Minitest::Mock.new
-    mock.expect :get_schema, get_res, [name: schema_path(schema_id), view: 2]
+    mock.expect :get_schema, get_res, name: schema_path(schema_id), view: 1
     pubsub.service.mocked_schemas = mock
 
-    schema = pubsub.schema schema_id, view: :full
+    schema = pubsub.schema schema_id, view: :basic
 
     mock.verify
 
@@ -239,13 +239,14 @@ describe Google::Cloud::PubSub::Project, :schemas, :mock_pubsub do
 
   it "gets a schema with project option" do
     schema_id = "found-schema"
+    other_project_id = "my-other-project"
 
     get_res = Google::Cloud::PubSub::V1::Schema.new schema_hash(schema_id)
     mock = Minitest::Mock.new
-    mock.expect :get_schema, get_res, [name: schema_path(schema_id), view: 2]
+    mock.expect :get_schema, get_res, name: "projects/#{other_project_id}/schemas/#{schema_id}", view: 2
     pubsub.service.mocked_schemas = mock
 
-    schema = pubsub.schema schema_id, view: :full
+    schema = pubsub.schema schema_id, project: other_project_id
 
     mock.verify
 
@@ -264,12 +265,35 @@ describe Google::Cloud::PubSub::Project, :schemas, :mock_pubsub do
     _(schema).wont_be :resource?
   end
 
+  it "gets a schema with skip_lookup and basic view option, then schema reloads basic view" do
+    schema_id = "found-schema"
+
+    get_res = Google::Cloud::PubSub::V1::Schema.new schema_hash(schema_id, definition: nil)
+    mock = Minitest::Mock.new
+    mock.expect :get_schema, get_res, name: schema_path(schema_id), view: 1
+    pubsub.service.mocked_schemas = mock
+
+    schema = pubsub.schema schema_id, skip_lookup: true, view: :basic
+    _(schema.name).must_equal schema_path(schema_id)
+    _(schema).must_be :reference?
+    _(schema).wont_be :resource?
+
+    schema.reload!
+
+    _(schema).wont_be :reference?
+    _(schema).must_be :resource?
+    _(schema).must_be :resource_partial?
+    _(schema).wont_be :resource_full?
+
+    mock.verify
+  end
+
   it "gets a schema with skip_lookup and full view option, then schema reloads full view" do
     schema_id = "found-schema"
 
     get_res = Google::Cloud::PubSub::V1::Schema.new schema_hash(schema_id)
     mock = Minitest::Mock.new
-    mock.expect :get_schema, get_res, [name: schema_path(schema_id), view: 2]
+    mock.expect :get_schema, get_res, name: schema_path(schema_id), view: 2
     pubsub.service.mocked_schemas = mock
 
     schema = pubsub.schema schema_id, skip_lookup: true, view: :full
@@ -289,7 +313,7 @@ describe Google::Cloud::PubSub::Project, :schemas, :mock_pubsub do
 
   it "lists schemas" do
     mock = Minitest::Mock.new
-    mock.expect :list_schemas, schemas_with_token, [parent: "projects/#{project}", view: 1, page_size: nil, page_token: nil]
+    mock.expect :list_schemas, schemas_with_token, parent: "projects/#{project}", view: 2, page_size: nil, page_token: nil
     pubsub.service.mocked_schemas = mock
 
     schemas = pubsub.schemas
@@ -301,7 +325,7 @@ describe Google::Cloud::PubSub::Project, :schemas, :mock_pubsub do
 
   it "lists schemas with find_schemas alias" do
     mock = Minitest::Mock.new
-    mock.expect :list_schemas, schemas_with_token, [parent: "projects/#{project}", view: 1, page_size: nil, page_token: nil]
+    mock.expect :list_schemas, schemas_with_token, parent: "projects/#{project}", view: 2, page_size: nil, page_token: nil
     pubsub.service.mocked_schemas = mock
 
     schemas = pubsub.find_schemas
@@ -313,7 +337,7 @@ describe Google::Cloud::PubSub::Project, :schemas, :mock_pubsub do
 
   it "lists schemas with list_schemas alias" do
     mock = Minitest::Mock.new
-    mock.expect :list_schemas, schemas_with_token, [parent: "projects/#{project}", view: 1, page_size: nil, page_token: nil]
+    mock.expect :list_schemas, schemas_with_token, parent: "projects/#{project}", view: 2, page_size: nil, page_token: nil
     pubsub.service.mocked_schemas = mock
 
     schemas = pubsub.list_schemas
@@ -323,10 +347,22 @@ describe Google::Cloud::PubSub::Project, :schemas, :mock_pubsub do
     _(schemas.size).must_equal 3
   end
 
+  it "lists schemas with view option" do
+    mock = Minitest::Mock.new
+    mock.expect :list_schemas, schemas_with_token, parent: "projects/#{project}", view: 1, page_size: nil, page_token: nil
+    pubsub.service.mocked_schemas = mock
+
+    schemas = pubsub.schemas view: :basic
+
+    mock.verify
+
+    _(schemas.size).must_equal 3
+  end
+
   it "paginates schemas" do
     mock = Minitest::Mock.new
-    mock.expect :list_schemas, schemas_with_token, [parent: "projects/#{project}", view: 1, page_size: nil, page_token: nil]
-    mock.expect :list_schemas, schemas_without_token, [parent: "projects/#{project}", view: 1, page_size: nil, page_token: "next_page_token"]
+    mock.expect :list_schemas, schemas_with_token, parent: "projects/#{project}", view: 2, page_size: nil, page_token: nil
+    mock.expect :list_schemas, schemas_without_token, parent: "projects/#{project}", view: 2, page_size: nil, page_token: "next_page_token"
     pubsub.service.mocked_schemas = mock
 
     first_schemas = pubsub.schemas
@@ -345,7 +381,7 @@ describe Google::Cloud::PubSub::Project, :schemas, :mock_pubsub do
 
   it "paginates schemas with max set" do
     mock = Minitest::Mock.new
-    mock.expect :list_schemas, schemas_with_token, [parent: "projects/#{project}", view: 1, page_size: 3, page_token: nil]
+    mock.expect :list_schemas, schemas_with_token, parent: "projects/#{project}", view: 2, page_size: 3, page_token: nil
     pubsub.service.mocked_schemas = mock
 
     schemas = pubsub.schemas max: 3
@@ -360,8 +396,8 @@ describe Google::Cloud::PubSub::Project, :schemas, :mock_pubsub do
 
   it "paginates schemas with next? and next" do
     mock = Minitest::Mock.new
-    mock.expect :list_schemas, schemas_with_token, [parent: "projects/#{project}", view: 1, page_size: nil, page_token: nil]
-    mock.expect :list_schemas, schemas_without_token, [parent: "projects/#{project}", view: 1, page_size: nil, page_token: "next_page_token"]
+    mock.expect :list_schemas, schemas_with_token, parent: "projects/#{project}", view: 2, page_size: nil, page_token: nil
+    mock.expect :list_schemas, schemas_without_token, parent: "projects/#{project}", view: 2, page_size: nil, page_token: "next_page_token"
     pubsub.service.mocked_schemas = mock
 
     first_schemas = pubsub.schemas
@@ -378,8 +414,8 @@ describe Google::Cloud::PubSub::Project, :schemas, :mock_pubsub do
 
   it "paginates schemas with next? and next and max set" do
     mock = Minitest::Mock.new
-    mock.expect :list_schemas, schemas_with_token, [parent: "projects/#{project}", view: 1, page_size: 3, page_token: nil]
-    mock.expect :list_schemas, schemas_without_token, [parent: "projects/#{project}", view: 1, page_size: 3, page_token: "next_page_token"]
+    mock.expect :list_schemas, schemas_with_token, parent: "projects/#{project}", view: 2, page_size: 3, page_token: nil
+    mock.expect :list_schemas, schemas_without_token, parent: "projects/#{project}", view: 2, page_size: 3, page_token: "next_page_token"
     pubsub.service.mocked_schemas = mock
 
     first_schemas = pubsub.schemas max: 3
@@ -396,8 +432,8 @@ describe Google::Cloud::PubSub::Project, :schemas, :mock_pubsub do
 
   it "paginates schemas with all" do
     mock = Minitest::Mock.new
-    mock.expect :list_schemas, schemas_with_token, [parent: "projects/#{project}", view: 1, page_size: nil, page_token: nil]
-    mock.expect :list_schemas, schemas_without_token, [parent: "projects/#{project}", view: 1, page_size: nil, page_token: "next_page_token"]
+    mock.expect :list_schemas, schemas_with_token, parent: "projects/#{project}", view: 2, page_size: nil, page_token: nil
+    mock.expect :list_schemas, schemas_without_token, parent: "projects/#{project}", view: 2, page_size: nil, page_token: "next_page_token"
     pubsub.service.mocked_schemas = mock
 
     schemas = pubsub.schemas.all.to_a
@@ -409,8 +445,8 @@ describe Google::Cloud::PubSub::Project, :schemas, :mock_pubsub do
 
   it "paginates schemas with all and max set" do
     mock = Minitest::Mock.new
-    mock.expect :list_schemas, schemas_with_token, [parent: "projects/#{project}", view: 1, page_size: 3, page_token: nil]
-    mock.expect :list_schemas, schemas_without_token, [parent: "projects/#{project}", view: 1, page_size: 3, page_token: "next_page_token"]
+    mock.expect :list_schemas, schemas_with_token, parent: "projects/#{project}", view: 2, page_size: 3, page_token: nil
+    mock.expect :list_schemas, schemas_without_token, parent: "projects/#{project}", view: 2, page_size: 3, page_token: "next_page_token"
     pubsub.service.mocked_schemas = mock
 
     schemas = pubsub.schemas(max: 3).all.to_a
@@ -422,8 +458,8 @@ describe Google::Cloud::PubSub::Project, :schemas, :mock_pubsub do
 
   it "iterates schemas with all using Enumerator" do
     mock = Minitest::Mock.new
-    mock.expect :list_schemas, schemas_with_token, [parent: "projects/#{project}", view: 1, page_size: nil, page_token: nil]
-    mock.expect :list_schemas, schemas_with_token_2, [parent: "projects/#{project}", view: 1, page_size: nil, page_token: "next_page_token"]
+    mock.expect :list_schemas, schemas_with_token, parent: "projects/#{project}", view: 2, page_size: nil, page_token: nil
+    mock.expect :list_schemas, schemas_with_token_2, parent: "projects/#{project}", view: 2, page_size: nil, page_token: "next_page_token"
     pubsub.service.mocked_schemas = mock
 
     schemas = pubsub.schemas.all.take(5)
@@ -435,8 +471,8 @@ describe Google::Cloud::PubSub::Project, :schemas, :mock_pubsub do
 
   it "iterates schemas with all and request_limit set" do
     mock = Minitest::Mock.new
-    mock.expect :list_schemas, schemas_with_token, [parent: "projects/#{project}", view: 1, page_size: nil, page_token: nil]
-    mock.expect :list_schemas, schemas_with_token_2, [parent: "projects/#{project}", view: 1, page_size: nil, page_token: "next_page_token"]
+    mock.expect :list_schemas, schemas_with_token, parent: "projects/#{project}", view: 2, page_size: nil, page_token: nil
+    mock.expect :list_schemas, schemas_with_token_2, parent: "projects/#{project}", view: 2, page_size: nil, page_token: "next_page_token"
     pubsub.service.mocked_schemas = mock
 
     schemas = pubsub.schemas.all(request_limit: 1).to_a
@@ -448,7 +484,7 @@ describe Google::Cloud::PubSub::Project, :schemas, :mock_pubsub do
 
   it "paginates schemas without max set" do
     mock = Minitest::Mock.new
-    mock.expect :list_schemas, schemas_with_token, [parent: "projects/#{project}", view: 1, page_size: nil, page_token: nil]
+    mock.expect :list_schemas, schemas_with_token, parent: "projects/#{project}", view: 2, page_size: nil, page_token: nil
     pubsub.service.mocked_schemas = mock
 
     schemas = pubsub.schemas

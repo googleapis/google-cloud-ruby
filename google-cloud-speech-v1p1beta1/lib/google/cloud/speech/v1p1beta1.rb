@@ -24,10 +24,17 @@ module Google
   module Cloud
     module Speech
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
+      #
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/speech/v1p1beta1"
       #     client = ::Google::Cloud::Speech::V1p1beta1::Speech::Client.new
+      #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/speech/v1p1beta1"
+      #     client = ::Google::Cloud::Speech::V1p1beta1::Speech::Rest::Client.new
       #
       module V1p1beta1
       end

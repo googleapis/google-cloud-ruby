@@ -1,0 +1,33 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-bigquery-data_transfer.gemspec",
+    "lib/google-cloud-bigquery-data_transfer.rb",
+    "lib/google/cloud/bigquery/data_transfer.rb",
+    "lib/google/cloud/bigquery/data_transfer/version.rb",
+    "test/google/cloud/bigquery/data_transfer/client_test.rb",
+    "test/google/cloud/bigquery/data_transfer/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml",
+    "MIGRATING.md",
+    "acceptance/google/cloud/bigquery/data_transfer/v1/data_transfer_service_smoke_test.rb",
+    "samples/.rubocop.yml",
+    "samples/Gemfile",
+    "samples/README.md",
+    "samples/Rakefile",
+    "samples/acceptance/helper.rb",
+    "samples/acceptance/quickstart_test.rb",
+    "samples/quickstart.rb"
+  ]
+}

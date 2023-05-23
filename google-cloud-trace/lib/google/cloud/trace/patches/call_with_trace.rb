@@ -54,9 +54,9 @@ module GRPC
       ##
       # @private Reverse lookup from numeric status code to readable string.
       def self.status_code_to_label code
-        @lookup ||= Hash[GRPC::Core::StatusCodes.constants.map do |c|
+        @lookup ||= GRPC::Core::StatusCodes.constants.to_h do |c|
           [GRPC::Core::StatusCodes.const_get(c), c.to_s]
-        end]
+        end
 
         @lookup[code]
       end
@@ -68,7 +68,7 @@ module GRPC
       def run_batch *args
         span = Google::Cloud::Trace.get
         # Make sure we're in a "gRPC request" span
-        span = nil if span && span.name != GRPC::ActiveCallWithTrace::SPAN_NAME
+        span = nil if !span.respond_to?(:name) || span.name != GRPC::ActiveCallWithTrace::SPAN_NAME
 
         if span && !args.empty?
           message = args[0]
@@ -84,6 +84,9 @@ module GRPC
     end
 
     # Patch GRPC::Core::Call#run_batch method
-    ::GRPC::Core::Call.prepend CallWithTrace
+    # @private
+    class Call
+      prepend CallWithTrace
+    end
   end
 end

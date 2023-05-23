@@ -48,12 +48,14 @@ module Google
       # Create a new client object for CatalogService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Client](https://googleapis.dev/ruby/google-cloud-recommendation_engine-v1beta1/latest/Google/Cloud/RecommendationEngine/V1beta1/CatalogService/Client.html)
-      # for version V1beta1 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # [Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-recommendation_engine-v1beta1/latest/Google-Cloud-RecommendationEngine-V1beta1-CatalogService-Client)
+      # for a gRPC client for version V1beta1 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the CatalogService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About CatalogService
       #
@@ -61,29 +63,33 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1beta1`.
-      # @return [CatalogService::Client] A client object for the specified version.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
       #
-      def self.catalog_service version: :v1beta1, &block
+      def self.catalog_service version: :v1beta1, transport: :grpc, &block
         require "google/cloud/recommendation_engine/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::RecommendationEngine
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::RecommendationEngine.const_get package_name
-        package_module.const_get(:CatalogService).const_get(:Client).new(&block)
+        service_module = Google::Cloud::RecommendationEngine.const_get(package_name).const_get(:CatalogService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
       # Create a new client object for PredictionApiKeyRegistry.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Client](https://googleapis.dev/ruby/google-cloud-recommendation_engine-v1beta1/latest/Google/Cloud/RecommendationEngine/V1beta1/PredictionApiKeyRegistry/Client.html)
-      # for version V1beta1 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # [Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-recommendation_engine-v1beta1/latest/Google-Cloud-RecommendationEngine-V1beta1-PredictionApiKeyRegistry-Client)
+      # for a gRPC client for version V1beta1 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the PredictionApiKeyRegistry service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About PredictionApiKeyRegistry
       #
@@ -95,29 +101,33 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1beta1`.
-      # @return [PredictionApiKeyRegistry::Client] A client object for the specified version.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
       #
-      def self.prediction_api_key_registry version: :v1beta1, &block
+      def self.prediction_api_key_registry version: :v1beta1, transport: :grpc, &block
         require "google/cloud/recommendation_engine/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::RecommendationEngine
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::RecommendationEngine.const_get package_name
-        package_module.const_get(:PredictionApiKeyRegistry).const_get(:Client).new(&block)
+        service_module = Google::Cloud::RecommendationEngine.const_get(package_name).const_get(:PredictionApiKeyRegistry)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
       # Create a new client object for PredictionService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::RecommendationEngine::V1beta1::PredictionService::Client](https://googleapis.dev/ruby/google-cloud-recommendation_engine-v1beta1/latest/Google/Cloud/RecommendationEngine/V1beta1/PredictionService/Client.html)
-      # for version V1beta1 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # [Google::Cloud::RecommendationEngine::V1beta1::PredictionService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-recommendation_engine-v1beta1/latest/Google-Cloud-RecommendationEngine-V1beta1-PredictionService-Client)
+      # for a gRPC client for version V1beta1 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the PredictionService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About PredictionService
       #
@@ -125,29 +135,33 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1beta1`.
-      # @return [PredictionService::Client] A client object for the specified version.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
       #
-      def self.prediction_service version: :v1beta1, &block
+      def self.prediction_service version: :v1beta1, transport: :grpc, &block
         require "google/cloud/recommendation_engine/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::RecommendationEngine
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::RecommendationEngine.const_get package_name
-        package_module.const_get(:PredictionService).const_get(:Client).new(&block)
+        service_module = Google::Cloud::RecommendationEngine.const_get(package_name).const_get(:PredictionService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
       # Create a new client object for UserEventService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Client](https://googleapis.dev/ruby/google-cloud-recommendation_engine-v1beta1/latest/Google/Cloud/RecommendationEngine/V1beta1/UserEventService/Client.html)
-      # for version V1beta1 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # [Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-recommendation_engine-v1beta1/latest/Google-Cloud-RecommendationEngine-V1beta1-UserEventService-Client)
+      # for a gRPC client for version V1beta1 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the UserEventService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About UserEventService
       #
@@ -155,17 +169,19 @@ module Google
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1beta1`.
-      # @return [UserEventService::Client] A client object for the specified version.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
       #
-      def self.user_event_service version: :v1beta1, &block
+      def self.user_event_service version: :v1beta1, transport: :grpc, &block
         require "google/cloud/recommendation_engine/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::RecommendationEngine
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::RecommendationEngine.const_get package_name
-        package_module.const_get(:UserEventService).const_get(:Client).new(&block)
+        service_module = Google::Cloud::RecommendationEngine.const_get(package_name).const_get(:UserEventService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -185,7 +201,7 @@ module Google
       # * `timeout` (*type:* `Numeric`) -
       #   Default timeout in seconds.
       # * `metadata` (*type:* `Hash{Symbol=>String}`) -
-      #   Additional gRPC headers to be sent with the call.
+      #   Additional headers to be sent with the call.
       # * `retry_policy` (*type:* `Hash`) -
       #   The retry policy. The value is a hash with the following keys:
       #     * `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.

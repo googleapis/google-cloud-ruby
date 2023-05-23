@@ -25,6 +25,7 @@ require "google/cloud/os_login/v1beta/version"
 require "google/cloud/os_login/v1beta/os_login_service/credentials"
 require "google/cloud/os_login/v1beta/os_login_service/paths"
 require "google/cloud/os_login/v1beta/os_login_service/client"
+require "google/cloud/os_login/v1beta/os_login_service/rest"
 
 module Google
   module Cloud
@@ -36,10 +37,15 @@ module Google
         # The Cloud OS Login API allows you to manage users and their associated SSH
         # public keys for logging into virtual machines on Google Cloud Platform.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/os_login/v1beta/os_login_service"
         #     client = ::Google::Cloud::OsLogin::V1beta::OsLoginService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/os_login/v1beta/os_login_service/rest"
+        #     client = ::Google::Cloud::OsLogin::V1beta::OsLoginService::Rest::Client.new
         #
         module OsLoginService
         end

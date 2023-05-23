@@ -7,6 +7,7 @@ require 'google/api/resource_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/struct_pb'
 require 'google/protobuf/timestamp_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/recommender/v1/insight.proto", :syntax => :proto3) do
     add_message "google.cloud.recommender.v1.Insight" do
@@ -19,6 +20,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :observation_period, :message, 5, "google.protobuf.Duration"
       optional :state_info, :message, 6, "google.cloud.recommender.v1.InsightStateInfo"
       optional :category, :enum, 7, "google.cloud.recommender.v1.Insight.Category"
+      optional :severity, :enum, 15, "google.cloud.recommender.v1.Insight.Severity"
       optional :etag, :string, 11
       repeated :associated_recommendations, :message, 8, "google.cloud.recommender.v1.Insight.RecommendationReference"
     end
@@ -31,6 +33,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :SECURITY, 2
       value :PERFORMANCE, 3
       value :MANAGEABILITY, 4
+    end
+    add_enum "google.cloud.recommender.v1.Insight.Severity" do
+      value :SEVERITY_UNSPECIFIED, 0
+      value :LOW, 1
+      value :MEDIUM, 2
+      value :HIGH, 3
+      value :CRITICAL, 4
     end
     add_message "google.cloud.recommender.v1.InsightStateInfo" do
       optional :state, :enum, 1, "google.cloud.recommender.v1.InsightStateInfo.State"
@@ -52,6 +61,7 @@ module Google
         Insight = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.Insight").msgclass
         Insight::RecommendationReference = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.Insight.RecommendationReference").msgclass
         Insight::Category = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.Insight.Category").enummodule
+        Insight::Severity = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.Insight.Severity").enummodule
         InsightStateInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.InsightStateInfo").msgclass
         InsightStateInfo::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recommender.v1.InsightStateInfo.State").enummodule
       end

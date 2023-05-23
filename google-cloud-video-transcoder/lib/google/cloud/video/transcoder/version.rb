@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Video
       module Transcoder
-        VERSION = "0.2.0"
+        VERSION = "1.3.0"
       end
     end
   end

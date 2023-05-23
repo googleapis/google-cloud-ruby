@@ -86,6 +86,10 @@ module Google
         # @!attribute [rw] vm
         #   @return [::Boolean]
         #     Whether to deploy this version in a container on a virtual machine.
+        # @!attribute [rw] app_engine_apis
+        #   @return [::Boolean]
+        #     Allows App Engine second generation runtimes to access the legacy bundled
+        #     services.
         # @!attribute [rw] beta_settings
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Metadata settings that are supplied to this version to enable
@@ -557,9 +561,27 @@ module Google
         #   @return [::String]
         #     Full Serverless VPC Access Connector name e.g.
         #     /projects/my-project/locations/us-central1/connectors/c1.
+        # @!attribute [rw] egress_setting
+        #   @return [::Google::Cloud::AppEngine::V1::VpcAccessConnector::EgressSetting]
+        #     The egress setting for the connector, controlling what traffic is diverted
+        #     through it.
         class VpcAccessConnector
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Available egress settings.
+          #
+          # This controls what traffic is diverted through the VPC Access Connector
+          # resource. By default PRIVATE_IP_RANGES will be used.
+          module EgressSetting
+            EGRESS_SETTING_UNSPECIFIED = 0
+
+            # Force the use of VPC Access for all egress traffic from the function.
+            ALL_TRAFFIC = 1
+
+            # Use the VPC Access Connector for private IP space from RFC1918.
+            PRIVATE_IP_RANGES = 2
+          end
         end
 
         # The entrypoint for the application.

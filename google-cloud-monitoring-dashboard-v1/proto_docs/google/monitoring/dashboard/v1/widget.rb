@@ -39,6 +39,19 @@ module Google
           # @!attribute [rw] blank
           #   @return [::Google::Protobuf::Empty]
           #     A blank space.
+          # @!attribute [rw] alert_chart
+          #   @return [::Google::Cloud::Monitoring::Dashboard::V1::AlertChart]
+          #     A chart of alert policy data.
+          # @!attribute [rw] time_series_table
+          #   @return [::Google::Cloud::Monitoring::Dashboard::V1::TimeSeriesTable]
+          #     A widget that displays time series data in a tabular format.
+          # @!attribute [rw] collapsible_group
+          #   @return [::Google::Cloud::Monitoring::Dashboard::V1::CollapsibleGroup]
+          #     A widget that groups the other widgets. All widgets that are within
+          #     the area spanned by the grouping widget are considered member widgets.
+          # @!attribute [rw] logs_panel
+          #   @return [::Google::Cloud::Monitoring::Dashboard::V1::LogsPanel]
+          #     A widget that shows a stream of logs.
           class Widget
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

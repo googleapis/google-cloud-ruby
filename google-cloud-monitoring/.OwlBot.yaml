@@ -1,0 +1,7 @@
+deep-copy-regex:
+  - source: /google/monitoring/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-monitoring/google-cloud-monitoring/$1
+  - source: /google/monitoring/dashboard/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-monitoring/google-cloud-monitoring-dashboard/$1
+  - source: /google/monitoring/metricsscope/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-monitoring/google-cloud-monitoring-metrics_scope/$1

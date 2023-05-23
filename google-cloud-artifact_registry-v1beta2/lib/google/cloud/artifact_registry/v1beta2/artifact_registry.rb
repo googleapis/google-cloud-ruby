@@ -26,6 +26,7 @@ require "google/cloud/artifact_registry/v1beta2/artifact_registry/credentials"
 require "google/cloud/artifact_registry/v1beta2/artifact_registry/paths"
 require "google/cloud/artifact_registry/v1beta2/artifact_registry/operations"
 require "google/cloud/artifact_registry/v1beta2/artifact_registry/client"
+require "google/cloud/artifact_registry/v1beta2/artifact_registry/rest"
 
 module Google
   module Cloud
@@ -46,10 +47,15 @@ module Google
         # * Files, which contain content and are optionally associated with a Package
         #   or Version.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/artifact_registry/v1beta2/artifact_registry"
         #     client = ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/artifact_registry/v1beta2/artifact_registry/rest"
+        #     client = ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Rest::Client.new
         #
         module ArtifactRegistry
         end

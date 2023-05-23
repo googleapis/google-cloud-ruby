@@ -40,13 +40,12 @@ module Google
             # See {::Google::Cloud::Language::V1beta2::LanguageService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all LanguageService clients:
-            #
-            #     ::Google::Cloud::Language::V1beta2::LanguageService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all LanguageService clients
+            #   ::Google::Cloud::Language::V1beta2::LanguageService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -66,50 +65,32 @@ module Google
 
                 default_config.rpcs.analyze_sentiment.timeout = 600.0
                 default_config.rpcs.analyze_sentiment.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.analyze_entities.timeout = 600.0
                 default_config.rpcs.analyze_entities.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.analyze_entity_sentiment.timeout = 600.0
                 default_config.rpcs.analyze_entity_sentiment.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.analyze_syntax.timeout = 600.0
                 default_config.rpcs.analyze_syntax.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.classify_text.timeout = 600.0
                 default_config.rpcs.classify_text.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.annotate_text.timeout = 600.0
                 default_config.rpcs.annotate_text.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config
@@ -141,19 +122,15 @@ module Google
             ##
             # Create a new LanguageService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new LanguageService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Language::V1beta2::LanguageService::Client.new
             #
-            #     client = ::Google::Cloud::Language::V1beta2::LanguageService::Client.new
-            #
-            # To create a new LanguageService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Language::V1beta2::LanguageService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Language::V1beta2::LanguageService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the LanguageService client.
             # @yieldparam config [Client::Configuration]
@@ -173,14 +150,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -229,6 +205,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/language/v1beta2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Language::V1beta2::LanguageService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Language::V1beta2::AnalyzeSentimentRequest.new
+            #
+            #   # Call the analyze_sentiment method.
+            #   result = client.analyze_sentiment request
+            #
+            #   # The returned object is of type Google::Cloud::Language::V1beta2::AnalyzeSentimentResponse.
+            #   p result
+            #
             def analyze_sentiment request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -249,7 +240,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.analyze_sentiment.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.analyze_sentiment.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @language_service_stub.call_rpc :analyze_sentiment, request, options: options do |response, operation|
@@ -293,6 +286,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/language/v1beta2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Language::V1beta2::LanguageService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Language::V1beta2::AnalyzeEntitiesRequest.new
+            #
+            #   # Call the analyze_entities method.
+            #   result = client.analyze_entities request
+            #
+            #   # The returned object is of type Google::Cloud::Language::V1beta2::AnalyzeEntitiesResponse.
+            #   p result
+            #
             def analyze_entities request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -313,7 +321,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.analyze_entities.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.analyze_entities.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @language_service_stub.call_rpc :analyze_entities, request, options: options do |response, operation|
@@ -356,6 +366,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/language/v1beta2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Language::V1beta2::LanguageService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Language::V1beta2::AnalyzeEntitySentimentRequest.new
+            #
+            #   # Call the analyze_entity_sentiment method.
+            #   result = client.analyze_entity_sentiment request
+            #
+            #   # The returned object is of type Google::Cloud::Language::V1beta2::AnalyzeEntitySentimentResponse.
+            #   p result
+            #
             def analyze_entity_sentiment request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -376,7 +401,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.analyze_entity_sentiment.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.analyze_entity_sentiment.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @language_service_stub.call_rpc :analyze_entity_sentiment, request, options: options do |response, operation|
@@ -389,7 +416,7 @@ module Google
 
             ##
             # Analyzes the syntax of the text and provides sentence boundaries and
-            # tokenization along with part-of-speech tags, dependency trees, and other
+            # tokenization along with part of speech tags, dependency trees, and other
             # properties.
             #
             # @overload analyze_syntax(request, options = nil)
@@ -420,6 +447,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/language/v1beta2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Language::V1beta2::LanguageService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Language::V1beta2::AnalyzeSyntaxRequest.new
+            #
+            #   # Call the analyze_syntax method.
+            #   result = client.analyze_syntax request
+            #
+            #   # The returned object is of type Google::Cloud::Language::V1beta2::AnalyzeSyntaxResponse.
+            #   p result
+            #
             def analyze_syntax request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -440,7 +482,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.analyze_syntax.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.analyze_syntax.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @language_service_stub.call_rpc :analyze_syntax, request, options: options do |response, operation|
@@ -464,13 +508,16 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload classify_text(document: nil)
+            # @overload classify_text(document: nil, classification_model_options: nil)
             #   Pass arguments to `classify_text` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param document [::Google::Cloud::Language::V1beta2::Document, ::Hash]
             #     Required. Input document.
+            #   @param classification_model_options [::Google::Cloud::Language::V1beta2::ClassificationModelOptions, ::Hash]
+            #     Model options to use for classification. Defaults to v1 options if not
+            #     specified.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Language::V1beta2::ClassifyTextResponse]
@@ -479,6 +526,21 @@ module Google
             # @return [::Google::Cloud::Language::V1beta2::ClassifyTextResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/language/v1beta2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Language::V1beta2::LanguageService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Language::V1beta2::ClassifyTextRequest.new
+            #
+            #   # Call the classify_text method.
+            #   result = client.classify_text request
+            #
+            #   # The returned object is of type Google::Cloud::Language::V1beta2::ClassifyTextResponse.
+            #   p result
             #
             def classify_text request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -500,7 +562,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.classify_text.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.classify_text.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @language_service_stub.call_rpc :classify_text, request, options: options do |response, operation|
@@ -545,6 +609,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/language/v1beta2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Language::V1beta2::LanguageService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Language::V1beta2::AnnotateTextRequest.new
+            #
+            #   # Call the annotate_text method.
+            #   result = client.annotate_text request
+            #
+            #   # The returned object is of type Google::Cloud::Language::V1beta2::AnnotateTextResponse.
+            #   p result
+            #
             def annotate_text request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -565,7 +644,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.annotate_text.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.annotate_text.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @language_service_stub.call_rpc :annotate_text, request, options: options do |response, operation|
@@ -589,22 +670,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for analyze_sentiment
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # analyze_sentiment to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Language::V1beta2::LanguageService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.analyze_sentiment.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Language::V1beta2::LanguageService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.analyze_sentiment.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Language::V1beta2::LanguageService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.analyze_sentiment.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Language::V1beta2::LanguageService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.analyze_sentiment.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
@@ -615,9 +695,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials

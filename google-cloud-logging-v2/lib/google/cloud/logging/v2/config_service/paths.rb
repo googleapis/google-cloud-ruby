@@ -140,6 +140,87 @@ module Google
             end
 
             ##
+            # Create a fully-qualified Link resource string.
+            #
+            # @overload link_path(project:, location:, bucket:, link:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/buckets/{bucket}/links/{link}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param bucket [String]
+            #   @param link [String]
+            #
+            # @overload link_path(organization:, location:, bucket:, link:)
+            #   The resource will be in the following format:
+            #
+            #   `organizations/{organization}/locations/{location}/buckets/{bucket}/links/{link}`
+            #
+            #   @param organization [String]
+            #   @param location [String]
+            #   @param bucket [String]
+            #   @param link [String]
+            #
+            # @overload link_path(folder:, location:, bucket:, link:)
+            #   The resource will be in the following format:
+            #
+            #   `folders/{folder}/locations/{location}/buckets/{bucket}/links/{link}`
+            #
+            #   @param folder [String]
+            #   @param location [String]
+            #   @param bucket [String]
+            #   @param link [String]
+            #
+            # @overload link_path(billing_account:, location:, bucket:, link:)
+            #   The resource will be in the following format:
+            #
+            #   `billingAccounts/{billing_account}/locations/{location}/buckets/{bucket}/links/{link}`
+            #
+            #   @param billing_account [String]
+            #   @param location [String]
+            #   @param bucket [String]
+            #   @param link [String]
+            #
+            # @return [::String]
+            def link_path **args
+              resources = {
+                "bucket:link:location:project" => (proc do |project:, location:, bucket:, link:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "bucket cannot contain /" if bucket.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/buckets/#{bucket}/links/#{link}"
+                end),
+                "bucket:link:location:organization" => (proc do |organization:, location:, bucket:, link:|
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "bucket cannot contain /" if bucket.to_s.include? "/"
+
+                  "organizations/#{organization}/locations/#{location}/buckets/#{bucket}/links/#{link}"
+                end),
+                "bucket:folder:link:location" => (proc do |folder:, location:, bucket:, link:|
+                  raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "bucket cannot contain /" if bucket.to_s.include? "/"
+
+                  "folders/#{folder}/locations/#{location}/buckets/#{bucket}/links/#{link}"
+                end),
+                "billing_account:bucket:link:location" => (proc do |billing_account:, location:, bucket:, link:|
+                  raise ::ArgumentError, "billing_account cannot contain /" if billing_account.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "bucket cannot contain /" if bucket.to_s.include? "/"
+
+                  "billingAccounts/#{billing_account}/locations/#{location}/buckets/#{bucket}/links/#{link}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
+            ##
             # Create a fully-qualified Location resource string.
             #
             # The resource will be in the following format:
@@ -483,6 +564,59 @@ module Google
             # @return [::String]
             def project_path project:
               "projects/#{project}"
+            end
+
+            ##
+            # Create a fully-qualified Settings resource string.
+            #
+            # @overload settings_path(project:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/settings`
+            #
+            #   @param project [String]
+            #
+            # @overload settings_path(organization:)
+            #   The resource will be in the following format:
+            #
+            #   `organizations/{organization}/settings`
+            #
+            #   @param organization [String]
+            #
+            # @overload settings_path(folder:)
+            #   The resource will be in the following format:
+            #
+            #   `folders/{folder}/settings`
+            #
+            #   @param folder [String]
+            #
+            # @overload settings_path(billing_account:)
+            #   The resource will be in the following format:
+            #
+            #   `billingAccounts/{billing_account}/settings`
+            #
+            #   @param billing_account [String]
+            #
+            # @return [::String]
+            def settings_path **args
+              resources = {
+                "project" => (proc do |project:|
+                  "projects/#{project}/settings"
+                end),
+                "organization" => (proc do |organization:|
+                  "organizations/#{organization}/settings"
+                end),
+                "folder" => (proc do |folder:|
+                  "folders/#{folder}/settings"
+                end),
+                "billing_account" => (proc do |billing_account:|
+                  "billingAccounts/#{billing_account}/settings"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
             end
 
             extend self

@@ -19,14 +19,15 @@
 require "google/cloud/pubsub/v1/schema_service"
 require "google/cloud/pubsub/v1/publisher"
 require "google/cloud/pubsub/v1/subscriber"
-require "google/cloud/pubsub/v1/iam_policy"
 require "google/cloud/pubsub/v1/version"
 
 module Google
   module Cloud
     module PubSub
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
+      #
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/pubsub/v1"
       #     client = ::Google::Cloud::PubSub::V1::SchemaService::Client.new

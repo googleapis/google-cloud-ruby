@@ -38,6 +38,12 @@ module Grafeas
     # @!attribute [rw] analysis_status
     #   @return [::Grafeas::V1::DiscoveryOccurrence::AnalysisStatus]
     #     The status of discovery for the resource.
+    # @!attribute [rw] analysis_completed
+    #   @return [::Grafeas::V1::DiscoveryOccurrence::AnalysisCompleted]
+    # @!attribute [rw] analysis_error
+    #   @return [::Array<::Google::Rpc::Status>]
+    #     Indicates any errors encountered during analysis of a resource. There
+    #     could be 0 or more of these errors.
     # @!attribute [rw] analysis_status_error
     #   @return [::Google::Rpc::Status]
     #     When an error is encountered this will contain a LocalizedMessage under
@@ -49,9 +55,21 @@ module Grafeas
     # @!attribute [rw] last_scan_time
     #   @return [::Google::Protobuf::Timestamp]
     #     The last time this resource was scanned.
+    # @!attribute [r] archive_time
+    #   @return [::Google::Protobuf::Timestamp]
+    #     The time occurrences related to this discovery occurrence were archived.
     class DiscoveryOccurrence
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
+
+      # Indicates which analysis completed successfully. Multiple types of
+      # analysis can be performed on a single resource.
+      # @!attribute [rw] analysis_type
+      #   @return [::Array<::String>]
+      class AnalysisCompleted
+        include ::Google::Protobuf::MessageExts
+        extend ::Google::Protobuf::MessageExts::ClassMethods
+      end
 
       # Whether the resource is continuously analyzed.
       module ContinuousAnalysis
@@ -80,11 +98,14 @@ module Grafeas
         # Analysis has finished successfully.
         FINISHED_SUCCESS = 3
 
+        # Analysis has completed.
+        COMPLETE = 3
+
         # Analysis has finished unsuccessfully, the analysis itself is in a bad
         # state.
         FINISHED_FAILED = 4
 
-        # The resource is known not to be supported
+        # The resource is known not to be supported.
         FINISHED_UNSUPPORTED = 5
       end
     end

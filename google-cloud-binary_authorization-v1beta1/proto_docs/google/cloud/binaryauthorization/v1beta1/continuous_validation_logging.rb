@@ -33,6 +33,9 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # An auditing event for one Pod.
+          # @!attribute [rw] pod_namespace
+          #   @return [::String]
+          #     The k8s namespace of the Pod.
           # @!attribute [rw] pod
           #   @return [::String]
           #     The name of the Pod.

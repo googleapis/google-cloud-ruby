@@ -117,12 +117,14 @@ class ::Google::Cloud::Speech::V1::Speech::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     config = {}
     audio = {}
+    output_config = {}
 
     long_running_recognize_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :long_running_recognize, name
       assert_kind_of ::Google::Cloud::Speech::V1::LongRunningRecognizeRequest, request
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Speech::V1::RecognitionConfig), request["config"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Speech::V1::RecognitionAudio), request["audio"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Speech::V1::TranscriptOutputConfig), request["output_config"]
       refute_nil options
     end
 
@@ -133,35 +135,35 @@ class ::Google::Cloud::Speech::V1::Speech::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.long_running_recognize({ config: config, audio: audio }) do |response, operation|
+      client.long_running_recognize({ config: config, audio: audio, output_config: output_config }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.long_running_recognize config: config, audio: audio do |response, operation|
+      client.long_running_recognize config: config, audio: audio, output_config: output_config do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.long_running_recognize ::Google::Cloud::Speech::V1::LongRunningRecognizeRequest.new(config: config, audio: audio) do |response, operation|
+      client.long_running_recognize ::Google::Cloud::Speech::V1::LongRunningRecognizeRequest.new(config: config, audio: audio, output_config: output_config) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.long_running_recognize({ config: config, audio: audio }, grpc_options) do |response, operation|
+      client.long_running_recognize({ config: config, audio: audio, output_config: output_config }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.long_running_recognize(::Google::Cloud::Speech::V1::LongRunningRecognizeRequest.new(config: config, audio: audio), grpc_options) do |response, operation|
+      client.long_running_recognize(::Google::Cloud::Speech::V1::LongRunningRecognizeRequest.new(config: config, audio: audio, output_config: output_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

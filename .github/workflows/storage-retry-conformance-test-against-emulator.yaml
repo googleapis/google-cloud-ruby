@@ -1,0 +1,34 @@
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'google-cloud-storage/**'
+  pull_request:
+    paths:
+      - 'google-cloud-storage/**'
+name: Run Storage retry conformance tests against service emulator
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: google-cloud-storage
+
+    services:
+      emulator:
+        image: gcr.io/cloud-devrel-public-resources/storage-testbench:latest
+        ports:
+          - 9000:9000
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '2.6'
+      - run: ruby --version
+      - run: bundle install
+      - run: bundle exec rake conformance
+        env:
+          STORAGE_EMULATOR_HOST: localhost:9000

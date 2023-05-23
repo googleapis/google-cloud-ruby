@@ -25,6 +25,7 @@ require "google/cloud/dlp/v2/version"
 require "google/cloud/dlp/v2/dlp_service/credentials"
 require "google/cloud/dlp/v2/dlp_service/paths"
 require "google/cloud/dlp/v2/dlp_service/client"
+require "google/cloud/dlp/v2/dlp_service/rest"
 
 module Google
   module Cloud
@@ -41,10 +42,15 @@ module Google
         # To learn more about concepts and find how-to guides see
         # https://cloud.google.com/dlp/docs/.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/dlp/v2/dlp_service"
         #     client = ::Google::Cloud::Dlp::V2::DlpService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/dlp/v2/dlp_service/rest"
+        #     client = ::Google::Cloud::Dlp::V2::DlpService::Rest::Client.new
         #
         module DlpService
         end

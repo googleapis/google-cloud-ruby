@@ -1,5 +1,41 @@
 # Release History
 
+### 2.3.3 (2023-05-19)
+
+#### Documentation
+
+* Fixed broken links in authentication documentation ([#21619](https://github.com/googleapis/google-cloud-ruby/issues/21619)) 
+
+### 2.3.2 (2022-10-18)
+
+#### Bug Fixes
+
+* update list logs response  ([#19285](https://github.com/googleapis/google-cloud-ruby/issues/19285)) 
+
+### 2.3.1 (2022-07-24)
+
+#### Bug Fixes
+
+* update resource descriptor to handle paged enum ([#18856](https://github.com/googleapis/google-cloud-ruby/issues/18856)) 
+
+### 2.3.0 (2022-06-30)
+
+#### Features
+
+* Update minimum Ruby version to 2.6 ([#18444](https://github.com/googleapis/google-cloud-ruby/issues/18444)) 
+
+### 2.2.2 / 2021-10-21
+
+#### Documentation
+
+* Add documentation for quota_project Configuration attribute
+
+### 2.2.1 / 2021-07-08
+
+#### Documentation
+
+* Update AUTHENTICATION.md in handwritten packages
+
 ### 2.2.0 / 2021-03-10
 
 #### Features

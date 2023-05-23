@@ -32,7 +32,7 @@ describe Google::Cloud::PubSub::Subscription, :modify_ack_deadline, :mock_pubsub
     new_deadline = 42
     mad_res = nil
     mock = Minitest::Mock.new
-    mock.expect :modify_ack_deadline, mad_res, [subscription: subscription_path(sub_name), ack_ids: [ack_id], ack_deadline_seconds: new_deadline]
+    mock.expect :modify_ack_deadline, mad_res, subscription: subscription_path(sub_name), ack_ids: [ack_id], ack_deadline_seconds: new_deadline
     subscription.service.mocked_subscriber = mock
 
     subscription.modify_ack_deadline new_deadline, ack_id
@@ -45,7 +45,7 @@ describe Google::Cloud::PubSub::Subscription, :modify_ack_deadline, :mock_pubsub
     new_deadline = 42
     mad_res = nil
     mock = Minitest::Mock.new
-    mock.expect :modify_ack_deadline, mad_res, [subscription: subscription_path(sub_name), ack_ids: ack_ids, ack_deadline_seconds: new_deadline]
+    mock.expect :modify_ack_deadline, mad_res, subscription: subscription_path(sub_name), ack_ids: ack_ids, ack_deadline_seconds: new_deadline
     subscription.service.mocked_subscriber = mock
 
     subscription.modify_ack_deadline new_deadline, *ack_ids
@@ -58,7 +58,7 @@ describe Google::Cloud::PubSub::Subscription, :modify_ack_deadline, :mock_pubsub
     new_deadline = 42
     mad_res = nil
     mock = Minitest::Mock.new
-    mock.expect :modify_ack_deadline, mad_res, [subscription: subscription_path(sub_name), ack_ids: ack_ids, ack_deadline_seconds: new_deadline]
+    mock.expect :modify_ack_deadline, mad_res, subscription: subscription_path(sub_name), ack_ids: ack_ids, ack_deadline_seconds: new_deadline
     subscription.service.mocked_subscriber = mock
 
     subscription.modify_ack_deadline new_deadline, ack_ids
@@ -70,7 +70,7 @@ describe Google::Cloud::PubSub::Subscription, :modify_ack_deadline, :mock_pubsub
     new_deadline = 42
     mad_res = nil
     mock = Minitest::Mock.new
-    mock.expect :modify_ack_deadline, mad_res, [subscription: subscription_path(sub_name), ack_ids: [rec_message1.ack_id], ack_deadline_seconds: new_deadline]
+    mock.expect :modify_ack_deadline, mad_res, subscription: subscription_path(sub_name), ack_ids: [rec_message1.ack_id], ack_deadline_seconds: new_deadline
     subscription.service.mocked_subscriber = mock
 
     subscription.modify_ack_deadline new_deadline, rec_message1
@@ -83,7 +83,7 @@ describe Google::Cloud::PubSub::Subscription, :modify_ack_deadline, :mock_pubsub
     new_deadline = 42
     mad_res = nil
     mock = Minitest::Mock.new
-    mock.expect :modify_ack_deadline, mad_res, [subscription: subscription_path(sub_name), ack_ids: rec_messages.map(&:ack_id), ack_deadline_seconds: new_deadline]
+    mock.expect :modify_ack_deadline, mad_res, subscription: subscription_path(sub_name), ack_ids: rec_messages.map(&:ack_id), ack_deadline_seconds: new_deadline
     subscription.service.mocked_subscriber = mock
 
     subscription.modify_ack_deadline new_deadline, *rec_messages
@@ -96,7 +96,7 @@ describe Google::Cloud::PubSub::Subscription, :modify_ack_deadline, :mock_pubsub
     new_deadline = 42
     mad_res = nil
     mock = Minitest::Mock.new
-    mock.expect :modify_ack_deadline, mad_res, [subscription: subscription_path(sub_name), ack_ids: rec_messages.map(&:ack_id), ack_deadline_seconds: new_deadline]
+    mock.expect :modify_ack_deadline, mad_res, subscription: subscription_path(sub_name), ack_ids: rec_messages.map(&:ack_id), ack_deadline_seconds: new_deadline
     subscription.service.mocked_subscriber = mock
 
     subscription.modify_ack_deadline new_deadline, rec_messages
@@ -115,7 +115,7 @@ describe Google::Cloud::PubSub::Subscription, :modify_ack_deadline, :mock_pubsub
       new_deadline = 42
       mad_res = nil
       mock = Minitest::Mock.new
-      mock.expect :modify_ack_deadline, mad_res, [subscription: subscription_path(sub_name), ack_ids: [ack_id], ack_deadline_seconds: new_deadline]
+      mock.expect :modify_ack_deadline, mad_res, subscription: subscription_path(sub_name), ack_ids: [ack_id], ack_deadline_seconds: new_deadline
       subscription.service.mocked_subscriber = mock
 
       subscription.modify_ack_deadline new_deadline, ack_id
@@ -128,7 +128,7 @@ describe Google::Cloud::PubSub::Subscription, :modify_ack_deadline, :mock_pubsub
       new_deadline = 42
       mad_res = nil
       mock = Minitest::Mock.new
-      mock.expect :modify_ack_deadline, mad_res, [subscription: subscription_path(sub_name), ack_ids: ack_ids, ack_deadline_seconds: new_deadline]
+      mock.expect :modify_ack_deadline, mad_res, subscription: subscription_path(sub_name), ack_ids: ack_ids, ack_deadline_seconds: new_deadline
       subscription.service.mocked_subscriber = mock
 
       subscription.modify_ack_deadline new_deadline, *ack_ids
@@ -141,7 +141,7 @@ describe Google::Cloud::PubSub::Subscription, :modify_ack_deadline, :mock_pubsub
       new_deadline = 42
       mad_res = nil
       mock = Minitest::Mock.new
-      mock.expect :modify_ack_deadline, mad_res, [subscription: subscription_path(sub_name), ack_ids: ack_ids, ack_deadline_seconds: new_deadline]
+      mock.expect :modify_ack_deadline, mad_res, subscription: subscription_path(sub_name), ack_ids: ack_ids, ack_deadline_seconds: new_deadline
       subscription.service.mocked_subscriber = mock
 
       subscription.modify_ack_deadline new_deadline, ack_ids
@@ -153,7 +153,7 @@ describe Google::Cloud::PubSub::Subscription, :modify_ack_deadline, :mock_pubsub
       new_deadline = 42
       mad_res = nil
       mock = Minitest::Mock.new
-      mock.expect :modify_ack_deadline, mad_res, [subscription: subscription_path(sub_name), ack_ids: [rec_message1.ack_id], ack_deadline_seconds: new_deadline]
+      mock.expect :modify_ack_deadline, mad_res, subscription: subscription_path(sub_name), ack_ids: [rec_message1.ack_id], ack_deadline_seconds: new_deadline
       subscription.service.mocked_subscriber = mock
 
       subscription.modify_ack_deadline new_deadline, rec_message1
@@ -166,7 +166,7 @@ describe Google::Cloud::PubSub::Subscription, :modify_ack_deadline, :mock_pubsub
       new_deadline = 42
       mad_res = nil
       mock = Minitest::Mock.new
-      mock.expect :modify_ack_deadline, mad_res, [subscription: subscription_path(sub_name), ack_ids: rec_messages.map(&:ack_id), ack_deadline_seconds: new_deadline]
+      mock.expect :modify_ack_deadline, mad_res, subscription: subscription_path(sub_name), ack_ids: rec_messages.map(&:ack_id), ack_deadline_seconds: new_deadline
       subscription.service.mocked_subscriber = mock
 
       subscription.modify_ack_deadline new_deadline, *rec_messages
@@ -179,7 +179,7 @@ describe Google::Cloud::PubSub::Subscription, :modify_ack_deadline, :mock_pubsub
       new_deadline = 42
       mad_res = nil
       mock = Minitest::Mock.new
-      mock.expect :modify_ack_deadline, mad_res, [subscription: subscription_path(sub_name), ack_ids: rec_messages.map(&:ack_id), ack_deadline_seconds: new_deadline]
+      mock.expect :modify_ack_deadline, mad_res, subscription: subscription_path(sub_name), ack_ids: rec_messages.map(&:ack_id), ack_deadline_seconds: new_deadline
       subscription.service.mocked_subscriber = mock
 
       subscription.modify_ack_deadline new_deadline, rec_messages

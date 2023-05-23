@@ -41,7 +41,7 @@ describe Google::Cloud::Debugger::Transmitter, :mock_debugger do
         debuggee_id: "",
         breakpoint: breakpoint_grpc
       }
-      mocked_service.expect :update_active_breakpoint, nil, [expected_args]
+      mocked_service.expect :update_active_breakpoint, nil, **expected_args
 
       transmitter.start
       transmitter.submit breakpoint

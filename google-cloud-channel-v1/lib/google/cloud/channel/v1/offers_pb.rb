@@ -9,7 +9,7 @@ require 'google/cloud/channel/v1/common_pb'
 require 'google/cloud/channel/v1/products_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/type/money_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/channel/v1/offers.proto", :syntax => :proto3) do
     add_message "google.cloud.channel.v1.Offer" do
@@ -22,6 +22,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :start_time, :message, 7, "google.protobuf.Timestamp"
       optional :end_time, :message, 8, "google.protobuf.Timestamp"
       repeated :parameter_definitions, :message, 9, "google.cloud.channel.v1.ParameterDefinition"
+      optional :deal_code, :string, 12
     end
     add_message "google.cloud.channel.v1.ParameterDefinition" do
       optional :name, :string, 1

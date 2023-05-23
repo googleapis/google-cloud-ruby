@@ -55,6 +55,63 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
       end
     end
 
+    it "should be able to run queries with and without read_time set" do
+      kind_val = "Post_#{SecureRandom.hex(4)}"
+      post.key = Google::Cloud::Datastore::Key.new kind_val, "post_1_#{SecureRandom.hex(4)}"
+      post2.key = Google::Cloud::Datastore::Key.new kind_val, "post_2_#{SecureRandom.hex(4)}"
+      dataset.save post, post2
+
+      sleep(1)
+      read_time = Time.now
+      sleep(1)
+
+      post2["isDraft"] = true
+      dataset.update post2
+
+      query = dataset.query(kind_val).where("isDraft", "=", false)
+
+      entities = dataset.run query, read_time: read_time
+      _(entities.count).must_equal 2
+      _(entities.batch_read_time.seconds).must_equal read_time.to_i
+      entities = dataset.run query
+      _(entities.count).must_equal 1
+      assert( entities.batch_read_time.seconds > read_time.to_i)
+
+      dataset.read_only_transaction(read_time: read_time) do |tx|
+        entities = tx.run query
+        _(entities.count).must_equal 2
+        _(entities.batch_read_time.seconds).must_equal read_time.to_i
+      end
+      dataset.read_only_transaction do |tx|
+        entities = tx.run query
+        _(entities.count).must_equal 1
+        assert( entities.batch_read_time.seconds > read_time.to_i)
+      end
+
+      dataset.delete post, post2
+    end
+
+    it "should be able to lookup for entities with and without read_time set" do
+      post.key = Google::Cloud::Datastore::Key.new "Post", "post_1_#{SecureRandom.hex(4)}"
+      dataset.save post
+
+      sleep(1)
+      read_time = Time.now
+      sleep(1)
+
+      post2.key = Google::Cloud::Datastore::Key.new "Post", "post_2_#{SecureRandom.hex(4)}"
+      dataset.save post2
+
+      entities = dataset.find_all post.key, post2.key
+      _(entities.count).must_equal 2
+      assert( entities.response_read_time.seconds > read_time.to_i)
+      entities = dataset.find_all post.key, post2.key, read_time: read_time
+      _(entities.count).must_equal 1
+      _(entities.response_read_time.seconds).must_equal read_time.to_i
+
+      dataset.delete post, post2
+    end
+
     it "should save/find/delete with a key name" do
       post.key = Google::Cloud::Datastore::Key.new "Post", "#{prefix}_post1"
       post.exclude_from_indexes! "author", true
@@ -146,6 +203,46 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
       dataset.delete post, post2
 
       entities = dataset.find_all post.key, post2.key
+      _(entities.count).must_equal 0
+    end
+
+    it "should save/find/delete multiple entities at once on multiple database" do
+      skip "Don't have secondary database to run the test" unless dataset_2
+      post.key  = Google::Cloud::Datastore::Key.new "Post"
+      post2.key = Google::Cloud::Datastore::Key.new "Post"
+
+      _(post.key).must_be :incomplete?
+      _(post2.key).must_be :incomplete?
+
+      dataset.save post
+      dataset_2.save post2
+
+      _(post.key).wont_be :incomplete?
+      _(post2.key).wont_be :incomplete?
+
+      entities = dataset.find_all post.key
+      _(entities.count).must_equal 1
+      entities = dataset_2.find_all post2.key
+      _(entities.count).must_equal 1
+
+      error = assert_raises Google::Cloud::InvalidArgumentError do
+        dataset.find_all post2.key
+      end
+      _(error).wont_be :nil?
+      _(error.message).must_include "mismatched databases within request"
+      error = assert_raises Google::Cloud::InvalidArgumentError do
+        dataset_2.find_all post.key
+      end
+      _(error).wont_be :nil?
+      _(error.message).must_include "mismatched databases within request"
+
+
+      dataset.delete post
+      dataset_2.delete post2
+
+      entities = dataset.find_all post.key
+      _(entities.count).must_equal 0
+      entities = dataset_2.find_all post2.key
       _(entities.count).must_equal 0
     end
 
@@ -386,20 +483,20 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
       character
     end
 
-    let(:jonsnow) do
+    let(:jon) do
       character = Google::Cloud::Datastore::Entity.new.tap do |e|
-        e["name"]        = "Jon Snow"
-        e["family"]      = "Stark"
+        e["name"]        = "Jon"
+        e["family"]      = "Targaryen"
         e["appearances"] = 32
         e["alive"]       = true
       end
-      character.key = Google::Cloud::Datastore::Key.new "Character", "Jon Snow"
+      character.key = Google::Cloud::Datastore::Key.new "Character", "Jon"
       character.key.parent = eddard
       character
     end
 
     let(:characters) do
-      [rickard, eddard, catelyn, arya, sansa, robb, bran, jonsnow]
+      [rickard, eddard, catelyn, arya, sansa, robb, bran, jon]
     end
 
     before do
@@ -438,7 +535,7 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
         where("family", "=", "Stark").
         where("appearances", ">=", 20)
       entities = dataset.run query
-      _(entities.count).must_equal 6
+      _(entities.count).must_equal 5
     end
 
     it "should filter by ancestor key" do
@@ -446,6 +543,150 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
         kind("Character").ancestor(book.key)
       entities = dataset.run query
       _(entities.count).must_equal 8
+    end
+
+    it "should fetch entities filtered by = operator" do
+      datastore = Google::Cloud::Datastore.new
+      query = datastore.query("Character").
+        ancestor(book).
+        where("alive", "=", true)
+      entities = datastore.run query
+      _(entities.count).must_equal 4
+    end
+
+    it "should fetch entities filtered through a simple Filter object" do
+      datastore = Google::Cloud::Datastore.new
+      filter = datastore.filter("alive", "=", true)
+      query = datastore.query("Character")
+                       .ancestor(book)
+                       .where(filter)
+      entities = datastore.run query
+      _(entities.count).must_equal 4
+    end
+
+    it "should fetch entities filtered by AND operator" do
+      datastore = Google::Cloud::Datastore.new
+      filter = datastore.filter("name", "=", "Arya")
+                        .and("alive", "=", true)
+                        .and(datastore.filter("appearances", "=", 33))
+      query = datastore.query("Character")
+                       .ancestor(book)
+                       .where(filter)
+      entities = datastore.run query
+      _(entities.count).must_equal 1
+    end
+
+    it "should fetch entities filtered by OR operator" do
+      datastore = Google::Cloud::Datastore.new
+      filter = datastore.filter("name", "=", "Rickard")
+                        .or("appearances", "=", 33)
+                        .or(datastore.filter("family", "=", "Targaryen"))
+      query = datastore.query("Character")
+                       .ancestor(book)
+                       .where(filter)
+      entities = datastore.run query
+      _(entities.count).must_equal 3
+    end
+
+    it "should fetch zero entities filtered by = operator" do
+      datastore = Google::Cloud::Datastore.new
+      query = datastore.query("Character").
+        ancestor(book).
+        where("appearances", "=", 1000)
+      entities = datastore.run query
+      _(entities.count).must_equal 0
+    end
+
+    it "should fetch subset of entities filtered by != operator" do
+      datastore = Google::Cloud::Datastore.new
+      query = datastore.query("Character").
+        ancestor(book).
+        where("appearances", "!=", 0)
+      entities = datastore.run query
+      _(entities.count).must_equal 7
+    end
+
+    it "should fetch all entities filtered by != operator" do
+      datastore = Google::Cloud::Datastore.new
+      query = datastore.query("Character").
+        ancestor(book).
+        where("appearances", "!=", -5)
+      entities = datastore.run query
+      _(entities.count).must_equal 8
+    end
+
+    it "should filter by in operator" do
+      datastore = Google::Cloud::Datastore.new
+      query = datastore.query("Character").
+        ancestor(book).
+        where("appearances", "in", [0])
+      entities = datastore.run query
+      _(entities.count).must_equal 1
+    end
+
+    it "should fetch all entities for all valid data for in operator" do
+      datastore = Google::Cloud::Datastore.new
+      query = datastore.query("Character").
+        ancestor(book).
+        where("family", "in", ["Stark", "Targaryen"])
+      entities = datastore.run query
+      _(entities.count).must_equal 8
+    end
+
+    it "should fetch zero entities for invalid data for in operator" do
+      datastore = Google::Cloud::Datastore.new
+      query = datastore.query("Character").
+        ancestor(book).
+        where("appearances", "in", [-5])
+      entities = datastore.run query
+      _(entities.count).must_equal 0
+    end
+
+    it "should raise an error for empty array for in operator" do
+      datastore = Google::Cloud::Datastore.new
+      query = datastore.query("Character").
+        ancestor(book).
+        where("appearances", "in", [])
+      assert_raises Google::Cloud::InvalidArgumentError do
+        entities = datastore.run query
+      end
+    end
+
+    it "should filter by not_in operator" do
+      datastore = Google::Cloud::Datastore.new
+      query = datastore.query("Character").
+        ancestor(book).
+        where("family", "not_in", ["Stark"])
+      entities = datastore.run query
+      _(entities.count).must_equal 1
+    end
+
+    it "should fetch zero entities for all valid data for not_in operator" do
+      datastore = Google::Cloud::Datastore.new
+      query = datastore.query("Character").
+        ancestor(book).
+        where("family", "not_in", ["Stark", "Targaryen"])
+      entities = datastore.run query
+      _(entities.count).must_equal 0
+    end
+
+    it "should fetch all entities for invalid data for not_in operator" do
+      datastore = Google::Cloud::Datastore.new
+      query = datastore.query("Character").
+        ancestor(book).
+        where("family", "not_in", ["Pym"])
+      entities = datastore.run query
+      _(entities.count).must_equal 8
+    end
+
+    it "should raise an error for empty array for not_in operator" do
+      datastore = Google::Cloud::Datastore.new
+      query = datastore.query("Character").
+        ancestor(book).
+        where("family", "not_in", [])
+      assert_raises Google::Cloud::InvalidArgumentError do
+        entities = datastore.run query
+      end
     end
 
     it "should filter by ancestor entity" do
@@ -540,7 +781,7 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
         cursor(last_cursor)
       last_entities = dataset.run last_query
       _(last_entities.count).must_equal 2
-      _(last_entities[0]["name"]).must_equal jonsnow["name"]
+      _(last_entities[0]["name"]).must_equal jon["name"]
       _(last_entities[1]["name"]).must_equal arya["name"]
     end
 
@@ -570,21 +811,21 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
       gql = dataset.gql "SELECT * FROM Character WHERE __key__ HAS ANCESTOR @bookKey AND family = @familyName AND appearances >= @appearanceCount",
                         bookKey: book.key, familyName: "Stark", appearanceCount: 20
       entities = dataset.run gql
-      _(entities.count).must_equal 6
+      _(entities.count).must_equal 5
     end
 
     it "should filter queries with defined indexes using GQL and positional bindings" do
       gql = dataset.gql "SELECT * FROM Character WHERE __key__ HAS ANCESTOR @1 AND family = @2 AND appearances >= @3"
       gql.positional_bindings = [book.key, "Stark", 20]
       entities = dataset.run gql
-      _(entities.count).must_equal 6
+      _(entities.count).must_equal 5
     end
 
     it "should filter queries with defined indexes using GQL and literal values" do
       gql = dataset.gql "SELECT * FROM Character WHERE __key__ HAS ANCESTOR Key(Book, '#{prefix}_GoT') AND family = 'Stark' AND appearances >= 20"
       gql.allow_literals = true
       entities = dataset.run gql
-      _(entities.count).must_equal 6
+      _(entities.count).must_equal 5
     end
 
     it "should specify consistency" do
@@ -593,7 +834,7 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
         where("family", "=", "Stark").
         where("appearances", ">=", 20)
       entities = dataset.run query, consistency: :strong
-      _(entities.count).must_equal 6
+      _(entities.count).must_equal 5
     end
 
     it "should find and run query in a read-only transaction" do
@@ -703,6 +944,60 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
 
       refresh = dataset.find "Post", "#{prefix}_post5"
       _(refresh).must_be :nil?
+    end
+  end
+
+  describe "querying with limit > 300" do
+    let(:kind_val) { "Post_#{SecureRandom.hex(4)}" }
+    let(:limit) { 700 }
+    let(:post) do
+      Google::Cloud::Datastore::Entity.new.tap do |e|
+        e["title"]       = "How to make the perfect pizza in your grill"
+      end
+    end
+
+    before :all do
+      # Add 1000 entities of the same kind to the datastore
+      1000.times.each do |id|
+        post_temp = post.dup
+        post_temp.key = Google::Cloud::Datastore::Key.new kind_val, "Post_#{id+1}"
+        dataset.save post_temp
+      end
+    end
+
+    after :all do
+      # Delete the entities added
+      1000.times.each do |id|
+        post_temp = post.dup
+        post_temp.key = Google::Cloud::Datastore::Key.new kind_val, "Post_#{id+1}"
+        dataset.delete post_temp
+      end
+    end
+
+    it "should limit results when limit > 300 in query" do
+      # Testing limit with query
+      query = dataset.query(kind_val).limit(limit)
+      entities_count = 0
+      results = dataset.run query
+      loop do
+        entities_count += results.count
+        break unless results.next?
+        results = results.next
+      end
+      _(entities_count).must_equal limit
+    end
+
+    it "should limit results when limit > 300 in GQL query" do
+      # Testing limit with GQL query
+      query_gql = dataset.gql "SELECT * FROM #{kind_val} LIMIT @limit", {limit: limit}
+      entities_count = 0
+      results = dataset.run query_gql
+      loop do
+        entities_count += results.count
+        break unless results.next?
+        results = results.next
+      end
+      _(entities_count).must_equal limit
     end
   end
 end

@@ -3,11 +3,9 @@ inherit_gem:
 
 AllCops:
   Include:
-    - "test/**/*.rb"
-    - "rakelib/link_transformer.rb"
-  Exclude:
-    - "integration/**/**"
+    - "NOTHING.rb"
+#   - ".toys/**/*.rb"
 
 Metrics/BlockLength:
   Exclude:
-    - "test/**/*.rb"
+    - ".toys/**/*.rb"

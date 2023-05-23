@@ -119,7 +119,7 @@ describe Google::Cloud::Debugger::Middleware, :mock_debugger do
       Google::Cloud::Debugger::Credentials.stub :default, "/default/keyfile.json" do
         debugger.agent.quota_manager = Google::Cloud::Debugger::RequestQuotaManager.new
 
-        stubbed_call = ->(_) {
+        stubbed_call = ->(*) {
           debugger.agent.quota_manager.count_quota.times do
             debugger.agent.quota_manager.consume
           end

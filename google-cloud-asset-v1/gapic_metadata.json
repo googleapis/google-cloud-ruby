@@ -69,6 +69,61 @@
               "methods": [
                 "analyze_iam_policy_longrunning"
               ]
+            },
+            "AnalyzeMove": {
+              "methods": [
+                "analyze_move"
+              ]
+            },
+            "QueryAssets": {
+              "methods": [
+                "query_assets"
+              ]
+            },
+            "CreateSavedQuery": {
+              "methods": [
+                "create_saved_query"
+              ]
+            },
+            "GetSavedQuery": {
+              "methods": [
+                "get_saved_query"
+              ]
+            },
+            "ListSavedQueries": {
+              "methods": [
+                "list_saved_queries"
+              ]
+            },
+            "UpdateSavedQuery": {
+              "methods": [
+                "update_saved_query"
+              ]
+            },
+            "DeleteSavedQuery": {
+              "methods": [
+                "delete_saved_query"
+              ]
+            },
+            "BatchGetEffectiveIamPolicies": {
+              "methods": [
+                "batch_get_effective_iam_policies"
+              ]
+            },
+            "AnalyzeOrgPolicies": {
+              "methods": [
+                "analyze_org_policies"
+              ]
+            },
+            "AnalyzeOrgPolicyGovernedContainers": {
+              "methods": [
+                "analyze_org_policy_governed_containers"
+              ]
+            },
+            "AnalyzeOrgPolicyGovernedAssets": {
+              "methods": [
+                "analyze_org_policy_governed_assets"
+              ]
             }
           }
         }

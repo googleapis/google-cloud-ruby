@@ -42,23 +42,6 @@ module Google
             end
 
             ##
-            # Create a fully-qualified Key resource string.
-            #
-            # The resource will be in the following format:
-            #
-            # `projects/{project}/keys/{key}`
-            #
-            # @param project [String]
-            # @param key [String]
-            #
-            # @return [::String]
-            def key_path project:, key:
-              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-
-              "projects/#{project}/keys/#{key}"
-            end
-
-            ##
             # Create a fully-qualified Project resource string.
             #
             # The resource will be in the following format:

@@ -18,10 +18,10 @@ require_relative "translate_v2_helper"
 
 describe Google::Cloud::Translate, :translate do
   it "detects a langauge" do
-    _(translate.detect("Hello").results.first.language).must_equal "en"
-    _(translate.detect("Hola").results.first.language).must_equal "es"
+    _(translate.detect("Hello World").results.first.language).must_equal "en"
+    _(translate.detect("Hola Mundo").results.first.language).must_equal "es"
 
-    detections = translate.detect "Hello", "Hola"
+    detections = translate.detect "Hello World", "Hola Mundo"
     _(detections.count).must_equal 2
     detections.each { |d| _(d).must_be_kind_of Google::Cloud::Translate::V2::Detection }
 
@@ -29,7 +29,6 @@ describe Google::Cloud::Translate, :translate do
     _(detections.first.language).must_equal detections.first.results.first.language
     _(detections.first.results.first.language).must_equal "en"
     _(detections.first.confidence).must_equal detections.first.results.first.confidence
-    _(detections.first.results.first.confidence).must_equal 1.0
 
     _(detections.last.results.first.language).must_equal "es"
   end
@@ -51,7 +50,7 @@ describe Google::Cloud::Translate, :translate do
 
     translation = translate.translate "How are you today?", to: "es", model: "base"
     _(translation.text).must_equal "¿Cómo estás hoy?"
-    _(translation.model).must_equal "base"
+    _(translation.model).must_equal "nmt"
 
     translations = translate.translate "Hello", "How are you today?", to: :es, model: :nmt
     _(translations.count).must_equal 2

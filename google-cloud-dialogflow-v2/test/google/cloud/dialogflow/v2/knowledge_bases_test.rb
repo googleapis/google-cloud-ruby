@@ -58,6 +58,7 @@ class ::Google::Cloud::Dialogflow::V2::KnowledgeBases::ClientTest < Minitest::Te
     parent = "hello world"
     page_size = 42
     page_token = "hello world"
+    filter = "hello world"
 
     list_knowledge_bases_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_knowledge_bases, name
@@ -65,6 +66,7 @@ class ::Google::Cloud::Dialogflow::V2::KnowledgeBases::ClientTest < Minitest::Te
       assert_equal "hello world", request["parent"]
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
       refute_nil options
     end
 
@@ -75,35 +77,35 @@ class ::Google::Cloud::Dialogflow::V2::KnowledgeBases::ClientTest < Minitest::Te
       end
 
       # Use hash object
-      client.list_knowledge_bases({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+      client.list_knowledge_bases({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_knowledge_bases parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+      client.list_knowledge_bases parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_knowledge_bases ::Google::Cloud::Dialogflow::V2::ListKnowledgeBasesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_knowledge_bases ::Google::Cloud::Dialogflow::V2::ListKnowledgeBasesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_knowledge_bases({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      client.list_knowledge_bases({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_knowledge_bases(::Google::Cloud::Dialogflow::V2::ListKnowledgeBasesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      client.list_knowledge_bases(::Google::Cloud::Dialogflow::V2::ListKnowledgeBasesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

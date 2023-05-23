@@ -44,8 +44,8 @@ module Google
         #     Output only. Timestamp of when the channel partner link is updated.
         # @!attribute [r] public_id
         #   @return [::String]
-        #     Output only. Public identifier that a customer must use to generate a transfer token
-        #     to move to this distributor-reseller combination.
+        #     Output only. Public identifier that a customer must use to generate a
+        #     transfer token to move to this distributor-reseller combination.
         # @!attribute [r] channel_partner_cloud_identity_info
         #   @return [::Google::Cloud::Channel::V1::CloudIdentityInfo]
         #     Output only. Cloud Identity info of the channel partner (IR).
@@ -54,7 +54,9 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The level of granularity the {::Google::Cloud::Channel::V1::ChannelPartnerLink ChannelPartnerLink} will display.
+        # The level of granularity the
+        # {::Google::Cloud::Channel::V1::ChannelPartnerLink ChannelPartnerLink} will
+        # display.
         module ChannelPartnerLinkView
           # The default / unset value.
           # The API will default to the BASIC view.
@@ -70,7 +72,7 @@ module Google
 
         # ChannelPartnerLinkState represents state of a channel partner link.
         module ChannelPartnerLinkState
-          # The state is not specified.
+          # Not used.
           CHANNEL_PARTNER_LINK_STATE_UNSPECIFIED = 0
 
           # An invitation has been sent to the reseller to create a channel partner

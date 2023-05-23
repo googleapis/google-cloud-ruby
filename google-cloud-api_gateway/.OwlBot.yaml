@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/apigateway/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-api_gateway/$1

@@ -14,9 +14,11 @@
 
 
 require "google/cloud/bigquery/external/data_source"
+require "google/cloud/bigquery/external/avro_source"
 require "google/cloud/bigquery/external/bigtable_source"
 require "google/cloud/bigquery/external/csv_source"
 require "google/cloud/bigquery/external/json_source"
+require "google/cloud/bigquery/external/parquet_source"
 require "google/cloud/bigquery/external/sheets_source"
 
 module Google
@@ -100,27 +102,28 @@ module Google
         # @private Determine source_format from inputs
         def self.source_format_for urls, format
           val = {
-            "csv"                    => "CSV",
             "avro"                   => "AVRO",
-            "json"                   => "NEWLINE_DELIMITED_JSON",
-            "newline_delimited_json" => "NEWLINE_DELIMITED_JSON",
+            "bigtable"               => "BIGTABLE",
+            "csv"                    => "CSV",
+            "backup"                 => "DATASTORE_BACKUP",
+            "datastore"              => "DATASTORE_BACKUP",
+            "datastore_backup"       => "DATASTORE_BACKUP",
             "sheets"                 => "GOOGLE_SHEETS",
             "google_sheets"          => "GOOGLE_SHEETS",
-            "datastore"              => "DATASTORE_BACKUP",
-            "backup"                 => "DATASTORE_BACKUP",
-            "datastore_backup"       => "DATASTORE_BACKUP",
-            "bigtable"               => "BIGTABLE",
+            "json"                   => "NEWLINE_DELIMITED_JSON",
+            "newline_delimited_json" => "NEWLINE_DELIMITED_JSON",
             "orc"                    => "ORC",
             "parquet"                => "PARQUET"
           }[format.to_s.downcase]
           return val unless val.nil?
           Array(urls).each do |url|
-            return "CSV" if url.end_with? ".csv"
-            return "NEWLINE_DELIMITED_JSON" if url.end_with? ".json"
             return "AVRO" if url.end_with? ".avro"
+            return "BIGTABLE" if url.start_with? "https://googleapis.com/bigtable/projects/"
+            return "CSV" if url.end_with? ".csv"
             return "DATASTORE_BACKUP" if url.end_with? ".backup_info"
             return "GOOGLE_SHEETS" if url.start_with? "https://docs.google.com/spreadsheets/"
-            return "BIGTABLE" if url.start_with? "https://googleapis.com/bigtable/projects/"
+            return "NEWLINE_DELIMITED_JSON" if url.end_with? ".json"
+            return "PARQUET" if url.end_with? ".parquet"
           end
           nil
         end
@@ -129,12 +132,14 @@ module Google
         # @private Determine table class from source_format
         def self.table_class_for format
           case format
-          when "CSV"                    then External::CsvSource
-          when "NEWLINE_DELIMITED_JSON" then External::JsonSource
-          when "GOOGLE_SHEETS"          then External::SheetsSource
+          when "AVRO"                   then External::AvroSource
           when "BIGTABLE"               then External::BigtableSource
+          when "CSV"                    then External::CsvSource
+          when "GOOGLE_SHEETS"          then External::SheetsSource
+          when "NEWLINE_DELIMITED_JSON" then External::JsonSource
+          when "PARQUET"                then External::ParquetSource
           else
-            # AVRO, DATASTORE_BACKUP, PARQUET
+            # DATASTORE_BACKUP, ORC
             External::DataSource
           end
         end

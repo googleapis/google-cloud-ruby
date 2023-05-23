@@ -45,9 +45,9 @@ describe Google::Cloud::Trace::Notifications, :mock_trace do
           end
         end
       end
-      trace.all_spans.size.must_equal 1
+      _(trace.all_spans.size).must_equal 1
       span = trace.root_spans.first
-      span.name.must_equal event_type
+      _(span.name).must_equal event_type
       expected_labels = {
         "/ruby/foo" => "barrr",
         "/ruby/whoops" => "x" * 1021 + "...",
@@ -61,11 +61,12 @@ describe Google::Cloud::Trace::Notifications, :mock_trace do
           '"line_number":1,"method_name":"main"}' \
           ']}'
       }
-      span.labels.must_equal expected_labels
+      _(span.labels).must_equal expected_labels
       # Protobuf expects labels to always be instance_of?(::String)
-      (span.labels.keys + span.labels.values).all? do |k|
+      is_all = (span.labels.keys + span.labels.values).all? do |k|
         k.instance_of?(::String)
-      end.must_equal true
+      end
+      _(is_all).must_equal true
     end
   end
 end

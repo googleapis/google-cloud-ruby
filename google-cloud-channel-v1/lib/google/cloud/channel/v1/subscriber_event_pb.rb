@@ -4,7 +4,7 @@
 require 'google/protobuf'
 
 require 'google/api/resource_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/channel/v1/subscriber_event.proto", :syntax => :proto3) do
     add_message "google.cloud.channel.v1.CustomerEvent" do
@@ -33,6 +33,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :RENEWAL_SETTING_CHANGED, 10
       value :PAID_SERVICE_STARTED, 11
       value :LICENSE_ASSIGNMENT_CHANGED, 12
+      value :LICENSE_CAP_CHANGED, 13
     end
     add_message "google.cloud.channel.v1.SubscriberEvent" do
       oneof :event do

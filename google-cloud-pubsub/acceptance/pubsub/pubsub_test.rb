@@ -37,6 +37,9 @@ describe Google::Cloud::PubSub, :pubsub do
   let(:dead_letter_topic_name) { $topic_names[8] }
   let(:dead_letter_topic_name_2) { $topic_names[9] }
   let(:labels) { { "foo" => "bar" } }
+  let(:topic_retention) { 50 * 60 }
+  let(:new_topic_retention) { 11 * 60 }
+  let(:subscription_retention) { 10 * 60 }
   let(:filter) { "attributes.event_type = \"1\"" }
 
   before do
@@ -47,6 +50,7 @@ describe Google::Cloud::PubSub, :pubsub do
   end
 
   it "should raise when endpoint is not the Pub/Sub service" do
+    skip("https://github.com/googleapis/google-cloud-ruby/issues/18275")
     pubsub_invalid_endpoint = Google::Cloud::PubSub.new endpoint: "example.com"
     expect { pubsub_invalid_endpoint.topics }.must_raise Google::Cloud::UnimplementedError
   end
@@ -60,14 +64,33 @@ describe Google::Cloud::PubSub, :pubsub do
     end
 
     it "should be created, updated and deleted" do
-      topic = pubsub.create_topic new_topic_name, labels: labels
+      topic = pubsub.create_topic new_topic_name,
+                                  labels: labels,
+                                  retention: topic_retention
       _(topic).must_be_kind_of Google::Cloud::PubSub::Topic
       topic = pubsub.topic(topic.name)
       _(topic).wont_be :nil?
+
       _(topic.labels).must_equal labels
       _(topic.labels).must_be :frozen?
       topic.labels = {}
       _(topic.labels).must_be :empty?
+
+      _(topic.retention).must_equal topic_retention
+      topic.retention = new_topic_retention
+      _(topic.retention).must_equal new_topic_retention
+
+      subscription = topic.subscribe "#{$topic_prefix}-sub-topic-retention"
+      _(subscription.topic_retention).must_equal new_topic_retention
+      subscription.reload!
+      _(subscription.topic_retention).must_equal new_topic_retention
+
+      # Clear message retention duration from the topic.
+      topic.retention = nil
+      _(topic.retention).must_be :nil?
+      topic.reload!
+      _(topic.retention).must_be :nil?
+
       topic.delete
       _(pubsub.topic(topic.name)).must_be :nil?
     end
@@ -187,14 +210,14 @@ describe Google::Cloud::PubSub, :pubsub do
       # create
       # `testdetachsubsxyz` is a special prefix to test the detach feature while pre-release in prod.
       subscription = topic.subscribe "testdetachsubsxyz-#{$topic_prefix}-sub-detach", retain_acked: true,
-                                                                                      retention: 600,
+                                                                                      retention: subscription_retention,
                                                                                       labels: labels,
                                                                                       filter: filter,
                                                                                       retry_policy: retry_policy
       _(subscription).wont_be :nil?
       _(subscription).must_be_kind_of Google::Cloud::PubSub::Subscription
       assert subscription.retain_acked
-      _(subscription.retention).must_equal 600
+      _(subscription.retention).must_equal subscription_retention
       _(subscription.labels).must_equal labels
       _(subscription.labels).must_be :frozen?
       _(subscription.filter).must_equal filter
@@ -252,7 +275,10 @@ describe Google::Cloud::PubSub, :pubsub do
         msg = topic.publish "hello"
         _(msg).wont_be :nil?
         # Check it received the published message
-        received_messages = pull_with_retry subscription
+        wait_for_condition description: "subscription pull" do
+          received_messages = subscription.pull immediate: false
+          received_messages.any?
+        end
         _(received_messages).wont_be :empty?
         _(received_messages.count).must_equal 1
         received_message = received_messages.first
@@ -284,7 +310,10 @@ describe Google::Cloud::PubSub, :pubsub do
         snapshot = subscription.create_snapshot labels: labels
 
         # Check it pulls the message
-        received_messages = pull_with_retry subscription
+        wait_for_condition description: "subscription pull" do
+          received_messages = subscription.pull immediate: false
+          received_messages.any?
+        end
         _(received_messages).wont_be :empty?
         _(received_messages.count).must_equal 1
         received_message = received_messages.first
@@ -303,7 +332,10 @@ describe Google::Cloud::PubSub, :pubsub do
         subscription.seek snapshot
 
         # Check it again pulls the message
-        received_messages = pull_with_retry subscription
+        wait_for_condition description: "subscription pull" do
+          received_messages = subscription.pull immediate: false
+          received_messages.any?
+        end
         _(received_messages.count).must_equal 1
         received_message = received_messages.first
         _(received_message).wont_be :nil?
@@ -369,7 +401,11 @@ describe Google::Cloud::PubSub, :pubsub do
 
           # Nack the message
           (1..7).each do |i|
-            received_messages = pull_with_retry subscription
+            received_messages = []
+            wait_for_condition description: "subscription pull" do
+              received_messages = subscription.pull immediate: false
+              received_messages.any?
+            end
             _(received_messages.count).must_equal 1
             received_message = received_messages.first
             _(received_message.msg.data).must_equal msg.data
@@ -378,13 +414,17 @@ describe Google::Cloud::PubSub, :pubsub do
           end
 
           # Check the dead letter subscription pulls the message
-          received_messages = pull_with_retry dead_letter_subscription
+          received_messages = []
+          wait_for_condition description: "subscription pull" do
+            received_messages = subscription.pull immediate: false
+            received_messages.any?
+          end
           _(received_messages).wont_be :empty?
           _(received_messages.count).must_equal 1
           received_message = received_messages.first
           _(received_message).wont_be :nil?
           _(received_message.msg.data).must_equal msg.data
-          _(received_message.delivery_attempt).must_be :nil?
+          _(received_message.delivery_attempt).must_be :>, 0
 
           # update
           dead_letter_topic_2 = retrieve_topic dead_letter_topic_name_2

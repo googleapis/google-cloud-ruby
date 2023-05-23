@@ -50,28 +50,28 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.table("my-instance", "my-table")
+        #   table = bigtable.table "my-instance", "my-table"
         #
-        #   entry = table.new_mutation_entry("user-1")
-        #   entry.set_cell("cf1", "field1", "XYZ")
-        #   table.mutate_row(entry)
+        #   entry = table.new_mutation_entry "user-1"
+        #   entry.set_cell "cf1", "field1", "XYZ"
+        #   table.mutate_row entry
         #
         # @example Multiple mutations on row.
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.table("my-instance", "my-table")
+        #   table = bigtable.table "my-instance", "my-table"
         #
-        #   entry = table.new_mutation_entry("user-1")
+        #   entry = table.new_mutation_entry "user-1"
         #   entry.set_cell(
         #     "cf1",
         #     "field1",
         #     "XYZ",
-        #     timestamp: (Time.now.to_f * 1000000).round(-3) # microseconds
-        #   ).delete_cells("cf2", "field02")
+        #     timestamp: (Time.now.to_f * 1_000_000).round(-3) # microseconds
+        #   ).delete_cells "cf2", "field02"
         #
-        #   table.mutate_row(entry)
+        #   table.mutate_row entry
         #
         def mutate_row entry
           service.mutate_row path, entry.row_key, entry.mutations, app_profile_id: @app_profile_id
@@ -96,12 +96,12 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.table("my-instance", "my-table")
+        #   table = bigtable.table "my-instance", "my-table"
         #
         #   entries = []
         #   entries << table.new_mutation_entry("row-1").set_cell("cf1", "field1", "XYZ")
         #   entries << table.new_mutation_entry("row-2").set_cell("cf1", "field1", "ABC")
-        #   responses = table.mutate_rows(entries)
+        #   responses = table.mutate_rows entries
         #
         #   responses.each do |response|
         #     puts response.status.description
@@ -131,15 +131,15 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table")
+        #   table = bigtable.table "my-instance", "my-table"
         #
-        #   rule_1 = table.new_read_modify_write_rule("cf", "field01")
-        #   rule_1.append("append-xyz")
+        #   rule_1 = table.new_read_modify_write_rule "cf", "field01"
+        #   rule_1.append "append-xyz"
         #
-        #   rule_2 = table.new_read_modify_write_rule("cf", "field01")
-        #   rule_2.increment(1)
+        #   rule_2 = table.new_read_modify_write_rule "cf", "field01"
+        #   rule_2.increment 1
         #
-        #   row = table.read_modify_write_row("user01", [rule_1, rule_2])
+        #   row = table.read_modify_write_row "user01", [rule_1, rule_2]
         #
         #   puts row.cells
         #
@@ -147,11 +147,11 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table")
+        #   table = bigtable.table "my-instance", "my-table"
         #
         #   rule = table.new_read_modify_write_rule("cf", "field01").append("append-xyz")
         #
-        #   row = table.read_modify_write_row("user01", rule)
+        #   row = table.read_modify_write_row "user01", rule
         #
         #   puts row.cells
         #
@@ -214,19 +214,19 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table")
+        #   table = bigtable.table "my-instance", "my-table"
         #
-        #   predicate_filter = Google::Cloud::Bigtable::RowFilter.key("user-10")
+        #   predicate_filter = Google::Cloud::Bigtable::RowFilter.key "user-10"
         #   on_match_mutations = Google::Cloud::Bigtable::MutationEntry.new
         #   on_match_mutations.set_cell(
         #     "cf1",
         #     "field1",
         #     "XYZ",
-        #     timestamp: (Time.now.to_f * 1000000).round(-3) # microseconds
-        #   ).delete_cells("cf2", "field02")
+        #     timestamp: (Time.now.to_f * 1_000_000).round(-3) # microseconds
+        #   ).delete_cells "cf2", "field02"
         #
         #   otherwise_mutations = Google::Cloud::Bigtable::MutationEntry.new
-        #   otherwise_mutations.delete_from_family("cf3")
+        #   otherwise_mutations.delete_from_family "cf3"
         #
         #   predicate_matched = table.check_and_mutate_row(
         #     "user01",
@@ -264,9 +264,9 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table")
+        #   table = bigtable.table "my-instance", "my-table"
         #
-        #   entry = table.new_mutation_entry("row-key-1")
+        #   entry = table.new_mutation_entry "row-key-1"
         #
         #   # Without row key
         #   entry = table.new_mutation_entry
@@ -289,17 +289,17 @@ module Google
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table")
-        #   rule = table.new_read_modify_write_rule("cf", "qualifier-1")
-        #   rule.append("append-xyz")
+        #   table = bigtable.table "my-instance", "my-table"
+        #   rule = table.new_read_modify_write_rule "cf", "qualifier-1"
+        #   rule.append "append-xyz"
         #
         # @example Create rule to increment qualifier value.
         #   require "google/cloud/bigtable"
         #
         #   bigtable = Google::Cloud::Bigtable.new
-        #   table = bigtable.table("my-instance", "my-table")
-        #   rule = table.new_read_modify_write_rule("cf", "qualifier-1")
-        #   rule.increment(100)
+        #   table = bigtable.table "my-instance", "my-table"
+        #   rule = table.new_read_modify_write_rule "cf", "qualifier-1"
+        #   rule.increment 100
         #
         def new_read_modify_write_rule family, qualifier
           Google::Cloud::Bigtable::ReadModifyWriteRule.new family, qualifier
@@ -323,12 +323,12 @@ module Google
         #
         #   bigtable = Google::Cloud::Bigtable.new
         #
-        #   table = bigtable.table("my-instance", "my-table")
+        #   table = bigtable.table "my-instance", "my-table"
         #
         #   entries = []
         #   entries << table.new_mutation_entry("row-1").set_cell("cf1", "field1", "XYZ")
         #   entries << table.new_mutation_entry("row-2").set_cell("cf1", "field1", "ABC")
-        #   responses = table.mutate_rows(entries)
+        #   responses = table.mutate_rows entries
         #
         #   responses.each do |response|
         #     puts response.status.description

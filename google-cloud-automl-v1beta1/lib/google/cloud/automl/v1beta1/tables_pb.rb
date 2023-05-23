@@ -12,7 +12,7 @@ require 'google/cloud/automl/v1beta1/regression_pb'
 require 'google/cloud/automl/v1beta1/temporal_pb'
 require 'google/protobuf/struct_pb'
 require 'google/protobuf/timestamp_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/automl/v1beta1/tables.proto", :syntax => :proto3) do
     add_message "google.cloud.automl.v1beta1.TablesDatasetMetadata" do

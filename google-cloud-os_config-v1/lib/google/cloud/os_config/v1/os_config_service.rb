@@ -25,6 +25,7 @@ require "google/cloud/os_config/v1/version"
 require "google/cloud/os_config/v1/os_config_service/credentials"
 require "google/cloud/os_config/v1/os_config_service/paths"
 require "google/cloud/os_config/v1/os_config_service/client"
+require "google/cloud/os_config/v1/os_config_service/rest"
 
 module Google
   module Cloud
@@ -36,10 +37,15 @@ module Google
         # The OS Config service is a server-side component that you can use to
         # manage package installations and patch jobs for virtual machine instances.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/os_config/v1/os_config_service"
         #     client = ::Google::Cloud::OsConfig::V1::OsConfigService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/os_config/v1/os_config_service/rest"
+        #     client = ::Google::Cloud::OsConfig::V1::OsConfigService::Rest::Client.new
         #
         module OsConfigService
         end

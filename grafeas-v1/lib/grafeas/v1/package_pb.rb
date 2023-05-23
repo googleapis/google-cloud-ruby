@@ -3,6 +3,9 @@
 
 require 'google/protobuf'
 
+require 'google/api/field_behavior_pb'
+require 'grafeas/v1/common_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("grafeas/v1/package.proto", :syntax => :proto3) do
     add_message "grafeas.v1.Distribution" do
@@ -21,15 +24,30 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "grafeas.v1.PackageNote" do
       optional :name, :string, 1
       repeated :distribution, :message, 10, "grafeas.v1.Distribution"
+      optional :package_type, :string, 11
+      optional :cpe_uri, :string, 12
+      optional :architecture, :enum, 13, "grafeas.v1.Architecture"
+      optional :version, :message, 14, "grafeas.v1.Version"
+      optional :maintainer, :string, 15
+      optional :url, :string, 16
+      optional :description, :string, 17
+      optional :license, :message, 18, "grafeas.v1.License"
+      repeated :digest, :message, 19, "grafeas.v1.Digest"
     end
     add_message "grafeas.v1.PackageOccurrence" do
       optional :name, :string, 1
       repeated :location, :message, 2, "grafeas.v1.Location"
+      optional :package_type, :string, 3
+      optional :cpe_uri, :string, 4
+      optional :architecture, :enum, 5, "grafeas.v1.Architecture"
+      optional :license, :message, 6, "grafeas.v1.License"
+      optional :version, :message, 7, "grafeas.v1.Version"
     end
     add_message "grafeas.v1.Version" do
       optional :epoch, :int32, 1
       optional :name, :string, 2
       optional :revision, :string, 3
+      optional :inclusive, :bool, 6
       optional :kind, :enum, 4, "grafeas.v1.Version.VersionKind"
       optional :full_name, :string, 5
     end

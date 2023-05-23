@@ -24,7 +24,7 @@ module Google
         # Request message for GameServerDeploymentsService.ListGameServerDeployments.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent resource name. Uses the form:
+        #     Required. The parent resource name, in the following form:
         #     `projects/{project}/locations/{location}`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
@@ -68,8 +68,7 @@ module Google
         # Request message for GameServerDeploymentsService.GetGameServerDeployment.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The name of the game server delpoyment to retrieve. Uses the form:
-        #
+        #     Required. The name of the game server delpoyment to retrieve, in the following form:
         #     `projects/{project}/locations/{location}/gameServerDeployments/{deployment}`.
         class GetGameServerDeploymentRequest
           include ::Google::Protobuf::MessageExts
@@ -80,8 +79,7 @@ module Google
         # GameServerDeploymentsService.GetGameServerDeploymentRollout.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The name of the game server delpoyment to retrieve. Uses the form:
-        #
+        #     Required. The name of the game server delpoyment to retrieve, in the following form:
         #     `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/rollout`.
         class GetGameServerDeploymentRolloutRequest
           include ::Google::Protobuf::MessageExts
@@ -91,7 +89,7 @@ module Google
         # Request message for GameServerDeploymentsService.CreateGameServerDeployment.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent resource name. Uses the form:
+        #     Required. The parent resource name, in the following form:
         #     `projects/{project}/locations/{location}`.
         # @!attribute [rw] deployment_id
         #   @return [::String]
@@ -107,8 +105,7 @@ module Google
         # Request message for GameServerDeploymentsService.DeleteGameServerDeployment.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The name of the game server delpoyment to delete. Uses the form:
-        #
+        #     Required. The name of the game server delpoyment to delete, in the following form:
         #     `projects/{project}/locations/{location}/gameServerDeployments/{deployment}`.
         class DeleteGameServerDeploymentRequest
           include ::Google::Protobuf::MessageExts
@@ -125,10 +122,7 @@ module Google
         #   @return [::Google::Protobuf::FieldMask]
         #     Required. Mask of fields to update. At least one path must be supplied in
         #     this field. For the `FieldMask` definition, see
-        #
-        #     https:
-        #     //developers.google.com/protocol-buffers
-        #     // /docs/reference/google.protobuf#fieldmask
+        #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
         class UpdateGameServerDeploymentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -144,10 +138,7 @@ module Google
         #   @return [::Google::Protobuf::FieldMask]
         #     Required. Mask of fields to update. At least one path must be supplied in
         #     this field. For the `FieldMask` definition, see
-        #
-        #     https:
-        #     //developers.google.com/protocol-buffers
-        #     // /docs/reference/google.protobuf#fieldmask
+        #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
         class UpdateGameServerDeploymentRolloutRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -156,8 +147,7 @@ module Google
         # Request message for GameServerDeploymentsService.FetchDeploymentState.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The name of the game server delpoyment. Uses the form:
-        #
+        #     Required. The name of the game server delpoyment, in the following form:
         #     `projects/{project}/locations/{location}/gameServerDeployments/{deployment}`.
         class FetchDeploymentStateRequest
           include ::Google::Protobuf::MessageExts
@@ -192,8 +182,7 @@ module Google
         # A game server deployment resource.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The resource name of the game server deployment. Uses the form:
-        #
+        #     The resource name of the game server deployment, in the following form:
         #     `projects/{project}/locations/{location}/gameServerDeployments/{deployment}`.
         #     For example,
         #     `projects/my-project/locations/global/gameServerDeployments/my-deployment`.
@@ -243,11 +232,10 @@ module Google
         # state.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The resource name of the game server deployment rollout. Uses the form:
-        #
+        #     The resource name of the game server deployment rollout, in the following
+        #     form:
         #     `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/rollout`.
         #     For example,
-        #
         #     `projects/my-project/locations/global/gameServerDeployments/my-deployment/rollout`.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
@@ -259,7 +247,6 @@ module Google
         #   @return [::String]
         #     The default game server config is applied to all realms unless overridden
         #     in the rollout. For example,
-        #
         #     `projects/my-project/locations/global/gameServerDeployments/my-game/configs/my-config`.
         # @!attribute [rw] game_server_config_overrides
         #   @return [::Array<::Google::Cloud::Gaming::V1::GameServerConfigOverride>]
@@ -283,10 +270,7 @@ module Google
         #   @return [::Google::Protobuf::FieldMask]
         #     Optional. Mask of fields to update. At least one path must be supplied in
         #     this field. For the `FieldMask` definition, see
-        #
-        #     https:
-        #     //developers.google.com/protocol-buffers
-        #     // /docs/reference/google.protobuf#fieldmask
+        #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
         # @!attribute [rw] preview_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Optional. The target timestamp to compute the preview. Defaults to the immediately

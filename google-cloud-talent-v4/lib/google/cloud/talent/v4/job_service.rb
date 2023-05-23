@@ -26,6 +26,7 @@ require "google/cloud/talent/v4/job_service/credentials"
 require "google/cloud/talent/v4/job_service/paths"
 require "google/cloud/talent/v4/job_service/operations"
 require "google/cloud/talent/v4/job_service/client"
+require "google/cloud/talent/v4/job_service/rest"
 
 module Google
   module Cloud
@@ -34,10 +35,15 @@ module Google
         ##
         # A service handles job management, including job CRUD, enumeration and search.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/talent/v4/job_service"
         #     client = ::Google::Cloud::Talent::V4::JobService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/talent/v4/job_service/rest"
+        #     client = ::Google::Cloud::Talent::V4::JobService::Rest::Client.new
         #
         module JobService
         end

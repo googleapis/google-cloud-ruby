@@ -12,6 +12,7 @@ require 'google/cloud/dialogflow/v2/fulfillment_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/dialogflow/v2/environment.proto", :syntax => :proto3) do
     add_message "google.cloud.dialogflow.v2.Environment" do

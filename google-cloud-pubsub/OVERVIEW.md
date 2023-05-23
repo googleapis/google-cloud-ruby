@@ -452,7 +452,7 @@ if your account has limited access to the Pub/Sub API. In particular, the role
 `roles/pubsub.subscriber` does not have the permission
 `pubsub.subscriptions.get`, which is required to retrieve a subscription
 resource. See [Access Control -
-Roles](https://cloud.google.com/pubsub/docs/access-control#tbl_roles) for the
+Roles](https://cloud.google.com/pubsub/docs/access-control#roles) for the
 complete list of Pub/Sub roles and permissions.
 
 ## Creating a snapshot and using seek
@@ -524,5 +524,5 @@ sub.topic.name #=> "projects/other-project-id/topics/other-topic"
 ## Additional information
 
 Google Cloud Pub/Sub can be configured to use an emulator or to enable gRPC's
-logging. To learn more, see the [Emulator guide}](EMULATOR.md) and
+logging. To learn more, see the [Emulator guide](EMULATOR.md) and
 [Logging guide](LOGGING.md).

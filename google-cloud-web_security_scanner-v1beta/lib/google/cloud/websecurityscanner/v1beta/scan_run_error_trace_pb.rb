@@ -4,6 +4,7 @@
 require 'google/protobuf'
 
 require 'google/cloud/websecurityscanner/v1beta/scan_config_error_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/websecurityscanner/v1beta/scan_run_error_trace.proto", :syntax => :proto3) do
     add_message "google.cloud.websecurityscanner.v1beta.ScanRunErrorTrace" do

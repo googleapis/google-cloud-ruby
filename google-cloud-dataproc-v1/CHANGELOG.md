@@ -1,5 +1,120 @@
 # Release History
 
+### 0.17.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20625](https://github.com/googleapis/google-cloud-ruby/issues/20625)) 
+
+### 0.16.0 (2023-02-23)
+
+#### Features
+
+* ClusterOperationMetadata includes child operation IDs 
+* Expose approximate and current batches resources usage 
+* Include a mixin client for IAM policies 
+* Include boot disk KMS key in GkeNodeConfig 
+* Include GPU partition size in GkeNodePoolAcceleratorConfig 
+* Include spot flag in GkeNodeConfig 
+* Support batch TTL 
+* Support custom staging bucket for batches 
+* Support filtering and ordering in list_batches API 
+* Support for the HIVEMETASTORE metric source 
+* Support Hudi and Trino components ([#20497](https://github.com/googleapis/google-cloud-ruby/issues/20497)) 
+* Support Trino jobs on 2.1+ image clusters 
+
+### 0.15.0 (2023-01-24)
+
+#### Features
+
+* Support for the SPOT preemptibility option ([#20045](https://github.com/googleapis/google-cloud-ruby/issues/20045)) 
+
+### 0.14.0 (2022-12-14)
+
+#### Features
+
+* Support for configuring driver scheduling in a Job 
+* Support for setting auxiliary node groups in a ClusterConfig 
+* Support for the NodeGroupController service ([#19853](https://github.com/googleapis/google-cloud-ruby/issues/19853)) 
+
+### 0.13.0 (2022-09-28)
+
+#### Features
+
+* Support for dataproc metric configuration ([#19209](https://github.com/googleapis/google-cloud-ruby/issues/19209)) 
+
+### 0.12.0 (2022-07-02)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+#### Bug Fixes
+
+* Fixed a crash when making certain long-running-operations status calls ([#18441](https://github.com/googleapis/google-cloud-ruby/issues/18441)) 
+
+### 0.11.0 (2022-06-30)
+
+#### Features
+
+* support OLM Prefix/Suffix ([#18190](https://github.com/googleapis/google-cloud-ruby/issues/18190)) 
+
+### 0.10.0 (2022-05-12)
+
+#### Bug Fixes
+
+* BREAKING CHANGE: Remove unused VirtualClusterConfig#temp_bucket field
+
+### 0.9.0 / 2022-02-17
+
+#### Features
+
+* **BREAKING CHANGE:** Replaced the temporary gke_cluster_config field with the permanent virtual_cluster_config
+
+### 0.8.0 / 2022-01-11
+
+#### Features
+
+* Additional fields for DiskConfig and RuntimeInfo
+
+#### Bug Fixes
+
+* Honor quota project in auxiliary operations clients
+
+#### Documentation
+
+* Fix titles of documentation pages
+* Remove some broken images and fix outdated content in authentication documentation
+
+### 0.7.1 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
+### 0.7.0 / 2021-10-21
+
+#### Features
+
+* Add support for batch workloads
+
+### 0.6.3 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
+### 0.6.2 / 2021-07-12
+
+#### Documentation
+
+* Clarify some language around authentication configuration
+
+### 0.6.1 / 2021-06-17
+
+#### Bug Fixes
+
+* Support future 1.x versions of gapic-common
+
 ### 0.6.0 / 2021-04-26
 
 #### Features

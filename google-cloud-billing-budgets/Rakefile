@@ -85,8 +85,8 @@ task :acceptance, :project, :keyfile do |t, args|
   if project.nil? || keyfile.nil?
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or BILLING_BUDGETS_TEST_PROJECT=test123 BILLING_BUDGETS_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
-  require "google/cloud/billing/budgets/v1beta1/budget_service/credentials"
-  ::Google::Cloud::Billing::Budgets::V1beta1::BudgetService::Credentials.env_vars.each do |path|
+  require "google/cloud/billing/budgets/v1/budget_service/credentials"
+  ::Google::Cloud::Billing::Budgets::V1::BudgetService::Credentials.env_vars.each do |path|
     ENV[path] = nil
   end
   ENV["BILLING_BUDGETS_PROJECT"] = project
@@ -157,11 +157,6 @@ end
 desc "Run yard-doctest example tests."
 task :doctest do
   puts "The google-cloud-billing-budgets gem does not have doctest tests."
-end
-
-task :cloudrad do
-  ENV["CLOUDRAD_GEM_NAME"] = "google-cloud-billing-budgets"
-  sh "bundle exec yard doc --fail-on-warning --yardopts .yardopts-cloudrad"
 end
 
 desc "Run the CI build"

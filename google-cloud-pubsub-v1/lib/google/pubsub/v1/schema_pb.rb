@@ -8,12 +8,16 @@ require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/protobuf/empty_pb'
+require 'google/protobuf/timestamp_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/pubsub/v1/schema.proto", :syntax => :proto3) do
     add_message "google.pubsub.v1.Schema" do
       optional :name, :string, 1
       optional :type, :enum, 2, "google.pubsub.v1.Schema.Type"
       optional :definition, :string, 3
+      optional :revision_id, :string, 4
+      optional :revision_create_time, :message, 6, "google.protobuf.Timestamp"
     end
     add_enum "google.pubsub.v1.Schema.Type" do
       value :TYPE_UNSPECIFIED, 0
@@ -38,6 +42,28 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.pubsub.v1.ListSchemasResponse" do
       repeated :schemas, :message, 1, "google.pubsub.v1.Schema"
       optional :next_page_token, :string, 2
+    end
+    add_message "google.pubsub.v1.ListSchemaRevisionsRequest" do
+      optional :name, :string, 1
+      optional :view, :enum, 2, "google.pubsub.v1.SchemaView"
+      optional :page_size, :int32, 3
+      optional :page_token, :string, 4
+    end
+    add_message "google.pubsub.v1.ListSchemaRevisionsResponse" do
+      repeated :schemas, :message, 1, "google.pubsub.v1.Schema"
+      optional :next_page_token, :string, 2
+    end
+    add_message "google.pubsub.v1.CommitSchemaRequest" do
+      optional :name, :string, 1
+      optional :schema, :message, 2, "google.pubsub.v1.Schema"
+    end
+    add_message "google.pubsub.v1.RollbackSchemaRequest" do
+      optional :name, :string, 1
+      optional :revision_id, :string, 2
+    end
+    add_message "google.pubsub.v1.DeleteSchemaRevisionRequest" do
+      optional :name, :string, 1
+      optional :revision_id, :string, 2
     end
     add_message "google.pubsub.v1.DeleteSchemaRequest" do
       optional :name, :string, 1
@@ -82,6 +108,11 @@ module Google
         GetSchemaRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.GetSchemaRequest").msgclass
         ListSchemasRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ListSchemasRequest").msgclass
         ListSchemasResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ListSchemasResponse").msgclass
+        ListSchemaRevisionsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ListSchemaRevisionsRequest").msgclass
+        ListSchemaRevisionsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ListSchemaRevisionsResponse").msgclass
+        CommitSchemaRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.CommitSchemaRequest").msgclass
+        RollbackSchemaRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.RollbackSchemaRequest").msgclass
+        DeleteSchemaRevisionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.DeleteSchemaRevisionRequest").msgclass
         DeleteSchemaRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.DeleteSchemaRequest").msgclass
         ValidateSchemaRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ValidateSchemaRequest").msgclass
         ValidateSchemaResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.pubsub.v1.ValidateSchemaResponse").msgclass

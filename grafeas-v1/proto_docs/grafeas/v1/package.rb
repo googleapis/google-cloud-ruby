@@ -23,7 +23,7 @@ module Grafeas
     # E.g., Debian's jessie-backports dpkg mirror.
     # @!attribute [rw] cpe_uri
     #   @return [::String]
-    #     Required. The cpe_uri in [CPE format](https://cpe.mitre.org/specification/)
+    #     The cpe_uri in [CPE format](https://cpe.mitre.org/specification/)
     #     denoting the package manager version distributing a package.
     # @!attribute [rw] architecture
     #   @return [::Grafeas::V1::Architecture]
@@ -50,10 +50,11 @@ module Grafeas
     # filesystem. E.g., glibc was found in `/var/lib/dpkg/status`.
     # @!attribute [rw] cpe_uri
     #   @return [::String]
-    #     Required. The CPE URI in [CPE format](https://cpe.mitre.org/specification/)
-    #     denoting the package manager version distributing a package.
+    #     Deprecated.
+    #     The CPE URI in [CPE format](https://cpe.mitre.org/specification/)
     # @!attribute [rw] version
     #   @return [::Grafeas::V1::Version]
+    #     Deprecated.
     #     The version installed at this location.
     # @!attribute [rw] path
     #   @return [::String]
@@ -63,28 +64,78 @@ module Grafeas
       extend ::Google::Protobuf::MessageExts::ClassMethods
     end
 
-    # This represents a particular package that is distributed over various
-    # channels. E.g., glibc (aka libc6) is distributed by many, at various
-    # versions.
+    # PackageNote represents a particular package version.
     # @!attribute [rw] name
     #   @return [::String]
-    #     Required. Immutable. The name of the package.
+    #     The name of the package.
     # @!attribute [rw] distribution
     #   @return [::Array<::Grafeas::V1::Distribution>]
+    #     Deprecated.
     #     The various channels by which a package is distributed.
+    # @!attribute [rw] package_type
+    #   @return [::String]
+    #     The type of package; whether native or non native (e.g., ruby gems,
+    #     node.js packages, etc.).
+    # @!attribute [rw] cpe_uri
+    #   @return [::String]
+    #     The cpe_uri in [CPE format](https://cpe.mitre.org/specification/)
+    #     denoting the package manager version distributing a package.
+    #     The cpe_uri will be blank for language packages.
+    # @!attribute [rw] architecture
+    #   @return [::Grafeas::V1::Architecture]
+    #     The CPU architecture for which packages in this distribution channel were
+    #     built. Architecture will be blank for language packages.
+    # @!attribute [rw] version
+    #   @return [::Grafeas::V1::Version]
+    #     The version of the package.
+    # @!attribute [rw] maintainer
+    #   @return [::String]
+    #     A freeform text denoting the maintainer of this package.
+    # @!attribute [rw] url
+    #   @return [::String]
+    #     The homepage for this package.
+    # @!attribute [rw] description
+    #   @return [::String]
+    #     The description of this package.
+    # @!attribute [rw] license
+    #   @return [::Grafeas::V1::License]
+    #     Licenses that have been declared by the authors of the package.
+    # @!attribute [rw] digest
+    #   @return [::Array<::Grafeas::V1::Digest>]
+    #     Hash value, typically a file digest, that allows unique
+    #     identification a specific package.
     class PackageNote
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
     end
 
     # Details on how a particular software package was installed on a system.
-    # @!attribute [rw] name
+    # @!attribute [r] name
     #   @return [::String]
-    #     Output only. The name of the installed package.
+    #     The name of the installed package.
     # @!attribute [rw] location
     #   @return [::Array<::Grafeas::V1::Location>]
-    #     Required. All of the places within the filesystem versions of this package
+    #     All of the places within the filesystem versions of this package
     #     have been found.
+    # @!attribute [r] package_type
+    #   @return [::String]
+    #     The type of package; whether native or non native (e.g., ruby gems,
+    #     node.js packages, etc.).
+    # @!attribute [r] cpe_uri
+    #   @return [::String]
+    #     The cpe_uri in [CPE format](https://cpe.mitre.org/specification/)
+    #     denoting the package manager version distributing a package.
+    #     The cpe_uri will be blank for language packages.
+    # @!attribute [r] architecture
+    #   @return [::Grafeas::V1::Architecture]
+    #     The CPU architecture for which packages in this distribution channel were
+    #     built. Architecture will be blank for language packages.
+    # @!attribute [rw] license
+    #   @return [::Grafeas::V1::License]
+    #     Licenses that have been declared by the authors of the package.
+    # @!attribute [r] version
+    #   @return [::Grafeas::V1::Version]
+    #     The version of the package.
     class PackageOccurrence
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -101,6 +152,14 @@ module Grafeas
     # @!attribute [rw] revision
     #   @return [::String]
     #     The iteration of the package build from the above version.
+    # @!attribute [rw] inclusive
+    #   @return [::Boolean]
+    #     Whether this version is specifying part of an inclusive range. Grafeas
+    #     does not have the capability to specify version ranges; instead we have
+    #     fields that specify start version and end versions. At times this is
+    #     insufficient - we also need to specify whether the version is included in
+    #     the range or is excluded from the range. This boolean is expected to be set
+    #     to true when the version is included in a range.
     # @!attribute [rw] kind
     #   @return [::Grafeas::V1::Version::VersionKind]
     #     Required. Distinguishes between sentinel MIN/MAX versions and normal

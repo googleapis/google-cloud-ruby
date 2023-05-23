@@ -23,10 +23,17 @@ module Google
   module Cloud
     module Build
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
+      #
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/build/v1"
       #     client = ::Google::Cloud::Build::V1::CloudBuild::Client.new
+      #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/build/v1"
+      #     client = ::Google::Cloud::Build::V1::CloudBuild::Rest::Client.new
       #
       module V1
       end

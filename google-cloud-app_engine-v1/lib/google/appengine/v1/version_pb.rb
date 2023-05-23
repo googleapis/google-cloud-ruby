@@ -5,10 +5,9 @@ require 'google/protobuf'
 
 require 'google/appengine/v1/app_yaml_pb'
 require 'google/appengine/v1/deploy_pb'
-require 'google/appengine/v1/network_settings_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/timestamp_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/appengine/v1/version.proto", :syntax => :proto3) do
     add_message "google.appengine.v1.Version" do
@@ -23,6 +22,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :runtime_channel, :string, 117
       optional :threadsafe, :bool, 11
       optional :vm, :bool, 12
+      optional :app_engine_apis, :bool, 128
       map :beta_settings, :string, :string, 13
       optional :env, :string, 14
       optional :serving_status, :enum, 15, "google.appengine.v1.ServingStatus"
@@ -134,6 +134,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.appengine.v1.VpcAccessConnector" do
       optional :name, :string, 1
+      optional :egress_setting, :enum, 2, "google.appengine.v1.VpcAccessConnector.EgressSetting"
+    end
+    add_enum "google.appengine.v1.VpcAccessConnector.EgressSetting" do
+      value :EGRESS_SETTING_UNSPECIFIED, 0
+      value :ALL_TRAFFIC, 1
+      value :PRIVATE_IP_RANGES, 2
     end
     add_message "google.appengine.v1.Entrypoint" do
       oneof :command do
@@ -178,6 +184,7 @@ module Google
         Volume = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.appengine.v1.Volume").msgclass
         Resources = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.appengine.v1.Resources").msgclass
         VpcAccessConnector = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.appengine.v1.VpcAccessConnector").msgclass
+        VpcAccessConnector::EgressSetting = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.appengine.v1.VpcAccessConnector.EgressSetting").enummodule
         Entrypoint = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.appengine.v1.Entrypoint").msgclass
         InboundServiceType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.appengine.v1.InboundServiceType").enummodule
         ServingStatus = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.appengine.v1.ServingStatus").enummodule

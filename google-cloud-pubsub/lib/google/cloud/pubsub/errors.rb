@@ -78,6 +78,14 @@ module Google
           super "Can't publish message using #{ordering_key}."
         end
       end
+
+      ##
+      # Raised when the desired action is `error` and the message would exceed
+      # flow control limits, or when the desired action is `block` and the
+      # message would block forever against the flow control limits.
+      #
+      class FlowControlLimitError < Google::Cloud::Error
+      end
     end
 
     Pubsub = PubSub unless const_defined? :Pubsub

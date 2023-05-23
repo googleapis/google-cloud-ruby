@@ -44,6 +44,10 @@ module Google
         # @!attribute [rw] project_id
         #   @return [::String]
         #     The ID of the project to which the entities belong.
+        # @!attribute [rw] database_id
+        #   @return [::String]
+        #     If not empty, the ID of the database to which the entities
+        #     belong.
         # @!attribute [rw] namespace_id
         #   @return [::String]
         #     If not empty, the ID of the namespace to which the entities belong.
@@ -90,20 +94,31 @@ module Google
           # @!attribute [rw] kind
           #   @return [::String]
           #     The kind of the entity.
+          #
           #     A kind matching regex `__.*__` is reserved/read-only.
           #     A kind must not contain more than 1500 bytes when UTF-8 encoded.
           #     Cannot be `""`.
+          #
+          #     Must be valid UTF-8 bytes. Legacy values that are not valid UTF-8 are
+          #     encoded as `__bytes<X>__` where `<X>` is the base-64 encoding of the
+          #     bytes.
           # @!attribute [rw] id
           #   @return [::Integer]
           #     The auto-allocated ID of the entity.
+          #
           #     Never equal to zero. Values less than zero are discouraged and may not
           #     be supported in the future.
           # @!attribute [rw] name
           #   @return [::String]
           #     The name of the entity.
+          #
           #     A name matching regex `__.*__` is reserved/read-only.
           #     A name must not be more than 1500 bytes when UTF-8 encoded.
           #     Cannot be `""`.
+          #
+          #     Must be valid UTF-8 bytes. Legacy values that are not valid UTF-8 are
+          #     encoded as `__bytes<X>__` where `<X>` is the base-64 encoding of the
+          #     bytes.
           class PathElement
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -146,7 +161,7 @@ module Google
         # @!attribute [rw] string_value
         #   @return [::String]
         #     A UTF-8 encoded string value.
-        #     When `exclude_from_indexes` is false (it is indexed), may have at most
+        #     When `exclude_from_indexes` is false (it is indexed) , may have at most
         #     1500 bytes. Otherwise, may be set to at most 1,000,000 bytes.
         # @!attribute [rw] blob_value
         #   @return [::String]
@@ -184,9 +199,7 @@ module Google
 
         # A Datastore data object.
         #
-        # An entity is limited to 1 megabyte when stored. That _roughly_
-        # corresponds to a limit of 1 megabyte for the serialized form of this
-        # message.
+        # Must not exceed 1 MiB - 4 bytes.
         # @!attribute [rw] key
         #   @return [::Google::Cloud::Datastore::V1::Key]
         #     The entity's key.
@@ -201,8 +214,8 @@ module Google
         #     The map's keys are property names.
         #     A property name matching regex `__.*__` is reserved.
         #     A reserved property name is forbidden in certain documented contexts.
-        #     The name must not contain more than 500 characters.
-        #     The name cannot be `""`.
+        #     The map keys, represented as UTF-8, must not exceed 1,500 bytes and cannot
+        #     be empty.
         class Entity
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -36,8 +36,8 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.cloud.recommender.v1.Recommender'
 
-            # Lists insights for a Cloud project. Requires the recommender.*.list IAM
-            # permission for the specified insight type.
+            # Lists insights for the specified Cloud Resource. Requires the
+            # recommender.*.list IAM permission for the specified insight type.
             rpc :ListInsights, ::Google::Cloud::Recommender::V1::ListInsightsRequest, ::Google::Cloud::Recommender::V1::ListInsightsResponse
             # Gets the requested insight. Requires the recommender.*.get IAM permission
             # for the specified insight type.
@@ -49,8 +49,8 @@ module Google
             # MarkInsightAccepted can be applied to insights in ACTIVE state. Requires
             # the recommender.*.update IAM permission for the specified insight.
             rpc :MarkInsightAccepted, ::Google::Cloud::Recommender::V1::MarkInsightAcceptedRequest, ::Google::Cloud::Recommender::V1::Insight
-            # Lists recommendations for a Cloud project. Requires the recommender.*.list
-            # IAM permission for the specified recommender.
+            # Lists recommendations for the specified Cloud Resource. Requires the
+            # recommender.*.list IAM permission for the specified recommender.
             rpc :ListRecommendations, ::Google::Cloud::Recommender::V1::ListRecommendationsRequest, ::Google::Cloud::Recommender::V1::ListRecommendationsResponse
             # Gets the requested recommendation. Requires the recommender.*.get
             # IAM permission for the specified recommender.
@@ -90,6 +90,18 @@ module Google
             # Requires the recommender.*.update IAM permission for the specified
             # recommender.
             rpc :MarkRecommendationFailed, ::Google::Cloud::Recommender::V1::MarkRecommendationFailedRequest, ::Google::Cloud::Recommender::V1::Recommendation
+            # Gets the requested Recommender Config. There is only one instance of the
+            # config for each Recommender.
+            rpc :GetRecommenderConfig, ::Google::Cloud::Recommender::V1::GetRecommenderConfigRequest, ::Google::Cloud::Recommender::V1::RecommenderConfig
+            # Updates a Recommender Config. This will create a new revision of the
+            # config.
+            rpc :UpdateRecommenderConfig, ::Google::Cloud::Recommender::V1::UpdateRecommenderConfigRequest, ::Google::Cloud::Recommender::V1::RecommenderConfig
+            # Gets the requested InsightTypeConfig. There is only one instance of the
+            # config for each InsightType.
+            rpc :GetInsightTypeConfig, ::Google::Cloud::Recommender::V1::GetInsightTypeConfigRequest, ::Google::Cloud::Recommender::V1::InsightTypeConfig
+            # Updates an InsightTypeConfig change. This will create a new revision of the
+            # config.
+            rpc :UpdateInsightTypeConfig, ::Google::Cloud::Recommender::V1::UpdateInsightTypeConfigRequest, ::Google::Cloud::Recommender::V1::InsightTypeConfig
           end
 
           Stub = Service.rpc_stub_class

@@ -1,7 +1,13 @@
 {
-    "name": "dns",
-    "language": "ruby",
+    "api_id": "dns.googleapis.com",
+    "api_shortname": "dns",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-dns/latest",
     "distribution_name": "google-cloud-dns",
-    "client_documentation": "https://googleapis.dev/ruby/google-cloud-dns/latest",
-    "library_type": "GAPIC_MANUAL"
+    "language": "ruby",
+    "name": "dns",
+    "name_pretty": "Cloud DNS API",
+    "product_documentation": "https://cloud.google.com/dns",
+    "release_level": "preview",
+    "repo": "googleapis/google-cloud-ruby",
+    "library_type": "OTHER"
 }

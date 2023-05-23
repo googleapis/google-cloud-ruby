@@ -65,7 +65,7 @@ module Grafeas
     #   @return [::String]
     #     The identifier for the public key that verifies this signature.
     #       * The `public_key_id` is required.
-    #       * The `public_key_id` MUST be an RFC3986 conformant URI.
+    #       * The `public_key_id` SHOULD be an RFC3986 conformant URI.
     #       * When possible, the `public_key_id` SHOULD be an immutable reference,
     #         such as a cryptographic digest.
     #
@@ -85,9 +85,70 @@ module Grafeas
       extend ::Google::Protobuf::MessageExts::ClassMethods
     end
 
+    # MUST match
+    # https://github.com/secure-systems-lab/dsse/blob/master/envelope.proto. An
+    # authenticated message of arbitrary type.
+    # @!attribute [rw] payload
+    #   @return [::String]
+    # @!attribute [rw] payload_type
+    #   @return [::String]
+    # @!attribute [rw] signatures
+    #   @return [::Array<::Grafeas::V1::EnvelopeSignature>]
+    class Envelope
+      include ::Google::Protobuf::MessageExts
+      extend ::Google::Protobuf::MessageExts::ClassMethods
+    end
+
+    # @!attribute [rw] sig
+    #   @return [::String]
+    # @!attribute [rw] keyid
+    #   @return [::String]
+    class EnvelopeSignature
+      include ::Google::Protobuf::MessageExts
+      extend ::Google::Protobuf::MessageExts::ClassMethods
+    end
+
+    # Indicates the location at which a package was found.
+    # @!attribute [rw] file_path
+    #   @return [::String]
+    #     For jars that are contained inside .war files, this filepath
+    #     can indicate the path to war file combined with the path to jar file.
+    class FileLocation
+      include ::Google::Protobuf::MessageExts
+      extend ::Google::Protobuf::MessageExts::ClassMethods
+    end
+
+    # License information.
+    # @!attribute [rw] expression
+    #   @return [::String]
+    #     Often a single license can be used to represent the licensing terms.
+    #     Sometimes it is necessary to include a choice of one or more licenses
+    #     or some combination of license identifiers.
+    #     Examples: "LGPL-2.1-only OR MIT", "LGPL-2.1-only AND MIT",
+    #     "GPL-2.0-or-later WITH Bison-exception-2.2".
+    # @!attribute [rw] comments
+    #   @return [::String]
+    #     Comments
+    class License
+      include ::Google::Protobuf::MessageExts
+      extend ::Google::Protobuf::MessageExts::ClassMethods
+    end
+
+    # Digest information.
+    # @!attribute [rw] algo
+    #   @return [::String]
+    #     `SHA1`, `SHA512` etc.
+    # @!attribute [rw] digest_bytes
+    #   @return [::String]
+    #     Value of the digest.
+    class Digest
+      include ::Google::Protobuf::MessageExts
+      extend ::Google::Protobuf::MessageExts::ClassMethods
+    end
+
     # Kind represents the kinds of notes supported.
     module NoteKind
-      # Unknown.
+      # Default value. This value is unused.
       NOTE_KIND_UNSPECIFIED = 0
 
       # The note and occurrence represent a package vulnerability.
@@ -113,6 +174,15 @@ module Grafeas
 
       # This represents an available package upgrade.
       UPGRADE = 8
+
+      # This represents a Compliance Note
+      COMPLIANCE = 9
+
+      # This represents a DSSE attestation Note
+      DSSE_ATTESTATION = 10
+
+      # This represents a Vulnerability Assessment.
+      VULNERABILITY_ASSESSMENT = 11
     end
   end
 end

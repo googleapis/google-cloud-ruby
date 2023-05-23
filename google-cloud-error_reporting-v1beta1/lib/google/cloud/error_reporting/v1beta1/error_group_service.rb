@@ -25,6 +25,7 @@ require "google/cloud/error_reporting/v1beta1/version"
 require "google/cloud/error_reporting/v1beta1/error_group_service/credentials"
 require "google/cloud/error_reporting/v1beta1/error_group_service/paths"
 require "google/cloud/error_reporting/v1beta1/error_group_service/client"
+require "google/cloud/error_reporting/v1beta1/error_group_service/rest"
 
 module Google
   module Cloud
@@ -33,10 +34,15 @@ module Google
         ##
         # Service for retrieving and updating individual error groups.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/error_reporting/v1beta1/error_group_service"
         #     client = ::Google::Cloud::ErrorReporting::V1beta1::ErrorGroupService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/error_reporting/v1beta1/error_group_service/rest"
+        #     client = ::Google::Cloud::ErrorReporting::V1beta1::ErrorGroupService::Rest::Client.new
         #
         module ErrorGroupService
         end

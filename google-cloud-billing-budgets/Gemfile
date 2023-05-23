@@ -2,4 +2,5 @@ source "https://rubygems.org"
 
 gemspec
 
+gem "google-cloud-billing-budgets-v1", path: "../google-cloud-billing-budgets-v1"
 gem "google-cloud-billing-budgets-v1beta1", path: "../google-cloud-billing-budgets-v1beta1"

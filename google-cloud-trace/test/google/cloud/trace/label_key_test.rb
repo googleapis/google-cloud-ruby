@@ -24,7 +24,7 @@ describe Google::Cloud::Trace::LabelKey, :mock_trace do
       Kernel.stub :caller_locations, frames do
         labels = {}
         Google::Cloud::Trace::LabelKey.set_stack_trace labels
-        labels["/stacktrace"].must_equal '{"stack_frame":[' \
+        _(labels["/stacktrace"]).must_equal '{"stack_frame":[' \
           '{"file_name":"/path/to/lib/mylib/stuff.rb",' \
           '"line_number":90,"method_name":"lib_method1"},' \
           '{"file_name":"/path/to/app/myapp.rb",' \
@@ -53,7 +53,7 @@ describe Google::Cloud::Trace::LabelKey, :mock_trace do
         labels = {}
         Google::Cloud::Trace::LabelKey.set_stack_trace labels,
           truncate_stack: truncation_proc, filter_stack: filter_proc
-        labels["/stacktrace"].must_equal '{"stack_frame":[' \
+        _(labels["/stacktrace"]).must_equal '{"stack_frame":[' \
           '{"file_name":"/path/to/app/myapp.rb",' \
           '"line_number":78,"method_name":"app_method1"},' \
           '{"file_name":"/path/to/app/myapp.rb",' \

@@ -6,13 +6,16 @@ require 'google/protobuf'
 require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
+require 'google/firestore/v1/aggregation_result_pb'
 require 'google/firestore/v1/common_pb'
 require 'google/firestore/v1/document_pb'
 require 'google/firestore/v1/query_pb'
 require 'google/firestore/v1/write_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/timestamp_pb'
+require 'google/protobuf/wrappers_pb'
 require 'google/rpc/status_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/firestore/v1/firestore.proto", :syntax => :proto3) do
     add_message "google.firestore.v1.GetDocumentRequest" do
@@ -111,6 +114,25 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :document, :message, 1, "google.firestore.v1.Document"
       optional :read_time, :message, 3, "google.protobuf.Timestamp"
       optional :skipped_results, :int32, 4
+      oneof :continuation_selector do
+        optional :done, :bool, 6
+      end
+    end
+    add_message "google.firestore.v1.RunAggregationQueryRequest" do
+      optional :parent, :string, 1
+      oneof :query_type do
+        optional :structured_aggregation_query, :message, 2, "google.firestore.v1.StructuredAggregationQuery"
+      end
+      oneof :consistency_selector do
+        optional :transaction, :bytes, 4
+        optional :new_transaction, :message, 5, "google.firestore.v1.TransactionOptions"
+        optional :read_time, :message, 6, "google.protobuf.Timestamp"
+      end
+    end
+    add_message "google.firestore.v1.RunAggregationQueryResponse" do
+      optional :result, :message, 1, "google.firestore.v1.AggregationResult"
+      optional :transaction, :bytes, 2
+      optional :read_time, :message, 3, "google.protobuf.Timestamp"
     end
     add_message "google.firestore.v1.PartitionQueryRequest" do
       optional :parent, :string, 1
@@ -119,6 +141,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :page_size, :int32, 5
       oneof :query_type do
         optional :structured_query, :message, 2, "google.firestore.v1.StructuredQuery"
+      end
+      oneof :consistency_selector do
+        optional :read_time, :message, 6, "google.protobuf.Timestamp"
       end
     end
     add_message "google.firestore.v1.PartitionQueryResponse" do
@@ -158,6 +183,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.firestore.v1.Target" do
       optional :target_id, :int32, 5
       optional :once, :bool, 6
+      optional :expected_count, :message, 12, "google.protobuf.Int32Value"
       oneof :target_type do
         optional :query, :message, 2, "google.firestore.v1.Target.QueryTarget"
         optional :documents, :message, 3, "google.firestore.v1.Target.DocumentsTarget"
@@ -194,6 +220,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :parent, :string, 1
       optional :page_size, :int32, 2
       optional :page_token, :string, 3
+      oneof :consistency_selector do
+        optional :read_time, :message, 4, "google.protobuf.Timestamp"
+      end
     end
     add_message "google.firestore.v1.ListCollectionIdsResponse" do
       repeated :collection_ids, :string, 1
@@ -230,6 +259,8 @@ module Google
         RollbackRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1.RollbackRequest").msgclass
         RunQueryRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1.RunQueryRequest").msgclass
         RunQueryResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1.RunQueryResponse").msgclass
+        RunAggregationQueryRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1.RunAggregationQueryRequest").msgclass
+        RunAggregationQueryResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1.RunAggregationQueryResponse").msgclass
         PartitionQueryRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1.PartitionQueryRequest").msgclass
         PartitionQueryResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1.PartitionQueryResponse").msgclass
         WriteRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.v1.WriteRequest").msgclass

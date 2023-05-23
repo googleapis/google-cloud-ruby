@@ -25,6 +25,7 @@ require "google/cloud/bigquery/reservation/v1/version"
 require "google/cloud/bigquery/reservation/v1/reservation_service/credentials"
 require "google/cloud/bigquery/reservation/v1/reservation_service/paths"
 require "google/cloud/bigquery/reservation/v1/reservation_service/client"
+require "google/cloud/bigquery/reservation/v1/reservation_service/rest"
 
 module Google
   module Cloud
@@ -32,7 +33,7 @@ module Google
       module Reservation
         module V1
           ##
-          # This API allows users to manage their flat-rate BigQuery reservations.
+          # This API allows users to manage their BigQuery reservations.
           #
           # A reservation provides computational resource guarantees, in the form of
           # [slots](https://cloud.google.com/bigquery/docs/slots), to users. A slot is a
@@ -48,10 +49,15 @@ module Google
           # location, e.g.:
           #   `projects/myproject/locations/US/capacityCommitments/id`.
           #
-          # To load this service and instantiate a client:
+          # @example Load this service and instantiate a gRPC client
           #
           #     require "google/cloud/bigquery/reservation/v1/reservation_service"
           #     client = ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new
+          #
+          # @example Load this service and instantiate a REST client
+          #
+          #     require "google/cloud/bigquery/reservation/v1/reservation_service/rest"
+          #     client = ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Rest::Client.new
           #
           module ReservationService
           end

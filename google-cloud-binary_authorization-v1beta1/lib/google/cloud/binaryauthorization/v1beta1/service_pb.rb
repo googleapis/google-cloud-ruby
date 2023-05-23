@@ -9,6 +9,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/binaryauthorization/v1beta1/resources_pb'
 require 'google/protobuf/empty_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/binaryauthorization/v1beta1/service.proto", :syntax => :proto3) do
     add_message "google.cloud.binaryauthorization.v1beta1.GetPolicyRequest" do
@@ -40,6 +41,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest" do
       optional :name, :string, 1
     end
+    add_message "google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest" do
+      optional :name, :string, 1
+    end
   end
 end
 
@@ -55,6 +59,7 @@ module Google
         ListAttestorsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest").msgclass
         ListAttestorsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.binaryauthorization.v1beta1.ListAttestorsResponse").msgclass
         DeleteAttestorRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest").msgclass
+        GetSystemPolicyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.binaryauthorization.v1beta1.GetSystemPolicyRequest").msgclass
       end
     end
   end

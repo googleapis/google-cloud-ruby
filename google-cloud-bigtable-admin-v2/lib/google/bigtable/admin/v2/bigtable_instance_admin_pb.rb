@@ -14,6 +14,7 @@ require 'google/longrunning/operations_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/bigtable/admin/v2/bigtable_instance_admin.proto", :syntax => :proto3) do
     add_message "google.bigtable.admin.v2.CreateInstanceRequest" do
@@ -75,11 +76,33 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :original_request, :message, 1, "google.bigtable.admin.v2.CreateClusterRequest"
       optional :request_time, :message, 2, "google.protobuf.Timestamp"
       optional :finish_time, :message, 3, "google.protobuf.Timestamp"
+      map :tables, :string, :message, 4, "google.bigtable.admin.v2.CreateClusterMetadata.TableProgress"
+    end
+    add_message "google.bigtable.admin.v2.CreateClusterMetadata.TableProgress" do
+      optional :estimated_size_bytes, :int64, 2
+      optional :estimated_copied_bytes, :int64, 3
+      optional :state, :enum, 4, "google.bigtable.admin.v2.CreateClusterMetadata.TableProgress.State"
+    end
+    add_enum "google.bigtable.admin.v2.CreateClusterMetadata.TableProgress.State" do
+      value :STATE_UNSPECIFIED, 0
+      value :PENDING, 1
+      value :COPYING, 2
+      value :COMPLETED, 3
+      value :CANCELLED, 4
     end
     add_message "google.bigtable.admin.v2.UpdateClusterMetadata" do
       optional :original_request, :message, 1, "google.bigtable.admin.v2.Cluster"
       optional :request_time, :message, 2, "google.protobuf.Timestamp"
       optional :finish_time, :message, 3, "google.protobuf.Timestamp"
+    end
+    add_message "google.bigtable.admin.v2.PartialUpdateClusterMetadata" do
+      optional :request_time, :message, 1, "google.protobuf.Timestamp"
+      optional :finish_time, :message, 2, "google.protobuf.Timestamp"
+      optional :original_request, :message, 3, "google.bigtable.admin.v2.PartialUpdateClusterRequest"
+    end
+    add_message "google.bigtable.admin.v2.PartialUpdateClusterRequest" do
+      optional :cluster, :message, 1, "google.bigtable.admin.v2.Cluster"
+      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
     end
     add_message "google.bigtable.admin.v2.CreateAppProfileRequest" do
       optional :parent, :string, 1
@@ -111,6 +134,17 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.bigtable.admin.v2.UpdateAppProfileMetadata" do
     end
+    add_message "google.bigtable.admin.v2.ListHotTabletsRequest" do
+      optional :parent, :string, 1
+      optional :start_time, :message, 2, "google.protobuf.Timestamp"
+      optional :end_time, :message, 3, "google.protobuf.Timestamp"
+      optional :page_size, :int32, 4
+      optional :page_token, :string, 5
+    end
+    add_message "google.bigtable.admin.v2.ListHotTabletsResponse" do
+      repeated :hot_tablets, :message, 1, "google.bigtable.admin.v2.HotTablet"
+      optional :next_page_token, :string, 2
+    end
   end
 end
 
@@ -133,7 +167,11 @@ module Google
           CreateInstanceMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateInstanceMetadata").msgclass
           UpdateInstanceMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.UpdateInstanceMetadata").msgclass
           CreateClusterMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateClusterMetadata").msgclass
+          CreateClusterMetadata::TableProgress = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateClusterMetadata.TableProgress").msgclass
+          CreateClusterMetadata::TableProgress::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateClusterMetadata.TableProgress.State").enummodule
           UpdateClusterMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.UpdateClusterMetadata").msgclass
+          PartialUpdateClusterMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.PartialUpdateClusterMetadata").msgclass
+          PartialUpdateClusterRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.PartialUpdateClusterRequest").msgclass
           CreateAppProfileRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateAppProfileRequest").msgclass
           GetAppProfileRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.GetAppProfileRequest").msgclass
           ListAppProfilesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListAppProfilesRequest").msgclass
@@ -141,6 +179,8 @@ module Google
           UpdateAppProfileRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.UpdateAppProfileRequest").msgclass
           DeleteAppProfileRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.DeleteAppProfileRequest").msgclass
           UpdateAppProfileMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.UpdateAppProfileMetadata").msgclass
+          ListHotTabletsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListHotTabletsRequest").msgclass
+          ListHotTabletsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListHotTabletsResponse").msgclass
         end
       end
     end

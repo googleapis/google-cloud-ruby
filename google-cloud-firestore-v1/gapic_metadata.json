@@ -55,6 +55,11 @@
                 "run_query"
               ]
             },
+            "RunAggregationQuery": {
+              "methods": [
+                "run_aggregation_query"
+              ]
+            },
             "PartitionQuery": {
               "methods": [
                 "partition_query"

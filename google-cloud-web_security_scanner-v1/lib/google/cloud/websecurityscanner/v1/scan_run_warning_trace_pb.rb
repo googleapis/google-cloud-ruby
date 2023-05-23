@@ -14,6 +14,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :TOO_MANY_CRAWL_RESULTS, 2
       value :TOO_MANY_FUZZ_TASKS, 3
       value :BLOCKED_BY_IAP, 4
+      value :NO_STARTING_URL_FOUND_FOR_MANAGED_SCAN, 5
     end
   end
 end

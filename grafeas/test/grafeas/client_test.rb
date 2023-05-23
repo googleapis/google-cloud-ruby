@@ -22,7 +22,7 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Grafeas::ClientConstructionMinitest < Minitest::Test
-  def test_grafeas
+  def test_grafeas_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
       client = Grafeas.grafeas do |config|

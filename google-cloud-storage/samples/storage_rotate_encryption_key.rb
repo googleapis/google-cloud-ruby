@@ -31,7 +31,7 @@ def rotate_encryption_key bucket_name:, file_name:, current_encryption_key:, new
   require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new
-  bucket  = storage.bucket bucket_name
+  bucket  = storage.bucket bucket_name, skip_lookup: true
   file    = bucket.file file_name, encryption_key: current_encryption_key
 
   file.rotate encryption_key:     current_encryption_key,

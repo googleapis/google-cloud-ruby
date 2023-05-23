@@ -487,10 +487,10 @@ module Google
         def labels_grpc
           return {} if labels.nil?
           # Coerce symbols to strings
-          Hash[labels.map do |k, v|
+          labels.to_h do |k, v|
             v = String(v) if v.is_a? Symbol
             [String(k), v]
-          end]
+          end
         end
 
         ##

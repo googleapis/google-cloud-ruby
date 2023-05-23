@@ -3,7 +3,6 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/securitycenter/v1/folder.proto", :syntax => :proto3) do
     add_message "google.cloud.securitycenter.v1.Folder" do

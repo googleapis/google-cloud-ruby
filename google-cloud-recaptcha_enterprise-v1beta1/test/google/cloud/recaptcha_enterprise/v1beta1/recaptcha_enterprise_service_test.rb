@@ -117,12 +117,18 @@ class ::Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService:
     # Create request parameters for a unary method.
     name = "hello world"
     annotation = :ANNOTATION_UNSPECIFIED
+    reasons = [:REASON_UNSPECIFIED]
+    hashed_account_id = "hello world"
+    transaction_event = {}
 
     annotate_assessment_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :annotate_assessment, name
       assert_kind_of ::Google::Cloud::RecaptchaEnterprise::V1beta1::AnnotateAssessmentRequest, request
       assert_equal "hello world", request["name"]
       assert_equal :ANNOTATION_UNSPECIFIED, request["annotation"]
+      assert_equal [:REASON_UNSPECIFIED], request["reasons"]
+      assert_equal "hello world", request["hashed_account_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::RecaptchaEnterprise::V1beta1::TransactionEvent), request["transaction_event"]
       refute_nil options
     end
 
@@ -133,340 +139,37 @@ class ::Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService:
       end
 
       # Use hash object
-      client.annotate_assessment({ name: name, annotation: annotation }) do |response, operation|
+      client.annotate_assessment({ name: name, annotation: annotation, reasons: reasons, hashed_account_id: hashed_account_id, transaction_event: transaction_event }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.annotate_assessment name: name, annotation: annotation do |response, operation|
+      client.annotate_assessment name: name, annotation: annotation, reasons: reasons, hashed_account_id: hashed_account_id, transaction_event: transaction_event do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.annotate_assessment ::Google::Cloud::RecaptchaEnterprise::V1beta1::AnnotateAssessmentRequest.new(name: name, annotation: annotation) do |response, operation|
+      client.annotate_assessment ::Google::Cloud::RecaptchaEnterprise::V1beta1::AnnotateAssessmentRequest.new(name: name, annotation: annotation, reasons: reasons, hashed_account_id: hashed_account_id, transaction_event: transaction_event) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.annotate_assessment({ name: name, annotation: annotation }, grpc_options) do |response, operation|
+      client.annotate_assessment({ name: name, annotation: annotation, reasons: reasons, hashed_account_id: hashed_account_id, transaction_event: transaction_event }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.annotate_assessment(::Google::Cloud::RecaptchaEnterprise::V1beta1::AnnotateAssessmentRequest.new(name: name, annotation: annotation), grpc_options) do |response, operation|
+      client.annotate_assessment(::Google::Cloud::RecaptchaEnterprise::V1beta1::AnnotateAssessmentRequest.new(name: name, annotation: annotation, reasons: reasons, hashed_account_id: hashed_account_id, transaction_event: transaction_event), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Verify method calls
       assert_equal 5, annotate_assessment_client_stub.call_rpc_count
-    end
-  end
-
-  def test_create_key
-    # Create GRPC objects.
-    grpc_response = ::Google::Cloud::RecaptchaEnterprise::V1beta1::Key.new
-    grpc_operation = GRPC::ActiveCall::Operation.new nil
-    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    grpc_options = {}
-
-    # Create request parameters for a unary method.
-    parent = "hello world"
-    key = {}
-
-    create_key_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
-      assert_equal :create_key, name
-      assert_kind_of ::Google::Cloud::RecaptchaEnterprise::V1beta1::CreateKeyRequest, request
-      assert_equal "hello world", request["parent"]
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::RecaptchaEnterprise::V1beta1::Key), request["key"]
-      refute_nil options
-    end
-
-    Gapic::ServiceStub.stub :new, create_key_client_stub do
-      # Create client
-      client = ::Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService::Client.new do |config|
-        config.credentials = grpc_channel
-      end
-
-      # Use hash object
-      client.create_key({ parent: parent, key: key }) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use named arguments
-      client.create_key parent: parent, key: key do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object
-      client.create_key ::Google::Cloud::RecaptchaEnterprise::V1beta1::CreateKeyRequest.new(parent: parent, key: key) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use hash object with options
-      client.create_key({ parent: parent, key: key }, grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object with options
-      client.create_key(::Google::Cloud::RecaptchaEnterprise::V1beta1::CreateKeyRequest.new(parent: parent, key: key), grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Verify method calls
-      assert_equal 5, create_key_client_stub.call_rpc_count
-    end
-  end
-
-  def test_list_keys
-    # Create GRPC objects.
-    grpc_response = ::Google::Cloud::RecaptchaEnterprise::V1beta1::ListKeysResponse.new
-    grpc_operation = GRPC::ActiveCall::Operation.new nil
-    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    grpc_options = {}
-
-    # Create request parameters for a unary method.
-    parent = "hello world"
-    page_size = 42
-    page_token = "hello world"
-
-    list_keys_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
-      assert_equal :list_keys, name
-      assert_kind_of ::Google::Cloud::RecaptchaEnterprise::V1beta1::ListKeysRequest, request
-      assert_equal "hello world", request["parent"]
-      assert_equal 42, request["page_size"]
-      assert_equal "hello world", request["page_token"]
-      refute_nil options
-    end
-
-    Gapic::ServiceStub.stub :new, list_keys_client_stub do
-      # Create client
-      client = ::Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService::Client.new do |config|
-        config.credentials = grpc_channel
-      end
-
-      # Use hash object
-      client.list_keys({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
-        assert_kind_of Gapic::PagedEnumerable, response
-        assert_equal grpc_response, response.response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use named arguments
-      client.list_keys parent: parent, page_size: page_size, page_token: page_token do |response, operation|
-        assert_kind_of Gapic::PagedEnumerable, response
-        assert_equal grpc_response, response.response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object
-      client.list_keys ::Google::Cloud::RecaptchaEnterprise::V1beta1::ListKeysRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
-        assert_kind_of Gapic::PagedEnumerable, response
-        assert_equal grpc_response, response.response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use hash object with options
-      client.list_keys({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
-        assert_kind_of Gapic::PagedEnumerable, response
-        assert_equal grpc_response, response.response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object with options
-      client.list_keys(::Google::Cloud::RecaptchaEnterprise::V1beta1::ListKeysRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
-        assert_kind_of Gapic::PagedEnumerable, response
-        assert_equal grpc_response, response.response
-        assert_equal grpc_operation, operation
-      end
-
-      # Verify method calls
-      assert_equal 5, list_keys_client_stub.call_rpc_count
-    end
-  end
-
-  def test_get_key
-    # Create GRPC objects.
-    grpc_response = ::Google::Cloud::RecaptchaEnterprise::V1beta1::Key.new
-    grpc_operation = GRPC::ActiveCall::Operation.new nil
-    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    grpc_options = {}
-
-    # Create request parameters for a unary method.
-    name = "hello world"
-
-    get_key_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
-      assert_equal :get_key, name
-      assert_kind_of ::Google::Cloud::RecaptchaEnterprise::V1beta1::GetKeyRequest, request
-      assert_equal "hello world", request["name"]
-      refute_nil options
-    end
-
-    Gapic::ServiceStub.stub :new, get_key_client_stub do
-      # Create client
-      client = ::Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService::Client.new do |config|
-        config.credentials = grpc_channel
-      end
-
-      # Use hash object
-      client.get_key({ name: name }) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use named arguments
-      client.get_key name: name do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object
-      client.get_key ::Google::Cloud::RecaptchaEnterprise::V1beta1::GetKeyRequest.new(name: name) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use hash object with options
-      client.get_key({ name: name }, grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object with options
-      client.get_key(::Google::Cloud::RecaptchaEnterprise::V1beta1::GetKeyRequest.new(name: name), grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Verify method calls
-      assert_equal 5, get_key_client_stub.call_rpc_count
-    end
-  end
-
-  def test_update_key
-    # Create GRPC objects.
-    grpc_response = ::Google::Cloud::RecaptchaEnterprise::V1beta1::Key.new
-    grpc_operation = GRPC::ActiveCall::Operation.new nil
-    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    grpc_options = {}
-
-    # Create request parameters for a unary method.
-    key = {}
-    update_mask = {}
-
-    update_key_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
-      assert_equal :update_key, name
-      assert_kind_of ::Google::Cloud::RecaptchaEnterprise::V1beta1::UpdateKeyRequest, request
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::RecaptchaEnterprise::V1beta1::Key), request["key"]
-      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
-      refute_nil options
-    end
-
-    Gapic::ServiceStub.stub :new, update_key_client_stub do
-      # Create client
-      client = ::Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService::Client.new do |config|
-        config.credentials = grpc_channel
-      end
-
-      # Use hash object
-      client.update_key({ key: key, update_mask: update_mask }) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use named arguments
-      client.update_key key: key, update_mask: update_mask do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object
-      client.update_key ::Google::Cloud::RecaptchaEnterprise::V1beta1::UpdateKeyRequest.new(key: key, update_mask: update_mask) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use hash object with options
-      client.update_key({ key: key, update_mask: update_mask }, grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object with options
-      client.update_key(::Google::Cloud::RecaptchaEnterprise::V1beta1::UpdateKeyRequest.new(key: key, update_mask: update_mask), grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Verify method calls
-      assert_equal 5, update_key_client_stub.call_rpc_count
-    end
-  end
-
-  def test_delete_key
-    # Create GRPC objects.
-    grpc_response = ::Google::Protobuf::Empty.new
-    grpc_operation = GRPC::ActiveCall::Operation.new nil
-    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    grpc_options = {}
-
-    # Create request parameters for a unary method.
-    name = "hello world"
-
-    delete_key_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
-      assert_equal :delete_key, name
-      assert_kind_of ::Google::Cloud::RecaptchaEnterprise::V1beta1::DeleteKeyRequest, request
-      assert_equal "hello world", request["name"]
-      refute_nil options
-    end
-
-    Gapic::ServiceStub.stub :new, delete_key_client_stub do
-      # Create client
-      client = ::Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService::Client.new do |config|
-        config.credentials = grpc_channel
-      end
-
-      # Use hash object
-      client.delete_key({ name: name }) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use named arguments
-      client.delete_key name: name do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object
-      client.delete_key ::Google::Cloud::RecaptchaEnterprise::V1beta1::DeleteKeyRequest.new(name: name) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use hash object with options
-      client.delete_key({ name: name }, grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object with options
-      client.delete_key(::Google::Cloud::RecaptchaEnterprise::V1beta1::DeleteKeyRequest.new(name: name), grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Verify method calls
-      assert_equal 5, delete_key_client_stub.call_rpc_count
     end
   end
 

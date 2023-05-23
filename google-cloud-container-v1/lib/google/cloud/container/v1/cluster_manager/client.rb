@@ -30,6 +30,8 @@ module Google
           # Google Kubernetes Engine Cluster Manager v1
           #
           class Client
+            include Paths
+
             # @private
             attr_reader :cluster_manager_stub
 
@@ -39,13 +41,12 @@ module Google
             # See {::Google::Cloud::Container::V1::ClusterManager::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all ClusterManager clients:
-            #
-            #     ::Google::Cloud::Container::V1::ClusterManager::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all ClusterManager clients
+            #   ::Google::Cloud::Container::V1::ClusterManager::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -65,18 +66,12 @@ module Google
 
                 default_config.rpcs.list_clusters.timeout = 20.0
                 default_config.rpcs.list_clusters.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.get_cluster.timeout = 20.0
                 default_config.rpcs.get_cluster.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.create_cluster.timeout = 45.0
@@ -101,62 +96,41 @@ module Google
 
                 default_config.rpcs.delete_cluster.timeout = 20.0
                 default_config.rpcs.delete_cluster.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_operations.timeout = 20.0
                 default_config.rpcs.list_operations.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.get_operation.timeout = 20.0
                 default_config.rpcs.get_operation.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.cancel_operation.timeout = 45.0
 
                 default_config.rpcs.get_server_config.timeout = 20.0
                 default_config.rpcs.get_server_config.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_node_pools.timeout = 20.0
                 default_config.rpcs.list_node_pools.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.get_node_pool.timeout = 20.0
                 default_config.rpcs.get_node_pool.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.create_node_pool.timeout = 45.0
 
                 default_config.rpcs.delete_node_pool.timeout = 20.0
                 default_config.rpcs.delete_node_pool.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.rollback_node_pool_upgrade.timeout = 45.0
@@ -206,19 +180,15 @@ module Google
             ##
             # Create a new ClusterManager client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new ClusterManager client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Container::V1::ClusterManager::Client.new
             #
-            #     client = ::Google::Cloud::Container::V1::ClusterManager::Client.new
-            #
-            # To create a new ClusterManager client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Container::V1::ClusterManager::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Container::V1::ClusterManager::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the ClusterManager client.
             # @yieldparam config [Client::Configuration]
@@ -238,14 +208,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -283,7 +252,7 @@ module Google
             #
             #   @param project_id [::String]
             #     Deprecated. The Google Developers Console [project ID or project
-            #     number](https://support.google.com/cloud/answer/6158840).
+            #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
             #     This field has been deprecated and replaced by the parent field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
@@ -303,6 +272,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/container/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1::ListClustersRequest.new
+            #
+            #   # Call the list_clusters method.
+            #   result = client.list_clusters request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1::ListClustersResponse.
+            #   p result
+            #
             def list_clusters request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -320,16 +304,20 @@ module Google
                 gapic_version: ::Google::Cloud::Container::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_clusters.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_clusters.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :list_clusters, request, options: options do |response, operation|
@@ -360,7 +348,7 @@ module Google
             #
             #   @param project_id [::String]
             #     Deprecated. The Google Developers Console [project ID or project
-            #     number](https://support.google.com/cloud/answer/6158840).
+            #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
@@ -382,6 +370,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/container/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1::GetClusterRequest.new
+            #
+            #   # Call the get_cluster method.
+            #   result = client.get_cluster request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1::Cluster.
+            #   p result
+            #
             def get_cluster request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -399,16 +402,20 @@ module Google
                 gapic_version: ::Google::Cloud::Container::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_cluster.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_cluster.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :get_cluster, request, options: options do |response, operation|
@@ -452,7 +459,7 @@ module Google
             #
             #   @param project_id [::String]
             #     Deprecated. The Google Developers Console [project ID or project
-            #     number](https://support.google.com/cloud/answer/6158840).
+            #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
             #     This field has been deprecated and replaced by the parent field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
@@ -474,6 +481,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/container/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1::CreateClusterRequest.new
+            #
+            #   # Call the create_cluster method.
+            #   result = client.create_cluster request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1::Operation.
+            #   p result
+            #
             def create_cluster request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -491,16 +513,20 @@ module Google
                 gapic_version: ::Google::Cloud::Container::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_cluster.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_cluster.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :create_cluster, request, options: options do |response, operation|
@@ -531,7 +557,7 @@ module Google
             #
             #   @param project_id [::String]
             #     Deprecated. The Google Developers Console [project ID or project
-            #     number](https://support.google.com/cloud/answer/6158840).
+            #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
@@ -555,6 +581,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/container/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1::UpdateClusterRequest.new
+            #
+            #   # Call the update_cluster method.
+            #   result = client.update_cluster request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1::Operation.
+            #   p result
+            #
             def update_cluster request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -572,16 +613,20 @@ module Google
                 gapic_version: ::Google::Cloud::Container::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_cluster.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_cluster.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :update_cluster, request, options: options do |response, operation|
@@ -605,14 +650,14 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload update_node_pool(project_id: nil, zone: nil, cluster_id: nil, node_pool_id: nil, node_version: nil, image_type: nil, name: nil, locations: nil, workload_metadata_config: nil, upgrade_settings: nil)
+            # @overload update_node_pool(project_id: nil, zone: nil, cluster_id: nil, node_pool_id: nil, node_version: nil, image_type: nil, name: nil, locations: nil, workload_metadata_config: nil, upgrade_settings: nil, tags: nil, taints: nil, labels: nil, linux_node_config: nil, kubelet_config: nil, node_network_config: nil, gcfs_config: nil, confidential_nodes: nil, gvnic: nil, etag: nil, fast_socket: nil, logging_config: nil, resource_labels: nil, windows_node_config: nil)
             #   Pass arguments to `update_node_pool` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param project_id [::String]
             #     Deprecated. The Google Developers Console [project ID or project
-            #     number](https://support.google.com/cloud/answer/6158840).
+            #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
@@ -638,7 +683,9 @@ module Google
             #     - "1.X.Y-gke.N": picks an explicit Kubernetes version
             #     - "-": picks the Kubernetes master version
             #   @param image_type [::String]
-            #     Required. The desired image type for the node pool.
+            #     Required. The desired image type for the node pool. Please see
+            #     https://cloud.google.com/kubernetes-engine/docs/concepts/node-images for
+            #     available image types.
             #   @param name [::String]
             #     The name (project, location, cluster, node pool) of the node pool to
             #     update. Specified in the format
@@ -653,6 +700,44 @@ module Google
             #     The desired workload metadata config for the node pool.
             #   @param upgrade_settings [::Google::Cloud::Container::V1::NodePool::UpgradeSettings, ::Hash]
             #     Upgrade settings control disruption and speed of the upgrade.
+            #   @param tags [::Google::Cloud::Container::V1::NetworkTags, ::Hash]
+            #     The desired network tags to be applied to all nodes in the node pool.
+            #     If this field is not present, the tags will not be changed. Otherwise,
+            #     the existing network tags will be *replaced* with the provided tags.
+            #   @param taints [::Google::Cloud::Container::V1::NodeTaints, ::Hash]
+            #     The desired node taints to be applied to all nodes in the node pool.
+            #     If this field is not present, the taints will not be changed. Otherwise,
+            #     the existing node taints will be *replaced* with the provided taints.
+            #   @param labels [::Google::Cloud::Container::V1::NodeLabels, ::Hash]
+            #     The desired node labels to be applied to all nodes in the node pool.
+            #     If this field is not present, the labels will not be changed. Otherwise,
+            #     the existing node labels will be *replaced* with the provided labels.
+            #   @param linux_node_config [::Google::Cloud::Container::V1::LinuxNodeConfig, ::Hash]
+            #     Parameters that can be configured on Linux nodes.
+            #   @param kubelet_config [::Google::Cloud::Container::V1::NodeKubeletConfig, ::Hash]
+            #     Node kubelet configs.
+            #   @param node_network_config [::Google::Cloud::Container::V1::NodeNetworkConfig, ::Hash]
+            #     Node network config.
+            #   @param gcfs_config [::Google::Cloud::Container::V1::GcfsConfig, ::Hash]
+            #     GCFS config.
+            #   @param confidential_nodes [::Google::Cloud::Container::V1::ConfidentialNodes, ::Hash]
+            #     Confidential nodes config.
+            #     All the nodes in the node pool will be Confidential VM once enabled.
+            #   @param gvnic [::Google::Cloud::Container::V1::VirtualNIC, ::Hash]
+            #     Enable or disable gvnic on the node pool.
+            #   @param etag [::String]
+            #     The current etag of the node pool.
+            #     If an etag is provided and does not match the current etag of the node
+            #     pool, update will be blocked and an ABORTED error will be returned.
+            #   @param fast_socket [::Google::Cloud::Container::V1::FastSocket, ::Hash]
+            #     Enable or disable NCCL fast socket for the node pool.
+            #   @param logging_config [::Google::Cloud::Container::V1::NodePoolLoggingConfig, ::Hash]
+            #     Logging configuration.
+            #   @param resource_labels [::Google::Cloud::Container::V1::ResourceLabels, ::Hash]
+            #     The resource labels for the node pool to use to annotate any related
+            #     Google Compute Engine resources.
+            #   @param windows_node_config [::Google::Cloud::Container::V1::WindowsNodeConfig, ::Hash]
+            #     Parameters that can be configured on Windows nodes.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Container::V1::Operation]
@@ -661,6 +746,21 @@ module Google
             # @return [::Google::Cloud::Container::V1::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/container/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1::UpdateNodePoolRequest.new
+            #
+            #   # Call the update_node_pool method.
+            #   result = client.update_node_pool request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1::Operation.
+            #   p result
             #
             def update_node_pool request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -679,16 +779,20 @@ module Google
                 gapic_version: ::Google::Cloud::Container::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_node_pool.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_node_pool.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :update_node_pool, request, options: options do |response, operation|
@@ -719,7 +823,7 @@ module Google
             #
             #   @param project_id [::String]
             #     Deprecated. The Google Developers Console [project ID or project
-            #     number](https://support.google.com/cloud/answer/6158840).
+            #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
@@ -747,6 +851,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/container/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1::SetNodePoolAutoscalingRequest.new
+            #
+            #   # Call the set_node_pool_autoscaling method.
+            #   result = client.set_node_pool_autoscaling request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1::Operation.
+            #   p result
+            #
             def set_node_pool_autoscaling request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -764,16 +883,20 @@ module Google
                 gapic_version: ::Google::Cloud::Container::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.set_node_pool_autoscaling.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.set_node_pool_autoscaling.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :set_node_pool_autoscaling, request, options: options do |response, operation|
@@ -804,7 +927,7 @@ module Google
             #
             #   @param project_id [::String]
             #     Deprecated. The Google Developers Console [project ID or project
-            #     number](https://support.google.com/cloud/answer/6158840).
+            #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
@@ -838,6 +961,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/container/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1::SetLoggingServiceRequest.new
+            #
+            #   # Call the set_logging_service method.
+            #   result = client.set_logging_service request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1::Operation.
+            #   p result
+            #
             def set_logging_service request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -855,16 +993,20 @@ module Google
                 gapic_version: ::Google::Cloud::Container::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.set_logging_service.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.set_logging_service.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :set_logging_service, request, options: options do |response, operation|
@@ -895,7 +1037,7 @@ module Google
             #
             #   @param project_id [::String]
             #     Deprecated. The Google Developers Console [project ID or project
-            #     number](https://support.google.com/cloud/answer/6158840).
+            #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
@@ -929,6 +1071,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/container/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1::SetMonitoringServiceRequest.new
+            #
+            #   # Call the set_monitoring_service method.
+            #   result = client.set_monitoring_service request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1::Operation.
+            #   p result
+            #
             def set_monitoring_service request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -946,16 +1103,20 @@ module Google
                 gapic_version: ::Google::Cloud::Container::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.set_monitoring_service.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.set_monitoring_service.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :set_monitoring_service, request, options: options do |response, operation|
@@ -986,7 +1147,7 @@ module Google
             #
             #   @param project_id [::String]
             #     Deprecated. The Google Developers Console [project ID or project
-            #     number](https://support.google.com/cloud/answer/6158840).
+            #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
@@ -997,8 +1158,8 @@ module Google
             #     Deprecated. The name of the cluster to upgrade.
             #     This field has been deprecated and replaced by the name field.
             #   @param addons_config [::Google::Cloud::Container::V1::AddonsConfig, ::Hash]
-            #     Required. The desired configurations for the various addons available to run in the
-            #     cluster.
+            #     Required. The desired configurations for the various addons available to
+            #     run in the cluster.
             #   @param name [::String]
             #     The name (project, location, cluster) of the cluster to set addons.
             #     Specified in the format `projects/*/locations/*/clusters/*`.
@@ -1010,6 +1171,21 @@ module Google
             # @return [::Google::Cloud::Container::V1::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/container/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1::SetAddonsConfigRequest.new
+            #
+            #   # Call the set_addons_config method.
+            #   result = client.set_addons_config request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1::Operation.
+            #   p result
             #
             def set_addons_config request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1028,16 +1204,20 @@ module Google
                 gapic_version: ::Google::Cloud::Container::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.set_addons_config.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.set_addons_config.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :set_addons_config, request, options: options do |response, operation|
@@ -1053,6 +1233,8 @@ module Google
             # Deprecated. Use
             # [projects.locations.clusters.update](https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1/projects.locations.clusters/update)
             # instead.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload set_locations(request, options = nil)
             #   Pass arguments to `set_locations` via a request object, either of type
@@ -1071,7 +1253,7 @@ module Google
             #
             #   @param project_id [::String]
             #     Deprecated. The Google Developers Console [project ID or project
-            #     number](https://support.google.com/cloud/answer/6158840).
+            #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
@@ -1101,6 +1283,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/container/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1::SetLocationsRequest.new
+            #
+            #   # Call the set_locations method.
+            #   result = client.set_locations request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1::Operation.
+            #   p result
+            #
             def set_locations request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1118,16 +1315,20 @@ module Google
                 gapic_version: ::Google::Cloud::Container::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.set_locations.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.set_locations.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :set_locations, request, options: options do |response, operation|
@@ -1158,7 +1359,7 @@ module Google
             #
             #   @param project_id [::String]
             #     Deprecated. The Google Developers Console [project ID or project
-            #     number](https://support.google.com/cloud/answer/6158840).
+            #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
@@ -1191,6 +1392,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/container/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1::UpdateMasterRequest.new
+            #
+            #   # Call the update_master method.
+            #   result = client.update_master request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1::Operation.
+            #   p result
+            #
             def update_master request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1208,16 +1424,20 @@ module Google
                 gapic_version: ::Google::Cloud::Container::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_master.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_master.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :update_master, request, options: options do |response, operation|
@@ -1250,7 +1470,7 @@ module Google
             #
             #   @param project_id [::String]
             #     Deprecated. The Google Developers Console [project ID or project
-            #     number](https://support.google.com/cloud/answer/6158840).
+            #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
@@ -1276,6 +1496,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/container/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1::SetMasterAuthRequest.new
+            #
+            #   # Call the set_master_auth method.
+            #   result = client.set_master_auth request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1::Operation.
+            #   p result
+            #
             def set_master_auth request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1293,16 +1528,20 @@ module Google
                 gapic_version: ::Google::Cloud::Container::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.set_master_auth.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.set_master_auth.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :set_master_auth, request, options: options do |response, operation|
@@ -1341,7 +1580,7 @@ module Google
             #
             #   @param project_id [::String]
             #     Deprecated. The Google Developers Console [project ID or project
-            #     number](https://support.google.com/cloud/answer/6158840).
+            #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
@@ -1363,6 +1602,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/container/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1::DeleteClusterRequest.new
+            #
+            #   # Call the delete_cluster method.
+            #   result = client.delete_cluster request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1::Operation.
+            #   p result
+            #
             def delete_cluster request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1380,16 +1634,20 @@ module Google
                 gapic_version: ::Google::Cloud::Container::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_cluster.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_cluster.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :delete_cluster, request, options: options do |response, operation|
@@ -1420,7 +1678,7 @@ module Google
             #
             #   @param project_id [::String]
             #     Deprecated. The Google Developers Console [project ID or project
-            #     number](https://support.google.com/cloud/answer/6158840).
+            #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
             #     This field has been deprecated and replaced by the parent field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
@@ -1440,6 +1698,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/container/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1::ListOperationsRequest.new
+            #
+            #   # Call the list_operations method.
+            #   result = client.list_operations request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1::ListOperationsResponse.
+            #   p result
+            #
             def list_operations request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1457,16 +1730,20 @@ module Google
                 gapic_version: ::Google::Cloud::Container::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_operations.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_operations.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :list_operations, request, options: options do |response, operation|
@@ -1497,7 +1774,7 @@ module Google
             #
             #   @param project_id [::String]
             #     Deprecated. The Google Developers Console [project ID or project
-            #     number](https://support.google.com/cloud/answer/6158840).
+            #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
@@ -1519,6 +1796,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/container/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1::GetOperationRequest.new
+            #
+            #   # Call the get_operation method.
+            #   result = client.get_operation request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1::Operation.
+            #   p result
+            #
             def get_operation request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1536,16 +1828,20 @@ module Google
                 gapic_version: ::Google::Cloud::Container::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_operation.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_operation.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :get_operation, request, options: options do |response, operation|
@@ -1576,7 +1872,7 @@ module Google
             #
             #   @param project_id [::String]
             #     Deprecated. The Google Developers Console [project ID or project
-            #     number](https://support.google.com/cloud/answer/6158840).
+            #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
@@ -1598,6 +1894,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/container/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1::CancelOperationRequest.new
+            #
+            #   # Call the cancel_operation method.
+            #   result = client.cancel_operation request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def cancel_operation request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1615,16 +1926,20 @@ module Google
                 gapic_version: ::Google::Cloud::Container::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.cancel_operation.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.cancel_operation.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :cancel_operation, request, options: options do |response, operation|
@@ -1655,7 +1970,7 @@ module Google
             #
             #   @param project_id [::String]
             #     Deprecated. The Google Developers Console [project ID or project
-            #     number](https://support.google.com/cloud/answer/6158840).
+            #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
@@ -1674,6 +1989,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/container/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1::GetServerConfigRequest.new
+            #
+            #   # Call the get_server_config method.
+            #   result = client.get_server_config request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1::ServerConfig.
+            #   p result
+            #
             def get_server_config request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1691,16 +2021,20 @@ module Google
                 gapic_version: ::Google::Cloud::Container::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_server_config.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_server_config.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :get_server_config, request, options: options do |response, operation|
@@ -1733,7 +2067,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     The cluster (project, location, cluster id) to get keys for. Specified in
+            #     The cluster (project, location, cluster name) to get keys for. Specified in
             #     the format `projects/*/locations/*/clusters/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -1743,6 +2077,21 @@ module Google
             # @return [::Google::Cloud::Container::V1::GetJSONWebKeysResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/container/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1::GetJSONWebKeysRequest.new
+            #
+            #   # Call the get_json_web_keys method.
+            #   result = client.get_json_web_keys request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1::GetJSONWebKeysResponse.
+            #   p result
             #
             def get_json_web_keys request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1761,16 +2110,20 @@ module Google
                 gapic_version: ::Google::Cloud::Container::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_json_web_keys.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_json_web_keys.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :get_json_web_keys, request, options: options do |response, operation|
@@ -1801,7 +2154,7 @@ module Google
             #
             #   @param project_id [::String]
             #     Deprecated. The Google Developers Console [project ID or project
-            #     number](https://developers.google.com/console/help/new/#projectnumber).
+            #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
             #     This field has been deprecated and replaced by the parent field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
@@ -1812,7 +2165,7 @@ module Google
             #     Deprecated. The name of the cluster.
             #     This field has been deprecated and replaced by the parent field.
             #   @param parent [::String]
-            #     The parent (project, location, cluster id) where the node pools will be
+            #     The parent (project, location, cluster name) where the node pools will be
             #     listed. Specified in the format `projects/*/locations/*/clusters/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -1822,6 +2175,21 @@ module Google
             # @return [::Google::Cloud::Container::V1::ListNodePoolsResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/container/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1::ListNodePoolsRequest.new
+            #
+            #   # Call the list_node_pools method.
+            #   result = client.list_node_pools request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1::ListNodePoolsResponse.
+            #   p result
             #
             def list_node_pools request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1840,16 +2208,20 @@ module Google
                 gapic_version: ::Google::Cloud::Container::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_node_pools.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_node_pools.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :list_node_pools, request, options: options do |response, operation|
@@ -1880,7 +2252,7 @@ module Google
             #
             #   @param project_id [::String]
             #     Deprecated. The Google Developers Console [project ID or project
-            #     number](https://developers.google.com/console/help/new/#projectnumber).
+            #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
@@ -1906,6 +2278,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/container/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1::GetNodePoolRequest.new
+            #
+            #   # Call the get_node_pool method.
+            #   result = client.get_node_pool request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1::NodePool.
+            #   p result
+            #
             def get_node_pool request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1923,16 +2310,20 @@ module Google
                 gapic_version: ::Google::Cloud::Container::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_node_pool.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_node_pool.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :get_node_pool, request, options: options do |response, operation|
@@ -1963,7 +2354,7 @@ module Google
             #
             #   @param project_id [::String]
             #     Deprecated. The Google Developers Console [project ID or project
-            #     number](https://developers.google.com/console/help/new/#projectnumber).
+            #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
             #     This field has been deprecated and replaced by the parent field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
@@ -1976,7 +2367,7 @@ module Google
             #   @param node_pool [::Google::Cloud::Container::V1::NodePool, ::Hash]
             #     Required. The node pool to create.
             #   @param parent [::String]
-            #     The parent (project, location, cluster id) where the node pool will be
+            #     The parent (project, location, cluster name) where the node pool will be
             #     created. Specified in the format
             #     `projects/*/locations/*/clusters/*`.
             #
@@ -1987,6 +2378,21 @@ module Google
             # @return [::Google::Cloud::Container::V1::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/container/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1::CreateNodePoolRequest.new
+            #
+            #   # Call the create_node_pool method.
+            #   result = client.create_node_pool request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1::Operation.
+            #   p result
             #
             def create_node_pool request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -2005,16 +2411,20 @@ module Google
                 gapic_version: ::Google::Cloud::Container::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_node_pool.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_node_pool.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :create_node_pool, request, options: options do |response, operation|
@@ -2045,7 +2455,7 @@ module Google
             #
             #   @param project_id [::String]
             #     Deprecated. The Google Developers Console [project ID or project
-            #     number](https://developers.google.com/console/help/new/#projectnumber).
+            #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
@@ -2071,6 +2481,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/container/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1::DeleteNodePoolRequest.new
+            #
+            #   # Call the delete_node_pool method.
+            #   result = client.delete_node_pool request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1::Operation.
+            #   p result
+            #
             def delete_node_pool request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2088,19 +2513,111 @@ module Google
                 gapic_version: ::Google::Cloud::Container::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_node_pool.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_node_pool.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :delete_node_pool, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # CompleteNodePoolUpgrade will signal an on-going node pool upgrade to
+            # complete.
+            #
+            # @overload complete_node_pool_upgrade(request, options = nil)
+            #   Pass arguments to `complete_node_pool_upgrade` via a request object, either of type
+            #   {::Google::Cloud::Container::V1::CompleteNodePoolUpgradeRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Container::V1::CompleteNodePoolUpgradeRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload complete_node_pool_upgrade(name: nil)
+            #   Pass arguments to `complete_node_pool_upgrade` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     The name (project, location, cluster, node pool id) of the node pool to
+            #     complete upgrade.
+            #     Specified in the format `projects/*/locations/*/clusters/*/nodePools/*`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Protobuf::Empty]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/container/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1::CompleteNodePoolUpgradeRequest.new
+            #
+            #   # Call the complete_node_pool_upgrade method.
+            #   result = client.complete_node_pool_upgrade request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
+            def complete_node_pool_upgrade request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Container::V1::CompleteNodePoolUpgradeRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.complete_node_pool_upgrade.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Container::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.complete_node_pool_upgrade.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.complete_node_pool_upgrade.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @cluster_manager_stub.call_rpc :complete_node_pool_upgrade, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -2122,14 +2639,14 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload rollback_node_pool_upgrade(project_id: nil, zone: nil, cluster_id: nil, node_pool_id: nil, name: nil)
+            # @overload rollback_node_pool_upgrade(project_id: nil, zone: nil, cluster_id: nil, node_pool_id: nil, name: nil, respect_pdb: nil)
             #   Pass arguments to `rollback_node_pool_upgrade` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param project_id [::String]
             #     Deprecated. The Google Developers Console [project ID or project
-            #     number](https://support.google.com/cloud/answer/6158840).
+            #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
@@ -2146,6 +2663,9 @@ module Google
             #     The name (project, location, cluster, node pool id) of the node poll to
             #     rollback upgrade.
             #     Specified in the format `projects/*/locations/*/clusters/*/nodePools/*`.
+            #   @param respect_pdb [::Boolean]
+            #     Option for rollback to ignore the PodDisruptionBudget.
+            #     Default value is false.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Container::V1::Operation]
@@ -2154,6 +2674,21 @@ module Google
             # @return [::Google::Cloud::Container::V1::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/container/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1::RollbackNodePoolUpgradeRequest.new
+            #
+            #   # Call the rollback_node_pool_upgrade method.
+            #   result = client.rollback_node_pool_upgrade request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1::Operation.
+            #   p result
             #
             def rollback_node_pool_upgrade request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -2172,16 +2707,20 @@ module Google
                 gapic_version: ::Google::Cloud::Container::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.rollback_node_pool_upgrade.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.rollback_node_pool_upgrade.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :rollback_node_pool_upgrade, request, options: options do |response, operation|
@@ -2212,7 +2751,7 @@ module Google
             #
             #   @param project_id [::String]
             #     Deprecated. The Google Developers Console [project ID or project
-            #     number](https://support.google.com/cloud/answer/6158840).
+            #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
@@ -2240,6 +2779,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/container/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1::SetNodePoolManagementRequest.new
+            #
+            #   # Call the set_node_pool_management method.
+            #   result = client.set_node_pool_management request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1::Operation.
+            #   p result
+            #
             def set_node_pool_management request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2257,16 +2811,20 @@ module Google
                 gapic_version: ::Google::Cloud::Container::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.set_node_pool_management.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.set_node_pool_management.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :set_node_pool_management, request, options: options do |response, operation|
@@ -2297,7 +2855,7 @@ module Google
             #
             #   @param project_id [::String]
             #     Deprecated. The Google Developers Console [project ID or project
-            #     number](https://developers.google.com/console/help/new/#projectnumber).
+            #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
@@ -2317,7 +2875,7 @@ module Google
             #     updating or changing labels. Make a `get()` request to the
             #     resource to get the latest fingerprint.
             #   @param name [::String]
-            #     The name (project, location, cluster id) of the cluster to set labels.
+            #     The name (project, location, cluster name) of the cluster to set labels.
             #     Specified in the format `projects/*/locations/*/clusters/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -2327,6 +2885,21 @@ module Google
             # @return [::Google::Cloud::Container::V1::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/container/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1::SetLabelsRequest.new
+            #
+            #   # Call the set_labels method.
+            #   result = client.set_labels request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1::Operation.
+            #   p result
             #
             def set_labels request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -2345,16 +2918,20 @@ module Google
                 gapic_version: ::Google::Cloud::Container::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.set_labels.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.set_labels.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :set_labels, request, options: options do |response, operation|
@@ -2385,7 +2962,7 @@ module Google
             #
             #   @param project_id [::String]
             #     Deprecated. The Google Developers Console [project ID or project
-            #     number](https://support.google.com/cloud/answer/6158840).
+            #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
@@ -2398,8 +2975,8 @@ module Google
             #   @param enabled [::Boolean]
             #     Required. Whether ABAC authorization will be enabled in the cluster.
             #   @param name [::String]
-            #     The name (project, location, cluster id) of the cluster to set legacy abac.
-            #     Specified in the format `projects/*/locations/*/clusters/*`.
+            #     The name (project, location, cluster name) of the cluster to set legacy
+            #     abac. Specified in the format `projects/*/locations/*/clusters/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Container::V1::Operation]
@@ -2408,6 +2985,21 @@ module Google
             # @return [::Google::Cloud::Container::V1::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/container/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1::SetLegacyAbacRequest.new
+            #
+            #   # Call the set_legacy_abac method.
+            #   result = client.set_legacy_abac request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1::Operation.
+            #   p result
             #
             def set_legacy_abac request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -2426,16 +3018,20 @@ module Google
                 gapic_version: ::Google::Cloud::Container::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.set_legacy_abac.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.set_legacy_abac.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :set_legacy_abac, request, options: options do |response, operation|
@@ -2466,7 +3062,7 @@ module Google
             #
             #   @param project_id [::String]
             #     Deprecated. The Google Developers Console [project ID or project
-            #     number](https://developers.google.com/console/help/new/#projectnumber).
+            #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
@@ -2477,7 +3073,7 @@ module Google
             #     Deprecated. The name of the cluster.
             #     This field has been deprecated and replaced by the name field.
             #   @param name [::String]
-            #     The name (project, location, cluster id) of the cluster to start IP
+            #     The name (project, location, cluster name) of the cluster to start IP
             #     rotation. Specified in the format `projects/*/locations/*/clusters/*`.
             #   @param rotate_credentials [::Boolean]
             #     Whether to rotate credentials during IP rotation.
@@ -2489,6 +3085,21 @@ module Google
             # @return [::Google::Cloud::Container::V1::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/container/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1::StartIPRotationRequest.new
+            #
+            #   # Call the start_ip_rotation method.
+            #   result = client.start_ip_rotation request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1::Operation.
+            #   p result
             #
             def start_ip_rotation request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -2507,16 +3118,20 @@ module Google
                 gapic_version: ::Google::Cloud::Container::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.start_ip_rotation.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.start_ip_rotation.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :start_ip_rotation, request, options: options do |response, operation|
@@ -2547,7 +3162,7 @@ module Google
             #
             #   @param project_id [::String]
             #     Deprecated. The Google Developers Console [project ID or project
-            #     number](https://developers.google.com/console/help/new/#projectnumber).
+            #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
@@ -2558,7 +3173,7 @@ module Google
             #     Deprecated. The name of the cluster.
             #     This field has been deprecated and replaced by the name field.
             #   @param name [::String]
-            #     The name (project, location, cluster id) of the cluster to complete IP
+            #     The name (project, location, cluster name) of the cluster to complete IP
             #     rotation. Specified in the format `projects/*/locations/*/clusters/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -2568,6 +3183,21 @@ module Google
             # @return [::Google::Cloud::Container::V1::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/container/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1::CompleteIPRotationRequest.new
+            #
+            #   # Call the complete_ip_rotation method.
+            #   result = client.complete_ip_rotation request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1::Operation.
+            #   p result
             #
             def complete_ip_rotation request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -2586,16 +3216,20 @@ module Google
                 gapic_version: ::Google::Cloud::Container::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.complete_ip_rotation.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.complete_ip_rotation.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :complete_ip_rotation, request, options: options do |response, operation|
@@ -2607,7 +3241,9 @@ module Google
             end
 
             ##
-            # Sets the size for a specific node pool.
+            # Sets the size for a specific node pool. The new size will be used for all
+            # replicas, including future replicas created by modifying
+            # {::Google::Cloud::Container::V1::NodePool#locations NodePool.locations}.
             #
             # @overload set_node_pool_size(request, options = nil)
             #   Pass arguments to `set_node_pool_size` via a request object, either of type
@@ -2626,7 +3262,7 @@ module Google
             #
             #   @param project_id [::String]
             #     Deprecated. The Google Developers Console [project ID or project
-            #     number](https://support.google.com/cloud/answer/6158840).
+            #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
@@ -2654,6 +3290,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/container/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1::SetNodePoolSizeRequest.new
+            #
+            #   # Call the set_node_pool_size method.
+            #   result = client.set_node_pool_size request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1::Operation.
+            #   p result
+            #
             def set_node_pool_size request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2671,16 +3322,20 @@ module Google
                 gapic_version: ::Google::Cloud::Container::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.set_node_pool_size.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.set_node_pool_size.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :set_node_pool_size, request, options: options do |response, operation|
@@ -2711,7 +3366,7 @@ module Google
             #
             #   @param project_id [::String]
             #     Deprecated. The Google Developers Console [project ID or project
-            #     number](https://developers.google.com/console/help/new/#projectnumber).
+            #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
             #     This field has been deprecated and replaced by the name field.
             #   @param zone [::String]
             #     Deprecated. The name of the Google Compute Engine
@@ -2724,7 +3379,7 @@ module Google
             #   @param network_policy [::Google::Cloud::Container::V1::NetworkPolicy, ::Hash]
             #     Required. Configuration options for the NetworkPolicy feature.
             #   @param name [::String]
-            #     The name (project, location, cluster id) of the cluster to set networking
+            #     The name (project, location, cluster name) of the cluster to set networking
             #     policy. Specified in the format `projects/*/locations/*/clusters/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -2734,6 +3389,21 @@ module Google
             # @return [::Google::Cloud::Container::V1::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/container/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1::SetNetworkPolicyRequest.new
+            #
+            #   # Call the set_network_policy method.
+            #   result = client.set_network_policy request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1::Operation.
+            #   p result
             #
             def set_network_policy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -2752,16 +3422,20 @@ module Google
                 gapic_version: ::Google::Cloud::Container::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.set_network_policy.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.set_network_policy.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :set_network_policy, request, options: options do |response, operation|
@@ -2792,7 +3466,7 @@ module Google
             #
             #   @param project_id [::String]
             #     Required. The Google Developers Console [project ID or project
-            #     number](https://support.google.com/cloud/answer/6158840).
+            #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
             #   @param zone [::String]
             #     Required. The name of the Google Compute Engine
             #     [zone](https://cloud.google.com/compute/docs/zones#available) in which the
@@ -2803,8 +3477,8 @@ module Google
             #     Required. The maintenance policy to be set for the cluster. An empty field
             #     clears the existing maintenance policy.
             #   @param name [::String]
-            #     The name (project, location, cluster id) of the cluster to set maintenance
-            #     policy.
+            #     The name (project, location, cluster name) of the cluster to set
+            #     maintenance policy.
             #     Specified in the format `projects/*/locations/*/clusters/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -2814,6 +3488,21 @@ module Google
             # @return [::Google::Cloud::Container::V1::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/container/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1::SetMaintenancePolicyRequest.new
+            #
+            #   # Call the set_maintenance_policy method.
+            #   result = client.set_maintenance_policy request
+            #
+            #   # The returned object is of type Google::Cloud::Container::V1::Operation.
+            #   p result
             #
             def set_maintenance_policy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -2832,16 +3521,20 @@ module Google
                 gapic_version: ::Google::Cloud::Container::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.set_maintenance_policy.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.set_maintenance_policy.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :set_maintenance_policy, request, options: options do |response, operation|
@@ -2895,6 +3588,25 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/container/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Container::V1::ClusterManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Container::V1::ListUsableSubnetworksRequest.new
+            #
+            #   # Call the list_usable_subnetworks method.
+            #   result = client.list_usable_subnetworks request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::Container::V1::UsableSubnetwork.
+            #     p item
+            #   end
+            #
             def list_usable_subnetworks request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2912,16 +3624,20 @@ module Google
                 gapic_version: ::Google::Cloud::Container::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_usable_subnetworks.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_usable_subnetworks.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cluster_manager_stub.call_rpc :list_usable_subnetworks, request, options: options do |response, operation|
@@ -2946,22 +3662,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for list_clusters
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # list_clusters to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Container::V1::ClusterManager::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_clusters.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Container::V1::ClusterManager::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_clusters.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Container::V1::ClusterManager::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_clusters.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Container::V1::ClusterManager::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_clusters.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
@@ -2972,9 +3687,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -3180,6 +3895,11 @@ module Google
                 #
                 attr_reader :delete_node_pool
                 ##
+                # RPC-specific configuration for `complete_node_pool_upgrade`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :complete_node_pool_upgrade
+                ##
                 # RPC-specific configuration for `rollback_node_pool_upgrade`
                 # @return [::Gapic::Config::Method]
                 #
@@ -3276,6 +3996,8 @@ module Google
                   @create_node_pool = ::Gapic::Config::Method.new create_node_pool_config
                   delete_node_pool_config = parent_rpcs.delete_node_pool if parent_rpcs.respond_to? :delete_node_pool
                   @delete_node_pool = ::Gapic::Config::Method.new delete_node_pool_config
+                  complete_node_pool_upgrade_config = parent_rpcs.complete_node_pool_upgrade if parent_rpcs.respond_to? :complete_node_pool_upgrade
+                  @complete_node_pool_upgrade = ::Gapic::Config::Method.new complete_node_pool_upgrade_config
                   rollback_node_pool_upgrade_config = parent_rpcs.rollback_node_pool_upgrade if parent_rpcs.respond_to? :rollback_node_pool_upgrade
                   @rollback_node_pool_upgrade = ::Gapic::Config::Method.new rollback_node_pool_upgrade_config
                   set_node_pool_management_config = parent_rpcs.set_node_pool_management if parent_rpcs.respond_to? :set_node_pool_management

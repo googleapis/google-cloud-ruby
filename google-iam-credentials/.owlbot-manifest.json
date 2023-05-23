@@ -1,0 +1,24 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-iam-credentials.gemspec",
+    "lib/google-iam-credentials.rb",
+    "lib/google/iam/credentials.rb",
+    "lib/google/iam/credentials/version.rb",
+    "test/google/iam/credentials/client_test.rb",
+    "test/google/iam/credentials/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}

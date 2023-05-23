@@ -35,23 +35,28 @@ describe Google::Cloud::Bigquery::Dataset, :load, :schema, :mock_bigquery do
 
   let(:table_name) { "My Table" }
   let(:table_description) { "This is my table" }
-  let(:table_schema) {
-    {
-      fields: [
-        { mode: "REQUIRED", name: "name", type: "STRING", description: nil, fields: [] },
-        { mode: "NULLABLE", name: "age", type: "INTEGER", description: nil, fields: [] },
-        { mode: "NULLABLE", name: "score", type: "FLOAT", description: "A score from 0.0 to 10.0", fields: [] },
-        { mode: "NULLABLE", name: "active", type: "BOOLEAN", description: nil, fields: [] },
-        { mode: "NULLABLE", name: "avatar", type: "BYTES", description: nil, fields: [] }
-      ]
-    }
-  }
+
+  let(:policy_tag) { "projects/#{project}/locations/us/taxonomies/1/policyTags/1" }
+  let(:policy_tag_2) { "projects/#{project}/locations/us/taxonomies/1/policyTags/2" }
+  let(:policy_tags) { [ policy_tag, policy_tag_2 ] }
+  let(:policy_tags_gapi) { Google::Apis::BigqueryV2::TableFieldSchema::PolicyTags.new names: policy_tags }
+  let(:max_length_string) { 50 }
+  let(:max_length_bytes) { 1024 }
+  let(:precision_numeric) { 10 }
+  let(:precision_bignumeric) { 38 }
+  let(:scale_numeric) { 9 }
+  let(:scale_bignumeric) { 37 }
+
   let(:table_schema_gapi) do
-    gapi = Google::Apis::BigqueryV2::TableSchema.from_json table_schema.to_json
-    gapi.fields.each do |f|
-      f.update! fields: []
-    end
-    gapi
+    Google::Apis::BigqueryV2::TableSchema.new(fields: [
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "REQUIRED", name: "name",          type: "STRING", description: nil, fields: [], max_length: max_length_string),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "age",           type: "INTEGER", policy_tags: policy_tags_gapi, description: nil, fields: []),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "score",         type: "FLOAT", description: "A score from 0.0 to 10.0", fields: []),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "cost",          type: "NUMERIC", description: nil, fields: [], precision: precision_numeric, scale: scale_numeric),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "my_bignumeric", type: "BIGNUMERIC", description: nil, fields: [], precision: precision_bignumeric, scale: scale_bignumeric),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "active",        type: "BOOLEAN", description: nil, fields: []),
+      Google::Apis::BigqueryV2::TableFieldSchema.new(mode: "NULLABLE", name: "avatar",        type: "BYTES", description: nil, fields: [], max_length: max_length_bytes),
+      ])
   end
 
   def storage_file path = nil
@@ -69,11 +74,13 @@ describe Google::Cloud::Bigquery::Dataset, :load, :schema, :mock_bigquery do
     dataset.service.mocked_service = mock
 
     result = dataset.load table_id, load_file, create: :needed do |schema|
-      schema.string "name", mode: :required
-      schema.integer "age"
+      schema.string "name", mode: :required, max_length: max_length_string
+      schema.integer "age", policy_tags: policy_tags
       schema.float "score", description: "A score from 0.0 to 10.0"
+      schema.numeric "cost", precision: precision_numeric, scale: scale_numeric
+      schema.bignumeric "my_bignumeric", precision: precision_bignumeric, scale: scale_bignumeric
       schema.boolean "active"
-      schema.bytes "avatar"
+      schema.bytes "avatar", max_length: max_length_bytes
     end
     _(result).must_equal true
 
@@ -90,11 +97,13 @@ describe Google::Cloud::Bigquery::Dataset, :load, :schema, :mock_bigquery do
     dataset.service.mocked_service = mock
 
     schema = bigquery.schema
-    schema.string "name", mode: :required
-    schema.integer "age"
+    schema.string "name", mode: :required, max_length: max_length_string
+    schema.integer "age", policy_tags: policy_tags
     schema.float "score", description: "A score from 0.0 to 10.0"
+    schema.numeric "cost", precision: precision_numeric, scale: scale_numeric
+    schema.bignumeric "my_bignumeric", precision: precision_bignumeric, scale: scale_bignumeric
     schema.boolean "active"
-    schema.bytes "avatar"
+    schema.bytes "avatar", max_length: max_length_bytes
 
     result = dataset.load table_id, load_file, create: :needed, schema: schema
     _(result).must_equal true
@@ -112,13 +121,15 @@ describe Google::Cloud::Bigquery::Dataset, :load, :schema, :mock_bigquery do
     dataset.service.mocked_service = mock
 
     schema = bigquery.schema
-    schema.string "name", mode: :required
-    schema.integer "age"
+    schema.string "name", mode: :required, max_length: max_length_string
+    schema.integer "age", policy_tags: policy_tags
 
     result = dataset.load table_id, load_file, create: :needed, schema: schema do |schema|
       schema.float "score", description: "A score from 0.0 to 10.0"
+      schema.numeric "cost", precision: precision_numeric, scale: scale_numeric
+      schema.bignumeric "my_bignumeric", precision: precision_bignumeric, scale: scale_bignumeric
       schema.boolean "active"
-      schema.bytes "avatar"
+      schema.bytes "avatar", max_length: max_length_bytes
     end
     _(result).must_equal true
 

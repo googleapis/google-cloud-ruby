@@ -58,6 +58,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/global/targetTcpProxies"
                 body = request_pb.target_tcp_proxy_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -87,6 +88,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/global/targetTcpProxies/#{request_pb.target_tcp_proxy}/setBackendService"
                 body = request_pb.target_tcp_proxies_set_backend_service_request_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -99,6 +101,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/global/targetTcpProxies/#{request_pb.target_tcp_proxy}/setProxyHeader"
                 body = request_pb.target_tcp_proxies_set_proxy_header_request_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end

@@ -26,10 +26,10 @@ describe Google::Cloud::Bigquery::QueryJob, :data, :mock_bigquery do
     bigquery.service.mocked_service = mock
     mock.expect :get_job_query_results,
                 query_data_gapi,
-                [project, job.job_id, {location: "US", max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
+                [project, job.job_id], location: "US", max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil
     mock.expect :list_table_data,
                 table_data_gapi.to_json,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil, options:{skip_deserialization: true} }]
+                [project, dataset_id, table_id], max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true}
 
     _(job).must_be :done?
     data = job.data
@@ -49,6 +49,7 @@ describe Google::Cloud::Bigquery::QueryJob, :data, :mock_bigquery do
     _(data[0][:duration]).must_equal Google::Cloud::Bigquery::Time.new("04:00:00")
     _(data[0][:target_end]).must_equal Time.parse("2017-01-01 00:00:00 UTC").to_datetime
     _(data[0][:birthday]).must_equal Date.parse("1968-10-20")
+    _(data[0][:home]).must_equal "POINT(-122.335503 47.625536)"
 
     _(data[1]).must_be_kind_of Hash
     _(data[1][:name]).must_equal "Aaron"
@@ -80,7 +81,7 @@ describe Google::Cloud::Bigquery::QueryJob, :data, :mock_bigquery do
     bigquery.service.mocked_service = mock
     mock.expect :list_table_data,
                 table_data_gapi.to_json,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil, options:{skip_deserialization: true} }]
+                [project, dataset_id, table_id], max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true}
 
     job.instance_variable_set :@destination_schema_gapi, query_data_gapi.schema
 
@@ -102,6 +103,7 @@ describe Google::Cloud::Bigquery::QueryJob, :data, :mock_bigquery do
     _(data[0][:duration]).must_equal Google::Cloud::Bigquery::Time.new("04:00:00")
     _(data[0][:target_end]).must_equal Time.parse("2017-01-01 00:00:00 UTC").to_datetime
     _(data[0][:birthday]).must_equal Date.parse("1968-10-20")
+    _(data[0][:home]).must_equal "POINT(-122.335503 47.625536)"
 
     _(data[1]).must_be_kind_of Hash
     _(data[1][:name]).must_equal "Aaron"
@@ -133,13 +135,13 @@ describe Google::Cloud::Bigquery::QueryJob, :data, :mock_bigquery do
     bigquery.service.mocked_service = mock
     mock.expect :get_job_query_results,
                 query_data_gapi,
-                [project, job.job_id, {location: "US", max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
+                [project, job.job_id], location: "US", max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil
     mock.expect :list_table_data,
                 table_data_gapi.to_json,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil, options:{skip_deserialization: true} }]
+                [project, dataset_id, table_id], max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true}
     mock.expect :list_table_data,
                 table_data_gapi.to_json,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: "token1234567890", start_index: nil, options:{skip_deserialization: true} }]
+                [project, dataset_id, table_id], max_results: nil, page_token: "token1234567890", start_index: nil, options: {skip_deserialization: true}
 
     data1 = job.data
 
@@ -156,13 +158,13 @@ describe Google::Cloud::Bigquery::QueryJob, :data, :mock_bigquery do
     bigquery.service.mocked_service = mock
     mock.expect :get_job_query_results,
                 query_data_gapi,
-                [project, job.job_id, {location: "US", max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
+                [project, job.job_id], location: "US", max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil
     mock.expect :list_table_data,
                 table_data_gapi.to_json,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil, options:{skip_deserialization: true} }]
+                [project, dataset_id, table_id], max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true}
     mock.expect :list_table_data,
                 table_data_gapi(token: nil).to_json,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: "token1234567890", start_index: nil, options:{skip_deserialization: true} }]
+                [project, dataset_id, table_id], max_results: nil, page_token: "token1234567890", start_index: nil, options: {skip_deserialization: true}
 
     data1 = job.data
 
@@ -181,13 +183,13 @@ describe Google::Cloud::Bigquery::QueryJob, :data, :mock_bigquery do
     bigquery.service.mocked_service = mock
     mock.expect :get_job_query_results,
                 query_data_gapi,
-                [project, job.job_id, {location: "US", max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
+                [project, job.job_id], location: "US", max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil
     mock.expect :list_table_data,
                 table_data_gapi.to_json,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil, options:{skip_deserialization: true} }]
+                [project, dataset_id, table_id], max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true}
     mock.expect :list_table_data,
                 table_data_gapi(token: nil).to_json,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: "token1234567890", start_index: nil, options:{skip_deserialization: true} }]
+                [project, dataset_id, table_id], max_results: nil, page_token: "token1234567890", start_index: nil, options: {skip_deserialization: true}
 
     data = job.data.all.to_a
 
@@ -201,13 +203,13 @@ describe Google::Cloud::Bigquery::QueryJob, :data, :mock_bigquery do
     bigquery.service.mocked_service = mock
     mock.expect :get_job_query_results,
                 query_data_gapi,
-                [project, job.job_id, {location: "US", max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
+                [project, job.job_id], location: "US", max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil
     mock.expect :list_table_data,
                 table_data_gapi.to_json,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil, options:{skip_deserialization: true} }]
+                [project, dataset_id, table_id], max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true}
     mock.expect :list_table_data,
                 table_data_gapi(token: nil).to_json,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: "token1234567890", start_index: nil, options:{skip_deserialization: true} }]
+                [project, dataset_id, table_id], max_results: nil, page_token: "token1234567890", start_index: nil, options: {skip_deserialization: true}
 
     data = job.data
 
@@ -220,13 +222,13 @@ describe Google::Cloud::Bigquery::QueryJob, :data, :mock_bigquery do
     bigquery.service.mocked_service = mock
     mock.expect :get_job_query_results,
                 query_data_gapi,
-                [project, job.job_id, {location: "US", max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
+                [project, job.job_id], location: "US", max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil
     mock.expect :list_table_data,
                 table_data_gapi.to_json,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil, options:{skip_deserialization: true} }]
+                [project, dataset_id, table_id], max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true}
     mock.expect :list_table_data,
                 table_data_gapi.to_json,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: "token1234567890", start_index: nil, options:{skip_deserialization: true} }]
+                [project, dataset_id, table_id], max_results: nil, page_token: "token1234567890", start_index: nil, options: {skip_deserialization: true}
 
     data = job.data.all.take(5)
 
@@ -240,13 +242,13 @@ describe Google::Cloud::Bigquery::QueryJob, :data, :mock_bigquery do
     bigquery.service.mocked_service = mock
     mock.expect :get_job_query_results,
                 query_data_gapi,
-                [project, job.job_id, {location: "US", max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
+                [project, job.job_id], location: "US", max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil
     mock.expect :list_table_data,
                 table_data_gapi.to_json,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: nil, options:{skip_deserialization: true} }]
+                [project, dataset_id, table_id], max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true}
     mock.expect :list_table_data,
                 table_data_gapi.to_json,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: "token1234567890", start_index: nil, options:{skip_deserialization: true} }]
+                [project, dataset_id, table_id], max_results: nil, page_token: "token1234567890", start_index: nil, options: {skip_deserialization: true}
 
     data = job.data.all(request_limit: 1).to_a
 
@@ -260,10 +262,10 @@ describe Google::Cloud::Bigquery::QueryJob, :data, :mock_bigquery do
     bigquery.service.mocked_service = mock
     mock.expect :get_job_query_results,
                 query_data_gapi,
-                [project, job.job_id, {location: "US", max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
+                [project, job.job_id], location: "US", max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil
     mock.expect :list_table_data,
                 table_data_gapi.to_json,
-                [project, dataset_id, table_id, {  max_results: 3, page_token: nil, start_index: nil, options:{skip_deserialization: true} }]
+                [project, dataset_id, table_id], max_results: 3, page_token: nil, start_index: nil, options: {skip_deserialization: true}
 
     data = job.data max: 3
     _(data.class).must_equal Google::Cloud::Bigquery::Data
@@ -274,10 +276,36 @@ describe Google::Cloud::Bigquery::QueryJob, :data, :mock_bigquery do
     bigquery.service.mocked_service = mock
     mock.expect :get_job_query_results,
                 query_data_gapi,
-                [project, job.job_id, {location: "US", max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
+                [project, job.job_id], location: "US", max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil
     mock.expect :list_table_data,
                 table_data_gapi.to_json,
-                [project, dataset_id, table_id, {  max_results: nil, page_token: nil, start_index: 25, options:{skip_deserialization: true} }]
+                [project, dataset_id, table_id], max_results: nil, page_token: nil, start_index: 25, options: {skip_deserialization: true}
+
+    data = job.data start: 25
+    mock.verify
+
+    _(data.class).must_equal Google::Cloud::Bigquery::Data
+  end
+
+  it "does not call list_table_data is no schema present" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    query_hash =  {
+      "kind" => "bigquery#getQueryResultsResponse",
+      "etag" => "etag1234567890",
+      "jobReference" => {
+        "projectId" => "my-project",
+        "jobId" => "job9876543210"
+      },
+      "pageToken" => "token1234567890",
+      "totalRows" => 3,
+      "totalBytesProcessed" => "456789", # String per google/google-api-ruby-client#439
+      "jobComplete" => true,
+      "cacheHit" => false
+    }
+    mock.expect :get_job_query_results,
+                Google::Apis::BigqueryV2::QueryResponse.from_json(query_hash.to_json),
+                [project, job.job_id], location: "US", max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil
 
     data = job.data start: 25
     mock.verify

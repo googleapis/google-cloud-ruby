@@ -42,7 +42,7 @@ module Google
           end
 
           # The Log4j level for job execution. When running an
-          # [Apache Hive](http://hive.apache.org/) job, Cloud
+          # [Apache Hive](https://hive.apache.org/) job, Cloud
           # Dataproc configures the Hive client to an equivalent verbosity level.
           module Level
             # Level is unspecified. Use default level for log4j.
@@ -133,7 +133,7 @@ module Google
           end
         end
 
-        # A Dataproc job for running [Apache Spark](http://spark.apache.org/)
+        # A Dataproc job for running [Apache Spark](https://spark.apache.org/)
         # applications on YARN.
         # @!attribute [rw] main_jar_file_uri
         #   @return [::String]
@@ -310,7 +310,7 @@ module Google
         end
 
         # A Dataproc job for running [Apache Spark
-        # SQL](http://spark.apache.org/sql/) queries.
+        # SQL](https://spark.apache.org/sql/) queries.
         # @!attribute [rw] query_file_uri
         #   @return [::String]
         #     The HCFS URI of the script that contains SQL queries.
@@ -484,6 +484,51 @@ module Google
         #   @return [::Google::Cloud::Dataproc::V1::LoggingConfig]
         #     Optional. The runtime log config for job execution.
         class PrestoJob
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class PropertiesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # A Dataproc job for running [Trino](https://trino.io/) queries.
+        # **IMPORTANT**: The [Dataproc Trino Optional
+        # Component](https://cloud.google.com/dataproc/docs/concepts/components/trino)
+        # must be enabled when the cluster is created to submit a Trino job to the
+        # cluster.
+        # @!attribute [rw] query_file_uri
+        #   @return [::String]
+        #     The HCFS URI of the script that contains SQL queries.
+        # @!attribute [rw] query_list
+        #   @return [::Google::Cloud::Dataproc::V1::QueryList]
+        #     A list of queries.
+        # @!attribute [rw] continue_on_failure
+        #   @return [::Boolean]
+        #     Optional. Whether to continue executing queries if a query fails.
+        #     The default value is `false`. Setting to `true` can be useful when
+        #     executing independent parallel queries.
+        # @!attribute [rw] output_format
+        #   @return [::String]
+        #     Optional. The format in which query output will be displayed. See the
+        #     Trino documentation for supported output formats
+        # @!attribute [rw] client_tags
+        #   @return [::Array<::String>]
+        #     Optional. Trino client tags to attach to this query
+        # @!attribute [rw] properties
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. A mapping of property names to values. Used to set Trino
+        #     [session properties](https://trino.io/docs/current/sql/set-session.html)
+        #     Equivalent to using the --session flag in the Trino CLI
+        # @!attribute [rw] logging_config
+        #   @return [::Google::Cloud::Dataproc::V1::LoggingConfig]
+        #     Optional. The runtime log config for job execution.
+        class TrinoJob
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
@@ -715,6 +760,9 @@ module Google
         # @!attribute [rw] presto_job
         #   @return [::Google::Cloud::Dataproc::V1::PrestoJob]
         #     Optional. Job is a Presto job.
+        # @!attribute [rw] trino_job
+        #   @return [::Google::Cloud::Dataproc::V1::TrinoJob]
+        #     Optional. Job is a Trino job.
         # @!attribute [r] status
         #   @return [::Google::Cloud::Dataproc::V1::JobStatus]
         #     Output only. The job status. Additional application-specific
@@ -761,6 +809,9 @@ module Google
         #     `false`, the job is still in progress. If `true`, the job is completed, and
         #     `status.state` field will indicate if it was successful, failed,
         #     or cancelled.
+        # @!attribute [rw] driver_scheduling_config
+        #   @return [::Google::Cloud::Dataproc::V1::DriverSchedulingConfig]
+        #     Optional. Driver scheduling configuration.
         class Job
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -775,6 +826,18 @@ module Google
           end
         end
 
+        # Driver scheduling configuration.
+        # @!attribute [rw] memory_mb
+        #   @return [::Integer]
+        #     Required. The amount of memory in MB the driver is requesting.
+        # @!attribute [rw] vcores
+        #   @return [::Integer]
+        #     Required. The number of vCPUs the driver is requesting.
+        class DriverSchedulingConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Job scheduling options.
         # @!attribute [rw] max_failures_per_hour
         #   @return [::Integer]
@@ -782,15 +845,26 @@ module Google
         #     a result of driver exiting with non-zero code before job is
         #     reported failed.
         #
-        #     A job may be reported as thrashing if driver exits with non-zero code
-        #     4 times within 10 minute window.
+        #     A job may be reported as thrashing if the driver exits with a non-zero code
+        #     four times within a 10-minute window.
         #
         #     Maximum value is 10.
+        #
+        #     **Note:** This restartable job option is not supported in Dataproc
+        #     [workflow templates]
+        #     (https://cloud.google.com/dataproc/docs/concepts/workflows/using-workflows#adding_jobs_to_a_template).
         # @!attribute [rw] max_failures_total
         #   @return [::Integer]
-        #     Optional. Maximum number of times in total a driver may be restarted as a
-        #     result of driver exiting with non-zero code before job is reported failed.
+        #     Optional. Maximum total number of times a driver may be restarted as a
+        #     result of the driver exiting with a non-zero code. After the maximum number
+        #     is reached, the job will be reported as failed.
+        #
         #     Maximum value is 240.
+        #
+        #     **Note:** Currently, this restartable job option is
+        #     not supported in Dataproc
+        #     [workflow
+        #     templates](https://cloud.google.com/dataproc/docs/concepts/workflows/using-workflows#adding_jobs_to_a_template).
         class JobScheduling
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

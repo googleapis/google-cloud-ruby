@@ -21,4 +21,12 @@ describe Google::Cloud::Firestore::Client, :mock_firestore do
     _(firestore.database_id).must_equal "(default)"
     _(firestore.path).must_equal "projects/projectID/databases/(default)"
   end
+
+  it "knows the project and database identifiers" do
+    _(secondary_firestore).must_be_kind_of Google::Cloud::Firestore::Client
+    _(secondary_firestore.project_id).must_equal project
+    _(secondary_firestore.database_id).must_equal secondary_database
+    _(secondary_firestore.path).must_equal "projects/projectID/databases/#{secondary_database}"
+    _(secondary_firestore.service.documents_path).must_equal "projects/projectID/databases/#{secondary_database}/documents"
+  end
 end

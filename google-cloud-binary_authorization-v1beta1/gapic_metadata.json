@@ -48,6 +48,20 @@
           }
         }
       }
+    },
+    "SystemPolicyV1Beta1": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::BinaryAuthorization::V1beta1::SystemPolicy::Client",
+          "rpcs": {
+            "GetSystemPolicy": {
+              "methods": [
+                "get_system_policy"
+              ]
+            }
+          }
+        }
+      }
     }
   }
 }

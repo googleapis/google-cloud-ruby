@@ -23,10 +23,17 @@ module Google
   module Cloud
     module OsLogin
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
+      #
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/os_login/v1beta"
       #     client = ::Google::Cloud::OsLogin::V1beta::OsLoginService::Client.new
+      #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/os_login/v1beta"
+      #     client = ::Google::Cloud::OsLogin::V1beta::OsLoginService::Rest::Client.new
       #
       module V1beta
       end

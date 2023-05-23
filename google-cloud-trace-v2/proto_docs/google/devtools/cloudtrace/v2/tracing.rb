@@ -29,7 +29,7 @@ module Google
         # @!attribute [rw] spans
         #   @return [::Array<::Google::Cloud::Trace::V2::Span>]
         #     Required. A list of new spans. The span names must not match existing
-        #     spans, or the results are undefined.
+        #     spans, otherwise the results are undefined.
         class BatchWriteSpansRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

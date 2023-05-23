@@ -18,47 +18,73 @@ require "json"
 require "tempfile"
 
 CONFIGS = {
-  gapics: {
-    title_regexp: /^\[CHANGE ME\] Re-generated [\w-]+-v\d+\w* to pick up changes in the API or client/,
+  "gapics" => {
+    title_regexp: /^\[CHANGE ME\] Re-generated [\w-]+-v\d\w* to pick up changes in the API or client/,
     message_type: :shared,
     detail_type: :none,
-    omit_paths: ["/synth\\.metadata$"]
   },
-  wrappers: {
+  "wrappers" => {
     title_regexp: /^\[CHANGE ME\] Re-generated (\w+-)*(v[a-z_]|[a-uw-z])\w* to pick up changes in the API or client/,
     message_type: :shared,
     detail_type: :none,
-    omit_paths: ["/synth\\.metadata$"]
   },
-  releases: {
-    title_regexp: /^chore: release [\w-]+ \d+\.\d+\.\d+/,
-    message_type: :pr_title_number,
-    detail_type: :none,
-    omit_paths: ["/synth\\.metadata$"]
-  },
-  all: {
+  "all" => {
     title_regexp: //,
     message_type: :pr_title,
     detail_type: :none,
-    omit_paths: ["/synth\\.metadata$"]
-  }
+  },
+  "releases-gapics" => {
+    title_regexp: /^chore\(main\): release [\w-]+-v\d\w* \d+\.\d+\.\d+/,
+    message_type: :pr_title_number,
+    detail_type: :none,
+    omit_path: [
+      /\.release-please-manifest\.json$/,
+      /\/CHANGELOG\.md$/,
+      /\/version\.rb$/,
+      /\/snippets\/snippet_metadata_[\w\.]+\.json$/
+    ],
+  },
+  "releases-wrappers" => {
+    title_regexp: /^chore\(main\): release (\w+-)*(v[a-z_]|[a-uw-z])\w* \d+\.\d+\.\d+/,
+    message_type: :pr_title_number,
+    detail_type: :none,
+    omit_path: [
+      /\.release-please-manifest\.json$/,
+      /\/CHANGELOG\.md$/,
+      /\/version\.rb$/,
+    ],
+  },
+  "releases-all" => {
+    title_regexp: /^chore\(main\): release [\w-]+ \d+\.\d+\.\d+/,
+    message_type: :pr_title_number,
+    detail_type: :none,
+    omit_path: [
+      /\.release-please-manifest\.json$/,
+      /\/CHANGELOG\.md$/,
+      /\/version\.rb$/,
+      /\/snippets\/snippet_metadata_[\w\.]+\.json$/
+    ],
+  },
 }
 
 REPO = "googleapis/google-cloud-ruby"
+BOT_USERS = ["yoshi-code-bot", "yoshi-automation", "gcf-owl-bot[bot]"]
 
 desc "Interactive mass code review"
 
-required_arg :config_name do
-  accept [:gapics, :wrappers, :releases, :all]
-  desc "The config that determines which PRs to review. Values: gapics, wrappers, releases"
-end
+optional_arg :config_name, accept: CONFIGS.keys, default: "all"
 
 flag :title_regexp, accept: Regexp
+flag :title_exact, accept: String
+flag :message, accept: String, default: ""
 flag :message_type, accept: [:shared, :pr_title, :pr_title_number]
 flag :detail_type, accept: [:shared, :none]
-flag :omit_paths, accept: Array
+flag :omit_path, accept: String, handler: :push
+flag :omit_diff, accept: String, handler: :push
 flag :max_line_count, accept: Integer
 flag :editor, accept: String
+flag :disable_edit
+flag :enable_automerge
 flag :dry_run
 
 include :exec
@@ -69,6 +95,7 @@ def run
   init_config
   find_prs.each do |pr_data|
     puts
+    next if check_automerge pr_data
     display_default pr_data
     handle_input pr_data
   end
@@ -88,18 +115,22 @@ def ensure_prerequisites
 end
 
 def init_config
-  config = CONFIGS[config_name]
-  config.each { |k, v| set k, v if get(k).nil? }
-  @commit_message = ""
+  CONFIGS[config_name].each { |k, v| set k, v if get(k).nil? }
+  set :title_regexp, Regexp.new("^#{Regexp.quote title_exact}$") if title_exact
+  @commit_message = message
   @commit_detail = ""
-  @edit_enabled = true
+  @edit_enabled = !disable_edit
+  @automerge_enabled = enable_automerge && !@edit_enabled
   @editor = editor || ENV["EDITOR"] || "/bin/nano"
   @max_line_count = max_line_count
-  @omits = omit_paths.map do |path|
+  @omits = Array(omit_path).map do |path|
     regexp = path.is_a?(Regexp) ? path : Regexp.new(path.to_s)
     Omit.new "Any file path matching #{regexp}" do |file|
       regexp =~ file.path
     end
+  end
+  Array(omit_diff).each do |expr|
+    handle_suppress(*expr.split)
   end
 end
 
@@ -107,9 +138,19 @@ def find_prs
   paged_api("repos/#{REPO}/pulls")
     .find_all do |pr_resource|
       title_regexp =~ pr_resource["title"] &&
-        pr_resource["labels"].all? { |label| label["name"] != "do not merge" }  
+        pr_resource["labels"].all? { |label| label["name"] != "do not merge" } &&
+        BOT_USERS.include?(pr_resource["user"]["login"])
     end
     .map { |pr_resource| PrData.new self, pr_resource }
+end
+
+def check_automerge pr_data
+  return false unless @automerge_enabled
+  return false unless pr_data.diff_files.all? { |file| @omits.any? { |omit| omit.call file } }
+  display_pr_title pr_data
+  puts "Automerging..."
+  handle_merge pr_data
+  true
 end
 
 def handle_input pr_data
@@ -126,20 +167,22 @@ def handle_input pr_data
       puts "... skipping this PR."
       return
     when "m"
-      get_commit_message pr_data
-      get_commit_detail pr_data if detail_type
-      do_approve pr_data
-      do_merge pr_data
+      handle_merge pr_data
       return
     when "q"
       puts "... quitting."
       exit 0
     when /^e\s*([+-])$/
       handle_edit Regexp.last_match[1]
+    when /^a\s*([+-])$/
+      handle_automerge Regexp.last_match[1]
     when /^d\s*(\S+)$/
       handle_display Regexp.last_match[1], pr_data
     when /^o\s*(\S(?:.*\S)?)$/
       handle_omit(*Regexp.last_match[1].split)
+    when /^s\s*(\S(?:.*\S)?)$/
+      handle_suppress(*Regexp.last_match[1].split)
+      puts "... added omit based on content regex"
     else
       puts "Unknown command.", :red, :bold
       show_help
@@ -147,14 +190,40 @@ def handle_input pr_data
   end
 end
 
+def handle_merge pr_data
+  get_commit_message pr_data
+  get_commit_detail pr_data if detail_type
+  do_approve pr_data
+  do_merge pr_data
+end
+
 def handle_edit arg
   case arg
   when "+"
-    @edit_enabled = true
-    puts "... enabling editing"
+    if @automerge_enabled
+      puts "Automerge must be disabled to enable edit"
+    else
+      @edit_enabled = true
+      puts "... enabling editing"
+    end
   when "-"
     @edit_enabled = false
     puts "... disabling editing"
+  end
+end
+
+def handle_automerge arg
+  case arg
+  when "+"
+    if @edit_enabled
+      puts "Edit must be disabled to enable automerge"
+    else
+      @automerge_enabled = true
+      puts "... enabling automerge"
+    end
+  when "-"
+    @automerge_enabled = false
+    puts "... disabling automerge"
   end
 end
 
@@ -175,7 +244,7 @@ end
 
 def handle_omit arg, *extra_args
   case arg
-  when "-"
+  when /^x/
     @omits = []
     puts "... cleared omits"
   when /^p/
@@ -225,6 +294,33 @@ def handle_omit arg, *extra_args
   end
 end
 
+def handle_suppress *args
+  adds = []
+  removes = []
+  args.each do |arg|
+    if arg =~ /^-(.+)$/
+      removes << Regexp.new(Regexp.last_match[1])
+    elsif arg =~ /^\+(.+)$/
+      adds << Regexp.new(Regexp.last_match[1])
+    end
+  end
+  omit = Omit.new "All changes match given regexes" do |file|
+    file.reduce_hunks true do |val, hunk|
+      val && hunk.all? do |line|
+        line_without_mark = line[1..-1]
+        if line.start_with? "+"
+          adds.any? { |regex| regex.match? line_without_mark }
+        elsif line.start_with? "-"
+          removes.any? { |regex| regex.match? line_without_mark }
+        else
+          true
+        end
+      end
+    end
+  end
+  @omits << omit
+end
+
 def show_help
 end
 
@@ -263,16 +359,16 @@ def display_all_diffs pr_data, force_all: false
     puts "Omitting display of #{file.path}"
   end
   diff_text = disp_files.map(&:text).join
+  return if diff_text.empty?
   exec ["ydiff", "--width=0", "-s", "--wrap"],
-       in: [:string, diff_text],
-       e: true
+       in: [:string, diff_text]
 end
 
 def display_file pr_data, index
-  file = pr_data.diff_files[index]
+  diff_text = pr_data.diff_files[index].text
+  return if diff_text.empty?
   exec ["ydiff", "--width=0", "-s", "--wrap"],
-       in: [:string, file.text],
-       e: true
+       in: [:string, diff_text]
 end
 
 def get_commit_message pr_data
@@ -314,10 +410,9 @@ def do_approve pr_data
   if dry_run
     puts "(dry run)"
   else
-    exec ["gh", "api", "repos/#{REPO}/pulls/#{pr_data.id}/reviews",
-          "--field", "event=APPROVE",
-          "--field", "body=Approved using toys batch-review"],
-         e: true
+    retry_gh ["repos/#{REPO}/pulls/#{pr_data.id}/reviews",
+              "--field", "event=APPROVE",
+              "--field", "body=Approved using toys batch-review"]
   end
   puts "... approved."
 end
@@ -326,16 +421,28 @@ def do_merge pr_data
   message = pr_data.custom_message @commit_message
   puts "... merging PR #{pr_data.id}..."
   if dry_run
-    puts "(message: #{message})", :bold
-    puts "(details: #{@commit_detail})", :bold unless @commit_detail.empty?
+    puts "message: #{message}", :bold
+    puts "details: #{@commit_detail}", :bold unless @commit_detail.empty?
+    sleep 1
   else
-    exec ["gh", "api", "-XPUT", "repos/#{REPO}/pulls/#{pr_data.id}/merge",
-          "--field", "merge_method=squash",
-          "--field", "commit_title=#{message}",
-          "--field", "commit_message=#{@commit_detail}"],
-         e: true
+    retry_gh ["-XPUT", "repos/#{REPO}/pulls/#{pr_data.id}/merge",
+              "--field", "merge_method=squash",
+              "--field", "commit_title=#{message}",
+              "--field", "commit_message=#{@commit_detail}"]
   end
   puts "... merged."
+end
+
+def retry_gh args, tries: 3
+  tries.times do |num|
+    result = exec ["gh", "api"] + args
+    return if result.success?
+    break unless result.error?
+    puts "waiting to retry..."
+    sleep 2 * (num + 1)
+  end
+  puts "Repeatedly failed to call gh", :red, :bold
+  exit 1
 end
 
 def api path, *args
@@ -361,15 +468,15 @@ end
 class DiffFile
   def initialize text
     @text = text
-    lines = text.split "\n"
+    @lines = text.split "\n"
     @path =
-      if lines.first =~ %r{^diff --git a/(\S+) b/\S+$}
-        $1
+      if @lines.first =~ %r{^diff --git a/(\S+) b/\S+$}
+        Regexp.last_match[1]
       else
         ""
       end
     @type =
-      case lines[1].to_s
+      case @lines[1].to_s
       when /^new file/
         "N"
       when /^deleted file/
@@ -377,7 +484,7 @@ class DiffFile
       else
         "C"
       end
-    analyze_changes lines
+    initial_analysis
   end
 
   attr_reader :text
@@ -385,24 +492,35 @@ class DiffFile
   attr_reader :type
   attr_reader :only_indentation
 
+  def reduce_hunks value
+    analyze_changes do |hunk|
+      value = yield value, hunk
+    end
+    value
+  end
+
   private
 
-  def analyze_changes lines
+  def initial_analysis
     @only_indentation = true
-    hunk = nil
-    lines << "@@"
-    lines.each do |line|
-      if line.start_with? "@@"
-        analyze_hunk hunk if hunk && !hunk.empty?
-        hunk = []
-      else
-        hunk << line if hunk
-      end
+    @common_directory = nil
+    analyze_changes do |hunk|
+      analyze_only_indentation hunk
     end
   end
 
-  def analyze_hunk hunk
-    analyze_only_indentation hunk
+  def analyze_changes
+    hunk = nil
+    from_path = to_path = nil
+    @lines.each do |line|
+      if line.start_with? "@@"
+        yield hunk if hunk && !hunk.empty?
+        hunk = []
+      elsif hunk
+        hunk << line
+      end
+    end
+    yield hunk if hunk && !hunk.empty?
   end
 
   def analyze_only_indentation hunk
@@ -454,20 +572,10 @@ class PrData
     @context = context
     @id = pr_resource["number"]
     @title = pr_resource["title"]
-    @lib_name =
-      case title
-      when /^\[CHANGE ME\] Re-generated google-cloud-([\w-]+) to pick up changes in the API or client/
-        $1
-      when /^\[CHANGE ME\] Re-generated ([\w-]+) to pick up changes in the API or client/
-        $1
-      else
-        nil
-      end
   end
 
   attr_reader :id
   attr_reader :title
-  attr_reader :lib_name
 
   def raw_diff_data
     @raw_diff_data ||= @context.capture(["curl", "-s", "https://patch-diff.githubusercontent.com/raw/#{REPO}/pull/#{id}.diff"], e: true)
@@ -486,11 +594,45 @@ class PrData
     @diff_line_count ||= raw_diff_data.count("\n")
   end
 
-  def custom_message(message)
-    if @lib_name && message =~ /^(\w+):\s+(\S.*)$/
-      "#{$1}(#{@lib_name}): #{$2}"
+  def lib_name
+    unless defined? @lib_name
+      @lib_name =
+        case title
+        when /^\[CHANGE ME\] Re-generated google-cloud-([\w-]+) to pick up changes in the API or client/
+          Regexp.last_match[1]
+        when /^\[CHANGE ME\] Re-generated ([\w-]+) to pick up changes in the API or client/
+          Regexp.last_match[1]
+        else
+          interpret_lib_name
+        end
+    end
+    @lib_name
+  end
+
+  def custom_message message
+    if lib_name && message =~ /^(\w+):\s+(\S.*)$/
+      "#{$1}(#{lib_name}): #{$2}"
     else
       message
     end
+  end
+
+  private
+
+  def interpret_lib_name
+    name = nil
+    diff_files.each do |diff_file|
+      if %r{^([^/]+)/} =~ diff_file.path
+        possible_name = Regexp.last_match[1]
+        if name.nil?
+          name = possible_name
+        elsif name != possible_name
+          return nil
+        end
+      else
+        return nil
+      end
+    end
+    name
   end
 end

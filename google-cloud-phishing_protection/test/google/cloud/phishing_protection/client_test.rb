@@ -20,15 +20,25 @@ require "helper"
 require "google/cloud/phishing_protection"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Cloud::PhishingProtection::ClientConstructionMinitest < Minitest::Test
-  def test_phishing_protection_service
+  def test_phishing_protection_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::PhishingProtection.phishing_protection_service do |config|
+      client = Google::Cloud::PhishingProtection.phishing_protection_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::Client, client
+    end
+  end
+
+  def test_phishing_protection_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::PhishingProtection.phishing_protection_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::Rest::Client, client
     end
   end
 end

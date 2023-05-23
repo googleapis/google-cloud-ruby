@@ -70,6 +70,27 @@ def batch_get_history project_id:, asset_names:
   # [END asset_quickstart_batch_get_assets_history]
 end
 
+def list_assets project_id:
+  # [START asset_quickstart_list_assets]
+  require "google/cloud/asset"
+
+  asset_service = Google::Cloud::Asset.asset_service
+  # project_id = 'YOUR_PROJECT_ID'
+  formatted_parent = asset_service.project_path project: project_id
+
+  content_type = :RESOURCE
+  response = asset_service.list_assets(
+    parent:           formatted_parent,
+    content_type:     content_type
+  )
+
+  # Do things with the result
+  response.page.each do |resource|
+    puts resource
+  end
+  # [END asset_quickstart_list_assets]
+end
+
 def create_feed project_id:, feed_id:, pubsub_topic:, asset_names:
   # [START asset_quickstart_create_feed]
   require "google/cloud/asset"
@@ -176,7 +197,7 @@ def analyze_iam_policy scope: "", full_resource_name: ""
 end
 
 def analyze_iam_policy_longrunning_gcs scope: "", full_resource_name: "", uri: ""
-  # [START asset_quickstart_analyze_iam_policy_lognrunning_gcs]
+  # [START asset_quickstart_analyze_iam_policy_longrunning_gcs]
   require "google/cloud/asset"
 
   # scope = 'SCOPE_OF_THE_QUERY'
@@ -206,10 +227,9 @@ def analyze_iam_policy_longrunning_gcs scope: "", full_resource_name: "", uri: "
   )
 
   operation.wait_until_done!
-  metadata = operation.metadata
-  puts "Wrote analysis results to: #{metadata.output_config.gcs_destination.uri}"
+  puts "Wrote analysis results to: #{uri}"
   # Do things with the result
-  # [END asset_quickstart_analyze_iam_policy_lognrunning_gcs]
+  # [END asset_quickstart_analyze_iam_policy_longrunning_gcs]
 end
 
 def analyze_iam_policy_longrunning_bigquery scope: "", full_resource_name: "", dataset: "", table_prefix: ""
@@ -245,8 +265,7 @@ def analyze_iam_policy_longrunning_bigquery scope: "", full_resource_name: "", d
   )
 
   operation.wait_until_done!
-  metadata = operation.metadata
-  puts "Wrote analysis results to: #{metadata.output_config.bigquery_destination.dataset}"
+  puts "Wrote analysis results to: #{dataset}"
   # Do things with the result
   # [END analyze_iam_policy_longrunning_bigquery]
 end

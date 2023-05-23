@@ -25,6 +25,7 @@ require "google/cloud/app_engine/v1/version"
 require "google/cloud/app_engine/v1/domain_mappings/credentials"
 require "google/cloud/app_engine/v1/domain_mappings/operations"
 require "google/cloud/app_engine/v1/domain_mappings/client"
+require "google/cloud/app_engine/v1/domain_mappings/rest"
 
 module Google
   module Cloud
@@ -33,10 +34,15 @@ module Google
         ##
         # Manages domains serving an application.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/app_engine/v1/domain_mappings"
         #     client = ::Google::Cloud::AppEngine::V1::DomainMappings::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/app_engine/v1/domain_mappings/rest"
+        #     client = ::Google::Cloud::AppEngine::V1::DomainMappings::Rest::Client.new
         #
         module DomainMappings
         end

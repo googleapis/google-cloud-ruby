@@ -23,7 +23,7 @@ module Google
       module Admin
         module Database
           module V1
-            VERSION = "0.6.0"
+            VERSION = "0.13.0"
           end
         end
       end

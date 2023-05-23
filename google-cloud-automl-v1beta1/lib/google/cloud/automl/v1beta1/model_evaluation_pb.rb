@@ -12,7 +12,7 @@ require 'google/cloud/automl/v1beta1/text_extraction_pb'
 require 'google/cloud/automl/v1beta1/text_sentiment_pb'
 require 'google/cloud/automl/v1beta1/translation_pb'
 require 'google/protobuf/timestamp_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/automl/v1beta1/model_evaluation.proto", :syntax => :proto3) do
     add_message "google.cloud.automl.v1beta1.ModelEvaluation" do

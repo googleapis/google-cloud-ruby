@@ -53,11 +53,10 @@ describe Google::Cloud::Bigtable::AppProfile, :save, :mock_bigtable do
     update_mask =   Google::Protobuf::FieldMask.new(
       paths: ["description", "single_cluster_routing"]
     )
-    mock.expect :update_app_profile, operation_grpc(job_grpc, mock), [
-      app_profile: app_profile_grpc,
-      update_mask: update_mask,
-      ignore_warnings: false
-    ]
+    mock.expect :update_app_profile, operation_grpc(job_grpc, mock),
+                app_profile: app_profile_grpc,
+                update_mask: update_mask,
+                ignore_warnings: false
     mock.expect :get_operation, operation_grpc(job_done_grpc, mock), [{name: ops_name}, Gapic::CallOptions]
     bigtable.service.mocked_instances = mock
 
@@ -86,11 +85,10 @@ describe Google::Cloud::Bigtable::AppProfile, :save, :mock_bigtable do
     update_mask =   Google::Protobuf::FieldMask.new(
       paths: ["description", "multi_cluster_routing_use_any"]
     )
-    mock.expect :update_app_profile, operation_grpc(job_grpc, mock), [
-      app_profile: app_profile_grpc,
-      update_mask: update_mask,
-      ignore_warnings: true
-    ]
+    mock.expect :update_app_profile, operation_grpc(job_grpc, mock),
+                app_profile: app_profile_grpc,
+                update_mask: update_mask,
+                ignore_warnings: true
     mock.expect :get_operation, operation_grpc(job_done_grpc, mock), [{name: ops_name}, Gapic::CallOptions]
     bigtable.service.mocked_instances = mock
 

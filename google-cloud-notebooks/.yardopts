@@ -1,5 +1,5 @@
 --no-private
---title=AI Platform Notebooks API
+--title="AI Platform Notebooks API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

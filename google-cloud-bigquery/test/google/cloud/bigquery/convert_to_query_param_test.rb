@@ -353,6 +353,50 @@ describe Google::Cloud::Bigquery::Convert, :to_query_param do
     end
   end
 
+  describe :GEOGRAPHY do
+    it "does NOT identify by value" do
+      expected = Google::Apis::BigqueryV2::QueryParameter.new(
+        parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
+          type: "STRING"
+        ),
+        parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
+          value: "POINT(-122.335503 47.625536)"
+        )
+      )
+
+      actual = Google::Cloud::Bigquery::Convert.to_query_param "POINT(-122.335503 47.625536)"
+      assert_equal expected.to_h, actual.to_h
+    end
+
+    it "allows string when using type" do
+      expected = Google::Apis::BigqueryV2::QueryParameter.new(
+        parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
+          type: "GEOGRAPHY"
+        ),
+        parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
+          value: "POINT(-122.335503 47.625536)"
+        )
+      )
+
+      actual = Google::Cloud::Bigquery::Convert.to_query_param "POINT(-122.335503 47.625536)", :GEOGRAPHY
+      assert_equal expected.to_h, actual.to_h
+    end
+
+    it "allows nil when using type" do
+      expected = Google::Apis::BigqueryV2::QueryParameter.new(
+        parameter_type: Google::Apis::BigqueryV2::QueryParameterType.new(
+          type: "GEOGRAPHY"
+        ),
+        parameter_value: Google::Apis::BigqueryV2::QueryParameterValue.new(
+          value: nil
+        )
+      )
+
+      actual = Google::Cloud::Bigquery::Convert.to_query_param nil, :GEOGRAPHY
+      assert_equal expected.to_h, actual.to_h
+    end
+  end
+
   describe :TIMESTAMP do
     it "identifies by value" do
       expected = Google::Apis::BigqueryV2::QueryParameter.new(

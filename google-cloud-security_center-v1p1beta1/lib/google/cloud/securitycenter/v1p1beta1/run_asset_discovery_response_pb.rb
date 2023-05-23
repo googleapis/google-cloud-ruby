@@ -4,7 +4,7 @@
 require 'google/protobuf'
 
 require 'google/protobuf/duration_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/securitycenter/v1p1beta1/run_asset_discovery_response.proto", :syntax => :proto3) do
     add_message "google.cloud.securitycenter.v1p1beta1.RunAssetDiscoveryResponse" do

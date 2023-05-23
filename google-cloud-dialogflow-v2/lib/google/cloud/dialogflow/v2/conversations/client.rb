@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/dialogflow/v2/conversation_pb"
+require "google/cloud/location"
 
 module Google
   module Cloud
@@ -27,7 +28,8 @@ module Google
           ##
           # Client for the Conversations service.
           #
-          # Service for managing {::Google::Cloud::Dialogflow::V2::Conversation Conversations}.
+          # Service for managing
+          # {::Google::Cloud::Dialogflow::V2::Conversation Conversations}.
           #
           class Client
             include Paths
@@ -41,13 +43,12 @@ module Google
             # See {::Google::Cloud::Dialogflow::V2::Conversations::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all Conversations clients:
-            #
-            #     ::Google::Cloud::Dialogflow::V2::Conversations::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all Conversations clients
+            #   ::Google::Cloud::Dialogflow::V2::Conversations::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -67,10 +68,7 @@ module Google
 
                 default_config.timeout = 60.0
                 default_config.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config
@@ -102,19 +100,15 @@ module Google
             ##
             # Create a new Conversations client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new Conversations client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Dialogflow::V2::Conversations::Client.new
             #
-            #     client = ::Google::Cloud::Dialogflow::V2::Conversations::Client.new
-            #
-            # To create a new Conversations client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Dialogflow::V2::Conversations::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Dialogflow::V2::Conversations::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Conversations client.
             # @yieldparam config [Client::Configuration]
@@ -134,18 +128,23 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
               @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
+
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
 
               @conversations_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::Dialogflow::V2::Conversations::Stub,
@@ -155,6 +154,13 @@ module Google
                 interceptors: @config.interceptors
               )
             end
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
 
             # Service calls
 
@@ -172,11 +178,14 @@ module Google
             # For Assist Stage, there's no dialogflow agent responding to user queries.
             # But we will provide suggestions which are generated from conversation.
             #
-            # If {::Google::Cloud::Dialogflow::V2::Conversation#conversation_profile Conversation.conversation_profile} is configured for a dialogflow
-            # agent, conversation will start from `Automated Agent Stage`, otherwise, it
-            # will start from `Assist Stage`. And during `Automated Agent Stage`, once an
-            # {::Google::Cloud::Dialogflow::V2::Intent Intent} with {::Google::Cloud::Dialogflow::V2::Intent#live_agent_handoff Intent.live_agent_handoff} is triggered, conversation
-            # will transfer to Assist Stage.
+            # If
+            # {::Google::Cloud::Dialogflow::V2::Conversation#conversation_profile Conversation.conversation_profile}
+            # is configured for a dialogflow agent, conversation will start from
+            # `Automated Agent Stage`, otherwise, it will start from `Assist Stage`. And
+            # during `Automated Agent Stage`, once an
+            # {::Google::Cloud::Dialogflow::V2::Intent Intent} with
+            # {::Google::Cloud::Dialogflow::V2::Intent#live_agent_handoff Intent.live_agent_handoff}
+            # is triggered, conversation will transfer to Assist Stage.
             #
             # @overload create_conversation(request, options = nil)
             #   Pass arguments to `create_conversation` via a request object, either of type
@@ -199,8 +208,8 @@ module Google
             #   @param conversation [::Google::Cloud::Dialogflow::V2::Conversation, ::Hash]
             #     Required. The conversation to create.
             #   @param conversation_id [::String]
-            #     Optional. Identifier of the conversation. Generally it's auto generated by Google.
-            #     Only set it if you cannot wait for the response to return a
+            #     Optional. Identifier of the conversation. Generally it's auto generated by
+            #     Google. Only set it if you cannot wait for the response to return a
             #     auto-generated one to you.
             #
             #     The conversation ID must be compliant with the regression fomula
@@ -217,6 +226,21 @@ module Google
             # @return [::Google::Cloud::Dialogflow::V2::Conversation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Conversations::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::CreateConversationRequest.new
+            #
+            #   # Call the create_conversation method.
+            #   result = client.create_conversation request
+            #
+            #   # The returned object is of type Google::Cloud::Dialogflow::V2::Conversation.
+            #   p result
             #
             def create_conversation request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -235,16 +259,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_conversation.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_conversation.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @conversations_stub.call_rpc :create_conversation, request, options: options do |response, operation|
@@ -308,6 +336,25 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Conversations::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::ListConversationsRequest.new
+            #
+            #   # Call the list_conversations method.
+            #   result = client.list_conversations request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::Dialogflow::V2::Conversation.
+            #     p item
+            #   end
+            #
             def list_conversations request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -325,16 +372,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_conversations.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_conversations.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @conversations_stub.call_rpc :list_conversations, request, options: options do |response, operation|
@@ -377,6 +428,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Conversations::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::GetConversationRequest.new
+            #
+            #   # Call the get_conversation method.
+            #   result = client.get_conversation request
+            #
+            #   # The returned object is of type Google::Cloud::Dialogflow::V2::Conversation.
+            #   p result
+            #
             def get_conversation request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -394,16 +460,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_conversation.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_conversation.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @conversations_stub.call_rpc :get_conversation, request, options: options do |response, operation|
@@ -446,6 +516,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Conversations::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::CompleteConversationRequest.new
+            #
+            #   # Call the complete_conversation method.
+            #   result = client.complete_conversation request
+            #
+            #   # The returned object is of type Google::Cloud::Dialogflow::V2::Conversation.
+            #   p result
+            #
             def complete_conversation request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -463,16 +548,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.complete_conversation.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.complete_conversation.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @conversations_stub.call_rpc :complete_conversation, request, options: options do |response, operation|
@@ -532,6 +621,25 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Conversations::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::ListMessagesRequest.new
+            #
+            #   # Call the list_messages method.
+            #   result = client.list_messages request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::Dialogflow::V2::Message.
+            #     p item
+            #   end
+            #
             def list_messages request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -549,20 +657,226 @@ module Google
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_messages.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_messages.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @conversations_stub.call_rpc :list_messages, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @conversations_stub, :list_messages, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Suggests summary for a conversation based on specific historical messages.
+            # The range of the messages to be used for summary can be specified in the
+            # request.
+            #
+            # @overload suggest_conversation_summary(request, options = nil)
+            #   Pass arguments to `suggest_conversation_summary` via a request object, either of type
+            #   {::Google::Cloud::Dialogflow::V2::SuggestConversationSummaryRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dialogflow::V2::SuggestConversationSummaryRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload suggest_conversation_summary(conversation: nil, latest_message: nil, context_size: nil, assist_query_params: nil)
+            #   Pass arguments to `suggest_conversation_summary` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param conversation [::String]
+            #     Required. The conversation to fetch suggestion for.
+            #     Format: `projects/<Project ID>/locations/<Location
+            #     ID>/conversations/<Conversation ID>`.
+            #   @param latest_message [::String]
+            #     The name of the latest conversation message used as context for
+            #     compiling suggestion. If empty, the latest message of the conversation will
+            #     be used.
+            #
+            #     Format: `projects/<Project ID>/locations/<Location
+            #     ID>/conversations/<Conversation ID>/messages/<Message ID>`.
+            #   @param context_size [::Integer]
+            #     Max number of messages prior to and including
+            #     [latest_message] to use as context when compiling the
+            #     suggestion. By default 500 and at most 1000.
+            #   @param assist_query_params [::Google::Cloud::Dialogflow::V2::AssistQueryParameters, ::Hash]
+            #     Parameters for a human assist query.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Dialogflow::V2::SuggestConversationSummaryResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Dialogflow::V2::SuggestConversationSummaryResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Conversations::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::SuggestConversationSummaryRequest.new
+            #
+            #   # Call the suggest_conversation_summary method.
+            #   result = client.suggest_conversation_summary request
+            #
+            #   # The returned object is of type Google::Cloud::Dialogflow::V2::SuggestConversationSummaryResponse.
+            #   p result
+            #
+            def suggest_conversation_summary request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dialogflow::V2::SuggestConversationSummaryRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.suggest_conversation_summary.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.conversation
+                header_params["conversation"] = request.conversation
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.suggest_conversation_summary.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.suggest_conversation_summary.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @conversations_stub.call_rpc :suggest_conversation_summary, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Generates and returns a summary for a conversation that does not have a
+            # resource created for it.
+            #
+            # @overload generate_stateless_summary(request, options = nil)
+            #   Pass arguments to `generate_stateless_summary` via a request object, either of type
+            #   {::Google::Cloud::Dialogflow::V2::GenerateStatelessSummaryRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dialogflow::V2::GenerateStatelessSummaryRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload generate_stateless_summary(stateless_conversation: nil, conversation_profile: nil, latest_message: nil, max_context_size: nil)
+            #   Pass arguments to `generate_stateless_summary` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param stateless_conversation [::Google::Cloud::Dialogflow::V2::GenerateStatelessSummaryRequest::MinimalConversation, ::Hash]
+            #     Required. The conversation to suggest a summary for.
+            #   @param conversation_profile [::Google::Cloud::Dialogflow::V2::ConversationProfile, ::Hash]
+            #     Required. A ConversationProfile containing information required for Summary
+            #     generation.
+            #     Required fields: \\{language_code, security_settings}
+            #     Optional fields: \\{agent_assistant_config}
+            #   @param latest_message [::String]
+            #     The name of the latest conversation message used as context for
+            #     generating a Summary. If empty, the latest message of the conversation will
+            #     be used. The format is specific to the user and the names of the messages
+            #     provided.
+            #   @param max_context_size [::Integer]
+            #     Max number of messages prior to and including
+            #     [latest_message] to use as context when compiling the
+            #     suggestion. By default 500 and at most 1000.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Dialogflow::V2::GenerateStatelessSummaryResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Dialogflow::V2::GenerateStatelessSummaryResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Conversations::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::GenerateStatelessSummaryRequest.new
+            #
+            #   # Call the generate_stateless_summary method.
+            #   result = client.generate_stateless_summary request
+            #
+            #   # The returned object is of type Google::Cloud::Dialogflow::V2::GenerateStatelessSummaryResponse.
+            #   p result
+            #
+            def generate_stateless_summary request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dialogflow::V2::GenerateStatelessSummaryRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.generate_stateless_summary.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.stateless_conversation&.parent
+                header_params["stateless_conversation.parent"] = request.stateless_conversation.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.generate_stateless_summary.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.generate_stateless_summary.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @conversations_stub.call_rpc :generate_stateless_summary, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -583,22 +897,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for create_conversation
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # create_conversation to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Dialogflow::V2::Conversations::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_conversation.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Dialogflow::V2::Conversations::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_conversation.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Dialogflow::V2::Conversations::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_conversation.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Dialogflow::V2::Conversations::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_conversation.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
@@ -609,9 +922,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -731,6 +1044,16 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_messages
+                ##
+                # RPC-specific configuration for `suggest_conversation_summary`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :suggest_conversation_summary
+                ##
+                # RPC-specific configuration for `generate_stateless_summary`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :generate_stateless_summary
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -744,6 +1067,10 @@ module Google
                   @complete_conversation = ::Gapic::Config::Method.new complete_conversation_config
                   list_messages_config = parent_rpcs.list_messages if parent_rpcs.respond_to? :list_messages
                   @list_messages = ::Gapic::Config::Method.new list_messages_config
+                  suggest_conversation_summary_config = parent_rpcs.suggest_conversation_summary if parent_rpcs.respond_to? :suggest_conversation_summary
+                  @suggest_conversation_summary = ::Gapic::Config::Method.new suggest_conversation_summary_config
+                  generate_stateless_summary_config = parent_rpcs.generate_stateless_summary if parent_rpcs.respond_to? :generate_stateless_summary
+                  @generate_stateless_summary = ::Gapic::Config::Method.new generate_stateless_summary_config
 
                   yield self if block_given?
                 end

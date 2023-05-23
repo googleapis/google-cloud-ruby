@@ -15,7 +15,7 @@
 # limitations under the License.
 
 def delete_job project_id:, location_id:, job_name:
-  # [START cloud_scheduler_create_job]
+  # [START cloudscheduler_delete_job]
   require "google/cloud/scheduler"
 
   # Create a client.
@@ -33,5 +33,5 @@ def delete_job project_id:, location_id:, job_name:
   client.delete_job name: job
 
   puts "Job deleted."
-  # [END cloud_scheduler_create_job]
+  # [END cloudscheduler_delete_job]
 end

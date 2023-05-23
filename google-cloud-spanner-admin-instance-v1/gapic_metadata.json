@@ -20,6 +20,26 @@
                 "get_instance_config"
               ]
             },
+            "CreateInstanceConfig": {
+              "methods": [
+                "create_instance_config"
+              ]
+            },
+            "UpdateInstanceConfig": {
+              "methods": [
+                "update_instance_config"
+              ]
+            },
+            "DeleteInstanceConfig": {
+              "methods": [
+                "delete_instance_config"
+              ]
+            },
+            "ListInstanceConfigOperations": {
+              "methods": [
+                "list_instance_config_operations"
+              ]
+            },
             "ListInstances": {
               "methods": [
                 "list_instances"

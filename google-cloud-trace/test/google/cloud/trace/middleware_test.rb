@@ -115,14 +115,14 @@ describe Google::Cloud::Trace::Middleware, :mock_trace do
   describe ".initialize" do
     it "uses the service object passed in" do
       middleware = Google::Cloud::Trace::Middleware.new base_app, service: "test-service"
-      middleware.instance_variable_get(:@service).must_equal "test-service"
+      _(middleware.instance_variable_get(:@service)).must_equal "test-service"
     end
 
     it "creates a default AsyncReporter if service isn't passed in" do
       Google::Cloud::Trace.configure.project_id = "test"
       Google::Cloud::Trace.stub :new, OpenStruct.new(service: nil) do
         middleware = Google::Cloud::Trace::Middleware.new base_app, credentials: credentials
-        middleware.instance_variable_get(:@service).must_be_kind_of Google::Cloud::Trace::AsyncReporter
+        _(middleware.instance_variable_get(:@service)).must_be_kind_of Google::Cloud::Trace::AsyncReporter
       end
     end
   end
@@ -132,11 +132,11 @@ describe Google::Cloud::Trace::Middleware, :mock_trace do
       env = rack_env sample: true
       tc = base_middleware.get_trace_context env
 
-      tc.trace_id.must_equal my_trace_id
-      tc.span_id.must_equal my_span_id
-      tc.sampled?.must_equal true
-      tc.capture_stack?.must_equal false
-      tc.new?.must_equal false
+      _(tc.trace_id).must_equal my_trace_id
+      _(tc.span_id).must_equal my_span_id
+      _(tc.sampled?).must_equal true
+      _(tc.capture_stack?).must_equal false
+      _(tc.new?).must_equal false
     end
 
     it "makes a new sampling decision" do
@@ -146,11 +146,11 @@ describe Google::Cloud::Trace::Middleware, :mock_trace do
         middleware.get_trace_context env
       end
 
-      tc.trace_id.must_equal my_trace_id
-      tc.span_id.must_equal my_span_id
-      tc.sampled?.must_equal true
-      tc.capture_stack?.must_equal false
-      tc.new?.must_equal false
+      _(tc.trace_id).must_equal my_trace_id
+      _(tc.span_id).must_equal my_span_id
+      _(tc.sampled?).must_equal true
+      _(tc.capture_stack?).must_equal false
+      _(tc.new?).must_equal false
     end
 
     it "honors path blacklist" do
@@ -160,31 +160,31 @@ describe Google::Cloud::Trace::Middleware, :mock_trace do
         middleware.get_trace_context env
       end
 
-      tc.trace_id.must_equal my_trace_id
-      tc.span_id.must_equal my_span_id
-      tc.sampled?.must_equal false
-      tc.capture_stack?.must_equal false
-      tc.new?.must_equal false
+      _(tc.trace_id).must_equal my_trace_id
+      _(tc.span_id).must_equal my_span_id
+      _(tc.sampled?).must_equal false
+      _(tc.capture_stack?).must_equal false
+      _(tc.new?).must_equal false
     end
   end
 
   describe ".get_url" do
     it "returns an URL without a query string" do
       url = base_middleware.get_url rack_env
-      url.must_equal "http://#{hostname}#{my_path}"
+      _(url).must_equal "http://#{hostname}#{my_path}"
     end
 
     it "returns an URL with a query string" do
       env = rack_env.merge({"QUERY_STRING" => "foo=bar"})
       url = base_middleware.get_url env
-      url.must_equal "http://#{hostname}#{my_path}?foo=bar"
+      _(url).must_equal "http://#{hostname}#{my_path}?foo=bar"
     end
   end
 
   describe ".call" do
     it "sends a trace" do
       mock = Minitest::Mock.new
-      mock.expect :patch_traces, nil, [{project_id: project, traces: traces_proto}]
+      mock.expect :patch_traces, nil, project_id: project, traces: traces_proto
       tracer.service.mocked_lowlevel_client = mock
 
       env = rack_env sample: true, span_id: nil
@@ -200,17 +200,17 @@ describe Google::Cloud::Trace::Middleware, :mock_trace do
       end
 
       mock.verify
-      result[1]["X-Cloud-Trace-Context"].must_equal "#{my_trace_id};o=1"
+      _(result[1]["X-Cloud-Trace-Context"]).must_equal "#{my_trace_id};o=1"
     end
 
     it "provides app access to the trace structure" do
       mock = Minitest::Mock.new
-      mock.expect :patch_traces, nil, [{project_id: project, traces: traces_proto}]
+      mock.expect :patch_traces, nil, project_id: project, traces: traces_proto
       tracer.service.mocked_lowlevel_client = mock
 
       env = rack_env sample: true, span_id: nil
       myapp = ::Proc.new do |env|
-        Google::Cloud::Trace.get.span_id.must_equal my_span_id
+        _(Google::Cloud::Trace.get.span_id).must_equal my_span_id
         ["200", {}, "Hello, world!\n"]
       end
 

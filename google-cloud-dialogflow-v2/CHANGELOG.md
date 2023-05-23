@@ -1,5 +1,186 @@
 # Release History
 
+### 0.24.0 (2023-05-16)
+
+#### Features
+
+* add baseline model configuration for conversation summarization ([#21568](https://github.com/googleapis/google-cloud-ruby/issues/21568)) 
+
+### 0.23.0 (2023-03-08)
+
+#### Features
+
+* Support REST transport ([#20626](https://github.com/googleapis/google-cloud-ruby/issues/20626)) 
+
+### 0.22.0 (2023-02-17)
+
+#### Features
+
+* Support for text-to-speech configuration in ConversationProfile 
+* Support for the assist_query_params argument to the suggest_conversation_summary RPC ([#20437](https://github.com/googleapis/google-cloud-ruby/issues/20437)) 
+
+### 0.21.0 (2023-01-15)
+
+#### Features
+
+* Include a human eval template in ConversationModelEvaluation 
+* Support for the suggest_conversation_summary RPC ([#20023](https://github.com/googleapis/google-cloud-ruby/issues/20023)) 
+* Support summarization feedback in AgentAssistantFeedback 
+
+### 0.20.0 (2022-12-09)
+
+#### Features
+
+* Added cx_current_page field to AutomatedAgentReply ([#19464](https://github.com/googleapis/google-cloud-ruby/issues/19464)) 
+
+### 0.19.0 (2022-11-01)
+
+#### Features
+
+* Added obfuscated_external_user_id to Participant 
+* Added support for the streaming_analyze_content call ([#19340](https://github.com/googleapis/google-cloud-ruby/issues/19340)) 
+* Can directly set Cloud Speech model on the SpeechToTextConfig 
+
+### 0.18.0 (2022-10-03)
+
+#### Features
+
+* Include the conversation dataset name with dataset creation metadata ([#19247](https://github.com/googleapis/google-cloud-ruby/issues/19247)) 
+
+### 0.17.1 (2022-07-28)
+
+#### Documentation
+
+* Minor reference documentation updates ([#18866](https://github.com/googleapis/google-cloud-ruby/issues/18866)) 
+
+### 0.17.0 (2022-07-02)
+
+#### Features
+
+* Added support for the locations mixin ([#18565](https://github.com/googleapis/google-cloud-ruby/issues/18565)) 
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+#### Bug Fixes
+
+* Fixed a crash when making certain long-running-operations status calls ([#18441](https://github.com/googleapis/google-cloud-ruby/issues/18441)) 
+
+### 0.16.0 (2022-05-09)
+
+#### Features
+
+* Support setting CX session parameters in the analyze_content call
+
+### 0.15.2 / 2022-03-31
+
+#### Documentation
+
+* Clarify the use of SuggestionResult error fields
+
+### 0.15.1 / 2022-03-09
+
+#### Documentation
+
+* update docs to clarify the permissions needed on Cloud storage object
+
+### 0.15.0 / 2022-03-07
+
+#### Features
+
+* Add ConversationDataset and ConversationModel
+
+### 0.14.0 / 2022-01-21
+
+#### Features
+
+* Add support for ConversationProcessConfig, ImportDocument and SuggestSmarReplies.
+
+### 0.13.0 / 2022-01-11
+
+#### Features
+
+* Added support for the export_document call
+* Added support for passing filters to the list_documents and list_knowledge_bases calls
+* Added support for importing custom metadata from Google Cloud Storage in the reload_document call
+* Added support for applying partial update to the smart messaging allowlist in the reload_document call
+
+#### Bug Fixes
+
+* Honor quota project in auxiliary operations clients
+
+#### Documentation
+
+* Clarifications and formatting fixes in the reference documentation
+* Fix titles of documentation pages
+* Remove some broken images and fix outdated content in authentication documentation
+
+### 0.12.0 / 2021-12-07
+
+#### Features
+
+* Support for document metadata filters and human assist query parameters
+
+### 0.11.5 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
+### 0.11.4 / 2021-10-28
+
+#### Documentation
+
+* Clarify some of the reference documentation
+
+### 0.11.3 / 2021-10-18
+
+#### Documentation
+
+* Recommend use of the analyze_content call over detect_intent
+
+### 0.11.2 / 2021-09-07
+
+#### Documentation
+
+* Updated documentation for long-running calls
+
+### 0.11.1 / 2021-08-11
+
+#### Bug Fixes
+
+* Honor client-level timeout configuration
+
+#### Documentation
+
+* Document root_followup_intent_name and followup_intent_info fields of Intent as read-only
+
+### 0.11.0 / 2021-08-05
+
+#### Features
+
+* Include the detected language code in StreamingRecognitionResult
+
+### 0.10.1 / 2021-07-12
+
+#### Documentation
+
+* Clarify some language around authentication configuration
+
+### 0.10.0 / 2021-06-22
+
+#### Features
+
+* Provide a helper for agent version paths
+
+### 0.9.0 / 2021-06-17
+
+#### Features
+
+* Added automated agent reply type, and allow cancellation flag for partial response feature
+* Report whether a query cancels slot filling
+
+#### Bug Fixes
+
+* Support future 1.x versions of gapic-common
+
 ### 0.8.1 / 2021-05-21
 
 #### Documentation

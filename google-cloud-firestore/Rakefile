@@ -52,12 +52,9 @@ task :acceptance, :project, :keyfile do |t, args|
   project = args[:project]
   project ||= ENV["FIRESTORE_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
   keyfile = args[:keyfile]
-  keyfile ||= ENV["FIRESTORE_TEST_KEYFILE"] || ENV["GCLOUD_TEST_KEYFILE"]
-  if keyfile
-    keyfile = File.read keyfile
-  else
-    keyfile ||= ENV["FIRESTORE_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
-  end
+  keyfile ||= ENV["FIRESTORE_TEST_KEYFILE"] || ENV["FIRESTORE_TEST_KEYFILE_JSON"] ||
+              ENV["GCLOUD_TEST_KEYFILE"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
+  keyfile = File.read keyfile if keyfile && !keyfile.strip.start_with?("{")
   if project.nil? || keyfile.nil?
     fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or FIRESTORE_TEST_PROJECT=test123 FIRESTORE_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
   end
@@ -70,7 +67,8 @@ task :acceptance, :project, :keyfile do |t, args|
   ENV["FIRESTORE_PROJECT"] = project
   ENV["FIRESTORE_KEYFILE_JSON"] = keyfile
 
-  Rake::Task["acceptance:run"].invoke
+  Rake::Task["acceptance:grpc"].invoke
+  Rake::Task["acceptance:rest"].invoke
 end
 
 namespace :acceptance do
@@ -91,12 +89,9 @@ namespace :acceptance do
     project = args[:project]
     project ||= ENV["FIRESTORE_TEST_PROJECT"] || ENV["GCLOUD_TEST_PROJECT"]
     keyfile = args[:keyfile]
-    keyfile ||= ENV["FIRESTORE_TEST_KEYFILE"] || ENV["GCLOUD_TEST_KEYFILE"]
-    if keyfile
-      keyfile = File.read keyfile
-    else
-      keyfile ||= ENV["FIRESTORE_TEST_KEYFILE_JSON"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
-    end
+    keyfile ||= ENV["FIRESTORE_TEST_KEYFILE"] || ENV["FIRESTORE_TEST_KEYFILE_JSON"] ||
+                ENV["GCLOUD_TEST_KEYFILE"] || ENV["GCLOUD_TEST_KEYFILE_JSON"]
+    keyfile = File.read keyfile if keyfile && !keyfile.strip.start_with?("{")
     if project.nil? || keyfile.nil?
       fail "You must provide a project and keyfile. e.g. rake acceptance[test123, /path/to/keyfile.json] or FIRESTORE_TEST_PROJECT=test123 FIRESTORE_TEST_KEYFILE=/path/to/keyfile.json rake acceptance"
     end
@@ -130,10 +125,12 @@ namespace :acceptance do
     end
   end
 
-  Rake::TestTask.new :run do |t|
-    t.libs << "acceptance"
-    t.test_files = FileList["acceptance/**/*_test.rb"]
-    t.warning = false
+  ["grpc", "rest"].each do |transport|
+    Rake::TestTask.new transport do |t|
+      t.libs << "acceptance"
+      t.test_files = FileList["acceptance/init_#{transport}.rb", "acceptance/**/*_test.rb"]
+      t.warning = false
+    end
   end
 end
 

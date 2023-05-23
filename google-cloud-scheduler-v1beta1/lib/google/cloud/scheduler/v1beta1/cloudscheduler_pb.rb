@@ -10,12 +10,15 @@ require 'google/api/resource_pb'
 require 'google/cloud/scheduler/v1beta1/job_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/scheduler/v1beta1/cloudscheduler.proto", :syntax => :proto3) do
     add_message "google.cloud.scheduler.v1beta1.ListJobsRequest" do
       optional :parent, :string, 1
+      optional :filter, :string, 4
       optional :page_size, :int32, 5
       optional :page_token, :string, 6
+      optional :legacy_app_engine_cron, :bool, 7
     end
     add_message "google.cloud.scheduler.v1beta1.ListJobsResponse" do
       repeated :jobs, :message, 1, "google.cloud.scheduler.v1beta1.Job"
@@ -34,6 +37,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.scheduler.v1beta1.DeleteJobRequest" do
       optional :name, :string, 1
+      optional :legacy_app_engine_cron, :bool, 2
     end
     add_message "google.cloud.scheduler.v1beta1.PauseJobRequest" do
       optional :name, :string, 1
@@ -43,6 +47,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.scheduler.v1beta1.RunJobRequest" do
       optional :name, :string, 1
+      optional :legacy_app_engine_cron, :bool, 2
     end
   end
 end

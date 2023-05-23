@@ -11,6 +11,7 @@ require 'google/api/resource_pb'
 require 'google/monitoring/v3/common_pb'
 require 'google/monitoring/v3/group_pb'
 require 'google/protobuf/empty_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/monitoring/v3/group_service.proto", :syntax => :proto3) do
     add_message "google.monitoring.v3.ListGroupsRequest" do

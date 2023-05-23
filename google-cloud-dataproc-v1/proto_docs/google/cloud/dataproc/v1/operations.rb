@@ -21,6 +21,54 @@ module Google
   module Cloud
     module Dataproc
       module V1
+        # Metadata describing the Batch operation.
+        # @!attribute [rw] batch
+        #   @return [::String]
+        #     Name of the batch for the operation.
+        # @!attribute [rw] batch_uuid
+        #   @return [::String]
+        #     Batch UUID for the operation.
+        # @!attribute [rw] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time when the operation was created.
+        # @!attribute [rw] done_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time when the operation finished.
+        # @!attribute [rw] operation_type
+        #   @return [::Google::Cloud::Dataproc::V1::BatchOperationMetadata::BatchOperationType]
+        #     The operation type.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     Short description of the operation.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Labels associated with the operation.
+        # @!attribute [rw] warnings
+        #   @return [::Array<::String>]
+        #     Warnings encountered during operation execution.
+        class BatchOperationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Operation type for Batch resources
+          module BatchOperationType
+            # Batch operation type is unknown.
+            BATCH_OPERATION_TYPE_UNSPECIFIED = 0
+
+            # Batch operation type.
+            BATCH = 1
+          end
+        end
+
         # The status of the operation.
         # @!attribute [r] state
         #   @return [::Google::Cloud::Dataproc::V1::ClusterOperationStatus::State]
@@ -79,6 +127,9 @@ module Google
         # @!attribute [r] warnings
         #   @return [::Array<::String>]
         #     Output only. Errors encountered during operation execution.
+        # @!attribute [r] child_operation_ids
+        #   @return [::Array<::String>]
+        #     Output only. Child operation ids
         class ClusterOperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -90,6 +141,63 @@ module Google
           class LabelsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Metadata describing the node group operation.
+        # @!attribute [r] node_group_id
+        #   @return [::String]
+        #     Output only. Node group ID for the operation.
+        # @!attribute [r] cluster_uuid
+        #   @return [::String]
+        #     Output only. Cluster UUID associated with the node group operation.
+        # @!attribute [r] status
+        #   @return [::Google::Cloud::Dataproc::V1::ClusterOperationStatus]
+        #     Output only. Current operation status.
+        # @!attribute [r] status_history
+        #   @return [::Array<::Google::Cloud::Dataproc::V1::ClusterOperationStatus>]
+        #     Output only. The previous operation status.
+        # @!attribute [rw] operation_type
+        #   @return [::Google::Cloud::Dataproc::V1::NodeGroupOperationMetadata::NodeGroupOperationType]
+        #     The operation type.
+        # @!attribute [r] description
+        #   @return [::String]
+        #     Output only. Short description of operation.
+        # @!attribute [r] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Output only. Labels associated with the operation.
+        # @!attribute [r] warnings
+        #   @return [::Array<::String>]
+        #     Output only. Errors encountered during operation execution.
+        class NodeGroupOperationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Operation type for node group resources.
+          module NodeGroupOperationType
+            # Node group operation type is unknown.
+            NODE_GROUP_OPERATION_TYPE_UNSPECIFIED = 0
+
+            # Create node group operation type.
+            CREATE = 1
+
+            # Update node group operation type.
+            UPDATE = 2
+
+            # Delete node group operation type.
+            DELETE = 3
+
+            # Resize node group operation type.
+            RESIZE = 4
           end
         end
       end

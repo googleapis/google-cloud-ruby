@@ -19,9 +19,10 @@
 
 module Google
   module Api
-    # An object that describes the schema of a {::Google::Api::MonitoredResource MonitoredResource} object using a
-    # type name and a set of labels.  For example, the monitored resource
-    # descriptor for Google Compute Engine VM instances has a type of
+    # An object that describes the schema of a
+    # {::Google::Api::MonitoredResource MonitoredResource} object using a type name
+    # and a set of labels.  For example, the monitored resource descriptor for
+    # Google Compute Engine VM instances has a type of
     # `"gce_instance"` and specifies the use of the labels `"instance_id"` and
     # `"zone"` to identify particular VM instances.
     #
@@ -40,7 +41,10 @@ module Google
     #   @return [::String]
     #     Required. The monitored resource type. For example, the type
     #     `"cloudsql_database"` represents databases in Google Cloud SQL.
-    #     The maximum length of this value is 256 characters.
+    #      For a list of types, see [Monitoring resource
+    #      types](https://cloud.google.com/monitoring/api/resources)
+    #     and [Logging resource
+    #     types](https://cloud.google.com/logging/docs/api/v2/resource-list).
     # @!attribute [rw] display_name
     #   @return [::String]
     #     Optional. A concise name for the monitored resource type that might be
@@ -56,6 +60,9 @@ module Google
     #     Required. A set of labels used to describe instances of this monitored
     #     resource type. For example, an individual Google Cloud SQL database is
     #     identified by values for the labels `"database_id"` and `"zone"`.
+    # @!attribute [rw] launch_stage
+    #   @return [::Google::Api::LaunchStage]
+    #     Optional. The launch stage of the monitored resource definition.
     class MonitoredResourceDescriptor
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -64,21 +71,28 @@ module Google
     # An object representing a resource that can be used for monitoring, logging,
     # billing, or other purposes. Examples include virtual machine instances,
     # databases, and storage devices such as disks. The `type` field identifies a
-    # {::Google::Api::MonitoredResourceDescriptor MonitoredResourceDescriptor} object that describes the resource's
-    # schema. Information in the `labels` field identifies the actual resource and
-    # its attributes according to the schema. For example, a particular Compute
-    # Engine VM instance could be represented by the following object, because the
-    # {::Google::Api::MonitoredResourceDescriptor MonitoredResourceDescriptor} for `"gce_instance"` has labels
-    # `"instance_id"` and `"zone"`:
+    # {::Google::Api::MonitoredResourceDescriptor MonitoredResourceDescriptor} object
+    # that describes the resource's schema. Information in the `labels` field
+    # identifies the actual resource and its attributes according to the schema.
+    # For example, a particular Compute Engine VM instance could be represented by
+    # the following object, because the
+    # {::Google::Api::MonitoredResourceDescriptor MonitoredResourceDescriptor} for
+    # `"gce_instance"` has labels
+    # `"project_id"`, `"instance_id"` and `"zone"`:
     #
     #     { "type": "gce_instance",
-    #       "labels": { "instance_id": "12345678901234",
+    #       "labels": { "project_id": "my-project",
+    #                   "instance_id": "12345678901234",
     #                   "zone": "us-central1-a" }}
     # @!attribute [rw] type
     #   @return [::String]
     #     Required. The monitored resource type. This field must match
-    #     the `type` field of a {::Google::Api::MonitoredResourceDescriptor MonitoredResourceDescriptor} object. For
-    #     example, the type of a Compute Engine VM instance is `gce_instance`.
+    #     the `type` field of a
+    #     {::Google::Api::MonitoredResourceDescriptor MonitoredResourceDescriptor}
+    #     object. For example, the type of a Compute Engine VM instance is
+    #     `gce_instance`. Some descriptors include the service name in the type; for
+    #     example, the type of a Datastream stream is
+    #     `datastream.googleapis.com/Stream`.
     # @!attribute [rw] labels
     #   @return [::Google::Protobuf::Map{::String => ::String}]
     #     Required. Values for all of the labels listed in the associated monitored
@@ -98,18 +112,17 @@ module Google
       end
     end
 
-    # Auxiliary metadata for a {::Google::Api::MonitoredResource MonitoredResource} object.
-    # {::Google::Api::MonitoredResource MonitoredResource} objects contain the minimum set of information to
-    # uniquely identify a monitored resource instance. There is some other useful
-    # auxiliary metadata. Google Stackdriver Monitoring & Logging uses an ingestion
-    # pipeline to extract metadata for cloud resources of all types , and stores
-    # the metadata in this message.
+    # Auxiliary metadata for a {::Google::Api::MonitoredResource MonitoredResource}
+    # object. {::Google::Api::MonitoredResource MonitoredResource} objects contain the
+    # minimum set of information to uniquely identify a monitored resource
+    # instance. There is some other useful auxiliary metadata. Monitoring and
+    # Logging use an ingestion pipeline to extract metadata for cloud resources of
+    # all types, and store the metadata in this message.
     # @!attribute [rw] system_labels
     #   @return [::Google::Protobuf::Struct]
     #     Output only. Values for predefined system metadata labels.
-    #     System labels are a kind of metadata extracted by Google Stackdriver.
-    #     Stackdriver determines what system labels are useful and how to obtain
-    #     their values. Some examples: "machine_image", "vpc", "subnet_id",
+    #     System labels are a kind of metadata extracted by Google, including
+    #     "machine_image", "vpc", "subnet_id",
     #     "security_group", "name", etc.
     #     System label values can be only strings, Boolean values, or a list of
     #     strings. For example:

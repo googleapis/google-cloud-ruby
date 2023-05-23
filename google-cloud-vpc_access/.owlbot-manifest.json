@@ -1,0 +1,24 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-vpc_access.gemspec",
+    "lib/google-cloud-vpc_access.rb",
+    "lib/google/cloud/vpc_access.rb",
+    "lib/google/cloud/vpc_access/version.rb",
+    "test/google/cloud/vpc_access/client_test.rb",
+    "test/google/cloud/vpc_access/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}

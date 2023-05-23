@@ -38,18 +38,52 @@ module Google
             # Retrieves the specified intent.
             rpc :GetIntent, ::Google::Cloud::Dialogflow::V2::GetIntentRequest, ::Google::Cloud::Dialogflow::V2::Intent
             # Creates an intent in the specified agent.
+            #
+            # Note: You should always train an agent prior to sending it queries. See the
+            # [training
+            # documentation](https://cloud.google.com/dialogflow/es/docs/training).
             rpc :CreateIntent, ::Google::Cloud::Dialogflow::V2::CreateIntentRequest, ::Google::Cloud::Dialogflow::V2::Intent
             # Updates the specified intent.
+            #
+            # Note: You should always train an agent prior to sending it queries. See the
+            # [training
+            # documentation](https://cloud.google.com/dialogflow/es/docs/training).
             rpc :UpdateIntent, ::Google::Cloud::Dialogflow::V2::UpdateIntentRequest, ::Google::Cloud::Dialogflow::V2::Intent
             # Deletes the specified intent and its direct or indirect followup intents.
+            #
+            # Note: You should always train an agent prior to sending it queries. See the
+            # [training
+            # documentation](https://cloud.google.com/dialogflow/es/docs/training).
             rpc :DeleteIntent, ::Google::Cloud::Dialogflow::V2::DeleteIntentRequest, ::Google::Protobuf::Empty
             # Updates/Creates multiple intents in the specified agent.
             #
-            # Operation <response: [BatchUpdateIntentsResponse][google.cloud.dialogflow.v2.BatchUpdateIntentsResponse]>
+            # This method is a [long-running
+            # operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
+            # The returned `Operation` type has the following method-specific fields:
+            #
+            # - `metadata`: An empty [Struct
+            #   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
+            # - `response`:
+            # [BatchUpdateIntentsResponse][google.cloud.dialogflow.v2.BatchUpdateIntentsResponse]
+            #
+            # Note: You should always train an agent prior to sending it queries. See the
+            # [training
+            # documentation](https://cloud.google.com/dialogflow/es/docs/training).
             rpc :BatchUpdateIntents, ::Google::Cloud::Dialogflow::V2::BatchUpdateIntentsRequest, ::Google::Longrunning::Operation
             # Deletes intents in the specified agent.
             #
-            # Operation <response: [google.protobuf.Empty][google.protobuf.Empty]>
+            # This method is a [long-running
+            # operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
+            # The returned `Operation` type has the following method-specific fields:
+            #
+            # - `metadata`: An empty [Struct
+            #   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
+            # - `response`: An [Empty
+            #   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)
+            #
+            # Note: You should always train an agent prior to sending it queries. See the
+            # [training
+            # documentation](https://cloud.google.com/dialogflow/es/docs/training).
             rpc :BatchDeleteIntents, ::Google::Cloud::Dialogflow::V2::BatchDeleteIntentsRequest, ::Google::Longrunning::Operation
           end
 

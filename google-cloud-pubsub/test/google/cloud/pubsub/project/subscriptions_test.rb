@@ -33,7 +33,7 @@ describe Google::Cloud::PubSub::Project, :subscriptions, :mock_pubsub do
 
     get_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash("random-topic", sub_name)
     mock = Minitest::Mock.new
-    mock.expect :get_subscription, get_res, [subscription: subscription_path(sub_name)]
+    mock.expect :get_subscription, get_res,  subscription: subscription_path(sub_name) 
     pubsub.service.mocked_subscriber = mock
 
     sub = pubsub.subscription sub_name
@@ -52,7 +52,7 @@ describe Google::Cloud::PubSub::Project, :subscriptions, :mock_pubsub do
 
     get_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash("random-topic", sub_full_path)
     mock = Minitest::Mock.new
-    mock.expect :get_subscription, get_res, [subscription: sub_full_path]
+    mock.expect :get_subscription, get_res,  subscription: sub_full_path 
     pubsub.service.mocked_subscriber = mock
 
     sub = pubsub.subscription sub_full_path
@@ -67,7 +67,7 @@ describe Google::Cloud::PubSub::Project, :subscriptions, :mock_pubsub do
 
     get_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash("random-topic", sub_name)
     mock = Minitest::Mock.new
-    mock.expect :get_subscription, get_res, [subscription: subscription_path(sub_name)]
+    mock.expect :get_subscription, get_res,  subscription: subscription_path(sub_name) 
     pubsub.service.mocked_subscriber = mock
 
     sub = pubsub.get_subscription sub_name
@@ -86,7 +86,7 @@ describe Google::Cloud::PubSub::Project, :subscriptions, :mock_pubsub do
 
     get_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash("random-topic", sub_name)
     mock = Minitest::Mock.new
-    mock.expect :get_subscription, get_res, [subscription: subscription_path(sub_name)]
+    mock.expect :get_subscription, get_res,  subscription: subscription_path(sub_name) 
     pubsub.service.mocked_subscriber = mock
 
     sub = pubsub.find_subscription sub_name
@@ -131,7 +131,7 @@ describe Google::Cloud::PubSub::Project, :subscriptions, :mock_pubsub do
 
     get_res = Google::Cloud::PubSub::V1::Subscription.new subscription_hash("random-topic", sub_full_path)
     mock = Minitest::Mock.new
-    mock.expect :get_subscription, get_res, [subscription: sub_full_path]
+    mock.expect :get_subscription, get_res,  subscription: sub_full_path 
     pubsub.service.mocked_subscriber = mock
 
     sub = pubsub.subscription sub_name, project: "custom"
@@ -156,7 +156,7 @@ describe Google::Cloud::PubSub::Project, :subscriptions, :mock_pubsub do
 
   it "lists subscriptions" do
     mock = Minitest::Mock.new
-    mock.expect :list_subscriptions, subscriptions_with_token, [project: "projects/#{project}", page_size: nil, page_token: nil]
+    mock.expect :list_subscriptions, subscriptions_with_token,  project: "projects/#{project}", page_size: nil, page_token: nil 
     pubsub.service.mocked_subscriber = mock
 
     subs = pubsub.subscriptions
@@ -171,7 +171,7 @@ describe Google::Cloud::PubSub::Project, :subscriptions, :mock_pubsub do
 
   it "lists subscriptions with find_subscriptions alias" do
     mock = Minitest::Mock.new
-    mock.expect :list_subscriptions, subscriptions_with_token, [project: "projects/#{project}", page_size: nil, page_token: nil]
+    mock.expect :list_subscriptions, subscriptions_with_token,  project: "projects/#{project}", page_size: nil, page_token: nil 
     pubsub.service.mocked_subscriber = mock
 
     subs = pubsub.find_subscriptions
@@ -186,7 +186,7 @@ describe Google::Cloud::PubSub::Project, :subscriptions, :mock_pubsub do
 
   it "lists subscriptions with list_subscriptions alias" do
     mock = Minitest::Mock.new
-    mock.expect :list_subscriptions, subscriptions_with_token, [project: "projects/#{project}", page_size: nil, page_token: nil]
+    mock.expect :list_subscriptions, subscriptions_with_token,  project: "projects/#{project}", page_size: nil, page_token: nil 
     pubsub.service.mocked_subscriber = mock
 
     subs = pubsub.list_subscriptions
@@ -201,8 +201,8 @@ describe Google::Cloud::PubSub::Project, :subscriptions, :mock_pubsub do
 
   it "paginates subscriptions" do
     mock = Minitest::Mock.new
-    mock.expect :list_subscriptions, subscriptions_with_token, [project: "projects/#{project}", page_size: nil, page_token: nil]
-    mock.expect :list_subscriptions, subscriptions_without_token, [project: "projects/#{project}", page_size: nil, page_token: "next_page_token"]
+    mock.expect :list_subscriptions, subscriptions_with_token,  project: "projects/#{project}", page_size: nil, page_token: nil 
+    mock.expect :list_subscriptions, subscriptions_without_token,  project: "projects/#{project}", page_size: nil, page_token: "next_page_token" 
     pubsub.service.mocked_subscriber = mock
 
     first_subs = pubsub.subscriptions
@@ -221,7 +221,7 @@ describe Google::Cloud::PubSub::Project, :subscriptions, :mock_pubsub do
 
   it "paginates subscriptions with max set" do
     mock = Minitest::Mock.new
-    mock.expect :list_subscriptions, subscriptions_with_token, [project: "projects/#{project}", page_size: 3, page_token: nil]
+    mock.expect :list_subscriptions, subscriptions_with_token,  project: "projects/#{project}", page_size: 3, page_token: nil 
     pubsub.service.mocked_subscriber = mock
 
     subs = pubsub.subscriptions max: 3
@@ -236,8 +236,8 @@ describe Google::Cloud::PubSub::Project, :subscriptions, :mock_pubsub do
 
   it "paginates subscriptions with next? and next" do
     mock = Minitest::Mock.new
-    mock.expect :list_subscriptions, subscriptions_with_token, [project: "projects/#{project}", page_size: nil, page_token: nil]
-    mock.expect :list_subscriptions, subscriptions_without_token, [project: "projects/#{project}", page_size: nil, page_token: "next_page_token"]
+    mock.expect :list_subscriptions, subscriptions_with_token,  project: "projects/#{project}", page_size: nil, page_token: nil 
+    mock.expect :list_subscriptions, subscriptions_without_token,  project: "projects/#{project}", page_size: nil, page_token: "next_page_token" 
     pubsub.service.mocked_subscriber = mock
 
     first_subs = pubsub.subscriptions
@@ -264,8 +264,8 @@ describe Google::Cloud::PubSub::Project, :subscriptions, :mock_pubsub do
 
   it "paginates subscriptions with next? and next and max set" do
     mock = Minitest::Mock.new
-    mock.expect :list_subscriptions, subscriptions_with_token, [project: "projects/#{project}", page_size: 3, page_token: nil]
-    mock.expect :list_subscriptions, subscriptions_without_token, [project: "projects/#{project}", page_size: 3, page_token: "next_page_token"]
+    mock.expect :list_subscriptions, subscriptions_with_token,  project: "projects/#{project}", page_size: 3, page_token: nil 
+    mock.expect :list_subscriptions, subscriptions_without_token,  project: "projects/#{project}", page_size: 3, page_token: "next_page_token" 
     pubsub.service.mocked_subscriber = mock
 
     first_subs = pubsub.subscriptions max: 3
@@ -292,8 +292,8 @@ describe Google::Cloud::PubSub::Project, :subscriptions, :mock_pubsub do
 
   it "paginates subscriptions with all" do
     mock = Minitest::Mock.new
-    mock.expect :list_subscriptions, subscriptions_with_token, [project: "projects/#{project}", page_size: nil, page_token: nil]
-    mock.expect :list_subscriptions, subscriptions_without_token, [project: "projects/#{project}", page_size: nil, page_token: "next_page_token"]
+    mock.expect :list_subscriptions, subscriptions_with_token,  project: "projects/#{project}", page_size: nil, page_token: nil 
+    mock.expect :list_subscriptions, subscriptions_without_token,  project: "projects/#{project}", page_size: nil, page_token: "next_page_token" 
     pubsub.service.mocked_subscriber = mock
 
     subs = pubsub.subscriptions.all.to_a
@@ -310,8 +310,8 @@ describe Google::Cloud::PubSub::Project, :subscriptions, :mock_pubsub do
 
   it "paginates subscriptions with all and max set" do
     mock = Minitest::Mock.new
-    mock.expect :list_subscriptions, subscriptions_with_token, [project: "projects/#{project}", page_size: 3, page_token: nil]
-    mock.expect :list_subscriptions, subscriptions_without_token, [project: "projects/#{project}", page_size: 3, page_token: "next_page_token"]
+    mock.expect :list_subscriptions, subscriptions_with_token,  project: "projects/#{project}", page_size: 3, page_token: nil 
+    mock.expect :list_subscriptions, subscriptions_without_token,  project: "projects/#{project}", page_size: 3, page_token: "next_page_token" 
     pubsub.service.mocked_subscriber = mock
 
     subs = pubsub.subscriptions(max: 3).all.to_a
@@ -328,8 +328,8 @@ describe Google::Cloud::PubSub::Project, :subscriptions, :mock_pubsub do
 
   it "iterates subscriptions with all using Enumerator" do
     mock = Minitest::Mock.new
-    mock.expect :list_subscriptions, subscriptions_with_token, [project: "projects/#{project}", page_size: nil, page_token: nil]
-    mock.expect :list_subscriptions, subscriptions_with_token_2, [project: "projects/#{project}", page_size: nil, page_token: "next_page_token"]
+    mock.expect :list_subscriptions, subscriptions_with_token,  project: "projects/#{project}", page_size: nil, page_token: nil 
+    mock.expect :list_subscriptions, subscriptions_with_token_2,  project: "projects/#{project}", page_size: nil, page_token: "next_page_token" 
     pubsub.service.mocked_subscriber = mock
 
     subs = pubsub.subscriptions.all.take(5)
@@ -346,8 +346,8 @@ describe Google::Cloud::PubSub::Project, :subscriptions, :mock_pubsub do
 
   it "iterates subscriptions with all and request_limit set" do
     mock = Minitest::Mock.new
-    mock.expect :list_subscriptions, subscriptions_with_token, [project: "projects/#{project}", page_size: nil, page_token: nil]
-    mock.expect :list_subscriptions, subscriptions_with_token_2, [project: "projects/#{project}", page_size: nil, page_token: "next_page_token"]
+    mock.expect :list_subscriptions, subscriptions_with_token,  project: "projects/#{project}", page_size: nil, page_token: nil 
+    mock.expect :list_subscriptions, subscriptions_with_token_2,  project: "projects/#{project}", page_size: nil, page_token: "next_page_token" 
     pubsub.service.mocked_subscriber = mock
 
     subs = pubsub.subscriptions.all(request_limit: 1).to_a

@@ -2,5 +2,7 @@
     "name": "stackdrivercore",
     "language": "ruby",
     "distribution_name": "stackdriver-core",
-    "client_documentation": "https://googleapis.dev/ruby/stackdriver-core/latest"
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/stackdriver-core/latest",
+    "release_level": "stable",
+    "library_type": "CORE"
 }

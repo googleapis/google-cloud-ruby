@@ -21,7 +21,8 @@ module Google
   module Cloud
     module Channel
       module V1
-        # Request message for {::Google::Cloud::Channel::V1::CloudChannelService::Client#check_cloud_identity_accounts_exist CloudChannelService.CheckCloudIdentityAccountsExist}.
+        # Request message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#check_cloud_identity_accounts_exist CloudChannelService.CheckCloudIdentityAccountsExist}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The reseller account's resource name.
@@ -67,41 +68,54 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_customers CloudChannelService.ListCustomers}
+        # Request message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_customers CloudChannelService.ListCustomers}
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the reseller account to list customers from.
         #     Parent uses the format: accounts/\\{account_id}.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. The maximum number of customers to return. The service may return fewer
-        #     than this value. If unspecified, returns at most 10 customers. The
+        #     Optional. The maximum number of customers to return. The service may return
+        #     fewer than this value. If unspecified, returns at most 10 customers. The
         #     maximum value is 50.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. A token identifying a page of results other than the first page.
         #     Obtained through
-        #     {::Google::Cloud::Channel::V1::ListCustomersResponse#next_page_token ListCustomersResponse.next_page_token} of the previous
-        #     {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_customers CloudChannelService.ListCustomers} call.
+        #     {::Google::Cloud::Channel::V1::ListCustomersResponse#next_page_token ListCustomersResponse.next_page_token}
+        #     of the previous
+        #     {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_customers CloudChannelService.ListCustomers}
+        #     call.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Filters applied to the [CloudChannelService.ListCustomers]
+        #     results. See
+        #     https://cloud.google.com/channel/docs/concepts/google-cloud/filter-customers
+        #     for more information.
         class ListCustomersRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_customers CloudChannelService.ListCustomers}.
+        # Response message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_customers CloudChannelService.ListCustomers}.
         # @!attribute [rw] customers
         #   @return [::Array<::Google::Cloud::Channel::V1::Customer>]
         #     The customers belonging to a reseller or distributor.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token to retrieve the next page of results.
-        #     Pass to {::Google::Cloud::Channel::V1::ListCustomersRequest#page_token ListCustomersRequest.page_token} to obtain that page.
+        #     Pass to
+        #     {::Google::Cloud::Channel::V1::ListCustomersRequest#page_token ListCustomersRequest.page_token}
+        #     to obtain that page.
         class ListCustomersResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Channel::V1::CloudChannelService::Client#get_customer CloudChannelService.GetCustomer}.
+        # Request message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#get_customer CloudChannelService.GetCustomer}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the customer to retrieve.
@@ -111,11 +125,12 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Channel::V1::CloudChannelService::Client#create_customer CloudChannelService.CreateCustomer}
+        # Request message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#create_customer CloudChannelService.CreateCustomer}
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The resource name of reseller account in which to create the customer.
-        #     Parent uses the format: accounts/\\{account_id}
+        #     Required. The resource name of reseller account in which to create the
+        #     customer. Parent uses the format: accounts/\\{account_id}
         # @!attribute [rw] customer
         #   @return [::Google::Cloud::Channel::V1::Customer]
         #     Required. The customer to create.
@@ -124,7 +139,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Channel::V1::CloudChannelService::Client#update_customer CloudChannelService.UpdateCustomer}.
+        # Request message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#update_customer CloudChannelService.UpdateCustomer}.
         # @!attribute [rw] customer
         #   @return [::Google::Cloud::Channel::V1::Customer]
         #     Required. New contents of the customer.
@@ -137,7 +153,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Channel::V1::CloudChannelService::Client#delete_customer CloudChannelService.DeleteCustomer}.
+        # Request message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#delete_customer CloudChannelService.DeleteCustomer}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the customer to delete.
@@ -146,7 +163,48 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Channel::V1::CloudChannelService::Client#provision_cloud_identity CloudChannelService.ProvisionCloudIdentity}
+        # Request message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#import_customer CloudChannelService.ImportCustomer}
+        # @!attribute [rw] domain
+        #   @return [::String]
+        #     Required. Customer domain.
+        # @!attribute [rw] cloud_identity_id
+        #   @return [::String]
+        #     Required. Customer's Cloud Identity ID
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the reseller's account.
+        #     Parent takes the format: accounts/\\{account_id} or
+        #     accounts/\\{account_id}/channelPartnerLinks/\\{channel_partner_id}
+        # @!attribute [rw] auth_token
+        #   @return [::String]
+        #     Optional. The super admin of the resold customer generates this token to
+        #     authorize a reseller to access their Cloud Identity and purchase
+        #     entitlements on their behalf. You can omit this token after authorization.
+        #     See https://support.google.com/a/answer/7643790 for more details.
+        # @!attribute [rw] overwrite_if_exists
+        #   @return [::Boolean]
+        #     Required. Choose to overwrite an existing customer if found.
+        #     This must be set to true if there is an existing customer with a
+        #     conflicting region code or domain.
+        # @!attribute [rw] channel_partner_id
+        #   @return [::String]
+        #     Optional. Cloud Identity ID of a channel partner who will be the direct
+        #     reseller for the customer's order. This field is required for 2-tier
+        #     transfer scenarios and can be provided via the request Parent binding as
+        #     well.
+        # @!attribute [rw] customer
+        #   @return [::String]
+        #     Optional. Specifies the customer that will receive imported Cloud Identity
+        #     information.
+        #     Format: accounts/\\{account_id}/customers/\\{customer_id}
+        class ImportCustomerRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#provision_cloud_identity CloudChannelService.ProvisionCloudIdentity}
         # @!attribute [rw] customer
         #   @return [::String]
         #     Required. Resource name of the customer.
@@ -165,7 +223,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_entitlements CloudChannelService.ListEntitlements}
+        # Request message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_entitlements CloudChannelService.ListEntitlements}
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the reseller's customer account to list
@@ -173,34 +232,40 @@ module Google
         #     Parent uses the format: accounts/\\{account_id}/customers/\\{customer_id}
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. Requested page size. Server might return fewer results than requested.
-        #     If unspecified, return at most 50 entitlements.
-        #     The maximum value is 100; the server will coerce values above 100.
+        #     Optional. Requested page size. Server might return fewer results than
+        #     requested. If unspecified, return at most 50 entitlements. The maximum
+        #     value is 100; the server will coerce values above 100.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. A token for a page of results other than the first page.
         #     Obtained using
-        #     {::Google::Cloud::Channel::V1::ListEntitlementsResponse#next_page_token ListEntitlementsResponse.next_page_token} of the previous
-        #     {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_entitlements CloudChannelService.ListEntitlements} call.
+        #     {::Google::Cloud::Channel::V1::ListEntitlementsResponse#next_page_token ListEntitlementsResponse.next_page_token}
+        #     of the previous
+        #     {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_entitlements CloudChannelService.ListEntitlements}
+        #     call.
         class ListEntitlementsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_entitlements CloudChannelService.ListEntitlements}.
+        # Response message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_entitlements CloudChannelService.ListEntitlements}.
         # @!attribute [rw] entitlements
         #   @return [::Array<::Google::Cloud::Channel::V1::Entitlement>]
         #     The reseller customer's entitlements.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token to list the next page of results.
-        #     Pass to {::Google::Cloud::Channel::V1::ListEntitlementsRequest#page_token ListEntitlementsRequest.page_token} to obtain that page.
+        #     Pass to
+        #     {::Google::Cloud::Channel::V1::ListEntitlementsRequest#page_token ListEntitlementsRequest.page_token}
+        #     to obtain that page.
         class ListEntitlementsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_transferable_skus CloudChannelService.ListTransferableSkus}
+        # Request message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_transferable_skus CloudChannelService.ListTransferableSkus}
         # @!attribute [rw] cloud_identity_id
         #   @return [::String]
         #     Customer's Cloud Identity ID
@@ -224,12 +289,13 @@ module Google
         #   @return [::String]
         #     A token for a page of results other than the first page.
         #     Obtained using
-        #     {::Google::Cloud::Channel::V1::ListTransferableSkusResponse#next_page_token ListTransferableSkusResponse.next_page_token} of the previous
-        #     {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_transferable_skus CloudChannelService.ListTransferableSkus} call.
-        #     Optional.
+        #     {::Google::Cloud::Channel::V1::ListTransferableSkusResponse#next_page_token ListTransferableSkusResponse.next_page_token}
+        #     of the previous
+        #     {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_transferable_skus CloudChannelService.ListTransferableSkus}
+        #     call. Optional.
         # @!attribute [rw] auth_token
         #   @return [::String]
-        #     The super admin of the resold customer generates this token to
+        #     Optional. The super admin of the resold customer generates this token to
         #     authorize a reseller to access their Cloud Identity and purchase
         #     entitlements on their behalf. You can omit this token after authorization.
         #     See https://support.google.com/a/answer/7643790 for more details.
@@ -244,21 +310,24 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_transferable_skus CloudChannelService.ListTransferableSkus}.
+        # Response message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_transferable_skus CloudChannelService.ListTransferableSkus}.
         # @!attribute [rw] transferable_skus
         #   @return [::Array<::Google::Cloud::Channel::V1::TransferableSku>]
         #     Information about existing SKUs for a customer that needs a transfer.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token to retrieve the next page of results.
-        #     Pass to {::Google::Cloud::Channel::V1::ListTransferableSkusRequest#page_token ListTransferableSkusRequest.page_token} to obtain
-        #     that page.
+        #     Pass to
+        #     {::Google::Cloud::Channel::V1::ListTransferableSkusRequest#page_token ListTransferableSkusRequest.page_token}
+        #     to obtain that page.
         class ListTransferableSkusResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_transferable_offers CloudChannelService.ListTransferableOffers}
+        # Request message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_transferable_offers CloudChannelService.ListTransferableOffers}
         # @!attribute [rw] cloud_identity_id
         #   @return [::String]
         #     Customer's Cloud Identity ID
@@ -278,14 +347,16 @@ module Google
         #   @return [::String]
         #     A token for a page of results other than the first page.
         #     Obtained using
-        #     {::Google::Cloud::Channel::V1::ListTransferableOffersResponse#next_page_token ListTransferableOffersResponse.next_page_token} of the previous
-        #     {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_transferable_offers CloudChannelService.ListTransferableOffers} call.
+        #     {::Google::Cloud::Channel::V1::ListTransferableOffersResponse#next_page_token ListTransferableOffersResponse.next_page_token}
+        #     of the previous
+        #     {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_transferable_offers CloudChannelService.ListTransferableOffers}
+        #     call.
         # @!attribute [rw] sku
         #   @return [::String]
         #     Required. The SKU to look up Offers for.
         # @!attribute [rw] language_code
         #   @return [::String]
-        #     The BCP-47 language code. For example, "en-US". The
+        #     Optional. The BCP-47 language code. For example, "en-US". The
         #     response will localize in the corresponding language code, if specified.
         #     The default value is "en-US".
         class ListTransferableOffersRequest
@@ -293,7 +364,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_transferable_offers CloudChannelService.ListTransferableOffers}.
+        # Response message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_transferable_offers CloudChannelService.ListTransferableOffers}.
         # @!attribute [rw] transferable_offers
         #   @return [::Array<::Google::Cloud::Channel::V1::TransferableOffer>]
         #     Information about Offers for a customer that can be used for
@@ -301,8 +373,9 @@ module Google
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token to retrieve the next page of results.
-        #     Pass to {::Google::Cloud::Channel::V1::ListTransferableOffersRequest#page_token ListTransferableOffersRequest.page_token} to obtain
-        #     that page.
+        #     Pass to
+        #     {::Google::Cloud::Channel::V1::ListTransferableOffersRequest#page_token ListTransferableOffersRequest.page_token}
+        #     to obtain that page.
         class ListTransferableOffersResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -318,7 +391,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Channel::V1::CloudChannelService::Client#get_entitlement CloudChannelService.GetEntitlement}.
+        # Request message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#get_entitlement CloudChannelService.GetEntitlement}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the entitlement to retrieve.
@@ -329,23 +403,25 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_channel_partner_links CloudChannelService.ListChannelPartnerLinks}
+        # Request message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_channel_partner_links CloudChannelService.ListChannelPartnerLinks}
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The resource name of the reseller account for listing channel partner
-        #     links.
-        #     Parent uses the format: accounts/\\{account_id}
+        #     Required. The resource name of the reseller account for listing channel
+        #     partner links. Parent uses the format: accounts/\\{account_id}
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. Requested page size. Server might return fewer results than requested.
-        #     If unspecified, server will pick a default size (25).
-        #     The maximum value is 200; the server will coerce values above 200.
+        #     Optional. Requested page size. Server might return fewer results than
+        #     requested. If unspecified, server will pick a default size (25). The
+        #     maximum value is 200; the server will coerce values above 200.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. A token for a page of results other than the first page.
         #     Obtained using
-        #     {::Google::Cloud::Channel::V1::ListChannelPartnerLinksResponse#next_page_token ListChannelPartnerLinksResponse.next_page_token} of the previous
-        #     {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_channel_partner_links CloudChannelService.ListChannelPartnerLinks} call.
+        #     {::Google::Cloud::Channel::V1::ListChannelPartnerLinksResponse#next_page_token ListChannelPartnerLinksResponse.next_page_token}
+        #     of the previous
+        #     {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_channel_partner_links CloudChannelService.ListChannelPartnerLinks}
+        #     call.
         # @!attribute [rw] view
         #   @return [::Google::Cloud::Channel::V1::ChannelPartnerLinkView]
         #     Optional. The level of granularity the ChannelPartnerLink will display.
@@ -354,20 +430,24 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_channel_partner_links CloudChannelService.ListChannelPartnerLinks}.
+        # Response message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_channel_partner_links CloudChannelService.ListChannelPartnerLinks}.
         # @!attribute [rw] channel_partner_links
         #   @return [::Array<::Google::Cloud::Channel::V1::ChannelPartnerLink>]
         #     The Channel partner links for a reseller.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token to retrieve the next page of results.
-        #     Pass to {::Google::Cloud::Channel::V1::ListChannelPartnerLinksRequest#page_token ListChannelPartnerLinksRequest.page_token} to obtain that page.
+        #     Pass to
+        #     {::Google::Cloud::Channel::V1::ListChannelPartnerLinksRequest#page_token ListChannelPartnerLinksRequest.page_token}
+        #     to obtain that page.
         class ListChannelPartnerLinksResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Channel::V1::CloudChannelService::Client#get_channel_partner_link CloudChannelService.GetChannelPartnerLink}.
+        # Request message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#get_channel_partner_link CloudChannelService.GetChannelPartnerLink}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the channel partner link to retrieve.
@@ -381,7 +461,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Channel::V1::CloudChannelService::Client#create_channel_partner_link CloudChannelService.CreateChannelPartnerLink}
+        # Request message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#create_channel_partner_link CloudChannelService.CreateChannelPartnerLink}
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Create a channel partner link for the provided reseller account's
@@ -397,7 +478,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Channel::V1::CloudChannelService::Client#update_channel_partner_link CloudChannelService.UpdateChannelPartnerLink}
+        # Request message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#update_channel_partner_link CloudChannelService.UpdateChannelPartnerLink}
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the channel partner link to cancel.
@@ -405,8 +487,8 @@ module Google
         #     where \\{id} is the Cloud Identity ID of the partner.
         # @!attribute [rw] channel_partner_link
         #   @return [::Google::Cloud::Channel::V1::ChannelPartnerLink]
-        #     Required. The channel partner link to update. Only channel_partner_link.link_state
-        #     is allowed for updates.
+        #     Required. The channel partner link to update. Only
+        #     channel_partner_link.link_state is allowed for updates.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Required. The update mask that applies to the resource.
@@ -417,19 +499,223 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Channel::V1::CloudChannelService::Client#create_entitlement CloudChannelService.CreateEntitlement}
+        # Request message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#get_customer_repricing_config CloudChannelService.GetCustomerRepricingConfig}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the CustomerRepricingConfig.
+        #     Format:
+        #     accounts/\\{account_id}/customers/\\{customer_id}/customerRepricingConfigs/\\{id}.
+        class GetCustomerRepricingConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_customer_repricing_configs CloudChannelService.ListCustomerRepricingConfigs}.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The resource name of the reseller's customer account in which to create the
-        #     entitlement.
-        #     Parent uses the format: accounts/\\{account_id}/customers/\\{customer_id}
+        #     Required. The resource name of the customer.
+        #     Parent uses the format: accounts/\\{account_id}/customers/\\{customer_id}.
+        #     Supports accounts/\\{account_id}/customers/- to retrieve configs for all
+        #     customers.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of repricing configs to return. The service
+        #     may return fewer than this value. If unspecified, returns a maximum of 50
+        #     rules. The maximum value is 100; values above 100 will be coerced to 100.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A token identifying a page of results beyond the first page.
+        #     Obtained through
+        #     {::Google::Cloud::Channel::V1::ListCustomerRepricingConfigsResponse#next_page_token ListCustomerRepricingConfigsResponse.next_page_token}
+        #     of the previous
+        #     {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_customer_repricing_configs CloudChannelService.ListCustomerRepricingConfigs}
+        #     call.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. A filter for [CloudChannelService.ListCustomerRepricingConfigs]
+        #     results (customer only). You can use this filter when you support
+        #     a BatchGet-like query.
+        #     To use the filter, you must set `parent=accounts/{account_id}/customers/-`.
+        #
+        #     Example: customer = accounts/account_id/customers/c1 OR
+        #     customer = accounts/account_id/customers/c2.
+        class ListCustomerRepricingConfigsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_customer_repricing_configs CloudChannelService.ListCustomerRepricingConfigs}.
+        # @!attribute [rw] customer_repricing_configs
+        #   @return [::Array<::Google::Cloud::Channel::V1::CustomerRepricingConfig>]
+        #     The repricing configs for this channel partner.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token to retrieve the next page of results.
+        #     Pass to
+        #     {::Google::Cloud::Channel::V1::ListCustomerRepricingConfigsRequest#page_token ListCustomerRepricingConfigsRequest.page_token}
+        #     to obtain that page.
+        class ListCustomerRepricingConfigsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#create_customer_repricing_config CloudChannelService.CreateCustomerRepricingConfig}.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the customer that will receive this
+        #     repricing config. Parent uses the format:
+        #     accounts/\\{account_id}/customers/\\{customer_id}
+        # @!attribute [rw] customer_repricing_config
+        #   @return [::Google::Cloud::Channel::V1::CustomerRepricingConfig]
+        #     Required. The CustomerRepricingConfig object to update.
+        class CreateCustomerRepricingConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#update_customer_repricing_config CloudChannelService.UpdateCustomerRepricingConfig}.
+        # @!attribute [rw] customer_repricing_config
+        #   @return [::Google::Cloud::Channel::V1::CustomerRepricingConfig]
+        #     Required. The CustomerRepricingConfig object to update.
+        class UpdateCustomerRepricingConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#delete_customer_repricing_config CloudChannelService.DeleteCustomerRepricingConfig}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the customer repricing config rule to
+        #     delete. Format:
+        #     accounts/\\{account_id}/customers/\\{customer_id}/customerRepricingConfigs/\\{id}.
+        class DeleteCustomerRepricingConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#get_channel_partner_repricing_config CloudChannelService.GetChannelPartnerRepricingConfig}
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the ChannelPartnerRepricingConfig
+        #     Format:
+        #     accounts/\\{account_id}/channelPartnerLinks/\\{channel_partner_id}/channelPartnerRepricingConfigs/\\{id}.
+        class GetChannelPartnerRepricingConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_channel_partner_repricing_configs CloudChannelService.ListChannelPartnerRepricingConfigs}.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the account's
+        #     {::Google::Cloud::Channel::V1::ChannelPartnerLink ChannelPartnerLink}. Parent
+        #     uses the format:
+        #     accounts/\\{account_id}/channelPartnerLinks/\\{channel_partner_id}.
+        #     Supports accounts/\\{account_id}/channelPartnerLinks/- to retrieve configs
+        #     for all channel partners.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of repricing configs to return. The service
+        #     may return fewer than this value. If unspecified, returns a maximum of 50
+        #     rules. The maximum value is 100; values above 100 will be coerced to 100.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A token identifying a page of results beyond the first page.
+        #     Obtained through
+        #     {::Google::Cloud::Channel::V1::ListChannelPartnerRepricingConfigsResponse#next_page_token ListChannelPartnerRepricingConfigsResponse.next_page_token}
+        #     of the previous
+        #     {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_channel_partner_repricing_configs CloudChannelService.ListChannelPartnerRepricingConfigs}
+        #     call.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. A filter for
+        #     [CloudChannelService.ListChannelPartnerRepricingConfigs] results
+        #     (channel_partner_link only). You can use this filter when you support a
+        #     BatchGet-like query. To use the filter, you must set
+        #     `parent=accounts/{account_id}/channelPartnerLinks/-`.
+        #
+        #     Example: `channel_partner_link =
+        #     accounts/account_id/channelPartnerLinks/c1` OR `channel_partner_link =
+        #     accounts/account_id/channelPartnerLinks/c2`.
+        class ListChannelPartnerRepricingConfigsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_channel_partner_repricing_configs CloudChannelService.ListChannelPartnerRepricingConfigs}.
+        # @!attribute [rw] channel_partner_repricing_configs
+        #   @return [::Array<::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig>]
+        #     The repricing configs for this channel partner.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token to retrieve the next page of results.
+        #     Pass to
+        #     {::Google::Cloud::Channel::V1::ListChannelPartnerRepricingConfigsRequest#page_token ListChannelPartnerRepricingConfigsRequest.page_token}
+        #     to obtain that page.
+        class ListChannelPartnerRepricingConfigsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#create_channel_partner_repricing_config CloudChannelService.CreateChannelPartnerRepricingConfig}.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the ChannelPartner that will receive the
+        #     repricing config. Parent uses the format:
+        #     accounts/\\{account_id}/channelPartnerLinks/\\{channel_partner_id}
+        # @!attribute [rw] channel_partner_repricing_config
+        #   @return [::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig]
+        #     Required. The ChannelPartnerRepricingConfig object to update.
+        class CreateChannelPartnerRepricingConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#update_channel_partner_repricing_config CloudChannelService.UpdateChannelPartnerRepricingConfig}.
+        # @!attribute [rw] channel_partner_repricing_config
+        #   @return [::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig]
+        #     Required. The ChannelPartnerRepricingConfig object to update.
+        class UpdateChannelPartnerRepricingConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for DeleteChannelPartnerRepricingConfig.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the channel partner repricing config rule to
+        #     delete.
+        class DeleteChannelPartnerRepricingConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#create_entitlement CloudChannelService.CreateEntitlement}
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the reseller's customer account in which to
+        #     create the entitlement. Parent uses the format:
+        #     accounts/\\{account_id}/customers/\\{customer_id}
         # @!attribute [rw] entitlement
         #   @return [::Google::Cloud::Channel::V1::Entitlement]
         #     Required. The entitlement to create.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. You can specify an optional unique request ID, and if you need to retry
-        #     your request, the server will know to ignore the request if it's complete.
+        #     Optional. You can specify an optional unique request ID, and if you need to
+        #     retry your request, the server will know to ignore the request if it's
+        #     complete.
         #
         #     For example, you make an initial request and the request times out. If you
         #     make the request again with the same request ID, the server can check if
@@ -444,12 +730,13 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Channel::V1::CloudChannelService::Client#transfer_entitlements CloudChannelService.TransferEntitlements}.
+        # Request message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#transfer_entitlements CloudChannelService.TransferEntitlements}.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The resource name of the reseller's customer account that will receive
-        #     transferred entitlements.
-        #     Parent uses the format: accounts/\\{account_id}/customers/\\{customer_id}
+        #     Required. The resource name of the reseller's customer account that will
+        #     receive transferred entitlements. Parent uses the format:
+        #     accounts/\\{account_id}/customers/\\{customer_id}
         # @!attribute [rw] entitlements
         #   @return [::Array<::Google::Cloud::Channel::V1::Entitlement>]
         #     Required. The new entitlements to create or transfer.
@@ -461,8 +748,9 @@ module Google
         #     See https://support.google.com/a/answer/7643790 for more details.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. You can specify an optional unique request ID, and if you need to retry
-        #     your request, the server will know to ignore the request if it's complete.
+        #     Optional. You can specify an optional unique request ID, and if you need to
+        #     retry your request, the server will know to ignore the request if it's
+        #     complete.
         #
         #     For example, you make an initial request and the request times out. If you
         #     make the request again with the same request ID, the server can check if
@@ -477,7 +765,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::Channel::V1::CloudChannelService::Client#transfer_entitlements CloudChannelService.TransferEntitlements}.
+        # Response message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#transfer_entitlements CloudChannelService.TransferEntitlements}.
         # This is put in the response field of google.longrunning.Operation.
         # @!attribute [rw] entitlements
         #   @return [::Array<::Google::Cloud::Channel::V1::Entitlement>]
@@ -487,19 +776,21 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Channel::V1::CloudChannelService::Client#transfer_entitlements_to_google CloudChannelService.TransferEntitlementsToGoogle}.
+        # Request message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#transfer_entitlements_to_google CloudChannelService.TransferEntitlementsToGoogle}.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The resource name of the reseller's customer account where the entitlements
-        #     transfer from.
-        #     Parent uses the format: accounts/\\{account_id}/customers/\\{customer_id}
+        #     Required. The resource name of the reseller's customer account where the
+        #     entitlements transfer from. Parent uses the format:
+        #     accounts/\\{account_id}/customers/\\{customer_id}
         # @!attribute [rw] entitlements
         #   @return [::Array<::Google::Cloud::Channel::V1::Entitlement>]
         #     Required. The entitlements to transfer to Google.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. You can specify an optional unique request ID, and if you need to retry
-        #     your request, the server will know to ignore the request if it's complete.
+        #     Optional. You can specify an optional unique request ID, and if you need to
+        #     retry your request, the server will know to ignore the request if it's
+        #     complete.
         #
         #     For example, you make an initial request and the request times out. If you
         #     make the request again with the same request ID, the server can check if
@@ -522,11 +813,17 @@ module Google
         #     accounts/\\{account_id}/customers/\\{customer_id}/entitlements/\\{entitlement_id}
         # @!attribute [rw] parameters
         #   @return [::Array<::Google::Cloud::Channel::V1::Parameter>]
-        #     Required. Entitlement parameters to update. You can only change editable parameters.
+        #     Required. Entitlement parameters to update. You can only change editable
+        #     parameters.
+        #
+        #     To view the available Parameters for a request, refer to the
+        #     {::Google::Cloud::Channel::V1::Offer#parameter_definitions Offer.parameter_definitions}
+        #     from the desired offer.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. You can specify an optional unique request ID, and if you need to retry
-        #     your request, the server will know to ignore the request if it's complete.
+        #     Optional. You can specify an optional unique request ID, and if you need to
+        #     retry your request, the server will know to ignore the request if it's
+        #     complete.
         #
         #     For example, you make an initial request and the request times out. If you
         #     make the request again with the same request ID, the server can check if
@@ -544,7 +841,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Channel::V1::CloudChannelService::Client#change_renewal_settings CloudChannelService.ChangeRenewalSettings}.
+        # Request message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#change_renewal_settings CloudChannelService.ChangeRenewalSettings}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the entitlement to update.
@@ -555,8 +853,9 @@ module Google
         #     Required. New renewal settings.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. You can specify an optional unique request ID, and if you need to retry
-        #     your request, the server will know to ignore the request if it's complete.
+        #     Optional. You can specify an optional unique request ID, and if you need to
+        #     retry your request, the server will know to ignore the request if it's
+        #     complete.
         #
         #     For example, you make an initial request and the request times out. If you
         #     make the request again with the same request ID, the server can check if
@@ -571,7 +870,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Channel::V1::CloudChannelService::Client#change_offer CloudChannelService.ChangeOffer}.
+        # Request message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#change_offer CloudChannelService.ChangeOffer}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the entitlement to update.
@@ -583,14 +883,18 @@ module Google
         #     Format: accounts/\\{account_id}/offers/\\{offer_id}.
         # @!attribute [rw] parameters
         #   @return [::Array<::Google::Cloud::Channel::V1::Parameter>]
-        #     Optional. Parameters needed to purchase the Offer.
+        #     Optional. Parameters needed to purchase the Offer. To view the available
+        #     Parameters refer to the
+        #     {::Google::Cloud::Channel::V1::Offer#parameter_definitions Offer.parameter_definitions}
+        #     from the desired offer.
         # @!attribute [rw] purchase_order_id
         #   @return [::String]
         #     Optional. Purchase order id provided by the reseller.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. You can specify an optional unique request ID, and if you need to retry
-        #     your request, the server will know to ignore the request if it's complete.
+        #     Optional. You can specify an optional unique request ID, and if you need to
+        #     retry your request, the server will know to ignore the request if it's
+        #     complete.
         #
         #     For example, you make an initial request and the request times out. If you
         #     make the request again with the same request ID, the server can check if
@@ -605,7 +909,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Channel::V1::CloudChannelService::Client#start_paid_service CloudChannelService.StartPaidService}.
+        # Request message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#start_paid_service CloudChannelService.StartPaidService}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the entitlement to start a paid service for.
@@ -613,8 +918,9 @@ module Google
         #     accounts/\\{account_id}/customers/\\{customer_id}/entitlements/\\{entitlement_id}
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. You can specify an optional unique request ID, and if you need to retry
-        #     your request, the server will know to ignore the request if it's complete.
+        #     Optional. You can specify an optional unique request ID, and if you need to
+        #     retry your request, the server will know to ignore the request if it's
+        #     complete.
         #
         #     For example, you make an initial request and the request times out. If you
         #     make the request again with the same request ID, the server can check if
@@ -629,7 +935,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Channel::V1::CloudChannelService::Client#cancel_entitlement CloudChannelService.CancelEntitlement}.
+        # Request message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#cancel_entitlement CloudChannelService.CancelEntitlement}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the entitlement to cancel.
@@ -637,8 +944,9 @@ module Google
         #     accounts/\\{account_id}/customers/\\{customer_id}/entitlements/\\{entitlement_id}
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. You can specify an optional unique request ID, and if you need to retry
-        #     your request, the server will know to ignore the request if it's complete.
+        #     Optional. You can specify an optional unique request ID, and if you need to
+        #     retry your request, the server will know to ignore the request if it's
+        #     complete.
         #
         #     For example, you make an initial request and the request times out. If you
         #     make the request again with the same request ID, the server can check if
@@ -653,7 +961,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Channel::V1::CloudChannelService::Client#suspend_entitlement CloudChannelService.SuspendEntitlement}.
+        # Request message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#suspend_entitlement CloudChannelService.SuspendEntitlement}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the entitlement to suspend.
@@ -661,8 +970,9 @@ module Google
         #     accounts/\\{account_id}/customers/\\{customer_id}/entitlements/\\{entitlement_id}
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. You can specify an optional unique request ID, and if you need to retry
-        #     your request, the server will know to ignore the request if it's complete.
+        #     Optional. You can specify an optional unique request ID, and if you need to
+        #     retry your request, the server will know to ignore the request if it's
+        #     complete.
         #
         #     For example, you make an initial request and the request times out. If you
         #     make the request again with the same request ID, the server can check if
@@ -677,7 +987,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::Channel::V1::CloudChannelService::Client#activate_entitlement CloudChannelService.ActivateEntitlement}.
+        # Request message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#activate_entitlement CloudChannelService.ActivateEntitlement}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the entitlement to activate.
@@ -685,8 +996,9 @@ module Google
         #     accounts/\\{account_id}/customers/\\{customer_id}/entitlements/\\{entitlement_id}
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Optional. You can specify an optional unique request ID, and if you need to retry
-        #     your request, the server will know to ignore the request if it's complete.
+        #     Optional. You can specify an optional unique request ID, and if you need to
+        #     retry your request, the server will know to ignore the request if it's
+        #     complete.
         #
         #     For example, you make an initial request and the request times out. If you
         #     make the request again with the same request ID, the server can check if
@@ -701,6 +1013,17 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for LookupOffer.
+        # @!attribute [rw] entitlement
+        #   @return [::String]
+        #     Required. The resource name of the entitlement to retrieve the Offer.
+        #     Entitlement uses the format:
+        #     accounts/\\{account_id}/customers/\\{customer_id}/entitlements/\\{entitlement_id}
+        class LookupOfferRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for ListProducts.
         # @!attribute [rw] account
         #   @return [::String]
@@ -708,9 +1031,9 @@ module Google
         #     Format: accounts/\\{account_id}.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. Requested page size. Server might return fewer results than requested.
-        #     If unspecified, returns at most 100 Products.
-        #     The maximum value is 1000; the server will coerce values above 1000.
+        #     Optional. Requested page size. Server might return fewer results than
+        #     requested. If unspecified, returns at most 100 Products. The maximum value
+        #     is 1000; the server will coerce values above 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. A token for a page of results other than the first page.
@@ -748,9 +1071,9 @@ module Google
         #     Format: accounts/\\{account_id}.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. Requested page size. Server might return fewer results than requested.
-        #     If unspecified, returns at most 100 SKUs.
-        #     The maximum value is 1000; the server will coerce values above 1000.
+        #     Optional. Requested page size. Server might return fewer results than
+        #     requested. If unspecified, returns at most 100 SKUs. The maximum value is
+        #     1000; the server will coerce values above 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. A token for a page of results other than the first page.
@@ -780,13 +1103,13 @@ module Google
         # Request message for ListOffers.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The resource name of the reseller account from which to list Offers.
-        #     Parent uses the format: accounts/\\{account_id}.
+        #     Required. The resource name of the reseller account from which to list
+        #     Offers. Parent uses the format: accounts/\\{account_id}.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. Requested page size. Server might return fewer results than requested.
-        #     If unspecified, returns at most 500 Offers.
-        #     The maximum value is 1000; the server will coerce values above 1000.
+        #     Optional. Requested page size. Server might return fewer results than
+        #     requested. If unspecified, returns at most 500 Offers. The maximum value is
+        #     1000; the server will coerce values above 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. A token for a page of results other than the first page.
@@ -802,6 +1125,12 @@ module Google
         #     Optional. The BCP-47 language code. For example, "en-US". The
         #     response will localize in the corresponding language code, if specified.
         #     The default value is "en-US".
+        # @!attribute [rw] show_future_offers
+        #   @return [::Boolean]
+        #     Optional. A boolean flag that determines if a response returns future
+        #     offers 30 days from now. If the show_future_offers is true, the response
+        #     will only contain offers that are scheduled to be available 30 days from
+        #     now.
         class ListOffersRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -832,9 +1161,9 @@ module Google
         #     Format: accounts/\\{account_id}/customers/\\{customer_id}.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. Requested page size. Server might return fewer results than requested.
-        #     If unspecified, returns at most 100 SKUs.
-        #     The maximum value is 1000; the server will coerce values above 1000.
+        #     Optional. Requested page size. Server might return fewer results than
+        #     requested. If unspecified, returns at most 100 SKUs. The maximum value is
+        #     1000; the server will coerce values above 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. A token for a page of results other than the first page.
@@ -860,7 +1189,8 @@ module Google
           end
 
           # List SKUs for upgrading or downgrading an entitlement. Make the purchase
-          # using {::Google::Cloud::Channel::V1::CloudChannelService::Client#change_offer CloudChannelService.ChangeOffer}.
+          # using
+          # {::Google::Cloud::Channel::V1::CloudChannelService::Client#change_offer CloudChannelService.ChangeOffer}.
           # @!attribute [rw] entitlement
           #   @return [::String]
           #     Required. Resource name of the entitlement.
@@ -922,9 +1252,9 @@ module Google
         #     Format: accounts/\\{account_id}/customers/\\{customer_id}.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. Requested page size. Server might return fewer results than requested.
-        #     If unspecified, returns at most 100 Offers.
-        #     The maximum value is 1000; the server will coerce values above 1000.
+        #     Optional. Requested page size. Server might return fewer results than
+        #     requested. If unspecified, returns at most 100 Offers. The maximum value is
+        #     1000; the server will coerce values above 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. A token for a page of results other than the first page.
@@ -992,7 +1322,8 @@ module Google
         #     Required. Resource name of the account.
         # @!attribute [rw] service_account
         #   @return [::String]
-        #     Required. Service account that provides subscriber access to the registered topic.
+        #     Required. Service account that provides subscriber access to the registered
+        #     topic.
         class RegisterSubscriberRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1013,7 +1344,8 @@ module Google
         #     Required. Resource name of the account.
         # @!attribute [rw] service_account
         #   @return [::String]
-        #     Required. Service account to unregister from subscriber access to the topic.
+        #     Required. Service account to unregister from subscriber access to the
+        #     topic.
         class UnregisterSubscriberRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1034,10 +1366,10 @@ module Google
         #     Required. Resource name of the account.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. The maximum number of service accounts to return. The service may return
-        #     fewer than this value.
-        #     If unspecified, returns at most 100 service accounts.
-        #     The maximum value is 1000; the server will coerce values above 1000.
+        #     Optional. The maximum number of service accounts to return. The service may
+        #     return fewer than this value. If unspecified, returns at most 100 service
+        #     accounts. The maximum value is 1000; the server will coerce values above
+        #     1000.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. A page token, received from a previous `ListSubscribers` call.
@@ -1062,6 +1394,52 @@ module Google
         #     A token that can be sent as `page_token` to retrieve the next page.
         #     If this field is omitted, there are no subsequent pages.
         class ListSubscribersResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_entitlement_changes CloudChannelService.ListEntitlementChanges}
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the entitlement for which to list
+        #     entitlement changes. The `-` wildcard may be used to match entitlements
+        #     across a customer. Formats:
+        #
+        #       * accounts/\\{account_id}/customers/\\{customer_id}/entitlements/\\{entitlement_id}
+        #       * accounts/\\{account_id}/customers/\\{customer_id}/entitlements/-
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of entitlement changes to return. The service
+        #     may return fewer than this value. If unspecified, returns at most 10
+        #     entitlement changes. The maximum value is 50; the server will coerce values
+        #     above 50.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A page token, received from a previous
+        #     {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_entitlement_changes CloudChannelService.ListEntitlementChanges}
+        #     call. Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to
+        #     {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_entitlement_changes CloudChannelService.ListEntitlementChanges}
+        #     must match the call that provided the page token.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Filters applied to the list results.
+        class ListEntitlementChangesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_entitlement_changes CloudChannelService.ListEntitlementChanges}
+        # @!attribute [rw] entitlement_changes
+        #   @return [::Array<::Google::Cloud::Channel::V1::EntitlementChange>]
+        #     The list of entitlement changes.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token to list the next page of results.
+        class ListEntitlementChangesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

@@ -20,19 +20,25 @@
 module Google
   module Iam
     module V1
-      # Defines an Identity and Access Management (IAM) policy. It is used to
-      # specify access control policies for Cloud Platform resources.
+      # An Identity and Access Management (IAM) policy, which specifies access
+      # controls for Google Cloud resources.
       #
       #
       # A `Policy` is a collection of `bindings`. A `binding` binds one or more
-      # `members` to a single `role`. Members can be user accounts, service accounts,
-      # Google groups, and domains (such as G Suite). A `role` is a named list of
-      # permissions (defined by IAM or configured by users). A `binding` can
-      # optionally specify a `condition`, which is a logic expression that further
-      # constrains the role binding based on attributes about the request and/or
-      # target resource.
+      # `members`, or principals, to a single `role`. Principals can be user
+      # accounts, service accounts, Google groups, and domains (such as G Suite). A
+      # `role` is a named list of permissions; each `role` can be an IAM predefined
+      # role or a user-created custom role.
       #
-      # **JSON Example**
+      # For some types of Google Cloud resources, a `binding` can also specify a
+      # `condition`, which is a logical expression that allows access to a resource
+      # only if the expression evaluates to `true`. A condition can add constraints
+      # based on attributes of the request, the resource, or both. To learn which
+      # resources support conditions in their IAM policies, see the
+      # [IAM
+      # documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
+      #
+      # **JSON example:**
       #
       #     {
       #       "bindings": [
@@ -47,7 +53,9 @@ module Google
       #         },
       #         {
       #           "role": "roles/resourcemanager.organizationViewer",
-      #           "members": ["user:eve@example.com"],
+      #           "members": [
+      #             "user:eve@example.com"
+      #           ],
       #           "condition": {
       #             "title": "expirable access",
       #             "description": "Does not grant access after Sep 2020",
@@ -55,10 +63,12 @@ module Google
       #             timestamp('2020-10-01T00:00:00.000Z')",
       #           }
       #         }
-      #       ]
+      #       ],
+      #       "etag": "BwWWja0YfJA=",
+      #       "version": 3
       #     }
       #
-      # **YAML Example**
+      # **YAML example:**
       #
       #     bindings:
       #     - members:
@@ -74,30 +84,53 @@ module Google
       #         title: expirable access
       #         description: Does not grant access after Sep 2020
       #         expression: request.time < timestamp('2020-10-01T00:00:00.000Z')
+      #     etag: BwWWja0YfJA=
+      #     version: 3
       #
       # For a description of IAM and its features, see the
-      # [IAM developer's guide](https://cloud.google.com/iam/docs).
+      # [IAM documentation](https://cloud.google.com/iam/docs/).
       # @!attribute [rw] version
       #   @return [::Integer]
       #     Specifies the format of the policy.
       #
-      #     Valid values are 0, 1, and 3. Requests specifying an invalid value will be
-      #     rejected.
+      #     Valid values are `0`, `1`, and `3`. Requests that specify an invalid value
+      #     are rejected.
       #
-      #     Operations affecting conditional bindings must specify version 3. This can
-      #     be either setting a conditional policy, modifying a conditional binding,
-      #     or removing a binding (conditional or unconditional) from the stored
-      #     conditional policy.
-      #     Operations on non-conditional policies may specify any valid value or
-      #     leave the field unset.
+      #     Any operation that affects conditional role bindings must specify version
+      #     `3`. This requirement applies to the following operations:
       #
-      #     If no etag is provided in the call to `setIamPolicy`, version compliance
-      #     checks against the stored policy is skipped.
+      #     * Getting a policy that includes a conditional role binding
+      #     * Adding a conditional role binding to a policy
+      #     * Changing a conditional role binding in a policy
+      #     * Removing any role binding, with or without a condition, from a policy
+      #       that includes conditions
+      #
+      #     **Important:** If you use IAM Conditions, you must include the `etag` field
+      #     whenever you call `setIamPolicy`. If you omit this field, then IAM allows
+      #     you to overwrite a version `3` policy with a version `1` policy, and all of
+      #     the conditions in the version `3` policy are lost.
+      #
+      #     If a policy does not include any conditions, operations on that policy may
+      #     specify any valid version or leave the field unset.
+      #
+      #     To learn which resources support conditions in their IAM policies, see the
+      #     [IAM
+      #     documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
       # @!attribute [rw] bindings
       #   @return [::Array<::Google::Iam::V1::Binding>]
-      #     Associates a list of `members` to a `role`. Optionally may specify a
-      #     `condition` that determines when binding is in effect.
-      #     `bindings` with no members will result in an error.
+      #     Associates a list of `members`, or principals, with a `role`. Optionally,
+      #     may specify a `condition` that determines how and when the `bindings` are
+      #     applied. Each of the `bindings` must contain at least one principal.
+      #
+      #     The `bindings` in a `Policy` can refer to up to 1,500 principals; up to 250
+      #     of these principals can be Google groups. Each occurrence of a principal
+      #     counts towards these limits. For example, if the `bindings` grant 50
+      #     different roles to `user:alice@example.com`, and not to any other
+      #     principal, then you can add another 1,450 principals to the `bindings` in
+      #     the `Policy`.
+      # @!attribute [rw] audit_configs
+      #   @return [::Array<::Google::Iam::V1::AuditConfig>]
+      #     Specifies cloud audit logging configuration for this policy.
       # @!attribute [rw] etag
       #   @return [::String]
       #     `etag` is used for optimistic concurrency control as a way to help
@@ -108,23 +141,23 @@ module Google
       #     systems are expected to put that etag in the request to `setIamPolicy` to
       #     ensure that their change will be applied to the same version of the policy.
       #
-      #     If no `etag` is provided in the call to `setIamPolicy`, then the existing
-      #     policy is overwritten. Due to blind-set semantics of an etag-less policy,
-      #     'setIamPolicy' will not fail even if the incoming policy version does not
-      #     meet the requirements for modifying the stored policy.
+      #     **Important:** If you use IAM Conditions, you must include the `etag` field
+      #     whenever you call `setIamPolicy`. If you omit this field, then IAM allows
+      #     you to overwrite a version `3` policy with a version `1` policy, and all of
+      #     the conditions in the version `3` policy are lost.
       class Policy
         include ::Google::Protobuf::MessageExts
         extend ::Google::Protobuf::MessageExts::ClassMethods
       end
 
-      # Associates `members` with a `role`.
+      # Associates `members`, or principals, with a `role`.
       # @!attribute [rw] role
       #   @return [::String]
-      #     Role that is assigned to `members`.
+      #     Role that is assigned to the list of `members`, or principals.
       #     For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
       # @!attribute [rw] members
       #   @return [::Array<::String>]
-      #     Specifies the identities requesting access for a Cloud Platform resource.
+      #     Specifies the principals requesting access for a Cloud Platform resource.
       #     `members` can have the following values:
       #
       #     * `allUsers`: A special identifier that represents anyone who is
@@ -143,18 +176,159 @@ module Google
       #     * `group:{emailid}`: An email address that represents a Google group.
       #        For example, `admins@example.com`.
       #
+      #     * `deleted:user:{emailid}?uid={uniqueid}`: An email address (plus unique
+      #        identifier) representing a user that has been recently deleted. For
+      #        example, `alice@example.com?uid=123456789012345678901`. If the user is
+      #        recovered, this value reverts to `user:{emailid}` and the recovered user
+      #        retains the role in the binding.
+      #
+      #     * `deleted:serviceAccount:{emailid}?uid={uniqueid}`: An email address (plus
+      #        unique identifier) representing a service account that has been recently
+      #        deleted. For example,
+      #        `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901`.
+      #        If the service account is undeleted, this value reverts to
+      #        `serviceAccount:{emailid}` and the undeleted service account retains the
+      #        role in the binding.
+      #
+      #     * `deleted:group:{emailid}?uid={uniqueid}`: An email address (plus unique
+      #        identifier) representing a Google group that has been recently
+      #        deleted. For example, `admins@example.com?uid=123456789012345678901`. If
+      #        the group is recovered, this value reverts to `group:{emailid}` and the
+      #        recovered group retains the role in the binding.
+      #
       #
       #     * `domain:{domain}`: The G Suite domain (primary) that represents all the
       #        users of that domain. For example, `google.com` or `example.com`.
       # @!attribute [rw] condition
       #   @return [::Google::Type::Expr]
       #     The condition that is associated with this binding.
-      #     NOTE: An unsatisfied condition will not allow user access via current
-      #     binding. Different bindings, including their conditions, are examined
-      #     independently.
+      #
+      #     If the condition evaluates to `true`, then this binding applies to the
+      #     current request.
+      #
+      #     If the condition evaluates to `false`, then this binding does not apply to
+      #     the current request. However, a different role binding might grant the same
+      #     role to one or more of the principals in this binding.
+      #
+      #     To learn which resources support conditions in their IAM policies, see the
+      #     [IAM
+      #     documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
       class Binding
         include ::Google::Protobuf::MessageExts
         extend ::Google::Protobuf::MessageExts::ClassMethods
+      end
+
+      # Specifies the audit configuration for a service.
+      # The configuration determines which permission types are logged, and what
+      # identities, if any, are exempted from logging.
+      # An AuditConfig must have one or more AuditLogConfigs.
+      #
+      # If there are AuditConfigs for both `allServices` and a specific service,
+      # the union of the two AuditConfigs is used for that service: the log_types
+      # specified in each AuditConfig are enabled, and the exempted_members in each
+      # AuditLogConfig are exempted.
+      #
+      # Example Policy with multiple AuditConfigs:
+      #
+      #     {
+      #       "audit_configs": [
+      #         {
+      #           "service": "allServices",
+      #           "audit_log_configs": [
+      #             {
+      #               "log_type": "DATA_READ",
+      #               "exempted_members": [
+      #                 "user:jose@example.com"
+      #               ]
+      #             },
+      #             {
+      #               "log_type": "DATA_WRITE"
+      #             },
+      #             {
+      #               "log_type": "ADMIN_READ"
+      #             }
+      #           ]
+      #         },
+      #         {
+      #           "service": "sampleservice.googleapis.com",
+      #           "audit_log_configs": [
+      #             {
+      #               "log_type": "DATA_READ"
+      #             },
+      #             {
+      #               "log_type": "DATA_WRITE",
+      #               "exempted_members": [
+      #                 "user:aliya@example.com"
+      #               ]
+      #             }
+      #           ]
+      #         }
+      #       ]
+      #     }
+      #
+      # For sampleservice, this policy enables DATA_READ, DATA_WRITE and ADMIN_READ
+      # logging. It also exempts jose@example.com from DATA_READ logging, and
+      # aliya@example.com from DATA_WRITE logging.
+      # @!attribute [rw] service
+      #   @return [::String]
+      #     Specifies a service that will be enabled for audit logging.
+      #     For example, `storage.googleapis.com`, `cloudsql.googleapis.com`.
+      #     `allServices` is a special value that covers all services.
+      # @!attribute [rw] audit_log_configs
+      #   @return [::Array<::Google::Iam::V1::AuditLogConfig>]
+      #     The configuration for logging of each type of permission.
+      class AuditConfig
+        include ::Google::Protobuf::MessageExts
+        extend ::Google::Protobuf::MessageExts::ClassMethods
+      end
+
+      # Provides the configuration for logging a type of permissions.
+      # Example:
+      #
+      #     {
+      #       "audit_log_configs": [
+      #         {
+      #           "log_type": "DATA_READ",
+      #           "exempted_members": [
+      #             "user:jose@example.com"
+      #           ]
+      #         },
+      #         {
+      #           "log_type": "DATA_WRITE"
+      #         }
+      #       ]
+      #     }
+      #
+      # This enables 'DATA_READ' and 'DATA_WRITE' logging, while exempting
+      # jose@example.com from DATA_READ logging.
+      # @!attribute [rw] log_type
+      #   @return [::Google::Iam::V1::AuditLogConfig::LogType]
+      #     The log type that this config enables.
+      # @!attribute [rw] exempted_members
+      #   @return [::Array<::String>]
+      #     Specifies the identities that do not cause logging for this type of
+      #     permission.
+      #     Follows the same format of
+      #     {::Google::Iam::V1::Binding#members Binding.members}.
+      class AuditLogConfig
+        include ::Google::Protobuf::MessageExts
+        extend ::Google::Protobuf::MessageExts::ClassMethods
+
+        # The list of valid permission types for which logging can be configured.
+        # Admin writes are always logged, and are not configurable.
+        module LogType
+          # Default case. Should never be this.
+          LOG_TYPE_UNSPECIFIED = 0
+
+          # Admin reads. Example: CloudIAM getIamPolicy
+          ADMIN_READ = 1
+
+          # Data writes. Example: CloudSQL Users create
+          DATA_WRITE = 2
+
+          # Data reads. Example: CloudSQL Users list
+          DATA_READ = 3
+        end
       end
 
       # The difference delta between two policies.

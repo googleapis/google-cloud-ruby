@@ -35,6 +35,18 @@ class ::Google::Cloud::Dataproc::V1::ClusterController::ClientPathsTest < Minite
     end
   end
 
+  def test_node_group_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Dataproc::V1::ClusterController::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.node_group_path project: "value0", region: "value1", cluster: "value2", node_group: "value3"
+      assert_equal "projects/value0/regions/value1/clusters/value2/nodeGroups/value3", path
+    end
+  end
+
   def test_service_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do

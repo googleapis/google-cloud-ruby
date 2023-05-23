@@ -5,7 +5,7 @@ require 'google/protobuf'
 
 require 'google/firestore/admin/v1/index_pb'
 require 'google/protobuf/timestamp_pb'
-require 'google/api/annotations_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/firestore/admin/v1/operation.proto", :syntax => :proto3) do
     add_message "google.firestore.admin.v1.IndexOperationMetadata" do
@@ -24,12 +24,21 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :state, :enum, 5, "google.firestore.admin.v1.OperationState"
       optional :progress_documents, :message, 6, "google.firestore.admin.v1.Progress"
       optional :progress_bytes, :message, 7, "google.firestore.admin.v1.Progress"
+      optional :ttl_config_delta, :message, 8, "google.firestore.admin.v1.FieldOperationMetadata.TtlConfigDelta"
     end
     add_message "google.firestore.admin.v1.FieldOperationMetadata.IndexConfigDelta" do
       optional :change_type, :enum, 1, "google.firestore.admin.v1.FieldOperationMetadata.IndexConfigDelta.ChangeType"
       optional :index, :message, 2, "google.firestore.admin.v1.Index"
     end
     add_enum "google.firestore.admin.v1.FieldOperationMetadata.IndexConfigDelta.ChangeType" do
+      value :CHANGE_TYPE_UNSPECIFIED, 0
+      value :ADD, 1
+      value :REMOVE, 2
+    end
+    add_message "google.firestore.admin.v1.FieldOperationMetadata.TtlConfigDelta" do
+      optional :change_type, :enum, 1, "google.firestore.admin.v1.FieldOperationMetadata.TtlConfigDelta.ChangeType"
+    end
+    add_enum "google.firestore.admin.v1.FieldOperationMetadata.TtlConfigDelta.ChangeType" do
       value :CHANGE_TYPE_UNSPECIFIED, 0
       value :ADD, 1
       value :REMOVE, 2
@@ -81,6 +90,8 @@ module Google
           FieldOperationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.FieldOperationMetadata").msgclass
           FieldOperationMetadata::IndexConfigDelta = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.FieldOperationMetadata.IndexConfigDelta").msgclass
           FieldOperationMetadata::IndexConfigDelta::ChangeType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.FieldOperationMetadata.IndexConfigDelta.ChangeType").enummodule
+          FieldOperationMetadata::TtlConfigDelta = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.FieldOperationMetadata.TtlConfigDelta").msgclass
+          FieldOperationMetadata::TtlConfigDelta::ChangeType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.FieldOperationMetadata.TtlConfigDelta.ChangeType").enummodule
           ExportDocumentsMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.ExportDocumentsMetadata").msgclass
           ImportDocumentsMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.ImportDocumentsMetadata").msgclass
           ExportDocumentsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.ExportDocumentsResponse").msgclass

@@ -48,13 +48,12 @@ module Google
             # See {::Google::Cloud::Build::V1::CloudBuild::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all CloudBuild clients:
-            #
-            #     ::Google::Cloud::Build::V1::CloudBuild::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all CloudBuild clients
+            #   ::Google::Cloud::Build::V1::CloudBuild::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -76,18 +75,12 @@ module Google
 
                 default_config.rpcs.get_build.timeout = 600.0
                 default_config.rpcs.get_build.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_builds.timeout = 600.0
                 default_config.rpcs.list_builds.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.cancel_build.timeout = 600.0
@@ -98,26 +91,17 @@ module Google
 
                 default_config.rpcs.get_build_trigger.timeout = 600.0
                 default_config.rpcs.get_build_trigger.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.list_build_triggers.timeout = 600.0
                 default_config.rpcs.list_build_triggers.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.delete_build_trigger.timeout = 600.0
                 default_config.rpcs.delete_build_trigger.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.update_build_trigger.timeout = 600.0
@@ -128,10 +112,7 @@ module Google
 
                 default_config.rpcs.get_worker_pool.timeout = 600.0
                 default_config.rpcs.get_worker_pool.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config.rpcs.delete_worker_pool.timeout = 600.0
@@ -140,10 +121,7 @@ module Google
 
                 default_config.rpcs.list_worker_pools.timeout = 600.0
                 default_config.rpcs.list_worker_pools.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14, 4]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
                 default_config
@@ -175,19 +153,15 @@ module Google
             ##
             # Create a new CloudBuild client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new CloudBuild client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Build::V1::CloudBuild::Client.new
             #
-            #     client = ::Google::Cloud::Build::V1::CloudBuild::Client.new
-            #
-            # To create a new CloudBuild client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Build::V1::CloudBuild::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Build::V1::CloudBuild::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the CloudBuild client.
             # @yieldparam config [Client::Configuration]
@@ -207,14 +181,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -222,6 +195,7 @@ module Google
 
               @operations_client = Operations.new do |config|
                 config.credentials = credentials
+                config.quota_project = @quota_project_id
                 config.endpoint = @config.endpoint
               end
 
@@ -281,6 +255,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/build/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Build::V1::CloudBuild::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Build::V1::CreateBuildRequest.new
+            #
+            #   # Call the create_build method.
+            #   result = client.create_build request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
             def create_build request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -298,16 +294,20 @@ module Google
                 gapic_version: ::Google::Cloud::Build::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id
-              }
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_build.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_build.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_build_stub.call_rpc :create_build, request, options: options do |response, operation|
@@ -356,6 +356,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/build/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Build::V1::CloudBuild::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Build::V1::GetBuildRequest.new
+            #
+            #   # Call the get_build method.
+            #   result = client.get_build request
+            #
+            #   # The returned object is of type Google::Cloud::Build::V1::Build.
+            #   p result
+            #
             def get_build request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -373,17 +388,23 @@ module Google
                 gapic_version: ::Google::Cloud::Build::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id,
-                "id" => request.id
-              }
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+              if request.id
+                header_params["id"] = request.id
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_build.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_build.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_build_stub.call_rpc :get_build, request, options: options do |response, operation|
@@ -417,7 +438,7 @@ module Google
             #
             #   @param parent [::String]
             #     The parent of the collection of `Builds`.
-            #     Format: `projects/{project}/locations/location`
+            #     Format: `projects/{project}/locations/{location}`
             #   @param project_id [::String]
             #     Required. ID of the project.
             #   @param page_size [::Integer]
@@ -443,6 +464,25 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/build/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Build::V1::CloudBuild::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Build::V1::ListBuildsRequest.new
+            #
+            #   # Call the list_builds method.
+            #   result = client.list_builds request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::Build::V1::Build.
+            #     p item
+            #   end
+            #
             def list_builds request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -460,16 +500,20 @@ module Google
                 gapic_version: ::Google::Cloud::Build::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id
-              }
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_builds.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_builds.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_build_stub.call_rpc :list_builds, request, options: options do |response, operation|
@@ -515,6 +559,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/build/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Build::V1::CloudBuild::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Build::V1::CancelBuildRequest.new
+            #
+            #   # Call the cancel_build method.
+            #   result = client.cancel_build request
+            #
+            #   # The returned object is of type Google::Cloud::Build::V1::Build.
+            #   p result
+            #
             def cancel_build request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -532,17 +591,23 @@ module Google
                 gapic_version: ::Google::Cloud::Build::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id,
-                "id" => request.id
-              }
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+              if request.id
+                header_params["id"] = request.id
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.cancel_build.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.cancel_build.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_build_stub.call_rpc :cancel_build, request, options: options do |response, operation|
@@ -613,6 +678,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/build/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Build::V1::CloudBuild::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Build::V1::RetryBuildRequest.new
+            #
+            #   # Call the retry_build method.
+            #   result = client.retry_build request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
             def retry_build request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -630,20 +717,127 @@ module Google
                 gapic_version: ::Google::Cloud::Build::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id,
-                "id" => request.id
-              }
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+              if request.id
+                header_params["id"] = request.id
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.retry_build.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.retry_build.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_build_stub.call_rpc :retry_build, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Approves or rejects a pending build.
+            #
+            # If approved, the returned LRO will be analogous to the LRO returned from
+            # a CreateBuild call.
+            #
+            # If rejected, the returned LRO will be immediately done.
+            #
+            # @overload approve_build(request, options = nil)
+            #   Pass arguments to `approve_build` via a request object, either of type
+            #   {::Google::Cloud::Build::V1::ApproveBuildRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Build::V1::ApproveBuildRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload approve_build(name: nil, approval_result: nil)
+            #   Pass arguments to `approve_build` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Name of the target build.
+            #     For example: "projects/\\{$project_id}/builds/\\{$build_id}"
+            #   @param approval_result [::Google::Cloud::Build::V1::ApprovalResult, ::Hash]
+            #     Approval decision and metadata.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/build/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Build::V1::CloudBuild::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Build::V1::ApproveBuildRequest.new
+            #
+            #   # Call the approve_build method.
+            #   result = client.approve_build request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def approve_build request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Build::V1::ApproveBuildRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.approve_build.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Build::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.approve_build.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.approve_build.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @cloud_build_stub.call_rpc :approve_build, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
@@ -667,11 +861,14 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload create_build_trigger(project_id: nil, trigger: nil)
+            # @overload create_build_trigger(parent: nil, project_id: nil, trigger: nil)
             #   Pass arguments to `create_build_trigger` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
+            #   @param parent [::String]
+            #     The parent resource where this trigger will be created.
+            #     Format: `projects/{project}/locations/{location}`
             #   @param project_id [::String]
             #     Required. ID of the project for which to configure automatic builds.
             #   @param trigger [::Google::Cloud::Build::V1::BuildTrigger, ::Hash]
@@ -684,6 +881,21 @@ module Google
             # @return [::Google::Cloud::Build::V1::BuildTrigger]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/build/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Build::V1::CloudBuild::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Build::V1::CreateBuildTriggerRequest.new
+            #
+            #   # Call the create_build_trigger method.
+            #   result = client.create_build_trigger request
+            #
+            #   # The returned object is of type Google::Cloud::Build::V1::BuildTrigger.
+            #   p result
             #
             def create_build_trigger request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -702,16 +914,20 @@ module Google
                 gapic_version: ::Google::Cloud::Build::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id
-              }
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_build_trigger.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_build_trigger.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_build_stub.call_rpc :create_build_trigger, request, options: options do |response, operation|
@@ -737,11 +953,14 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload get_build_trigger(project_id: nil, trigger_id: nil)
+            # @overload get_build_trigger(name: nil, project_id: nil, trigger_id: nil)
             #   Pass arguments to `get_build_trigger` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
+            #   @param name [::String]
+            #     The name of the `Trigger` to retrieve.
+            #     Format: `projects/{project}/locations/{location}/triggers/{trigger}`
             #   @param project_id [::String]
             #     Required. ID of the project that owns the trigger.
             #   @param trigger_id [::String]
@@ -754,6 +973,21 @@ module Google
             # @return [::Google::Cloud::Build::V1::BuildTrigger]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/build/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Build::V1::CloudBuild::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Build::V1::GetBuildTriggerRequest.new
+            #
+            #   # Call the get_build_trigger method.
+            #   result = client.get_build_trigger request
+            #
+            #   # The returned object is of type Google::Cloud::Build::V1::BuildTrigger.
+            #   p result
             #
             def get_build_trigger request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -772,17 +1006,23 @@ module Google
                 gapic_version: ::Google::Cloud::Build::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id,
-                "trigger_id" => request.trigger_id
-              }
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+              if request.trigger_id
+                header_params["trigger_id"] = request.trigger_id
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_build_trigger.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_build_trigger.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_build_stub.call_rpc :get_build_trigger, request, options: options do |response, operation|
@@ -808,11 +1048,14 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_build_triggers(project_id: nil, page_size: nil, page_token: nil)
+            # @overload list_build_triggers(parent: nil, project_id: nil, page_size: nil, page_token: nil)
             #   Pass arguments to `list_build_triggers` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
+            #   @param parent [::String]
+            #     The parent of the collection of `Triggers`.
+            #     Format: `projects/{project}/locations/{location}`
             #   @param project_id [::String]
             #     Required. ID of the project for which to list BuildTriggers.
             #   @param page_size [::Integer]
@@ -827,6 +1070,25 @@ module Google
             # @return [::Gapic::PagedEnumerable<::Google::Cloud::Build::V1::BuildTrigger>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/build/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Build::V1::CloudBuild::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Build::V1::ListBuildTriggersRequest.new
+            #
+            #   # Call the list_build_triggers method.
+            #   result = client.list_build_triggers request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::Build::V1::BuildTrigger.
+            #     p item
+            #   end
             #
             def list_build_triggers request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -845,16 +1107,20 @@ module Google
                 gapic_version: ::Google::Cloud::Build::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id
-              }
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_build_triggers.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_build_triggers.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_build_stub.call_rpc :list_build_triggers, request, options: options do |response, operation|
@@ -881,11 +1147,14 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload delete_build_trigger(project_id: nil, trigger_id: nil)
+            # @overload delete_build_trigger(name: nil, project_id: nil, trigger_id: nil)
             #   Pass arguments to `delete_build_trigger` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
+            #   @param name [::String]
+            #     The name of the `Trigger` to delete.
+            #     Format: `projects/{project}/locations/{location}/triggers/{trigger}`
             #   @param project_id [::String]
             #     Required. ID of the project that owns the trigger.
             #   @param trigger_id [::String]
@@ -898,6 +1167,21 @@ module Google
             # @return [::Google::Protobuf::Empty]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/build/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Build::V1::CloudBuild::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Build::V1::DeleteBuildTriggerRequest.new
+            #
+            #   # Call the delete_build_trigger method.
+            #   result = client.delete_build_trigger request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
             #
             def delete_build_trigger request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -916,17 +1200,23 @@ module Google
                 gapic_version: ::Google::Cloud::Build::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id,
-                "trigger_id" => request.trigger_id
-              }
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+              if request.trigger_id
+                header_params["trigger_id"] = request.trigger_id
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_build_trigger.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_build_trigger.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_build_stub.call_rpc :delete_build_trigger, request, options: options do |response, operation|
@@ -972,6 +1262,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/build/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Build::V1::CloudBuild::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Build::V1::UpdateBuildTriggerRequest.new
+            #
+            #   # Call the update_build_trigger method.
+            #   result = client.update_build_trigger request
+            #
+            #   # The returned object is of type Google::Cloud::Build::V1::BuildTrigger.
+            #   p result
+            #
             def update_build_trigger request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -989,17 +1294,23 @@ module Google
                 gapic_version: ::Google::Cloud::Build::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id,
-                "trigger_id" => request.trigger_id
-              }
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+              if request.trigger_id
+                header_params["trigger_id"] = request.trigger_id
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_build_trigger.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_build_trigger.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_build_stub.call_rpc :update_build_trigger, request, options: options do |response, operation|
@@ -1023,11 +1334,14 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload run_build_trigger(project_id: nil, trigger_id: nil, source: nil)
+            # @overload run_build_trigger(name: nil, project_id: nil, trigger_id: nil, source: nil)
             #   Pass arguments to `run_build_trigger` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
+            #   @param name [::String]
+            #     The name of the `Trigger` to run.
+            #     Format: `projects/{project}/locations/{location}/triggers/{trigger}`
             #   @param project_id [::String]
             #     Required. ID of the project.
             #   @param trigger_id [::String]
@@ -1042,6 +1356,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/build/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Build::V1::CloudBuild::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Build::V1::RunBuildTriggerRequest.new
+            #
+            #   # Call the run_build_trigger method.
+            #   result = client.run_build_trigger request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
             #
             def run_build_trigger request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1060,17 +1396,23 @@ module Google
                 gapic_version: ::Google::Cloud::Build::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id,
-                "trigger_id" => request.trigger_id
-              }
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+              if request.trigger_id
+                header_params["trigger_id"] = request.trigger_id
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.run_build_trigger.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.run_build_trigger.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_build_stub.call_rpc :run_build_trigger, request, options: options do |response, operation|
@@ -1096,11 +1438,14 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload receive_trigger_webhook(body: nil, project_id: nil, trigger: nil, secret: nil)
+            # @overload receive_trigger_webhook(name: nil, body: nil, project_id: nil, trigger: nil, secret: nil)
             #   Pass arguments to `receive_trigger_webhook` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
+            #   @param name [::String]
+            #     The name of the `ReceiveTriggerWebhook` to retrieve.
+            #     Format: `projects/{project}/locations/{location}/triggers/{trigger}`
             #   @param body [::Google::Api::HttpBody, ::Hash]
             #     HTTP request body.
             #   @param project_id [::String]
@@ -1117,6 +1462,21 @@ module Google
             # @return [::Google::Cloud::Build::V1::ReceiveTriggerWebhookResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/build/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Build::V1::CloudBuild::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Build::V1::ReceiveTriggerWebhookRequest.new
+            #
+            #   # Call the receive_trigger_webhook method.
+            #   result = client.receive_trigger_webhook request
+            #
+            #   # The returned object is of type Google::Cloud::Build::V1::ReceiveTriggerWebhookResponse.
+            #   p result
             #
             def receive_trigger_webhook request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1135,17 +1495,23 @@ module Google
                 gapic_version: ::Google::Cloud::Build::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id,
-                "trigger" => request.trigger
-              }
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+              if request.trigger
+                header_params["trigger"] = request.trigger
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.receive_trigger_webhook.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.receive_trigger_webhook.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_build_stub.call_rpc :receive_trigger_webhook, request, options: options do |response, operation|
@@ -1157,9 +1523,7 @@ module Google
             end
 
             ##
-            # Creates a `WorkerPool` to run the builds, and returns the new worker pool.
-            #
-            # This API is experimental.
+            # Creates a `WorkerPool`.
             #
             # @overload create_worker_pool(request, options = nil)
             #   Pass arguments to `create_worker_pool` via a request object, either of type
@@ -1171,23 +1535,55 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload create_worker_pool(parent: nil, worker_pool: nil)
+            # @overload create_worker_pool(parent: nil, worker_pool: nil, worker_pool_id: nil, validate_only: nil)
             #   Pass arguments to `create_worker_pool` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     ID of the parent project.
+            #     Required. The parent resource where this worker pool will be created.
+            #     Format: `projects/{project}/locations/{location}`.
             #   @param worker_pool [::Google::Cloud::Build::V1::WorkerPool, ::Hash]
-            #     `WorkerPool` resource to create.
+            #     Required. `WorkerPool` resource to create.
+            #   @param worker_pool_id [::String]
+            #     Required. Immutable. The ID to use for the `WorkerPool`, which will become
+            #     the final component of the resource name.
+            #
+            #     This value should be 1-63 characters, and valid characters
+            #     are /[a-z][0-9]-/.
+            #   @param validate_only [::Boolean]
+            #     If set, validate the request and preview the response, but do not actually
+            #     post it.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [::Google::Cloud::Build::V1::WorkerPool]
+            # @yieldparam response [::Gapic::Operation]
             # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [::Google::Cloud::Build::V1::WorkerPool]
+            # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/build/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Build::V1::CloudBuild::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Build::V1::CreateWorkerPoolRequest.new
+            #
+            #   # Call the create_worker_pool method.
+            #   result = client.create_worker_pool request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
             #
             def create_worker_pool request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1206,13 +1602,24 @@ module Google
                 gapic_version: ::Google::Cloud::Build::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
               options.apply_defaults timeout:      @config.rpcs.create_worker_pool.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_worker_pool.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_build_stub.call_rpc :create_worker_pool, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
@@ -1221,9 +1628,7 @@ module Google
             end
 
             ##
-            # Returns information about a `WorkerPool`.
-            #
-            # This API is experimental.
+            # Returns details of a `WorkerPool`.
             #
             # @overload get_worker_pool(request, options = nil)
             #   Pass arguments to `get_worker_pool` via a request object, either of type
@@ -1241,8 +1646,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     The field will contain name of the resource requested, for example:
-            #     "projects/project-1/workerPools/workerpool-name"
+            #     Required. The name of the `WorkerPool` to retrieve.
+            #     Format: `projects/{project}/locations/{location}/workerPools/{workerPool}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Build::V1::WorkerPool]
@@ -1251,6 +1656,21 @@ module Google
             # @return [::Google::Cloud::Build::V1::WorkerPool]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/build/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Build::V1::CloudBuild::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Build::V1::GetWorkerPoolRequest.new
+            #
+            #   # Call the get_worker_pool method.
+            #   result = client.get_worker_pool request
+            #
+            #   # The returned object is of type Google::Cloud::Build::V1::WorkerPool.
+            #   p result
             #
             def get_worker_pool request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1269,10 +1689,20 @@ module Google
                 gapic_version: ::Google::Cloud::Build::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
               options.apply_defaults timeout:      @config.rpcs.get_worker_pool.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_worker_pool.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_build_stub.call_rpc :get_worker_pool, request, options: options do |response, operation|
@@ -1284,9 +1714,7 @@ module Google
             end
 
             ##
-            # Deletes a `WorkerPool` by its project ID and WorkerPool name.
-            #
-            # This API is experimental.
+            # Deletes a `WorkerPool`.
             #
             # @overload delete_worker_pool(request, options = nil)
             #   Pass arguments to `delete_worker_pool` via a request object, either of type
@@ -1298,22 +1726,54 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload delete_worker_pool(name: nil)
+            # @overload delete_worker_pool(name: nil, etag: nil, allow_missing: nil, validate_only: nil)
             #   Pass arguments to `delete_worker_pool` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     The field will contain name of the resource requested, for example:
-            #     "projects/project-1/workerPools/workerpool-name"
+            #     Required. The name of the `WorkerPool` to delete.
+            #     Format:
+            #     `projects/{project}/locations/{location}/workerPools/{workerPool}`.
+            #   @param etag [::String]
+            #     Optional. If this is provided, it must match the server's etag on the
+            #     workerpool for the request to be processed.
+            #   @param allow_missing [::Boolean]
+            #     If set to true, and the `WorkerPool` is not found, the request will succeed
+            #     but no action will be taken on the server.
+            #   @param validate_only [::Boolean]
+            #     If set, validate the request and preview the response, but do not actually
+            #     post it.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam response [::Gapic::Operation]
             # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [::Google::Protobuf::Empty]
+            # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/build/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Build::V1::CloudBuild::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Build::V1::DeleteWorkerPoolRequest.new
+            #
+            #   # Call the delete_worker_pool method.
+            #   result = client.delete_worker_pool request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
             #
             def delete_worker_pool request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1332,13 +1792,24 @@ module Google
                 gapic_version: ::Google::Cloud::Build::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
               options.apply_defaults timeout:      @config.rpcs.delete_worker_pool.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_worker_pool.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_build_stub.call_rpc :delete_worker_pool, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
@@ -1347,9 +1818,7 @@ module Google
             end
 
             ##
-            # Update a `WorkerPool`.
-            #
-            # This API is experimental.
+            # Updates a `WorkerPool`.
             #
             # @overload update_worker_pool(request, options = nil)
             #   Pass arguments to `update_worker_pool` via a request object, either of type
@@ -1361,24 +1830,51 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload update_worker_pool(name: nil, worker_pool: nil)
+            # @overload update_worker_pool(worker_pool: nil, update_mask: nil, validate_only: nil)
             #   Pass arguments to `update_worker_pool` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param name [::String]
-            #     The field will contain name of the resource requested, for example:
-            #     "projects/project-1/workerPools/workerpool-name"
             #   @param worker_pool [::Google::Cloud::Build::V1::WorkerPool, ::Hash]
-            #     `WorkerPool` resource to update.
+            #     Required. The `WorkerPool` to update.
+            #
+            #     The `name` field is used to identify the `WorkerPool` to update.
+            #     Format: `projects/{project}/locations/{location}/workerPools/{workerPool}`.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     A mask specifying which fields in `worker_pool` to update.
+            #   @param validate_only [::Boolean]
+            #     If set, validate the request and preview the response, but do not actually
+            #     post it.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [::Google::Cloud::Build::V1::WorkerPool]
+            # @yieldparam response [::Gapic::Operation]
             # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [::Google::Cloud::Build::V1::WorkerPool]
+            # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/build/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Build::V1::CloudBuild::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Build::V1::UpdateWorkerPoolRequest.new
+            #
+            #   # Call the update_worker_pool method.
+            #   result = client.update_worker_pool request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
             #
             def update_worker_pool request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1397,13 +1893,24 @@ module Google
                 gapic_version: ::Google::Cloud::Build::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
+              header_params = {}
+              if request.worker_pool&.name
+                header_params["worker_pool.name"] = request.worker_pool.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
               options.apply_defaults timeout:      @config.rpcs.update_worker_pool.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_worker_pool.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_build_stub.call_rpc :update_worker_pool, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
@@ -1412,9 +1919,7 @@ module Google
             end
 
             ##
-            # List project's `WorkerPools`.
-            #
-            # This API is experimental.
+            # Lists `WorkerPool`s.
             #
             # @overload list_worker_pools(request, options = nil)
             #   Pass arguments to `list_worker_pools` via a request object, either of type
@@ -1426,21 +1931,47 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_worker_pools(parent: nil)
+            # @overload list_worker_pools(parent: nil, page_size: nil, page_token: nil)
             #   Pass arguments to `list_worker_pools` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     ID of the parent project.
+            #     Required. The parent of the collection of `WorkerPools`.
+            #     Format: `projects/{project}/locations/{location}`.
+            #   @param page_size [::Integer]
+            #     The maximum number of `WorkerPool`s to return. The service may return
+            #     fewer than this value. If omitted, the server will use a sensible default.
+            #   @param page_token [::String]
+            #     A page token, received from a previous `ListWorkerPools` call. Provide this
+            #     to retrieve the subsequent page.
             #
             # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [::Google::Cloud::Build::V1::ListWorkerPoolsResponse]
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Build::V1::WorkerPool>]
             # @yieldparam operation [::GRPC::ActiveCall::Operation]
             #
-            # @return [::Google::Cloud::Build::V1::ListWorkerPoolsResponse]
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Build::V1::WorkerPool>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/build/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Build::V1::CloudBuild::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Build::V1::ListWorkerPoolsRequest.new
+            #
+            #   # Call the list_worker_pools method.
+            #   result = client.list_worker_pools request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::Build::V1::WorkerPool.
+            #     p item
+            #   end
             #
             def list_worker_pools request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1459,13 +1990,24 @@ module Google
                 gapic_version: ::Google::Cloud::Build::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
               options.apply_defaults timeout:      @config.rpcs.list_worker_pools.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_worker_pools.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @cloud_build_stub.call_rpc :list_worker_pools, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @cloud_build_stub, :list_worker_pools, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
@@ -1486,22 +2028,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for create_build
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # create_build to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Build::V1::CloudBuild::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_build.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Build::V1::CloudBuild::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_build.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Build::V1::CloudBuild::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_build.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Build::V1::CloudBuild::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_build.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
@@ -1512,9 +2053,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials
@@ -1635,6 +2176,11 @@ module Google
                 #
                 attr_reader :retry_build
                 ##
+                # RPC-specific configuration for `approve_build`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :approve_build
+                ##
                 # RPC-specific configuration for `create_build_trigger`
                 # @return [::Gapic::Config::Method]
                 #
@@ -1707,6 +2253,8 @@ module Google
                   @cancel_build = ::Gapic::Config::Method.new cancel_build_config
                   retry_build_config = parent_rpcs.retry_build if parent_rpcs.respond_to? :retry_build
                   @retry_build = ::Gapic::Config::Method.new retry_build_config
+                  approve_build_config = parent_rpcs.approve_build if parent_rpcs.respond_to? :approve_build
+                  @approve_build = ::Gapic::Config::Method.new approve_build_config
                   create_build_trigger_config = parent_rpcs.create_build_trigger if parent_rpcs.respond_to? :create_build_trigger
                   @create_build_trigger = ::Gapic::Config::Method.new create_build_trigger_config
                   get_build_trigger_config = parent_rpcs.get_build_trigger if parent_rpcs.respond_to? :get_build_trigger

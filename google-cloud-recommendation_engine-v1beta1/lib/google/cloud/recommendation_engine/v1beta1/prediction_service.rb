@@ -25,6 +25,7 @@ require "google/cloud/recommendation_engine/v1beta1/version"
 require "google/cloud/recommendation_engine/v1beta1/prediction_service/credentials"
 require "google/cloud/recommendation_engine/v1beta1/prediction_service/paths"
 require "google/cloud/recommendation_engine/v1beta1/prediction_service/client"
+require "google/cloud/recommendation_engine/v1beta1/prediction_service/rest"
 
 module Google
   module Cloud
@@ -33,10 +34,15 @@ module Google
         ##
         # Service for making recommendation prediction.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/recommendation_engine/v1beta1/prediction_service"
         #     client = ::Google::Cloud::RecommendationEngine::V1beta1::PredictionService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/recommendation_engine/v1beta1/prediction_service/rest"
+        #     client = ::Google::Cloud::RecommendationEngine::V1beta1::PredictionService::Rest::Client.new
         #
         module PredictionService
         end

@@ -18,7 +18,7 @@ require "google/cloud/error_reporting/v1beta1"
 
 
 describe Google::Cloud::ErrorReporting do
-  it "submits error event to Stackdriver Error Reporting service" do
+  it "submits error event to Error Reporting service" do
     token = Time.now.to_i
     response = send_request "test_error_reporting", "token=#{token}"
 

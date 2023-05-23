@@ -56,6 +56,7 @@ class ::Google::Cloud::Datastore::V1::Datastore::ClientTest < Minitest::Test
 
     # Create request parameters for a unary method.
     project_id = "hello world"
+    database_id = "hello world"
     read_options = {}
     keys = [{}]
 
@@ -63,6 +64,7 @@ class ::Google::Cloud::Datastore::V1::Datastore::ClientTest < Minitest::Test
       assert_equal :lookup, name
       assert_kind_of ::Google::Cloud::Datastore::V1::LookupRequest, request
       assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["database_id"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Datastore::V1::ReadOptions), request["read_options"]
       assert_kind_of ::Google::Cloud::Datastore::V1::Key, request["keys"].first
       refute_nil options
@@ -75,31 +77,31 @@ class ::Google::Cloud::Datastore::V1::Datastore::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.lookup({ project_id: project_id, read_options: read_options, keys: keys }) do |response, operation|
+      client.lookup({ project_id: project_id, database_id: database_id, read_options: read_options, keys: keys }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.lookup project_id: project_id, read_options: read_options, keys: keys do |response, operation|
+      client.lookup project_id: project_id, database_id: database_id, read_options: read_options, keys: keys do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.lookup ::Google::Cloud::Datastore::V1::LookupRequest.new(project_id: project_id, read_options: read_options, keys: keys) do |response, operation|
+      client.lookup ::Google::Cloud::Datastore::V1::LookupRequest.new(project_id: project_id, database_id: database_id, read_options: read_options, keys: keys) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.lookup({ project_id: project_id, read_options: read_options, keys: keys }, grpc_options) do |response, operation|
+      client.lookup({ project_id: project_id, database_id: database_id, read_options: read_options, keys: keys }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.lookup(::Google::Cloud::Datastore::V1::LookupRequest.new(project_id: project_id, read_options: read_options, keys: keys), grpc_options) do |response, operation|
+      client.lookup(::Google::Cloud::Datastore::V1::LookupRequest.new(project_id: project_id, database_id: database_id, read_options: read_options, keys: keys), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -118,6 +120,7 @@ class ::Google::Cloud::Datastore::V1::Datastore::ClientTest < Minitest::Test
 
     # Create request parameters for a unary method.
     project_id = "hello world"
+    database_id = "hello world"
     partition_id = {}
     read_options = {}
     query = {}
@@ -126,6 +129,7 @@ class ::Google::Cloud::Datastore::V1::Datastore::ClientTest < Minitest::Test
       assert_equal :run_query, name
       assert_kind_of ::Google::Cloud::Datastore::V1::RunQueryRequest, request
       assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["database_id"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Datastore::V1::PartitionId), request["partition_id"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Datastore::V1::ReadOptions), request["read_options"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Datastore::V1::Query), request["query"]
@@ -140,37 +144,104 @@ class ::Google::Cloud::Datastore::V1::Datastore::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.run_query({ project_id: project_id, partition_id: partition_id, read_options: read_options, query: query }) do |response, operation|
+      client.run_query({ project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, query: query }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.run_query project_id: project_id, partition_id: partition_id, read_options: read_options, query: query do |response, operation|
+      client.run_query project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, query: query do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.run_query ::Google::Cloud::Datastore::V1::RunQueryRequest.new(project_id: project_id, partition_id: partition_id, read_options: read_options, query: query) do |response, operation|
+      client.run_query ::Google::Cloud::Datastore::V1::RunQueryRequest.new(project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, query: query) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.run_query({ project_id: project_id, partition_id: partition_id, read_options: read_options, query: query }, grpc_options) do |response, operation|
+      client.run_query({ project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, query: query }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.run_query(::Google::Cloud::Datastore::V1::RunQueryRequest.new(project_id: project_id, partition_id: partition_id, read_options: read_options, query: query), grpc_options) do |response, operation|
+      client.run_query(::Google::Cloud::Datastore::V1::RunQueryRequest.new(project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, query: query), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Verify method calls
       assert_equal 5, run_query_client_stub.call_rpc_count
+    end
+  end
+
+  def test_run_aggregation_query
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Datastore::V1::RunAggregationQueryResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    project_id = "hello world"
+    database_id = "hello world"
+    partition_id = {}
+    read_options = {}
+    aggregation_query = {}
+
+    run_aggregation_query_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :run_aggregation_query, name
+      assert_kind_of ::Google::Cloud::Datastore::V1::RunAggregationQueryRequest, request
+      assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["database_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Datastore::V1::PartitionId), request["partition_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Datastore::V1::ReadOptions), request["read_options"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Datastore::V1::AggregationQuery), request["aggregation_query"]
+      assert_equal :aggregation_query, request.query_type
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, run_aggregation_query_client_stub do
+      # Create client
+      client = ::Google::Cloud::Datastore::V1::Datastore::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.run_aggregation_query({ project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, aggregation_query: aggregation_query }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.run_aggregation_query project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, aggregation_query: aggregation_query do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.run_aggregation_query ::Google::Cloud::Datastore::V1::RunAggregationQueryRequest.new(project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, aggregation_query: aggregation_query) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.run_aggregation_query({ project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, aggregation_query: aggregation_query }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.run_aggregation_query(::Google::Cloud::Datastore::V1::RunAggregationQueryRequest.new(project_id: project_id, database_id: database_id, partition_id: partition_id, read_options: read_options, aggregation_query: aggregation_query), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, run_aggregation_query_client_stub.call_rpc_count
     end
   end
 
@@ -183,12 +254,14 @@ class ::Google::Cloud::Datastore::V1::Datastore::ClientTest < Minitest::Test
 
     # Create request parameters for a unary method.
     project_id = "hello world"
+    database_id = "hello world"
     transaction_options = {}
 
     begin_transaction_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :begin_transaction, name
       assert_kind_of ::Google::Cloud::Datastore::V1::BeginTransactionRequest, request
       assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["database_id"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Datastore::V1::TransactionOptions), request["transaction_options"]
       refute_nil options
     end
@@ -200,31 +273,31 @@ class ::Google::Cloud::Datastore::V1::Datastore::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.begin_transaction({ project_id: project_id, transaction_options: transaction_options }) do |response, operation|
+      client.begin_transaction({ project_id: project_id, database_id: database_id, transaction_options: transaction_options }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.begin_transaction project_id: project_id, transaction_options: transaction_options do |response, operation|
+      client.begin_transaction project_id: project_id, database_id: database_id, transaction_options: transaction_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.begin_transaction ::Google::Cloud::Datastore::V1::BeginTransactionRequest.new(project_id: project_id, transaction_options: transaction_options) do |response, operation|
+      client.begin_transaction ::Google::Cloud::Datastore::V1::BeginTransactionRequest.new(project_id: project_id, database_id: database_id, transaction_options: transaction_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.begin_transaction({ project_id: project_id, transaction_options: transaction_options }, grpc_options) do |response, operation|
+      client.begin_transaction({ project_id: project_id, database_id: database_id, transaction_options: transaction_options }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.begin_transaction(::Google::Cloud::Datastore::V1::BeginTransactionRequest.new(project_id: project_id, transaction_options: transaction_options), grpc_options) do |response, operation|
+      client.begin_transaction(::Google::Cloud::Datastore::V1::BeginTransactionRequest.new(project_id: project_id, database_id: database_id, transaction_options: transaction_options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -243,6 +316,7 @@ class ::Google::Cloud::Datastore::V1::Datastore::ClientTest < Minitest::Test
 
     # Create request parameters for a unary method.
     project_id = "hello world"
+    database_id = "hello world"
     mode = :MODE_UNSPECIFIED
     transaction = "hello world"
     mutations = [{}]
@@ -251,6 +325,7 @@ class ::Google::Cloud::Datastore::V1::Datastore::ClientTest < Minitest::Test
       assert_equal :commit, name
       assert_kind_of ::Google::Cloud::Datastore::V1::CommitRequest, request
       assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["database_id"]
       assert_equal :MODE_UNSPECIFIED, request["mode"]
       assert_equal "hello world", request["transaction"]
       assert_equal :transaction, request.transaction_selector
@@ -265,31 +340,31 @@ class ::Google::Cloud::Datastore::V1::Datastore::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.commit({ project_id: project_id, mode: mode, transaction: transaction, mutations: mutations }) do |response, operation|
+      client.commit({ project_id: project_id, database_id: database_id, mode: mode, transaction: transaction, mutations: mutations }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.commit project_id: project_id, mode: mode, transaction: transaction, mutations: mutations do |response, operation|
+      client.commit project_id: project_id, database_id: database_id, mode: mode, transaction: transaction, mutations: mutations do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.commit ::Google::Cloud::Datastore::V1::CommitRequest.new(project_id: project_id, mode: mode, transaction: transaction, mutations: mutations) do |response, operation|
+      client.commit ::Google::Cloud::Datastore::V1::CommitRequest.new(project_id: project_id, database_id: database_id, mode: mode, transaction: transaction, mutations: mutations) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.commit({ project_id: project_id, mode: mode, transaction: transaction, mutations: mutations }, grpc_options) do |response, operation|
+      client.commit({ project_id: project_id, database_id: database_id, mode: mode, transaction: transaction, mutations: mutations }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.commit(::Google::Cloud::Datastore::V1::CommitRequest.new(project_id: project_id, mode: mode, transaction: transaction, mutations: mutations), grpc_options) do |response, operation|
+      client.commit(::Google::Cloud::Datastore::V1::CommitRequest.new(project_id: project_id, database_id: database_id, mode: mode, transaction: transaction, mutations: mutations), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -308,12 +383,14 @@ class ::Google::Cloud::Datastore::V1::Datastore::ClientTest < Minitest::Test
 
     # Create request parameters for a unary method.
     project_id = "hello world"
+    database_id = "hello world"
     transaction = "hello world"
 
     rollback_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :rollback, name
       assert_kind_of ::Google::Cloud::Datastore::V1::RollbackRequest, request
       assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["database_id"]
       assert_equal "hello world", request["transaction"]
       refute_nil options
     end
@@ -325,31 +402,31 @@ class ::Google::Cloud::Datastore::V1::Datastore::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.rollback({ project_id: project_id, transaction: transaction }) do |response, operation|
+      client.rollback({ project_id: project_id, database_id: database_id, transaction: transaction }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.rollback project_id: project_id, transaction: transaction do |response, operation|
+      client.rollback project_id: project_id, database_id: database_id, transaction: transaction do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.rollback ::Google::Cloud::Datastore::V1::RollbackRequest.new(project_id: project_id, transaction: transaction) do |response, operation|
+      client.rollback ::Google::Cloud::Datastore::V1::RollbackRequest.new(project_id: project_id, database_id: database_id, transaction: transaction) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.rollback({ project_id: project_id, transaction: transaction }, grpc_options) do |response, operation|
+      client.rollback({ project_id: project_id, database_id: database_id, transaction: transaction }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.rollback(::Google::Cloud::Datastore::V1::RollbackRequest.new(project_id: project_id, transaction: transaction), grpc_options) do |response, operation|
+      client.rollback(::Google::Cloud::Datastore::V1::RollbackRequest.new(project_id: project_id, database_id: database_id, transaction: transaction), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -368,12 +445,14 @@ class ::Google::Cloud::Datastore::V1::Datastore::ClientTest < Minitest::Test
 
     # Create request parameters for a unary method.
     project_id = "hello world"
+    database_id = "hello world"
     keys = [{}]
 
     allocate_ids_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :allocate_ids, name
       assert_kind_of ::Google::Cloud::Datastore::V1::AllocateIdsRequest, request
       assert_equal "hello world", request["project_id"]
+      assert_equal "hello world", request["database_id"]
       assert_kind_of ::Google::Cloud::Datastore::V1::Key, request["keys"].first
       refute_nil options
     end
@@ -385,31 +464,31 @@ class ::Google::Cloud::Datastore::V1::Datastore::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.allocate_ids({ project_id: project_id, keys: keys }) do |response, operation|
+      client.allocate_ids({ project_id: project_id, database_id: database_id, keys: keys }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.allocate_ids project_id: project_id, keys: keys do |response, operation|
+      client.allocate_ids project_id: project_id, database_id: database_id, keys: keys do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.allocate_ids ::Google::Cloud::Datastore::V1::AllocateIdsRequest.new(project_id: project_id, keys: keys) do |response, operation|
+      client.allocate_ids ::Google::Cloud::Datastore::V1::AllocateIdsRequest.new(project_id: project_id, database_id: database_id, keys: keys) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.allocate_ids({ project_id: project_id, keys: keys }, grpc_options) do |response, operation|
+      client.allocate_ids({ project_id: project_id, database_id: database_id, keys: keys }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.allocate_ids(::Google::Cloud::Datastore::V1::AllocateIdsRequest.new(project_id: project_id, keys: keys), grpc_options) do |response, operation|
+      client.allocate_ids(::Google::Cloud::Datastore::V1::AllocateIdsRequest.new(project_id: project_id, database_id: database_id, keys: keys), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

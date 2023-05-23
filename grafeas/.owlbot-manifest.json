@@ -1,0 +1,23 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "grafeas.gemspec",
+    "lib/grafeas.rb",
+    "lib/grafeas/version.rb",
+    "test/grafeas/client_test.rb",
+    "test/grafeas/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml",
+    "MIGRATING.md"
+  ]
+}

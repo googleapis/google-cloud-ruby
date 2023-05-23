@@ -247,6 +247,28 @@ describe "topics" do
     end
   end
 
+  it "supports pubsub_publisher_with_compression" do
+    #setup
+    sample = SampleLoader.load "pubsub_publisher_with_compression.rb"
+    @topic = pubsub.create_topic topic_id
+    @subscription = @topic.subscribe random_subscription_id
+
+    # pubsub_publisher_with_compression
+    assert_output /Published a compressed message of message ID:/ do
+      sample.run project_id: pubsub.project, topic_id: topic_id
+    end
+
+    messages = []
+    expect_with_retry "pubsub_publisher_with_compression" do
+      @subscription.pull(immediate: false, max: 1).each do |message|
+        messages << message
+        message.acknowledge!
+      end
+      assert_equal 1, messages.length
+      assert_equal "This is a test message.", messages[0].data
+    end
+  end
+
   it "supports pubsub_publish_custom_attributes" do
     #setup
     @topic = pubsub.create_topic topic_id
@@ -314,6 +336,17 @@ describe "topics" do
       end
       assert_equal 1, messages.length
       assert_equal "This is a test message.", messages[0].data
+    end
+  end
+
+  it "supports pubsub_publisher_flow_control" do
+    #setup
+    @topic = pubsub.create_topic topic_id
+    @subscription = @topic.subscribe random_subscription_id
+
+    # pubsub_publisher_flow_control
+    assert_output "Published messages with flow control settings to #{topic_id}.\n" do
+      publish_messages_async_with_flow_control topic_id: topic_id
     end
   end
 

@@ -34,7 +34,7 @@ module Google
         ##
         # API v1beta1 service for Cloud AI Platform Notebooks.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/notebooks/v1beta1/notebook_service"
         #     client = ::Google::Cloud::Notebooks::V1beta1::NotebookService::Client.new

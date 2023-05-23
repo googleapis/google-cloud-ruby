@@ -1,0 +1,24 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-tpu.gemspec",
+    "lib/google-cloud-tpu.rb",
+    "lib/google/cloud/tpu.rb",
+    "lib/google/cloud/tpu/version.rb",
+    "test/google/cloud/tpu/client_test.rb",
+    "test/google/cloud/tpu/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}

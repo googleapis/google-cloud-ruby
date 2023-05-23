@@ -23,10 +23,17 @@ module Google
   module Cloud
     module Scheduler
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # API client module.
+      #
+      # @example Load this package, including all its services, and instantiate a gRPC client
       #
       #     require "google/cloud/scheduler/v1"
       #     client = ::Google::Cloud::Scheduler::V1::CloudScheduler::Client.new
+      #
+      # @example Load this package, including all its services, and instantiate a REST client
+      #
+      #     require "google/cloud/scheduler/v1"
+      #     client = ::Google::Cloud::Scheduler::V1::CloudScheduler::Rest::Client.new
       #
       module V1
       end

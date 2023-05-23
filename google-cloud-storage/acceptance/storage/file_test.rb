@@ -27,6 +27,10 @@ describe Google::Cloud::Storage::File, :storage do
     { logo: { path: "acceptance/data/CloudPlatform_128px_Retina.png" },
       big:  { path: "acceptance/data/three-mb-file.tif" } }
   end
+  let(:files_big_md5) { Google::Cloud::Storage::File::Verifier.md5_for File.new(files[:big][:path]) }
+  let(:files_big_crc32c) { Google::Cloud::Storage::File::Verifier.crc32c_for File.new(files[:big][:path]) }
+  let(:io_md5) { Google::Cloud::Storage::File::Verifier.md5_for StringIO.new("Hello world!") }
+  let(:io_crc32c) { Google::Cloud::Storage::File::Verifier.crc32c_for StringIO.new("Hello world!") }
   let(:custom_time) { DateTime.new 2020, 2, 3, 4, 5, 6 }
 
   before do
@@ -94,9 +98,13 @@ describe Google::Cloud::Storage::File, :storage do
     uploaded_1.reload!
     _(uploaded_1.generation).must_equal generation_1
 
-    uploaded_2 = bucket.create_file StringIO.new("generation 2"), filename
+    uploaded_2 = bucket.create_file StringIO.new("generation 2"), filename, if_generation_match: generation_1
     generation_2 = uploaded_2.generation
     _(generation_2).wont_equal generation_1
+
+    expect do
+      bucket.create_file StringIO.new("generation 2"), filename, if_generation_match: generation_1
+    end.must_raise Google::Cloud::FailedPreconditionError
 
     uploaded_1.reload! generation: true
     _(uploaded_1.generation).must_equal generation_1
@@ -106,7 +114,7 @@ describe Google::Cloud::Storage::File, :storage do
     _(uploaded_1.generation).must_equal generation_2
 
     Tempfile.open ["generation_file", ".txt"] do |tmpfile|
-      downloaded = bucket.file(filename).download tmpfile
+      downloaded = bucket.file(filename, if_generation_match: generation_2).download tmpfile
       _(File.read(downloaded.path)).must_equal "generation 2"
     end
 
@@ -116,7 +124,7 @@ describe Google::Cloud::Storage::File, :storage do
     end
 
     uploaded_2.delete generation: generation_1
-    uploaded_2.delete generation: generation_2
+    uploaded_2.delete if_generation_match: generation_2
     bucket.versioning = false
   end
 
@@ -137,6 +145,78 @@ describe Google::Cloud::Storage::File, :storage do
     Tempfile.open ["google-cloud", ".png"] do |tmpfile|
       tmpfile.binmode
       downloaded = uploaded.download tmpfile, verify: :all
+
+      _(downloaded.size).must_equal original.size
+      _(downloaded.size).must_equal uploaded.size
+      _(downloaded.size).must_equal tmpfile.size # Same file
+
+      _(File.read(downloaded.path, mode: "rb")).must_equal File.read(original.path, mode: "rb")
+    end
+    uploaded.delete
+  end
+
+  it "should upload and download a larger file with checksum: :md5" do
+    original = File.new files[:big][:path]
+    uploaded = bucket.create_file original, "BigLogo.png", checksum: :md5
+
+    _(uploaded.md5).must_equal files_big_md5
+    Tempfile.open ["google-cloud", ".png"] do |tmpfile|
+      tmpfile.binmode
+      downloaded = uploaded.download tmpfile, verify: :md5
+
+      _(downloaded.size).must_equal original.size
+      _(downloaded.size).must_equal uploaded.size
+      _(downloaded.size).must_equal tmpfile.size # Same file
+
+      _(File.read(downloaded.path, mode: "rb")).must_equal File.read(original.path, mode: "rb")
+    end
+    uploaded.delete
+  end
+
+  it "should upload and download a larger file with checksum: :crc32c" do
+    original = File.new files[:big][:path]
+    uploaded = bucket.create_file original, "BigLogo.png", checksum: :crc32c
+
+    _(uploaded.crc32c).must_equal files_big_crc32c
+    Tempfile.open ["google-cloud", ".png"] do |tmpfile|
+      tmpfile.binmode
+      downloaded = uploaded.download tmpfile, verify: :crc32c
+
+      _(downloaded.size).must_equal original.size
+      _(downloaded.size).must_equal uploaded.size
+      _(downloaded.size).must_equal tmpfile.size # Same file
+
+      _(File.read(downloaded.path, mode: "rb")).must_equal File.read(original.path, mode: "rb")
+    end
+    uploaded.delete
+  end
+
+  it "should upload and download a larger file with md5" do
+    original = File.new files[:big][:path]
+    uploaded = bucket.create_file original, "BigLogo.png", md5: files_big_md5
+
+    _(uploaded.md5).must_equal files_big_md5
+    Tempfile.open ["google-cloud", ".png"] do |tmpfile|
+      tmpfile.binmode
+      downloaded = uploaded.download tmpfile, verify: :md5
+
+      _(downloaded.size).must_equal original.size
+      _(downloaded.size).must_equal uploaded.size
+      _(downloaded.size).must_equal tmpfile.size # Same file
+
+      _(File.read(downloaded.path, mode: "rb")).must_equal File.read(original.path, mode: "rb")
+    end
+    uploaded.delete
+  end
+
+  it "should upload and download a larger file with crc32c" do
+    original = File.new files[:big][:path]
+    uploaded = bucket.create_file original, "BigLogo.png", crc32c: files_big_crc32c
+
+    _(uploaded.crc32c).must_equal files_big_crc32c
+    Tempfile.open ["google-cloud", ".png"] do |tmpfile|
+      tmpfile.binmode
+      downloaded = uploaded.download tmpfile, verify: :crc32c
 
       _(downloaded.size).must_equal original.size
       _(downloaded.size).must_equal uploaded.size
@@ -179,7 +259,10 @@ describe Google::Cloud::Storage::File, :storage do
     _(uploaded.metadata).must_be :empty?
     _(uploaded.metageneration).must_equal 1
 
-    uploaded.update do |f|
+    uploaded.update if_generation_match: generation,
+                    if_generation_not_match: (generation - 1),
+                    if_metageneration_match: 1,
+                    if_metageneration_not_match: 0 do |f|
       f.cache_control = "private, max-age=0, no-cache"
       f.content_disposition = "attachment; filename=filename.ext"
       f.content_language = "en"
@@ -212,6 +295,12 @@ describe Google::Cloud::Storage::File, :storage do
     _(uploaded.metadata["player"]).must_equal "Alice"
     _(uploaded.metadata["score"]).must_equal "101"
     _(uploaded.metageneration).must_equal 2
+
+    expect do
+      uploaded.update if_generation_match: (generation - 1) do |f|
+        f.content_language = "de"
+      end
+    end.must_raise Google::Cloud::FailedPreconditionError
 
     uploaded.reload!
 
@@ -290,6 +379,7 @@ describe Google::Cloud::Storage::File, :storage do
     inmemory = StringIO.new "Hello world!"
     uploaded = bucket.create_file inmemory, "uploaded/with/inmemory.txt"
     _(uploaded.name).must_equal "uploaded/with/inmemory.txt"
+    _(uploaded.md5).must_equal io_md5
 
     downloadio = StringIO.new()
     downloaded = uploaded.download downloadio
@@ -302,6 +392,22 @@ describe Google::Cloud::Storage::File, :storage do
 
     _(downloaded.read).must_equal inmemory.read
     _(downloaded.read.encoding).must_equal inmemory.read.encoding
+
+    uploaded.delete
+  end
+
+  it "should upload text using IO and checksum: :md5" do
+    inmemory = StringIO.new "Hello world!"
+    uploaded = bucket.create_file inmemory, "uploaded/with/inmemory.txt", checksum: :md5
+    _(uploaded.md5).must_equal io_md5
+
+    uploaded.delete
+  end
+
+  it "should upload text using IO and checksum: :crc32c" do
+    inmemory = StringIO.new "Hello world!"
+    uploaded = bucket.create_file inmemory, "uploaded/with/inmemory.txt", checksum: :crc32c
+    _(uploaded.crc32c).must_equal io_crc32c
 
     uploaded.delete
   end
@@ -351,6 +457,25 @@ describe Google::Cloud::Storage::File, :storage do
     uploaded.delete
   end
 
+  it "should upload and download an empty file" do
+    begin
+      data = ""
+      file = StringIO.new
+
+      uploaded = bucket.create_file file, "uploaded/empty-file.txt"
+      _(uploaded.name).must_equal "uploaded/empty-file.txt"
+
+      downloadio = StringIO.new
+      downloaded = uploaded.download downloadio
+      _(downloaded).must_be_kind_of StringIO
+
+      downloaded_data = downloaded.string
+      _(downloaded_data).must_equal data
+    ensure
+      uploaded.delete
+    end
+  end
+
   it "should download and verify when Content-Encoding gzip response header with skip_decompress" do
     bucket = bucket_public
     file = bucket.file bucket_public_file_gzip
@@ -384,7 +509,7 @@ describe Google::Cloud::Storage::File, :storage do
 
     Tempfile.open ["hello_world", ".txt"] do |tmpfile|
       tmpfile.binmode
-      downloaded = file.download tmpfile,  verify: :crc32c
+      downloaded = file.download tmpfile, verify: :crc32c
 
       _(File.read(downloaded.path, mode: "rb")).must_equal "hello world" # decompressed file data
     end
@@ -672,6 +797,18 @@ describe Google::Cloud::Storage::File, :storage do
     uploaded_a.delete
     uploaded_b.delete
     composed.delete
+  end
+
+  it "should raise when attempting to compose existing files with failing precondition" do
+    uploaded_a = bucket.create_file StringIO.new("a"), "a.txt"
+    uploaded_b = bucket.create_file StringIO.new("b"), "b.txt"
+    if_source_generation_match = [nil, (uploaded_b.generation - 1)] # Bad generation value.
+
+    expect do
+      bucket.compose [uploaded_a.name, uploaded_b.name], "ab.txt", if_source_generation_match: if_source_generation_match
+    end.must_raise Google::Cloud::FailedPreconditionError
+    uploaded_a.delete
+    uploaded_b.delete
   end
 
   describe "anonymous project" do

@@ -341,9 +341,7 @@ module Google
         #   zone.export "path/to/db.example.com"
         #
         def export path
-          File.open path, "w" do |f|
-            f.write to_zonefile
-          end
+          File.write path, to_zonefile
         end
 
         ##

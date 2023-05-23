@@ -8,9 +8,9 @@ require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/dialogflow/v2/participant_pb'
-require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/dialogflow/v2/answer_record.proto", :syntax => :proto3) do
     add_message "google.cloud.dialogflow.v2.AnswerRecord" do
@@ -54,6 +54,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :answer_relevance, :enum, 1, "google.cloud.dialogflow.v2.AgentAssistantFeedback.AnswerRelevance"
       optional :document_correctness, :enum, 2, "google.cloud.dialogflow.v2.AgentAssistantFeedback.DocumentCorrectness"
       optional :document_efficiency, :enum, 3, "google.cloud.dialogflow.v2.AgentAssistantFeedback.DocumentEfficiency"
+      optional :summarization_feedback, :message, 4, "google.cloud.dialogflow.v2.AgentAssistantFeedback.SummarizationFeedback"
+    end
+    add_message "google.cloud.dialogflow.v2.AgentAssistantFeedback.SummarizationFeedback" do
+      optional :start_time, :message, 1, "google.protobuf.Timestamp"
+      optional :submit_time, :message, 2, "google.protobuf.Timestamp"
+      optional :summary_text, :string, 3
     end
     add_enum "google.cloud.dialogflow.v2.AgentAssistantFeedback.AnswerRelevance" do
       value :ANSWER_RELEVANCE_UNSPECIFIED, 0
@@ -90,6 +96,7 @@ module Google
         AnswerFeedback = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.AnswerFeedback").msgclass
         AnswerFeedback::CorrectnessLevel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.AnswerFeedback.CorrectnessLevel").enummodule
         AgentAssistantFeedback = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.AgentAssistantFeedback").msgclass
+        AgentAssistantFeedback::SummarizationFeedback = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.AgentAssistantFeedback.SummarizationFeedback").msgclass
         AgentAssistantFeedback::AnswerRelevance = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.AgentAssistantFeedback.AnswerRelevance").enummodule
         AgentAssistantFeedback::DocumentCorrectness = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.AgentAssistantFeedback.DocumentCorrectness").enummodule
         AgentAssistantFeedback::DocumentEfficiency = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.AgentAssistantFeedback.DocumentEfficiency").enummodule

@@ -41,13 +41,12 @@ module Google
             # See {::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all DataLabelingService clients:
-            #
-            #     ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all DataLabelingService clients
+            #   ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -69,68 +68,44 @@ module Google
 
                 default_config.rpcs.get_dataset.timeout = 30.0
                 default_config.rpcs.get_dataset.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 30.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_datasets.timeout = 30.0
                 default_config.rpcs.list_datasets.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 30.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.delete_dataset.timeout = 30.0
                 default_config.rpcs.delete_dataset.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 30.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.import_data.timeout = 30.0
 
                 default_config.rpcs.export_data.timeout = 30.0
                 default_config.rpcs.export_data.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 30.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_data_item.timeout = 30.0
                 default_config.rpcs.get_data_item.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 30.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_data_items.timeout = 30.0
                 default_config.rpcs.list_data_items.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 30.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_annotated_dataset.timeout = 30.0
                 default_config.rpcs.get_annotated_dataset.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 30.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_annotated_datasets.timeout = 30.0
                 default_config.rpcs.list_annotated_datasets.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 30.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.label_image.timeout = 30.0
@@ -141,86 +116,56 @@ module Google
 
                 default_config.rpcs.get_example.timeout = 30.0
                 default_config.rpcs.get_example.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 30.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_examples.timeout = 30.0
                 default_config.rpcs.list_examples.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 30.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.create_annotation_spec_set.timeout = 30.0
 
                 default_config.rpcs.get_annotation_spec_set.timeout = 30.0
                 default_config.rpcs.get_annotation_spec_set.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 30.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_annotation_spec_sets.timeout = 30.0
                 default_config.rpcs.list_annotation_spec_sets.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 30.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.delete_annotation_spec_set.timeout = 30.0
                 default_config.rpcs.delete_annotation_spec_set.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 30.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.create_instruction.timeout = 30.0
 
                 default_config.rpcs.get_instruction.timeout = 30.0
                 default_config.rpcs.get_instruction.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 30.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_instructions.timeout = 30.0
                 default_config.rpcs.list_instructions.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 30.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.delete_instruction.timeout = 30.0
                 default_config.rpcs.delete_instruction.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 30.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_evaluation.timeout = 30.0
                 default_config.rpcs.get_evaluation.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 30.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.search_evaluations.timeout = 30.0
                 default_config.rpcs.search_evaluations.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 30.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.search_example_comparisons.timeout = 30.0
@@ -231,10 +176,7 @@ module Google
 
                 default_config.rpcs.get_evaluation_job.timeout = 30.0
                 default_config.rpcs.get_evaluation_job.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 30.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.pause_evaluation_job.timeout = 30.0
@@ -243,18 +185,12 @@ module Google
 
                 default_config.rpcs.delete_evaluation_job.timeout = 30.0
                 default_config.rpcs.delete_evaluation_job.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 30.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_evaluation_jobs.timeout = 30.0
                 default_config.rpcs.list_evaluation_jobs.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 30.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config
@@ -286,19 +222,15 @@ module Google
             ##
             # Create a new DataLabelingService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new DataLabelingService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
             #
-            #     client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
-            #
-            # To create a new DataLabelingService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the DataLabelingService client.
             # @yieldparam config [Client::Configuration]
@@ -318,14 +250,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -333,6 +264,7 @@ module Google
 
               @operations_client = Operations.new do |config|
                 config.credentials = credentials
+                config.quota_project = @quota_project_id
                 config.endpoint = @config.endpoint
               end
 
@@ -386,6 +318,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_labeling/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataLabeling::V1beta1::CreateDatasetRequest.new
+            #
+            #   # Call the create_dataset method.
+            #   result = client.create_dataset request
+            #
+            #   # The returned object is of type Google::Cloud::DataLabeling::V1beta1::Dataset.
+            #   p result
+            #
             def create_dataset request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -403,16 +350,20 @@ module Google
                 gapic_version: ::Google::Cloud::DataLabeling::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_dataset.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_dataset.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :create_dataset, request, options: options do |response, operation|
@@ -453,6 +404,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_labeling/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataLabeling::V1beta1::GetDatasetRequest.new
+            #
+            #   # Call the get_dataset method.
+            #   result = client.get_dataset request
+            #
+            #   # The returned object is of type Google::Cloud::DataLabeling::V1beta1::Dataset.
+            #   p result
+            #
             def get_dataset request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -470,16 +436,20 @@ module Google
                 gapic_version: ::Google::Cloud::DataLabeling::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_dataset.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_dataset.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :get_dataset, request, options: options do |response, operation|
@@ -531,6 +501,25 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_labeling/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataLabeling::V1beta1::ListDatasetsRequest.new
+            #
+            #   # Call the list_datasets method.
+            #   result = client.list_datasets request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::DataLabeling::V1beta1::Dataset.
+            #     p item
+            #   end
+            #
             def list_datasets request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -548,16 +537,20 @@ module Google
                 gapic_version: ::Google::Cloud::DataLabeling::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_datasets.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_datasets.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :list_datasets, request, options: options do |response, operation|
@@ -599,6 +592,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_labeling/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataLabeling::V1beta1::DeleteDatasetRequest.new
+            #
+            #   # Call the delete_dataset method.
+            #   result = client.delete_dataset request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_dataset request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -616,16 +624,20 @@ module Google
                 gapic_version: ::Google::Cloud::DataLabeling::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_dataset.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_dataset.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :delete_dataset, request, options: options do |response, operation|
@@ -675,6 +687,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_labeling/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataLabeling::V1beta1::ImportDataRequest.new
+            #
+            #   # Call the import_data method.
+            #   result = client.import_data request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
             def import_data request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -692,16 +726,20 @@ module Google
                 gapic_version: ::Google::Cloud::DataLabeling::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.import_data.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.import_data.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :import_data, request, options: options do |response, operation|
@@ -756,6 +794,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_labeling/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataLabeling::V1beta1::ExportDataRequest.new
+            #
+            #   # Call the export_data method.
+            #   result = client.export_data request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
             def export_data request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -773,16 +833,20 @@ module Google
                 gapic_version: ::Google::Cloud::DataLabeling::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.export_data.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.export_data.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :export_data, request, options: options do |response, operation|
@@ -825,6 +889,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_labeling/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataLabeling::V1beta1::GetDataItemRequest.new
+            #
+            #   # Call the get_data_item method.
+            #   result = client.get_data_item request
+            #
+            #   # The returned object is of type Google::Cloud::DataLabeling::V1beta1::DataItem.
+            #   p result
+            #
             def get_data_item request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -842,16 +921,20 @@ module Google
                 gapic_version: ::Google::Cloud::DataLabeling::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_data_item.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_data_item.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :get_data_item, request, options: options do |response, operation|
@@ -904,6 +987,25 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_labeling/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataLabeling::V1beta1::ListDataItemsRequest.new
+            #
+            #   # Call the list_data_items method.
+            #   result = client.list_data_items request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::DataLabeling::V1beta1::DataItem.
+            #     p item
+            #   end
+            #
             def list_data_items request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -921,16 +1023,20 @@ module Google
                 gapic_version: ::Google::Cloud::DataLabeling::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_data_items.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_data_items.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :list_data_items, request, options: options do |response, operation|
@@ -973,6 +1079,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_labeling/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataLabeling::V1beta1::GetAnnotatedDatasetRequest.new
+            #
+            #   # Call the get_annotated_dataset method.
+            #   result = client.get_annotated_dataset request
+            #
+            #   # The returned object is of type Google::Cloud::DataLabeling::V1beta1::AnnotatedDataset.
+            #   p result
+            #
             def get_annotated_dataset request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -990,16 +1111,20 @@ module Google
                 gapic_version: ::Google::Cloud::DataLabeling::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_annotated_dataset.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_annotated_dataset.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :get_annotated_dataset, request, options: options do |response, operation|
@@ -1051,6 +1176,25 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_labeling/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataLabeling::V1beta1::ListAnnotatedDatasetsRequest.new
+            #
+            #   # Call the list_annotated_datasets method.
+            #   result = client.list_annotated_datasets request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::DataLabeling::V1beta1::AnnotatedDataset.
+            #     p item
+            #   end
+            #
             def list_annotated_datasets request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1068,16 +1212,20 @@ module Google
                 gapic_version: ::Google::Cloud::DataLabeling::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_annotated_datasets.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_annotated_datasets.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :list_annotated_datasets, request, options: options do |response, operation|
@@ -1120,6 +1268,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_labeling/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataLabeling::V1beta1::DeleteAnnotatedDatasetRequest.new
+            #
+            #   # Call the delete_annotated_dataset method.
+            #   result = client.delete_annotated_dataset request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_annotated_dataset request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1137,16 +1300,20 @@ module Google
                 gapic_version: ::Google::Cloud::DataLabeling::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_annotated_dataset.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_annotated_dataset.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :delete_annotated_dataset, request, options: options do |response, operation|
@@ -1208,6 +1375,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_labeling/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataLabeling::V1beta1::LabelImageRequest.new
+            #
+            #   # Call the label_image method.
+            #   result = client.label_image request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
             def label_image request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1225,16 +1414,20 @@ module Google
                 gapic_version: ::Google::Cloud::DataLabeling::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.label_image.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.label_image.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :label_image, request, options: options do |response, operation|
@@ -1297,6 +1490,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_labeling/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataLabeling::V1beta1::LabelVideoRequest.new
+            #
+            #   # Call the label_video method.
+            #   result = client.label_video request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
             def label_video request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1314,16 +1529,20 @@ module Google
                 gapic_version: ::Google::Cloud::DataLabeling::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.label_video.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.label_video.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :label_video, request, options: options do |response, operation|
@@ -1378,6 +1597,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_labeling/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataLabeling::V1beta1::LabelTextRequest.new
+            #
+            #   # Call the label_text method.
+            #   result = client.label_text request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
             def label_text request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1395,16 +1636,20 @@ module Google
                 gapic_version: ::Google::Cloud::DataLabeling::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.label_text.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.label_text.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :label_text, request, options: options do |response, operation|
@@ -1451,6 +1696,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_labeling/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataLabeling::V1beta1::GetExampleRequest.new
+            #
+            #   # Call the get_example method.
+            #   result = client.get_example request
+            #
+            #   # The returned object is of type Google::Cloud::DataLabeling::V1beta1::Example.
+            #   p result
+            #
             def get_example request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1468,16 +1728,20 @@ module Google
                 gapic_version: ::Google::Cloud::DataLabeling::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_example.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_example.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :get_example, request, options: options do |response, operation|
@@ -1531,6 +1795,25 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_labeling/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataLabeling::V1beta1::ListExamplesRequest.new
+            #
+            #   # Call the list_examples method.
+            #   result = client.list_examples request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::DataLabeling::V1beta1::Example.
+            #     p item
+            #   end
+            #
             def list_examples request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1548,16 +1831,20 @@ module Google
                 gapic_version: ::Google::Cloud::DataLabeling::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_examples.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_examples.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :list_examples, request, options: options do |response, operation|
@@ -1603,6 +1890,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_labeling/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataLabeling::V1beta1::CreateAnnotationSpecSetRequest.new
+            #
+            #   # Call the create_annotation_spec_set method.
+            #   result = client.create_annotation_spec_set request
+            #
+            #   # The returned object is of type Google::Cloud::DataLabeling::V1beta1::AnnotationSpecSet.
+            #   p result
+            #
             def create_annotation_spec_set request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1620,16 +1922,20 @@ module Google
                 gapic_version: ::Google::Cloud::DataLabeling::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_annotation_spec_set.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_annotation_spec_set.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :create_annotation_spec_set, request, options: options do |response, operation|
@@ -1670,6 +1976,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_labeling/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataLabeling::V1beta1::GetAnnotationSpecSetRequest.new
+            #
+            #   # Call the get_annotation_spec_set method.
+            #   result = client.get_annotation_spec_set request
+            #
+            #   # The returned object is of type Google::Cloud::DataLabeling::V1beta1::AnnotationSpecSet.
+            #   p result
+            #
             def get_annotation_spec_set request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1687,16 +2008,20 @@ module Google
                 gapic_version: ::Google::Cloud::DataLabeling::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_annotation_spec_set.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_annotation_spec_set.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :get_annotation_spec_set, request, options: options do |response, operation|
@@ -1748,6 +2073,25 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_labeling/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataLabeling::V1beta1::ListAnnotationSpecSetsRequest.new
+            #
+            #   # Call the list_annotation_spec_sets method.
+            #   result = client.list_annotation_spec_sets request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::DataLabeling::V1beta1::AnnotationSpecSet.
+            #     p item
+            #   end
+            #
             def list_annotation_spec_sets request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1765,16 +2109,20 @@ module Google
                 gapic_version: ::Google::Cloud::DataLabeling::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_annotation_spec_sets.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_annotation_spec_sets.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :list_annotation_spec_sets, request, options: options do |response, operation|
@@ -1816,6 +2164,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_labeling/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataLabeling::V1beta1::DeleteAnnotationSpecSetRequest.new
+            #
+            #   # Call the delete_annotation_spec_set method.
+            #   result = client.delete_annotation_spec_set request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_annotation_spec_set request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1833,16 +2196,20 @@ module Google
                 gapic_version: ::Google::Cloud::DataLabeling::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_annotation_spec_set.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_annotation_spec_set.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :delete_annotation_spec_set, request, options: options do |response, operation|
@@ -1885,6 +2252,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_labeling/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataLabeling::V1beta1::CreateInstructionRequest.new
+            #
+            #   # Call the create_instruction method.
+            #   result = client.create_instruction request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
             def create_instruction request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1902,16 +2291,20 @@ module Google
                 gapic_version: ::Google::Cloud::DataLabeling::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_instruction.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_instruction.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :create_instruction, request, options: options do |response, operation|
@@ -1953,6 +2346,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_labeling/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataLabeling::V1beta1::GetInstructionRequest.new
+            #
+            #   # Call the get_instruction method.
+            #   result = client.get_instruction request
+            #
+            #   # The returned object is of type Google::Cloud::DataLabeling::V1beta1::Instruction.
+            #   p result
+            #
             def get_instruction request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1970,16 +2378,20 @@ module Google
                 gapic_version: ::Google::Cloud::DataLabeling::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_instruction.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_instruction.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :get_instruction, request, options: options do |response, operation|
@@ -2031,6 +2443,25 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_labeling/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataLabeling::V1beta1::ListInstructionsRequest.new
+            #
+            #   # Call the list_instructions method.
+            #   result = client.list_instructions request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::DataLabeling::V1beta1::Instruction.
+            #     p item
+            #   end
+            #
             def list_instructions request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2048,16 +2479,20 @@ module Google
                 gapic_version: ::Google::Cloud::DataLabeling::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_instructions.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_instructions.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :list_instructions, request, options: options do |response, operation|
@@ -2099,6 +2534,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_labeling/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataLabeling::V1beta1::DeleteInstructionRequest.new
+            #
+            #   # Call the delete_instruction method.
+            #   result = client.delete_instruction request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_instruction request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2116,16 +2566,20 @@ module Google
                 gapic_version: ::Google::Cloud::DataLabeling::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_instruction.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_instruction.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :delete_instruction, request, options: options do |response, operation|
@@ -2168,6 +2622,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_labeling/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataLabeling::V1beta1::GetEvaluationRequest.new
+            #
+            #   # Call the get_evaluation method.
+            #   result = client.get_evaluation request
+            #
+            #   # The returned object is of type Google::Cloud::DataLabeling::V1beta1::Evaluation.
+            #   p result
+            #
             def get_evaluation request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2185,16 +2654,20 @@ module Google
                 gapic_version: ::Google::Cloud::DataLabeling::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_evaluation.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_evaluation.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :get_evaluation, request, options: options do |response, operation|
@@ -2278,6 +2751,25 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_labeling/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataLabeling::V1beta1::SearchEvaluationsRequest.new
+            #
+            #   # Call the search_evaluations method.
+            #   result = client.search_evaluations request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::DataLabeling::V1beta1::Evaluation.
+            #     p item
+            #   end
+            #
             def search_evaluations request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2295,16 +2787,20 @@ module Google
                 gapic_version: ::Google::Cloud::DataLabeling::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.search_evaluations.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.search_evaluations.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :search_evaluations, request, options: options do |response, operation|
@@ -2361,6 +2857,25 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_labeling/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataLabeling::V1beta1::SearchExampleComparisonsRequest.new
+            #
+            #   # Call the search_example_comparisons method.
+            #   result = client.search_example_comparisons request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::DataLabeling::V1beta1::SearchExampleComparisonsResponse::ExampleComparison.
+            #     p item
+            #   end
+            #
             def search_example_comparisons request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2378,16 +2893,20 @@ module Google
                 gapic_version: ::Google::Cloud::DataLabeling::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.search_example_comparisons.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.search_example_comparisons.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :search_example_comparisons, request, options: options do |response, operation|
@@ -2431,6 +2950,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_labeling/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataLabeling::V1beta1::CreateEvaluationJobRequest.new
+            #
+            #   # Call the create_evaluation_job method.
+            #   result = client.create_evaluation_job request
+            #
+            #   # The returned object is of type Google::Cloud::DataLabeling::V1beta1::EvaluationJob.
+            #   p result
+            #
             def create_evaluation_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2448,16 +2982,20 @@ module Google
                 gapic_version: ::Google::Cloud::DataLabeling::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_evaluation_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_evaluation_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :create_evaluation_job, request, options: options do |response, operation|
@@ -2512,6 +3050,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_labeling/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataLabeling::V1beta1::UpdateEvaluationJobRequest.new
+            #
+            #   # Call the update_evaluation_job method.
+            #   result = client.update_evaluation_job request
+            #
+            #   # The returned object is of type Google::Cloud::DataLabeling::V1beta1::EvaluationJob.
+            #   p result
+            #
             def update_evaluation_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2529,16 +3082,20 @@ module Google
                 gapic_version: ::Google::Cloud::DataLabeling::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "evaluation_job.name" => request.evaluation_job.name
-              }
+              header_params = {}
+              if request.evaluation_job&.name
+                header_params["evaluation_job.name"] = request.evaluation_job.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_evaluation_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_evaluation_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :update_evaluation_job, request, options: options do |response, operation|
@@ -2580,6 +3137,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_labeling/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataLabeling::V1beta1::GetEvaluationJobRequest.new
+            #
+            #   # Call the get_evaluation_job method.
+            #   result = client.get_evaluation_job request
+            #
+            #   # The returned object is of type Google::Cloud::DataLabeling::V1beta1::EvaluationJob.
+            #   p result
+            #
             def get_evaluation_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2597,16 +3169,20 @@ module Google
                 gapic_version: ::Google::Cloud::DataLabeling::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_evaluation_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_evaluation_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :get_evaluation_job, request, options: options do |response, operation|
@@ -2649,6 +3225,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_labeling/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataLabeling::V1beta1::PauseEvaluationJobRequest.new
+            #
+            #   # Call the pause_evaluation_job method.
+            #   result = client.pause_evaluation_job request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def pause_evaluation_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2666,16 +3257,20 @@ module Google
                 gapic_version: ::Google::Cloud::DataLabeling::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.pause_evaluation_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.pause_evaluation_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :pause_evaluation_job, request, options: options do |response, operation|
@@ -2718,6 +3313,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_labeling/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataLabeling::V1beta1::ResumeEvaluationJobRequest.new
+            #
+            #   # Call the resume_evaluation_job method.
+            #   result = client.resume_evaluation_job request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def resume_evaluation_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2735,16 +3345,20 @@ module Google
                 gapic_version: ::Google::Cloud::DataLabeling::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.resume_evaluation_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.resume_evaluation_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :resume_evaluation_job, request, options: options do |response, operation|
@@ -2786,6 +3400,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_labeling/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataLabeling::V1beta1::DeleteEvaluationJobRequest.new
+            #
+            #   # Call the delete_evaluation_job method.
+            #   result = client.delete_evaluation_job request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_evaluation_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2803,16 +3432,20 @@ module Google
                 gapic_version: ::Google::Cloud::DataLabeling::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_evaluation_job.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_evaluation_job.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :delete_evaluation_job, request, options: options do |response, operation|
@@ -2872,6 +3505,25 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_labeling/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataLabeling::V1beta1::ListEvaluationJobsRequest.new
+            #
+            #   # Call the list_evaluation_jobs method.
+            #   result = client.list_evaluation_jobs request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::DataLabeling::V1beta1::EvaluationJob.
+            #     p item
+            #   end
+            #
             def list_evaluation_jobs request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2889,16 +3541,20 @@ module Google
                 gapic_version: ::Google::Cloud::DataLabeling::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_evaluation_jobs.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_evaluation_jobs.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @data_labeling_service_stub.call_rpc :list_evaluation_jobs, request, options: options do |response, operation|
@@ -2923,22 +3579,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for create_dataset
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # create_dataset to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_dataset.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_dataset.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_dataset.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_dataset.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
@@ -2949,9 +3604,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials

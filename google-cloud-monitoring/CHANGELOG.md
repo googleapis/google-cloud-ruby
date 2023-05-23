@@ -1,5 +1,60 @@
 # Release History
 
+### 1.6.1 (2023-05-04)
+
+#### Documentation
+
+* Updated some product names ([#21541](https://github.com/googleapis/google-cloud-ruby/issues/21541)) 
+
+### 1.6.0 (2023-03-09)
+
+#### Features
+
+* Support REST transport ([#20767](https://github.com/googleapis/google-cloud-ruby/issues/20767)) 
+
+### 1.5.0 (2023-01-12)
+
+#### Features
+
+* Added support for the Snooze Service ([#19975](https://github.com/googleapis/google-cloud-ruby/issues/19975)) 
+
+### 1.4.1 (2022-08-09)
+
+#### Documentation
+
+* Minor branding updates ([#18989](https://github.com/googleapis/google-cloud-ruby/issues/18989)) 
+
+### 1.4.0 (2022-07-05)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+
+### 1.3.1 / 2022-01-11
+
+#### Documentation
+
+* Fix titles of documentation pages
+* Remove some broken images and fix outdated content in authentication documentation
+
+### 1.3.0 / 2021-09-28
+
+#### Features
+
+* Added support for the MetricsScope service
+
+### 1.2.2 / 2021-07-12
+
+#### Documentation
+
+* Clarified some language around authentication configuration
+
+### 1.2.1 / 2021-07-01
+
+#### Bug Fixes
+
+* Expand dependencies to include future 1.x releases of versioned clients
+
 ### 1.2.0 / 2021-04-06
 
 #### Features

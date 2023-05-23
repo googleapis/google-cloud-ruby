@@ -32,7 +32,7 @@ describe Google::Cloud::Bigquery::Dataset, :load, :local, :mock_bigquery do
 
     temp_csv do |file|
       mock.expect :insert_job, load_job_resp_gapi(table_reference, "some/file/path.csv"),
-        [project, load_job_gapi(table_reference, "CSV"), upload_source: file, content_type: "text/csv"]
+        [project, load_job_gapi(table_reference, "CSV")], upload_source: file, content_type: "text/csv"
 
       result = dataset.load table_id, file, format: :csv
       _(result).must_equal true
@@ -46,7 +46,7 @@ describe Google::Cloud::Bigquery::Dataset, :load, :local, :mock_bigquery do
 
     temp_csv do |file|
       mock.expect :insert_job, load_job_resp_gapi(table_reference, "some/file/path.csv"),
-        [project, load_job_csv_options_gapi(table_reference), upload_source: file, content_type: "text/csv"]
+        [project, load_job_csv_options_gapi(table_reference)], upload_source: file, content_type: "text/csv"
 
       result = dataset.load table_id, file, format: :csv, jagged_rows: true, quoted_newlines: true, autodetect: true,
         encoding: "ISO-8859-1", delimiter: "\t", ignore_unknown: true, max_bad_records: 42, null_marker: "\N",
@@ -67,7 +67,7 @@ describe Google::Cloud::Bigquery::Dataset, :load, :local, :mock_bigquery do
 
     temp_json do |file|
       mock.expect :insert_job, load_job_resp_gapi(table_reference, "some/file/path.json"),
-        [project, load_job_gapi(table_reference), upload_source: file, content_type: "application/json"]
+        [project, load_job_gapi(table_reference)], upload_source: file, content_type: "application/json"
 
       result = dataset.load table_id, file, format: "JSON"
       _(result).must_equal true
@@ -79,7 +79,7 @@ describe Google::Cloud::Bigquery::Dataset, :load, :local, :mock_bigquery do
   it "can upload a json file and derive the format" do
     mock = Minitest::Mock.new
     mock.expect :insert_job, load_job_resp_gapi(table_reference, "some/file/path.json"),
-      [project, load_job_gapi(table_reference), upload_source: "acceptance/data/kitten-test-data.json", content_type: "application/json"]
+      [project, load_job_gapi(table_reference)], upload_source: "acceptance/data/kitten-test-data.json", content_type: "application/json"
     dataset.service.mocked_service = mock
 
     local_json = "acceptance/data/kitten-test-data.json"

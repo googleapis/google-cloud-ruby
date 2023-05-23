@@ -55,13 +55,12 @@ module Google
             # See {::Google::Cloud::DataQnA::V1alpha::QuestionService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all QuestionService clients:
-            #
-            #     ::Google::Cloud::DataQnA::V1alpha::QuestionService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all QuestionService clients
+            #   ::Google::Cloud::DataQnA::V1alpha::QuestionService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -81,10 +80,7 @@ module Google
 
                 default_config.timeout = 60.0
                 default_config.retry_policy = {
-                  initial_delay: 1.0,
-                  max_delay: 10.0,
-                  multiplier: 1.3,
-                  retry_codes: [14]
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.create_question.timeout = 60.0
@@ -122,19 +118,15 @@ module Google
             ##
             # Create a new QuestionService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new QuestionService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::DataQnA::V1alpha::QuestionService::Client.new
             #
-            #     client = ::Google::Cloud::DataQnA::V1alpha::QuestionService::Client.new
-            #
-            # To create a new QuestionService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::DataQnA::V1alpha::QuestionService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::DataQnA::V1alpha::QuestionService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the QuestionService client.
             # @yieldparam config [Client::Configuration]
@@ -154,14 +146,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -210,6 +201,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dataqna/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataQnA::V1alpha::QuestionService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataQnA::V1alpha::GetQuestionRequest.new
+            #
+            #   # Call the get_question method.
+            #   result = client.get_question request
+            #
+            #   # The returned object is of type Google::Cloud::DataQnA::V1alpha::Question.
+            #   p result
+            #
             def get_question request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -227,16 +233,20 @@ module Google
                 gapic_version: ::Google::Cloud::DataQnA::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_question.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_question.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @question_service_stub.call_rpc :get_question, request, options: options do |response, operation|
@@ -279,6 +289,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dataqna/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataQnA::V1alpha::QuestionService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataQnA::V1alpha::CreateQuestionRequest.new
+            #
+            #   # Call the create_question method.
+            #   result = client.create_question request
+            #
+            #   # The returned object is of type Google::Cloud::DataQnA::V1alpha::Question.
+            #   p result
+            #
             def create_question request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -296,16 +321,20 @@ module Google
                 gapic_version: ::Google::Cloud::DataQnA::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_question.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_question.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @question_service_stub.call_rpc :create_question, request, options: options do |response, operation|
@@ -348,6 +377,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dataqna/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataQnA::V1alpha::QuestionService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataQnA::V1alpha::ExecuteQuestionRequest.new
+            #
+            #   # Call the execute_question method.
+            #   result = client.execute_question request
+            #
+            #   # The returned object is of type Google::Cloud::DataQnA::V1alpha::Question.
+            #   p result
+            #
             def execute_question request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -365,16 +409,20 @@ module Google
                 gapic_version: ::Google::Cloud::DataQnA::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.execute_question.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.execute_question.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @question_service_stub.call_rpc :execute_question, request, options: options do |response, operation|
@@ -416,6 +464,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dataqna/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataQnA::V1alpha::QuestionService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataQnA::V1alpha::GetUserFeedbackRequest.new
+            #
+            #   # Call the get_user_feedback method.
+            #   result = client.get_user_feedback request
+            #
+            #   # The returned object is of type Google::Cloud::DataQnA::V1alpha::UserFeedback.
+            #   p result
+            #
             def get_user_feedback request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -433,16 +496,20 @@ module Google
                 gapic_version: ::Google::Cloud::DataQnA::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_user_feedback.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_user_feedback.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @question_service_stub.call_rpc :get_user_feedback, request, options: options do |response, operation|
@@ -488,6 +555,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dataqna/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataQnA::V1alpha::QuestionService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataQnA::V1alpha::UpdateUserFeedbackRequest.new
+            #
+            #   # Call the update_user_feedback method.
+            #   result = client.update_user_feedback request
+            #
+            #   # The returned object is of type Google::Cloud::DataQnA::V1alpha::UserFeedback.
+            #   p result
+            #
             def update_user_feedback request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -505,16 +587,20 @@ module Google
                 gapic_version: ::Google::Cloud::DataQnA::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "user_feedback.name" => request.user_feedback.name
-              }
+              header_params = {}
+              if request.user_feedback&.name
+                header_params["user_feedback.name"] = request.user_feedback.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_user_feedback.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_user_feedback.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @question_service_stub.call_rpc :update_user_feedback, request, options: options do |response, operation|
@@ -538,22 +624,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for get_question
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # get_question to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::DataQnA::V1alpha::QuestionService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.get_question.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::DataQnA::V1alpha::QuestionService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.get_question.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::DataQnA::V1alpha::QuestionService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.get_question.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::DataQnA::V1alpha::QuestionService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.get_question.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
@@ -564,9 +649,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials

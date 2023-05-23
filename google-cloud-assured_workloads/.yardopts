@@ -1,5 +1,5 @@
 --no-private
---title=Assured Workloads for Government API
+--title="Assured Workloads for Government API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

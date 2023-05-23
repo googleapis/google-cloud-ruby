@@ -17,12 +17,54 @@ require "minitest/autorun"
 
 require "google/cloud/kms"
 
-class KmsServiceSmokeTest < Minitest::Test
-  def test_list_key_rings
-    kms = Google::Cloud::Kms.key_management_service version: :v1
-    key_ring_parent = kms.class.location_path ENV["KMS_PROJECT"], "us-central1"
-    key_rings = kms.list_key_rings(parent: key_ring_parent).to_a
-    key_rings.size.must_equal 1
-    key_rings[0].name.must_match %r{keyRings/ruby-test$}
+class KmsServiceSmokeTest < Minitest::Spec
+  def test_list_key_rings_grpc
+    kms = Google::Cloud::Kms.key_management_service version: :v1, transport: :grpc
+    key_ring_parent = kms.location_path project: ENV["KMS_PROJECT"], location: "us-central1"
+    key_rings = kms.list_key_rings(parent: key_ring_parent) do |result, operation|
+      assert_kind_of ::GRPC::ActiveCall::Operation, operation
+    end.to_a
+    _(key_rings.size).must_equal 1
+    _(key_rings[0].name).must_match %r{keyRings/ruby-test$}
+  end
+
+  def test_list_locations_grpc
+    kms = Google::Cloud::Kms.key_management_service version: :v1, transport: :grpc
+    location_client = kms.location_client
+    enum = location_client.list_locations(name: "projects/#{ENV['KMS_PROJECT']}")
+    assert enum.any? { |loc| loc.name.end_with? "/us-central1" }
+  end
+
+  def test_get_iam_policy_grpc
+    kms = Google::Cloud::Kms.key_management_service version: :v1, transport: :grpc
+    iam_client = kms.iam_policy_client
+    name = kms.key_ring_path project: ENV["KMS_PROJECT"], location: "us-central1", key_ring: "ruby-test"
+    policy = iam_client.get_iam_policy resource: name
+    assert_kind_of Google::Iam::V1::Policy, policy
+  end
+
+  def test_list_key_rings_rest
+    kms = Google::Cloud::Kms.key_management_service version: :v1, transport: :rest
+    key_ring_parent = kms.location_path project: ENV["KMS_PROJECT"], location: "us-central1"
+    key_rings = kms.list_key_rings(parent: key_ring_parent) do |result, operation|
+      assert_kind_of ::Faraday::Response, operation.underlying_op
+    end.to_a
+    _(key_rings.size).must_equal 1
+    _(key_rings[0].name).must_match %r{keyRings/ruby-test$}
+  end
+
+  def test_list_locations_rest
+    kms = Google::Cloud::Kms.key_management_service version: :v1, transport: :rest
+    location_client = kms.location_client
+    enum = location_client.list_locations(name: "projects/#{ENV['KMS_PROJECT']}")
+    assert enum.any? { |loc| loc.name.end_with? "/us-central1" }
+  end
+
+  def test_get_iam_policy_rest
+    kms = Google::Cloud::Kms.key_management_service version: :v1, transport: :rest
+    iam_client = kms.iam_policy_client
+    name = kms.key_ring_path project: ENV["KMS_PROJECT"], location: "us-central1", key_ring: "ruby-test"
+    policy = iam_client.get_iam_policy resource: name
+    assert_kind_of Google::Iam::V1::Policy, policy
   end
 end

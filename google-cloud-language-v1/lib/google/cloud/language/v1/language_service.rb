@@ -24,6 +24,7 @@ require "google/cloud/language/v1/version"
 
 require "google/cloud/language/v1/language_service/credentials"
 require "google/cloud/language/v1/language_service/client"
+require "google/cloud/language/v1/language_service/rest"
 
 module Google
   module Cloud
@@ -33,10 +34,15 @@ module Google
         # Provides text analysis operations such as sentiment analysis and entity
         # recognition.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/language/v1/language_service"
         #     client = ::Google::Cloud::Language::V1::LanguageService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/language/v1/language_service/rest"
+        #     client = ::Google::Cloud::Language::V1::LanguageService::Rest::Client.new
         #
         module LanguageService
         end

@@ -23,6 +23,18 @@ require "gapic/grpc/service_stub"
 require "google/cloud/bigtable/v2/bigtable"
 
 class ::Google::Cloud::Bigtable::V2::Bigtable::ClientPathsTest < Minitest::Test
+  def test_instance_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.instance_path project: "value0", instance: "value1"
+      assert_equal "projects/value0/instances/value1", path
+    end
+  end
+
   def test_table_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do

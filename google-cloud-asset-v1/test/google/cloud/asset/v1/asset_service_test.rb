@@ -60,6 +60,7 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
     asset_types = ["hello world"]
     content_type = :CONTENT_TYPE_UNSPECIFIED
     output_config = {}
+    relationship_types = ["hello world"]
 
     export_assets_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :export_assets, name
@@ -69,6 +70,7 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
       assert_equal ["hello world"], request["asset_types"]
       assert_equal :CONTENT_TYPE_UNSPECIFIED, request["content_type"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Asset::V1::OutputConfig), request["output_config"]
+      assert_equal ["hello world"], request["relationship_types"]
       refute_nil options
     end
 
@@ -79,35 +81,35 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.export_assets({ parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, output_config: output_config }) do |response, operation|
+      client.export_assets({ parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, output_config: output_config, relationship_types: relationship_types }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.export_assets parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, output_config: output_config do |response, operation|
+      client.export_assets parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, output_config: output_config, relationship_types: relationship_types do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.export_assets ::Google::Cloud::Asset::V1::ExportAssetsRequest.new(parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, output_config: output_config) do |response, operation|
+      client.export_assets ::Google::Cloud::Asset::V1::ExportAssetsRequest.new(parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, output_config: output_config, relationship_types: relationship_types) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.export_assets({ parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, output_config: output_config }, grpc_options) do |response, operation|
+      client.export_assets({ parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, output_config: output_config, relationship_types: relationship_types }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.export_assets(::Google::Cloud::Asset::V1::ExportAssetsRequest.new(parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, output_config: output_config), grpc_options) do |response, operation|
+      client.export_assets(::Google::Cloud::Asset::V1::ExportAssetsRequest.new(parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, output_config: output_config, relationship_types: relationship_types), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -132,6 +134,7 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
     content_type = :CONTENT_TYPE_UNSPECIFIED
     page_size = 42
     page_token = "hello world"
+    relationship_types = ["hello world"]
 
     list_assets_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_assets, name
@@ -142,6 +145,7 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
       assert_equal :CONTENT_TYPE_UNSPECIFIED, request["content_type"]
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
+      assert_equal ["hello world"], request["relationship_types"]
       refute_nil options
     end
 
@@ -152,35 +156,35 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.list_assets({ parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, page_size: page_size, page_token: page_token }) do |response, operation|
+      client.list_assets({ parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, page_size: page_size, page_token: page_token, relationship_types: relationship_types }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_assets parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, page_size: page_size, page_token: page_token do |response, operation|
+      client.list_assets parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, page_size: page_size, page_token: page_token, relationship_types: relationship_types do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_assets ::Google::Cloud::Asset::V1::ListAssetsRequest.new(parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, page_size: page_size, page_token: page_token) do |response, operation|
+      client.list_assets ::Google::Cloud::Asset::V1::ListAssetsRequest.new(parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, page_size: page_size, page_token: page_token, relationship_types: relationship_types) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_assets({ parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      client.list_assets({ parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, page_size: page_size, page_token: page_token, relationship_types: relationship_types }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_assets(::Google::Cloud::Asset::V1::ListAssetsRequest.new(parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      client.list_assets(::Google::Cloud::Asset::V1::ListAssetsRequest.new(parent: parent, read_time: read_time, asset_types: asset_types, content_type: content_type, page_size: page_size, page_token: page_token, relationship_types: relationship_types), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -203,6 +207,7 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
     asset_names = ["hello world"]
     content_type = :CONTENT_TYPE_UNSPECIFIED
     read_time_window = {}
+    relationship_types = ["hello world"]
 
     batch_get_assets_history_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :batch_get_assets_history, name
@@ -211,6 +216,7 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
       assert_equal ["hello world"], request["asset_names"]
       assert_equal :CONTENT_TYPE_UNSPECIFIED, request["content_type"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Asset::V1::TimeWindow), request["read_time_window"]
+      assert_equal ["hello world"], request["relationship_types"]
       refute_nil options
     end
 
@@ -221,31 +227,31 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.batch_get_assets_history({ parent: parent, asset_names: asset_names, content_type: content_type, read_time_window: read_time_window }) do |response, operation|
+      client.batch_get_assets_history({ parent: parent, asset_names: asset_names, content_type: content_type, read_time_window: read_time_window, relationship_types: relationship_types }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.batch_get_assets_history parent: parent, asset_names: asset_names, content_type: content_type, read_time_window: read_time_window do |response, operation|
+      client.batch_get_assets_history parent: parent, asset_names: asset_names, content_type: content_type, read_time_window: read_time_window, relationship_types: relationship_types do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.batch_get_assets_history ::Google::Cloud::Asset::V1::BatchGetAssetsHistoryRequest.new(parent: parent, asset_names: asset_names, content_type: content_type, read_time_window: read_time_window) do |response, operation|
+      client.batch_get_assets_history ::Google::Cloud::Asset::V1::BatchGetAssetsHistoryRequest.new(parent: parent, asset_names: asset_names, content_type: content_type, read_time_window: read_time_window, relationship_types: relationship_types) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.batch_get_assets_history({ parent: parent, asset_names: asset_names, content_type: content_type, read_time_window: read_time_window }, grpc_options) do |response, operation|
+      client.batch_get_assets_history({ parent: parent, asset_names: asset_names, content_type: content_type, read_time_window: read_time_window, relationship_types: relationship_types }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.batch_get_assets_history(::Google::Cloud::Asset::V1::BatchGetAssetsHistoryRequest.new(parent: parent, asset_names: asset_names, content_type: content_type, read_time_window: read_time_window), grpc_options) do |response, operation|
+      client.batch_get_assets_history(::Google::Cloud::Asset::V1::BatchGetAssetsHistoryRequest.new(parent: parent, asset_names: asset_names, content_type: content_type, read_time_window: read_time_window, relationship_types: relationship_types), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -565,6 +571,7 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
     page_size = 42
     page_token = "hello world"
     order_by = "hello world"
+    read_mask = {}
 
     search_all_resources_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :search_all_resources, name
@@ -575,6 +582,7 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
       assert_equal "hello world", request["order_by"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["read_mask"]
       refute_nil options
     end
 
@@ -585,35 +593,35 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.search_all_resources({ scope: scope, query: query, asset_types: asset_types, page_size: page_size, page_token: page_token, order_by: order_by }) do |response, operation|
+      client.search_all_resources({ scope: scope, query: query, asset_types: asset_types, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.search_all_resources scope: scope, query: query, asset_types: asset_types, page_size: page_size, page_token: page_token, order_by: order_by do |response, operation|
+      client.search_all_resources scope: scope, query: query, asset_types: asset_types, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.search_all_resources ::Google::Cloud::Asset::V1::SearchAllResourcesRequest.new(scope: scope, query: query, asset_types: asset_types, page_size: page_size, page_token: page_token, order_by: order_by) do |response, operation|
+      client.search_all_resources ::Google::Cloud::Asset::V1::SearchAllResourcesRequest.new(scope: scope, query: query, asset_types: asset_types, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.search_all_resources({ scope: scope, query: query, asset_types: asset_types, page_size: page_size, page_token: page_token, order_by: order_by }, grpc_options) do |response, operation|
+      client.search_all_resources({ scope: scope, query: query, asset_types: asset_types, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.search_all_resources(::Google::Cloud::Asset::V1::SearchAllResourcesRequest.new(scope: scope, query: query, asset_types: asset_types, page_size: page_size, page_token: page_token, order_by: order_by), grpc_options) do |response, operation|
+      client.search_all_resources(::Google::Cloud::Asset::V1::SearchAllResourcesRequest.new(scope: scope, query: query, asset_types: asset_types, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -636,6 +644,8 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
     query = "hello world"
     page_size = 42
     page_token = "hello world"
+    asset_types = ["hello world"]
+    order_by = "hello world"
 
     search_all_iam_policies_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :search_all_iam_policies, name
@@ -644,6 +654,8 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
       assert_equal "hello world", request["query"]
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
+      assert_equal ["hello world"], request["asset_types"]
+      assert_equal "hello world", request["order_by"]
       refute_nil options
     end
 
@@ -654,35 +666,35 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.search_all_iam_policies({ scope: scope, query: query, page_size: page_size, page_token: page_token }) do |response, operation|
+      client.search_all_iam_policies({ scope: scope, query: query, page_size: page_size, page_token: page_token, asset_types: asset_types, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.search_all_iam_policies scope: scope, query: query, page_size: page_size, page_token: page_token do |response, operation|
+      client.search_all_iam_policies scope: scope, query: query, page_size: page_size, page_token: page_token, asset_types: asset_types, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.search_all_iam_policies ::Google::Cloud::Asset::V1::SearchAllIamPoliciesRequest.new(scope: scope, query: query, page_size: page_size, page_token: page_token) do |response, operation|
+      client.search_all_iam_policies ::Google::Cloud::Asset::V1::SearchAllIamPoliciesRequest.new(scope: scope, query: query, page_size: page_size, page_token: page_token, asset_types: asset_types, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.search_all_iam_policies({ scope: scope, query: query, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+      client.search_all_iam_policies({ scope: scope, query: query, page_size: page_size, page_token: page_token, asset_types: asset_types, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.search_all_iam_policies(::Google::Cloud::Asset::V1::SearchAllIamPoliciesRequest.new(scope: scope, query: query, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+      client.search_all_iam_policies(::Google::Cloud::Asset::V1::SearchAllIamPoliciesRequest.new(scope: scope, query: query, page_size: page_size, page_token: page_token, asset_types: asset_types, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -702,12 +714,14 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
 
     # Create request parameters for a unary method.
     analysis_query = {}
+    saved_analysis_query = "hello world"
     execution_timeout = {}
 
     analyze_iam_policy_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :analyze_iam_policy, name
       assert_kind_of ::Google::Cloud::Asset::V1::AnalyzeIamPolicyRequest, request
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Asset::V1::IamPolicyAnalysisQuery), request["analysis_query"]
+      assert_equal "hello world", request["saved_analysis_query"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Duration), request["execution_timeout"]
       refute_nil options
     end
@@ -719,31 +733,31 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.analyze_iam_policy({ analysis_query: analysis_query, execution_timeout: execution_timeout }) do |response, operation|
+      client.analyze_iam_policy({ analysis_query: analysis_query, saved_analysis_query: saved_analysis_query, execution_timeout: execution_timeout }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.analyze_iam_policy analysis_query: analysis_query, execution_timeout: execution_timeout do |response, operation|
+      client.analyze_iam_policy analysis_query: analysis_query, saved_analysis_query: saved_analysis_query, execution_timeout: execution_timeout do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.analyze_iam_policy ::Google::Cloud::Asset::V1::AnalyzeIamPolicyRequest.new(analysis_query: analysis_query, execution_timeout: execution_timeout) do |response, operation|
+      client.analyze_iam_policy ::Google::Cloud::Asset::V1::AnalyzeIamPolicyRequest.new(analysis_query: analysis_query, saved_analysis_query: saved_analysis_query, execution_timeout: execution_timeout) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.analyze_iam_policy({ analysis_query: analysis_query, execution_timeout: execution_timeout }, grpc_options) do |response, operation|
+      client.analyze_iam_policy({ analysis_query: analysis_query, saved_analysis_query: saved_analysis_query, execution_timeout: execution_timeout }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.analyze_iam_policy(::Google::Cloud::Asset::V1::AnalyzeIamPolicyRequest.new(analysis_query: analysis_query, execution_timeout: execution_timeout), grpc_options) do |response, operation|
+      client.analyze_iam_policy(::Google::Cloud::Asset::V1::AnalyzeIamPolicyRequest.new(analysis_query: analysis_query, saved_analysis_query: saved_analysis_query, execution_timeout: execution_timeout), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -762,12 +776,14 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
 
     # Create request parameters for a unary method.
     analysis_query = {}
+    saved_analysis_query = "hello world"
     output_config = {}
 
     analyze_iam_policy_longrunning_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :analyze_iam_policy_longrunning, name
       assert_kind_of ::Google::Cloud::Asset::V1::AnalyzeIamPolicyLongrunningRequest, request
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Asset::V1::IamPolicyAnalysisQuery), request["analysis_query"]
+      assert_equal "hello world", request["saved_analysis_query"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Asset::V1::IamPolicyAnalysisOutputConfig), request["output_config"]
       refute_nil options
     end
@@ -779,35 +795,35 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.analyze_iam_policy_longrunning({ analysis_query: analysis_query, output_config: output_config }) do |response, operation|
+      client.analyze_iam_policy_longrunning({ analysis_query: analysis_query, saved_analysis_query: saved_analysis_query, output_config: output_config }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.analyze_iam_policy_longrunning analysis_query: analysis_query, output_config: output_config do |response, operation|
+      client.analyze_iam_policy_longrunning analysis_query: analysis_query, saved_analysis_query: saved_analysis_query, output_config: output_config do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.analyze_iam_policy_longrunning ::Google::Cloud::Asset::V1::AnalyzeIamPolicyLongrunningRequest.new(analysis_query: analysis_query, output_config: output_config) do |response, operation|
+      client.analyze_iam_policy_longrunning ::Google::Cloud::Asset::V1::AnalyzeIamPolicyLongrunningRequest.new(analysis_query: analysis_query, saved_analysis_query: saved_analysis_query, output_config: output_config) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.analyze_iam_policy_longrunning({ analysis_query: analysis_query, output_config: output_config }, grpc_options) do |response, operation|
+      client.analyze_iam_policy_longrunning({ analysis_query: analysis_query, saved_analysis_query: saved_analysis_query, output_config: output_config }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.analyze_iam_policy_longrunning(::Google::Cloud::Asset::V1::AnalyzeIamPolicyLongrunningRequest.new(analysis_query: analysis_query, output_config: output_config), grpc_options) do |response, operation|
+      client.analyze_iam_policy_longrunning(::Google::Cloud::Asset::V1::AnalyzeIamPolicyLongrunningRequest.new(analysis_query: analysis_query, saved_analysis_query: saved_analysis_query, output_config: output_config), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -815,6 +831,723 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
 
       # Verify method calls
       assert_equal 5, analyze_iam_policy_longrunning_client_stub.call_rpc_count
+    end
+  end
+
+  def test_analyze_move
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Asset::V1::AnalyzeMoveResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    resource = "hello world"
+    destination_parent = "hello world"
+    view = :ANALYSIS_VIEW_UNSPECIFIED
+
+    analyze_move_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :analyze_move, name
+      assert_kind_of ::Google::Cloud::Asset::V1::AnalyzeMoveRequest, request
+      assert_equal "hello world", request["resource"]
+      assert_equal "hello world", request["destination_parent"]
+      assert_equal :ANALYSIS_VIEW_UNSPECIFIED, request["view"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, analyze_move_client_stub do
+      # Create client
+      client = ::Google::Cloud::Asset::V1::AssetService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.analyze_move({ resource: resource, destination_parent: destination_parent, view: view }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.analyze_move resource: resource, destination_parent: destination_parent, view: view do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.analyze_move ::Google::Cloud::Asset::V1::AnalyzeMoveRequest.new(resource: resource, destination_parent: destination_parent, view: view) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.analyze_move({ resource: resource, destination_parent: destination_parent, view: view }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.analyze_move(::Google::Cloud::Asset::V1::AnalyzeMoveRequest.new(resource: resource, destination_parent: destination_parent, view: view), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, analyze_move_client_stub.call_rpc_count
+    end
+  end
+
+  def test_query_assets
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Asset::V1::QueryAssetsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    statement = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    timeout = {}
+    read_time_window = {}
+    output_config = {}
+
+    query_assets_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :query_assets, name
+      assert_kind_of ::Google::Cloud::Asset::V1::QueryAssetsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["statement"]
+      assert_equal :statement, request.query
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Duration), request["timeout"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Asset::V1::TimeWindow), request["read_time_window"]
+      assert_equal :read_time_window, request.time
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Asset::V1::QueryAssetsOutputConfig), request["output_config"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, query_assets_client_stub do
+      # Create client
+      client = ::Google::Cloud::Asset::V1::AssetService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.query_assets({ parent: parent, statement: statement, page_size: page_size, page_token: page_token, timeout: timeout, read_time_window: read_time_window, output_config: output_config }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.query_assets parent: parent, statement: statement, page_size: page_size, page_token: page_token, timeout: timeout, read_time_window: read_time_window, output_config: output_config do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.query_assets ::Google::Cloud::Asset::V1::QueryAssetsRequest.new(parent: parent, statement: statement, page_size: page_size, page_token: page_token, timeout: timeout, read_time_window: read_time_window, output_config: output_config) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.query_assets({ parent: parent, statement: statement, page_size: page_size, page_token: page_token, timeout: timeout, read_time_window: read_time_window, output_config: output_config }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.query_assets(::Google::Cloud::Asset::V1::QueryAssetsRequest.new(parent: parent, statement: statement, page_size: page_size, page_token: page_token, timeout: timeout, read_time_window: read_time_window, output_config: output_config), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, query_assets_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_saved_query
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Asset::V1::SavedQuery.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    saved_query = {}
+    saved_query_id = "hello world"
+
+    create_saved_query_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_saved_query, name
+      assert_kind_of ::Google::Cloud::Asset::V1::CreateSavedQueryRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Asset::V1::SavedQuery), request["saved_query"]
+      assert_equal "hello world", request["saved_query_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_saved_query_client_stub do
+      # Create client
+      client = ::Google::Cloud::Asset::V1::AssetService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_saved_query({ parent: parent, saved_query: saved_query, saved_query_id: saved_query_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_saved_query parent: parent, saved_query: saved_query, saved_query_id: saved_query_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_saved_query ::Google::Cloud::Asset::V1::CreateSavedQueryRequest.new(parent: parent, saved_query: saved_query, saved_query_id: saved_query_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_saved_query({ parent: parent, saved_query: saved_query, saved_query_id: saved_query_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_saved_query(::Google::Cloud::Asset::V1::CreateSavedQueryRequest.new(parent: parent, saved_query: saved_query, saved_query_id: saved_query_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_saved_query_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_saved_query
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Asset::V1::SavedQuery.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_saved_query_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_saved_query, name
+      assert_kind_of ::Google::Cloud::Asset::V1::GetSavedQueryRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_saved_query_client_stub do
+      # Create client
+      client = ::Google::Cloud::Asset::V1::AssetService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_saved_query({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_saved_query name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_saved_query ::Google::Cloud::Asset::V1::GetSavedQueryRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_saved_query({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_saved_query(::Google::Cloud::Asset::V1::GetSavedQueryRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_saved_query_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_saved_queries
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Asset::V1::ListSavedQueriesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    filter = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_saved_queries_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_saved_queries, name
+      assert_kind_of ::Google::Cloud::Asset::V1::ListSavedQueriesRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_saved_queries_client_stub do
+      # Create client
+      client = ::Google::Cloud::Asset::V1::AssetService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_saved_queries({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_saved_queries parent: parent, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_saved_queries ::Google::Cloud::Asset::V1::ListSavedQueriesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_saved_queries({ parent: parent, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_saved_queries(::Google::Cloud::Asset::V1::ListSavedQueriesRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_saved_queries_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_saved_query
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Asset::V1::SavedQuery.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    saved_query = {}
+    update_mask = {}
+
+    update_saved_query_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_saved_query, name
+      assert_kind_of ::Google::Cloud::Asset::V1::UpdateSavedQueryRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Asset::V1::SavedQuery), request["saved_query"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_saved_query_client_stub do
+      # Create client
+      client = ::Google::Cloud::Asset::V1::AssetService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_saved_query({ saved_query: saved_query, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_saved_query saved_query: saved_query, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_saved_query ::Google::Cloud::Asset::V1::UpdateSavedQueryRequest.new(saved_query: saved_query, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_saved_query({ saved_query: saved_query, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_saved_query(::Google::Cloud::Asset::V1::UpdateSavedQueryRequest.new(saved_query: saved_query, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_saved_query_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_saved_query
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_saved_query_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_saved_query, name
+      assert_kind_of ::Google::Cloud::Asset::V1::DeleteSavedQueryRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_saved_query_client_stub do
+      # Create client
+      client = ::Google::Cloud::Asset::V1::AssetService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_saved_query({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_saved_query name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_saved_query ::Google::Cloud::Asset::V1::DeleteSavedQueryRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_saved_query({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_saved_query(::Google::Cloud::Asset::V1::DeleteSavedQueryRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_saved_query_client_stub.call_rpc_count
+    end
+  end
+
+  def test_batch_get_effective_iam_policies
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    scope = "hello world"
+    names = ["hello world"]
+
+    batch_get_effective_iam_policies_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :batch_get_effective_iam_policies, name
+      assert_kind_of ::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesRequest, request
+      assert_equal "hello world", request["scope"]
+      assert_equal ["hello world"], request["names"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, batch_get_effective_iam_policies_client_stub do
+      # Create client
+      client = ::Google::Cloud::Asset::V1::AssetService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.batch_get_effective_iam_policies({ scope: scope, names: names }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.batch_get_effective_iam_policies scope: scope, names: names do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.batch_get_effective_iam_policies ::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesRequest.new(scope: scope, names: names) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.batch_get_effective_iam_policies({ scope: scope, names: names }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.batch_get_effective_iam_policies(::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesRequest.new(scope: scope, names: names), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, batch_get_effective_iam_policies_client_stub.call_rpc_count
+    end
+  end
+
+  def test_analyze_org_policies
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Asset::V1::AnalyzeOrgPoliciesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    scope = "hello world"
+    constraint = "hello world"
+    filter = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    analyze_org_policies_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :analyze_org_policies, name
+      assert_kind_of ::Google::Cloud::Asset::V1::AnalyzeOrgPoliciesRequest, request
+      assert_equal "hello world", request["scope"]
+      assert_equal "hello world", request["constraint"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert request.has_page_size?
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, analyze_org_policies_client_stub do
+      # Create client
+      client = ::Google::Cloud::Asset::V1::AssetService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.analyze_org_policies({ scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.analyze_org_policies scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.analyze_org_policies ::Google::Cloud::Asset::V1::AnalyzeOrgPoliciesRequest.new(scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.analyze_org_policies({ scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.analyze_org_policies(::Google::Cloud::Asset::V1::AnalyzeOrgPoliciesRequest.new(scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, analyze_org_policies_client_stub.call_rpc_count
+    end
+  end
+
+  def test_analyze_org_policy_governed_containers
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedContainersResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    scope = "hello world"
+    constraint = "hello world"
+    filter = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    analyze_org_policy_governed_containers_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :analyze_org_policy_governed_containers, name
+      assert_kind_of ::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedContainersRequest, request
+      assert_equal "hello world", request["scope"]
+      assert_equal "hello world", request["constraint"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert request.has_page_size?
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, analyze_org_policy_governed_containers_client_stub do
+      # Create client
+      client = ::Google::Cloud::Asset::V1::AssetService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.analyze_org_policy_governed_containers({ scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.analyze_org_policy_governed_containers scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.analyze_org_policy_governed_containers ::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedContainersRequest.new(scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.analyze_org_policy_governed_containers({ scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.analyze_org_policy_governed_containers(::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedContainersRequest.new(scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, analyze_org_policy_governed_containers_client_stub.call_rpc_count
+    end
+  end
+
+  def test_analyze_org_policy_governed_assets
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    scope = "hello world"
+    constraint = "hello world"
+    filter = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    analyze_org_policy_governed_assets_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :analyze_org_policy_governed_assets, name
+      assert_kind_of ::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsRequest, request
+      assert_equal "hello world", request["scope"]
+      assert_equal "hello world", request["constraint"]
+      assert_equal "hello world", request["filter"]
+      assert_equal 42, request["page_size"]
+      assert request.has_page_size?
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, analyze_org_policy_governed_assets_client_stub do
+      # Create client
+      client = ::Google::Cloud::Asset::V1::AssetService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.analyze_org_policy_governed_assets({ scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.analyze_org_policy_governed_assets scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.analyze_org_policy_governed_assets ::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsRequest.new(scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.analyze_org_policy_governed_assets({ scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.analyze_org_policy_governed_assets(::Google::Cloud::Asset::V1::AnalyzeOrgPolicyGovernedAssetsRequest.new(scope: scope, constraint: constraint, filter: filter, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, analyze_org_policy_governed_assets_client_stub.call_rpc_count
     end
   end
 

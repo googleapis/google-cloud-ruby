@@ -18,6 +18,7 @@ gem "minitest"
 require "minitest/autorun"
 require "minitest/focus"
 require "minitest/rg"
+require "retriable"
 require "google/cloud/storage"
 require "google/cloud/pubsub"
 
@@ -105,18 +106,17 @@ module Acceptance
   end
 end
 
-def safe_gcs_execute retries: 20, delay: 2
-  current_retries = 0
-  loop do
-    begin
-      return yield
-    rescue Google::Cloud::ResourceExhaustedError
-      raise unless current_retries >= retries
-
-      sleep delay
-      current_retries += 1
-    end
+def safe_gcs_execute retries: 5
+  max_retries = 10
+  Retriable.retriable(
+    on: Google::Cloud::ResourceExhaustedError,
+    base_interval: 1,
+    multiplier: 2,
+    tries: [retries, max_retries].min
+  ) do
+    return yield
   end
+  raise
 end
 
 # Create buckets to be shared with all the tests

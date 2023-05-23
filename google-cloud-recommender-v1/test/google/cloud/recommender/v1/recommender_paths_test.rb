@@ -65,6 +65,21 @@ class ::Google::Cloud::Recommender::V1::Recommender::ClientPathsTest < Minitest:
     end
   end
 
+  def test_insight_type_config_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Recommender::V1::Recommender::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.insight_type_config_path project: "value0", location: "value1", insight_type: "value2"
+      assert_equal "projects/value0/locations/value1/insightTypes/value2/config", path
+
+      path = client.insight_type_config_path organization: "value0", location: "value1", insight_type: "value2"
+      assert_equal "organizations/value0/locations/value1/insightTypes/value2/config", path
+    end
+  end
+
   def test_recommendation_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do
@@ -104,6 +119,21 @@ class ::Google::Cloud::Recommender::V1::Recommender::ClientPathsTest < Minitest:
 
       path = client.recommender_path organization: "value0", location: "value1", recommender: "value2"
       assert_equal "organizations/value0/locations/value1/recommenders/value2", path
+    end
+  end
+
+  def test_recommender_config_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Recommender::V1::Recommender::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.recommender_config_path project: "value0", location: "value1", recommender: "value2"
+      assert_equal "projects/value0/locations/value1/recommenders/value2/config", path
+
+      path = client.recommender_config_path organization: "value0", location: "value1", recommender: "value2"
+      assert_equal "organizations/value0/locations/value1/recommenders/value2/config", path
     end
   end
 end

@@ -20,45 +20,82 @@ require "helper"
 require "google/cloud/recommendation_engine"
 require "gapic/common"
 require "gapic/grpc"
+require "gapic/rest"
 
 class Google::Cloud::RecommendationEngine::ClientConstructionMinitest < Minitest::Test
-  def test_catalog_service
+  def test_catalog_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::RecommendationEngine.catalog_service do |config|
+      client = Google::Cloud::RecommendationEngine.catalog_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Client, client
     end
   end
 
-  def test_prediction_api_key_registry
+  def test_catalog_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::RecommendationEngine.catalog_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Rest::Client, client
+    end
+  end
+
+  def test_prediction_api_key_registry_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::RecommendationEngine.prediction_api_key_registry do |config|
+      client = Google::Cloud::RecommendationEngine.prediction_api_key_registry transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Client, client
     end
   end
 
-  def test_prediction_service
+  def test_prediction_api_key_registry_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::RecommendationEngine.prediction_api_key_registry transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Rest::Client, client
+    end
+  end
+
+  def test_prediction_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::RecommendationEngine.prediction_service do |config|
+      client = Google::Cloud::RecommendationEngine.prediction_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::RecommendationEngine::V1beta1::PredictionService::Client, client
     end
   end
 
-  def test_user_event_service
+  def test_prediction_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::RecommendationEngine.prediction_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::RecommendationEngine::V1beta1::PredictionService::Rest::Client, client
+    end
+  end
+
+  def test_user_event_service_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::RecommendationEngine.user_event_service do |config|
+      client = Google::Cloud::RecommendationEngine.user_event_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
       assert_kind_of Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Client, client
+    end
+  end
+
+  def test_user_event_service_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::RecommendationEngine.user_event_service transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Rest::Client, client
     end
   end
 end

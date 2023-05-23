@@ -31,10 +31,10 @@ module Google
       #   require "google/cloud/bigtable"
       #
       #   bigtable = Google::Cloud::Bigtable.new
-      #   instance = bigtable.instance("my-instance")
-      #   cluster = instance.cluster("my-cluster")
+      #   instance = bigtable.instance "my-instance"
+      #   cluster = instance.cluster "my-cluster"
       #
-      #   backup = cluster.backup("my-backup")
+      #   backup = cluster.backup "my-backup"
       #
       #   encryption_info = backup.encryption_info
       #   encryption_info.encryption_type #=> :GOOGLE_DEFAULT_ENCRYPTION
@@ -44,7 +44,7 @@ module Google
       #
       #   bigtable = Google::Cloud::Bigtable.new
       #
-      #   table = bigtable.table("my-instance", "my-table", view: :ENCRYPTION_VIEW, perform_lookup: true)
+      #   table = bigtable.table "my-instance", "my-table", view: :ENCRYPTION_VIEW, perform_lookup: true
       #
       #   table.cluster_states.each do |cs|
       #     puts cs.cluster_name

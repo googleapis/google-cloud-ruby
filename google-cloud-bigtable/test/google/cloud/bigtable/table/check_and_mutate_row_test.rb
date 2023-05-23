@@ -38,13 +38,12 @@ describe Google::Cloud::Bigtable::Table, :check_and_mutate_row, :mock_bigtable d
     ]
 
     res = Google::Cloud::Bigtable::V2::CheckAndMutateRowResponse.new(predicate_matched: true)
-    mock.expect :check_and_mutate_row, res, [
+    mock.expect :check_and_mutate_row, res,
       table_name: table_path(instance_id, table_id),
       row_key: row_key,
       predicate_filter: predicate_filter,
       true_mutations: true_mutations,
       false_mutations: false_mutations
-    ]
 
     result = table.check_and_mutate_row(
       row_key,

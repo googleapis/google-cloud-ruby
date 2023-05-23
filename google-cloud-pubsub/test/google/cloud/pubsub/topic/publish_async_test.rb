@@ -79,6 +79,45 @@ describe Google::Cloud::PubSub::Topic, :publish_async, :mock_pubsub do
     _(callback_called).must_equal true
   end
 
+  it "publishes multiple messages with callbacks" do
+    mutex = Mutex.new
+    messages = [
+      Google::Cloud::PubSub::V1::PubsubMessage.new(data: "async-message 0".encode(Encoding::ASCII_8BIT), message_id: "msg0"),
+      Google::Cloud::PubSub::V1::PubsubMessage.new(data: "async-message 1".encode(Encoding::ASCII_8BIT), message_id: "msg1")
+    ]
+    callbacks_called = 0
+
+    topic.service.mocked_publisher = AsyncPublisherStub.new
+
+    _(topic.async_publisher).must_be :nil?
+
+    topic.publish_async "async-message 0" do |result|
+      assert_equal "msg0", result.msg_id
+      mutex.synchronize { callbacks_called += 1 }
+    end
+
+    topic.publish_async "async-message 1" do |result|
+      assert_equal "msg1", result.msg_id
+      mutex.synchronize { callbacks_called += 1 }
+    end
+
+    _(topic.async_publisher).wont_be :nil?
+
+    _(topic.async_publisher).must_be :started?
+    _(topic.async_publisher).wont_be :stopped?
+
+    # force the queued messages to be published
+    topic.async_publisher.stop!
+
+    _(topic.async_publisher).wont_be :started?
+    _(topic.async_publisher).must_be :stopped?
+
+    published_messages_hash = topic.service.mocked_publisher.message_hash
+    expected_messages_hash = { "" => messages }
+    assert_equal expected_messages_hash, published_messages_hash
+    _(callbacks_called).must_equal 2
+  end
+
   it "publishes a message with multibyte characters" do
     callback_called = false
 

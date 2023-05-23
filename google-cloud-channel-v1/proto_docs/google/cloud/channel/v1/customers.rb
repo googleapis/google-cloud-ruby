@@ -31,36 +31,34 @@ module Google
         #     Required. Name of the organization that the customer entity represents.
         # @!attribute [rw] org_postal_address
         #   @return [::Google::Type::PostalAddress]
-        #     Required. Address of the organization of the customer entity.
-        #     Region and zip codes are required to enforce US laws and embargoes.
-        #     Valid address lines are required for all customers.
-        #     Language code is discarded. Use the Customer-level language code to set the
-        #     customer's language.
+        #     Required. The organization address for the customer. To enforce US laws and
+        #     embargoes, we require a region and zip code. You must provide valid
+        #     addresses for every customer. To set the customer's language, use the
+        #     Customer-level language code.
         # @!attribute [rw] primary_contact_info
         #   @return [::Google::Cloud::Channel::V1::ContactInfo]
         #     Primary contact info.
         # @!attribute [rw] alternate_email
         #   @return [::String]
-        #     Secondary contact email.
-        #     Alternate email and primary contact email are required to have different
-        #     domains if primary contact email is present.
-        #     When creating admin.google.com accounts, users get notified credentials at
-        #     this email. This email address is also used as a recovery email.
+        #     Secondary contact email. You need to provide an alternate email to create
+        #     different domains if a primary contact email already exists. Users will
+        #     receive a notification with credentials when you create an admin.google.com
+        #     account. Secondary emails are also recovery email addresses. Alternate
+        #     emails are optional when you create Team customers.
         # @!attribute [rw] domain
         #   @return [::String]
-        #     Required. Primary domain used by the customer.
-        #     Domain of primary contact email is required to be same as the provided
-        #     domain.
+        #     Required. The customer's primary domain. Must match the primary contact
+        #     email's domain.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The time at which the customer is created.
+        #     Output only. Time when the customer was created.
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The time at which the customer is updated.
+        #     Output only. Time when the customer was updated.
         # @!attribute [r] cloud_identity_id
         #   @return [::String]
-        #     Output only. Customer's cloud_identity_id.
-        #     Populated only if a Cloud Identity resource exists for this customer.
+        #     Output only. The customer's Cloud Identity ID if the customer has a Cloud
+        #     Identity resource.
         # @!attribute [rw] language_code
         #   @return [::String]
         #     Optional. The BCP-47 language code, such as "en-US" or "sr-Latn". For more
@@ -74,6 +72,10 @@ module Google
         #   @return [::String]
         #     Cloud Identity ID of the customer's channel partner.
         #     Populated only if a channel partner exists for this customer.
+        # @!attribute [rw] correlation_id
+        #   @return [::String]
+        #     Optional. External CRM ID for the customer.
+        #     Populated only if a CRM ID exists for this customer.
         class Customer
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -82,26 +84,25 @@ module Google
         # Contact information for a customer account.
         # @!attribute [rw] first_name
         #   @return [::String]
-        #     First name of the contact in the customer account.
+        #     The customer account contact's first name. Optional for Team customers.
         # @!attribute [rw] last_name
         #   @return [::String]
-        #     Last name of the contact in the customer account.
+        #     The customer account contact's last name. Optional for Team customers.
         # @!attribute [r] display_name
         #   @return [::String]
-        #     Output only. Display name of the contact in the customer account.
-        #     Populated by combining customer first name and last name.
+        #     Output only. The customer account contact's display name, formatted as a
+        #     combination of the customer's first and last name.
         # @!attribute [rw] email
         #   @return [::String]
-        #     Email of the contact in the customer account.
-        #     Email is required for entitlements that need creation of admin.google.com
-        #     accounts. The email will be the username used in credentials to access the
-        #     admin.google.com account.
+        #     The customer account's contact email. Required for entitlements that create
+        #     admin.google.com accounts, and serves as the customer's username for those
+        #     accounts. Use this email to invite Team customers.
         # @!attribute [rw] title
         #   @return [::String]
-        #     Optional. Job title of the contact in the customer account.
+        #     Optional. The customer account contact's job title.
         # @!attribute [rw] phone
         #   @return [::String]
-        #     Phone number of the contact in the customer account.
+        #     The customer account's contact phone number.
         class ContactInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

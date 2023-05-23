@@ -97,7 +97,8 @@ def reads_prefix instance_id, table_id
   table = bigtable.table instance_id, table_id
 
   prefix = "phone#"
-  range = table.new_row_range.between prefix, prefix.next
+  end_key = prefix[0...-1] + prefix[-1].next
+  range = table.new_row_range.between prefix, end_key
   table.read_rows(ranges: range).each do |row|
     print_row row
   end

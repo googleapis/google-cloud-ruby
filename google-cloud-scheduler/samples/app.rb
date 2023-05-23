@@ -16,7 +16,7 @@
 
 $stdout.sync = true
 
-# [START cloud_scheduler_app]
+# [START cloudscheduler_app]
 require "sinatra"
 
 # Define relative URI for job endpoint
@@ -26,7 +26,7 @@ post "/log_payload" do
   puts "Received job with payload: #{data}"
   "Printed job payload: #{data}"
 end
-# [END cloud_scheduler_app]
+# [END cloudscheduler_app]
 
 get "/" do
   # Basic index to verify app is serving

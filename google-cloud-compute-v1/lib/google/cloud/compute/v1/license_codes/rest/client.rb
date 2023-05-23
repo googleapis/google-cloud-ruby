@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/compute/v1/compute_pb"
+require "google/cloud/compute/v1/license_codes/rest/service_stub"
 
 module Google
   module Cloud
@@ -31,8 +32,6 @@ module Google
             # The LicenseCodes API.
             #
             class Client
-              include GrpcTranscoding
-
               # @private
               attr_reader :license_codes_stub
 
@@ -42,13 +41,12 @@ module Google
               # See {::Google::Cloud::Compute::V1::LicenseCodes::Rest::Client::Configuration}
               # for a description of the configuration fields.
               #
-              # ## Example
+              # @example
               #
-              # To modify the configuration for all LicenseCodes clients:
-              #
-              #     ::Google::Cloud::Compute::V1::LicenseCodes::Rest::Client.configure do |config|
-              #       config.timeout = 10.0
-              #     end
+              #   # Modify the configuration for all LicenseCodes clients
+              #   ::Google::Cloud::Compute::V1::LicenseCodes::Rest::Client.configure do |config|
+              #     config.timeout = 10.0
+              #   end
               #
               # @yield [config] Configure the Client client.
               # @yieldparam config [Client::Configuration]
@@ -65,6 +63,13 @@ module Google
                                     namespace.pop
                                   end
                   default_config = Client::Configuration.new parent_config
+
+                  default_config.rpcs.get.timeout = 600.0
+                  default_config.rpcs.get.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  }
+
+                  default_config.rpcs.test_iam_permissions.timeout = 600.0
 
                   default_config
                 end
@@ -95,28 +100,20 @@ module Google
               ##
               # Create a new LicenseCodes REST client object.
               #
-              # ## Examples
+              # @example
               #
-              # To create a new LicenseCodes REST client with the default
-              # configuration:
+              #   # Create a client using the default configuration
+              #   client = ::Google::Cloud::Compute::V1::LicenseCodes::Rest::Client.new
               #
-              #     client = ::Google::Cloud::Compute::V1::LicenseCodes::Rest::Client.new
-              #
-              # To create a new LicenseCodes REST client with a custom
-              # configuration:
-              #
-              #     client = ::Google::Cloud::Compute::V1::LicenseCodes::Rest::Client.new do |config|
-              #       config.timeout = 10.0
-              #     end
+              #   # Create a client using a custom configuration
+              #   client = ::Google::Cloud::Compute::V1::LicenseCodes::Rest::Client.new do |config|
+              #     config.timeout = 10.0
+              #   end
               #
               # @yield [config] Configure the LicenseCodes client.
               # @yieldparam config [Client::Configuration]
               #
               def initialize
-                # These require statements are intentionally placed here to initialize
-                # the REST modules only when it's required.
-                require "gapic/rest"
-
                 # Create the configuration object
                 @config = Configuration.new Client.configure
 
@@ -125,18 +122,26 @@ module Google
 
                 # Create credentials
                 credentials = @config.credentials
-                credentials ||= Credentials.default scope: @config.scope
-                if credentials.is_a?(String) || credentials.is_a?(Hash)
+                # Use self-signed JWT if the endpoint is unchanged from default,
+                # but only if the default endpoint does not have a region prefix.
+                enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+                                         !@config.endpoint.split(".").first.include?("-")
+                credentials ||= Credentials.default scope: @config.scope,
+                                                    enable_self_signed_jwt: enable_self_signed_jwt
+                if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                   credentials = Credentials.new credentials, scope: @config.scope
                 end
 
-                @client_stub = ::Gapic::Rest::ClientStub.new endpoint: @config.endpoint, credentials: credentials
+                @quota_project_id = @config.quota_project
+                @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
+
+                @license_codes_stub = ::Google::Cloud::Compute::V1::LicenseCodes::Rest::ServiceStub.new endpoint: @config.endpoint, credentials: credentials
               end
 
               # Service calls
 
               ##
-              # Return a specified license code. License codes are mirrored across all projects that have permissions to read the License Code.  Caution This resource is intended for use only by third-party partners who are creating Cloud Marketplace images.
+              # Return a specified license code. License codes are mirrored across all projects that have permissions to read the License Code. *Caution* This resource is intended for use only by third-party partners who are creating Cloud Marketplace images.
               #
               # @overload get(request, options = nil)
               #   Pass arguments to `get` via a request object, either of type
@@ -147,8 +152,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload get(license_code: nil, project: nil)
               #   Pass arguments to `get` via keyword arguments. Note that at
@@ -159,9 +162,9 @@ module Google
               #     Number corresponding to the License code resource to return.
               #   @param project [::String]
               #     Project ID for this request.
-              # @yield [result, env] Access the result along with the Faraday environment object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::LicenseCode]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::LicenseCode]
               #
@@ -175,32 +178,34 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.get.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
-                uri, _body, _query_string_params = transcode_get request
-                response = @client_stub.make_get_request(
-                  uri:     uri,
-                  options: options
-                )
-                result = ::Google::Cloud::Compute::V1::LicenseCode.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, response if block_given?
-                result
-              rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
+                @license_codes_stub.get request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
-              # Returns permissions that a caller has on the specified resource.  Caution This resource is intended for use only by third-party partners who are creating Cloud Marketplace images.
+              # Returns permissions that a caller has on the specified resource. *Caution* This resource is intended for use only by third-party partners who are creating Cloud Marketplace images.
               #
               # @overload test_iam_permissions(request, options = nil)
               #   Pass arguments to `test_iam_permissions` via a request object, either of type
@@ -211,8 +216,6 @@ module Google
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
               #
               # @overload test_iam_permissions(project: nil, resource: nil, test_permissions_request_resource: nil)
               #   Pass arguments to `test_iam_permissions` via keyword arguments. Note that at
@@ -225,9 +228,9 @@ module Google
               #     Name or id of the resource for this request.
               #   @param test_permissions_request_resource [::Google::Cloud::Compute::V1::TestPermissionsRequest, ::Hash]
               #     The body resource for this request
-              # @yield [result, env] Access the result along with the Faraday environment object
+              # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Compute::V1::TestPermissionsResponse]
-              # @yieldparam response [::Faraday::Response]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
               #
               # @return [::Google::Cloud::Compute::V1::TestPermissionsResponse]
               #
@@ -241,53 +244,60 @@ module Google
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = {}
+                call_metadata = @config.rpcs.test_iam_permissions.metadata.to_h
 
-                # Set x-goog-api-client header
+                # Set x-goog-api-client and x-goog-user-project headers
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
                   lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.test_iam_permissions.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.test_iam_permissions.retry_policy
 
                 options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     call_metadata
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
 
-                uri, body, _query_string_params = transcode_test_iam_permissions request
-                response = @client_stub.make_post_request(
-                  uri:     uri,
-                  body:    body,
-                  options: options
-                )
-                result = ::Google::Cloud::Compute::V1::TestPermissionsResponse.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, response if block_given?
-                result
-              rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
+                @license_codes_stub.test_iam_permissions request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
               end
 
               ##
               # Configuration class for the LicenseCodes REST API.
               #
               # This class represents the configuration for LicenseCodes REST,
-              # providing control over credentials, timeouts, retry behavior, logging.
+              # providing control over timeouts, retry behavior, logging, transport
+              # parameters, and other low-level controls. Certain parameters can also be
+              # applied individually to specific RPCs. See
+              # {::Google::Cloud::Compute::V1::LicenseCodes::Rest::Client::Configuration::Rpcs}
+              # for a list of RPCs that can be configured independently.
               #
               # Configuration can be applied globally to all clients, or to a single client
               # on construction.
               #
-              # # Examples
+              # @example
               #
-              # To modify the global config, setting the timeout for all calls to 10 seconds:
+              #   # Modify the global config, setting the timeout for
+              #   # get to 20 seconds,
+              #   # and all remaining timeouts to 10 seconds.
+              #   ::Google::Cloud::Compute::V1::LicenseCodes::Rest::Client.configure do |config|
+              #     config.timeout = 10.0
+              #     config.rpcs.get.timeout = 20.0
+              #   end
               #
-              #     ::Google::Cloud::Compute::V1::LicenseCodes::Client.configure do |config|
-              #       config.timeout = 10.0
-              #     end
-              #
-              # To apply the above configuration only to a new client:
-              #
-              #     client = ::Google::Cloud::Compute::V1::LicenseCodes::Client.new do |config|
-              #       config.timeout = 10.0
-              #     end
+              #   # Apply the above configuration only to a new client.
+              #   client = ::Google::Cloud::Compute::V1::LicenseCodes::Rest::Client.new do |config|
+              #     config.timeout = 10.0
+              #     config.rpcs.get.timeout = 20.0
+              #   end
               #
               # @!attribute [rw] endpoint
               #   The hostname or hostname:port of the service endpoint.
@@ -298,9 +308,9 @@ module Google
               #    *  (`String`) The path to a service account key file in JSON format
               #    *  (`Hash`) A service account key as a Hash
               #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-              #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+              #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
               #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-              #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+              #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
               #    *  (`nil`) indicating no credentials
               #   @return [::Object]
               # @!attribute [rw] scope
@@ -315,6 +325,20 @@ module Google
               # @!attribute [rw] timeout
               #   The call timeout in seconds.
               #   @return [::Numeric]
+              # @!attribute [rw] metadata
+              #   Additional headers to be sent with the call.
+              #   @return [::Hash{::Symbol=>::String}]
+              # @!attribute [rw] retry_policy
+              #   The retry policy. The value is a hash with the following keys:
+              #    *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
+              #    *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
+              #    *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+              #    *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
+              #       trigger a retry.
+              #   @return [::Hash]
+              # @!attribute [rw] quota_project
+              #   A separate project against which to charge quota.
+              #   @return [::String]
               #
               class Configuration
                 extend ::Gapic::Config
@@ -328,12 +352,67 @@ module Google
                 config_attr :lib_name,      nil, ::String, nil
                 config_attr :lib_version,   nil, ::String, nil
                 config_attr :timeout,       nil, ::Numeric, nil
+                config_attr :metadata,      nil, ::Hash, nil
+                config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
+                config_attr :quota_project, nil, ::String, nil
 
                 # @private
                 def initialize parent_config = nil
                   @parent_config = parent_config unless parent_config.nil?
 
                   yield self if block_given?
+                end
+
+                ##
+                # Configurations for individual RPCs
+                # @return [Rpcs]
+                #
+                def rpcs
+                  @rpcs ||= begin
+                    parent_rpcs = nil
+                    parent_rpcs = @parent_config.rpcs if defined?(@parent_config) && @parent_config.respond_to?(:rpcs)
+                    Rpcs.new parent_rpcs
+                  end
+                end
+
+                ##
+                # Configuration RPC class for the LicenseCodes API.
+                #
+                # Includes fields providing the configuration for each RPC in this service.
+                # Each configuration object is of type `Gapic::Config::Method` and includes
+                # the following configuration fields:
+                #
+                #  *  `timeout` (*type:* `Numeric`) - The call timeout in seconds
+                #  *  `metadata` (*type:* `Hash{Symbol=>String}`) - Additional headers
+                #  *  `retry_policy (*type:* `Hash`) - The retry policy. The policy fields
+                #     include the following keys:
+                #      *  `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.
+                #      *  `:max_delay` (*type:* `Numeric`) - The max delay in seconds.
+                #      *  `:multiplier` (*type:* `Numeric`) - The incremental backoff multiplier.
+                #      *  `:retry_codes` (*type:* `Array<String>`) - The error codes that should
+                #         trigger a retry.
+                #
+                class Rpcs
+                  ##
+                  # RPC-specific configuration for `get`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get
+                  ##
+                  # RPC-specific configuration for `test_iam_permissions`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :test_iam_permissions
+
+                  # @private
+                  def initialize parent_rpcs = nil
+                    get_config = parent_rpcs.get if parent_rpcs.respond_to? :get
+                    @get = ::Gapic::Config::Method.new get_config
+                    test_iam_permissions_config = parent_rpcs.test_iam_permissions if parent_rpcs.respond_to? :test_iam_permissions
+                    @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
+
+                    yield self if block_given?
+                  end
                 end
               end
             end

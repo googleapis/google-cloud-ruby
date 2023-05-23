@@ -1,5 +1,23 @@
 # Release History
 
+### 0.36.1 (2023-05-19)
+
+#### Documentation
+
+* Fixed broken links in authentication documentation ([#21619](https://github.com/googleapis/google-cloud-ruby/issues/21619)) 
+
+### 0.36.0 (2022-07-28)
+
+#### Features
+
+* Update minimum Ruby version to 2.6 ([#18869](https://github.com/googleapis/google-cloud-ruby/issues/18869)) 
+
+### 0.35.1 / 2021-06-17
+
+#### Bug Fixes
+
+* Expand googleauth dependency to support future 1.x versions
+
 ### 0.35.0 / 2021-03-10
 
 #### Features

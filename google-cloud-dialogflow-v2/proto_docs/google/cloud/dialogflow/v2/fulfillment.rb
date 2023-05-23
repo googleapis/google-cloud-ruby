@@ -35,13 +35,15 @@ module Google
         #   @return [::String]
         #     Required. The unique identifier of the fulfillment.
         #     Supported formats:
+        #
         #     - `projects/<Project ID>/agent/fulfillment`
         #     - `projects/<Project ID>/locations/<Location ID>/agent/fulfillment`
         #
         #     This field is not used for Fulfillment in an Environment.
         # @!attribute [rw] display_name
         #   @return [::String]
-        #     Optional. The human-readable name of the fulfillment, unique within the agent.
+        #     Optional. The human-readable name of the fulfillment, unique within the
+        #     agent.
         #
         #     This field is not used for Fulfillment in an Environment.
         # @!attribute [rw] generic_web_service
@@ -52,15 +54,18 @@ module Google
         #     Optional. Whether fulfillment is enabled.
         # @!attribute [rw] features
         #   @return [::Array<::Google::Cloud::Dialogflow::V2::Fulfillment::Feature>]
-        #     Optional. The field defines whether the fulfillment is enabled for certain features.
+        #     Optional. The field defines whether the fulfillment is enabled for certain
+        #     features.
         class Fulfillment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Represents configuration for a generic web service.
           # Dialogflow supports two mechanisms for authentications:
+          #
           # - Basic authentication with username and password.
           # - Authentication with additional authentication headers.
+          #
           # More information could be found at:
           # https://cloud.google.com/dialogflow/docs/fulfillment-configure.
           # @!attribute [rw] uri
@@ -75,11 +80,12 @@ module Google
           #     Optional. The password for HTTP Basic authentication.
           # @!attribute [rw] request_headers
           #   @return [::Google::Protobuf::Map{::String => ::String}]
-          #     Optional. The HTTP request headers to send together with fulfillment requests.
+          #     Optional. The HTTP request headers to send together with fulfillment
+          #     requests.
           # @!attribute [rw] is_cloud_function
           #   @return [::Boolean]
-          #     Optional. Indicates if generic web service is created through Cloud Functions
-          #     integration. Defaults to false.
+          #     Optional. Indicates if generic web service is created through Cloud
+          #     Functions integration. Defaults to false.
           #
           #     is_cloud_function is deprecated. Cloud functions can be configured by
           #     its uri as a regular web service now.
@@ -116,7 +122,8 @@ module Google
           end
         end
 
-        # The request message for {::Google::Cloud::Dialogflow::V2::Fulfillments::Client#get_fulfillment Fulfillments.GetFulfillment}.
+        # The request message for
+        # {::Google::Cloud::Dialogflow::V2::Fulfillments::Client#get_fulfillment Fulfillments.GetFulfillment}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the fulfillment.
@@ -126,7 +133,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {::Google::Cloud::Dialogflow::V2::Fulfillments::Client#update_fulfillment Fulfillments.UpdateFulfillment}.
+        # The request message for
+        # {::Google::Cloud::Dialogflow::V2::Fulfillments::Client#update_fulfillment Fulfillments.UpdateFulfillment}.
         # @!attribute [rw] fulfillment
         #   @return [::Google::Cloud::Dialogflow::V2::Fulfillment]
         #     Required. The fulfillment to update.

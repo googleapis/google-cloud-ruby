@@ -33,6 +33,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/regions/#{request_pb.region}/targetPools/#{request_pb.target_pool}/addHealthCheck"
                 body = request_pb.target_pools_add_health_check_request_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -45,6 +46,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/regions/#{request_pb.region}/targetPools/#{request_pb.target_pool}/addInstance"
                 body = request_pb.target_pools_add_instance_request_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -112,6 +114,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/regions/#{request_pb.region}/targetPools"
                 body = request_pb.target_pool_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -141,6 +144,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/regions/#{request_pb.region}/targetPools/#{request_pb.target_pool}/removeHealthCheck"
                 body = request_pb.target_pools_remove_health_check_request_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -153,6 +157,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/regions/#{request_pb.region}/targetPools/#{request_pb.target_pool}/removeInstance"
                 body = request_pb.target_pools_remove_instance_request_resource.to_json
                 query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end
@@ -165,6 +170,8 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/regions/#{request_pb.region}/targetPools/#{request_pb.target_pool}/setBackup"
                 body = request_pb.target_reference_resource.to_json
                 query_string_params = {}
+                query_string_params["failoverRatio"] = request_pb.failover_ratio.to_s if request_pb.has_failover_ratio?
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 
                 [uri, body, query_string_params]
               end

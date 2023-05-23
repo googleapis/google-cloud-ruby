@@ -179,6 +179,49 @@ module Google
             end
 
             ##
+            # Create a fully-qualified InsightTypeConfig resource string.
+            #
+            # @overload insight_type_config_path(project:, location:, insight_type:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/insightTypes/{insight_type}/config`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param insight_type [String]
+            #
+            # @overload insight_type_config_path(organization:, location:, insight_type:)
+            #   The resource will be in the following format:
+            #
+            #   `organizations/{organization}/locations/{location}/insightTypes/{insight_type}/config`
+            #
+            #   @param organization [String]
+            #   @param location [String]
+            #   @param insight_type [String]
+            #
+            # @return [::String]
+            def insight_type_config_path **args
+              resources = {
+                "insight_type:location:project" => (proc do |project:, location:, insight_type:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/insightTypes/#{insight_type}/config"
+                end),
+                "insight_type:location:organization" => (proc do |organization:, location:, insight_type:|
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                  "organizations/#{organization}/locations/#{location}/insightTypes/#{insight_type}/config"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
+            ##
             # Create a fully-qualified Recommendation resource string.
             #
             # @overload recommendation_path(project:, location:, recommender:, recommendation:)
@@ -324,6 +367,49 @@ module Google
                   raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
                   "organizations/#{organization}/locations/#{location}/recommenders/#{recommender}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
+            ##
+            # Create a fully-qualified RecommenderConfig resource string.
+            #
+            # @overload recommender_config_path(project:, location:, recommender:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/recommenders/{recommender}/config`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param recommender [String]
+            #
+            # @overload recommender_config_path(organization:, location:, recommender:)
+            #   The resource will be in the following format:
+            #
+            #   `organizations/{organization}/locations/{location}/recommenders/{recommender}/config`
+            #
+            #   @param organization [String]
+            #   @param location [String]
+            #   @param recommender [String]
+            #
+            # @return [::String]
+            def recommender_config_path **args
+              resources = {
+                "location:project:recommender" => (proc do |project:, location:, recommender:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/recommenders/#{recommender}/config"
+                end),
+                "location:organization:recommender" => (proc do |organization:, location:, recommender:|
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                  "organizations/#{organization}/locations/#{location}/recommenders/#{recommender}/config"
                 end)
               }
 

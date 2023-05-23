@@ -1,0 +1,34 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-kms.gemspec",
+    "lib/google-cloud-kms.rb",
+    "lib/google/cloud/kms.rb",
+    "lib/google/cloud/kms/version.rb",
+    "test/google/cloud/kms/client_test.rb",
+    "test/google/cloud/kms/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml",
+    "MIGRATING.md",
+    "acceptance/google/cloud/kms/v1/smoke_test.rb",
+    "lib/google/cloud/kms/helpers.rb",
+    "samples/.rubocop.yml",
+    "samples/Gemfile",
+    "samples/README.md",
+    "samples/Rakefile",
+    "samples/acceptance/snippets_test.rb",
+    "samples/snippets.rb",
+    "test/google/cloud/kms/client_helper_test.rb"
+  ]
+}

@@ -302,6 +302,34 @@ describe Google::Cloud::Bigquery::Dataset, :load_job, :updater, :storage, :mock_
     _(job.hive_partitioning_source_uri_prefix).must_equal source_uri_prefix
   end
 
+  it "can specify a storage URIs with Parquet options" do
+    gcs_uris = ["gs://mybucket/00/*.parquet", "gs://mybucket/01/*.parquet"]
+
+    mock = Minitest::Mock.new
+    parquet_options = Google::Apis::BigqueryV2::ParquetOptions.new(
+      enable_list_inference: true,
+      enum_as_string: true
+    )
+    job_gapi = load_job_url_gapi table_gapi.table_reference, gcs_uris, parquet_options: parquet_options
+    job_gapi.configuration.load.source_format = "PARQUET"
+    mock.expect :insert_job,
+                load_job_resp_gapi(table, gcs_uris, source_format: "PARQUET", parquet_options: parquet_options),
+                [project, job_gapi]
+    dataset.service.mocked_service = mock
+
+    job = dataset.load_job table_id, gcs_uris do |j|
+      j.parquet_enable_list_inference = true
+      j.parquet_enum_as_string = true
+    end
+    mock.verify
+
+    _(job).must_be_kind_of Google::Cloud::Bigquery::LoadJob
+    _(job.parquet?).must_equal true
+    _(job.parquet_options?).must_equal true
+    _(job.parquet_enable_list_inference?).must_equal true
+    _(job.parquet_enum_as_string?).must_equal true
+  end
+
   # Borrowed from MockStorage, load to a common module?
 
   def random_bucket_hash name=random_bucket_name

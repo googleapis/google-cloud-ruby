@@ -87,8 +87,8 @@ module Google
         ##
         # A unique ID for this model.
         #
-        # @return [String] The ID must contain only letters (a-z, A-Z), numbers
-        #   (0-9), or underscores (_). The maximum length is 1,024 characters.
+        # @return [String] The ID must contain only letters (`[A-Za-z]`), numbers
+        #   (`[0-9]`), or underscores (`_`). The maximum length is 1,024 characters.
         #
         # @!group Attributes
         #
@@ -100,8 +100,8 @@ module Google
         ##
         # The ID of the `Dataset` containing this model.
         #
-        # @return [String] The ID must contain only letters (a-z, A-Z), numbers
-        #   (0-9), or underscores (_). The maximum length is 1,024 characters.
+        # @return [String] The ID must contain only letters (`[A-Za-z]`), numbers
+        #   (`[0-9]`), or underscores (`_`). The maximum length is 1,024 characters.
         #
         # @!group Attributes
         #
@@ -515,8 +515,8 @@ module Google
         #   * `ml_tf_saved_model` - TensorFlow SavedModel
         #   * `ml_xgboost_booster` - XGBoost Booster
         # @param [String] job_id A user-defined ID for the extract job. The ID
-        #   must contain only letters (a-z, A-Z), numbers (0-9), underscores
-        #   (_), or dashes (-). The maximum length is 1,024 characters. If
+        #   must contain only letters (`[A-Za-z]`), numbers (`[0-9]`), underscores
+        #   (`_`), or dashes (`-`). The maximum length is 1,024 characters. If
         #   `job_id` is provided, then `prefix` will not be used.
         #
         #   See [Generating a job
@@ -525,8 +525,8 @@ module Google
         #   prepended to a generated value to produce a unique job ID. For
         #   example, the prefix `daily_import_job_` can be given to generate a
         #   job ID such as `daily_import_job_12vEDtMQ0mbp1Mo5Z7mzAFQJZazh`. The
-        #   prefix must contain only letters (a-z, A-Z), numbers (0-9),
-        #   underscores (_), or dashes (-). The maximum length of the entire ID
+        #   prefix must contain only letters (`[A-Za-z]`), numbers (`[0-9]`),
+        #   underscores (`_`), or dashes (`-`). The maximum length of the entire ID
         #   is 1,024 characters. If `job_id` is provided, then `prefix` will not
         #   be used.
         # @param [Hash] labels A hash of user-provided labels associated with

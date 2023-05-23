@@ -8,7 +8,14 @@ require "rake/testtask"
 desc "Run tests."
 Rake::TestTask.new do |t|
   t.libs << "test"
-  t.test_files = FileList["test/**/*_test.rb"]
+  t.test_files = FileList["test/**/*_test.rb"].exclude(/conformance/)
+  t.warning = false
+end
+
+desc "Run conformance tests"
+Rake::TestTask.new :conformance do |t|
+  t.libs << "test"
+  t.test_files = FileList["test/**/*conformance_test.rb"]
   t.warning = false
 end
 
@@ -23,6 +30,14 @@ namespace :test do
     end
 
     Rake::Task[:test].invoke
+  end
+end
+
+# Conformance Tests
+namespace :conformance do
+  desc "Run storage conformance tests."
+  task :run do
+    Rake::Task[:conformance].invoke
   end
 end
 
@@ -161,6 +176,8 @@ task :ci do
   Rake::Task[:doctest].invoke
   header "google-cloud-storage test", "*"
   Rake::Task[:test].invoke
+  header "google-cloud-storage conformance", "*"
+  Rake::Task[:conformance].invoke
 end
 namespace :ci do
   desc "Run the CI build, with acceptance tests."
@@ -182,7 +199,7 @@ end
 namespace :samples do
   task :latest do
     Dir.chdir "samples" do
-      Bundler.with_clean_env do
+      Bundler.with_unbundled_env do
         ENV["GOOGLE_CLOUD_SAMPLES_TEST"] = "not_master"
         sh "bundle update"
         sh "bundle exec rake test"
@@ -192,7 +209,7 @@ namespace :samples do
 
   task :master do
     Dir.chdir "samples" do
-      Bundler.with_clean_env do
+      Bundler.with_unbundled_env do
         ENV["GOOGLE_CLOUD_SAMPLES_TEST"] = "master"
         sh "bundle update"
         sh "bundle exec rake test"

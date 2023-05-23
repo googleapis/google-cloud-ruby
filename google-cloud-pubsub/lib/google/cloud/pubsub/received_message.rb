@@ -161,6 +161,29 @@ module Google
         ##
         # Acknowledges receipt of the message.
         #
+        # @yield [callback] The block to be called when reject operation is done.
+        # @yieldparam [Google::Cloud::PubSub::AcknowledgeResult] Result object that contains the status and error.
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   sub = pubsub.subscription "my-topic-sub"
+        #   subscriber = sub.listen do |received_message|
+        #     puts received_message.message.data
+        #
+        #     received_message.acknowledge! do |result|
+        #       puts result.status
+        #     end
+        #   end
+        #
+        #   # Start background threads that will call block passed to listen.
+        #   subscriber.start
+        #
+        #   # Shut down the subscriber when ready to stop receiving messages.
+        #   subscriber.stop!
+        #
         # @example
         #   require "google/cloud/pubsub"
         #
@@ -179,9 +202,14 @@ module Google
         #   # Shut down the subscriber when ready to stop receiving messages.
         #   subscriber.stop!
         #
-        def acknowledge!
+        def acknowledge! &block
           ensure_subscription!
-          subscription.acknowledge ack_id
+          if subscription.respond_to?(:exactly_once_delivery_enabled) && subscription.exactly_once_delivery_enabled
+            subscription.acknowledge ack_id, &block
+          else
+            subscription.acknowledge ack_id
+            yield AcknowledgeResult.new(AcknowledgeResult::SUCCESS) if block_given?
+          end
         end
         alias ack! acknowledge!
 
@@ -196,6 +224,30 @@ module Google
         #   example, if the value is `10`, the new ack deadline will expire 10
         #   seconds after the call is made. Specifying `0` may immediately make
         #   the message available for another pull request.
+        #
+        # @yield [callback] The block to be called when reject operation is done.
+        # @yieldparam [Google::Cloud::PubSub::AcknowledgeResult] Result object that contains the status and error.
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   sub = pubsub.subscription "my-topic-sub"
+        #   subscriber = sub.listen do |received_message|
+        #     puts received_message.message.data
+        #
+        #     # Delay for 2 minutes
+        #     received_message.modify_ack_deadline! 120 do |result|
+        #       puts result.status
+        #     end
+        #   end
+        #
+        #   # Start background threads that will call block passed to listen.
+        #   subscriber.start
+        #
+        #   # Shut down the subscriber when ready to stop receiving messages.
+        #   subscriber.stop!
         #
         # @example
         #   require "google/cloud/pubsub"
@@ -216,9 +268,14 @@ module Google
         #   # Shut down the subscriber when ready to stop receiving messages.
         #   subscriber.stop!
         #
-        def modify_ack_deadline! new_deadline
+        def modify_ack_deadline! new_deadline, &block
           ensure_subscription!
-          subscription.modify_ack_deadline new_deadline, ack_id
+          if subscription.respond_to?(:exactly_once_delivery_enabled) && subscription.exactly_once_delivery_enabled
+            subscription.modify_ack_deadline new_deadline, ack_id, &block
+          else
+            subscription.modify_ack_deadline new_deadline, ack_id
+            yield AcknowledgeResult.new(AcknowledgeResult::SUCCESS) if block_given?
+          end
         end
 
         ##
@@ -226,6 +283,30 @@ module Google
         # it.
         #
         # This will make the message available for redelivery.
+        #
+        # @yield [callback] The block to be called when reject operation is done.
+        # @yieldparam [Google::Cloud::PubSub::AcknowledgeResult] Result object that contains the status and error.
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   sub = pubsub.subscription "my-topic-sub"
+        #   subscriber = sub.listen do |received_message|
+        #     puts received_message.message.data
+        #
+        #     # Release message back to the API.
+        #     received_message.reject! do |result|
+        #       puts result.status
+        #     end
+        #   end
+        #
+        #   # Start background threads that will call block passed to listen.
+        #   subscriber.start
+        #
+        #   # Shut down the subscriber when ready to stop receiving messages.
+        #   subscriber.stop!
         #
         # @example
         #   require "google/cloud/pubsub"
@@ -246,8 +327,8 @@ module Google
         #   # Shut down the subscriber when ready to stop receiving messages.
         #   subscriber.stop!
         #
-        def reject!
-          modify_ack_deadline! 0
+        def reject! &block
+          modify_ack_deadline! 0, &block
         end
         alias nack! reject!
         alias ignore! reject!

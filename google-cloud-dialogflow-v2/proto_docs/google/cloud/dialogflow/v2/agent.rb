@@ -126,18 +126,20 @@ module Google
             # Not specified. This value should never be used.
             TIER_UNSPECIFIED = 0
 
-            # Standard tier.
+            # Trial Edition, previously known as Standard Edition.
             TIER_STANDARD = 1
 
-            # Enterprise tier (Essentials).
+            # Essentials Edition, previously known as Enterprise Essential Edition.
             TIER_ENTERPRISE = 2
 
-            # Enterprise tier (Plus).
+            # Essentials Edition (same as TIER_ENTERPRISE), previously known as
+            # Enterprise Plus Edition.
             TIER_ENTERPRISE_PLUS = 3
           end
         end
 
-        # The request message for {::Google::Cloud::Dialogflow::V2::Agents::Client#get_agent Agents.GetAgent}.
+        # The request message for
+        # {::Google::Cloud::Dialogflow::V2::Agents::Client#get_agent Agents.GetAgent}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The project that the agent to fetch is associated with.
@@ -147,7 +149,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {::Google::Cloud::Dialogflow::V2::Agents::Client#set_agent Agents.SetAgent}.
+        # The request message for
+        # {::Google::Cloud::Dialogflow::V2::Agents::Client#set_agent Agents.SetAgent}.
         # @!attribute [rw] agent
         #   @return [::Google::Cloud::Dialogflow::V2::Agent]
         #     Required. The agent to update.
@@ -159,7 +162,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {::Google::Cloud::Dialogflow::V2::Agents::Client#delete_agent Agents.DeleteAgent}.
+        # The request message for
+        # {::Google::Cloud::Dialogflow::V2::Agents::Client#delete_agent Agents.DeleteAgent}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The project that the agent to delete is associated with.
@@ -169,7 +173,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {::Google::Cloud::Dialogflow::V2::Agents::Client#search_agents Agents.SearchAgents}.
+        # The request message for
+        # {::Google::Cloud::Dialogflow::V2::Agents::Client#search_agents Agents.SearchAgents}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The project to list agents from.
@@ -186,7 +191,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response message for {::Google::Cloud::Dialogflow::V2::Agents::Client#search_agents Agents.SearchAgents}.
+        # The response message for
+        # {::Google::Cloud::Dialogflow::V2::Agents::Client#search_agents Agents.SearchAgents}.
         # @!attribute [rw] agents
         #   @return [::Array<::Google::Cloud::Dialogflow::V2::Agent>]
         #     The list of agents. There will be a maximum number of items returned based
@@ -200,7 +206,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {::Google::Cloud::Dialogflow::V2::Agents::Client#train_agent Agents.TrainAgent}.
+        # The request message for
+        # {::Google::Cloud::Dialogflow::V2::Agents::Client#train_agent Agents.TrainAgent}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The project that the agent to train is associated with.
@@ -210,23 +217,31 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {::Google::Cloud::Dialogflow::V2::Agents::Client#export_agent Agents.ExportAgent}.
+        # The request message for
+        # {::Google::Cloud::Dialogflow::V2::Agents::Client#export_agent Agents.ExportAgent}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The project that the agent to export is associated with.
         #     Format: `projects/<Project ID>`.
         # @!attribute [rw] agent_uri
         #   @return [::String]
-        #     Required. The [Google Cloud Storage](https://cloud.google.com/storage/docs/)
-        #     URI to export the agent to.
-        #     The format of this URI must be `gs://<bucket-name>/<object-name>`.
-        #     If left unspecified, the serialized agent is returned inline.
+        #     Required. The [Google Cloud
+        #     Storage](https://cloud.google.com/storage/docs/) URI to export the agent
+        #     to. The format of this URI must be `gs://<bucket-name>/<object-name>`. If
+        #     left unspecified, the serialized agent is returned inline.
+        #
+        #     Dialogflow performs a write operation for the Cloud Storage object
+        #     on the caller's behalf, so your request authentication must
+        #     have write permissions for the object. For more information, see
+        #     [Dialogflow access
+        #     control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
         class ExportAgentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response message for {::Google::Cloud::Dialogflow::V2::Agents::Client#export_agent Agents.ExportAgent}.
+        # The response message for
+        # {::Google::Cloud::Dialogflow::V2::Agents::Client#export_agent Agents.ExportAgent}.
         # @!attribute [rw] agent_uri
         #   @return [::String]
         #     The URI to a file containing the exported agent. This field is populated
@@ -239,7 +254,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {::Google::Cloud::Dialogflow::V2::Agents::Client#import_agent Agents.ImportAgent}.
+        # The request message for
+        # {::Google::Cloud::Dialogflow::V2::Agents::Client#import_agent Agents.ImportAgent}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The project that the agent to import is associated with.
@@ -248,6 +264,12 @@ module Google
         #   @return [::String]
         #     The URI to a Google Cloud Storage file containing the agent to import.
         #     Note: The URI must start with "gs://".
+        #
+        #     Dialogflow performs a read operation for the Cloud Storage object
+        #     on the caller's behalf, so your request authentication must
+        #     have read permissions for the object. For more information, see
+        #     [Dialogflow access
+        #     control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
         # @!attribute [rw] agent_content
         #   @return [::String]
         #     Zip compressed raw byte content for agent.
@@ -256,7 +278,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {::Google::Cloud::Dialogflow::V2::Agents::Client#restore_agent Agents.RestoreAgent}.
+        # The request message for
+        # {::Google::Cloud::Dialogflow::V2::Agents::Client#restore_agent Agents.RestoreAgent}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The project that the agent to restore is associated with.
@@ -265,6 +288,12 @@ module Google
         #   @return [::String]
         #     The URI to a Google Cloud Storage file containing the agent to restore.
         #     Note: The URI must start with "gs://".
+        #
+        #     Dialogflow performs a read operation for the Cloud Storage object
+        #     on the caller's behalf, so your request authentication must
+        #     have read permissions for the object. For more information, see
+        #     [Dialogflow access
+        #     control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
         # @!attribute [rw] agent_content
         #   @return [::String]
         #     Zip compressed raw byte content for agent.
@@ -273,7 +302,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The request message for {::Google::Cloud::Dialogflow::V2::Agents::Client#get_validation_result Agents.GetValidationResult}.
+        # The request message for
+        # {::Google::Cloud::Dialogflow::V2::Agents::Client#get_validation_result Agents.GetValidationResult}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The project that the agent is associated with.

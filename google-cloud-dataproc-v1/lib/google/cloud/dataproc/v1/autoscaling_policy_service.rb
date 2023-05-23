@@ -25,6 +25,7 @@ require "google/cloud/dataproc/v1/version"
 require "google/cloud/dataproc/v1/autoscaling_policy_service/credentials"
 require "google/cloud/dataproc/v1/autoscaling_policy_service/paths"
 require "google/cloud/dataproc/v1/autoscaling_policy_service/client"
+require "google/cloud/dataproc/v1/autoscaling_policy_service/rest"
 
 module Google
   module Cloud
@@ -34,10 +35,15 @@ module Google
         # The API interface for managing autoscaling policies in the
         # Dataproc API.
         #
-        # To load this service and instantiate a client:
+        # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/dataproc/v1/autoscaling_policy_service"
         #     client = ::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Client.new
+        #
+        # @example Load this service and instantiate a REST client
+        #
+        #     require "google/cloud/dataproc/v1/autoscaling_policy_service/rest"
+        #     client = ::Google::Cloud::Dataproc::V1::AutoscalingPolicyService::Rest::Client.new
         #
         module AutoscalingPolicyService
         end

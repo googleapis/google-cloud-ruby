@@ -45,15 +45,53 @@ module Google
   module Cloud
     module Channel
       ##
+      # Create a new client object for CloudChannelReportsService.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Channel::V1::CloudChannelReportsService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-channel-v1/latest/Google-Cloud-Channel-V1-CloudChannelReportsService-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
+      # `version` parameter. If the CloudChannelReportsService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
+      #
+      # ## About CloudChannelReportsService
+      #
+      # CloudChannelReportsService lets Google Cloud resellers and
+      # distributors retrieve and combine a variety of data in Cloud Channel for
+      # multiple products (Google Cloud, Google Voice, and Google Workspace.)
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
+      #
+      def self.cloud_channel_reports_service version: :v1, transport: :grpc, &block
+        require "google/cloud/channel/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Channel
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        service_module = Google::Cloud::Channel.const_get(package_name).const_get(:CloudChannelReportsService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
+      end
+
+      ##
       # Create a new client object for CloudChannelService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Channel::V1::CloudChannelService::Client](https://googleapis.dev/ruby/google-cloud-channel-v1/latest/Google/Cloud/Channel/V1/CloudChannelService/Client.html)
-      # for version V1 of the API.
-      # However, you can specify specify a different API version by passing it in the
+      # [Google::Cloud::Channel::V1::CloudChannelService::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-channel-v1/latest/Google-Cloud-Channel-V1-CloudChannelService-Client)
+      # for a gRPC client for version V1 of the API.
+      # However, you can specify a different API version by passing it in the
       # `version` parameter. If the CloudChannelService service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
+      # You can also specify a different transport by passing `:rest` or `:grpc` in
+      # the `transport` parameter.
       #
       # ## About CloudChannelService
       #
@@ -67,29 +105,32 @@ module Google
       # 3. Resellers and distributors can manage customer entitlements.
       #
       # CloudChannelService exposes the following resources:
-      # - Customers: An entity—usually an enterprise—managed by a reseller or
-      # distributor.
+      # - Customers: An entity-usually an
+      # enterprise-managed by a reseller or distributor.
       #
-      # - Entitlements: An entity that provides a customer with the means to use
-      # a service. Entitlements are created or updated as a result of a successful
-      # fulfillment.
+      # - Entitlements: An entity that
+      # provides a customer with the means to use a service. Entitlements are created
+      # or updated as a result of a successful fulfillment.
       #
-      # - ChannelPartnerLinks: An entity that identifies links between
-      # distributors and their indirect resellers in a channel.
+      # - ChannelPartnerLinks: An
+      # entity that identifies links between distributors and their indirect
+      # resellers in a channel.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
-      # @return [CloudChannelService::Client] A client object for the specified version.
+      # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
+      # @return [::Object] A client object for the specified version.
       #
-      def self.cloud_channel_service version: :v1, &block
+      def self.cloud_channel_service version: :v1, transport: :grpc, &block
         require "google/cloud/channel/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Channel
                        .constants
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
-        package_module = Google::Cloud::Channel.const_get package_name
-        package_module.const_get(:CloudChannelService).const_get(:Client).new(&block)
+        service_module = Google::Cloud::Channel.const_get(package_name).const_get(:CloudChannelService)
+        service_module = service_module.const_get(:Rest) if transport == :rest
+        service_module.const_get(:Client).new(&block)
       end
 
       ##
@@ -109,7 +150,7 @@ module Google
       # * `timeout` (*type:* `Numeric`) -
       #   Default timeout in seconds.
       # * `metadata` (*type:* `Hash{Symbol=>String}`) -
-      #   Additional gRPC headers to be sent with the call.
+      #   Additional headers to be sent with the call.
       # * `retry_policy` (*type:* `Hash`) -
       #   The retry policy. The value is a hash with the following keys:
       #     * `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.

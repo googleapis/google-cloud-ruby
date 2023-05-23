@@ -22,7 +22,7 @@ module Google
     # Represents an amount of money with its currency type.
     # @!attribute [rw] currency_code
     #   @return [::String]
-    #     The 3-letter currency code defined in ISO 4217.
+    #     The three-letter currency code defined in ISO 4217.
     # @!attribute [rw] units
     #   @return [::Integer]
     #     The whole units of the amount.

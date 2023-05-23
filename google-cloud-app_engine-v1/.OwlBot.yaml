@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/appengine/v1/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-app_engine-v1/$1

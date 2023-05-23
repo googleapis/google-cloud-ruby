@@ -42,13 +42,12 @@ module Google
             # See {::Google::Cloud::Gaming::V1::RealmsService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all RealmsService clients:
-            #
-            #     ::Google::Cloud::Gaming::V1::RealmsService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all RealmsService clients
+            #   ::Google::Cloud::Gaming::V1::RealmsService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -68,18 +67,12 @@ module Google
 
                 default_config.rpcs.list_realms.timeout = 60.0
                 default_config.rpcs.list_realms.retry_policy = {
-                  initial_delay: 1.0,
-                  max_delay: 10.0,
-                  multiplier: 1.3,
-                  retry_codes: [14]
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.get_realm.timeout = 60.0
                 default_config.rpcs.get_realm.retry_policy = {
-                  initial_delay: 1.0,
-                  max_delay: 10.0,
-                  multiplier: 1.3,
-                  retry_codes: [14]
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.create_realm.timeout = 60.0
@@ -90,10 +83,7 @@ module Google
 
                 default_config.rpcs.preview_realm_update.timeout = 60.0
                 default_config.rpcs.preview_realm_update.retry_policy = {
-                  initial_delay: 1.0,
-                  max_delay: 10.0,
-                  multiplier: 1.3,
-                  retry_codes: [14]
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config
@@ -125,19 +115,15 @@ module Google
             ##
             # Create a new RealmsService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new RealmsService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Gaming::V1::RealmsService::Client.new
             #
-            #     client = ::Google::Cloud::Gaming::V1::RealmsService::Client.new
-            #
-            # To create a new RealmsService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Gaming::V1::RealmsService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Gaming::V1::RealmsService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the RealmsService client.
             # @yieldparam config [Client::Configuration]
@@ -157,14 +143,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -172,6 +157,7 @@ module Google
 
               @operations_client = Operations.new do |config|
                 config.credentials = credentials
+                config.quota_project = @quota_project_id
                 config.endpoint = @config.endpoint
               end
 
@@ -212,7 +198,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent resource name. Uses the form:
+            #     Required. The parent resource name, in the following form:
             #     `projects/{project}/locations/{location}`.
             #   @param page_size [::Integer]
             #     Optional. The maximum number of items to return.  If unspecified, server
@@ -237,6 +223,25 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/gaming/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Gaming::V1::RealmsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Gaming::V1::ListRealmsRequest.new
+            #
+            #   # Call the list_realms method.
+            #   result = client.list_realms request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::Gaming::V1::Realm.
+            #     p item
+            #   end
+            #
             def list_realms request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -254,16 +259,20 @@ module Google
                 gapic_version: ::Google::Cloud::Gaming::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_realms.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_realms.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @realms_service_stub.call_rpc :list_realms, request, options: options do |response, operation|
@@ -294,7 +303,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the realm to retrieve. Uses the form:
+            #     Required. The name of the realm to retrieve, in the following form:
             #     `projects/{project}/locations/{location}/realms/{realm}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -304,6 +313,21 @@ module Google
             # @return [::Google::Cloud::Gaming::V1::Realm]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/gaming/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Gaming::V1::RealmsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Gaming::V1::GetRealmRequest.new
+            #
+            #   # Call the get_realm method.
+            #   result = client.get_realm request
+            #
+            #   # The returned object is of type Google::Cloud::Gaming::V1::Realm.
+            #   p result
             #
             def get_realm request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -322,16 +346,20 @@ module Google
                 gapic_version: ::Google::Cloud::Gaming::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_realm.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_realm.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @realms_service_stub.call_rpc :get_realm, request, options: options do |response, operation|
@@ -361,7 +389,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent resource name. Uses the form:
+            #     Required. The parent resource name, in the following form:
             #     `projects/{project}/locations/{location}`.
             #   @param realm_id [::String]
             #     Required. The ID of the realm resource to be created.
@@ -375,6 +403,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/gaming/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Gaming::V1::RealmsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Gaming::V1::CreateRealmRequest.new
+            #
+            #   # Call the create_realm method.
+            #   result = client.create_realm request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
             #
             def create_realm request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -393,16 +443,20 @@ module Google
                 gapic_version: ::Google::Cloud::Gaming::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_realm.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_realm.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @realms_service_stub.call_rpc :create_realm, request, options: options do |response, operation|
@@ -433,7 +487,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the realm to delete. Uses the form:
+            #     Required. The name of the realm to delete, in the following form:
             #     `projects/{project}/locations/{location}/realms/{realm}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -443,6 +497,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/gaming/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Gaming::V1::RealmsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Gaming::V1::DeleteRealmRequest.new
+            #
+            #   # Call the delete_realm method.
+            #   result = client.delete_realm request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
             #
             def delete_realm request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -461,16 +537,20 @@ module Google
                 gapic_version: ::Google::Cloud::Gaming::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_realm.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_realm.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @realms_service_stub.call_rpc :delete_realm, request, options: options do |response, operation|
@@ -506,10 +586,7 @@ module Google
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Required. The update mask applies to the resource. For the `FieldMask`
             #     definition, see
-            #
-            #     https:
-            #     //developers.google.com/protocol-buffers
-            #     // /docs/reference/google.protobuf#fieldmask
+            #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -518,6 +595,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/gaming/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Gaming::V1::RealmsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Gaming::V1::UpdateRealmRequest.new
+            #
+            #   # Call the update_realm method.
+            #   result = client.update_realm request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
             #
             def update_realm request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -536,16 +635,20 @@ module Google
                 gapic_version: ::Google::Cloud::Gaming::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "realm.name" => request.realm.name
-              }
+              header_params = {}
+              if request.realm&.name
+                header_params["realm.name"] = request.realm.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_realm.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_realm.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @realms_service_stub.call_rpc :update_realm, request, options: options do |response, operation|
@@ -581,10 +684,7 @@ module Google
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Required. The update mask applies to the resource. For the `FieldMask`
             #     definition, see
-            #
-            #     https:
-            #     //developers.google.com/protocol-buffers
-            #     // /docs/reference/google.protobuf#fieldmask
+            #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
             #   @param preview_time [::Google::Protobuf::Timestamp, ::Hash]
             #     Optional. The target timestamp to compute the preview.
             #
@@ -595,6 +695,21 @@ module Google
             # @return [::Google::Cloud::Gaming::V1::PreviewRealmUpdateResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/gaming/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Gaming::V1::RealmsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Gaming::V1::PreviewRealmUpdateRequest.new
+            #
+            #   # Call the preview_realm_update method.
+            #   result = client.preview_realm_update request
+            #
+            #   # The returned object is of type Google::Cloud::Gaming::V1::PreviewRealmUpdateResponse.
+            #   p result
             #
             def preview_realm_update request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -613,16 +728,20 @@ module Google
                 gapic_version: ::Google::Cloud::Gaming::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "realm.name" => request.realm.name
-              }
+              header_params = {}
+              if request.realm&.name
+                header_params["realm.name"] = request.realm.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.preview_realm_update.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.preview_realm_update.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @realms_service_stub.call_rpc :preview_realm_update, request, options: options do |response, operation|
@@ -646,22 +765,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for list_realms
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # list_realms to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Gaming::V1::RealmsService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_realms.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Gaming::V1::RealmsService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_realms.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Gaming::V1::RealmsService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_realms.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Gaming::V1::RealmsService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_realms.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
@@ -672,9 +790,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials

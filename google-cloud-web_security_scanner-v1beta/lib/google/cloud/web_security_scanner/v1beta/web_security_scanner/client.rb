@@ -43,13 +43,12 @@ module Google
             # See {::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all WebSecurityScanner clients:
-            #
-            #     ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all WebSecurityScanner clients
+            #   ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -71,26 +70,17 @@ module Google
 
                 default_config.rpcs.delete_scan_config.timeout = 600.0
                 default_config.rpcs.delete_scan_config.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_scan_config.timeout = 600.0
                 default_config.rpcs.get_scan_config.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_scan_configs.timeout = 600.0
                 default_config.rpcs.list_scan_configs.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.update_scan_config.timeout = 600.0
@@ -99,52 +89,34 @@ module Google
 
                 default_config.rpcs.get_scan_run.timeout = 600.0
                 default_config.rpcs.get_scan_run.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_scan_runs.timeout = 600.0
                 default_config.rpcs.list_scan_runs.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.stop_scan_run.timeout = 600.0
 
                 default_config.rpcs.list_crawled_urls.timeout = 600.0
                 default_config.rpcs.list_crawled_urls.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.get_finding.timeout = 600.0
                 default_config.rpcs.get_finding.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_findings.timeout = 600.0
                 default_config.rpcs.list_findings.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_finding_type_stats.timeout = 600.0
                 default_config.rpcs.list_finding_type_stats.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config
@@ -176,19 +148,15 @@ module Google
             ##
             # Create a new WebSecurityScanner client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new WebSecurityScanner client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client.new
             #
-            #     client = ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client.new
-            #
-            # To create a new WebSecurityScanner client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the WebSecurityScanner client.
             # @yieldparam config [Client::Configuration]
@@ -208,14 +176,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -264,6 +231,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/web_security_scanner/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::WebSecurityScanner::V1beta::CreateScanConfigRequest.new
+            #
+            #   # Call the create_scan_config method.
+            #   result = client.create_scan_config request
+            #
+            #   # The returned object is of type Google::Cloud::WebSecurityScanner::V1beta::ScanConfig.
+            #   p result
+            #
             def create_scan_config request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -281,16 +263,20 @@ module Google
                 gapic_version: ::Google::Cloud::WebSecurityScanner::V1beta::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_scan_config.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_scan_config.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @web_security_scanner_stub.call_rpc :create_scan_config, request, options: options do |response, operation|
@@ -331,6 +317,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/web_security_scanner/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::WebSecurityScanner::V1beta::DeleteScanConfigRequest.new
+            #
+            #   # Call the delete_scan_config method.
+            #   result = client.delete_scan_config request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_scan_config request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -348,16 +349,20 @@ module Google
                 gapic_version: ::Google::Cloud::WebSecurityScanner::V1beta::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_scan_config.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_scan_config.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @web_security_scanner_stub.call_rpc :delete_scan_config, request, options: options do |response, operation|
@@ -398,6 +403,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/web_security_scanner/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::WebSecurityScanner::V1beta::GetScanConfigRequest.new
+            #
+            #   # Call the get_scan_config method.
+            #   result = client.get_scan_config request
+            #
+            #   # The returned object is of type Google::Cloud::WebSecurityScanner::V1beta::ScanConfig.
+            #   p result
+            #
             def get_scan_config request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -415,16 +435,20 @@ module Google
                 gapic_version: ::Google::Cloud::WebSecurityScanner::V1beta::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_scan_config.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_scan_config.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @web_security_scanner_stub.call_rpc :get_scan_config, request, options: options do |response, operation|
@@ -473,6 +497,25 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/web_security_scanner/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::WebSecurityScanner::V1beta::ListScanConfigsRequest.new
+            #
+            #   # Call the list_scan_configs method.
+            #   result = client.list_scan_configs request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::WebSecurityScanner::V1beta::ScanConfig.
+            #     p item
+            #   end
+            #
             def list_scan_configs request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -490,16 +533,20 @@ module Google
                 gapic_version: ::Google::Cloud::WebSecurityScanner::V1beta::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_scan_configs.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_scan_configs.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @web_security_scanner_stub.call_rpc :list_scan_configs, request, options: options do |response, operation|
@@ -546,6 +593,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/web_security_scanner/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::WebSecurityScanner::V1beta::UpdateScanConfigRequest.new
+            #
+            #   # Call the update_scan_config method.
+            #   result = client.update_scan_config request
+            #
+            #   # The returned object is of type Google::Cloud::WebSecurityScanner::V1beta::ScanConfig.
+            #   p result
+            #
             def update_scan_config request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -563,16 +625,20 @@ module Google
                 gapic_version: ::Google::Cloud::WebSecurityScanner::V1beta::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "scan_config.name" => request.scan_config.name
-              }
+              header_params = {}
+              if request.scan_config&.name
+                header_params["scan_config.name"] = request.scan_config.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_scan_config.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_scan_config.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @web_security_scanner_stub.call_rpc :update_scan_config, request, options: options do |response, operation|
@@ -613,6 +679,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/web_security_scanner/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::WebSecurityScanner::V1beta::StartScanRunRequest.new
+            #
+            #   # Call the start_scan_run method.
+            #   result = client.start_scan_run request
+            #
+            #   # The returned object is of type Google::Cloud::WebSecurityScanner::V1beta::ScanRun.
+            #   p result
+            #
             def start_scan_run request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -630,16 +711,20 @@ module Google
                 gapic_version: ::Google::Cloud::WebSecurityScanner::V1beta::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.start_scan_run.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.start_scan_run.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @web_security_scanner_stub.call_rpc :start_scan_run, request, options: options do |response, operation|
@@ -681,6 +766,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/web_security_scanner/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::WebSecurityScanner::V1beta::GetScanRunRequest.new
+            #
+            #   # Call the get_scan_run method.
+            #   result = client.get_scan_run request
+            #
+            #   # The returned object is of type Google::Cloud::WebSecurityScanner::V1beta::ScanRun.
+            #   p result
+            #
             def get_scan_run request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -698,16 +798,20 @@ module Google
                 gapic_version: ::Google::Cloud::WebSecurityScanner::V1beta::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_scan_run.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_scan_run.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @web_security_scanner_stub.call_rpc :get_scan_run, request, options: options do |response, operation|
@@ -757,6 +861,25 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/web_security_scanner/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::WebSecurityScanner::V1beta::ListScanRunsRequest.new
+            #
+            #   # Call the list_scan_runs method.
+            #   result = client.list_scan_runs request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::WebSecurityScanner::V1beta::ScanRun.
+            #     p item
+            #   end
+            #
             def list_scan_runs request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -774,16 +897,20 @@ module Google
                 gapic_version: ::Google::Cloud::WebSecurityScanner::V1beta::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_scan_runs.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_scan_runs.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @web_security_scanner_stub.call_rpc :list_scan_runs, request, options: options do |response, operation|
@@ -826,6 +953,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/web_security_scanner/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::WebSecurityScanner::V1beta::StopScanRunRequest.new
+            #
+            #   # Call the stop_scan_run method.
+            #   result = client.stop_scan_run request
+            #
+            #   # The returned object is of type Google::Cloud::WebSecurityScanner::V1beta::ScanRun.
+            #   p result
+            #
             def stop_scan_run request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -843,16 +985,20 @@ module Google
                 gapic_version: ::Google::Cloud::WebSecurityScanner::V1beta::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.stop_scan_run.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.stop_scan_run.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @web_security_scanner_stub.call_rpc :stop_scan_run, request, options: options do |response, operation|
@@ -902,6 +1048,25 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/web_security_scanner/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::WebSecurityScanner::V1beta::ListCrawledUrlsRequest.new
+            #
+            #   # Call the list_crawled_urls method.
+            #   result = client.list_crawled_urls request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::WebSecurityScanner::V1beta::CrawledUrl.
+            #     p item
+            #   end
+            #
             def list_crawled_urls request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -919,16 +1084,20 @@ module Google
                 gapic_version: ::Google::Cloud::WebSecurityScanner::V1beta::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_crawled_urls.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_crawled_urls.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @web_security_scanner_stub.call_rpc :list_crawled_urls, request, options: options do |response, operation|
@@ -971,6 +1140,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/web_security_scanner/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::WebSecurityScanner::V1beta::GetFindingRequest.new
+            #
+            #   # Call the get_finding method.
+            #   result = client.get_finding request
+            #
+            #   # The returned object is of type Google::Cloud::WebSecurityScanner::V1beta::Finding.
+            #   p result
+            #
             def get_finding request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -988,16 +1172,20 @@ module Google
                 gapic_version: ::Google::Cloud::WebSecurityScanner::V1beta::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_finding.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_finding.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @web_security_scanner_stub.call_rpc :get_finding, request, options: options do |response, operation|
@@ -1052,6 +1240,25 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/web_security_scanner/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::WebSecurityScanner::V1beta::ListFindingsRequest.new
+            #
+            #   # Call the list_findings method.
+            #   result = client.list_findings request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::WebSecurityScanner::V1beta::Finding.
+            #     p item
+            #   end
+            #
             def list_findings request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1069,16 +1276,20 @@ module Google
                 gapic_version: ::Google::Cloud::WebSecurityScanner::V1beta::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_findings.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_findings.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @web_security_scanner_stub.call_rpc :list_findings, request, options: options do |response, operation|
@@ -1121,6 +1332,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/web_security_scanner/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::WebSecurityScanner::V1beta::ListFindingTypeStatsRequest.new
+            #
+            #   # Call the list_finding_type_stats method.
+            #   result = client.list_finding_type_stats request
+            #
+            #   # The returned object is of type Google::Cloud::WebSecurityScanner::V1beta::ListFindingTypeStatsResponse.
+            #   p result
+            #
             def list_finding_type_stats request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1138,16 +1364,20 @@ module Google
                 gapic_version: ::Google::Cloud::WebSecurityScanner::V1beta::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_finding_type_stats.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_finding_type_stats.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @web_security_scanner_stub.call_rpc :list_finding_type_stats, request, options: options do |response, operation|
@@ -1171,22 +1401,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for create_scan_config
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # create_scan_config to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_scan_config.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_scan_config.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_scan_config.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_scan_config.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
@@ -1197,9 +1426,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials

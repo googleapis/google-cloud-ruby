@@ -26,7 +26,7 @@ module Google
           # the resources that serve them.
           # All tables in an instance are served from all
           # {::Google::Cloud::Bigtable::Admin::V2::Cluster Clusters} in the instance.
-          # @!attribute [r] name
+          # @!attribute [rw] name
           #   @return [::String]
           #     The unique name of the instance. Values are of the form
           #     `projects/{project}/instances/[a-z][a-z0-9\\-]+[a-z0-9]`.
@@ -55,6 +55,14 @@ module Google
           #       the regular expression: `[\p{Ll}\p{Lo}\p{N}_-]{0,63}`.
           #     * No more than 64 labels can be associated with a given resource.
           #     * Keys and values must both be under 128 bytes.
+          # @!attribute [r] create_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. A server-assigned timestamp representing when this Instance was created.
+          #     For instances created before this field was added (August 2021), this value
+          #     is `seconds: 0, nanos: 1`.
+          # @!attribute [r] satisfies_pzs
+          #   @return [::Boolean]
+          #     Output only. Reserved for future use.
           class Instance
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -93,42 +101,70 @@ module Google
               # on the cluster.
               PRODUCTION = 1
 
-              # The instance is meant for development and testing purposes only; it has
-              # no performance or uptime guarantees and is not covered by SLA.
-              # After a development instance is created, it can be upgraded by
-              # updating the instance to type `PRODUCTION`. An instance created
-              # as a production instance cannot be changed to a development instance.
-              # When creating a development instance, `serve_nodes` on the cluster must
-              # not be set.
+              # DEPRECATED: Prefer PRODUCTION for all use cases, as it no longer enforces
+              # a higher minimum node count than DEVELOPMENT.
               DEVELOPMENT = 2
             end
+          end
+
+          # The Autoscaling targets for a Cluster. These determine the recommended nodes.
+          # @!attribute [rw] cpu_utilization_percent
+          #   @return [::Integer]
+          #     The cpu utilization that the Autoscaler should be trying to achieve.
+          #     This number is on a scale from 0 (no utilization) to
+          #     100 (total utilization), and is limited between 10 and 80, otherwise it
+          #     will return INVALID_ARGUMENT error.
+          # @!attribute [rw] storage_utilization_gib_per_node
+          #   @return [::Integer]
+          #     The storage utilization that the Autoscaler should be trying to achieve.
+          #     This number is limited between 2560 (2.5TiB) and 5120 (5TiB) for a SSD
+          #     cluster and between 8192 (8TiB) and 16384 (16TiB) for an HDD cluster;
+          #     otherwise it will return INVALID_ARGUMENT error. If this value is set to 0,
+          #     it will be treated as if it were set to the default value: 2560 for SSD,
+          #     8192 for HDD.
+          class AutoscalingTargets
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Limits for the number of nodes a Cluster can autoscale up/down to.
+          # @!attribute [rw] min_serve_nodes
+          #   @return [::Integer]
+          #     Required. Minimum number of nodes to scale down to.
+          # @!attribute [rw] max_serve_nodes
+          #   @return [::Integer]
+          #     Required. Maximum number of nodes to scale up to.
+          class AutoscalingLimits
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # A resizable group of nodes in a particular cloud location, capable
           # of serving all {::Google::Cloud::Bigtable::Admin::V2::Table Tables} in the parent
           # {::Google::Cloud::Bigtable::Admin::V2::Instance Instance}.
-          # @!attribute [r] name
+          # @!attribute [rw] name
           #   @return [::String]
           #     The unique name of the cluster. Values are of the form
           #     `projects/{project}/instances/{instance}/clusters/[a-z][-a-z0-9]*`.
           # @!attribute [rw] location
           #   @return [::String]
-          #     (`CreationOnly`)
-          #     The location where this cluster's nodes and storage reside. For best
+          #     Immutable. The location where this cluster's nodes and storage reside. For best
           #     performance, clients should be located as close as possible to this
           #     cluster. Currently only zones are supported, so values should be of the
           #     form `projects/{project}/locations/{zone}`.
           # @!attribute [r] state
           #   @return [::Google::Cloud::Bigtable::Admin::V2::Cluster::State]
-          #     The current state of the cluster.
+          #     Output only. The current state of the cluster.
           # @!attribute [rw] serve_nodes
           #   @return [::Integer]
-          #     Required. The number of nodes allocated to this cluster. More nodes enable
-          #     higher throughput and more consistent performance.
+          #     The number of nodes allocated to this cluster. More nodes enable higher
+          #     throughput and more consistent performance.
+          # @!attribute [rw] cluster_config
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::Cluster::ClusterConfig]
+          #     Configuration for this cluster.
           # @!attribute [rw] default_storage_type
           #   @return [::Google::Cloud::Bigtable::Admin::V2::StorageType]
-          #     (`CreationOnly`)
-          #     The type of storage used by this cluster to serve its
+          #     Immutable. The type of storage used by this cluster to serve its
           #     parent instance's tables, unless explicitly overridden.
           # @!attribute [rw] encryption_config
           #   @return [::Google::Cloud::Bigtable::Admin::V2::Cluster::EncryptionConfig]
@@ -136,6 +172,27 @@ module Google
           class Cluster
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Autoscaling config for a cluster.
+            # @!attribute [rw] autoscaling_limits
+            #   @return [::Google::Cloud::Bigtable::Admin::V2::AutoscalingLimits]
+            #     Required. Autoscaling limits for this cluster.
+            # @!attribute [rw] autoscaling_targets
+            #   @return [::Google::Cloud::Bigtable::Admin::V2::AutoscalingTargets]
+            #     Required. Autoscaling targets for this cluster.
+            class ClusterAutoscalingConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Configuration for a cluster.
+            # @!attribute [rw] cluster_autoscaling_config
+            #   @return [::Google::Cloud::Bigtable::Admin::V2::Cluster::ClusterAutoscalingConfig]
+            #     Autoscaling configuration for this cluster.
+            class ClusterConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
 
             # Cloud Key Management Service (Cloud KMS) settings for a CMEK-protected
             # cluster.
@@ -148,7 +205,9 @@ module Google
             #      `cloudkms.cryptoKeyEncrypterDecrypter` role on the CMEK key.
             #      2) Only regional keys can be used and the region of the CMEK key must
             #      match the region of the cluster.
-            #     3) All clusters within an instance must use the same CMEK key.
+            #      3) All clusters within an instance must use the same CMEK key.
+            #     Values are of the form
+            #     `projects/{project}/locations/{location}/keyRings/{keyring}/cryptoKeys/{key}`
             class EncryptionConfig
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -184,7 +243,6 @@ module Google
           # from a particular end user application.
           # @!attribute [rw] name
           #   @return [::String]
-          #     (`OutputOnly`)
           #     The unique name of the app profile. Values are of the form
           #     `projects/{project}/instances/{instance}/appProfiles/[_a-zA-Z0-9][-_.a-zA-Z0-9]*`.
           # @!attribute [rw] etag
@@ -199,7 +257,7 @@ module Google
           #     details.
           # @!attribute [rw] description
           #   @return [::String]
-          #     Optional long form description of the use case for this AppProfile.
+          #     Long form description of the use case for this AppProfile.
           # @!attribute [rw] multi_cluster_routing_use_any
           #   @return [::Google::Cloud::Bigtable::Admin::V2::AppProfile::MultiClusterRoutingUseAny]
           #     Use a multi-cluster routing policy.
@@ -215,6 +273,10 @@ module Google
             # transient errors or delays. Clusters in a region are considered
             # equidistant. Choosing this option sacrifices read-your-writes consistency
             # to improve availability.
+            # @!attribute [rw] cluster_ids
+            #   @return [::Array<::String>]
+            #     The set of clusters to route to. The order is ignored; clusters will be
+            #     tried in order of distance. If left empty, all clusters are eligible.
             class MultiClusterRoutingUseAny
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -235,6 +297,42 @@ module Google
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
+          end
+
+          # A tablet is a defined by a start and end key and is explained in
+          # https://cloud.google.com/bigtable/docs/overview#architecture and
+          # https://cloud.google.com/bigtable/docs/performance#optimization.
+          # A Hot tablet is a tablet that exhibits high average cpu usage during the time
+          # interval from start time to end time.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     The unique name of the hot tablet. Values are of the form
+          #     `projects/{project}/instances/{instance}/clusters/{cluster}/hotTablets/[a-zA-Z0-9_-]*`.
+          # @!attribute [rw] table_name
+          #   @return [::String]
+          #     Name of the table that contains the tablet. Values are of the form
+          #     `projects/{project}/instances/{instance}/tables/[_a-zA-Z0-9][-_.a-zA-Z0-9]*`.
+          # @!attribute [r] start_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The start time of the hot tablet.
+          # @!attribute [r] end_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The end time of the hot tablet.
+          # @!attribute [rw] start_key
+          #   @return [::String]
+          #     Tablet Start Key (inclusive).
+          # @!attribute [rw] end_key
+          #   @return [::String]
+          #     Tablet End Key (inclusive).
+          # @!attribute [r] node_cpu_usage_percent
+          #   @return [::Float]
+          #     Output only. The average CPU usage spent by a node on this tablet over the start_time to
+          #     end_time time range. The percentage is the amount of CPU used by the node
+          #     to serve the tablet, from 0% (tablet was not interacted with) to 100% (the
+          #     node spent all cycles serving the hot tablet).
+          class HotTablet
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
       end

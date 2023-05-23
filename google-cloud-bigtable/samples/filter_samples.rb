@@ -116,7 +116,7 @@ def filter_limit_timestamp_range instance_id, table_id
   # [START bigtable_filters_limit_timestamp_range]
   # instance_id = "my-instance"
   # table_id    = "my-table"
-  timestamp_minus_hr = (Time.now.to_f * 1_000_000).round(-3) - 60 * 60 * 1000 * 1000
+  timestamp_minus_hr = (Time.now.to_f * 1_000_000).round(-3) - (60 * 60 * 1000 * 1000)
   puts timestamp_minus_hr
   filter = Google::Cloud::Bigtable::RowFilter.timestamp_range from: 0, to: timestamp_minus_hr
 

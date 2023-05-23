@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/dialogflow/v2/session_pb"
+require "google/cloud/location"
 
 module Google
   module Cloud
@@ -44,13 +45,12 @@ module Google
             # See {::Google::Cloud::Dialogflow::V2::Sessions::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all Sessions clients:
-            #
-            #     ::Google::Cloud::Dialogflow::V2::Sessions::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all Sessions clients
+            #   ::Google::Cloud::Dialogflow::V2::Sessions::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -70,18 +70,12 @@ module Google
 
                 default_config.timeout = 60.0
                 default_config.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.detect_intent.timeout = 220.0
                 default_config.rpcs.detect_intent.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.streaming_detect_intent.timeout = 220.0
@@ -115,19 +109,15 @@ module Google
             ##
             # Create a new Sessions client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new Sessions client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Dialogflow::V2::Sessions::Client.new
             #
-            #     client = ::Google::Cloud::Dialogflow::V2::Sessions::Client.new
-            #
-            # To create a new Sessions client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Dialogflow::V2::Sessions::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Dialogflow::V2::Sessions::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Sessions client.
             # @yieldparam config [Client::Configuration]
@@ -147,18 +137,23 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
               @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
+
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
 
               @sessions_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::Dialogflow::V2::Sessions::Stub,
@@ -169,6 +164,13 @@ module Google
               )
             end
 
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
+
             # Service calls
 
             ##
@@ -176,6 +178,13 @@ module Google
             # as a result. This method is not idempotent, because it may cause contexts
             # and session entity types to be updated, which in turn might affect
             # results of future queries.
+            #
+            # If you might use
+            # [Agent Assist](https://cloud.google.com/dialogflow/docs/#aa)
+            # or other CCAI products now or in the future, consider using
+            # {::Google::Cloud::Dialogflow::V2::Participants::Client#analyze_content AnalyzeContent}
+            # instead of `DetectIntent`. `AnalyzeContent` has additional
+            # functionality for Agent Assist and other CCAI products.
             #
             # Note: Always use agent versions for production traffic.
             # See [Versions and
@@ -230,12 +239,14 @@ module Google
             #     audio. If this field is not set and agent-level speech synthesizer is not
             #     configured, no output audio is generated.
             #   @param output_audio_config_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Mask for {::Google::Cloud::Dialogflow::V2::DetectIntentRequest#output_audio_config output_audio_config} indicating which settings in this
-            #     request-level config should override speech synthesizer settings defined at
-            #     agent-level.
+            #     Mask for
+            #     {::Google::Cloud::Dialogflow::V2::DetectIntentRequest#output_audio_config output_audio_config}
+            #     indicating which settings in this request-level config should override
+            #     speech synthesizer settings defined at agent-level.
             #
-            #     If unspecified or empty, {::Google::Cloud::Dialogflow::V2::DetectIntentRequest#output_audio_config output_audio_config} replaces the agent-level
-            #     config in its entirety.
+            #     If unspecified or empty,
+            #     {::Google::Cloud::Dialogflow::V2::DetectIntentRequest#output_audio_config output_audio_config}
+            #     replaces the agent-level config in its entirety.
             #   @param input_audio [::String]
             #     The natural language speech audio to be processed. This field
             #     should be populated iff `query_input` is set to an input audio config.
@@ -248,6 +259,21 @@ module Google
             # @return [::Google::Cloud::Dialogflow::V2::DetectIntentResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Sessions::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::DetectIntentRequest.new
+            #
+            #   # Call the detect_intent method.
+            #   result = client.detect_intent request
+            #
+            #   # The returned object is of type Google::Cloud::Dialogflow::V2::DetectIntentResponse.
+            #   p result
             #
             def detect_intent request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -266,16 +292,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "session" => request.session
-              }
+              header_params = {}
+              if request.session
+                header_params["session"] = request.session
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.detect_intent.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.detect_intent.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @sessions_stub.call_rpc :detect_intent, request, options: options do |response, operation|
@@ -290,6 +320,13 @@ module Google
             # Processes a natural language query in audio format in a streaming fashion
             # and returns structured, actionable data as a result. This method is only
             # available via the gRPC API (not REST).
+            #
+            # If you might use
+            # [Agent Assist](https://cloud.google.com/dialogflow/docs/#aa)
+            # or other CCAI products now or in the future, consider using
+            # {::Google::Cloud::Dialogflow::V2::Participants::Client#streaming_analyze_content StreamingAnalyzeContent}
+            # instead of `StreamingDetectIntent`. `StreamingAnalyzeContent` has
+            # additional functionality for Agent Assist and other CCAI products.
             #
             # Note: Always use agent versions for production traffic.
             # See [Versions and
@@ -307,6 +344,30 @@ module Google
             # @return [::Enumerable<::Google::Cloud::Dialogflow::V2::StreamingDetectIntentResponse>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Sessions::Client.new
+            #
+            #   # Create an input stream.
+            #   input = Gapic::StreamInput.new
+            #
+            #   # Call the streaming_detect_intent method to start streaming.
+            #   output = client.streaming_detect_intent input
+            #
+            #   # Send requests on the stream. For each request object, set fields by
+            #   # passing keyword arguments. Be sure to close the stream when done.
+            #   input << Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest.new
+            #   input << Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest.new
+            #   input.close
+            #
+            #   # The returned object is a streamed enumerable yielding elements of type
+            #   # ::Google::Cloud::Dialogflow::V2::StreamingDetectIntentResponse
+            #   output.each do |current_response|
+            #     p current_response
+            #   end
             #
             def streaming_detect_intent request, options = nil
               unless request.is_a? ::Enumerable
@@ -333,7 +394,9 @@ module Google
               options.apply_defaults timeout:      @config.rpcs.streaming_detect_intent.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.streaming_detect_intent.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @sessions_stub.call_rpc :streaming_detect_intent, request, options: options do |response, operation|
@@ -357,22 +420,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for detect_intent
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # detect_intent to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Dialogflow::V2::Sessions::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.detect_intent.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Dialogflow::V2::Sessions::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.detect_intent.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Dialogflow::V2::Sessions::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.detect_intent.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Dialogflow::V2::Sessions::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.detect_intent.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
@@ -383,9 +445,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials

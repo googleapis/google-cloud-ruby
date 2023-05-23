@@ -28,14 +28,14 @@ module Google
           # Client for the AlertPolicyService service.
           #
           # The AlertPolicyService API is used to manage (list, create, delete,
-          # edit) alert policies in Stackdriver Monitoring. An alerting policy is
+          # edit) alert policies in Cloud Monitoring. An alerting policy is
           # a description of the conditions under which some aspect of your
           # system is considered to be "unhealthy" and the ways to notify
           # people or services about this state. In addition to using this API, alert
           # policies can also be managed through
-          # [Stackdriver Monitoring](https://cloud.google.com/monitoring/docs/),
+          # [Cloud Monitoring](https://cloud.google.com/monitoring/docs/),
           # which can be reached by clicking the "Monitoring" tab in
-          # [Cloud Console](https://console.cloud.google.com/).
+          # [Cloud console](https://console.cloud.google.com/).
           #
           class Client
             include Paths
@@ -49,13 +49,12 @@ module Google
             # See {::Google::Cloud::Monitoring::V3::AlertPolicyService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all AlertPolicyService clients:
-            #
-            #     ::Google::Cloud::Monitoring::V3::AlertPolicyService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all AlertPolicyService clients
+            #   ::Google::Cloud::Monitoring::V3::AlertPolicyService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -75,28 +74,19 @@ module Google
 
                 default_config.rpcs.list_alert_policies.timeout = 30.0
                 default_config.rpcs.list_alert_policies.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 30.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.get_alert_policy.timeout = 30.0
                 default_config.rpcs.get_alert_policy.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 30.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.create_alert_policy.timeout = 30.0
 
                 default_config.rpcs.delete_alert_policy.timeout = 30.0
                 default_config.rpcs.delete_alert_policy.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 30.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
                 default_config.rpcs.update_alert_policy.timeout = 30.0
@@ -130,19 +120,15 @@ module Google
             ##
             # Create a new AlertPolicyService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new AlertPolicyService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new
             #
-            #     client = ::Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new
-            #
-            # To create a new AlertPolicyService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the AlertPolicyService client.
             # @yieldparam config [Client::Configuration]
@@ -162,14 +148,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -205,7 +190,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The project whose alert policies are to be listed. The format is:
+            #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name)
+            #     whose alert policies are to be listed. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
             #
@@ -242,6 +228,25 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::ListAlertPoliciesRequest.new
+            #
+            #   # Call the list_alert_policies method.
+            #   result = client.list_alert_policies request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::Monitoring::V3::AlertPolicy.
+            #     p item
+            #   end
+            #
             def list_alert_policies request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -259,16 +264,20 @@ module Google
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_alert_policies.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_alert_policies.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @alert_policy_service_stub.call_rpc :list_alert_policies, request, options: options do |response, operation|
@@ -311,6 +320,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::GetAlertPolicyRequest.new
+            #
+            #   # Call the get_alert_policy method.
+            #   result = client.get_alert_policy request
+            #
+            #   # The returned object is of type Google::Cloud::Monitoring::V3::AlertPolicy.
+            #   p result
+            #
             def get_alert_policy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -328,16 +352,20 @@ module Google
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_alert_policy.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_alert_policy.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @alert_policy_service_stub.call_rpc :get_alert_policy, request, options: options do |response, operation|
@@ -367,13 +395,14 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The project in which to create the alerting policy. The format is:
+            #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name) in
+            #     which to create the alerting policy. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
             #
             #     Note that this field names the parent container in which the alerting
             #     policy will be written, not the name of the created policy. |name| must be
-            #     a host project of a workspace, otherwise INVALID_ARGUMENT error will
+            #     a host project of a Metrics Scope, otherwise INVALID_ARGUMENT error will
             #     return. The alerting policy that is returned will have a name that contains
             #     a normalized representation of this name as a prefix but adds a suffix of
             #     the form `/alertPolicies/[ALERT_POLICY_ID]`, identifying the policy in the
@@ -390,6 +419,21 @@ module Google
             # @return [::Google::Cloud::Monitoring::V3::AlertPolicy]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::CreateAlertPolicyRequest.new
+            #
+            #   # Call the create_alert_policy method.
+            #   result = client.create_alert_policy request
+            #
+            #   # The returned object is of type Google::Cloud::Monitoring::V3::AlertPolicy.
+            #   p result
             #
             def create_alert_policy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -408,16 +452,20 @@ module Google
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_alert_policy.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_alert_policy.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @alert_policy_service_stub.call_rpc :create_alert_policy, request, options: options do |response, operation|
@@ -461,6 +509,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::DeleteAlertPolicyRequest.new
+            #
+            #   # Call the delete_alert_policy method.
+            #   result = client.delete_alert_policy request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_alert_policy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -478,16 +541,20 @@ module Google
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_alert_policy.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_alert_policy.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @alert_policy_service_stub.call_rpc :delete_alert_policy, request, options: options do |response, operation|
@@ -555,6 +622,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::UpdateAlertPolicyRequest.new
+            #
+            #   # Call the update_alert_policy method.
+            #   result = client.update_alert_policy request
+            #
+            #   # The returned object is of type Google::Cloud::Monitoring::V3::AlertPolicy.
+            #   p result
+            #
             def update_alert_policy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -572,16 +654,20 @@ module Google
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "alert_policy.name" => request.alert_policy.name
-              }
+              header_params = {}
+              if request.alert_policy&.name
+                header_params["alert_policy.name"] = request.alert_policy.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_alert_policy.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_alert_policy.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @alert_policy_service_stub.call_rpc :update_alert_policy, request, options: options do |response, operation|
@@ -605,22 +691,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for list_alert_policies
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # list_alert_policies to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Monitoring::V3::AlertPolicyService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_alert_policies.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Monitoring::V3::AlertPolicyService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_alert_policies.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.list_alert_policies.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.list_alert_policies.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
@@ -631,9 +716,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials

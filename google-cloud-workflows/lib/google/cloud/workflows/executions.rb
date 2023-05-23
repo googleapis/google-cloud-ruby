@@ -49,9 +49,9 @@ module Google
         # Create a new client object for Executions.
         #
         # By default, this returns an instance of
-        # [Google::Cloud::Workflows::Executions::V1beta::Executions::Client](https://googleapis.dev/ruby/google-cloud-workflows-executions-v1beta/latest/Google/Cloud/Workflows/Executions/V1beta/Executions/Client.html)
-        # for version V1beta of the API.
-        # However, you can specify specify a different API version by passing it in the
+        # [Google::Cloud::Workflows::Executions::V1::Executions::Client](https://cloud.google.com/ruby/docs/reference/google-cloud-workflows-executions-v1/latest/Google-Cloud-Workflows-Executions-V1-Executions-Client)
+        # for a gRPC client for version V1 of the API.
+        # However, you can specify a different API version by passing it in the
         # `version` parameter. If the Executions service is
         # supported by that API version, and the corresponding gem is available, the
         # appropriate versioned client will be returned.
@@ -59,21 +59,21 @@ module Google
         # ## About Executions
         #
         # Executions is used to start and manage running instances of
-        # [Workflows][google.cloud.workflows.v1beta.Workflow] called executions.
+        # [Workflows][google.cloud.workflows.v1.Workflow] called executions.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
-        #   Defaults to `:v1beta`.
-        # @return [Executions::Client] A client object for the specified version.
+        #   Defaults to `:v1`.
+        # @return [::Object] A client object for the specified version.
         #
-        def self.executions version: :v1beta, &block
+        def self.executions version: :v1, &block
           require "google/cloud/workflows/executions/#{version.to_s.downcase}"
 
           package_name = Google::Cloud::Workflows::Executions
                          .constants
                          .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                          .first
-          package_module = Google::Cloud::Workflows::Executions.const_get package_name
-          package_module.const_get(:Executions).const_get(:Client).new(&block)
+          service_module = Google::Cloud::Workflows::Executions.const_get(package_name).const_get(:Executions)
+          service_module.const_get(:Client).new(&block)
         end
 
         ##
@@ -93,7 +93,7 @@ module Google
         # * `timeout` (*type:* `Numeric`) -
         #   Default timeout in seconds.
         # * `metadata` (*type:* `Hash{Symbol=>String}`) -
-        #   Additional gRPC headers to be sent with the call.
+        #   Additional headers to be sent with the call.
         # * `retry_policy` (*type:* `Hash`) -
         #   The retry policy. The value is a hash with the following keys:
         #     * `:initial_delay` (*type:* `Numeric`) - The initial delay in seconds.

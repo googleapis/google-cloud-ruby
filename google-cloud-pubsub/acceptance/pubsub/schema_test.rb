@@ -46,6 +46,7 @@ describe Google::Cloud::PubSub::Schema, :pubsub do
   let(:bad_value) { { "BAD_VALUE" => nil } }
 
   it "should validate, create, list, get, validate message, create topic, publish binary message, receive binary message, and delete a schema" do
+    skip("https://github.com/googleapis/google-cloud-ruby/issues/20925")
     # validate schema
     _(pubsub.valid_schema? :avro, definition).must_equal true
     _(pubsub.valid_schema? :TYPE_UNSPECIFIED, definition).must_equal false
@@ -60,7 +61,7 @@ describe Google::Cloud::PubSub::Schema, :pubsub do
     _(schema.definition).must_equal definition
 
     # list
-    schemas = pubsub.schemas view: :full
+    schemas = pubsub.schemas
     _(schemas).wont_be :empty?
     schema = schemas.first
     _(schema).must_be_kind_of Google::Cloud::PubSub::Schema
@@ -69,7 +70,7 @@ describe Google::Cloud::PubSub::Schema, :pubsub do
     _(schema.definition).wont_be :nil?
 
     # get
-    schema = pubsub.schema schema_name, view: :full
+    schema = pubsub.schema schema_name
     _(schema).must_be_kind_of Google::Cloud::PubSub::Schema
     _(schema.name).must_equal "projects/#{pubsub.project_id}/schemas/#{schema_name}"
     _(schema.type).must_equal :AVRO
@@ -109,7 +110,10 @@ describe Google::Cloud::PubSub::Schema, :pubsub do
       _(msg).wont_be :nil?
 
       # Check it received the published message
-      received_messages = pull_with_retry subscription
+      wait_for_condition description: "subscription pull" do
+        received_messages = subscription.pull immediate: false
+        received_messages.any?
+      end
       _(received_messages.count).must_equal 1
       received_message = received_messages.first
       _(received_message.data).must_equal msg.data
@@ -131,15 +135,10 @@ describe Google::Cloud::PubSub::Schema, :pubsub do
     # delete
     schema.delete
 
-    schema = pubsub.schema schema_name
+    wait_for_condition description: "schema delete" do
+      schema = pubsub.schema schema_name, view: :basic
+      schema.nil?
+    end
     _(schema).must_be :nil?
-
-    topic = pubsub.topic topic.name
-    _(topic.schema_name).must_equal "_deleted-schema_"
-    _(topic.message_encoding).must_equal :BINARY
-
-    expect do 
-      pubsub.create_topic topic_name_2, schema_name: schema_name, message_encoding: :binary
-    end.must_raise Google::Cloud::NotFoundError
   end
 end

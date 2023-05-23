@@ -41,13 +41,12 @@ module Google
             # See {::Google::Cloud::Talent::V4::Completion::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all Completion clients:
-            #
-            #     ::Google::Cloud::Talent::V4::Completion::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all Completion clients
+            #   ::Google::Cloud::Talent::V4::Completion::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -67,10 +66,7 @@ module Google
 
                 default_config.rpcs.complete_query.timeout = 30.0
                 default_config.rpcs.complete_query.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config
@@ -102,19 +98,15 @@ module Google
             ##
             # Create a new Completion client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new Completion client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Talent::V4::Completion::Client.new
             #
-            #     client = ::Google::Cloud::Talent::V4::Completion::Client.new
-            #
-            # To create a new Completion client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Talent::V4::Completion::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Talent::V4::Completion::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Completion client.
             # @yieldparam config [Client::Configuration]
@@ -134,14 +126,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -204,9 +195,11 @@ module Google
             #     "projects/\\{project_id}/tenants/\\{tenant_id}/companies/\\{company_id}", for
             #     example, "projects/foo/tenants/bar/companies/baz".
             #   @param scope [::Google::Cloud::Talent::V4::CompleteQueryRequest::CompletionScope]
-            #     The scope of the completion. The defaults is {::Google::Cloud::Talent::V4::CompleteQueryRequest::CompletionScope::PUBLIC CompletionScope.PUBLIC}.
+            #     The scope of the completion. The defaults is
+            #     {::Google::Cloud::Talent::V4::CompleteQueryRequest::CompletionScope::PUBLIC CompletionScope.PUBLIC}.
             #   @param type [::Google::Cloud::Talent::V4::CompleteQueryRequest::CompletionType]
-            #     The completion topic. The default is {::Google::Cloud::Talent::V4::CompleteQueryRequest::CompletionType::COMBINED CompletionType.COMBINED}.
+            #     The completion topic. The default is
+            #     {::Google::Cloud::Talent::V4::CompleteQueryRequest::CompletionType::COMBINED CompletionType.COMBINED}.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Talent::V4::CompleteQueryResponse]
@@ -215,6 +208,21 @@ module Google
             # @return [::Google::Cloud::Talent::V4::CompleteQueryResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/talent/v4"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Talent::V4::Completion::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Talent::V4::CompleteQueryRequest.new
+            #
+            #   # Call the complete_query method.
+            #   result = client.complete_query request
+            #
+            #   # The returned object is of type Google::Cloud::Talent::V4::CompleteQueryResponse.
+            #   p result
             #
             def complete_query request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -233,16 +241,20 @@ module Google
                 gapic_version: ::Google::Cloud::Talent::V4::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "tenant" => request.tenant
-              }
+              header_params = {}
+              if request.tenant
+                header_params["tenant"] = request.tenant
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.complete_query.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.complete_query.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @completion_stub.call_rpc :complete_query, request, options: options do |response, operation|
@@ -266,22 +278,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for complete_query
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # complete_query to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Talent::V4::Completion::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.complete_query.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Talent::V4::Completion::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.complete_query.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Talent::V4::Completion::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.complete_query.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Talent::V4::Completion::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.complete_query.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
@@ -292,9 +303,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials

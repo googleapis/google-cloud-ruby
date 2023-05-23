@@ -41,13 +41,12 @@ module Google
             # See {::Google::Cloud::Talent::V4::TenantService::Client::Configuration}
             # for a description of the configuration fields.
             #
-            # ## Example
+            # @example
             #
-            # To modify the configuration for all TenantService clients:
-            #
-            #     ::Google::Cloud::Talent::V4::TenantService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Modify the configuration for all TenantService clients
+            #   ::Google::Cloud::Talent::V4::TenantService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the Client client.
             # @yieldparam config [Client::Configuration]
@@ -69,28 +68,19 @@ module Google
 
                 default_config.rpcs.get_tenant.timeout = 30.0
                 default_config.rpcs.get_tenant.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.update_tenant.timeout = 30.0
 
                 default_config.rpcs.delete_tenant.timeout = 30.0
                 default_config.rpcs.delete_tenant.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config.rpcs.list_tenants.timeout = 30.0
                 default_config.rpcs.list_tenants.retry_policy = {
-                  initial_delay: 0.1,
-                  max_delay: 60.0,
-                  multiplier: 1.3,
-                  retry_codes: [4, 14]
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
                 default_config
@@ -122,19 +112,15 @@ module Google
             ##
             # Create a new TenantService client object.
             #
-            # ## Examples
+            # @example
             #
-            # To create a new TenantService client with the default
-            # configuration:
+            #   # Create a client using the default configuration
+            #   client = ::Google::Cloud::Talent::V4::TenantService::Client.new
             #
-            #     client = ::Google::Cloud::Talent::V4::TenantService::Client.new
-            #
-            # To create a new TenantService client with a custom
-            # configuration:
-            #
-            #     client = ::Google::Cloud::Talent::V4::TenantService::Client.new do |config|
-            #       config.timeout = 10.0
-            #     end
+            #   # Create a client using a custom configuration
+            #   client = ::Google::Cloud::Talent::V4::TenantService::Client.new do |config|
+            #     config.timeout = 10.0
+            #   end
             #
             # @yield [config] Configure the TenantService client.
             # @yieldparam config [Client::Configuration]
@@ -154,14 +140,13 @@ module Google
 
               # Create credentials
               credentials = @config.credentials
-              # Use self-signed JWT if the scope and endpoint are unchanged from default,
+              # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.scope == Client.configure.scope &&
-                                       @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
-              if credentials.is_a?(String) || credentials.is_a?(Hash)
+              if credentials.is_a?(::String) || credentials.is_a?(::Hash)
                 credentials = Credentials.new credentials, scope: @config.scope
               end
               @quota_project_id = @config.quota_project
@@ -212,6 +197,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/talent/v4"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Talent::V4::TenantService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Talent::V4::CreateTenantRequest.new
+            #
+            #   # Call the create_tenant method.
+            #   result = client.create_tenant request
+            #
+            #   # The returned object is of type Google::Cloud::Talent::V4::Tenant.
+            #   p result
+            #
             def create_tenant request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -229,16 +229,20 @@ module Google
                 gapic_version: ::Google::Cloud::Talent::V4::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_tenant.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_tenant.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @tenant_service_stub.call_rpc :create_tenant, request, options: options do |response, operation|
@@ -281,6 +285,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/talent/v4"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Talent::V4::TenantService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Talent::V4::GetTenantRequest.new
+            #
+            #   # Call the get_tenant method.
+            #   result = client.get_tenant request
+            #
+            #   # The returned object is of type Google::Cloud::Talent::V4::Tenant.
+            #   p result
+            #
             def get_tenant request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -298,16 +317,20 @@ module Google
                 gapic_version: ::Google::Cloud::Talent::V4::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_tenant.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_tenant.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @tenant_service_stub.call_rpc :get_tenant, request, options: options do |response, operation|
@@ -337,12 +360,15 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param tenant [::Google::Cloud::Talent::V4::Tenant, ::Hash]
-            #     Required. The tenant resource to replace the current resource in the system.
+            #     Required. The tenant resource to replace the current resource in the
+            #     system.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Strongly recommended for the best service experience.
             #
-            #     If {::Google::Cloud::Talent::V4::UpdateTenantRequest#update_mask update_mask} is provided, only the specified fields in
-            #     {::Google::Cloud::Talent::V4::UpdateTenantRequest#tenant tenant} are updated. Otherwise all the fields are updated.
+            #     If {::Google::Cloud::Talent::V4::UpdateTenantRequest#update_mask update_mask} is
+            #     provided, only the specified fields in
+            #     {::Google::Cloud::Talent::V4::UpdateTenantRequest#tenant tenant} are updated.
+            #     Otherwise all the fields are updated.
             #
             #     A field mask to specify the tenant fields to be updated. Only
             #     top level fields of {::Google::Cloud::Talent::V4::Tenant Tenant} are supported.
@@ -354,6 +380,21 @@ module Google
             # @return [::Google::Cloud::Talent::V4::Tenant]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/talent/v4"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Talent::V4::TenantService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Talent::V4::UpdateTenantRequest.new
+            #
+            #   # Call the update_tenant method.
+            #   result = client.update_tenant request
+            #
+            #   # The returned object is of type Google::Cloud::Talent::V4::Tenant.
+            #   p result
             #
             def update_tenant request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -372,16 +413,20 @@ module Google
                 gapic_version: ::Google::Cloud::Talent::V4::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "tenant.name" => request.tenant.name
-              }
+              header_params = {}
+              if request.tenant&.name
+                header_params["tenant.name"] = request.tenant.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_tenant.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_tenant.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @tenant_service_stub.call_rpc :update_tenant, request, options: options do |response, operation|
@@ -424,6 +469,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/talent/v4"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Talent::V4::TenantService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Talent::V4::DeleteTenantRequest.new
+            #
+            #   # Call the delete_tenant method.
+            #   result = client.delete_tenant request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_tenant request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -441,16 +501,20 @@ module Google
                 gapic_version: ::Google::Cloud::Talent::V4::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_tenant.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.delete_tenant.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @tenant_service_stub.call_rpc :delete_tenant, request, options: options do |response, operation|
@@ -498,6 +562,25 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/talent/v4"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Talent::V4::TenantService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Talent::V4::ListTenantsRequest.new
+            #
+            #   # Call the list_tenants method.
+            #   result = client.list_tenants request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::Talent::V4::Tenant.
+            #     p item
+            #   end
+            #
             def list_tenants request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -515,16 +598,20 @@ module Google
                 gapic_version: ::Google::Cloud::Talent::V4::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_tenants.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.list_tenants.retry_policy
-              options.apply_defaults metadata:     @config.metadata,
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
                                      retry_policy: @config.retry_policy
 
               @tenant_service_stub.call_rpc :list_tenants, request, options: options do |response, operation|
@@ -549,22 +636,21 @@ module Google
             # Configuration can be applied globally to all clients, or to a single client
             # on construction.
             #
-            # # Examples
+            # @example
             #
-            # To modify the global config, setting the timeout for create_tenant
-            # to 20 seconds, and all remaining timeouts to 10 seconds:
+            #   # Modify the global config, setting the timeout for
+            #   # create_tenant to 20 seconds,
+            #   # and all remaining timeouts to 10 seconds.
+            #   ::Google::Cloud::Talent::V4::TenantService::Client.configure do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_tenant.timeout = 20.0
+            #   end
             #
-            #     ::Google::Cloud::Talent::V4::TenantService::Client.configure do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_tenant.timeout = 20.0
-            #     end
-            #
-            # To apply the above configuration only to a new client:
-            #
-            #     client = ::Google::Cloud::Talent::V4::TenantService::Client.new do |config|
-            #       config.timeout = 10.0
-            #       config.rpcs.create_tenant.timeout = 20.0
-            #     end
+            #   # Apply the above configuration only to a new client.
+            #   client = ::Google::Cloud::Talent::V4::TenantService::Client.new do |config|
+            #     config.timeout = 10.0
+            #     config.rpcs.create_tenant.timeout = 20.0
+            #   end
             #
             # @!attribute [rw] endpoint
             #   The hostname or hostname:port of the service endpoint.
@@ -575,9 +661,9 @@ module Google
             #    *  (`String`) The path to a service account key file in JSON format
             #    *  (`Hash`) A service account key as a Hash
             #    *  (`Google::Auth::Credentials`) A googleauth credentials object
-            #       (see the [googleauth docs](https://googleapis.dev/ruby/googleauth/latest/index.html))
+            #       (see the [googleauth docs](https://rubydoc.info/gems/googleauth/Google/Auth/Credentials))
             #    *  (`Signet::OAuth2::Client`) A signet oauth2 client object
-            #       (see the [signet docs](https://googleapis.dev/ruby/signet/latest/Signet/OAuth2/Client.html))
+            #       (see the [signet docs](https://rubydoc.info/gems/signet/Signet/OAuth2/Client))
             #    *  (`GRPC::Core::Channel`) a gRPC channel with included credentials
             #    *  (`GRPC::Core::ChannelCredentials`) a gRPC credentails object
             #    *  (`nil`) indicating no credentials

@@ -45,6 +45,16 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.devtools.artifactregistry.v1beta2.ArtifactRegistry'
 
+            # Imports Apt artifacts. The returned Operation will complete once the
+            # resources are imported. Package, Version, and File resources are created
+            # based on the imported artifacts. Imported artifacts that conflict with
+            # existing resources are ignored.
+            rpc :ImportAptArtifacts, ::Google::Cloud::ArtifactRegistry::V1beta2::ImportAptArtifactsRequest, ::Google::Longrunning::Operation
+            # Imports Yum (RPM) artifacts. The returned Operation will complete once the
+            # resources are imported. Package, Version, and File resources are created
+            # based on the imported artifacts. Imported artifacts that conflict with
+            # existing resources are ignored.
+            rpc :ImportYumArtifacts, ::Google::Cloud::ArtifactRegistry::V1beta2::ImportYumArtifactsRequest, ::Google::Longrunning::Operation
             # Lists repositories.
             rpc :ListRepositories, ::Google::Cloud::ArtifactRegistry::V1beta2::ListRepositoriesRequest, ::Google::Cloud::ArtifactRegistry::V1beta2::ListRepositoriesResponse
             # Gets a repository.
@@ -92,6 +102,10 @@ module Google
             rpc :GetIamPolicy, ::Google::Iam::V1::GetIamPolicyRequest, ::Google::Iam::V1::Policy
             # Tests if the caller has a list of permissions on a resource.
             rpc :TestIamPermissions, ::Google::Iam::V1::TestIamPermissionsRequest, ::Google::Iam::V1::TestIamPermissionsResponse
+            # Retrieves the Settings for the Project.
+            rpc :GetProjectSettings, ::Google::Cloud::ArtifactRegistry::V1beta2::GetProjectSettingsRequest, ::Google::Cloud::ArtifactRegistry::V1beta2::ProjectSettings
+            # Updates the Settings for the Project.
+            rpc :UpdateProjectSettings, ::Google::Cloud::ArtifactRegistry::V1beta2::UpdateProjectSettingsRequest, ::Google::Cloud::ArtifactRegistry::V1beta2::ProjectSettings
           end
 
           Stub = Service.rpc_stub_class

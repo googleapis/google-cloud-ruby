@@ -65,8 +65,8 @@ module Google
         #     enabled, so negative boost will simply be ignored. Though `boost` can
         #     accept a wide range of positive values, most use cases are best served with
         #     values between 0 (exclusive) and 20. We recommend using a binary search
-        #     approach to finding the optimal value for your use case. Speech recognition
-        #     will skip PhraseSets with a boost value of 0.
+        #     approach to finding the optimal value for your use case as well as adding
+        #     phrases both with and without boost to your requests.
         class PhraseSet
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -90,6 +90,12 @@ module Google
           # resources and inline classes. Then use the class' id wrapped in $`{...}`
           # e.g. "$\\{my-months}". To refer to custom classes resources, use the class'
           # id wrapped in `${}` (e.g. `${my-months}`).
+          #
+          # Speech-to-Text supports three locations: `global`, `us` (US North America),
+          # and `eu` (Europe). If you are calling the `speech.googleapis.com`
+          # endpoint, use the `global` location. To specify a region, use a
+          # [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
+          # with matching `us` or `eu` location value.
           # @!attribute [rw] value
           #   @return [::String]
           #     The phrase itself.
@@ -99,12 +105,11 @@ module Google
           #     Positive value will increase the probability that a specific phrase will
           #     be recognized over other similar sounding phrases. The higher the boost,
           #     the higher the chance of false positive recognition as well. Negative
-          #     boost values would correspond to anti-biasing. Anti-biasing is not
-          #     enabled, so negative boost will simply be ignored. Though `boost` can
-          #     accept a wide range of positive values, most use cases are best served
+          #     boost will simply be ignored. Though `boost` can accept a wide range of
+          #     positive values, most use cases are best served
           #     with values between 0 and 20. We recommend using a binary search approach
-          #     to finding the optimal value for your use case. Speech recognition
-          #     will skip PhraseSets with a boost value of 0.
+          #     to finding the optimal value for your use case as well as adding
+          #     phrases both with and without boost to your requests.
           class Phrase
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -126,9 +131,53 @@ module Google
         #     class' `name` blank and fill in the rest of its fields, giving it a unique
         #     `custom_class_id`. Refer to the inline defined class in phrase hints by its
         #     `custom_class_id`.
+        # @!attribute [rw] abnf_grammar
+        #   @return [::Google::Cloud::Speech::V1p1beta1::SpeechAdaptation::ABNFGrammar]
+        #     Augmented Backus-Naur form (ABNF) is a standardized grammar notation
+        #     comprised by a set of derivation rules.
+        #     See specifications: https://www.w3.org/TR/speech-grammar
         class SpeechAdaptation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] abnf_strings
+          #   @return [::Array<::String>]
+          #     All declarations and rules of an ABNF grammar broken up into multiple
+          #     strings that will end up concatenated.
+          class ABNFGrammar
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Transcription normalization configuration. Use transcription normalization
+        # to automatically replace parts of the transcript with phrases of your
+        # choosing. For StreamingRecognize, this normalization only applies to stable
+        # partial transcripts (stability > 0.8) and final transcripts.
+        # @!attribute [rw] entries
+        #   @return [::Array<::Google::Cloud::Speech::V1p1beta1::TranscriptNormalization::Entry>]
+        #     A list of replacement entries. We will perform replacement with one entry
+        #     at a time. For example, the second entry in ["cat" => "dog", "mountain cat"
+        #     => "mountain dog"] will never be applied because we will always process the
+        #     first entry before it. At most 100 entries.
+        class TranscriptNormalization
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # A single replacement configuration.
+          # @!attribute [rw] search
+          #   @return [::String]
+          #     What to replace. Max length is 100 characters.
+          # @!attribute [rw] replace
+          #   @return [::String]
+          #     What to replace with. Max length is 100 characters.
+          # @!attribute [rw] case_sensitive
+          #   @return [::Boolean]
+          #     Whether the search is case sensitive.
+          class Entry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
       end
     end

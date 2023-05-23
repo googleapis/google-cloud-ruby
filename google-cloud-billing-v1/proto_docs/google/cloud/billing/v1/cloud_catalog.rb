@@ -70,6 +70,9 @@ module Google
         #   @return [::String]
         #     Identifies the service provider.
         #     This is 'Google' for first party services in Google Cloud Platform.
+        # @!attribute [rw] geo_taxonomy
+        #   @return [::Google::Cloud::Billing::V1::GeoTaxonomy]
+        #     The geographic taxonomy for this sku.
         class Sku
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -142,6 +145,21 @@ module Google
         #   @return [::String]
         #     The short hand for unit of usage this pricing is specified in.
         #     Example: usage_unit of "GiBy" means that usage is specified in "Gibi Byte".
+        # @!attribute [rw] display_quantity
+        #   @return [::Float]
+        #     The recommended quantity of units for displaying pricing info. When
+        #     displaying pricing info it is recommended to display:
+        #     (unit_price * display_quantity) per display_quantity usage_unit.
+        #     This field does not affect the pricing formula and is for display purposes
+        #     only.
+        #     Example: If the unit_price is "0.0001 USD", the usage_unit is "GB" and
+        #     the display_quantity is "1000" then the recommended way of displaying the
+        #     pricing info is "0.10 USD per 1000 GB"
+        # @!attribute [rw] tiered_rates
+        #   @return [::Array<::Google::Cloud::Billing::V1::PricingExpression::TierRate>]
+        #     The list of tiered rates for this pricing. The total cost is computed by
+        #     applying each of the tiered rates on usage. This repeated list is sorted
+        #     by ascending order of start_usage_amount.
         # @!attribute [rw] usage_unit_description
         #   @return [::String]
         #     The unit of usage in human readable form.
@@ -161,21 +179,6 @@ module Google
         #     unit_price / base_unit_conversion_factor = price per base_unit.
         #     start_usage_amount * base_unit_conversion_factor = start_usage_amount in
         #     base_unit.
-        # @!attribute [rw] display_quantity
-        #   @return [::Float]
-        #     The recommended quantity of units for displaying pricing info. When
-        #     displaying pricing info it is recommended to display:
-        #     (unit_price * display_quantity) per display_quantity usage_unit.
-        #     This field does not affect the pricing formula and is for display purposes
-        #     only.
-        #     Example: If the unit_price is "0.0001 USD", the usage_unit is "GB" and
-        #     the display_quantity is "1000" then the recommended way of displaying the
-        #     pricing info is "0.10 USD per 1000 GB"
-        # @!attribute [rw] tiered_rates
-        #   @return [::Array<::Google::Cloud::Billing::V1::PricingExpression::TierRate>]
-        #     The list of tiered rates for this pricing. The total cost is computed by
-        #     applying each of the tiered rates on usage. This repeated list is sorted
-        #     by ascending order of start_usage_amount.
         class PricingExpression
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -230,6 +233,36 @@ module Google
             DAILY = 1
 
             MONTHLY = 2
+          end
+        end
+
+        # Encapsulates the geographic taxonomy data for a sku.
+        # @!attribute [rw] type
+        #   @return [::Google::Cloud::Billing::V1::GeoTaxonomy::Type]
+        #     The type of Geo Taxonomy: GLOBAL, REGIONAL, or MULTI_REGIONAL.
+        # @!attribute [rw] regions
+        #   @return [::Array<::String>]
+        #     The list of regions associated with a sku. Empty for Global skus, which are
+        #     associated with all Google Cloud regions.
+        class GeoTaxonomy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The type of Geo Taxonomy: GLOBAL, REGIONAL, or MULTI_REGIONAL.
+          module Type
+            # The type is not specified.
+            TYPE_UNSPECIFIED = 0
+
+            # The sku is global in nature, e.g. a license sku. Global skus are
+            # available in all regions, and so have an empty region list.
+            GLOBAL = 1
+
+            # The sku is available in a specific region, e.g. "us-west2".
+            REGIONAL = 2
+
+            # The sku is associated with multiple regions, e.g. "us-west2" and
+            # "us-east1".
+            MULTI_REGIONAL = 3
           end
         end
 
