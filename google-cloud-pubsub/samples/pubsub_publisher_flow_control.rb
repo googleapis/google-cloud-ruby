@@ -44,4 +44,3 @@ def publish_messages_async_with_flow_control topic_id:
   puts "Published messages with flow control settings to #{topic_id}."
   # [END pubsub_publisher_flow_control]
 end
-  
