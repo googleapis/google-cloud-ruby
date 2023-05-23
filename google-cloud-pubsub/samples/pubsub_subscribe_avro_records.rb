@@ -1,4 +1,4 @@
-# Copyright 2021 Google, Inc
+# Copyright 2023 Google, Inc
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -52,5 +52,3 @@ def subscribe_avro_records subscription_id:, avsc_file:
   subscriber.stop.wait!
   # [END pubsub_subscribe_avro_records]
 end
-
-subscribe_avro_records subscription_id: ARGV.shift, avsc_file: ARGV.shift if $PROGRAM_NAME == __FILE__

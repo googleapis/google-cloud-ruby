@@ -1,4 +1,4 @@
-# Copyright 2021 Google, Inc
+# Copyright 2023 Google, Inc
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,5 +26,3 @@ def create_topic topic_id:
   puts "Topic #{topic.name} created."
   # [END pubsub_create_topic]
 end
-
-create_topic topic_id: ARGV.shift if $PROGRAM_NAME == __FILE__

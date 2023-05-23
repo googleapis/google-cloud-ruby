@@ -1,4 +1,4 @@
-# Copyright 2021 Google, Inc
+# Copyright 2023 Google, Inc
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
 
 require "google/cloud/pubsub"
 
-def create_ordered_pull_subscription topic_id:, subscription_id:
+def enable_subscription_ordering topic_id:, subscription_id:
   # [START pubsub_enable_subscription_ordering]
   # topic_id        = "your-topic-id"
   # subscription_id = "your-subscription-id"
@@ -28,9 +28,4 @@ def create_ordered_pull_subscription topic_id:, subscription_id:
 
   puts "Pull subscription #{subscription_id} created with message ordering."
   # [END pubsub_enable_subscription_ordering]
-end
-
-if $PROGRAM_NAME == __FILE__
-  create_ordered_pull_subscription topic_id:        ARGV.shift,
-                                   subscription_id: ARGV.shift
 end

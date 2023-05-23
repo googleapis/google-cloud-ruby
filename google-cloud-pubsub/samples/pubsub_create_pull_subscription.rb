@@ -1,4 +1,4 @@
-# Copyright 2021 Google, Inc
+# Copyright 2023 Google, Inc
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,9 +27,4 @@ def create_pull_subscription topic_id:, subscription_id:
 
   puts "Pull subscription #{subscription_id} created."
   # [END pubsub_create_pull_subscription]
-end
-
-if $PROGRAM_NAME == __FILE__
-  create_pull_subscription topic_id:        ARGV.shift,
-                           subscription_id: ARGV.shift
 end

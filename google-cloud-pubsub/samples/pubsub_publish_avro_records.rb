@@ -1,4 +1,4 @@
-# Copyright 2021 Google, Inc
+# Copyright 2023 Google, Inc
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -44,5 +44,3 @@ def publish_avro_records topic_id:, avsc_file:
   end
   # [END pubsub_publish_avro_records]
 end
-
-publish_avro_records topic_id: ARGV.shift, avsc_file: ARGV.shift if $PROGRAM_NAME == __FILE__

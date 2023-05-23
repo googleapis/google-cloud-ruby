@@ -1,4 +1,4 @@
-# Copyright 2021 Google, Inc
+# Copyright 2023 Google, Inc
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,5 +30,3 @@ def list_topic_subscriptions topic_id:
   end
   # [END pubsub_list_topic_subscriptions]
 end
-
-list_topic_subscriptions topic_id: ARGV.shift if $PROGRAM_NAME == __FILE__

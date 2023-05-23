@@ -1,4 +1,4 @@
-# Copyright 2021 Google, Inc
+# Copyright 2023 Google, Inc
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,5 +26,3 @@ def dead_letter_remove subscription_id:
   puts "Removed dead letter topic from #{subscription_id} subscription."
   # [END pubsub_dead_letter_remove]
 end
-
-dead_letter_remove subscription_id: ARGV.shift if $PROGRAM_NAME == __FILE__

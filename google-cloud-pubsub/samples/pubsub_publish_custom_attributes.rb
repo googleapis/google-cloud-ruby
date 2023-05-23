@@ -1,4 +1,4 @@
-# Copyright 2021 Google, Inc
+# Copyright 2023 Google, Inc
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -34,5 +34,3 @@ def publish_message_async_with_custom_attributes topic_id:
   topic.async_publisher.stop.wait!
   # [END pubsub_publish_custom_attributes]
 end
-
-publish_message_async_with_custom_attributes topic_id: ARGV.shift if $PROGRAM_NAME == __FILE__
