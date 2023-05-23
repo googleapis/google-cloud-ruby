@@ -123,7 +123,7 @@ describe "topics" do
 
     # pubsub_enable_subscription_ordering
     assert_output "Pull subscription #{subscription_id} created with message ordering.\n" do
-    enable_subscription_ordering topic_id: topic_id, subscription_id: subscription_id
+      enable_subscription_ordering topic_id: topic_id, subscription_id: subscription_id
     end
     @subscription = @topic.subscription subscription_id
     assert @subscription
