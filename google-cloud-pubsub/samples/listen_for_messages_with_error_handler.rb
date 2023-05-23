@@ -37,7 +37,7 @@ def listen_for_messages_with_error_handler subscription_id:
     # messages does not quit
     sleep 60
     subscriber.stop.wait!
-  rescue Exception => e
+  rescue StandardError => e
     puts "Exception #{e.inspect}: #{e.message}"
     raise "Stopped listening for messages."
   end

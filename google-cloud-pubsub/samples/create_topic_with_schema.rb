@@ -30,4 +30,8 @@ def create_topic_with_schema topic_id:, schema_id:, message_encoding:
   # [END pubsub_create_topic_with_schema]
 end
 
-create_topic_with_schema topic_id: ARGV.shift, schema_id: ARGV.shift, message_encoding: ARGV.shift if $PROGRAM_NAME == __FILE__
+if $PROGRAM_NAME == __FILE__
+  create_topic_with_schema topic_id: ARGV.shift,
+                           schema_id: ARGV.shift,
+                           message_encoding: ARGV.shift
+end

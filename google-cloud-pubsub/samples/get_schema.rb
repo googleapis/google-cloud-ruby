@@ -27,10 +27,4 @@ def get_schema schema_id:
   # [END pubsub_get_schema]
 end
 
-if $PROGRAM_NAME == __FILE__
-  get_schema schema_id: ARGV.shift
-else
-
-end
-
 get_schema schema_id: ARGV.shift if $PROGRAM_NAME == __FILE__
