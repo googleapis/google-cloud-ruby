@@ -459,10 +459,6 @@
       "component": "google-cloud-dataproc-v1",
       "version_file": "lib/google/cloud/dataproc/v1/version.rb"
     },
-    "google-cloud-dataproc-v1beta2": {
-      "component": "google-cloud-dataproc-v1beta2",
-      "version_file": "lib/google/cloud/dataproc/v1beta2/version.rb"
-    },
     "google-cloud-dataqna": {
       "component": "google-cloud-dataqna",
       "version_file": "lib/google/cloud/dataqna/version.rb"
@@ -1041,7 +1037,7 @@
     },
     "google-cloud-secret_manager-v1": {
       "component": "google-cloud-secret_manager-v1",
-      "version-file": "lib/google/cloud/secret_manager/v1/version.rb"
+      "version_file": "lib/google/cloud/secret_manager/v1/version.rb"
     },
     "google-cloud-secret_manager-v1beta1": {
       "component": "google-cloud-secret_manager-v1beta1",
@@ -1414,10 +1410,6 @@
     "grafeas": {
       "component": "grafeas",
       "version_file": "lib/grafeas/version.rb"
-    },
-    "grafeas-client": {
-      "component": "grafeas-client",
-      "version_file": "lib/grafeas/client/version.rb"
     },
     "grafeas-v1": {
       "component": "grafeas-v1",
