@@ -72,7 +72,7 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::SearchService::ClientTest < Mini
     user_pseudo_id = "hello world"
     content_search_spec = {}
     safe_search = true
-    user_label = {}
+    user_labels = {}
 
     search_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :search, name
@@ -94,7 +94,7 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::SearchService::ClientTest < Mini
       assert_equal "hello world", request["user_pseudo_id"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::ContentSearchSpec), request["content_search_spec"]
       assert_equal true, request["safe_search"]
-      assert_equal({}, request["user_label"].to_h)
+      assert_equal({}, request["user_labels"].to_h)
       refute_nil options
     end
 
@@ -105,35 +105,35 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::SearchService::ClientTest < Mini
       end
 
       # Use hash object
-      client.search({ serving_config: serving_config, branch: branch, query: query, page_size: page_size, page_token: page_token, offset: offset, filter: filter, order_by: order_by, user_info: user_info, facet_specs: facet_specs, boost_spec: boost_spec, params: params, query_expansion_spec: query_expansion_spec, spell_correction_spec: spell_correction_spec, user_pseudo_id: user_pseudo_id, content_search_spec: content_search_spec, safe_search: safe_search, user_label: user_label }) do |response, operation|
+      client.search({ serving_config: serving_config, branch: branch, query: query, page_size: page_size, page_token: page_token, offset: offset, filter: filter, order_by: order_by, user_info: user_info, facet_specs: facet_specs, boost_spec: boost_spec, params: params, query_expansion_spec: query_expansion_spec, spell_correction_spec: spell_correction_spec, user_pseudo_id: user_pseudo_id, content_search_spec: content_search_spec, safe_search: safe_search, user_labels: user_labels }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.search serving_config: serving_config, branch: branch, query: query, page_size: page_size, page_token: page_token, offset: offset, filter: filter, order_by: order_by, user_info: user_info, facet_specs: facet_specs, boost_spec: boost_spec, params: params, query_expansion_spec: query_expansion_spec, spell_correction_spec: spell_correction_spec, user_pseudo_id: user_pseudo_id, content_search_spec: content_search_spec, safe_search: safe_search, user_label: user_label do |response, operation|
+      client.search serving_config: serving_config, branch: branch, query: query, page_size: page_size, page_token: page_token, offset: offset, filter: filter, order_by: order_by, user_info: user_info, facet_specs: facet_specs, boost_spec: boost_spec, params: params, query_expansion_spec: query_expansion_spec, spell_correction_spec: spell_correction_spec, user_pseudo_id: user_pseudo_id, content_search_spec: content_search_spec, safe_search: safe_search, user_labels: user_labels do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.search ::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest.new(serving_config: serving_config, branch: branch, query: query, page_size: page_size, page_token: page_token, offset: offset, filter: filter, order_by: order_by, user_info: user_info, facet_specs: facet_specs, boost_spec: boost_spec, params: params, query_expansion_spec: query_expansion_spec, spell_correction_spec: spell_correction_spec, user_pseudo_id: user_pseudo_id, content_search_spec: content_search_spec, safe_search: safe_search, user_label: user_label) do |response, operation|
+      client.search ::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest.new(serving_config: serving_config, branch: branch, query: query, page_size: page_size, page_token: page_token, offset: offset, filter: filter, order_by: order_by, user_info: user_info, facet_specs: facet_specs, boost_spec: boost_spec, params: params, query_expansion_spec: query_expansion_spec, spell_correction_spec: spell_correction_spec, user_pseudo_id: user_pseudo_id, content_search_spec: content_search_spec, safe_search: safe_search, user_labels: user_labels) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.search({ serving_config: serving_config, branch: branch, query: query, page_size: page_size, page_token: page_token, offset: offset, filter: filter, order_by: order_by, user_info: user_info, facet_specs: facet_specs, boost_spec: boost_spec, params: params, query_expansion_spec: query_expansion_spec, spell_correction_spec: spell_correction_spec, user_pseudo_id: user_pseudo_id, content_search_spec: content_search_spec, safe_search: safe_search, user_label: user_label }, grpc_options) do |response, operation|
+      client.search({ serving_config: serving_config, branch: branch, query: query, page_size: page_size, page_token: page_token, offset: offset, filter: filter, order_by: order_by, user_info: user_info, facet_specs: facet_specs, boost_spec: boost_spec, params: params, query_expansion_spec: query_expansion_spec, spell_correction_spec: spell_correction_spec, user_pseudo_id: user_pseudo_id, content_search_spec: content_search_spec, safe_search: safe_search, user_labels: user_labels }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.search(::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest.new(serving_config: serving_config, branch: branch, query: query, page_size: page_size, page_token: page_token, offset: offset, filter: filter, order_by: order_by, user_info: user_info, facet_specs: facet_specs, boost_spec: boost_spec, params: params, query_expansion_spec: query_expansion_spec, spell_correction_spec: spell_correction_spec, user_pseudo_id: user_pseudo_id, content_search_spec: content_search_spec, safe_search: safe_search, user_label: user_label), grpc_options) do |response, operation|
+      client.search(::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest.new(serving_config: serving_config, branch: branch, query: query, page_size: page_size, page_token: page_token, offset: offset, filter: filter, order_by: order_by, user_info: user_info, facet_specs: facet_specs, boost_spec: boost_spec, params: params, query_expansion_spec: query_expansion_spec, spell_correction_spec: spell_correction_spec, user_pseudo_id: user_pseudo_id, content_search_spec: content_search_spec, safe_search: safe_search, user_labels: user_labels), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
