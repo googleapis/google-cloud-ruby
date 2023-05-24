@@ -38,6 +38,7 @@
     "snippets/language_service/analyze_syntax.rb",
     "snippets/language_service/annotate_text.rb",
     "snippets/language_service/classify_text.rb",
+    "snippets/language_service/moderate_text.rb",
     "snippets/snippet_metadata_google.cloud.language.v1beta2.json",
     "test/google/cloud/language/v1beta2/language_service_rest_test.rb",
     "test/google/cloud/language/v1beta2/language_service_test.rb",

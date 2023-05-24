@@ -296,8 +296,10 @@ module Google
               end
 
               ##
-              # Finds entities, similar to {::Google::Cloud::Language::V1beta2::LanguageService::Rest::Client#analyze_entities AnalyzeEntities} in the text and analyzes
-              # sentiment associated with each entity and its mentions.
+              # Finds entities, similar to
+              # {::Google::Cloud::Language::V1beta2::LanguageService::Rest::Client#analyze_entities AnalyzeEntities}
+              # in the text and analyzes sentiment associated with each entity and its
+              # mentions.
               #
               # @overload analyze_entity_sentiment(request, options = nil)
               #   Pass arguments to `analyze_entity_sentiment` via a request object, either of type
@@ -484,6 +486,68 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @language_service_stub.classify_text request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Moderates a document for harmful and sensitive categories.
+              #
+              # @overload moderate_text(request, options = nil)
+              #   Pass arguments to `moderate_text` via a request object, either of type
+              #   {::Google::Cloud::Language::V1beta2::ModerateTextRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Language::V1beta2::ModerateTextRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload moderate_text(document: nil)
+              #   Pass arguments to `moderate_text` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param document [::Google::Cloud::Language::V1beta2::Document, ::Hash]
+              #     Required. Input document.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Language::V1beta2::ModerateTextResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Language::V1beta2::ModerateTextResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def moderate_text request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Language::V1beta2::ModerateTextRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.moderate_text.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Language::V1beta2::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.moderate_text.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.moderate_text.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @language_service_stub.moderate_text request, options do |result, operation|
                   yield result, operation if block_given?
                   return result
                 end
@@ -707,6 +771,11 @@ module Google
                   #
                   attr_reader :classify_text
                   ##
+                  # RPC-specific configuration for `moderate_text`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :moderate_text
+                  ##
                   # RPC-specific configuration for `annotate_text`
                   # @return [::Gapic::Config::Method]
                   #
@@ -724,6 +793,8 @@ module Google
                     @analyze_syntax = ::Gapic::Config::Method.new analyze_syntax_config
                     classify_text_config = parent_rpcs.classify_text if parent_rpcs.respond_to? :classify_text
                     @classify_text = ::Gapic::Config::Method.new classify_text_config
+                    moderate_text_config = parent_rpcs.moderate_text if parent_rpcs.respond_to? :moderate_text
+                    @moderate_text = ::Gapic::Config::Method.new moderate_text_config
                     annotate_text_config = parent_rpcs.annotate_text if parent_rpcs.respond_to? :annotate_text
                     @annotate_text = ::Gapic::Config::Method.new annotate_text_config
 
