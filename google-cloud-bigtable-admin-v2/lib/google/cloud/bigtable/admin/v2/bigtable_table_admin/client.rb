@@ -671,11 +671,15 @@ module Google
               #     The table's `name` field is used to identify the table to update.
               #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
               #     Required. The list of fields to update.
-              #     A mask specifying which fields (e.g. `deletion_protection`) in the `table`
+              #     A mask specifying which fields (e.g. `change_stream_config`) in the `table`
               #     field should be updated. This mask is relative to the `table` field, not to
               #     the request message. The wildcard (*) path is currently not supported.
-              #     Currently UpdateTable is only supported for the following field:
-              #      * `deletion_protection`
+              #     Currently UpdateTable is only supported for the following fields:
+              #
+              #     * `change_stream_config`
+              #     * `change_stream_config.retention_period`
+              #     * `deletion_protection`
+              #
               #     If `column_families` is set in `update_mask`, it will return an
               #     UNIMPLEMENTED error.
               #
