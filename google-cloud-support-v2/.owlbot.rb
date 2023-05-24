@@ -14,27 +14,22 @@
 
 # OwlBot script for google-cloud-support-v2
 
+paths = [
+  "lib/google/cloud/support/v2/case_attachment_service/paths.rb",
+  "lib/google/cloud/support/v2/case_service/paths.rb",
+  "lib/google/cloud/support/v2/comment_service/paths.rb"
+]
 # Fix for b/283189019 (internal)
-# rubocop:disable Lint/InterpolationCheck:
-OwlBot.modifier path: "lib/google/cloud/support/v2/case_attachment_service/paths.rb" do |content|
+OwlBot.modifier path: paths do |content|
+  # rubocop:disable Lint/InterpolationCheck:
   content&.gsub '#{case}', '#{binding.local_variable_get :case}'
+  # rubocop:enable Lint/InterpolationCheck:
 end
-# rubocop:enable Lint/InterpolationCheck:
 
 # Fix for b/283189019 (internal)
-# rubocop:disable Lint/InterpolationCheck:
-OwlBot.modifier path: "lib/google/cloud/support/v2/case_service/paths.rb" do |content|
-  content&.gsub '#{case}', '#{binding.local_variable_get :case}'
-end
-# rubocop:enable Lint/InterpolationCheck:
-
-# Fix for b/283189019 (internal)
-# rubocop:disable Lint/InterpolationCheck:
 OwlBot.modifier path: "lib/google/cloud/support/v2/comment_service/paths.rb" do |content|
-  content&.gsub('#{case}', '#{binding.local_variable_get :case}')
-        &.gsub("case.to_s", "binding.local_variable_get(:case).to_s")
+  content&.gsub "case.to_s", "binding.local_variable_get(:case).to_s"
 end
-# rubocop:enable Lint/InterpolationCheck:
 
 # Fix for b/283189019 (internal)
 OwlBot.modifier path: "test/google/cloud/support/v2/case_service_test.rb" do |content|
