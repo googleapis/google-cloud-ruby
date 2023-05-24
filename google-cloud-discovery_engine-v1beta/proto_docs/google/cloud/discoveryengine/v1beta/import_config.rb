@@ -236,6 +236,60 @@ module Google
         #     The mode of reconciliation between existing documents and the documents to
         #     be imported. Defaults to
         #     {::Google::Cloud::DiscoveryEngine::V1beta::ImportDocumentsRequest::ReconciliationMode::INCREMENTAL ReconciliationMode.INCREMENTAL}.
+        # @!attribute [rw] auto_generate_ids
+        #   @return [::Boolean]
+        #     Whether to automatically generate IDs for the documents if absent.
+        #
+        #     If set to `true`,
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::Document#id Document.id}s are
+        #     automatically generated based on the hash of the payload, where IDs may not
+        #     be consistent during multiple imports. In which case
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::ImportDocumentsRequest::ReconciliationMode::FULL ReconciliationMode.FULL}
+        #     is highly recommended to avoid duplicate contents. If unset or set to
+        #     `false`, {::Google::Cloud::DiscoveryEngine::V1beta::Document#id Document.id}s
+        #     have to be specified using
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::ImportDocumentsRequest#id_field id_field},
+        #     otherwises, documents without IDs will fail to be imported.
+        #
+        #     Only set this field when using
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::GcsSource GcsSource} or
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::BigQuerySource BigQuerySource}, and
+        #     when
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::GcsSource#data_schema GcsSource.data_schema}
+        #     or
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::BigQuerySource#data_schema BigQuerySource.data_schema}
+        #     is `custom`. Otherwise, an INVALID_ARGUMENT error is thrown.
+        # @!attribute [rw] id_field
+        #   @return [::String]
+        #     The field in the Cloud Storage and BigQuery sources that indicates the
+        #     unique IDs of the documents.
+        #
+        #     For {::Google::Cloud::DiscoveryEngine::V1beta::GcsSource GcsSource} it is the
+        #     key of the JSON field. For instance, `my_id` for JSON `{"my_id":
+        #     "some_uuid"}`. For
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::BigQuerySource BigQuerySource} it is
+        #     the column name of the BigQuery table where the unique ids are stored.
+        #
+        #     The values of the JSON field or the BigQuery column will be used as the
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::Document#id Document.id}s. The JSON
+        #     field or the BigQuery column must be of string type, and the values must be
+        #     set as valid strings conform to
+        #     [RFC-1034](https://tools.ietf.org/html/rfc1034) with 1-63 characters.
+        #     Otherwise, documents without valid IDs will fail to be imported.
+        #
+        #     Only set this field when using
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::GcsSource GcsSource} or
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::BigQuerySource BigQuerySource}, and
+        #     when
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::GcsSource#data_schema GcsSource.data_schema}
+        #     or
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::BigQuerySource#data_schema BigQuerySource.data_schema}
+        #     is `custom`. And only set this field when
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::ImportDocumentsRequest#auto_generate_ids auto_generate_ids}
+        #     is unset or set as `false`. Otherwise, an INVALID_ARGUMENT error is thrown.
+        #
+        #     If it is unset, a default value `_id` is used when importing from the
+        #     allowed data sources.
         class ImportDocumentsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
