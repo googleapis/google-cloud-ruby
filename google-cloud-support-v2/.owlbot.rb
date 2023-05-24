@@ -14,34 +14,32 @@
 
 # OwlBot script for google-cloud-support-v2
 
-lib_paths = [
-  "lib/google/cloud/support/v2/case_attachment_service/paths.rb",
-  "lib/google/cloud/support/v2/case_service/paths.rb",
-  "lib/google/cloud/support/v2/comment_service/paths.rb"
-]
-
 # Fix for b/283189019 (internal)
-OwlBot.modifier path: lib_paths do |content|
-  # The regex matches following conditions:
-  # - Ignore comments
-  # - Look for occurences of 'case' in method definitions, but
-  #   ignore the keyword arguments (ex: case:)
-  content&.gsub(/^((?!\s*#).*\b)(case)\b[^:]/) do |match|
-    match
-      .split(/\bcase\b/) # ensure we don't change false positives of 'case' (ex: cases)
-      .join("binding.local_variable_get(:case)") # This works according to https://stackoverflow.com/a/45654031
-  end
+# rubocop:disable Lint/InterpolationCheck:
+OwlBot.modifier path: "lib/google/cloud/support/v2/case_attachment_service/paths.rb" do |content|
+  content&.gsub '#{case}', '#{binding.local_variable_get :case}'
 end
-
-test_paths = [
-  "test/google/cloud/support/v2/case_service_test.rb"
-]
+# rubocop:enable Lint/InterpolationCheck:
 
 # Fix for b/283189019 (internal)
-OwlBot.modifier path: test_paths do |content|
-  content&.gsub(/\scase([^:])/) do |_match|
-    "a_case#{Regexp.last_match 1}"
-  end
+# rubocop:disable Lint/InterpolationCheck:
+OwlBot.modifier path: "lib/google/cloud/support/v2/case_service/paths.rb" do |content|
+  content&.gsub '#{case}', '#{binding.local_variable_get :case}'
+end
+# rubocop:enable Lint/InterpolationCheck:
+
+# Fix for b/283189019 (internal)
+# rubocop:disable Lint/InterpolationCheck:
+OwlBot.modifier path: "lib/google/cloud/support/v2/comment_service/paths.rb" do |content|
+  content&.gsub('#{case}', '#{binding.local_variable_get :case}')
+        &.gsub("case.to_s", "binding.local_variable_get(:case).to_s")
+end
+# rubocop:enable Lint/InterpolationCheck:
+
+# Fix for b/283189019 (internal)
+OwlBot.modifier path: "test/google/cloud/support/v2/case_service_test.rb" do |content|
+  content&.gsub("case =", "ccase =")
+         &.gsub("case: case", "case: ccase")
 end
 
 OwlBot.move_files
