@@ -17,7 +17,6 @@ require "google/cloud/pubsub"
 def list_topic_subscriptions topic_id:
   # [START pubsub_list_topic_subscriptions]
   # topic_id = "your-topic-id"
-  require "google/cloud/pubsub"
 
   pubsub = Google::Cloud::Pubsub.new
 

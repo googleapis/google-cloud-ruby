@@ -17,7 +17,6 @@ require "google/cloud/pubsub"
 def delete_topic topic_id:
   # [START pubsub_delete_topic]
   # topic_id = "your-topic-id"
-  require "google/cloud/pubsub"
 
   pubsub = Google::Cloud::Pubsub.new
 

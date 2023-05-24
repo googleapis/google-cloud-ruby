@@ -19,7 +19,6 @@ def dead_letter_create_subscription topic_id:, subscription_id:, dead_letter_top
   # topic_id             = "your-topic-id"
   # subscription_id      = "your-subscription-id"
   # dead_letter_topic_id = "your-dead-letter-topic-id"
-  require "google/cloud/pubsub"
 
   pubsub = Google::Cloud::Pubsub.new
 

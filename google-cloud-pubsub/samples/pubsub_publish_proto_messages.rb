@@ -13,12 +13,11 @@
 # limitations under the License.
 
 require "google/cloud/pubsub"
+require_relative "utilities/us-states_pb"
 
 def publish_proto_messages topic_id:
   # [START pubsub_publish_proto_messages]
   # topic_id = "your-topic-id"
-  require "google/cloud/pubsub"
-  require_relative "utilities/us-states_pb"
 
   pubsub = Google::Cloud::Pubsub.new
 

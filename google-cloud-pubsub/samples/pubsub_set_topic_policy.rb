@@ -19,7 +19,6 @@ def set_topic_policy topic_id:, role:, service_account_email:
   # topic_id              = "your-topic-id"
   # role                  = "roles/pubsub.publisher"
   # service_account_email = "serviceAccount:account_name@project_name.iam.gserviceaccount.com"
-  require "google/cloud/pubsub"
 
   pubsub = Google::Cloud::Pubsub.new
 

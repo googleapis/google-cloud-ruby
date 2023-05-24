@@ -17,7 +17,6 @@ require "google/cloud/pubsub"
 def test_subscription_permissions subscription_id:
   # [START pubsub_test_subscription_permissions]
   # subscription_id = "your-subscription-id"
-  require "google/cloud/pubsub"
 
   pubsub = Google::Cloud::Pubsub.new
 

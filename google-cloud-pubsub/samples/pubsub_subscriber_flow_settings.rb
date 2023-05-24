@@ -17,7 +17,6 @@ require "google/cloud/pubsub"
 def listen_for_messages_with_flow_control subscription_id:
   # [START pubsub_subscriber_flow_settings]
   # subscription_id = "your-subscription-id"
-  require "google/cloud/pubsub"
 
   pubsub = Google::Cloud::Pubsub.new
 

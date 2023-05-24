@@ -19,7 +19,6 @@ def create_push_subscription topic_id:, subscription_id:, endpoint:
   # topic_id          = "your-topic-id"
   # subscription_id   = "your-subscription-id"
   # endpoint          = "https://your-test-project.appspot.com/push"
-  require "google/cloud/pubsub"
 
   pubsub = Google::Cloud::Pubsub.new
 

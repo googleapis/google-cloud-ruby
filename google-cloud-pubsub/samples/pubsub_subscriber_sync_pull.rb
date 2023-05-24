@@ -17,7 +17,6 @@ require "google/cloud/pubsub"
 def pull_messages subscription_id:
   # [START pubsub_subscriber_sync_pull]
   # subscription_id = "your-subscription-id"
-  require "google/cloud/pubsub"
 
   pubsub = Google::Cloud::Pubsub.new
 

@@ -17,7 +17,6 @@ require "google/cloud/pubsub"
 def publish_with_error_handler topic_id:
   # [START pubsub_publish_with_error_handler]
   # topic_id = "your-topic-id"
-  require "google/cloud/pubsub"
 
   pubsub = Google::Cloud::Pubsub.new
 

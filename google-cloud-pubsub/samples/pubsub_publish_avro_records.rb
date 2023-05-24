@@ -18,7 +18,6 @@ def publish_avro_records topic_id:, avsc_file:
   # [START pubsub_publish_avro_records]
   # topic_id = "your-topic-id"
   # avsc_file = "path/to/an/avro/schema/file/(.avsc)/formatted/in/json"
-  require "google/cloud/pubsub"
 
   pubsub = Google::Cloud::Pubsub.new
 

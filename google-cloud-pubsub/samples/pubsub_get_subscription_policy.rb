@@ -17,7 +17,6 @@ require "google/cloud/pubsub"
 def get_subscription_policy subscription_id:
   # [START pubsub_get_subscription_policy]
   # subscription_id = "your-subscription-id"
-  require "google/cloud/pubsub"
 
   pubsub = Google::Cloud::Pubsub.new
 

@@ -16,7 +16,6 @@ require "google/cloud/pubsub"
 
 def list_schemas
   # [START pubsub_list_schemas]
-  require "google/cloud/pubsub"
 
   pubsub = Google::Cloud::Pubsub.new
 

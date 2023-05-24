@@ -18,7 +18,6 @@ def enable_subscription_ordering topic_id:, subscription_id:
   # [START pubsub_enable_subscription_ordering]
   # topic_id        = "your-topic-id"
   # subscription_id = "your-subscription-id"
-  require "google/cloud/pubsub"
 
   pubsub = Google::Cloud::Pubsub.new
 

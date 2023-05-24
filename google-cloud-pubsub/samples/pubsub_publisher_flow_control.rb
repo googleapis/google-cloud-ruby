@@ -17,7 +17,6 @@ require "google/cloud/pubsub"
 def publish_messages_async_with_flow_control topic_id:
   # [START pubsub_publisher_flow_control]
   # topic_id = "your-topic-id"
-  require "google/cloud/pubsub"
 
   pubsub = Google::Cloud::Pubsub.new
 

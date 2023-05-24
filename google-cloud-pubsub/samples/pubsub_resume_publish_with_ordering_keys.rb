@@ -17,7 +17,6 @@ require "google/cloud/pubsub"
 def publish_resume_publish topic_id:
   # [START pubsub_resume_publish_with_ordering_keys]
   # topic_id = "your-topic-id"
-  require "google/cloud/pubsub"
 
   pubsub = Google::Cloud::Pubsub.new
 

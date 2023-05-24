@@ -17,7 +17,6 @@ require "google/cloud/pubsub"
 def test_topic_permissions topic_id:
   # [START pubsub_test_topic_permissions]
   # topic_id = "your-topic-id"
-  require "google/cloud/pubsub"
 
   pubsub = Google::Cloud::Pubsub.new
 

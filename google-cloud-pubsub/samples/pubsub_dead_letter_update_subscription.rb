@@ -19,7 +19,6 @@ def dead_letter_update_subscription subscription_id:
   # subscription_id       = "your-subscription-id"
   # role                  = "roles/pubsub.publisher"
   # service_account_email = "serviceAccount:account_name@project_name.iam.gserviceaccount.com"
-  require "google/cloud/pubsub"
 
   pubsub = Google::Cloud::Pubsub.new
 

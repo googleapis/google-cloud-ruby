@@ -18,7 +18,6 @@ def create_proto_schema schema_id:, proto_file:
   # [START pubsub_create_proto_schema]
   # schema_id = "your-schema-id"
   # proto_file = "path/to/a/proto/file/(.proto)/formatted/in/protocol/buffers"
-  require "google/cloud/pubsub"
 
   pubsub = Google::Cloud::Pubsub.new
 

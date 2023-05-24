@@ -18,7 +18,6 @@ def listen_for_messages subscription_id:
   # [START pubsub_subscriber_async_pull]
   # [START pubsub_quickstart_subscriber]
   # subscription_id = "your-subscription-id"
-  require "google/cloud/pubsub"
 
   pubsub = Google::Cloud::Pubsub.new
 

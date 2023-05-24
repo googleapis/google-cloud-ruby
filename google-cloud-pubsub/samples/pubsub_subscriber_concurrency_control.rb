@@ -17,7 +17,6 @@ require "google/cloud/pubsub"
 def listen_for_messages_with_concurrency_control subscription_id:
   # [START pubsub_subscriber_concurrency_control]
   # subscription_id = "your-subscription-id"
-  require "google/cloud/pubsub"
 
   pubsub = Google::Cloud::Pubsub.new
 

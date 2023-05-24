@@ -17,7 +17,6 @@ require "google/cloud/pubsub"
 def detach_subscription subscription_id:
   # [START pubsub_detach_subscription]
   # subscription_id = "your-subscription-id"
-  require "google/cloud/pubsub"
 
   pubsub = Google::Cloud::Pubsub.new
 

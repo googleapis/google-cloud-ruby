@@ -17,7 +17,6 @@ require "google/cloud/pubsub"
 def subscriber_sync_pull_with_lease subscription_id:
   # [START pubsub_subscriber_sync_pull_with_lease]
   # subscription_id = "your-subscription-id"
-  require "google/cloud/pubsub"
 
   pubsub = Google::Cloud::Pubsub.new
 

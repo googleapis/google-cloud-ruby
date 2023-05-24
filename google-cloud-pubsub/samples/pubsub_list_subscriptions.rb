@@ -16,7 +16,6 @@ require "google/cloud/pubsub"
 
 def list_subscriptions
   # [START pubsub_list_subscriptions]
-  require "google/cloud/pubsub"
 
   pubsub = Google::Cloud::Pubsub.new
 

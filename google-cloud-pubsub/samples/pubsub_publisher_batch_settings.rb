@@ -17,7 +17,6 @@ require "google/cloud/pubsub"
 def publish_messages_async_with_batch_settings topic_id:
   # [START pubsub_publisher_batch_settings]
   # topic_id = "your-topic-id"
-  require "google/cloud/pubsub"
 
   pubsub = Google::Cloud::Pubsub.new
 

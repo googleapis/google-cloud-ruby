@@ -17,7 +17,6 @@ require "google/cloud/pubsub"
 def get_schema schema_id:
   # [START pubsub_get_schema]
   # schema_id = "your-schema-id"
-  require "google/cloud/pubsub"
 
   pubsub = Google::Cloud::Pubsub.new
 

@@ -17,7 +17,6 @@ require "google/cloud/pubsub"
 def get_topic_policy topic_id:
   # [START pubsub_get_topic_policy]
   # topic_id = "your-topic-id"
-  require "google/cloud/pubsub"
 
   pubsub = Google::Cloud::Pubsub.new
 

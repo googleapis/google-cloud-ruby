@@ -13,12 +13,11 @@
 # limitations under the License.
 
 require "google/cloud/pubsub"
+require_relative "utilities/us-states_pb"
 
 def subscribe_proto_messages subscription_id:
   # [START pubsub_subscribe_proto_messages]
   # subscription_id = "your-subscription-id"
-  require "google/cloud/pubsub"
-  require_relative "utilities/us-states_pb"
 
   pubsub = Google::Cloud::Pubsub.new
 
