@@ -13,11 +13,24 @@
 # limitations under the License.
 
 require_relative "helper"
-require_relative "../subscriptions.rb"
 require_relative "../pubsub_create_subscription_with_filter.rb"
 require_relative "../pubsub_subscriber_exactly_once_delivery.rb"
 require_relative "../pubsub_create_subscription_with_exactly_once_delivery.rb"
 require_relative "../pubsub_create_bigquery_subscription.rb"
+require_relative "../pubsub_subscriber_async_pull_custom_attributes.rb"
+require_relative "../pubsub_subscriber_sync_pull.rb"
+require_relative "../pubsub_subscriber_flow_settings.rb"
+require_relative "../pubsub_subscriber_async_pull.rb"
+require_relative "../pubsub_subscriber_concurrency_control.rb"
+require_relative "../pubsub_subscriber_sync_pull_with_lease.rb"
+require_relative "../pubsub_update_push_configuration.rb"
+require_relative "../pubsub_list_subscriptions.rb"
+require_relative "../pubsub_set_subscription_policy.rb"
+require_relative "../pubsub_get_subscription_policy.rb"
+require_relative "../pubsub_get_topic_policy.rb"
+require_relative "../pubsub_test_subscription_permissions.rb"
+require_relative "../pubsub_detach_subscription.rb"
+require_relative "../pubsub_delete_subscription.rb"
 require "google/cloud/bigquery"
 
 describe "subscriptions" do
