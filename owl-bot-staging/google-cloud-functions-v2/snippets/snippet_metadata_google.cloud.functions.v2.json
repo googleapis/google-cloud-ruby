@@ -1,0 +1,335 @@
+{
+  "client_library": {
+    "name": "google-cloud-functions-v2",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.functions.v2",
+        "version": "v2"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "cloudfunctions_v2_generated_FunctionService_GetFunction_sync",
+      "title": "Snippet for the get_function call in the FunctionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Functions::V2::FunctionService::Client#get_function. It may require modification in order to execute successfully.",
+      "file": "function_service/get_function.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_function",
+        "full_name": "::Google::Cloud::Functions::V2::FunctionService::Client#get_function",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Functions::V2::GetFunctionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Functions::V2::Function",
+        "client": {
+          "short_name": "FunctionService::Client",
+          "full_name": "::Google::Cloud::Functions::V2::FunctionService::Client"
+        },
+        "method": {
+          "short_name": "GetFunction",
+          "full_name": "google.cloud.functions.v2.FunctionService.GetFunction",
+          "service": {
+            "short_name": "FunctionService",
+            "full_name": "google.cloud.functions.v2.FunctionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudfunctions_v2_generated_FunctionService_ListFunctions_sync",
+      "title": "Snippet for the list_functions call in the FunctionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Functions::V2::FunctionService::Client#list_functions. It may require modification in order to execute successfully.",
+      "file": "function_service/list_functions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_functions",
+        "full_name": "::Google::Cloud::Functions::V2::FunctionService::Client#list_functions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Functions::V2::ListFunctionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Functions::V2::ListFunctionsResponse",
+        "client": {
+          "short_name": "FunctionService::Client",
+          "full_name": "::Google::Cloud::Functions::V2::FunctionService::Client"
+        },
+        "method": {
+          "short_name": "ListFunctions",
+          "full_name": "google.cloud.functions.v2.FunctionService.ListFunctions",
+          "service": {
+            "short_name": "FunctionService",
+            "full_name": "google.cloud.functions.v2.FunctionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudfunctions_v2_generated_FunctionService_CreateFunction_sync",
+      "title": "Snippet for the create_function call in the FunctionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Functions::V2::FunctionService::Client#create_function. It may require modification in order to execute successfully.",
+      "file": "function_service/create_function.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_function",
+        "full_name": "::Google::Cloud::Functions::V2::FunctionService::Client#create_function",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Functions::V2::CreateFunctionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "FunctionService::Client",
+          "full_name": "::Google::Cloud::Functions::V2::FunctionService::Client"
+        },
+        "method": {
+          "short_name": "CreateFunction",
+          "full_name": "google.cloud.functions.v2.FunctionService.CreateFunction",
+          "service": {
+            "short_name": "FunctionService",
+            "full_name": "google.cloud.functions.v2.FunctionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudfunctions_v2_generated_FunctionService_UpdateFunction_sync",
+      "title": "Snippet for the update_function call in the FunctionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Functions::V2::FunctionService::Client#update_function. It may require modification in order to execute successfully.",
+      "file": "function_service/update_function.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_function",
+        "full_name": "::Google::Cloud::Functions::V2::FunctionService::Client#update_function",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Functions::V2::UpdateFunctionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "FunctionService::Client",
+          "full_name": "::Google::Cloud::Functions::V2::FunctionService::Client"
+        },
+        "method": {
+          "short_name": "UpdateFunction",
+          "full_name": "google.cloud.functions.v2.FunctionService.UpdateFunction",
+          "service": {
+            "short_name": "FunctionService",
+            "full_name": "google.cloud.functions.v2.FunctionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudfunctions_v2_generated_FunctionService_DeleteFunction_sync",
+      "title": "Snippet for the delete_function call in the FunctionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Functions::V2::FunctionService::Client#delete_function. It may require modification in order to execute successfully.",
+      "file": "function_service/delete_function.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_function",
+        "full_name": "::Google::Cloud::Functions::V2::FunctionService::Client#delete_function",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Functions::V2::DeleteFunctionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "FunctionService::Client",
+          "full_name": "::Google::Cloud::Functions::V2::FunctionService::Client"
+        },
+        "method": {
+          "short_name": "DeleteFunction",
+          "full_name": "google.cloud.functions.v2.FunctionService.DeleteFunction",
+          "service": {
+            "short_name": "FunctionService",
+            "full_name": "google.cloud.functions.v2.FunctionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudfunctions_v2_generated_FunctionService_GenerateUploadUrl_sync",
+      "title": "Snippet for the generate_upload_url call in the FunctionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Functions::V2::FunctionService::Client#generate_upload_url. It may require modification in order to execute successfully.",
+      "file": "function_service/generate_upload_url.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "generate_upload_url",
+        "full_name": "::Google::Cloud::Functions::V2::FunctionService::Client#generate_upload_url",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Functions::V2::GenerateUploadUrlRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Functions::V2::GenerateUploadUrlResponse",
+        "client": {
+          "short_name": "FunctionService::Client",
+          "full_name": "::Google::Cloud::Functions::V2::FunctionService::Client"
+        },
+        "method": {
+          "short_name": "GenerateUploadUrl",
+          "full_name": "google.cloud.functions.v2.FunctionService.GenerateUploadUrl",
+          "service": {
+            "short_name": "FunctionService",
+            "full_name": "google.cloud.functions.v2.FunctionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudfunctions_v2_generated_FunctionService_GenerateDownloadUrl_sync",
+      "title": "Snippet for the generate_download_url call in the FunctionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Functions::V2::FunctionService::Client#generate_download_url. It may require modification in order to execute successfully.",
+      "file": "function_service/generate_download_url.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "generate_download_url",
+        "full_name": "::Google::Cloud::Functions::V2::FunctionService::Client#generate_download_url",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Functions::V2::GenerateDownloadUrlRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Functions::V2::GenerateDownloadUrlResponse",
+        "client": {
+          "short_name": "FunctionService::Client",
+          "full_name": "::Google::Cloud::Functions::V2::FunctionService::Client"
+        },
+        "method": {
+          "short_name": "GenerateDownloadUrl",
+          "full_name": "google.cloud.functions.v2.FunctionService.GenerateDownloadUrl",
+          "service": {
+            "short_name": "FunctionService",
+            "full_name": "google.cloud.functions.v2.FunctionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudfunctions_v2_generated_FunctionService_ListRuntimes_sync",
+      "title": "Snippet for the list_runtimes call in the FunctionService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Functions::V2::FunctionService::Client#list_runtimes. It may require modification in order to execute successfully.",
+      "file": "function_service/list_runtimes.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_runtimes",
+        "full_name": "::Google::Cloud::Functions::V2::FunctionService::Client#list_runtimes",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Functions::V2::ListRuntimesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Functions::V2::ListRuntimesResponse",
+        "client": {
+          "short_name": "FunctionService::Client",
+          "full_name": "::Google::Cloud::Functions::V2::FunctionService::Client"
+        },
+        "method": {
+          "short_name": "ListRuntimes",
+          "full_name": "google.cloud.functions.v2.FunctionService.ListRuntimes",
+          "service": {
+            "short_name": "FunctionService",
+            "full_name": "google.cloud.functions.v2.FunctionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
