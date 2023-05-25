@@ -616,6 +616,14 @@ module Google
         #   @return [::Google::Cloud::PubSub::V1::PushConfig::OidcToken]
         #     If specified, Pub/Sub will generate and attach an OIDC JWT token as an
         #     `Authorization` header in the HTTP request for every pushed message.
+        # @!attribute [rw] pubsub_wrapper
+        #   @return [::Google::Cloud::PubSub::V1::PushConfig::PubsubWrapper]
+        #     When set, the payload to the push endpoint is in the form of the JSON
+        #     representation of a PubsubMessage
+        #     (https://cloud.google.com/pubsub/docs/reference/rpc/google.pubsub.v1#pubsubmessage).
+        # @!attribute [rw] no_wrapper
+        #   @return [::Google::Cloud::PubSub::V1::PushConfig::NoWrapper]
+        #     When set, the payload to the push endpoint is not wrapped.
         class PushConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -639,6 +647,25 @@ module Google
           #     token audience here: https://tools.ietf.org/html/rfc7519#section-4.1.3
           #     Note: if not specified, the Push endpoint URL will be used.
           class OidcToken
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The payload to the push endpoint is in the form of the JSON representation
+          # of a PubsubMessage
+          # (https://cloud.google.com/pubsub/docs/reference/rpc/google.pubsub.v1#pubsubmessage).
+          class PubsubWrapper
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Sets the `data` field as the HTTP body for delivery.
+          # @!attribute [rw] write_metadata
+          #   @return [::Boolean]
+          #     When true, writes the Pub/Sub message metadata to
+          #     `x-goog-pubsub-<KEY>:<VAL>` headers of the HTTP request. Writes the
+          #     Pub/Sub message attributes to `<KEY>:<VAL>` headers of the HTTP request.
+          class NoWrapper
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
