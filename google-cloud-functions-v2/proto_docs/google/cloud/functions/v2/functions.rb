@@ -27,9 +27,6 @@ module Google
         #   @return [::String]
         #     A user-defined name of the function. Function names must be unique
         #     globally and match pattern `projects/*/locations/*/functions/*`
-        # @!attribute [rw] environment
-        #   @return [::Google::Cloud::Functions::V2::Environment]
-        #     Describe whether the function is 1st Gen or 2nd Gen.
         # @!attribute [rw] description
         #   @return [::String]
         #     User-provided description of a function.
@@ -57,16 +54,19 @@ module Google
         # @!attribute [r] state_messages
         #   @return [::Array<::Google::Cloud::Functions::V2::StateMessage>]
         #     Output only. State Messages for this Cloud Function.
+        # @!attribute [rw] environment
+        #   @return [::Google::Cloud::Functions::V2::Environment]
+        #     Describe whether the function is 1st Gen or 2nd Gen.
+        # @!attribute [r] url
+        #   @return [::String]
+        #     Output only. The deployed url for the function.
         # @!attribute [rw] kms_key_name
         #   @return [::String]
-        #     Resource name of a KMS crypto key (managed by the user) used to
+        #     [Preview] Resource name of a KMS crypto key (managed by the user) used to
         #     encrypt/decrypt function resources.
         #
         #     It must match the pattern
         #     `projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}`.
-        # @!attribute [r] url
-        #   @return [::String]
-        #     Output only. The deployed url for the function.
         class Function
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -267,9 +267,9 @@ module Google
         #     User-provided build-time environment variables for the function
         # @!attribute [rw] docker_registry
         #   @return [::Google::Cloud::Functions::V2::BuildConfig::DockerRegistry]
-        #     Optional. Docker Registry to use for this deployment. This configuration is
-        #     only applicable to 1st Gen functions, 2nd Gen functions can only use
-        #     Artifact Registry.
+        #     Docker Registry to use for this deployment. This configuration is only
+        #     applicable to 1st Gen functions, 2nd Gen functions can only use Artifact
+        #     Registry.
         #
         #     If `docker_repository` field is specified, this field will be automatically
         #     set as `ARTIFACT_REGISTRY`.
@@ -277,8 +277,8 @@ module Google
         #     This field may be overridden by the backend for eligible deployments.
         # @!attribute [rw] docker_repository
         #   @return [::String]
-        #     User managed repository created in Artifact Registry optionally with a
-        #     customer managed encryption key. This is the repository to which the
+        #     User managed repository created in Artifact Registry optionally
+        #     with a customer managed encryption key. This is the repository to which the
         #     function docker image will be pushed after it is built by Cloud Build.
         #     If unspecified, GCF will create and use a repository named 'gcf-artifacts'
         #     for every deployed region.
@@ -322,7 +322,6 @@ module Google
 
         # Describes the Service being deployed.
         # Currently Supported : Cloud Run (fully managed).
-        # Next tag: 23
         # @!attribute [r] service
         #   @return [::String]
         #     Output only. Name of the service associated with a Function.
@@ -343,7 +342,7 @@ module Google
         #     a full description.
         # @!attribute [rw] available_cpu
         #   @return [::String]
-        #     The number of CPUs used in a single container instance.
+        #     [Preview] The number of CPUs used in a single container instance.
         #     Default value is calculated from available memory.
         #     Supports the same values as Cloud Run, see
         #     https://cloud.google.com/run/docs/reference/rest/v1/Container#resourcerequirements
@@ -413,8 +412,8 @@ module Google
         #     Output only. The name of service revision.
         # @!attribute [rw] max_instance_request_concurrency
         #   @return [::Integer]
-        #     Sets the maximum number of concurrent requests that each instance can
-        #     receive. Defaults to 1.
+        #     [Preview] Sets the maximum number of concurrent requests that each instance
+        #     can receive. Defaults to 1.
         # @!attribute [rw] security_level
         #   @return [::Google::Cloud::Functions::V2::ServiceConfig::SecurityLevel]
         #     Security level configure whether the function only accepts https.
@@ -473,7 +472,7 @@ module Google
           #
           # This enforces security protocol on function URL.
           #
-          # Security level is only ocnfigurable for 1st Gen functions, If unspecified,
+          # Security level is only configurable for 1st Gen functions, If unspecified,
           # SECURE_OPTIONAL will be used. 2nd Gen functions are SECURE_ALWAYS ONLY.
           module SecurityLevel
             # Unspecified.
@@ -754,7 +753,7 @@ module Google
         #     URL should be generated, specified in the format `projects/*/locations/*`.
         # @!attribute [rw] kms_key_name
         #   @return [::String]
-        #     Resource name of a KMS crypto key (managed by the user) used to
+        #     [Preview] Resource name of a KMS crypto key (managed by the user) used to
         #     encrypt/decrypt function source code objects in intermediate Cloud Storage
         #     buckets. When you generate an upload url and upload your source code, it
         #     gets copied to an intermediate Cloud Storage bucket. The source code is
@@ -917,6 +916,15 @@ module Google
         #   @return [::Array<::Google::Cloud::Functions::V2::Stage>]
         #     Mechanism for reporting in-progress stages
         class OperationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Extra GCF specific location information.
+        # @!attribute [rw] environments
+        #   @return [::Array<::Google::Cloud::Functions::V2::Environment>]
+        #     The Cloud Function environments this location supports.
+        class LocationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
