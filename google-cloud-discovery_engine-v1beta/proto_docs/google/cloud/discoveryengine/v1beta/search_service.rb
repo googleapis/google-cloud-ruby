@@ -141,7 +141,7 @@ module Google
         #   @return [::Boolean]
         #     Whether to turn on safe search. This is only supported for
         #     [ContentConfig.PUBLIC_WEBSITE][].
-        # @!attribute [rw] user_label
+        # @!attribute [rw] user_labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     The user labels applied to a resource must meet the following requirements:
         #
@@ -465,7 +465,7 @@ module Google
           #   @return [::String]
           # @!attribute [rw] value
           #   @return [::String]
-          class UserLabelEntry
+          class UserLabelsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

@@ -44,6 +44,25 @@ module Google
             end
 
             ##
+            # Create a fully-qualified ConversionWorkspace resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/conversionWorkspaces/{conversion_workspace}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param conversion_workspace [String]
+            #
+            # @return [::String]
+            def conversion_workspace_path project:, location:, conversion_workspace:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/conversionWorkspaces/#{conversion_workspace}"
+            end
+
+            ##
             # Create a fully-qualified Location resource string.
             #
             # The resource will be in the following format:
@@ -77,6 +96,42 @@ module Google
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/migrationJobs/#{migration_job}"
+            end
+
+            ##
+            # Create a fully-qualified Networks resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/global/networks/{network}`
+            #
+            # @param project [String]
+            # @param network [String]
+            #
+            # @return [::String]
+            def networks_path project:, network:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+              "projects/#{project}/global/networks/#{network}"
+            end
+
+            ##
+            # Create a fully-qualified PrivateConnection resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/privateConnections/{private_connection}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param private_connection [String]
+            #
+            # @return [::String]
+            def private_connection_path project:, location:, private_connection:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/privateConnections/#{private_connection}"
             end
 
             extend self

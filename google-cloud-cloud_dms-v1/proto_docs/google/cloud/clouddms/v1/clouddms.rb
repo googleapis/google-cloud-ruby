@@ -21,15 +21,15 @@ module Google
   module Cloud
     module CloudDMS
       module V1
-        # Retrieve a list of all migration jobs in a given project and location.
+        # Retrieves a list of all migration jobs in a given project and location.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent, which owns this collection of migrationJobs.
+        #     Required. The parent which owns this collection of migrationJobs.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of migration jobs to return. The service may return
         #     fewer than this value. If unspecified, at most 50 migration jobs will be
-        #     returned. The maximum value is 1000; values above 1000 will be coerced to
+        #     returned. The maximum value is 1000; values above 1000 are coerced to
         #     1000.
         # @!attribute [rw] page_token
         #   @return [::String]
@@ -64,7 +64,7 @@ module Google
         #     The list of migration jobs objects.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     A token which can be sent as `page_token` to retrieve the next page.
         #     If this field is omitted, there are no subsequent pages.
         # @!attribute [rw] unreachable
         #   @return [::Array<::String>]
@@ -87,7 +87,7 @@ module Google
         # in the specified project and region.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent, which owns this collection of migration jobs.
+        #     Required. The parent which owns this collection of migration jobs.
         # @!attribute [rw] migration_job_id
         #   @return [::String]
         #     Required. The ID of the instance to create.
@@ -98,12 +98,12 @@ module Google
         #     object.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     A unique id used to identify the request. If the server receives two
-        #     requests with the same id, then the second request will be ignored.
+        #     A unique ID used to identify the request. If the server receives two
+        #     requests with the same ID, then the second request is ignored.
         #
         #     It is recommended to always set this value to a UUID.
         #
-        #     The id must contain only letters (a-z, A-Z), numbers (0-9), underscores
+        #     The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
         #     (_), and hyphens (-). The maximum length is 40 characters.
         class CreateMigrationJobRequest
           include ::Google::Protobuf::MessageExts
@@ -113,19 +113,19 @@ module Google
         # Request message for 'UpdateMigrationJob' request.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. Field mask is used to specify the fields to be overwritten in the
-        #     migration job resource by the update.
+        #     Required. Field mask is used to specify the fields to be overwritten by the
+        #     update in the conversion workspace resource.
         # @!attribute [rw] migration_job
         #   @return [::Google::Cloud::CloudDMS::V1::MigrationJob]
         #     Required. The migration job parameters to update.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     A unique id used to identify the request. If the server receives two
-        #     requests with the same id, then the second request will be ignored.
+        #     A unique ID used to identify the request. If the server receives two
+        #     requests with the same ID, then the second request is ignored.
         #
         #     It is recommended to always set this value to a UUID.
         #
-        #     The id must contain only letters (a-z, A-Z), numbers (0-9), underscores
+        #     The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
         #     (_), and hyphens (-). The maximum length is 40 characters.
         class UpdateMigrationJobRequest
           include ::Google::Protobuf::MessageExts
@@ -138,12 +138,12 @@ module Google
         #     Required. Name of the migration job resource to delete.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     A unique id used to identify the request. If the server receives two
-        #     requests with the same id, then the second request will be ignored.
+        #     A unique ID used to identify the request. If the server receives two
+        #     requests with the same ID, then the second request is ignored.
         #
         #     It is recommended to always set this value to a UUID.
         #
-        #     The id must contain only letters (a-z, A-Z), numbers (0-9), underscores
+        #     The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
         #     (_), and hyphens (-). The maximum length is 40 characters.
         # @!attribute [rw] force
         #   @return [::Boolean]
@@ -224,7 +224,7 @@ module Google
         #     The VM selection configuration
         # @!attribute [rw] vm_port
         #   @return [::Integer]
-        #     The port that will be open on the bastion host
+        #     The port that will be open on the bastion host.
         class GenerateSshScriptRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -266,12 +266,12 @@ module Google
         # Request message for 'ListConnectionProfiles' request.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent, which owns this collection of connection profiles.
+        #     Required. The parent which owns this collection of connection profiles.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of connection profiles to return. The service may return
         #     fewer than this value. If unspecified, at most 50 connection profiles will
-        #     be returned. The maximum value is 1000; values above 1000 will be coerced
+        #     be returned. The maximum value is 1000; values above 1000 are coerced
         #     to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
@@ -293,7 +293,7 @@ module Google
         #     connect with a specific username.
         # @!attribute [rw] order_by
         #   @return [::String]
-        #     the order by fields for the result.
+        #     A comma-separated list of fields to order results according to.
         class ListConnectionProfilesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -305,7 +305,7 @@ module Google
         #     The response list of connection profiles.
         # @!attribute [rw] next_page_token
         #   @return [::String]
-        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     A token which can be sent as `page_token` to retrieve the next page.
         #     If this field is omitted, there are no subsequent pages.
         # @!attribute [rw] unreachable
         #   @return [::Array<::String>]
@@ -327,7 +327,7 @@ module Google
         # Request message for 'CreateConnectionProfile' request.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent, which owns this collection of connection profiles.
+        #     Required. The parent which owns this collection of connection profiles.
         # @!attribute [rw] connection_profile_id
         #   @return [::String]
         #     Required. The connection profile identifier.
@@ -336,13 +336,23 @@ module Google
         #     Required. The create request body including the connection profile data
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     A unique id used to identify the request. If the server receives two
-        #     requests with the same id, then the second request will be ignored.
+        #     Optional. A unique ID used to identify the request. If the server receives
+        #     two requests with the same ID, then the second request is ignored.
         #
         #     It is recommended to always set this value to a UUID.
         #
-        #     The id must contain only letters (a-z, A-Z), numbers (0-9), underscores
+        #     The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
         #     (_), and hyphens (-). The maximum length is 40 characters.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. Only validate the connection profile, but don't create any
+        #     resources. The default is false. Only supported for Oracle connection
+        #     profiles.
+        # @!attribute [rw] skip_validation
+        #   @return [::Boolean]
+        #     Optional. Create the connection profile without validating it.
+        #     The default is false.
+        #     Only supported for Oracle connection profiles.
         class CreateConnectionProfileRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -351,20 +361,30 @@ module Google
         # Request message for 'UpdateConnectionProfile' request.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. Field mask is used to specify the fields to be overwritten in the
-        #     connection profile resource by the update.
+        #     Required. Field mask is used to specify the fields to be overwritten by the
+        #     update in the conversion workspace resource.
         # @!attribute [rw] connection_profile
         #   @return [::Google::Cloud::CloudDMS::V1::ConnectionProfile]
         #     Required. The connection profile parameters to update.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     A unique id used to identify the request. If the server receives two
-        #     requests with the same id, then the second request will be ignored.
+        #     Optional. A unique ID used to identify the request. If the server receives
+        #     two requests with the same ID, then the second request is ignored.
         #
         #     It is recommended to always set this value to a UUID.
         #
-        #     The id must contain only letters (a-z, A-Z), numbers (0-9), underscores
+        #     The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
         #     (_), and hyphens (-). The maximum length is 40 characters.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. Only validate the connection profile, but don't update any
+        #     resources. The default is false. Only supported for Oracle connection
+        #     profiles.
+        # @!attribute [rw] skip_validation
+        #   @return [::Boolean]
+        #     Optional. Update the connection profile without validating it.
+        #     The default is false.
+        #     Only supported for Oracle connection profiles.
         class UpdateConnectionProfileRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -376,18 +396,123 @@ module Google
         #     Required. Name of the connection profile resource to delete.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     A unique id used to identify the request. If the server receives two
-        #     requests with the same id, then the second request will be ignored.
+        #     A unique ID used to identify the request. If the server receives two
+        #     requests with the same ID, then the second request is ignored.
         #
         #     It is recommended to always set this value to a UUID.
         #
-        #     The id must contain only letters (a-z, A-Z), numbers (0-9), underscores
+        #     The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
         #     (_), and hyphens (-). The maximum length is 40 characters.
         # @!attribute [rw] force
         #   @return [::Boolean]
         #     In case of force delete, the CloudSQL replica database is also deleted
         #     (only for CloudSQL connection profile).
         class DeleteConnectionProfileRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message to create a new private connection in the specified project
+        # and region.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent that owns the collection of PrivateConnections.
+        # @!attribute [rw] private_connection_id
+        #   @return [::String]
+        #     Required. The private connection identifier.
+        # @!attribute [rw] private_connection
+        #   @return [::Google::Cloud::CloudDMS::V1::PrivateConnection]
+        #     Required. The private connection resource to create.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A unique ID used to identify the request. If the server receives
+        #     two requests with the same ID, then the second request is ignored.
+        #
+        #     It is recommended to always set this value to a UUID.
+        #
+        #     The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
+        #     (_), and hyphens (-). The maximum length is 40 characters.
+        # @!attribute [rw] skip_validation
+        #   @return [::Boolean]
+        #     Optional. If set to true, will skip validations.
+        class CreatePrivateConnectionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message to retrieve a list of private connections in a given project
+        # and location.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent that owns the collection of private connections.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Maximum number of private connections to return.
+        #     If unspecified, at most 50 private connections that are returned.
+        #     The maximum value is 1000; values above 1000 are coerced to 1000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Page token received from a previous `ListPrivateConnections` call.
+        #     Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to
+        #     `ListPrivateConnections` must match the call that provided the page
+        #     token.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     A filter expression that filters private connections listed in the
+        #     response. The expression must specify the field name, a comparison
+        #     operator, and the value that you want to use for filtering. The value must
+        #     be a string, a number, or a boolean. The comparison operator must be either
+        #     =, !=, >, or <. For example, list private connections created this year by
+        #     specifying **createTime %gt; 2021-01-01T00:00:00.000000000Z**.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Order by fields for the result.
+        class ListPrivateConnectionsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for 'ListPrivateConnections' request.
+        # @!attribute [rw] private_connections
+        #   @return [::Array<::Google::Cloud::CloudDMS::V1::PrivateConnection>]
+        #     List of private connections.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Locations that could not be reached.
+        class ListPrivateConnectionsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message to delete a private connection.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the private connection to delete.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. A unique ID used to identify the request. If the server receives
+        #     two requests with the same ID, then the second request is ignored.
+        #
+        #     It is recommended to always set this value to a UUID.
+        #
+        #     The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
+        #     (_), and hyphens (-). The maximum length is 40 characters.
+        class DeletePrivateConnectionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message to get a private connection resource.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the private connection to get.
+        class GetPrivateConnectionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -412,12 +537,397 @@ module Google
         #   @return [::Boolean]
         #     Output only. Identifies whether the user has requested cancellation
         #     of the operation. Operations that have successfully been cancelled
-        #     have [Operation.error][] value with a {::Google::Rpc::Status#code google.rpc.Status.code} of 1,
-        #     corresponding to `Code.CANCELLED`.
+        #     have [Operation.error][] value with a
+        #     {::Google::Rpc::Status#code google.rpc.Status.code} of 1, corresponding to
+        #     `Code.CANCELLED`.
         # @!attribute [r] api_version
         #   @return [::String]
         #     Output only. API version used to start the operation.
         class OperationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Retrieve a list of all conversion workspaces in a given project and location.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent which owns this collection of conversion workspaces.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of conversion workspaces to return. The service may
+        #     return fewer than this value. If unspecified, at most 50 sets are returned.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     The nextPageToken value received in the previous call to
+        #     conversionWorkspaces.list, used in the subsequent request to retrieve the
+        #     next page of results. On first call this should be left blank. When
+        #     paginating, all other parameters provided to conversionWorkspaces.list must
+        #     match the call that provided the page token.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     A filter expression that filters conversion workspaces listed in the
+        #     response. The expression must specify the field name, a comparison
+        #     operator, and the value that you want to use for filtering. The value must
+        #     be a string, a number, or a boolean. The comparison operator must be either
+        #     =, !=, >, or <. For example, list conversion workspaces created this year
+        #     by specifying **createTime %gt; 2020-01-01T00:00:00.000000000Z.** You can
+        #     also filter nested fields. For example, you could specify
+        #     **source.version = "12.c.1"** to select all conversion workspaces with
+        #     source database version equal to 12.c.1.
+        class ListConversionWorkspacesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for 'ListConversionWorkspaces' request.
+        # @!attribute [rw] conversion_workspaces
+        #   @return [::Array<::Google::Cloud::CloudDMS::V1::ConversionWorkspace>]
+        #     The list of conversion workspace objects.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Locations that could not be reached.
+        class ListConversionWorkspacesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for 'GetConversionWorkspace' request.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the conversion workspace resource to get.
+        class GetConversionWorkspaceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message to create a new Conversion Workspace
+        # in the specified project and region.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent which owns this collection of conversion workspaces.
+        # @!attribute [rw] conversion_workspace_id
+        #   @return [::String]
+        #     Required. The ID of the conversion workspace to create.
+        # @!attribute [rw] conversion_workspace
+        #   @return [::Google::Cloud::CloudDMS::V1::ConversionWorkspace]
+        #     Required. Represents a conversion workspace object.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     A unique ID used to identify the request. If the server receives two
+        #     requests with the same ID, then the second request is ignored.
+        #
+        #     It is recommended to always set this value to a UUID.
+        #
+        #     The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
+        #     (_), and hyphens (-). The maximum length is 40 characters.
+        class CreateConversionWorkspaceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for 'UpdateConversionWorkspace' request.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. Field mask is used to specify the fields to be overwritten by the
+        #     update in the conversion workspace resource.
+        # @!attribute [rw] conversion_workspace
+        #   @return [::Google::Cloud::CloudDMS::V1::ConversionWorkspace]
+        #     Required. The conversion workspace parameters to update.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     A unique ID used to identify the request. If the server receives two
+        #     requests with the same ID, then the second request is ignored.
+        #
+        #     It is recommended to always set this value to a UUID.
+        #
+        #     The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
+        #     (_), and hyphens (-). The maximum length is 40 characters.
+        class UpdateConversionWorkspaceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for 'DeleteConversionWorkspace' request.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the conversion workspace resource to delete.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     A unique ID used to identify the request. If the server receives two
+        #     requests with the same ID, then the second request is ignored.
+        #
+        #     It is recommended to always set this value to a UUID.
+        #
+        #     The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores
+        #     (_), and hyphens (-). The maximum length is 40 characters.
+        class DeleteConversionWorkspaceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for 'CommitConversionWorkspace' request.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the conversion workspace resource to commit.
+        # @!attribute [rw] commit_name
+        #   @return [::String]
+        #     Optional. Optional name of the commit.
+        class CommitConversionWorkspaceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for 'RollbackConversionWorkspace' request.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the conversion workspace resource to roll back to.
+        class RollbackConversionWorkspaceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for 'ApplyConversionWorkspace' request.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the conversion workspace resource for which to apply
+        #     the draft tree. Must be in the form of:
+        #      projects/\\{project}/locations/\\{location}/conversionWorkspaces/\\{conversion_workspace}.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Filter which entities to apply. Leaving this field empty will apply all of
+        #     the entities. Supports Google AIP 160 based filtering.
+        # @!attribute [rw] connection_profile
+        #   @return [::String]
+        #     Fully qualified (Uri) name of the destination connection profile.
+        class ApplyConversionWorkspaceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for 'SeedConversionWorkspace' request.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Name of the conversion workspace resource to seed with new database
+        #     structure, in the form of:
+        #     projects/\\{project}/locations/\\{location}/conversionWorkspaces/\\{conversion_workspace}.
+        # @!attribute [rw] auto_commit
+        #   @return [::Boolean]
+        #     Should the conversion workspace be committed automatically after the
+        #     seed operation.
+        # @!attribute [rw] source_connection_profile
+        #   @return [::String]
+        #     Fully qualified (Uri) name of the source connection profile.
+        # @!attribute [rw] destination_connection_profile
+        #   @return [::String]
+        #     Fully qualified (Uri) name of the destination connection profile.
+        class SeedConversionWorkspaceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for 'ConvertConversionWorkspace' request.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Name of the conversion workspace resource to convert in the form of:
+        #     projects/\\{project}/locations/\\{location}/conversionWorkspaces/\\{conversion_workspace}.
+        # @!attribute [rw] auto_commit
+        #   @return [::Boolean]
+        #     Specifies whether the conversion workspace is to be committed automatically
+        #     after the conversion.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Filter the entities to convert. Leaving this field empty will convert all
+        #     of the entities. Supports Google AIP-160 style filtering.
+        class ConvertConversionWorkspaceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for 'ImportMappingRules' request.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Name of the conversion workspace resource to import the rules to
+        #     in the form of:
+        #     projects/\\{project}/locations/\\{location}/conversionWorkspaces/\\{conversion_workspace}.
+        # @!attribute [rw] rules_format
+        #   @return [::Google::Cloud::CloudDMS::V1::ImportRulesFileFormat]
+        #     The format of the rules content file.
+        # @!attribute [rw] rules_files
+        #   @return [::Array<::Google::Cloud::CloudDMS::V1::ImportMappingRulesRequest::RulesFile>]
+        #     One or more rules files.
+        # @!attribute [rw] auto_commit
+        #   @return [::Boolean]
+        #     Should the conversion workspace be committed automatically after the
+        #     import operation.
+        class ImportMappingRulesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Details of a single rules file.
+          # @!attribute [rw] rules_source_filename
+          #   @return [::String]
+          #     The filename of the rules that needs to be converted. The filename is
+          #     used mainly so that future logs of the import rules job contain it, and
+          #     can therefore be searched by it.
+          # @!attribute [rw] rules_content
+          #   @return [::String]
+          #     The text content of the rules that needs to be converted.
+          class RulesFile
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Request message for 'DescribeDatabaseEntities' request.
+        # @!attribute [rw] conversion_workspace
+        #   @return [::String]
+        #     Required. Name of the conversion workspace resource whose database entities
+        #     are described. Must be in the form of:
+        #     projects/\\{project}/locations/\\{location}/conversionWorkspaces/\\{conversion_workspace}.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of entities to return. The service may return
+        #     fewer entities than the value specifies.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     The nextPageToken value received in the previous call to
+        #     conversionWorkspace.describeDatabaseEntities, used in the subsequent
+        #     request to retrieve the next page of results. On first call this should be
+        #     left blank. When paginating, all other parameters provided to
+        #     conversionWorkspace.describeDatabaseEntities must match the call that
+        #     provided the page token.
+        # @!attribute [rw] tree
+        #   @return [::Google::Cloud::CloudDMS::V1::DescribeDatabaseEntitiesRequest::DBTreeType]
+        #     The tree to fetch.
+        # @!attribute [rw] uncommitted
+        #   @return [::Boolean]
+        #     Whether to retrieve the latest committed version of the entities or the
+        #     latest version. This field is ignored if a specific commit_id is specified.
+        # @!attribute [rw] commit_id
+        #   @return [::String]
+        #     Request a specific commit ID. If not specified, the entities from the
+        #     latest commit are returned.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Filter the returned entities based on AIP-160 standard.
+        class DescribeDatabaseEntitiesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The type of a tree to return
+          module DBTreeType
+            # Unspecified tree type.
+            DB_TREE_TYPE_UNSPECIFIED = 0
+
+            # The source database tree.
+            SOURCE_TREE = 1
+
+            # The draft database tree.
+            DRAFT_TREE = 2
+
+            # The destination database tree.
+            DESTINATION_TREE = 3
+          end
+        end
+
+        # Response message for 'DescribeDatabaseEntities' request.
+        # @!attribute [rw] database_entities
+        #   @return [::Array<::Google::Cloud::CloudDMS::V1::DatabaseEntity>]
+        #     The list of database entities for the conversion workspace.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class DescribeDatabaseEntitiesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for 'SearchBackgroundJobs' request.
+        # @!attribute [rw] conversion_workspace
+        #   @return [::String]
+        #     Required. Name of the conversion workspace resource whose jobs are listed,
+        #     in the form of:
+        #     projects/\\{project}/locations/\\{location}/conversionWorkspaces/\\{conversion_workspace}.
+        # @!attribute [rw] return_most_recent_per_job_type
+        #   @return [::Boolean]
+        #     Optional. Whether or not to return just the most recent job per job type,
+        # @!attribute [rw] max_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of jobs to return. The service may return
+        #     fewer than this value. If unspecified, at most 100 jobs are
+        #     returned. The maximum value is 100; values above 100 are coerced to
+        #     100.
+        # @!attribute [rw] completed_until_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Optional. If provided, only returns jobs that completed until (not
+        #     including) the given timestamp.
+        class SearchBackgroundJobsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for 'SearchBackgroundJobs' request.
+        # @!attribute [rw] jobs
+        #   @return [::Array<::Google::Cloud::CloudDMS::V1::BackgroundJobLogEntry>]
+        #     The list of conversion workspace mapping rules.
+        class SearchBackgroundJobsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for 'DescribeConversionWorkspaceRevisions' request.
+        # @!attribute [rw] conversion_workspace
+        #   @return [::String]
+        #     Required. Name of the conversion workspace resource whose revisions are
+        #     listed. Must be in the form of:
+        #     projects/\\{project}/locations/\\{location}/conversionWorkspaces/\\{conversion_workspace}.
+        # @!attribute [rw] commit_id
+        #   @return [::String]
+        #     Optional. Optional filter to request a specific commit ID.
+        class DescribeConversionWorkspaceRevisionsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for 'DescribeConversionWorkspaceRevisions' request.
+        # @!attribute [rw] revisions
+        #   @return [::Array<::Google::Cloud::CloudDMS::V1::ConversionWorkspace>]
+        #     The list of conversion workspace revisions.
+        class DescribeConversionWorkspaceRevisionsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for 'FetchStaticIps' request.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name for the location for which static IPs should be
+        #     returned. Must be in the format `projects/*/locations/*`.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Maximum number of IPs to return.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous `FetchStaticIps` call.
+        class FetchStaticIpsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for a 'FetchStaticIps' request.
+        # @!attribute [rw] static_ips
+        #   @return [::Array<::String>]
+        #     List of static IPs.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token that can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class FetchStaticIpsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
