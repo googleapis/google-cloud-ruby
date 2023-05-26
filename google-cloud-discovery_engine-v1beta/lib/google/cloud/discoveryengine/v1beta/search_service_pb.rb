@@ -31,7 +31,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :user_pseudo_id, :string, 15
       optional :content_search_spec, :message, 24, "google.cloud.discoveryengine.v1beta.SearchRequest.ContentSearchSpec"
       optional :safe_search, :bool, 20
-      map :user_label, :string, :string, 22
+      map :user_labels, :string, :string, 22
     end
     add_message "google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec" do
       optional :facet_key, :message, 1, "google.cloud.discoveryengine.v1beta.SearchRequest.FacetSpec.FacetKey"
