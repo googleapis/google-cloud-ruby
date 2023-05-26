@@ -329,10 +329,11 @@ def run_linkinator dir
     "\\w+\\.md$",
     "^https://rubygems\\.org/gems/#{dir_without_version}",
     "^https://cloud\\.google\\.com/ruby/docs/reference/#{dir}/latest$",
-    "^https://rubydoc\\.info/gems/#{dir_without_version}"
+    "^https://rubydoc\\.info/gems/#{dir}"
   ]
   if dir == dir_without_version
     skip_regexes << "^https://cloud\\.google\\.com/ruby/docs/reference/#{dir}-v\\d\\w*/latest$"
+    skip_regexes << "^https://rubydoc\\.info/gems/#{dir}-v\\d\\w*"
   end
   linkinator_cmd = ["npx", "linkinator", "./doc", "--retry-errors", "--skip", skip_regexes.join(" ")]
   result = exec linkinator_cmd, out: :capture, err: [:child, :out]
