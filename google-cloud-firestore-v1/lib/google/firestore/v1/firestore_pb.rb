@@ -13,6 +13,7 @@ require 'google/firestore/v1/query_pb'
 require 'google/firestore/v1/write_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/timestamp_pb'
+require 'google/protobuf/wrappers_pb'
 require 'google/rpc/status_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
@@ -182,6 +183,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.firestore.v1.Target" do
       optional :target_id, :int32, 5
       optional :once, :bool, 6
+      optional :expected_count, :message, 12, "google.protobuf.Int32Value"
       oneof :target_type do
         optional :query, :message, 2, "google.firestore.v1.Target.QueryTarget"
         optional :documents, :message, 3, "google.firestore.v1.Target.DocumentsTarget"

@@ -75,6 +75,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :trigger_intent, :string, 11
         optional :transcript, :string, 12
         optional :trigger_event, :string, 14
+        optional :dtmf_digits, :string, 17
       end
     end
     add_message "google.cloud.dialogflow.cx.v3.WebhookRequest.FulfillmentInfo" do

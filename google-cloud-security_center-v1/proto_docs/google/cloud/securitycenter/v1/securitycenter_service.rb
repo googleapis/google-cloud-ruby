@@ -130,7 +130,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for creating security health analytics custom modules.
+        # Request message for creating Security Health Analytics custom modules.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Resource name of the new custom module's parent. Its format is
@@ -185,7 +185,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for deleting security health analytics custom modules.
+        # Request message for deleting Security Health Analytics custom modules.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Name of the custom module to delete. Its format is
@@ -244,7 +244,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for getting effective security health analytics custom
+        # Request message for getting effective Security Health Analytics custom
         # modules.
         # @!attribute [rw] name
         #   @return [::String]
@@ -258,7 +258,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for getting security health analytics custom modules.
+        # Request message for getting Security Health Analytics custom modules.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Name of the custom module to get. Its format is
@@ -625,7 +625,7 @@ module Google
           end
         end
 
-        # Request message for listing descendant security health analytics custom
+        # Request message for listing descendant Security Health Analytics custom
         # modules.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -645,7 +645,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for listing descendant security health analytics custom
+        # Response message for listing descendant Security Health Analytics custom
         # modules.
         # @!attribute [rw] security_health_analytics_custom_modules
         #   @return [::Array<::Google::Cloud::SecurityCenter::V1::SecurityHealthAnalyticsCustomModule>]
@@ -730,7 +730,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for listing effective security health analytics custom
+        # Request message for listing effective Security Health Analytics custom
         # modules.
         # @!attribute [rw] parent
         #   @return [::String]
@@ -750,7 +750,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for listing effective security health analytics custom
+        # Response message for listing effective Security Health Analytics custom
         # modules.
         # @!attribute [rw] effective_security_health_analytics_custom_modules
         #   @return [::Array<::Google::Cloud::SecurityCenter::V1::EffectiveSecurityHealthAnalyticsCustomModule>]
@@ -764,7 +764,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for listing security health analytics custom modules.
+        # Request message for listing Security Health Analytics custom modules.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Name of parent to list custom modules. Its format is
@@ -783,7 +783,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for listing security health analytics custom modules.
+        # Response message for listing Security Health Analytics custom modules.
         # @!attribute [rw] security_health_analytics_custom_modules
         #   @return [::Array<::Google::Cloud::SecurityCenter::V1::SecurityHealthAnalyticsCustomModule>]
         #     Custom modules belonging to the requested parent.
@@ -1396,7 +1396,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for updating security health analytics custom modules.
+        # Request message for updating Security Health Analytics custom modules.
         # @!attribute [rw] security_health_analytics_custom_module
         #   @return [::Google::Cloud::SecurityCenter::V1::SecurityHealthAnalyticsCustomModule]
         #     Required. The SecurityHealthAnalytics custom module to update.

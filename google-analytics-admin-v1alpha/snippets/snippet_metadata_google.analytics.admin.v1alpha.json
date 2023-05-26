@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-analytics-admin-v1alpha",
-    "version": "0.17.0",
+    "version": "0.19.0",
     "language": "RUBY",
     "apis": [
       {
@@ -3932,6 +3932,206 @@
       ]
     },
     {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetChannelGroup_sync",
+      "title": "Snippet for the get_channel_group call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#get_channel_group. It may require modification in order to execute successfully.",
+      "file": "analytics_admin_service/get_channel_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_channel_group",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#get_channel_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::GetChannelGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::ChannelGroup",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "GetChannelGroup",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.GetChannelGroup",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListChannelGroups_sync",
+      "title": "Snippet for the list_channel_groups call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#list_channel_groups. It may require modification in order to execute successfully.",
+      "file": "analytics_admin_service/list_channel_groups.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_channel_groups",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#list_channel_groups",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::ListChannelGroupsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::ListChannelGroupsResponse",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "ListChannelGroups",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.ListChannelGroups",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateChannelGroup_sync",
+      "title": "Snippet for the create_channel_group call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#create_channel_group. It may require modification in order to execute successfully.",
+      "file": "analytics_admin_service/create_channel_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_channel_group",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#create_channel_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::CreateChannelGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::ChannelGroup",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "CreateChannelGroup",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.CreateChannelGroup",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateChannelGroup_sync",
+      "title": "Snippet for the update_channel_group call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#update_channel_group. It may require modification in order to execute successfully.",
+      "file": "analytics_admin_service/update_channel_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_channel_group",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#update_channel_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::UpdateChannelGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::ChannelGroup",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "UpdateChannelGroup",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateChannelGroup",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteChannelGroup_sync",
+      "title": "Snippet for the delete_channel_group call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#delete_channel_group. It may require modification in order to execute successfully.",
+      "file": "analytics_admin_service/delete_channel_group.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_channel_group",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#delete_channel_group",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::DeleteChannelGroupRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "DeleteChannelGroup",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.DeleteChannelGroup",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_SetAutomatedGa4ConfigurationOptOut_sync",
       "title": "Snippet for the set_automated_ga4_configuration_opt_out call in the AnalyticsAdminService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#set_automated_ga4_configuration_opt_out. It may require modification in order to execute successfully.",
@@ -4275,6 +4475,406 @@
         "method": {
           "short_name": "ListConnectedSiteTags",
           "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.ListConnectedSiteTags",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_FetchConnectedGa4Property_sync",
+      "title": "Snippet for the fetch_connected_ga4_property call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#fetch_connected_ga4_property. It may require modification in order to execute successfully.",
+      "file": "analytics_admin_service/fetch_connected_ga4_property.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "fetch_connected_ga4_property",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#fetch_connected_ga4_property",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::FetchConnectedGa4PropertyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::FetchConnectedGa4PropertyResponse",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "FetchConnectedGa4Property",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.FetchConnectedGa4Property",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetAdSenseLink_sync",
+      "title": "Snippet for the get_ad_sense_link call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#get_ad_sense_link. It may require modification in order to execute successfully.",
+      "file": "analytics_admin_service/get_ad_sense_link.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_ad_sense_link",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#get_ad_sense_link",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::GetAdSenseLinkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::AdSenseLink",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "GetAdSenseLink",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.GetAdSenseLink",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateAdSenseLink_sync",
+      "title": "Snippet for the create_ad_sense_link call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#create_ad_sense_link. It may require modification in order to execute successfully.",
+      "file": "analytics_admin_service/create_ad_sense_link.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_ad_sense_link",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#create_ad_sense_link",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::CreateAdSenseLinkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::AdSenseLink",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "CreateAdSenseLink",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.CreateAdSenseLink",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteAdSenseLink_sync",
+      "title": "Snippet for the delete_ad_sense_link call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#delete_ad_sense_link. It may require modification in order to execute successfully.",
+      "file": "analytics_admin_service/delete_ad_sense_link.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_ad_sense_link",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#delete_ad_sense_link",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::DeleteAdSenseLinkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "DeleteAdSenseLink",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.DeleteAdSenseLink",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListAdSenseLinks_sync",
+      "title": "Snippet for the list_ad_sense_links call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#list_ad_sense_links. It may require modification in order to execute successfully.",
+      "file": "analytics_admin_service/list_ad_sense_links.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_ad_sense_links",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#list_ad_sense_links",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::ListAdSenseLinksRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::ListAdSenseLinksResponse",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "ListAdSenseLinks",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.ListAdSenseLinks",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetEventCreateRule_sync",
+      "title": "Snippet for the get_event_create_rule call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#get_event_create_rule. It may require modification in order to execute successfully.",
+      "file": "analytics_admin_service/get_event_create_rule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_event_create_rule",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#get_event_create_rule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::GetEventCreateRuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::EventCreateRule",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "GetEventCreateRule",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.GetEventCreateRule",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListEventCreateRules_sync",
+      "title": "Snippet for the list_event_create_rules call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#list_event_create_rules. It may require modification in order to execute successfully.",
+      "file": "analytics_admin_service/list_event_create_rules.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_event_create_rules",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#list_event_create_rules",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::ListEventCreateRulesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::ListEventCreateRulesResponse",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "ListEventCreateRules",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.ListEventCreateRules",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateEventCreateRule_sync",
+      "title": "Snippet for the create_event_create_rule call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#create_event_create_rule. It may require modification in order to execute successfully.",
+      "file": "analytics_admin_service/create_event_create_rule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_event_create_rule",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#create_event_create_rule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::CreateEventCreateRuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::EventCreateRule",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "CreateEventCreateRule",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.CreateEventCreateRule",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateEventCreateRule_sync",
+      "title": "Snippet for the update_event_create_rule call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#update_event_create_rule. It may require modification in order to execute successfully.",
+      "file": "analytics_admin_service/update_event_create_rule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_event_create_rule",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#update_event_create_rule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::UpdateEventCreateRuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::EventCreateRule",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "UpdateEventCreateRule",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateEventCreateRule",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_DeleteEventCreateRule_sync",
+      "title": "Snippet for the delete_event_create_rule call in the AnalyticsAdminService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#delete_event_create_rule. It may require modification in order to execute successfully.",
+      "file": "analytics_admin_service/delete_event_create_rule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_event_create_rule",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#delete_event_create_rule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::DeleteEventCreateRuleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "DeleteEventCreateRule",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.DeleteEventCreateRule",
           "service": {
             "short_name": "AnalyticsAdminService",
             "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"

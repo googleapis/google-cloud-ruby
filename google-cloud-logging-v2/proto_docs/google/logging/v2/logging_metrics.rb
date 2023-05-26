@@ -56,6 +56,17 @@ module Google
         #         "resource.type=gae_app AND severity>=ERROR"
         #
         #     The maximum length of the filter is 20000 characters.
+        # @!attribute [rw] bucket_name
+        #   @return [::String]
+        #     Optional. The resource name of the Log Bucket that owns the Log Metric.
+        #     Only Log Buckets in projects are supported. The bucket has to be in the
+        #     same project as the metric.
+        #
+        #     For example:
+        #
+        #       `projects/my-project/locations/global/buckets/my-bucket`
+        #
+        #     If empty, then the Log Metric is considered a non-Bucket Log Metric.
         # @!attribute [rw] disabled
         #   @return [::Boolean]
         #     Optional. If set to True, then this metric is disabled and it does not
@@ -88,7 +99,8 @@ module Google
         #     Optional. A `value_extractor` is required when using a distribution
         #     logs-based metric to extract the values to record from a log entry.
         #     Two functions are supported for value extraction: `EXTRACT(field)` or
-        #     `REGEXP_EXTRACT(field, regex)`. The argument are:
+        #     `REGEXP_EXTRACT(field, regex)`. The arguments are:
+        #
         #       1. field: The name of the log entry field from which the value is to be
         #          extracted.
         #       2. regex: A regular expression using the Google RE2 syntax
@@ -113,7 +125,7 @@ module Google
         #     is the same as for the `value_extractor` field.
         #
         #     The extracted value is converted to the type defined in the label
-        #     descriptor. If the either the extraction or the type conversion fails,
+        #     descriptor. If either the extraction or the type conversion fails,
         #     the label will have a default value. The default value for a string
         #     label is an empty string, for an integer label its 0, and for a boolean
         #     label its `false`.

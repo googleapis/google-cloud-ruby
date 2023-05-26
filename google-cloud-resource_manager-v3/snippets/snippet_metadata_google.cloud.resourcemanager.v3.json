@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-resource_manager-v3",
-    "version": "0.4.0",
+    "version": "0.5.1",
     "language": "RUBY",
     "apis": [
       {
@@ -1212,6 +1212,166 @@
       ]
     },
     {
+      "region_tag": "cloudresourcemanager_v3_generated_TagBindings_ListEffectiveTags_sync",
+      "title": "Snippet for the list_effective_tags call in the TagBindings service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagBindings::Client#list_effective_tags. It may require modification in order to execute successfully.",
+      "file": "tag_bindings/list_effective_tags.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_effective_tags",
+        "full_name": "::Google::Cloud::ResourceManager::V3::TagBindings::Client#list_effective_tags",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ResourceManager::V3::ListEffectiveTagsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ResourceManager::V3::ListEffectiveTagsResponse",
+        "client": {
+          "short_name": "TagBindings::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::TagBindings::Client"
+        },
+        "method": {
+          "short_name": "ListEffectiveTags",
+          "full_name": "google.cloud.resourcemanager.v3.TagBindings.ListEffectiveTags",
+          "service": {
+            "short_name": "TagBindings",
+            "full_name": "google.cloud.resourcemanager.v3.TagBindings"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_TagHolds_CreateTagHold_sync",
+      "title": "Snippet for the create_tag_hold call in the TagHolds service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagHolds::Client#create_tag_hold. It may require modification in order to execute successfully.",
+      "file": "tag_holds/create_tag_hold.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_tag_hold",
+        "full_name": "::Google::Cloud::ResourceManager::V3::TagHolds::Client#create_tag_hold",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ResourceManager::V3::CreateTagHoldRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "TagHolds::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::TagHolds::Client"
+        },
+        "method": {
+          "short_name": "CreateTagHold",
+          "full_name": "google.cloud.resourcemanager.v3.TagHolds.CreateTagHold",
+          "service": {
+            "short_name": "TagHolds",
+            "full_name": "google.cloud.resourcemanager.v3.TagHolds"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_TagHolds_DeleteTagHold_sync",
+      "title": "Snippet for the delete_tag_hold call in the TagHolds service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagHolds::Client#delete_tag_hold. It may require modification in order to execute successfully.",
+      "file": "tag_holds/delete_tag_hold.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_tag_hold",
+        "full_name": "::Google::Cloud::ResourceManager::V3::TagHolds::Client#delete_tag_hold",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ResourceManager::V3::DeleteTagHoldRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "TagHolds::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::TagHolds::Client"
+        },
+        "method": {
+          "short_name": "DeleteTagHold",
+          "full_name": "google.cloud.resourcemanager.v3.TagHolds.DeleteTagHold",
+          "service": {
+            "short_name": "TagHolds",
+            "full_name": "google.cloud.resourcemanager.v3.TagHolds"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_TagHolds_ListTagHolds_sync",
+      "title": "Snippet for the list_tag_holds call in the TagHolds service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagHolds::Client#list_tag_holds. It may require modification in order to execute successfully.",
+      "file": "tag_holds/list_tag_holds.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_tag_holds",
+        "full_name": "::Google::Cloud::ResourceManager::V3::TagHolds::Client#list_tag_holds",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ResourceManager::V3::ListTagHoldsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ResourceManager::V3::ListTagHoldsResponse",
+        "client": {
+          "short_name": "TagHolds::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::TagHolds::Client"
+        },
+        "method": {
+          "short_name": "ListTagHolds",
+          "full_name": "google.cloud.resourcemanager.v3.TagHolds.ListTagHolds",
+          "service": {
+            "short_name": "TagHolds",
+            "full_name": "google.cloud.resourcemanager.v3.TagHolds"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "cloudresourcemanager_v3_generated_TagKeys_ListTagKeys_sync",
       "title": "Snippet for the list_tag_keys call in the TagKeys service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagKeys::Client#list_tag_keys. It may require modification in order to execute successfully.",
@@ -1275,6 +1435,46 @@
         "method": {
           "short_name": "GetTagKey",
           "full_name": "google.cloud.resourcemanager.v3.TagKeys.GetTagKey",
+          "service": {
+            "short_name": "TagKeys",
+            "full_name": "google.cloud.resourcemanager.v3.TagKeys"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_TagKeys_GetNamespacedTagKey_sync",
+      "title": "Snippet for the get_namespaced_tag_key call in the TagKeys service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagKeys::Client#get_namespaced_tag_key. It may require modification in order to execute successfully.",
+      "file": "tag_keys/get_namespaced_tag_key.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_namespaced_tag_key",
+        "full_name": "::Google::Cloud::ResourceManager::V3::TagKeys::Client#get_namespaced_tag_key",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ResourceManager::V3::GetNamespacedTagKeyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ResourceManager::V3::TagKey",
+        "client": {
+          "short_name": "TagKeys::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::TagKeys::Client"
+        },
+        "method": {
+          "short_name": "GetNamespacedTagKey",
+          "full_name": "google.cloud.resourcemanager.v3.TagKeys.GetNamespacedTagKey",
           "service": {
             "short_name": "TagKeys",
             "full_name": "google.cloud.resourcemanager.v3.TagKeys"
@@ -1595,6 +1795,46 @@
         "method": {
           "short_name": "GetTagValue",
           "full_name": "google.cloud.resourcemanager.v3.TagValues.GetTagValue",
+          "service": {
+            "short_name": "TagValues",
+            "full_name": "google.cloud.resourcemanager.v3.TagValues"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudresourcemanager_v3_generated_TagValues_GetNamespacedTagValue_sync",
+      "title": "Snippet for the get_namespaced_tag_value call in the TagValues service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::ResourceManager::V3::TagValues::Client#get_namespaced_tag_value. It may require modification in order to execute successfully.",
+      "file": "tag_values/get_namespaced_tag_value.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_namespaced_tag_value",
+        "full_name": "::Google::Cloud::ResourceManager::V3::TagValues::Client#get_namespaced_tag_value",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::ResourceManager::V3::GetNamespacedTagValueRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::ResourceManager::V3::TagValue",
+        "client": {
+          "short_name": "TagValues::Client",
+          "full_name": "::Google::Cloud::ResourceManager::V3::TagValues::Client"
+        },
+        "method": {
+          "short_name": "GetNamespacedTagValue",
+          "full_name": "google.cloud.resourcemanager.v3.TagValues.GetNamespacedTagValue",
           "service": {
             "short_name": "TagValues",
             "full_name": "google.cloud.resourcemanager.v3.TagValues"

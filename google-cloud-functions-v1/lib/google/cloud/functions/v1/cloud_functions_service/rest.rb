@@ -21,6 +21,7 @@ require "gapic/config"
 require "gapic/config/method"
 
 require "google/cloud/functions/v1/version"
+require "google/cloud/functions/v1/bindings_override"
 
 require "google/cloud/functions/v1/cloud_functions_service/credentials"
 require "google/cloud/functions/v1/cloud_functions_service/paths"

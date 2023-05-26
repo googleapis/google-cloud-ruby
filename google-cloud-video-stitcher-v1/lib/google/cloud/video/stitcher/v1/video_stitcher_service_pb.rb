@@ -9,11 +9,14 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/video/stitcher/v1/ad_tag_details_pb'
 require 'google/cloud/video/stitcher/v1/cdn_keys_pb'
+require 'google/cloud/video/stitcher/v1/live_configs_pb'
 require 'google/cloud/video/stitcher/v1/sessions_pb'
 require 'google/cloud/video/stitcher/v1/slates_pb'
 require 'google/cloud/video/stitcher/v1/stitch_details_pb'
+require 'google/longrunning/operations_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
+require 'google/protobuf/timestamp_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/video/stitcher/v1/video_stitcher_service.proto", :syntax => :proto3) do
@@ -91,6 +94,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :parent, :string, 1
       optional :slate_id, :string, 2
       optional :slate, :message, 3, "google.cloud.video.stitcher.v1.Slate"
+      optional :request_id, :string, 4
     end
     add_message "google.cloud.video.stitcher.v1.GetSlateRequest" do
       optional :name, :string, 1
@@ -120,6 +124,36 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.video.stitcher.v1.GetLiveSessionRequest" do
       optional :name, :string, 1
+    end
+    add_message "google.cloud.video.stitcher.v1.CreateLiveConfigRequest" do
+      optional :parent, :string, 1
+      optional :live_config_id, :string, 2
+      optional :live_config, :message, 3, "google.cloud.video.stitcher.v1.LiveConfig"
+      optional :request_id, :string, 4
+    end
+    add_message "google.cloud.video.stitcher.v1.ListLiveConfigsRequest" do
+      optional :parent, :string, 1
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
+      optional :filter, :string, 4
+      optional :order_by, :string, 5
+    end
+    add_message "google.cloud.video.stitcher.v1.ListLiveConfigsResponse" do
+      repeated :live_configs, :message, 1, "google.cloud.video.stitcher.v1.LiveConfig"
+      optional :next_page_token, :string, 2
+      repeated :unreachable, :string, 3
+    end
+    add_message "google.cloud.video.stitcher.v1.GetLiveConfigRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.cloud.video.stitcher.v1.DeleteLiveConfigRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.cloud.video.stitcher.v1.OperationMetadata" do
+      optional :create_time, :message, 1, "google.protobuf.Timestamp"
+      optional :end_time, :message, 2, "google.protobuf.Timestamp"
+      optional :target, :string, 3
+      optional :verb, :string, 4
     end
   end
 end
@@ -154,6 +188,12 @@ module Google
           DeleteSlateRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.stitcher.v1.DeleteSlateRequest").msgclass
           CreateLiveSessionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.stitcher.v1.CreateLiveSessionRequest").msgclass
           GetLiveSessionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.stitcher.v1.GetLiveSessionRequest").msgclass
+          CreateLiveConfigRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.stitcher.v1.CreateLiveConfigRequest").msgclass
+          ListLiveConfigsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.stitcher.v1.ListLiveConfigsRequest").msgclass
+          ListLiveConfigsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.stitcher.v1.ListLiveConfigsResponse").msgclass
+          GetLiveConfigRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.stitcher.v1.GetLiveConfigRequest").msgclass
+          DeleteLiveConfigRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.stitcher.v1.DeleteLiveConfigRequest").msgclass
+          OperationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.stitcher.v1.OperationMetadata").msgclass
         end
       end
     end

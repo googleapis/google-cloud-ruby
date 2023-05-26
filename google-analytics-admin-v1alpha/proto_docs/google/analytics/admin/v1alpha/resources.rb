@@ -549,12 +549,24 @@ module Google
           # @!attribute [rw] expanded_data_set
           #   @return [::Google::Analytics::Admin::V1alpha::ExpandedDataSet]
           #     A snapshot of an ExpandedDataSet resource in change history.
+          # @!attribute [rw] channel_group
+          #   @return [::Google::Analytics::Admin::V1alpha::ChannelGroup]
+          #     A snapshot of a ChannelGroup resource in change history.
           # @!attribute [rw] bigquery_link
           #   @return [::Google::Analytics::Admin::V1alpha::BigQueryLink]
           #     A snapshot of a BigQuery link resource in change history.
           # @!attribute [rw] enhanced_measurement_settings
           #   @return [::Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings]
           #     A snapshot of EnhancedMeasurementSettings resource in change history.
+          # @!attribute [rw] adsense_link
+          #   @return [::Google::Analytics::Admin::V1alpha::AdSenseLink]
+          #     A snapshot of an AdSenseLink resource in change history.
+          # @!attribute [rw] audience
+          #   @return [::Google::Analytics::Admin::V1alpha::Audience]
+          #     A snapshot of an Audience resource in change history.
+          # @!attribute [rw] event_create_rule
+          #   @return [::Google::Analytics::Admin::V1alpha::EventCreateRule]
+          #     A snapshot of an EventCreateRule resource in change history.
           class ChangeHistoryResource
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -761,6 +773,9 @@ module Google
         #     If this is an event-scoped dimension, then this is the event parameter
         #     name.
         #
+        #     If this is an item-scoped dimension, then this is the parameter
+        #     name found in the eCommerce items array.
+        #
         #     May only contain alphanumeric and underscore characters, starting with a
         #     letter. Max length of 24 characters for user-scoped dimensions, 40
         #     characters for event-scoped dimensions.
@@ -798,6 +813,9 @@ module Google
 
             # Dimension scoped to a user.
             USER = 2
+
+            # Dimension scoped to eCommerce items
+            ITEM = 3
           end
         end
 
@@ -1189,6 +1207,21 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A link between a GA4 Property and an AdSense for Content ad client.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. The resource name for this AdSense Link resource.
+        #     Format: properties/\\{propertyId}/adSenseLinks/\\{linkId}
+        #     Example: properties/1234/adSenseLinks/6789
+        # @!attribute [rw] ad_client_code
+        #   @return [::String]
+        #     Immutable. The AdSense ad client code that the GA4 property is linked to.
+        #     Example format: "ca-pub-1234567890"
+        class AdSenseLink
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The category selected for this property, used for industry benchmarking.
         module IndustryCategory
           # Industry category unspecified
@@ -1374,6 +1407,15 @@ module Google
 
           # EnhancedMeasurementSettings resource
           ENHANCED_MEASUREMENT_SETTINGS = 24
+
+          # AdSenseLink resource
+          ADSENSE_LINK = 27
+
+          # Audience resource
+          AUDIENCE = 28
+
+          # EventCreateRule resource
+          EVENT_CREATE_RULE = 29
         end
 
         # Status of the Google Signals settings.

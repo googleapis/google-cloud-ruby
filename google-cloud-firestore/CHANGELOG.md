@@ -1,5 +1,17 @@
 # Release History
 
+### 2.13.0 (2023-05-10)
+
+#### Features
+
+* Added support for bulk writer ([#21426](https://github.com/googleapis/google-cloud-ruby/issues/21426)) 
+
+### 2.12.0 (2023-04-20)
+
+#### Features
+
+* Add support for OR query ([#20920](https://github.com/googleapis/google-cloud-ruby/issues/20920)) 
+
 ### 2.11.0 (2023-02-23)
 
 #### Features

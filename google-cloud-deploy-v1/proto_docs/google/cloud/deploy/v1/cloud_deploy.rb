@@ -1223,6 +1223,10 @@ module Google
           # @!attribute [r] manifest_path
           #   @return [::String]
           #     Output only. File path of the rendered manifest relative to the URI.
+          # @!attribute [r] job_manifests_path
+          #   @return [::String]
+          #     Output only. File path of the directory of rendered job manifests
+          #     relative to the URI. This is only set if it is applicable.
           class PhaseArtifact
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1236,6 +1240,20 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # The artifacts produced by a deploy operation.
+        # @!attribute [r] artifact_uri
+        #   @return [::String]
+        #     Output only. URI of a directory containing the artifacts. All paths are
+        #     relative to this location.
+        # @!attribute [r] manifest_paths
+        #   @return [::Array<::String>]
+        #     Output only. File paths of the manifests applied during the deploy
+        #     operation relative to the URI.
+        class DeployArtifact
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # CloudRunRenderMetadata contains Cloud Run information associated with a
@@ -1637,7 +1655,7 @@ module Google
         # Deployment job composition.
         # @!attribute [r] deploy_job
         #   @return [::Google::Cloud::Deploy::V1::Job]
-        #     Output only. The deploy Job. This is the first job run in the phase.
+        #     Output only. The deploy Job. This is the deploy job in the phase.
         # @!attribute [r] verify_job
         #   @return [::Google::Cloud::Deploy::V1::Job]
         #     Output only. The verify Job. Runs after a deploy if the deploy succeeds.
@@ -2080,6 +2098,9 @@ module Google
         # @!attribute [r] metadata
         #   @return [::Google::Cloud::Deploy::V1::DeployJobRunMetadata]
         #     Output only. Metadata containing information about the deploy job run.
+        # @!attribute [r] artifact
+        #   @return [::Google::Cloud::Deploy::V1::DeployArtifact]
+        #     Output only. The artifact of a deploy job run, if available.
         class DeployJobRun
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

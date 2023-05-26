@@ -5,6 +5,8 @@ require 'google/protobuf'
 
 require 'google/analytics/admin/v1alpha/access_report_pb'
 require 'google/analytics/admin/v1alpha/audience_pb'
+require 'google/analytics/admin/v1alpha/channel_group_pb'
+require 'google/analytics/admin/v1alpha/event_create_and_edit_pb'
 require 'google/analytics/admin/v1alpha/expanded_data_set_pb'
 require 'google/analytics/admin/v1alpha/resources_pb'
 require 'google/api/annotations_pb'
@@ -514,6 +516,29 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :expanded_data_sets, :message, 1, "google.analytics.admin.v1alpha.ExpandedDataSet"
       optional :next_page_token, :string, 2
     end
+    add_message "google.analytics.admin.v1alpha.CreateChannelGroupRequest" do
+      optional :parent, :string, 1
+      optional :channel_group, :message, 2, "google.analytics.admin.v1alpha.ChannelGroup"
+    end
+    add_message "google.analytics.admin.v1alpha.UpdateChannelGroupRequest" do
+      optional :channel_group, :message, 1, "google.analytics.admin.v1alpha.ChannelGroup"
+      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
+    end
+    add_message "google.analytics.admin.v1alpha.DeleteChannelGroupRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.GetChannelGroupRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.ListChannelGroupsRequest" do
+      optional :parent, :string, 1
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
+    end
+    add_message "google.analytics.admin.v1alpha.ListChannelGroupsResponse" do
+      repeated :channel_groups, :message, 1, "google.analytics.admin.v1alpha.ChannelGroup"
+      optional :next_page_token, :string, 2
+    end
     add_message "google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest" do
       optional :property, :string, 1
       optional :opt_out, :bool, 2
@@ -560,6 +585,54 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse" do
       repeated :connected_site_tags, :message, 1, "google.analytics.admin.v1alpha.ConnectedSiteTag"
+    end
+    add_message "google.analytics.admin.v1alpha.CreateAdSenseLinkRequest" do
+      optional :parent, :string, 1
+      optional :adsense_link, :message, 2, "google.analytics.admin.v1alpha.AdSenseLink"
+    end
+    add_message "google.analytics.admin.v1alpha.GetAdSenseLinkRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.DeleteAdSenseLinkRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.ListAdSenseLinksRequest" do
+      optional :parent, :string, 1
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
+    end
+    add_message "google.analytics.admin.v1alpha.ListAdSenseLinksResponse" do
+      repeated :adsense_links, :message, 1, "google.analytics.admin.v1alpha.AdSenseLink"
+      optional :next_page_token, :string, 2
+    end
+    add_message "google.analytics.admin.v1alpha.FetchConnectedGa4PropertyRequest" do
+      optional :property, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse" do
+      optional :property, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.CreateEventCreateRuleRequest" do
+      optional :parent, :string, 1
+      optional :event_create_rule, :message, 2, "google.analytics.admin.v1alpha.EventCreateRule"
+    end
+    add_message "google.analytics.admin.v1alpha.UpdateEventCreateRuleRequest" do
+      optional :event_create_rule, :message, 1, "google.analytics.admin.v1alpha.EventCreateRule"
+      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
+    end
+    add_message "google.analytics.admin.v1alpha.DeleteEventCreateRuleRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.GetEventCreateRuleRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.ListEventCreateRulesRequest" do
+      optional :parent, :string, 1
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
+    end
+    add_message "google.analytics.admin.v1alpha.ListEventCreateRulesResponse" do
+      repeated :event_create_rules, :message, 1, "google.analytics.admin.v1alpha.EventCreateRule"
+      optional :next_page_token, :string, 2
     end
   end
 end
@@ -695,6 +768,12 @@ module Google
         GetExpandedDataSetRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetExpandedDataSetRequest").msgclass
         ListExpandedDataSetsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListExpandedDataSetsRequest").msgclass
         ListExpandedDataSetsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListExpandedDataSetsResponse").msgclass
+        CreateChannelGroupRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CreateChannelGroupRequest").msgclass
+        UpdateChannelGroupRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.UpdateChannelGroupRequest").msgclass
+        DeleteChannelGroupRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DeleteChannelGroupRequest").msgclass
+        GetChannelGroupRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetChannelGroupRequest").msgclass
+        ListChannelGroupsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListChannelGroupsRequest").msgclass
+        ListChannelGroupsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListChannelGroupsResponse").msgclass
         SetAutomatedGa4ConfigurationOptOutRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutRequest").msgclass
         SetAutomatedGa4ConfigurationOptOutResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.SetAutomatedGa4ConfigurationOptOutResponse").msgclass
         FetchAutomatedGa4ConfigurationOptOutRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.FetchAutomatedGa4ConfigurationOptOutRequest").msgclass
@@ -709,6 +788,19 @@ module Google
         DeleteConnectedSiteTagRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DeleteConnectedSiteTagRequest").msgclass
         ListConnectedSiteTagsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListConnectedSiteTagsRequest").msgclass
         ListConnectedSiteTagsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListConnectedSiteTagsResponse").msgclass
+        CreateAdSenseLinkRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CreateAdSenseLinkRequest").msgclass
+        GetAdSenseLinkRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetAdSenseLinkRequest").msgclass
+        DeleteAdSenseLinkRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DeleteAdSenseLinkRequest").msgclass
+        ListAdSenseLinksRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListAdSenseLinksRequest").msgclass
+        ListAdSenseLinksResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListAdSenseLinksResponse").msgclass
+        FetchConnectedGa4PropertyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.FetchConnectedGa4PropertyRequest").msgclass
+        FetchConnectedGa4PropertyResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.FetchConnectedGa4PropertyResponse").msgclass
+        CreateEventCreateRuleRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CreateEventCreateRuleRequest").msgclass
+        UpdateEventCreateRuleRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.UpdateEventCreateRuleRequest").msgclass
+        DeleteEventCreateRuleRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DeleteEventCreateRuleRequest").msgclass
+        GetEventCreateRuleRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetEventCreateRuleRequest").msgclass
+        ListEventCreateRulesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListEventCreateRulesRequest").msgclass
+        ListEventCreateRulesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListEventCreateRulesResponse").msgclass
       end
     end
   end

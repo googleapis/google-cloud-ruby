@@ -31,8 +31,7 @@ module Google
             #
             # CloudChannelReportsService lets Google Cloud resellers and
             # distributors retrieve and combine a variety of data in Cloud Channel for
-            # multiple products (Google Cloud Platform (GCP), Google Voice, and
-            # Google Workspace.)
+            # multiple products (Google Cloud, Google Voice, and Google Workspace.)
             #
             class Client
               include Paths
@@ -274,7 +273,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload fetch_report_results(report_job: nil, page_size: nil, page_token: nil)
+              # @overload fetch_report_results(report_job: nil, page_size: nil, page_token: nil, partition_keys: nil)
               #   Pass arguments to `fetch_report_results` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -298,6 +297,9 @@ module Google
               #     of the previous
               #     {::Google::Cloud::Channel::V1::CloudChannelReportsService::Rest::Client#fetch_report_results CloudChannelReportsService.FetchReportResults}
               #     call.
+              #   @param partition_keys [::Array<::String>]
+              #     Optional. List of keys specifying which report partitions to return.
+              #     If empty, returns all partitions.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Channel::V1::Row>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

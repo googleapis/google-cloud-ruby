@@ -88,6 +88,8 @@ module Google
             rpc :GetTask, ::Google::Cloud::Dataplex::V1::GetTaskRequest, ::Google::Cloud::Dataplex::V1::Task
             # Lists Jobs under the given task.
             rpc :ListJobs, ::Google::Cloud::Dataplex::V1::ListJobsRequest, ::Google::Cloud::Dataplex::V1::ListJobsResponse
+            # Run an on demand execution of a Task.
+            rpc :RunTask, ::Google::Cloud::Dataplex::V1::RunTaskRequest, ::Google::Cloud::Dataplex::V1::RunTaskResponse
             # Get job resource.
             rpc :GetJob, ::Google::Cloud::Dataplex::V1::GetJobRequest, ::Google::Cloud::Dataplex::V1::Job
             # Cancel jobs running for the task resource.

@@ -34,9 +34,11 @@ module Google
       module V1beta1
         ##
         # The GKE Hub MembershipService handles the registration of many Kubernetes
-        # clusters to Google Cloud, represented with the {::Google::Cloud::GkeHub::V1beta1::Membership Membership} resource.
+        # clusters to Google Cloud, represented with the
+        # {::Google::Cloud::GkeHub::V1beta1::Membership Membership} resource.
         #
-        # GKE Hub is currently only available in the global region.
+        # GKE Hub is currently available in the global region and all regions in
+        # https://cloud.google.com/compute/docs/regions-zones.
         #
         # **Membership management may be non-trivial:** it is recommended to use one
         # of the Google-provided client libraries or tools where possible when working

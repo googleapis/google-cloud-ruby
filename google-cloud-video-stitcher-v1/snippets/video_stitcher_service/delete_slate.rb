@@ -36,7 +36,14 @@ def delete_slate
   # Call the delete_slate method.
   result = client.delete_slate request
 
-  # The returned object is of type Google::Protobuf::Empty.
-  p result
+  # The returned object is of type Gapic::Operation. You can use it to
+  # check the status of an operation, cancel it, or wait for results.
+  # Here is how to wait for a response.
+  result.wait_until_done! timeout: 60
+  if result.response?
+    p result.response
+  else
+    puts "No response received."
+  end
 end
 # [END videostitcher_v1_generated_VideoStitcherService_DeleteSlate_sync]

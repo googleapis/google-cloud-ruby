@@ -1980,6 +1980,69 @@ module Google
               end
 
               ##
+              # Run an on demand execution of a Task.
+              #
+              # @overload run_task(request, options = nil)
+              #   Pass arguments to `run_task` via a request object, either of type
+              #   {::Google::Cloud::Dataplex::V1::RunTaskRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Dataplex::V1::RunTaskRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload run_task(name: nil)
+              #   Pass arguments to `run_task` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The resource name of the task:
+              #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/tasks/{task_id}`.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Dataplex::V1::RunTaskResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Dataplex::V1::RunTaskResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def run_task request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataplex::V1::RunTaskRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.run_task.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Dataplex::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.run_task.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.run_task.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @dataplex_service_stub.run_task request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Get job resource.
               #
               # @overload get_job(request, options = nil)
@@ -2790,6 +2853,11 @@ module Google
                   #
                   attr_reader :list_jobs
                   ##
+                  # RPC-specific configuration for `run_task`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :run_task
+                  ##
                   # RPC-specific configuration for `get_job`
                   # @return [::Gapic::Config::Method]
                   #
@@ -2880,6 +2948,8 @@ module Google
                     @get_task = ::Gapic::Config::Method.new get_task_config
                     list_jobs_config = parent_rpcs.list_jobs if parent_rpcs.respond_to? :list_jobs
                     @list_jobs = ::Gapic::Config::Method.new list_jobs_config
+                    run_task_config = parent_rpcs.run_task if parent_rpcs.respond_to? :run_task
+                    @run_task = ::Gapic::Config::Method.new run_task_config
                     get_job_config = parent_rpcs.get_job if parent_rpcs.respond_to? :get_job
                     @get_job = ::Gapic::Config::Method.new get_job_config
                     cancel_job_config = parent_rpcs.cancel_job if parent_rpcs.respond_to? :cancel_job

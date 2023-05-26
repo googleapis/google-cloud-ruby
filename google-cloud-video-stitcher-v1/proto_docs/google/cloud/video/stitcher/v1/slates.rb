@@ -31,9 +31,25 @@ module Google
           #   @return [::String]
           #     The URI to fetch the source content for the slate. This URI must return an
           #     MP4 video with at least one audio track.
+          # @!attribute [rw] gam_slate
+          #   @return [::Google::Cloud::Video::Stitcher::V1::Slate::GamSlate]
+          #     gam_slate has all the GAM-related attributes of slates.
           class Slate
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # GamSlate object has Google Ad Manager (GAM) related properties for the
+            # slate.
+            # @!attribute [rw] network_code
+            #   @return [::String]
+            #     Required. Ad Manager network code to associate with the live config.
+            # @!attribute [r] gam_slate_id
+            #   @return [::Integer]
+            #     Output only. The identifier generated for the slate by GAM.
+            class GamSlate
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
         end
       end

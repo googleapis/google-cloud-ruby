@@ -48,6 +48,11 @@ module Google
             # Undeploys a Model from an Endpoint, removing a DeployedModel from it, and
             # freeing all resources it's using.
             rpc :UndeployModel, ::Google::Cloud::AIPlatform::V1::UndeployModelRequest, ::Google::Longrunning::Operation
+            # Updates an existing deployed model. Updatable fields include
+            # `min_replica_count`, `max_replica_count`, `autoscaling_metric_specs`,
+            # `disable_container_logging` (v1 only), and `enable_container_logging`
+            # (v1beta1 only).
+            rpc :MutateDeployedModel, ::Google::Cloud::AIPlatform::V1::MutateDeployedModelRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

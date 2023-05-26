@@ -76,6 +76,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :latest_created_revision, :string, 34
       repeated :traffic_statuses, :message, 35, "google.cloud.run.v2.TrafficTargetStatus"
       optional :uri, :string, 36
+      optional :satisfies_pzs, :bool, 38
       optional :reconciling, :bool, 98
       optional :etag, :string, 99
     end

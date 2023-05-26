@@ -81,10 +81,14 @@ module Google
         #
         #     - assigned_units: The number of licenses assigned to users.
         #
-        #     For GCP billing subaccounts, the following Parameter may be accepted as
-        #     input:
+        #     For Google Cloud billing subaccounts, the following Parameter may be
+        #     accepted as input:
         #
         #     - display_name: The display name of the billing subaccount.
+        # @!attribute [rw] billing_account
+        #   @return [::String]
+        #     Optional. The billing account resource name that is used to pay for this
+        #     entitlement.
         class Entitlement
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -156,8 +160,8 @@ module Google
         # @!attribute [r] provisioning_id
         #   @return [::String]
         #     Output only. Provisioning ID of the entitlement. For Google Workspace, this
-        #     is the underlying Subscription ID. For Google Cloud Platform, this is the
-        #     Billing Account ID of the billing subaccount."
+        #     is the underlying Subscription ID. For Google Cloud, this is the Billing
+        #     Account ID of the billing subaccount."
         # @!attribute [r] product_id
         #   @return [::String]
         #     Output only. The product pertaining to the provisioning resource as

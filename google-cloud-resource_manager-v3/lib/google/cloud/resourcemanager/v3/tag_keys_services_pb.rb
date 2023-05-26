@@ -38,10 +38,14 @@ module Google
             # Retrieves a TagKey. This method will return `PERMISSION_DENIED` if the
             # key does not exist or the user does not have permission to view it.
             rpc :GetTagKey, ::Google::Cloud::ResourceManager::V3::GetTagKeyRequest, ::Google::Cloud::ResourceManager::V3::TagKey
+            # Retrieves a TagKey by its namespaced name.
+            # This method will return `PERMISSION_DENIED` if the key does not exist
+            # or the user does not have permission to view it.
+            rpc :GetNamespacedTagKey, ::Google::Cloud::ResourceManager::V3::GetNamespacedTagKeyRequest, ::Google::Cloud::ResourceManager::V3::TagKey
             # Creates a new TagKey. If another request with the same parameters is
             # sent while the original request is in process, the second request
-            # will receive an error. A maximum of 300 TagKeys can exist under a parent at
-            # any given time.
+            # will receive an error. A maximum of 1000 TagKeys can exist under a parent
+            # at any given time.
             rpc :CreateTagKey, ::Google::Cloud::ResourceManager::V3::CreateTagKeyRequest, ::Google::Longrunning::Operation
             # Updates the attributes of the TagKey resource.
             rpc :UpdateTagKey, ::Google::Cloud::ResourceManager::V3::UpdateTagKeyRequest, ::Google::Longrunning::Operation

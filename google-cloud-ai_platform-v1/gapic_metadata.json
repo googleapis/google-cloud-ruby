@@ -113,6 +113,11 @@
               "methods": [
                 "undeploy_model"
               ]
+            },
+            "MutateDeployedModel": {
+              "methods": [
+                "mutate_deployed_model"
+              ]
             }
           }
         }
@@ -527,6 +532,25 @@
             "ResumeModelDeploymentMonitoringJob": {
               "methods": [
                 "resume_model_deployment_monitoring_job"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "MatchService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AIPlatform::V1::MatchService::Client",
+          "rpcs": {
+            "FindNeighbors": {
+              "methods": [
+                "find_neighbors"
+              ]
+            },
+            "ReadIndexDatapoints": {
+              "methods": [
+                "read_index_datapoints"
               ]
             }
           }

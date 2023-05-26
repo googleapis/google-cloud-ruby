@@ -73,6 +73,9 @@ module Google
             # The range of the messages to be used for summary can be specified in the
             # request.
             rpc :SuggestConversationSummary, ::Google::Cloud::Dialogflow::V2::SuggestConversationSummaryRequest, ::Google::Cloud::Dialogflow::V2::SuggestConversationSummaryResponse
+            # Generates and returns a summary for a conversation that does not have a
+            # resource created for it.
+            rpc :GenerateStatelessSummary, ::Google::Cloud::Dialogflow::V2::GenerateStatelessSummaryRequest, ::Google::Cloud::Dialogflow::V2::GenerateStatelessSummaryResponse
           end
 
           Stub = Service.rpc_stub_class

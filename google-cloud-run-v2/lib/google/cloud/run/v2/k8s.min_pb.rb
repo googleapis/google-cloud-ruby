@@ -24,6 +24,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.run.v2.ResourceRequirements" do
       map :limits, :string, :string, 1
       optional :cpu_idle, :bool, 2
+      optional :startup_cpu_boost, :bool, 3
     end
     add_message "google.cloud.run.v2.EnvVar" do
       optional :name, :string, 1
@@ -81,6 +82,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.run.v2.HTTPGetAction" do
       optional :path, :string, 1
       repeated :http_headers, :message, 4, "google.cloud.run.v2.HTTPHeader"
+      optional :port, :int32, 5
     end
     add_message "google.cloud.run.v2.HTTPHeader" do
       optional :name, :string, 1

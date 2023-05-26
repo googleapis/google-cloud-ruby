@@ -24,9 +24,9 @@ module Google
         # Describes an API diff request.
         # @!attribute [rw] threat_type
         #   @return [::Google::Cloud::WebRisk::V1::ThreatType]
-        #     Required. The threat list to update. Only a single ThreatType should be specified
-        #     per request. If you want to handle multiple ThreatTypes, you must make one
-        #     request per ThreatType.
+        #     Required. The threat list to update. Only a single ThreatType should be
+        #     specified per request. If you want to handle multiple ThreatTypes, you must
+        #     make one request per ThreatType.
         # @!attribute [rw] version_token
         #   @return [::String]
         #     The current version token of the client for the requested list (the
@@ -124,7 +124,8 @@ module Google
         #     Required. The URI to be checked for matches.
         # @!attribute [rw] threat_types
         #   @return [::Array<::Google::Cloud::WebRisk::V1::ThreatType>]
-        #     Required. The ThreatLists to search in. Multiple ThreatLists may be specified.
+        #     Required. The ThreatLists to search in. Multiple ThreatLists may be
+        #     specified.
         class SearchUrisRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -160,7 +161,8 @@ module Google
         #     the web safe base64 variant (RFC 4648).
         # @!attribute [rw] threat_types
         #   @return [::Array<::Google::Cloud::WebRisk::V1::ThreatType>]
-        #     Required. The ThreatLists to search in. Multiple ThreatLists may be specified.
+        #     Required. The ThreatLists to search in. Multiple ThreatLists may be
+        #     specified.
         class SearchHashesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -287,23 +289,204 @@ module Google
         # Wraps a URI that might be displaying malicious content.
         # @!attribute [rw] uri
         #   @return [::String]
-        #     Required. The URI that is being reported for malicious content to be analyzed.
+        #     Required. The URI that is being reported for malicious content to be
+        #     analyzed.
+        # @!attribute [r] threat_types
+        #   @return [::Array<::Google::Cloud::WebRisk::V1::ThreatType>]
+        #     Output only. ThreatTypes found to be associated with the submitted URI
+        #     after reviewing it. This might be empty if the URI was not added to any
+        #     list.
         class Submission
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Context about the submission including the type of abuse found on the URI and
+        # supporting details.
+        # option (google.api.message_visibility).restriction = "TRUSTED_TESTER";
+        # @!attribute [rw] abuse_type
+        #   @return [::Google::Cloud::WebRisk::V1::ThreatInfo::AbuseType]
+        #     The type of abuse.
+        # @!attribute [rw] threat_confidence
+        #   @return [::Google::Cloud::WebRisk::V1::ThreatInfo::Confidence]
+        #     Confidence that the URI is unsafe.
+        # @!attribute [rw] threat_justification
+        #   @return [::Google::Cloud::WebRisk::V1::ThreatInfo::ThreatJustification]
+        #     Context about why the URI is unsafe.
+        class ThreatInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Confidence that a URI is unsafe.
+          # @!attribute [rw] score
+          #   @return [::Float]
+          #     A decimal representation of confidence in the range of 0
+          #     to 1 where 0 indicates no confidence and 1 indicates
+          #     complete confidence.
+          # @!attribute [rw] level
+          #   @return [::Google::Cloud::WebRisk::V1::ThreatInfo::Confidence::ConfidenceLevel]
+          #     Enum representation of confidence.
+          class Confidence
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Enum representation of confidence.
+            module ConfidenceLevel
+              # Default.
+              CONFIDENCE_LEVEL_UNSPECIFIED = 0
+
+              # Less than 60% confidence that the URI is unsafe.
+              LOW = 1
+
+              # Between 60% and 80% confidence that the URI is unsafe.
+              MEDIUM = 2
+
+              # Greater than 80% confidence that the URI is unsafe.
+              HIGH = 3
+            end
+          end
+
+          # Context about why the URI is unsafe.
+          # @!attribute [rw] labels
+          #   @return [::Array<::Google::Cloud::WebRisk::V1::ThreatInfo::ThreatJustification::JustificationLabel>]
+          #     Labels associated with this URI that explain how it was classified.
+          # @!attribute [rw] comments
+          #   @return [::Array<::String>]
+          #     Free-form context on why this URI is unsafe.
+          class ThreatJustification
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Labels that explain how the URI was classified.
+            module JustificationLabel
+              # Default.
+              JUSTIFICATION_LABEL_UNSPECIFIED = 0
+
+              # The submitter manually verified that the submission is unsafe.
+              MANUAL_VERIFICATION = 1
+
+              # The submitter received the submission from an end user.
+              USER_REPORT = 2
+
+              # The submitter received the submission from an automated system.
+              AUTOMATED_REPORT = 3
+            end
+          end
+
+          # The abuse type found on the URI.
+          module AbuseType
+            # Default.
+            ABUSE_TYPE_UNSPECIFIED = 0
+
+            # The URI contains malware.
+            MALWARE = 1
+
+            # The URI contains social engineering.
+            SOCIAL_ENGINEERING = 2
+
+            # The URI contains unwanted software.
+            UNWANTED_SOFTWARE = 3
+          end
+        end
+
+        # Details about how the threat was discovered.
+        # @!attribute [rw] platform
+        #   @return [::Google::Cloud::WebRisk::V1::ThreatDiscovery::Platform]
+        #     Platform on which the threat was discovered.
+        # @!attribute [rw] region_codes
+        #   @return [::Array<::String>]
+        #     CLDR region code of the countries/regions the URI poses a threat ordered
+        #     from most impact to least impact. Example: "US" for United States.
+        class ThreatDiscovery
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Platform types.
+          module Platform
+            # Default.
+            PLATFORM_UNSPECIFIED = 0
+
+            # General Android platform.
+            ANDROID = 1
+
+            # General iOS platform.
+            IOS = 2
+
+            # General macOS platform.
+            MACOS = 3
+
+            # General Windows platform.
+            WINDOWS = 4
+          end
+        end
+
         # Request to send a potentially phishy URI to WebRisk.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The name of the project that is making the submission. This string is in
-        #     the format "projects/\\{project_number}".
+        #     Required. The name of the project that is making the submission. This
+        #     string is in the format "projects/\\{project_number}".
         # @!attribute [rw] submission
         #   @return [::Google::Cloud::WebRisk::V1::Submission]
         #     Required. The submission that contains the content of the phishing report.
         class CreateSubmissionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to send a potentially malicious URI to WebRisk.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The name of the project that is making the submission. This
+        #     string is in the format "projects/\\{project_number}".
+        # @!attribute [rw] submission
+        #   @return [::Google::Cloud::WebRisk::V1::Submission]
+        #     Required. The submission that contains the URI to be scanned.
+        # @!attribute [rw] threat_info
+        #   @return [::Google::Cloud::WebRisk::V1::ThreatInfo]
+        #     Provides additional information about the submission.
+        # @!attribute [rw] threat_discovery
+        #   @return [::Google::Cloud::WebRisk::V1::ThreatDiscovery]
+        #     Provides additional information about how the submission was discovered.
+        class SubmitUriRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Metadata for the Submit URI long-running operation.
+        # option (google.api.message_visibility).restriction = "TRUSTED_TESTER";
+        # @!attribute [rw] state
+        #   @return [::Google::Cloud::WebRisk::V1::SubmitUriMetadata::State]
+        #     The state of the operation.
+        # @!attribute [rw] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Creation time of the operation.
+        # @!attribute [rw] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Latest update time of the operation.
+        class SubmitUriMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Enum that represents the state of the long-running operation.
+          module State
+            # Default unspecified state.
+            STATE_UNSPECIFIED = 0
+
+            # The operation is currently running.
+            RUNNING = 1
+
+            # The operation finished with a success status.
+            SUCCEEDED = 2
+
+            # The operation was cancelled.
+            CANCELLED = 3
+
+            # The operation finished with a failure status.
+            FAILED = 4
+
+            # The operation was closed with no action taken.
+            CLOSED = 5
+          end
         end
 
         # The type of threat. This maps directly to the threat list a threat may

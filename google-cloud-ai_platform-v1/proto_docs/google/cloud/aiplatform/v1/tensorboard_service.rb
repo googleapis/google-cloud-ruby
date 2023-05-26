@@ -747,12 +747,12 @@ module Google
         # @!attribute [rw] page_token
         #   @return [::String]
         #     A page token, received from a previous
-        #     [TensorboardService.ExportTensorboardTimeSeries][] call.
-        #     Provide this to retrieve the subsequent page.
+        #     {::Google::Cloud::AIPlatform::V1::TensorboardService::Client#export_tensorboard_time_series_data ExportTensorboardTimeSeriesData}
+        #     call. Provide this to retrieve the subsequent page.
         #
         #     When paginating, all other parameters provided to
-        #     [TensorboardService.ExportTensorboardTimeSeries][] must
-        #     match the call that provided the page token.
+        #     {::Google::Cloud::AIPlatform::V1::TensorboardService::Client#export_tensorboard_time_series_data ExportTensorboardTimeSeriesData}
+        #     must match the call that provided the page token.
         # @!attribute [rw] order_by
         #   @return [::String]
         #     Field to use to sort the TensorboardTimeSeries' data.
@@ -771,8 +771,9 @@ module Google
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token, which can be sent as
-        #     [ExportTensorboardTimeSeriesRequest.page_token][] to retrieve the next
-        #     page. If this field is omitted, there are no subsequent pages.
+        #     {::Google::Cloud::AIPlatform::V1::ExportTensorboardTimeSeriesDataRequest#page_token page_token}
+        #     to retrieve the next page. If this field is omitted, there are no
+        #     subsequent pages.
         class ExportTensorboardTimeSeriesDataResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -175,6 +175,25 @@ class Google::Cloud::Dialogflow::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_conversation_profiles_grpc
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Dialogflow.conversation_profiles transport: :grpc do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Dialogflow::V2::ConversationProfiles::Client, client
+    end
+  end
+
+  def test_conversation_profiles_rest
+    Gapic::Rest::ClientStub.stub :new, :stub do
+      client = Google::Cloud::Dialogflow.conversation_profiles transport: :rest do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Dialogflow::V2::ConversationProfiles::Rest::Client, client
+    end
+  end
+
   def test_conversations_grpc
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
@@ -229,25 +248,6 @@ class Google::Cloud::Dialogflow::ClientConstructionMinitest < Minitest::Test
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Cloud::Dialogflow::V2::ConversationModels::Rest::Client, client
-    end
-  end
-
-  def test_conversation_profiles_grpc
-    Gapic::ServiceStub.stub :new, :stub do
-      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::Dialogflow.conversation_profiles transport: :grpc do |config|
-        config.credentials = grpc_channel
-      end
-      assert_kind_of Google::Cloud::Dialogflow::V2::ConversationProfiles::Client, client
-    end
-  end
-
-  def test_conversation_profiles_rest
-    Gapic::Rest::ClientStub.stub :new, :stub do
-      client = Google::Cloud::Dialogflow.conversation_profiles transport: :rest do |config|
-        config.credentials = :dummy_credentials
-      end
-      assert_kind_of Google::Cloud::Dialogflow::V2::ConversationProfiles::Rest::Client, client
     end
   end
 

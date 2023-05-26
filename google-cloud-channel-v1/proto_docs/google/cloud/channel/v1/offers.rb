@@ -153,7 +153,7 @@ module Google
         # @!attribute [rw] billing_account
         #   @return [::String]
         #     Reseller Billing account to charge after an offer transaction.
-        #     Only present for Google Cloud Platform offers.
+        #     Only present for Google Cloud offers.
         class Plan
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -320,14 +320,13 @@ module Google
           # Voice usage.
           MINUTES = 5
 
-          # For IaaS SKUs like Google Cloud Platform, monetization is based on usage
-          # accrued on your billing account irrespective of the type of monetizable
-          # resource. This enum represents an aggregated resource/container for all
-          # usage SKUs on a billing account. Currently, only applicable to Google Cloud
-          # Platform.
+          # For IaaS SKUs like Google Cloud, monetization is based on usage accrued on
+          # your billing account irrespective of the type of monetizable resource. This
+          # enum represents an aggregated resource/container for all usage SKUs on a
+          # billing account. Currently, only applicable to Google Cloud.
           IAAS_USAGE = 6
 
-          # For Google Cloud Platform subscriptions like Anthos or SAP.
+          # For Google Cloud subscriptions like Anthos or SAP.
           SUBSCRIPTION = 7
         end
 

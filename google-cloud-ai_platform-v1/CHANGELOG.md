@@ -1,5 +1,36 @@
 # Changelog
 
+### 0.24.0 (2023-05-19)
+
+#### Features
+
+* add match service 
+* support examples for ExplanationParameters 
+
+### 0.24.0 (2023-05-18)
+
+#### Features
+
+* add match service 
+* support examples for ExplanationParameters 
+
+### 0.23.0 (2023-05-04)
+
+#### Features
+
+* Added AcceleratorType::NVIDIA_L4 
+* Added EntityType#offline_storage_ttl_days 
+* Added experiment and experiment_run fields to CustomJobSpec 
+* Added Featurestore#online_storage_ttl_days 
+* Added ModelSourceInfo::ModelSourceType::GENIE 
+* Support for mutate_deployed_model 
+
+### 0.22.0 (2023-04-21)
+
+#### Features
+
+* Support marking TensorBoard instance as default ([#21445](https://github.com/googleapis/google-cloud-ruby/issues/21445)) 
+
 ### 0.21.0 (2023-04-06)
 
 #### Features

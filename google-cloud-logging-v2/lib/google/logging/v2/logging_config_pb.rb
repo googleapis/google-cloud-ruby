@@ -14,6 +14,11 @@ require 'google/protobuf/timestamp_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/logging/v2/logging_config.proto", :syntax => :proto3) do
+    add_message "google.logging.v2.IndexConfig" do
+      optional :field_path, :string, 1
+      optional :type, :enum, 2, "google.logging.v2.IndexType"
+      optional :create_time, :message, 3, "google.protobuf.Timestamp"
+    end
     add_message "google.logging.v2.LogBucket" do
       optional :name, :string, 1
       optional :description, :string, 3
@@ -22,7 +27,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :retention_days, :int32, 11
       optional :locked, :bool, 9
       optional :lifecycle_state, :enum, 12, "google.logging.v2.LifecycleState"
+      optional :analytics_enabled, :bool, 14
       repeated :restricted_fields, :string, 15
+      repeated :index_configs, :message, 17, "google.logging.v2.IndexConfig"
       optional :cmek_settings, :message, 19, "google.logging.v2.CmekSettings"
     end
     add_message "google.logging.v2.LogView" do
@@ -52,6 +59,16 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :VERSION_FORMAT_UNSPECIFIED, 0
       value :V2, 1
       value :V1, 2
+    end
+    add_message "google.logging.v2.BigQueryDataset" do
+      optional :dataset_id, :string, 1
+    end
+    add_message "google.logging.v2.Link" do
+      optional :name, :string, 1
+      optional :description, :string, 2
+      optional :create_time, :message, 3, "google.protobuf.Timestamp"
+      optional :lifecycle_state, :enum, 4, "google.logging.v2.LifecycleState"
+      optional :bigquery_dataset, :message, 5, "google.logging.v2.BigQueryDataset"
     end
     add_message "google.logging.v2.BigQueryOptions" do
       optional :use_partitioned_tables, :bool, 1
@@ -136,6 +153,26 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.logging.v2.DeleteSinkRequest" do
       optional :sink_name, :string, 1
     end
+    add_message "google.logging.v2.CreateLinkRequest" do
+      optional :parent, :string, 1
+      optional :link, :message, 2, "google.logging.v2.Link"
+      optional :link_id, :string, 3
+    end
+    add_message "google.logging.v2.DeleteLinkRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.logging.v2.ListLinksRequest" do
+      optional :parent, :string, 1
+      optional :page_token, :string, 2
+      optional :page_size, :int32, 3
+    end
+    add_message "google.logging.v2.ListLinksResponse" do
+      repeated :links, :message, 1, "google.logging.v2.Link"
+      optional :next_page_token, :string, 2
+    end
+    add_message "google.logging.v2.GetLinkRequest" do
+      optional :name, :string, 1
+    end
     add_message "google.logging.v2.LogExclusion" do
       optional :name, :string, 1
       optional :description, :string, 2
@@ -179,6 +216,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.logging.v2.CmekSettings" do
       optional :name, :string, 1
       optional :kms_key_name, :string, 2
+      optional :kms_key_version_name, :string, 4
       optional :service_account_id, :string, 3
     end
     add_message "google.logging.v2.GetSettingsRequest" do
@@ -213,10 +251,26 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.logging.v2.CopyLogEntriesResponse" do
       optional :log_entries_copied_count, :int64, 1
     end
-    add_enum "google.logging.v2.LifecycleState" do
-      value :LIFECYCLE_STATE_UNSPECIFIED, 0
-      value :ACTIVE, 1
-      value :DELETE_REQUESTED, 2
+    add_message "google.logging.v2.BucketMetadata" do
+      optional :start_time, :message, 1, "google.protobuf.Timestamp"
+      optional :end_time, :message, 2, "google.protobuf.Timestamp"
+      optional :state, :enum, 3, "google.logging.v2.OperationState"
+      oneof :request do
+        optional :create_bucket_request, :message, 4, "google.logging.v2.CreateBucketRequest"
+        optional :update_bucket_request, :message, 5, "google.logging.v2.UpdateBucketRequest"
+      end
+    end
+    add_message "google.logging.v2.LinkMetadata" do
+      optional :start_time, :message, 1, "google.protobuf.Timestamp"
+      optional :end_time, :message, 2, "google.protobuf.Timestamp"
+      optional :state, :enum, 3, "google.logging.v2.OperationState"
+      oneof :request do
+        optional :create_link_request, :message, 4, "google.logging.v2.CreateLinkRequest"
+        optional :delete_link_request, :message, 5, "google.logging.v2.DeleteLinkRequest"
+      end
+    end
+    add_message "google.logging.v2.LocationMetadata" do
+      optional :log_analytics_enabled, :bool, 1
     end
     add_enum "google.logging.v2.OperationState" do
       value :OPERATION_STATE_UNSPECIFIED, 0
@@ -227,6 +281,19 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :OPERATION_STATE_FAILED, 5
       value :OPERATION_STATE_CANCELLED, 6
     end
+    add_enum "google.logging.v2.LifecycleState" do
+      value :LIFECYCLE_STATE_UNSPECIFIED, 0
+      value :ACTIVE, 1
+      value :DELETE_REQUESTED, 2
+      value :UPDATING, 3
+      value :CREATING, 4
+      value :FAILED, 5
+    end
+    add_enum "google.logging.v2.IndexType" do
+      value :INDEX_TYPE_UNSPECIFIED, 0
+      value :INDEX_TYPE_STRING, 1
+      value :INDEX_TYPE_INTEGER, 2
+    end
   end
 end
 
@@ -234,10 +301,13 @@ module Google
   module Cloud
     module Logging
       module V2
+        IndexConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.IndexConfig").msgclass
         LogBucket = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LogBucket").msgclass
         LogView = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LogView").msgclass
         LogSink = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LogSink").msgclass
         LogSink::VersionFormat = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LogSink.VersionFormat").enummodule
+        BigQueryDataset = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.BigQueryDataset").msgclass
+        Link = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.Link").msgclass
         BigQueryOptions = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.BigQueryOptions").msgclass
         ListBucketsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListBucketsRequest").msgclass
         ListBucketsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListBucketsResponse").msgclass
@@ -258,6 +328,11 @@ module Google
         CreateSinkRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.CreateSinkRequest").msgclass
         UpdateSinkRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.UpdateSinkRequest").msgclass
         DeleteSinkRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.DeleteSinkRequest").msgclass
+        CreateLinkRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.CreateLinkRequest").msgclass
+        DeleteLinkRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.DeleteLinkRequest").msgclass
+        ListLinksRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListLinksRequest").msgclass
+        ListLinksResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListLinksResponse").msgclass
+        GetLinkRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.GetLinkRequest").msgclass
         LogExclusion = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LogExclusion").msgclass
         ListExclusionsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListExclusionsRequest").msgclass
         ListExclusionsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.ListExclusionsResponse").msgclass
@@ -274,8 +349,12 @@ module Google
         CopyLogEntriesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.CopyLogEntriesRequest").msgclass
         CopyLogEntriesMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.CopyLogEntriesMetadata").msgclass
         CopyLogEntriesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.CopyLogEntriesResponse").msgclass
-        LifecycleState = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LifecycleState").enummodule
+        BucketMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.BucketMetadata").msgclass
+        LinkMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LinkMetadata").msgclass
+        LocationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LocationMetadata").msgclass
         OperationState = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.OperationState").enummodule
+        LifecycleState = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.LifecycleState").enummodule
+        IndexType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.logging.v2.IndexType").enummodule
       end
     end
   end

@@ -41,6 +41,21 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientPathsTest < Min
     end
   end
 
+  def test_dlp_job_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.dlp_job_path project: "value0", dlp_job: "value1"
+      assert_equal "projects/value0/dlpJobs/value1", path
+
+      path = client.dlp_job_path project: "value0", location: "value1", dlp_job: "value2"
+      assert_equal "projects/value0/locations/value1/dlpJobs/value2", path
+    end
+  end
+
   def test_effective_security_health_analytics_custom_module_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do
@@ -257,6 +272,21 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientPathsTest < Min
 
       path = client.source_path project: "value0", source: "value1"
       assert_equal "projects/value0/sources/value1", path
+    end
+  end
+
+  def test_table_data_profile_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.table_data_profile_path project: "value0", table_profile: "value1"
+      assert_equal "projects/value0/tableProfiles/value1", path
+
+      path = client.table_data_profile_path project: "value0", location: "value1", table_profile: "value2"
+      assert_equal "projects/value0/locations/value1/tableProfiles/value2", path
     end
   end
 

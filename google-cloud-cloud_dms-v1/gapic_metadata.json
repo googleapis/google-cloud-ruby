@@ -94,6 +94,101 @@
               "methods": [
                 "delete_connection_profile"
               ]
+            },
+            "CreatePrivateConnection": {
+              "methods": [
+                "create_private_connection"
+              ]
+            },
+            "GetPrivateConnection": {
+              "methods": [
+                "get_private_connection"
+              ]
+            },
+            "ListPrivateConnections": {
+              "methods": [
+                "list_private_connections"
+              ]
+            },
+            "DeletePrivateConnection": {
+              "methods": [
+                "delete_private_connection"
+              ]
+            },
+            "GetConversionWorkspace": {
+              "methods": [
+                "get_conversion_workspace"
+              ]
+            },
+            "ListConversionWorkspaces": {
+              "methods": [
+                "list_conversion_workspaces"
+              ]
+            },
+            "CreateConversionWorkspace": {
+              "methods": [
+                "create_conversion_workspace"
+              ]
+            },
+            "UpdateConversionWorkspace": {
+              "methods": [
+                "update_conversion_workspace"
+              ]
+            },
+            "DeleteConversionWorkspace": {
+              "methods": [
+                "delete_conversion_workspace"
+              ]
+            },
+            "SeedConversionWorkspace": {
+              "methods": [
+                "seed_conversion_workspace"
+              ]
+            },
+            "ImportMappingRules": {
+              "methods": [
+                "import_mapping_rules"
+              ]
+            },
+            "ConvertConversionWorkspace": {
+              "methods": [
+                "convert_conversion_workspace"
+              ]
+            },
+            "CommitConversionWorkspace": {
+              "methods": [
+                "commit_conversion_workspace"
+              ]
+            },
+            "RollbackConversionWorkspace": {
+              "methods": [
+                "rollback_conversion_workspace"
+              ]
+            },
+            "ApplyConversionWorkspace": {
+              "methods": [
+                "apply_conversion_workspace"
+              ]
+            },
+            "DescribeDatabaseEntities": {
+              "methods": [
+                "describe_database_entities"
+              ]
+            },
+            "SearchBackgroundJobs": {
+              "methods": [
+                "search_background_jobs"
+              ]
+            },
+            "DescribeConversionWorkspaceRevisions": {
+              "methods": [
+                "describe_conversion_workspace_revisions"
+              ]
+            },
+            "FetchStaticIps": {
+              "methods": [
+                "fetch_static_ips"
+              ]
             }
           }
         }

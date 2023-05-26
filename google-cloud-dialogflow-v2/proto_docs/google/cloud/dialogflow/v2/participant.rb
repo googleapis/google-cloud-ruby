@@ -439,6 +439,10 @@ module Google
         #     response stream still contains only one final response even if some
         #     `Fulfillment`s in Dialogflow virtual agent have been configured to return
         #     partial responses.
+        # @!attribute [rw] enable_debugging_info
+        #   @return [::Boolean]
+        #     If true, `StreamingAnalyzeContentResponse.debugging_info` will get
+        #     populated.
         class StreamingAnalyzeContentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -512,6 +516,10 @@ module Google
         # @!attribute [rw] dtmf_parameters
         #   @return [::Google::Cloud::Dialogflow::V2::DtmfParameters]
         #     Indicates the parameters of DTMF.
+        # @!attribute [rw] debugging_info
+        #   @return [::Google::Cloud::Dialogflow::V2::CloudConversationDebuggingInfo]
+        #     Debugging info that would get populated when
+        #     `StreamingAnalyzeContentRequest.enable_debugging_info` is set to true.
         class StreamingAnalyzeContentResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

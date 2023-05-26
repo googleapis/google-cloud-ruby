@@ -287,7 +287,7 @@ module Google
               table_id:       table_id,
               table:          table,
               initial_splits: initial_splits
-            }.delete_if { |_, v| v.nil? }
+            }.compact
           )
         end
 
@@ -671,7 +671,7 @@ module Google
               app_profile_id: app_profile_id,
               row_key:        row_key,
               mutations:      mutations
-            }.delete_if { |_, v| v.nil? }
+            }.compact
           )
         end
 
@@ -681,7 +681,7 @@ module Google
               table_name:     table_name,
               app_profile_id: app_profile_id,
               entries:        entries
-            }.delete_if { |_, v| v.nil? }
+            }.compact
           )
         end
 
@@ -699,7 +699,7 @@ module Google
               predicate_filter: predicate_filter,
               true_mutations:   true_mutations,
               false_mutations:  false_mutations
-            }.delete_if { |_, v| v.nil? }
+            }.compact
           )
         end
 
@@ -710,7 +710,7 @@ module Google
               app_profile_id: app_profile_id,
               row_key:        row_key,
               rules:          rules
-            }.delete_if { |_, v| v.nil? }
+            }.compact
           )
         end
 

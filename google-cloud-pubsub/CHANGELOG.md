@@ -1,5 +1,23 @@
 # Release History
 
+### 2.15.4 (2023-05-19)
+
+#### Documentation
+
+* Fixed broken links in authentication documentation ([#21619](https://github.com/googleapis/google-cloud-ruby/issues/21619)) 
+
+### 2.15.4 (2023-05-18)
+
+#### Documentation
+
+* Fixed broken links in authentication documentation ([#21619](https://github.com/googleapis/google-cloud-ruby/issues/21619)) 
+
+### 2.15.3 (2023-04-19)
+
+#### Bug Fixes
+
+* wait for successful receipt modack when exactly once delivery enabled ([#21431](https://github.com/googleapis/google-cloud-ruby/issues/21431)) 
+
 ### 2.15.2 (2023-03-19)
 
 #### Bug Fixes

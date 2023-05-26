@@ -438,7 +438,7 @@ module Google
             #
             #   @param parent [::String]
             #     The parent of the collection of `Builds`.
-            #     Format: `projects/{project}/locations/location`
+            #     Format: `projects/{project}/locations/{location}`
             #   @param project_id [::String]
             #     Required. ID of the project.
             #   @param page_size [::Integer]
@@ -1734,7 +1734,7 @@ module Google
             #   @param name [::String]
             #     Required. The name of the `WorkerPool` to delete.
             #     Format:
-            #     `projects/{project}/locations/{workerPool}/workerPools/{workerPool}`.
+            #     `projects/{project}/locations/{location}/workerPools/{workerPool}`.
             #   @param etag [::String]
             #     Optional. If this is provided, it must match the server's etag on the
             #     workerpool for the request to be processed.

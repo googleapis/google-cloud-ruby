@@ -134,8 +134,8 @@ module Google
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of Recognizers to return. The service may return fewer
-        #     than this value. If unspecified, at most 20 Recognizers will be returned.
-        #     The maximum value is 20; values above 20 will be coerced to 20.
+        #     than this value. If unspecified, at most 5 Recognizers will be returned.
+        #     The maximum value is 100; values above 100 will be coerced to 100.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     A page token, received from a previous
@@ -263,56 +263,19 @@ module Google
         #     Required. Which model to use for recognition requests. Select the model
         #     best suited to your domain to get best results.
         #
-        #     Supported models:
-        #
-        #     - `latest_long`
-        #
-        #       Best for long form content like media or conversation.
-        #
-        #     - `latest_short`
-        #
-        #       Best for short form content like commands or single shot directed speech.
-        #       When using this model, the service will stop transcribing audio after the
-        #       first utterance is detected and completed.
-        #
-        #       When using this model,
-        #       {::Google::Cloud::Speech::V2::RecognitionFeatures::MultiChannelMode::SEPARATE_RECOGNITION_PER_CHANNEL SEPARATE_RECOGNITION_PER_CHANNEL}
-        #       is not supported; multi-channel audio is accepted, but only the first
-        #       channel will be processed and transcribed.
-        #
-        #     - `telephony`
-        #
-        #       Best for audio that originated from a phone call (typically recorded at
-        #       an 8khz sampling rate).
-        #
-        #     - `medical_conversation`
-        #
-        #       For conversations between a medical provider—for example, a doctor or
-        #       nurse—and a patient. Use this model when both a provider and a patient
-        #       are speaking. Words uttered by each speaker are automatically detected
-        #       and labeled in the returned transcript.
-        #
-        #       For supported features please see [medical models
-        #       documentation](https://cloud.google.com/speech-to-text/docs/medical-models).
-        #
-        #     - `medical_dictation`
-        #
-        #       For dictated notes spoken by a single medical provider—for example, a
-        #       doctor dictating notes about a patient's blood test results.
-        #
-        #       For supported features please see [medical models
-        #       documentation](https://cloud.google.com/speech-to-text/docs/medical-models).
-        #
-        #     - `usm`
-        #
-        #       The next generation of Speech-to-Text models from Google.
+        #     Guidance for choosing which model to use can be found in the [Transcription
+        #     Models
+        #     Documentation](https://cloud.google.com/speech-to-text/v2/docs/transcription-model)
+        #     and the models supported in each region can be found in the [Table Of
+        #     Supported
+        #     Models](https://cloud.google.com/speech-to-text/v2/docs/speech-to-text-supported-languages).
         # @!attribute [rw] language_codes
         #   @return [::Array<::String>]
         #     Required. The language of the supplied audio as a
         #     [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag.
         #
-        #     Supported languages for each model are listed at:
-        #     https://cloud.google.com/speech-to-text/docs/languages
+        #     Supported languages for each model are listed in the [Table of Supported
+        #     Models](https://cloud.google.com/speech-to-text/v2/docs/speech-to-text-supported-languages).
         #
         #     If additional languages are provided, recognition result will contain
         #     recognition in the most likely language detected. The recognition result
@@ -922,9 +885,23 @@ module Google
         # @!attribute [rw] recognition_output_config
         #   @return [::Google::Cloud::Speech::V2::RecognitionOutputConfig]
         #     Configuration options for where to output the transcripts of each file.
+        # @!attribute [rw] processing_strategy
+        #   @return [::Google::Cloud::Speech::V2::BatchRecognizeRequest::ProcessingStrategy]
+        #     Processing strategy to use for this request.
         class BatchRecognizeRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Possible processing strategies for batch requests.
+          module ProcessingStrategy
+            # Default value for the processing strategy. The request is processed as
+            # soon as its received.
+            PROCESSING_STRATEGY_UNSPECIFIED = 0
+
+            # If selected, processes the request during lower utilization periods for a
+            # price discount. The request is fulfilled within 24 hours.
+            DYNAMIC_BATCHING = 1
+          end
         end
 
         # Output configurations for Cloud Storage.
@@ -1528,10 +1505,10 @@ module Google
         #     expected format is `projects/{project}/locations/{location}`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Number of results per requests. A valid page_size ranges from 0 to 20
+        #     Number of results per requests. A valid page_size ranges from 0 to 100
         #     inclusive. If the page_size is zero or unspecified, a page size of 5 will
-        #     be chosen. If the page size exceeds 20, it will be coerced down to 20. Note
-        #     that a call might return fewer results than the requested page size.
+        #     be chosen. If the page size exceeds 100, it will be coerced down to 100.
+        #     Note that a call might return fewer results than the requested page size.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     A page token, received from a previous
@@ -1679,8 +1656,8 @@ module Google
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of PhraseSets to return. The service may return fewer
-        #     than this value. If unspecified, at most 20 PhraseSets will be returned.
-        #     The maximum value is 20; values above 20 will be coerced to 20.
+        #     than this value. If unspecified, at most 5 PhraseSets will be returned.
+        #     The maximum value is 100; values above 100 will be coerced to 100.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     A page token, received from a previous

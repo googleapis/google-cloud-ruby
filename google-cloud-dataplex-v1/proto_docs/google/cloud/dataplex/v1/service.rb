@@ -553,6 +553,23 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the task:
+        #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/tasks/{task_id}`.
+        class RunTaskRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] job
+        #   @return [::Google::Cloud::Dataplex::V1::Job]
+        #     Jobs created by RunTask API.
+        class RunTaskResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # List jobs request.
         # @!attribute [rw] parent
         #   @return [::String]

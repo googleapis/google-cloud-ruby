@@ -1,5 +1,11 @@
 # Release History
 
+### 1.2.1 (2023-04-21)
+
+#### Documentation
+
+* Clarify region availability for GKE Hub service ([#21453](https://github.com/googleapis/google-cloud-ruby/issues/21453)) 
+
 ### 1.2.0 (2023-03-09)
 
 #### Features

@@ -394,11 +394,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :desired_gateway_api_config, :message, 114, "google.container.v1.GatewayAPIConfig"
       optional :etag, :string, 115
       optional :desired_node_pool_logging_config, :message, 116, "google.container.v1.NodePoolLoggingConfig"
+      optional :desired_fleet, :message, 117, "google.container.v1.Fleet"
       optional :desired_stack_type, :enum, 119, "google.container.v1.StackType"
       optional :additional_pod_ranges_config, :message, 120, "google.container.v1.AdditionalPodRangesConfig"
       optional :removed_additional_pod_ranges_config, :message, 121, "google.container.v1.AdditionalPodRangesConfig"
     end
     add_message "google.container.v1.AdditionalPodRangesConfig" do
+      repeated :pod_range_names, :string, 1
     end
     add_message "google.container.v1.Operation" do
       optional :name, :string, 1
@@ -442,6 +444,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :SET_NODE_POOL_SIZE, 14
       value :SET_NETWORK_POLICY, 15
       value :SET_MAINTENANCE_POLICY, 16
+      value :RESIZE_CLUSTER, 18
     end
     add_message "google.container.v1.OperationProgress" do
       optional :name, :string, 1
@@ -1009,8 +1012,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :enable_certificates, :message, 1, "google.protobuf.BoolValue"
     end
     add_message "google.container.v1.DatabaseEncryption" do
-      optional :state, :enum, 2, "google.container.v1.DatabaseEncryption.State"
       optional :key_name, :string, 1
+      optional :state, :enum, 2, "google.container.v1.DatabaseEncryption.State"
     end
     add_enum "google.container.v1.DatabaseEncryption.State" do
       value :UNKNOWN, 0

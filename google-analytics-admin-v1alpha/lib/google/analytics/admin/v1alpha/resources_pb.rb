@@ -3,6 +3,9 @@
 
 require 'google/protobuf'
 
+require 'google/analytics/admin/v1alpha/audience_pb'
+require 'google/analytics/admin/v1alpha/channel_group_pb'
+require 'google/analytics/admin/v1alpha/event_create_and_edit_pb'
 require 'google/analytics/admin/v1alpha/expanded_data_set_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
@@ -151,8 +154,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :data_stream, :message, 18, "google.analytics.admin.v1alpha.DataStream"
         optional :attribution_settings, :message, 20, "google.analytics.admin.v1alpha.AttributionSettings"
         optional :expanded_data_set, :message, 21, "google.analytics.admin.v1alpha.ExpandedDataSet"
+        optional :channel_group, :message, 22, "google.analytics.admin.v1alpha.ChannelGroup"
         optional :bigquery_link, :message, 23, "google.analytics.admin.v1alpha.BigQueryLink"
         optional :enhanced_measurement_settings, :message, 24, "google.analytics.admin.v1alpha.EnhancedMeasurementSettings"
+        optional :adsense_link, :message, 27, "google.analytics.admin.v1alpha.AdSenseLink"
+        optional :audience, :message, 28, "google.analytics.admin.v1alpha.Audience"
+        optional :event_create_rule, :message, 29, "google.analytics.admin.v1alpha.EventCreateRule"
       end
     end
     add_message "google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink" do
@@ -211,6 +218,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :DIMENSION_SCOPE_UNSPECIFIED, 0
       value :EVENT, 1
       value :USER, 2
+      value :ITEM, 3
     end
     add_message "google.analytics.admin.v1alpha.CustomMetric" do
       optional :name, :string, 1
@@ -318,6 +326,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :display_name, :string, 1
       optional :tag_id, :string, 2
     end
+    add_message "google.analytics.admin.v1alpha.AdSenseLink" do
+      optional :name, :string, 1
+      optional :ad_client_code, :string, 2
+    end
     add_enum "google.analytics.admin.v1alpha.IndustryCategory" do
       value :INDUSTRY_CATEGORY_UNSPECIFIED, 0
       value :AUTOMOTIVE, 1
@@ -384,6 +396,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :EXPANDED_DATA_SET, 21
       value :CHANNEL_GROUP, 22
       value :ENHANCED_MEASUREMENT_SETTINGS, 24
+      value :ADSENSE_LINK, 27
+      value :AUDIENCE, 28
+      value :EVENT_CREATE_RULE, 29
     end
     add_enum "google.analytics.admin.v1alpha.GoogleSignalsState" do
       value :GOOGLE_SIGNALS_STATE_UNSPECIFIED, 0
@@ -463,6 +478,7 @@ module Google
         BigQueryLink = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.BigQueryLink").msgclass
         EnhancedMeasurementSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.EnhancedMeasurementSettings").msgclass
         ConnectedSiteTag = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ConnectedSiteTag").msgclass
+        AdSenseLink = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.AdSenseLink").msgclass
         IndustryCategory = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.IndustryCategory").enummodule
         ServiceLevel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ServiceLevel").enummodule
         ActorType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ActorType").enummodule

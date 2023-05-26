@@ -1,5 +1,15 @@
 # Release History
 
+### 0.10.0 (2023-05-16)
+
+#### Features
+
+* added helper methods for long running operations, IAM, and locations 
+#### Documentation
+
+* apply general style guide updates to descriptions 
+* clarify that vpcConnector shortname is only returned if the connector is in the same project as the function 
+
 ### 0.9.0 (2023-03-08)
 
 #### Features

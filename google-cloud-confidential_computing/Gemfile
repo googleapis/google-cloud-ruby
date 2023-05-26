@@ -1,0 +1,5 @@
+source "https://rubygems.org"
+
+gemspec
+
+gem "google-cloud-confidential_computing-v1", path: "../google-cloud-confidential_computing-v1"

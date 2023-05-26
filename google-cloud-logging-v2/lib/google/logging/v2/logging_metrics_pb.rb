@@ -18,6 +18,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 1
       optional :description, :string, 2
       optional :filter, :string, 3
+      optional :bucket_name, :string, 13
       optional :disabled, :bool, 12
       optional :metric_descriptor, :message, 5, "google.api.MetricDescriptor"
       optional :value_extractor, :string, 6

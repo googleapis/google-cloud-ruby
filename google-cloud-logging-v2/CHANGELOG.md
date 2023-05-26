@@ -1,5 +1,16 @@
 # Release History
 
+### 0.9.0 (2023-05-08)
+
+#### Features
+
+* Added bucket_name field to LogMetric 
+* Support analytics_enabled field for LogBucket 
+* Support for configuring the KMS key version name 
+* Support for managing links 
+* Support index configuration for LogBucket 
+* Support RPCs for creating and updating log buckets asynchronously 
+
 ### 0.8.1 (2022-07-28)
 
 #### Documentation

@@ -54,109 +54,6 @@
         }
       }
     },
-    "DataScanService": {
-      "clients": {
-        "grpc": {
-          "libraryClient": "::Google::Cloud::Dataplex::V1::DataScanService::Client",
-          "rpcs": {
-            "CreateDataScan": {
-              "methods": [
-                "create_data_scan"
-              ]
-            },
-            "UpdateDataScan": {
-              "methods": [
-                "update_data_scan"
-              ]
-            },
-            "DeleteDataScan": {
-              "methods": [
-                "delete_data_scan"
-              ]
-            },
-            "GetDataScan": {
-              "methods": [
-                "get_data_scan"
-              ]
-            },
-            "ListDataScans": {
-              "methods": [
-                "list_data_scans"
-              ]
-            },
-            "RunDataScan": {
-              "methods": [
-                "run_data_scan"
-              ]
-            },
-            "GetDataScanJob": {
-              "methods": [
-                "get_data_scan_job"
-              ]
-            },
-            "ListDataScanJobs": {
-              "methods": [
-                "list_data_scan_jobs"
-              ]
-            }
-          }
-        }
-      }
-    },
-    "MetadataService": {
-      "clients": {
-        "grpc": {
-          "libraryClient": "::Google::Cloud::Dataplex::V1::MetadataService::Client",
-          "rpcs": {
-            "CreateEntity": {
-              "methods": [
-                "create_entity"
-              ]
-            },
-            "UpdateEntity": {
-              "methods": [
-                "update_entity"
-              ]
-            },
-            "DeleteEntity": {
-              "methods": [
-                "delete_entity"
-              ]
-            },
-            "GetEntity": {
-              "methods": [
-                "get_entity"
-              ]
-            },
-            "ListEntities": {
-              "methods": [
-                "list_entities"
-              ]
-            },
-            "CreatePartition": {
-              "methods": [
-                "create_partition"
-              ]
-            },
-            "DeletePartition": {
-              "methods": [
-                "delete_partition"
-              ]
-            },
-            "GetPartition": {
-              "methods": [
-                "get_partition"
-              ]
-            },
-            "ListPartitions": {
-              "methods": [
-                "list_partitions"
-              ]
-            }
-          }
-        }
-      }
-    },
     "DataplexService": {
       "clients": {
         "grpc": {
@@ -282,6 +179,11 @@
                 "list_jobs"
               ]
             },
+            "RunTask": {
+              "methods": [
+                "run_task"
+              ]
+            },
             "GetJob": {
               "methods": [
                 "get_job"
@@ -320,6 +222,109 @@
             "ListSessions": {
               "methods": [
                 "list_sessions"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "DataScanService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dataplex::V1::DataScanService::Client",
+          "rpcs": {
+            "CreateDataScan": {
+              "methods": [
+                "create_data_scan"
+              ]
+            },
+            "UpdateDataScan": {
+              "methods": [
+                "update_data_scan"
+              ]
+            },
+            "DeleteDataScan": {
+              "methods": [
+                "delete_data_scan"
+              ]
+            },
+            "GetDataScan": {
+              "methods": [
+                "get_data_scan"
+              ]
+            },
+            "ListDataScans": {
+              "methods": [
+                "list_data_scans"
+              ]
+            },
+            "RunDataScan": {
+              "methods": [
+                "run_data_scan"
+              ]
+            },
+            "GetDataScanJob": {
+              "methods": [
+                "get_data_scan_job"
+              ]
+            },
+            "ListDataScanJobs": {
+              "methods": [
+                "list_data_scan_jobs"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "MetadataService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dataplex::V1::MetadataService::Client",
+          "rpcs": {
+            "CreateEntity": {
+              "methods": [
+                "create_entity"
+              ]
+            },
+            "UpdateEntity": {
+              "methods": [
+                "update_entity"
+              ]
+            },
+            "DeleteEntity": {
+              "methods": [
+                "delete_entity"
+              ]
+            },
+            "GetEntity": {
+              "methods": [
+                "get_entity"
+              ]
+            },
+            "ListEntities": {
+              "methods": [
+                "list_entities"
+              ]
+            },
+            "CreatePartition": {
+              "methods": [
+                "create_partition"
+              ]
+            },
+            "DeletePartition": {
+              "methods": [
+                "delete_partition"
+              ]
+            },
+            "GetPartition": {
+              "methods": [
+                "get_partition"
+              ]
+            },
+            "ListPartitions": {
+              "methods": [
+                "list_partitions"
               ]
             }
           }

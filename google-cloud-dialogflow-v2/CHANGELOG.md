@@ -1,5 +1,11 @@
 # Release History
 
+### 0.24.0 (2023-05-16)
+
+#### Features
+
+* add baseline model configuration for conversation summarization ([#21568](https://github.com/googleapis/google-cloud-ruby/issues/21568)) 
+
 ### 0.23.0 (2023-03-08)
 
 #### Features

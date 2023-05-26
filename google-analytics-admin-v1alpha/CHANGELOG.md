@@ -1,5 +1,26 @@
 # Release History
 
+### 0.19.0 (2023-05-15)
+
+#### Features
+
+* add AUDIENCE, EVENT_CREATE_RULE options to the ChangeHistoryResourceType enum 
+* add AdSenseLink type to the Admin API v1alpha 
+* add audience, event_create_rule fields to the ChangeHistoryResource.resource oneof field 
+* add CreateEventCreateRule, UpdateEventCreateRule,DeleteEventCreateRule, ListEventCreateRules methods to the Admin API v1alpha 
+* add EventCreateRule, MatchingCondition types to the Admin API v1alpha 
+* add FetchConnectedGa4Property method to the Admin API v1alpha 
+* add GetAdSenseLink, CreateAdSenseLink, DeleteAdSenseLink, ListAdSenseLinks methods to the Admin API v1alpha 
+
+### 0.18.0 (2023-05-04)
+
+#### Features
+
+* Added ChangeHistoryResource#channel_group 
+* Added CustomDimension::DimensionScope::ITEM 
+* Support for fetch_connected_ga4_property 
+* Support for managing channel groups 
+
 ### 0.17.0 (2023-03-23)
 
 #### Features

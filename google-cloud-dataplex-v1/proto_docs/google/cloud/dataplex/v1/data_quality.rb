@@ -37,7 +37,7 @@ module Google
         #     Overall data quality result -- `true` if all rules passed.
         # @!attribute [rw] dimensions
         #   @return [::Array<::Google::Cloud::Dataplex::V1::DataQualityDimensionResult>]
-        #     A list of results at the dimension-level.
+        #     A list of results at the dimension level.
         # @!attribute [rw] rules
         #   @return [::Array<::Google::Cloud::Dataplex::V1::DataQualityRuleResult>]
         #     A list of all the rules in a job, and their results.
@@ -52,8 +52,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # DataQualityRuleResult provides a more detailed, per-rule level view of the
-        # results.
+        # DataQualityRuleResult provides a more detailed, per-rule view of the results.
         # @!attribute [rw] rule
         #   @return [::Google::Cloud::Dataplex::V1::DataQualityRule]
         #     The rule specified in the DataQualitySpec, as is.
@@ -62,12 +61,15 @@ module Google
         #     Whether the rule passed or failed.
         # @!attribute [rw] evaluated_count
         #   @return [::Integer]
-        #     The number of rows a rule was evaluated against.
-        #     This field is only valid for ColumnMap type rules.
+        #     The number of rows a rule was evaluated against. This field is only valid
+        #     for ColumnMap type rules.
+        #
         #     Evaluated count can be configured to either
-        #     (1) include all rows (default) - with null rows automatically failing rule
-        #     evaluation  OR (2) exclude null rows from the evaluated_count, by setting
-        #     ignore_nulls = true
+        #
+        #     * include all rows (default) - with `null` rows automatically failing rule
+        #     evaluation, or
+        #     * exclude `null` rows from the `evaluated_count`, by setting
+        #     `ignore_nulls = true`.
         # @!attribute [rw] passed_count
         #   @return [::Integer]
         #     The number of rows which passed a rule evaluation.
@@ -77,7 +79,7 @@ module Google
         #     The number of rows with null values in the specified column.
         # @!attribute [rw] pass_ratio
         #   @return [::Float]
-        #     The ratio of passed_count / evaluated_count.
+        #     The ratio of **passed_count / evaluated_count**.
         #     This field is only valid for ColumnMap type rules.
         # @!attribute [rw] failing_rows_query
         #   @return [::String]
@@ -88,8 +90,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # DataQualityDimensionResult provides a more detailed, per-dimension level view
-        # of the results.
+        # DataQualityDimensionResult provides a more detailed, per-dimension view of
+        # the results.
         # @!attribute [rw] passed
         #   @return [::Boolean]
         #     Whether the dimension passed or failed.
@@ -133,20 +135,22 @@ module Google
         #     Optional. The unnested column which this rule is evaluated against.
         # @!attribute [rw] ignore_null
         #   @return [::Boolean]
-        #     Optional. Rows with null values will automatically fail a rule, unless
-        #     ignore_null is true. In that case, such null rows are trivially considered
-        #     passing. Only applicable to ColumnMap rules.
+        #     Optional. Rows with `null` values will automatically fail a rule, unless
+        #     `ignore_null` is `true`. In that case, such `null` rows are trivially
+        #     considered passing.
+        #
+        #     Only applicable to ColumnMap rules.
         # @!attribute [rw] dimension
         #   @return [::String]
         #     Required. The dimension a rule belongs to. Results are also aggregated at
-        #     the dimension-level. Supported dimensions are ["COMPLETENESS", "ACCURACY",
-        #     "CONSISTENCY", "VALIDITY", "UNIQUENESS", "INTEGRITY"]
+        #     the dimension level. Supported dimensions are **["COMPLETENESS",
+        #     "ACCURACY", "CONSISTENCY", "VALIDITY", "UNIQUENESS", "INTEGRITY"]**
         # @!attribute [rw] threshold
         #   @return [::Float]
-        #     Optional. The minimum ratio of passing_rows / total_rows required to pass
-        #     this rule, with a range of [0.0, 1.0]
+        #     Optional. The minimum ratio of **passing_rows / total_rows** required to
+        #     pass this rule, with a range of [0.0, 1.0].
         #
-        #     0 indicates default value (i.e. 1.0)
+        #     0 indicates default value (i.e. 1.0).
         class DataQualityRule
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -155,21 +159,25 @@ module Google
           # @!attribute [rw] min_value
           #   @return [::String]
           #     Optional. The minimum column value allowed for a row to pass this
-          #     validation. At least one of min_value and max_value need to be provided.
+          #     validation. At least one of `min_value` and `max_value` need to be
+          #     provided.
           # @!attribute [rw] max_value
           #   @return [::String]
           #     Optional. The maximum column value allowed for a row to pass this
-          #     validation. At least one of min_value and max_value need to be provided.
+          #     validation. At least one of `min_value` and `max_value` need to be
+          #     provided.
           # @!attribute [rw] strict_min_enabled
           #   @return [::Boolean]
           #     Optional. Whether each value needs to be strictly greater than ('>') the
-          #     minimum, or if equality is allowed. Only relevant if a min_value has been
-          #     defined. Default = false.
+          #     minimum, or if equality is allowed.
+          #
+          #     Only relevant if a `min_value` has been defined. Default = false.
           # @!attribute [rw] strict_max_enabled
           #   @return [::Boolean]
           #     Optional. Whether each value needs to be strictly lesser than ('<') the
-          #     maximum, or if equality is allowed. Only relevant if a max_value has been
-          #     defined. Default = false.
+          #     maximum, or if equality is allowed.
+          #
+          #     Only relevant if a `max_value` has been defined. Default = false.
           class RangeExpectation
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -184,6 +192,7 @@ module Google
           # Evaluates whether each column value is contained by a specified set.
           # @!attribute [rw] values
           #   @return [::Array<::String>]
+          #     Expected values for the column value.
           class SetExpectation
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -192,6 +201,7 @@ module Google
           # Evaluates whether each column value matches a specified regex.
           # @!attribute [rw] regex
           #   @return [::String]
+          #     A regular expression the column value is expected to match.
           class RegexExpectation
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -207,30 +217,36 @@ module Google
           # range.
           # @!attribute [rw] statistic
           #   @return [::Google::Cloud::Dataplex::V1::DataQualityRule::StatisticRangeExpectation::ColumnStatistic]
+          #     The aggregate metric to evaluate.
           # @!attribute [rw] min_value
           #   @return [::String]
           #     The minimum column statistic value allowed for a row to pass this
           #     validation.
-          #     At least one of min_value and max_value need to be provided.
+          #
+          #     At least one of `min_value` and `max_value` need to be provided.
           # @!attribute [rw] max_value
           #   @return [::String]
           #     The maximum column statistic value allowed for a row to pass this
           #     validation.
-          #     At least one of min_value and max_value need to be provided.
+          #
+          #     At least one of `min_value` and `max_value` need to be provided.
           # @!attribute [rw] strict_min_enabled
           #   @return [::Boolean]
           #     Whether column statistic needs to be strictly greater than ('>')
-          #     the minimum, or if equality is allowed. Only relevant if a min_value has
-          #     been defined. Default = false.
+          #     the minimum, or if equality is allowed.
+          #
+          #     Only relevant if a `min_value` has been defined. Default = false.
           # @!attribute [rw] strict_max_enabled
           #   @return [::Boolean]
           #     Whether column statistic needs to be strictly lesser than ('<') the
-          #     maximum, or if equality is allowed. Only relevant if a max_value has been
-          #     defined. Default = false.
+          #     maximum, or if equality is allowed.
+          #
+          #     Only relevant if a `max_value` has been defined. Default = false.
           class StatisticRangeExpectation
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
+            # The list of aggregate metrics a rule can be evaluated against.
             module ColumnStatistic
               # Unspecified statistic type
               STATISTIC_UNDEFINED = 0
@@ -247,22 +263,28 @@ module Google
           end
 
           # Evaluates whether each row passes the specified condition.
+          #
           # The SQL expression needs to use BigQuery standard SQL syntax and should
-          # produce a boolean per row as the result.
+          # produce a boolean value per row as the result.
+          #
           # Example: col1 >= 0 AND col2 < 10
           # @!attribute [rw] sql_expression
           #   @return [::String]
+          #     The SQL expression.
           class RowConditionExpectation
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # Evaluates whether the provided expression is true.
+          #
           # The SQL expression needs to use BigQuery standard SQL syntax and should
           # produce a scalar boolean result.
+          #
           # Example: MIN(col1) >= 0
           # @!attribute [rw] sql_expression
           #   @return [::String]
+          #     The SQL expression.
           class TableConditionExpectation
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

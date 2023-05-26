@@ -6600,7 +6600,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The name of the Audience to get.
+              #     Required. The name of the ExpandedDataSet to get.
               #     Example format: properties/1234/expandedDataSets/5678
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Analytics::Admin::V1alpha::ExpandedDataSet]
@@ -6905,6 +6905,340 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @analytics_admin_service_stub.delete_expanded_data_set request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lookup for a single ChannelGroup.
+              #
+              # @overload get_channel_group(request, options = nil)
+              #   Pass arguments to `get_channel_group` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::GetChannelGroupRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::GetChannelGroupRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_channel_group(name: nil)
+              #   Pass arguments to `get_channel_group` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The ChannelGroup to get.
+              #     Example format: properties/1234/channelGroups/5678
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::ChannelGroup]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::ChannelGroup]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def get_channel_group request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::GetChannelGroupRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_channel_group.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_channel_group.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_channel_group.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.get_channel_group request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists ChannelGroups on a property.
+              #
+              # @overload list_channel_groups(request, options = nil)
+              #   Pass arguments to `list_channel_groups` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::ListChannelGroupsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::ListChannelGroupsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_channel_groups(parent: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_channel_groups` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The property for which to list ChannelGroups.
+              #     Example format: properties/1234
+              #   @param page_size [::Integer]
+              #     The maximum number of resources to return.
+              #     If unspecified, at most 50 resources will be returned.
+              #     The maximum value is 200 (higher values will be coerced to the maximum).
+              #   @param page_token [::String]
+              #     A page token, received from a previous `ListChannelGroups` call. Provide
+              #     this to retrieve the subsequent page.
+              #
+              #     When paginating, all other parameters provided to `ListChannelGroups`
+              #     must match the call that provided the page token.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Admin::V1alpha::ChannelGroup>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Admin::V1alpha::ChannelGroup>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def list_channel_groups request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::ListChannelGroupsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_channel_groups.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_channel_groups.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_channel_groups.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.list_channel_groups request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @analytics_admin_service_stub, :list_channel_groups, "channel_groups", request, result, options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a ChannelGroup.
+              #
+              # @overload create_channel_group(request, options = nil)
+              #   Pass arguments to `create_channel_group` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::CreateChannelGroupRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::CreateChannelGroupRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_channel_group(parent: nil, channel_group: nil)
+              #   Pass arguments to `create_channel_group` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The property for which to create a ChannelGroup.
+              #     Example format: properties/1234
+              #   @param channel_group [::Google::Analytics::Admin::V1alpha::ChannelGroup, ::Hash]
+              #     Required. The ChannelGroup to create.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::ChannelGroup]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::ChannelGroup]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def create_channel_group request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::CreateChannelGroupRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_channel_group.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_channel_group.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_channel_group.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.create_channel_group request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates a ChannelGroup.
+              #
+              # @overload update_channel_group(request, options = nil)
+              #   Pass arguments to `update_channel_group` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::UpdateChannelGroupRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::UpdateChannelGroupRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_channel_group(channel_group: nil, update_mask: nil)
+              #   Pass arguments to `update_channel_group` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param channel_group [::Google::Analytics::Admin::V1alpha::ChannelGroup, ::Hash]
+              #     Required. The ChannelGroup to update.
+              #     The resource's `name` field is used to identify the ChannelGroup to be
+              #     updated.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Required. The list of fields to be updated. Field names must be in snake
+              #     case (e.g., "field_to_update"). Omitted fields will not be updated. To
+              #     replace the entire entity, use one path with the string "*" to match all
+              #     fields.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::ChannelGroup]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::ChannelGroup]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def update_channel_group request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::UpdateChannelGroupRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_channel_group.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_channel_group.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_channel_group.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.update_channel_group request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a ChannelGroup on a property.
+              #
+              # @overload delete_channel_group(request, options = nil)
+              #   Pass arguments to `delete_channel_group` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::DeleteChannelGroupRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::DeleteChannelGroupRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_channel_group(name: nil)
+              #   Pass arguments to `delete_channel_group` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The ChannelGroup to delete.
+              #     Example format: properties/1234/channelGroups/5678
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def delete_channel_group request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::DeleteChannelGroupRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_channel_group.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_channel_group.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_channel_group.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.delete_channel_group request, options do |result, operation|
                   yield result, operation if block_given?
                   return result
                 end
@@ -7530,6 +7864,674 @@ module Google
               end
 
               ##
+              # Given a specified UA property, looks up the GA4 property connected to it.
+              # Note: this cannot be used with GA4 properties.
+              #
+              # @overload fetch_connected_ga4_property(request, options = nil)
+              #   Pass arguments to `fetch_connected_ga4_property` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::FetchConnectedGa4PropertyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::FetchConnectedGa4PropertyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload fetch_connected_ga4_property(property: nil)
+              #   Pass arguments to `fetch_connected_ga4_property` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param property [::String]
+              #     Required. The UA property for which to look up the connected GA4 property.
+              #     Note this request uses the
+              #     internal property ID, not the tracking ID of the form UA-XXXXXX-YY.
+              #     Format: properties/\\{internal_web_property_id}
+              #     Example: properties/1234
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::FetchConnectedGa4PropertyResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::FetchConnectedGa4PropertyResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def fetch_connected_ga4_property request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::FetchConnectedGa4PropertyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.fetch_connected_ga4_property.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.fetch_connected_ga4_property.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.fetch_connected_ga4_property.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.fetch_connected_ga4_property request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Looks up a single AdSenseLink.
+              #
+              # @overload get_ad_sense_link(request, options = nil)
+              #   Pass arguments to `get_ad_sense_link` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::GetAdSenseLinkRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::GetAdSenseLinkRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_ad_sense_link(name: nil)
+              #   Pass arguments to `get_ad_sense_link` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Unique identifier for the AdSense Link requested.
+              #     Format: properties/\\{propertyId}/adSenseLinks/\\{linkId}
+              #     Example: properties/1234/adSenseLinks/5678
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::AdSenseLink]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::AdSenseLink]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def get_ad_sense_link request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::GetAdSenseLinkRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_ad_sense_link.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_ad_sense_link.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_ad_sense_link.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.get_ad_sense_link request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates an AdSenseLink.
+              #
+              # @overload create_ad_sense_link(request, options = nil)
+              #   Pass arguments to `create_ad_sense_link` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::CreateAdSenseLinkRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::CreateAdSenseLinkRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_ad_sense_link(parent: nil, adsense_link: nil)
+              #   Pass arguments to `create_ad_sense_link` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The property for which to create an AdSense Link.
+              #     Format: properties/\\{propertyId}
+              #     Example: properties/1234
+              #   @param adsense_link [::Google::Analytics::Admin::V1alpha::AdSenseLink, ::Hash]
+              #     Required. The AdSense Link to create
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::AdSenseLink]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::AdSenseLink]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def create_ad_sense_link request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::CreateAdSenseLinkRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_ad_sense_link.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_ad_sense_link.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_ad_sense_link.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.create_ad_sense_link request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes an AdSenseLink.
+              #
+              # @overload delete_ad_sense_link(request, options = nil)
+              #   Pass arguments to `delete_ad_sense_link` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::DeleteAdSenseLinkRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::DeleteAdSenseLinkRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_ad_sense_link(name: nil)
+              #   Pass arguments to `delete_ad_sense_link` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Unique identifier for the AdSense Link to be deleted.
+              #     Format: properties/\\{propertyId}/adSenseLinks/\\{linkId}
+              #     Example: properties/1234/adSenseLinks/5678
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def delete_ad_sense_link request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::DeleteAdSenseLinkRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_ad_sense_link.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_ad_sense_link.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_ad_sense_link.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.delete_ad_sense_link request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists AdSenseLinks on a property.
+              #
+              # @overload list_ad_sense_links(request, options = nil)
+              #   Pass arguments to `list_ad_sense_links` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::ListAdSenseLinksRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::ListAdSenseLinksRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_ad_sense_links(parent: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_ad_sense_links` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Resource name of the parent property.
+              #     Format: properties/\\{propertyId}
+              #     Example: properties/1234
+              #   @param page_size [::Integer]
+              #     The maximum number of resources to return.
+              #     If unspecified, at most 50 resources will be returned.
+              #     The maximum value is 200 (higher values will be coerced to the maximum).
+              #   @param page_token [::String]
+              #     A page token received from a previous `ListAdSenseLinks` call.
+              #     Provide this to retrieve the subsequent page.
+              #
+              #     When paginating, all other parameters provided to `ListAdSenseLinks` must
+              #     match the call that provided the page token.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Admin::V1alpha::AdSenseLink>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Admin::V1alpha::AdSenseLink>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def list_ad_sense_links request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::ListAdSenseLinksRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_ad_sense_links.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_ad_sense_links.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_ad_sense_links.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.list_ad_sense_links request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @analytics_admin_service_stub, :list_ad_sense_links, "adsense_links", request, result, options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lookup for a single EventCreateRule.
+              #
+              # @overload get_event_create_rule(request, options = nil)
+              #   Pass arguments to `get_event_create_rule` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::GetEventCreateRuleRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::GetEventCreateRuleRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_event_create_rule(name: nil)
+              #   Pass arguments to `get_event_create_rule` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the EventCreateRule to get.
+              #     Example format: properties/123/dataStreams/456/eventCreateRules/789
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::EventCreateRule]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::EventCreateRule]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def get_event_create_rule request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::GetEventCreateRuleRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_event_create_rule.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_event_create_rule.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_event_create_rule.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.get_event_create_rule request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists EventCreateRules on a web data stream.
+              #
+              # @overload list_event_create_rules(request, options = nil)
+              #   Pass arguments to `list_event_create_rules` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::ListEventCreateRulesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::ListEventCreateRulesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_event_create_rules(parent: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_event_create_rules` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Example format: properties/123/dataStreams/456
+              #   @param page_size [::Integer]
+              #     The maximum number of resources to return.
+              #     If unspecified, at most 50 resources will be returned.
+              #     The maximum value is 200 (higher values will be coerced to the maximum).
+              #   @param page_token [::String]
+              #     A page token, received from a previous `ListEventCreateRules` call. Provide
+              #     this to retrieve the subsequent page.
+              #
+              #     When paginating, all other parameters provided to `ListEventCreateRules`
+              #     must match the call that provided the page token.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Admin::V1alpha::EventCreateRule>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Analytics::Admin::V1alpha::EventCreateRule>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def list_event_create_rules request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::ListEventCreateRulesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_event_create_rules.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_event_create_rules.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_event_create_rules.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.list_event_create_rules request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @analytics_admin_service_stub, :list_event_create_rules, "event_create_rules", request, result, options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates an EventCreateRule.
+              #
+              # @overload create_event_create_rule(request, options = nil)
+              #   Pass arguments to `create_event_create_rule` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::CreateEventCreateRuleRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::CreateEventCreateRuleRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_event_create_rule(parent: nil, event_create_rule: nil)
+              #   Pass arguments to `create_event_create_rule` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Example format: properties/123/dataStreams/456
+              #   @param event_create_rule [::Google::Analytics::Admin::V1alpha::EventCreateRule, ::Hash]
+              #     Required. The EventCreateRule to create.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::EventCreateRule]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::EventCreateRule]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def create_event_create_rule request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::CreateEventCreateRuleRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_event_create_rule.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_event_create_rule.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_event_create_rule.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.create_event_create_rule request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates an EventCreateRule.
+              #
+              # @overload update_event_create_rule(request, options = nil)
+              #   Pass arguments to `update_event_create_rule` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::UpdateEventCreateRuleRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::UpdateEventCreateRuleRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_event_create_rule(event_create_rule: nil, update_mask: nil)
+              #   Pass arguments to `update_event_create_rule` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param event_create_rule [::Google::Analytics::Admin::V1alpha::EventCreateRule, ::Hash]
+              #     Required. The EventCreateRule to update.
+              #     The resource's `name` field is used to identify the EventCreateRule to be
+              #     updated.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Required. The list of fields to be updated. Field names must be in snake
+              #     case (e.g., "field_to_update"). Omitted fields will not be updated. To
+              #     replace the entire entity, use one path with the string "*" to match all
+              #     fields.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Analytics::Admin::V1alpha::EventCreateRule]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Analytics::Admin::V1alpha::EventCreateRule]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def update_event_create_rule request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::UpdateEventCreateRuleRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_event_create_rule.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_event_create_rule.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_event_create_rule.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.update_event_create_rule request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes an EventCreateRule.
+              #
+              # @overload delete_event_create_rule(request, options = nil)
+              #   Pass arguments to `delete_event_create_rule` via a request object, either of type
+              #   {::Google::Analytics::Admin::V1alpha::DeleteEventCreateRuleRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Analytics::Admin::V1alpha::DeleteEventCreateRuleRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_event_create_rule(name: nil)
+              #   Pass arguments to `delete_event_create_rule` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Example format:
+              #     properties/123/dataStreams/456/eventCreateRules/789
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def delete_event_create_rule request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::DeleteEventCreateRuleRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_event_create_rule.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_event_create_rule.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_event_create_rule.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @analytics_admin_service_stub.delete_event_create_rule request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the AnalyticsAdminService REST API.
               #
               # This class represents the configuration for AnalyticsAdminService REST,
@@ -8143,6 +9145,31 @@ module Google
                   #
                   attr_reader :delete_expanded_data_set
                   ##
+                  # RPC-specific configuration for `get_channel_group`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_channel_group
+                  ##
+                  # RPC-specific configuration for `list_channel_groups`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_channel_groups
+                  ##
+                  # RPC-specific configuration for `create_channel_group`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_channel_group
+                  ##
+                  # RPC-specific configuration for `update_channel_group`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_channel_group
+                  ##
+                  # RPC-specific configuration for `delete_channel_group`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_channel_group
+                  ##
                   # RPC-specific configuration for `set_automated_ga4_configuration_opt_out`
                   # @return [::Gapic::Config::Method]
                   #
@@ -8187,6 +9214,56 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :list_connected_site_tags
+                  ##
+                  # RPC-specific configuration for `fetch_connected_ga4_property`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :fetch_connected_ga4_property
+                  ##
+                  # RPC-specific configuration for `get_ad_sense_link`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_ad_sense_link
+                  ##
+                  # RPC-specific configuration for `create_ad_sense_link`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_ad_sense_link
+                  ##
+                  # RPC-specific configuration for `delete_ad_sense_link`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_ad_sense_link
+                  ##
+                  # RPC-specific configuration for `list_ad_sense_links`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_ad_sense_links
+                  ##
+                  # RPC-specific configuration for `get_event_create_rule`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_event_create_rule
+                  ##
+                  # RPC-specific configuration for `list_event_create_rules`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_event_create_rules
+                  ##
+                  # RPC-specific configuration for `create_event_create_rule`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_event_create_rule
+                  ##
+                  # RPC-specific configuration for `update_event_create_rule`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_event_create_rule
+                  ##
+                  # RPC-specific configuration for `delete_event_create_rule`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_event_create_rule
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -8386,6 +9463,16 @@ module Google
                     @update_expanded_data_set = ::Gapic::Config::Method.new update_expanded_data_set_config
                     delete_expanded_data_set_config = parent_rpcs.delete_expanded_data_set if parent_rpcs.respond_to? :delete_expanded_data_set
                     @delete_expanded_data_set = ::Gapic::Config::Method.new delete_expanded_data_set_config
+                    get_channel_group_config = parent_rpcs.get_channel_group if parent_rpcs.respond_to? :get_channel_group
+                    @get_channel_group = ::Gapic::Config::Method.new get_channel_group_config
+                    list_channel_groups_config = parent_rpcs.list_channel_groups if parent_rpcs.respond_to? :list_channel_groups
+                    @list_channel_groups = ::Gapic::Config::Method.new list_channel_groups_config
+                    create_channel_group_config = parent_rpcs.create_channel_group if parent_rpcs.respond_to? :create_channel_group
+                    @create_channel_group = ::Gapic::Config::Method.new create_channel_group_config
+                    update_channel_group_config = parent_rpcs.update_channel_group if parent_rpcs.respond_to? :update_channel_group
+                    @update_channel_group = ::Gapic::Config::Method.new update_channel_group_config
+                    delete_channel_group_config = parent_rpcs.delete_channel_group if parent_rpcs.respond_to? :delete_channel_group
+                    @delete_channel_group = ::Gapic::Config::Method.new delete_channel_group_config
                     set_automated_ga4_configuration_opt_out_config = parent_rpcs.set_automated_ga4_configuration_opt_out if parent_rpcs.respond_to? :set_automated_ga4_configuration_opt_out
                     @set_automated_ga4_configuration_opt_out = ::Gapic::Config::Method.new set_automated_ga4_configuration_opt_out_config
                     fetch_automated_ga4_configuration_opt_out_config = parent_rpcs.fetch_automated_ga4_configuration_opt_out if parent_rpcs.respond_to? :fetch_automated_ga4_configuration_opt_out
@@ -8404,6 +9491,26 @@ module Google
                     @delete_connected_site_tag = ::Gapic::Config::Method.new delete_connected_site_tag_config
                     list_connected_site_tags_config = parent_rpcs.list_connected_site_tags if parent_rpcs.respond_to? :list_connected_site_tags
                     @list_connected_site_tags = ::Gapic::Config::Method.new list_connected_site_tags_config
+                    fetch_connected_ga4_property_config = parent_rpcs.fetch_connected_ga4_property if parent_rpcs.respond_to? :fetch_connected_ga4_property
+                    @fetch_connected_ga4_property = ::Gapic::Config::Method.new fetch_connected_ga4_property_config
+                    get_ad_sense_link_config = parent_rpcs.get_ad_sense_link if parent_rpcs.respond_to? :get_ad_sense_link
+                    @get_ad_sense_link = ::Gapic::Config::Method.new get_ad_sense_link_config
+                    create_ad_sense_link_config = parent_rpcs.create_ad_sense_link if parent_rpcs.respond_to? :create_ad_sense_link
+                    @create_ad_sense_link = ::Gapic::Config::Method.new create_ad_sense_link_config
+                    delete_ad_sense_link_config = parent_rpcs.delete_ad_sense_link if parent_rpcs.respond_to? :delete_ad_sense_link
+                    @delete_ad_sense_link = ::Gapic::Config::Method.new delete_ad_sense_link_config
+                    list_ad_sense_links_config = parent_rpcs.list_ad_sense_links if parent_rpcs.respond_to? :list_ad_sense_links
+                    @list_ad_sense_links = ::Gapic::Config::Method.new list_ad_sense_links_config
+                    get_event_create_rule_config = parent_rpcs.get_event_create_rule if parent_rpcs.respond_to? :get_event_create_rule
+                    @get_event_create_rule = ::Gapic::Config::Method.new get_event_create_rule_config
+                    list_event_create_rules_config = parent_rpcs.list_event_create_rules if parent_rpcs.respond_to? :list_event_create_rules
+                    @list_event_create_rules = ::Gapic::Config::Method.new list_event_create_rules_config
+                    create_event_create_rule_config = parent_rpcs.create_event_create_rule if parent_rpcs.respond_to? :create_event_create_rule
+                    @create_event_create_rule = ::Gapic::Config::Method.new create_event_create_rule_config
+                    update_event_create_rule_config = parent_rpcs.update_event_create_rule if parent_rpcs.respond_to? :update_event_create_rule
+                    @update_event_create_rule = ::Gapic::Config::Method.new update_event_create_rule_config
+                    delete_event_create_rule_config = parent_rpcs.delete_event_create_rule if parent_rpcs.respond_to? :delete_event_create_rule
+                    @delete_event_create_rule = ::Gapic::Config::Method.new delete_event_create_rule_config
 
                     yield self if block_given?
                   end

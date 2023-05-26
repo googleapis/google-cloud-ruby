@@ -318,6 +318,16 @@ module Google
             rpc :UpdateExpandedDataSet, ::Google::Analytics::Admin::V1alpha::UpdateExpandedDataSetRequest, ::Google::Analytics::Admin::V1alpha::ExpandedDataSet
             # Deletes a ExpandedDataSet on a property.
             rpc :DeleteExpandedDataSet, ::Google::Analytics::Admin::V1alpha::DeleteExpandedDataSetRequest, ::Google::Protobuf::Empty
+            # Lookup for a single ChannelGroup.
+            rpc :GetChannelGroup, ::Google::Analytics::Admin::V1alpha::GetChannelGroupRequest, ::Google::Analytics::Admin::V1alpha::ChannelGroup
+            # Lists ChannelGroups on a property.
+            rpc :ListChannelGroups, ::Google::Analytics::Admin::V1alpha::ListChannelGroupsRequest, ::Google::Analytics::Admin::V1alpha::ListChannelGroupsResponse
+            # Creates a ChannelGroup.
+            rpc :CreateChannelGroup, ::Google::Analytics::Admin::V1alpha::CreateChannelGroupRequest, ::Google::Analytics::Admin::V1alpha::ChannelGroup
+            # Updates a ChannelGroup.
+            rpc :UpdateChannelGroup, ::Google::Analytics::Admin::V1alpha::UpdateChannelGroupRequest, ::Google::Analytics::Admin::V1alpha::ChannelGroup
+            # Deletes a ChannelGroup on a property.
+            rpc :DeleteChannelGroup, ::Google::Analytics::Admin::V1alpha::DeleteChannelGroupRequest, ::Google::Protobuf::Empty
             # Sets the opt out status for the automated GA4 setup process for a UA
             # property.
             # Note: this has no effect on GA4 property.
@@ -349,6 +359,27 @@ module Google
             # of 20 connected site tags will be returned. Note: this has no effect on GA4
             # property.
             rpc :ListConnectedSiteTags, ::Google::Analytics::Admin::V1alpha::ListConnectedSiteTagsRequest, ::Google::Analytics::Admin::V1alpha::ListConnectedSiteTagsResponse
+            # Given a specified UA property, looks up the GA4 property connected to it.
+            # Note: this cannot be used with GA4 properties.
+            rpc :FetchConnectedGa4Property, ::Google::Analytics::Admin::V1alpha::FetchConnectedGa4PropertyRequest, ::Google::Analytics::Admin::V1alpha::FetchConnectedGa4PropertyResponse
+            # Looks up a single AdSenseLink.
+            rpc :GetAdSenseLink, ::Google::Analytics::Admin::V1alpha::GetAdSenseLinkRequest, ::Google::Analytics::Admin::V1alpha::AdSenseLink
+            # Creates an AdSenseLink.
+            rpc :CreateAdSenseLink, ::Google::Analytics::Admin::V1alpha::CreateAdSenseLinkRequest, ::Google::Analytics::Admin::V1alpha::AdSenseLink
+            # Deletes an AdSenseLink.
+            rpc :DeleteAdSenseLink, ::Google::Analytics::Admin::V1alpha::DeleteAdSenseLinkRequest, ::Google::Protobuf::Empty
+            # Lists AdSenseLinks on a property.
+            rpc :ListAdSenseLinks, ::Google::Analytics::Admin::V1alpha::ListAdSenseLinksRequest, ::Google::Analytics::Admin::V1alpha::ListAdSenseLinksResponse
+            # Lookup for a single EventCreateRule.
+            rpc :GetEventCreateRule, ::Google::Analytics::Admin::V1alpha::GetEventCreateRuleRequest, ::Google::Analytics::Admin::V1alpha::EventCreateRule
+            # Lists EventCreateRules on a web data stream.
+            rpc :ListEventCreateRules, ::Google::Analytics::Admin::V1alpha::ListEventCreateRulesRequest, ::Google::Analytics::Admin::V1alpha::ListEventCreateRulesResponse
+            # Creates an EventCreateRule.
+            rpc :CreateEventCreateRule, ::Google::Analytics::Admin::V1alpha::CreateEventCreateRuleRequest, ::Google::Analytics::Admin::V1alpha::EventCreateRule
+            # Updates an EventCreateRule.
+            rpc :UpdateEventCreateRule, ::Google::Analytics::Admin::V1alpha::UpdateEventCreateRuleRequest, ::Google::Analytics::Admin::V1alpha::EventCreateRule
+            # Deletes an EventCreateRule.
+            rpc :DeleteEventCreateRule, ::Google::Analytics::Admin::V1alpha::DeleteEventCreateRuleRequest, ::Google::Protobuf::Empty
           end
 
           Stub = Service.rpc_stub_class

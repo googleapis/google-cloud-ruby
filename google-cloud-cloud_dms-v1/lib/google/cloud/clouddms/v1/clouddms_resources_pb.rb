@@ -40,12 +40,35 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :password_set, :bool, 5
       optional :ssl, :message, 6, "google.cloud.clouddms.v1.SslConfig"
       optional :cloud_sql_id, :string, 7
+      optional :network_architecture, :enum, 8, "google.cloud.clouddms.v1.NetworkArchitecture"
+      oneof :connectivity do
+        optional :static_ip_connectivity, :message, 100, "google.cloud.clouddms.v1.StaticIpConnectivity"
+        optional :private_service_connect_connectivity, :message, 101, "google.cloud.clouddms.v1.PrivateServiceConnectConnectivity"
+      end
+    end
+    add_message "google.cloud.clouddms.v1.OracleConnectionProfile" do
+      optional :host, :string, 1
+      optional :port, :int32, 2
+      optional :username, :string, 3
+      optional :password, :string, 4
+      optional :password_set, :bool, 5
+      optional :database_service, :string, 6
+      oneof :connectivity do
+        optional :static_service_ip_connectivity, :message, 100, "google.cloud.clouddms.v1.StaticServiceIpConnectivity"
+        optional :forward_ssh_connectivity, :message, 101, "google.cloud.clouddms.v1.ForwardSshTunnelConnectivity"
+        optional :private_connectivity, :message, 102, "google.cloud.clouddms.v1.PrivateConnectivity"
+      end
     end
     add_message "google.cloud.clouddms.v1.CloudSqlConnectionProfile" do
       optional :cloud_sql_id, :string, 1
       optional :settings, :message, 2, "google.cloud.clouddms.v1.CloudSqlSettings"
       optional :private_ip, :string, 3
       optional :public_ip, :string, 4
+      optional :additional_public_ip, :string, 5
+    end
+    add_message "google.cloud.clouddms.v1.AlloyDbConnectionProfile" do
+      optional :cluster_id, :string, 1
+      optional :settings, :message, 2, "google.cloud.clouddms.v1.AlloyDbSettings"
     end
     add_message "google.cloud.clouddms.v1.SqlAclEntry" do
       optional :value, :string, 1
@@ -58,6 +81,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.clouddms.v1.SqlIpConfig" do
       optional :enable_ipv4, :message, 1, "google.protobuf.BoolValue"
       optional :private_network, :string, 2
+      optional :allocated_ip_range, :string, 5
       optional :require_ssl, :message, 3, "google.protobuf.BoolValue"
       repeated :authorized_networks, :message, 4, "google.cloud.clouddms.v1.SqlAclEntry"
     end
@@ -73,10 +97,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :data_disk_type, :enum, 9, "google.cloud.clouddms.v1.CloudSqlSettings.SqlDataDiskType"
       optional :data_disk_size_gb, :message, 10, "google.protobuf.Int64Value"
       optional :zone, :string, 11
+      optional :secondary_zone, :string, 18
       optional :source_id, :string, 12
       optional :root_password, :string, 13
       optional :root_password_set, :bool, 14
       optional :collation, :string, 15
+      optional :cmek_key_name, :string, 16
+      optional :availability_type, :enum, 17, "google.cloud.clouddms.v1.CloudSqlSettings.SqlAvailabilityType"
     end
     add_enum "google.cloud.clouddms.v1.CloudSqlSettings.SqlActivationPolicy" do
       value :SQL_ACTIVATION_POLICY_UNSPECIFIED, 0
@@ -98,8 +125,42 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :MYSQL_8_0, 6
       value :POSTGRES_12, 7
       value :POSTGRES_13, 8
+      value :POSTGRES_14, 17
+    end
+    add_enum "google.cloud.clouddms.v1.CloudSqlSettings.SqlAvailabilityType" do
+      value :SQL_AVAILABILITY_TYPE_UNSPECIFIED, 0
+      value :ZONAL, 1
+      value :REGIONAL, 2
+    end
+    add_message "google.cloud.clouddms.v1.AlloyDbSettings" do
+      optional :initial_user, :message, 1, "google.cloud.clouddms.v1.AlloyDbSettings.UserPassword"
+      optional :vpc_network, :string, 2
+      map :labels, :string, :string, 3
+      optional :primary_instance_settings, :message, 4, "google.cloud.clouddms.v1.AlloyDbSettings.PrimaryInstanceSettings"
+      optional :encryption_config, :message, 5, "google.cloud.clouddms.v1.AlloyDbSettings.EncryptionConfig"
+    end
+    add_message "google.cloud.clouddms.v1.AlloyDbSettings.UserPassword" do
+      optional :user, :string, 1
+      optional :password, :string, 2
+      optional :password_set, :bool, 3
+    end
+    add_message "google.cloud.clouddms.v1.AlloyDbSettings.PrimaryInstanceSettings" do
+      optional :id, :string, 1
+      optional :machine_config, :message, 2, "google.cloud.clouddms.v1.AlloyDbSettings.PrimaryInstanceSettings.MachineConfig"
+      map :database_flags, :string, :string, 6
+      map :labels, :string, :string, 7
+      optional :private_ip, :string, 8
+    end
+    add_message "google.cloud.clouddms.v1.AlloyDbSettings.PrimaryInstanceSettings.MachineConfig" do
+      optional :cpu_count, :int32, 1
+    end
+    add_message "google.cloud.clouddms.v1.AlloyDbSettings.EncryptionConfig" do
+      optional :kms_key_name, :string, 1
     end
     add_message "google.cloud.clouddms.v1.StaticIpConnectivity" do
+    end
+    add_message "google.cloud.clouddms.v1.PrivateServiceConnectConnectivity" do
+      optional :service_attachment, :string, 1
     end
     add_message "google.cloud.clouddms.v1.ReverseSshConnectivity" do
       optional :vm_ip, :string, 1
@@ -109,6 +170,20 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.clouddms.v1.VpcPeeringConnectivity" do
       optional :vpc, :string, 1
+    end
+    add_message "google.cloud.clouddms.v1.ForwardSshTunnelConnectivity" do
+      optional :hostname, :string, 1
+      optional :username, :string, 2
+      optional :port, :int32, 3
+      oneof :authentication_method do
+        optional :password, :string, 100
+        optional :private_key, :string, 101
+      end
+    end
+    add_message "google.cloud.clouddms.v1.StaticServiceIpConnectivity" do
+    end
+    add_message "google.cloud.clouddms.v1.PrivateConnectivity" do
+      optional :private_connection, :string, 1
     end
     add_message "google.cloud.clouddms.v1.DatabaseType" do
       optional :provider, :enum, 1, "google.cloud.clouddms.v1.DatabaseProvider"
@@ -124,6 +199,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :phase, :enum, 7, "google.cloud.clouddms.v1.MigrationJob.Phase"
       optional :type, :enum, 8, "google.cloud.clouddms.v1.MigrationJob.Type"
       optional :dump_path, :string, 9
+      optional :dump_flags, :message, 17, "google.cloud.clouddms.v1.MigrationJob.DumpFlags"
       optional :source, :string, 10
       optional :destination, :string, 11
       optional :duration, :message, 12, "google.protobuf.Duration"
@@ -131,11 +207,21 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :source_database, :message, 14, "google.cloud.clouddms.v1.DatabaseType"
       optional :destination_database, :message, 15, "google.cloud.clouddms.v1.DatabaseType"
       optional :end_time, :message, 16, "google.protobuf.Timestamp"
+      optional :conversion_workspace, :message, 18, "google.cloud.clouddms.v1.ConversionWorkspaceInfo"
+      optional :filter, :string, 20
+      optional :cmek_key_name, :string, 21
       oneof :connectivity do
         optional :reverse_ssh_connectivity, :message, 101, "google.cloud.clouddms.v1.ReverseSshConnectivity"
         optional :vpc_peering_connectivity, :message, 102, "google.cloud.clouddms.v1.VpcPeeringConnectivity"
         optional :static_ip_connectivity, :message, 103, "google.cloud.clouddms.v1.StaticIpConnectivity"
       end
+    end
+    add_message "google.cloud.clouddms.v1.MigrationJob.DumpFlag" do
+      optional :name, :string, 1
+      optional :value, :string, 2
+    end
+    add_message "google.cloud.clouddms.v1.MigrationJob.DumpFlags" do
+      repeated :dump_flags, :message, 1, "google.cloud.clouddms.v1.MigrationJob.DumpFlag"
     end
     add_enum "google.cloud.clouddms.v1.MigrationJob.State" do
       value :STATE_UNSPECIFIED, 0
@@ -168,6 +254,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :ONE_TIME, 1
       value :CONTINUOUS, 2
     end
+    add_message "google.cloud.clouddms.v1.ConversionWorkspaceInfo" do
+      optional :name, :string, 1
+      optional :commit_id, :string, 2
+    end
     add_message "google.cloud.clouddms.v1.ConnectionProfile" do
       optional :name, :string, 1
       optional :create_time, :message, 2, "google.protobuf.Timestamp"
@@ -180,7 +270,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       oneof :connection_profile do
         optional :mysql, :message, 100, "google.cloud.clouddms.v1.MySqlConnectionProfile"
         optional :postgresql, :message, 101, "google.cloud.clouddms.v1.PostgreSqlConnectionProfile"
+        optional :oracle, :message, 104, "google.cloud.clouddms.v1.OracleConnectionProfile"
         optional :cloudsql, :message, 102, "google.cloud.clouddms.v1.CloudSqlConnectionProfile"
+        optional :alloydb, :message, 105, "google.cloud.clouddms.v1.AlloyDbConnectionProfile"
       end
     end
     add_enum "google.cloud.clouddms.v1.ConnectionProfile.State" do
@@ -219,16 +311,54 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :UNSUPPORTED_TABLE_DEFINITION, 18
       value :UNSUPPORTED_DEFINER, 19
       value :CANT_RESTART_RUNNING_MIGRATION, 21
+      value :TABLES_WITH_LIMITED_SUPPORT, 24
+      value :UNSUPPORTED_DATABASE_LOCALE, 25
+      value :UNSUPPORTED_DATABASE_FDW_CONFIG, 26
+      value :ERROR_RDBMS, 27
+      value :SOURCE_SIZE_EXCEEDS_THRESHOLD, 28
+    end
+    add_message "google.cloud.clouddms.v1.PrivateConnection" do
+      optional :name, :string, 1
+      optional :create_time, :message, 2, "google.protobuf.Timestamp"
+      optional :update_time, :message, 3, "google.protobuf.Timestamp"
+      map :labels, :string, :string, 4
+      optional :display_name, :string, 5
+      optional :state, :enum, 6, "google.cloud.clouddms.v1.PrivateConnection.State"
+      optional :error, :message, 7, "google.rpc.Status"
+      oneof :connectivity do
+        optional :vpc_peering_config, :message, 100, "google.cloud.clouddms.v1.VpcPeeringConfig"
+      end
+    end
+    add_enum "google.cloud.clouddms.v1.PrivateConnection.State" do
+      value :STATE_UNSPECIFIED, 0
+      value :CREATING, 1
+      value :CREATED, 2
+      value :FAILED, 3
+      value :DELETING, 4
+      value :FAILED_TO_DELETE, 5
+      value :DELETED, 6
+    end
+    add_message "google.cloud.clouddms.v1.VpcPeeringConfig" do
+      optional :vpc_name, :string, 1
+      optional :subnet, :string, 2
+    end
+    add_enum "google.cloud.clouddms.v1.NetworkArchitecture" do
+      value :NETWORK_ARCHITECTURE_UNSPECIFIED, 0
+      value :NETWORK_ARCHITECTURE_OLD_CSQL_PRODUCER, 1
+      value :NETWORK_ARCHITECTURE_NEW_CSQL_PRODUCER, 2
     end
     add_enum "google.cloud.clouddms.v1.DatabaseEngine" do
       value :DATABASE_ENGINE_UNSPECIFIED, 0
       value :MYSQL, 1
       value :POSTGRESQL, 2
+      value :ORACLE, 4
     end
     add_enum "google.cloud.clouddms.v1.DatabaseProvider" do
       value :DATABASE_PROVIDER_UNSPECIFIED, 0
       value :CLOUDSQL, 1
       value :RDS, 2
+      value :AURORA, 3
+      value :ALLOYDB, 4
     end
   end
 end
@@ -241,25 +371,44 @@ module Google
         SslConfig::SslType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.clouddms.v1.SslConfig.SslType").enummodule
         MySqlConnectionProfile = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.clouddms.v1.MySqlConnectionProfile").msgclass
         PostgreSqlConnectionProfile = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.clouddms.v1.PostgreSqlConnectionProfile").msgclass
+        OracleConnectionProfile = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.clouddms.v1.OracleConnectionProfile").msgclass
         CloudSqlConnectionProfile = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.clouddms.v1.CloudSqlConnectionProfile").msgclass
+        AlloyDbConnectionProfile = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.clouddms.v1.AlloyDbConnectionProfile").msgclass
         SqlAclEntry = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.clouddms.v1.SqlAclEntry").msgclass
         SqlIpConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.clouddms.v1.SqlIpConfig").msgclass
         CloudSqlSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.clouddms.v1.CloudSqlSettings").msgclass
         CloudSqlSettings::SqlActivationPolicy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.clouddms.v1.CloudSqlSettings.SqlActivationPolicy").enummodule
         CloudSqlSettings::SqlDataDiskType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.clouddms.v1.CloudSqlSettings.SqlDataDiskType").enummodule
         CloudSqlSettings::SqlDatabaseVersion = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.clouddms.v1.CloudSqlSettings.SqlDatabaseVersion").enummodule
+        CloudSqlSettings::SqlAvailabilityType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.clouddms.v1.CloudSqlSettings.SqlAvailabilityType").enummodule
+        AlloyDbSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.clouddms.v1.AlloyDbSettings").msgclass
+        AlloyDbSettings::UserPassword = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.clouddms.v1.AlloyDbSettings.UserPassword").msgclass
+        AlloyDbSettings::PrimaryInstanceSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.clouddms.v1.AlloyDbSettings.PrimaryInstanceSettings").msgclass
+        AlloyDbSettings::PrimaryInstanceSettings::MachineConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.clouddms.v1.AlloyDbSettings.PrimaryInstanceSettings.MachineConfig").msgclass
+        AlloyDbSettings::EncryptionConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.clouddms.v1.AlloyDbSettings.EncryptionConfig").msgclass
         StaticIpConnectivity = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.clouddms.v1.StaticIpConnectivity").msgclass
+        PrivateServiceConnectConnectivity = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.clouddms.v1.PrivateServiceConnectConnectivity").msgclass
         ReverseSshConnectivity = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.clouddms.v1.ReverseSshConnectivity").msgclass
         VpcPeeringConnectivity = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.clouddms.v1.VpcPeeringConnectivity").msgclass
+        ForwardSshTunnelConnectivity = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.clouddms.v1.ForwardSshTunnelConnectivity").msgclass
+        StaticServiceIpConnectivity = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.clouddms.v1.StaticServiceIpConnectivity").msgclass
+        PrivateConnectivity = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.clouddms.v1.PrivateConnectivity").msgclass
         DatabaseType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.clouddms.v1.DatabaseType").msgclass
         MigrationJob = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.clouddms.v1.MigrationJob").msgclass
+        MigrationJob::DumpFlag = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.clouddms.v1.MigrationJob.DumpFlag").msgclass
+        MigrationJob::DumpFlags = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.clouddms.v1.MigrationJob.DumpFlags").msgclass
         MigrationJob::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.clouddms.v1.MigrationJob.State").enummodule
         MigrationJob::Phase = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.clouddms.v1.MigrationJob.Phase").enummodule
         MigrationJob::Type = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.clouddms.v1.MigrationJob.Type").enummodule
+        ConversionWorkspaceInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.clouddms.v1.ConversionWorkspaceInfo").msgclass
         ConnectionProfile = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.clouddms.v1.ConnectionProfile").msgclass
         ConnectionProfile::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.clouddms.v1.ConnectionProfile.State").enummodule
         MigrationJobVerificationError = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.clouddms.v1.MigrationJobVerificationError").msgclass
         MigrationJobVerificationError::ErrorCode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.clouddms.v1.MigrationJobVerificationError.ErrorCode").enummodule
+        PrivateConnection = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.clouddms.v1.PrivateConnection").msgclass
+        PrivateConnection::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.clouddms.v1.PrivateConnection.State").enummodule
+        VpcPeeringConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.clouddms.v1.VpcPeeringConfig").msgclass
+        NetworkArchitecture = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.clouddms.v1.NetworkArchitecture").enummodule
         DatabaseEngine = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.clouddms.v1.DatabaseEngine").enummodule
         DatabaseProvider = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.clouddms.v1.DatabaseProvider").enummodule
       end

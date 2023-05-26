@@ -1,5 +1,17 @@
 # Changelog
 
+### 0.8.0 (2023-05-04)
+
+#### Features
+
+* Adds support for Session affinity in Service 
+* Adds support for Startup CPU Boost 
+* New 'port' field for HttpGetAction probe type 
+* New fields/enum values 
+#### Documentation
+
+* General documentation fixes. 
+
 ### 0.7.0 (2023-03-08)
 
 #### Features

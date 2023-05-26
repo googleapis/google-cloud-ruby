@@ -66,6 +66,25 @@ module Google
               end
 
               ##
+              # Create a fully-qualified LiveConfig resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/locations/{location}/liveConfigs/{live_config}`
+              #
+              # @param project [String]
+              # @param location [String]
+              # @param live_config [String]
+              #
+              # @return [::String]
+              def live_config_path project:, location:, live_config:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                "projects/#{project}/locations/#{location}/liveConfigs/#{live_config}"
+              end
+
+              ##
               # Create a fully-qualified LiveSession resource string.
               #
               # The resource will be in the following format:

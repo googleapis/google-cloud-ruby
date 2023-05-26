@@ -71,6 +71,11 @@ module Google
                     initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                   }
 
+                  default_config.rpcs.create_agent.timeout = 180.0
+                  default_config.rpcs.create_agent.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
                   default_config
                 end
                 yield @configure if block_given?

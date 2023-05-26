@@ -283,8 +283,7 @@ module Google
         #     published table name. Specifying a new ID in an update entity
         #     request will override the existing value.
         #     The ID must contain only letters (a-z, A-Z), numbers (0-9), and
-        #     underscores. Must begin with a letter and consist of 256 or fewer
-        #     characters.
+        #     underscores, and consist of 256 or fewer characters.
         # @!attribute [rw] etag
         #   @return [::String]
         #     Optional. The etag associated with the entity, which can be retrieved with
@@ -322,6 +321,14 @@ module Google
         # @!attribute [r] compatibility
         #   @return [::Google::Cloud::Dataplex::V1::Entity::CompatibilityStatus]
         #     Output only. Metadata stores that the entity is compatible with.
+        # @!attribute [r] access
+        #   @return [::Google::Cloud::Dataplex::V1::StorageAccess]
+        #     Output only. Identifies the access mechanism to the entity. Not user
+        #     settable.
+        # @!attribute [r] uid
+        #   @return [::String]
+        #     Output only. System generated unique ID for the Entity. This ID will be
+        #     different if the Entity is deleted and re-created with the same name.
         # @!attribute [rw] schema
         #   @return [::Google::Cloud::Dataplex::V1::Schema]
         #     Required. The description of the data structure and layout.
@@ -682,6 +689,28 @@ module Google
 
             # BZip2 compressed set of files.
             BZIP2 = 3
+          end
+        end
+
+        # Describes the access mechanism of the data within its storage location.
+        # @!attribute [r] read
+        #   @return [::Google::Cloud::Dataplex::V1::StorageAccess::AccessMode]
+        #     Output only. Describes the read access mechanism of the data. Not user
+        #     settable.
+        class StorageAccess
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Access Mode determines how data stored within the Entity is read.
+          module AccessMode
+            # Access mode unspecified.
+            ACCESS_MODE_UNSPECIFIED = 0
+
+            # Default. Data is accessed directly using storage APIs.
+            DIRECT = 1
+
+            # Data is accessed through a managed interface using BigQuery APIs.
+            MANAGED = 2
           end
         end
 

@@ -1,5 +1,34 @@
 # Release History
 
+### 0.21.1 (2023-05-19)
+
+#### Documentation
+
+* clarify release channel defaulting behavior 
+
+### 0.21.0 (2023-05-08)
+
+#### Features
+
+* Support for configuring the Cloud Storage Fuse CSI driver 
+* Support for fleet registration via cluster update 
+
+### 0.20.0 (2023-04-27)
+
+#### Features
+
+* Add option RESIZE_CLUSTER to enum Operation Type ([#21483](https://github.com/googleapis/google-cloud-ruby/issues/21483)) 
+* Add state field to DatabaseEncryption ([#21483](https://github.com/googleapis/google-cloud-ruby/issues/21483)) 
+#### Documentation
+
+* Expand documentation for Operation Type ([#21483](https://github.com/googleapis/google-cloud-ruby/issues/21483)) 
+
+### 0.19.0 (2023-04-21)
+
+#### Features
+
+* Support additional pod IPv4 ranges ([#21443](https://github.com/googleapis/google-cloud-ruby/issues/21443)) 
+
 ### 0.18.0 (2023-04-10)
 
 #### Features

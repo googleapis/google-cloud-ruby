@@ -40,6 +40,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :tensorboard, :string, 7
       optional :enable_web_access, :bool, 10
       optional :enable_dashboard_access, :bool, 16
+      optional :experiment, :string, 17
+      optional :experiment_run, :string, 18
     end
     add_message "google.cloud.aiplatform.v1.WorkerPoolSpec" do
       optional :machine_spec, :message, 1, "google.cloud.aiplatform.v1.MachineSpec"

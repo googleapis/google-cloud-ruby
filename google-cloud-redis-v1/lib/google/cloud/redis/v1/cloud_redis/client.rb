@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/redis/v1/cloud_redis_pb"
+require "google/cloud/location"
 
 module Google
   module Cloud
@@ -175,6 +176,12 @@ module Google
                 config.endpoint = @config.endpoint
               end
 
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
               @cloud_redis_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::Redis::V1::CloudRedis::Stub,
                 credentials:  credentials,
@@ -190,6 +197,13 @@ module Google
             # @return [::Google::Cloud::Redis::V1::CloudRedis::Operations]
             #
             attr_reader :operations_client
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
 
             # Service calls
 
@@ -233,7 +247,8 @@ module Google
             #     to determine if there are more instances left to be queried.
             #   @param page_token [::String]
             #     The `next_page_token` value returned from a previous
-            #     {::Google::Cloud::Redis::V1::CloudRedis::Client#list_instances ListInstances} request, if any.
+            #     {::Google::Cloud::Redis::V1::CloudRedis::Client#list_instances ListInstances} request, if
+            #     any.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Redis::V1::Instance>]
@@ -1228,7 +1243,8 @@ module Google
             #         `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
             #     where `location_id` refers to a GCP region.
             #   @param reschedule_type [::Google::Cloud::Redis::V1::RescheduleMaintenanceRequest::RescheduleType]
-            #     Required. If reschedule type is SPECIFIC_TIME, must set up schedule_time as well.
+            #     Required. If reschedule type is SPECIFIC_TIME, must set up schedule_time as
+            #     well.
             #   @param schedule_time [::Google::Protobuf::Timestamp, ::Hash]
             #     Optional. Timestamp when the maintenance shall be rescheduled to if
             #     reschedule_type=SPECIFIC_TIME, in RFC 3339 format, for

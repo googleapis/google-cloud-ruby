@@ -39,6 +39,11 @@
               "methods": [
                 "update_ekm_config"
               ]
+            },
+            "VerifyConnectivity": {
+              "methods": [
+                "verify_connectivity"
+              ]
             }
           }
         }

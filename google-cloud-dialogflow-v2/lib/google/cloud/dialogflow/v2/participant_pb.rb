@@ -91,6 +91,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :assist_query_params, :message, 8, "google.cloud.dialogflow.v2.AssistQueryParameters"
       optional :cx_parameters, :message, 13, "google.protobuf.Struct"
       optional :enable_partial_automated_agent_reply, :bool, 12
+      optional :enable_debugging_info, :bool, 19
       oneof :config do
         optional :audio_config, :message, 2, "google.cloud.dialogflow.v2.InputAudioConfig"
         optional :text_config, :message, 3, "google.cloud.dialogflow.v2.InputTextConfig"
@@ -110,6 +111,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :human_agent_suggestion_results, :message, 7, "google.cloud.dialogflow.v2.SuggestionResult"
       repeated :end_user_suggestion_results, :message, 8, "google.cloud.dialogflow.v2.SuggestionResult"
       optional :dtmf_parameters, :message, 10, "google.cloud.dialogflow.v2.DtmfParameters"
+      optional :debugging_info, :message, 11, "google.cloud.dialogflow.v2.CloudConversationDebuggingInfo"
     end
     add_message "google.cloud.dialogflow.v2.SuggestArticlesRequest" do
       optional :parent, :string, 1

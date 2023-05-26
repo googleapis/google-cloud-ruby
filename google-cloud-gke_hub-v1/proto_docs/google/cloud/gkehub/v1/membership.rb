@@ -27,8 +27,9 @@ module Google
         #     Optional. Endpoint information to reach this member.
         # @!attribute [r] name
         #   @return [::String]
-        #     Output only. The full, unique name of this Membership resource in the format
-        #     `projects/*/locations/*/memberships/{membership_id}`, set during creation.
+        #     Output only. The full, unique name of this Membership resource in the
+        #     format `projects/*/locations/*/memberships/{membership_id}`, set during
+        #     creation.
         #
         #     `membership_id` must be a valid RFC 1123 compliant DNS label:
         #
@@ -40,7 +41,7 @@ module Google
         #     with a maximum length of 63 characters.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Optional. GCP labels for this membership.
+        #     Optional. Labels for this membership.
         # @!attribute [r] description
         #   @return [::String]
         #     Output only. Description of this membership, limited to 63 characters.
@@ -61,8 +62,8 @@ module Google
         #     Output only. When the Membership was deleted.
         # @!attribute [rw] external_id
         #   @return [::String]
-        #     Optional. An externally-generated and managed ID for this Membership. This ID may
-        #     be modified after creation, but this is not recommended.
+        #     Optional. An externally-generated and managed ID for this Membership. This
+        #     ID may be modified after creation, but this is not recommended.
         #
         #     The ID must match the regex: `[a-zA-Z0-9][a-zA-Z0-9_\-\.]*`
         #
@@ -70,20 +71,24 @@ module Google
         #     set to the UID of the `kube-system` namespace object.
         # @!attribute [r] last_connection_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. For clusters using Connect, the timestamp of the most recent connection
-        #     established with Google Cloud. This time is updated every several minutes,
-        #     not continuously. For clusters that do not use GKE Connect, or that have
-        #     never connected successfully, this field will be unset.
+        #     Output only. For clusters using Connect, the timestamp of the most recent
+        #     connection established with Google Cloud. This time is updated every
+        #     several minutes, not continuously. For clusters that do not use GKE
+        #     Connect, or that have never connected successfully, this field will be
+        #     unset.
         # @!attribute [r] unique_id
         #   @return [::String]
-        #     Output only. Google-generated UUID for this resource. This is unique across all
-        #     Membership resources. If a Membership resource is deleted and another
+        #     Output only. Google-generated UUID for this resource. This is unique across
+        #     all Membership resources. If a Membership resource is deleted and another
         #     resource with the same name is created, it gets a different unique_id.
         # @!attribute [rw] authority
         #   @return [::Google::Cloud::GkeHub::V1::Authority]
         #     Optional. How to identify workloads from this Membership.
         #     See the documentation on Workload Identity for more details:
         #     https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity
+        # @!attribute [rw] monitoring_config
+        #   @return [::Google::Cloud::GkeHub::V1::MonitoringConfig]
+        #     Optional. The monitoring config information for this membership.
         class Membership
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -108,14 +113,18 @@ module Google
         #     Output only. Useful Kubernetes-specific metadata.
         # @!attribute [rw] kubernetes_resource
         #   @return [::Google::Cloud::GkeHub::V1::KubernetesResource]
-        #     Optional. The in-cluster Kubernetes Resources that should be applied for a correctly
-        #     registered cluster, in the steady state. These resources:
+        #     Optional. The in-cluster Kubernetes Resources that should be applied for a
+        #     correctly registered cluster, in the steady state. These resources:
         #
         #       * Ensure that the cluster is exclusively registered to one and only one
         #         Hub Membership.
         #       * Propagate Workload Pool Information available in the Membership
         #         Authority field.
         #       * Ensure proper initial configuration of default Hub Features.
+        # @!attribute [r] google_managed
+        #   @return [::Boolean]
+        #     Output only. Whether the lifecycle of this membership is managed by a
+        #     google cluster platform service.
         class MembershipEndpoint
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -126,8 +135,8 @@ module Google
         # UpdateMembership, these resources should be re-applied in the cluster.
         # @!attribute [rw] membership_cr_manifest
         #   @return [::String]
-        #     Input only. The YAML representation of the Membership CR. This field is ignored for GKE
-        #     clusters where Hub can read the CR directly.
+        #     Input only. The YAML representation of the Membership CR. This field is
+        #     ignored for GKE clusters where Hub can read the CR directly.
         #
         #     Callers should provide the CR that is currently present in the cluster
         #     during CreateMembership or UpdateMembership, or leave this field empty if
@@ -135,8 +144,8 @@ module Google
         #     registered with another Membership.
         # @!attribute [r] membership_resources
         #   @return [::Array<::Google::Cloud::GkeHub::V1::ResourceManifest>]
-        #     Output only. Additional Kubernetes resources that need to be applied to the cluster
-        #     after Membership creation, and after every update.
+        #     Output only. Additional Kubernetes resources that need to be applied to the
+        #     cluster after Membership creation, and after every update.
         #
         #     This field is only populated in the Membership returned from a successful
         #     long-running operation from CreateMembership or UpdateMembership. It is not
@@ -163,9 +172,9 @@ module Google
         # ResourceOptions represent options for Kubernetes resource generation.
         # @!attribute [rw] connect_version
         #   @return [::String]
-        #     Optional. The Connect agent version to use for connect_resources. Defaults to the
-        #     latest GKE Connect version. The version must be a currently supported
-        #     version, obsolete versions will be rejected.
+        #     Optional. The Connect agent version to use for connect_resources. Defaults
+        #     to the latest GKE Connect version. The version must be a currently
+        #     supported version, obsolete versions will be rejected.
         # @!attribute [rw] v1beta1_crd
         #   @return [::Boolean]
         #     Optional. Use `apiextensions/v1beta1` instead of `apiextensions/v1` for
@@ -174,8 +183,8 @@ module Google
         #     <1.16.
         # @!attribute [rw] k8s_version
         #   @return [::String]
-        #     Optional. Major version of the Kubernetes cluster. This is only used to determine
-        #     which version to use for the CustomResourceDefinition resources,
+        #     Optional. Major version of the Kubernetes cluster. This is only used to
+        #     determine which version to use for the CustomResourceDefinition resources,
         #     `apiextensions/v1beta1` or`apiextensions/v1`.
         class ResourceOptions
           include ::Google::Protobuf::MessageExts
@@ -202,11 +211,16 @@ module Google
         # GkeCluster contains information specific to GKE clusters.
         # @!attribute [rw] resource_link
         #   @return [::String]
-        #     Immutable. Self-link of the GCP resource for the GKE cluster. For example:
+        #     Immutable. Self-link of the Google Cloud resource for the GKE cluster. For
+        #     example:
         #
         #     //container.googleapis.com/projects/my-project/locations/us-west1-a/clusters/my-cluster
         #
         #     Zonal clusters are also supported.
+        # @!attribute [r] cluster_missing
+        #   @return [::Boolean]
+        #     Output only. If cluster_missing is set then it denotes that the GKE cluster
+        #     no longer exists in the GKE Control Plane.
         class GkeCluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -216,12 +230,13 @@ module Google
         # representing Kubernetes clusters.
         # @!attribute [r] kubernetes_api_server_version
         #   @return [::String]
-        #     Output only. Kubernetes API server version string as reported by `/version`.
+        #     Output only. Kubernetes API server version string as reported by
+        #     `/version`.
         # @!attribute [r] node_provider_id
         #   @return [::String]
-        #     Output only. Node providerID as reported by the first node in the list of nodes on
-        #     the Kubernetes endpoint. On Kubernetes platforms that support zero-node
-        #     clusters (like GKE-on-GCP), the node_count will be zero and the
+        #     Output only. Node providerID as reported by the first node in the list of
+        #     nodes on the Kubernetes endpoint. On Kubernetes platforms that support
+        #     zero-node clusters (like GKE-on-GCP), the node_count will be zero and the
         #     node_provider_id will be empty.
         # @!attribute [r] node_count
         #   @return [::Integer]
@@ -231,14 +246,46 @@ module Google
         #     Output only. vCPU count as reported by Kubernetes nodes resources.
         # @!attribute [r] memory_mb
         #   @return [::Integer]
-        #     Output only. The total memory capacity as reported by the sum of all Kubernetes nodes
-        #     resources, defined in MB.
+        #     Output only. The total memory capacity as reported by the sum of all
+        #     Kubernetes nodes resources, defined in MB.
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The time at which these details were last updated. This update_time is
-        #     different from the Membership-level update_time since EndpointDetails are
-        #     updated internally for API consumers.
+        #     Output only. The time at which these details were last updated. This
+        #     update_time is different from the Membership-level update_time since
+        #     EndpointDetails are updated internally for API consumers.
         class KubernetesMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # This field informs Fleet-based applications/services/UIs with the necessary
+        # information for where each underlying Cluster reports its metrics.
+        # @!attribute [rw] project_id
+        #   @return [::String]
+        #     Immutable. Project used to report Metrics
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Immutable. Location used to report Metrics
+        # @!attribute [rw] cluster
+        #   @return [::String]
+        #     Immutable. Cluster name used to report metrics.
+        #     For Anthos on VMWare/Baremetal, it would be in format
+        #     `memberClusters/cluster_name`; And for Anthos on MultiCloud, it would be in
+        #     format
+        #     `{azureClusters, awsClusters}/cluster_name`.
+        # @!attribute [rw] kubernetes_metrics_prefix
+        #   @return [::String]
+        #     Kubernetes system metrics, if available, are written to this prefix.
+        #     This defaults to kubernetes.io for GKE, and kubernetes.io/anthos for Anthos
+        #     eventually. Noted: Anthos MultiCloud will have kubernetes.io prefix today
+        #     but will migration to be under kubernetes.io/anthos
+        # @!attribute [rw] cluster_hash
+        #   @return [::String]
+        #     Immutable. Cluster hash, this is a unique string generated by google code,
+        #     which does not contain any PII, which we can use to reference the cluster.
+        #     This is expected to be created by the monitoring stack and persisted into
+        #     the Cluster object as well as to GKE-Hub.
+        class MonitoringConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -278,8 +325,8 @@ module Google
         # https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity
         # @!attribute [rw] issuer
         #   @return [::String]
-        #     Optional. A JSON Web Token (JWT) issuer URI. `issuer` must start with `https://` and
-        #     be a valid URL with length <2000 characters.
+        #     Optional. A JSON Web Token (JWT) issuer URI. `issuer` must start with
+        #     `https://` and be a valid URL with length <2000 characters.
         #
         #     If set, then Google will allow valid OIDC tokens from this issuer to
         #     authenticate within the workload_identity_pool. OIDC discovery will be
@@ -290,8 +337,8 @@ module Google
         #     a new issuer (and re-enabling Workload Identity).
         # @!attribute [r] workload_identity_pool
         #   @return [::String]
-        #     Output only. The name of the workload identity pool in which `issuer` will be
-        #     recognized.
+        #     Output only. The name of the workload identity pool in which `issuer` will
+        #     be recognized.
         #
         #     There is a single Workload Identity Pool per Hub that is shared
         #     between all Memberships that belong to that Hub. For a Hub hosted in
@@ -299,11 +346,12 @@ module Google
         #     although this is subject to change in newer versions of this API.
         # @!attribute [r] identity_provider
         #   @return [::String]
-        #     Output only. An identity provider that reflects the `issuer` in the workload identity
-        #     pool.
+        #     Output only. An identity provider that reflects the `issuer` in the
+        #     workload identity pool.
         # @!attribute [rw] oidc_jwks
         #   @return [::String]
-        #     Optional. OIDC verification keys for this Membership in JWKS format (RFC 7517).
+        #     Optional. OIDC verification keys for this Membership in JWKS format (RFC
+        #     7517).
         #
         #     When this field is set, OIDC discovery will NOT be performed on `issuer`,
         #     and instead OIDC tokens will be validated using this field.

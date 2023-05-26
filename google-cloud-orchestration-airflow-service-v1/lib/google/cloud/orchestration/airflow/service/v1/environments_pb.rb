@@ -71,6 +71,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :workloads_config, :message, 15, "google.cloud.orchestration.airflow.service.v1.WorkloadsConfig"
       optional :environment_size, :enum, 16, "google.cloud.orchestration.airflow.service.v1.EnvironmentConfig.EnvironmentSize"
       optional :airflow_uri, :string, 6
+      optional :airflow_byoid_uri, :string, 20
       optional :master_authorized_networks_config, :message, 17, "google.cloud.orchestration.airflow.service.v1.MasterAuthorizedNetworksConfig"
       optional :recovery_config, :message, 18, "google.cloud.orchestration.airflow.service.v1.RecoveryConfig"
     end

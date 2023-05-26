@@ -96,6 +96,14 @@ module Google
             # @!attribute [r] database_dialect
             #   @return [::Google::Cloud::Spanner::Admin::Database::V1::DatabaseDialect]
             #     Output only. The dialect of the Cloud Spanner Database.
+            # @!attribute [rw] enable_drop_protection
+            #   @return [::Boolean]
+            #     Whether drop protection is enabled for this database. Defaults to false,
+            #     if not set.
+            # @!attribute [r] reconciling
+            #   @return [::Boolean]
+            #     Output only. If true, the database is being updated. If false, there are no
+            #     ongoing update operations for the database.
             class Database
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -204,6 +212,42 @@ module Google
             #     Required. The name of the requested database. Values are of the form
             #     `projects/<project>/instances/<instance>/databases/<database>`.
             class GetDatabaseRequest
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The request for
+            # {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_database UpdateDatabase}.
+            # @!attribute [rw] database
+            #   @return [::Google::Cloud::Spanner::Admin::Database::V1::Database]
+            #     Required. The database to update.
+            #     The `name` field of the database is of the form
+            #     `projects/<project>/instances/<instance>/databases/<database>`.
+            # @!attribute [rw] update_mask
+            #   @return [::Google::Protobuf::FieldMask]
+            #     Required. The list of fields to update. Currently, only
+            #     `enable_drop_protection` field can be updated.
+            class UpdateDatabaseRequest
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Metadata type for the operation returned by
+            # {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_database UpdateDatabase}.
+            # @!attribute [rw] request
+            #   @return [::Google::Cloud::Spanner::Admin::Database::V1::UpdateDatabaseRequest]
+            #     The request for
+            #     {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_database UpdateDatabase}.
+            # @!attribute [rw] progress
+            #   @return [::Google::Cloud::Spanner::Admin::Database::V1::OperationProgress]
+            #     The progress of the
+            #     {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#update_database UpdateDatabase}
+            #     operation.
+            # @!attribute [rw] cancel_time
+            #   @return [::Google::Protobuf::Timestamp]
+            #     The time at which this operation was cancelled. If set, this operation is
+            #     in the process of undoing itself (which is best-effort).
+            class UpdateDatabaseMetadata
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end

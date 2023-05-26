@@ -23,10 +23,6 @@
       "component": "google-analytics-data",
       "version_file": "lib/google/analytics/data/version.rb"
     },
-    "google-analytics-data-v1alpha": {
-      "component": "google-analytics-data-v1alpha",
-      "version_file": "lib/google/analytics/data/v1alpha/version.rb"
-    },
     "google-analytics-data-v1beta": {
       "component": "google-analytics-data-v1beta",
       "version_file": "lib/google/analytics/data/v1beta/version.rb"
@@ -359,6 +355,14 @@
       "component": "google-cloud-compute-v1",
       "version_file": "lib/google/cloud/compute/v1/version.rb"
     },
+    "google-cloud-confidential_computing": {
+      "component": "google-cloud-confidential_computing",
+      "version_file": "lib/google/cloud/confidential_computing/version.rb"
+    },
+    "google-cloud-confidential_computing-v1": {
+      "component": "google-cloud-confidential_computing-v1",
+      "version_file": "lib/google/cloud/confidential_computing/v1/version.rb"
+    },
     "google-cloud-contact_center_insights": {
       "component": "google-cloud-contact_center_insights",
       "version_file": "lib/google/cloud/contact_center_insights/version.rb"
@@ -455,10 +459,6 @@
       "component": "google-cloud-dataproc-v1",
       "version_file": "lib/google/cloud/dataproc/v1/version.rb"
     },
-    "google-cloud-dataproc-v1beta2": {
-      "component": "google-cloud-dataproc-v1beta2",
-      "version_file": "lib/google/cloud/dataproc/v1beta2/version.rb"
-    },
     "google-cloud-dataqna": {
       "component": "google-cloud-dataqna",
       "version_file": "lib/google/cloud/dataqna/version.rb"
@@ -526,6 +526,10 @@
     "google-cloud-dialogflow-v2": {
       "component": "google-cloud-dialogflow-v2",
       "version_file": "lib/google/cloud/dialogflow/v2/version.rb"
+    },
+    "google-cloud-discovery_engine-v1beta": {
+      "component": "google-cloud-discovery_engine-v1beta",
+      "version_file": "lib/google/cloud/discovery_engine/v1beta/version.rb"
     },
     "google-cloud-dlp": {
       "component": "google-cloud-dlp",
@@ -1033,7 +1037,7 @@
     },
     "google-cloud-secret_manager-v1": {
       "component": "google-cloud-secret_manager-v1",
-      "version-file": "lib/google/cloud/secret_manager/v1/version.rb"
+      "version_file": "lib/google/cloud/secret_manager/v1/version.rb"
     },
     "google-cloud-secret_manager-v1beta1": {
       "component": "google-cloud-secret_manager-v1beta1",
@@ -1146,6 +1150,14 @@
     "google-cloud-storage": {
       "component": "google-cloud-storage",
       "version_file": "lib/google/cloud/storage/version.rb"
+    },
+    "google-cloud-storage_insights": {
+      "component": "google-cloud-storage_insights",
+      "version_file": "lib/google/cloud/storage_insights/version.rb"
+    },
+    "google-cloud-storage_insights-v1": {
+      "component": "google-cloud-storage_insights-v1",
+      "version_file": "lib/google/cloud/storage_insights/v1/version.rb"
     },
     "google-cloud-storage_transfer": {
       "component": "google-cloud-storage_transfer",
@@ -1398,10 +1410,6 @@
     "grafeas": {
       "component": "grafeas",
       "version_file": "lib/grafeas/version.rb"
-    },
-    "grafeas-client": {
-      "component": "grafeas-client",
-      "version_file": "lib/grafeas/client/version.rb"
     },
     "grafeas-v1": {
       "component": "grafeas-v1",

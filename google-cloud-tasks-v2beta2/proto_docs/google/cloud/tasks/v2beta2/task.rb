@@ -24,7 +24,8 @@ module Google
         # A unit of scheduled work.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Optionally caller-specified in {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#create_task CreateTask}.
+        #     Optionally caller-specified in
+        #     {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#create_task CreateTask}.
         #
         #     The task name.
         #
@@ -48,16 +49,21 @@ module Google
         #   @return [::Google::Cloud::Tasks::V2beta2::AppEngineHttpRequest]
         #     App Engine HTTP request that is sent to the task's target. Can
         #     be set only if
-        #     {::Google::Cloud::Tasks::V2beta2::Queue#app_engine_http_target app_engine_http_target} is set
-        #     on the queue.
+        #     {::Google::Cloud::Tasks::V2beta2::Queue#app_engine_http_target app_engine_http_target}
+        #     is set on the queue.
         #
-        #     An App Engine task is a task that has {::Google::Cloud::Tasks::V2beta2::AppEngineHttpRequest AppEngineHttpRequest} set.
+        #     An App Engine task is a task that has
+        #     {::Google::Cloud::Tasks::V2beta2::AppEngineHttpRequest AppEngineHttpRequest}
+        #     set.
         # @!attribute [rw] pull_message
         #   @return [::Google::Cloud::Tasks::V2beta2::PullMessage]
-        #     {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#lease_tasks LeaseTasks} to process the task. Can be
-        #     set only if {::Google::Cloud::Tasks::V2beta2::Queue#pull_target pull_target} is set on the queue.
+        #     {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#lease_tasks LeaseTasks} to process
+        #     the task. Can be set only if
+        #     {::Google::Cloud::Tasks::V2beta2::Queue#pull_target pull_target} is set on the
+        #     queue.
         #
-        #     A pull task is a task that has {::Google::Cloud::Tasks::V2beta2::PullMessage PullMessage} set.
+        #     A pull task is a task that has
+        #     {::Google::Cloud::Tasks::V2beta2::PullMessage PullMessage} set.
         # @!attribute [rw] schedule_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The time when the task is scheduled to be attempted.
@@ -67,7 +73,8 @@ module Google
         #     For pull queues, this is the time when the task is available to
         #     be leased; if a task is currently leased, this is the time when
         #     the current lease expires, that is, the time that the task was
-        #     leased plus the {::Google::Cloud::Tasks::V2beta2::LeaseTasksRequest#lease_duration lease_duration}.
+        #     leased plus the
+        #     {::Google::Cloud::Tasks::V2beta2::LeaseTasksRequest#lease_duration lease_duration}.
         #
         #     `schedule_time` will be truncated to the nearest microsecond.
         # @!attribute [rw] create_time
@@ -80,13 +87,14 @@ module Google
         #     Output only. The task status.
         # @!attribute [rw] view
         #   @return [::Google::Cloud::Tasks::V2beta2::Task::View]
-        #     Output only. The view specifies which subset of the {::Google::Cloud::Tasks::V2beta2::Task Task} has
-        #     been returned.
+        #     Output only. The view specifies which subset of the
+        #     {::Google::Cloud::Tasks::V2beta2::Task Task} has been returned.
         class Task
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # The view specifies a subset of {::Google::Cloud::Tasks::V2beta2::Task Task} data.
+          # The view specifies a subset of {::Google::Cloud::Tasks::V2beta2::Task Task}
+          # data.
           #
           # When a task is returned in a response, not all
           # information is retrieved by default because some data, such as
@@ -101,18 +109,21 @@ module Google
             # sensitive data.
             #
             # This view does not include the
-            # ({::Google::Cloud::Tasks::V2beta2::AppEngineHttpRequest payload in AppEngineHttpRequest} and
-            # {::Google::Cloud::Tasks::V2beta2::PullMessage#payload payload in PullMessage}). These payloads are
-            # desirable to return only when needed, because they can be large
-            # and because of the sensitivity of the data that you choose to
-            # store in it.
+            # ([payload in
+            # AppEngineHttpRequest][google.cloud.tasks.v2beta2.AppEngineHttpRequest]
+            # and [payload in
+            # PullMessage][google.cloud.tasks.v2beta2.PullMessage.payload]). These
+            # payloads are desirable to return only when needed, because they can be
+            # large and because of the sensitivity of the data that you choose to store
+            # in it.
             BASIC = 1
 
             # All information is returned.
             #
-            # Authorization for {::Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL} requires
-            # `cloudtasks.tasks.fullView` [Google IAM](https://cloud.google.com/iam/)
-            # permission on the {::Google::Cloud::Tasks::V2beta2::Queue Queue} resource.
+            # Authorization for {::Google::Cloud::Tasks::V2beta2::Task::View::FULL FULL}
+            # requires `cloudtasks.tasks.fullView` [Google
+            # IAM](https://cloud.google.com/iam/) permission on the
+            # {::Google::Cloud::Tasks::V2beta2::Queue Queue} resource.
             FULL = 2
           end
         end
@@ -128,20 +139,26 @@ module Google
         #   @return [::Integer]
         #     Output only. The number of attempts which have received a response.
         #
-        #     This field is not calculated for {::Google::Cloud::Tasks::V2beta2::PullMessage pull tasks}.
+        #     This field is not calculated for [pull
+        #     tasks][google.cloud.tasks.v2beta2.PullMessage].
         # @!attribute [rw] first_attempt_status
         #   @return [::Google::Cloud::Tasks::V2beta2::AttemptStatus]
         #     Output only. The status of the task's first attempt.
         #
-        #     Only {::Google::Cloud::Tasks::V2beta2::AttemptStatus#dispatch_time dispatch_time} will be set.
-        #     The other {::Google::Cloud::Tasks::V2beta2::AttemptStatus AttemptStatus} information is not retained by Cloud Tasks.
+        #     Only
+        #     {::Google::Cloud::Tasks::V2beta2::AttemptStatus#dispatch_time dispatch_time}
+        #     will be set. The other
+        #     {::Google::Cloud::Tasks::V2beta2::AttemptStatus AttemptStatus} information is
+        #     not retained by Cloud Tasks.
         #
-        #     This field is not calculated for {::Google::Cloud::Tasks::V2beta2::PullMessage pull tasks}.
+        #     This field is not calculated for [pull
+        #     tasks][google.cloud.tasks.v2beta2.PullMessage].
         # @!attribute [rw] last_attempt_status
         #   @return [::Google::Cloud::Tasks::V2beta2::AttemptStatus]
         #     Output only. The status of the task's last attempt.
         #
-        #     This field is not calculated for {::Google::Cloud::Tasks::V2beta2::PullMessage pull tasks}.
+        #     This field is not calculated for [pull
+        #     tasks][google.cloud.tasks.v2beta2.PullMessage].
         class TaskStatus
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

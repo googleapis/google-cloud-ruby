@@ -1,5 +1,11 @@
 # Release History
 
+### 0.10.1 (2023-05-10)
+
+#### Documentation
+
+* update documentation to require certain fields ([#21563](https://github.com/googleapis/google-cloud-ruby/issues/21563)) 
+
 ### 0.10.0 (2023-02-23)
 
 #### Features

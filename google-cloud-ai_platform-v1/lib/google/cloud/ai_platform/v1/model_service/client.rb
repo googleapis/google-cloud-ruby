@@ -549,8 +549,10 @@ module Google
             #   @param page_token [::String]
             #     The standard list page token.
             #     Typically obtained via
-            #     {::Google::Cloud::AIPlatform::V1::ListModelVersionsResponse#next_page_token ListModelVersionsResponse.next_page_token}
-            #     of the previous [ModelService.ListModelversions][] call.
+            #     {::Google::Cloud::AIPlatform::V1::ListModelVersionsResponse#next_page_token next_page_token}
+            #     of the previous
+            #     {::Google::Cloud::AIPlatform::V1::ModelService::Client#list_model_versions ListModelVersions}
+            #     call.
             #   @param filter [::String]
             #     An expression for filtering the results of the request. For field names
             #     both snake_case and camelCase are supported.

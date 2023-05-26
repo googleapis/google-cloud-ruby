@@ -8,6 +8,7 @@ require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/longrunning/operations_pb'
+require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/rpc/status_pb'
@@ -27,6 +28,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :last_connection_time, :message, 11, "google.protobuf.Timestamp"
       optional :unique_id, :string, 12
       optional :infrastructure_type, :enum, 13, "google.cloud.gkehub.v1beta1.Membership.InfrastructureType"
+      optional :monitoring_config, :message, 14, "google.cloud.gkehub.v1beta1.MonitoringConfig"
       oneof :type do
         optional :endpoint, :message, 4, "google.cloud.gkehub.v1beta1.MembershipEndpoint"
       end
@@ -103,6 +105,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :identity_provider, :string, 3
       optional :oidc_jwks, :bytes, 4
     end
+    add_message "google.cloud.gkehub.v1beta1.MonitoringConfig" do
+      optional :project_id, :string, 1
+      optional :location, :string, 2
+      optional :cluster, :string, 3
+      optional :kubernetes_metrics_prefix, :string, 4
+      optional :cluster_hash, :string, 5
+    end
     add_message "google.cloud.gkehub.v1beta1.MembershipState" do
       optional :code, :enum, 1, "google.cloud.gkehub.v1beta1.MembershipState.Code"
       optional :description, :string, 2
@@ -140,6 +149,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.gkehub.v1beta1.DeleteMembershipRequest" do
       optional :name, :string, 1
       optional :request_id, :string, 4
+      optional :force, :bool, 5
     end
     add_message "google.cloud.gkehub.v1beta1.UpdateMembershipRequest" do
       optional :name, :string, 1
@@ -218,6 +228,7 @@ module Google
         ApplianceCluster = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkehub.v1beta1.ApplianceCluster").msgclass
         KubernetesMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkehub.v1beta1.KubernetesMetadata").msgclass
         Authority = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkehub.v1beta1.Authority").msgclass
+        MonitoringConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkehub.v1beta1.MonitoringConfig").msgclass
         MembershipState = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkehub.v1beta1.MembershipState").msgclass
         MembershipState::Code = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkehub.v1beta1.MembershipState.Code").enummodule
         ListMembershipsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkehub.v1beta1.ListMembershipsRequest").msgclass

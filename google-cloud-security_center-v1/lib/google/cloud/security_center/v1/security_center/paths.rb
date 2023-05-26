@@ -77,6 +77,47 @@ module Google
             end
 
             ##
+            # Create a fully-qualified DlpJob resource string.
+            #
+            # @overload dlp_job_path(project:, dlp_job:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/dlpJobs/{dlp_job}`
+            #
+            #   @param project [String]
+            #   @param dlp_job [String]
+            #
+            # @overload dlp_job_path(project:, location:, dlp_job:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/dlpJobs/{dlp_job}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param dlp_job [String]
+            #
+            # @return [::String]
+            def dlp_job_path **args
+              resources = {
+                "dlp_job:project" => (proc do |project:, dlp_job:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+                  "projects/#{project}/dlpJobs/#{dlp_job}"
+                end),
+                "dlp_job:location:project" => (proc do |project:, location:, dlp_job:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/dlpJobs/#{dlp_job}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
+            ##
             # Create a fully-qualified EffectiveSecurityHealthAnalyticsCustomModule resource string.
             #
             # @overload effective_security_health_analytics_custom_module_path(organization:, effective_custom_module:)
@@ -646,6 +687,47 @@ module Google
                   raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
                   "projects/#{project}/sources/#{source}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
+            ##
+            # Create a fully-qualified TableDataProfile resource string.
+            #
+            # @overload table_data_profile_path(project:, table_profile:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/tableProfiles/{table_profile}`
+            #
+            #   @param project [String]
+            #   @param table_profile [String]
+            #
+            # @overload table_data_profile_path(project:, location:, table_profile:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/locations/{location}/tableProfiles/{table_profile}`
+            #
+            #   @param project [String]
+            #   @param location [String]
+            #   @param table_profile [String]
+            #
+            # @return [::String]
+            def table_data_profile_path **args
+              resources = {
+                "project:table_profile" => (proc do |project:, table_profile:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+                  "projects/#{project}/tableProfiles/#{table_profile}"
+                end),
+                "location:project:table_profile" => (proc do |project:, location:, table_profile:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                  "projects/#{project}/locations/#{location}/tableProfiles/#{table_profile}"
                 end)
               }
 
