@@ -67,50 +67,8 @@ module Google
                 default_config = Client::Configuration.new parent_config
 
                 default_config.timeout = 60.0
-
-                default_config.rpcs.search_catalog.timeout = 60.0
-                default_config.rpcs.search_catalog.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
-                }
-
-                default_config.rpcs.get_entry_group.timeout = 60.0
-                default_config.rpcs.get_entry_group.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
-                }
-
-                default_config.rpcs.list_entry_groups.timeout = 60.0
-                default_config.rpcs.list_entry_groups.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
-                }
-
-                default_config.rpcs.get_entry.timeout = 60.0
-                default_config.rpcs.get_entry.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
-                }
-
-                default_config.rpcs.lookup_entry.timeout = 60.0
-                default_config.rpcs.lookup_entry.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
-                }
-
-                default_config.rpcs.list_entries.timeout = 60.0
-                default_config.rpcs.list_entries.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
-                }
-
-                default_config.rpcs.list_tags.timeout = 60.0
-                default_config.rpcs.list_tags.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
-                }
-
-                default_config.rpcs.get_iam_policy.timeout = 60.0
-                default_config.rpcs.get_iam_policy.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
-                }
-
-                default_config.rpcs.import_entries.timeout = 60.0
-                default_config.rpcs.import_entries.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                default_config.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 8, 13]
                 }
 
                 default_config
@@ -1275,7 +1233,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload lookup_entry(linked_resource: nil, sql_resource: nil, fully_qualified_name: nil)
+            # @overload lookup_entry(linked_resource: nil, sql_resource: nil, fully_qualified_name: nil, project: nil, location: nil)
             #   Pass arguments to `lookup_entry` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1304,7 +1262,9 @@ module Google
             #     [Lexical structure in Standard SQL]
             #     (https://cloud.google.com/bigquery/docs/reference/standard-sql/lexical).
             #   @param fully_qualified_name [::String]
-            #     Fully qualified name (FQN) of the resource.
+            #     [Fully Qualified Name
+            #     (FQN)](https://cloud.google.com//data-catalog/docs/fully-qualified-names)
+            #     of the resource.
             #
             #     FQNs take two forms:
             #
@@ -1319,6 +1279,14 @@ module Google
             #     Example for a DPMS table:
             #
             #     `dataproc_metastore:{PROJECT_ID}.{LOCATION_ID}.{INSTANCE_ID}.{DATABASE_ID}.{TABLE_ID}`
+            #   @param project [::String]
+            #     Project where the lookup should be performed. Required to lookup
+            #     entry that is not a part of `DPMS` or `DATAPLEX` `integrated_system`
+            #     using its `fully_qualified_name`. Ignored in other cases.
+            #   @param location [::String]
+            #     Location where the lookup should be performed. Required to lookup
+            #     entry that is not a part of `DPMS` or `DATAPLEX` `integrated_system`
+            #     using its `fully_qualified_name`. Ignored in other cases.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DataCatalog::V1::Entry]
@@ -3560,7 +3528,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload import_entries(parent: nil, gcs_bucket_path: nil)
+            # @overload import_entries(parent: nil, gcs_bucket_path: nil, job_id: nil)
             #   Pass arguments to `import_entries` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -3569,6 +3537,9 @@ module Google
             #     Required. Target entry group for ingested entries.
             #   @param gcs_bucket_path [::String]
             #     Path to a Cloud Storage bucket that contains a dump ready for ingestion.
+            #   @param job_id [::String]
+            #     Optional. (Optional) Dataplex task job id, if specified will be used as
+            #     part of ImportEntries LRO ID
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
