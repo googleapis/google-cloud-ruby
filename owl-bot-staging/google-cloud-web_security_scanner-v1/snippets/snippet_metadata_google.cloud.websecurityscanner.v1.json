@@ -1,0 +1,535 @@
+{
+  "client_library": {
+    "name": "google-cloud-web_security_scanner-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.websecurityscanner.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "websecurityscanner_v1_generated_WebSecurityScanner_CreateScanConfig_sync",
+      "title": "Snippet for the create_scan_config call in the WebSecurityScanner service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client#create_scan_config. It may require modification in order to execute successfully.",
+      "file": "web_security_scanner/create_scan_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_scan_config",
+        "full_name": "::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client#create_scan_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::WebSecurityScanner::V1::CreateScanConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::WebSecurityScanner::V1::ScanConfig",
+        "client": {
+          "short_name": "WebSecurityScanner::Client",
+          "full_name": "::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client"
+        },
+        "method": {
+          "short_name": "CreateScanConfig",
+          "full_name": "google.cloud.websecurityscanner.v1.WebSecurityScanner.CreateScanConfig",
+          "service": {
+            "short_name": "WebSecurityScanner",
+            "full_name": "google.cloud.websecurityscanner.v1.WebSecurityScanner"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "websecurityscanner_v1_generated_WebSecurityScanner_DeleteScanConfig_sync",
+      "title": "Snippet for the delete_scan_config call in the WebSecurityScanner service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client#delete_scan_config. It may require modification in order to execute successfully.",
+      "file": "web_security_scanner/delete_scan_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_scan_config",
+        "full_name": "::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client#delete_scan_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::WebSecurityScanner::V1::DeleteScanConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "WebSecurityScanner::Client",
+          "full_name": "::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client"
+        },
+        "method": {
+          "short_name": "DeleteScanConfig",
+          "full_name": "google.cloud.websecurityscanner.v1.WebSecurityScanner.DeleteScanConfig",
+          "service": {
+            "short_name": "WebSecurityScanner",
+            "full_name": "google.cloud.websecurityscanner.v1.WebSecurityScanner"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "websecurityscanner_v1_generated_WebSecurityScanner_GetScanConfig_sync",
+      "title": "Snippet for the get_scan_config call in the WebSecurityScanner service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client#get_scan_config. It may require modification in order to execute successfully.",
+      "file": "web_security_scanner/get_scan_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_scan_config",
+        "full_name": "::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client#get_scan_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::WebSecurityScanner::V1::GetScanConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::WebSecurityScanner::V1::ScanConfig",
+        "client": {
+          "short_name": "WebSecurityScanner::Client",
+          "full_name": "::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client"
+        },
+        "method": {
+          "short_name": "GetScanConfig",
+          "full_name": "google.cloud.websecurityscanner.v1.WebSecurityScanner.GetScanConfig",
+          "service": {
+            "short_name": "WebSecurityScanner",
+            "full_name": "google.cloud.websecurityscanner.v1.WebSecurityScanner"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "websecurityscanner_v1_generated_WebSecurityScanner_ListScanConfigs_sync",
+      "title": "Snippet for the list_scan_configs call in the WebSecurityScanner service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client#list_scan_configs. It may require modification in order to execute successfully.",
+      "file": "web_security_scanner/list_scan_configs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_scan_configs",
+        "full_name": "::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client#list_scan_configs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::WebSecurityScanner::V1::ListScanConfigsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::WebSecurityScanner::V1::ListScanConfigsResponse",
+        "client": {
+          "short_name": "WebSecurityScanner::Client",
+          "full_name": "::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client"
+        },
+        "method": {
+          "short_name": "ListScanConfigs",
+          "full_name": "google.cloud.websecurityscanner.v1.WebSecurityScanner.ListScanConfigs",
+          "service": {
+            "short_name": "WebSecurityScanner",
+            "full_name": "google.cloud.websecurityscanner.v1.WebSecurityScanner"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "websecurityscanner_v1_generated_WebSecurityScanner_UpdateScanConfig_sync",
+      "title": "Snippet for the update_scan_config call in the WebSecurityScanner service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client#update_scan_config. It may require modification in order to execute successfully.",
+      "file": "web_security_scanner/update_scan_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_scan_config",
+        "full_name": "::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client#update_scan_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::WebSecurityScanner::V1::UpdateScanConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::WebSecurityScanner::V1::ScanConfig",
+        "client": {
+          "short_name": "WebSecurityScanner::Client",
+          "full_name": "::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client"
+        },
+        "method": {
+          "short_name": "UpdateScanConfig",
+          "full_name": "google.cloud.websecurityscanner.v1.WebSecurityScanner.UpdateScanConfig",
+          "service": {
+            "short_name": "WebSecurityScanner",
+            "full_name": "google.cloud.websecurityscanner.v1.WebSecurityScanner"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "websecurityscanner_v1_generated_WebSecurityScanner_StartScanRun_sync",
+      "title": "Snippet for the start_scan_run call in the WebSecurityScanner service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client#start_scan_run. It may require modification in order to execute successfully.",
+      "file": "web_security_scanner/start_scan_run.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "start_scan_run",
+        "full_name": "::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client#start_scan_run",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::WebSecurityScanner::V1::StartScanRunRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::WebSecurityScanner::V1::ScanRun",
+        "client": {
+          "short_name": "WebSecurityScanner::Client",
+          "full_name": "::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client"
+        },
+        "method": {
+          "short_name": "StartScanRun",
+          "full_name": "google.cloud.websecurityscanner.v1.WebSecurityScanner.StartScanRun",
+          "service": {
+            "short_name": "WebSecurityScanner",
+            "full_name": "google.cloud.websecurityscanner.v1.WebSecurityScanner"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "websecurityscanner_v1_generated_WebSecurityScanner_GetScanRun_sync",
+      "title": "Snippet for the get_scan_run call in the WebSecurityScanner service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client#get_scan_run. It may require modification in order to execute successfully.",
+      "file": "web_security_scanner/get_scan_run.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_scan_run",
+        "full_name": "::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client#get_scan_run",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::WebSecurityScanner::V1::GetScanRunRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::WebSecurityScanner::V1::ScanRun",
+        "client": {
+          "short_name": "WebSecurityScanner::Client",
+          "full_name": "::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client"
+        },
+        "method": {
+          "short_name": "GetScanRun",
+          "full_name": "google.cloud.websecurityscanner.v1.WebSecurityScanner.GetScanRun",
+          "service": {
+            "short_name": "WebSecurityScanner",
+            "full_name": "google.cloud.websecurityscanner.v1.WebSecurityScanner"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "websecurityscanner_v1_generated_WebSecurityScanner_ListScanRuns_sync",
+      "title": "Snippet for the list_scan_runs call in the WebSecurityScanner service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client#list_scan_runs. It may require modification in order to execute successfully.",
+      "file": "web_security_scanner/list_scan_runs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_scan_runs",
+        "full_name": "::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client#list_scan_runs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::WebSecurityScanner::V1::ListScanRunsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::WebSecurityScanner::V1::ListScanRunsResponse",
+        "client": {
+          "short_name": "WebSecurityScanner::Client",
+          "full_name": "::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client"
+        },
+        "method": {
+          "short_name": "ListScanRuns",
+          "full_name": "google.cloud.websecurityscanner.v1.WebSecurityScanner.ListScanRuns",
+          "service": {
+            "short_name": "WebSecurityScanner",
+            "full_name": "google.cloud.websecurityscanner.v1.WebSecurityScanner"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "websecurityscanner_v1_generated_WebSecurityScanner_StopScanRun_sync",
+      "title": "Snippet for the stop_scan_run call in the WebSecurityScanner service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client#stop_scan_run. It may require modification in order to execute successfully.",
+      "file": "web_security_scanner/stop_scan_run.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "stop_scan_run",
+        "full_name": "::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client#stop_scan_run",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::WebSecurityScanner::V1::StopScanRunRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::WebSecurityScanner::V1::ScanRun",
+        "client": {
+          "short_name": "WebSecurityScanner::Client",
+          "full_name": "::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client"
+        },
+        "method": {
+          "short_name": "StopScanRun",
+          "full_name": "google.cloud.websecurityscanner.v1.WebSecurityScanner.StopScanRun",
+          "service": {
+            "short_name": "WebSecurityScanner",
+            "full_name": "google.cloud.websecurityscanner.v1.WebSecurityScanner"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "websecurityscanner_v1_generated_WebSecurityScanner_ListCrawledUrls_sync",
+      "title": "Snippet for the list_crawled_urls call in the WebSecurityScanner service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client#list_crawled_urls. It may require modification in order to execute successfully.",
+      "file": "web_security_scanner/list_crawled_urls.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_crawled_urls",
+        "full_name": "::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client#list_crawled_urls",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::WebSecurityScanner::V1::ListCrawledUrlsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::WebSecurityScanner::V1::ListCrawledUrlsResponse",
+        "client": {
+          "short_name": "WebSecurityScanner::Client",
+          "full_name": "::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client"
+        },
+        "method": {
+          "short_name": "ListCrawledUrls",
+          "full_name": "google.cloud.websecurityscanner.v1.WebSecurityScanner.ListCrawledUrls",
+          "service": {
+            "short_name": "WebSecurityScanner",
+            "full_name": "google.cloud.websecurityscanner.v1.WebSecurityScanner"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "websecurityscanner_v1_generated_WebSecurityScanner_GetFinding_sync",
+      "title": "Snippet for the get_finding call in the WebSecurityScanner service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client#get_finding. It may require modification in order to execute successfully.",
+      "file": "web_security_scanner/get_finding.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_finding",
+        "full_name": "::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client#get_finding",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::WebSecurityScanner::V1::GetFindingRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::WebSecurityScanner::V1::Finding",
+        "client": {
+          "short_name": "WebSecurityScanner::Client",
+          "full_name": "::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client"
+        },
+        "method": {
+          "short_name": "GetFinding",
+          "full_name": "google.cloud.websecurityscanner.v1.WebSecurityScanner.GetFinding",
+          "service": {
+            "short_name": "WebSecurityScanner",
+            "full_name": "google.cloud.websecurityscanner.v1.WebSecurityScanner"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "websecurityscanner_v1_generated_WebSecurityScanner_ListFindings_sync",
+      "title": "Snippet for the list_findings call in the WebSecurityScanner service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client#list_findings. It may require modification in order to execute successfully.",
+      "file": "web_security_scanner/list_findings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_findings",
+        "full_name": "::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client#list_findings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::WebSecurityScanner::V1::ListFindingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::WebSecurityScanner::V1::ListFindingsResponse",
+        "client": {
+          "short_name": "WebSecurityScanner::Client",
+          "full_name": "::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client"
+        },
+        "method": {
+          "short_name": "ListFindings",
+          "full_name": "google.cloud.websecurityscanner.v1.WebSecurityScanner.ListFindings",
+          "service": {
+            "short_name": "WebSecurityScanner",
+            "full_name": "google.cloud.websecurityscanner.v1.WebSecurityScanner"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "websecurityscanner_v1_generated_WebSecurityScanner_ListFindingTypeStats_sync",
+      "title": "Snippet for the list_finding_type_stats call in the WebSecurityScanner service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client#list_finding_type_stats. It may require modification in order to execute successfully.",
+      "file": "web_security_scanner/list_finding_type_stats.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_finding_type_stats",
+        "full_name": "::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client#list_finding_type_stats",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::WebSecurityScanner::V1::ListFindingTypeStatsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::WebSecurityScanner::V1::ListFindingTypeStatsResponse",
+        "client": {
+          "short_name": "WebSecurityScanner::Client",
+          "full_name": "::Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client"
+        },
+        "method": {
+          "short_name": "ListFindingTypeStats",
+          "full_name": "google.cloud.websecurityscanner.v1.WebSecurityScanner.ListFindingTypeStats",
+          "service": {
+            "short_name": "WebSecurityScanner",
+            "full_name": "google.cloud.websecurityscanner.v1.WebSecurityScanner"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
