@@ -35,6 +35,19 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Change stream configuration.
+          # @!attribute [rw] retention_period
+          #   @return [::Google::Protobuf::Duration]
+          #     How long the change stream should be retained. Change stream data older
+          #     than the retention period will not be returned when reading the change
+          #     stream from the table.
+          #     Values must be at least 1 day and at most 7 days, and will be truncated to
+          #     microsecond granularity.
+          class ChangeStreamConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # A collection of user data indexed by row, column, and timestamp.
           # Each table is served using the resources of its parent cluster.
           # @!attribute [rw] name
@@ -63,6 +76,11 @@ module Google
           #   @return [::Google::Cloud::Bigtable::Admin::V2::RestoreInfo]
           #     Output only. If this table was restored from another data source (e.g. a backup), this
           #     field will be populated with information about the restore.
+          # @!attribute [rw] change_stream_config
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::ChangeStreamConfig]
+          #     If specified, enable the change stream on this table.
+          #     Otherwise, the change stream is disabled and the change stream is not
+          #     retained.
           # @!attribute [rw] deletion_protection
           #   @return [::Boolean]
           #     Set to true to make the table protected against data loss. i.e. deleting
