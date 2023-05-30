@@ -1,0 +1,735 @@
+{
+  "client_library": {
+    "name": "google-cloud-dataflow-v1beta3",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.dataflow.v1beta3",
+        "version": "v1beta3"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "dataflow_v1beta3_generated_Snapshots_GetSnapshot_sync",
+      "title": "Snippet for the get_snapshot call in the Snapshots service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataflow::V1beta3::Snapshots::Client#get_snapshot. It may require modification in order to execute successfully.",
+      "file": "snapshots/get_snapshot.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_snapshot",
+        "full_name": "::Google::Cloud::Dataflow::V1beta3::Snapshots::Client#get_snapshot",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataflow::V1beta3::GetSnapshotRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataflow::V1beta3::Snapshot",
+        "client": {
+          "short_name": "Snapshots::Client",
+          "full_name": "::Google::Cloud::Dataflow::V1beta3::Snapshots::Client"
+        },
+        "method": {
+          "short_name": "GetSnapshot",
+          "full_name": "google.dataflow.v1beta3.SnapshotsV1Beta3.GetSnapshot",
+          "service": {
+            "short_name": "Snapshots",
+            "full_name": "google.dataflow.v1beta3.SnapshotsV1Beta3"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataflow_v1beta3_generated_Snapshots_DeleteSnapshot_sync",
+      "title": "Snippet for the delete_snapshot call in the Snapshots service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataflow::V1beta3::Snapshots::Client#delete_snapshot. It may require modification in order to execute successfully.",
+      "file": "snapshots/delete_snapshot.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_snapshot",
+        "full_name": "::Google::Cloud::Dataflow::V1beta3::Snapshots::Client#delete_snapshot",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataflow::V1beta3::DeleteSnapshotRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataflow::V1beta3::DeleteSnapshotResponse",
+        "client": {
+          "short_name": "Snapshots::Client",
+          "full_name": "::Google::Cloud::Dataflow::V1beta3::Snapshots::Client"
+        },
+        "method": {
+          "short_name": "DeleteSnapshot",
+          "full_name": "google.dataflow.v1beta3.SnapshotsV1Beta3.DeleteSnapshot",
+          "service": {
+            "short_name": "Snapshots",
+            "full_name": "google.dataflow.v1beta3.SnapshotsV1Beta3"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataflow_v1beta3_generated_Snapshots_ListSnapshots_sync",
+      "title": "Snippet for the list_snapshots call in the Snapshots service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataflow::V1beta3::Snapshots::Client#list_snapshots. It may require modification in order to execute successfully.",
+      "file": "snapshots/list_snapshots.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_snapshots",
+        "full_name": "::Google::Cloud::Dataflow::V1beta3::Snapshots::Client#list_snapshots",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataflow::V1beta3::ListSnapshotsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataflow::V1beta3::ListSnapshotsResponse",
+        "client": {
+          "short_name": "Snapshots::Client",
+          "full_name": "::Google::Cloud::Dataflow::V1beta3::Snapshots::Client"
+        },
+        "method": {
+          "short_name": "ListSnapshots",
+          "full_name": "google.dataflow.v1beta3.SnapshotsV1Beta3.ListSnapshots",
+          "service": {
+            "short_name": "Snapshots",
+            "full_name": "google.dataflow.v1beta3.SnapshotsV1Beta3"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataflow_v1beta3_generated_Jobs_CreateJob_sync",
+      "title": "Snippet for the create_job call in the Jobs service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataflow::V1beta3::Jobs::Client#create_job. It may require modification in order to execute successfully.",
+      "file": "jobs/create_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_job",
+        "full_name": "::Google::Cloud::Dataflow::V1beta3::Jobs::Client#create_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataflow::V1beta3::CreateJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataflow::V1beta3::Job",
+        "client": {
+          "short_name": "Jobs::Client",
+          "full_name": "::Google::Cloud::Dataflow::V1beta3::Jobs::Client"
+        },
+        "method": {
+          "short_name": "CreateJob",
+          "full_name": "google.dataflow.v1beta3.JobsV1Beta3.CreateJob",
+          "service": {
+            "short_name": "Jobs",
+            "full_name": "google.dataflow.v1beta3.JobsV1Beta3"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataflow_v1beta3_generated_Jobs_GetJob_sync",
+      "title": "Snippet for the get_job call in the Jobs service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataflow::V1beta3::Jobs::Client#get_job. It may require modification in order to execute successfully.",
+      "file": "jobs/get_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_job",
+        "full_name": "::Google::Cloud::Dataflow::V1beta3::Jobs::Client#get_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataflow::V1beta3::GetJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataflow::V1beta3::Job",
+        "client": {
+          "short_name": "Jobs::Client",
+          "full_name": "::Google::Cloud::Dataflow::V1beta3::Jobs::Client"
+        },
+        "method": {
+          "short_name": "GetJob",
+          "full_name": "google.dataflow.v1beta3.JobsV1Beta3.GetJob",
+          "service": {
+            "short_name": "Jobs",
+            "full_name": "google.dataflow.v1beta3.JobsV1Beta3"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataflow_v1beta3_generated_Jobs_UpdateJob_sync",
+      "title": "Snippet for the update_job call in the Jobs service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataflow::V1beta3::Jobs::Client#update_job. It may require modification in order to execute successfully.",
+      "file": "jobs/update_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_job",
+        "full_name": "::Google::Cloud::Dataflow::V1beta3::Jobs::Client#update_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataflow::V1beta3::UpdateJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataflow::V1beta3::Job",
+        "client": {
+          "short_name": "Jobs::Client",
+          "full_name": "::Google::Cloud::Dataflow::V1beta3::Jobs::Client"
+        },
+        "method": {
+          "short_name": "UpdateJob",
+          "full_name": "google.dataflow.v1beta3.JobsV1Beta3.UpdateJob",
+          "service": {
+            "short_name": "Jobs",
+            "full_name": "google.dataflow.v1beta3.JobsV1Beta3"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataflow_v1beta3_generated_Jobs_ListJobs_sync",
+      "title": "Snippet for the list_jobs call in the Jobs service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataflow::V1beta3::Jobs::Client#list_jobs. It may require modification in order to execute successfully.",
+      "file": "jobs/list_jobs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_jobs",
+        "full_name": "::Google::Cloud::Dataflow::V1beta3::Jobs::Client#list_jobs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataflow::V1beta3::ListJobsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataflow::V1beta3::ListJobsResponse",
+        "client": {
+          "short_name": "Jobs::Client",
+          "full_name": "::Google::Cloud::Dataflow::V1beta3::Jobs::Client"
+        },
+        "method": {
+          "short_name": "ListJobs",
+          "full_name": "google.dataflow.v1beta3.JobsV1Beta3.ListJobs",
+          "service": {
+            "short_name": "Jobs",
+            "full_name": "google.dataflow.v1beta3.JobsV1Beta3"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataflow_v1beta3_generated_Jobs_AggregatedListJobs_sync",
+      "title": "Snippet for the aggregated_list_jobs call in the Jobs service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataflow::V1beta3::Jobs::Client#aggregated_list_jobs. It may require modification in order to execute successfully.",
+      "file": "jobs/aggregated_list_jobs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "aggregated_list_jobs",
+        "full_name": "::Google::Cloud::Dataflow::V1beta3::Jobs::Client#aggregated_list_jobs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataflow::V1beta3::ListJobsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataflow::V1beta3::ListJobsResponse",
+        "client": {
+          "short_name": "Jobs::Client",
+          "full_name": "::Google::Cloud::Dataflow::V1beta3::Jobs::Client"
+        },
+        "method": {
+          "short_name": "AggregatedListJobs",
+          "full_name": "google.dataflow.v1beta3.JobsV1Beta3.AggregatedListJobs",
+          "service": {
+            "short_name": "Jobs",
+            "full_name": "google.dataflow.v1beta3.JobsV1Beta3"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataflow_v1beta3_generated_Jobs_CheckActiveJobs_sync",
+      "title": "Snippet for the check_active_jobs call in the Jobs service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataflow::V1beta3::Jobs::Client#check_active_jobs. It may require modification in order to execute successfully.",
+      "file": "jobs/check_active_jobs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "check_active_jobs",
+        "full_name": "::Google::Cloud::Dataflow::V1beta3::Jobs::Client#check_active_jobs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataflow::V1beta3::CheckActiveJobsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataflow::V1beta3::CheckActiveJobsResponse",
+        "client": {
+          "short_name": "Jobs::Client",
+          "full_name": "::Google::Cloud::Dataflow::V1beta3::Jobs::Client"
+        },
+        "method": {
+          "short_name": "CheckActiveJobs",
+          "full_name": "google.dataflow.v1beta3.JobsV1Beta3.CheckActiveJobs",
+          "service": {
+            "short_name": "Jobs",
+            "full_name": "google.dataflow.v1beta3.JobsV1Beta3"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataflow_v1beta3_generated_Jobs_SnapshotJob_sync",
+      "title": "Snippet for the snapshot_job call in the Jobs service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataflow::V1beta3::Jobs::Client#snapshot_job. It may require modification in order to execute successfully.",
+      "file": "jobs/snapshot_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "snapshot_job",
+        "full_name": "::Google::Cloud::Dataflow::V1beta3::Jobs::Client#snapshot_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataflow::V1beta3::SnapshotJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataflow::V1beta3::Snapshot",
+        "client": {
+          "short_name": "Jobs::Client",
+          "full_name": "::Google::Cloud::Dataflow::V1beta3::Jobs::Client"
+        },
+        "method": {
+          "short_name": "SnapshotJob",
+          "full_name": "google.dataflow.v1beta3.JobsV1Beta3.SnapshotJob",
+          "service": {
+            "short_name": "Jobs",
+            "full_name": "google.dataflow.v1beta3.JobsV1Beta3"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataflow_v1beta3_generated_Messages_ListJobMessages_sync",
+      "title": "Snippet for the list_job_messages call in the Messages service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataflow::V1beta3::Messages::Client#list_job_messages. It may require modification in order to execute successfully.",
+      "file": "messages/list_job_messages.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_job_messages",
+        "full_name": "::Google::Cloud::Dataflow::V1beta3::Messages::Client#list_job_messages",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataflow::V1beta3::ListJobMessagesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataflow::V1beta3::ListJobMessagesResponse",
+        "client": {
+          "short_name": "Messages::Client",
+          "full_name": "::Google::Cloud::Dataflow::V1beta3::Messages::Client"
+        },
+        "method": {
+          "short_name": "ListJobMessages",
+          "full_name": "google.dataflow.v1beta3.MessagesV1Beta3.ListJobMessages",
+          "service": {
+            "short_name": "Messages",
+            "full_name": "google.dataflow.v1beta3.MessagesV1Beta3"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataflow_v1beta3_generated_Metrics_GetJobMetrics_sync",
+      "title": "Snippet for the get_job_metrics call in the Metrics service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataflow::V1beta3::Metrics::Client#get_job_metrics. It may require modification in order to execute successfully.",
+      "file": "metrics/get_job_metrics.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_job_metrics",
+        "full_name": "::Google::Cloud::Dataflow::V1beta3::Metrics::Client#get_job_metrics",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataflow::V1beta3::GetJobMetricsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataflow::V1beta3::JobMetrics",
+        "client": {
+          "short_name": "Metrics::Client",
+          "full_name": "::Google::Cloud::Dataflow::V1beta3::Metrics::Client"
+        },
+        "method": {
+          "short_name": "GetJobMetrics",
+          "full_name": "google.dataflow.v1beta3.MetricsV1Beta3.GetJobMetrics",
+          "service": {
+            "short_name": "Metrics",
+            "full_name": "google.dataflow.v1beta3.MetricsV1Beta3"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataflow_v1beta3_generated_Metrics_GetJobExecutionDetails_sync",
+      "title": "Snippet for the get_job_execution_details call in the Metrics service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataflow::V1beta3::Metrics::Client#get_job_execution_details. It may require modification in order to execute successfully.",
+      "file": "metrics/get_job_execution_details.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_job_execution_details",
+        "full_name": "::Google::Cloud::Dataflow::V1beta3::Metrics::Client#get_job_execution_details",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataflow::V1beta3::GetJobExecutionDetailsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataflow::V1beta3::JobExecutionDetails",
+        "client": {
+          "short_name": "Metrics::Client",
+          "full_name": "::Google::Cloud::Dataflow::V1beta3::Metrics::Client"
+        },
+        "method": {
+          "short_name": "GetJobExecutionDetails",
+          "full_name": "google.dataflow.v1beta3.MetricsV1Beta3.GetJobExecutionDetails",
+          "service": {
+            "short_name": "Metrics",
+            "full_name": "google.dataflow.v1beta3.MetricsV1Beta3"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataflow_v1beta3_generated_Metrics_GetStageExecutionDetails_sync",
+      "title": "Snippet for the get_stage_execution_details call in the Metrics service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataflow::V1beta3::Metrics::Client#get_stage_execution_details. It may require modification in order to execute successfully.",
+      "file": "metrics/get_stage_execution_details.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_stage_execution_details",
+        "full_name": "::Google::Cloud::Dataflow::V1beta3::Metrics::Client#get_stage_execution_details",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataflow::V1beta3::GetStageExecutionDetailsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataflow::V1beta3::StageExecutionDetails",
+        "client": {
+          "short_name": "Metrics::Client",
+          "full_name": "::Google::Cloud::Dataflow::V1beta3::Metrics::Client"
+        },
+        "method": {
+          "short_name": "GetStageExecutionDetails",
+          "full_name": "google.dataflow.v1beta3.MetricsV1Beta3.GetStageExecutionDetails",
+          "service": {
+            "short_name": "Metrics",
+            "full_name": "google.dataflow.v1beta3.MetricsV1Beta3"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataflow_v1beta3_generated_TemplatesService_CreateJobFromTemplate_sync",
+      "title": "Snippet for the create_job_from_template call in the TemplatesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataflow::V1beta3::TemplatesService::Client#create_job_from_template. It may require modification in order to execute successfully.",
+      "file": "templates_service/create_job_from_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_job_from_template",
+        "full_name": "::Google::Cloud::Dataflow::V1beta3::TemplatesService::Client#create_job_from_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataflow::V1beta3::CreateJobFromTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataflow::V1beta3::Job",
+        "client": {
+          "short_name": "TemplatesService::Client",
+          "full_name": "::Google::Cloud::Dataflow::V1beta3::TemplatesService::Client"
+        },
+        "method": {
+          "short_name": "CreateJobFromTemplate",
+          "full_name": "google.dataflow.v1beta3.TemplatesService.CreateJobFromTemplate",
+          "service": {
+            "short_name": "TemplatesService",
+            "full_name": "google.dataflow.v1beta3.TemplatesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataflow_v1beta3_generated_TemplatesService_LaunchTemplate_sync",
+      "title": "Snippet for the launch_template call in the TemplatesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataflow::V1beta3::TemplatesService::Client#launch_template. It may require modification in order to execute successfully.",
+      "file": "templates_service/launch_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "launch_template",
+        "full_name": "::Google::Cloud::Dataflow::V1beta3::TemplatesService::Client#launch_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataflow::V1beta3::LaunchTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataflow::V1beta3::LaunchTemplateResponse",
+        "client": {
+          "short_name": "TemplatesService::Client",
+          "full_name": "::Google::Cloud::Dataflow::V1beta3::TemplatesService::Client"
+        },
+        "method": {
+          "short_name": "LaunchTemplate",
+          "full_name": "google.dataflow.v1beta3.TemplatesService.LaunchTemplate",
+          "service": {
+            "short_name": "TemplatesService",
+            "full_name": "google.dataflow.v1beta3.TemplatesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataflow_v1beta3_generated_TemplatesService_GetTemplate_sync",
+      "title": "Snippet for the get_template call in the TemplatesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataflow::V1beta3::TemplatesService::Client#get_template. It may require modification in order to execute successfully.",
+      "file": "templates_service/get_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_template",
+        "full_name": "::Google::Cloud::Dataflow::V1beta3::TemplatesService::Client#get_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataflow::V1beta3::GetTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataflow::V1beta3::GetTemplateResponse",
+        "client": {
+          "short_name": "TemplatesService::Client",
+          "full_name": "::Google::Cloud::Dataflow::V1beta3::TemplatesService::Client"
+        },
+        "method": {
+          "short_name": "GetTemplate",
+          "full_name": "google.dataflow.v1beta3.TemplatesService.GetTemplate",
+          "service": {
+            "short_name": "TemplatesService",
+            "full_name": "google.dataflow.v1beta3.TemplatesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataflow_v1beta3_generated_FlexTemplatesService_LaunchFlexTemplate_sync",
+      "title": "Snippet for the launch_flex_template call in the FlexTemplatesService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Dataflow::V1beta3::FlexTemplatesService::Client#launch_flex_template. It may require modification in order to execute successfully.",
+      "file": "flex_templates_service/launch_flex_template.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "launch_flex_template",
+        "full_name": "::Google::Cloud::Dataflow::V1beta3::FlexTemplatesService::Client#launch_flex_template",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dataflow::V1beta3::LaunchFlexTemplateRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dataflow::V1beta3::LaunchFlexTemplateResponse",
+        "client": {
+          "short_name": "FlexTemplatesService::Client",
+          "full_name": "::Google::Cloud::Dataflow::V1beta3::FlexTemplatesService::Client"
+        },
+        "method": {
+          "short_name": "LaunchFlexTemplate",
+          "full_name": "google.dataflow.v1beta3.FlexTemplatesService.LaunchFlexTemplate",
+          "service": {
+            "short_name": "FlexTemplatesService",
+            "full_name": "google.dataflow.v1beta3.FlexTemplatesService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
