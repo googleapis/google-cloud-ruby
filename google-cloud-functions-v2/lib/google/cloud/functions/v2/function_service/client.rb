@@ -727,7 +727,7 @@ module Google
             #     Required. The project and location in which the Google Cloud Storage signed
             #     URL should be generated, specified in the format `projects/*/locations/*`.
             #   @param kms_key_name [::String]
-            #     Resource name of a KMS crypto key (managed by the user) used to
+            #     [Preview] Resource name of a KMS crypto key (managed by the user) used to
             #     encrypt/decrypt function source code objects in intermediate Cloud Storage
             #     buckets. When you generate an upload url and upload your source code, it
             #     gets copied to an intermediate Cloud Storage bucket. The source code is
