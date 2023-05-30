@@ -1,0 +1,58 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.functions.v2",
+  "libraryPackage": "::Google::Cloud::Functions::V2",
+  "services": {
+    "FunctionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Functions::V2::FunctionService::Client",
+          "rpcs": {
+            "GetFunction": {
+              "methods": [
+                "get_function"
+              ]
+            },
+            "ListFunctions": {
+              "methods": [
+                "list_functions"
+              ]
+            },
+            "CreateFunction": {
+              "methods": [
+                "create_function"
+              ]
+            },
+            "UpdateFunction": {
+              "methods": [
+                "update_function"
+              ]
+            },
+            "DeleteFunction": {
+              "methods": [
+                "delete_function"
+              ]
+            },
+            "GenerateUploadUrl": {
+              "methods": [
+                "generate_upload_url"
+              ]
+            },
+            "GenerateDownloadUrl": {
+              "methods": [
+                "generate_download_url"
+              ]
+            },
+            "ListRuntimes": {
+              "methods": [
+                "list_runtimes"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
