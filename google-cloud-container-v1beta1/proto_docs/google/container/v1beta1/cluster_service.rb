@@ -353,6 +353,9 @@ module Google
         #     Parameters for the node ephemeral storage using Local SSDs.
         #     If unspecified, ephemeral storage is backed by the boot disk.
         #     This field is functionally equivalent to the ephemeral_storage_config
+        # @!attribute [rw] sole_tenant_config
+        #   @return [::Google::Cloud::Container::V1beta1::SoleTenantConfig]
+        #     Parameters for node pools to be backed by shared sole tenant node groups.
         class NodeConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -615,6 +618,46 @@ module Google
             # Must consume from a specific reservation. Must specify key value fields
             # for specifying the reservations.
             SPECIFIC_RESERVATION = 3
+          end
+        end
+
+        # SoleTenantConfig contains the NodeAffinities to specify what shared sole
+        # tenant node groups should back the node pool.
+        # @!attribute [rw] node_affinities
+        #   @return [::Array<::Google::Cloud::Container::V1beta1::SoleTenantConfig::NodeAffinity>]
+        #     NodeAffinities used to match to a shared sole tenant node group.
+        class SoleTenantConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Specifies the NodeAffinity key, values, and affinity operator according to
+          # [shared sole tenant node group
+          # affinities](https://cloud.google.com/compute/docs/nodes/sole-tenant-nodes#node_affinity_and_anti-affinity).
+          # @!attribute [rw] key
+          #   @return [::String]
+          #     Key for NodeAffinity.
+          # @!attribute [rw] operator
+          #   @return [::Google::Cloud::Container::V1beta1::SoleTenantConfig::NodeAffinity::Operator]
+          #     Operator for NodeAffinity.
+          # @!attribute [rw] values
+          #   @return [::Array<::String>]
+          #     Values for NodeAffinity.
+          class NodeAffinity
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Operator allows user to specify affinity or anti-affinity for the
+            # given key values.
+            module Operator
+              # Invalid or unspecified affinity operator.
+              OPERATOR_UNSPECIFIED = 0
+
+              # Affinity operator.
+              IN = 1
+
+              # Anti-affinity operator.
+              NOT_IN = 2
+            end
           end
         end
 
