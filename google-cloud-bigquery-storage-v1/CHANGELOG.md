@@ -1,5 +1,13 @@
 # Release History
 
+### 0.19.0 (2023-05-31)
+
+#### Features
+
+* Defined additional storage error codes ([#21682](https://github.com/googleapis/google-cloud-ruby/issues/21682)) 
+* Support for table sampling percentage 
+* Uses binary protobuf definitions for better forward compatibility 
+
 ### 0.18.0 (2023-02-13)
 
 #### Features
