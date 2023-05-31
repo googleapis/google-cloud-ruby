@@ -1,0 +1,18 @@
+{
+    "api_id": "memcache.googleapis.com",
+    "api_shortname": "memcache",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-memcache-v1/latest",
+    "distribution_name": "google-cloud-memcache-v1",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "memcache",
+    "name_pretty": "Google Cloud Memorystore for Memcached V1 API",
+    "product_documentation": "https://cloud.google.com/memorystore/docs/memcached/",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Google Cloud Memorystore for Memcached API is used for creating and managing Memcached instances in GCP. Note that google-cloud-memcache-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-memcache instead. See the readme for more details.",
+    "ruby-cloud-env-prefix": "MEMCACHE",
+    "ruby-cloud-product-url": "https://cloud.google.com/memorystore/docs/memcached/",
+    "library_type": "GAPIC_AUTO"
+}
