@@ -68,7 +68,12 @@ CONFIGS = {
 }
 
 REPO = "googleapis/google-cloud-ruby"
-BOT_USERS = ["yoshi-code-bot", "yoshi-automation", "gcf-owl-bot[bot]"]
+BOT_USERS = [
+  "yoshi-code-bot",
+  "yoshi-automation",
+  "gcf-owl-bot[bot]",
+  "release-please[bot]"
+]
 
 desc "Interactive mass code review"
 
