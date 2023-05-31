@@ -513,7 +513,7 @@
   "google-cloud-secret_manager+FILLER": "0.0.0",
   "google-cloud-secret_manager-v1": "0.16.0",
   "google-cloud-secret_manager-v1+FILLER": "0.0.0",
-  "google-cloud-secret_manager-v1beta1": "0.11.0",
+  "google-cloud-secret_manager-v1beta1": "0.12.0",
   "google-cloud-secret_manager-v1beta1+FILLER": "0.0.0",
   "google-cloud-security-private_ca": "1.2.0",
   "google-cloud-security-private_ca+FILLER": "0.0.0",
