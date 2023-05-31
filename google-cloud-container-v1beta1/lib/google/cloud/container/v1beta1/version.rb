@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Container
       module V1beta1
-        VERSION = "0.21.1"
+        VERSION = "0.22.0"
       end
     end
   end
