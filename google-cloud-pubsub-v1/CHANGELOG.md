@@ -1,5 +1,12 @@
 # Release History
 
+### 0.17.0 (2023-05-31)
+
+#### Features
+
+* Support for pushing JSON representations of a PubsubMessage to a push endpoint ([#21687](https://github.com/googleapis/google-cloud-ruby/issues/21687)) 
+* Uses binary protobuf definitions for better forward compatibility 
+
 ### 0.16.0 (2023-05-18)
 
 #### Features
