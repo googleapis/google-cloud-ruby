@@ -1,5 +1,12 @@
 # Release History
 
+### 0.16.0 (2023-05-31)
+
+#### Features
+
+* Support for enabling the change stream on a table ([#21683](https://github.com/googleapis/google-cloud-ruby/issues/21683)) 
+* Uses binary protobuf definitions for better forward compatibility 
+
 ### 0.15.0 (2022-09-16)
 
 #### Features
