@@ -839,6 +839,20 @@
         }
       }
     },
+    "ModelGardenService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AIPlatform::V1::ModelGardenService::Client",
+          "rpcs": {
+            "GetPublisherModel": {
+              "methods": [
+                "get_publisher_model"
+              ]
+            }
+          }
+        }
+      }
+    },
     "PipelineService": {
       "clients": {
         "grpc": {
