@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.2.0 (2023-05-31)
+
+#### Features
+
+* Uses binary protobuf definitions for better forward compatibility ([#21671](https://github.com/googleapis/google-cloud-ruby/issues/21671)) 
+
 ### 0.1.0 (2023-03-21)
 
 #### Features
