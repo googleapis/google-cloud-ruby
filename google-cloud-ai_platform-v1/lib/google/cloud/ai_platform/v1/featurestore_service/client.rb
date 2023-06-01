@@ -1940,7 +1940,7 @@ module Google
             #     `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entityType}`
             #   @param entity_id_field [::String]
             #     Source column that holds entity IDs. If not provided, entity IDs are
-            #     extracted from the column named `entity_id`.
+            #     extracted from the column named entity_id.
             #   @param feature_specs [::Array<::Google::Cloud::AIPlatform::V1::ImportFeatureValuesRequest::FeatureSpec, ::Hash>]
             #     Required. Specifications defining which Feature values to import from the
             #     entity. The request fails if no feature_specs are provided, and having

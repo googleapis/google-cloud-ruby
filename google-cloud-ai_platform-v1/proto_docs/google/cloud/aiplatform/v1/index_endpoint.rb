@@ -145,17 +145,16 @@ module Google
         #     Output only. The DeployedIndex may depend on various data on its original
         #     Index. Additionally when certain changes to the original Index are being
         #     done (e.g. when what the Index contains is being changed) the DeployedIndex
-        #     may be asynchronously updated in the background to reflect this changes. If
-        #     this timestamp's value is at least the
+        #     may be asynchronously updated in the background to reflect these changes.
+        #     If this timestamp's value is at least the
         #     {::Google::Cloud::AIPlatform::V1::Index#update_time Index.update_time} of the
         #     original Index, it means that this DeployedIndex and the original Index are
         #     in sync. If this timestamp is older, then to see which updates this
-        #     DeployedIndex already contains (and which not), one must
-        #     [list][Operations.ListOperations] [Operations][Operation]
-        #     [working][Operation.name] on the original Index. Only
-        #     the successfully completed Operations with
-        #     [Operations.metadata.generic_metadata.update_time]
-        #     [google.cloud.aiplatform.v1.GenericOperationMetadata.update_time]
+        #     DeployedIndex already contains (and which it does not), one must
+        #     list the operations that
+        #     are running on the original Index. Only the successfully completed
+        #     Operations with
+        #     {::Google::Cloud::AIPlatform::V1::GenericOperationMetadata#update_time update_time}
         #     equal or before this sync time are contained in this DeployedIndex.
         # @!attribute [rw] automatic_resources
         #   @return [::Google::Cloud::AIPlatform::V1::AutomaticResources]

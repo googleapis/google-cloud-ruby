@@ -399,8 +399,7 @@ module Google
             # {::Google::Cloud::AIPlatform::V1::ExplainRequest#deployed_model_id deployed_model_id}
             # is not specified, all DeployedModels must have
             # {::Google::Cloud::AIPlatform::V1::DeployedModel#explanation_spec explanation_spec}
-            # populated. Only deployed AutoML tabular Models have
-            # explanation_spec.
+            # populated.
             #
             # @overload explain(request, options = nil)
             #   Pass arguments to `explain` via a request object, either of type

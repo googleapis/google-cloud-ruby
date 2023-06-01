@@ -815,6 +815,9 @@ module Google
             #         To filter on metadata fields use traversal operation as follows:
             #         `metadata.<field_name>.<type_value>`.
             #         For example: `metadata.field_1.number_value = 10.0`
+            #         In case the field name contains special characters (such as colon), one
+            #         can embed it inside double quote.
+            #         For example: `metadata."field:1".number_value = 10.0`
             #     *   **Context based filtering**:
             #         To filter Artifacts based on the contexts to which they belong, use the
             #         function operator with the full resource name
@@ -929,7 +932,6 @@ module Google
             #     `projects/{project}/locations/{location}/metadataStores/{metadatastore}/artifacts/{artifact}`
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Optional. A FieldMask indicating which fields should be updated.
-            #     Functionality of this field is not yet supported.
             #   @param allow_missing [::Boolean]
             #     If set to true, and the {::Google::Cloud::AIPlatform::V1::Artifact Artifact} is
             #     not found, a new {::Google::Cloud::AIPlatform::V1::Artifact Artifact} is
@@ -1434,6 +1436,9 @@ module Google
             #        To filter on metadata fields use traversal operation as follows:
             #        `metadata.<field_name>.<type_value>`.
             #        For example: `metadata.field_1.number_value = 10.0`.
+            #        In case the field name contains special characters (such as colon), one
+            #        can embed it inside double quote.
+            #        For example: `metadata."field:1".number_value = 10.0`
             #     *  **Parent Child filtering**:
             #        To filter Contexts based on parent-child relationship use the HAS
             #        operator as follows:
@@ -1552,7 +1557,6 @@ module Google
             #     `projects/{project}/locations/{location}/metadataStores/{metadatastore}/contexts/{context}`
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Optional. A FieldMask indicating which fields should be updated.
-            #     Functionality of this field is not yet supported.
             #   @param allow_missing [::Boolean]
             #     If set to true, and the {::Google::Cloud::AIPlatform::V1::Context Context} is
             #     not found, a new {::Google::Cloud::AIPlatform::V1::Context Context} is created.
@@ -2440,6 +2444,9 @@ module Google
             #        To filter on metadata fields use traversal operation as follows:
             #        `metadata.<field_name>.<type_value>`
             #        For example: `metadata.field_1.number_value = 10.0`
+            #        In case the field name contains special characters (such as colon), one
+            #        can embed it inside double quote.
+            #        For example: `metadata."field:1".number_value = 10.0`
             #     *  **Context based filtering**:
             #        To filter Executions based on the contexts to which they belong use
             #        the function operator with the full resource name:
@@ -2554,7 +2561,6 @@ module Google
             #     `projects/{project}/locations/{location}/metadataStores/{metadatastore}/executions/{execution}`
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Optional. A FieldMask indicating which fields should be updated.
-            #     Functionality of this field is not yet supported.
             #   @param allow_missing [::Boolean]
             #     If set to true, and the {::Google::Cloud::AIPlatform::V1::Execution Execution}
             #     is not found, a new {::Google::Cloud::AIPlatform::V1::Execution Execution} is
@@ -3348,6 +3354,9 @@ module Google
             #        To filter on metadata fields use traversal operation as follows:
             #        `metadata.<field_name>.<type_value>`.
             #        For example: `metadata.field_1.number_value = 10.0`
+            #        In case the field name contains special characters (such as colon), one
+            #        can embed it inside double quote.
+            #        For example: `metadata."field:1".number_value = 10.0`
             #
             #     Each of the above supported filter types can be combined together using
             #     logical operators (`AND` & `OR`). Maximum nested expression depth allowed

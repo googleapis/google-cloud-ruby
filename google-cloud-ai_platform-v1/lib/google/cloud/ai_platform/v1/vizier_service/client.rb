@@ -641,7 +641,8 @@ module Google
             # suggested by Vertex AI Vizier. Returns a long-running
             # operation associated with the generation of Trial suggestions.
             # When this long-running operation succeeds, it will contain
-            # a [SuggestTrialsResponse][google.cloud.ml.v1.SuggestTrialsResponse].
+            # a
+            # {::Google::Cloud::AIPlatform::V1::SuggestTrialsResponse SuggestTrialsResponse}.
             #
             # @overload suggest_trials(request, options = nil)
             #   Pass arguments to `suggest_trials` via a request object, either of type
