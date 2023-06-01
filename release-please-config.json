@@ -1263,10 +1263,6 @@
       "component": "google-cloud-video-transcoder-v1",
       "version_file": "lib/google/cloud/video/transcoder/v1/version.rb"
     },
-    "google-cloud-video-transcoder-v1beta1": {
-      "component": "google-cloud-video-transcoder-v1beta1",
-      "version_file": "lib/google/cloud/video/transcoder/v1beta1/version.rb"
-    },
     "google-cloud-video_intelligence": {
       "component": "google-cloud-video_intelligence",
       "version_file": "lib/google/cloud/video_intelligence/version.rb"
