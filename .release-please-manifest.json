@@ -625,8 +625,6 @@
   "google-cloud-video-transcoder+FILLER": "0.0.0",
   "google-cloud-video-transcoder-v1": "0.9.0",
   "google-cloud-video-transcoder-v1+FILLER": "0.0.0",
-  "google-cloud-video-transcoder-v1beta1": "0.3.2",
-  "google-cloud-video-transcoder-v1beta1+FILLER": "0.0.0",
   "google-cloud-video_intelligence": "3.3.0",
   "google-cloud-video_intelligence+FILLER": "0.0.0",
   "google-cloud-video_intelligence-v1": "0.9.0",
