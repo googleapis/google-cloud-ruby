@@ -890,8 +890,7 @@ module Google
         # Represents a category returned from the text classifier.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The name of the category representing the document, from the [predefined
-        #     taxonomy](https://cloud.google.com/natural-language/docs/categories).
+        #     The name of the category representing the document.
         # @!attribute [rw] confidence
         #   @return [::Float]
         #     The classifier's confidence of the category. Number represents how certain
@@ -1080,6 +1079,24 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # The document moderation request message.
+        # @!attribute [rw] document
+        #   @return [::Google::Cloud::Language::V1::Document]
+        #     Required. Input document.
+        class ModerateTextRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The document moderation response message.
+        # @!attribute [rw] moderation_categories
+        #   @return [::Array<::Google::Cloud::Language::V1::ClassificationCategory>]
+        #     Harmful and sensitive categories representing the input document.
+        class ModerateTextResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The request message for the text annotation API, which can perform multiple
         # analysis types (sentiment, entities, and syntax) in one call.
         # @!attribute [rw] document
@@ -1112,6 +1129,9 @@ module Google
           # @!attribute [rw] classify_text
           #   @return [::Boolean]
           #     Classify the full document into categories.
+          # @!attribute [rw] moderate_text
+          #   @return [::Boolean]
+          #     Moderate the document for harmful and sensitive categories.
           # @!attribute [rw] classification_model_options
           #   @return [::Google::Cloud::Language::V1::ClassificationModelOptions]
           #     The model options to use for classification. Defaults to v1 options
@@ -1150,6 +1170,9 @@ module Google
         # @!attribute [rw] categories
         #   @return [::Array<::Google::Cloud::Language::V1::ClassificationCategory>]
         #     Categories identified in the input document.
+        # @!attribute [rw] moderation_categories
+        #   @return [::Array<::Google::Cloud::Language::V1::ClassificationCategory>]
+        #     Harmful and sensitive categories identified in the input document.
         class AnnotateTextResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

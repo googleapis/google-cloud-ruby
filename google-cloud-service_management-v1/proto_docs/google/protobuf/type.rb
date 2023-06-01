@@ -38,6 +38,9 @@ module Google
     # @!attribute [rw] syntax
     #   @return [::Google::Protobuf::Syntax]
     #     The source syntax.
+    # @!attribute [rw] edition
+    #   @return [::String]
+    #     The source edition string, only valid when syntax is SYNTAX_EDITIONS.
     class Type
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -172,6 +175,9 @@ module Google
     # @!attribute [rw] syntax
     #   @return [::Google::Protobuf::Syntax]
     #     The source syntax.
+    # @!attribute [rw] edition
+    #   @return [::String]
+    #     The source edition string, only valid when syntax is SYNTAX_EDITIONS.
     class Enum
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -218,6 +224,9 @@ module Google
 
       # Syntax `proto3`.
       SYNTAX_PROTO3 = 1
+
+      # Syntax `editions`.
+      SYNTAX_EDITIONS = 2
     end
   end
 end

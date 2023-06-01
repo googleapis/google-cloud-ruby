@@ -337,6 +337,60 @@ class ::Google::Cloud::Language::V1beta2::LanguageService::Rest::ClientTest < Mi
     end
   end
 
+  def test_moderate_text
+    # Create test objects.
+    client_result = ::Google::Cloud::Language::V1beta2::ModerateTextResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    document = {}
+
+    moderate_text_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Language::V1beta2::LanguageService::Rest::ServiceStub.stub :transcode_moderate_text_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, moderate_text_client_stub do
+        # Create client
+        client = ::Google::Cloud::Language::V1beta2::LanguageService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.moderate_text({ document: document }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.moderate_text document: document do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.moderate_text ::Google::Cloud::Language::V1beta2::ModerateTextRequest.new(document: document) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.moderate_text({ document: document }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.moderate_text(::Google::Cloud::Language::V1beta2::ModerateTextRequest.new(document: document), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, moderate_text_client_stub.call_count
+      end
+    end
+  end
+
   def test_annotate_text
     # Create test objects.
     client_result = ::Google::Cloud::Language::V1beta2::AnnotateTextResponse.new

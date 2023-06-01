@@ -92,8 +92,8 @@ module Google
         # @!attribute [rw] sentiment
         #   @return [::Google::Cloud::Language::V1beta2::Sentiment]
         #     For calls to [AnalyzeSentiment][] or if
-        #     {::Google::Cloud::Language::V1beta2::AnnotateTextRequest::Features#extract_document_sentiment AnnotateTextRequest.Features.extract_document_sentiment} is set to
-        #     true, this field will contain the sentiment for the sentence.
+        #     {::Google::Cloud::Language::V1beta2::AnnotateTextRequest::Features#extract_document_sentiment AnnotateTextRequest.Features.extract_document_sentiment}
+        #     is set to true, this field will contain the sentiment for the sentence.
         class Sentence
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -130,9 +130,9 @@ module Google
         # @!attribute [rw] sentiment
         #   @return [::Google::Cloud::Language::V1beta2::Sentiment]
         #     For calls to [AnalyzeEntitySentiment][] or if
-        #     {::Google::Cloud::Language::V1beta2::AnnotateTextRequest::Features#extract_entity_sentiment AnnotateTextRequest.Features.extract_entity_sentiment} is set to
-        #     true, this field will contain the aggregate sentiment expressed for this
-        #     entity in the provided document.
+        #     {::Google::Cloud::Language::V1beta2::AnnotateTextRequest::Features#extract_entity_sentiment AnnotateTextRequest.Features.extract_entity_sentiment}
+        #     is set to true, this field will contain the aggregate sentiment expressed
+        #     for this entity in the provided document.
         class Entity
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -871,9 +871,9 @@ module Google
         # @!attribute [rw] sentiment
         #   @return [::Google::Cloud::Language::V1beta2::Sentiment]
         #     For calls to [AnalyzeEntitySentiment][] or if
-        #     {::Google::Cloud::Language::V1beta2::AnnotateTextRequest::Features#extract_entity_sentiment AnnotateTextRequest.Features.extract_entity_sentiment} is set to
-        #     true, this field will contain the sentiment expressed for this mention of
-        #     the entity in the provided document.
+        #     {::Google::Cloud::Language::V1beta2::AnnotateTextRequest::Features#extract_entity_sentiment AnnotateTextRequest.Features.extract_entity_sentiment}
+        #     is set to true, this field will contain the sentiment expressed for this
+        #     mention of the entity in the provided document.
         class EntityMention
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -898,7 +898,9 @@ module Google
         # @!attribute [rw] begin_offset
         #   @return [::Integer]
         #     The API calculates the beginning offset of the content in the original
-        #     document according to the {::Google::Cloud::Language::V1beta2::EncodingType EncodingType} specified in the API request.
+        #     document according to the
+        #     {::Google::Cloud::Language::V1beta2::EncodingType EncodingType} specified in the
+        #     API request.
         class TextSpan
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -907,8 +909,7 @@ module Google
         # Represents a category returned from the text classifier.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The name of the category representing the document, from the [predefined
-        #     taxonomy](https://cloud.google.com/natural-language/docs/categories).
+        #     The name of the category representing the document.
         # @!attribute [rw] confidence
         #   @return [::Float]
         #     The classifier's confidence of the category. Number represents how certain
@@ -982,7 +983,8 @@ module Google
         #   @return [::String]
         #     The language of the text, which will be the same as the language specified
         #     in the request or, if not specified, the automatically-detected language.
-        #     See {::Google::Cloud::Language::V1beta2::Document#language Document.language} field for more details.
+        #     See {::Google::Cloud::Language::V1beta2::Document#language Document.language}
+        #     field for more details.
         # @!attribute [rw] sentences
         #   @return [::Array<::Google::Cloud::Language::V1beta2::Sentence>]
         #     The sentiment for all the sentences in the document.
@@ -1011,7 +1013,8 @@ module Google
         #   @return [::String]
         #     The language of the text, which will be the same as the language specified
         #     in the request or, if not specified, the automatically-detected language.
-        #     See {::Google::Cloud::Language::V1beta2::Document#language Document.language} field for more details.
+        #     See {::Google::Cloud::Language::V1beta2::Document#language Document.language}
+        #     field for more details.
         class AnalyzeEntitySentimentResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1037,7 +1040,8 @@ module Google
         #   @return [::String]
         #     The language of the text, which will be the same as the language specified
         #     in the request or, if not specified, the automatically-detected language.
-        #     See {::Google::Cloud::Language::V1beta2::Document#language Document.language} field for more details.
+        #     See {::Google::Cloud::Language::V1beta2::Document#language Document.language}
+        #     field for more details.
         class AnalyzeEntitiesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1066,7 +1070,8 @@ module Google
         #   @return [::String]
         #     The language of the text, which will be the same as the language specified
         #     in the request or, if not specified, the automatically-detected language.
-        #     See {::Google::Cloud::Language::V1beta2::Document#language Document.language} field for more details.
+        #     See {::Google::Cloud::Language::V1beta2::Document#language Document.language}
+        #     field for more details.
         class AnalyzeSyntaxResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1094,6 +1099,24 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # The document moderation request message.
+        # @!attribute [rw] document
+        #   @return [::Google::Cloud::Language::V1beta2::Document]
+        #     Required. Input document.
+        class ModerateTextRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The document moderation response message.
+        # @!attribute [rw] moderation_categories
+        #   @return [::Array<::Google::Cloud::Language::V1beta2::ClassificationCategory>]
+        #     Harmful and sensitive categories representing the input document.
+        class ModerateTextResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The request message for the text annotation API, which can perform multiple
         # analysis types (sentiment, entities, and syntax) in one call.
         # @!attribute [rw] document
@@ -1111,7 +1134,7 @@ module Google
 
           # All available features for sentiment, syntax, and semantic analysis.
           # Setting each one to true will enable that specific analysis for the input.
-          # Next ID: 11
+          # Next ID: 12
           # @!attribute [rw] extract_syntax
           #   @return [::Boolean]
           #     Extract syntax information.
@@ -1130,6 +1153,9 @@ module Google
           #     the API will use the default model which classifies into a
           #     [predefined
           #     taxonomy](https://cloud.google.com/natural-language/docs/categories).
+          # @!attribute [rw] moderate_text
+          #   @return [::Boolean]
+          #     Moderate the document for harmful and sensitive categories.
           # @!attribute [rw] classification_model_options
           #   @return [::Google::Cloud::Language::V1beta2::ClassificationModelOptions]
           #     The model options to use for classification. Defaults to v1 options
@@ -1163,10 +1189,14 @@ module Google
         #   @return [::String]
         #     The language of the text, which will be the same as the language specified
         #     in the request or, if not specified, the automatically-detected language.
-        #     See {::Google::Cloud::Language::V1beta2::Document#language Document.language} field for more details.
+        #     See {::Google::Cloud::Language::V1beta2::Document#language Document.language}
+        #     field for more details.
         # @!attribute [rw] categories
         #   @return [::Array<::Google::Cloud::Language::V1beta2::ClassificationCategory>]
         #     Categories identified in the input document.
+        # @!attribute [rw] moderation_categories
+        #   @return [::Array<::Google::Cloud::Language::V1beta2::ClassificationCategory>]
+        #     Harmful and sensitive categories identified in the input document.
         class AnnotateTextResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
