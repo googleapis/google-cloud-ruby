@@ -32,6 +32,32 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # The request for
+          # {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#create_database FirestoreAdmin.CreateDatabase}.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. A parent name of the form
+          #     `projects/{project_id}`
+          # @!attribute [rw] database
+          #   @return [::Google::Cloud::Firestore::Admin::V1::Database]
+          #     Required. The Database to create.
+          # @!attribute [rw] database_id
+          #   @return [::String]
+          #     Required. The ID to use for the database, which will become the final
+          #     component of the database's resource name.
+          #
+          #     The value must be set to "(default)".
+          class CreateDatabaseRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Metadata related to the create database operation.
+          class CreateDatabaseMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # The list of databases for a project.
           # @!attribute [rw] databases
           #   @return [::Array<::Google::Cloud::Firestore::Admin::V1::Database>]
@@ -41,7 +67,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request for {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#get_database FirestoreAdmin.GetDatabase}.
+          # The request for
+          # {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#get_database FirestoreAdmin.GetDatabase}.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. A name of the form
@@ -51,7 +78,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request for {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#update_database FirestoreAdmin.UpdateDatabase}.
+          # The request for
+          # {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#update_database FirestoreAdmin.UpdateDatabase}.
           # @!attribute [rw] database
           #   @return [::Google::Cloud::Firestore::Admin::V1::Database]
           #     Required. The database to update.
@@ -69,7 +97,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request for {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#create_index FirestoreAdmin.CreateIndex}.
+          # The request for
+          # {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#create_index FirestoreAdmin.CreateIndex}.
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. A parent name of the form
@@ -82,7 +111,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request for {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_indexes FirestoreAdmin.ListIndexes}.
+          # The request for
+          # {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_indexes FirestoreAdmin.ListIndexes}.
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. A parent name of the form
@@ -96,14 +126,15 @@ module Google
           # @!attribute [rw] page_token
           #   @return [::String]
           #     A page token, returned from a previous call to
-          #     {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_indexes FirestoreAdmin.ListIndexes}, that may be used to get the next
-          #     page of results.
+          #     {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_indexes FirestoreAdmin.ListIndexes},
+          #     that may be used to get the next page of results.
           class ListIndexesRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The response for {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_indexes FirestoreAdmin.ListIndexes}.
+          # The response for
+          # {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_indexes FirestoreAdmin.ListIndexes}.
           # @!attribute [rw] indexes
           #   @return [::Array<::Google::Cloud::Firestore::Admin::V1::Index>]
           #     The requested indexes.
@@ -116,7 +147,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request for {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#get_index FirestoreAdmin.GetIndex}.
+          # The request for
+          # {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#get_index FirestoreAdmin.GetIndex}.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. A name of the form
@@ -126,7 +158,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request for {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#delete_index FirestoreAdmin.DeleteIndex}.
+          # The request for
+          # {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#delete_index FirestoreAdmin.DeleteIndex}.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. A name of the form
@@ -136,7 +169,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request for {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#update_field FirestoreAdmin.UpdateField}.
+          # The request for
+          # {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#update_field FirestoreAdmin.UpdateField}.
           # @!attribute [rw] field
           #   @return [::Google::Cloud::Firestore::Admin::V1::Field]
           #     Required. The field to be updated.
@@ -149,7 +183,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request for {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#get_field FirestoreAdmin.GetField}.
+          # The request for
+          # {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#get_field FirestoreAdmin.GetField}.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. A name of the form
@@ -159,7 +194,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request for {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_fields FirestoreAdmin.ListFields}.
+          # The request for
+          # {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_fields FirestoreAdmin.ListFields}.
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. A parent name of the form
@@ -167,24 +203,26 @@ module Google
           # @!attribute [rw] filter
           #   @return [::String]
           #     The filter to apply to list results. Currently,
-          #     {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_fields FirestoreAdmin.ListFields} only supports listing fields
-          #     that have been explicitly overridden. To issue this query, call
-          #     {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_fields FirestoreAdmin.ListFields} with a filter that includes
-          #     `indexConfig.usesAncestorConfig:false` .
+          #     {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_fields FirestoreAdmin.ListFields}
+          #     only supports listing fields that have been explicitly overridden. To issue
+          #     this query, call
+          #     {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_fields FirestoreAdmin.ListFields}
+          #     with a filter that includes `indexConfig.usesAncestorConfig:false` .
           # @!attribute [rw] page_size
           #   @return [::Integer]
           #     The number of results to return.
           # @!attribute [rw] page_token
           #   @return [::String]
           #     A page token, returned from a previous call to
-          #     {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_fields FirestoreAdmin.ListFields}, that may be used to get the next
-          #     page of results.
+          #     {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_fields FirestoreAdmin.ListFields},
+          #     that may be used to get the next page of results.
           class ListFieldsRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The response for {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_fields FirestoreAdmin.ListFields}.
+          # The response for
+          # {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#list_fields FirestoreAdmin.ListFields}.
           # @!attribute [rw] fields
           #   @return [::Array<::Google::Cloud::Firestore::Admin::V1::Field>]
           #     The requested fields.
@@ -197,7 +235,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request for {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#export_documents FirestoreAdmin.ExportDocuments}.
+          # The request for
+          # {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#export_documents FirestoreAdmin.ExportDocuments}.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. Database to export. Should be of the form:
@@ -220,7 +259,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request for {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#import_documents FirestoreAdmin.ImportDocuments}.
+          # The request for
+          # {::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client#import_documents FirestoreAdmin.ImportDocuments}.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. Database to import into. Should be of the form:
