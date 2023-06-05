@@ -1027,7 +1027,7 @@ module Google
               #     not supported (00000000-0000-0000-0000-000000000000).
               #   @param allow_missing [::Boolean]
               #     Optional. If set to true, then deleting an already deleted or non-existing
-              #     DeliveryPipeline will succeed.
+              #     `Target` will succeed.
               #   @param validate_only [::Boolean]
               #     Optional. If set, validate the request and preview the review, but do not
               #     actually post it.
