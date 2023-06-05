@@ -947,6 +947,10 @@
       "component": "google-cloud-pubsub-v1",
       "version_file": "lib/google/cloud/pubsub/v1/version.rb"
     },
+    "google-cloud-rapid_migration_assessment": {
+      "component": "google-cloud-rapid_migration_assessment",
+      "version_file": "lib/google/cloud/rapid_migration_assessment/version.rb"
+    },
     "google-cloud-recaptcha_enterprise": {
       "component": "google-cloud-recaptcha_enterprise",
       "version_file": "lib/google/cloud/recaptcha_enterprise/version.rb"
