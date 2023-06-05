@@ -37,6 +37,7 @@
     "proto_docs/google/type/date.rb",
     "snippets/Gemfile",
     "snippets/cluster_manager/cancel_operation.rb",
+    "snippets/cluster_manager/check_autopilot_compatibility.rb",
     "snippets/cluster_manager/complete_ip_rotation.rb",
     "snippets/cluster_manager/complete_node_pool_upgrade.rb",
     "snippets/cluster_manager/create_cluster.rb",
