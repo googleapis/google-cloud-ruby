@@ -1,5 +1,15 @@
 # Release History
 
+### 0.8.0 (2023-06-06)
+
+#### Features
+
+* Support for filtering by resource ancestors ([#22243](https://github.com/googleapis/google-cloud-ruby/issues/22243)) 
+* Uses binary protobuf definitions for better forward compatibility ([#21672](https://github.com/googleapis/google-cloud-ruby/issues/21672)) 
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
 ### 0.7.0 (2022-07-01)
 
 #### Features
