@@ -665,7 +665,9 @@ module Google
               class Configuration
                 extend ::Gapic::Config
 
-                config_attr :endpoint,      "videostitcher.googleapis.com", ::String
+                DEFAULT_ENDPOINT = "videostitcher.googleapis.com"
+
+                config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
                 config_attr :credentials,   nil do |value|
                   allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                   allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
