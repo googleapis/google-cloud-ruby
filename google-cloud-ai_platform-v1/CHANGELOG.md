@@ -1,5 +1,18 @@
 # Changelog
 
+### 0.25.0 (2023-06-06)
+
+#### Features
+
+* Added ImportFeatureValuesOperationMetadata#blocking_operation_ids 
+* Model resource includes the pipeline job that produced it 
+* Support for model garden ([#21948](https://github.com/googleapis/google-cloud-ruby/issues/21948)) 
+* Support for the NVIDIA_A100_80GB accelerator type 
+* Uses binary protobuf definitions for better forward compatibility ([#21671](https://github.com/googleapis/google-cloud-ruby/issues/21671)) 
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
 ### 0.24.0 (2023-05-19)
 
 #### Features
