@@ -125,7 +125,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -1940,7 +1940,7 @@ module Google
             #     `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entityType}`
             #   @param entity_id_field [::String]
             #     Source column that holds entity IDs. If not provided, entity IDs are
-            #     extracted from the column named `entity_id`.
+            #     extracted from the column named entity_id.
             #   @param feature_specs [::Array<::Google::Cloud::AIPlatform::V1::ImportFeatureValuesRequest::FeatureSpec, ::Hash>]
             #     Required. Specifications defining which Feature values to import from the
             #     entity. The request fails if no feature_specs are provided, and having
@@ -2638,7 +2638,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "aiplatform.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "aiplatform.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

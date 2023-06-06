@@ -44,6 +44,9 @@ module Google
           # Nvidia Tesla A100 GPU.
           NVIDIA_TESLA_A100 = 8
 
+          # Nvidia A100 80GB GPU.
+          NVIDIA_A100_80GB = 9
+
           # Nvidia L4 GPU.
           NVIDIA_L4 = 11
 
