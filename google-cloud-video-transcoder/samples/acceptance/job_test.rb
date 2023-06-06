@@ -212,7 +212,7 @@ describe "Transcoder Snippets" do
 
     it "lists a job" do
       expect {
-        list_jobs(project_id: project_id, location: location_id)
+        list_jobs project_id: project_id, location: location_id
       }.must_output(%r{Jobs:(.*\s)*projects/#{project_number}/locations/#{location_id}/jobs/#{job_id}})
     end
   end
