@@ -1,0 +1,88 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.spanner.admin.instance.v1",
+  "libraryPackage": "::Google::Cloud::Spanner::Admin::Instance::V1",
+  "services": {
+    "InstanceAdmin": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client",
+          "rpcs": {
+            "ListInstanceConfigs": {
+              "methods": [
+                "list_instance_configs"
+              ]
+            },
+            "GetInstanceConfig": {
+              "methods": [
+                "get_instance_config"
+              ]
+            },
+            "CreateInstanceConfig": {
+              "methods": [
+                "create_instance_config"
+              ]
+            },
+            "UpdateInstanceConfig": {
+              "methods": [
+                "update_instance_config"
+              ]
+            },
+            "DeleteInstanceConfig": {
+              "methods": [
+                "delete_instance_config"
+              ]
+            },
+            "ListInstanceConfigOperations": {
+              "methods": [
+                "list_instance_config_operations"
+              ]
+            },
+            "ListInstances": {
+              "methods": [
+                "list_instances"
+              ]
+            },
+            "GetInstance": {
+              "methods": [
+                "get_instance"
+              ]
+            },
+            "CreateInstance": {
+              "methods": [
+                "create_instance"
+              ]
+            },
+            "UpdateInstance": {
+              "methods": [
+                "update_instance"
+              ]
+            },
+            "DeleteInstance": {
+              "methods": [
+                "delete_instance"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
