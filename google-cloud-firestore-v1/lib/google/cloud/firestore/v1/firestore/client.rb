@@ -206,7 +206,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -318,9 +318,6 @@ module Google
               end
 
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              if @config&.metadata&.key? :"google-cloud-resource-prefix"
-                metadata[:"x-goog-request-params"] ||= @config.metadata[:"google-cloud-resource-prefix"].split("/").each_slice(2).to_h.map { |k, v| "#{k}=#{v}" }.join("&")
-              end
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_document.timeout,
@@ -465,9 +462,6 @@ module Google
               end
 
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              if @config&.metadata&.key? :"google-cloud-resource-prefix"
-                metadata[:"x-goog-request-params"] ||= @config.metadata[:"google-cloud-resource-prefix"].split("/").each_slice(2).to_h.map { |k, v| "#{k}=#{v}" }.join("&")
-              end
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_documents.timeout,
@@ -571,9 +565,6 @@ module Google
               end
 
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              if @config&.metadata&.key? :"google-cloud-resource-prefix"
-                metadata[:"x-goog-request-params"] ||= @config.metadata[:"google-cloud-resource-prefix"].split("/").each_slice(2).to_h.map { |k, v| "#{k}=#{v}" }.join("&")
-              end
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_document.timeout,
@@ -663,9 +654,6 @@ module Google
               end
 
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              if @config&.metadata&.key? :"google-cloud-resource-prefix"
-                metadata[:"x-goog-request-params"] ||= @config.metadata[:"google-cloud-resource-prefix"].split("/").each_slice(2).to_h.map { |k, v| "#{k}=#{v}" }.join("&")
-              end
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_document.timeout,
@@ -778,9 +766,6 @@ module Google
               end
 
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              if @config&.metadata&.key? :"google-cloud-resource-prefix"
-                metadata[:"x-goog-request-params"] ||= @config.metadata[:"google-cloud-resource-prefix"].split("/").each_slice(2).to_h.map { |k, v| "#{k}=#{v}" }.join("&")
-              end
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.batch_get_documents.timeout,
@@ -870,9 +855,6 @@ module Google
               end
 
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              if @config&.metadata&.key? :"google-cloud-resource-prefix"
-                metadata[:"x-goog-request-params"] ||= @config.metadata[:"google-cloud-resource-prefix"].split("/").each_slice(2).to_h.map { |k, v| "#{k}=#{v}" }.join("&")
-              end
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.begin_transaction.timeout,
@@ -965,9 +947,6 @@ module Google
               end
 
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              if @config&.metadata&.key? :"google-cloud-resource-prefix"
-                metadata[:"x-goog-request-params"] ||= @config.metadata[:"google-cloud-resource-prefix"].split("/").each_slice(2).to_h.map { |k, v| "#{k}=#{v}" }.join("&")
-              end
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.commit.timeout,
@@ -1056,9 +1035,6 @@ module Google
               end
 
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              if @config&.metadata&.key? :"google-cloud-resource-prefix"
-                metadata[:"x-goog-request-params"] ||= @config.metadata[:"google-cloud-resource-prefix"].split("/").each_slice(2).to_h.map { |k, v| "#{k}=#{v}" }.join("&")
-              end
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.rollback.timeout,
@@ -1166,9 +1142,6 @@ module Google
               end
 
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              if @config&.metadata&.key? :"google-cloud-resource-prefix"
-                metadata[:"x-goog-request-params"] ||= @config.metadata[:"google-cloud-resource-prefix"].split("/").each_slice(2).to_h.map { |k, v| "#{k}=#{v}" }.join("&")
-              end
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.run_query.timeout,
@@ -1291,9 +1264,6 @@ module Google
               end
 
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              if @config&.metadata&.key? :"google-cloud-resource-prefix"
-                metadata[:"x-goog-request-params"] ||= @config.metadata[:"google-cloud-resource-prefix"].split("/").each_slice(2).to_h.map { |k, v| "#{k}=#{v}" }.join("&")
-              end
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.run_aggregation_query.timeout,
@@ -1427,9 +1397,6 @@ module Google
               end
 
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              if @config&.metadata&.key? :"google-cloud-resource-prefix"
-                metadata[:"x-goog-request-params"] ||= @config.metadata[:"google-cloud-resource-prefix"].split("/").each_slice(2).to_h.map { |k, v| "#{k}=#{v}" }.join("&")
-              end
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.partition_query.timeout,
@@ -1685,9 +1652,6 @@ module Google
               end
 
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              if @config&.metadata&.key? :"google-cloud-resource-prefix"
-                metadata[:"x-goog-request-params"] ||= @config.metadata[:"google-cloud-resource-prefix"].split("/").each_slice(2).to_h.map { |k, v| "#{k}=#{v}" }.join("&")
-              end
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_collection_ids.timeout,
@@ -1791,9 +1755,6 @@ module Google
               end
 
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              if @config&.metadata&.key? :"google-cloud-resource-prefix"
-                metadata[:"x-goog-request-params"] ||= @config.metadata[:"google-cloud-resource-prefix"].split("/").each_slice(2).to_h.map { |k, v| "#{k}=#{v}" }.join("&")
-              end
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.batch_write.timeout,
@@ -1898,9 +1859,6 @@ module Google
               end
 
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              if @config&.metadata&.key? :"google-cloud-resource-prefix"
-                metadata[:"x-goog-request-params"] ||= @config.metadata[:"google-cloud-resource-prefix"].split("/").each_slice(2).to_h.map { |k, v| "#{k}=#{v}" }.join("&")
-              end
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_document.timeout,
@@ -2001,7 +1959,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "firestore.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "firestore.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
