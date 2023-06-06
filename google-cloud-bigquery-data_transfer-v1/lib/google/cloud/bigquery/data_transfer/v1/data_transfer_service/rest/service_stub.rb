@@ -60,7 +60,7 @@ module Google
 
                   verb, uri, query_string_params, body = ServiceStub.transcode_get_data_source_request request_pb
                   query_string_params = if query_string_params.any?
-                                          query_string_params.to_h { |p| p.split("=", 2) }
+                                          query_string_params.to_h { |p| p.split "=", 2 }
                                         else
                                           {}
                                         end
@@ -98,7 +98,7 @@ module Google
 
                   verb, uri, query_string_params, body = ServiceStub.transcode_list_data_sources_request request_pb
                   query_string_params = if query_string_params.any?
-                                          query_string_params.to_h { |p| p.split("=", 2) }
+                                          query_string_params.to_h { |p| p.split "=", 2 }
                                         else
                                           {}
                                         end
@@ -136,7 +136,7 @@ module Google
 
                   verb, uri, query_string_params, body = ServiceStub.transcode_create_transfer_config_request request_pb
                   query_string_params = if query_string_params.any?
-                                          query_string_params.to_h { |p| p.split("=", 2) }
+                                          query_string_params.to_h { |p| p.split "=", 2 }
                                         else
                                           {}
                                         end
@@ -174,7 +174,7 @@ module Google
 
                   verb, uri, query_string_params, body = ServiceStub.transcode_update_transfer_config_request request_pb
                   query_string_params = if query_string_params.any?
-                                          query_string_params.to_h { |p| p.split("=", 2) }
+                                          query_string_params.to_h { |p| p.split "=", 2 }
                                         else
                                           {}
                                         end
@@ -212,7 +212,7 @@ module Google
 
                   verb, uri, query_string_params, body = ServiceStub.transcode_delete_transfer_config_request request_pb
                   query_string_params = if query_string_params.any?
-                                          query_string_params.to_h { |p| p.split("=", 2) }
+                                          query_string_params.to_h { |p| p.split "=", 2 }
                                         else
                                           {}
                                         end
@@ -250,7 +250,7 @@ module Google
 
                   verb, uri, query_string_params, body = ServiceStub.transcode_get_transfer_config_request request_pb
                   query_string_params = if query_string_params.any?
-                                          query_string_params.to_h { |p| p.split("=", 2) }
+                                          query_string_params.to_h { |p| p.split "=", 2 }
                                         else
                                           {}
                                         end
@@ -288,7 +288,7 @@ module Google
 
                   verb, uri, query_string_params, body = ServiceStub.transcode_list_transfer_configs_request request_pb
                   query_string_params = if query_string_params.any?
-                                          query_string_params.to_h { |p| p.split("=", 2) }
+                                          query_string_params.to_h { |p| p.split "=", 2 }
                                         else
                                           {}
                                         end
@@ -326,7 +326,7 @@ module Google
 
                   verb, uri, query_string_params, body = ServiceStub.transcode_schedule_transfer_runs_request request_pb
                   query_string_params = if query_string_params.any?
-                                          query_string_params.to_h { |p| p.split("=", 2) }
+                                          query_string_params.to_h { |p| p.split "=", 2 }
                                         else
                                           {}
                                         end
@@ -364,7 +364,7 @@ module Google
 
                   verb, uri, query_string_params, body = ServiceStub.transcode_start_manual_transfer_runs_request request_pb
                   query_string_params = if query_string_params.any?
-                                          query_string_params.to_h { |p| p.split("=", 2) }
+                                          query_string_params.to_h { |p| p.split "=", 2 }
                                         else
                                           {}
                                         end
@@ -402,7 +402,7 @@ module Google
 
                   verb, uri, query_string_params, body = ServiceStub.transcode_get_transfer_run_request request_pb
                   query_string_params = if query_string_params.any?
-                                          query_string_params.to_h { |p| p.split("=", 2) }
+                                          query_string_params.to_h { |p| p.split "=", 2 }
                                         else
                                           {}
                                         end
@@ -440,7 +440,7 @@ module Google
 
                   verb, uri, query_string_params, body = ServiceStub.transcode_delete_transfer_run_request request_pb
                   query_string_params = if query_string_params.any?
-                                          query_string_params.to_h { |p| p.split("=", 2) }
+                                          query_string_params.to_h { |p| p.split "=", 2 }
                                         else
                                           {}
                                         end
@@ -478,7 +478,7 @@ module Google
 
                   verb, uri, query_string_params, body = ServiceStub.transcode_list_transfer_runs_request request_pb
                   query_string_params = if query_string_params.any?
-                                          query_string_params.to_h { |p| p.split("=", 2) }
+                                          query_string_params.to_h { |p| p.split "=", 2 }
                                         else
                                           {}
                                         end
@@ -516,7 +516,7 @@ module Google
 
                   verb, uri, query_string_params, body = ServiceStub.transcode_list_transfer_logs_request request_pb
                   query_string_params = if query_string_params.any?
-                                          query_string_params.to_h { |p| p.split("=", 2) }
+                                          query_string_params.to_h { |p| p.split "=", 2 }
                                         else
                                           {}
                                         end
@@ -554,7 +554,7 @@ module Google
 
                   verb, uri, query_string_params, body = ServiceStub.transcode_check_valid_creds_request request_pb
                   query_string_params = if query_string_params.any?
-                                          query_string_params.to_h { |p| p.split("=", 2) }
+                                          query_string_params.to_h { |p| p.split "=", 2 }
                                         else
                                           {}
                                         end
@@ -592,7 +592,7 @@ module Google
 
                   verb, uri, query_string_params, body = ServiceStub.transcode_enroll_data_sources_request request_pb
                   query_string_params = if query_string_params.any?
-                                          query_string_params.to_h { |p| p.split("=", 2) }
+                                          query_string_params.to_h { |p| p.split "=", 2 }
                                         else
                                           {}
                                         end
