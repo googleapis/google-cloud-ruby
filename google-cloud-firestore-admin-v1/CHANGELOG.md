@@ -1,5 +1,15 @@
 # Release History
 
+### 0.10.0 (2023-06-06)
+
+#### Features
+
+* Support for create_database ([#22073](https://github.com/googleapis/google-cloud-ruby/issues/22073)) 
+* Uses binary protobuf definitions for better forward compatibility ([#21675](https://github.com/googleapis/google-cloud-ruby/issues/21675)) 
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
 ### 0.9.0 (2023-05-19)
 
 #### Features
