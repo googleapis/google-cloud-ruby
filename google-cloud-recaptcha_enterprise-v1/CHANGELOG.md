@@ -1,5 +1,11 @@
 # Release History
 
+### 0.14.1 (2023-06-06)
+
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
 ### 0.14.0 (2023-06-01)
 
 #### Features
