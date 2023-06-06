@@ -256,6 +256,12 @@ module Google
           #   @return [::String]
           #     Required. Name of the Kubernetes Deployment whose traffic is managed by
           #     the specified Service.
+          # @!attribute [rw] disable_pod_overprovisioning
+          #   @return [::Boolean]
+          #     Optional. Whether to disable Pod overprovisioning. If Pod
+          #     overprovisioning is disabled then Cloud Deploy will limit the number of
+          #     total Pods used for the deployment strategy to the number of Pods the
+          #     Deployment has on the cluster.
           class ServiceNetworking
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -914,7 +920,7 @@ module Google
         # @!attribute [rw] allow_missing
         #   @return [::Boolean]
         #     Optional. If set to true, then deleting an already deleted or non-existing
-        #     DeliveryPipeline will succeed.
+        #     `Target` will succeed.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
         #     Optional. If set, validate the request and preview the review, but do not
