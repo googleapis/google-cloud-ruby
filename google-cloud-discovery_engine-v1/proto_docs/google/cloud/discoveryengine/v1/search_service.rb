@@ -200,10 +200,6 @@ module Google
           #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::ContentSearchSpec::SnippetSpec]
           #     If there is no snippet spec provided, there will be no snippet in the
           #     search result.
-          # @!attribute [rw] summary_spec
-          #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchRequest::ContentSearchSpec::SummarySpec]
-          #     If there is no summary spec provided, there will be no summary in the
-          #     search response.
           class ContentSearchSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -220,20 +216,6 @@ module Google
             #   @return [::Boolean]
             #     if true, only snippet reference is returned.
             class SnippetSpec
-              include ::Google::Protobuf::MessageExts
-              extend ::Google::Protobuf::MessageExts::ClassMethods
-            end
-
-            # The specification that configs the summary in the search response.
-            # @!attribute [rw] summary_result_count
-            #   @return [::Integer]
-            #     The number of top results the summary should be generated from.
-            #     If the number of returned results is less than summary_result_count,
-            #     then the summary would be derived from all the results; otherwise, the
-            #     summary would be derived from the top results.
-            #
-            #     At most 5 results can be used for generating summary.
-            class SummarySpec
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
@@ -288,12 +270,6 @@ module Google
         #     Contains the spell corrected query, if found. If the spell correction type
         #     is AUTOMATIC, then the search results are based on corrected_query.
         #     Otherwise the original query is used for search.
-        # @!attribute [rw] summary
-        #   @return [::Google::Cloud::DiscoveryEngine::V1::SearchResponse::Summary]
-        #     A summary as part of the search results.
-        #     This field is only returned if
-        #     {::Google::Cloud::DiscoveryEngine::V1::SearchRequest::ContentSearchSpec#summary_spec SearchRequest.ContentSearchSpec.summary_spec}
-        #     is set.
         class SearchResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -308,15 +284,6 @@ module Google
           #     The document data snippet in the search response. Only fields that are
           #     marked as retrievable are populated.
           class SearchResult
-            include ::Google::Protobuf::MessageExts
-            extend ::Google::Protobuf::MessageExts::ClassMethods
-          end
-
-          # Summary of the top N search result specified by the summary spec.
-          # @!attribute [rw] summary_text
-          #   @return [::String]
-          #     The summary content.
-          class Summary
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
