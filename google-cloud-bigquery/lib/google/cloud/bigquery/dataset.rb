@@ -479,7 +479,7 @@ module Google
         def tags
           ensure_full_data!
           return nil if @gapi.tags.nil?
-          @gapi.tags.map { |gapi| Tag.from_gapi(gapi) }
+          @gapi.tags.map { |gapi| Tag.from_gapi gapi }
         end
 
         ##
