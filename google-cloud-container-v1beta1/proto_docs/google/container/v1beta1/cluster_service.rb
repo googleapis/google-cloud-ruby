@@ -1780,6 +1780,9 @@ module Google
         # @!attribute [rw] fleet
         #   @return [::Google::Cloud::Container::V1beta1::Fleet]
         #     Fleet information for the cluster.
+        # @!attribute [rw] security_posture_config
+        #   @return [::Google::Cloud::Container::V1beta1::SecurityPostureConfig]
+        #     Enable/Disable Security Posture API features for the cluster.
         class Cluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1886,6 +1889,43 @@ module Google
 
             # Applies basic vulnerability scanning settings for cluster workloads.
             BASIC = 2
+          end
+        end
+
+        # SecurityPostureConfig defines the flags needed to enable/disable features for
+        # the Security Posture API.
+        # @!attribute [rw] mode
+        #   @return [::Google::Cloud::Container::V1beta1::SecurityPostureConfig::Mode]
+        #     Sets which mode to use for Security Posture features.
+        # @!attribute [rw] vulnerability_mode
+        #   @return [::Google::Cloud::Container::V1beta1::SecurityPostureConfig::VulnerabilityMode]
+        #     Sets which mode to use for vulnerability scanning.
+        class SecurityPostureConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Mode defines enablement mode for GKE Security posture features.
+          module Mode
+            # Default value not specified.
+            MODE_UNSPECIFIED = 0
+
+            # Disables Security Posture features on the cluster.
+            DISABLED = 1
+
+            # Applies Security Posture features on the cluster.
+            BASIC = 2
+          end
+
+          # VulnerabilityMode defines enablement mode for vulnerability scanning.
+          module VulnerabilityMode
+            # Default value not specified.
+            VULNERABILITY_MODE_UNSPECIFIED = 0
+
+            # Disables vulnerability scanning on the cluster.
+            VULNERABILITY_DISABLED = 1
+
+            # Applies basic vulnerability scanning on the cluster.
+            VULNERABILITY_BASIC = 2
           end
         end
 
@@ -2145,9 +2185,15 @@ module Google
         # @!attribute [rw] enable_k8s_beta_apis
         #   @return [::Google::Cloud::Container::V1beta1::K8sBetaAPIConfig]
         #     Kubernetes open source beta apis enabled on the cluster. Only beta apis
+        # @!attribute [rw] desired_security_posture_config
+        #   @return [::Google::Cloud::Container::V1beta1::SecurityPostureConfig]
+        #     Enable/Disable Security Posture API features for the cluster.
         # @!attribute [rw] desired_enable_fqdn_network_policy
         #   @return [::Boolean]
         #     Enable/Disable FQDN Network Policy for the cluster.
+        # @!attribute [rw] desired_autopilot_workload_policy_config
+        #   @return [::Google::Cloud::Container::V1beta1::WorkloadPolicyConfig]
+        #     The desired workload policy configuration for the autopilot cluster.
         # @!attribute [rw] desired_k8s_beta_apis
         #   @return [::Google::Cloud::Container::V1beta1::K8sBetaAPIConfig]
         #     Beta APIs enabled for cluster.
@@ -4201,6 +4247,9 @@ module Google
         # @!attribute [rw] gpu_sharing_config
         #   @return [::Google::Cloud::Container::V1beta1::GPUSharingConfig]
         #     The configuration for GPU sharing options.
+        # @!attribute [rw] gpu_driver_installation_config
+        #   @return [::Google::Cloud::Container::V1beta1::GPUDriverInstallationConfig]
+        #     The configuration for auto installation of GPU driver.
         class AcceleratorConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -4225,6 +4274,31 @@ module Google
 
             # GPUs are time-shared between containers.
             TIME_SHARING = 1
+          end
+        end
+
+        # GPUDriverInstallationConfig specifies the version of GPU driver to be auto
+        # installed.
+        # @!attribute [rw] gpu_driver_version
+        #   @return [::Google::Cloud::Container::V1beta1::GPUDriverInstallationConfig::GPUDriverVersion]
+        #     Mode for how the GPU driver is installed.
+        class GPUDriverInstallationConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The GPU driver version to install.
+          module GPUDriverVersion
+            # Default value is to not install any GPU driver.
+            GPU_DRIVER_VERSION_UNSPECIFIED = 0
+
+            # Disable GPU driver auto installation and needs manual installation
+            INSTALLATION_DISABLED = 1
+
+            # "Default" GPU driver in COS and Ubuntu.
+            DEFAULT = 2
+
+            # "Latest" GPU driver in COS.
+            LATEST = 3
           end
         end
 
@@ -5124,7 +5198,20 @@ module Google
         # @!attribute [rw] enabled
         #   @return [::Boolean]
         #     Enable Autopilot
+        # @!attribute [rw] workload_policy_config
+        #   @return [::Google::Cloud::Container::V1beta1::WorkloadPolicyConfig]
+        #     Workload policy configuration for Autopilot.
         class Autopilot
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # WorkloadPolicyConfig is the configuration of workload policy for autopilot
+        # clusters.
+        # @!attribute [rw] allow_net_admin
+        #   @return [::Boolean]
+        #     If true, workloads can use NET_ADMIN capability.
+        class WorkloadPolicyConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
