@@ -178,7 +178,7 @@ desc "Run rubocop on yard examples."
 task :rubocop_yard_examples do
   YARD.parse "lib/**/*.rb"
   registry = YARD::Registry.load_all
-  examples = registry.all.map { |object| object.tags(:example) }.flatten
+  examples = registry.all.map { |object| object.tags :example }.flatten
 
   dir_name = "rubocop_yard_examples"
   rm_rf dir_name

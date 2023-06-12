@@ -128,7 +128,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -162,7 +162,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload search(serving_config: nil, branch: nil, query: nil, page_size: nil, page_token: nil, offset: nil, filter: nil, order_by: nil, user_info: nil, facet_specs: nil, boost_spec: nil, params: nil, query_expansion_spec: nil, spell_correction_spec: nil, user_pseudo_id: nil, content_search_spec: nil, safe_search: nil, user_label: nil)
+            # @overload search(serving_config: nil, branch: nil, query: nil, page_size: nil, page_token: nil, offset: nil, filter: nil, order_by: nil, user_info: nil, facet_specs: nil, boost_spec: nil, params: nil, query_expansion_spec: nil, spell_correction_spec: nil, user_pseudo_id: nil, content_search_spec: nil, safe_search: nil, user_labels: nil)
             #   Pass arguments to `search` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -231,9 +231,7 @@ module Google
             #   @param params [::Hash{::String => ::Google::Protobuf::Value, ::Hash}]
             #     Additional search parameters.
             #
-            #     For
-            #     [IndustryVertical.SITE_SEARCH][google.cloud.discoveryengine.v1beta.IndustryVertical.SITE_SEARCH]
-            #     vertical, supported values are:
+            #     For public website search only, supported values are:
             #
             #     * `user_country_code`: string. Default empty. If set to non-empty, results
             #        are restricted or boosted based on the location provided.
@@ -267,7 +265,7 @@ module Google
             #   @param safe_search [::Boolean]
             #     Whether to turn on safe search. This is only supported for
             #     [ContentConfig.PUBLIC_WEBSITE][].
-            #   @param user_label [::Hash{::String => ::String}]
+            #   @param user_labels [::Hash{::String => ::String}]
             #     The user labels applied to a resource must meet the following requirements:
             #
             #     * Each resource can have multiple labels, up to a maximum of 64.
@@ -437,7 +435,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "discoveryengine.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "discoveryengine.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

@@ -161,6 +161,14 @@ module Google
             # @!attribute [rw] avro_serialization_options
             #   @return [::Google::Cloud::Bigquery::Storage::V1::AvroSerializationOptions]
             #     Optional. Options specific to the Apache Avro output format
+            # @!attribute [rw] sample_percentage
+            #   @return [::Float]
+            #     Optional. Specifies a table sampling percentage. Specifically, the query
+            #     planner will use TABLESAMPLE SYSTEM (sample_percentage PERCENT). This
+            #     samples at the file-level. It will randomly choose for each file whether
+            #     to include that file in the sample returned. Note, that if the table only
+            #     has one file, then TABLESAMPLE SYSTEM will select that file and return
+            #     all returnable rows contained within.
             class TableReadOptions
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -22,7 +22,7 @@ module Google
     module Bigquery
       module Storage
         module V1
-          VERSION = "0.18.0"
+          VERSION = "0.19.1"
         end
       end
     end

@@ -42,7 +42,8 @@ module Google
         #     Output only. Timestamp when this TensorboardExperiment was last updated.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     The labels with user-defined metadata to organize your Datasets.
+        #     The labels with user-defined metadata to organize your
+        #     TensorboardExperiment.
         #
         #     Label keys and values cannot be longer than 64 characters
         #     (Unicode codepoints), can only contain lowercase letters, numeric

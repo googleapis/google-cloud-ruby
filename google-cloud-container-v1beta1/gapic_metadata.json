@@ -175,6 +175,11 @@
                 "list_usable_subnetworks"
               ]
             },
+            "CheckAutopilotCompatibility": {
+              "methods": [
+                "check_autopilot_compatibility"
+              ]
+            },
             "ListLocations": {
               "methods": [
                 "list_locations"

@@ -129,6 +129,9 @@ module Google
         # @!attribute [rw] results
         #   @return [::Array<::Google::Cloud::DataCatalog::V1::SearchCatalogResult>]
         #     Search results.
+        # @!attribute [rw] total_size
+        #   @return [::Integer]
+        #     The approximate total number of entries matched by the query.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     Pagination token that can be used in subsequent calls to retrieve the next
@@ -362,7 +365,9 @@ module Google
         #     (https://cloud.google.com/bigquery/docs/reference/standard-sql/lexical).
         # @!attribute [rw] fully_qualified_name
         #   @return [::String]
-        #     Fully qualified name (FQN) of the resource.
+        #     [Fully Qualified Name
+        #     (FQN)](https://cloud.google.com//data-catalog/docs/fully-qualified-names)
+        #     of the resource.
         #
         #     FQNs take two forms:
         #
@@ -377,6 +382,16 @@ module Google
         #     Example for a DPMS table:
         #
         #     `dataproc_metastore:{PROJECT_ID}.{LOCATION_ID}.{INSTANCE_ID}.{DATABASE_ID}.{TABLE_ID}`
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project where the lookup should be performed. Required to lookup
+        #     entry that is not a part of `DPMS` or `DATAPLEX` `integrated_system`
+        #     using its `fully_qualified_name`. Ignored in other cases.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Location where the lookup should be performed. Required to lookup
+        #     entry that is not a part of `DPMS` or `DATAPLEX` `integrated_system`
+        #     using its `fully_qualified_name`. Ignored in other cases.
         class LookupEntryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -420,25 +435,11 @@ module Google
         #     The maximum size is 200 bytes when encoded in UTF-8.
         # @!attribute [rw] fully_qualified_name
         #   @return [::String]
-        #     Fully qualified name (FQN) of the resource. Set automatically for entries
-        #     representing resources from synced systems. Settable only during creation
-        #     and read-only afterwards. Can be used for search and lookup of the entries.
-        #
-        #
-        #
-        #     FQNs take two forms:
-        #
-        #     * For non-regionalized resources:
-        #
-        #       `{SYSTEM}:{PROJECT}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}`
-        #
-        #     * For regionalized resources:
-        #
-        #       `{SYSTEM}:{PROJECT}.{LOCATION_ID}.{PATH_TO_RESOURCE_SEPARATED_WITH_DOTS}`
-        #
-        #     Example for a DPMS table:
-        #
-        #     `dataproc_metastore:{PROJECT_ID}.{LOCATION_ID}.{INSTANCE_ID}.{DATABASE_ID}.{TABLE_ID}`
+        #     [Fully Qualified Name
+        #     (FQN)](https://cloud.google.com//data-catalog/docs/fully-qualified-names)
+        #     of the resource. Set automatically for entries representing resources from
+        #     synced systems. Settable only during creation, and read-only later. Can
+        #     be used for search and lookup of the entries.
         # @!attribute [rw] type
         #   @return [::Google::Cloud::DataCatalog::V1::EntryType]
         #     The type of the entry.
@@ -484,6 +485,10 @@ module Google
         #   @return [::Google::Cloud::DataCatalog::V1::LookerSystemSpec]
         #     Specification that applies to Looker sysstem. Only settable when
         #     `user_specified_system` is equal to `LOOKER`
+        # @!attribute [rw] cloud_bigtable_system_spec
+        #   @return [::Google::Cloud::DataCatalog::V1::CloudBigtableSystemSpec]
+        #     Specification that applies to Cloud Bigtable system. Only settable when
+        #     `integrated_system` is equal to `CLOUD_BIGTABLE`
         # @!attribute [rw] gcs_fileset_spec
         #   @return [::Google::Cloud::DataCatalog::V1::GcsFilesetSpec]
         #     Specification that applies to a Cloud Storage fileset. Valid only
@@ -515,6 +520,9 @@ module Google
         #   @return [::Google::Cloud::DataCatalog::V1::FilesetSpec]
         #     Specification that applies to a fileset resource. Valid only
         #     for entries with the `FILESET` type.
+        # @!attribute [rw] service_spec
+        #   @return [::Google::Cloud::DataCatalog::V1::ServiceSpec]
+        #     Specification that applies to a Service resource.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Display name of an entry.
@@ -785,6 +793,58 @@ module Google
         #   @return [::String]
         #     Name of the parent View. Empty if it does not exist.
         class LookerSystemSpec
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Specification that applies to
+        # all entries that are part of `CLOUD_BIGTABLE` system
+        # (user_specified_type)
+        # @!attribute [rw] instance_display_name
+        #   @return [::String]
+        #     Display name of the Instance. This is user specified and different from
+        #     the resource name.
+        class CloudBigtableSystemSpec
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Specification that applies to Instance
+        # entries that are part of `CLOUD_BIGTABLE` system.
+        # (user_specified_type)
+        # @!attribute [rw] cloud_bigtable_cluster_specs
+        #   @return [::Array<::Google::Cloud::DataCatalog::V1::CloudBigtableInstanceSpec::CloudBigtableClusterSpec>]
+        #     The list of clusters for the Instance.
+        class CloudBigtableInstanceSpec
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Spec that applies to clusters of an Instance of Cloud Bigtable.
+          # @!attribute [rw] display_name
+          #   @return [::String]
+          #     Name of the cluster.
+          # @!attribute [rw] location
+          #   @return [::String]
+          #     Location of the cluster, typically a Cloud zone.
+          # @!attribute [rw] type
+          #   @return [::String]
+          #     Type of the resource. For a cluster this would be "CLUSTER".
+          # @!attribute [rw] linked_resource
+          #   @return [::String]
+          #     A link back to the parent resource, in this case Instance.
+          class CloudBigtableClusterSpec
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Specification that applies to a Service resource. Valid only
+        # for entries with the `SERVICE` type.
+        # @!attribute [rw] cloud_bigtable_instance_spec
+        #   @return [::Google::Cloud::DataCatalog::V1::CloudBigtableInstanceSpec]
+        #     Specification that applies to Instance entries of `CLOUD_BIGTABLE`
+        #     system.
+        class ServiceSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1278,6 +1338,10 @@ module Google
         # @!attribute [rw] gcs_bucket_path
         #   @return [::String]
         #     Path to a Cloud Storage bucket that contains a dump ready for ingestion.
+        # @!attribute [rw] job_id
+        #   @return [::String]
+        #     Optional. (Optional) Dataplex task job id, if specified will be used as
+        #     part of ImportEntries LRO ID
         class ImportEntriesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -91,7 +91,7 @@ module Google
           #     The Google Cloud service name.
           # @!attribute [rw] identity
           #   @return [::String]
-          #     P4SA Identity of the service.
+          #     The service agent for the service.
           class Service
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

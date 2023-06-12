@@ -485,6 +485,22 @@ module Google
 
               # Offset out of range.
               OFFSET_OUT_OF_RANGE = 9
+
+              # Customer-managed encryption key (CMEK) not provided for CMEK-enabled
+              # data.
+              CMEK_NOT_PROVIDED = 10
+
+              # Customer-managed encryption key (CMEK) was incorrectly provided.
+              INVALID_CMEK_PROVIDED = 11
+
+              # There is an encryption error while using customer-managed encryption key.
+              CMEK_ENCRYPTION_ERROR = 12
+
+              # Key Management Service (KMS) service returned an error.
+              KMS_SERVICE_ERROR = 13
+
+              # Permission denied while using customer-managed encryption key.
+              KMS_PERMISSION_DENIED = 14
             end
           end
 

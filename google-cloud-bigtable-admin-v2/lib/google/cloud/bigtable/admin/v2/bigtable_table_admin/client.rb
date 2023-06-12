@@ -198,7 +198,7 @@ module Google
                 credentials = @config.credentials
                 # Use self-signed JWT if the endpoint is unchanged from default,
                 # but only if the default endpoint does not have a region prefix.
-                enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+                enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                          !@config.endpoint.split(".").first.include?("-")
                 credentials ||= Credentials.default scope: @config.scope,
                                                     enable_self_signed_jwt: enable_self_signed_jwt
@@ -671,11 +671,15 @@ module Google
               #     The table's `name` field is used to identify the table to update.
               #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
               #     Required. The list of fields to update.
-              #     A mask specifying which fields (e.g. `deletion_protection`) in the `table`
+              #     A mask specifying which fields (e.g. `change_stream_config`) in the `table`
               #     field should be updated. This mask is relative to the `table` field, not to
               #     the request message. The wildcard (*) path is currently not supported.
-              #     Currently UpdateTable is only supported for the following field:
-              #      * `deletion_protection`
+              #     Currently UpdateTable is only supported for the following fields:
+              #
+              #     * `change_stream_config`
+              #     * `change_stream_config.retention_period`
+              #     * `deletion_protection`
+              #
               #     If `column_families` is set in `update_mask`, it will return an
               #     UNIMPLEMENTED error.
               #
@@ -2719,7 +2723,9 @@ module Google
               class Configuration
                 extend ::Gapic::Config
 
-                config_attr :endpoint,      "bigtableadmin.googleapis.com", ::String
+                DEFAULT_ENDPOINT = "bigtableadmin.googleapis.com"
+
+                config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
                 config_attr :credentials,   nil do |value|
                   allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                   allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC

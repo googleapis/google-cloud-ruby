@@ -135,7 +135,7 @@ module Google
           sink = Google::Cloud::Logging::V2::LogSink.new(
             {
               name: name, destination: destination, filter: filter
-            }.delete_if { |_, v| v.nil? }
+            }.compact
           )
           sinks.create_sink parent:                 project_path,
                             sink:                   sink,
@@ -150,7 +150,7 @@ module Google
           sink = Google::Cloud::Logging::V2::LogSink.new(
             {
               name: name, destination: destination, filter: filter
-            }.delete_if { |_, v| v.nil? }
+            }.compact
           )
           sinks.update_sink sink_name:              sink_path(name),
                             sink:                   sink,
@@ -171,7 +171,7 @@ module Google
         def create_metric name, filter, description
           metric = Google::Cloud::Logging::V2::LogMetric.new(
             { name: name, description: description,
-              filter: filter }.delete_if { |_, v| v.nil? }
+              filter: filter }.compact
           )
           metrics.create_log_metric parent: project_path, metric: metric
         end
@@ -183,7 +183,7 @@ module Google
         def update_metric name, description, filter
           metric = Google::Cloud::Logging::V2::LogMetric.new(
             { name: name, description: description,
-              filter: filter }.delete_if { |_, v| v.nil? }
+              filter: filter }.compact
           )
           metrics.update_log_metric metric_name: metric_path(name), metric: metric
         end

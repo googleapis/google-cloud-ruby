@@ -51,6 +51,8 @@ module Google
             rpc :AnalyzeSyntax, ::Google::Cloud::Language::V1::AnalyzeSyntaxRequest, ::Google::Cloud::Language::V1::AnalyzeSyntaxResponse
             # Classifies a document into categories.
             rpc :ClassifyText, ::Google::Cloud::Language::V1::ClassifyTextRequest, ::Google::Cloud::Language::V1::ClassifyTextResponse
+            # Moderates a document for harmful and sensitive categories.
+            rpc :ModerateText, ::Google::Cloud::Language::V1::ModerateTextRequest, ::Google::Cloud::Language::V1::ModerateTextResponse
             # A convenience method that provides all the features that analyzeSentiment,
             # analyzeEntities, and analyzeSyntax provide in one call.
             rpc :AnnotateText, ::Google::Cloud::Language::V1::AnnotateTextRequest, ::Google::Cloud::Language::V1::AnnotateTextResponse

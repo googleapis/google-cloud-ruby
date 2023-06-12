@@ -349,6 +349,8 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Rest::ClientTes
     parent = "hello world"
     error_config = {}
     reconciliation_mode = :RECONCILIATION_MODE_UNSPECIFIED
+    auto_generate_ids = true
+    id_field = "hello world"
 
     import_documents_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -364,27 +366,27 @@ class ::Google::Cloud::DiscoveryEngine::V1beta::DocumentService::Rest::ClientTes
         end
 
         # Use hash object
-        client.import_documents({ inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode }) do |_result, response|
+        client.import_documents({ inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode, auto_generate_ids: auto_generate_ids, id_field: id_field }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.import_documents inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode do |_result, response|
+        client.import_documents inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode, auto_generate_ids: auto_generate_ids, id_field: id_field do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.import_documents ::Google::Cloud::DiscoveryEngine::V1beta::ImportDocumentsRequest.new(inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode) do |_result, response|
+        client.import_documents ::Google::Cloud::DiscoveryEngine::V1beta::ImportDocumentsRequest.new(inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode, auto_generate_ids: auto_generate_ids, id_field: id_field) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.import_documents({ inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode }, call_options) do |_result, response|
+        client.import_documents({ inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode, auto_generate_ids: auto_generate_ids, id_field: id_field }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.import_documents(::Google::Cloud::DiscoveryEngine::V1beta::ImportDocumentsRequest.new(inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode), call_options) do |_result, response|
+        client.import_documents(::Google::Cloud::DiscoveryEngine::V1beta::ImportDocumentsRequest.new(inline_source: inline_source, parent: parent, error_config: error_config, reconciliation_mode: reconciliation_mode, auto_generate_ids: auto_generate_ids, id_field: id_field), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

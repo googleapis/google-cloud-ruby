@@ -1,5 +1,24 @@
 # Release History
 
+### 0.17.1 (2023-06-06)
+
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
+### 0.17.0 (2023-05-31)
+
+#### Features
+
+* Support for pushing JSON representations of a PubsubMessage to a push endpoint ([#21687](https://github.com/googleapis/google-cloud-ruby/issues/21687)) 
+* Uses binary protobuf definitions for better forward compatibility 
+
+### 0.16.0 (2023-05-18)
+
+#### Features
+
+* add cloud storage subscription fields ([#21576](https://github.com/googleapis/google-cloud-ruby/issues/21576)) 
+
 ### 0.15.1 (2023-02-23)
 
 #### Documentation

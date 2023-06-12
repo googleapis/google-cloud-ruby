@@ -720,7 +720,7 @@ module Google
               use_legacy_sql:                  use_legacy_sql,
               user_defined_function_resources: udfs_gapi(udfs)
             )
-          }.delete_if { |_, v| v.nil? }
+          }.compact
           new_view = Google::Apis::BigqueryV2::Table.new(**new_view_opts)
 
           gapi = service.insert_table dataset_id, new_view
@@ -794,7 +794,7 @@ module Google
               query:               query,
               refresh_interval_ms: refresh_interval_ms
             )
-          }.delete_if { |_, v| v.nil? }
+          }.compact
           new_view = Google::Apis::BigqueryV2::Table.new(**new_view_opts)
 
           gapi = service.insert_table dataset_id, new_view
@@ -2776,7 +2776,7 @@ module Google
           params = {
             dataset: dataset_ref,
             target_types: target_types
-          }.delete_if { |_, v| v.nil? }
+          }.compact
           Google::Apis::BigqueryV2::DatasetAccessEntry.new(**params)
         end
 

@@ -133,6 +133,9 @@ module Google
             rpc :SetMaintenancePolicy, ::Google::Cloud::Container::V1beta1::SetMaintenancePolicyRequest, ::Google::Cloud::Container::V1beta1::Operation
             # Lists subnetworks that can be used for creating clusters in a project.
             rpc :ListUsableSubnetworks, ::Google::Cloud::Container::V1beta1::ListUsableSubnetworksRequest, ::Google::Cloud::Container::V1beta1::ListUsableSubnetworksResponse
+            # Checks the cluster compatibility with Autopilot mode, and returns a list of
+            # compatibility issues.
+            rpc :CheckAutopilotCompatibility, ::Google::Cloud::Container::V1beta1::CheckAutopilotCompatibilityRequest, ::Google::Cloud::Container::V1beta1::CheckAutopilotCompatibilityResponse
             # Fetches locations that offer Google Kubernetes Engine.
             rpc :ListLocations, ::Google::Cloud::Container::V1beta1::ListLocationsRequest, ::Google::Cloud::Container::V1beta1::ListLocationsResponse
           end

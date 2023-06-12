@@ -1,5 +1,15 @@
 # Changelog
 
+### 0.8.0 (2023-06-06)
+
+#### Features
+
+* Added ServiceNetworking#disable_pod_overprovisioning ([#22241](https://github.com/googleapis/google-cloud-ruby/issues/22241)) 
+* Uses binary protobuf definitions for better forward compatibility ([#21674](https://github.com/googleapis/google-cloud-ruby/issues/21674)) 
+#### Bug Fixes
+
+* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
+
 ### 0.7.0 (2023-05-04)
 
 #### Features

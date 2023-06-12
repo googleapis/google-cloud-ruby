@@ -200,7 +200,7 @@ module Google
         # @!attribute [rw] entity_id_field
         #   @return [::String]
         #     Source column that holds entity IDs. If not provided, entity IDs are
-        #     extracted from the column named `entity_id`.
+        #     extracted from the column named entity_id.
         # @!attribute [rw] feature_specs
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::ImportFeatureValuesRequest::FeatureSpec>]
         #     Required. Specifications defining which Feature values to import from the
@@ -983,6 +983,10 @@ module Google
         #   @return [::Integer]
         #     The number rows that weren't ingested due to having timestamps outside the
         #     retention boundary.
+        # @!attribute [rw] blocking_operation_ids
+        #   @return [::Array<::Integer>]
+        #     List of ImportFeatureValues operations running under a single EntityType
+        #     that are blocking this operation.
         class ImportFeatureValuesOperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1155,7 +1159,7 @@ module Google
         # @!attribute [rw] entity_id_field
         #   @return [::String]
         #     Source column that holds entity IDs. If not provided, entity IDs are
-        #     extracted from the column named `entity_id`.
+        #     extracted from the column named entity_id.
         class EntityIdSelector
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

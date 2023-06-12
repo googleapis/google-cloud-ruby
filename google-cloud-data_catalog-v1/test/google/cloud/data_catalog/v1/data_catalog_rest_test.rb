@@ -625,6 +625,8 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
 
     # Create request parameters for a unary method.
     linked_resource = "hello world"
+    project = "hello world"
+    location = "hello world"
 
     lookup_entry_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -640,27 +642,27 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
         end
 
         # Use hash object
-        client.lookup_entry({ linked_resource: linked_resource }) do |_result, response|
+        client.lookup_entry({ linked_resource: linked_resource, project: project, location: location }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.lookup_entry linked_resource: linked_resource do |_result, response|
+        client.lookup_entry linked_resource: linked_resource, project: project, location: location do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.lookup_entry ::Google::Cloud::DataCatalog::V1::LookupEntryRequest.new(linked_resource: linked_resource) do |_result, response|
+        client.lookup_entry ::Google::Cloud::DataCatalog::V1::LookupEntryRequest.new(linked_resource: linked_resource, project: project, location: location) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.lookup_entry({ linked_resource: linked_resource }, call_options) do |_result, response|
+        client.lookup_entry({ linked_resource: linked_resource, project: project, location: location }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.lookup_entry(::Google::Cloud::DataCatalog::V1::LookupEntryRequest.new(linked_resource: linked_resource), call_options) do |_result, response|
+        client.lookup_entry(::Google::Cloud::DataCatalog::V1::LookupEntryRequest.new(linked_resource: linked_resource, project: project, location: location), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -1895,6 +1897,7 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
     # Create request parameters for a unary method.
     parent = "hello world"
     gcs_bucket_path = "hello world"
+    job_id = "hello world"
 
     import_entries_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -1910,27 +1913,27 @@ class ::Google::Cloud::DataCatalog::V1::DataCatalog::Rest::ClientTest < Minitest
         end
 
         # Use hash object
-        client.import_entries({ parent: parent, gcs_bucket_path: gcs_bucket_path }) do |_result, response|
+        client.import_entries({ parent: parent, gcs_bucket_path: gcs_bucket_path, job_id: job_id }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.import_entries parent: parent, gcs_bucket_path: gcs_bucket_path do |_result, response|
+        client.import_entries parent: parent, gcs_bucket_path: gcs_bucket_path, job_id: job_id do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.import_entries ::Google::Cloud::DataCatalog::V1::ImportEntriesRequest.new(parent: parent, gcs_bucket_path: gcs_bucket_path) do |_result, response|
+        client.import_entries ::Google::Cloud::DataCatalog::V1::ImportEntriesRequest.new(parent: parent, gcs_bucket_path: gcs_bucket_path, job_id: job_id) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.import_entries({ parent: parent, gcs_bucket_path: gcs_bucket_path }, call_options) do |_result, response|
+        client.import_entries({ parent: parent, gcs_bucket_path: gcs_bucket_path, job_id: job_id }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.import_entries(::Google::Cloud::DataCatalog::V1::ImportEntriesRequest.new(parent: parent, gcs_bucket_path: gcs_bucket_path), call_options) do |_result, response|
+        client.import_entries(::Google::Cloud::DataCatalog::V1::ImportEntriesRequest.new(parent: parent, gcs_bucket_path: gcs_bucket_path, job_id: job_id), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

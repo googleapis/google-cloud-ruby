@@ -347,6 +347,9 @@ module Google
         #   @return [::Google::Cloud::Container::V1::EphemeralStorageLocalSsdConfig]
         #     Parameters for the node ephemeral storage using Local SSDs.
         #     If unspecified, ephemeral storage is backed by the boot disk.
+        # @!attribute [rw] sole_tenant_config
+        #   @return [::Google::Cloud::Container::V1::SoleTenantConfig]
+        #     Parameters for node pools to be backed by shared sole tenant node groups.
         class NodeConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -559,6 +562,46 @@ module Google
             # Must consume from a specific reservation. Must specify key value fields
             # for specifying the reservations.
             SPECIFIC_RESERVATION = 3
+          end
+        end
+
+        # SoleTenantConfig contains the NodeAffinities to specify what shared sole
+        # tenant node groups should back the node pool.
+        # @!attribute [rw] node_affinities
+        #   @return [::Array<::Google::Cloud::Container::V1::SoleTenantConfig::NodeAffinity>]
+        #     NodeAffinities used to match to a shared sole tenant node group.
+        class SoleTenantConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Specifies the NodeAffinity key, values, and affinity operator according to
+          # [shared sole tenant node group
+          # affinities](https://cloud.google.com/compute/docs/nodes/sole-tenant-nodes#node_affinity_and_anti-affinity).
+          # @!attribute [rw] key
+          #   @return [::String]
+          #     Key for NodeAffinity.
+          # @!attribute [rw] operator
+          #   @return [::Google::Cloud::Container::V1::SoleTenantConfig::NodeAffinity::Operator]
+          #     Operator for NodeAffinity.
+          # @!attribute [rw] values
+          #   @return [::Array<::String>]
+          #     Values for NodeAffinity.
+          class NodeAffinity
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Operator allows user to specify affinity or anti-affinity for the
+            # given key values.
+            module Operator
+              # Invalid or unspecified affinity operator.
+              OPERATOR_UNSPECIFIED = 0
+
+              # Affinity operator.
+              IN = 1
+
+              # Anti-affinity operator.
+              NOT_IN = 2
+            end
           end
         end
 
@@ -1366,7 +1409,12 @@ module Google
         #     Shielded Nodes configuration.
         # @!attribute [rw] release_channel
         #   @return [::Google::Cloud::Container::V1::ReleaseChannel]
-        #     Release channel configuration.
+        #     Release channel configuration. If left unspecified on cluster creation and
+        #     a version is specified, the cluster is enrolled in the most mature release
+        #     channel where the version is available (first checking STABLE, then
+        #     REGULAR, and finally RAPID). Otherwise, if no release channel
+        #     configuration and no version is specified, the cluster is enrolled in the
+        #     REGULAR channel with its default version.
         # @!attribute [rw] workload_identity_config
         #   @return [::Google::Cloud::Container::V1::WorkloadIdentityConfig]
         #     Configuration for the use of Kubernetes Service Accounts in GCP IAM
@@ -1511,6 +1559,9 @@ module Google
         # @!attribute [rw] fleet
         #   @return [::Google::Cloud::Container::V1::Fleet]
         #     Fleet information for the cluster.
+        # @!attribute [rw] enable_k8s_beta_apis
+        #   @return [::Google::Cloud::Container::V1::K8sBetaAPIConfig]
+        #     Beta APIs Config
         class Cluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1552,6 +1603,15 @@ module Google
             # full functionality. Details can be found in the `statusMessage` field.
             DEGRADED = 6
           end
+        end
+
+        # K8sBetaAPIConfig , configuration for beta APIs
+        # @!attribute [rw] enabled_apis
+        #   @return [::Array<::String>]
+        #     Enabled k8s beta APIs.
+        class K8sBetaAPIConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Node pool configs that apply to all auto-provisioned node pools
@@ -1783,6 +1843,15 @@ module Google
         #     The additional pod ranges that are to be removed from the cluster.
         #     The pod ranges specified here must have been specified earlier in the
         #     'additional_pod_ranges_config' argument.
+        # @!attribute [rw] enable_k8s_beta_apis
+        #   @return [::Google::Cloud::Container::V1::K8sBetaAPIConfig]
+        #     Kubernetes open source beta apis enabled on the cluster. Only beta apis
+        # @!attribute [rw] desired_enable_fqdn_network_policy
+        #   @return [::Boolean]
+        #     Enable/Disable FQDN Network Policy for the cluster.
+        # @!attribute [rw] desired_k8s_beta_apis
+        #   @return [::Google::Cloud::Container::V1::K8sBetaAPIConfig]
+        #     Desired Beta APIs to be enabled for cluster.
         class ClusterUpdate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1834,12 +1903,14 @@ module Google
         #
         #     Examples:
         #
-        #       -
-        #       `https://container.googleapis.com/v1/projects/123/locations/us-central1/clusters/my-cluster`
-        #       -
-        #       `https://container.googleapis.com/v1/projects/123/zones/us-central1-c/clusters/my-cluster/nodePools/my-np`
-        #       -
-        #       `https://container.googleapis.com/v1/projects/123/zones/us-central1-c/clusters/my-cluster/nodePools/my-np/node/my-node`
+        #     -
+        #     ##
+        #     `https://container.googleapis.com/v1/projects/123/locations/us-central1/clusters/my-cluster`
+        #
+        #     ##
+        #     `https://container.googleapis.com/v1/projects/123/zones/us-central1-c/clusters/my-cluster/nodePools/my-np`
+        #
+        #     `https://container.googleapis.com/v1/projects/123/zones/us-central1-c/clusters/my-cluster/nodePools/my-np/node/my-node`
         # @!attribute [rw] location
         #   @return [::String]
         #     [Output only] The name of the Google Compute Engine
@@ -2943,6 +3014,9 @@ module Google
         #     This checksum is computed by the server based on the value of node pool
         #     fields, and may be sent on update requests to ensure the client has an
         #     up-to-date value before proceeding.
+        # @!attribute [rw] best_effort_provisioning
+        #   @return [::Google::Cloud::Container::V1::BestEffortProvisioning]
+        #     Enable best effort provisioning for nodes
         class NodePool
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3145,6 +3219,22 @@ module Google
         #   @return [::Google::Cloud::Container::V1::AutoUpgradeOptions]
         #     Specifies the Auto Upgrade knobs for the node pool.
         class NodeManagement
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Best effort provisioning.
+        # @!attribute [rw] enabled
+        #   @return [::Boolean]
+        #     When this is enabled, cluster/node pool creations will ignore non-fatal
+        #     errors like stockout to best provision as many nodes as possible right now
+        #     and eventually bring up all target number of nodes
+        # @!attribute [rw] min_provision_nodes
+        #   @return [::Integer]
+        #     Minimum number of nodes to be provisioned to be considered as succeeded,
+        #     and the rest of nodes will be provisioned gradually and eventually when
+        #     stockout issue has been resolved.
+        class BestEffortProvisioning
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -3948,6 +4038,9 @@ module Google
         #   @return [::Google::Cloud::Container::V1::GatewayAPIConfig]
         #     GatewayAPIConfig contains the desired config of Gateway API on this
         #     cluster.
+        # @!attribute [rw] enable_fqdn_network_policy
+        #   @return [::Boolean]
+        #     Whether FQDN Network Policy is enabled on this cluster.
         class NetworkConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -4078,6 +4171,73 @@ module Google
         #     The public component of the keys used by the cluster to sign token
         #     requests.
         class GetJSONWebKeysResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # CheckAutopilotCompatibilityRequest requests getting the blockers for the
+        # given operation in the cluster.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     The name (project, location, cluster) of the cluster to retrieve.
+        #     Specified in the format `projects/*/locations/*/clusters/*`.
+        class CheckAutopilotCompatibilityRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # AutopilotCompatibilityIssue contains information about a specific
+        # compatibility issue with Autopilot mode.
+        # @!attribute [rw] last_observation
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The last time when this issue was observed.
+        # @!attribute [rw] constraint_type
+        #   @return [::String]
+        #     The constraint type of the issue.
+        # @!attribute [rw] incompatibility_type
+        #   @return [::Google::Cloud::Container::V1::AutopilotCompatibilityIssue::IssueType]
+        #     The incompatibility type of this issue.
+        # @!attribute [rw] subjects
+        #   @return [::Array<::String>]
+        #     The name of the resources which are subject to this issue.
+        # @!attribute [rw] documentation_url
+        #   @return [::String]
+        #     A URL to a public documnetation, which addresses resolving this issue.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     The description of the issue.
+        class AutopilotCompatibilityIssue
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The type of the reported issue.
+          module IssueType
+            # Default value, should not be used.
+            UNSPECIFIED = 0
+
+            # Indicates that the issue is a known incompatibility between the
+            # cluster and Autopilot mode.
+            INCOMPATIBILITY = 1
+
+            # Indicates the issue is an incompatibility if customers take no further
+            # action to resolve.
+            ADDITIONAL_CONFIG_REQUIRED = 2
+
+            # Indicates the issue is not an incompatibility, but depending on the
+            # workloads business logic, there is a potential that they won't work on
+            # Autopilot.
+            PASSED_WITH_OPTIONAL_CONFIG = 3
+          end
+        end
+
+        # CheckAutopilotCompatibilityResponse has a list of compatibility issues.
+        # @!attribute [rw] issues
+        #   @return [::Array<::Google::Cloud::Container::V1::AutopilotCompatibilityIssue>]
+        #     The list of issues for the given operation.
+        # @!attribute [rw] summary
+        #   @return [::String]
+        #     The summary of the autopilot compatibility response.
+        class CheckAutopilotCompatibilityResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

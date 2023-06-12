@@ -287,6 +287,32 @@ describe Google::Cloud::Bigquery::QueryJob, :data, :mock_bigquery do
     _(data.class).must_equal Google::Cloud::Bigquery::Data
   end
 
+  it "does not call list_table_data is no schema present" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+    query_hash =  {
+      "kind" => "bigquery#getQueryResultsResponse",
+      "etag" => "etag1234567890",
+      "jobReference" => {
+        "projectId" => "my-project",
+        "jobId" => "job9876543210"
+      },
+      "pageToken" => "token1234567890",
+      "totalRows" => 3,
+      "totalBytesProcessed" => "456789", # String per google/google-api-ruby-client#439
+      "jobComplete" => true,
+      "cacheHit" => false
+    }
+    mock.expect :get_job_query_results,
+                Google::Apis::BigqueryV2::QueryResponse.from_json(query_hash.to_json),
+                [project, job.job_id], location: "US", max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil
+
+    data = job.data start: 25
+    mock.verify
+
+    _(data.class).must_equal Google::Cloud::Bigquery::Data
+  end
+
   def query_job_gapi
     json = query_job_resp_json("SELECT name, age, score, active FROM `users`")
     Google::Apis::BigqueryV2::Job.from_json json

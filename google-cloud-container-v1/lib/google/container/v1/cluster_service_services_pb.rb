@@ -133,6 +133,9 @@ module Google
             rpc :SetMaintenancePolicy, ::Google::Cloud::Container::V1::SetMaintenancePolicyRequest, ::Google::Cloud::Container::V1::Operation
             # Lists subnetworks that are usable for creating clusters in a project.
             rpc :ListUsableSubnetworks, ::Google::Cloud::Container::V1::ListUsableSubnetworksRequest, ::Google::Cloud::Container::V1::ListUsableSubnetworksResponse
+            # Checks the cluster compatibility with Autopilot mode, and returns a list of
+            # compatibility issues.
+            rpc :CheckAutopilotCompatibility, ::Google::Cloud::Container::V1::CheckAutopilotCompatibilityRequest, ::Google::Cloud::Container::V1::CheckAutopilotCompatibilityResponse
           end
 
           Stub = Service.rpc_stub_class

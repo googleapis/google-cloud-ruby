@@ -1,5 +1,11 @@
 # Release History
 
+### 1.43.1 (2023-05-19)
+
+#### Bug Fixes
+
+* ensure schema for data parsing ([#21616](https://github.com/googleapis/google-cloud-ruby/issues/21616)) 
+
 ### 1.43.0 (2023-05-10)
 
 #### Features

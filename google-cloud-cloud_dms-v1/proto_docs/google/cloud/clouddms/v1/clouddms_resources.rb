@@ -24,23 +24,23 @@ module Google
         # SSL configuration information.
         # @!attribute [r] type
         #   @return [::Google::Cloud::CloudDMS::V1::SslConfig::SslType]
-        #     Output only. The ssl config type according to 'client_key', 'client_certificate' and
-        #     'ca_certificate'.
+        #     Output only. The ssl config type according to 'client_key',
+        #     'client_certificate' and 'ca_certificate'.
         # @!attribute [rw] client_key
         #   @return [::String]
-        #     Input only. The unencrypted PKCS#1 or PKCS#8 PEM-encoded private key associated with
-        #     the Client Certificate. If this field is used then the 'client_certificate'
-        #     field is mandatory.
+        #     Input only. The unencrypted PKCS#1 or PKCS#8 PEM-encoded private key
+        #     associated with the Client Certificate. If this field is used then the
+        #     'client_certificate' field is mandatory.
         # @!attribute [rw] client_certificate
         #   @return [::String]
-        #     Input only. The x509 PEM-encoded certificate that will be used by the replica to
-        #     authenticate against the source database server.If this field is used then
-        #     the 'client_key' field is mandatory.
+        #     Input only. The x509 PEM-encoded certificate that will be used by the
+        #     replica to authenticate against the source database server.If this field is
+        #     used then the 'client_key' field is mandatory.
         # @!attribute [rw] ca_certificate
         #   @return [::String]
-        #     Required. Input only. The x509 PEM-encoded certificate of the CA that signed the source database
-        #     server's certificate. The replica will use this certificate to verify
-        #     it's connecting to the right host.
+        #     Required. Input only. The x509 PEM-encoded certificate of the CA that
+        #     signed the source database server's certificate. The replica will use this
+        #     certificate to verify it's connecting to the right host.
         class SslConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -68,13 +68,15 @@ module Google
         #     Required. The network port of the source MySQL database.
         # @!attribute [rw] username
         #   @return [::String]
-        #     Required. The username that Database Migration Service will use to connect to the
-        #     database. The value is encrypted when stored in Database Migration Service.
+        #     Required. The username that Database Migration Service will use to connect
+        #     to the database. The value is encrypted when stored in Database Migration
+        #     Service.
         # @!attribute [rw] password
         #   @return [::String]
-        #     Required. Input only. The password for the user that Database Migration Service will be using to
-        #     connect to the database. This field is not returned on request, and the
-        #     value is encrypted when stored in Database Migration Service.
+        #     Required. Input only. The password for the user that Database Migration
+        #     Service will be using to connect to the database. This field is not
+        #     returned on request, and the value is encrypted when stored in Database
+        #     Migration Service.
         # @!attribute [r] password_set
         #   @return [::Boolean]
         #     Output only. Indicates If this connection profile password is stored.
@@ -100,13 +102,15 @@ module Google
         #     Required. The network port of the source PostgreSQL database.
         # @!attribute [rw] username
         #   @return [::String]
-        #     Required. The username that Database Migration Service will use to connect to the
-        #     database. The value is encrypted when stored in Database Migration Service.
+        #     Required. The username that Database Migration Service will use to connect
+        #     to the database. The value is encrypted when stored in Database Migration
+        #     Service.
         # @!attribute [rw] password
         #   @return [::String]
-        #     Required. Input only. The password for the user that Database Migration Service will be using to
-        #     connect to the database. This field is not returned on request, and the
-        #     value is encrypted when stored in Database Migration Service.
+        #     Required. Input only. The password for the user that Database Migration
+        #     Service will be using to connect to the database. This field is not
+        #     returned on request, and the value is encrypted when stored in Database
+        #     Migration Service.
         # @!attribute [r] password_set
         #   @return [::Boolean]
         #     Output only. Indicates If this connection profile password is stored.
@@ -117,7 +121,56 @@ module Google
         #   @return [::String]
         #     If the source is a Cloud SQL database, use this field to
         #     provide the Cloud SQL instance ID of the source.
+        # @!attribute [r] network_architecture
+        #   @return [::Google::Cloud::CloudDMS::V1::NetworkArchitecture]
+        #     Output only. If the source is a Cloud SQL database, this field indicates
+        #     the network architecture it's associated with.
+        # @!attribute [rw] static_ip_connectivity
+        #   @return [::Google::Cloud::CloudDMS::V1::StaticIpConnectivity]
+        #     Static ip connectivity data (default, no additional details needed).
+        # @!attribute [rw] private_service_connect_connectivity
+        #   @return [::Google::Cloud::CloudDMS::V1::PrivateServiceConnectConnectivity]
+        #     Private service connect connectivity.
         class PostgreSqlConnectionProfile
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Specifies connection parameters required specifically for Oracle
+        # databases.
+        # @!attribute [rw] host
+        #   @return [::String]
+        #     Required. The IP or hostname of the source Oracle database.
+        # @!attribute [rw] port
+        #   @return [::Integer]
+        #     Required. The network port of the source Oracle database.
+        # @!attribute [rw] username
+        #   @return [::String]
+        #     Required. The username that Database Migration Service will use to connect
+        #     to the database. The value is encrypted when stored in Database Migration
+        #     Service.
+        # @!attribute [rw] password
+        #   @return [::String]
+        #     Required. Input only. The password for the user that Database Migration
+        #     Service will be using to connect to the database. This field is not
+        #     returned on request, and the value is encrypted when stored in Database
+        #     Migration Service.
+        # @!attribute [r] password_set
+        #   @return [::Boolean]
+        #     Output only. Indicates whether a new password is included in the request.
+        # @!attribute [rw] database_service
+        #   @return [::String]
+        #     Required. Database service for the Oracle connection.
+        # @!attribute [rw] static_service_ip_connectivity
+        #   @return [::Google::Cloud::CloudDMS::V1::StaticServiceIpConnectivity]
+        #     Static Service IP connectivity.
+        # @!attribute [rw] forward_ssh_connectivity
+        #   @return [::Google::Cloud::CloudDMS::V1::ForwardSshTunnelConnectivity]
+        #     Forward SSH tunnel connectivity.
+        # @!attribute [rw] private_connectivity
+        #   @return [::Google::Cloud::CloudDMS::V1::PrivateConnectivity]
+        #     Private connectivity.
+        class OracleConnectionProfile
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -126,7 +179,8 @@ module Google
         # required to create a Cloud SQL destination database instance.
         # @!attribute [r] cloud_sql_id
         #   @return [::String]
-        #     Output only. The Cloud SQL instance ID that this connection profile is associated with.
+        #     Output only. The Cloud SQL instance ID that this connection profile is
+        #     associated with.
         # @!attribute [rw] settings
         #   @return [::Google::Cloud::CloudDMS::V1::CloudSqlSettings]
         #     Immutable. Metadata used to create the destination Cloud SQL database.
@@ -136,7 +190,26 @@ module Google
         # @!attribute [r] public_ip
         #   @return [::String]
         #     Output only. The Cloud SQL database instance's public IP.
+        # @!attribute [r] additional_public_ip
+        #   @return [::String]
+        #     Output only. The Cloud SQL database instance's additional (outgoing) public
+        #     IP. Used when the Cloud SQL database availability type is REGIONAL (i.e.
+        #     multiple zones / highly available).
         class CloudSqlConnectionProfile
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Specifies required connection parameters, and the parameters
+        # required to create an AlloyDB destination cluster.
+        # @!attribute [rw] cluster_id
+        #   @return [::String]
+        #     Required. The AlloyDB cluster ID that this connection profile is associated
+        #     with.
+        # @!attribute [rw] settings
+        #   @return [::Google::Cloud::CloudDMS::V1::AlloyDbSettings]
+        #     Immutable. Metadata used to create the destination AlloyDB cluster.
+        class AlloyDbConnectionProfile
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -171,6 +244,14 @@ module Google
         #     accessible for private IP. For example,
         #     `projects/myProject/global/networks/default`. This setting can
         #     be updated, but it cannot be removed after it is set.
+        # @!attribute [rw] allocated_ip_range
+        #   @return [::String]
+        #     Optional. The name of the allocated IP address range for the private IP
+        #     Cloud SQL instance. This name refers to an already allocated IP range
+        #     address. If set, the instance IP address will be created in the allocated
+        #     range. Note that this IP address range can't be modified after the instance
+        #     is created. If you change the VPC when configuring connectivity settings
+        #     for the migration job, this field is not relevant.
         # @!attribute [rw] require_ssl
         #   @return [::Google::Protobuf::BoolValue]
         #     Whether SSL connections over IP should be enforced or not.
@@ -244,8 +325,13 @@ module Google
         #     The minimum (and default) size is 10GB.
         # @!attribute [rw] zone
         #   @return [::String]
-        #     The Google Cloud Platform zone where your Cloud SQL datdabse instance is
+        #     The Google Cloud Platform zone where your Cloud SQL database instance is
         #     located.
+        # @!attribute [rw] secondary_zone
+        #   @return [::String]
+        #     Optional. The Google Cloud Platform zone where the failover Cloud SQL
+        #     database instance is located. Used when the Cloud SQL database availability
+        #     type is REGIONAL (i.e. multiple zones / highly available).
         # @!attribute [rw] source_id
         #   @return [::String]
         #     The Database Migration Service source connection profile ID,
@@ -260,6 +346,16 @@ module Google
         # @!attribute [rw] collation
         #   @return [::String]
         #     The Cloud SQL default instance level collation.
+        # @!attribute [rw] cmek_key_name
+        #   @return [::String]
+        #     The KMS key name used for the csql instance.
+        # @!attribute [rw] availability_type
+        #   @return [::Google::Cloud::CloudDMS::V1::CloudSqlSettings::SqlAvailabilityType]
+        #     Optional. Availability type. Potential values:
+        #     *  `ZONAL`: The instance serves data from only one zone. Outages in that
+        #     zone affect data availability.
+        #     *  `REGIONAL`: The instance can serve data from more than one zone in a
+        #     region (it is highly available).
         class CloudSqlSettings
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -334,14 +430,162 @@ module Google
 
             # PostgreSQL 13.
             POSTGRES_13 = 8
+
+            # PostgreSQL 14.
+            POSTGRES_14 = 17
+          end
+
+          # The availability type of the given Cloud SQL instance.
+          module SqlAvailabilityType
+            # This is an unknown Availability type.
+            SQL_AVAILABILITY_TYPE_UNSPECIFIED = 0
+
+            # Zonal availablility instance.
+            ZONAL = 1
+
+            # Regional availability instance.
+            REGIONAL = 2
           end
         end
 
-        # The source database will allow incoming connections from the destination
-        # database's public IP. You can retrieve the Cloud SQL instance's public IP
-        # from the Cloud SQL console or using Cloud SQL APIs. No additional
+        # Settings for creating an AlloyDB cluster.
+        # @!attribute [rw] initial_user
+        #   @return [::Google::Cloud::CloudDMS::V1::AlloyDbSettings::UserPassword]
+        #     Required. Input only. Initial user to setup during cluster creation.
+        #     Required.
+        # @!attribute [rw] vpc_network
+        #   @return [::String]
+        #     Required. The resource link for the VPC network in which cluster resources
+        #     are created and from which they are accessible via Private IP. The network
+        #     must belong to the same project as the cluster. It is specified in the
+        #     form: "projects/\\{project_number}/global/networks/\\{network_id}". This is
+        #     required to create a cluster.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Labels for the AlloyDB cluster created by DMS. An object containing a list
+        #     of 'key', 'value' pairs.
+        # @!attribute [rw] primary_instance_settings
+        #   @return [::Google::Cloud::CloudDMS::V1::AlloyDbSettings::PrimaryInstanceSettings]
+        # @!attribute [rw] encryption_config
+        #   @return [::Google::Cloud::CloudDMS::V1::AlloyDbSettings::EncryptionConfig]
+        #     Optional. The encryption config can be specified to encrypt the data disks
+        #     and other persistent data resources of a cluster with a
+        #     customer-managed encryption key (CMEK). When this field is not
+        #     specified, the cluster will then use default encryption scheme to
+        #     protect the user data.
+        class AlloyDbSettings
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The username/password for a database user. Used for specifying initial
+          # users at cluster creation time.
+          # @!attribute [rw] user
+          #   @return [::String]
+          #     The database username.
+          # @!attribute [rw] password
+          #   @return [::String]
+          #     The initial password for the user.
+          # @!attribute [r] password_set
+          #   @return [::Boolean]
+          #     Output only. Indicates if the initial_user.password field has been set.
+          class UserPassword
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Settings for the cluster's primary instance
+          # @!attribute [rw] id
+          #   @return [::String]
+          #     Required. The ID of the AlloyDB primary instance. The ID must satisfy the
+          #     regex expression "[a-z0-9-]+".
+          # @!attribute [rw] machine_config
+          #   @return [::Google::Cloud::CloudDMS::V1::AlloyDbSettings::PrimaryInstanceSettings::MachineConfig]
+          #     Configuration for the machines that host the underlying
+          #     database engine.
+          # @!attribute [rw] database_flags
+          #   @return [::Google::Protobuf::Map{::String => ::String}]
+          #     Database flags to pass to AlloyDB when DMS is creating the AlloyDB
+          #     cluster and instances. See the AlloyDB documentation for how these can be
+          #     used.
+          # @!attribute [rw] labels
+          #   @return [::Google::Protobuf::Map{::String => ::String}]
+          #     Labels for the AlloyDB primary instance created by DMS. An object
+          #     containing a list of 'key', 'value' pairs.
+          # @!attribute [r] private_ip
+          #   @return [::String]
+          #     Output only. The private IP address for the Instance.
+          #     This is the connection endpoint for an end-user application.
+          class PrimaryInstanceSettings
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # MachineConfig describes the configuration of a machine.
+            # @!attribute [rw] cpu_count
+            #   @return [::Integer]
+            #     The number of CPU's in the VM instance.
+            class MachineConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::String]
+            class DatabaseFlagsEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::String]
+            class LabelsEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+
+          # EncryptionConfig describes the encryption config of a cluster that is
+          # encrypted with a CMEK (customer-managed encryption key).
+          # @!attribute [rw] kms_key_name
+          #   @return [::String]
+          #     The fully-qualified resource name of the KMS key.
+          #     Each Cloud KMS key is regionalized and has the following format:
+          #     projects/[PROJECT]/locations/[REGION]/keyRings/[RING]/cryptoKeys/[KEY_NAME]
+          class EncryptionConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # The source database will allow incoming connections from the public IP of the
+        # destination database. You can retrieve the public IP of the Cloud SQL
+        # instance from the Cloud SQL console or using Cloud SQL APIs. No additional
         # configuration is required.
         class StaticIpConnectivity
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Private Service Connect connectivity
+        # (https://cloud.google.com/vpc/docs/private-service-connect#service-attachments)
+        # @!attribute [rw] service_attachment
+        #   @return [::String]
+        #     Required. A service attachment that exposes a database, and has the
+        #     following format:
+        #     projects/\\{project}/regions/\\{region}/serviceAttachments/\\{service_attachment_name}
+        class PrivateServiceConnectConnectivity
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -354,12 +598,12 @@ module Google
         # set up the VPC peering between the Cloud SQL private network and the VPC.
         # @!attribute [rw] vm_ip
         #   @return [::String]
-        #     Required. The IP of the virtual machine (Compute Engine) used as the bastion server
-        #     for the SSH tunnel.
+        #     Required. The IP of the virtual machine (Compute Engine) used as the
+        #     bastion server for the SSH tunnel.
         # @!attribute [rw] vm_port
         #   @return [::Integer]
-        #     Required. The forwarding port of the virtual machine (Compute Engine) used as the
-        #     bastion server for the SSH tunnel.
+        #     Required. The forwarding port of the virtual machine (Compute Engine) used
+        #     as the bastion server for the SSH tunnel.
         # @!attribute [rw] vm
         #   @return [::String]
         #     The name of the virtual machine (Compute Engine) used as the bastion server
@@ -383,6 +627,42 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Forward SSH Tunnel connectivity.
+        # @!attribute [rw] hostname
+        #   @return [::String]
+        #     Required. Hostname for the SSH tunnel.
+        # @!attribute [rw] username
+        #   @return [::String]
+        #     Required. Username for the SSH tunnel.
+        # @!attribute [rw] port
+        #   @return [::Integer]
+        #     Port for the SSH tunnel, default value is 22.
+        # @!attribute [rw] password
+        #   @return [::String]
+        #     Input only. SSH password.
+        # @!attribute [rw] private_key
+        #   @return [::String]
+        #     Input only. SSH private key.
+        class ForwardSshTunnelConnectivity
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Static IP address connectivity configured on service project.
+        class StaticServiceIpConnectivity
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Private Connectivity.
+        # @!attribute [rw] private_connection
+        #   @return [::String]
+        #     Required. The resource name (URI) of the private connection.
+        class PrivateConnectivity
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A message defining the database engine and provider.
         # @!attribute [rw] provider
         #   @return [::Google::Cloud::CloudDMS::V1::DatabaseProvider]
@@ -399,7 +679,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     The name (URI) of this migration job resource, in the form of:
-        #     projects/\\{project}/locations/\\{location}/instances/\\{instance}.
+        #     projects/\\{project}/locations/\\{location}/migrationJobs/\\{migrationJob}.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The timestamp when the migration job resource was created.
@@ -407,8 +687,8 @@ module Google
         #     Example: "2014-10-02T15:01:23.045123456Z".
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The timestamp when the migration job resource was last updated.
-        #     A timestamp in RFC3339 UTC "Zulu" format, accurate to nanoseconds.
+        #     Output only. The timestamp when the migration job resource was last
+        #     updated. A timestamp in RFC3339 UTC "Zulu" format, accurate to nanoseconds.
         #     Example: "2014-10-02T15:01:23.045123456Z".
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
@@ -433,6 +713,11 @@ module Google
         #   @return [::String]
         #     The path to the dump file in Google Cloud Storage,
         #     in the format: (gs://[BUCKET_NAME]/[OBJECT_NAME]).
+        #     This field and the "dump_flags" field are mutually exclusive.
+        # @!attribute [rw] dump_flags
+        #   @return [::Google::Cloud::CloudDMS::V1::MigrationJob::DumpFlags]
+        #     The initial dump flags.
+        #     This field and the "dump_path" field are mutually exclusive.
         # @!attribute [rw] source
         #   @return [::String]
         #     Required. The resource name (URI) of the source connection profile.
@@ -451,8 +736,9 @@ module Google
         #     static ip connectivity data (default, no additional details needed).
         # @!attribute [r] duration
         #   @return [::Google::Protobuf::Duration]
-        #     Output only. The duration of the migration job (in seconds). A duration in seconds
-        #     with up to nine fractional digits, terminated by 's'. Example: "3.5s".
+        #     Output only. The duration of the migration job (in seconds). A duration in
+        #     seconds with up to nine fractional digits, terminated by 's'. Example:
+        #     "3.5s".
         # @!attribute [r] error
         #   @return [::Google::Rpc::Status]
         #     Output only. The error details in case of state FAILED.
@@ -464,10 +750,55 @@ module Google
         #     The database engine type and provider of the destination.
         # @!attribute [r] end_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. If the migration job is completed, the time when it was completed.
+        #     Output only. If the migration job is completed, the time when it was
+        #     completed.
+        # @!attribute [rw] conversion_workspace
+        #   @return [::Google::Cloud::CloudDMS::V1::ConversionWorkspaceInfo]
+        #     The conversion workspace used by the migration.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     This field can be used to select the entities to migrate as part of
+        #     the migration job. It uses AIP-160 notation to select a subset of the
+        #     entities configured on the associated conversion-workspace. This field
+        #     should not be set on migration-jobs that are not associated with a
+        #     conversion workspace.
+        # @!attribute [rw] cmek_key_name
+        #   @return [::String]
+        #     The CMEK (customer-managed encryption key) fully qualified key name used
+        #     for the migration job.
+        #     This field supports all migration jobs types except for:
+        #     * Mysql to Mysql (use the cmek field in the cloudsql connection profile
+        #     instead).
+        #     * PostrgeSQL to PostgreSQL (use the cmek field in the cloudsql
+        #     connection profile instead).
+        #     * PostgreSQL to AlloyDB (use the kms_key_name field in the alloydb
+        #     connection profile instead).
+        #     Each Cloud CMEK key has the following format:
+        #     projects/[PROJECT]/locations/[REGION]/keyRings/[RING]/cryptoKeys/[KEY_NAME]
         class MigrationJob
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Dump flag definition.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     The name of the flag
+          # @!attribute [rw] value
+          #   @return [::String]
+          #     The value of the flag.
+          class DumpFlag
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Dump flags definition.
+          # @!attribute [rw] dump_flags
+          #   @return [::Array<::Google::Cloud::CloudDMS::V1::MigrationJob::DumpFlag>]
+          #     The flags for the initial dump.
+          class DumpFlags
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # @!attribute [rw] key
           #   @return [::String]
@@ -563,11 +894,23 @@ module Google
           end
         end
 
+        # A conversion workspace's version.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     The resource name (URI) of the conversion workspace.
+        # @!attribute [rw] commit_id
+        #   @return [::String]
+        #     The commit ID of the conversion workspace.
+        class ConversionWorkspaceInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A connection profile definition.
         # @!attribute [rw] name
         #   @return [::String]
         #     The name of this connection profile resource in the form of
-        #     projects/\\{project}/locations/\\{location}/instances/\\{instance}.
+        #     projects/\\{project}/locations/\\{location}/connectionProfiles/\\{connectionProfile}.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The timestamp when the resource was created.
@@ -597,9 +940,15 @@ module Google
         # @!attribute [rw] postgresql
         #   @return [::Google::Cloud::CloudDMS::V1::PostgreSqlConnectionProfile]
         #     A PostgreSQL database connection profile.
+        # @!attribute [rw] oracle
+        #   @return [::Google::Cloud::CloudDMS::V1::OracleConnectionProfile]
+        #     An Oracle database connection profile.
         # @!attribute [rw] cloudsql
         #   @return [::Google::Cloud::CloudDMS::V1::CloudSqlConnectionProfile]
         #     A CloudSQL database connection profile.
+        # @!attribute [rw] alloydb
+        #   @return [::Google::Cloud::CloudDMS::V1::AlloyDbConnectionProfile]
+        #     An AlloyDB cluster connection profile.
         # @!attribute [r] error
         #   @return [::Google::Rpc::Status]
         #     Output only. The error details in case of state FAILED.
@@ -653,7 +1002,8 @@ module Google
         #     Output only. An instance of ErrorCode specifying the error that occurred.
         # @!attribute [r] error_message
         #   @return [::String]
-        #     Output only. A formatted message with further details about the error and a CTA.
+        #     Output only. A formatted message with further details about the error and a
+        #     CTA.
         # @!attribute [r] error_detail_message
         #   @return [::String]
         #     Output only. A specific detailed error message, if supplied by the engine.
@@ -725,7 +1075,115 @@ module Google
 
             # Migration is already running at the time of restart request.
             CANT_RESTART_RUNNING_MIGRATION = 21
+
+            # The source has tables with limited support.
+            # E.g. PostgreSQL tables without primary keys.
+            TABLES_WITH_LIMITED_SUPPORT = 24
+
+            # The source uses an unsupported locale.
+            UNSUPPORTED_DATABASE_LOCALE = 25
+
+            # The source uses an unsupported Foreign Data Wrapper configuration.
+            UNSUPPORTED_DATABASE_FDW_CONFIG = 26
+
+            # There was an underlying RDBMS error.
+            ERROR_RDBMS = 27
+
+            # The source DB size in Bytes exceeds a certain threshold. The migration
+            # might require an increase of quota, or might not be supported.
+            SOURCE_SIZE_EXCEEDS_THRESHOLD = 28
           end
+        end
+
+        # The PrivateConnection resource is used to establish private connectivity
+        # with the customer's network.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     The name of the resource.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The create time of the resource.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The last update time of the resource.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     The resource labels for private connections to use to annotate any related
+        #     underlying resources such as Compute Engine VMs. An object containing a
+        #     list of "key": "value" pairs.
+        #
+        #     Example: `{ "name": "wrench", "mass": "1.3kg", "count": "3" }`.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     The private connection display name.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::CloudDMS::V1::PrivateConnection::State]
+        #     Output only. The state of the private connection.
+        # @!attribute [r] error
+        #   @return [::Google::Rpc::Status]
+        #     Output only. The error details in case of state FAILED.
+        # @!attribute [rw] vpc_peering_config
+        #   @return [::Google::Cloud::CloudDMS::V1::VpcPeeringConfig]
+        #     VPC peering configuration.
+        class PrivateConnection
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Private Connection state.
+          module State
+            STATE_UNSPECIFIED = 0
+
+            # The private connection is in creation state - creating resources.
+            CREATING = 1
+
+            # The private connection has been created with all of its resources.
+            CREATED = 2
+
+            # The private connection creation has failed.
+            FAILED = 3
+
+            # The private connection is being deleted.
+            DELETING = 4
+
+            # Delete request has failed, resource is in invalid state.
+            FAILED_TO_DELETE = 5
+
+            # The private connection has been deleted.
+            DELETED = 6
+          end
+        end
+
+        # The VPC peering configuration is used to create VPC peering with the
+        # consumer's VPC.
+        # @!attribute [rw] vpc_name
+        #   @return [::String]
+        #     Required. Fully qualified name of the VPC that Database Migration Service
+        #     will peer to.
+        # @!attribute [rw] subnet
+        #   @return [::String]
+        #     Required. A free subnet for peering. (CIDR of /29)
+        class VpcPeeringConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        module NetworkArchitecture
+          NETWORK_ARCHITECTURE_UNSPECIFIED = 0
+
+          # Instance is in Cloud SQL's old producer network architecture.
+          NETWORK_ARCHITECTURE_OLD_CSQL_PRODUCER = 1
+
+          # Instance is in Cloud SQL's new producer network architecture.
+          NETWORK_ARCHITECTURE_NEW_CSQL_PRODUCER = 2
         end
 
         # The database engine types.
@@ -738,6 +1196,9 @@ module Google
 
           # The source engine is PostgreSQL.
           POSTGRESQL = 2
+
+          # The source engine is Oracle.
+          ORACLE = 4
         end
 
         # The database providers.
@@ -750,6 +1211,12 @@ module Google
 
           # RDS runs the database.
           RDS = 2
+
+          # Amazon Aurora.
+          AURORA = 3
+
+          # AlloyDB.
+          ALLOYDB = 4
         end
       end
     end

@@ -100,9 +100,7 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::Google::Protobuf::Value}]
         #     Additional search parameters.
         #
-        #     For
-        #     [IndustryVertical.SITE_SEARCH][google.cloud.discoveryengine.v1beta.IndustryVertical.SITE_SEARCH]
-        #     vertical, supported values are:
+        #     For public website search only, supported values are:
         #
         #     * `user_country_code`: string. Default empty. If set to non-empty, results
         #        are restricted or boosted based on the location provided.
@@ -141,7 +139,7 @@ module Google
         #   @return [::Boolean]
         #     Whether to turn on safe search. This is only supported for
         #     [ContentConfig.PUBLIC_WEBSITE][].
-        # @!attribute [rw] user_label
+        # @!attribute [rw] user_labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     The user labels applied to a resource must meet the following requirements:
         #
@@ -465,7 +463,7 @@ module Google
           #   @return [::String]
           # @!attribute [rw] value
           #   @return [::String]
-          class UserLabelEntry
+          class UserLabelsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

@@ -68,7 +68,12 @@ CONFIGS = {
 }
 
 REPO = "googleapis/google-cloud-ruby"
-BOT_USERS = ["yoshi-code-bot", "yoshi-automation", "gcf-owl-bot[bot]"]
+BOT_USERS = [
+  "yoshi-code-bot",
+  "yoshi-automation",
+  "gcf-owl-bot[bot]",
+  "release-please[bot]"
+]
 
 desc "Interactive mass code review"
 
@@ -121,6 +126,8 @@ def init_config
   @commit_detail = ""
   @edit_enabled = !disable_edit
   @automerge_enabled = enable_automerge && !@edit_enabled
+  @automerge_count_max = 0
+  @automerge_count = 1
   @editor = editor || ENV["EDITOR"] || "/bin/nano"
   @max_line_count = max_line_count
   @omits = Array(omit_path).map do |path|
@@ -145,11 +152,20 @@ def find_prs
 end
 
 def check_automerge pr_data
-  return false unless @automerge_enabled
-  return false unless pr_data.diff_files.all? { |file| @omits.any? { |omit| omit.call file } }
+  if !@automerge_enabled ||
+      @automerge_count_max.positive? && @automerge_count >= @automerge_count_max ||
+      !pr_data.diff_files.all? { |file| @omits.any? { |omit| omit.call file } }
+    @automerge_count = 1
+    return false
+  end
   display_pr_title pr_data
-  puts "Automerging..."
+  if @automerge_count_max.zero?
+    puts "Automerging ..."
+  else
+    puts "Automerging (#{@automerge_count}/#{@automerge_count_max}) ..."
+  end
   handle_merge pr_data
+  @automerge_count += 1
   true
 end
 
@@ -174,8 +190,8 @@ def handle_input pr_data
       exit 0
     when /^e\s*([+-])$/
       handle_edit Regexp.last_match[1]
-    when /^a\s*([+-])$/
-      handle_automerge Regexp.last_match[1]
+    when /^a\s*([+-])\s*(\d+)?$/
+      handle_automerge Regexp.last_match[1], Regexp.last_match[2].to_i
     when /^d\s*(\S+)$/
       handle_display Regexp.last_match[1], pr_data
     when /^o\s*(\S(?:.*\S)?)$/
@@ -212,7 +228,7 @@ def handle_edit arg
   end
 end
 
-def handle_automerge arg
+def handle_automerge arg, count
   case arg
   when "+"
     if @edit_enabled
@@ -225,6 +241,7 @@ def handle_automerge arg
     @automerge_enabled = false
     puts "... disabling automerge"
   end
+  @automerge_count_max = count
 end
 
 def handle_display arg, pr_data
@@ -298,9 +315,9 @@ def handle_suppress *args
   adds = []
   removes = []
   args.each do |arg|
-    if arg =~ /^-(.+)$/
+    if arg =~ /^-(.*)$/
       removes << Regexp.new(Regexp.last_match[1])
-    elsif arg =~ /^\+(.+)$/
+    elsif arg =~ /^\+(.*)$/
       adds << Regexp.new(Regexp.last_match[1])
     end
   end

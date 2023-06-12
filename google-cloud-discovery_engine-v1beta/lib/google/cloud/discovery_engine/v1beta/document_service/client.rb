@@ -135,7 +135,7 @@ module Google
               credentials = @config.credentials
               # Use self-signed JWT if the endpoint is unchanged from default,
               # but only if the default endpoint does not have a region prefix.
-              enable_self_signed_jwt = @config.endpoint == Client.configure.endpoint &&
+              enable_self_signed_jwt = @config.endpoint == Configuration::DEFAULT_ENDPOINT &&
                                        !@config.endpoint.split(".").first.include?("-")
               credentials ||= Credentials.default scope: @config.scope,
                                                   enable_self_signed_jwt: enable_self_signed_jwt
@@ -696,7 +696,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload import_documents(inline_source: nil, gcs_source: nil, bigquery_source: nil, parent: nil, error_config: nil, reconciliation_mode: nil)
+            # @overload import_documents(inline_source: nil, gcs_source: nil, bigquery_source: nil, parent: nil, error_config: nil, reconciliation_mode: nil, auto_generate_ids: nil, id_field: nil)
             #   Pass arguments to `import_documents` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -717,6 +717,58 @@ module Google
             #     The mode of reconciliation between existing documents and the documents to
             #     be imported. Defaults to
             #     {::Google::Cloud::DiscoveryEngine::V1beta::ImportDocumentsRequest::ReconciliationMode::INCREMENTAL ReconciliationMode.INCREMENTAL}.
+            #   @param auto_generate_ids [::Boolean]
+            #     Whether to automatically generate IDs for the documents if absent.
+            #
+            #     If set to `true`,
+            #     {::Google::Cloud::DiscoveryEngine::V1beta::Document#id Document.id}s are
+            #     automatically generated based on the hash of the payload, where IDs may not
+            #     be consistent during multiple imports. In which case
+            #     {::Google::Cloud::DiscoveryEngine::V1beta::ImportDocumentsRequest::ReconciliationMode::FULL ReconciliationMode.FULL}
+            #     is highly recommended to avoid duplicate contents. If unset or set to
+            #     `false`, {::Google::Cloud::DiscoveryEngine::V1beta::Document#id Document.id}s
+            #     have to be specified using
+            #     {::Google::Cloud::DiscoveryEngine::V1beta::ImportDocumentsRequest#id_field id_field},
+            #     otherwises, documents without IDs will fail to be imported.
+            #
+            #     Only set this field when using
+            #     {::Google::Cloud::DiscoveryEngine::V1beta::GcsSource GcsSource} or
+            #     {::Google::Cloud::DiscoveryEngine::V1beta::BigQuerySource BigQuerySource}, and
+            #     when
+            #     {::Google::Cloud::DiscoveryEngine::V1beta::GcsSource#data_schema GcsSource.data_schema}
+            #     or
+            #     {::Google::Cloud::DiscoveryEngine::V1beta::BigQuerySource#data_schema BigQuerySource.data_schema}
+            #     is `custom`. Otherwise, an INVALID_ARGUMENT error is thrown.
+            #   @param id_field [::String]
+            #     The field in the Cloud Storage and BigQuery sources that indicates the
+            #     unique IDs of the documents.
+            #
+            #     For {::Google::Cloud::DiscoveryEngine::V1beta::GcsSource GcsSource} it is the
+            #     key of the JSON field. For instance, `my_id` for JSON `{"my_id":
+            #     "some_uuid"}`. For
+            #     {::Google::Cloud::DiscoveryEngine::V1beta::BigQuerySource BigQuerySource} it is
+            #     the column name of the BigQuery table where the unique ids are stored.
+            #
+            #     The values of the JSON field or the BigQuery column will be used as the
+            #     {::Google::Cloud::DiscoveryEngine::V1beta::Document#id Document.id}s. The JSON
+            #     field or the BigQuery column must be of string type, and the values must be
+            #     set as valid strings conform to
+            #     [RFC-1034](https://tools.ietf.org/html/rfc1034) with 1-63 characters.
+            #     Otherwise, documents without valid IDs will fail to be imported.
+            #
+            #     Only set this field when using
+            #     {::Google::Cloud::DiscoveryEngine::V1beta::GcsSource GcsSource} or
+            #     {::Google::Cloud::DiscoveryEngine::V1beta::BigQuerySource BigQuerySource}, and
+            #     when
+            #     {::Google::Cloud::DiscoveryEngine::V1beta::GcsSource#data_schema GcsSource.data_schema}
+            #     or
+            #     {::Google::Cloud::DiscoveryEngine::V1beta::BigQuerySource#data_schema BigQuerySource.data_schema}
+            #     is `custom`. And only set this field when
+            #     {::Google::Cloud::DiscoveryEngine::V1beta::ImportDocumentsRequest#auto_generate_ids auto_generate_ids}
+            #     is unset or set as `false`. Otherwise, an INVALID_ARGUMENT error is thrown.
+            #
+            #     If it is unset, a default value `_id` is used when importing from the
+            #     allowed data sources.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -989,7 +1041,9 @@ module Google
             class Configuration
               extend ::Gapic::Config
 
-              config_attr :endpoint,      "discoveryengine.googleapis.com", ::String
+              DEFAULT_ENDPOINT = "discoveryengine.googleapis.com"
+
+              config_attr :endpoint,      DEFAULT_ENDPOINT, ::String
               config_attr :credentials,   nil do |value|
                 allowed = [::String, ::Hash, ::Proc, ::Symbol, ::Google::Auth::Credentials, ::Signet::OAuth2::Client, nil]
                 allowed += [::GRPC::Core::Channel, ::GRPC::Core::ChannelCredentials] if defined? ::GRPC
