@@ -42,6 +42,9 @@ module Google
         #   @return [::String]
         #     Type of user agent associated with the finding. For example, an operating
         #     system shell or an embedded or standalone application.
+        # @!attribute [rw] user_agent
+        #   @return [::String]
+        #     The caller's user agent string associated with the finding.
         # @!attribute [rw] service_name
         #   @return [::String]
         #     This is the API service that the service account made a call to, e.g.

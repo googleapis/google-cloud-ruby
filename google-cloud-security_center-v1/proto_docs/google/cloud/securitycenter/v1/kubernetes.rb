@@ -24,32 +24,39 @@ module Google
         # Kubernetes-related attributes.
         # @!attribute [rw] pods
         #   @return [::Array<::Google::Cloud::SecurityCenter::V1::Kubernetes::Pod>]
-        #     Kubernetes Pods associated with the finding. This field will contain Pod
-        #     records for each container that is owned by a Pod.
+        #     Kubernetes
+        #     [Pods](https://cloud.google.com/kubernetes-engine/docs/concepts/pod)
+        #     associated with the finding. This field contains Pod records for each
+        #     container that is owned by a Pod.
         # @!attribute [rw] nodes
         #   @return [::Array<::Google::Cloud::SecurityCenter::V1::Kubernetes::Node>]
-        #     Provides Kubernetes Node information.
+        #     Provides Kubernetes
+        #     [node](https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-architecture#nodes)
+        #     information.
         # @!attribute [rw] node_pools
         #   @return [::Array<::Google::Cloud::SecurityCenter::V1::Kubernetes::NodePool>]
-        #     GKE Node Pools associated with the finding. This field will
-        #     contain NodePool information for each Node, when it is available.
+        #     GKE [node
+        #     pools](https://cloud.google.com/kubernetes-engine/docs/concepts/node-pools)
+        #     associated with the finding. This field contains node pool information for
+        #     each node, when it is available.
         # @!attribute [rw] roles
         #   @return [::Array<::Google::Cloud::SecurityCenter::V1::Kubernetes::Role>]
-        #     Provides Kubernetes role information for findings that involve
-        #     Roles or ClusterRoles.
+        #     Provides Kubernetes role information for findings that involve [Roles or
+        #     ClusterRoles](https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control).
         # @!attribute [rw] bindings
         #   @return [::Array<::Google::Cloud::SecurityCenter::V1::Kubernetes::Binding>]
         #     Provides Kubernetes role binding information for findings that involve
-        #     RoleBindings or ClusterRoleBindings.
+        #     [RoleBindings or
+        #     ClusterRoleBindings](https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control).
         # @!attribute [rw] access_reviews
         #   @return [::Array<::Google::Cloud::SecurityCenter::V1::Kubernetes::AccessReview>]
-        #     Provides information on any Kubernetes access reviews (i.e. privilege
-        #     checks) relevant to the finding.
+        #     Provides information on any Kubernetes access reviews (privilege checks)
+        #     relevant to the finding.
         class Kubernetes
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Kubernetes Pod.
+          # A Kubernetes Pod.
           # @!attribute [rw] ns
           #   @return [::String]
           #     Kubernetes Pod namespace.
@@ -68,20 +75,20 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Kubernetes Nodes associated with the finding.
+          # Kubernetes nodes associated with the finding.
           # @!attribute [rw] name
           #   @return [::String]
-          #     Full Resource name of the Compute Engine VM running the
-          #     cluster node.
+          #     [Full resource name](https://google.aip.dev/122#full-resource-names) of
+          #     the Compute Engine VM running the cluster node.
           class Node
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Provides GKE Node Pool information.
+          # Provides GKE node pool information.
           # @!attribute [rw] name
           #   @return [::String]
-          #     Kubernetes Node pool name.
+          #     Kubernetes node pool name.
           # @!attribute [rw] nodes
           #   @return [::Array<::Google::Cloud::SecurityCenter::V1::Kubernetes::Node>]
           #     Nodes associated with the finding.
@@ -120,10 +127,10 @@ module Google
           # Represents a Kubernetes RoleBinding or ClusterRoleBinding.
           # @!attribute [rw] ns
           #   @return [::String]
-          #     Namespace for binding.
+          #     Namespace for the binding.
           # @!attribute [rw] name
           #   @return [::String]
-          #     Name for binding.
+          #     Name for the binding.
           # @!attribute [rw] role
           #   @return [::Google::Cloud::SecurityCenter::V1::Kubernetes::Role]
           #     The Role or ClusterRole referenced by the binding.
@@ -136,21 +143,21 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Represents a Kubernetes Subject.
+          # Represents a Kubernetes subject.
           # @!attribute [rw] kind
           #   @return [::Google::Cloud::SecurityCenter::V1::Kubernetes::Subject::AuthType]
-          #     Authentication type for subject.
+          #     Authentication type for the subject.
           # @!attribute [rw] ns
           #   @return [::String]
-          #     Namespace for subject.
+          #     Namespace for the subject.
           # @!attribute [rw] name
           #   @return [::String]
-          #     Name for subject.
+          #     Name for the subject.
           class Subject
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
-            # Auth types that can be used for Subject's kind field.
+            # Auth types that can be used for the subject's kind field.
             module AuthType
               # Authentication is not specified.
               AUTH_TYPE_UNSPECIFIED = 0
@@ -158,7 +165,7 @@ module Google
               # User with valid certificate.
               USER = 1
 
-              # Users managed by Kubernetes API with credentials stored as Secrets.
+              # Users managed by Kubernetes API with credentials stored as secrets.
               SERVICEACCOUNT = 2
 
               # Collection of users.
@@ -166,11 +173,13 @@ module Google
             end
           end
 
-          # Conveys information about a Kubernetes access review (e.g. kubectl auth
-          # can-i ...) that was involved in a finding.
+          # Conveys information about a Kubernetes access review (such as one returned
+          # by a [`kubectl auth
+          # can-i`](https://kubernetes.io/docs/reference/access-authn-authz/authorization/#checking-api-access)
+          # command) that was involved in a finding.
           # @!attribute [rw] group
           #   @return [::String]
-          #     Group is the API Group of the Resource. "*" means all.
+          #     The API group of the resource. "*" means all.
           # @!attribute [rw] ns
           #   @return [::String]
           #     Namespace of the action being requested. Currently, there is no
@@ -178,20 +187,20 @@ module Google
           #     are represented by "" (empty).
           # @!attribute [rw] name
           #   @return [::String]
-          #     Name is the name of the resource being requested. Empty means all.
+          #     The name of the resource being requested. Empty means all.
           # @!attribute [rw] resource
           #   @return [::String]
-          #     Resource is the optional resource type requested. "*" means all.
+          #     The optional resource type requested. "*" means all.
           # @!attribute [rw] subresource
           #   @return [::String]
-          #     Subresource is the optional subresource type.
+          #     The optional subresource type.
           # @!attribute [rw] verb
           #   @return [::String]
-          #     Verb is a Kubernetes resource API verb, like: get, list, watch, create,
-          #     update, delete, proxy. "*" means all.
+          #     A Kubernetes resource API verb, like get, list, watch, create, update,
+          #     delete, proxy. "*" means all.
           # @!attribute [rw] version
           #   @return [::String]
-          #     Version is the API Version of the Resource. "*" means all.
+          #     The API version of the resource. "*" means all.
           class AccessReview
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

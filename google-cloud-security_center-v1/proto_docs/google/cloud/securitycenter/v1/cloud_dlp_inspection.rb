@@ -30,8 +30,8 @@ module Google
         #     `projects/123/locations/europe/dlpJobs/i-8383929`.
         # @!attribute [rw] info_type
         #   @return [::String]
-        #     The [type of
-        #     information](https://cloud.google.com/dlp/docs/infotypes-reference) found,
+        #     The type of information (or
+        #     *[infoType](https://cloud.google.com/dlp/docs/infotypes-reference)*) found,
         #     for example, `EMAIL_ADDRESS` or `STREET_ADDRESS`.
         # @!attribute [rw] info_type_count
         #   @return [::Integer]
