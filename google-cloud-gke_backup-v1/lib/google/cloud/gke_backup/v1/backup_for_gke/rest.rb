@@ -21,6 +21,7 @@ require "gapic/config"
 require "gapic/config/method"
 
 require "google/cloud/gke_backup/v1/version"
+require "google/cloud/gke_backup/v1/bindings_override"
 
 require "google/cloud/gke_backup/v1/backup_for_gke/credentials"
 require "google/cloud/gke_backup/v1/backup_for_gke/paths"
