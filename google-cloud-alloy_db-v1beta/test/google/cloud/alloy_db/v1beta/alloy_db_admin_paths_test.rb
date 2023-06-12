@@ -94,4 +94,16 @@ class ::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::ClientPathsTest < Minitest
       assert_equal "projects/value0/global/networks/value1", path
     end
   end
+
+  def test_user_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.user_path project: "value0", location: "value1", cluster: "value2", user: "value3"
+      assert_equal "projects/value0/locations/value1/clusters/value2/users/value3", path
+    end
+  end
 end
