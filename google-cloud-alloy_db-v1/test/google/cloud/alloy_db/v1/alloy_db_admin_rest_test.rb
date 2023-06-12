@@ -129,6 +129,7 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
 
     # Create request parameters for a unary method.
     name = "hello world"
+    view = :CLUSTER_VIEW_UNSPECIFIED
 
     get_cluster_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -144,27 +145,27 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
         end
 
         # Use hash object
-        client.get_cluster({ name: name }) do |_result, response|
+        client.get_cluster({ name: name, view: view }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_cluster name: name do |_result, response|
+        client.get_cluster name: name, view: view do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_cluster ::Google::Cloud::AlloyDB::V1::GetClusterRequest.new(name: name) do |_result, response|
+        client.get_cluster ::Google::Cloud::AlloyDB::V1::GetClusterRequest.new(name: name, view: view) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_cluster({ name: name }, call_options) do |_result, response|
+        client.get_cluster({ name: name, view: view }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_cluster(::Google::Cloud::AlloyDB::V1::GetClusterRequest.new(name: name), call_options) do |_result, response|
+        client.get_cluster(::Google::Cloud::AlloyDB::V1::GetClusterRequest.new(name: name, view: view), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -348,6 +349,63 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
     end
   end
 
+  def test_promote_cluster
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+    etag = "hello world"
+    validate_only = true
+
+    promote_cluster_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_promote_cluster_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, promote_cluster_client_stub do
+        # Create client
+        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.promote_cluster({ name: name, request_id: request_id, etag: etag, validate_only: validate_only }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.promote_cluster name: name, request_id: request_id, etag: etag, validate_only: validate_only do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.promote_cluster ::Google::Cloud::AlloyDB::V1::PromoteClusterRequest.new(name: name, request_id: request_id, etag: etag, validate_only: validate_only) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.promote_cluster({ name: name, request_id: request_id, etag: etag, validate_only: validate_only }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.promote_cluster(::Google::Cloud::AlloyDB::V1::PromoteClusterRequest.new(name: name, request_id: request_id, etag: etag, validate_only: validate_only), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, promote_cluster_client_stub.call_count
+      end
+    end
+  end
+
   def test_restore_cluster
     # Create test objects.
     client_result = ::Google::Longrunning::Operation.new
@@ -403,6 +461,64 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
 
         # Verify method calls
         assert_equal 5, restore_cluster_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_secondary_cluster
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    cluster_id = "hello world"
+    cluster = {}
+    request_id = "hello world"
+    validate_only = true
+
+    create_secondary_cluster_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_create_secondary_cluster_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_secondary_cluster_client_stub do
+        # Create client
+        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_secondary_cluster({ parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id, validate_only: validate_only }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_secondary_cluster parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id, validate_only: validate_only do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_secondary_cluster ::Google::Cloud::AlloyDB::V1::CreateSecondaryClusterRequest.new(parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id, validate_only: validate_only) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_secondary_cluster({ parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id, validate_only: validate_only }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_secondary_cluster(::Google::Cloud::AlloyDB::V1::CreateSecondaryClusterRequest.new(parent: parent, cluster_id: cluster_id, cluster: cluster, request_id: request_id, validate_only: validate_only), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_secondary_cluster_client_stub.call_count
       end
     end
   end
@@ -574,6 +690,64 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
 
         # Verify method calls
         assert_equal 5, create_instance_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_secondary_instance
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    instance_id = "hello world"
+    instance = {}
+    request_id = "hello world"
+    validate_only = true
+
+    create_secondary_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_create_secondary_instance_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_secondary_instance_client_stub do
+        # Create client
+        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_secondary_instance({ parent: parent, instance_id: instance_id, instance: instance, request_id: request_id, validate_only: validate_only }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_secondary_instance parent: parent, instance_id: instance_id, instance: instance, request_id: request_id, validate_only: validate_only do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_secondary_instance ::Google::Cloud::AlloyDB::V1::CreateSecondaryInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance, request_id: request_id, validate_only: validate_only) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_secondary_instance({ parent: parent, instance_id: instance_id, instance: instance, request_id: request_id, validate_only: validate_only }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_secondary_instance(::Google::Cloud::AlloyDB::V1::CreateSecondaryInstanceRequest.new(parent: parent, instance_id: instance_id, instance: instance, request_id: request_id, validate_only: validate_only), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_secondary_instance_client_stub.call_count
       end
     end
   end
@@ -801,6 +975,63 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
 
         # Verify method calls
         assert_equal 5, failover_instance_client_stub.call_count
+      end
+    end
+  end
+
+  def test_inject_fault
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    fault_type = :FAULT_TYPE_UNSPECIFIED
+    name = "hello world"
+    request_id = "hello world"
+    validate_only = true
+
+    inject_fault_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_inject_fault_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, inject_fault_client_stub do
+        # Create client
+        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.inject_fault({ fault_type: fault_type, name: name, request_id: request_id, validate_only: validate_only }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.inject_fault fault_type: fault_type, name: name, request_id: request_id, validate_only: validate_only do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.inject_fault ::Google::Cloud::AlloyDB::V1::InjectFaultRequest.new(fault_type: fault_type, name: name, request_id: request_id, validate_only: validate_only) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.inject_fault({ fault_type: fault_type, name: name, request_id: request_id, validate_only: validate_only }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.inject_fault(::Google::Cloud::AlloyDB::V1::InjectFaultRequest.new(fault_type: fault_type, name: name, request_id: request_id, validate_only: validate_only), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, inject_fault_client_stub.call_count
       end
     end
   end
@@ -1198,6 +1429,290 @@ class ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ClientTest < Minitest::T
 
         # Verify method calls
         assert_equal 5, list_supported_database_flags_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_users
+    # Create test objects.
+    client_result = ::Google::Cloud::AlloyDB::V1::ListUsersResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_users_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_list_users_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_users_client_stub do
+        # Create client
+        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.list_users({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.list_users parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.list_users ::Google::Cloud::AlloyDB::V1::ListUsersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.list_users({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.list_users(::Google::Cloud::AlloyDB::V1::ListUsersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_users_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_user
+    # Create test objects.
+    client_result = ::Google::Cloud::AlloyDB::V1::User.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_user_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_get_user_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_user_client_stub do
+        # Create client
+        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_user({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_user name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_user ::Google::Cloud::AlloyDB::V1::GetUserRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_user({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_user(::Google::Cloud::AlloyDB::V1::GetUserRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_user_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_user
+    # Create test objects.
+    client_result = ::Google::Cloud::AlloyDB::V1::User.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    user_id = "hello world"
+    user = {}
+    request_id = "hello world"
+    validate_only = true
+
+    create_user_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_create_user_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_user_client_stub do
+        # Create client
+        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.create_user({ parent: parent, user_id: user_id, user: user, request_id: request_id, validate_only: validate_only }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.create_user parent: parent, user_id: user_id, user: user, request_id: request_id, validate_only: validate_only do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.create_user ::Google::Cloud::AlloyDB::V1::CreateUserRequest.new(parent: parent, user_id: user_id, user: user, request_id: request_id, validate_only: validate_only) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.create_user({ parent: parent, user_id: user_id, user: user, request_id: request_id, validate_only: validate_only }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.create_user(::Google::Cloud::AlloyDB::V1::CreateUserRequest.new(parent: parent, user_id: user_id, user: user, request_id: request_id, validate_only: validate_only), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_user_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_user
+    # Create test objects.
+    client_result = ::Google::Cloud::AlloyDB::V1::User.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    user = {}
+    request_id = "hello world"
+    validate_only = true
+    allow_missing = true
+
+    update_user_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_update_user_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_user_client_stub do
+        # Create client
+        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.update_user({ update_mask: update_mask, user: user, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.update_user update_mask: update_mask, user: user, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.update_user ::Google::Cloud::AlloyDB::V1::UpdateUserRequest.new(update_mask: update_mask, user: user, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.update_user({ update_mask: update_mask, user: user, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.update_user(::Google::Cloud::AlloyDB::V1::UpdateUserRequest.new(update_mask: update_mask, user: user, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_user_client_stub.call_count
+      end
+    end
+  end
+
+  def test_delete_user
+    # Create test objects.
+    client_result = ::Google::Protobuf::Empty.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+    validate_only = true
+
+    delete_user_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::ServiceStub.stub :transcode_delete_user_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, delete_user_client_stub do
+        # Create client
+        client = ::Google::Cloud::AlloyDB::V1::AlloyDBAdmin::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.delete_user({ name: name, request_id: request_id, validate_only: validate_only }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.delete_user name: name, request_id: request_id, validate_only: validate_only do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.delete_user ::Google::Cloud::AlloyDB::V1::DeleteUserRequest.new(name: name, request_id: request_id, validate_only: validate_only) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.delete_user({ name: name, request_id: request_id, validate_only: validate_only }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.delete_user(::Google::Cloud::AlloyDB::V1::DeleteUserRequest.new(name: name, request_id: request_id, validate_only: validate_only), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, delete_user_client_stub.call_count
       end
     end
   end
