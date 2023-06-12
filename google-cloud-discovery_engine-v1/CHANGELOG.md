@@ -5,8 +5,3 @@
 #### Features
 
 * Initial release of generated google-cloud-discovery_engine-v1 client ([#22239](https://github.com/googleapis/google-cloud-ruby/issues/22239)) 
-#### Bug Fixes
-
-* Don't use self-signed JWT credentials if the global configuration endpoint has been modified 
-
-## Release History
