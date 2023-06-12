@@ -1,0 +1,1575 @@
+{
+  "client_library": {
+    "name": "google-cloud-vmware_engine-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.vmwareengine.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "vmwareengine_v1_generated_VmwareEngine_ListPrivateClouds_sync",
+      "title": "Snippet for the list_private_clouds call in the VmwareEngine service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_private_clouds. It may require modification in order to execute successfully.",
+      "file": "vmware_engine/list_private_clouds.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_private_clouds",
+        "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_private_clouds",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VmwareEngine::V1::ListPrivateCloudsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::VmwareEngine::V1::ListPrivateCloudsResponse",
+        "client": {
+          "short_name": "VmwareEngine::Client",
+          "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client"
+        },
+        "method": {
+          "short_name": "ListPrivateClouds",
+          "full_name": "google.cloud.vmwareengine.v1.VmwareEngine.ListPrivateClouds",
+          "service": {
+            "short_name": "VmwareEngine",
+            "full_name": "google.cloud.vmwareengine.v1.VmwareEngine"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmwareengine_v1_generated_VmwareEngine_GetPrivateCloud_sync",
+      "title": "Snippet for the get_private_cloud call in the VmwareEngine service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#get_private_cloud. It may require modification in order to execute successfully.",
+      "file": "vmware_engine/get_private_cloud.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_private_cloud",
+        "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#get_private_cloud",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VmwareEngine::V1::GetPrivateCloudRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::VmwareEngine::V1::PrivateCloud",
+        "client": {
+          "short_name": "VmwareEngine::Client",
+          "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client"
+        },
+        "method": {
+          "short_name": "GetPrivateCloud",
+          "full_name": "google.cloud.vmwareengine.v1.VmwareEngine.GetPrivateCloud",
+          "service": {
+            "short_name": "VmwareEngine",
+            "full_name": "google.cloud.vmwareengine.v1.VmwareEngine"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmwareengine_v1_generated_VmwareEngine_CreatePrivateCloud_sync",
+      "title": "Snippet for the create_private_cloud call in the VmwareEngine service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#create_private_cloud. It may require modification in order to execute successfully.",
+      "file": "vmware_engine/create_private_cloud.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_private_cloud",
+        "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#create_private_cloud",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VmwareEngine::V1::CreatePrivateCloudRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VmwareEngine::Client",
+          "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client"
+        },
+        "method": {
+          "short_name": "CreatePrivateCloud",
+          "full_name": "google.cloud.vmwareengine.v1.VmwareEngine.CreatePrivateCloud",
+          "service": {
+            "short_name": "VmwareEngine",
+            "full_name": "google.cloud.vmwareengine.v1.VmwareEngine"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmwareengine_v1_generated_VmwareEngine_UpdatePrivateCloud_sync",
+      "title": "Snippet for the update_private_cloud call in the VmwareEngine service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#update_private_cloud. It may require modification in order to execute successfully.",
+      "file": "vmware_engine/update_private_cloud.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_private_cloud",
+        "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#update_private_cloud",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VmwareEngine::V1::UpdatePrivateCloudRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VmwareEngine::Client",
+          "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client"
+        },
+        "method": {
+          "short_name": "UpdatePrivateCloud",
+          "full_name": "google.cloud.vmwareengine.v1.VmwareEngine.UpdatePrivateCloud",
+          "service": {
+            "short_name": "VmwareEngine",
+            "full_name": "google.cloud.vmwareengine.v1.VmwareEngine"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmwareengine_v1_generated_VmwareEngine_DeletePrivateCloud_sync",
+      "title": "Snippet for the delete_private_cloud call in the VmwareEngine service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#delete_private_cloud. It may require modification in order to execute successfully.",
+      "file": "vmware_engine/delete_private_cloud.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_private_cloud",
+        "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#delete_private_cloud",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VmwareEngine::V1::DeletePrivateCloudRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VmwareEngine::Client",
+          "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client"
+        },
+        "method": {
+          "short_name": "DeletePrivateCloud",
+          "full_name": "google.cloud.vmwareengine.v1.VmwareEngine.DeletePrivateCloud",
+          "service": {
+            "short_name": "VmwareEngine",
+            "full_name": "google.cloud.vmwareengine.v1.VmwareEngine"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmwareengine_v1_generated_VmwareEngine_UndeletePrivateCloud_sync",
+      "title": "Snippet for the undelete_private_cloud call in the VmwareEngine service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#undelete_private_cloud. It may require modification in order to execute successfully.",
+      "file": "vmware_engine/undelete_private_cloud.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "undelete_private_cloud",
+        "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#undelete_private_cloud",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VmwareEngine::V1::UndeletePrivateCloudRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VmwareEngine::Client",
+          "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client"
+        },
+        "method": {
+          "short_name": "UndeletePrivateCloud",
+          "full_name": "google.cloud.vmwareengine.v1.VmwareEngine.UndeletePrivateCloud",
+          "service": {
+            "short_name": "VmwareEngine",
+            "full_name": "google.cloud.vmwareengine.v1.VmwareEngine"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmwareengine_v1_generated_VmwareEngine_ListClusters_sync",
+      "title": "Snippet for the list_clusters call in the VmwareEngine service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_clusters. It may require modification in order to execute successfully.",
+      "file": "vmware_engine/list_clusters.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_clusters",
+        "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_clusters",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VmwareEngine::V1::ListClustersRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::VmwareEngine::V1::ListClustersResponse",
+        "client": {
+          "short_name": "VmwareEngine::Client",
+          "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client"
+        },
+        "method": {
+          "short_name": "ListClusters",
+          "full_name": "google.cloud.vmwareengine.v1.VmwareEngine.ListClusters",
+          "service": {
+            "short_name": "VmwareEngine",
+            "full_name": "google.cloud.vmwareengine.v1.VmwareEngine"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmwareengine_v1_generated_VmwareEngine_GetCluster_sync",
+      "title": "Snippet for the get_cluster call in the VmwareEngine service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#get_cluster. It may require modification in order to execute successfully.",
+      "file": "vmware_engine/get_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_cluster",
+        "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#get_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VmwareEngine::V1::GetClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::VmwareEngine::V1::Cluster",
+        "client": {
+          "short_name": "VmwareEngine::Client",
+          "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client"
+        },
+        "method": {
+          "short_name": "GetCluster",
+          "full_name": "google.cloud.vmwareengine.v1.VmwareEngine.GetCluster",
+          "service": {
+            "short_name": "VmwareEngine",
+            "full_name": "google.cloud.vmwareengine.v1.VmwareEngine"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmwareengine_v1_generated_VmwareEngine_CreateCluster_sync",
+      "title": "Snippet for the create_cluster call in the VmwareEngine service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#create_cluster. It may require modification in order to execute successfully.",
+      "file": "vmware_engine/create_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_cluster",
+        "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#create_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VmwareEngine::V1::CreateClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VmwareEngine::Client",
+          "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client"
+        },
+        "method": {
+          "short_name": "CreateCluster",
+          "full_name": "google.cloud.vmwareengine.v1.VmwareEngine.CreateCluster",
+          "service": {
+            "short_name": "VmwareEngine",
+            "full_name": "google.cloud.vmwareengine.v1.VmwareEngine"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmwareengine_v1_generated_VmwareEngine_UpdateCluster_sync",
+      "title": "Snippet for the update_cluster call in the VmwareEngine service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#update_cluster. It may require modification in order to execute successfully.",
+      "file": "vmware_engine/update_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_cluster",
+        "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#update_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VmwareEngine::V1::UpdateClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VmwareEngine::Client",
+          "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client"
+        },
+        "method": {
+          "short_name": "UpdateCluster",
+          "full_name": "google.cloud.vmwareengine.v1.VmwareEngine.UpdateCluster",
+          "service": {
+            "short_name": "VmwareEngine",
+            "full_name": "google.cloud.vmwareengine.v1.VmwareEngine"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmwareengine_v1_generated_VmwareEngine_DeleteCluster_sync",
+      "title": "Snippet for the delete_cluster call in the VmwareEngine service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#delete_cluster. It may require modification in order to execute successfully.",
+      "file": "vmware_engine/delete_cluster.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_cluster",
+        "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#delete_cluster",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VmwareEngine::V1::DeleteClusterRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VmwareEngine::Client",
+          "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client"
+        },
+        "method": {
+          "short_name": "DeleteCluster",
+          "full_name": "google.cloud.vmwareengine.v1.VmwareEngine.DeleteCluster",
+          "service": {
+            "short_name": "VmwareEngine",
+            "full_name": "google.cloud.vmwareengine.v1.VmwareEngine"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmwareengine_v1_generated_VmwareEngine_ListSubnets_sync",
+      "title": "Snippet for the list_subnets call in the VmwareEngine service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_subnets. It may require modification in order to execute successfully.",
+      "file": "vmware_engine/list_subnets.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_subnets",
+        "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_subnets",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VmwareEngine::V1::ListSubnetsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::VmwareEngine::V1::ListSubnetsResponse",
+        "client": {
+          "short_name": "VmwareEngine::Client",
+          "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client"
+        },
+        "method": {
+          "short_name": "ListSubnets",
+          "full_name": "google.cloud.vmwareengine.v1.VmwareEngine.ListSubnets",
+          "service": {
+            "short_name": "VmwareEngine",
+            "full_name": "google.cloud.vmwareengine.v1.VmwareEngine"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmwareengine_v1_generated_VmwareEngine_GetSubnet_sync",
+      "title": "Snippet for the get_subnet call in the VmwareEngine service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#get_subnet. It may require modification in order to execute successfully.",
+      "file": "vmware_engine/get_subnet.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_subnet",
+        "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#get_subnet",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VmwareEngine::V1::GetSubnetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::VmwareEngine::V1::Subnet",
+        "client": {
+          "short_name": "VmwareEngine::Client",
+          "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client"
+        },
+        "method": {
+          "short_name": "GetSubnet",
+          "full_name": "google.cloud.vmwareengine.v1.VmwareEngine.GetSubnet",
+          "service": {
+            "short_name": "VmwareEngine",
+            "full_name": "google.cloud.vmwareengine.v1.VmwareEngine"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmwareengine_v1_generated_VmwareEngine_UpdateSubnet_sync",
+      "title": "Snippet for the update_subnet call in the VmwareEngine service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#update_subnet. It may require modification in order to execute successfully.",
+      "file": "vmware_engine/update_subnet.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_subnet",
+        "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#update_subnet",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VmwareEngine::V1::UpdateSubnetRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VmwareEngine::Client",
+          "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client"
+        },
+        "method": {
+          "short_name": "UpdateSubnet",
+          "full_name": "google.cloud.vmwareengine.v1.VmwareEngine.UpdateSubnet",
+          "service": {
+            "short_name": "VmwareEngine",
+            "full_name": "google.cloud.vmwareengine.v1.VmwareEngine"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmwareengine_v1_generated_VmwareEngine_ListNodeTypes_sync",
+      "title": "Snippet for the list_node_types call in the VmwareEngine service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_node_types. It may require modification in order to execute successfully.",
+      "file": "vmware_engine/list_node_types.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_node_types",
+        "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_node_types",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VmwareEngine::V1::ListNodeTypesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::VmwareEngine::V1::ListNodeTypesResponse",
+        "client": {
+          "short_name": "VmwareEngine::Client",
+          "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client"
+        },
+        "method": {
+          "short_name": "ListNodeTypes",
+          "full_name": "google.cloud.vmwareengine.v1.VmwareEngine.ListNodeTypes",
+          "service": {
+            "short_name": "VmwareEngine",
+            "full_name": "google.cloud.vmwareengine.v1.VmwareEngine"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmwareengine_v1_generated_VmwareEngine_GetNodeType_sync",
+      "title": "Snippet for the get_node_type call in the VmwareEngine service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#get_node_type. It may require modification in order to execute successfully.",
+      "file": "vmware_engine/get_node_type.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_node_type",
+        "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#get_node_type",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VmwareEngine::V1::GetNodeTypeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::VmwareEngine::V1::NodeType",
+        "client": {
+          "short_name": "VmwareEngine::Client",
+          "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client"
+        },
+        "method": {
+          "short_name": "GetNodeType",
+          "full_name": "google.cloud.vmwareengine.v1.VmwareEngine.GetNodeType",
+          "service": {
+            "short_name": "VmwareEngine",
+            "full_name": "google.cloud.vmwareengine.v1.VmwareEngine"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmwareengine_v1_generated_VmwareEngine_ShowNsxCredentials_sync",
+      "title": "Snippet for the show_nsx_credentials call in the VmwareEngine service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#show_nsx_credentials. It may require modification in order to execute successfully.",
+      "file": "vmware_engine/show_nsx_credentials.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "show_nsx_credentials",
+        "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#show_nsx_credentials",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VmwareEngine::V1::ShowNsxCredentialsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::VmwareEngine::V1::Credentials",
+        "client": {
+          "short_name": "VmwareEngine::Client",
+          "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client"
+        },
+        "method": {
+          "short_name": "ShowNsxCredentials",
+          "full_name": "google.cloud.vmwareengine.v1.VmwareEngine.ShowNsxCredentials",
+          "service": {
+            "short_name": "VmwareEngine",
+            "full_name": "google.cloud.vmwareengine.v1.VmwareEngine"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmwareengine_v1_generated_VmwareEngine_ShowVcenterCredentials_sync",
+      "title": "Snippet for the show_vcenter_credentials call in the VmwareEngine service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#show_vcenter_credentials. It may require modification in order to execute successfully.",
+      "file": "vmware_engine/show_vcenter_credentials.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "show_vcenter_credentials",
+        "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#show_vcenter_credentials",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VmwareEngine::V1::ShowVcenterCredentialsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::VmwareEngine::V1::Credentials",
+        "client": {
+          "short_name": "VmwareEngine::Client",
+          "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client"
+        },
+        "method": {
+          "short_name": "ShowVcenterCredentials",
+          "full_name": "google.cloud.vmwareengine.v1.VmwareEngine.ShowVcenterCredentials",
+          "service": {
+            "short_name": "VmwareEngine",
+            "full_name": "google.cloud.vmwareengine.v1.VmwareEngine"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmwareengine_v1_generated_VmwareEngine_ResetNsxCredentials_sync",
+      "title": "Snippet for the reset_nsx_credentials call in the VmwareEngine service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#reset_nsx_credentials. It may require modification in order to execute successfully.",
+      "file": "vmware_engine/reset_nsx_credentials.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "reset_nsx_credentials",
+        "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#reset_nsx_credentials",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VmwareEngine::V1::ResetNsxCredentialsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VmwareEngine::Client",
+          "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client"
+        },
+        "method": {
+          "short_name": "ResetNsxCredentials",
+          "full_name": "google.cloud.vmwareengine.v1.VmwareEngine.ResetNsxCredentials",
+          "service": {
+            "short_name": "VmwareEngine",
+            "full_name": "google.cloud.vmwareengine.v1.VmwareEngine"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmwareengine_v1_generated_VmwareEngine_ResetVcenterCredentials_sync",
+      "title": "Snippet for the reset_vcenter_credentials call in the VmwareEngine service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#reset_vcenter_credentials. It may require modification in order to execute successfully.",
+      "file": "vmware_engine/reset_vcenter_credentials.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "reset_vcenter_credentials",
+        "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#reset_vcenter_credentials",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VmwareEngine::V1::ResetVcenterCredentialsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VmwareEngine::Client",
+          "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client"
+        },
+        "method": {
+          "short_name": "ResetVcenterCredentials",
+          "full_name": "google.cloud.vmwareengine.v1.VmwareEngine.ResetVcenterCredentials",
+          "service": {
+            "short_name": "VmwareEngine",
+            "full_name": "google.cloud.vmwareengine.v1.VmwareEngine"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmwareengine_v1_generated_VmwareEngine_CreateHcxActivationKey_sync",
+      "title": "Snippet for the create_hcx_activation_key call in the VmwareEngine service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#create_hcx_activation_key. It may require modification in order to execute successfully.",
+      "file": "vmware_engine/create_hcx_activation_key.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_hcx_activation_key",
+        "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#create_hcx_activation_key",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VmwareEngine::V1::CreateHcxActivationKeyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VmwareEngine::Client",
+          "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client"
+        },
+        "method": {
+          "short_name": "CreateHcxActivationKey",
+          "full_name": "google.cloud.vmwareengine.v1.VmwareEngine.CreateHcxActivationKey",
+          "service": {
+            "short_name": "VmwareEngine",
+            "full_name": "google.cloud.vmwareengine.v1.VmwareEngine"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmwareengine_v1_generated_VmwareEngine_ListHcxActivationKeys_sync",
+      "title": "Snippet for the list_hcx_activation_keys call in the VmwareEngine service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_hcx_activation_keys. It may require modification in order to execute successfully.",
+      "file": "vmware_engine/list_hcx_activation_keys.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_hcx_activation_keys",
+        "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_hcx_activation_keys",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VmwareEngine::V1::ListHcxActivationKeysRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::VmwareEngine::V1::ListHcxActivationKeysResponse",
+        "client": {
+          "short_name": "VmwareEngine::Client",
+          "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client"
+        },
+        "method": {
+          "short_name": "ListHcxActivationKeys",
+          "full_name": "google.cloud.vmwareengine.v1.VmwareEngine.ListHcxActivationKeys",
+          "service": {
+            "short_name": "VmwareEngine",
+            "full_name": "google.cloud.vmwareengine.v1.VmwareEngine"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmwareengine_v1_generated_VmwareEngine_GetHcxActivationKey_sync",
+      "title": "Snippet for the get_hcx_activation_key call in the VmwareEngine service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#get_hcx_activation_key. It may require modification in order to execute successfully.",
+      "file": "vmware_engine/get_hcx_activation_key.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_hcx_activation_key",
+        "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#get_hcx_activation_key",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VmwareEngine::V1::GetHcxActivationKeyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::VmwareEngine::V1::HcxActivationKey",
+        "client": {
+          "short_name": "VmwareEngine::Client",
+          "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client"
+        },
+        "method": {
+          "short_name": "GetHcxActivationKey",
+          "full_name": "google.cloud.vmwareengine.v1.VmwareEngine.GetHcxActivationKey",
+          "service": {
+            "short_name": "VmwareEngine",
+            "full_name": "google.cloud.vmwareengine.v1.VmwareEngine"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmwareengine_v1_generated_VmwareEngine_GetNetworkPolicy_sync",
+      "title": "Snippet for the get_network_policy call in the VmwareEngine service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#get_network_policy. It may require modification in order to execute successfully.",
+      "file": "vmware_engine/get_network_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_network_policy",
+        "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#get_network_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VmwareEngine::V1::GetNetworkPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::VmwareEngine::V1::NetworkPolicy",
+        "client": {
+          "short_name": "VmwareEngine::Client",
+          "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client"
+        },
+        "method": {
+          "short_name": "GetNetworkPolicy",
+          "full_name": "google.cloud.vmwareengine.v1.VmwareEngine.GetNetworkPolicy",
+          "service": {
+            "short_name": "VmwareEngine",
+            "full_name": "google.cloud.vmwareengine.v1.VmwareEngine"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmwareengine_v1_generated_VmwareEngine_ListNetworkPolicies_sync",
+      "title": "Snippet for the list_network_policies call in the VmwareEngine service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_network_policies. It may require modification in order to execute successfully.",
+      "file": "vmware_engine/list_network_policies.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_network_policies",
+        "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_network_policies",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VmwareEngine::V1::ListNetworkPoliciesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::VmwareEngine::V1::ListNetworkPoliciesResponse",
+        "client": {
+          "short_name": "VmwareEngine::Client",
+          "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client"
+        },
+        "method": {
+          "short_name": "ListNetworkPolicies",
+          "full_name": "google.cloud.vmwareengine.v1.VmwareEngine.ListNetworkPolicies",
+          "service": {
+            "short_name": "VmwareEngine",
+            "full_name": "google.cloud.vmwareengine.v1.VmwareEngine"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmwareengine_v1_generated_VmwareEngine_CreateNetworkPolicy_sync",
+      "title": "Snippet for the create_network_policy call in the VmwareEngine service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#create_network_policy. It may require modification in order to execute successfully.",
+      "file": "vmware_engine/create_network_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_network_policy",
+        "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#create_network_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VmwareEngine::V1::CreateNetworkPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VmwareEngine::Client",
+          "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client"
+        },
+        "method": {
+          "short_name": "CreateNetworkPolicy",
+          "full_name": "google.cloud.vmwareengine.v1.VmwareEngine.CreateNetworkPolicy",
+          "service": {
+            "short_name": "VmwareEngine",
+            "full_name": "google.cloud.vmwareengine.v1.VmwareEngine"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmwareengine_v1_generated_VmwareEngine_UpdateNetworkPolicy_sync",
+      "title": "Snippet for the update_network_policy call in the VmwareEngine service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#update_network_policy. It may require modification in order to execute successfully.",
+      "file": "vmware_engine/update_network_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_network_policy",
+        "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#update_network_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VmwareEngine::V1::UpdateNetworkPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VmwareEngine::Client",
+          "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client"
+        },
+        "method": {
+          "short_name": "UpdateNetworkPolicy",
+          "full_name": "google.cloud.vmwareengine.v1.VmwareEngine.UpdateNetworkPolicy",
+          "service": {
+            "short_name": "VmwareEngine",
+            "full_name": "google.cloud.vmwareengine.v1.VmwareEngine"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmwareengine_v1_generated_VmwareEngine_DeleteNetworkPolicy_sync",
+      "title": "Snippet for the delete_network_policy call in the VmwareEngine service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#delete_network_policy. It may require modification in order to execute successfully.",
+      "file": "vmware_engine/delete_network_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_network_policy",
+        "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#delete_network_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VmwareEngine::V1::DeleteNetworkPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VmwareEngine::Client",
+          "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client"
+        },
+        "method": {
+          "short_name": "DeleteNetworkPolicy",
+          "full_name": "google.cloud.vmwareengine.v1.VmwareEngine.DeleteNetworkPolicy",
+          "service": {
+            "short_name": "VmwareEngine",
+            "full_name": "google.cloud.vmwareengine.v1.VmwareEngine"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmwareengine_v1_generated_VmwareEngine_CreateVmwareEngineNetwork_sync",
+      "title": "Snippet for the create_vmware_engine_network call in the VmwareEngine service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#create_vmware_engine_network. It may require modification in order to execute successfully.",
+      "file": "vmware_engine/create_vmware_engine_network.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_vmware_engine_network",
+        "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#create_vmware_engine_network",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VmwareEngine::V1::CreateVmwareEngineNetworkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VmwareEngine::Client",
+          "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client"
+        },
+        "method": {
+          "short_name": "CreateVmwareEngineNetwork",
+          "full_name": "google.cloud.vmwareengine.v1.VmwareEngine.CreateVmwareEngineNetwork",
+          "service": {
+            "short_name": "VmwareEngine",
+            "full_name": "google.cloud.vmwareengine.v1.VmwareEngine"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmwareengine_v1_generated_VmwareEngine_UpdateVmwareEngineNetwork_sync",
+      "title": "Snippet for the update_vmware_engine_network call in the VmwareEngine service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#update_vmware_engine_network. It may require modification in order to execute successfully.",
+      "file": "vmware_engine/update_vmware_engine_network.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_vmware_engine_network",
+        "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#update_vmware_engine_network",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VmwareEngine::V1::UpdateVmwareEngineNetworkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VmwareEngine::Client",
+          "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client"
+        },
+        "method": {
+          "short_name": "UpdateVmwareEngineNetwork",
+          "full_name": "google.cloud.vmwareengine.v1.VmwareEngine.UpdateVmwareEngineNetwork",
+          "service": {
+            "short_name": "VmwareEngine",
+            "full_name": "google.cloud.vmwareengine.v1.VmwareEngine"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmwareengine_v1_generated_VmwareEngine_DeleteVmwareEngineNetwork_sync",
+      "title": "Snippet for the delete_vmware_engine_network call in the VmwareEngine service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#delete_vmware_engine_network. It may require modification in order to execute successfully.",
+      "file": "vmware_engine/delete_vmware_engine_network.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_vmware_engine_network",
+        "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#delete_vmware_engine_network",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VmwareEngine::V1::DeleteVmwareEngineNetworkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VmwareEngine::Client",
+          "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client"
+        },
+        "method": {
+          "short_name": "DeleteVmwareEngineNetwork",
+          "full_name": "google.cloud.vmwareengine.v1.VmwareEngine.DeleteVmwareEngineNetwork",
+          "service": {
+            "short_name": "VmwareEngine",
+            "full_name": "google.cloud.vmwareengine.v1.VmwareEngine"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmwareengine_v1_generated_VmwareEngine_GetVmwareEngineNetwork_sync",
+      "title": "Snippet for the get_vmware_engine_network call in the VmwareEngine service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#get_vmware_engine_network. It may require modification in order to execute successfully.",
+      "file": "vmware_engine/get_vmware_engine_network.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_vmware_engine_network",
+        "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#get_vmware_engine_network",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VmwareEngine::V1::GetVmwareEngineNetworkRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::VmwareEngine::V1::VmwareEngineNetwork",
+        "client": {
+          "short_name": "VmwareEngine::Client",
+          "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client"
+        },
+        "method": {
+          "short_name": "GetVmwareEngineNetwork",
+          "full_name": "google.cloud.vmwareengine.v1.VmwareEngine.GetVmwareEngineNetwork",
+          "service": {
+            "short_name": "VmwareEngine",
+            "full_name": "google.cloud.vmwareengine.v1.VmwareEngine"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmwareengine_v1_generated_VmwareEngine_ListVmwareEngineNetworks_sync",
+      "title": "Snippet for the list_vmware_engine_networks call in the VmwareEngine service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_vmware_engine_networks. It may require modification in order to execute successfully.",
+      "file": "vmware_engine/list_vmware_engine_networks.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_vmware_engine_networks",
+        "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_vmware_engine_networks",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VmwareEngine::V1::ListVmwareEngineNetworksRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::VmwareEngine::V1::ListVmwareEngineNetworksResponse",
+        "client": {
+          "short_name": "VmwareEngine::Client",
+          "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client"
+        },
+        "method": {
+          "short_name": "ListVmwareEngineNetworks",
+          "full_name": "google.cloud.vmwareengine.v1.VmwareEngine.ListVmwareEngineNetworks",
+          "service": {
+            "short_name": "VmwareEngine",
+            "full_name": "google.cloud.vmwareengine.v1.VmwareEngine"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmwareengine_v1_generated_VmwareEngine_CreatePrivateConnection_sync",
+      "title": "Snippet for the create_private_connection call in the VmwareEngine service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#create_private_connection. It may require modification in order to execute successfully.",
+      "file": "vmware_engine/create_private_connection.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_private_connection",
+        "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#create_private_connection",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VmwareEngine::V1::CreatePrivateConnectionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VmwareEngine::Client",
+          "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client"
+        },
+        "method": {
+          "short_name": "CreatePrivateConnection",
+          "full_name": "google.cloud.vmwareengine.v1.VmwareEngine.CreatePrivateConnection",
+          "service": {
+            "short_name": "VmwareEngine",
+            "full_name": "google.cloud.vmwareengine.v1.VmwareEngine"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmwareengine_v1_generated_VmwareEngine_GetPrivateConnection_sync",
+      "title": "Snippet for the get_private_connection call in the VmwareEngine service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#get_private_connection. It may require modification in order to execute successfully.",
+      "file": "vmware_engine/get_private_connection.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_private_connection",
+        "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#get_private_connection",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VmwareEngine::V1::GetPrivateConnectionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::VmwareEngine::V1::PrivateConnection",
+        "client": {
+          "short_name": "VmwareEngine::Client",
+          "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client"
+        },
+        "method": {
+          "short_name": "GetPrivateConnection",
+          "full_name": "google.cloud.vmwareengine.v1.VmwareEngine.GetPrivateConnection",
+          "service": {
+            "short_name": "VmwareEngine",
+            "full_name": "google.cloud.vmwareengine.v1.VmwareEngine"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmwareengine_v1_generated_VmwareEngine_ListPrivateConnections_sync",
+      "title": "Snippet for the list_private_connections call in the VmwareEngine service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_private_connections. It may require modification in order to execute successfully.",
+      "file": "vmware_engine/list_private_connections.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_private_connections",
+        "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_private_connections",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VmwareEngine::V1::ListPrivateConnectionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::VmwareEngine::V1::ListPrivateConnectionsResponse",
+        "client": {
+          "short_name": "VmwareEngine::Client",
+          "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client"
+        },
+        "method": {
+          "short_name": "ListPrivateConnections",
+          "full_name": "google.cloud.vmwareengine.v1.VmwareEngine.ListPrivateConnections",
+          "service": {
+            "short_name": "VmwareEngine",
+            "full_name": "google.cloud.vmwareengine.v1.VmwareEngine"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmwareengine_v1_generated_VmwareEngine_UpdatePrivateConnection_sync",
+      "title": "Snippet for the update_private_connection call in the VmwareEngine service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#update_private_connection. It may require modification in order to execute successfully.",
+      "file": "vmware_engine/update_private_connection.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_private_connection",
+        "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#update_private_connection",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VmwareEngine::V1::UpdatePrivateConnectionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VmwareEngine::Client",
+          "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client"
+        },
+        "method": {
+          "short_name": "UpdatePrivateConnection",
+          "full_name": "google.cloud.vmwareengine.v1.VmwareEngine.UpdatePrivateConnection",
+          "service": {
+            "short_name": "VmwareEngine",
+            "full_name": "google.cloud.vmwareengine.v1.VmwareEngine"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmwareengine_v1_generated_VmwareEngine_DeletePrivateConnection_sync",
+      "title": "Snippet for the delete_private_connection call in the VmwareEngine service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#delete_private_connection. It may require modification in order to execute successfully.",
+      "file": "vmware_engine/delete_private_connection.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_private_connection",
+        "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#delete_private_connection",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VmwareEngine::V1::DeletePrivateConnectionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VmwareEngine::Client",
+          "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client"
+        },
+        "method": {
+          "short_name": "DeletePrivateConnection",
+          "full_name": "google.cloud.vmwareengine.v1.VmwareEngine.DeletePrivateConnection",
+          "service": {
+            "short_name": "VmwareEngine",
+            "full_name": "google.cloud.vmwareengine.v1.VmwareEngine"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "vmwareengine_v1_generated_VmwareEngine_ListPrivateConnectionPeeringRoutes_sync",
+      "title": "Snippet for the list_private_connection_peering_routes call in the VmwareEngine service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_private_connection_peering_routes. It may require modification in order to execute successfully.",
+      "file": "vmware_engine/list_private_connection_peering_routes.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_private_connection_peering_routes",
+        "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client#list_private_connection_peering_routes",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VmwareEngine::V1::ListPrivateConnectionPeeringRoutesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::VmwareEngine::V1::ListPrivateConnectionPeeringRoutesResponse",
+        "client": {
+          "short_name": "VmwareEngine::Client",
+          "full_name": "::Google::Cloud::VmwareEngine::V1::VmwareEngine::Client"
+        },
+        "method": {
+          "short_name": "ListPrivateConnectionPeeringRoutes",
+          "full_name": "google.cloud.vmwareengine.v1.VmwareEngine.ListPrivateConnectionPeeringRoutes",
+          "service": {
+            "short_name": "VmwareEngine",
+            "full_name": "google.cloud.vmwareengine.v1.VmwareEngine"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
