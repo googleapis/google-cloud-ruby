@@ -1,0 +1,193 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.container.v1beta1",
+  "libraryPackage": "::Google::Cloud::Container::V1beta1",
+  "services": {
+    "ClusterManager": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Container::V1beta1::ClusterManager::Client",
+          "rpcs": {
+            "ListClusters": {
+              "methods": [
+                "list_clusters"
+              ]
+            },
+            "GetCluster": {
+              "methods": [
+                "get_cluster"
+              ]
+            },
+            "CreateCluster": {
+              "methods": [
+                "create_cluster"
+              ]
+            },
+            "UpdateCluster": {
+              "methods": [
+                "update_cluster"
+              ]
+            },
+            "UpdateNodePool": {
+              "methods": [
+                "update_node_pool"
+              ]
+            },
+            "SetNodePoolAutoscaling": {
+              "methods": [
+                "set_node_pool_autoscaling"
+              ]
+            },
+            "SetLoggingService": {
+              "methods": [
+                "set_logging_service"
+              ]
+            },
+            "SetMonitoringService": {
+              "methods": [
+                "set_monitoring_service"
+              ]
+            },
+            "SetAddonsConfig": {
+              "methods": [
+                "set_addons_config"
+              ]
+            },
+            "SetLocations": {
+              "methods": [
+                "set_locations"
+              ]
+            },
+            "UpdateMaster": {
+              "methods": [
+                "update_master"
+              ]
+            },
+            "SetMasterAuth": {
+              "methods": [
+                "set_master_auth"
+              ]
+            },
+            "DeleteCluster": {
+              "methods": [
+                "delete_cluster"
+              ]
+            },
+            "ListOperations": {
+              "methods": [
+                "list_operations"
+              ]
+            },
+            "GetOperation": {
+              "methods": [
+                "get_operation"
+              ]
+            },
+            "CancelOperation": {
+              "methods": [
+                "cancel_operation"
+              ]
+            },
+            "GetServerConfig": {
+              "methods": [
+                "get_server_config"
+              ]
+            },
+            "GetJSONWebKeys": {
+              "methods": [
+                "get_json_web_keys"
+              ]
+            },
+            "ListNodePools": {
+              "methods": [
+                "list_node_pools"
+              ]
+            },
+            "GetNodePool": {
+              "methods": [
+                "get_node_pool"
+              ]
+            },
+            "CreateNodePool": {
+              "methods": [
+                "create_node_pool"
+              ]
+            },
+            "DeleteNodePool": {
+              "methods": [
+                "delete_node_pool"
+              ]
+            },
+            "CompleteNodePoolUpgrade": {
+              "methods": [
+                "complete_node_pool_upgrade"
+              ]
+            },
+            "RollbackNodePoolUpgrade": {
+              "methods": [
+                "rollback_node_pool_upgrade"
+              ]
+            },
+            "SetNodePoolManagement": {
+              "methods": [
+                "set_node_pool_management"
+              ]
+            },
+            "SetLabels": {
+              "methods": [
+                "set_labels"
+              ]
+            },
+            "SetLegacyAbac": {
+              "methods": [
+                "set_legacy_abac"
+              ]
+            },
+            "StartIPRotation": {
+              "methods": [
+                "start_ip_rotation"
+              ]
+            },
+            "CompleteIPRotation": {
+              "methods": [
+                "complete_ip_rotation"
+              ]
+            },
+            "SetNodePoolSize": {
+              "methods": [
+                "set_node_pool_size"
+              ]
+            },
+            "SetNetworkPolicy": {
+              "methods": [
+                "set_network_policy"
+              ]
+            },
+            "SetMaintenancePolicy": {
+              "methods": [
+                "set_maintenance_policy"
+              ]
+            },
+            "ListUsableSubnetworks": {
+              "methods": [
+                "list_usable_subnetworks"
+              ]
+            },
+            "CheckAutopilotCompatibility": {
+              "methods": [
+                "check_autopilot_compatibility"
+              ]
+            },
+            "ListLocations": {
+              "methods": [
+                "list_locations"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
