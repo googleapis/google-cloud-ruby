@@ -8,7 +8,7 @@
     "name": "rapidmigrationassessment",
     "name_pretty": "Rapid Migration Assessment V1 API",
     "product_documentation": "https://cloud.google.com/migration-center/docs",
-    "release_level": "unreleased",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "The Rapid Migration Assessment service is our first-party migration assessment and planning tool. Note that google-cloud-rapid_migration_assessment-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-rapid_migration_assessment instead. See the readme for more details.",
