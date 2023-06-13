@@ -1,4 +1,4 @@
-name: OwlBot Manual Run
+name: Mark Library Obsolete
 
 on:
   workflow_dispatch:
