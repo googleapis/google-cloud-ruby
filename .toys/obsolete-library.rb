@@ -27,7 +27,7 @@ include :exec, e: true
 include "yoshi-pr-generator"
 
 def run
-  cd context_directory
+  setup
   branch_name = "pr/delete/#{gem_name}"
   message = "chore: obsolete #{gem_name}"
   result = yoshi_pr_generator.capture enabled: !git_remote.nil?,
@@ -39,6 +39,12 @@ def run
     remove_owlbot_config
     remove_directory
   end
+  puts "result: #{result}"
+end
+
+def setup
+  cd context_directory
+  yoshi_utils.git_ensure_identity
 end
 
 def remove_release_manifest

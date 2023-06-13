@@ -11,7 +11,7 @@ on:
         required: false
 
 jobs:
-  OwlBot:
+  ObsoleteLibrary:
     if: ${{ github.repository == 'googleapis/google-cloud-ruby' }}
     runs-on: ubuntu-latest
     env:
