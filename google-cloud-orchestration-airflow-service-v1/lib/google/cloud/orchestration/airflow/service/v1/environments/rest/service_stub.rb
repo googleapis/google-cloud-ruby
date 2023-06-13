@@ -233,6 +233,120 @@ module Google
                   end
 
                   ##
+                  # Baseline implementation for the execute_airflow_command REST call
+                  #
+                  # @param request_pb [::Google::Cloud::Orchestration::Airflow::Service::V1::ExecuteAirflowCommandRequest]
+                  #   A request object representing the call parameters. Required.
+                  # @param options [::Gapic::CallOptions]
+                  #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                  #
+                  # @yield [result, operation] Access the result along with the TransportOperation object
+                  # @yieldparam result [::Google::Cloud::Orchestration::Airflow::Service::V1::ExecuteAirflowCommandResponse]
+                  # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                  #
+                  # @return [::Google::Cloud::Orchestration::Airflow::Service::V1::ExecuteAirflowCommandResponse]
+                  #   A result object deserialized from the server's reply
+                  def execute_airflow_command request_pb, options = nil
+                    raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                    verb, uri, query_string_params, body = ServiceStub.transcode_execute_airflow_command_request request_pb
+                    query_string_params = if query_string_params.any?
+                                            query_string_params.to_h { |p| p.split "=", 2 }
+                                          else
+                                            {}
+                                          end
+
+                    response = @client_stub.make_http_request(
+                      verb,
+                      uri:     uri,
+                      body:    body || "",
+                      params:  query_string_params,
+                      options: options
+                    )
+                    operation = ::Gapic::Rest::TransportOperation.new response
+                    result = ::Google::Cloud::Orchestration::Airflow::Service::V1::ExecuteAirflowCommandResponse.decode_json response.body, ignore_unknown_fields: true
+
+                    yield result, operation if block_given?
+                    result
+                  end
+
+                  ##
+                  # Baseline implementation for the stop_airflow_command REST call
+                  #
+                  # @param request_pb [::Google::Cloud::Orchestration::Airflow::Service::V1::StopAirflowCommandRequest]
+                  #   A request object representing the call parameters. Required.
+                  # @param options [::Gapic::CallOptions]
+                  #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                  #
+                  # @yield [result, operation] Access the result along with the TransportOperation object
+                  # @yieldparam result [::Google::Cloud::Orchestration::Airflow::Service::V1::StopAirflowCommandResponse]
+                  # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                  #
+                  # @return [::Google::Cloud::Orchestration::Airflow::Service::V1::StopAirflowCommandResponse]
+                  #   A result object deserialized from the server's reply
+                  def stop_airflow_command request_pb, options = nil
+                    raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                    verb, uri, query_string_params, body = ServiceStub.transcode_stop_airflow_command_request request_pb
+                    query_string_params = if query_string_params.any?
+                                            query_string_params.to_h { |p| p.split "=", 2 }
+                                          else
+                                            {}
+                                          end
+
+                    response = @client_stub.make_http_request(
+                      verb,
+                      uri:     uri,
+                      body:    body || "",
+                      params:  query_string_params,
+                      options: options
+                    )
+                    operation = ::Gapic::Rest::TransportOperation.new response
+                    result = ::Google::Cloud::Orchestration::Airflow::Service::V1::StopAirflowCommandResponse.decode_json response.body, ignore_unknown_fields: true
+
+                    yield result, operation if block_given?
+                    result
+                  end
+
+                  ##
+                  # Baseline implementation for the poll_airflow_command REST call
+                  #
+                  # @param request_pb [::Google::Cloud::Orchestration::Airflow::Service::V1::PollAirflowCommandRequest]
+                  #   A request object representing the call parameters. Required.
+                  # @param options [::Gapic::CallOptions]
+                  #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                  #
+                  # @yield [result, operation] Access the result along with the TransportOperation object
+                  # @yieldparam result [::Google::Cloud::Orchestration::Airflow::Service::V1::PollAirflowCommandResponse]
+                  # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                  #
+                  # @return [::Google::Cloud::Orchestration::Airflow::Service::V1::PollAirflowCommandResponse]
+                  #   A result object deserialized from the server's reply
+                  def poll_airflow_command request_pb, options = nil
+                    raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                    verb, uri, query_string_params, body = ServiceStub.transcode_poll_airflow_command_request request_pb
+                    query_string_params = if query_string_params.any?
+                                            query_string_params.to_h { |p| p.split "=", 2 }
+                                          else
+                                            {}
+                                          end
+
+                    response = @client_stub.make_http_request(
+                      verb,
+                      uri:     uri,
+                      body:    body || "",
+                      params:  query_string_params,
+                      options: options
+                    )
+                    operation = ::Gapic::Rest::TransportOperation.new response
+                    result = ::Google::Cloud::Orchestration::Airflow::Service::V1::PollAirflowCommandResponse.decode_json response.body, ignore_unknown_fields: true
+
+                    yield result, operation if block_given?
+                    result
+                  end
+
+                  ##
                   # Baseline implementation for the save_snapshot REST call
                   #
                   # @param request_pb [::Google::Cloud::Orchestration::Airflow::Service::V1::SaveSnapshotRequest]
@@ -303,6 +417,82 @@ module Google
                     )
                     operation = ::Gapic::Rest::TransportOperation.new response
                     result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+
+                    yield result, operation if block_given?
+                    result
+                  end
+
+                  ##
+                  # Baseline implementation for the database_failover REST call
+                  #
+                  # @param request_pb [::Google::Cloud::Orchestration::Airflow::Service::V1::DatabaseFailoverRequest]
+                  #   A request object representing the call parameters. Required.
+                  # @param options [::Gapic::CallOptions]
+                  #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                  #
+                  # @yield [result, operation] Access the result along with the TransportOperation object
+                  # @yieldparam result [::Google::Longrunning::Operation]
+                  # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                  #
+                  # @return [::Google::Longrunning::Operation]
+                  #   A result object deserialized from the server's reply
+                  def database_failover request_pb, options = nil
+                    raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                    verb, uri, query_string_params, body = ServiceStub.transcode_database_failover_request request_pb
+                    query_string_params = if query_string_params.any?
+                                            query_string_params.to_h { |p| p.split "=", 2 }
+                                          else
+                                            {}
+                                          end
+
+                    response = @client_stub.make_http_request(
+                      verb,
+                      uri:     uri,
+                      body:    body || "",
+                      params:  query_string_params,
+                      options: options
+                    )
+                    operation = ::Gapic::Rest::TransportOperation.new response
+                    result = ::Google::Longrunning::Operation.decode_json response.body, ignore_unknown_fields: true
+
+                    yield result, operation if block_given?
+                    result
+                  end
+
+                  ##
+                  # Baseline implementation for the fetch_database_properties REST call
+                  #
+                  # @param request_pb [::Google::Cloud::Orchestration::Airflow::Service::V1::FetchDatabasePropertiesRequest]
+                  #   A request object representing the call parameters. Required.
+                  # @param options [::Gapic::CallOptions]
+                  #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                  #
+                  # @yield [result, operation] Access the result along with the TransportOperation object
+                  # @yieldparam result [::Google::Cloud::Orchestration::Airflow::Service::V1::FetchDatabasePropertiesResponse]
+                  # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                  #
+                  # @return [::Google::Cloud::Orchestration::Airflow::Service::V1::FetchDatabasePropertiesResponse]
+                  #   A result object deserialized from the server's reply
+                  def fetch_database_properties request_pb, options = nil
+                    raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                    verb, uri, query_string_params, body = ServiceStub.transcode_fetch_database_properties_request request_pb
+                    query_string_params = if query_string_params.any?
+                                            query_string_params.to_h { |p| p.split "=", 2 }
+                                          else
+                                            {}
+                                          end
+
+                    response = @client_stub.make_http_request(
+                      verb,
+                      uri:     uri,
+                      body:    body || "",
+                      params:  query_string_params,
+                      options: options
+                    )
+                    operation = ::Gapic::Rest::TransportOperation.new response
+                    result = ::Google::Cloud::Orchestration::Airflow::Service::V1::FetchDatabasePropertiesResponse.decode_json response.body, ignore_unknown_fields: true
 
                     yield result, operation if block_given?
                     result
@@ -418,6 +608,72 @@ module Google
                   ##
                   # @private
                   #
+                  # GRPC transcoding helper method for the execute_airflow_command REST call
+                  #
+                  # @param request_pb [::Google::Cloud::Orchestration::Airflow::Service::V1::ExecuteAirflowCommandRequest]
+                  #   A request object representing the call parameters. Required.
+                  # @return [Array(String, [String, nil], Hash{String => String})]
+                  #   Uri, Body, Query string parameters
+                  def self.transcode_execute_airflow_command_request request_pb
+                    transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                            .with_bindings(
+                                                              uri_method: :post,
+                                                              uri_template: "/v1/{environment}:executeAirflowCommand",
+                                                              body: "*",
+                                                              matches: [
+                                                                ["environment", %r{^projects/[^/]+/locations/[^/]+/environments/[^/]+/?$}, false]
+                                                              ]
+                                                            )
+                    transcoder.transcode request_pb
+                  end
+
+                  ##
+                  # @private
+                  #
+                  # GRPC transcoding helper method for the stop_airflow_command REST call
+                  #
+                  # @param request_pb [::Google::Cloud::Orchestration::Airflow::Service::V1::StopAirflowCommandRequest]
+                  #   A request object representing the call parameters. Required.
+                  # @return [Array(String, [String, nil], Hash{String => String})]
+                  #   Uri, Body, Query string parameters
+                  def self.transcode_stop_airflow_command_request request_pb
+                    transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                            .with_bindings(
+                                                              uri_method: :post,
+                                                              uri_template: "/v1/{environment}:stopAirflowCommand",
+                                                              body: "*",
+                                                              matches: [
+                                                                ["environment", %r{^projects/[^/]+/locations/[^/]+/environments/[^/]+/?$}, false]
+                                                              ]
+                                                            )
+                    transcoder.transcode request_pb
+                  end
+
+                  ##
+                  # @private
+                  #
+                  # GRPC transcoding helper method for the poll_airflow_command REST call
+                  #
+                  # @param request_pb [::Google::Cloud::Orchestration::Airflow::Service::V1::PollAirflowCommandRequest]
+                  #   A request object representing the call parameters. Required.
+                  # @return [Array(String, [String, nil], Hash{String => String})]
+                  #   Uri, Body, Query string parameters
+                  def self.transcode_poll_airflow_command_request request_pb
+                    transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                            .with_bindings(
+                                                              uri_method: :post,
+                                                              uri_template: "/v1/{environment}:pollAirflowCommand",
+                                                              body: "*",
+                                                              matches: [
+                                                                ["environment", %r{^projects/[^/]+/locations/[^/]+/environments/[^/]+/?$}, false]
+                                                              ]
+                                                            )
+                    transcoder.transcode request_pb
+                  end
+
+                  ##
+                  # @private
+                  #
                   # GRPC transcoding helper method for the save_snapshot REST call
                   #
                   # @param request_pb [::Google::Cloud::Orchestration::Airflow::Service::V1::SaveSnapshotRequest]
@@ -452,6 +708,49 @@ module Google
                                                               uri_method: :post,
                                                               uri_template: "/v1/{environment}:loadSnapshot",
                                                               body: "*",
+                                                              matches: [
+                                                                ["environment", %r{^projects/[^/]+/locations/[^/]+/environments/[^/]+/?$}, false]
+                                                              ]
+                                                            )
+                    transcoder.transcode request_pb
+                  end
+
+                  ##
+                  # @private
+                  #
+                  # GRPC transcoding helper method for the database_failover REST call
+                  #
+                  # @param request_pb [::Google::Cloud::Orchestration::Airflow::Service::V1::DatabaseFailoverRequest]
+                  #   A request object representing the call parameters. Required.
+                  # @return [Array(String, [String, nil], Hash{String => String})]
+                  #   Uri, Body, Query string parameters
+                  def self.transcode_database_failover_request request_pb
+                    transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                            .with_bindings(
+                                                              uri_method: :post,
+                                                              uri_template: "/v1/{environment}:databaseFailover",
+                                                              body: "*",
+                                                              matches: [
+                                                                ["environment", %r{^projects/[^/]+/locations/[^/]+/environments/[^/]+/?$}, false]
+                                                              ]
+                                                            )
+                    transcoder.transcode request_pb
+                  end
+
+                  ##
+                  # @private
+                  #
+                  # GRPC transcoding helper method for the fetch_database_properties REST call
+                  #
+                  # @param request_pb [::Google::Cloud::Orchestration::Airflow::Service::V1::FetchDatabasePropertiesRequest]
+                  #   A request object representing the call parameters. Required.
+                  # @return [Array(String, [String, nil], Hash{String => String})]
+                  #   Uri, Body, Query string parameters
+                  def self.transcode_fetch_database_properties_request request_pb
+                    transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                            .with_bindings(
+                                                              uri_method: :get,
+                                                              uri_template: "/v1/{environment}:fetchDatabaseProperties",
                                                               matches: [
                                                                 ["environment", %r{^projects/[^/]+/locations/[^/]+/environments/[^/]+/?$}, false]
                                                               ]

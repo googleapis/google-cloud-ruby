@@ -212,6 +212,126 @@
       ]
     },
     {
+      "region_tag": "composer_v1_generated_Environments_ExecuteAirflowCommand_sync",
+      "title": "Snippet for the execute_airflow_command call in the Environments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#execute_airflow_command. It may require modification in order to execute successfully.",
+      "file": "environments/execute_airflow_command.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "execute_airflow_command",
+        "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#execute_airflow_command",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Orchestration::Airflow::Service::V1::ExecuteAirflowCommandRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Orchestration::Airflow::Service::V1::ExecuteAirflowCommandResponse",
+        "client": {
+          "short_name": "Environments::Client",
+          "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client"
+        },
+        "method": {
+          "short_name": "ExecuteAirflowCommand",
+          "full_name": "google.cloud.orchestration.airflow.service.v1.Environments.ExecuteAirflowCommand",
+          "service": {
+            "short_name": "Environments",
+            "full_name": "google.cloud.orchestration.airflow.service.v1.Environments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "composer_v1_generated_Environments_StopAirflowCommand_sync",
+      "title": "Snippet for the stop_airflow_command call in the Environments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#stop_airflow_command. It may require modification in order to execute successfully.",
+      "file": "environments/stop_airflow_command.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "stop_airflow_command",
+        "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#stop_airflow_command",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Orchestration::Airflow::Service::V1::StopAirflowCommandRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Orchestration::Airflow::Service::V1::StopAirflowCommandResponse",
+        "client": {
+          "short_name": "Environments::Client",
+          "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client"
+        },
+        "method": {
+          "short_name": "StopAirflowCommand",
+          "full_name": "google.cloud.orchestration.airflow.service.v1.Environments.StopAirflowCommand",
+          "service": {
+            "short_name": "Environments",
+            "full_name": "google.cloud.orchestration.airflow.service.v1.Environments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "composer_v1_generated_Environments_PollAirflowCommand_sync",
+      "title": "Snippet for the poll_airflow_command call in the Environments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#poll_airflow_command. It may require modification in order to execute successfully.",
+      "file": "environments/poll_airflow_command.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "poll_airflow_command",
+        "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#poll_airflow_command",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Orchestration::Airflow::Service::V1::PollAirflowCommandRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Orchestration::Airflow::Service::V1::PollAirflowCommandResponse",
+        "client": {
+          "short_name": "Environments::Client",
+          "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client"
+        },
+        "method": {
+          "short_name": "PollAirflowCommand",
+          "full_name": "google.cloud.orchestration.airflow.service.v1.Environments.PollAirflowCommand",
+          "service": {
+            "short_name": "Environments",
+            "full_name": "google.cloud.orchestration.airflow.service.v1.Environments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "composer_v1_generated_Environments_SaveSnapshot_sync",
       "title": "Snippet for the save_snapshot call in the Environments service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#save_snapshot. It may require modification in order to execute successfully.",
@@ -287,6 +407,86 @@
         {
           "start": 20,
           "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "composer_v1_generated_Environments_DatabaseFailover_sync",
+      "title": "Snippet for the database_failover call in the Environments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#database_failover. It may require modification in order to execute successfully.",
+      "file": "environments/database_failover.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "database_failover",
+        "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#database_failover",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Orchestration::Airflow::Service::V1::DatabaseFailoverRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Environments::Client",
+          "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client"
+        },
+        "method": {
+          "short_name": "DatabaseFailover",
+          "full_name": "google.cloud.orchestration.airflow.service.v1.Environments.DatabaseFailover",
+          "service": {
+            "short_name": "Environments",
+            "full_name": "google.cloud.orchestration.airflow.service.v1.Environments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "composer_v1_generated_Environments_FetchDatabaseProperties_sync",
+      "title": "Snippet for the fetch_database_properties call in the Environments service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#fetch_database_properties. It may require modification in order to execute successfully.",
+      "file": "environments/fetch_database_properties.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "fetch_database_properties",
+        "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#fetch_database_properties",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Orchestration::Airflow::Service::V1::FetchDatabasePropertiesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Orchestration::Airflow::Service::V1::FetchDatabasePropertiesResponse",
+        "client": {
+          "short_name": "Environments::Client",
+          "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client"
+        },
+        "method": {
+          "short_name": "FetchDatabaseProperties",
+          "full_name": "google.cloud.orchestration.airflow.service.v1.Environments.FetchDatabaseProperties",
+          "service": {
+            "short_name": "Environments",
+            "full_name": "google.cloud.orchestration.airflow.service.v1.Environments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
           "type": "FULL"
         }
       ]

@@ -603,6 +603,221 @@ module Google
                   end
 
                   ##
+                  # Executes Airflow CLI command.
+                  #
+                  # @overload execute_airflow_command(request, options = nil)
+                  #   Pass arguments to `execute_airflow_command` via a request object, either of type
+                  #   {::Google::Cloud::Orchestration::Airflow::Service::V1::ExecuteAirflowCommandRequest} or an equivalent Hash.
+                  #
+                  #   @param request [::Google::Cloud::Orchestration::Airflow::Service::V1::ExecuteAirflowCommandRequest, ::Hash]
+                  #     A request object representing the call parameters. Required. To specify no
+                  #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                  #   @param options [::Gapic::CallOptions, ::Hash]
+                  #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                  #
+                  # @overload execute_airflow_command(environment: nil, command: nil, subcommand: nil, parameters: nil)
+                  #   Pass arguments to `execute_airflow_command` via keyword arguments. Note that at
+                  #   least one keyword argument is required. To specify no parameters, or to keep all
+                  #   the default parameter values, pass an empty Hash as a request object (see above).
+                  #
+                  #   @param environment [::String]
+                  #     The resource name of the environment in the form:
+                  #     "projects/\\{projectId}/locations/\\{locationId}/environments/\\{environmentId}".
+                  #   @param command [::String]
+                  #     Airflow command.
+                  #   @param subcommand [::String]
+                  #     Airflow subcommand.
+                  #   @param parameters [::Array<::String>]
+                  #     Parameters for the Airflow command/subcommand as an array of arguments.
+                  #     It may contain positional arguments like `["my-dag-id"]`, key-value
+                  #     parameters like `["--foo=bar"]` or `["--foo","bar"]`,
+                  #     or other flags like `["-f"]`.
+                  # @yield [result, operation] Access the result along with the TransportOperation object
+                  # @yieldparam result [::Google::Cloud::Orchestration::Airflow::Service::V1::ExecuteAirflowCommandResponse]
+                  # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                  #
+                  # @return [::Google::Cloud::Orchestration::Airflow::Service::V1::ExecuteAirflowCommandResponse]
+                  #
+                  # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                  def execute_airflow_command request, options = nil
+                    raise ::ArgumentError, "request must be provided" if request.nil?
+
+                    request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Orchestration::Airflow::Service::V1::ExecuteAirflowCommandRequest
+
+                    # Converts hash and nil to an options object
+                    options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                    # Customize the options with defaults
+                    call_metadata = @config.rpcs.execute_airflow_command.metadata.to_h
+
+                    # Set x-goog-api-client and x-goog-user-project headers
+                    call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                      lib_name: @config.lib_name, lib_version: @config.lib_version,
+                      gapic_version: ::Google::Cloud::Orchestration::Airflow::Service::V1::VERSION,
+                      transports_version_send: [:rest]
+
+                    call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                    options.apply_defaults timeout:      @config.rpcs.execute_airflow_command.timeout,
+                                           metadata:     call_metadata,
+                                           retry_policy: @config.rpcs.execute_airflow_command.retry_policy
+
+                    options.apply_defaults timeout:      @config.timeout,
+                                           metadata:     @config.metadata,
+                                           retry_policy: @config.retry_policy
+
+                    @environments_stub.execute_airflow_command request, options do |result, operation|
+                      yield result, operation if block_given?
+                      return result
+                    end
+                  rescue ::Gapic::Rest::Error => e
+                    raise ::Google::Cloud::Error.from_error(e)
+                  end
+
+                  ##
+                  # Stops Airflow CLI command execution.
+                  #
+                  # @overload stop_airflow_command(request, options = nil)
+                  #   Pass arguments to `stop_airflow_command` via a request object, either of type
+                  #   {::Google::Cloud::Orchestration::Airflow::Service::V1::StopAirflowCommandRequest} or an equivalent Hash.
+                  #
+                  #   @param request [::Google::Cloud::Orchestration::Airflow::Service::V1::StopAirflowCommandRequest, ::Hash]
+                  #     A request object representing the call parameters. Required. To specify no
+                  #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                  #   @param options [::Gapic::CallOptions, ::Hash]
+                  #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                  #
+                  # @overload stop_airflow_command(environment: nil, execution_id: nil, pod: nil, pod_namespace: nil, force: nil)
+                  #   Pass arguments to `stop_airflow_command` via keyword arguments. Note that at
+                  #   least one keyword argument is required. To specify no parameters, or to keep all
+                  #   the default parameter values, pass an empty Hash as a request object (see above).
+                  #
+                  #   @param environment [::String]
+                  #     The resource name of the environment in the form:
+                  #     "projects/\\{projectId}/locations/\\{locationId}/environments/\\{environmentId}".
+                  #   @param execution_id [::String]
+                  #     The unique ID of the command execution.
+                  #   @param pod [::String]
+                  #     The name of the pod where the command is executed.
+                  #   @param pod_namespace [::String]
+                  #     The namespace of the pod where the command is executed.
+                  #   @param force [::Boolean]
+                  #     If true, the execution is terminated forcefully (SIGKILL). If false, the
+                  #     execution is stopped gracefully, giving it time for cleanup.
+                  # @yield [result, operation] Access the result along with the TransportOperation object
+                  # @yieldparam result [::Google::Cloud::Orchestration::Airflow::Service::V1::StopAirflowCommandResponse]
+                  # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                  #
+                  # @return [::Google::Cloud::Orchestration::Airflow::Service::V1::StopAirflowCommandResponse]
+                  #
+                  # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                  def stop_airflow_command request, options = nil
+                    raise ::ArgumentError, "request must be provided" if request.nil?
+
+                    request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Orchestration::Airflow::Service::V1::StopAirflowCommandRequest
+
+                    # Converts hash and nil to an options object
+                    options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                    # Customize the options with defaults
+                    call_metadata = @config.rpcs.stop_airflow_command.metadata.to_h
+
+                    # Set x-goog-api-client and x-goog-user-project headers
+                    call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                      lib_name: @config.lib_name, lib_version: @config.lib_version,
+                      gapic_version: ::Google::Cloud::Orchestration::Airflow::Service::V1::VERSION,
+                      transports_version_send: [:rest]
+
+                    call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                    options.apply_defaults timeout:      @config.rpcs.stop_airflow_command.timeout,
+                                           metadata:     call_metadata,
+                                           retry_policy: @config.rpcs.stop_airflow_command.retry_policy
+
+                    options.apply_defaults timeout:      @config.timeout,
+                                           metadata:     @config.metadata,
+                                           retry_policy: @config.retry_policy
+
+                    @environments_stub.stop_airflow_command request, options do |result, operation|
+                      yield result, operation if block_given?
+                      return result
+                    end
+                  rescue ::Gapic::Rest::Error => e
+                    raise ::Google::Cloud::Error.from_error(e)
+                  end
+
+                  ##
+                  # Polls Airflow CLI command execution and fetches logs.
+                  #
+                  # @overload poll_airflow_command(request, options = nil)
+                  #   Pass arguments to `poll_airflow_command` via a request object, either of type
+                  #   {::Google::Cloud::Orchestration::Airflow::Service::V1::PollAirflowCommandRequest} or an equivalent Hash.
+                  #
+                  #   @param request [::Google::Cloud::Orchestration::Airflow::Service::V1::PollAirflowCommandRequest, ::Hash]
+                  #     A request object representing the call parameters. Required. To specify no
+                  #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                  #   @param options [::Gapic::CallOptions, ::Hash]
+                  #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                  #
+                  # @overload poll_airflow_command(environment: nil, execution_id: nil, pod: nil, pod_namespace: nil, next_line_number: nil)
+                  #   Pass arguments to `poll_airflow_command` via keyword arguments. Note that at
+                  #   least one keyword argument is required. To specify no parameters, or to keep all
+                  #   the default parameter values, pass an empty Hash as a request object (see above).
+                  #
+                  #   @param environment [::String]
+                  #     The resource name of the environment in the form:
+                  #     "projects/\\{projectId}/locations/\\{locationId}/environments/\\{environmentId}"
+                  #   @param execution_id [::String]
+                  #     The unique ID of the command execution.
+                  #   @param pod [::String]
+                  #     The name of the pod where the command is executed.
+                  #   @param pod_namespace [::String]
+                  #     The namespace of the pod where the command is executed.
+                  #   @param next_line_number [::Integer]
+                  #     Line number from which new logs should be fetched.
+                  # @yield [result, operation] Access the result along with the TransportOperation object
+                  # @yieldparam result [::Google::Cloud::Orchestration::Airflow::Service::V1::PollAirflowCommandResponse]
+                  # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                  #
+                  # @return [::Google::Cloud::Orchestration::Airflow::Service::V1::PollAirflowCommandResponse]
+                  #
+                  # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                  def poll_airflow_command request, options = nil
+                    raise ::ArgumentError, "request must be provided" if request.nil?
+
+                    request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Orchestration::Airflow::Service::V1::PollAirflowCommandRequest
+
+                    # Converts hash and nil to an options object
+                    options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                    # Customize the options with defaults
+                    call_metadata = @config.rpcs.poll_airflow_command.metadata.to_h
+
+                    # Set x-goog-api-client and x-goog-user-project headers
+                    call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                      lib_name: @config.lib_name, lib_version: @config.lib_version,
+                      gapic_version: ::Google::Cloud::Orchestration::Airflow::Service::V1::VERSION,
+                      transports_version_send: [:rest]
+
+                    call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                    options.apply_defaults timeout:      @config.rpcs.poll_airflow_command.timeout,
+                                           metadata:     call_metadata,
+                                           retry_policy: @config.rpcs.poll_airflow_command.retry_policy
+
+                    options.apply_defaults timeout:      @config.timeout,
+                                           metadata:     @config.metadata,
+                                           retry_policy: @config.retry_policy
+
+                    @environments_stub.poll_airflow_command request, options do |result, operation|
+                      yield result, operation if block_given?
+                      return result
+                    end
+                  rescue ::Gapic::Rest::Error => e
+                    raise ::Google::Cloud::Error.from_error(e)
+                  end
+
+                  ##
                   # Creates a snapshots of a Cloud Composer environment.
                   #
                   # As a result of this operation, snapshot of environment's state is stored
@@ -747,6 +962,133 @@ module Google
 
                     @environments_stub.load_snapshot request, options do |result, operation|
                       result = ::Gapic::Operation.new result, @operations_client, options: options
+                      yield result, operation if block_given?
+                      return result
+                    end
+                  rescue ::Gapic::Rest::Error => e
+                    raise ::Google::Cloud::Error.from_error(e)
+                  end
+
+                  ##
+                  # Triggers database failover (only for highly resilient environments).
+                  #
+                  # @overload database_failover(request, options = nil)
+                  #   Pass arguments to `database_failover` via a request object, either of type
+                  #   {::Google::Cloud::Orchestration::Airflow::Service::V1::DatabaseFailoverRequest} or an equivalent Hash.
+                  #
+                  #   @param request [::Google::Cloud::Orchestration::Airflow::Service::V1::DatabaseFailoverRequest, ::Hash]
+                  #     A request object representing the call parameters. Required. To specify no
+                  #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                  #   @param options [::Gapic::CallOptions, ::Hash]
+                  #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                  #
+                  # @overload database_failover(environment: nil)
+                  #   Pass arguments to `database_failover` via keyword arguments. Note that at
+                  #   least one keyword argument is required. To specify no parameters, or to keep all
+                  #   the default parameter values, pass an empty Hash as a request object (see above).
+                  #
+                  #   @param environment [::String]
+                  #     Target environment:
+                  #     "projects/\\{projectId}/locations/\\{locationId}/environments/\\{environmentId}"
+                  # @yield [result, operation] Access the result along with the TransportOperation object
+                  # @yieldparam result [::Gapic::Operation]
+                  # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                  #
+                  # @return [::Gapic::Operation]
+                  #
+                  # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                  def database_failover request, options = nil
+                    raise ::ArgumentError, "request must be provided" if request.nil?
+
+                    request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Orchestration::Airflow::Service::V1::DatabaseFailoverRequest
+
+                    # Converts hash and nil to an options object
+                    options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                    # Customize the options with defaults
+                    call_metadata = @config.rpcs.database_failover.metadata.to_h
+
+                    # Set x-goog-api-client and x-goog-user-project headers
+                    call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                      lib_name: @config.lib_name, lib_version: @config.lib_version,
+                      gapic_version: ::Google::Cloud::Orchestration::Airflow::Service::V1::VERSION,
+                      transports_version_send: [:rest]
+
+                    call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                    options.apply_defaults timeout:      @config.rpcs.database_failover.timeout,
+                                           metadata:     call_metadata,
+                                           retry_policy: @config.rpcs.database_failover.retry_policy
+
+                    options.apply_defaults timeout:      @config.timeout,
+                                           metadata:     @config.metadata,
+                                           retry_policy: @config.retry_policy
+
+                    @environments_stub.database_failover request, options do |result, operation|
+                      result = ::Gapic::Operation.new result, @operations_client, options: options
+                      yield result, operation if block_given?
+                      return result
+                    end
+                  rescue ::Gapic::Rest::Error => e
+                    raise ::Google::Cloud::Error.from_error(e)
+                  end
+
+                  ##
+                  # Fetches database properties.
+                  #
+                  # @overload fetch_database_properties(request, options = nil)
+                  #   Pass arguments to `fetch_database_properties` via a request object, either of type
+                  #   {::Google::Cloud::Orchestration::Airflow::Service::V1::FetchDatabasePropertiesRequest} or an equivalent Hash.
+                  #
+                  #   @param request [::Google::Cloud::Orchestration::Airflow::Service::V1::FetchDatabasePropertiesRequest, ::Hash]
+                  #     A request object representing the call parameters. Required. To specify no
+                  #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                  #   @param options [::Gapic::CallOptions, ::Hash]
+                  #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+                  #
+                  # @overload fetch_database_properties(environment: nil)
+                  #   Pass arguments to `fetch_database_properties` via keyword arguments. Note that at
+                  #   least one keyword argument is required. To specify no parameters, or to keep all
+                  #   the default parameter values, pass an empty Hash as a request object (see above).
+                  #
+                  #   @param environment [::String]
+                  #     Required. The resource name of the environment, in the form:
+                  #     "projects/\\{projectId}/locations/\\{locationId}/environments/\\{environmentId}"
+                  # @yield [result, operation] Access the result along with the TransportOperation object
+                  # @yieldparam result [::Google::Cloud::Orchestration::Airflow::Service::V1::FetchDatabasePropertiesResponse]
+                  # @yieldparam operation [::Gapic::Rest::TransportOperation]
+                  #
+                  # @return [::Google::Cloud::Orchestration::Airflow::Service::V1::FetchDatabasePropertiesResponse]
+                  #
+                  # @raise [::Google::Cloud::Error] if the REST call is aborted.
+                  def fetch_database_properties request, options = nil
+                    raise ::ArgumentError, "request must be provided" if request.nil?
+
+                    request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Orchestration::Airflow::Service::V1::FetchDatabasePropertiesRequest
+
+                    # Converts hash and nil to an options object
+                    options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                    # Customize the options with defaults
+                    call_metadata = @config.rpcs.fetch_database_properties.metadata.to_h
+
+                    # Set x-goog-api-client and x-goog-user-project headers
+                    call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                      lib_name: @config.lib_name, lib_version: @config.lib_version,
+                      gapic_version: ::Google::Cloud::Orchestration::Airflow::Service::V1::VERSION,
+                      transports_version_send: [:rest]
+
+                    call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                    options.apply_defaults timeout:      @config.rpcs.fetch_database_properties.timeout,
+                                           metadata:     call_metadata,
+                                           retry_policy: @config.rpcs.fetch_database_properties.retry_policy
+
+                    options.apply_defaults timeout:      @config.timeout,
+                                           metadata:     @config.metadata,
+                                           retry_policy: @config.retry_policy
+
+                    @environments_stub.fetch_database_properties request, options do |result, operation|
                       yield result, operation if block_given?
                       return result
                     end
@@ -905,6 +1247,21 @@ module Google
                       #
                       attr_reader :delete_environment
                       ##
+                      # RPC-specific configuration for `execute_airflow_command`
+                      # @return [::Gapic::Config::Method]
+                      #
+                      attr_reader :execute_airflow_command
+                      ##
+                      # RPC-specific configuration for `stop_airflow_command`
+                      # @return [::Gapic::Config::Method]
+                      #
+                      attr_reader :stop_airflow_command
+                      ##
+                      # RPC-specific configuration for `poll_airflow_command`
+                      # @return [::Gapic::Config::Method]
+                      #
+                      attr_reader :poll_airflow_command
+                      ##
                       # RPC-specific configuration for `save_snapshot`
                       # @return [::Gapic::Config::Method]
                       #
@@ -914,6 +1271,16 @@ module Google
                       # @return [::Gapic::Config::Method]
                       #
                       attr_reader :load_snapshot
+                      ##
+                      # RPC-specific configuration for `database_failover`
+                      # @return [::Gapic::Config::Method]
+                      #
+                      attr_reader :database_failover
+                      ##
+                      # RPC-specific configuration for `fetch_database_properties`
+                      # @return [::Gapic::Config::Method]
+                      #
+                      attr_reader :fetch_database_properties
 
                       # @private
                       def initialize parent_rpcs = nil
@@ -927,10 +1294,20 @@ module Google
                         @update_environment = ::Gapic::Config::Method.new update_environment_config
                         delete_environment_config = parent_rpcs.delete_environment if parent_rpcs.respond_to? :delete_environment
                         @delete_environment = ::Gapic::Config::Method.new delete_environment_config
+                        execute_airflow_command_config = parent_rpcs.execute_airflow_command if parent_rpcs.respond_to? :execute_airflow_command
+                        @execute_airflow_command = ::Gapic::Config::Method.new execute_airflow_command_config
+                        stop_airflow_command_config = parent_rpcs.stop_airflow_command if parent_rpcs.respond_to? :stop_airflow_command
+                        @stop_airflow_command = ::Gapic::Config::Method.new stop_airflow_command_config
+                        poll_airflow_command_config = parent_rpcs.poll_airflow_command if parent_rpcs.respond_to? :poll_airflow_command
+                        @poll_airflow_command = ::Gapic::Config::Method.new poll_airflow_command_config
                         save_snapshot_config = parent_rpcs.save_snapshot if parent_rpcs.respond_to? :save_snapshot
                         @save_snapshot = ::Gapic::Config::Method.new save_snapshot_config
                         load_snapshot_config = parent_rpcs.load_snapshot if parent_rpcs.respond_to? :load_snapshot
                         @load_snapshot = ::Gapic::Config::Method.new load_snapshot_config
+                        database_failover_config = parent_rpcs.database_failover if parent_rpcs.respond_to? :database_failover
+                        @database_failover = ::Gapic::Config::Method.new database_failover_config
+                        fetch_database_properties_config = parent_rpcs.fetch_database_properties if parent_rpcs.respond_to? :fetch_database_properties
+                        @fetch_database_properties = ::Gapic::Config::Method.new fetch_database_properties_config
 
                         yield self if block_given?
                       end
