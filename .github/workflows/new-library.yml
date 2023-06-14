@@ -23,9 +23,7 @@ jobs:
         ruby-version: "3.2"
     - name: Install tools
       run: |
-        git config --global user.email "70984784+yoshi-code-bot@users.noreply.github.com"
-        git config --global user.name "Yoshi Code Bot"
         gem install --no-document toys
     - name: Create library
       run: |
-        toys new-library -v --pull --test --fork --bootstrap-releases ${{ github.event.inputs.protoPath }}
+        toys new-library -v --pull --test --remote=origin --bootstrap-releases ${{ github.event.inputs.protoPath }}

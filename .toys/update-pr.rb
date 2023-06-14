@@ -24,9 +24,11 @@ flag :rebase
 static :repo_name, "googleapis/google-cloud-ruby"
 
 include :exec, e: true
+include "yoshi-utils"
 
 def run
   require "json"
+  yoshi_utils.git_ensure_identity
   check_preconditions
   save_state
   setup_branch base_branch
