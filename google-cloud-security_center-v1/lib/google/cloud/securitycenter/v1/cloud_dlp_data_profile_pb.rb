@@ -7,7 +7,7 @@ require 'google/protobuf'
 require 'google/api/resource_pb'
 
 
-descriptor_data = "\n;google/cloud/securitycenter/v1/cloud_dlp_data_profile.proto\x12\x1egoogle.cloud.securitycenter.v1\x1a\x19google/api/resource.proto\"U\n\x13\x43loudDlpDataProfile\x12>\n\x0c\x64\x61ta_profile\x18\x01 \x01(\tB(\xfa\x41%\n#dlp.googleapis.com/TableDataProfileB\x94\x03\n\"com.google.cloud.securitycenter.v1B\x18\x43loudDlpDataProfileProtoP\x01ZJcloud.google.com/go/securitycenter/apiv1/securitycenterpb;securitycenterpb\xaa\x02\x1eGoogle.Cloud.SecurityCenter.V1\xca\x02\x1eGoogle\\Cloud\\SecurityCenter\\V1\xea\x02!Google::Cloud::SecurityCenter::V1\xea\x41\x9e\x01\n#dlp.googleapis.com/TableDataProfile\x12\x30projects/{project}/tableProfiles/{table_profile}\x12\x45projects/{project}/locations/{location}/tableProfiles/{table_profile}b\x06proto3"
+descriptor_data = "\n;google/cloud/securitycenter/v1/cloud_dlp_data_profile.proto\x12\x1egoogle.cloud.securitycenter.v1\x1a\x19google/api/resource.proto\"\xf4\x01\n\x13\x43loudDlpDataProfile\x12>\n\x0c\x64\x61ta_profile\x18\x01 \x01(\tB(\xfa\x41%\n#dlp.googleapis.com/TableDataProfile\x12S\n\x0bparent_type\x18\x02 \x01(\x0e\x32>.google.cloud.securitycenter.v1.CloudDlpDataProfile.ParentType\"H\n\nParentType\x12\x1b\n\x17PARENT_TYPE_UNSPECIFIED\x10\x00\x12\x10\n\x0cORGANIZATION\x10\x01\x12\x0b\n\x07PROJECT\x10\x02\x42\x94\x03\n\"com.google.cloud.securitycenter.v1B\x18\x43loudDlpDataProfileProtoP\x01ZJcloud.google.com/go/securitycenter/apiv1/securitycenterpb;securitycenterpb\xaa\x02\x1eGoogle.Cloud.SecurityCenter.V1\xca\x02\x1eGoogle\\Cloud\\SecurityCenter\\V1\xea\x02!Google::Cloud::SecurityCenter::V1\xea\x41\x9e\x01\n#dlp.googleapis.com/TableDataProfile\x12\x30projects/{project}/tableProfiles/{table_profile}\x12\x45projects/{project}/locations/{location}/tableProfiles/{table_profile}b\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
@@ -38,6 +38,7 @@ module Google
     module SecurityCenter
       module V1
         CloudDlpDataProfile = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.CloudDlpDataProfile").msgclass
+        CloudDlpDataProfile::ParentType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.CloudDlpDataProfile.ParentType").enummodule
       end
     end
   end
