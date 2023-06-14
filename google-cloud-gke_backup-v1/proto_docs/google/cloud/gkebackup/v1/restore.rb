@@ -27,7 +27,7 @@ module Google
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The full name of the Restore resource.
-        #     Format: projects/*/locations/*/restorePlans/*/restores/*
+        #     Format: `projects/*/locations/*/restorePlans/*/restores/*`
         # @!attribute [r] uid
         #   @return [::String]
         #     Output only. Server generated global unique identifier of
@@ -44,22 +44,26 @@ module Google
         #     User specified descriptive string for this Restore.
         # @!attribute [rw] backup
         #   @return [::String]
-        #     Required. Immutable. A reference to the {::Google::Cloud::GkeBackup::V1::Backup Backup} used as the source from which this Restore
-        #     will restore. Note that this Backup must be a sub-resource of the
-        #     RestorePlan's {::Google::Cloud::GkeBackup::V1::RestorePlan#backup_plan backup_plan}.
-        #     Format: projects/*/locations/*/backupPlans/*/backups/*.
+        #     Required. Immutable. A reference to the
+        #     {::Google::Cloud::GkeBackup::V1::Backup Backup} used as the source from which
+        #     this Restore will restore. Note that this Backup must be a sub-resource of
+        #     the RestorePlan's
+        #     {::Google::Cloud::GkeBackup::V1::RestorePlan#backup_plan backup_plan}. Format:
+        #     `projects/*/locations/*/backupPlans/*/backups/*`.
         # @!attribute [r] cluster
         #   @return [::String]
         #     Output only. The target cluster into which this Restore will restore data.
         #     Valid formats:
         #
-        #       - projects/*/locations/*/clusters/*
-        #       - projects/*/zones/*/clusters/*
+        #       - `projects/*/locations/*/clusters/*`
+        #       - `projects/*/zones/*/clusters/*`
         #
-        #     Inherited from parent RestorePlan's {::Google::Cloud::GkeBackup::V1::RestorePlan#cluster cluster} value.
+        #     Inherited from parent RestorePlan's
+        #     {::Google::Cloud::GkeBackup::V1::RestorePlan#cluster cluster} value.
         # @!attribute [r] restore_config
         #   @return [::Google::Cloud::GkeBackup::V1::RestoreConfig]
-        #     Output only. Configuration of the Restore.  Inherited from parent RestorePlan's
+        #     Output only. Configuration of the Restore.  Inherited from parent
+        #     RestorePlan's
         #     {::Google::Cloud::GkeBackup::V1::RestorePlan#restore_config restore_config}.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
@@ -69,7 +73,8 @@ module Google
         #     Output only. The current state of the Restore.
         # @!attribute [r] state_reason
         #   @return [::String]
-        #     Output only. Human-readable description of why the Restore is in its current state.
+        #     Output only. Human-readable description of why the Restore is in its
+        #     current state.
         # @!attribute [r] complete_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Timestamp of when the restore operation completed.
@@ -81,15 +86,15 @@ module Google
         #     Output only. Number of resources excluded during the restore execution.
         # @!attribute [r] resources_failed_count
         #   @return [::Integer]
-        #     Output only. Number of resources that failed to be restored during the restore
-        #     execution.
+        #     Output only. Number of resources that failed to be restored during the
+        #     restore execution.
         # @!attribute [r] volumes_restored_count
         #   @return [::Integer]
         #     Output only. Number of volumes restored during the restore execution.
         # @!attribute [r] etag
         #   @return [::String]
-        #     Output only. `etag` is used for optimistic concurrency control as a way to help
-        #     prevent simultaneous updates of a restore from overwriting each other.
+        #     Output only. `etag` is used for optimistic concurrency control as a way to
+        #     help prevent simultaneous updates of a restore from overwriting each other.
         #     It is strongly suggested that systems make use of the `etag` in the
         #     read-modify-write cycle to perform restore updates in order to avoid
         #     race conditions: An `etag` is returned in the response to `GetRestore`,
@@ -146,7 +151,8 @@ module Google
         #     Defines the behavior for handling the situation where cluster-scoped
         #     resources being restored already exist in the target cluster. This MUST be
         #     set to a value other than CLUSTER_RESOURCE_CONFLICT_POLICY_UNSPECIFIED if
-        #     {::Google::Cloud::GkeBackup::V1::RestoreConfig#cluster_resource_restore_scope cluster_resource_restore_scope} is not empty.
+        #     {::Google::Cloud::GkeBackup::V1::RestoreConfig#cluster_resource_restore_scope cluster_resource_restore_scope}
+        #     is not empty.
         # @!attribute [rw] namespaced_resource_restore_mode
         #   @return [::Google::Cloud::GkeBackup::V1::RestoreConfig::NamespacedResourceRestoreMode]
         #     Defines the behavior for handling the situation where sets of namespaced
@@ -197,13 +203,29 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Identifies the cluster-scoped resources to restore from the Backup.
+          # Defines the scope of cluster-scoped resources to restore.
+          #
+          # Some group kinds are not reasonable choices for a restore, and will cause
+          # an error if selected here. Any scope selection that would restore
+          # "all valid" resources automatically excludes these group kinds.
+          # - gkebackup.gke.io/BackupJob
+          # - gkebackup.gke.io/RestoreJob
+          # - metrics.k8s.io/NodeMetrics
+          # - migration.k8s.io/StorageState
+          # - migration.k8s.io/StorageVersionMigration
+          # - Node
+          # - snapshot.storage.k8s.io/VolumeSnapshotContent
+          # - storage.k8s.io/CSINode
+          #
+          # Some group kinds are driven by restore configuration elsewhere,
+          # and will cause an error if selected here.
+          # - Namespace
+          # - PersistentVolume
           # @!attribute [rw] selected_group_kinds
           #   @return [::Array<::Google::Cloud::GkeBackup::V1::RestoreConfig::GroupKind>]
-          #     A list of "types" of cluster-scoped resources to be restored from the
-          #     Backup.  An empty list means that NO cluster-scoped resources will be
-          #     restored. Note that Namespaces and PersistentVolume restoration is
-          #     handled separately and is not governed by this field.
+          #     A list of cluster-scoped resource group kinds to restore from the
+          #     backup. If specified, only the selected resources will be restored.
+          #     Mutually exclusive to any other field in the message.
           class ClusterResourceRestoreScope
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -247,7 +269,7 @@ module Google
           #     value does not match this expression. If this field is NOT specified,
           #     then ALL fields matched by the target_json_path expression will undergo
           #     substitution. Note that an empty (e.g., "", rather than unspecified)
-          #     value for for this field will only match empty fields.
+          #     value for this field will only match empty fields.
           # @!attribute [rw] new_value
           #   @return [::String]
           #     This is the new value to set for any fields that pass the filtering and
@@ -258,22 +280,22 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Defines how volume data should be restored
+          # Defines how volume data should be restored.
           module VolumeDataRestorePolicy
             # Unspecified (illegal).
             VOLUME_DATA_RESTORE_POLICY_UNSPECIFIED = 0
 
-            # For each PVC to be restored, will create a new underlying volume (and PV)
+            # For each PVC to be restored, create a new underlying volume and PV
             # from the corresponding VolumeBackup contained within the Backup.
             RESTORE_VOLUME_DATA_FROM_BACKUP = 1
 
             # For each PVC to be restored, attempt to reuse the original PV contained
-            # in the Backup (with its original underlying volume).  Note that option
+            # in the Backup (with its original underlying volume). This option
             # is likely only usable when restoring a workload to its original cluster.
             REUSE_VOLUME_HANDLE_FROM_BACKUP = 2
 
-            # For each PVC to be restored, PVCs will be created without any particular
-            # action to restore data.  In this case, the normal Kubernetes provisioning
+            # For each PVC to be restored, create PVC without any particular
+            # action to restore data. In this case, the normal Kubernetes provisioning
             # logic would kick in, and this would likely result in either dynamically
             # provisioning blank PVs or binding to statically provisioned PVs.
             NO_VOLUME_DATA_RESTORATION = 3
@@ -290,8 +312,8 @@ module Google
             USE_EXISTING_VERSION = 1
 
             # Delete the existing version before re-creating it from the Backup.
-            # Note that this is a dangerous option which could cause unintentional
-            # data loss if used inappropriately - for example, deleting a CRD will
+            # This is a dangerous option which could cause unintentional
+            # data loss if used inappropriately. For example, deleting a CRD will
             # cause Kubernetes to delete all CRs of that type.
             USE_BACKUP_VERSION = 2
           end

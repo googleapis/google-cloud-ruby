@@ -28,7 +28,7 @@ module Google
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The full name of the VolumeBackup resource.
-        #     Format: projects/*/locations/*/backupPlans/*/backups/*/volumeBackups/*.
+        #     Format: `projects/*/locations/*/backupPlans/*/backups/*/volumeBackups/*`.
         # @!attribute [r] uid
         #   @return [::String]
         #     Output only. Server generated global unique identifier of
@@ -43,24 +43,26 @@ module Google
         #     updated.
         # @!attribute [r] source_pvc
         #   @return [::Google::Cloud::GkeBackup::V1::NamespacedName]
-        #     Output only. A reference to the source Kubernetes PVC from which this VolumeBackup
-        #     was created.
+        #     Output only. A reference to the source Kubernetes PVC from which this
+        #     VolumeBackup was created.
         # @!attribute [r] volume_backup_handle
         #   @return [::String]
-        #     Output only. A storage system-specific opaque handle to the underlying volume backup.
+        #     Output only. A storage system-specific opaque handle to the underlying
+        #     volume backup.
         # @!attribute [r] format
         #   @return [::Google::Cloud::GkeBackup::V1::VolumeBackup::VolumeBackupFormat]
         #     Output only. The format used for the volume backup.
         # @!attribute [r] storage_bytes
         #   @return [::Integer]
-        #     Output only. The aggregate size of the underlying artifacts associated with this
-        #     VolumeBackup in the backup storage. This may change over time when
+        #     Output only. The aggregate size of the underlying artifacts associated with
+        #     this VolumeBackup in the backup storage. This may change over time when
         #     multiple backups of the same volume share the same backup storage
         #     location. In particular, this is likely to increase in size when
         #     the immediately preceding backup of the same volume is deleted.
         # @!attribute [r] disk_size_bytes
         #   @return [::Integer]
-        #     Output only. The minimum size of the disk to which this VolumeBackup can be restored.
+        #     Output only. The minimum size of the disk to which this VolumeBackup can be
+        #     restored.
         # @!attribute [r] complete_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The timestamp when the associated underlying volume backup
@@ -70,12 +72,12 @@ module Google
         #     Output only. The current state of this VolumeBackup.
         # @!attribute [r] state_message
         #   @return [::String]
-        #     Output only. A human readable message explaining why the VolumeBackup is in its current
-        #     state.
+        #     Output only. A human readable message explaining why the VolumeBackup is in
+        #     its current state.
         # @!attribute [r] etag
         #   @return [::String]
-        #     Output only. `etag` is used for optimistic concurrency control as a way to help
-        #     prevent simultaneous updates of a volume backup from overwriting each
+        #     Output only. `etag` is used for optimistic concurrency control as a way to
+        #     help prevent simultaneous updates of a volume backup from overwriting each
         #     other. It is strongly suggested that systems make use of the `etag` in the
         #     read-modify-write cycle to perform volume backup updates in order to avoid
         #     race conditions.
@@ -128,7 +130,7 @@ module Google
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. Full name of the VolumeRestore resource.
-        #     Format: projects/*/locations/*/restorePlans/*/restores/*/volumeRestores/*.
+        #     Format: `projects/*/locations/*/restorePlans/*/restores/*/volumeRestores/*`
         # @!attribute [r] uid
         #   @return [::String]
         #     Output only. Server generated global unique identifier of
@@ -143,15 +145,16 @@ module Google
         #     updated.
         # @!attribute [r] volume_backup
         #   @return [::String]
-        #     Output only. The full name of the VolumeBackup from which the volume will be restored.
-        #     Format: projects/*/locations/*/backupPlans/*/backups/*/volumeBackups/*.
+        #     Output only. The full name of the VolumeBackup from which the volume will
+        #     be restored. Format:
+        #     `projects/*/locations/*/backupPlans/*/backups/*/volumeBackups/*`.
         # @!attribute [r] target_pvc
         #   @return [::Google::Cloud::GkeBackup::V1::NamespacedName]
         #     Output only. The reference to the target Kubernetes PVC to be restored.
         # @!attribute [r] volume_handle
         #   @return [::String]
-        #     Output only. A storage system-specific opaque handler to the underlying volume created
-        #     for the target PVC from the volume backup.
+        #     Output only. A storage system-specific opaque handler to the underlying
+        #     volume created for the target PVC from the volume backup.
         # @!attribute [r] volume_type
         #   @return [::Google::Cloud::GkeBackup::V1::VolumeRestore::VolumeType]
         #     Output only. The type of volume provisioned
@@ -164,12 +167,12 @@ module Google
         #     Output only. The current state of this VolumeRestore.
         # @!attribute [r] state_message
         #   @return [::String]
-        #     Output only. A human readable message explaining why the VolumeRestore is in its
-        #     current state.
+        #     Output only. A human readable message explaining why the VolumeRestore is
+        #     in its current state.
         # @!attribute [r] etag
         #   @return [::String]
-        #     Output only. `etag` is used for optimistic concurrency control as a way to help
-        #     prevent simultaneous updates of a volume restore from overwriting each
+        #     Output only. `etag` is used for optimistic concurrency control as a way to
+        #     help prevent simultaneous updates of a volume restore from overwriting each
         #     other. It is strongly suggested that systems make use of the `etag` in the
         #     read-modify-write cycle to perform volume restore updates in order to avoid
         #     race conditions.
