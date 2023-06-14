@@ -40,7 +40,10 @@ tool "bootstrap" do
   flag :git_remote, "--remote NAME" do
     desc "The name of the git remote to use as the pull request head. If omitted, does not open a pull request."
   end
-
+  flag :enable_fork, "--fork" do
+    desc "Use a fork to open the pull request"
+  end
+  
   include :exec, e: true
   include :terminal
   include "yoshi-pr-generator"
@@ -56,15 +59,24 @@ tool "bootstrap" do
     end
     puts "Adding #{packages.size} packages..."
 
+    setup_git
+
     date = Time.now.utc.strftime("%Y%m%d-%H%M%S")
     set :branch_name, "gen/bootstrap-release-#{date}" unless branch_name
     commit_message = "chore: Bootstrap release manifest for new packages"
-    yoshi_utils.git_ensure_identity
     yoshi_pr_generator.capture enabled: !git_remote.nil?,
                                remote: git_remote,
                                branch_name: branch_name,
                                commit_message: commit_message do
       update_manifest_files
+    end
+  end
+
+  def setup_git
+    yoshi_utils.git_ensure_identity
+    if enable_fork
+      set :git_remote, "pull-request-fork" unless git_remote
+      yoshi_utils.gh_ensure_fork remote: git_remote
     end
   end
 

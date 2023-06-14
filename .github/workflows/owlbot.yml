@@ -29,4 +29,4 @@ jobs:
         gem install --no-document toys
     - name: OwlBot
       run: |
-        toys owlbot -v --pull --remote=origin ${{ github.event.inputs.flags }} ${{ github.event.inputs.gems }}
+        toys owlbot -v --pull --fork ${{ github.event.inputs.flags }} ${{ github.event.inputs.gems }}

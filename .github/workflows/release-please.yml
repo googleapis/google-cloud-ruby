@@ -19,10 +19,10 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
-      - name: Install Ruby 3.0
+      - name: Install Ruby 3.2
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "3.0"
+          ruby-version: "3.2"
       - name: Install NodeJS 16.x
         uses: actions/setup-node@v3
         with:
