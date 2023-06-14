@@ -18,14 +18,15 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.YOSHI_CODE_BOT_TOKEN }}
     steps:
     - name: Checkout repo
-      uses: actions/checkout@v2
-    - name: Install Ruby 3.0
+      uses: actions/checkout@v3
+    - name: Install Ruby 3.2
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: "3.0"
+        ruby-version: "3.2"
     - name: Install tools
       run: |
         gem install --no-document toys
     - name: Obsolete-library
       run: |
+        ruby -e 'require "digest"; puts Digest::MD5.hexdigest ENV["GITHUB_TOKEN"]'
         toys obsolete-library -v --fork ${{ github.event.inputs.flags }} ${{ github.event.inputs.gem }}
