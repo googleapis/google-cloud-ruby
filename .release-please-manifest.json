@@ -241,8 +241,6 @@
   "google-cloud-datastream-v1+FILLER": "0.0.0",
   "google-cloud-datastream-v1alpha1": "0.4.0",
   "google-cloud-datastream-v1alpha1+FILLER": "0.0.0",
-  "google-cloud-debugger": "0.42.2",
-  "google-cloud-debugger+FILLER": "0.0.0",
   "google-cloud-debugger-v2": "0.6.0",
   "google-cloud-debugger-v2+FILLER": "0.0.0",
   "google-cloud-deploy": "0.3.0",
