@@ -18,11 +18,11 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.YOSHI_CODE_BOT_TOKEN }}
     steps:
     - name: Checkout repo
-      uses: actions/checkout@v3
-    - name: Install Ruby 3.2
+      uses: actions/checkout@v2
+    - name: Install Ruby 3.0
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: "3.2"
+        ruby-version: "3.0"
     - name: Install tools
       run: |
         gem install --no-document toys
