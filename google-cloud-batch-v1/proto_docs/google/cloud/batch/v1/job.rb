@@ -399,7 +399,6 @@ module Google
           #     The minimum CPU platform.
           #     See
           #     https://cloud.google.com/compute/docs/instances/specify-min-cpu-platform.
-          #     Not yet implemented.
           # @!attribute [rw] provisioning_model
           #   @return [::Google::Cloud::Batch::V1::AllocationPolicy::ProvisioningModel]
           #     The provisioning model.
@@ -534,8 +533,7 @@ module Google
           end
         end
 
-        # A TaskGroup contains one or multiple Tasks that share the same
-        # Runnable but with different runtime parameters.
+        # A TaskGroup defines one or more Tasks that all share the same TaskSpec.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. TaskGroup name.
@@ -554,6 +552,10 @@ module Google
         #     Max number of tasks that can run in parallel.
         #     Default to min(task_count, 1000).
         #     Field parallelism must be 1 if the scheduling_policy is IN_ORDER.
+        # @!attribute [rw] scheduling_policy
+        #   @return [::Google::Cloud::Batch::V1::TaskGroup::SchedulingPolicy]
+        #     Scheduling policy for Tasks in the TaskGroup.
+        #     The default value is AS_SOON_AS_POSSIBLE.
         # @!attribute [rw] task_environments
         #   @return [::Array<::Google::Cloud::Batch::V1::Environment>]
         #     An array of environment variable mappings, which are passed to Tasks with
@@ -565,8 +567,6 @@ module Google
         #     addition to any environment variables set in task_environments, specifying
         #     the number of Tasks in the Task's parent TaskGroup, and the specific Task's
         #     index in the TaskGroup (0 through BATCH_TASK_COUNT - 1).
-        #
-        #     task_environments supports up to 200 entries.
         # @!attribute [rw] task_count_per_node
         #   @return [::Integer]
         #     Max number of tasks that can be run on a VM at the same time.
@@ -584,6 +584,21 @@ module Google
         class TaskGroup
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # How Tasks in the TaskGroup should be scheduled relative to each other.
+          module SchedulingPolicy
+            # Unspecified.
+            SCHEDULING_POLICY_UNSPECIFIED = 0
+
+            # Run Tasks as soon as resources are available.
+            #
+            # Tasks might be executed in parallel depending on parallelism and
+            # task_count values.
+            AS_SOON_AS_POSSIBLE = 1
+
+            # Run Tasks sequentially with increased task index.
+            IN_ORDER = 2
+          end
         end
 
         # Carries information about a Google Cloud service account.
