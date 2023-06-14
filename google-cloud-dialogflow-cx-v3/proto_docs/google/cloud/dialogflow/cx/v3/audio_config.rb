@@ -186,6 +186,9 @@ module Google
           # @!attribute [rw] synthesize_speech_config
           #   @return [::Google::Cloud::Dialogflow::CX::V3::SynthesizeSpeechConfig]
           #     Optional. Configuration of how speech should be synthesized.
+          #     If not specified,
+          #     {::Google::Cloud::Dialogflow::CX::V3::Agent#text_to_speech_settings Agent.text_to_speech_settings}
+          #     is applied.
           class OutputAudioConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -200,13 +203,17 @@ module Google
           #
           #     These settings affect:
           #
-          #      - The synthesize configuration used in [phone
-          #        gateway](https://cloud.google.com/dialogflow/cx/docs/concept/integration/phone-gateway).
+          #      - The [phone
+          #      gateway](https://cloud.google.com/dialogflow/cx/docs/concept/integration/phone-gateway)
+          #        synthesize configuration set via
+          #        {::Google::Cloud::Dialogflow::CX::V3::Agent#text_to_speech_settings Agent.text_to_speech_settings}.
           #
-          #      - You no longer need to specify
+          #      - How speech is synthesized when invoking
+          #      {::Google::Cloud::Dialogflow::CX::V3::Sessions::Client session} APIs.
+          #        {::Google::Cloud::Dialogflow::CX::V3::Agent#text_to_speech_settings Agent.text_to_speech_settings}
+          #        only applies if
           #        {::Google::Cloud::Dialogflow::CX::V3::OutputAudioConfig#synthesize_speech_config OutputAudioConfig.synthesize_speech_config}
-          #        when invoking API calls. Your agent will use the pre-configured options
-          #        for speech synthesizing.
+          #        is not specified.
           class TextToSpeechSettings
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

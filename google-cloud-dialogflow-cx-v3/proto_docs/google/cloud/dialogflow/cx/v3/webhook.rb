@@ -86,6 +86,23 @@ module Google
             #          -out example.com.crt \
             #          -extfile <(printf "\nsubjectAltName='DNS:www.example.com'")
             #     ```
+            # @!attribute [rw] webhook_type
+            #   @return [::Google::Cloud::Dialogflow::CX::V3::Webhook::GenericWebService::WebhookType]
+            #     Optional. Type of the webhook.
+            # @!attribute [rw] http_method
+            #   @return [::Google::Cloud::Dialogflow::CX::V3::Webhook::GenericWebService::HttpMethod]
+            #     Optional. HTTP method for the flexible webhook calls. Standard webhook
+            #     always uses POST.
+            # @!attribute [rw] request_body
+            #   @return [::String]
+            #     Optional. Defines a custom JSON object as request body to send to
+            #     flexible webhook.
+            # @!attribute [rw] parameter_mapping
+            #   @return [::Google::Protobuf::Map{::String => ::String}]
+            #     Optional. Maps the values extracted from specific fields of the flexible
+            #     webhook response into session parameters.
+            #      - Key: session parameter name
+            #      - Value: field path in the webhook response
             class GenericWebService
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -97,6 +114,54 @@ module Google
               class RequestHeadersEntry
                 include ::Google::Protobuf::MessageExts
                 extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # @!attribute [rw] key
+              #   @return [::String]
+              # @!attribute [rw] value
+              #   @return [::String]
+              class ParameterMappingEntry
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # Represents the type of webhook configuration.
+              module WebhookType
+                # Default value. This value is unused.
+                WEBHOOK_TYPE_UNSPECIFIED = 0
+
+                # Represents a standard webhook.
+                STANDARD = 1
+
+                # Represents a flexible webhook.
+                FLEXIBLE = 2
+              end
+
+              # HTTP method to use when calling webhooks.
+              module HttpMethod
+                # HTTP method not specified.
+                HTTP_METHOD_UNSPECIFIED = 0
+
+                # HTTP POST Method.
+                POST = 1
+
+                # HTTP GET Method.
+                GET = 2
+
+                # HTTP HEAD Method.
+                HEAD = 3
+
+                # HTTP PUT Method.
+                PUT = 4
+
+                # HTTP DELETE Method.
+                DELETE = 5
+
+                # HTTP PATCH Method.
+                PATCH = 6
+
+                # HTTP OPTIONS Method.
+                OPTIONS = 7
               end
             end
 

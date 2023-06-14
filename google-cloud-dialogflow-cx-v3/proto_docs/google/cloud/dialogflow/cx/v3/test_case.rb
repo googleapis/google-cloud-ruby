@@ -192,7 +192,8 @@ module Google
           #     The type of diff.
           # @!attribute [rw] description
           #   @return [::String]
-          #     A description of the diff, showing the actual output vs expected output.
+          #     A human readable description of the diff, showing the actual output vs
+          #     expected output.
           class TestRunDifference
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
