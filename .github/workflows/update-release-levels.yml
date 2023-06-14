@@ -24,4 +24,4 @@ jobs:
           gem install --no-document toys
       - name: execute
         run: |
-          toys update-release-levels --remote=origin ${{ github.event.inputs.args }}
+          toys update-release-levels --fork ${{ github.event.inputs.args }}

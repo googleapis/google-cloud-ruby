@@ -28,4 +28,4 @@ jobs:
         gem install --no-document toys
     - name: Obsolete-library
       run: |
-        toys obsolete-library -v --remote=origin ${{ github.event.inputs.flags }} ${{ github.event.inputs.gem }}
+        toys obsolete-library -v --fork ${{ github.event.inputs.flags }} ${{ github.event.inputs.gem }}
