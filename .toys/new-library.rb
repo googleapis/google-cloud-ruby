@@ -43,6 +43,9 @@ end
 flag :git_remote, "--remote NAME" do
   desc "The name of the git remote to use as the pull request head. If omitted, does not open a pull request."
 end
+flag :enable_fork, "--fork" do
+  desc "Use a fork to open the pull request"
+end
 flag :enable_tests, "--[no-]test" do
   desc "Run CI on the newly-created library"
 end
@@ -81,6 +84,10 @@ def setup
   Dir.chdir context_directory
   error "#{owlbot_config_path} already exists" if File.file? owlbot_config_path
   yoshi_utils.git_ensure_identity
+  if enable_fork
+    set :git_remote, "pull-request-fork" unless git_remote
+    yoshi_utils.gh_ensure_fork remote: git_remote
+  end
   mkdir_p gem_name
 end
 

@@ -30,6 +30,9 @@ end
 flag :git_remote, "--remote=NAME" do
   desc "The name of the git remote to use as the pull request head. If omitted, does not open a pull request."
 end
+flag :enable_fork, "--fork" do
+  desc "Use a fork to open the pull request"
+end
 flag :commit_message, "--message=MESSAGE" do
   desc "The conventional commit message"
 end
@@ -76,7 +79,7 @@ def run
 
   gems = choose_gems
   cd context_directory
-  yoshi_utils.git_ensure_identity
+  setup_git
   gem_info = collect_gem_info gems
 
   pull_images
@@ -89,6 +92,14 @@ def run
   verify_staging gems
   results = process_gems gems
   final_output results
+end
+
+def setup_git
+  yoshi_utils.git_ensure_identity
+  if enable_fork
+    set :git_remote, "pull-request-fork" unless git_remote
+    yoshi_utils.gh_ensure_fork remote: git_remote
+  end
 end
 
 def ensure_docker
