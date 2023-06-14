@@ -495,10 +495,6 @@
       "component": "google-cloud-datastream-v1alpha1",
       "version_file": "lib/google/cloud/datastream/v1alpha1/version.rb"
     },
-    "google-cloud-debugger": {
-      "component": "google-cloud-debugger",
-      "version_file": "lib/google/cloud/debugger/version.rb"
-    },
     "google-cloud-debugger-v2": {
       "component": "google-cloud-debugger-v2",
       "version_file": "lib/google/cloud/debugger/v2/version.rb"
