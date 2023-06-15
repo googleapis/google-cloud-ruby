@@ -82,6 +82,9 @@ module Google
             # Failover promotes the HA standby instance as the new primary.
             # Imperative only.
             rpc :FailoverInstance, ::Google::Cloud::AlloyDB::V1beta::FailoverInstanceRequest, ::Google::Longrunning::Operation
+            # Injects fault in an instance.
+            # Imperative only.
+            rpc :InjectFault, ::Google::Cloud::AlloyDB::V1beta::InjectFaultRequest, ::Google::Longrunning::Operation
             # Restart an Instance in a cluster.
             # Imperative only.
             rpc :RestartInstance, ::Google::Cloud::AlloyDB::V1beta::RestartInstanceRequest, ::Google::Longrunning::Operation
@@ -105,6 +108,16 @@ module Google
             rpc :GenerateClientCertificate, ::Google::Cloud::AlloyDB::V1beta::GenerateClientCertificateRequest, ::Google::Cloud::AlloyDB::V1beta::GenerateClientCertificateResponse
             # Get instance metadata used for a connection.
             rpc :GetConnectionInfo, ::Google::Cloud::AlloyDB::V1beta::GetConnectionInfoRequest, ::Google::Cloud::AlloyDB::V1beta::ConnectionInfo
+            # Lists Users in a given project and location.
+            rpc :ListUsers, ::Google::Cloud::AlloyDB::V1beta::ListUsersRequest, ::Google::Cloud::AlloyDB::V1beta::ListUsersResponse
+            # Gets details of a single User.
+            rpc :GetUser, ::Google::Cloud::AlloyDB::V1beta::GetUserRequest, ::Google::Cloud::AlloyDB::V1beta::User
+            # Creates a new User in a given project, location, and cluster.
+            rpc :CreateUser, ::Google::Cloud::AlloyDB::V1beta::CreateUserRequest, ::Google::Cloud::AlloyDB::V1beta::User
+            # Updates the parameters of a single User.
+            rpc :UpdateUser, ::Google::Cloud::AlloyDB::V1beta::UpdateUserRequest, ::Google::Cloud::AlloyDB::V1beta::User
+            # Deletes a single User.
+            rpc :DeleteUser, ::Google::Cloud::AlloyDB::V1beta::DeleteUserRequest, ::Google::Protobuf::Empty
           end
 
           Stub = Service.rpc_stub_class

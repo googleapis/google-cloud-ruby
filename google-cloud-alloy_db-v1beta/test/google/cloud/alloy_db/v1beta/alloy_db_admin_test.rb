@@ -127,11 +127,13 @@ class ::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::ClientTest < Minitest::Tes
 
     # Create request parameters for a unary method.
     name = "hello world"
+    view = :CLUSTER_VIEW_UNSPECIFIED
 
     get_cluster_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_cluster, name
       assert_kind_of ::Google::Cloud::AlloyDB::V1beta::GetClusterRequest, request
       assert_equal "hello world", request["name"]
+      assert_equal :CLUSTER_VIEW_UNSPECIFIED, request["view"]
       refute_nil options
     end
 
@@ -142,31 +144,31 @@ class ::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::ClientTest < Minitest::Tes
       end
 
       # Use hash object
-      client.get_cluster({ name: name }) do |response, operation|
+      client.get_cluster({ name: name, view: view }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_cluster name: name do |response, operation|
+      client.get_cluster name: name, view: view do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_cluster ::Google::Cloud::AlloyDB::V1beta::GetClusterRequest.new(name: name) do |response, operation|
+      client.get_cluster ::Google::Cloud::AlloyDB::V1beta::GetClusterRequest.new(name: name, view: view) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_cluster({ name: name }, grpc_options) do |response, operation|
+      client.get_cluster({ name: name, view: view }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_cluster(::Google::Cloud::AlloyDB::V1beta::GetClusterRequest.new(name: name), grpc_options) do |response, operation|
+      client.get_cluster(::Google::Cloud::AlloyDB::V1beta::GetClusterRequest.new(name: name, view: view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1150,6 +1152,75 @@ class ::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::ClientTest < Minitest::Tes
     end
   end
 
+  def test_inject_fault
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    fault_type = :FAULT_TYPE_UNSPECIFIED
+    name = "hello world"
+    request_id = "hello world"
+    validate_only = true
+
+    inject_fault_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :inject_fault, name
+      assert_kind_of ::Google::Cloud::AlloyDB::V1beta::InjectFaultRequest, request
+      assert_equal :FAULT_TYPE_UNSPECIFIED, request["fault_type"]
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["request_id"]
+      assert_equal true, request["validate_only"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, inject_fault_client_stub do
+      # Create client
+      client = ::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.inject_fault({ fault_type: fault_type, name: name, request_id: request_id, validate_only: validate_only }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.inject_fault fault_type: fault_type, name: name, request_id: request_id, validate_only: validate_only do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.inject_fault ::Google::Cloud::AlloyDB::V1beta::InjectFaultRequest.new(fault_type: fault_type, name: name, request_id: request_id, validate_only: validate_only) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.inject_fault({ fault_type: fault_type, name: name, request_id: request_id, validate_only: validate_only }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.inject_fault(::Google::Cloud::AlloyDB::V1beta::InjectFaultRequest.new(fault_type: fault_type, name: name, request_id: request_id, validate_only: validate_only), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, inject_fault_client_stub.call_rpc_count
+    end
+  end
+
   def test_restart_instance
     # Create GRPC objects.
     grpc_response = ::Google::Longrunning::Operation.new
@@ -1636,6 +1707,7 @@ class ::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::ClientTest < Minitest::Tes
     request_id = "hello world"
     pem_csr = "hello world"
     cert_duration = {}
+    public_key = "hello world"
 
     generate_client_certificate_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :generate_client_certificate, name
@@ -1644,6 +1716,7 @@ class ::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::ClientTest < Minitest::Tes
       assert_equal "hello world", request["request_id"]
       assert_equal "hello world", request["pem_csr"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Duration), request["cert_duration"]
+      assert_equal "hello world", request["public_key"]
       refute_nil options
     end
 
@@ -1654,31 +1727,31 @@ class ::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::ClientTest < Minitest::Tes
       end
 
       # Use hash object
-      client.generate_client_certificate({ parent: parent, request_id: request_id, pem_csr: pem_csr, cert_duration: cert_duration }) do |response, operation|
+      client.generate_client_certificate({ parent: parent, request_id: request_id, pem_csr: pem_csr, cert_duration: cert_duration, public_key: public_key }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.generate_client_certificate parent: parent, request_id: request_id, pem_csr: pem_csr, cert_duration: cert_duration do |response, operation|
+      client.generate_client_certificate parent: parent, request_id: request_id, pem_csr: pem_csr, cert_duration: cert_duration, public_key: public_key do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.generate_client_certificate ::Google::Cloud::AlloyDB::V1beta::GenerateClientCertificateRequest.new(parent: parent, request_id: request_id, pem_csr: pem_csr, cert_duration: cert_duration) do |response, operation|
+      client.generate_client_certificate ::Google::Cloud::AlloyDB::V1beta::GenerateClientCertificateRequest.new(parent: parent, request_id: request_id, pem_csr: pem_csr, cert_duration: cert_duration, public_key: public_key) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.generate_client_certificate({ parent: parent, request_id: request_id, pem_csr: pem_csr, cert_duration: cert_duration }, grpc_options) do |response, operation|
+      client.generate_client_certificate({ parent: parent, request_id: request_id, pem_csr: pem_csr, cert_duration: cert_duration, public_key: public_key }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.generate_client_certificate(::Google::Cloud::AlloyDB::V1beta::GenerateClientCertificateRequest.new(parent: parent, request_id: request_id, pem_csr: pem_csr, cert_duration: cert_duration), grpc_options) do |response, operation|
+      client.generate_client_certificate(::Google::Cloud::AlloyDB::V1beta::GenerateClientCertificateRequest.new(parent: parent, request_id: request_id, pem_csr: pem_csr, cert_duration: cert_duration, public_key: public_key), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1745,6 +1818,329 @@ class ::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::ClientTest < Minitest::Tes
 
       # Verify method calls
       assert_equal 5, get_connection_info_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_users
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::AlloyDB::V1beta::ListUsersResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_users_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_users, name
+      assert_kind_of ::Google::Cloud::AlloyDB::V1beta::ListUsersRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_users_client_stub do
+      # Create client
+      client = ::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_users({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_users parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_users ::Google::Cloud::AlloyDB::V1beta::ListUsersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_users({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_users(::Google::Cloud::AlloyDB::V1beta::ListUsersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_users_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_user
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::AlloyDB::V1beta::User.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_user_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_user, name
+      assert_kind_of ::Google::Cloud::AlloyDB::V1beta::GetUserRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_user_client_stub do
+      # Create client
+      client = ::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_user({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_user name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_user ::Google::Cloud::AlloyDB::V1beta::GetUserRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_user({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_user(::Google::Cloud::AlloyDB::V1beta::GetUserRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_user_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_user
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::AlloyDB::V1beta::User.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    user_id = "hello world"
+    user = {}
+    request_id = "hello world"
+    validate_only = true
+
+    create_user_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_user, name
+      assert_kind_of ::Google::Cloud::AlloyDB::V1beta::CreateUserRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["user_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AlloyDB::V1beta::User), request["user"]
+      assert_equal "hello world", request["request_id"]
+      assert_equal true, request["validate_only"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_user_client_stub do
+      # Create client
+      client = ::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_user({ parent: parent, user_id: user_id, user: user, request_id: request_id, validate_only: validate_only }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_user parent: parent, user_id: user_id, user: user, request_id: request_id, validate_only: validate_only do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_user ::Google::Cloud::AlloyDB::V1beta::CreateUserRequest.new(parent: parent, user_id: user_id, user: user, request_id: request_id, validate_only: validate_only) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_user({ parent: parent, user_id: user_id, user: user, request_id: request_id, validate_only: validate_only }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_user(::Google::Cloud::AlloyDB::V1beta::CreateUserRequest.new(parent: parent, user_id: user_id, user: user, request_id: request_id, validate_only: validate_only), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_user_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_user
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::AlloyDB::V1beta::User.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    user = {}
+    request_id = "hello world"
+    validate_only = true
+    allow_missing = true
+
+    update_user_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_user, name
+      assert_kind_of ::Google::Cloud::AlloyDB::V1beta::UpdateUserRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AlloyDB::V1beta::User), request["user"]
+      assert_equal "hello world", request["request_id"]
+      assert_equal true, request["validate_only"]
+      assert_equal true, request["allow_missing"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_user_client_stub do
+      # Create client
+      client = ::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_user({ update_mask: update_mask, user: user, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_user update_mask: update_mask, user: user, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_user ::Google::Cloud::AlloyDB::V1beta::UpdateUserRequest.new(update_mask: update_mask, user: user, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_user({ update_mask: update_mask, user: user, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_user(::Google::Cloud::AlloyDB::V1beta::UpdateUserRequest.new(update_mask: update_mask, user: user, request_id: request_id, validate_only: validate_only, allow_missing: allow_missing), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_user_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_user
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    request_id = "hello world"
+    validate_only = true
+
+    delete_user_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_user, name
+      assert_kind_of ::Google::Cloud::AlloyDB::V1beta::DeleteUserRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["request_id"]
+      assert_equal true, request["validate_only"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_user_client_stub do
+      # Create client
+      client = ::Google::Cloud::AlloyDB::V1beta::AlloyDBAdmin::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_user({ name: name, request_id: request_id, validate_only: validate_only }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_user name: name, request_id: request_id, validate_only: validate_only do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_user ::Google::Cloud::AlloyDB::V1beta::DeleteUserRequest.new(name: name, request_id: request_id, validate_only: validate_only) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_user({ name: name, request_id: request_id, validate_only: validate_only }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_user(::Google::Cloud::AlloyDB::V1beta::DeleteUserRequest.new(name: name, request_id: request_id, validate_only: validate_only), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_user_client_stub.call_rpc_count
     end
   end
 

@@ -115,6 +115,16 @@ module Google
                     initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                   }
 
+                  default_config.rpcs.list_users.timeout = 60.0
+                  default_config.rpcs.list_users.retry_policy = {
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.get_user.timeout = 60.0
+                  default_config.rpcs.get_user.retry_policy = {
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
                   default_config
                 end
                 yield @configure if block_given?
@@ -311,7 +321,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload get_cluster(name: nil)
+              # @overload get_cluster(name: nil, view: nil)
               #   Pass arguments to `get_cluster` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -319,6 +329,9 @@ module Google
               #   @param name [::String]
               #     Required. The name of the resource. For the required format, see the
               #     comment on the Cluster.name field.
+              #   @param view [::Google::Cloud::AlloyDB::V1beta::ClusterView]
+              #     Optional. The view of the cluster to return. Returns all default fields if
+              #     not set.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::AlloyDB::V1beta::Cluster]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -380,7 +393,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The name of the parent resource. For the required format, see the
+              #     Required. The location of the new cluster. For the required format, see the
               #     comment on the Cluster.name field.
               #   @param cluster_id [::String]
               #     Required. ID of the requesting object.
@@ -825,8 +838,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The name of the parent resource (the primary cluster). For the
-              #     required format, see the comment on the Cluster.name field.
+              #     Required. The location of the new cluster. For the required
+              #     format, see the comment on the Cluster.name field.
               #   @param cluster_id [::String]
               #     Required. ID of the requesting object (the secondary cluster).
               #   @param cluster [::Google::Cloud::AlloyDB::V1beta::Cluster, ::Hash]
@@ -1552,6 +1565,91 @@ module Google
               end
 
               ##
+              # Injects fault in an instance.
+              # Imperative only.
+              #
+              # @overload inject_fault(request, options = nil)
+              #   Pass arguments to `inject_fault` via a request object, either of type
+              #   {::Google::Cloud::AlloyDB::V1beta::InjectFaultRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::AlloyDB::V1beta::InjectFaultRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload inject_fault(fault_type: nil, name: nil, request_id: nil, validate_only: nil)
+              #   Pass arguments to `inject_fault` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param fault_type [::Google::Cloud::AlloyDB::V1beta::InjectFaultRequest::FaultType]
+              #     Required. The type of fault to be injected in an instance.
+              #   @param name [::String]
+              #     Required. The name of the resource. For the required format, see the
+              #     comment on the Instance.name field.
+              #   @param request_id [::String]
+              #     Optional. An optional request ID to identify requests. Specify a unique
+              #     request ID so that if you must retry your request, the server will know to
+              #     ignore the request if it has already been completed. The server will
+              #     guarantee that for at least 60 minutes after the first request.
+              #
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same request
+              #     ID, the server can check if original operation with the same request ID
+              #     was received, and if so, will ignore the second request. This prevents
+              #     clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              #   @param validate_only [::Boolean]
+              #     Optional. If set, performs request validation (e.g. permission checks and
+              #     any other type of validation), but do not actually execute the fault
+              #     injection.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def inject_fault request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AlloyDB::V1beta::InjectFaultRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.inject_fault.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::AlloyDB::V1beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.inject_fault.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.inject_fault.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @alloy_db_admin_stub.inject_fault request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Restart an Instance in a cluster.
               # Imperative only.
               #
@@ -2115,7 +2213,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload generate_client_certificate(parent: nil, request_id: nil, pem_csr: nil, cert_duration: nil)
+              # @overload generate_client_certificate(parent: nil, request_id: nil, pem_csr: nil, cert_duration: nil, public_key: nil)
               #   Pass arguments to `generate_client_certificate` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2145,6 +2243,8 @@ module Google
               #     24 hours. The endpoint may or may not honor the hint. If the hint is left
               #     unspecified or is not honored, then the endpoint will pick an appropriate
               #     default duration.
+              #   @param public_key [::String]
+              #     Optional. The public key from the client.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::AlloyDB::V1beta::GenerateClientCertificateResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -2257,6 +2357,390 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @alloy_db_admin_stub.get_connection_info request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists Users in a given project and location.
+              #
+              # @overload list_users(request, options = nil)
+              #   Pass arguments to `list_users` via a request object, either of type
+              #   {::Google::Cloud::AlloyDB::V1beta::ListUsersRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::AlloyDB::V1beta::ListUsersRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_users(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+              #   Pass arguments to `list_users` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Parent value for ListUsersRequest
+              #   @param page_size [::Integer]
+              #     Optional. Requested page size. Server may return fewer items than
+              #     requested. If unspecified, server will pick an appropriate default.
+              #   @param page_token [::String]
+              #     Optional. A token identifying a page of results the server should return.
+              #   @param filter [::String]
+              #     Optional. Filtering results
+              #   @param order_by [::String]
+              #     Optional. Hint for how to order the results
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::AlloyDB::V1beta::ListUsersResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::AlloyDB::V1beta::ListUsersResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def list_users request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AlloyDB::V1beta::ListUsersRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_users.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::AlloyDB::V1beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_users.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_users.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @alloy_db_admin_stub.list_users request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets details of a single User.
+              #
+              # @overload get_user(request, options = nil)
+              #   Pass arguments to `get_user` via a request object, either of type
+              #   {::Google::Cloud::AlloyDB::V1beta::GetUserRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::AlloyDB::V1beta::GetUserRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_user(name: nil)
+              #   Pass arguments to `get_user` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the resource. For the required format, see the
+              #     comment on the User.name field.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::AlloyDB::V1beta::User]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::AlloyDB::V1beta::User]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def get_user request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AlloyDB::V1beta::GetUserRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_user.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::AlloyDB::V1beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_user.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_user.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @alloy_db_admin_stub.get_user request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates a new User in a given project, location, and cluster.
+              #
+              # @overload create_user(request, options = nil)
+              #   Pass arguments to `create_user` via a request object, either of type
+              #   {::Google::Cloud::AlloyDB::V1beta::CreateUserRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::AlloyDB::V1beta::CreateUserRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_user(parent: nil, user_id: nil, user: nil, request_id: nil, validate_only: nil)
+              #   Pass arguments to `create_user` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. Value for parent.
+              #   @param user_id [::String]
+              #     Required. ID of the requesting object.
+              #   @param user [::Google::Cloud::AlloyDB::V1beta::User, ::Hash]
+              #     Required. The resource being created
+              #   @param request_id [::String]
+              #     Optional. An optional request ID to identify requests. Specify a unique
+              #     request ID so that if you must retry your request, the server will know to
+              #     ignore the request if it has already been completed. The server will
+              #     guarantee that for at least 60 minutes since the first request.
+              #
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same request
+              #     ID, the server can check if original operation with the same request ID
+              #     was received, and if so, will ignore the second request. This prevents
+              #     clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              #   @param validate_only [::Boolean]
+              #     Optional. If set, the backend validates the request, but doesn't actually
+              #     execute it.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::AlloyDB::V1beta::User]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::AlloyDB::V1beta::User]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def create_user request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AlloyDB::V1beta::CreateUserRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_user.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::AlloyDB::V1beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_user.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_user.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @alloy_db_admin_stub.create_user request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates the parameters of a single User.
+              #
+              # @overload update_user(request, options = nil)
+              #   Pass arguments to `update_user` via a request object, either of type
+              #   {::Google::Cloud::AlloyDB::V1beta::UpdateUserRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::AlloyDB::V1beta::UpdateUserRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_user(update_mask: nil, user: nil, request_id: nil, validate_only: nil, allow_missing: nil)
+              #   Pass arguments to `update_user` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. Field mask is used to specify the fields to be overwritten in the
+              #     User resource by the update.
+              #     The fields specified in the update_mask are relative to the resource, not
+              #     the full request. A field will be overwritten if it is in the mask. If the
+              #     user does not provide a mask then all fields will be overwritten.
+              #   @param user [::Google::Cloud::AlloyDB::V1beta::User, ::Hash]
+              #     Required. The resource being updated
+              #   @param request_id [::String]
+              #     Optional. An optional request ID to identify requests. Specify a unique
+              #     request ID so that if you must retry your request, the server will know to
+              #     ignore the request if it has already been completed. The server will
+              #     guarantee that for at least 60 minutes since the first request.
+              #
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same request
+              #     ID, the server can check if original operation with the same request ID
+              #     was received, and if so, will ignore the second request. This prevents
+              #     clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              #   @param validate_only [::Boolean]
+              #     Optional. If set, the backend validates the request, but doesn't actually
+              #     execute it.
+              #   @param allow_missing [::Boolean]
+              #     Optional. Allow missing fields in the update mask.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::AlloyDB::V1beta::User]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::AlloyDB::V1beta::User]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def update_user request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AlloyDB::V1beta::UpdateUserRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_user.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::AlloyDB::V1beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_user.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_user.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @alloy_db_admin_stub.update_user request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a single User.
+              #
+              # @overload delete_user(request, options = nil)
+              #   Pass arguments to `delete_user` via a request object, either of type
+              #   {::Google::Cloud::AlloyDB::V1beta::DeleteUserRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::AlloyDB::V1beta::DeleteUserRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_user(name: nil, request_id: nil, validate_only: nil)
+              #   Pass arguments to `delete_user` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The name of the resource. For the required format, see the
+              #     comment on the User.name field.
+              #   @param request_id [::String]
+              #     Optional. An optional request ID to identify requests. Specify a unique
+              #     request ID so that if you must retry your request, the server will know to
+              #     ignore the request if it has already been completed. The server will
+              #     guarantee that for at least 60 minutes after the first request.
+              #
+              #     For example, consider a situation where you make an initial request and
+              #     the request times out. If you make the request again with the same request
+              #     ID, the server can check if original operation with the same request ID
+              #     was received, and if so, will ignore the second request. This prevents
+              #     clients from accidentally creating duplicate commitments.
+              #
+              #     The request ID must be a valid UUID with the exception that zero UUID is
+              #     not supported (00000000-0000-0000-0000-000000000000).
+              #   @param validate_only [::Boolean]
+              #     Optional. If set, the backend validates the request, but doesn't actually
+              #     execute it.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Protobuf::Empty]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Protobuf::Empty]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def delete_user request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AlloyDB::V1beta::DeleteUserRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_user.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::AlloyDB::V1beta::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_user.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_user.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @alloy_db_admin_stub.delete_user request, options do |result, operation|
                   yield result, operation if block_given?
                   return result
                 end
@@ -2477,6 +2961,11 @@ module Google
                   #
                   attr_reader :failover_instance
                   ##
+                  # RPC-specific configuration for `inject_fault`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :inject_fault
+                  ##
                   # RPC-specific configuration for `restart_instance`
                   # @return [::Gapic::Config::Method]
                   #
@@ -2521,6 +3010,31 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :get_connection_info
+                  ##
+                  # RPC-specific configuration for `list_users`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_users
+                  ##
+                  # RPC-specific configuration for `get_user`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_user
+                  ##
+                  # RPC-specific configuration for `create_user`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_user
+                  ##
+                  # RPC-specific configuration for `update_user`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_user
+                  ##
+                  # RPC-specific configuration for `delete_user`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_user
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -2556,6 +3070,8 @@ module Google
                     @delete_instance = ::Gapic::Config::Method.new delete_instance_config
                     failover_instance_config = parent_rpcs.failover_instance if parent_rpcs.respond_to? :failover_instance
                     @failover_instance = ::Gapic::Config::Method.new failover_instance_config
+                    inject_fault_config = parent_rpcs.inject_fault if parent_rpcs.respond_to? :inject_fault
+                    @inject_fault = ::Gapic::Config::Method.new inject_fault_config
                     restart_instance_config = parent_rpcs.restart_instance if parent_rpcs.respond_to? :restart_instance
                     @restart_instance = ::Gapic::Config::Method.new restart_instance_config
                     list_backups_config = parent_rpcs.list_backups if parent_rpcs.respond_to? :list_backups
@@ -2574,6 +3090,16 @@ module Google
                     @generate_client_certificate = ::Gapic::Config::Method.new generate_client_certificate_config
                     get_connection_info_config = parent_rpcs.get_connection_info if parent_rpcs.respond_to? :get_connection_info
                     @get_connection_info = ::Gapic::Config::Method.new get_connection_info_config
+                    list_users_config = parent_rpcs.list_users if parent_rpcs.respond_to? :list_users
+                    @list_users = ::Gapic::Config::Method.new list_users_config
+                    get_user_config = parent_rpcs.get_user if parent_rpcs.respond_to? :get_user
+                    @get_user = ::Gapic::Config::Method.new get_user_config
+                    create_user_config = parent_rpcs.create_user if parent_rpcs.respond_to? :create_user
+                    @create_user = ::Gapic::Config::Method.new create_user_config
+                    update_user_config = parent_rpcs.update_user if parent_rpcs.respond_to? :update_user
+                    @update_user = ::Gapic::Config::Method.new update_user_config
+                    delete_user_config = parent_rpcs.delete_user if parent_rpcs.respond_to? :delete_user
+                    @delete_user = ::Gapic::Config::Method.new delete_user_config
 
                     yield self if block_given?
                   end
