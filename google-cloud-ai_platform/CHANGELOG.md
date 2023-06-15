@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.3.0 (2023-06-15)
+
+#### Features
+
+* Added factory methods for match_service and model_garden_service ([#21623](https://github.com/googleapis/google-cloud-ruby/issues/21623)) 
+
 ### 0.2.0 (2022-07-01)
 
 #### Features
