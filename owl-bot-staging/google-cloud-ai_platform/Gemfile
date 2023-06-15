@@ -1,0 +1,5 @@
+source "https://rubygems.org"
+
+gemspec
+
+gem "google-cloud-ai_platform-v1", path: "../google-cloud-ai_platform-v1"
