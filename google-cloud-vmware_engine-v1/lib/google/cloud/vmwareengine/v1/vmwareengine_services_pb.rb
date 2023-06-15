@@ -100,6 +100,15 @@ module Google
             rpc :DeleteCluster, ::Google::Cloud::VmwareEngine::V1::DeleteClusterRequest, ::Google::Longrunning::Operation
             # Lists subnets in a given private cloud.
             rpc :ListSubnets, ::Google::Cloud::VmwareEngine::V1::ListSubnetsRequest, ::Google::Cloud::VmwareEngine::V1::ListSubnetsResponse
+            # Gets details of a single subnet.
+            rpc :GetSubnet, ::Google::Cloud::VmwareEngine::V1::GetSubnetRequest, ::Google::Cloud::VmwareEngine::V1::Subnet
+            # Updates the parameters of a single subnet. Only fields specified in
+            # `update_mask` are applied.
+            #
+            # *Note*: This API is synchronous and always returns a successful
+            # `google.longrunning.Operation` (LRO). The returned LRO will only have
+            # `done` and `response` fields.
+            rpc :UpdateSubnet, ::Google::Cloud::VmwareEngine::V1::UpdateSubnetRequest, ::Google::Longrunning::Operation
             # Lists node types
             rpc :ListNodeTypes, ::Google::Cloud::VmwareEngine::V1::ListNodeTypesRequest, ::Google::Cloud::VmwareEngine::V1::ListNodeTypesResponse
             # Gets details of a single `NodeType`.
@@ -161,6 +170,25 @@ module Google
             rpc :GetVmwareEngineNetwork, ::Google::Cloud::VmwareEngine::V1::GetVmwareEngineNetworkRequest, ::Google::Cloud::VmwareEngine::V1::VmwareEngineNetwork
             # Lists `VmwareEngineNetwork` resources in a given project and location.
             rpc :ListVmwareEngineNetworks, ::Google::Cloud::VmwareEngine::V1::ListVmwareEngineNetworksRequest, ::Google::Cloud::VmwareEngine::V1::ListVmwareEngineNetworksResponse
+            # Creates a new private connection that can be used for accessing private
+            # Clouds.
+            rpc :CreatePrivateConnection, ::Google::Cloud::VmwareEngine::V1::CreatePrivateConnectionRequest, ::Google::Longrunning::Operation
+            # Retrieves a `PrivateConnection` resource by its resource name. The resource
+            # contains details of the private connection, such as connected
+            # network, routing mode and state.
+            rpc :GetPrivateConnection, ::Google::Cloud::VmwareEngine::V1::GetPrivateConnectionRequest, ::Google::Cloud::VmwareEngine::V1::PrivateConnection
+            # Lists `PrivateConnection` resources in a given project and location.
+            rpc :ListPrivateConnections, ::Google::Cloud::VmwareEngine::V1::ListPrivateConnectionsRequest, ::Google::Cloud::VmwareEngine::V1::ListPrivateConnectionsResponse
+            # Modifies a `PrivateConnection` resource. Only `description` and
+            # `routing_mode` fields can be updated. Only fields specified in `updateMask`
+            # are applied.
+            rpc :UpdatePrivateConnection, ::Google::Cloud::VmwareEngine::V1::UpdatePrivateConnectionRequest, ::Google::Longrunning::Operation
+            # Deletes a `PrivateConnection` resource. When a private connection is
+            # deleted for a VMware Engine network, the connected network becomes
+            # inaccessible to that VMware Engine network.
+            rpc :DeletePrivateConnection, ::Google::Cloud::VmwareEngine::V1::DeletePrivateConnectionRequest, ::Google::Longrunning::Operation
+            # Lists the private connection routes exchanged over a peering connection.
+            rpc :ListPrivateConnectionPeeringRoutes, ::Google::Cloud::VmwareEngine::V1::ListPrivateConnectionPeeringRoutesRequest, ::Google::Cloud::VmwareEngine::V1::ListPrivateConnectionPeeringRoutesResponse
           end
 
           Stub = Service.rpc_stub_class

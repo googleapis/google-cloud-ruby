@@ -93,6 +93,13 @@ module Google
                   initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
+                default_config.rpcs.get_subnet.timeout = 120.0
+                default_config.rpcs.get_subnet.retry_policy = {
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                }
+
+                default_config.rpcs.update_subnet.timeout = 60.0
+
                 default_config.rpcs.list_node_types.timeout = 120.0
                 default_config.rpcs.list_node_types.retry_policy = {
                   initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
@@ -140,6 +147,21 @@ module Google
 
                 default_config.rpcs.list_vmware_engine_networks.timeout = 120.0
                 default_config.rpcs.list_vmware_engine_networks.retry_policy = {
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                }
+
+                default_config.rpcs.get_private_connection.timeout = 120.0
+                default_config.rpcs.get_private_connection.retry_policy = {
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                }
+
+                default_config.rpcs.list_private_connections.timeout = 120.0
+                default_config.rpcs.list_private_connections.retry_policy = {
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                }
+
+                default_config.rpcs.list_private_connection_peering_routes.timeout = 120.0
+                default_config.rpcs.list_private_connection_peering_routes.retry_policy = {
                   initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
@@ -1601,6 +1623,199 @@ module Google
 
               @vmware_engine_stub.call_rpc :list_subnets, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @vmware_engine_stub, :list_subnets, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets details of a single subnet.
+            #
+            # @overload get_subnet(request, options = nil)
+            #   Pass arguments to `get_subnet` via a request object, either of type
+            #   {::Google::Cloud::VmwareEngine::V1::GetSubnetRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::VmwareEngine::V1::GetSubnetRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_subnet(name: nil)
+            #   Pass arguments to `get_subnet` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The resource name of the subnet to retrieve.
+            #     Resource names are schemeless URIs that follow the conventions in
+            #     https://cloud.google.com/apis/design/resource_names.
+            #     For example:
+            #     `projects/my-project/locations/us-central1-a/privateClouds/my-cloud/subnets/my-subnet`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::VmwareEngine::V1::Subnet]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::VmwareEngine::V1::Subnet]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/vmware_engine/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::VmwareEngine::V1::GetSubnetRequest.new
+            #
+            #   # Call the get_subnet method.
+            #   result = client.get_subnet request
+            #
+            #   # The returned object is of type Google::Cloud::VmwareEngine::V1::Subnet.
+            #   p result
+            #
+            def get_subnet request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VmwareEngine::V1::GetSubnetRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_subnet.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::VmwareEngine::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_subnet.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_subnet.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @vmware_engine_stub.call_rpc :get_subnet, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates the parameters of a single subnet. Only fields specified in
+            # `update_mask` are applied.
+            #
+            # *Note*: This API is synchronous and always returns a successful
+            # `google.longrunning.Operation` (LRO). The returned LRO will only have
+            # `done` and `response` fields.
+            #
+            # @overload update_subnet(request, options = nil)
+            #   Pass arguments to `update_subnet` via a request object, either of type
+            #   {::Google::Cloud::VmwareEngine::V1::UpdateSubnetRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::VmwareEngine::V1::UpdateSubnetRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_subnet(update_mask: nil, subnet: nil)
+            #   Pass arguments to `update_subnet` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Required. Field mask is used to specify the fields to be overwritten in the
+            #     `Subnet` resource by the update.
+            #     The fields specified in the `update_mask` are relative to the resource, not
+            #     the full request. A field will be overwritten if it is in the mask. If the
+            #     user does not provide a mask then all fields will be overwritten.
+            #   @param subnet [::Google::Cloud::VmwareEngine::V1::Subnet, ::Hash]
+            #     Required. Subnet description.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/vmware_engine/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::VmwareEngine::V1::UpdateSubnetRequest.new
+            #
+            #   # Call the update_subnet method.
+            #   result = client.update_subnet request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def update_subnet request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VmwareEngine::V1::UpdateSubnetRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_subnet.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::VmwareEngine::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.subnet&.name
+                header_params["subnet.name"] = request.subnet.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_subnet.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_subnet.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @vmware_engine_stub.call_rpc :update_subnet, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
@@ -3749,6 +3964,693 @@ module Google
             end
 
             ##
+            # Creates a new private connection that can be used for accessing private
+            # Clouds.
+            #
+            # @overload create_private_connection(request, options = nil)
+            #   Pass arguments to `create_private_connection` via a request object, either of type
+            #   {::Google::Cloud::VmwareEngine::V1::CreatePrivateConnectionRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::VmwareEngine::V1::CreatePrivateConnectionRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_private_connection(parent: nil, private_connection_id: nil, private_connection: nil, request_id: nil)
+            #   Pass arguments to `create_private_connection` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The resource name of the location to create the new private
+            #     connection in. Private connection is a regional resource.
+            #     Resource names are schemeless URIs that follow the conventions in
+            #     https://cloud.google.com/apis/design/resource_names. For example:
+            #     `projects/my-project/locations/us-central1`
+            #   @param private_connection_id [::String]
+            #     Required. The user-provided identifier of the new private connection.
+            #     This identifier must be unique among private connection resources
+            #     within the parent and becomes the final token in the name URI. The
+            #     identifier must meet the following requirements:
+            #
+            #     * Only contains 1-63 alphanumeric characters and hyphens
+            #     * Begins with an alphabetical character
+            #     * Ends with a non-hyphen character
+            #     * Not formatted as a UUID
+            #     * Complies with [RFC 1034](https://datatracker.ietf.org/doc/html/rfc1034)
+            #     (section 3.5)
+            #   @param private_connection [::Google::Cloud::VmwareEngine::V1::PrivateConnection, ::Hash]
+            #     Required. The initial description of the new private connection.
+            #   @param request_id [::String]
+            #     Optional. A request ID to identify requests. Specify a unique request ID
+            #     so that if you must retry your request, the server will know to ignore
+            #     the request if it has already been completed. The server guarantees that a
+            #     request doesn't result in creation of duplicate commitments for at least 60
+            #     minutes.
+            #
+            #     For example, consider a situation where you make an initial request and the
+            #     request times out. If you make the request again with the same request
+            #     ID, the server can check if original operation with the same request ID
+            #     was received, and if so, will ignore the second request. This prevents
+            #     clients from accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/vmware_engine/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::VmwareEngine::V1::CreatePrivateConnectionRequest.new
+            #
+            #   # Call the create_private_connection method.
+            #   result = client.create_private_connection request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def create_private_connection request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VmwareEngine::V1::CreatePrivateConnectionRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_private_connection.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::VmwareEngine::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_private_connection.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_private_connection.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @vmware_engine_stub.call_rpc :create_private_connection, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Retrieves a `PrivateConnection` resource by its resource name. The resource
+            # contains details of the private connection, such as connected
+            # network, routing mode and state.
+            #
+            # @overload get_private_connection(request, options = nil)
+            #   Pass arguments to `get_private_connection` via a request object, either of type
+            #   {::Google::Cloud::VmwareEngine::V1::GetPrivateConnectionRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::VmwareEngine::V1::GetPrivateConnectionRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_private_connection(name: nil)
+            #   Pass arguments to `get_private_connection` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The resource name of the private connection to retrieve.
+            #     Resource names are schemeless URIs that follow the conventions in
+            #     https://cloud.google.com/apis/design/resource_names.
+            #     For example:
+            #     `projects/my-project/locations/us-central1/privateConnections/my-connection`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::VmwareEngine::V1::PrivateConnection]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::VmwareEngine::V1::PrivateConnection]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/vmware_engine/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::VmwareEngine::V1::GetPrivateConnectionRequest.new
+            #
+            #   # Call the get_private_connection method.
+            #   result = client.get_private_connection request
+            #
+            #   # The returned object is of type Google::Cloud::VmwareEngine::V1::PrivateConnection.
+            #   p result
+            #
+            def get_private_connection request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VmwareEngine::V1::GetPrivateConnectionRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_private_connection.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::VmwareEngine::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_private_connection.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_private_connection.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @vmware_engine_stub.call_rpc :get_private_connection, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists `PrivateConnection` resources in a given project and location.
+            #
+            # @overload list_private_connections(request, options = nil)
+            #   Pass arguments to `list_private_connections` via a request object, either of type
+            #   {::Google::Cloud::VmwareEngine::V1::ListPrivateConnectionsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::VmwareEngine::V1::ListPrivateConnectionsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_private_connections(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+            #   Pass arguments to `list_private_connections` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The resource name of the location to query for
+            #     private connections. Resource names are schemeless URIs that follow the
+            #     conventions in https://cloud.google.com/apis/design/resource_names. For
+            #     example: `projects/my-project/locations/us-central1`
+            #   @param page_size [::Integer]
+            #     The maximum number of private connections to return in one page.
+            #     The maximum value is coerced to 1000.
+            #     The default value of this field is 500.
+            #   @param page_token [::String]
+            #     A page token, received from a previous `ListPrivateConnections` call.
+            #     Provide this to retrieve the subsequent page.
+            #
+            #     When paginating, all other parameters provided to
+            #     `ListPrivateConnections` must match the call that provided the page
+            #     token.
+            #   @param filter [::String]
+            #     A filter expression that matches resources returned in the response.
+            #     The expression must specify the field name, a comparison
+            #     operator, and the value that you want to use for filtering. The value
+            #     must be a string, a number, or a boolean. The comparison operator
+            #     must be `=`, `!=`, `>`, or `<`.
+            #
+            #     For example, if you are filtering a list of private connections, you can
+            #     exclude the ones named `example-connection` by specifying
+            #     `name != "example-connection"`.
+            #
+            #     To filter on multiple expressions, provide each separate expression within
+            #     parentheses. For example:
+            #     ```
+            #     (name = "example-connection")
+            #     (createTime > "2022-09-22T08:15:10.40Z")
+            #     ```
+            #
+            #     By default, each expression is an `AND` expression. However, you
+            #     can include `AND` and `OR` expressions explicitly.
+            #     For example:
+            #     ```
+            #     (name = "example-connection-1") AND
+            #     (createTime > "2021-04-12T08:15:10.40Z") OR
+            #     (name = "example-connection-2")
+            #     ```
+            #   @param order_by [::String]
+            #     Sorts list results by a certain order. By default, returned results
+            #     are ordered by `name` in ascending order.
+            #     You can also sort results in descending order based on the `name` value
+            #     using `orderBy="name desc"`.
+            #     Currently, only ordering by `name` is supported.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::VmwareEngine::V1::PrivateConnection>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::VmwareEngine::V1::PrivateConnection>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/vmware_engine/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::VmwareEngine::V1::ListPrivateConnectionsRequest.new
+            #
+            #   # Call the list_private_connections method.
+            #   result = client.list_private_connections request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::VmwareEngine::V1::PrivateConnection.
+            #     p item
+            #   end
+            #
+            def list_private_connections request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VmwareEngine::V1::ListPrivateConnectionsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_private_connections.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::VmwareEngine::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_private_connections.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_private_connections.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @vmware_engine_stub.call_rpc :list_private_connections, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @vmware_engine_stub, :list_private_connections, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Modifies a `PrivateConnection` resource. Only `description` and
+            # `routing_mode` fields can be updated. Only fields specified in `updateMask`
+            # are applied.
+            #
+            # @overload update_private_connection(request, options = nil)
+            #   Pass arguments to `update_private_connection` via a request object, either of type
+            #   {::Google::Cloud::VmwareEngine::V1::UpdatePrivateConnectionRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::VmwareEngine::V1::UpdatePrivateConnectionRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_private_connection(private_connection: nil, update_mask: nil, request_id: nil)
+            #   Pass arguments to `update_private_connection` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param private_connection [::Google::Cloud::VmwareEngine::V1::PrivateConnection, ::Hash]
+            #     Required. Private connection description.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Required. Field mask is used to specify the fields to be overwritten in the
+            #     `PrivateConnection` resource by the update.
+            #     The fields specified in the `update_mask` are relative to the resource, not
+            #     the full request. A field will be overwritten if it is in the mask. If the
+            #     user does not provide a mask then all fields will be overwritten.
+            #   @param request_id [::String]
+            #     Optional. A request ID to identify requests. Specify a unique request ID
+            #     so that if you must retry your request, the server will know to ignore
+            #     the request if it has already been completed. The server guarantees that a
+            #     request doesn't result in creation of duplicate commitments for at least 60
+            #     minutes.
+            #
+            #     For example, consider a situation where you make an initial request and the
+            #     request times out. If you make the request again with the same request
+            #     ID, the server can check if original operation with the same request ID
+            #     was received, and if so, will ignore the second request. This prevents
+            #     clients from accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/vmware_engine/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::VmwareEngine::V1::UpdatePrivateConnectionRequest.new
+            #
+            #   # Call the update_private_connection method.
+            #   result = client.update_private_connection request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def update_private_connection request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VmwareEngine::V1::UpdatePrivateConnectionRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_private_connection.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::VmwareEngine::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.private_connection&.name
+                header_params["private_connection.name"] = request.private_connection.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_private_connection.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_private_connection.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @vmware_engine_stub.call_rpc :update_private_connection, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes a `PrivateConnection` resource. When a private connection is
+            # deleted for a VMware Engine network, the connected network becomes
+            # inaccessible to that VMware Engine network.
+            #
+            # @overload delete_private_connection(request, options = nil)
+            #   Pass arguments to `delete_private_connection` via a request object, either of type
+            #   {::Google::Cloud::VmwareEngine::V1::DeletePrivateConnectionRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::VmwareEngine::V1::DeletePrivateConnectionRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_private_connection(name: nil, request_id: nil)
+            #   Pass arguments to `delete_private_connection` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The resource name of the private connection to be deleted.
+            #     Resource names are schemeless URIs that follow the conventions in
+            #     https://cloud.google.com/apis/design/resource_names.
+            #     For example:
+            #     `projects/my-project/locations/us-central1/privateConnections/my-connection`
+            #   @param request_id [::String]
+            #     Optional. A request ID to identify requests. Specify a unique request ID
+            #     so that if you must retry your request, the server will know to ignore
+            #     the request if it has already been completed. The server guarantees that a
+            #     request doesn't result in creation of duplicate commitments for at least 60
+            #     minutes.
+            #
+            #     For example, consider a situation where you make an initial request and the
+            #     request times out. If you make the request again with the same request
+            #     ID, the server can check if original operation with the same request ID
+            #     was received, and if so, will ignore the second request. This prevents
+            #     clients from accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/vmware_engine/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::VmwareEngine::V1::DeletePrivateConnectionRequest.new
+            #
+            #   # Call the delete_private_connection method.
+            #   result = client.delete_private_connection request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def delete_private_connection request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VmwareEngine::V1::DeletePrivateConnectionRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_private_connection.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::VmwareEngine::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_private_connection.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_private_connection.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @vmware_engine_stub.call_rpc :delete_private_connection, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists the private connection routes exchanged over a peering connection.
+            #
+            # @overload list_private_connection_peering_routes(request, options = nil)
+            #   Pass arguments to `list_private_connection_peering_routes` via a request object, either of type
+            #   {::Google::Cloud::VmwareEngine::V1::ListPrivateConnectionPeeringRoutesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::VmwareEngine::V1::ListPrivateConnectionPeeringRoutesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_private_connection_peering_routes(parent: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `list_private_connection_peering_routes` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The resource name of the private connection to retrieve peering
+            #     routes from. Resource names are schemeless URIs that follow the conventions
+            #     in https://cloud.google.com/apis/design/resource_names. For example:
+            #     `projects/my-project/locations/us-west1/privateConnections/my-connection`
+            #   @param page_size [::Integer]
+            #     The maximum number of peering routes to return in one page.
+            #     The service may return fewer than this value.
+            #     The maximum value is coerced to 1000.
+            #     The default value of this field is 500.
+            #   @param page_token [::String]
+            #     A page token, received from a previous `ListPrivateConnectionPeeringRoutes`
+            #     call. Provide this to retrieve the subsequent page. When paginating, all
+            #     other parameters provided to `ListPrivateConnectionPeeringRoutes` must
+            #     match the call that provided the page token.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::VmwareEngine::V1::PeeringRoute>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::VmwareEngine::V1::PeeringRoute>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/vmware_engine/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::VmwareEngine::V1::VmwareEngine::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::VmwareEngine::V1::ListPrivateConnectionPeeringRoutesRequest.new
+            #
+            #   # Call the list_private_connection_peering_routes method.
+            #   result = client.list_private_connection_peering_routes request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::VmwareEngine::V1::PeeringRoute.
+            #     p item
+            #   end
+            #
+            def list_private_connection_peering_routes request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VmwareEngine::V1::ListPrivateConnectionPeeringRoutesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_private_connection_peering_routes.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::VmwareEngine::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_private_connection_peering_routes.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_private_connection_peering_routes.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @vmware_engine_stub.call_rpc :list_private_connection_peering_routes, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @vmware_engine_stub, :list_private_connection_peering_routes, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the VmwareEngine API.
             #
             # This class represents the configuration for VmwareEngine,
@@ -3946,6 +4848,16 @@ module Google
                 #
                 attr_reader :list_subnets
                 ##
+                # RPC-specific configuration for `get_subnet`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_subnet
+                ##
+                # RPC-specific configuration for `update_subnet`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_subnet
+                ##
                 # RPC-specific configuration for `list_node_types`
                 # @return [::Gapic::Config::Method]
                 #
@@ -4040,6 +4952,36 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_vmware_engine_networks
+                ##
+                # RPC-specific configuration for `create_private_connection`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_private_connection
+                ##
+                # RPC-specific configuration for `get_private_connection`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_private_connection
+                ##
+                # RPC-specific configuration for `list_private_connections`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_private_connections
+                ##
+                # RPC-specific configuration for `update_private_connection`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_private_connection
+                ##
+                # RPC-specific configuration for `delete_private_connection`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_private_connection
+                ##
+                # RPC-specific configuration for `list_private_connection_peering_routes`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_private_connection_peering_routes
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -4067,6 +5009,10 @@ module Google
                   @delete_cluster = ::Gapic::Config::Method.new delete_cluster_config
                   list_subnets_config = parent_rpcs.list_subnets if parent_rpcs.respond_to? :list_subnets
                   @list_subnets = ::Gapic::Config::Method.new list_subnets_config
+                  get_subnet_config = parent_rpcs.get_subnet if parent_rpcs.respond_to? :get_subnet
+                  @get_subnet = ::Gapic::Config::Method.new get_subnet_config
+                  update_subnet_config = parent_rpcs.update_subnet if parent_rpcs.respond_to? :update_subnet
+                  @update_subnet = ::Gapic::Config::Method.new update_subnet_config
                   list_node_types_config = parent_rpcs.list_node_types if parent_rpcs.respond_to? :list_node_types
                   @list_node_types = ::Gapic::Config::Method.new list_node_types_config
                   get_node_type_config = parent_rpcs.get_node_type if parent_rpcs.respond_to? :get_node_type
@@ -4105,6 +5051,18 @@ module Google
                   @get_vmware_engine_network = ::Gapic::Config::Method.new get_vmware_engine_network_config
                   list_vmware_engine_networks_config = parent_rpcs.list_vmware_engine_networks if parent_rpcs.respond_to? :list_vmware_engine_networks
                   @list_vmware_engine_networks = ::Gapic::Config::Method.new list_vmware_engine_networks_config
+                  create_private_connection_config = parent_rpcs.create_private_connection if parent_rpcs.respond_to? :create_private_connection
+                  @create_private_connection = ::Gapic::Config::Method.new create_private_connection_config
+                  get_private_connection_config = parent_rpcs.get_private_connection if parent_rpcs.respond_to? :get_private_connection
+                  @get_private_connection = ::Gapic::Config::Method.new get_private_connection_config
+                  list_private_connections_config = parent_rpcs.list_private_connections if parent_rpcs.respond_to? :list_private_connections
+                  @list_private_connections = ::Gapic::Config::Method.new list_private_connections_config
+                  update_private_connection_config = parent_rpcs.update_private_connection if parent_rpcs.respond_to? :update_private_connection
+                  @update_private_connection = ::Gapic::Config::Method.new update_private_connection_config
+                  delete_private_connection_config = parent_rpcs.delete_private_connection if parent_rpcs.respond_to? :delete_private_connection
+                  @delete_private_connection = ::Gapic::Config::Method.new delete_private_connection_config
+                  list_private_connection_peering_routes_config = parent_rpcs.list_private_connection_peering_routes if parent_rpcs.respond_to? :list_private_connection_peering_routes
+                  @list_private_connection_peering_routes = ::Gapic::Config::Method.new list_private_connection_peering_routes_config
 
                   yield self if block_given?
                 end
