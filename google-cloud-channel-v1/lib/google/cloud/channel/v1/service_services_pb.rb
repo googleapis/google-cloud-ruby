@@ -861,6 +861,46 @@ module Google
             # [ChannelPartnerRepricingConfig][google.cloud.channel.v1.ChannelPartnerRepricingConfig]
             # found for the name in the request.
             rpc :DeleteChannelPartnerRepricingConfig, ::Google::Cloud::Channel::V1::DeleteChannelPartnerRepricingConfigRequest, ::Google::Protobuf::Empty
+            # Lists the Rebilling supported SKU groups the account is authorized to
+            # sell.
+            # Reference: https://cloud.google.com/skus/sku-groups
+            #
+            # Possible Error Codes:
+            #
+            # * PERMISSION_DENIED: If the account making the request and the account
+            # being queried are different, or the account doesn't exist.
+            # * INTERNAL: Any non-user error related to technical issues in the
+            # backend. In this case, contact Cloud Channel support.
+            #
+            # Return Value:
+            # If successful, the [SkuGroup][google.cloud.channel.v1.SkuGroup] resources.
+            # The data for each resource is displayed in the alphabetical order of SKU
+            # group display name.
+            # The data for each resource is displayed in the ascending order of
+            # [SkuGroup.display_name][google.cloud.channel.v1.SkuGroup.display_name]
+            #
+            # If unsuccessful, returns an error.
+            rpc :ListSkuGroups, ::Google::Cloud::Channel::V1::ListSkuGroupsRequest, ::Google::Cloud::Channel::V1::ListSkuGroupsResponse
+            # Lists the Billable SKUs in a given SKU group.
+            #
+            # Possible error codes:
+            # PERMISSION_DENIED: If the account making the request and the account
+            # being queried for are different, or the account doesn't exist.
+            # INVALID_ARGUMENT: Missing or invalid required parameters in the
+            # request.
+            # INTERNAL: Any non-user error related to technical issue in the
+            # backend. In this case, contact cloud channel support.
+            #
+            # Return Value:
+            # If successful, the [BillableSku][google.cloud.channel.v1.BillableSku]
+            # resources. The data for each resource is displayed in the ascending order
+            # of:
+            #
+            # * [BillableSku.service_display_name][google.cloud.channel.v1.BillableSku.service_display_name]
+            # * [BillableSku.sku_display_name][google.cloud.channel.v1.BillableSku.sku_display_name]
+            #
+            # If unsuccessful, returns an error.
+            rpc :ListSkuGroupBillableSkus, ::Google::Cloud::Channel::V1::ListSkuGroupBillableSkusRequest, ::Google::Cloud::Channel::V1::ListSkuGroupBillableSkusResponse
             # Returns the requested [Offer][google.cloud.channel.v1.Offer] resource.
             #
             # Possible error codes:
