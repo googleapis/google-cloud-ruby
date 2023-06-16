@@ -1,5 +1,11 @@
 # Release History
 
+### 0.21.0 (2023-06-16)
+
+#### Features
+
+* Add support for ListSkuGroups and ListSkuGroupBillableSkus APIs ([#22409](https://github.com/googleapis/google-cloud-ruby/issues/22409)) 
+
 ### 0.20.0 (2023-06-06)
 
 #### Features
