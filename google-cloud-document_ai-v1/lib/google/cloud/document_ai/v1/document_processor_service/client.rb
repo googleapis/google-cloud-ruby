@@ -28,7 +28,7 @@ module Google
           ##
           # Client for the DocumentProcessorService service.
           #
-          # Service to call Cloud DocumentAI to process documents according to the
+          # Service to call Document AI to process documents according to the
           # processor's definition. Processors are built using state-of-the-art Google
           # AI such as natural language, computer vision, and translation to extract
           # structured information from unstructured or semi-structured documents.
@@ -68,7 +68,7 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.rpcs.process_document.timeout = 120.0
+                default_config.rpcs.process_document.timeout = 300.0
                 default_config.rpcs.process_document.retry_policy = {
                   initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
@@ -223,12 +223,13 @@ module Google
             #     or
             #     `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
             #   @param skip_human_review [::Boolean]
-            #     Whether Human Review feature should be skipped for this request. Default to
-            #     false.
+            #     Whether human review should be skipped for this request. Default to
+            #     `false`.
             #   @param field_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Specifies which fields to include in ProcessResponse's document.
-            #     Only supports top level document and pages field so it must be in the form
-            #     of `{document_field_name}` or `pages.{page_field_name}`.
+            #     Specifies which fields to include in the
+            #     {::Google::Cloud::DocumentAI::V1::ProcessResponse#document ProcessResponse.document}
+            #     output. Only supports top-level document and pages field, so it must be in
+            #     the form of `{document_field_name}` or `pages.{page_field_name}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DocumentAI::V1::ProcessResponse]
@@ -321,12 +322,16 @@ module Google
             #     or
             #     `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
             #   @param input_documents [::Google::Cloud::DocumentAI::V1::BatchDocumentsInputConfig, ::Hash]
-            #     The input documents for batch process.
+            #     The input documents for the
+            #     {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#batch_process_documents BatchProcessDocuments}
+            #     method.
             #   @param document_output_config [::Google::Cloud::DocumentAI::V1::DocumentOutputConfig, ::Hash]
-            #     The overall output config for batch process.
+            #     The output configuration for the
+            #     {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#batch_process_documents BatchProcessDocuments}
+            #     method.
             #   @param skip_human_review [::Boolean]
-            #     Whether Human Review feature should be skipped for this request. Default to
-            #     false.
+            #     Whether human review should be skipped for this request. Default to
+            #     `false`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -401,8 +406,9 @@ module Google
             end
 
             ##
-            # Fetches processor types. Note that we do not use ListProcessorTypes here
-            # because it is not paginated.
+            # Fetches processor types. Note that we don't use
+            # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#list_processor_types ListProcessorTypes}
+            # here, because it isn't paginated.
             #
             # @overload fetch_processor_types(request, options = nil)
             #   Pass arguments to `fetch_processor_types` via a request object, either of type
@@ -420,9 +426,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The project of processor type to list.
-            #     The available processor types may depend on the allow-listing on projects.
-            #     Format: `projects/{project}/locations/{location}`
+            #     Required. The location of processor types to list.
+            #     Format: `projects/{project}/locations/{location}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DocumentAI::V1::FetchProcessorTypesResponse]
@@ -507,13 +512,12 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The location of processor type to list.
-            #     The available processor types may depend on the allow-listing on projects.
-            #     Format: `projects/{project}/locations/{location}`
+            #     Required. The location of processor types to list.
+            #     Format: `projects/{project}/locations/{location}`.
             #   @param page_size [::Integer]
             #     The maximum number of processor types to return.
-            #     If unspecified, at most 100 processor types will be returned.
-            #     The maximum value is 500; values above 500 will be coerced to 500.
+            #     If unspecified, at most `100` processor types will be returned.
+            #     The maximum value is `500`. Values above `500` will be coerced to `500`.
             #   @param page_token [::String]
             #     Used to retrieve the next page of results, empty if at the end of the list.
             #
@@ -694,8 +698,8 @@ module Google
             #     Processors. Format: `projects/{project}/locations/{location}`
             #   @param page_size [::Integer]
             #     The maximum number of processors to return.
-            #     If unspecified, at most 50 processors will be returned.
-            #     The maximum value is 100; values above 100 will be coerced to 100.
+            #     If unspecified, at most `50` processors will be returned.
+            #     The maximum value is `100`. Values above `100` will be coerced to `100`.
             #   @param page_token [::String]
             #     We will return the processors sorted by creation time. The page token
             #     will point to the next processor.
@@ -857,7 +861,7 @@ module Google
             ##
             # Trains a new processor version.
             # Operation metadata is returned as
-            # cloud_documentai_core.TrainProcessorVersionMetadata.
+            # {::Google::Cloud::DocumentAI::V1::TrainProcessorVersionMetadata TrainProcessorVersionMetadata}.
             #
             # @overload train_processor_version(request, options = nil)
             #   Pass arguments to `train_processor_version` via a request object, either of type
@@ -883,7 +887,8 @@ module Google
             #   @param document_schema [::Google::Cloud::DocumentAI::V1::DocumentSchema, ::Hash]
             #     Optional. The schema the processor version will be trained with.
             #   @param input_data [::Google::Cloud::DocumentAI::V1::TrainProcessorVersionRequest::InputData, ::Hash]
-            #     Optional. The input data used to train the `ProcessorVersion`.
+            #     Optional. The input data used to train the
+            #     {::Google::Cloud::DocumentAI::V1::ProcessorVersion ProcessorVersion}.
             #   @param base_processor_version [::String]
             #     Optional. The processor version to use as a base for training. This
             #     processor version must be a child of `parent`. Format:
@@ -1070,8 +1075,8 @@ module Google
             #     `projects/{project}/locations/{location}/processors/{processor}`
             #   @param page_size [::Integer]
             #     The maximum number of processor versions to return.
-            #     If unspecified, at most 10 processor versions will be returned.
-            #     The maximum value is 20; values above 20 will be coerced to 20.
+            #     If unspecified, at most `10` processor versions will be returned.
+            #     The maximum value is `20`. Values above `20` will be coerced to `20`.
             #   @param page_token [::String]
             #     We will return the processor versions sorted by creation time. The page
             #     token will point to the next processor version.
@@ -1426,8 +1431,9 @@ module Google
             end
 
             ##
-            # Creates a processor from the type processor that the user chose.
-            # The processor will be at "ENABLED" state by default after its creation.
+            # Creates a processor from the
+            # {::Google::Cloud::DocumentAI::V1::ProcessorType ProcessorType} provided. The
+            # processor will be at `ENABLED` state by default after its creation.
             #
             # @overload create_processor(request, options = nil)
             #   Pass arguments to `create_processor` via a request object, either of type
@@ -1448,9 +1454,11 @@ module Google
             #     Required. The parent (project and location) under which to create the
             #     processor. Format: `projects/{project}/locations/{location}`
             #   @param processor [::Google::Cloud::DocumentAI::V1::Processor, ::Hash]
-            #     Required. The processor to be created, requires [processor_type] and
-            #     [display_name] to be set. Also, the processor is under CMEK if CMEK fields
-            #     are set.
+            #     Required. The processor to be created, requires
+            #     {::Google::Cloud::DocumentAI::V1::Processor#type Processor.type} and
+            #     [Processor.display_name]][] to be set. Also, the
+            #     {::Google::Cloud::DocumentAI::V1::Processor#kms_key_name Processor.kms_key_name}
+            #     field must be set if the processor is under CMEK.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DocumentAI::V1::Processor]
@@ -1922,8 +1930,9 @@ module Google
             #   @param inline_document [::Google::Cloud::DocumentAI::V1::Document, ::Hash]
             #     An inline document proto.
             #   @param human_review_config [::String]
-            #     Required. The resource name of the HumanReviewConfig that the document will
-            #     be reviewed with.
+            #     Required. The resource name of the
+            #     [HumanReviewConfig][google.cloud.documentai.v1.HumanReviewConfig] that the
+            #     document will be reviewed with.
             #   @param enable_schema_validation [::Boolean]
             #     Whether the validation should be performed on the ad-hoc review request.
             #   @param priority [::Google::Cloud::DocumentAI::V1::ReviewDocumentRequest::Priority]
@@ -2215,8 +2224,8 @@ module Google
             #     `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
             #   @param page_size [::Integer]
             #     The standard list page size.
-            #     If unspecified, at most 5 evaluations will be returned.
-            #     The maximum value is 100; values above 100 will be coerced to 100.
+            #     If unspecified, at most `5` evaluations are returned.
+            #     The maximum value is `100`. Values above `100` are coerced to `100`.
             #   @param page_token [::String]
             #     A page token, received from a previous `ListEvaluations` call.
             #     Provide this to retrieve the subsequent page.
