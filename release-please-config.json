@@ -519,6 +519,10 @@
       "component": "google-cloud-dialogflow-v2",
       "version_file": "lib/google/cloud/dialogflow/v2/version.rb"
     },
+    "google-cloud-discovery_engine": {
+      "component": "google-cloud-discovery_engine",
+      "version_file": "lib/google/cloud/discovery_engine/version.rb"
+    },
     "google-cloud-discovery_engine-v1": {
       "component": "google-cloud-discovery_engine-v1",
       "version_file": "lib/google/cloud/discovery_engine/v1/version.rb"
