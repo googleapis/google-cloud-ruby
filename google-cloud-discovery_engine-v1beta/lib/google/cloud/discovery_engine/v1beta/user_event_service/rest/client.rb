@@ -327,11 +327,11 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param inline_source [::Google::Cloud::DiscoveryEngine::V1beta::ImportUserEventsRequest::InlineSource, ::Hash]
-              #     Required. The Inline source for the input content for UserEvents.
+              #     The Inline source for the input content for UserEvents.
               #   @param gcs_source [::Google::Cloud::DiscoveryEngine::V1beta::GcsSource, ::Hash]
-              #     Required. Cloud Storage location for the input content.
+              #     Cloud Storage location for the input content.
               #   @param bigquery_source [::Google::Cloud::DiscoveryEngine::V1beta::BigQuerySource, ::Hash]
-              #     Required. BigQuery input source.
+              #     BigQuery input source.
               #   @param parent [::String]
               #     Required. Parent DataStore resource name, of the form
               #     `projects/{project}/locations/{location}/collections/{collection}/dataStores/{data_store}`
