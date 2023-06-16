@@ -1,0 +1,37 @@
+name: Release-Please Now
+on:
+  schedule:
+    - cron: '02 0 * * *'
+    - cron: '02 13 * * *'
+  workflow_dispatch:
+    inputs:
+      args:
+        description: "Extra command line arguments."
+        required: false
+
+jobs:
+  add-release-please-label:
+    if: ${{ github.repository == 'googleapis/google-cloud-ruby' }}
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.YOSHI_APPROVER_TOKEN }}
+      RELEASE_PLEASE_DISABLE: ${{ secrets.RELEASE_PLEASE_DISABLE }}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - name: Install Ruby 3.2
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2"
+      - name: Install NodeJS 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16.x"
+      - name: Install tools
+        run: |
+          gem install --no-document toys
+      - name: execute
+        run: |
+          toys release label-please -v \
+            --github-event-name=${{ github.event_name }} \
+            ${{ github.event.inputs.args }}
