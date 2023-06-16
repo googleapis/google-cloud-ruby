@@ -1,5 +1,15 @@
 # Changelog
 
+### 0.4.0 (2023-06-16)
+
+#### Features
+
+* Added RECONCILING and FAILED subnet states 
+* Added type field to PrivateCloud resource 
+* Support for listing private connection peering routes 
+* Support for private connection management RPCs 
+* Support for the get_subnet and update_subnet RPCs 
+
 ### 0.3.1 (2023-06-06)
 
 #### Bug Fixes
