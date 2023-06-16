@@ -8,7 +8,7 @@
     "name": "discoveryengine",
     "name_pretty": "Discovery Engine API",
     "product_documentation": "https://cloud.google.com/discovery-engine/media/docs",
-    "release_level": "unreleased",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Discovery Engine API.",
