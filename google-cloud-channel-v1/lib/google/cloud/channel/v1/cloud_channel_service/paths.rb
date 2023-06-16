@@ -146,6 +146,23 @@ module Google
               "products/#{product}"
             end
 
+            ##
+            # Create a fully-qualified SkuGroup resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `accounts/{account}/skuGroups/{sku_group}`
+            #
+            # @param account [String]
+            # @param sku_group [String]
+            #
+            # @return [::String]
+            def sku_group_path account:, sku_group:
+              raise ::ArgumentError, "account cannot contain /" if account.to_s.include? "/"
+
+              "accounts/#{account}/skuGroups/#{sku_group}"
+            end
+
             extend self
           end
         end

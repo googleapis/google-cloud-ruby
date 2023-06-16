@@ -111,6 +111,8 @@
     "snippets/cloud_channel_service/list_products.rb",
     "snippets/cloud_channel_service/list_purchasable_offers.rb",
     "snippets/cloud_channel_service/list_purchasable_skus.rb",
+    "snippets/cloud_channel_service/list_sku_group_billable_skus.rb",
+    "snippets/cloud_channel_service/list_sku_groups.rb",
     "snippets/cloud_channel_service/list_skus.rb",
     "snippets/cloud_channel_service/list_subscribers.rb",
     "snippets/cloud_channel_service/list_transferable_offers.rb",
