@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.10.0 (2023-06-16)
+
+#### Features
+
+* Add support for scheduling_policy ([#22399](https://github.com/googleapis/google-cloud-ruby/issues/22399)) 
+
 ### 0.9.0 (2023-06-06)
 
 #### Features
