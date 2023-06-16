@@ -43,16 +43,26 @@ module Google
             rpc :UpdateCluster, ::Google::Cloud::AlloyDB::V1::UpdateClusterRequest, ::Google::Longrunning::Operation
             # Deletes a single Cluster.
             rpc :DeleteCluster, ::Google::Cloud::AlloyDB::V1::DeleteClusterRequest, ::Google::Longrunning::Operation
+            # Promotes a SECONDARY cluster. This turns down replication
+            # from the PRIMARY cluster and promotes a secondary cluster
+            # into its own standalone cluster.
+            # Imperative only.
+            rpc :PromoteCluster, ::Google::Cloud::AlloyDB::V1::PromoteClusterRequest, ::Google::Longrunning::Operation
             # Creates a new Cluster in a given project and location, with a volume
             # restored from the provided source, either a backup ID or a point-in-time
             # and a source cluster.
             rpc :RestoreCluster, ::Google::Cloud::AlloyDB::V1::RestoreClusterRequest, ::Google::Longrunning::Operation
+            # Creates a cluster of type SECONDARY in the given location using
+            # the primary cluster as the source.
+            rpc :CreateSecondaryCluster, ::Google::Cloud::AlloyDB::V1::CreateSecondaryClusterRequest, ::Google::Longrunning::Operation
             # Lists Instances in a given project and location.
             rpc :ListInstances, ::Google::Cloud::AlloyDB::V1::ListInstancesRequest, ::Google::Cloud::AlloyDB::V1::ListInstancesResponse
             # Gets details of a single Instance.
             rpc :GetInstance, ::Google::Cloud::AlloyDB::V1::GetInstanceRequest, ::Google::Cloud::AlloyDB::V1::Instance
             # Creates a new Instance in a given project and location.
             rpc :CreateInstance, ::Google::Cloud::AlloyDB::V1::CreateInstanceRequest, ::Google::Longrunning::Operation
+            # Creates a new SECONDARY Instance in a given project and location.
+            rpc :CreateSecondaryInstance, ::Google::Cloud::AlloyDB::V1::CreateSecondaryInstanceRequest, ::Google::Longrunning::Operation
             # Creates new instances under the given project, location and cluster.
             # There can be only one primary instance in a cluster. If the primary
             # instance exists in the cluster as well as this request, then API will
@@ -72,6 +82,9 @@ module Google
             # Failover promotes the HA standby instance as the new primary.
             # Imperative only.
             rpc :FailoverInstance, ::Google::Cloud::AlloyDB::V1::FailoverInstanceRequest, ::Google::Longrunning::Operation
+            # Injects fault in an instance.
+            # Imperative only.
+            rpc :InjectFault, ::Google::Cloud::AlloyDB::V1::InjectFaultRequest, ::Google::Longrunning::Operation
             # Restart an Instance in a cluster.
             # Imperative only.
             rpc :RestartInstance, ::Google::Cloud::AlloyDB::V1::RestartInstanceRequest, ::Google::Longrunning::Operation
@@ -87,6 +100,16 @@ module Google
             rpc :DeleteBackup, ::Google::Cloud::AlloyDB::V1::DeleteBackupRequest, ::Google::Longrunning::Operation
             # Lists SupportedDatabaseFlags for a given project and location.
             rpc :ListSupportedDatabaseFlags, ::Google::Cloud::AlloyDB::V1::ListSupportedDatabaseFlagsRequest, ::Google::Cloud::AlloyDB::V1::ListSupportedDatabaseFlagsResponse
+            # Lists Users in a given project and location.
+            rpc :ListUsers, ::Google::Cloud::AlloyDB::V1::ListUsersRequest, ::Google::Cloud::AlloyDB::V1::ListUsersResponse
+            # Gets details of a single User.
+            rpc :GetUser, ::Google::Cloud::AlloyDB::V1::GetUserRequest, ::Google::Cloud::AlloyDB::V1::User
+            # Creates a new User in a given project, location, and cluster.
+            rpc :CreateUser, ::Google::Cloud::AlloyDB::V1::CreateUserRequest, ::Google::Cloud::AlloyDB::V1::User
+            # Updates the parameters of a single User.
+            rpc :UpdateUser, ::Google::Cloud::AlloyDB::V1::UpdateUserRequest, ::Google::Cloud::AlloyDB::V1::User
+            # Deletes a single User.
+            rpc :DeleteUser, ::Google::Cloud::AlloyDB::V1::DeleteUserRequest, ::Google::Protobuf::Empty
           end
 
           Stub = Service.rpc_stub_class
