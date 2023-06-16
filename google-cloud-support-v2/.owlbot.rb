@@ -22,7 +22,8 @@ paths = [
 # Fix for b/283189019 (internal)
 OwlBot.modifier path: paths do |content|
   # rubocop:disable Lint/InterpolationCheck:
-  content&.gsub '#{case}', '#{binding.local_variable_get :case}'
+  content&.gsub('#{case}', '#{binding.local_variable_get :case}')
+         &.gsub(/\n\n+\z/, "\n")
   # rubocop:enable Lint/InterpolationCheck:
 end
 
