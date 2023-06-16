@@ -1,5 +1,13 @@
 # Release History
 
+### 0.23.0 (2023-06-16)
+
+#### Features
+
+* add API for GPU driver installation config ([#22377](https://github.com/googleapis/google-cloud-ruby/issues/22377)) 
+* add SecurityPostureConfig API field to allow customers to enable GKE Security Posture capabilities for their clusters 
+* add workloadPolicyConfig API field to allow customer enable NET_ADMIN capability for their autopilot clusters 
+
 ### 0.22.0 (2023-06-06)
 
 #### Features
