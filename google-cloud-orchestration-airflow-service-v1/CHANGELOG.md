@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.7.0 (2023-06-16)
+
+#### Features
+
+* added support for StopAirflowCommand, ExecuteAirflowCommand, PollAirflowCommand, DatabaseFailover, FetchDatabaseProperties ([#22388](https://github.com/googleapis/google-cloud-ruby/issues/22388)) 
+
 ### 0.6.1 (2023-06-06)
 
 #### Bug Fixes
