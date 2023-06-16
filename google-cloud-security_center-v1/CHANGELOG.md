@@ -1,5 +1,11 @@
 # Release History
 
+### 0.30.0 (2023-06-16)
+
+#### Features
+
+* Add user agent and DLP parent type fields to finding's list of attributes ([#22380](https://github.com/googleapis/google-cloud-ruby/issues/22380)) 
+
 ### 0.29.1 (2023-06-06)
 
 #### Bug Fixes
