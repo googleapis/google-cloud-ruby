@@ -507,6 +507,12 @@ module Google
           #     If unspecified, the
           #     {::Google::Cloud::Dialogflow::CX::V3::ResponseMessage ResponseMessage} with
           #     unspecified channel will be returned.
+          # @!attribute [rw] session_ttl
+          #   @return [::Google::Protobuf::Duration]
+          #     Optional. Sets Dialogflow session life time.
+          #     By default, a Dialogflow session remains active and its data is stored for
+          #     30 minutes after the last request is sent for the session.
+          #     This value should be no longer than 1 day.
           class QueryParameters
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

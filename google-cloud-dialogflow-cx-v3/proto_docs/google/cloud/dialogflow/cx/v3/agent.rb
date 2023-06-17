@@ -235,6 +235,9 @@ module Google
           #     Optional. Environment name. If not set, draft environment is assumed.
           #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
           #     ID>/environments/<Environment ID>`.
+          # @!attribute [rw] include_bigquery_export_settings
+          #   @return [::Boolean]
+          #     Optional. Whether to include BigQuery Export setting.
           class ExportAgentRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
