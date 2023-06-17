@@ -43,6 +43,8 @@ module Google
             rpc :ListModelVersions, ::Google::Cloud::AIPlatform::V1::ListModelVersionsRequest, ::Google::Cloud::AIPlatform::V1::ListModelVersionsResponse
             # Updates a Model.
             rpc :UpdateModel, ::Google::Cloud::AIPlatform::V1::UpdateModelRequest, ::Google::Cloud::AIPlatform::V1::Model
+            # Incrementally update the dataset used for an examples model.
+            rpc :UpdateExplanationDataset, ::Google::Cloud::AIPlatform::V1::UpdateExplanationDatasetRequest, ::Google::Longrunning::Operation
             # Deletes a Model.
             #
             # A model cannot be deleted if any

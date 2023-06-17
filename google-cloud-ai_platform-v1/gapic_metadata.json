@@ -775,6 +775,11 @@
                 "update_model"
               ]
             },
+            "UpdateExplanationDataset": {
+              "methods": [
+                "update_explanation_dataset"
+              ]
+            },
             "DeleteModel": {
               "methods": [
                 "delete_model"

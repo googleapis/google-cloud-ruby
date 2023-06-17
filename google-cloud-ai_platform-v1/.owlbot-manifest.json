@@ -474,6 +474,7 @@
     "snippets/model_service/list_model_versions.rb",
     "snippets/model_service/list_models.rb",
     "snippets/model_service/merge_version_aliases.rb",
+    "snippets/model_service/update_explanation_dataset.rb",
     "snippets/model_service/update_model.rb",
     "snippets/model_service/upload_model.rb",
     "snippets/pipeline_service/cancel_pipeline_job.rb",
