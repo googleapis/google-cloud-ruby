@@ -415,6 +415,10 @@ module Google
           #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::ContentSearchSpec::SummarySpec]
           #     If there is no summary spec provided, there will be no summary in the
           #     search response.
+          # @!attribute [rw] extractive_content_spec
+          #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::ContentSearchSpec::ExtractiveContentSpec]
+          #     If there is no extractive_content_spec provided, there will be no
+          #     extractive answer in the search response.
           class ContentSearchSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -423,6 +427,10 @@ module Google
             # @!attribute [rw] max_snippet_count
             #   @return [::Integer]
             #     Max number of snippets returned in each search result.
+            #
+            #     A snippet is an infomartive summary of a content with highlighting for
+            #     UI rendering.
+            #
             #     If the matching snippets is less than the max_snippet_count, return all
             #     of the snippets; otherwise, return the max_snippet_count.
             #
@@ -445,6 +453,39 @@ module Google
             #
             #     At most 5 results can be used for generating summary.
             class SummarySpec
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The specification that configs the extractive content in search results.
+            # @!attribute [rw] max_extractive_answer_count
+            #   @return [::Integer]
+            #     The max number of extractive answers returned in each search result.
+            #
+            #     An extractive answer is a verbatim answer extracted from the original
+            #     document, which provides precise and contextually relevant answer to
+            #     the search query.
+            #
+            #     If the number of matching answers is less than the
+            #     extractive_answer_count, return all of the answers; otherwise, return
+            #     the extractive_answer_count.
+            #
+            #     At most 5 answers will be returned for each SearchResult.
+            # @!attribute [rw] max_extractive_segment_count
+            #   @return [::Integer]
+            #     The max number of extractive segments returned in each search result.
+            #
+            #     An extractive segment is a text segment extracted from the original
+            #     document which is relevant to the search query and in general more
+            #     verbose than an extrative answer. The segment could then be used as
+            #     input for LLMs to generate summaries and answers.
+            #
+            #     If the number of matching segments is less than the
+            #     max_extractive_segment_count, return all of the segments; otherwise,
+            #     return the max_extractive_segment_count.
+            #
+            #     Currently one segment will be returned for each SearchResult.
+            class ExtractiveContentSpec
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
@@ -495,6 +536,14 @@ module Google
         #     {::Google::Cloud::DiscoveryEngine::V1beta::UserEvent UserEvent} logs resulting
         #     from this search, which enables accurate attribution of search model
         #     performance.
+        # @!attribute [rw] redirect_uri
+        #   @return [::String]
+        #     The URI of a customer-defined redirect page. If redirect action is
+        #     triggered, no search is performed, and only
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse#redirect_uri redirect_uri}
+        #     and
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse#attribution_token attribution_token}
+        #     are set in the response.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token that can be sent as

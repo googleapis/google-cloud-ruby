@@ -610,7 +610,7 @@ module Google
               #     {::Google::Cloud::DiscoveryEngine::V1beta::GcsSource#data_schema GcsSource.data_schema}
               #     or
               #     {::Google::Cloud::DiscoveryEngine::V1beta::BigQuerySource#data_schema BigQuerySource.data_schema}
-              #     is `custom`. Otherwise, an INVALID_ARGUMENT error is thrown.
+              #     is `custom` or `csv`. Otherwise, an INVALID_ARGUMENT error is thrown.
               #   @param id_field [::String]
               #     The field in the Cloud Storage and BigQuery sources that indicates the
               #     unique IDs of the documents.

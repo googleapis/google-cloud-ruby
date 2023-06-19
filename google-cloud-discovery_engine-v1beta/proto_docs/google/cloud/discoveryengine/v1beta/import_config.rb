@@ -49,6 +49,10 @@ module Google
         #     * `custom`: One custom data JSON per row in arbitrary format that conforms
         #       the defined {::Google::Cloud::DiscoveryEngine::V1beta::Schema Schema} of the
         #       data store. This can only be used by the GENERIC Data Store vertical.
+        #     * `csv`: A CSV file with header conforming the defined
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::Schema Schema} of the
+        #       data store. Each entry after the header will be imported as a Document.
+        #       This can only be used by the GENERIC Data Store vertical.
         #
         #     Supported values for user even imports:
         #
@@ -122,13 +126,13 @@ module Google
         # Request message for the ImportUserEvents request.
         # @!attribute [rw] inline_source
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::ImportUserEventsRequest::InlineSource]
-        #     Required. The Inline source for the input content for UserEvents.
+        #     The Inline source for the input content for UserEvents.
         # @!attribute [rw] gcs_source
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::GcsSource]
-        #     Required. Cloud Storage location for the input content.
+        #     Cloud Storage location for the input content.
         # @!attribute [rw] bigquery_source
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::BigQuerySource]
-        #     Required. BigQuery input source.
+        #     BigQuery input source.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Parent DataStore resource name, of the form
@@ -258,7 +262,7 @@ module Google
         #     {::Google::Cloud::DiscoveryEngine::V1beta::GcsSource#data_schema GcsSource.data_schema}
         #     or
         #     {::Google::Cloud::DiscoveryEngine::V1beta::BigQuerySource#data_schema BigQuerySource.data_schema}
-        #     is `custom`. Otherwise, an INVALID_ARGUMENT error is thrown.
+        #     is `custom` or `csv`. Otherwise, an INVALID_ARGUMENT error is thrown.
         # @!attribute [rw] id_field
         #   @return [::String]
         #     The field in the Cloud Storage and BigQuery sources that indicates the

@@ -184,6 +184,8 @@ module Google
             #     API calls. Do not use it when there is no traffic for Search API.
             #     * `user-event` - Using suggestions generated from user-imported search
             #     events.
+            #     * `document-completable` - Using suggestions taken directly from
+            #     user-imported document fields marked as completable.
             #
             #     Default values:
             #
