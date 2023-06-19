@@ -22,10 +22,9 @@ module Google
     module DocumentAI
       module V1
         # A processor version is an implementation of a processor. Each processor
-        # can have multiple versions, pre-trained by Google internally or up-trained
-        # by the customer. At a time, a processor can only have one default version
-        # version. So the processor's behavior (when processing documents) is defined
-        # by a default version
+        # can have multiple versions, pretrained by Google internally or uptrained
+        # by the customer. A processor can only have one default version at a time.
+        # Its document-processing behavior is defined by that version.
         # @!attribute [rw] name
         #   @return [::String]
         #     The resource name of the processor version.
@@ -54,7 +53,7 @@ module Google
         #     The KMS key version with which data is encrypted.
         # @!attribute [rw] google_managed
         #   @return [::Boolean]
-        #     Denotes that this ProcessorVersion is managed by google.
+        #     Denotes that this `ProcessorVersion` is managed by Google.
         # @!attribute [rw] deprecation_info
         #   @return [::Google::Cloud::DocumentAI::V1::ProcessorVersion::DeprecationInfo]
         #     If set, information about the eventual deprecation of this version.
@@ -99,6 +98,9 @@ module Google
 
             # The processor version failed and is in an indeterminate state.
             FAILED = 7
+
+            # The processor version is being imported.
+            IMPORTING = 8
           end
         end
 
@@ -110,8 +112,8 @@ module Google
         #     Format: `projects/{project}/locations/{location}/processors/{processor}`
         # @!attribute [rw] type
         #   @return [::String]
-        #     The processor type, e.g., `OCR_PROCESSOR`, `INVOICE_PROCESSOR`, etc.
-        #     To get a list of processors types, see
+        #     The processor type, such as: `OCR_PROCESSOR`, `INVOICE_PROCESSOR`.
+        #     To get a list of processor types, see
         #     {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#fetch_processor_types FetchProcessorTypes}.
         # @!attribute [rw] display_name
         #   @return [::String]
@@ -131,8 +133,8 @@ module Google
         #     The time the processor was created.
         # @!attribute [rw] kms_key_name
         #   @return [::String]
-        #     The KMS key used for encryption/decryption in CMEK scenarios.
-        #     See https://cloud.google.com/security-key-management.
+        #     The [KMS key](https://cloud.google.com/security-key-management) used for
+        #     encryption and decryption in CMEK scenarios.
         class Processor
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
