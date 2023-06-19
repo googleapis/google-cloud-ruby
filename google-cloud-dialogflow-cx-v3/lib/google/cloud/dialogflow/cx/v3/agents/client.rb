@@ -656,7 +656,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload export_agent(name: nil, agent_uri: nil, data_format: nil, environment: nil)
+              # @overload export_agent(name: nil, agent_uri: nil, data_format: nil, environment: nil, include_bigquery_export_settings: nil)
               #   Pass arguments to `export_agent` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -682,6 +682,8 @@ module Google
               #     Optional. Environment name. If not set, draft environment is assumed.
               #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
               #     ID>/environments/<Environment ID>`.
+              #   @param include_bigquery_export_settings [::Boolean]
+              #     Optional. Whether to include BigQuery Export setting.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Gapic::Operation]
