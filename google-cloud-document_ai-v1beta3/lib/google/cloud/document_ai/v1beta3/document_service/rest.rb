@@ -23,27 +23,24 @@ require "gapic/config/method"
 require "google/cloud/document_ai/v1beta3/version"
 require "google/cloud/document_ai/v1beta3/bindings_override"
 
-require "google/cloud/document_ai/v1beta3/document_processor_service/credentials"
-require "google/cloud/document_ai/v1beta3/document_processor_service/paths"
-require "google/cloud/document_ai/v1beta3/document_processor_service/rest/operations"
-require "google/cloud/document_ai/v1beta3/document_processor_service/rest/client"
+require "google/cloud/document_ai/v1beta3/document_service/credentials"
+require "google/cloud/document_ai/v1beta3/document_service/paths"
+require "google/cloud/document_ai/v1beta3/document_service/rest/operations"
+require "google/cloud/document_ai/v1beta3/document_service/rest/client"
 
 module Google
   module Cloud
     module DocumentAI
       module V1beta3
         ##
-        # Service to call Document AI to process documents according to the
-        # processor's definition. Processors are built using state-of-the-art Google
-        # AI such as natural language, computer vision, and translation to extract
-        # structured information from unstructured or semi-structured documents.
+        # Service to call Cloud DocumentAI to manage document collection (dataset).
         #
         # To load this service and instantiate a REST client:
         #
-        #     require "google/cloud/document_ai/v1beta3/document_processor_service/rest"
-        #     client = ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Rest::Client.new
+        #     require "google/cloud/document_ai/v1beta3/document_service/rest"
+        #     client = ::Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::Client.new
         #
-        module DocumentProcessorService
+        module DocumentService
           # Client for the REST transport
           module Rest
           end
@@ -54,4 +51,4 @@ module Google
 end
 
 helper_path = ::File.join __dir__, "rest", "helpers.rb"
-require "google/cloud/document_ai/v1beta3/document_processor_service/rest/helpers" if ::File.file? helper_path
+require "google/cloud/document_ai/v1beta3/document_service/rest/helpers" if ::File.file? helper_path
