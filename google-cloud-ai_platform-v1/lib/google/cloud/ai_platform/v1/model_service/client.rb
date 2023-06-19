@@ -753,6 +753,102 @@ module Google
             end
 
             ##
+            # Incrementally update the dataset used for an examples model.
+            #
+            # @overload update_explanation_dataset(request, options = nil)
+            #   Pass arguments to `update_explanation_dataset` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::UpdateExplanationDatasetRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::UpdateExplanationDatasetRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_explanation_dataset(model: nil, examples: nil)
+            #   Pass arguments to `update_explanation_dataset` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param model [::String]
+            #     Required. The resource name of the Model to update.
+            #     Format: `projects/{project}/locations/{location}/models/{model}`
+            #   @param examples [::Google::Cloud::AIPlatform::V1::Examples, ::Hash]
+            #     The example config containing the location of the dataset.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::ModelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::UpdateExplanationDatasetRequest.new
+            #
+            #   # Call the update_explanation_dataset method.
+            #   result = client.update_explanation_dataset request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def update_explanation_dataset request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::UpdateExplanationDatasetRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_explanation_dataset.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.model
+                header_params["model"] = request.model
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_explanation_dataset.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_explanation_dataset.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @model_service_stub.call_rpc :update_explanation_dataset, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Deletes a Model.
             #
             # A model cannot be deleted if any
@@ -2086,6 +2182,11 @@ module Google
                 #
                 attr_reader :update_model
                 ##
+                # RPC-specific configuration for `update_explanation_dataset`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_explanation_dataset
+                ##
                 # RPC-specific configuration for `delete_model`
                 # @return [::Gapic::Config::Method]
                 #
@@ -2158,6 +2259,8 @@ module Google
                   @list_model_versions = ::Gapic::Config::Method.new list_model_versions_config
                   update_model_config = parent_rpcs.update_model if parent_rpcs.respond_to? :update_model
                   @update_model = ::Gapic::Config::Method.new update_model_config
+                  update_explanation_dataset_config = parent_rpcs.update_explanation_dataset if parent_rpcs.respond_to? :update_explanation_dataset
+                  @update_explanation_dataset = ::Gapic::Config::Method.new update_explanation_dataset_config
                   delete_model_config = parent_rpcs.delete_model if parent_rpcs.respond_to? :delete_model
                   @delete_model = ::Gapic::Config::Method.new delete_model_config
                   delete_model_version_config = parent_rpcs.delete_model_version if parent_rpcs.respond_to? :delete_model_version
