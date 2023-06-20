@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.18.0 (2023-06-20)
+
+#### Features
+
+* add include_bigquery_export_settings to ExportAgentRequest ([#22426](https://github.com/googleapis/google-cloud-ruby/issues/22426)) 
+
 ### 0.17.0 (2023-06-06)
 
 #### Features
