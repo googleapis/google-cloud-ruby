@@ -1,5 +1,11 @@
 # Release History
 
+### 0.13.0 (2023-06-20)
+
+#### Features
+
+* support project_billing_info_path 
+
 ### 0.12.0 (2023-06-06)
 
 #### Features
