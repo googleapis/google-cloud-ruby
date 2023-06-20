@@ -1,5 +1,11 @@
 # Release History
 
+### 0.24.0 (2023-06-20)
+
+#### Features
+
+* support document service with dataset and datasetSchema resources 
+
 ### 0.23.0 (2023-06-06)
 
 #### Features
