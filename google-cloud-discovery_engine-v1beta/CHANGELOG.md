@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.3.0 (2023-06-20)
+
+#### Features
+
+* support extractive content in search 
+
 ### 0.2.1 (2023-06-06)
 
 #### Bug Fixes
