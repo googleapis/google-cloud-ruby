@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.26.0 (2023-06-20)
+
+#### Features
+
+* support UpdateExplanationDataset 
+
 ### 0.25.0 (2023-06-06)
 
 #### Features
