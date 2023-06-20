@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.13.0 (2023-06-20)
+
+#### Features
+
+* support styleInfo for document 
+
 ### 0.12.0 (2023-06-06)
 
 #### Features
