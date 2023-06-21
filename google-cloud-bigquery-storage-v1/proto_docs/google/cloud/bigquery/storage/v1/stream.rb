@@ -67,6 +67,13 @@ module Google
           #     Output only. An estimate on the number of bytes this session will scan when
           #     all streams are completely consumed. This estimate is based on
           #     metadata from the table which might be incomplete or stale.
+          # @!attribute [r] estimated_total_physical_file_size
+          #   @return [::Integer]
+          #     Output only. A pre-projected estimate of the total physical size (in bytes)
+          #     of files this session will scan when all streams are completely consumed.
+          #     This estimate does not depend on the selected columns and can be based on
+          #     metadata from the table which might be incomplete or stale. Only set for
+          #     BigLake tables.
           # @!attribute [r] estimated_row_count
           #   @return [::Integer]
           #     Output only. An estimate on the number of rows present in this session's
@@ -164,11 +171,11 @@ module Google
             # @!attribute [rw] sample_percentage
             #   @return [::Float]
             #     Optional. Specifies a table sampling percentage. Specifically, the query
-            #     planner will use TABLESAMPLE SYSTEM (sample_percentage PERCENT). This
-            #     samples at the file-level. It will randomly choose for each file whether
-            #     to include that file in the sample returned. Note, that if the table only
-            #     has one file, then TABLESAMPLE SYSTEM will select that file and return
-            #     all returnable rows contained within.
+            #     planner will use TABLESAMPLE SYSTEM (sample_percentage PERCENT). The
+            #     sampling percentage is applied at the data block granularity. It will
+            #     randomly choose for each data block whether to read the rows in that data
+            #     block. For more details, see
+            #     https://cloud.google.com/bigquery/docs/table-sampling)
             class TableReadOptions
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
