@@ -124,9 +124,44 @@ module Google
         # @!attribute [rw] strategy
         #   @return [::Google::Cloud::Deploy::V1::Strategy]
         #     Optional. The strategy to use for a `Rollout` to this stage.
+        # @!attribute [rw] deploy_parameters
+        #   @return [::Array<::Google::Cloud::Deploy::V1::DeployParameters>]
+        #     Optional. The deploy parameters to use for the target in this stage.
         class Stage
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # DeployParameters contains deploy parameters information.
+        # @!attribute [rw] values
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Required. Values are deploy parameters in key-value pairs.
+        # @!attribute [rw] match_target_labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Deploy parameters are applied to targets with match labels.
+        #     If unspecified, deploy parameters are applied to all targets (including
+        #     child targets of a multi-target).
+        class DeployParameters
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class ValuesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class MatchTargetLabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Strategy contains deployment strategy information.
@@ -602,6 +637,9 @@ module Google
         #     `RENDER` and `DEPLOY` `ExecutionEnvironmentUsage` values.
         #     When no configurations are specified, execution will use the default
         #     specified in `DefaultPool`.
+        # @!attribute [rw] deploy_parameters
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. The deploy parameters to use for this target.
         class Target
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -620,6 +658,15 @@ module Google
           # @!attribute [rw] value
           #   @return [::String]
           class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class DeployParametersEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -1024,6 +1071,9 @@ module Google
         # @!attribute [r] condition
         #   @return [::Google::Cloud::Deploy::V1::Release::ReleaseCondition]
         #     Output only. Information around the state of the Release.
+        # @!attribute [rw] deploy_parameters
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. The deploy parameters to use for all targets in this release.
         class Release
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1167,6 +1217,15 @@ module Google
           # @!attribute [rw] value
           #   @return [::Google::Cloud::Deploy::V1::Release::TargetRender]
           class TargetRendersEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class DeployParametersEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
