@@ -41,23 +41,4 @@ class Google::Cloud::DocumentAI::ClientConstructionMinitest < Minitest::Test
       assert_kind_of Google::Cloud::DocumentAI::V1::DocumentProcessorService::Rest::Client, client
     end
   end
-
-  def test_document_service_grpc
-    Gapic::ServiceStub.stub :new, :stub do
-      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::DocumentAI.document_service transport: :grpc do |config|
-        config.credentials = grpc_channel
-      end
-      assert_kind_of Google::Cloud::DocumentAI::V1::DocumentService::Client, client
-    end
-  end
-
-  def test_document_service_rest
-    Gapic::Rest::ClientStub.stub :new, :stub do
-      client = Google::Cloud::DocumentAI.document_service transport: :rest do |config|
-        config.credentials = :dummy_credentials
-      end
-      assert_kind_of Google::Cloud::DocumentAI::V1::DocumentService::Rest::Client, client
-    end
-  end
 end
