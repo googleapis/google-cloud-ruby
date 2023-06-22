@@ -196,6 +196,12 @@ module Google
         #     ID>/agents/<Agent ID>/environments/<Environment ID
         #     or '-'>`. If environment is not specified, the default `draft` environment
         #     is used.
+        # @!attribute [rw] session_ttl
+        #   @return [::Google::Protobuf::Duration]
+        #     Optional. Sets Dialogflow CX session life time.
+        #     By default, a Dialogflow CX session remains active and its data is stored
+        #     for 30 minutes after the last request is sent for the session. This value
+        #     should be no longer than 1 day.
         class AutomatedAgentConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -321,7 +327,8 @@ module Google
           #     If this field is not set, it defaults to 0.0, which means that all
           #     suggestions are returned.
           #
-          #     Supported features: ARTICLE_SUGGESTION, FAQ, SMART_REPLY, SMART_COMPOSE.
+          #     Supported features: ARTICLE_SUGGESTION, FAQ, SMART_REPLY, SMART_COMPOSE,
+          #     KNOWLEDGE_SEARCH, KNOWLEDGE_ASSIST, ENTITY_EXTRACTION.
           # @!attribute [rw] context_filter_settings
           #   @return [::Google::Cloud::Dialogflow::V2::HumanAgentAssistantConfig::SuggestionQueryConfig::ContextFilterSettings]
           #     Determines how recent conversation context is filtered when generating
@@ -364,7 +371,7 @@ module Google
             # @!attribute [rw] agent
             #   @return [::String]
             #     Required. The name of a Dialogflow virtual agent used for end user side
-            #     intent detection and suggestion. Format: `projects/<Project Number/
+            #     intent detection and suggestion. Format: `projects/<Project
             #     ID>/locations/<Location ID>/agent`. When multiple agents are allowed in
             #     the same Dialogflow project.
             class DialogflowQuerySource

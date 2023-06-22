@@ -434,7 +434,7 @@ module Google
               #     Format: `projects/<Project ID>/locations/<Location
               #     ID>/knowledgeBases/<Knowledge Base ID>`.
               #   @param gcs_source [::Google::Cloud::Dialogflow::V2::GcsSources, ::Hash]
-              #     The Google Cloud Storage location for the documents.
+              #     Optional. The Google Cloud Storage location for the documents.
               #     The path can include a wildcard.
               #
               #     These URIs may have the forms

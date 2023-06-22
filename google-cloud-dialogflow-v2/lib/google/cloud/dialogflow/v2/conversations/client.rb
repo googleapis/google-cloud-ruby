@@ -718,7 +718,7 @@ module Google
             #     [latest_message] to use as context when compiling the
             #     suggestion. By default 500 and at most 1000.
             #   @param assist_query_params [::Google::Cloud::Dialogflow::V2::AssistQueryParameters, ::Hash]
-            #     Parameters for a human assist query.
+            #     Parameters for a human assist query. Only used for POC/demo purpose.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Dialogflow::V2::SuggestConversationSummaryResponse]

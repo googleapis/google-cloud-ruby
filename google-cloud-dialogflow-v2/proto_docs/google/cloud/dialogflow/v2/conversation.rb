@@ -280,7 +280,7 @@ module Google
         #     suggestion. By default 500 and at most 1000.
         # @!attribute [rw] assist_query_params
         #   @return [::Google::Cloud::Dialogflow::V2::AssistQueryParameters]
-        #     Parameters for a human assist query.
+        #     Parameters for a human assist query. Only used for POC/demo purpose.
         class SuggestConversationSummaryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
