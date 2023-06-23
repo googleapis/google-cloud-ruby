@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.9.0 (2023-06-23)
+
+#### Features
+
+* support deploy_parameters for stage 
+
 ### 0.8.0 (2023-06-06)
 
 #### Features
