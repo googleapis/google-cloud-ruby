@@ -1830,6 +1830,8 @@ module Google
             # Filters an organization's assets and  groups them by their specified
             # properties.
             #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
+            #
             # @overload group_assets(request, options = nil)
             #   Pass arguments to `group_assets` via a request object, either of type
             #   {::Google::Cloud::SecurityCenter::V1::GroupAssetsRequest} or an equivalent Hash.
@@ -2266,6 +2268,8 @@ module Google
 
             ##
             # Lists an organization's assets.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload list_assets(request, options = nil)
             #   Pass arguments to `list_assets` via a request object, either of type
@@ -3317,6 +3321,8 @@ module Google
             # This API can only be called with limited frequency for an organization. If
             # it is called too frequently the caller will receive a TOO_MANY_REQUESTS
             # error.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload run_asset_discovery(request, options = nil)
             #   Pass arguments to `run_asset_discovery` via a request object, either of type
