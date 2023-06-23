@@ -1,5 +1,14 @@
 # Release History
 
+### 0.21.0 (2023-06-23)
+
+#### Features
+
+* support AdsWebConversionDataExportScope 
+#### Documentation
+
+* announce the deprecation of first-click, linear, time-decay and position-based attribution models 
+
 ### 0.20.0 (2023-06-06)
 
 #### Features
