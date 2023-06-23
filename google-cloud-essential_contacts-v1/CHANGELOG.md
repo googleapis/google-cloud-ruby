@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.4.1 (2023-06-23)
+
+#### Documentation
+
+* mark fields in Contacts message as REQUIRED 
+
 ### 0.4.0 (2023-06-06)
 
 #### Features
