@@ -1,5 +1,11 @@
 # Release History
 
+### 0.26.0 (2023-06-23)
+
+#### Features
+
+* support session_ttl for AutomatedAgentConfig 
+
 ### 0.25.0 (2023-06-06)
 
 #### Features
