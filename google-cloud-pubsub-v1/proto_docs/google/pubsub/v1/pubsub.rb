@@ -749,7 +749,8 @@ module Google
         # @!attribute [rw] filename_suffix
         #   @return [::String]
         #     User-provided suffix for Cloud Storage filename. See the [object naming
-        #     requirements](https://cloud.google.com/storage/docs/objects#naming).
+        #     requirements](https://cloud.google.com/storage/docs/objects#naming). Must
+        #     not end in "/".
         # @!attribute [rw] text_config
         #   @return [::Google::Cloud::PubSub::V1::CloudStorageConfig::TextConfig]
         #     If set, message data will be written to Cloud Storage in text format.
