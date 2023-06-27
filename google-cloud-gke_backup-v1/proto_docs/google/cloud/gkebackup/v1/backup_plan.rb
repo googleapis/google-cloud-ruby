@@ -82,6 +82,16 @@ module Google
         #   @return [::Integer]
         #     Output only. The number of Kubernetes Pods backed up in the
         #     last successful Backup created via this BackupPlan.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::GkeBackup::V1::BackupPlan::State]
+        #     Output only. State of the BackupPlan. This State field reflects the
+        #     various stages a BackupPlan can be in
+        #     during the Create operation. It will be set to "DEACTIVATED"
+        #     if the BackupPlan is deactivated on an Update
+        # @!attribute [r] state_reason
+        #   @return [::String]
+        #     Output only. Human-readable description of why BackupPlan is in the current
+        #     `state`
         class BackupPlan
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -130,7 +140,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Schedule defines scheduling parameters for automatically creating Backups
+          # Defines scheduling parameters for automatically creating Backups
           # via this BackupPlan.
           # @!attribute [rw] cron_schedule
           #   @return [::String]
@@ -195,6 +205,30 @@ module Google
           class LabelsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # State
+          module State
+            # Default first value for Enums.
+            STATE_UNSPECIFIED = 0
+
+            # Waiting for cluster state to be RUNNING.
+            CLUSTER_PENDING = 1
+
+            # The BackupPlan is in the process of being created.
+            PROVISIONING = 2
+
+            # The BackupPlan has successfully been created and is ready for Backups.
+            READY = 3
+
+            # BackupPlan creation has failed.
+            FAILED = 4
+
+            # The BackupPlan has been deactivated.
+            DEACTIVATED = 5
+
+            # The BackupPlan is in the process of being deleted.
+            DELETING = 6
           end
         end
       end

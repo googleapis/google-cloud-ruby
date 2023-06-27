@@ -23,7 +23,7 @@ module Google
       module V1
         # The configuration of a potential series of Restore operations to be performed
         # against Backups belong to a particular BackupPlan.
-        # Next id: 11
+        # Next id: 13
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The full name of the RestorePlan resource.
@@ -73,6 +73,15 @@ module Google
         #     and systems are expected to put that etag in the request to
         #     `UpdateRestorePlan` or `DeleteRestorePlan` to ensure that their change
         #     will be applied to the same version of the resource.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::GkeBackup::V1::RestorePlan::State]
+        #     Output only. State of the RestorePlan. This State field reflects the
+        #     various stages a RestorePlan can be in
+        #     during the Create operation.
+        # @!attribute [r] state_reason
+        #   @return [::String]
+        #     Output only. Human-readable description of why RestorePlan is in the
+        #     current `state`
         class RestorePlan
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -84,6 +93,24 @@ module Google
           class LabelsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # State
+          module State
+            # Default first value for Enums.
+            STATE_UNSPECIFIED = 0
+
+            # Waiting for cluster state to be RUNNING.
+            CLUSTER_PENDING = 1
+
+            # The RestorePlan has successfully been created and is ready for Restores.
+            READY = 2
+
+            # RestorePlan creation has failed.
+            FAILED = 3
+
+            # The RestorePlan is in the process of being deleted.
+            DELETING = 4
           end
         end
       end
