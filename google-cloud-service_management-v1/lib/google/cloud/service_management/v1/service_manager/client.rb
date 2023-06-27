@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/api/servicemanagement/v1/servicemanager_pb"
+require "google/iam/v1"
 
 module Google
   module Cloud
@@ -140,6 +141,12 @@ module Google
                 config.endpoint = @config.endpoint
               end
 
+              @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
               @service_manager_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::ServiceManagement::V1::ServiceManager::Stub,
                 credentials:  credentials,
@@ -155,6 +162,13 @@ module Google
             # @return [::Google::Cloud::ServiceManagement::V1::ServiceManager::Operations]
             #
             attr_reader :operations_client
+
+            ##
+            # Get the associated client for mix-in of the IAMPolicy.
+            #
+            # @return [Google::Iam::V1::IAMPolicy::Client]
+            #
+            attr_reader :iam_policy_client
 
             # Service calls
 
@@ -184,7 +198,7 @@ module Google
             #     Include services produced by the specified project.
             #   @param page_size [::Integer]
             #     The max number of items to include in the response list. Page size is 50
-            #     if not specified. Maximum value is 100.
+            #     if not specified. Maximum value is 500.
             #   @param page_token [::String]
             #     Token identifying which result to start with; returned by a previous list
             #     call.
@@ -465,8 +479,8 @@ module Google
             #
             #   @param service_name [::String]
             #     Required. The name of the service.  See the
-            #     [overview](https://cloud.google.com/service-infrastructure/docs/overview) for naming requirements.  For
-            #     example: `example.googleapis.com`.
+            #     [overview](https://cloud.google.com/service-management/overview) for naming
+            #     requirements.  For example: `example.googleapis.com`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -565,8 +579,8 @@ module Google
             #
             #   @param service_name [::String]
             #     Required. The name of the service. See the
-            #     [overview](https://cloud.google.com/service-infrastructure/docs/overview) for naming requirements. For
-            #     example: `example.googleapis.com`.
+            #     [overview](https://cloud.google.com/service-management/overview) for naming
+            #     requirements. For example: `example.googleapis.com`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -661,8 +675,8 @@ module Google
             #
             #   @param service_name [::String]
             #     Required. The name of the service.  See the
-            #     [overview](https://cloud.google.com/service-infrastructure/docs/overview) for naming requirements.  For
-            #     example: `example.googleapis.com`.
+            #     [overview](https://cloud.google.com/service-management/overview) for naming
+            #     requirements.  For example: `example.googleapis.com`.
             #   @param page_token [::String]
             #     The token of the page to retrieve.
             #   @param page_size [::Integer]
@@ -758,8 +772,8 @@ module Google
             #
             #   @param service_name [::String]
             #     Required. The name of the service.  See the
-            #     [overview](https://cloud.google.com/service-infrastructure/docs/overview) for naming requirements.  For
-            #     example: `example.googleapis.com`.
+            #     [overview](https://cloud.google.com/service-management/overview) for naming
+            #     requirements.  For example: `example.googleapis.com`.
             #   @param config_id [::String]
             #     Required. The id of the service configuration resource.
             #
@@ -863,8 +877,8 @@ module Google
             #
             #   @param service_name [::String]
             #     Required. The name of the service.  See the
-            #     [overview](https://cloud.google.com/service-infrastructure/docs/overview) for naming requirements.  For
-            #     example: `example.googleapis.com`.
+            #     [overview](https://cloud.google.com/service-management/overview) for naming
+            #     requirements.  For example: `example.googleapis.com`.
             #   @param service_config [::Google::Api::Service, ::Hash]
             #     Required. The service configuration resource.
             #
@@ -965,8 +979,8 @@ module Google
             #
             #   @param service_name [::String]
             #     Required. The name of the service.  See the
-            #     [overview](https://cloud.google.com/service-infrastructure/docs/overview) for naming requirements.  For
-            #     example: `example.googleapis.com`.
+            #     [overview](https://cloud.google.com/service-management/overview) for naming
+            #     requirements.  For example: `example.googleapis.com`.
             #   @param config_source [::Google::Cloud::ServiceManagement::V1::ConfigSource, ::Hash]
             #     Required. The source configuration for the service.
             #   @param validate_only [::Boolean]
@@ -1067,8 +1081,8 @@ module Google
             #
             #   @param service_name [::String]
             #     Required. The name of the service.  See the
-            #     [overview](https://cloud.google.com/service-infrastructure/docs/overview) for naming requirements.  For
-            #     example: `example.googleapis.com`.
+            #     [overview](https://cloud.google.com/service-management/overview) for naming
+            #     requirements.  For example: `example.googleapis.com`.
             #   @param page_token [::String]
             #     The token of the page to retrieve.
             #   @param page_size [::Integer]
@@ -1077,12 +1091,14 @@ module Google
             #   @param filter [::String]
             #     Required. Use `filter` to return subset of rollouts.
             #     The following filters are supported:
-            #       -- To limit the results to only those in
-            #          status (google.api.servicemanagement.v1.RolloutStatus) 'SUCCESS',
-            #          use filter='status=SUCCESS'
-            #       -- To limit the results to those in
-            #          status (google.api.servicemanagement.v1.RolloutStatus) 'CANCELLED'
-            #          or 'FAILED', use filter='status=CANCELLED OR status=FAILED'
+            #
+            #      -- By [status]
+            #      [google.api.servicemanagement.v1.Rollout.RolloutStatus]. For example,
+            #      `filter='status=SUCCESS'`
+            #
+            #      -- By [strategy]
+            #      [google.api.servicemanagement.v1.Rollout.strategy]. For example,
+            #      `filter='strategy=TrafficPercentStrategy'`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::ServiceManagement::V1::Rollout>]
@@ -1174,8 +1190,8 @@ module Google
             #
             #   @param service_name [::String]
             #     Required. The name of the service.  See the
-            #     [overview](https://cloud.google.com/service-infrastructure/docs/overview) for naming requirements.  For
-            #     example: `example.googleapis.com`.
+            #     [overview](https://cloud.google.com/service-management/overview) for naming
+            #     requirements.  For example: `example.googleapis.com`.
             #   @param rollout_id [::String]
             #     Required. The id of the rollout resource.
             #
@@ -1279,8 +1295,8 @@ module Google
             #
             #   @param service_name [::String]
             #     Required. The name of the service.  See the
-            #     [overview](https://cloud.google.com/service-infrastructure/docs/overview) for naming requirements.  For
-            #     example: `example.googleapis.com`.
+            #     [overview](https://cloud.google.com/service-management/overview) for naming
+            #     requirements.  For example: `example.googleapis.com`.
             #   @param rollout [::Google::Cloud::ServiceManagement::V1::Rollout, ::Hash]
             #     Required. The rollout resource. The `service_name` field is output only.
             #
