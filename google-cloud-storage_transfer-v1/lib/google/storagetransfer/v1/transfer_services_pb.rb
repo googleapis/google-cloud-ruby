@@ -49,8 +49,8 @@ module Google
             # Updates a transfer job. Updating a job's transfer spec does not affect
             # transfer operations that are running already.
             #
-            # **Note:** The job's [status][google.storagetransfer.v1.TransferJob.status] field can be modified
-            # using this RPC (for example, to set a job's status to
+            # **Note:** The job's [status][google.storagetransfer.v1.TransferJob.status]
+            # field can be modified using this RPC (for example, to set a job's status to
             # [DELETED][google.storagetransfer.v1.TransferJob.Status.DELETED],
             # [DISABLED][google.storagetransfer.v1.TransferJob.Status.DISABLED], or
             # [ENABLED][google.storagetransfer.v1.TransferJob.Status.ENABLED]).
@@ -63,9 +63,10 @@ module Google
             rpc :PauseTransferOperation, ::Google::Cloud::StorageTransfer::V1::PauseTransferOperationRequest, ::Google::Protobuf::Empty
             # Resumes a transfer operation that is paused.
             rpc :ResumeTransferOperation, ::Google::Cloud::StorageTransfer::V1::ResumeTransferOperationRequest, ::Google::Protobuf::Empty
-            # Attempts to start a new TransferOperation for the current TransferJob. A
-            # TransferJob has a maximum of one active TransferOperation. If this method
-            # is called while a TransferOperation is active, an error will be returned.
+            # Starts a new operation for the specified transfer job.
+            # A `TransferJob` has a maximum of one active `TransferOperation`. If this
+            # method is called while a `TransferOperation` is active, an error is
+            # returned.
             rpc :RunTransferJob, ::Google::Cloud::StorageTransfer::V1::RunTransferJobRequest, ::Google::Longrunning::Operation
             # Deletes a transfer job. Deleting a transfer job sets its status to
             # [DELETED][google.storagetransfer.v1.TransferJob.Status.DELETED].
