@@ -176,6 +176,27 @@ module Google
             end
 
             ##
+            # Create a fully-qualified Repository resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/connections/{connection}/repositories/{repository}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param connection [String]
+            # @param repository [String]
+            #
+            # @return [::String]
+            def repository_path project:, location:, connection:, repository:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "connection cannot contain /" if connection.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/connections/#{connection}/repositories/#{repository}"
+            end
+
+            ##
             # Create a fully-qualified SecretVersion resource string.
             #
             # The resource will be in the following format:
