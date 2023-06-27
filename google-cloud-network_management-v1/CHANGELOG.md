@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.7.0 (2023-06-27)
+
+#### Features
+
+* Support forwarding_rule for Connectivity Test Endpoint ([#22449](https://github.com/googleapis/google-cloud-ruby/issues/22449)) 
+
 ### 0.6.1 (2023-06-06)
 
 #### Bug Fixes
