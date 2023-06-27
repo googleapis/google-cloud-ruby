@@ -140,7 +140,7 @@ module Google
         end
 
         # Configuration of a restore.
-        # Next id: 9
+        # Next id: 12
         # @!attribute [rw] volume_data_restore_policy
         #   @return [::Google::Cloud::GkeBackup::V1::RestoreConfig::VolumeDataRestorePolicy]
         #     Specifies the mechanism to be used to restore volume data.
@@ -175,6 +175,14 @@ module Google
         #     A list of selected ProtectedApplications to restore. The listed
         #     ProtectedApplications and all the resources to which they refer will be
         #     restored.
+        # @!attribute [rw] no_namespaces
+        #   @return [::Boolean]
+        #     Do not restore any namespaced resources if set to "True".
+        #     Specifying this field to "False" is not allowed.
+        # @!attribute [rw] excluded_namespaces
+        #   @return [::Google::Cloud::GkeBackup::V1::Namespaces]
+        #     A list of selected namespaces excluded from restoration. All
+        #     namespaces except those in this list will be restored.
         # @!attribute [rw] substitution_rules
         #   @return [::Array<::Google::Cloud::GkeBackup::V1::RestoreConfig::SubstitutionRule>]
         #     A list of transformation rules to be applied against Kubernetes resources
@@ -182,6 +190,13 @@ module Google
         #     order defined - this order matters, as changes made by a rule may impact
         #     the filtering logic of subsequent rules. An empty list means no
         #     substitution will occur.
+        # @!attribute [rw] transformation_rules
+        #   @return [::Array<::Google::Cloud::GkeBackup::V1::RestoreConfig::TransformationRule>]
+        #     A list of transformation rules to be applied against Kubernetes resources
+        #     as they are selected for restoration from a Backup. Rules are executed in
+        #     order defined - this order matters, as changes made by a rule may impact
+        #     the filtering logic of subsequent rules. An empty list means no
+        #     transformation will occur.
         class RestoreConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -225,6 +240,21 @@ module Google
           #   @return [::Array<::Google::Cloud::GkeBackup::V1::RestoreConfig::GroupKind>]
           #     A list of cluster-scoped resource group kinds to restore from the
           #     backup. If specified, only the selected resources will be restored.
+          #     Mutually exclusive to any other field in the message.
+          # @!attribute [rw] excluded_group_kinds
+          #   @return [::Array<::Google::Cloud::GkeBackup::V1::RestoreConfig::GroupKind>]
+          #     A list of cluster-scoped resource group kinds to NOT restore from the
+          #     backup. If specified, all valid cluster-scoped resources will be
+          #     restored except for those specified in the list.
+          #     Mutually exclusive to any other field in the message.
+          # @!attribute [rw] all_group_kinds
+          #   @return [::Boolean]
+          #     If True, all valid cluster-scoped resources will be restored.
+          #     Mutually exclusive to any other field in the message.
+          # @!attribute [rw] no_group_kinds
+          #   @return [::Boolean]
+          #     If True, no cluster-scoped resources will be restored.
+          #     This has the same restore scope as if the message is not defined.
           #     Mutually exclusive to any other field in the message.
           class ClusterResourceRestoreScope
             include ::Google::Protobuf::MessageExts
@@ -276,6 +306,119 @@ module Google
           #     selection criteria. To remove a value from a Kubernetes resource, either
           #     leave this field unspecified, or set it to the empty string ("").
           class SubstitutionRule
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # TransformationRuleAction defines a TransformationRule action based on the
+          # JSON Patch RFC (https://www.rfc-editor.org/rfc/rfc6902)
+          # @!attribute [rw] op
+          #   @return [::Google::Cloud::GkeBackup::V1::RestoreConfig::TransformationRuleAction::Op]
+          #     Required. op specifies the operation to perform.
+          # @!attribute [rw] from_path
+          #   @return [::String]
+          #     A string containing a JSON Pointer value that references the location in
+          #     the target document to move the value from.
+          # @!attribute [rw] path
+          #   @return [::String]
+          #     A string containing a JSON-Pointer value that references a location
+          #     within the target document where the operation is performed.
+          # @!attribute [rw] value
+          #   @return [::String]
+          #     A string that specifies the desired value in string format to
+          #     use for transformation.
+          class TransformationRuleAction
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Possible values for operations of a transformation rule action.
+            module Op
+              # Unspecified operation
+              OP_UNSPECIFIED = 0
+
+              # The "remove" operation removes the value at the target location.
+              REMOVE = 1
+
+              # The "move" operation removes the value at a specified location and
+              # adds it to the target location.
+              MOVE = 2
+
+              # The "copy" operation copies the value at a specified location to the
+              # target location.
+              COPY = 3
+
+              # The "add" operation performs one of the following functions,
+              # depending upon what the target location references:
+              # 1. If the target location specifies an array index, a new value is
+              # inserted into the array at the specified index.
+              # 2. If the target location specifies an object member that does not
+              # already exist, a new member is added to the object.
+              # 3. If the target location specifies an object member that does exist,
+              # that member's value is replaced.
+              ADD = 4
+
+              # The "test" operation tests that a value at the target location is
+              # equal to a specified value.
+              TEST = 5
+
+              # The "replace" operation replaces the value at the target location
+              # with a new value.  The operation object MUST contain a "value" member
+              # whose content specifies the replacement value.
+              REPLACE = 6
+            end
+          end
+
+          # ResourceFilter specifies matching criteria to limit the scope of a
+          # change to a specific set of kubernetes resources that are selected for
+          # restoration from a backup.
+          # @!attribute [rw] namespaces
+          #   @return [::Array<::String>]
+          #     (Filtering parameter) Any resource subject to transformation must be
+          #     contained within one of the listed Kubernetes Namespace in the Backup.
+          #     If this field is not provided, no namespace filtering will be performed
+          #     (all resources in all Namespaces, including all cluster-scoped resources,
+          #     will be candidates for transformation).
+          #     To mix cluster-scoped and namespaced resources in the same rule, use an
+          #     empty string ("") as one of the target namespaces.
+          # @!attribute [rw] group_kinds
+          #   @return [::Array<::Google::Cloud::GkeBackup::V1::RestoreConfig::GroupKind>]
+          #     (Filtering parameter) Any resource subject to transformation must belong
+          #     to one of the listed "types". If this field is not provided, no type
+          #     filtering will be performed (all resources of all types matching previous
+          #     filtering parameters will be candidates for transformation).
+          # @!attribute [rw] json_path
+          #   @return [::String]
+          #     This is a [JSONPath]
+          #     (https://github.com/json-path/JsonPath/blob/master/README.md)
+          #     expression that matches specific fields of candidate
+          #     resources and it operates as a filtering parameter (resources that
+          #     are not matched with this expression will not be candidates for
+          #     transformation).
+          class ResourceFilter
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # A transformation rule to be applied against Kubernetes resources as they
+          # are selected for restoration from a Backup. A rule contains both filtering
+          # logic (which resources are subject to transform) and transformation logic.
+          # @!attribute [rw] field_actions
+          #   @return [::Array<::Google::Cloud::GkeBackup::V1::RestoreConfig::TransformationRuleAction>]
+          #     Required. A list of transformation rule actions to take against candidate
+          #     resources. Actions are executed in order defined - this order matters, as
+          #     they could potentially interfere with each other and the first operation
+          #     could affect the outcome of the second operation.
+          # @!attribute [rw] resource_filter
+          #   @return [::Google::Cloud::GkeBackup::V1::RestoreConfig::ResourceFilter]
+          #     This field is used to specify a set of fields that should be used to
+          #     determine which resources in backup should be acted upon by the supplied
+          #     transformation rule actions, and this will ensure that only specific
+          #     resources are affected by transformation rule actions.
+          # @!attribute [rw] description
+          #   @return [::String]
+          #     The description is a user specified string description of the
+          #     transformation rule.
+          class TransformationRule
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
