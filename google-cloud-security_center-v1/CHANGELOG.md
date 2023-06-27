@@ -1,5 +1,11 @@
 # Release History
 
+### 0.31.0 (2023-06-27)
+
+#### Features
+
+* Mark the Asset APIs as deprecated in client libraries ([#22448](https://github.com/googleapis/google-cloud-ruby/issues/22448)) 
+
 ### 0.30.0 (2023-06-16)
 
 #### Features
