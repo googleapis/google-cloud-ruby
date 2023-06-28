@@ -45,6 +45,7 @@
     "snippets/repository_manager/create_repository.rb",
     "snippets/repository_manager/delete_connection.rb",
     "snippets/repository_manager/delete_repository.rb",
+    "snippets/repository_manager/fetch_git_refs.rb",
     "snippets/repository_manager/fetch_linkable_repositories.rb",
     "snippets/repository_manager/fetch_read_token.rb",
     "snippets/repository_manager/fetch_read_write_token.rb",
