@@ -185,7 +185,7 @@ module Google
         #     Number of accelerator cards exposed to the guest.
         # @!attribute [rw] guest_accelerator_type
         #   @return [::String]
-        #     The accelerator type resource name, not a full URL, e.g. 'nvidia-tesla-k80'.
+        #     The accelerator type resource name, not a full URL, e.g. nvidia-tesla-t4.
         class Accelerators
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -194,19 +194,19 @@ module Google
         # An access configuration attached to an instance's network interface. Only one access config per instance is supported.
         # @!attribute [rw] external_ipv6
         #   @return [::String]
-        #     The first IPv6 address of the external IPv6 range associated with this instance, prefix length is stored in externalIpv6PrefixLength in ipv6AccessConfig. To use a static external IP address, it must be unused and in the same region as the instance's zone. If not specified, Google Cloud will automatically assign an external IPv6 address from the instance's subnetwork.
+        #     Applies to ipv6AccessConfigs only. The first IPv6 address of the external IPv6 range associated with this instance, prefix length is stored in externalIpv6PrefixLength in ipv6AccessConfig. To use a static external IP address, it must be unused and in the same region as the instance's zone. If not specified, Google Cloud will automatically assign an external IPv6 address from the instance's subnetwork.
         # @!attribute [rw] external_ipv6_prefix_length
         #   @return [::Integer]
-        #     The prefix length of the external IPv6 range.
+        #     Applies to ipv6AccessConfigs only. The prefix length of the external IPv6 range.
         # @!attribute [rw] kind
         #   @return [::String]
         #     [Output Only] Type of the resource. Always compute#accessConfig for access configs.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The name of this access configuration. The default and recommended name is External NAT, but you can use any arbitrary string, such as My external IP or Network Access.
+        #     The name of this access configuration. In accessConfigs (IPv4), the default and recommended name is External NAT, but you can use any arbitrary string, such as My external IP or Network Access. In ipv6AccessConfigs, the recommend name is External IPv6.
         # @!attribute [rw] nat_i_p
         #   @return [::String]
-        #     An external IP address associated with this instance. Specify an unused static external IP address available to the project or leave this field undefined to use an IP from a shared ephemeral IP address pool. If you specify a static external IP address, it must live in the same region as the zone of the instance.
+        #     Applies to accessConfigs (IPv4) only. An external IP address associated with this instance. Specify an unused static external IP address available to the project or leave this field undefined to use an IP from a shared ephemeral IP address pool. If you specify a static external IP address, it must live in the same region as the zone of the instance.
         # @!attribute [rw] network_tier
         #   @return [::String]
         #     This signifies the networking tier used for configuring this access configuration and can only take the following values: PREMIUM, STANDARD. If an AccessConfig is specified without a valid external IP address, an ephemeral IP will be created with this networkTier. If an AccessConfig with a valid external IP address is specified, it must match that of the networkTier associated with the Address resource owning that IP.
@@ -219,7 +219,7 @@ module Google
         #     Specifies whether a public DNS 'PTR' record should be created to map the external IP address of the instance to a DNS domain name. This field is not used in ipv6AccessConfig. A default PTR record will be created if the VM has external IPv6 range associated.
         # @!attribute [rw] type
         #   @return [::String]
-        #     The type of configuration. The default and only option is ONE_TO_ONE_NAT.
+        #     The type of configuration. In accessConfigs (IPv4), the default and only option is ONE_TO_ONE_NAT. In ipv6AccessConfigs, the default and only option is DIRECT_IPV6.
         #     Check the Type enum for the list of possible values.
         class AccessConfig
           include ::Google::Protobuf::MessageExts
@@ -243,7 +243,7 @@ module Google
             STANDARD_OVERRIDES_FIXED_STANDARD = 465_847_234
           end
 
-          # The type of configuration. The default and only option is ONE_TO_ONE_NAT.
+          # The type of configuration. In accessConfigs (IPv4), the default and only option is ONE_TO_ONE_NAT. In ipv6AccessConfigs, the default and only option is DIRECT_IPV6.
           module Type
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
@@ -645,7 +645,7 @@ module Google
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] ip_version
         #   @return [::String]
-        #     The IP version that will be used by this address. Valid options are IPV4 or IPV6. This can only be specified for a global address.
+        #     The IP version that will be used by this address. Valid options are IPV4 or IPV6.
         #     Check the IpVersion enum for the list of possible values.
         # @!attribute [rw] ipv6_endpoint_type
         #   @return [::String]
@@ -654,6 +654,12 @@ module Google
         # @!attribute [rw] kind
         #   @return [::String]
         #     [Output Only] Type of the resource. Always compute#address for addresses.
+        # @!attribute [rw] label_fingerprint
+        #   @return [::String]
+        #     A fingerprint for the labels being applied to this Address, which is essentially a hash of the labels set used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update labels. You must always provide an up-to-date fingerprint hash in order to update or change labels, otherwise the request will fail with error 412 conditionNotMet. To see the latest fingerprint, make a get() request to retrieve an Address.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Labels for this resource. These can only be added or modified by the setLabels method. Each label key/value pair must comply with RFC1035. Label values may be empty.
         # @!attribute [rw] name
         #   @return [::String]
         #     Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?`. The first character must be a lowercase letter, and all following characters (except for the last character) must be a dash, lowercase letter, or digit. The last character must be a lowercase letter or digit.
@@ -691,6 +697,15 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # The type of address to reserve, either INTERNAL or EXTERNAL. If unspecified, defaults to EXTERNAL.
           module AddressType
             # A value indicating that the enum field is not set.
@@ -705,7 +720,7 @@ module Google
             UNSPECIFIED_TYPE = 53_933_922
           end
 
-          # The IP version that will be used by this address. Valid options are IPV4 or IPV6. This can only be specified for a global address.
+          # The IP version that will be used by this address. Valid options are IPV4 or IPV6.
           module IpVersion
             # A value indicating that the enum field is not set.
             UNDEFINED_IP_VERSION = 0
@@ -2238,6 +2253,10 @@ module Google
         #   @return [::String]
         #     The mode in which to attach this disk, either READ_WRITE or READ_ONLY. If not specified, the default is to attach the disk in READ_WRITE mode.
         #     Check the Mode enum for the list of possible values.
+        # @!attribute [rw] saved_state
+        #   @return [::String]
+        #     For LocalSSD disks on VM Instances in STOPPED or SUSPENDED state, this field is set to PRESERVED if the LocalSSD data has been saved to a persistent location by customer request. (see the discard_local_ssd option on Stop/Suspend). Read-only in the api.
+        #     Check the SavedState enum for the list of possible values.
         # @!attribute [rw] shielded_instance_initial_state
         #   @return [::Google::Cloud::Compute::V1::InitialStateConfig]
         #     [Output Only] shielded vm initial state stored on disk
@@ -2289,6 +2308,18 @@ module Google
             READ_WRITE = 173_607_894
           end
 
+          # For LocalSSD disks on VM Instances in STOPPED or SUSPENDED state, this field is set to PRESERVED if the LocalSSD data has been saved to a persistent location by customer request. (see the discard_local_ssd option on Stop/Suspend). Read-only in the api.
+          module SavedState
+            # A value indicating that the enum field is not set.
+            UNDEFINED_SAVED_STATE = 0
+
+            # *[Default]* Disk state has not been preserved.
+            DISK_SAVED_STATE_UNSPECIFIED = 391_290_831
+
+            # Disk state has been preserved.
+            PRESERVED = 254_159_736
+          end
+
           # Specifies the type of the disk, either SCRATCH or PERSISTENT. If not specified, the default is PERSISTENT.
           module Type
             # A value indicating that the enum field is not set.
@@ -2330,6 +2361,12 @@ module Google
         # @!attribute [rw] provisioned_iops
         #   @return [::Integer]
         #     Indicates how many IOPS to provision for the disk. This sets the number of I/O operations per second that the disk can handle. Values must be between 10,000 and 120,000. For more details, see the Extreme persistent disk documentation.
+        # @!attribute [rw] provisioned_throughput
+        #   @return [::Integer]
+        #     Indicates how much throughput to provision for the disk. This sets the number of throughput mb per second that the disk can handle. Values must be between 1 and 7,124.
+        # @!attribute [rw] replica_zones
+        #   @return [::Array<::String>]
+        #     Required for each regional disk associated with the instance. Specify the URLs of the zones where the disk should be replicated to. You must provide exactly two replica zones, and one zone must be the same as the instance zone. You can't use this option with boot disks.
         # @!attribute [rw] resource_manager_tags
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Resource manager tags to be bound to the disk. Tag keys and values have the same definition as resource manager tags. Keys must be in the format `tagKeys/{tag_key_id}`, and values are in the format `tagValues/456`. The field is ignored (both PUT & PATCH) when empty.
@@ -2707,7 +2744,7 @@ module Google
         # Cloud Autoscaler policy.
         # @!attribute [rw] cool_down_period_sec
         #   @return [::Integer]
-        #     The number of seconds that the autoscaler waits before it starts collecting information from a new instance. This prevents the autoscaler from collecting information when the instance is initializing, during which the collected usage would not be reliable. The default time autoscaler waits is 60 seconds. Virtual machine initialization times might vary because of numerous factors. We recommend that you test how long an instance may take to initialize. To do this, create an instance and time the startup process.
+        #     The number of seconds that your application takes to initialize on a VM instance. This is referred to as the [initialization period](/compute/docs/autoscaler#cool_down_period). Specifying an accurate initialization period improves autoscaler decisions. For example, when scaling out, the autoscaler ignores data from VMs that are still initializing because those VMs might not yet represent normal usage of your application. The default initialization period is 60 seconds. Initialization periods might vary because of numerous factors. We recommend that you test how long your application takes to initialize. To do this, create a VM and time your application's startup process.
         # @!attribute [rw] cpu_utilization
         #   @return [::Google::Cloud::Compute::V1::AutoscalingPolicyCpuUtilization]
         #     Defines the CPU utilization policy that allows the autoscaler to scale based on the average CPU utilization of a managed instance group.
@@ -2725,7 +2762,7 @@ module Google
         #     The minimum number of replicas that the autoscaler can scale in to. This cannot be less than 0. If not provided, autoscaler chooses a default value depending on maximum number of instances allowed.
         # @!attribute [rw] mode
         #   @return [::String]
-        #     Defines operating mode for this policy.
+        #     Defines the operating mode for this policy. The following modes are available: - OFF: Disables the autoscaler but maintains its configuration. - ONLY_SCALE_OUT: Restricts the autoscaler to add VM instances only. - ON: Enables all autoscaler activities according to its policy. For more information, see "Turning off or restricting an autoscaler"
         #     Check the Mode enum for the list of possible values.
         # @!attribute [rw] scale_in_control
         #   @return [::Google::Cloud::Compute::V1::AutoscalingPolicyScaleInControl]
@@ -2745,7 +2782,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Defines operating mode for this policy.
+          # Defines the operating mode for this policy. The following modes are available: - OFF: Disables the autoscaler but maintains its configuration. - ONLY_SCALE_OUT: Restricts the autoscaler to add VM instances only. - ON: Enables all autoscaler activities according to its policy. For more information, see "Turning off or restricting an autoscaler"
           module Mode
             # A value indicating that the enum field is not set.
             UNDEFINED_MODE = 0
@@ -3178,6 +3215,9 @@ module Google
         # @!attribute [rw] max_stream_duration
         #   @return [::Google::Cloud::Compute::V1::Duration]
         #     Specifies the default maximum duration (timeout) for streams to this service. Duration is computed from the beginning of the stream until the response has been completely processed, including all retries. A stream that does not complete in this duration is closed. If not specified, there will be no timeout limit, i.e. the maximum duration is infinite. This value can be overridden in the PathMatcher configuration of the UrlMap that references this backend service. This field is only allowed when the loadBalancingScheme of the backend service is INTERNAL_SELF_MANAGED.
+        # @!attribute [rw] metadatas
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Deployment metadata associated with the resource to be set by a GKE hub controller and read by the backend RCTH
         # @!attribute [rw] name
         #   @return [::String]
         #     Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
@@ -3224,6 +3264,15 @@ module Google
         class BackendService
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class MetadatasEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # Compress text responses using Brotli or gzip compression, based on the client's Accept-Encoding header.
           module CompressionMode
@@ -3927,6 +3976,33 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for Disks.BulkInsert. See the method description for details.
+        # @!attribute [rw] bulk_insert_disk_resource_resource
+        #   @return [::Google::Cloud::Compute::V1::BulkInsertDiskResource]
+        #     The body resource for this request
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     The name of the zone for this request.
+        class BulkInsertDiskRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A transient resource used in compute.disks.bulkInsert and compute.regionDisks.bulkInsert. It is only used to process requests and is not persisted.
+        # @!attribute [rw] source_consistency_group_policy
+        #   @return [::String]
+        #     The URL of the DiskConsistencyGroupPolicy for the group of disks to clone. This may be a full or partial URL, such as: - https://www.googleapis.com/compute/v1/projects/project/regions/region /resourcePolicies/resourcePolicy - projects/project/regions/region/resourcePolicies/resourcePolicy - regions/region/resourcePolicies/resourcePolicy
+        class BulkInsertDiskResource
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for Instances.BulkInsert. See the method description for details.
         # @!attribute [rw] bulk_insert_instance_resource_resource
         #   @return [::Google::Cloud::Compute::V1::BulkInsertInstanceResource]
@@ -3986,6 +4062,24 @@ module Google
         #   @return [::String]
         #     This field is only temporary. It will be removed. Do not use it.
         class BulkInsertInstanceResourcePerInstanceProperties
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionDisks.BulkInsert. See the method description for details.
+        # @!attribute [rw] bulk_insert_disk_resource_resource
+        #   @return [::Google::Cloud::Compute::V1::BulkInsertDiskResource]
+        #     The body resource for this request
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The name of the region for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        class BulkInsertRegionDiskRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -4170,7 +4264,7 @@ module Google
         #     [Output Only] Server-defined URL for the resource.
         # @!attribute [rw] split_source_commitment
         #   @return [::String]
-        #     Source commitment to be splitted into a new commitment.
+        #     Source commitment to be split into a new commitment.
         # @!attribute [rw] start_timestamp
         #   @return [::String]
         #     [Output Only] Commitment start time in RFC3339 text format.
@@ -4252,6 +4346,8 @@ module Google
             GENERAL_PURPOSE_N2D = 232_471_400
 
             GENERAL_PURPOSE_T2D = 232_477_166
+
+            GRAPHICS_OPTIMIZED = 68_500_563
 
             MEMORY_OPTIMIZED = 281_753_417
 
@@ -4595,7 +4691,7 @@ module Google
 
         # @!attribute [rw] kms_key_name
         #   @return [::String]
-        #     The name of the encryption key that is stored in Google Cloud KMS. For example: "kmsKeyName": "projects/kms_project_id/locations/region/keyRings/ key_region/cryptoKeys/key
+        #     The name of the encryption key that is stored in Google Cloud KMS. For example: "kmsKeyName": "projects/kms_project_id/locations/region/keyRings/ key_region/cryptoKeys/key The fully-qualifed key name may be returned for resource GET requests. For example: "kmsKeyName": "projects/kms_project_id/locations/region/keyRings/ key_region/cryptoKeys/key /cryptoKeyVersions/1
         # @!attribute [rw] kms_key_service_account
         #   @return [::String]
         #     The service account being used for the encryption request for the given KMS key. If absent, the Compute Engine default service account is used. For example: "kmsKeyServiceAccount": "name@project_id.iam.gserviceaccount.com/
@@ -6217,6 +6313,12 @@ module Google
         #   @return [::String]
         #     The architecture of the disk. Valid values are ARM64 or X86_64.
         #     Check the Architecture enum for the list of possible values.
+        # @!attribute [rw] async_primary_disk
+        #   @return [::Google::Cloud::Compute::V1::DiskAsyncReplication]
+        #     Disk asynchronously replicated into this disk.
+        # @!attribute [rw] async_secondary_disks
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Compute::V1::DiskAsyncReplicationList}]
+        #     [Output Only] A list of disks this disk is asynchronously replicated to.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
         #     [Output Only] Creation timestamp in RFC3339 text format.
@@ -6271,6 +6373,9 @@ module Google
         # @!attribute [rw] provisioned_iops
         #   @return [::Integer]
         #     Indicates how many IOPS to provision for the disk. This sets the number of I/O operations per second that the disk can handle. Values must be between 10,000 and 120,000. For more details, see the Extreme persistent disk documentation.
+        # @!attribute [rw] provisioned_throughput
+        #   @return [::Integer]
+        #     Indicates how much throughput to provision for the disk. This sets the number of throughput mb per second that the disk can handle. Values must be between 1 and 7,124.
         # @!attribute [rw] region
         #   @return [::String]
         #     [Output Only] URL of the region where the disk resides. Only applicable for regional resources. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.
@@ -6280,6 +6385,9 @@ module Google
         # @!attribute [rw] resource_policies
         #   @return [::Array<::String>]
         #     Resource policies applied to this disk for automatic snapshot creations.
+        # @!attribute [rw] resource_status
+        #   @return [::Google::Cloud::Compute::V1::DiskResourceStatus]
+        #     [Output Only] Status information for the disk resource.
         # @!attribute [rw] satisfies_pzs
         #   @return [::Boolean]
         #     [Output Only] Reserved for future use.
@@ -6289,6 +6397,12 @@ module Google
         # @!attribute [rw] size_gb
         #   @return [::Integer]
         #     Size, in GB, of the persistent disk. You can specify this field when creating a persistent disk using the sourceImage, sourceSnapshot, or sourceDisk parameter, or specify it alone to create an empty persistent disk. If you specify this field along with a source, the value of sizeGb must not be less than the size of the source. Acceptable values are 1 to 65536, inclusive.
+        # @!attribute [rw] source_consistency_group_policy
+        #   @return [::String]
+        #     [Output Only] URL of the DiskConsistencyGroupPolicy for a secondary disk that was created using a consistency group.
+        # @!attribute [rw] source_consistency_group_policy_id
+        #   @return [::String]
+        #     [Output Only] ID of the DiskConsistencyGroupPolicy for a secondary disk that was created using a consistency group.
         # @!attribute [rw] source_disk
         #   @return [::String]
         #     The source disk used to create this disk. You can provide this as a partial or full URL to the resource. For example, the following are valid values: - https://www.googleapis.com/compute/v1/projects/project/zones/zone /disks/disk - https://www.googleapis.com/compute/v1/projects/project/regions/region /disks/disk - projects/project/zones/zone/disks/disk - projects/project/regions/region/disks/disk - zones/zone/disks/disk - regions/region/disks/disk
@@ -6332,6 +6446,15 @@ module Google
         class Disk
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Compute::V1::DiskAsyncReplicationList]
+          class AsyncSecondaryDisksEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # @!attribute [rw] key
           #   @return [::String]
@@ -6412,6 +6535,30 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # @!attribute [rw] consistency_group_policy
+        #   @return [::String]
+        #     [Output Only] URL of the DiskConsistencyGroupPolicy if replication was started on the disk as a member of a group.
+        # @!attribute [rw] consistency_group_policy_id
+        #   @return [::String]
+        #     [Output Only] ID of the DiskConsistencyGroupPolicy if replication was started on the disk as a member of a group.
+        # @!attribute [rw] disk
+        #   @return [::String]
+        #     The other disk asynchronously replicated to or from the current disk. You can provide this as a partial or full URL to the resource. For example, the following are valid values: - https://www.googleapis.com/compute/v1/projects/project/zones/zone /disks/disk - projects/project/zones/zone/disks/disk - zones/zone/disks/disk
+        # @!attribute [rw] disk_id
+        #   @return [::String]
+        #     [Output Only] The unique ID of the other disk asynchronously replicated to or from the current disk. This value identifies the exact disk that was used to create this replication. For example, if you started replicating the persistent disk from a disk that was later deleted and recreated under the same name, the disk ID would identify the exact version of the disk that was used.
+        class DiskAsyncReplication
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] async_replication_disk
+        #   @return [::Google::Cloud::Compute::V1::DiskAsyncReplication]
+        class DiskAsyncReplicationList
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A specification of the desired way to instantiate a disk in the instance template when its created from a source instance.
@@ -6510,6 +6657,56 @@ module Google
           class ResourceManagerTagsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # @!attribute [rw] async_primary_disk
+        #   @return [::Google::Cloud::Compute::V1::DiskResourceStatusAsyncReplicationStatus]
+        # @!attribute [rw] async_secondary_disks
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Compute::V1::DiskResourceStatusAsyncReplicationStatus}]
+        #     Key: disk, value: AsyncReplicationStatus message
+        class DiskResourceStatus
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Compute::V1::DiskResourceStatusAsyncReplicationStatus]
+          class AsyncSecondaryDisksEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # @!attribute [rw] state
+        #   @return [::String]
+        #     Check the State enum for the list of possible values.
+        class DiskResourceStatusAsyncReplicationStatus
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+
+          module State
+            # A value indicating that the enum field is not set.
+            UNDEFINED_STATE = 0
+
+            # Replication is active.
+            ACTIVE = 314_733_318
+
+            # Secondary disk is created and is waiting for replication to start.
+            CREATED = 135_924_424
+
+            # Replication is starting.
+            STARTING = 488_820_800
+
+            STATE_UNSPECIFIED = 470_755_401
+
+            # Replication is stopped.
+            STOPPED = 444_276_141
+
+            # Replication is stopping.
+            STOPPING = 350_791_796
           end
         end
 
@@ -6653,6 +6850,23 @@ module Google
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning which replaces the list of disks when the list is empty.
         class DisksScopedList
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] async_secondary_disk
+        #   @return [::String]
+        #     The secondary disk to start asynchronous replication to. You can provide this as a partial or full URL to the resource. For example, the following are valid values: - https://www.googleapis.com/compute/v1/projects/project/zones/zone /disks/disk - https://www.googleapis.com/compute/v1/projects/project/regions/region /disks/disk - projects/project/zones/zone/disks/disk - projects/project/regions/region/disks/disk - zones/zone/disks/disk - regions/region/disks/disk
+        class DisksStartAsyncReplicationRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A transient resource used in compute.disks.stopGroupAsyncReplication and compute.regionDisks.stopGroupAsyncReplication. It is only used to process requests and is not persisted.
+        # @!attribute [rw] resource_policy
+        #   @return [::String]
+        #     The URL of the DiskConsistencyGroupPolicy for the group of disks to stop. This may be a full or partial URL, such as: - https://www.googleapis.com/compute/v1/projects/project/regions/region /resourcePolicies/resourcePolicy - projects/project/regions/region/resourcePolicies/resourcePolicy - regions/region/resourcePolicies/resourcePolicy
+        class DisksStopGroupAsyncReplicationResource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -7306,18 +7520,42 @@ module Google
         end
 
         # Represents a match condition that incoming traffic is evaluated against. Exactly one field must be specified.
+        # @!attribute [rw] dest_address_groups
+        #   @return [::Array<::String>]
+        #     Address groups which should be matched against the traffic destination. Maximum number of destination address groups is 10.
+        # @!attribute [rw] dest_fqdns
+        #   @return [::Array<::String>]
+        #     Fully Qualified Domain Name (FQDN) which should be matched against traffic destination. Maximum number of destination fqdn allowed is 100.
         # @!attribute [rw] dest_ip_ranges
         #   @return [::Array<::String>]
         #     CIDR IP address range. Maximum number of destination CIDR IP ranges allowed is 5000.
+        # @!attribute [rw] dest_region_codes
+        #   @return [::Array<::String>]
+        #     Region codes whose IP addresses will be used to match for destination of traffic. Should be specified as 2 letter country code defined as per ISO 3166 alpha-2 country codes. ex."US" Maximum number of dest region codes allowed is 5000.
+        # @!attribute [rw] dest_threat_intelligences
+        #   @return [::Array<::String>]
+        #     Names of Network Threat Intelligence lists. The IPs in these lists will be matched against traffic destination.
         # @!attribute [rw] layer4_configs
         #   @return [::Array<::Google::Cloud::Compute::V1::FirewallPolicyRuleMatcherLayer4Config>]
         #     Pairs of IP protocols and ports that the rule should match.
+        # @!attribute [rw] src_address_groups
+        #   @return [::Array<::String>]
+        #     Address groups which should be matched against the traffic source. Maximum number of source address groups is 10.
+        # @!attribute [rw] src_fqdns
+        #   @return [::Array<::String>]
+        #     Fully Qualified Domain Name (FQDN) which should be matched against traffic source. Maximum number of source fqdn allowed is 100.
         # @!attribute [rw] src_ip_ranges
         #   @return [::Array<::String>]
         #     CIDR IP address range. Maximum number of source CIDR IP ranges allowed is 5000.
+        # @!attribute [rw] src_region_codes
+        #   @return [::Array<::String>]
+        #     Region codes whose IP addresses will be used to match for source of traffic. Should be specified as 2 letter country code defined as per ISO 3166 alpha-2 country codes. ex."US" Maximum number of source region codes allowed is 5000.
         # @!attribute [rw] src_secure_tags
         #   @return [::Array<::Google::Cloud::Compute::V1::FirewallPolicyRuleSecureTag>]
         #     List of secure tag values, which should be matched at the source of the traffic. For INGRESS rule, if all the srcSecureTag are INEFFECTIVE, and there is no srcIpRange, this rule will be ignored. Maximum number of source tag values allowed is 256.
+        # @!attribute [rw] src_threat_intelligences
+        #   @return [::Array<::String>]
+        #     Names of Network Threat Intelligence lists. The IPs in these lists will be matched against traffic source.
         class FirewallPolicyRuleMatcher
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -7385,6 +7623,9 @@ module Google
         # @!attribute [rw] allow_global_access
         #   @return [::Boolean]
         #     This field is used along with the backend_service field for internal load balancing or with the target field for internal TargetInstance. If the field is set to TRUE, clients can access ILB from all regions. Otherwise only allows access from clients in the same region as the internal load balancer.
+        # @!attribute [rw] allow_psc_global_access
+        #   @return [::Boolean]
+        #     This is used in PSC consumer ForwardingRule to control whether the PSC endpoint can be accessed from another region.
         # @!attribute [rw] backend_service
         #   @return [::String]
         #     Identifies the backend service to which the forwarding rule sends traffic. Required for Internal TCP/UDP Load Balancing and Network Load Balancing; must be omitted for all other load balancer types.
@@ -7431,7 +7672,7 @@ module Google
         #     Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash. For Private Service Connect forwarding rules that forward traffic to Google APIs, the forwarding rule name must be a 1-20 characters string with lowercase letters and numbers and must start with a letter.
         # @!attribute [rw] network
         #   @return [::String]
-        #     This field is not used for external load balancing. For Internal TCP/UDP Load Balancing, this field identifies the network that the load balanced IP should belong to for this Forwarding Rule. If this field is not specified, the default network will be used. For Private Service Connect forwarding rules that forward traffic to Google APIs, a network must be provided.
+        #     This field is not used for external load balancing. For Internal TCP/UDP Load Balancing, this field identifies the network that the load balanced IP should belong to for this Forwarding Rule. If the subnetwork is specified, the network of the subnetwork will be used. If neither subnetwork nor this field is specified, the default network will be used. For Private Service Connect forwarding rules that forward traffic to Google APIs, a network must be provided.
         # @!attribute [rw] network_tier
         #   @return [::String]
         #     This signifies the networking tier used for configuring this load balancer and can only take the following values: PREMIUM, STANDARD. For regional ForwardingRule, the valid values are PREMIUM and STANDARD. For GlobalForwardingRule, the valid value is PREMIUM. If this field is not specified, it is assumed to be PREMIUM. If IPAddress is specified, this value must be equal to the networkTier of the Address.
@@ -8563,6 +8804,18 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for InterconnectRemoteLocations.Get. See the method description for details.
+        # @!attribute [rw] interconnect_remote_location
+        #   @return [::String]
+        #     Name of the interconnect remote location to return.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        class GetInterconnectRemoteLocationRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for Interconnects.Get. See the method description for details.
         # @!attribute [rw] interconnect
         #   @return [::String]
@@ -8633,6 +8886,9 @@ module Google
         # @!attribute [rw] max_results
         #   @return [::Integer]
         #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+        # @!attribute [rw] nat_name
+        #   @return [::String]
+        #     Name of the nat service to filter the Nat Mapping information. If it is omitted, all nats for this router will be returned. Name should conform to RFC1035.
         # @!attribute [rw] order_by
         #   @return [::String]
         #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
@@ -9631,6 +9887,17 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     An optional destination address description if intended to be different from the source.
+        # @!attribute [rw] destination_address
+        #   @return [::String]
+        #     The URL of the destination address to move to. This can be a full or partial URL. For example, the following are all valid URLs to a address: - https://www.googleapis.com/compute/v1/projects/project /global/addresses/address - projects/project/global/addresses/address Note that destination project must be different from the source project. So /global/addresses/address is not valid partial url.
+        class GlobalAddressesMoveRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # @!attribute [rw] network_endpoints
         #   @return [::Array<::Google::Cloud::Compute::V1::NetworkEndpoint>]
         #     The list of network endpoints to be attached.
@@ -9745,13 +10012,13 @@ module Google
         # Guest OS features.
         # @!attribute [rw] type
         #   @return [::String]
-        #     The ID of a supported feature. To add multiple values, use commas to separate values. Set to one or more of the following values: - VIRTIO_SCSI_MULTIQUEUE - WINDOWS - MULTI_IP_SUBNET - UEFI_COMPATIBLE - GVNIC - SEV_CAPABLE - SUSPEND_RESUME_COMPATIBLE - SEV_SNP_CAPABLE - TDX_CAPABLE For more information, see Enabling guest operating system features.
+        #     The ID of a supported feature. To add multiple values, use commas to separate values. Set to one or more of the following values: - VIRTIO_SCSI_MULTIQUEUE - WINDOWS - MULTI_IP_SUBNET - UEFI_COMPATIBLE - GVNIC - SEV_CAPABLE - SUSPEND_RESUME_COMPATIBLE - SEV_LIVE_MIGRATABLE - SEV_SNP_CAPABLE For more information, see Enabling guest operating system features.
         #     Check the Type enum for the list of possible values.
         class GuestOsFeature
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # The ID of a supported feature. To add multiple values, use commas to separate values. Set to one or more of the following values: - VIRTIO_SCSI_MULTIQUEUE - WINDOWS - MULTI_IP_SUBNET - UEFI_COMPATIBLE - GVNIC - SEV_CAPABLE - SUSPEND_RESUME_COMPATIBLE - SEV_SNP_CAPABLE - TDX_CAPABLE For more information, see Enabling guest operating system features.
+          # The ID of a supported feature. To add multiple values, use commas to separate values. Set to one or more of the following values: - VIRTIO_SCSI_MULTIQUEUE - WINDOWS - MULTI_IP_SUBNET - UEFI_COMPATIBLE - GVNIC - SEV_CAPABLE - SUSPEND_RESUME_COMPATIBLE - SEV_LIVE_MIGRATABLE - SEV_SNP_CAPABLE For more information, see Enabling guest operating system features.
           module Type
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
@@ -9937,7 +10204,7 @@ module Google
           end
         end
 
-        # Represents a Health Check resource. Google Compute Engine has two Health Check resources: * [Global](/compute/docs/reference/rest/v1/healthChecks) * [Regional](/compute/docs/reference/rest/v1/regionHealthChecks) Internal HTTP(S) load balancers must use regional health checks (`compute.v1.regionHealthChecks`). Traffic Director must use global health checks (`compute.v1.HealthChecks`). Internal TCP/UDP load balancers can use either regional or global health checks (`compute.v1.regionHealthChecks` or `compute.v1.HealthChecks`). External HTTP(S), TCP proxy, and SSL proxy load balancers as well as managed instance group auto-healing must use global health checks (`compute.v1.HealthChecks`). Backend service-based network load balancers must use regional health checks (`compute.v1.regionHealthChecks`). Target pool-based network load balancers must use legacy HTTP health checks (`compute.v1.httpHealthChecks`). For more information, see Health checks overview.
+        # Represents a Health Check resource. Google Compute Engine has two Health Check resources: * [Global](/compute/docs/reference/rest/v1/healthChecks) * [Regional](/compute/docs/reference/rest/v1/regionHealthChecks) Internal HTTP(S) load balancers must use regional health checks (`compute.v1.regionHealthChecks`). Traffic Director must use global health checks (`compute.v1.healthChecks`). Internal TCP/UDP load balancers can use either regional or global health checks (`compute.v1.regionHealthChecks` or `compute.v1.healthChecks`). External HTTP(S), TCP proxy, and SSL proxy load balancers as well as managed instance group auto-healing must use global health checks (`compute.v1.healthChecks`). Backend service-based network load balancers must use regional health checks (`compute.v1.regionHealthChecks`). Target pool-based network load balancers must use legacy HTTP health checks (`compute.v1.httpHealthChecks`). For more information, see Health checks overview.
         # @!attribute [rw] check_interval_sec
         #   @return [::Integer]
         #     How often (in seconds) to send a health check. The default value is 5 seconds.
@@ -10199,7 +10466,7 @@ module Google
         #     A forwarding rule IP address assigned to this instance.
         # @!attribute [rw] health_state
         #   @return [::String]
-        #     Health state of the instance.
+        #     Health state of the IPv4 address of the instance.
         #     Check the HealthState enum for the list of possible values.
         # @!attribute [rw] instance
         #   @return [::String]
@@ -10228,7 +10495,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Health state of the instance.
+          # Health state of the IPv4 address of the instance.
           module HealthState
             # A value indicating that the enum field is not set.
             UNDEFINED_HEALTH_STATE = 0
@@ -10578,6 +10845,9 @@ module Google
         # @!attribute [rw] metadata_filters
         #   @return [::Array<::Google::Cloud::Compute::V1::MetadataFilter>]
         #     Opaque filter criteria used by the load balancer to restrict routing configuration to a limited set of xDS compliant clients. In their xDS requests to the load balancer, xDS clients present node metadata. When there is a match, the relevant routing configuration is made available to those proxies. For each metadataFilter in this list, if its filterMatchCriteria is set to MATCH_ANY, at least one of the filterLabels must match the corresponding label provided in the metadata. If its filterMatchCriteria is set to MATCH_ALL, then all of its filterLabels must match with corresponding labels provided in the metadata. If multiple metadata filters are specified, all of them need to be satisfied in order to be considered a match. metadataFilters specified here is applied after those specified in ForwardingRule that refers to the UrlMap this HttpRouteRuleMatch belongs to. metadataFilters only applies to load balancers that have loadBalancingScheme set to INTERNAL_SELF_MANAGED. Not supported when the URL map is bound to a target gRPC proxy that has validateForProxyless field set to true.
+        # @!attribute [rw] path_template_match
+        #   @return [::String]
+        #     If specified, the route is a pattern match expression that must match the :path header once the query string is removed. A pattern match allows you to match - The value must be between 1 and 1024 characters - The pattern must start with a leading slash ("/") - There may be no more than 5 operators in pattern Precisely one of prefix_match, full_path_match, regex_match or path_template_match must be set.
         # @!attribute [rw] prefix_match
         #   @return [::String]
         #     For satisfying the matchRule condition, the request's path must begin with the specified prefixMatch. prefixMatch must begin with a /. The value must be from 1 to 1024 characters. Only one of prefixMatch, fullPathMatch or regexMatch must be specified.
@@ -12078,6 +12348,9 @@ module Google
         # @!attribute [rw] id
         #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
+        # @!attribute [rw] instance_encryption_key
+        #   @return [::Google::Cloud::Compute::V1::CustomerEncryptionKey]
+        #     Encrypts suspended data for an instance with a customer-managed encryption key. If you are creating a new instance, this field will encrypt the local SSD and in-memory contents of the instance during the suspend operation. If you do not provide an encryption key when creating the instance, then the local SSD and in-memory contents will be encrypted using an automatically generated key during the suspend operation.
         # @!attribute [rw] key_revocation_action_type
         #   @return [::String]
         #     KeyRevocationActionType of the instance. Supported options are "STOP" and "NONE". The default value is "NONE" if it is not specified.
@@ -12219,7 +12492,7 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
-            # The Nanny is halted and we are performing tear down tasks like network deprogramming, releasing quota, IP, tearing down disks etc.
+            # The instance is halted and we are performing tear down tasks like network deprogramming, releasing quota, IP, tearing down disks etc.
             DEPROVISIONING = 428_935_662
 
             # Resources are being allocated for the instance.
@@ -12590,7 +12863,7 @@ module Google
         #     The URL for the health check that signals autohealing.
         # @!attribute [rw] initial_delay_sec
         #   @return [::Integer]
-        #     The number of seconds that the managed instance group waits before it applies autohealing policies to new instances or recently recreated instances. This initial delay allows instances to initialize and run their startup scripts before the instance group determines that they are UNHEALTHY. This prevents the managed instance group from recreating its instances prematurely. This value must be from range [0, 3600].
+        #     The initial delay is the number of seconds that a new VM takes to initialize and run its startup script. During a VM's initial delay period, the MIG ignores unsuccessful health checks because the VM might be in the startup process. This prevents the MIG from prematurely recreating a VM. If the health check receives a healthy response during the initial delay, it indicates that the startup process is complete and the VM is ready. The value of initial delay must be between 0 and 3600 seconds. The default value is 0.
         class InstanceGroupManagerAutoHealingPolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -12680,7 +12953,7 @@ module Google
         #     Check the MinimalAction enum for the list of possible values.
         # @!attribute [rw] most_disruptive_allowed_action
         #   @return [::String]
-        #     Most disruptive action that is allowed to be taken on an instance. You can specify either NONE to forbid any actions, REFRESH to allow actions that do not need instance restart, RESTART to allow actions that can be applied without instance replacing or REPLACE to allow all possible actions. If the Updater determines that the minimal update action needed is more disruptive than most disruptive allowed action you specify it will not perform the update at all.
+        #     Most disruptive action that is allowed to be taken on an instance. You can specify either NONE to forbid any actions, REFRESH to avoid restarting the VM and to limit disruption as much as possible. RESTART to allow actions that can be applied without instance replacing or REPLACE to allow all possible actions. If the Updater determines that the minimal update action needed is more disruptive than most disruptive allowed action you specify it will not perform the update at all.
         #     Check the MostDisruptiveAllowedAction enum for the list of possible values.
         # @!attribute [rw] replacement_method
         #   @return [::String]
@@ -12714,7 +12987,7 @@ module Google
             UNDEFINED_MINIMAL_ACTION = 0
           end
 
-          # Most disruptive action that is allowed to be taken on an instance. You can specify either NONE to forbid any actions, REFRESH to allow actions that do not need instance restart, RESTART to allow actions that can be applied without instance replacing or REPLACE to allow all possible actions. If the Updater determines that the minimal update action needed is more disruptive than most disruptive allowed action you specify it will not perform the update at all.
+          # Most disruptive action that is allowed to be taken on an instance. You can specify either NONE to forbid any actions, REFRESH to avoid restarting the VM and to limit disruption as much as possible. RESTART to allow actions that can be applied without instance replacing or REPLACE to allow all possible actions. If the Updater determines that the minimal update action needed is more disruptive than most disruptive allowed action you specify it will not perform the update at all.
           # Additional supported values which may be not listed in the enum directly due to technical reasons:
           # NONE
           # REFRESH
@@ -12780,17 +13053,17 @@ module Google
         #     The list of URLs of one or more instances for which you want to apply updates. Each URL can be a full URL or a partial URL, such as zones/[ZONE]/instances/[INSTANCE_NAME].
         # @!attribute [rw] minimal_action
         #   @return [::String]
-        #     The minimal action that you want to perform on each instance during the update: - REPLACE: At minimum, delete the instance and create it again. - RESTART: Stop the instance and start it again. - REFRESH: Do not stop the instance. - NONE: Do not disrupt the instance at all. By default, the minimum action is NONE. If your update requires a more disruptive action than you set with this flag, the necessary action is performed to execute the update.
+        #     The minimal action that you want to perform on each instance during the update: - REPLACE: At minimum, delete the instance and create it again. - RESTART: Stop the instance and start it again. - REFRESH: Do not stop the instance and limit disruption as much as possible. - NONE: Do not disrupt the instance at all. By default, the minimum action is NONE. If your update requires a more disruptive action than you set with this flag, the necessary action is performed to execute the update.
         #     Check the MinimalAction enum for the list of possible values.
         # @!attribute [rw] most_disruptive_allowed_action
         #   @return [::String]
-        #     The most disruptive action that you want to perform on each instance during the update: - REPLACE: Delete the instance and create it again. - RESTART: Stop the instance and start it again. - REFRESH: Do not stop the instance. - NONE: Do not disrupt the instance at all. By default, the most disruptive allowed action is REPLACE. If your update requires a more disruptive action than you set with this flag, the update request will fail.
+        #     The most disruptive action that you want to perform on each instance during the update: - REPLACE: Delete the instance and create it again. - RESTART: Stop the instance and start it again. - REFRESH: Do not stop the instance and limit disruption as much as possible. - NONE: Do not disrupt the instance at all. By default, the most disruptive allowed action is REPLACE. If your update requires a more disruptive action than you set with this flag, the update request will fail.
         #     Check the MostDisruptiveAllowedAction enum for the list of possible values.
         class InstanceGroupManagersApplyUpdatesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # The minimal action that you want to perform on each instance during the update: - REPLACE: At minimum, delete the instance and create it again. - RESTART: Stop the instance and start it again. - REFRESH: Do not stop the instance. - NONE: Do not disrupt the instance at all. By default, the minimum action is NONE. If your update requires a more disruptive action than you set with this flag, the necessary action is performed to execute the update.
+          # The minimal action that you want to perform on each instance during the update: - REPLACE: At minimum, delete the instance and create it again. - RESTART: Stop the instance and start it again. - REFRESH: Do not stop the instance and limit disruption as much as possible. - NONE: Do not disrupt the instance at all. By default, the minimum action is NONE. If your update requires a more disruptive action than you set with this flag, the necessary action is performed to execute the update.
           # Additional supported values which may be not listed in the enum directly due to technical reasons:
           # NONE
           # REFRESH
@@ -12801,7 +13074,7 @@ module Google
             UNDEFINED_MINIMAL_ACTION = 0
           end
 
-          # The most disruptive action that you want to perform on each instance during the update: - REPLACE: Delete the instance and create it again. - RESTART: Stop the instance and start it again. - REFRESH: Do not stop the instance. - NONE: Do not disrupt the instance at all. By default, the most disruptive allowed action is REPLACE. If your update requires a more disruptive action than you set with this flag, the update request will fail.
+          # The most disruptive action that you want to perform on each instance during the update: - REPLACE: Delete the instance and create it again. - RESTART: Stop the instance and start it again. - REFRESH: Do not stop the instance and limit disruption as much as possible. - NONE: Do not disrupt the instance at all. By default, the most disruptive allowed action is REPLACE. If your update requires a more disruptive action than you set with this flag, the update request will fail.
           # Additional supported values which may be not listed in the enum directly due to technical reasons:
           # NONE
           # REFRESH
@@ -12824,7 +13097,7 @@ module Google
 
         # @!attribute [rw] instances
         #   @return [::Array<::String>]
-        #     The URLs of one or more instances to delete. This can be a full URL or a partial URL, such as zones/[ZONE]/instances/[INSTANCE_NAME].
+        #     The URLs of one or more instances to delete. This can be a full URL or a partial URL, such as zones/[ZONE]/instances/[INSTANCE_NAME]. Queued instances do not have URL and can be deleted only by name. One cannot specify both URLs and names in a single request.
         # @!attribute [rw] skip_instances_on_validation_error
         #   @return [::Boolean]
         #     Specifies whether the request should proceed despite the inclusion of instances that are not members of the group or that are already in the process of being deleted or abandoned. If this field is set to `false` and such an instance is specified in the request, the operation fails. The operation always fails if the request contains a malformed instance URL or a reference to an instance that exists in a zone or region other than the group's zone or region.
@@ -13427,7 +13700,7 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_STATUS = 0
 
-            # The Nanny is halted and we are performing tear down tasks like network deprogramming, releasing quota, IP, tearing down disks etc.
+            # The instance is halted and we are performing tear down tasks like network deprogramming, releasing quota, IP, tearing down disks etc.
             DEPROVISIONING = 428_935_662
 
             # Resources are being allocated for the instance.
@@ -13617,7 +13890,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Represents an Interconnect resource. An Interconnect resource is a dedicated connection between the GCP network and your on-premises network. For more information, read the Dedicated Interconnect Overview.
+        # Represents an Interconnect resource. An Interconnect resource is a dedicated connection between the Google Cloud network and your on-premises network. For more information, read the Dedicated Interconnect Overview.
         # @!attribute [rw] admin_enabled
         #   @return [::Boolean]
         #     Administrative status of the interconnect. When this is set to true, the Interconnect is functional and can carry traffic. When set to false, no packets can be carried over the interconnect and no BGP routes are exchanged over it. By default, the status is set to true.
@@ -13655,6 +13928,12 @@ module Google
         # @!attribute [rw] kind
         #   @return [::String]
         #     [Output Only] Type of the resource. Always compute#interconnect for interconnects.
+        # @!attribute [rw] label_fingerprint
+        #   @return [::String]
+        #     A fingerprint for the labels being applied to this Interconnect, which is essentially a hash of the labels set used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update labels. You must always provide an up-to-date fingerprint hash in order to update or change labels, otherwise the request will fail with error 412 conditionNotMet. To see the latest fingerprint, make a get() request to retrieve an Interconnect.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Labels for this resource. These can only be added or modified by the setLabels method. Each label key/value pair must comply with RFC1035. Label values may be empty.
         # @!attribute [rw] link_type
         #   @return [::String]
         #     Type of link requested, which can take one of the following values: - LINK_TYPE_ETHERNET_10G_LR: A 10G Ethernet with LR optics - LINK_TYPE_ETHERNET_100G_LR: A 100G Ethernet with LR optics. Note that this field indicates the speed of each of the links in the bundle, not the speed of the entire bundle.
@@ -13678,6 +13957,9 @@ module Google
         # @!attribute [rw] provisioned_link_count
         #   @return [::Integer]
         #     [Output Only] Number of links actually provisioned in this interconnect.
+        # @!attribute [rw] remote_location
+        #   @return [::String]
+        #     Indicates that this is a Cross-Cloud Interconnect. This field specifies the location outside of Google's network that the interconnect is connected to.
         # @!attribute [rw] requested_link_count
         #   @return [::Integer]
         #     Target number of physical links in the link bundle, as requested by the customer.
@@ -13694,6 +13976,15 @@ module Google
         class Interconnect
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # Type of interconnect, which can take one of the following values: - PARTNER: A partner-managed interconnection shared between customers though a partner. - DEDICATED: A dedicated physical interconnection with the customer. Note that a value IT_PRIVATE has been deprecated in favor of DEDICATED.
           module InterconnectType
@@ -13770,6 +14061,9 @@ module Google
         # @!attribute [rw] cloud_router_ipv6_interface_id
         #   @return [::String]
         #     This field is not available.
+        # @!attribute [rw] configuration_constraints
+        #   @return [::Google::Cloud::Compute::V1::InterconnectAttachmentConfigurationConstraints]
+        #     [Output Only] Constraints for this attachment, if any. The attachment does not work if these constraints are not met.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
         #     [Output Only] Creation timestamp in RFC3339 text format.
@@ -13807,10 +14101,16 @@ module Google
         #     URL of the underlying Interconnect object that this attachment's traffic will traverse through.
         # @!attribute [rw] ipsec_internal_addresses
         #   @return [::Array<::String>]
-        #     A list of URLs of addresses that have been reserved for the VLAN attachment. Used only for the VLAN attachment that has the encryption option as IPSEC. The addresses must be regional internal IP address ranges. When creating an HA VPN gateway over the VLAN attachment, if the attachment is configured to use a regional internal IP address, then the VPN gateway's IP address is allocated from the IP address range specified here. For example, if the HA VPN gateway's interface 0 is paired to this VLAN attachment, then a regional internal IP address for the VPN gateway interface 0 will be allocated from the IP address specified for this VLAN attachment. If this field is not specified when creating the VLAN attachment, then later on when creating an HA VPN gateway on this VLAN attachment, the HA VPN gateway's IP address is allocated from the regional external IP address pool. Not currently available publicly.
+        #     A list of URLs of addresses that have been reserved for the VLAN attachment. Used only for the VLAN attachment that has the encryption option as IPSEC. The addresses must be regional internal IP address ranges. When creating an HA VPN gateway over the VLAN attachment, if the attachment is configured to use a regional internal IP address, then the VPN gateway's IP address is allocated from the IP address range specified here. For example, if the HA VPN gateway's interface 0 is paired to this VLAN attachment, then a regional internal IP address for the VPN gateway interface 0 will be allocated from the IP address specified for this VLAN attachment. If this field is not specified when creating the VLAN attachment, then later on when creating an HA VPN gateway on this VLAN attachment, the HA VPN gateway's IP address is allocated from the regional external IP address pool.
         # @!attribute [rw] kind
         #   @return [::String]
         #     [Output Only] Type of the resource. Always compute#interconnectAttachment for interconnect attachments.
+        # @!attribute [rw] label_fingerprint
+        #   @return [::String]
+        #     A fingerprint for the labels being applied to this InterconnectAttachment, which is essentially a hash of the labels set used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update labels. You must always provide an up-to-date fingerprint hash in order to update or change labels, otherwise the request will fail with error 412 conditionNotMet. To see the latest fingerprint, make a get() request to retrieve an InterconnectAttachment.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Labels for this resource. These can only be added or modified by the setLabels method. Each label key/value pair must comply with RFC1035. Label values may be empty.
         # @!attribute [rw] mtu
         #   @return [::Integer]
         #     Maximum Transmission Unit (MTU), in bytes, of packets passing through this interconnect attachment. Only 1440 and 1500 are allowed. If not specified, the value will default to 1440.
@@ -13836,6 +14136,9 @@ module Google
         # @!attribute [rw] region
         #   @return [::String]
         #     [Output Only] URL of the region where the regional interconnect attachment resides. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.
+        # @!attribute [rw] remote_service
+        #   @return [::String]
+        #     [Output Only] If the attachment is on a Cross-Cloud Interconnect connection, this field contains the interconnect's remote location service provider. Example values: "Amazon Web Services" "Microsoft Azure". The field is set only for attachments on Cross-Cloud Interconnect connections. Its value is copied from the InterconnectRemoteLocation remoteService field.
         # @!attribute [rw] router
         #   @return [::String]
         #     URL of the Cloud Router to be used for dynamic routing. This router must be in the same region as this InterconnectAttachment. The InterconnectAttachment will automatically connect the Interconnect to the network & region within which the Cloud Router is configured.
@@ -13853,6 +14156,9 @@ module Google
         #   @return [::String]
         #     [Output Only] The current state of this attachment's functionality. Enum values ACTIVE and UNPROVISIONED are shared by DEDICATED/PRIVATE, PARTNER, and PARTNER_PROVIDER interconnect attachments, while enum values PENDING_PARTNER, PARTNER_REQUEST_RECEIVED, and PENDING_CUSTOMER are used for only PARTNER and PARTNER_PROVIDER interconnect attachments. This state can take one of the following values: - ACTIVE: The attachment has been turned up and is ready to use. - UNPROVISIONED: The attachment is not ready to use yet, because turnup is not complete. - PENDING_PARTNER: A newly-created PARTNER attachment that has not yet been configured on the Partner side. - PARTNER_REQUEST_RECEIVED: A PARTNER attachment is in the process of provisioning after a PARTNER_PROVIDER attachment was created that references it. - PENDING_CUSTOMER: A PARTNER or PARTNER_PROVIDER attachment that is waiting for a customer to activate it. - DEFUNCT: The attachment was deleted externally and is no longer functional. This could be because the associated Interconnect was removed, or because the other side of a Partner attachment was deleted.
         #     Check the State enum for the list of possible values.
+        # @!attribute [rw] subnet_length
+        #   @return [::Integer]
+        #     Length of the IPv4 subnet mask. Allowed values: - 29 (default) - 30 The default value is 29, except for Cross-Cloud Interconnect connections that use an InterconnectRemoteLocation with a constraints.subnetLengthRange.min equal to 30. For example, connections that use an Azure remote location fall into this category. In these cases, the default value is 30, and requesting 29 returns an error. Where both 29 and 30 are allowed, 29 is preferred, because it gives Google Cloud Support more debugging visibility.
         # @!attribute [rw] type
         #   @return [::String]
         #     The type of interconnect attachment this is, which can take one of the following values: - DEDICATED: an attachment to a Dedicated Interconnect. - PARTNER: an attachment to a Partner Interconnect, created by the customer. - PARTNER_PROVIDER: an attachment to a Partner Interconnect, created by the partner.
@@ -13863,6 +14169,15 @@ module Google
         class InterconnectAttachment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # Provisioned bandwidth capacity for the interconnect attachment. For attachments of type DEDICATED, the user can set the bandwidth. For attachments of type PARTNER, the Google Partner that is operating the interconnect must set the bandwidth. Output only for PARTNER type, mutable for PARTNER_PROVIDER and DEDICATED, and can take one of the following values: - BPS_50M: 50 Mbit/s - BPS_100M: 100 Mbit/s - BPS_200M: 200 Mbit/s - BPS_300M: 300 Mbit/s - BPS_400M: 400 Mbit/s - BPS_500M: 500 Mbit/s - BPS_1G: 1 Gbit/s - BPS_2G: 2 Gbit/s - BPS_5G: 5 Gbit/s - BPS_10G: 10 Gbit/s - BPS_20G: 20 Gbit/s - BPS_50G: 50 Gbit/s
           module Bandwidth
@@ -14029,6 +14344,42 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # @!attribute [rw] bgp_md5
+        #   @return [::String]
+        #     [Output Only] Whether the attachment's BGP session requires/allows/disallows BGP MD5 authentication. This can take one of the following values: MD5_OPTIONAL, MD5_REQUIRED, MD5_UNSUPPORTED. For example, a Cross-Cloud Interconnect connection to a remote cloud provider that requires BGP MD5 authentication has the interconnectRemoteLocation attachment_configuration_constraints.bgp_md5 field set to MD5_REQUIRED, and that property is propagated to the attachment. Similarly, if BGP MD5 is MD5_UNSUPPORTED, an error is returned if MD5 is requested.
+        #     Check the BgpMd5 enum for the list of possible values.
+        # @!attribute [rw] bgp_peer_asn_ranges
+        #   @return [::Array<::Google::Cloud::Compute::V1::InterconnectAttachmentConfigurationConstraintsBgpPeerASNRange>]
+        #     [Output Only] List of ASN ranges that the remote location is known to support. Formatted as an array of inclusive ranges \\{min: min-value, max: max-value}. For example, [\\{min: 123, max: 123}, \\{min: 64512, max: 65534}] allows the peer ASN to be 123 or anything in the range 64512-65534. This field is only advisory. Although the API accepts other ranges, these are the ranges that we recommend.
+        class InterconnectAttachmentConfigurationConstraints
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # [Output Only] Whether the attachment's BGP session requires/allows/disallows BGP MD5 authentication. This can take one of the following values: MD5_OPTIONAL, MD5_REQUIRED, MD5_UNSUPPORTED. For example, a Cross-Cloud Interconnect connection to a remote cloud provider that requires BGP MD5 authentication has the interconnectRemoteLocation attachment_configuration_constraints.bgp_md5 field set to MD5_REQUIRED, and that property is propagated to the attachment. Similarly, if BGP MD5 is MD5_UNSUPPORTED, an error is returned if MD5 is requested.
+          module BgpMd5
+            # A value indicating that the enum field is not set.
+            UNDEFINED_BGP_MD5 = 0
+
+            # MD5_OPTIONAL: BGP MD5 authentication is supported and can optionally be configured.
+            MD5_OPTIONAL = 532_156_673
+
+            # MD5_REQUIRED: BGP MD5 authentication must be configured.
+            MD5_REQUIRED = 218_034_496
+
+            # MD5_UNSUPPORTED: BGP MD5 authentication must not be configured
+            MD5_UNSUPPORTED = 86_962_388
+          end
+        end
+
+        # @!attribute [rw] max
+        #   @return [::Integer]
+        # @!attribute [rw] min
+        #   @return [::Integer]
+        class InterconnectAttachmentConfigurationConstraintsBgpPeerASNRange
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Response to the list request, and contains a list of interconnect attachments.
@@ -14520,6 +14871,196 @@ module Google
             # [Deprecated] The outage associated with this notification was canceled before the outage was due to start.
             NS_CANCELED = 506_579_411
           end
+        end
+
+        # Represents a Cross-Cloud Interconnect Remote Location resource. You can use this resource to find remote location details about an Interconnect attachment (VLAN).
+        # @!attribute [rw] address
+        #   @return [::String]
+        #     [Output Only] The postal address of the Point of Presence, each line in the address is separated by a newline character.
+        # @!attribute [rw] attachment_configuration_constraints
+        #   @return [::Google::Cloud::Compute::V1::InterconnectAttachmentConfigurationConstraints]
+        #     [Output Only] Subset of fields from InterconnectAttachment's |configurationConstraints| field that apply to all attachments for this remote location.
+        # @!attribute [rw] city
+        #   @return [::String]
+        #     [Output Only] Metropolitan area designator that indicates which city an interconnect is located. For example: "Chicago, IL", "Amsterdam, Netherlands".
+        # @!attribute [rw] constraints
+        #   @return [::Google::Cloud::Compute::V1::InterconnectRemoteLocationConstraints]
+        #     [Output Only] Constraints on the parameters for creating Cross-Cloud Interconnect and associated InterconnectAttachments.
+        # @!attribute [rw] continent
+        #   @return [::String]
+        #     [Output Only] Continent for this location, which can take one of the following values: - AFRICA - ASIA_PAC - EUROPE - NORTH_AMERICA - SOUTH_AMERICA
+        #     Check the Continent enum for the list of possible values.
+        # @!attribute [rw] creation_timestamp
+        #   @return [::String]
+        #     [Output Only] Creation timestamp in RFC3339 text format.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     [Output Only] An optional description of the resource.
+        # @!attribute [rw] facility_provider
+        #   @return [::String]
+        #     [Output Only] The name of the provider for this facility (e.g., EQUINIX).
+        # @!attribute [rw] facility_provider_facility_id
+        #   @return [::String]
+        #     [Output Only] A provider-assigned Identifier for this facility (e.g., Ashburn-DC1).
+        # @!attribute [rw] id
+        #   @return [::Integer]
+        #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
+        # @!attribute [rw] kind
+        #   @return [::String]
+        #     [Output Only] Type of the resource. Always compute#interconnectRemoteLocation for interconnect remote locations.
+        # @!attribute [rw] lacp
+        #   @return [::String]
+        #     [Output Only] Link Aggregation Control Protocol (LACP) constraints, which can take one of the following values: LACP_SUPPORTED, LACP_UNSUPPORTED
+        #     Check the Lacp enum for the list of possible values.
+        # @!attribute [rw] max_lag_size100_gbps
+        #   @return [::Integer]
+        #     [Output Only] The maximum number of 100 Gbps ports supported in a link aggregation group (LAG). When linkType is 100 Gbps, requestedLinkCount cannot exceed max_lag_size_100_gbps.
+        # @!attribute [rw] max_lag_size10_gbps
+        #   @return [::Integer]
+        #     [Output Only] The maximum number of 10 Gbps ports supported in a link aggregation group (LAG). When linkType is 10 Gbps, requestedLinkCount cannot exceed max_lag_size_10_gbps.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     [Output Only] Name of the resource.
+        # @!attribute [rw] peeringdb_facility_id
+        #   @return [::String]
+        #     [Output Only] The peeringdb identifier for this facility (corresponding with a netfac type in peeringdb).
+        # @!attribute [rw] permitted_connections
+        #   @return [::Array<::Google::Cloud::Compute::V1::InterconnectRemoteLocationPermittedConnections>]
+        #     [Output Only] Permitted connections.
+        # @!attribute [rw] remote_service
+        #   @return [::String]
+        #     [Output Only] Indicates the service provider present at the remote location. Example values: "Amazon Web Services", "Microsoft Azure".
+        # @!attribute [rw] self_link
+        #   @return [::String]
+        #     [Output Only] Server-defined URL for the resource.
+        # @!attribute [rw] status
+        #   @return [::String]
+        #     [Output Only] The status of this InterconnectRemoteLocation, which can take one of the following values: - CLOSED: The InterconnectRemoteLocation is closed and is unavailable for provisioning new Cross-Cloud Interconnects. - AVAILABLE: The InterconnectRemoteLocation is available for provisioning new Cross-Cloud Interconnects.
+        #     Check the Status enum for the list of possible values.
+        class InterconnectRemoteLocation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # [Output Only] Continent for this location, which can take one of the following values: - AFRICA - ASIA_PAC - EUROPE - NORTH_AMERICA - SOUTH_AMERICA
+          module Continent
+            # A value indicating that the enum field is not set.
+            UNDEFINED_CONTINENT = 0
+
+            AFRICA = 317_443_706
+
+            ASIA_PAC = 119_782_269
+
+            EUROPE = 445_819_298
+
+            NORTH_AMERICA = 448_015_508
+
+            SOUTH_AMERICA = 32_597_340
+          end
+
+          # [Output Only] Link Aggregation Control Protocol (LACP) constraints, which can take one of the following values: LACP_SUPPORTED, LACP_UNSUPPORTED
+          module Lacp
+            # A value indicating that the enum field is not set.
+            UNDEFINED_LACP = 0
+
+            # LACP_SUPPORTED: LACP is supported, and enabled by default on the Cross-Cloud Interconnect.
+            LACP_SUPPORTED = 339_576_113
+
+            # LACP_UNSUPPORTED: LACP is not supported and is not be enabled on this port. GetDiagnostics shows bundleAggregationType as "static". GCP does not support LAGs without LACP, so requestedLinkCount must be 1.
+            LACP_UNSUPPORTED = 203_930_104
+          end
+
+          # [Output Only] The status of this InterconnectRemoteLocation, which can take one of the following values: - CLOSED: The InterconnectRemoteLocation is closed and is unavailable for provisioning new Cross-Cloud Interconnects. - AVAILABLE: The InterconnectRemoteLocation is available for provisioning new Cross-Cloud Interconnects.
+          module Status
+            # A value indicating that the enum field is not set.
+            UNDEFINED_STATUS = 0
+
+            # The InterconnectRemoteLocation is available for provisioning new Cross-Cloud Interconnects.
+            AVAILABLE = 442_079_913
+
+            # The InterconnectRemoteLocation is closed for provisioning new Cross-Cloud Interconnects.
+            CLOSED = 380_163_436
+          end
+        end
+
+        # @!attribute [rw] port_pair_remote_location
+        #   @return [::String]
+        #     [Output Only] Port pair remote location constraints, which can take one of the following values: PORT_PAIR_UNCONSTRAINED_REMOTE_LOCATION, PORT_PAIR_MATCHING_REMOTE_LOCATION. GCP's API refers only to individual ports, but the UI uses this field when ordering a pair of ports, to prevent users from accidentally ordering something that is incompatible with their cloud provider. Specifically, when ordering a redundant pair of Cross-Cloud Interconnect ports, and one of them uses a remote location with portPairMatchingRemoteLocation set to matching, the UI requires that both ports use the same remote location.
+        #     Check the PortPairRemoteLocation enum for the list of possible values.
+        # @!attribute [rw] port_pair_vlan
+        #   @return [::String]
+        #     [Output Only] Port pair VLAN constraints, which can take one of the following values: PORT_PAIR_UNCONSTRAINED_VLAN, PORT_PAIR_MATCHING_VLAN
+        #     Check the PortPairVlan enum for the list of possible values.
+        # @!attribute [rw] subnet_length_range
+        #   @return [::Google::Cloud::Compute::V1::InterconnectRemoteLocationConstraintsSubnetLengthRange]
+        #     [Output Only] [min-length, max-length] The minimum and maximum value (inclusive) for the IPv4 subnet length. For example, an interconnectRemoteLocation for Azure has \\{min: 30, max: 30} because Azure requires /30 subnets. This range specifies the values supported by both cloud providers. Interconnect currently supports /29 and /30 IPv4 subnet lengths. If a remote cloud has no constraint on IPv4 subnet length, the range would thus be \\{min: 29, max: 30}.
+        class InterconnectRemoteLocationConstraints
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # [Output Only] Port pair remote location constraints, which can take one of the following values: PORT_PAIR_UNCONSTRAINED_REMOTE_LOCATION, PORT_PAIR_MATCHING_REMOTE_LOCATION. GCP's API refers only to individual ports, but the UI uses this field when ordering a pair of ports, to prevent users from accidentally ordering something that is incompatible with their cloud provider. Specifically, when ordering a redundant pair of Cross-Cloud Interconnect ports, and one of them uses a remote location with portPairMatchingRemoteLocation set to matching, the UI requires that both ports use the same remote location.
+          module PortPairRemoteLocation
+            # A value indicating that the enum field is not set.
+            UNDEFINED_PORT_PAIR_REMOTE_LOCATION = 0
+
+            # If PORT_PAIR_MATCHING_REMOTE_LOCATION, the remote cloud provider allocates ports in pairs, and the user should choose the same remote location for both ports.
+            PORT_PAIR_MATCHING_REMOTE_LOCATION = 207_291_859
+
+            # If PORT_PAIR_UNCONSTRAINED_REMOTE_LOCATION, a user may opt to provision a redundant pair of Cross-Cloud Interconnects using two different remote locations in the same city.
+            PORT_PAIR_UNCONSTRAINED_REMOTE_LOCATION = 60_609_829
+          end
+
+          # [Output Only] Port pair VLAN constraints, which can take one of the following values: PORT_PAIR_UNCONSTRAINED_VLAN, PORT_PAIR_MATCHING_VLAN
+          module PortPairVlan
+            # A value indicating that the enum field is not set.
+            UNDEFINED_PORT_PAIR_VLAN = 0
+
+            # If PORT_PAIR_MATCHING_VLAN, the Interconnect for this attachment is part of a pair of ports that should have matching VLAN allocations. This occurs with Cross-Cloud Interconnect to Azure remote locations. While GCP's API does not explicitly group pairs of ports, the UI uses this field to ensure matching VLAN ids when configuring a redundant VLAN pair.
+            PORT_PAIR_MATCHING_VLAN = 250_295_358
+
+            # PORT_PAIR_UNCONSTRAINED_VLAN means there is no constraint.
+            PORT_PAIR_UNCONSTRAINED_VLAN = 175_227_948
+          end
+        end
+
+        # @!attribute [rw] max
+        #   @return [::Integer]
+        # @!attribute [rw] min
+        #   @return [::Integer]
+        class InterconnectRemoteLocationConstraintsSubnetLengthRange
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response to the list request, and contains a list of interconnect remote locations.
+        # @!attribute [rw] id
+        #   @return [::String]
+        #     [Output Only] Unique identifier for the resource; defined by the server.
+        # @!attribute [rw] items
+        #   @return [::Array<::Google::Cloud::Compute::V1::InterconnectRemoteLocation>]
+        #     A list of InterconnectRemoteLocation resources.
+        # @!attribute [rw] kind
+        #   @return [::String]
+        #     [Output Only] Type of resource. Always compute#interconnectRemoteLocationList for lists of interconnect remote locations.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     [Output Only] This token lets you get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.
+        # @!attribute [rw] self_link
+        #   @return [::String]
+        #     [Output Only] Server-defined URL for this resource.
+        # @!attribute [rw] warning
+        #   @return [::Google::Cloud::Compute::V1::Warning]
+        #     [Output Only] Informational warning message.
+        class InterconnectRemoteLocationList
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] interconnect_location
+        #   @return [::String]
+        #     [Output Only] URL of an Interconnect location that is permitted to connect to this Interconnect remote location.
+        class InterconnectRemoteLocationPermittedConnections
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Response for the InterconnectsGetDiagnosticsRequest.
@@ -15518,6 +16059,30 @@ module Google
         #   @return [::Boolean]
         #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListInterconnectLocationsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for InterconnectRemoteLocations.List. See the method description for details.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:` operator can be used with string fields to match substrings. For non-string fields it is equivalent to the `=` operator. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`.
+        # @!attribute [rw] max_results
+        #   @return [::Integer]
+        #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] return_partial_success
+        #   @return [::Boolean]
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        class ListInterconnectRemoteLocationsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -17919,7 +18484,7 @@ module Google
             # A value indicating that the enum field is not set.
             UNDEFINED_INSTANCE_STATUS = 0
 
-            # The Nanny is halted and we are performing tear down tasks like network deprogramming, releasing quota, IP, tearing down disks etc.
+            # The instance is halted and we are performing tear down tasks like network deprogramming, releasing quota, IP, tearing down disks etc.
             DEPROVISIONING = 428_935_662
 
             # Resources are being allocated for the instance.
@@ -18056,6 +18621,27 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for Addresses.Move. See the method description for details.
+        # @!attribute [rw] address
+        #   @return [::String]
+        #     Name of the address resource to move.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Source project ID which the Address is moved from.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region for this request.
+        # @!attribute [rw] region_addresses_move_request_resource
+        #   @return [::Google::Cloud::Compute::V1::RegionAddressesMoveRequest]
+        #     The body resource for this request
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        class MoveAddressRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for Projects.MoveDisk. See the method description for details.
         # @!attribute [rw] disk_move_request_resource
         #   @return [::Google::Cloud::Compute::V1::DiskMoveRequest]
@@ -18082,6 +18668,24 @@ module Google
         #   @return [::String]
         #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
         class MoveFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for GlobalAddresses.Move. See the method description for details.
+        # @!attribute [rw] address
+        #   @return [::String]
+        #     Name of the address resource to move.
+        # @!attribute [rw] global_addresses_move_request_resource
+        #   @return [::Google::Cloud::Compute::V1::GlobalAddressesMoveRequest]
+        #     The body resource for this request
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Source project ID which the Address is moved from.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        class MoveGlobalAddressRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -18134,7 +18738,7 @@ module Google
         #     [Output Only] URL of the firewall policy the network is associated with.
         # @!attribute [rw] gateway_i_pv4
         #   @return [::String]
-        #     [Output Only] The gateway address for default routing out of the network, selected by GCP.
+        #     [Output Only] The gateway address for default routing out of the network, selected by Google Cloud.
         # @!attribute [rw] id
         #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
@@ -18199,7 +18803,7 @@ module Google
         #     An optional description of this resource. Provide this property when you create the resource.
         # @!attribute [rw] fingerprint
         #   @return [::String]
-        #     [Output Only] Fingerprint of this resource. A hash of the contents stored in this object. This field is used in optimistic locking. An up-to-date fingerprint must be provided in order to patch.
+        #     Fingerprint of this resource. A hash of the contents stored in this object. This field is used in optimistic locking. An up-to-date fingerprint must be provided in order to patch.
         # @!attribute [rw] id
         #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource type. The server generates this identifier.
@@ -18211,7 +18815,7 @@ module Google
         #     Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
         # @!attribute [rw] network
         #   @return [::String]
-        #     [Output Only] The URL of the network which the Network Attachment belongs to.
+        #     [Output Only] The URL of the network which the Network Attachment belongs to. Practically it is inferred by fetching the network of the first subnetwork associated. Because it is required that all the subnetworks must be from the same network, it is assured that the Network Attachment belongs to the same network as all the subnetworks.
         # @!attribute [rw] producer_accept_lists
         #   @return [::Array<::String>]
         #     Projects that are allowed to connect to this network attachment. The project can be specified using its id or number.
@@ -18282,13 +18886,13 @@ module Google
         # [Output Only] A connection connected to this network attachment.
         # @!attribute [rw] ip_address
         #   @return [::String]
-        #     The IP address assigned to the producer instance network interface. This value will be a range in case of Serverless.
+        #     The IPv4 address assigned to the producer instance network interface. This value will be a range in case of Serverless.
         # @!attribute [rw] project_id_or_num
         #   @return [::String]
         #     The project id or number of the interface to which the IP was assigned.
         # @!attribute [rw] secondary_ip_cidr_ranges
         #   @return [::Array<::String>]
-        #     Alias IP ranges from the same subnetwork
+        #     Alias IP ranges from the same subnetwork.
         # @!attribute [rw] status
         #   @return [::String]
         #     The status of a connected endpoint to this network attachment.
@@ -18835,7 +19439,7 @@ module Google
         #     The networking queue count that's specified by users for the network interface. Both Rx and Tx queues will be set to this number. It'll be empty if not specified by the users.
         # @!attribute [rw] stack_type
         #   @return [::String]
-        #     The stack type for this network interface to identify whether the IPv6 feature is enabled or not. If not specified, IPV4_ONLY will be used. This field can be both set at instance creation and update network interface operations.
+        #     The stack type for this network interface. To assign only IPv4 addresses, use IPV4_ONLY. To assign both IPv4 and IPv6 addresses, use IPV4_IPV6. If not specified, IPV4_ONLY is used. This field can be both set at instance creation and update network interface operations.
         #     Check the StackType enum for the list of possible values.
         # @!attribute [rw] subnetwork
         #   @return [::String]
@@ -18873,7 +19477,7 @@ module Google
             VIRTIO_NET = 452_123_481
           end
 
-          # The stack type for this network interface to identify whether the IPv6 feature is enabled or not. If not specified, IPV4_ONLY will be used. This field can be both set at instance creation and update network interface operations.
+          # The stack type for this network interface. To assign only IPv4 addresses, use IPV4_ONLY. To assign both IPv4 and IPv6 addresses, use IPV4_IPV6. If not specified, IPV4_ONLY is used. This field can be both set at instance creation and update network interface operations.
           module StackType
             # A value indicating that the enum field is not set.
             UNDEFINED_STACK_TYPE = 0
@@ -21520,7 +22124,7 @@ module Google
         #     An optional description of this resource. Provide this property when you create the resource.
         # @!attribute [rw] dns_verification_ip
         #   @return [::String]
-        #     The IPv4 address to be used for reverse DNS verification.
+        #     The address to be used for reverse DNS verification.
         # @!attribute [rw] fingerprint
         #   @return [::String]
         #     Fingerprint of this resource. A hash of the contents stored in this object. This field is used in optimistic locking. This field will be ignored when inserting a new PublicAdvertisedPrefix. An up-to-date fingerprint must be provided in order to update the PublicAdvertisedPrefix, otherwise the request will fail with error 412 conditionNotMet. To see the latest fingerprint, make a get() request to retrieve a PublicAdvertisedPrefix.
@@ -21529,7 +22133,7 @@ module Google
         #     [Output Only] The unique identifier for the resource type. The server generates this identifier.
         # @!attribute [rw] ip_cidr_range
         #   @return [::String]
-        #     The IPv4 address range, in CIDR format, represented by this public advertised prefix.
+        #     The address range, in CIDR format, represented by this public advertised prefix.
         # @!attribute [rw] kind
         #   @return [::String]
         #     [Output Only] Type of the resource. Always compute#publicAdvertisedPrefix for public advertised prefixes.
@@ -21869,6 +22473,8 @@ module Google
 
             COMMITTED_NVIDIA_K80_GPUS = 3_857_188
 
+            COMMITTED_NVIDIA_L4_GPUS = 19_163_645
+
             COMMITTED_NVIDIA_P100_GPUS = 107_528_100
 
             COMMITTED_NVIDIA_P4_GPUS = 347_952_897
@@ -21972,6 +22578,12 @@ module Google
 
             NETWORK_FIREWALL_POLICIES = 101_117_374
 
+            NET_LB_SECURITY_POLICIES_PER_REGION = 157_892_269
+
+            NET_LB_SECURITY_POLICY_RULES_PER_REGION = 356_090_931
+
+            NET_LB_SECURITY_POLICY_RULE_ATTRIBUTES_PER_REGION = 311_243_888
+
             NODE_GROUPS = 24_624_817
 
             NODE_TEMPLATES = 474_896_668
@@ -21981,6 +22593,8 @@ module Google
             NVIDIA_A100_GPUS = 504_872_978
 
             NVIDIA_K80_GPUS = 163_886_599
+
+            NVIDIA_L4_GPUS = 491_923_130
 
             NVIDIA_P100_GPUS = 236_601_633
 
@@ -22009,6 +22623,8 @@ module Google
             PREEMPTIBLE_NVIDIA_A100_GPUS = 68_832_784
 
             PREEMPTIBLE_NVIDIA_K80_GPUS = 374_960_201
+
+            PREEMPTIBLE_NVIDIA_L4_GPUS = 100_408_376
 
             PREEMPTIBLE_NVIDIA_P100_GPUS = 337_432_351
 
@@ -22055,6 +22671,8 @@ module Google
             SECURITY_POLICIES = 189_518_703
 
             SECURITY_POLICIES_PER_REGION = 249_041_734
+
+            SECURITY_POLICY_ADVANCED_RULES_PER_REGION = 371_815_341
 
             SECURITY_POLICY_CEVAL_RULES = 470_815_689
 
@@ -22268,6 +22886,17 @@ module Google
           end
         end
 
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     An optional destination address description if intended to be different from the source.
+        # @!attribute [rw] destination_address
+        #   @return [::String]
+        #     The URL of the destination address to move to. This can be a full or partial URL. For example, the following are all valid URLs to a address: - https://www.googleapis.com/compute/v1/projects/project/regions/region /addresses/address - projects/project/regions/region/addresses/address Note that destination project must be different from the source project. So /regions/region/addresses/address is not valid partial url.
+        class RegionAddressesMoveRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Contains a list of autoscalers.
         # @!attribute [rw] id
         #   @return [::String]
@@ -22335,6 +22964,14 @@ module Google
         #   @return [::Integer]
         #     The new size of the regional persistent disk, which is specified in GB.
         class RegionDisksResizeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] async_secondary_disk
+        #   @return [::String]
+        #     The secondary disk to start asynchronous replication to. You can provide this as a partial or full URL to the resource. For example, the following are valid values: - https://www.googleapis.com/compute/v1/projects/project/zones/zone /disks/disk - https://www.googleapis.com/compute/v1/projects/project/regions/region /disks/disk - projects/project/zones/zone/disks/disk - projects/project/regions/region/disks/disk - zones/zone/disks/disk - regions/region/disks/disk
+        class RegionDisksStartAsyncReplicationRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -22431,17 +23068,17 @@ module Google
         #     The list of URLs of one or more instances for which you want to apply updates. Each URL can be a full URL or a partial URL, such as zones/[ZONE]/instances/[INSTANCE_NAME].
         # @!attribute [rw] minimal_action
         #   @return [::String]
-        #     The minimal action that you want to perform on each instance during the update: - REPLACE: At minimum, delete the instance and create it again. - RESTART: Stop the instance and start it again. - REFRESH: Do not stop the instance. - NONE: Do not disrupt the instance at all. By default, the minimum action is NONE. If your update requires a more disruptive action than you set with this flag, the necessary action is performed to execute the update.
+        #     The minimal action that you want to perform on each instance during the update: - REPLACE: At minimum, delete the instance and create it again. - RESTART: Stop the instance and start it again. - REFRESH: Do not stop the instance and limit disruption as much as possible. - NONE: Do not disrupt the instance at all. By default, the minimum action is NONE. If your update requires a more disruptive action than you set with this flag, the necessary action is performed to execute the update.
         #     Check the MinimalAction enum for the list of possible values.
         # @!attribute [rw] most_disruptive_allowed_action
         #   @return [::String]
-        #     The most disruptive action that you want to perform on each instance during the update: - REPLACE: Delete the instance and create it again. - RESTART: Stop the instance and start it again. - REFRESH: Do not stop the instance. - NONE: Do not disrupt the instance at all. By default, the most disruptive allowed action is REPLACE. If your update requires a more disruptive action than you set with this flag, the update request will fail.
+        #     The most disruptive action that you want to perform on each instance during the update: - REPLACE: Delete the instance and create it again. - RESTART: Stop the instance and start it again. - REFRESH: Do not stop the instance and limit disruption as much as possible. - NONE: Do not disrupt the instance at all. By default, the most disruptive allowed action is REPLACE. If your update requires a more disruptive action than you set with this flag, the update request will fail.
         #     Check the MostDisruptiveAllowedAction enum for the list of possible values.
         class RegionInstanceGroupManagersApplyUpdatesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # The minimal action that you want to perform on each instance during the update: - REPLACE: At minimum, delete the instance and create it again. - RESTART: Stop the instance and start it again. - REFRESH: Do not stop the instance. - NONE: Do not disrupt the instance at all. By default, the minimum action is NONE. If your update requires a more disruptive action than you set with this flag, the necessary action is performed to execute the update.
+          # The minimal action that you want to perform on each instance during the update: - REPLACE: At minimum, delete the instance and create it again. - RESTART: Stop the instance and start it again. - REFRESH: Do not stop the instance and limit disruption as much as possible. - NONE: Do not disrupt the instance at all. By default, the minimum action is NONE. If your update requires a more disruptive action than you set with this flag, the necessary action is performed to execute the update.
           # Additional supported values which may be not listed in the enum directly due to technical reasons:
           # NONE
           # REFRESH
@@ -22452,7 +23089,7 @@ module Google
             UNDEFINED_MINIMAL_ACTION = 0
           end
 
-          # The most disruptive action that you want to perform on each instance during the update: - REPLACE: Delete the instance and create it again. - RESTART: Stop the instance and start it again. - REFRESH: Do not stop the instance. - NONE: Do not disrupt the instance at all. By default, the most disruptive allowed action is REPLACE. If your update requires a more disruptive action than you set with this flag, the update request will fail.
+          # The most disruptive action that you want to perform on each instance during the update: - REPLACE: Delete the instance and create it again. - RESTART: Stop the instance and start it again. - REFRESH: Do not stop the instance and limit disruption as much as possible. - NONE: Do not disrupt the instance at all. By default, the most disruptive allowed action is REPLACE. If your update requires a more disruptive action than you set with this flag, the update request will fail.
           # Additional supported values which may be not listed in the enum directly due to technical reasons:
           # NONE
           # REFRESH
@@ -23370,6 +24007,9 @@ module Google
         #     [Output Only] Creation timestamp in RFC3339 text format.
         # @!attribute [rw] description
         #   @return [::String]
+        # @!attribute [rw] disk_consistency_group_policy
+        #   @return [::Google::Cloud::Compute::V1::ResourcePolicyDiskConsistencyGroupPolicy]
+        #     Resource policy for disk consistency groups.
         # @!attribute [rw] group_placement_policy
         #   @return [::Google::Cloud::Compute::V1::ResourcePolicyGroupPlacementPolicy]
         #     Resource policy for instances for placement configuration.
@@ -23474,6 +24114,12 @@ module Google
         #   @return [::String]
         #     Start time of the window. This must be in UTC format that resolves to one of 00:00, 04:00, 08:00, 12:00, 16:00, or 20:00. For example, both 13:00-5 and 08:00 are valid.
         class ResourcePolicyDailyCycle
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Resource policy for disk consistency groups.
+        class ResourcePolicyDiskConsistencyGroupPolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -24052,6 +24698,12 @@ module Google
         # @!attribute [rw] bfd
         #   @return [::Google::Cloud::Compute::V1::RouterBgpPeerBfd]
         #     BFD configuration for the BGP peering.
+        # @!attribute [rw] custom_learned_ip_ranges
+        #   @return [::Array<::Google::Cloud::Compute::V1::RouterBgpPeerCustomLearnedIpRange>]
+        #     A list of user-defined custom learned route IP address ranges for a BGP session.
+        # @!attribute [rw] custom_learned_route_priority
+        #   @return [::Integer]
+        #     The user-defined custom learned route priority for a BGP session. This value is applied to all custom learned route ranges for the session. You can choose a value from `0` to `65335`. If you don't provide a value, Google Cloud assigns a priority of `100` to the ranges.
         # @!attribute [rw] enable
         #   @return [::String]
         #     The status of the BGP peer connection. If set to FALSE, any active session with the peer is terminated and all associated routing information is removed. If set to TRUE, the peer connection can be established with routing information. The default is TRUE.
@@ -24163,6 +24815,14 @@ module Google
 
             PASSIVE = 462_813_959
           end
+        end
+
+        # @!attribute [rw] range
+        #   @return [::String]
+        #     The custom learned route IP address range. Must be a valid CIDR-formatted prefix. If an IP address is provided without a subnet mask, it is interpreted as, for IPv4, a `/32` singular IP address range, and, for IPv6, `/128`.
+        class RouterBgpPeerCustomLearnedIpRange
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # @!attribute [rw] ip_range
@@ -24282,7 +24942,7 @@ module Google
         #     A list of rules associated with this NAT.
         # @!attribute [rw] source_subnetwork_ip_ranges_to_nat
         #   @return [::String]
-        #     Specify the Nat option, which can take one of the following values: - ALL_SUBNETWORKS_ALL_IP_RANGES: All of the IP ranges in every Subnetwork are allowed to Nat. - ALL_SUBNETWORKS_ALL_PRIMARY_IP_RANGES: All of the primary IP ranges in every Subnetwork are allowed to Nat. - LIST_OF_SUBNETWORKS: A list of Subnetworks are allowed to Nat (specified in the field subnetwork below) The default is SUBNETWORK_IP_RANGE_TO_NAT_OPTION_UNSPECIFIED. Note that if this field contains ALL_SUBNETWORKS_ALL_IP_RANGES or ALL_SUBNETWORKS_ALL_PRIMARY_IP_RANGES, then there should not be any other Router.Nat section in any Router for this network in this region.
+        #     Specify the Nat option, which can take one of the following values: - ALL_SUBNETWORKS_ALL_IP_RANGES: All of the IP ranges in every Subnetwork are allowed to Nat. - ALL_SUBNETWORKS_ALL_PRIMARY_IP_RANGES: All of the primary IP ranges in every Subnetwork are allowed to Nat. - LIST_OF_SUBNETWORKS: A list of Subnetworks are allowed to Nat (specified in the field subnetwork below) The default is SUBNETWORK_IP_RANGE_TO_NAT_OPTION_UNSPECIFIED. Note that if this field contains ALL_SUBNETWORKS_ALL_IP_RANGES then there should not be any other Router.Nat section in any Router for this network in this region.
         #     Check the SourceSubnetworkIpRangesToNat enum for the list of possible values.
         # @!attribute [rw] subnetworks
         #   @return [::Array<::Google::Cloud::Compute::V1::RouterNatSubnetworkToNat>]
@@ -24327,7 +24987,7 @@ module Google
             MANUAL_ONLY = 261_251_205
           end
 
-          # Specify the Nat option, which can take one of the following values: - ALL_SUBNETWORKS_ALL_IP_RANGES: All of the IP ranges in every Subnetwork are allowed to Nat. - ALL_SUBNETWORKS_ALL_PRIMARY_IP_RANGES: All of the primary IP ranges in every Subnetwork are allowed to Nat. - LIST_OF_SUBNETWORKS: A list of Subnetworks are allowed to Nat (specified in the field subnetwork below) The default is SUBNETWORK_IP_RANGE_TO_NAT_OPTION_UNSPECIFIED. Note that if this field contains ALL_SUBNETWORKS_ALL_IP_RANGES or ALL_SUBNETWORKS_ALL_PRIMARY_IP_RANGES, then there should not be any other Router.Nat section in any Router for this network in this region.
+          # Specify the Nat option, which can take one of the following values: - ALL_SUBNETWORKS_ALL_IP_RANGES: All of the IP ranges in every Subnetwork are allowed to Nat. - ALL_SUBNETWORKS_ALL_PRIMARY_IP_RANGES: All of the primary IP ranges in every Subnetwork are allowed to Nat. - LIST_OF_SUBNETWORKS: A list of Subnetworks are allowed to Nat (specified in the field subnetwork below) The default is SUBNETWORK_IP_RANGE_TO_NAT_OPTION_UNSPECIFIED. Note that if this field contains ALL_SUBNETWORKS_ALL_IP_RANGES then there should not be any other Router.Nat section in any Router for this network in this region.
           module SourceSubnetworkIpRangesToNat
             # A value indicating that the enum field is not set.
             UNDEFINED_SOURCE_SUBNETWORK_IP_RANGES_TO_NAT = 0
@@ -25100,6 +25760,12 @@ module Google
         # @!attribute [rw] kind
         #   @return [::String]
         #     [Output only] Type of the resource. Always compute#securityPolicyfor security policies
+        # @!attribute [rw] label_fingerprint
+        #   @return [::String]
+        #     A fingerprint for the labels being applied to this security policy, which is essentially a hash of the labels set used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update labels. You must always provide an up-to-date fingerprint hash in order to update or change labels. To see the latest fingerprint, make get() request to the security policy.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Labels for this resource. These can only be added or modified by the setLabels method. Each label key/value pair must comply with RFC1035. Label values may be empty.
         # @!attribute [rw] name
         #   @return [::String]
         #     Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
@@ -25121,6 +25787,15 @@ module Google
         class SecurityPolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # The type indicates the intended use of the security policy. - CLOUD_ARMOR: Cloud Armor backend security policies can be configured to filter incoming HTTP requests targeting backend services. They filter requests before they hit the origin servers. - CLOUD_ARMOR_EDGE: Cloud Armor edge security policies can be configured to filter incoming HTTP requests targeting backend services (including Cloud CDN-enabled) as well as backend buckets (Cloud Storage). They filter requests before the request is served from Google's cache. - CLOUD_ARMOR_INTERNAL_SERVICE: Cloud Armor internal service policies can be configured to filter HTTP requests targeting services managed by Traffic Director in a service mesh. They filter requests before the request is served from the application. - CLOUD_ARMOR_NETWORK: Cloud Armor network policies can be configured to filter packets targeting network load balancing resources such as backend services, target pools, target instances, and instances with external IPs. They filter requests before the request is served from the application. This field can be set only at resource creation time.
           module Type
@@ -25144,19 +25819,19 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Configuration options for L7 DDoS detection.
+        # Configuration options for L7 DDoS detection. This field is only supported in Global Security Policies of type CLOUD_ARMOR.
         # @!attribute [rw] enable
         #   @return [::Boolean]
-        #     If set to true, enables CAAP for L7 DDoS detection.
+        #     If set to true, enables CAAP for L7 DDoS detection. This field is only supported in Global Security Policies of type CLOUD_ARMOR.
         # @!attribute [rw] rule_visibility
         #   @return [::String]
-        #     Rule visibility can be one of the following: STANDARD - opaque rules. (default) PREMIUM - transparent rules.
+        #     Rule visibility can be one of the following: STANDARD - opaque rules. (default) PREMIUM - transparent rules. This field is only supported in Global Security Policies of type CLOUD_ARMOR.
         #     Check the RuleVisibility enum for the list of possible values.
         class SecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Rule visibility can be one of the following: STANDARD - opaque rules. (default) PREMIUM - transparent rules.
+          # Rule visibility can be one of the following: STANDARD - opaque rules. (default) PREMIUM - transparent rules. This field is only supported in Global Security Policies of type CLOUD_ARMOR.
           module RuleVisibility
             # A value indicating that the enum field is not set.
             UNDEFINED_RULE_VISIBILITY = 0
@@ -25248,7 +25923,7 @@ module Google
 
         # @!attribute [rw] redirect_site_key
         #   @return [::String]
-        #     An optional field to supply a reCAPTCHA site key to be used for all the rules using the redirect action with the type of GOOGLE_RECAPTCHA under the security policy. The specified site key needs to be created from the reCAPTCHA API. The user is responsible for the validity of the specified site key. If not specified, a Google-managed site key is used.
+        #     An optional field to supply a reCAPTCHA site key to be used for all the rules using the redirect action with the type of GOOGLE_RECAPTCHA under the security policy. The specified site key needs to be created from the reCAPTCHA API. The user is responsible for the validity of the specified site key. If not specified, a Google-managed site key is used. This field is only supported in Global Security Policies of type CLOUD_ARMOR.
         class SecurityPolicyRecaptchaOptionsConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -25264,13 +25939,13 @@ module Google
         # Represents a rule that describes one or more match conditions along with the action to be taken when traffic matches this condition (allow or deny).
         # @!attribute [rw] action
         #   @return [::String]
-        #     The Action to perform when the rule is matched. The following are the valid actions: - allow: allow access to target. - deny(STATUS): deny access to target, returns the HTTP response code specified. Valid values for `STATUS` are 403, 404, and 502. - rate_based_ban: limit client traffic to the configured threshold and ban the client if the traffic exceeds the threshold. Configure parameters for this action in RateLimitOptions. Requires rate_limit_options to be set. - redirect: redirect to a different target. This can either be an internal reCAPTCHA redirect, or an external URL-based redirect via a 302 response. Parameters for this action can be configured via redirectOptions. - throttle: limit client traffic to the configured threshold. Configure parameters for this action in rateLimitOptions. Requires rate_limit_options to be set for this.
+        #     The Action to perform when the rule is matched. The following are the valid actions: - allow: allow access to target. - deny(STATUS): deny access to target, returns the HTTP response code specified. Valid values for `STATUS` are 403, 404, and 502. - rate_based_ban: limit client traffic to the configured threshold and ban the client if the traffic exceeds the threshold. Configure parameters for this action in RateLimitOptions. Requires rate_limit_options to be set. - redirect: redirect to a different target. This can either be an internal reCAPTCHA redirect, or an external URL-based redirect via a 302 response. Parameters for this action can be configured via redirectOptions. This action is only supported in Global Security Policies of type CLOUD_ARMOR. - throttle: limit client traffic to the configured threshold. Configure parameters for this action in rateLimitOptions. Requires rate_limit_options to be set for this.
         # @!attribute [rw] description
         #   @return [::String]
         #     An optional description of this resource. Provide this property when you create the resource.
         # @!attribute [rw] header_action
         #   @return [::Google::Cloud::Compute::V1::SecurityPolicyRuleHttpHeaderAction]
-        #     Optional, additional actions that are performed on headers.
+        #     Optional, additional actions that are performed on headers. This field is only supported in Global Security Policies of type CLOUD_ARMOR.
         # @!attribute [rw] kind
         #   @return [::String]
         #     [Output only] Type of the resource. Always compute#securityPolicyRule for security policy rules
@@ -25291,7 +25966,7 @@ module Google
         #     Must be specified if the action is "rate_based_ban" or "throttle". Cannot be specified for any other actions.
         # @!attribute [rw] redirect_options
         #   @return [::Google::Cloud::Compute::V1::SecurityPolicyRuleRedirectOptions]
-        #     Parameters defining the redirect action. Cannot be specified for any other actions.
+        #     Parameters defining the redirect action. Cannot be specified for any other actions. This field is only supported in Global Security Policies of type CLOUD_ARMOR.
         class SecurityPolicyRule
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -25322,7 +25997,7 @@ module Google
         #     The configuration options available when specifying versioned_expr. This field must be specified if versioned_expr is specified and cannot be specified if versioned_expr is not specified.
         # @!attribute [rw] expr
         #   @return [::Google::Cloud::Compute::V1::Expr]
-        #     User defined CEVAL expression. A CEVAL expression is used to specify match criteria such as origin.ip, source.region_code and contents in the request header.
+        #     User defined CEVAL expression. A CEVAL expression is used to specify match criteria such as origin.ip, source.region_code and contents in the request header. Expressions containing `evaluateThreatIntelligence` require Cloud Armor Managed Protection Plus tier and are not supported in Edge Policies nor in Regional Policies. Expressions containing `evaluatePreconfiguredExpr('sourceiplist-*')` require Cloud Armor Managed Protection Plus tier and are only supported in Global Security Policies.
         # @!attribute [rw] versioned_expr
         #   @return [::String]
         #     Preconfigured versioned expression. If this field is specified, config must also be specified. Available preconfigured expressions along with their requirements are: SRC_IPS_V1 - must specify the corresponding src_ip_range field in config.
@@ -25426,15 +26101,18 @@ module Google
         #   @return [::String]
         #     Determines the key to enforce the rate_limit_threshold on. Possible values are: - ALL: A single rate limit threshold is applied to all the requests matching this rule. This is the default value if "enforceOnKey" is not configured. - IP: The source IP address of the request is the key. Each IP has this limit enforced separately. - HTTP_HEADER: The value of the HTTP header whose name is configured under "enforceOnKeyName". The key value is truncated to the first 128 bytes of the header value. If no such header is present in the request, the key type defaults to ALL. - XFF_IP: The first IP address (i.e. the originating client IP address) specified in the list of IPs under X-Forwarded-For HTTP header. If no such header is present or the value is not a valid IP, the key defaults to the source IP address of the request i.e. key type IP. - HTTP_COOKIE: The value of the HTTP cookie whose name is configured under "enforceOnKeyName". The key value is truncated to the first 128 bytes of the cookie value. If no such cookie is present in the request, the key type defaults to ALL. - HTTP_PATH: The URL path of the HTTP request. The key value is truncated to the first 128 bytes. - SNI: Server name indication in the TLS session of the HTTPS request. The key value is truncated to the first 128 bytes. The key type defaults to ALL on a HTTP session. - REGION_CODE: The country/region from which the request originates.
         #     Check the EnforceOnKey enum for the list of possible values.
+        # @!attribute [rw] enforce_on_key_configs
+        #   @return [::Array<::Google::Cloud::Compute::V1::SecurityPolicyRuleRateLimitOptionsEnforceOnKeyConfig>]
+        #     If specified, any combination of values of enforce_on_key_type/enforce_on_key_name is treated as the key on which ratelimit threshold/action is enforced. You can specify up to 3 enforce_on_key_configs. If enforce_on_key_configs is specified, enforce_on_key must not be specified.
         # @!attribute [rw] enforce_on_key_name
         #   @return [::String]
         #     Rate limit key name applicable only for the following key types: HTTP_HEADER -- Name of the HTTP header whose value is taken as the key value. HTTP_COOKIE -- Name of the HTTP cookie whose value is taken as the key value.
         # @!attribute [rw] exceed_action
         #   @return [::String]
-        #     Action to take for requests that are above the configured rate limit threshold, to either deny with a specified HTTP response code, or redirect to a different endpoint. Valid options are `deny(STATUS)`, where valid values for `STATUS` are 403, 404, 429, and 502, and `redirect`, where the redirect parameters come from `exceedRedirectOptions` below.
+        #     Action to take for requests that are above the configured rate limit threshold, to either deny with a specified HTTP response code, or redirect to a different endpoint. Valid options are `deny(STATUS)`, where valid values for `STATUS` are 403, 404, 429, and 502, and `redirect`, where the redirect parameters come from `exceedRedirectOptions` below. The `redirect` action is only supported in Global Security Policies of type CLOUD_ARMOR.
         # @!attribute [rw] exceed_redirect_options
         #   @return [::Google::Cloud::Compute::V1::SecurityPolicyRuleRedirectOptions]
-        #     Parameters defining the redirect action that is used as the exceed action. Cannot be specified if the exceed action is not redirect.
+        #     Parameters defining the redirect action that is used as the exceed action. Cannot be specified if the exceed action is not redirect. This field is only supported in Global Security Policies of type CLOUD_ARMOR.
         # @!attribute [rw] rate_limit_threshold
         #   @return [::Google::Cloud::Compute::V1::SecurityPolicyRuleRateLimitOptionsThreshold]
         #     Threshold at which to begin ratelimiting.
@@ -25446,6 +26124,40 @@ module Google
           module EnforceOnKey
             # A value indicating that the enum field is not set.
             UNDEFINED_ENFORCE_ON_KEY = 0
+
+            ALL = 64_897
+
+            HTTP_COOKIE = 494_981_627
+
+            HTTP_HEADER = 91_597_348
+
+            HTTP_PATH = 311_503_228
+
+            IP = 2343
+
+            REGION_CODE = 79_559_768
+
+            SNI = 82_254
+
+            XFF_IP = 438_707_118
+          end
+        end
+
+        # @!attribute [rw] enforce_on_key_name
+        #   @return [::String]
+        #     Rate limit key name applicable only for the following key types: HTTP_HEADER -- Name of the HTTP header whose value is taken as the key value. HTTP_COOKIE -- Name of the HTTP cookie whose value is taken as the key value.
+        # @!attribute [rw] enforce_on_key_type
+        #   @return [::String]
+        #     Determines the key to enforce the rate_limit_threshold on. Possible values are: - ALL: A single rate limit threshold is applied to all the requests matching this rule. This is the default value if "enforceOnKeyConfigs" is not configured. - IP: The source IP address of the request is the key. Each IP has this limit enforced separately. - HTTP_HEADER: The value of the HTTP header whose name is configured under "enforceOnKeyName". The key value is truncated to the first 128 bytes of the header value. If no such header is present in the request, the key type defaults to ALL. - XFF_IP: The first IP address (i.e. the originating client IP address) specified in the list of IPs under X-Forwarded-For HTTP header. If no such header is present or the value is not a valid IP, the key defaults to the source IP address of the request i.e. key type IP. - HTTP_COOKIE: The value of the HTTP cookie whose name is configured under "enforceOnKeyName". The key value is truncated to the first 128 bytes of the cookie value. If no such cookie is present in the request, the key type defaults to ALL. - HTTP_PATH: The URL path of the HTTP request. The key value is truncated to the first 128 bytes. - SNI: Server name indication in the TLS session of the HTTPS request. The key value is truncated to the first 128 bytes. The key type defaults to ALL on a HTTP session. - REGION_CODE: The country/region from which the request originates.
+        #     Check the EnforceOnKeyType enum for the list of possible values.
+        class SecurityPolicyRuleRateLimitOptionsEnforceOnKeyConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Determines the key to enforce the rate_limit_threshold on. Possible values are: - ALL: A single rate limit threshold is applied to all the requests matching this rule. This is the default value if "enforceOnKeyConfigs" is not configured. - IP: The source IP address of the request is the key. Each IP has this limit enforced separately. - HTTP_HEADER: The value of the HTTP header whose name is configured under "enforceOnKeyName". The key value is truncated to the first 128 bytes of the header value. If no such header is present in the request, the key type defaults to ALL. - XFF_IP: The first IP address (i.e. the originating client IP address) specified in the list of IPs under X-Forwarded-For HTTP header. If no such header is present or the value is not a valid IP, the key defaults to the source IP address of the request i.e. key type IP. - HTTP_COOKIE: The value of the HTTP cookie whose name is configured under "enforceOnKeyName". The key value is truncated to the first 128 bytes of the cookie value. If no such cookie is present in the request, the key type defaults to ALL. - HTTP_PATH: The URL path of the HTTP request. The key value is truncated to the first 128 bytes. - SNI: Server name indication in the TLS session of the HTTPS request. The key value is truncated to the first 128 bytes. The key type defaults to ALL on a HTTP session. - REGION_CODE: The country/region from which the request originates.
+          module EnforceOnKeyType
+            # A value indicating that the enum field is not set.
+            UNDEFINED_ENFORCE_ON_KEY_TYPE = 0
 
             ALL = 64_897
 
@@ -25501,10 +26213,10 @@ module Google
         # The authentication and authorization settings for a BackendService.
         # @!attribute [rw] client_tls_policy
         #   @return [::String]
-        #     Optional. A URL referring to a networksecurity.ClientTlsPolicy resource that describes how clients should authenticate with this service's backends. clientTlsPolicy only applies to a global BackendService with the loadBalancingScheme set to INTERNAL_SELF_MANAGED. If left blank, communications are not encrypted. Note: This field currently has no impact.
+        #     Optional. A URL referring to a networksecurity.ClientTlsPolicy resource that describes how clients should authenticate with this service's backends. clientTlsPolicy only applies to a global BackendService with the loadBalancingScheme set to INTERNAL_SELF_MANAGED. If left blank, communications are not encrypted.
         # @!attribute [rw] subject_alt_names
         #   @return [::Array<::String>]
-        #     Optional. A list of Subject Alternative Names (SANs) that the client verifies during a mutual TLS handshake with an server/endpoint for this BackendService. When the server presents its X.509 certificate to the client, the client inspects the certificate's subjectAltName field. If the field contains one of the specified values, the communication continues. Otherwise, it fails. This additional check enables the client to verify that the server is authorized to run the requested service. Note that the contents of the server certificate's subjectAltName field are configured by the Public Key Infrastructure which provisions server identities. Only applies to a global BackendService with loadBalancingScheme set to INTERNAL_SELF_MANAGED. Only applies when BackendService has an attached clientTlsPolicy with clientCertificate (mTLS mode). Note: This field currently has no impact.
+        #     Optional. A list of Subject Alternative Names (SANs) that the client verifies during a mutual TLS handshake with an server/endpoint for this BackendService. When the server presents its X.509 certificate to the client, the client inspects the certificate's subjectAltName field. If the field contains one of the specified values, the communication continues. Otherwise, it fails. This additional check enables the client to verify that the server is authorized to run the requested service. Note that the contents of the server certificate's subjectAltName field are configured by the Public Key Infrastructure which provisions server identities. Only applies to a global BackendService with loadBalancingScheme set to INTERNAL_SELF_MANAGED. Only applies when BackendService has an attached clientTlsPolicy with clientCertificate (mTLS mode).
         class SecuritySettings
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -25586,7 +26298,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Represents a ServiceAttachment resource. A service attachment represents a service that a producer has exposed. It encapsulates the load balancer which fronts the service runs and a list of NAT IP ranges that the producers uses to represent the consumers connecting to the service. next tag = 20
+        # Represents a ServiceAttachment resource. A service attachment represents a service that a producer has exposed. It encapsulates the load balancer which fronts the service runs and a list of NAT IP ranges that the producers uses to represent the consumers connecting to the service.
         # @!attribute [rw] connected_endpoints
         #   @return [::Array<::Google::Cloud::Compute::V1::ServiceAttachmentConnectedEndpoint>]
         #     [Output Only] An array of connections for all the consumers connected to this service attachment.
@@ -25633,6 +26345,9 @@ module Google
         # @!attribute [rw] psc_service_attachment_id
         #   @return [::Google::Cloud::Compute::V1::Uint128]
         #     [Output Only] An 128-bit global unique ID of the PSC service attachment.
+        # @!attribute [rw] reconcile_connections
+        #   @return [::Boolean]
+        #     This flag determines whether a consumer accept/reject list change can reconcile the statuses of existing ACCEPTED or REJECTED PSC endpoints. - If false, connection policy update will only affect existing PENDING PSC endpoints. Existing ACCEPTED/REJECTED endpoints will remain untouched regardless how the connection policy is modified . - If true, update will affect both PENDING and ACCEPTED/REJECTED PSC endpoints. For example, an ACCEPTED PSC endpoint will be moved to REJECTED if its project is added to the reject list. For newly created service attachment, this boolean defaults to true.
         # @!attribute [rw] region
         #   @return [::String]
         #     [Output Only] URL of the region where the service attachment resides. This field applies only to the region resource. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.
@@ -27389,6 +28104,9 @@ module Google
         # @!attribute [rw] project
         #   @return [::String]
         #     Project ID for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
         # @!attribute [rw] zone
         #   @return [::String]
         #     The name of the zone for this request.
@@ -28056,6 +28774,48 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for Disks.StartAsyncReplication. See the method description for details.
+        # @!attribute [rw] disk
+        #   @return [::String]
+        #     The name of the persistent disk.
+        # @!attribute [rw] disks_start_async_replication_request_resource
+        #   @return [::Google::Cloud::Compute::V1::DisksStartAsyncReplicationRequest]
+        #     The body resource for this request
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     The name of the zone for this request.
+        class StartAsyncReplicationDiskRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionDisks.StartAsyncReplication. See the method description for details.
+        # @!attribute [rw] disk
+        #   @return [::String]
+        #     The name of the persistent disk.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The name of the region for this request.
+        # @!attribute [rw] region_disks_start_async_replication_request_resource
+        #   @return [::Google::Cloud::Compute::V1::RegionDisksStartAsyncReplicationRequest]
+        #     The body resource for this request
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        class StartAsyncReplicationRegionDiskRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for Instances.Start. See the method description for details.
         # @!attribute [rw] instance
         #   @return [::String]
@@ -28139,6 +28899,78 @@ module Google
           end
         end
 
+        # A request message for Disks.StopAsyncReplication. See the method description for details.
+        # @!attribute [rw] disk
+        #   @return [::String]
+        #     The name of the persistent disk.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     The name of the zone for this request.
+        class StopAsyncReplicationDiskRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionDisks.StopAsyncReplication. See the method description for details.
+        # @!attribute [rw] disk
+        #   @return [::String]
+        #     The name of the persistent disk.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The name of the region for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        class StopAsyncReplicationRegionDiskRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for Disks.StopGroupAsyncReplication. See the method description for details.
+        # @!attribute [rw] disks_stop_group_async_replication_resource_resource
+        #   @return [::Google::Cloud::Compute::V1::DisksStopGroupAsyncReplicationResource]
+        #     The body resource for this request
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] zone
+        #   @return [::String]
+        #     The name of the zone for this request. This must be the zone of the primary or secondary disks in the consistency group.
+        class StopGroupAsyncReplicationDiskRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionDisks.StopGroupAsyncReplication. See the method description for details.
+        # @!attribute [rw] disks_stop_group_async_replication_resource_resource
+        #   @return [::Google::Cloud::Compute::V1::DisksStopGroupAsyncReplicationResource]
+        #     The body resource for this request
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The name of the region for this request. This must be the region of the primary or secondary disks in the consistency group.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        class StopGroupAsyncReplicationRegionDiskRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for Instances.Stop. See the method description for details.
         # @!attribute [rw] discard_local_ssd
         #   @return [::Boolean]
@@ -28169,7 +29001,7 @@ module Google
         #     An optional description of this resource. Provide this property when you create the resource. This field can be set only at resource creation time.
         # @!attribute [rw] enable_flow_logs
         #   @return [::Boolean]
-        #     Whether to enable flow logging for this subnetwork. If this field is not explicitly set, it will not appear in get listings. If not set the default behavior is determined by the org policy, if there is no org policy specified, then it will default to disabled. This field isn't supported with the purpose field set to INTERNAL_HTTPS_LOAD_BALANCER.
+        #     Whether to enable flow logging for this subnetwork. If this field is not explicitly set, it will not appear in get listings. If not set the default behavior is determined by the org policy, if there is no org policy specified, then it will default to disabled. This field isn't supported if the subnet purpose field is set to REGIONAL_MANAGED_PROXY.
         # @!attribute [rw] external_ipv6_prefix
         #   @return [::String]
         #     The external IPv6 address range that is owned by this subnetwork.
@@ -28216,14 +29048,14 @@ module Google
         #     Check the PrivateIpv6GoogleAccess enum for the list of possible values.
         # @!attribute [rw] purpose
         #   @return [::String]
-        #     The purpose of the resource. This field can be either PRIVATE_RFC_1918 or INTERNAL_HTTPS_LOAD_BALANCER. A subnetwork with purpose set to INTERNAL_HTTPS_LOAD_BALANCER is a user-created subnetwork that is reserved for Internal HTTP(S) Load Balancing. If unspecified, the purpose defaults to PRIVATE_RFC_1918. The enableFlowLogs field isn't supported with the purpose field set to INTERNAL_HTTPS_LOAD_BALANCER.
+        #     The purpose of the resource. This field can be either PRIVATE, REGIONAL_MANAGED_PROXY, PRIVATE_SERVICE_CONNECT, or INTERNAL_HTTPS_LOAD_BALANCER. PRIVATE is the default purpose for user-created subnets or subnets that are automatically created in auto mode networks. A subnet with purpose set to REGIONAL_MANAGED_PROXY is a user-created subnetwork that is reserved for regional Envoy-based load balancers. A subnet with purpose set to PRIVATE_SERVICE_CONNECT is used to publish services using Private Service Connect. A subnet with purpose set to INTERNAL_HTTPS_LOAD_BALANCER is a proxy-only subnet that can be used only by regional internal HTTP(S) load balancers. Note that REGIONAL_MANAGED_PROXY is the preferred setting for all regional Envoy load balancers. If unspecified, the subnet purpose defaults to PRIVATE. The enableFlowLogs field isn't supported if the subnet purpose field is set to REGIONAL_MANAGED_PROXY.
         #     Check the Purpose enum for the list of possible values.
         # @!attribute [rw] region
         #   @return [::String]
         #     URL of the region where the Subnetwork resides. This field can be set only at resource creation time.
         # @!attribute [rw] role
         #   @return [::String]
-        #     The role of subnetwork. Currently, this field is only used when purpose = INTERNAL_HTTPS_LOAD_BALANCER. The value can be set to ACTIVE or BACKUP. An ACTIVE subnetwork is one that is currently being used for Internal HTTP(S) Load Balancing. A BACKUP subnetwork is one that is ready to be promoted to ACTIVE or is currently draining. This field can be updated with a patch request.
+        #     The role of subnetwork. Currently, this field is only used when purpose = REGIONAL_MANAGED_PROXY. The value can be set to ACTIVE or BACKUP. An ACTIVE subnetwork is one that is currently being used for Envoy-based load balancers in a region. A BACKUP subnetwork is one that is ready to be promoted to ACTIVE or is currently draining. This field can be updated with a patch request.
         #     Check the Role enum for the list of possible values.
         # @!attribute [rw] secondary_ip_ranges
         #   @return [::Array<::Google::Cloud::Compute::V1::SubnetworkSecondaryRange>]
@@ -28272,7 +29104,7 @@ module Google
             ENABLE_OUTBOUND_VM_ACCESS_TO_GOOGLE = 288_210_263
           end
 
-          # The purpose of the resource. This field can be either PRIVATE_RFC_1918 or INTERNAL_HTTPS_LOAD_BALANCER. A subnetwork with purpose set to INTERNAL_HTTPS_LOAD_BALANCER is a user-created subnetwork that is reserved for Internal HTTP(S) Load Balancing. If unspecified, the purpose defaults to PRIVATE_RFC_1918. The enableFlowLogs field isn't supported with the purpose field set to INTERNAL_HTTPS_LOAD_BALANCER.
+          # The purpose of the resource. This field can be either PRIVATE, REGIONAL_MANAGED_PROXY, PRIVATE_SERVICE_CONNECT, or INTERNAL_HTTPS_LOAD_BALANCER. PRIVATE is the default purpose for user-created subnets or subnets that are automatically created in auto mode networks. A subnet with purpose set to REGIONAL_MANAGED_PROXY is a user-created subnetwork that is reserved for regional Envoy-based load balancers. A subnet with purpose set to PRIVATE_SERVICE_CONNECT is used to publish services using Private Service Connect. A subnet with purpose set to INTERNAL_HTTPS_LOAD_BALANCER is a proxy-only subnet that can be used only by regional internal HTTP(S) load balancers. Note that REGIONAL_MANAGED_PROXY is the preferred setting for all regional Envoy load balancers. If unspecified, the subnet purpose defaults to PRIVATE. The enableFlowLogs field isn't supported if the subnet purpose field is set to REGIONAL_MANAGED_PROXY.
           module Purpose
             # A value indicating that the enum field is not set.
             UNDEFINED_PURPOSE = 0
@@ -28293,7 +29125,7 @@ module Google
             REGIONAL_MANAGED_PROXY = 153_049_966
           end
 
-          # The role of subnetwork. Currently, this field is only used when purpose = INTERNAL_HTTPS_LOAD_BALANCER. The value can be set to ACTIVE or BACKUP. An ACTIVE subnetwork is one that is currently being used for Internal HTTP(S) Load Balancing. A BACKUP subnetwork is one that is ready to be promoted to ACTIVE or is currently draining. This field can be updated with a patch request.
+          # The role of subnetwork. Currently, this field is only used when purpose = REGIONAL_MANAGED_PROXY. The value can be set to ACTIVE or BACKUP. An ACTIVE subnetwork is one that is currently being used for Envoy-based load balancers in a region. A BACKUP subnetwork is one that is ready to be promoted to ACTIVE or is currently draining. This field can be updated with a patch request.
           module Role
             # A value indicating that the enum field is not set.
             UNDEFINED_ROLE = 0
@@ -28398,7 +29230,7 @@ module Google
         #     Check the AggregationInterval enum for the list of possible values.
         # @!attribute [rw] enable
         #   @return [::Boolean]
-        #     Whether to enable flow logging for this subnetwork. If this field is not explicitly set, it will not appear in get listings. If not set the default behavior is determined by the org policy, if there is no org policy specified, then it will default to disabled.
+        #     Whether to enable flow logging for this subnetwork. If this field is not explicitly set, it will not appear in get listings. If not set the default behavior is determined by the org policy, if there is no org policy specified, then it will default to disabled. Flow logging isn't supported if the subnet purpose field is set to REGIONAL_MANAGED_PROXY.
         # @!attribute [rw] filter_expr
         #   @return [::String]
         #     Can only be specified if VPC flow logs for this subnetwork is enabled. The filter expression is used to define which VPC flow logs should be exported to Cloud Logging.
@@ -28779,7 +29611,7 @@ module Google
 
         # @!attribute [rw] certificate_map
         #   @return [::String]
-        #     URL of the Certificate Map to associate with this TargetHttpsProxy.
+        #     URL of the Certificate Map to associate with this TargetHttpsProxy. Accepted format is //certificatemanager.googleapis.com/projects/\\{project }/locations/\\{location}/certificateMaps/\\{resourceName}.
         class TargetHttpsProxiesSetCertificateMapRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -28823,7 +29655,7 @@ module Google
         #     Optional. A URL referring to a networksecurity.AuthorizationPolicy resource that describes how the proxy should authorize inbound traffic. If left blank, access will not be restricted by an authorization policy. Refer to the AuthorizationPolicy resource for additional details. authorizationPolicy only applies to a global TargetHttpsProxy attached to globalForwardingRules with the loadBalancingScheme set to INTERNAL_SELF_MANAGED. Note: This field currently has no impact.
         # @!attribute [rw] certificate_map
         #   @return [::String]
-        #     URL of a certificate map that identifies a certificate map associated with the given target proxy. This field can only be set for global target proxies. If set, sslCertificates will be ignored.
+        #     URL of a certificate map that identifies a certificate map associated with the given target proxy. This field can only be set for global target proxies. If set, sslCertificates will be ignored. Accepted format is //certificatemanager.googleapis.com/projects/\\{project }/locations/\\{location}/certificateMaps/\\{resourceName}.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
         #     [Output Only] Creation timestamp in RFC3339 text format.
@@ -28857,7 +29689,7 @@ module Google
         #     [Output Only] Server-defined URL for the resource.
         # @!attribute [rw] server_tls_policy
         #   @return [::String]
-        #     Optional. A URL referring to a networksecurity.ServerTlsPolicy resource that describes how the proxy should authenticate inbound traffic. serverTlsPolicy only applies to a global TargetHttpsProxy attached to globalForwardingRules with the loadBalancingScheme set to INTERNAL_SELF_MANAGED. If left blank, communications are not encrypted. Note: This field currently has no impact.
+        #     Optional. A URL referring to a networksecurity.ServerTlsPolicy resource that describes how the proxy should authenticate inbound traffic. serverTlsPolicy only applies to a global TargetHttpsProxy attached to globalForwardingRules with the loadBalancingScheme set to INTERNAL_SELF_MANAGED or EXTERNAL or EXTERNAL_MANAGED. For details which ServerTlsPolicy resources are accepted with INTERNAL_SELF_MANAGED and which with EXTERNAL, EXTERNAL_MANAGED loadBalancingScheme consult ServerTlsPolicy documentation. If left blank, communications are not encrypted.
         # @!attribute [rw] ssl_certificates
         #   @return [::Array<::String>]
         #     URLs to SslCertificate resources that are used to authenticate connections between users and the load balancer. At least one SSL certificate must be specified. Currently, you may specify up to 15 SSL certificates. sslCertificates do not apply when the load balancing scheme is set to INTERNAL_SELF_MANAGED.
@@ -29264,7 +30096,7 @@ module Google
 
         # @!attribute [rw] certificate_map
         #   @return [::String]
-        #     URL of the Certificate Map to associate with this TargetSslProxy.
+        #     URL of the Certificate Map to associate with this TargetSslProxy. Accepted format is //certificatemanager.googleapis.com/projects/\\{project }/locations/\\{location}/certificateMaps/\\{resourceName}.
         class TargetSslProxiesSetCertificateMapRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -29300,7 +30132,7 @@ module Google
         # Represents a Target SSL Proxy resource. A target SSL proxy is a component of a SSL Proxy load balancer. Global forwarding rules reference a target SSL proxy, and the target proxy then references an external backend service. For more information, read Using Target Proxies.
         # @!attribute [rw] certificate_map
         #   @return [::String]
-        #     URL of a certificate map that identifies a certificate map associated with the given target proxy. This field can only be set for global target proxies. If set, sslCertificates will be ignored.
+        #     URL of a certificate map that identifies a certificate map associated with the given target proxy. This field can only be set for global target proxies. If set, sslCertificates will be ignored. Accepted format is //certificatemanager.googleapis.com/projects/\\{project }/locations/\\{location}/certificateMaps/\\{resourceName}.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
         #     [Output Only] Creation timestamp in RFC3339 text format.
@@ -29531,6 +30363,12 @@ module Google
         # @!attribute [rw] kind
         #   @return [::String]
         #     [Output Only] Type of resource. Always compute#targetVpnGateway for target VPN gateways.
+        # @!attribute [rw] label_fingerprint
+        #   @return [::String]
+        #     A fingerprint for the labels being applied to this TargetVpnGateway, which is essentially a hash of the labels set used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update labels. You must always provide an up-to-date fingerprint hash in order to update or change labels, otherwise the request will fail with error 412 conditionNotMet. To see the latest fingerprint, make a get() request to retrieve a TargetVpnGateway.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Labels for this resource. These can only be added or modified by the setLabels method. Each label key/value pair must comply with RFC1035. Label values may be empty.
         # @!attribute [rw] name
         #   @return [::String]
         #     Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
@@ -29553,6 +30391,15 @@ module Google
         class TargetVpnGateway
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # [Output Only] The status of the VPN gateway, which can be one of the following: CREATING, READY, FAILED, or DELETING.
           module Status
@@ -30825,6 +31672,9 @@ module Google
         # @!attribute [rw] path_prefix_rewrite
         #   @return [::String]
         #     Before forwarding the request to the selected backend service, the matching portion of the request's path is replaced by pathPrefixRewrite. The value must be from 1 to 1024 characters.
+        # @!attribute [rw] path_template_rewrite
+        #   @return [::String]
+        #     If specified, the pattern rewrites the URL path (based on the :path header) using the HTTP template syntax. A corresponding path_template_match must be specified. Any template variables must exist in the path_template_match field. - -At least one variable must be specified in the path_template_match field - You can omit variables from the rewritten URL - The * and ** operators cannot be matched unless they have a corresponding variable name - e.g. \\{format=*} or \\{var=**}. For example, a path_template_match of /static/\\{format=**} could be rewritten as /static/content/\\{format} to prefix /content to the URL. Variables can also be re-ordered in a rewrite, so that /\\{country}/\\{format}/\\{suffix=**} can be rewritten as /content/\\{format}/\\{country}/\\{suffix}. At least one non-empty routeRules[].matchRules[].path_template_match is required. Only one of path_prefix_rewrite or path_template_rewrite may be specified.
         class UrlRewrite
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -30849,11 +31699,11 @@ module Google
         #     Network URL.
         # @!attribute [rw] purpose
         #   @return [::String]
-        #     The purpose of the resource. This field can be either PRIVATE_RFC_1918 or INTERNAL_HTTPS_LOAD_BALANCER. A subnetwork with purpose set to INTERNAL_HTTPS_LOAD_BALANCER is a user-created subnetwork that is reserved for Internal HTTP(S) Load Balancing. If unspecified, the purpose defaults to PRIVATE_RFC_1918. The enableFlowLogs field isn't supported with the purpose field set to INTERNAL_HTTPS_LOAD_BALANCER.
+        #     The purpose of the resource. This field can be either PRIVATE, REGIONAL_MANAGED_PROXY, PRIVATE_SERVICE_CONNECT, or INTERNAL_HTTPS_LOAD_BALANCER. PRIVATE is the default purpose for user-created subnets or subnets that are automatically created in auto mode networks. A subnet with purpose set to REGIONAL_MANAGED_PROXY is a user-created subnetwork that is reserved for regional Envoy-based load balancers. A subnet with purpose set to PRIVATE_SERVICE_CONNECT is used to publish services using Private Service Connect. A subnet with purpose set to INTERNAL_HTTPS_LOAD_BALANCER is a proxy-only subnet that can be used only by regional internal HTTP(S) load balancers. Note that REGIONAL_MANAGED_PROXY is the preferred setting for all regional Envoy load balancers. If unspecified, the subnet purpose defaults to PRIVATE. The enableFlowLogs field isn't supported if the subnet purpose field is set to REGIONAL_MANAGED_PROXY.
         #     Check the Purpose enum for the list of possible values.
         # @!attribute [rw] role
         #   @return [::String]
-        #     The role of subnetwork. Currently, this field is only used when purpose = INTERNAL_HTTPS_LOAD_BALANCER. The value can be set to ACTIVE or BACKUP. An ACTIVE subnetwork is one that is currently being used for Internal HTTP(S) Load Balancing. A BACKUP subnetwork is one that is ready to be promoted to ACTIVE or is currently draining. This field can be updated with a patch request.
+        #     The role of subnetwork. Currently, this field is only used when purpose = REGIONAL_MANAGED_PROXY. The value can be set to ACTIVE or BACKUP. An ACTIVE subnetwork is one that is currently being used for Envoy-based load balancers in a region. A BACKUP subnetwork is one that is ready to be promoted to ACTIVE or is currently draining. This field can be updated with a patch request.
         #     Check the Role enum for the list of possible values.
         # @!attribute [rw] secondary_ip_ranges
         #   @return [::Array<::Google::Cloud::Compute::V1::UsableSubnetworkSecondaryRange>]
@@ -30881,7 +31731,7 @@ module Google
             INTERNAL = 279_295_677
           end
 
-          # The purpose of the resource. This field can be either PRIVATE_RFC_1918 or INTERNAL_HTTPS_LOAD_BALANCER. A subnetwork with purpose set to INTERNAL_HTTPS_LOAD_BALANCER is a user-created subnetwork that is reserved for Internal HTTP(S) Load Balancing. If unspecified, the purpose defaults to PRIVATE_RFC_1918. The enableFlowLogs field isn't supported with the purpose field set to INTERNAL_HTTPS_LOAD_BALANCER.
+          # The purpose of the resource. This field can be either PRIVATE, REGIONAL_MANAGED_PROXY, PRIVATE_SERVICE_CONNECT, or INTERNAL_HTTPS_LOAD_BALANCER. PRIVATE is the default purpose for user-created subnets or subnets that are automatically created in auto mode networks. A subnet with purpose set to REGIONAL_MANAGED_PROXY is a user-created subnetwork that is reserved for regional Envoy-based load balancers. A subnet with purpose set to PRIVATE_SERVICE_CONNECT is used to publish services using Private Service Connect. A subnet with purpose set to INTERNAL_HTTPS_LOAD_BALANCER is a proxy-only subnet that can be used only by regional internal HTTP(S) load balancers. Note that REGIONAL_MANAGED_PROXY is the preferred setting for all regional Envoy load balancers. If unspecified, the subnet purpose defaults to PRIVATE. The enableFlowLogs field isn't supported if the subnet purpose field is set to REGIONAL_MANAGED_PROXY.
           module Purpose
             # A value indicating that the enum field is not set.
             UNDEFINED_PURPOSE = 0
@@ -30902,7 +31752,7 @@ module Google
             REGIONAL_MANAGED_PROXY = 153_049_966
           end
 
-          # The role of subnetwork. Currently, this field is only used when purpose = INTERNAL_HTTPS_LOAD_BALANCER. The value can be set to ACTIVE or BACKUP. An ACTIVE subnetwork is one that is currently being used for Internal HTTP(S) Load Balancing. A BACKUP subnetwork is one that is ready to be promoted to ACTIVE or is currently draining. This field can be updated with a patch request.
+          # The role of subnetwork. Currently, this field is only used when purpose = REGIONAL_MANAGED_PROXY. The value can be set to ACTIVE or BACKUP. An ACTIVE subnetwork is one that is currently being used for Envoy-based load balancers in a region. A BACKUP subnetwork is one that is ready to be promoted to ACTIVE or is currently draining. This field can be updated with a patch request.
           module Role
             # A value indicating that the enum field is not set.
             UNDEFINED_ROLE = 0
@@ -31261,7 +32111,7 @@ module Google
         #     The VPN gateway interface this VPN tunnel is associated with.
         # @!attribute [rw] peer_gateway_interface
         #   @return [::Integer]
-        #     The peer gateway interface this VPN tunnel is connected to, the peer gateway could either be an external VPN gateway or GCP VPN gateway.
+        #     The peer gateway interface this VPN tunnel is connected to, the peer gateway could either be an external VPN gateway or a Google Cloud VPN gateway.
         # @!attribute [rw] tunnel_url
         #   @return [::String]
         #     URL reference to the VPN tunnel.
@@ -31270,7 +32120,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A VPN connection contains all VPN tunnels connected from this VpnGateway to the same peer gateway. The peer gateway could either be a external VPN gateway or GCP VPN gateway.
+        # A VPN connection contains all VPN tunnels connected from this VpnGateway to the same peer gateway. The peer gateway could either be an external VPN gateway or a Google Cloud VPN gateway.
         # @!attribute [rw] peer_external_gateway
         #   @return [::String]
         #     URL reference to the peer external VPN gateways to which the VPN tunnels in this VPN connection are connected. This field is mutually exclusive with peer_gcp_gateway.
@@ -31340,6 +32190,12 @@ module Google
         # @!attribute [rw] kind
         #   @return [::String]
         #     [Output Only] Type of resource. Always compute#vpnTunnel for VPN tunnels.
+        # @!attribute [rw] label_fingerprint
+        #   @return [::String]
+        #     A fingerprint for the labels being applied to this VpnTunnel, which is essentially a hash of the labels set used for optimistic locking. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update labels. You must always provide an up-to-date fingerprint hash in order to update or change labels, otherwise the request will fail with error 412 conditionNotMet. To see the latest fingerprint, make a get() request to retrieve a VpnTunnel.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Labels for this resource. These can only be added or modified by the setLabels method. Each label key/value pair must comply with RFC1035. Label values may be empty.
         # @!attribute [rw] local_traffic_selector
         #   @return [::Array<::String>]
         #     Local traffic selector to use when establishing the VPN tunnel with the peer VPN gateway. The value should be a CIDR formatted string, for example: 192.168.0.0/16. The ranges must be disjoint. Only IPv4 is supported.
@@ -31392,6 +32248,15 @@ module Google
         class VpnTunnel
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # [Output Only] The status of the VPN tunnel, which can be one of the following: - PROVISIONING: Resource is being allocated for the VPN tunnel. - WAITING_FOR_FULL_CONFIG: Waiting to receive all VPN-related configs from the user. Network, TargetVpnGateway, VpnTunnel, ForwardingRule, and Route resources are needed to setup the VPN tunnel. - FIRST_HANDSHAKE: Successful first handshake with the peer VPN. - ESTABLISHED: Secure session is successfully established with the peer VPN. - NETWORK_ERROR: Deprecated, replaced by NO_INCOMING_PACKETS - AUTHORIZATION_ERROR: Auth error (for example, bad shared secret). - NEGOTIATION_FAILURE: Handshake failed. - DEPROVISIONING: Resources are being deallocated for the VPN tunnel. - FAILED: Tunnel creation has failed and the tunnel is not ready to be used. - NO_INCOMING_PACKETS: No incoming packets from peer. - REJECTED: Tunnel configuration was rejected, can be result of being denied access. - ALLOCATING_RESOURCES: Cloud VPN is in the process of allocating all required resources. - STOPPED: Tunnel is stopped due to its Forwarding Rules being deleted for Classic VPN tunnels or the project is in frozen state. - PEER_IDENTITY_MISMATCH: Peer identity does not match peer IP, probably behind NAT. - TS_NARROWING_NOT_ALLOWED: Traffic selector narrowing not allowed for an HA-VPN tunnel.
           module Status
@@ -31626,6 +32491,9 @@ module Google
             # When deploying a deployment with a exceedingly large number of resources
             LARGE_DEPLOYMENT_WARNING = 481_440_678
 
+            # Resource can't be retrieved due to list overhead quota exceed which captures the amount of resources filtered out by user-defined list filter.
+            LIST_OVERHEAD_QUOTA_EXCEED = 47_618_117
+
             # A resource depends on a missing type
             MISSING_TYPE_DEPENDENCY = 344_505_463
 
@@ -31727,6 +32595,9 @@ module Google
 
             # When deploying a deployment with a exceedingly large number of resources
             LARGE_DEPLOYMENT_WARNING = 481_440_678
+
+            # Resource can't be retrieved due to list overhead quota exceed which captures the amount of resources filtered out by user-defined list filter.
+            LIST_OVERHEAD_QUOTA_EXCEED = 47_618_117
 
             # A resource depends on a missing type
             MISSING_TYPE_DEPENDENCY = 344_505_463
