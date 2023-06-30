@@ -159,6 +159,16 @@
                 "decrypt"
               ]
             },
+            "RawEncrypt": {
+              "methods": [
+                "raw_encrypt"
+              ]
+            },
+            "RawDecrypt": {
+              "methods": [
+                "raw_decrypt"
+              ]
+            },
             "AsymmetricSign": {
               "methods": [
                 "asymmetric_sign"

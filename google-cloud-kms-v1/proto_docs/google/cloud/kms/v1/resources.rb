@@ -179,6 +179,13 @@ module Google
             ASYMMETRIC_DECRYPT = 6
 
             # {::Google::Cloud::Kms::V1::CryptoKey CryptoKeys} with this purpose may be used
+            # with {::Google::Cloud::Kms::V1::KeyManagementService::Client#raw_encrypt RawEncrypt}
+            # and {::Google::Cloud::Kms::V1::KeyManagementService::Client#raw_decrypt RawDecrypt}.
+            # This purpose is meant to be used for interoperable symmetric
+            # encryption and does not support automatic CryptoKey rotation.
+            RAW_ENCRYPT_DECRYPT = 7
+
+            # {::Google::Cloud::Kms::V1::CryptoKey CryptoKeys} with this purpose may be used
             # with {::Google::Cloud::Kms::V1::KeyManagementService::Client#mac_sign MacSign}.
             MAC = 9
           end
@@ -420,6 +427,12 @@ module Google
 
             # Creates symmetric encryption keys.
             GOOGLE_SYMMETRIC_ENCRYPTION = 1
+
+            # AES-GCM (Galois Counter Mode) using 128-bit keys.
+            AES_128_GCM = 41
+
+            # AES-GCM (Galois Counter Mode) using 256-bit keys.
+            AES_256_GCM = 19
 
             # RSASSA-PSS 2048 bit key with a SHA256 digest.
             RSA_SIGN_PSS_2048_SHA256 = 2
