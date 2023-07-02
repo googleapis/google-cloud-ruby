@@ -164,16 +164,15 @@ module Google
           # Data specific to web streams.
           # @!attribute [r] measurement_id
           #   @return [::String]
-          #     Output only. Analytics Measurement ID.
-          #
-          #     Example: "G-1A2BCD345E"
+          #     Output only. Analytics "Measurement ID", without the "G-" prefix.
+          #     Example: "G-1A2BCD345E" would just be "1A2BCD345E"
           # @!attribute [r] firebase_app_id
           #   @return [::String]
           #     Output only. ID of the corresponding web app in Firebase, if any.
           #     This ID can change if the web app is deleted and recreated.
           # @!attribute [rw] default_uri
           #   @return [::String]
-          #     Domain name of the web app being measured, or empty.
+          #     Immutable. Domain name of the web app being measured, or empty.
           #     Example: "http://www.google.com", "https://www.google.com"
           class WebStreamData
             include ::Google::Protobuf::MessageExts
@@ -986,10 +985,6 @@ module Google
         #     Changing the attribution model will apply to both historical and future
         #     data. These changes will be reflected in reports with conversion and
         #     revenue data. User and session data will be unaffected.
-        # @!attribute [rw] ads_web_conversion_data_export_scope
-        #   @return [::Google::Analytics::Admin::V1alpha::AttributionSettings::AdsWebConversionDataExportScope]
-        #     Required. The Conversion Export Scope for data exported to linked Ads
-        #     Accounts.
         class AttributionSettings
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1041,47 +1036,19 @@ module Google
             # for YouTube) before converting.
             CROSS_CHANNEL_LAST_CLICK = 2
 
-            # Starting in June 2023, new properties can no longer use this model.
-            # See
-            # [Analytics
-            # Help](https://support.google.com/analytics/answer/9164320?hl=en#040623)
-            # for more details.
-            # Starting in September 2023, we will sunset this model for all properties.
-            #
             # Gives all credit for the conversion to the first channel that a customer
             # clicked (or engaged view through for YouTube) before converting.
             CROSS_CHANNEL_FIRST_CLICK = 3
 
-            # Starting in June 2023, new properties can no longer use this model.
-            # See
-            # [Analytics
-            # Help](https://support.google.com/analytics/answer/9164320?hl=en#040623)
-            # for more details.
-            # Starting in September 2023, we will sunset this model for all properties.
-            #
             # Distributes the credit for the conversion equally across all the channels
             # a customer clicked (or engaged view through for YouTube) before
             # converting.
             CROSS_CHANNEL_LINEAR = 4
 
-            # Starting in June 2023, new properties can no longer use this model.
-            # See
-            # [Analytics
-            # Help](https://support.google.com/analytics/answer/9164320?hl=en#040623)
-            # for more details.
-            # Starting in September 2023, we will sunset this model for all properties.
-            #
             # Attributes 40% credit to the first and last interaction, and the
             # remaining 20% credit is distributed evenly to the middle interactions.
             CROSS_CHANNEL_POSITION_BASED = 5
 
-            # Starting in June 2023, new properties can no longer use this model.
-            # See
-            # [Analytics
-            # Help](https://support.google.com/analytics/answer/9164320?hl=en#040623)
-            # for more details.
-            # Starting in September 2023, we will sunset this model for all properties.
-            #
             # Gives more credit to the touchpoints that happened closer in time to
             # the conversion.
             CROSS_CHANNEL_TIME_DECAY = 6
@@ -1089,22 +1056,6 @@ module Google
             # Attributes 100% of the conversion value to the last Google Ads channel
             # that the customer clicked through before converting.
             ADS_PREFERRED_LAST_CLICK = 7
-          end
-
-          # The Conversion Export Scope for data exported to linked Ads Accounts.
-          module AdsWebConversionDataExportScope
-            # Default value. This value is unused.
-            ADS_WEB_CONVERSION_DATA_EXPORT_SCOPE_UNSPECIFIED = 0
-
-            # No data export scope selected yet.
-            # Export scope can never be changed back to this value.
-            NOT_SELECTED_YET = 1
-
-            # The Ads Web Conversion Data export scope is Cross Channel.
-            CROSS_CHANNEL = 2
-
-            # The Ads Web Conversion Data export scope is Ads Preferred.
-            ADS_PREFERRED = 3
           end
         end
 
@@ -1185,7 +1136,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Singleton resource under a web DataStream, configuring measurement of
+        # Singleton resource under a WebDataStream, configuring measurement of
         # additional site interactions and content.
         # @!attribute [r] name
         #   @return [::String]
