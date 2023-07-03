@@ -135,6 +135,9 @@ module Google
         #
         #     Controls the maximum number of processes allowed to run in a pod. The value
         #     must be greater than or equal to 1024 and less than 4194304.
+        # @!attribute [rw] insecure_kubelet_readonly_port_enabled
+        #   @return [::Boolean]
+        #     Enable or disable Kubelet read only port.
         class NodeKubeletConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -463,6 +466,11 @@ module Google
         #     power of 2)
         #     Example: max_pods_per_node of 30 will result in 32 IPs (/27) when
         #     overprovisioning is disabled.
+        # @!attribute [r] pod_ipv4_range_utilization
+        #   @return [::Float]
+        #     Output only. [Output only] The utilization of the IPv4 range for pod.
+        #     The ratio is Usage/[Total number of IPs in the secondary range],
+        #     Usage=numNodes*numZones*podIPsPerNode.
         class NodeNetworkConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1308,6 +1316,11 @@ module Google
         #     cluster. These pod ranges can be used by new node pools to allocate pod IPs
         #     automatically. Once the range is removed it will not show up in
         #     IPAllocationPolicy.
+        # @!attribute [r] default_pod_ipv4_range_utilization
+        #   @return [::Float]
+        #     Output only. [Output only] The utilization of the cluster default IPv4
+        #     range for pod. The ratio is Usage/[Total number of IPs in the secondary
+        #     range], Usage=numNodes*numZones*podIPsPerNode.
         class IPAllocationPolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2210,7 +2223,22 @@ module Google
         # @!attribute [rw] pod_range_names
         #   @return [::Array<::String>]
         #     Name for pod secondary ipv4 range which has the actual range defined ahead.
+        # @!attribute [r] pod_range_info
+        #   @return [::Array<::Google::Cloud::Container::V1beta1::RangeInfo>]
+        #     Output only. [Output only] Information for additional pod range.
         class AdditionalPodRangesConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # RangeInfo contains the range name and the range utilization by this cluster.
+        # @!attribute [r] range_name
+        #   @return [::String]
+        #     Output only. [Output only] Name of a range.
+        # @!attribute [r] utilization
+        #   @return [::Float]
+        #     Output only. [Output only] The utilization of the range.
+        class RangeInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -3571,6 +3599,10 @@ module Google
           # @!attribute [rw] type
           #   @return [::Google::Cloud::Container::V1beta1::NodePool::PlacementPolicy::Type]
           #     The type of placement.
+          # @!attribute [rw] tpu_topology
+          #   @return [::String]
+          #     TPU placement topology for pod slice node pool.
+          #     https://cloud.google.com/tpu/docs/types-topologies#tpu_topologies
           class PlacementPolicy
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -4030,6 +4062,9 @@ module Google
         #     The image type to use for NAP created node. Please see
         #     https://cloud.google.com/kubernetes-engine/docs/concepts/node-images for
         #     available image types.
+        # @!attribute [rw] insecure_kubelet_readonly_port_enabled
+        #   @return [::Boolean]
+        #     Enable or disable Kubelet read only port.
         class AutoprovisioningNodePoolDefaults
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
