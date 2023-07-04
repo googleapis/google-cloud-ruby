@@ -179,6 +179,7 @@ module Google
 
           # Valid Job states.
           module State
+            # Job state unspecified.
             STATE_UNSPECIFIED = 0
 
             # Job is admitted (validated and persisted) and waiting for resources.
@@ -323,6 +324,7 @@ module Google
           #     * "batch-debian": use Batch Debian images.
           #     * "batch-centos": use Batch CentOS images.
           #     * "batch-cos": use Batch Container-Optimized images.
+          #     * "batch-hpc-centos": use Batch HPC CentOS images.
           # @!attribute [rw] snapshot
           #   @return [::String]
           #     Name of a snapshot used as the data source.
