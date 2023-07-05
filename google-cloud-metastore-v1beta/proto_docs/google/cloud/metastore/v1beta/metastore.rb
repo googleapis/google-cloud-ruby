@@ -1378,6 +1378,28 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Error details in public error message for
+        # {::Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#query_metadata DataprocMetastore.QueryMetadata}.
+        # @!attribute [rw] details
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Additional structured details about this error.
+        #
+        #     Keys define the failure items.
+        #     Value describes the exception or details of the item.
+        class ErrorDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class DetailsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # Request message for
         # {::Google::Cloud::Metastore::V1beta::DataprocMetastore::Client#move_table_to_database DataprocMetastore.MoveTableToDatabase}.
         # @!attribute [rw] service
