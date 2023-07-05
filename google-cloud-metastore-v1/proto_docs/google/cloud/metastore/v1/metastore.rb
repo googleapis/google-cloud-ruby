@@ -221,6 +221,10 @@ module Google
         #     method and specify this field's path
         #     (`hive_metastore_config.kerberos_config`) in the request's `update_mask`
         #     while omitting this field from the request's `service`.
+        # @!attribute [rw] endpoint_protocol
+        #   @return [::Google::Cloud::Metastore::V1::HiveMetastoreConfig::EndpointProtocol]
+        #     The protocol to use for the metastore service endpoint. If unspecified,
+        #     defaults to `THRIFT`.
         # @!attribute [rw] auxiliary_versions
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Metastore::V1::AuxiliaryVersionConfig}]
         #     A mapping of Hive metastore version to the auxiliary version
@@ -251,6 +255,18 @@ module Google
           class AuxiliaryVersionsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Protocols available for serving the metastore service endpoint.
+          module EndpointProtocol
+            # The protocol is not set.
+            ENDPOINT_PROTOCOL_UNSPECIFIED = 0
+
+            # Use the legacy Apache Thrift protocol for the metastore service endpoint.
+            THRIFT = 1
+
+            # Use the modernized gRPC protocol for the metastore service endpoint.
+            GRPC = 2
           end
         end
 
@@ -427,6 +443,9 @@ module Google
           #   @return [::String]
           #     A Cloud Storage object or folder URI that specifies the source from which
           #     to import metadata. It must begin with `gs://`.
+          # @!attribute [rw] source_database
+          #   @return [::String]
+          #     The name of the source database.
           # @!attribute [rw] type
           #   @return [::Google::Cloud::Metastore::V1::DatabaseDumpSpec::Type]
           #     Optional. The type of the database dump. If unspecified, defaults to
@@ -1235,6 +1254,119 @@ module Google
             # Database dump contains Avro files.
             AVRO = 2
           end
+        end
+
+        # Request message for
+        # {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#query_metadata DataprocMetastore.QueryMetadata}.
+        # @!attribute [rw] service
+        #   @return [::String]
+        #     Required. The relative resource name of the metastore service to query
+        #     metadata, in the following format:
+        #
+        #     `projects/{project_id}/locations/{location_id}/services/{service_id}`.
+        # @!attribute [rw] query
+        #   @return [::String]
+        #     Required. A read-only SQL query to execute against the metadata database.
+        #     The query cannot change or mutate the data.
+        class QueryMetadataRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#query_metadata DataprocMetastore.QueryMetadata}.
+        # @!attribute [rw] result_manifest_uri
+        #   @return [::String]
+        #     The manifest URI  is link to a JSON instance in Cloud Storage.
+        #     This instance manifests immediately along with QueryMetadataResponse. The
+        #     content of the URI is not retriable until the long-running operation query
+        #     against the metadata finishes.
+        class QueryMetadataResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Error details in public error message for
+        # {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#query_metadata DataprocMetastore.QueryMetadata}.
+        # @!attribute [rw] details
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Additional structured details about this error.
+        #
+        #     Keys define the failure items.
+        #     Value describes the exception or details of the item.
+        class ErrorDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class DetailsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Request message for
+        # {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#move_table_to_database DataprocMetastore.MoveTableToDatabase}.
+        # @!attribute [rw] service
+        #   @return [::String]
+        #     Required. The relative resource name of the metastore service to mutate
+        #     metadata, in the following format:
+        #
+        #     `projects/{project_id}/locations/{location_id}/services/{service_id}`.
+        # @!attribute [rw] table_name
+        #   @return [::String]
+        #     Required. The name of the table to be moved.
+        # @!attribute [rw] db_name
+        #   @return [::String]
+        #     Required. The name of the database where the table resides.
+        # @!attribute [rw] destination_db_name
+        #   @return [::String]
+        #     Required. The name of the database where the table should be moved.
+        class MoveTableToDatabaseRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#move_table_to_database DataprocMetastore.MoveTableToDatabase}.
+        class MoveTableToDatabaseResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#alter_metadata_resource_location DataprocMetastore.AlterMetadataResourceLocation}.
+        # @!attribute [rw] service
+        #   @return [::String]
+        #     Required. The relative resource name of the metastore service to mutate
+        #     metadata, in the following format:
+        #
+        #     `projects/{project_id}/locations/{location_id}/services/{service_id}`.
+        # @!attribute [rw] resource_name
+        #   @return [::String]
+        #     Required. The relative metadata resource name in the following format.
+        #
+        #     `databases/{database_id}`
+        #     or
+        #     `databases/{database_id}/tables/{table_id}`
+        #     or
+        #     `databases/{database_id}/tables/{table_id}/partitions/{partition_id}`
+        # @!attribute [rw] location_uri
+        #   @return [::String]
+        #     Required. The new location URI for the metadata resource.
+        class AlterMetadataResourceLocationRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::Metastore::V1::DataprocMetastore::Client#alter_metadata_resource_location DataprocMetastore.AlterMetadataResourceLocation}.
+        class AlterMetadataResourceLocationResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end
