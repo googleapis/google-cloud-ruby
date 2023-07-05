@@ -220,7 +220,7 @@ module Google
               #     * `column:y`
               #     * `description:z`
               #   @param page_size [::Integer]
-              #     Number of results to return in a single search page.
+              #     Upper bound on the number of results you can get in a single response.
               #
               #     Can't be negative or 0, defaults to 10 in this case.
               #     The maximum number is 1000. If exceeded, throws an "invalid argument"
@@ -242,6 +242,13 @@ module Google
               #     * `relevance` that can only be descending
               #     * `last_modified_timestamp [asc|desc]` with descending (`desc`) as default
               #     * `default` that can only be descending
+              #
+              #     Search queries don't guarantee full recall. Results that match your query
+              #     might not be returned, even in subsequent result pages. Additionally,
+              #     returned (and not returned) results can vary if you repeat search queries.
+              #     If you are experiencing recall issues and you don't have to fetch the
+              #     results in any specific order, consider setting this parameter to
+              #     `default`.
               #
               #     If this parameter is omitted, it defaults to the descending `relevance`.
               # @yield [result, operation] Access the result along with the TransportOperation object
