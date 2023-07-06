@@ -1360,6 +1360,10 @@ module Google
         #     If no service account is set, then the standard Cloud Build service account
         #     ([PROJECT_NUM]@system.gserviceaccount.com) will be used instead.
         #     Format: `projects/{PROJECT_ID}/serviceAccounts/{ACCOUNT_ID_OR_EMAIL}`
+        # @!attribute [rw] repository_event_config
+        #   @return [::Google::Cloud::Build::V1::RepositoryEventConfig]
+        #     The configuration of a trigger that creates a build whenever an event from
+        #     Repo API is received.
         class BuildTrigger
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1371,6 +1375,40 @@ module Google
           class SubstitutionsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # The configuration of a trigger that creates a build whenever an event from
+        # Repo API is received.
+        # @!attribute [rw] repository
+        #   @return [::String]
+        #     The resource name of the Repo API resource.
+        # @!attribute [r] repository_type
+        #   @return [::Google::Cloud::Build::V1::RepositoryEventConfig::RepositoryType]
+        #     Output only. The type of the SCM vendor the repository points to.
+        # @!attribute [rw] pull_request
+        #   @return [::Google::Cloud::Build::V1::PullRequestFilter]
+        #     Filter to match changes in pull requests.
+        # @!attribute [rw] push
+        #   @return [::Google::Cloud::Build::V1::PushFilter]
+        #     Filter to match changes in refs like branches, tags.
+        class RepositoryEventConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # All possible SCM repo types from Repo API.
+          module RepositoryType
+            # If unspecified, RepositoryType defaults to GITHUB.
+            REPOSITORY_TYPE_UNSPECIFIED = 0
+
+            # The SCM repo is GITHUB.
+            GITHUB = 1
+
+            # The SCM repo is GITHUB Enterprise.
+            GITHUB_ENTERPRISE = 2
+
+            # The SCM repo is GITLAB Enterprise.
+            GITLAB_ENTERPRISE = 3
           end
         end
 
