@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.4.0 (2023-07-06)
+
+#### Features
+
+* add interoperable symmetric encryption system ([#22470](https://github.com/googleapis/google-cloud-ruby/issues/22470)) 
+
 ### 0.3.0 (2023-06-06)
 
 #### Features
