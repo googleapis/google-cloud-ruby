@@ -69,10 +69,10 @@ module Google
           #     metadata from the table which might be incomplete or stale.
           # @!attribute [r] estimated_total_physical_file_size
           #   @return [::Integer]
-          #     Output only. A pre-projected estimate of the total physical size (in bytes)
-          #     of files this session will scan when all streams are completely consumed.
-          #     This estimate does not depend on the selected columns and can be based on
-          #     metadata from the table which might be incomplete or stale. Only set for
+          #     Output only. A pre-projected estimate of the total physical size of files
+          #     (in bytes) that this session will scan when all streams are consumed. This
+          #     estimate is independent of the selected columns and can be based on
+          #     incomplete or stale metadata from the table.  This field is only set for
           #     BigLake tables.
           # @!attribute [r] estimated_row_count
           #   @return [::Integer]

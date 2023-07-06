@@ -82,22 +82,22 @@ module Google
 
                   default_config.rpcs.get_write_stream.timeout = 600.0
                   default_config.rpcs.get_write_stream.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14, 8]
                   }
 
                   default_config.rpcs.finalize_write_stream.timeout = 600.0
                   default_config.rpcs.finalize_write_stream.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14, 8]
                   }
 
                   default_config.rpcs.batch_commit_write_streams.timeout = 600.0
                   default_config.rpcs.batch_commit_write_streams.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14, 8]
                   }
 
                   default_config.rpcs.flush_rows.timeout = 600.0
                   default_config.rpcs.flush_rows.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14, 8]
                   }
 
                   default_config
