@@ -710,6 +710,12 @@ module Google
         #   @return [::Google::Cloud::ContactCenterInsights::V1::IssueModelLabelStats]
         #     Output only. Immutable. The issue model's label statistics on its training
         #     data.
+        # @!attribute [rw] model_type
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::IssueModel::ModelType]
+        #     Type of the model.
+        # @!attribute [rw] language_code
+        #   @return [::String]
+        #     Language of the model.
         class IssueModel
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -752,6 +758,18 @@ module Google
 
             # Model is being deleted.
             DELETING = 5
+          end
+
+          # Type of the model.
+          module ModelType
+            # Unspecified model type.
+            MODEL_TYPE_UNSPECIFIED = 0
+
+            # Type V1.
+            TYPE_V1 = 1
+
+            # Type V2.
+            TYPE_V2 = 2
           end
         end
 
@@ -1032,7 +1050,7 @@ module Google
         #   @return [::String]
         #     The fully-qualified DLP inspect template resource name.
         #     Format:
-        #     `projects/{project}/inspectTemplates/{template}`
+        #     `projects/{project}/locations/{location}/inspectTemplates/{template}`
         class RedactionConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
