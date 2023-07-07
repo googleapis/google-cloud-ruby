@@ -1869,6 +1869,316 @@ module Google
             end
 
             ##
+            # Query DPMS metadata.
+            #
+            # @overload query_metadata(request, options = nil)
+            #   Pass arguments to `query_metadata` via a request object, either of type
+            #   {::Google::Cloud::Metastore::V1::QueryMetadataRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Metastore::V1::QueryMetadataRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload query_metadata(service: nil, query: nil)
+            #   Pass arguments to `query_metadata` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param service [::String]
+            #     Required. The relative resource name of the metastore service to query
+            #     metadata, in the following format:
+            #
+            #     `projects/{project_id}/locations/{location_id}/services/{service_id}`.
+            #   @param query [::String]
+            #     Required. A read-only SQL query to execute against the metadata database.
+            #     The query cannot change or mutate the data.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/metastore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Metastore::V1::DataprocMetastore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Metastore::V1::QueryMetadataRequest.new
+            #
+            #   # Call the query_metadata method.
+            #   result = client.query_metadata request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def query_metadata request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Metastore::V1::QueryMetadataRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.query_metadata.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Metastore::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.service
+                header_params["service"] = request.service
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.query_metadata.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.query_metadata.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dataproc_metastore_stub.call_rpc :query_metadata, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Move a table to another database.
+            #
+            # @overload move_table_to_database(request, options = nil)
+            #   Pass arguments to `move_table_to_database` via a request object, either of type
+            #   {::Google::Cloud::Metastore::V1::MoveTableToDatabaseRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Metastore::V1::MoveTableToDatabaseRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload move_table_to_database(service: nil, table_name: nil, db_name: nil, destination_db_name: nil)
+            #   Pass arguments to `move_table_to_database` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param service [::String]
+            #     Required. The relative resource name of the metastore service to mutate
+            #     metadata, in the following format:
+            #
+            #     `projects/{project_id}/locations/{location_id}/services/{service_id}`.
+            #   @param table_name [::String]
+            #     Required. The name of the table to be moved.
+            #   @param db_name [::String]
+            #     Required. The name of the database where the table resides.
+            #   @param destination_db_name [::String]
+            #     Required. The name of the database where the table should be moved.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/metastore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Metastore::V1::DataprocMetastore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Metastore::V1::MoveTableToDatabaseRequest.new
+            #
+            #   # Call the move_table_to_database method.
+            #   result = client.move_table_to_database request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def move_table_to_database request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Metastore::V1::MoveTableToDatabaseRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.move_table_to_database.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Metastore::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.service
+                header_params["service"] = request.service
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.move_table_to_database.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.move_table_to_database.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dataproc_metastore_stub.call_rpc :move_table_to_database, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Alter metadata resource location. The metadata resource can be a database,
+            # table, or partition. This functionality only updates the parent directory
+            # for the respective metadata resource and does not transfer any existing
+            # data to the new location.
+            #
+            # @overload alter_metadata_resource_location(request, options = nil)
+            #   Pass arguments to `alter_metadata_resource_location` via a request object, either of type
+            #   {::Google::Cloud::Metastore::V1::AlterMetadataResourceLocationRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Metastore::V1::AlterMetadataResourceLocationRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload alter_metadata_resource_location(service: nil, resource_name: nil, location_uri: nil)
+            #   Pass arguments to `alter_metadata_resource_location` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param service [::String]
+            #     Required. The relative resource name of the metastore service to mutate
+            #     metadata, in the following format:
+            #
+            #     `projects/{project_id}/locations/{location_id}/services/{service_id}`.
+            #   @param resource_name [::String]
+            #     Required. The relative metadata resource name in the following format.
+            #
+            #     `databases/{database_id}`
+            #     or
+            #     `databases/{database_id}/tables/{table_id}`
+            #     or
+            #     `databases/{database_id}/tables/{table_id}/partitions/{partition_id}`
+            #   @param location_uri [::String]
+            #     Required. The new location URI for the metadata resource.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/metastore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Metastore::V1::DataprocMetastore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Metastore::V1::AlterMetadataResourceLocationRequest.new
+            #
+            #   # Call the alter_metadata_resource_location method.
+            #   result = client.alter_metadata_resource_location request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def alter_metadata_resource_location request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Metastore::V1::AlterMetadataResourceLocationRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.alter_metadata_resource_location.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Metastore::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.service
+                header_params["service"] = request.service
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.alter_metadata_resource_location.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.alter_metadata_resource_location.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dataproc_metastore_stub.call_rpc :alter_metadata_resource_location, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the DataprocMetastore API.
             #
             # This class represents the configuration for DataprocMetastore,
@@ -2080,6 +2390,21 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_backup
+                ##
+                # RPC-specific configuration for `query_metadata`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :query_metadata
+                ##
+                # RPC-specific configuration for `move_table_to_database`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :move_table_to_database
+                ##
+                # RPC-specific configuration for `alter_metadata_resource_location`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :alter_metadata_resource_location
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -2113,6 +2438,12 @@ module Google
                   @create_backup = ::Gapic::Config::Method.new create_backup_config
                   delete_backup_config = parent_rpcs.delete_backup if parent_rpcs.respond_to? :delete_backup
                   @delete_backup = ::Gapic::Config::Method.new delete_backup_config
+                  query_metadata_config = parent_rpcs.query_metadata if parent_rpcs.respond_to? :query_metadata
+                  @query_metadata = ::Gapic::Config::Method.new query_metadata_config
+                  move_table_to_database_config = parent_rpcs.move_table_to_database if parent_rpcs.respond_to? :move_table_to_database
+                  @move_table_to_database = ::Gapic::Config::Method.new move_table_to_database_config
+                  alter_metadata_resource_location_config = parent_rpcs.alter_metadata_resource_location if parent_rpcs.respond_to? :alter_metadata_resource_location
+                  @alter_metadata_resource_location = ::Gapic::Config::Method.new alter_metadata_resource_location_config
 
                   yield self if block_given?
                 end

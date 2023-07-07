@@ -80,6 +80,15 @@ module Google
             rpc :CreateBackup, ::Google::Cloud::Metastore::V1::CreateBackupRequest, ::Google::Longrunning::Operation
             # Deletes a single backup.
             rpc :DeleteBackup, ::Google::Cloud::Metastore::V1::DeleteBackupRequest, ::Google::Longrunning::Operation
+            # Query DPMS metadata.
+            rpc :QueryMetadata, ::Google::Cloud::Metastore::V1::QueryMetadataRequest, ::Google::Longrunning::Operation
+            # Move a table to another database.
+            rpc :MoveTableToDatabase, ::Google::Cloud::Metastore::V1::MoveTableToDatabaseRequest, ::Google::Longrunning::Operation
+            # Alter metadata resource location. The metadata resource can be a database,
+            # table, or partition. This functionality only updates the parent directory
+            # for the respective metadata resource and does not transfer any existing
+            # data to the new location.
+            rpc :AlterMetadataResourceLocation, ::Google::Cloud::Metastore::V1::AlterMetadataResourceLocationRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

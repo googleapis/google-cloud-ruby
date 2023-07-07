@@ -612,6 +612,126 @@
       ]
     },
     {
+      "region_tag": "metastore_v1_generated_DataprocMetastore_QueryMetadata_sync",
+      "title": "Snippet for the query_metadata call in the DataprocMetastore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1::DataprocMetastore::Client#query_metadata. It may require modification in order to execute successfully.",
+      "file": "dataproc_metastore/query_metadata.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "query_metadata",
+        "full_name": "::Google::Cloud::Metastore::V1::DataprocMetastore::Client#query_metadata",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Metastore::V1::QueryMetadataRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DataprocMetastore::Client",
+          "full_name": "::Google::Cloud::Metastore::V1::DataprocMetastore::Client"
+        },
+        "method": {
+          "short_name": "QueryMetadata",
+          "full_name": "google.cloud.metastore.v1.DataprocMetastore.QueryMetadata",
+          "service": {
+            "short_name": "DataprocMetastore",
+            "full_name": "google.cloud.metastore.v1.DataprocMetastore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "metastore_v1_generated_DataprocMetastore_MoveTableToDatabase_sync",
+      "title": "Snippet for the move_table_to_database call in the DataprocMetastore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1::DataprocMetastore::Client#move_table_to_database. It may require modification in order to execute successfully.",
+      "file": "dataproc_metastore/move_table_to_database.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "move_table_to_database",
+        "full_name": "::Google::Cloud::Metastore::V1::DataprocMetastore::Client#move_table_to_database",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Metastore::V1::MoveTableToDatabaseRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DataprocMetastore::Client",
+          "full_name": "::Google::Cloud::Metastore::V1::DataprocMetastore::Client"
+        },
+        "method": {
+          "short_name": "MoveTableToDatabase",
+          "full_name": "google.cloud.metastore.v1.DataprocMetastore.MoveTableToDatabase",
+          "service": {
+            "short_name": "DataprocMetastore",
+            "full_name": "google.cloud.metastore.v1.DataprocMetastore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "metastore_v1_generated_DataprocMetastore_AlterMetadataResourceLocation_sync",
+      "title": "Snippet for the alter_metadata_resource_location call in the DataprocMetastore service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1::DataprocMetastore::Client#alter_metadata_resource_location. It may require modification in order to execute successfully.",
+      "file": "dataproc_metastore/alter_metadata_resource_location.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "alter_metadata_resource_location",
+        "full_name": "::Google::Cloud::Metastore::V1::DataprocMetastore::Client#alter_metadata_resource_location",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Metastore::V1::AlterMetadataResourceLocationRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DataprocMetastore::Client",
+          "full_name": "::Google::Cloud::Metastore::V1::DataprocMetastore::Client"
+        },
+        "method": {
+          "short_name": "AlterMetadataResourceLocation",
+          "full_name": "google.cloud.metastore.v1.DataprocMetastore.AlterMetadataResourceLocation",
+          "service": {
+            "short_name": "DataprocMetastore",
+            "full_name": "google.cloud.metastore.v1.DataprocMetastore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "metastore_v1_generated_DataprocMetastoreFederation_ListFederations_sync",
       "title": "Snippet for the list_federations call in the DataprocMetastoreFederation service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Metastore::V1::DataprocMetastoreFederation::Client#list_federations. It may require modification in order to execute successfully.",
