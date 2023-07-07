@@ -1783,6 +1783,9 @@ module Google
 
             # Highcpu e2 machine with 32 CPUs.
             E2_HIGHCPU_32 = 6
+
+            # E2 machine with 1 CPU.
+            E2_MEDIUM = 7
           end
 
           # Specifies the behavior when there is an error in the substitution checks.
