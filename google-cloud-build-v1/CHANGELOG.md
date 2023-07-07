@@ -1,5 +1,11 @@
 # Release History
 
+### 0.18.0 (2023-07-07)
+
+#### Features
+
+* add repositoryevent to buildtrigger ([#22461](https://github.com/googleapis/google-cloud-ruby/issues/22461)) 
+
 ### 0.17.0 (2023-06-06)
 
 #### Features
