@@ -272,6 +272,13 @@ module Google
         # @!attribute [r] uri
         #   @return [::String]
         #     Output only. The main URI in which this Service is serving traffic.
+        # @!attribute [rw] custom_audiences
+        #   @return [::Array<::String>]
+        #     One or more custom audiences that you want this service to support. Specify
+        #     each custom audience as the full URL in a string. The custom audiences are
+        #     encoded in the token and used to authenticate requests. For more
+        #     information, see
+        #     https://cloud.google.com/run/docs/configuring/custom-audiences.
         # @!attribute [r] satisfies_pzs
         #   @return [::Boolean]
         #     Output only. Reserved for future use.
