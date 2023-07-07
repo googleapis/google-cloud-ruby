@@ -260,7 +260,7 @@ module Google
         #     characters or less.
         # @!attribute [rw] model
         #   @return [::String]
-        #     Required. Which model to use for recognition requests. Select the model
+        #     Optional. Which model to use for recognition requests. Select the model
         #     best suited to your domain to get best results.
         #
         #     Guidance for choosing which model to use can be found in the [Transcription
@@ -271,7 +271,7 @@ module Google
         #     Models](https://cloud.google.com/speech-to-text/v2/docs/speech-to-text-supported-languages).
         # @!attribute [rw] language_codes
         #   @return [::Array<::String>]
-        #     Required. The language of the supplied audio as a
+        #     Optional. The language of the supplied audio as a
         #     [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag.
         #
         #     Supported languages for each model are listed in the [Table of Supported
@@ -561,6 +561,30 @@ module Google
         #   @return [::Google::Cloud::Speech::V2::ExplicitDecodingConfig]
         #     Explicitly specified decoding parameters.
         #     Required if using headerless PCM audio (linear16, mulaw, alaw).
+        # @!attribute [rw] model
+        #   @return [::String]
+        #     Optional. Which model to use for recognition requests. Select the model
+        #     best suited to your domain to get best results.
+        #
+        #     Guidance for choosing which model to use can be found in the [Transcription
+        #     Models
+        #     Documentation](https://cloud.google.com/speech-to-text/v2/docs/transcription-model)
+        #     and the models supported in each region can be found in the [Table Of
+        #     Supported
+        #     Models](https://cloud.google.com/speech-to-text/v2/docs/speech-to-text-supported-languages).
+        # @!attribute [rw] language_codes
+        #   @return [::Array<::String>]
+        #     Optional. The language of the supplied audio as a
+        #     [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag.
+        #     Language tags are normalized to BCP-47 before they are used eg "en-us"
+        #     becomes "en-US".
+        #
+        #     Supported languages for each model are listed in the [Table of Supported
+        #     Models](https://cloud.google.com/speech-to-text/v2/docs/speech-to-text-supported-languages).
+        #
+        #     If additional languages are provided, recognition result will contain
+        #     recognition in the most likely language detected. The recognition result
+        #     will include the language tag of the language detected in the audio.
         # @!attribute [rw] features
         #   @return [::Google::Cloud::Speech::V2::RecognitionFeatures]
         #     Speech recognition features to enable.
@@ -582,7 +606,8 @@ module Google
         #   @return [::String]
         #     Required. The name of the Recognizer to use during recognition. The
         #     expected format is
-        #     `projects/{project}/locations/{location}/recognizers/{recognizer}`.
+        #     `projects/{project}/locations/{location}/recognizers/{recognizer}`. The
+        #     \\{recognizer} segment may be set to `_` to use an empty implicit Recognizer.
         # @!attribute [rw] config
         #   @return [::Google::Cloud::Speech::V2::RecognitionConfig]
         #     Features and audio metadata to use for the Automatic Speech Recognition.
@@ -816,25 +841,28 @@ module Google
         # {::Google::Cloud::Speech::V2::Speech::Client#streaming_recognize StreamingRecognize}
         # method. Multiple
         # {::Google::Cloud::Speech::V2::StreamingRecognizeRequest StreamingRecognizeRequest}
-        # messages are sent. The first message must contain a
+        # messages are sent in one call.
+        #
+        # If the {::Google::Cloud::Speech::V2::Recognizer Recognizer} referenced by
+        # {::Google::Cloud::Speech::V2::StreamingRecognizeRequest#recognizer recognizer}
+        # contains a fully specified request configuration then the stream may only
+        # contain messages with only
+        # {::Google::Cloud::Speech::V2::StreamingRecognizeRequest#audio audio} set.
+        #
+        # Otherwise the first message must contain a
         # {::Google::Cloud::Speech::V2::StreamingRecognizeRequest#recognizer recognizer} and
-        # optionally a
+        # a
         # {::Google::Cloud::Speech::V2::StreamingRecognizeRequest#streaming_config streaming_config}
-        # message and must not contain
-        # {::Google::Cloud::Speech::V2::StreamingRecognizeRequest#audio audio}. All
-        # subsequent messages must contain
-        # {::Google::Cloud::Speech::V2::StreamingRecognizeRequest#audio audio} and must not
-        # contain a
-        # {::Google::Cloud::Speech::V2::StreamingRecognizeRequest#streaming_config streaming_config}
-        # message.
+        # message that together fully specify the request configuration and must not
+        # contain {::Google::Cloud::Speech::V2::StreamingRecognizeRequest#audio audio}. All
+        # subsequent messages must only have
+        # {::Google::Cloud::Speech::V2::StreamingRecognizeRequest#audio audio} set.
         # @!attribute [rw] recognizer
         #   @return [::String]
-        #     Required. Streaming recognition should start with an initial request having
-        #     a `recognizer`. Subsequent requests carry the audio data to be recognized.
-        #
-        #     The initial request with configuration can be omitted if the Recognizer
-        #     being used has a
-        #     {::Google::Cloud::Speech::V2::Recognizer#default_recognition_config default_recognition_config}.
+        #     Required. The name of the Recognizer to use during recognition. The
+        #     expected format is
+        #     `projects/{project}/locations/{location}/recognizers/{recognizer}`. The
+        #     \\{recognizer} segment may be set to `_` to use an empty implicit Recognizer.
         # @!attribute [rw] streaming_config
         #   @return [::Google::Cloud::Speech::V2::StreamingRecognitionConfig]
         #     StreamingRecognitionConfig to be used in this recognition attempt.
@@ -854,7 +882,10 @@ module Google
         # method.
         # @!attribute [rw] recognizer
         #   @return [::String]
-        #     Required. Resource name of the recognizer to be used for ASR.
+        #     Required. The name of the Recognizer to use during recognition. The
+        #     expected format is
+        #     `projects/{project}/locations/{location}/recognizers/{recognizer}`. The
+        #     \\{recognizer} segment may be set to `_` to use an empty implicit Recognizer.
         # @!attribute [rw] config
         #   @return [::Google::Cloud::Speech::V2::RecognitionConfig]
         #     Features and audio metadata to use for the Automatic Speech Recognition.
