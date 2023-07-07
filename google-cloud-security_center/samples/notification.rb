@@ -28,7 +28,10 @@ def create_notification_config org_id:, config_id:, pubsub_topic:
 
   client = Google::Cloud::SecurityCenter.security_center
 
-  org_path = client.organization_path organization: org_id
+  # You can also use 'project_id' or 'folder_id' as a parent.
+  # client.project_path project: project_id
+  # client.folder_path folder: folder_id
+  parent = client.organization_path organization: org_id
 
   notification_config = {
     description:      "Sample config for Ruby",
@@ -37,7 +40,7 @@ def create_notification_config org_id:, config_id:, pubsub_topic:
   }
 
   response = client.create_notification_config(
-    parent:              org_path,
+    parent:              parent,
     config_id:           config_id,
     notification_config: notification_config
   )
@@ -67,6 +70,7 @@ def update_notification_config org_id:, config_id:, description: nil, pubsub_top
 
   client = Google::Cloud::SecurityCenter.security_center
 
+  # You can also use 'project_id' or 'folder_id' as a parent.
   config_path = client.notification_config_path organization:        org_id,
                                                 notification_config: config_id
   notification_config = { name: config_path }
@@ -101,6 +105,7 @@ def delete_notification_config org_id:, config_id:
 
   client = Google::Cloud::SecurityCenter.security_center
 
+  # You can also use 'project_id' or 'folder_id' as a parent.
   config_path = client.notification_config_path organization:        org_id,
                                                 notification_config: config_id
 
@@ -122,6 +127,7 @@ def get_notification_config org_id:, config_id:
 
   client = Google::Cloud::SecurityCenter.security_center
 
+  # You can also use 'project_id' or 'folder_id' as a parent.
   config_path = client.notification_config_path organization:        org_id,
                                                 notification_config: config_id
 
@@ -139,9 +145,12 @@ def list_notification_configs org_id:
 
   client = Google::Cloud::SecurityCenter.security_center
 
-  org_path = client.organization_path organization: org_id
+  # You can also use 'project_id' or 'folder_id' as a parent.
+  # client.project_path project: project_id
+  # client.folder_path folder: folder_id
+  parent = client.organization_path organization: org_id
 
-  client.list_notification_configs(parent: org_path).each_page do |page|
+  client.list_notification_configs(parent: parent).each_page do |page|
     page.each do |element|
       puts element
     end
