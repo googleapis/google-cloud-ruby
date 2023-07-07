@@ -1,5 +1,11 @@
 # Release History
 
+### 0.17.0 (2023-07-07)
+
+#### Features
+
+* added rpc RenameTagTemplateFieldEnumValue ([#22481](https://github.com/googleapis/google-cloud-ruby/issues/22481)) 
+
 ### 0.16.1 (2023-06-06)
 
 #### Bug Fixes
