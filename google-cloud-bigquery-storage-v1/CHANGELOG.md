@@ -1,5 +1,11 @@
 # Release History
 
+### 0.21.0 (2023-07-07)
+
+#### Features
+
+* add ResourceExhausted to retryable error for Write API unary calls ([#22483](https://github.com/googleapis/google-cloud-ruby/issues/22483)) 
+
 ### 0.20.0 (2023-06-23)
 
 #### Features
