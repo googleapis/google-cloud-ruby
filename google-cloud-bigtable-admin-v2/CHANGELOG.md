@@ -1,5 +1,11 @@
 # Release History
 
+### 0.16.2 (2023-07-10)
+
+#### Documentation
+
+* Increase the max backup retention period to 90 days ([#22465](https://github.com/googleapis/google-cloud-ruby/issues/22465)) 
+
 ### 0.16.1 (2023-06-06)
 
 #### Bug Fixes
