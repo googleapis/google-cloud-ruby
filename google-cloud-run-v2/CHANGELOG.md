@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.10.0 (2023-07-10)
+
+#### Features
+
+* Adds support for custom audiences ([#22488](https://github.com/googleapis/google-cloud-ruby/issues/22488)) 
+
 ### 0.9.1 (2023-06-06)
 
 #### Bug Fixes
