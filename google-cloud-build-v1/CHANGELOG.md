@@ -1,5 +1,11 @@
 # Release History
 
+### 0.19.0 (2023-07-10)
+
+#### Features
+
+* added e2-medium machine type ([#22489](https://github.com/googleapis/google-cloud-ruby/issues/22489)) 
+
 ### 0.18.0 (2023-07-07)
 
 #### Features
