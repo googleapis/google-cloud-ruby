@@ -1889,6 +1889,9 @@ module Google
         # @!attribute [rw] desired_security_posture_config
         #   @return [::Google::Cloud::Container::V1::SecurityPostureConfig]
         #     Enable/Disable Security Posture API features for the cluster.
+        # @!attribute [rw] desired_network_performance_config
+        #   @return [::Google::Cloud::Container::V1::NetworkConfig::ClusterNetworkPerformanceConfig]
+        #     The desired network performance config.
         # @!attribute [rw] desired_enable_fqdn_network_policy
         #   @return [::Boolean]
         #     Enable/Disable FQDN Network Policy for the cluster.
@@ -4112,12 +4115,33 @@ module Google
         #   @return [::Google::Cloud::Container::V1::GatewayAPIConfig]
         #     GatewayAPIConfig contains the desired config of Gateway API on this
         #     cluster.
+        # @!attribute [rw] network_performance_config
+        #   @return [::Google::Cloud::Container::V1::NetworkConfig::ClusterNetworkPerformanceConfig]
+        #     Network bandwidth tier configuration.
         # @!attribute [rw] enable_fqdn_network_policy
         #   @return [::Boolean]
         #     Whether FQDN Network Policy is enabled on this cluster.
         class NetworkConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Configuration of network bandwidth tiers
+          # @!attribute [rw] total_egress_bandwidth_tier
+          #   @return [::Google::Cloud::Container::V1::NetworkConfig::ClusterNetworkPerformanceConfig::Tier]
+          #     Specifies the total network bandwidth tier for NodePools in the cluster.
+          class ClusterNetworkPerformanceConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Node network tier
+            module Tier
+              # Default value
+              TIER_UNSPECIFIED = 0
+
+              # Higher bandwidth, actual values based on VM size.
+              TIER_1 = 1
+            end
+          end
         end
 
         # GatewayAPIConfig contains the desired config of Gateway API on this cluster.
@@ -4406,6 +4430,9 @@ module Google
 
             # Use CloudDNS for DNS resolution.
             CLOUD_DNS = 2
+
+            # Use KubeDNS for DNS resolution
+            KUBE_DNS = 3
           end
 
           # DNSScope lists the various scopes of access to cluster DNS records.
