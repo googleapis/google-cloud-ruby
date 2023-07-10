@@ -1,5 +1,12 @@
 # Release History
 
+### 0.24.0 (2023-07-10)
+
+#### Features
+
+* Support for network performance configuration ([#22464](https://github.com/googleapis/google-cloud-ruby/issues/22464)) 
+* Support for using KubeDNS for DNS resolution 
+
 ### 0.23.0 (2023-06-16)
 
 #### Features
