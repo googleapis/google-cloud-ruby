@@ -1,5 +1,13 @@
 # Changelog
 
+### 0.3.0 (2023-07-10)
+
+#### Features
+
+* Repository reports the external ID of its webhook 
+* Support for connections to GitLab 
+* Support for fetch_git_refs RPC ([#22463](https://github.com/googleapis/google-cloud-ruby/issues/22463)) 
+
 ### 0.2.0 (2023-06-06)
 
 #### Features
