@@ -80,6 +80,16 @@ module Google
           #   @return [::Google::Cloud::Video::Transcoder::V1::Job::ProcessingMode]
           #     The processing mode of the job.
           #     The default is `PROCESSING_MODE_INTERACTIVE`.
+          # @!attribute [rw] batch_mode_priority
+          #   @return [::Integer]
+          #     The processing priority of a batch job.
+          #     This field can only be set for batch mode jobs. The default value is 0.
+          #     This value cannot be negative. Higher values correspond to higher
+          #     priorities for the job.
+          # @!attribute [rw] optimization
+          #   @return [::Google::Cloud::Video::Transcoder::V1::Job::OptimizationStrategy]
+          #     Optional. The optimization strategy of the job. The default is
+          #     `AUTODETECT`.
           class Job
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -125,6 +135,18 @@ module Google
               # The job processing mode is batch mode.
               # Batch mode allows queuing of jobs.
               PROCESSING_MODE_BATCH = 2
+            end
+
+            # The optimization strategy of the job. The default is `AUTODETECT`.
+            module OptimizationStrategy
+              # The optimization strategy is not specified.
+              OPTIMIZATION_STRATEGY_UNSPECIFIED = 0
+
+              # Prioritize job processing speed.
+              AUTODETECT = 1
+
+              # Disable all optimizations.
+              DISABLED = 2
             end
           end
 
@@ -189,6 +211,12 @@ module Google
           # @!attribute [rw] overlays
           #   @return [::Array<::Google::Cloud::Video::Transcoder::V1::Overlay>]
           #     List of overlays on the output video, in descending Z-order.
+          # @!attribute [rw] encryptions
+          #   @return [::Array<::Google::Cloud::Video::Transcoder::V1::Encryption>]
+          #     List of encryption configurations for the content.
+          #     Each configuration has an ID. Specify this ID in the
+          #     {::Google::Cloud::Video::Transcoder::V1::MuxStream#encryption_id MuxStream.encryption_id}
+          #     field to indicate the configuration to use for that `MuxStream` output.
           class JobConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -311,6 +339,10 @@ module Google
           # @!attribute [rw] segment_settings
           #   @return [::Google::Cloud::Video::Transcoder::V1::SegmentSettings]
           #     Segment settings for `ts`, `fmp4` and `vtt`.
+          # @!attribute [rw] encryption_id
+          #   @return [::String]
+          #     Identifier of the encryption configuration to use. If omitted, output will
+          #     be unencrypted.
           class MuxStream
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -323,7 +355,7 @@ module Google
           #     extension suffix corresponding to the `Manifest.type`.
           # @!attribute [rw] type
           #   @return [::Google::Cloud::Video::Transcoder::V1::Manifest::ManifestType]
-          #     Required. Type of the manifest, can be `HLS` or `DASH`.
+          #     Required. Type of the manifest.
           # @!attribute [rw] mux_streams
           #   @return [::Array<::String>]
           #     Required. List of user given `MuxStream.key`s that should appear in this
@@ -332,19 +364,44 @@ module Google
           #     When `Manifest.type` is `HLS`, a media manifest with name `MuxStream.key`
           #     and `.m3u8` extension is generated for each element of the
           #     `Manifest.mux_streams`.
+          # @!attribute [rw] dash
+          #   @return [::Google::Cloud::Video::Transcoder::V1::Manifest::DashConfig]
+          #     `DASH` manifest configuration.
           class Manifest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
-            # The manifest type can be either `HLS` or `DASH`.
+            # `DASH` manifest configuration.
+            # @!attribute [rw] segment_reference_scheme
+            #   @return [::Google::Cloud::Video::Transcoder::V1::Manifest::DashConfig::SegmentReferenceScheme]
+            #     The segment reference scheme for a `DASH` manifest. The default is
+            #     `SEGMENT_LIST`.
+            class DashConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # The segment reference scheme for a `DASH` manifest.
+              module SegmentReferenceScheme
+                # The segment reference scheme is not specified.
+                SEGMENT_REFERENCE_SCHEME_UNSPECIFIED = 0
+
+                # Lists the URLs of media files for each segment.
+                SEGMENT_LIST = 1
+
+                # Lists each segment from a template with $Number$ variable.
+                SEGMENT_TEMPLATE_NUMBER = 2
+              end
+            end
+
+            # The manifest type, which corresponds to the adaptive streaming format used.
             module ManifestType
               # The manifest type is not specified.
               MANIFEST_TYPE_UNSPECIFIED = 0
 
-              # Create `HLS` manifest. The corresponding file extension is `.m3u8`.
+              # Create an HLS manifest. The corresponding file extension is `.m3u8`.
               HLS = 1
 
-              # Create `DASH` manifest. The corresponding file extension is `.mpd`.
+              # Create an MPEG-DASH manifest. The corresponding file extension is `.mpd`.
               DASH = 2
             end
           end
@@ -1329,6 +1386,113 @@ module Google
           class SegmentSettings
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Encryption settings.
+          # @!attribute [rw] id
+          #   @return [::String]
+          #     Required. Identifier for this set of encryption options.
+          # @!attribute [rw] aes_128
+          #   @return [::Google::Cloud::Video::Transcoder::V1::Encryption::Aes128Encryption]
+          #     Configuration for AES-128 encryption.
+          # @!attribute [rw] sample_aes
+          #   @return [::Google::Cloud::Video::Transcoder::V1::Encryption::SampleAesEncryption]
+          #     Configuration for SAMPLE-AES encryption.
+          # @!attribute [rw] mpeg_cenc
+          #   @return [::Google::Cloud::Video::Transcoder::V1::Encryption::MpegCommonEncryption]
+          #     Configuration for MPEG Common Encryption (MPEG-CENC).
+          # @!attribute [rw] secret_manager_key_source
+          #   @return [::Google::Cloud::Video::Transcoder::V1::Encryption::SecretManagerSource]
+          #     Keys are stored in Google Secret Manager.
+          # @!attribute [rw] drm_systems
+          #   @return [::Google::Cloud::Video::Transcoder::V1::Encryption::DrmSystems]
+          #     Required. DRM system(s) to use; at least one must be specified. If a
+          #     DRM system is omitted, it is considered disabled.
+          class Encryption
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Configuration for AES-128 encryption.
+            class Aes128Encryption
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Configuration for SAMPLE-AES encryption.
+            class SampleAesEncryption
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Configuration for MPEG Common Encryption (MPEG-CENC).
+            # @!attribute [rw] scheme
+            #   @return [::String]
+            #     Required. Specify the encryption scheme.
+            #
+            #     Supported encryption schemes:
+            #
+            #     - `cenc`
+            #     - `cbcs`
+            class MpegCommonEncryption
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Configuration for secrets stored in Google Secret Manager.
+            # @!attribute [rw] secret_version
+            #   @return [::String]
+            #     Required. The name of the Secret Version containing the encryption key in
+            #     the following format:
+            #     `projects/{project}/secrets/{secret_id}/versions/{version_number}`
+            #
+            #     Note that only numbered versions are supported. Aliases like "latest" are
+            #     not supported.
+            class SecretManagerSource
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Widevine configuration.
+            class Widevine
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Fairplay configuration.
+            class Fairplay
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Playready configuration.
+            class Playready
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Clearkey configuration.
+            class Clearkey
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Defines configuration for DRM systems in use.
+            # @!attribute [rw] widevine
+            #   @return [::Google::Cloud::Video::Transcoder::V1::Encryption::Widevine]
+            #     Widevine configuration.
+            # @!attribute [rw] fairplay
+            #   @return [::Google::Cloud::Video::Transcoder::V1::Encryption::Fairplay]
+            #     Fairplay configuration.
+            # @!attribute [rw] playready
+            #   @return [::Google::Cloud::Video::Transcoder::V1::Encryption::Playready]
+            #     Playready configuration.
+            # @!attribute [rw] clearkey
+            #   @return [::Google::Cloud::Video::Transcoder::V1::Encryption::Clearkey]
+            #     Clearkey configuration.
+            class DrmSystems
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
         end
       end
