@@ -1,5 +1,13 @@
 # Release History
 
+### 0.9.0 (2023-07-10)
+
+#### Features
+
+* added Admin Interface (v1) ([#22478](https://github.com/googleapis/google-cloud-ruby/issues/22478)) 
+* added BigQuery as a backend metastore (v1) 
+* added gRPC endpoint protocol (v1) 
+
 ### 0.8.1 (2023-06-06)
 
 #### Bug Fixes
