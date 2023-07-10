@@ -3226,7 +3226,7 @@ module Google
         #     The URL of the network to which this backend service belongs. This field can only be specified when the load balancing scheme is set to INTERNAL.
         # @!attribute [rw] outlier_detection
         #   @return [::Google::Cloud::Compute::V1::OutlierDetection]
-        #     Settings controlling the eviction of unhealthy hosts from the load balancing pool for the backend service. If not set, this feature is considered disabled. This field is applicable to either: - A regional backend service with the service_protocol set to HTTP, HTTPS, HTTP2, or GRPC, and load_balancing_scheme set to INTERNAL_MANAGED. - A global backend service with the load_balancing_scheme set to INTERNAL_SELF_MANAGED.
+        #     Settings controlling the ejection of unhealthy backend endpoints from the load balancing pool of each individual proxy instance that processes the traffic for the given backend service. If not set, this feature is considered disabled. Results of the outlier detection algorithm (ejection of endpoints from the load balancing pool and returning them back to the pool) are executed independently by each proxy instance of the load balancer. In most cases, more than one proxy instance handles the traffic received by a backend service. Thus, it is possible that an unhealthy endpoint is detected and ejected by only some of the proxies, and while this happens, other proxies may continue to send requests to the same unhealthy endpoint until they detect and eject the unhealthy endpoint. Applicable backend endpoints can be: - VM instances in an Instance Group - Endpoints in a Zonal NEG (GCE_VM_IP, GCE_VM_IP_PORT) - Endpoints in a Hybrid Connectivity NEG (NON_GCP_PRIVATE_IP_PORT) - Serverless NEGs, that resolve to Cloud Run, App Engine, or Cloud Functions Services - Private Service Connect NEGs, that resolve to Google-managed regional API endpoints or managed services published using Private Service Connect Applicable backend service types can be: - A global backend service with the loadBalancingScheme set to INTERNAL_SELF_MANAGED or EXTERNAL_MANAGED. - A regional backend service with the serviceProtocol set to HTTP, HTTPS, or HTTP2, and loadBalancingScheme set to INTERNAL_MANAGED or EXTERNAL_MANAGED. Not supported for Serverless NEGs. Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
         # @!attribute [rw] port
         #   @return [::Integer]
         #     Deprecated in favor of portName. The TCP port to connect on the backend. The default value is 80. For Internal TCP/UDP Load Balancing and Network Load Balancing, omit port.
@@ -7622,7 +7622,7 @@ module Google
         #     This field can only be used: - If IPProtocol is one of TCP, UDP, or SCTP. - By internal TCP/UDP load balancers, backend service-based network load balancers, and internal and external protocol forwarding. Set this field to true to allow packets addressed to any port or packets lacking destination port information (for example, UDP fragments after the first fragment) to be forwarded to the backends configured with this forwarding rule. The ports, port_range, and allPorts fields are mutually exclusive.
         # @!attribute [rw] allow_global_access
         #   @return [::Boolean]
-        #     This field is used along with the backend_service field for internal load balancing or with the target field for internal TargetInstance. If the field is set to TRUE, clients can access ILB from all regions. Otherwise only allows access from clients in the same region as the internal load balancer.
+        #     This field is used along with the backend_service field for internal load balancing or with the target field for internal TargetInstance. If set to true, clients can access the Internal TCP/UDP Load Balancer, Internal HTTP(S) and TCP Proxy Load Balancer from all regions. If false, only allows access from the local region the load balancer is located at. Note that for INTERNAL_MANAGED forwarding rules, this field cannot be changed after the forwarding rule is created.
         # @!attribute [rw] allow_psc_global_access
         #   @return [::Boolean]
         #     This is used in PSC consumer ForwardingRule to control whether the PSC endpoint can be accessed from another region.
@@ -12719,6 +12719,9 @@ module Google
         # @!attribute [rw] instance_group
         #   @return [::String]
         #     [Output Only] The URL of the Instance Group resource.
+        # @!attribute [rw] instance_lifecycle_policy
+        #   @return [::Google::Cloud::Compute::V1::InstanceGroupManagerInstanceLifecyclePolicy]
+        #     The repair policy for this managed instance group.
         # @!attribute [rw] instance_template
         #   @return [::String]
         #     The URL of the instance template that is specified for this managed instance group. The group uses this template to create all new instances in the managed instance group. The templates for existing instances in the group do not change unless you run recreateInstances, run applyUpdatesToInstances, or set the group's updatePolicy.type to PROACTIVE.
@@ -12867,6 +12870,25 @@ module Google
         class InstanceGroupManagerAutoHealingPolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] force_update_on_repair
+        #   @return [::String]
+        #     A bit indicating whether to forcefully apply the group's latest configuration when repairing a VM. Valid options are: - NO (default): If configuration updates are available, they are not forcefully applied during repair. Instead, configuration updates are applied according to the group's update policy. - YES: If configuration updates are available, they are applied during repair.
+        #     Check the ForceUpdateOnRepair enum for the list of possible values.
+        class InstanceGroupManagerInstanceLifecyclePolicy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # A bit indicating whether to forcefully apply the group's latest configuration when repairing a VM. Valid options are: - NO (default): If configuration updates are available, they are not forcefully applied during repair. Instead, configuration updates are applied according to the group's update policy. - YES: If configuration updates are available, they are applied during repair.
+          module ForceUpdateOnRepair
+            # A value indicating that the enum field is not set.
+            UNDEFINED_FORCE_UPDATE_ON_REPAIR = 0
+
+            NO = 2497
+
+            YES = 87_751
+          end
         end
 
         # [Output Only] A list of managed instance groups.
@@ -14456,7 +14478,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Diagnostics information about interconnect, contains detailed and current technical information about Google's side of the connection.
+        # Diagnostics information about the Interconnect connection, which contains detailed and current technical information about Google's side of the connection.
         # @!attribute [rw] arp_caches
         #   @return [::Array<::Google::Cloud::Compute::V1::InterconnectDiagnosticsARPEntry>]
         #     A list of InterconnectDiagnostics.ARPEntry objects, describing individual neighbors currently seen by the Google router in the ARP cache for the Interconnect. This will be empty when the Interconnect is not bundled.
@@ -20545,37 +20567,37 @@ module Google
         # Settings controlling the eviction of unhealthy hosts from the load balancing pool for the backend service.
         # @!attribute [rw] base_ejection_time
         #   @return [::Google::Cloud::Compute::V1::Duration]
-        #     The base time that a host is ejected for. The real ejection time is equal to the base ejection time multiplied by the number of times the host has been ejected. Defaults to 30000ms or 30s.
+        #     The base time that a backend endpoint is ejected for. Defaults to 30000ms or 30s. After a backend endpoint is returned back to the load balancing pool, it can be ejected again in another ejection analysis. Thus, the total ejection time is equal to the base ejection time multiplied by the number of times the backend endpoint has been ejected. Defaults to 30000ms or 30s.
         # @!attribute [rw] consecutive_errors
         #   @return [::Integer]
-        #     Number of errors before a host is ejected from the connection pool. When the backend host is accessed over HTTP, a 5xx return code qualifies as an error. Defaults to 5. Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
+        #     Number of consecutive errors before a backend endpoint is ejected from the load balancing pool. When the backend endpoint is accessed over HTTP, a 5xx return code qualifies as an error. Defaults to 5.
         # @!attribute [rw] consecutive_gateway_failure
         #   @return [::Integer]
-        #     The number of consecutive gateway failures (502, 503, 504 status or connection errors that are mapped to one of those status codes) before a consecutive gateway failure ejection occurs. Defaults to 3. Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
+        #     The number of consecutive gateway failures (502, 503, 504 status or connection errors that are mapped to one of those status codes) before a consecutive gateway failure ejection occurs. Defaults to 3.
         # @!attribute [rw] enforcing_consecutive_errors
         #   @return [::Integer]
-        #     The percentage chance that a host will be actually ejected when an outlier status is detected through consecutive 5xx. This setting can be used to disable ejection or to ramp it up slowly. Defaults to 0. Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
+        #     The percentage chance that a backend endpoint will be ejected when an outlier status is detected through consecutive 5xx. This setting can be used to disable ejection or to ramp it up slowly. Defaults to 0.
         # @!attribute [rw] enforcing_consecutive_gateway_failure
         #   @return [::Integer]
-        #     The percentage chance that a host will be actually ejected when an outlier status is detected through consecutive gateway failures. This setting can be used to disable ejection or to ramp it up slowly. Defaults to 100. Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
+        #     The percentage chance that a backend endpoint will be ejected when an outlier status is detected through consecutive gateway failures. This setting can be used to disable ejection or to ramp it up slowly. Defaults to 100.
         # @!attribute [rw] enforcing_success_rate
         #   @return [::Integer]
-        #     The percentage chance that a host will be actually ejected when an outlier status is detected through success rate statistics. This setting can be used to disable ejection or to ramp it up slowly. Defaults to 100.
+        #     The percentage chance that a backend endpoint will be ejected when an outlier status is detected through success rate statistics. This setting can be used to disable ejection or to ramp it up slowly. Defaults to 100. Not supported when the backend service uses Serverless NEG.
         # @!attribute [rw] interval
         #   @return [::Google::Cloud::Compute::V1::Duration]
-        #     Time interval between ejection analysis sweeps. This can result in both new ejections as well as hosts being returned to service. Defaults to 1 second.
+        #     Time interval between ejection analysis sweeps. This can result in both new ejections and backend endpoints being returned to service. The interval is equal to the number of seconds as defined in outlierDetection.interval.seconds plus the number of nanoseconds as defined in outlierDetection.interval.nanos. Defaults to 1 second.
         # @!attribute [rw] max_ejection_percent
         #   @return [::Integer]
-        #     Maximum percentage of hosts in the load balancing pool for the backend service that can be ejected. Defaults to 50%.
+        #     Maximum percentage of backend endpoints in the load balancing pool for the backend service that can be ejected if the ejection conditions are met. Defaults to 50%.
         # @!attribute [rw] success_rate_minimum_hosts
         #   @return [::Integer]
-        #     The number of hosts in a cluster that must have enough request volume to detect success rate outliers. If the number of hosts is less than this setting, outlier detection via success rate statistics is not performed for any host in the cluster. Defaults to 5.
+        #     The number of backend endpoints in the load balancing pool that must have enough request volume to detect success rate outliers. If the number of backend endpoints is fewer than this setting, outlier detection via success rate statistics is not performed for any backend endpoint in the load balancing pool. Defaults to 5. Not supported when the backend service uses Serverless NEG.
         # @!attribute [rw] success_rate_request_volume
         #   @return [::Integer]
-        #     The minimum number of total requests that must be collected in one interval (as defined by the interval duration above) to include this host in success rate based outlier detection. If the volume is lower than this setting, outlier detection via success rate statistics is not performed for that host. Defaults to 100.
+        #     The minimum number of total requests that must be collected in one interval (as defined by the interval duration above) to include this backend endpoint in success rate based outlier detection. If the volume is lower than this setting, outlier detection via success rate statistics is not performed for that backend endpoint. Defaults to 100. Not supported when the backend service uses Serverless NEG.
         # @!attribute [rw] success_rate_stdev_factor
         #   @return [::Integer]
-        #     This factor is used to determine the ejection threshold for success rate outlier ejection. The ejection threshold is the difference between the mean success rate, and the product of this factor and the standard deviation of the mean success rate: mean - (stdev * success_rate_stdev_factor). This factor is divided by a thousand to get a double. That is, if the desired factor is 1.9, the runtime value should be 1900. Defaults to 1900.
+        #     This factor is used to determine the ejection threshold for success rate outlier ejection. The ejection threshold is the difference between the mean success rate, and the product of this factor and the standard deviation of the mean success rate: mean - (stdev * successRateStdevFactor). This factor is divided by a thousand to get a double. That is, if the desired factor is 1.9, the runtime value should be 1900. Defaults to 1900. Not supported when the backend service uses Serverless NEG.
         class OutlierDetection
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -22244,7 +22266,7 @@ module Google
         #     [Output Only] The unique identifier for the resource type. The server generates this identifier.
         # @!attribute [rw] ip_cidr_range
         #   @return [::String]
-        #     The IPv4 address range, in CIDR format, represented by this public delegated prefix.
+        #     The IP address range, in CIDR format, represented by this public delegated prefix.
         # @!attribute [rw] is_live_migration
         #   @return [::Boolean]
         #     If true, the prefix will be live migrated.
@@ -22360,7 +22382,7 @@ module Google
         #     An optional description of this resource. Provide this property when you create the resource.
         # @!attribute [rw] ip_cidr_range
         #   @return [::String]
-        #     The IPv4 address range, in CIDR format, represented by this sub public delegated prefix.
+        #     The IP address range, in CIDR format, represented by this sub public delegated prefix.
         # @!attribute [rw] is_address
         #   @return [::Boolean]
         #     Whether the sub prefix is delegated to create Address resources in the delegatee project.
@@ -24420,6 +24442,9 @@ module Google
         # @!attribute [rw] next_hop_gateway
         #   @return [::String]
         #     The URL to a gateway that should handle matching packets. You can only specify the internet gateway using a full or partial valid URL: projects/ project/global/gateways/default-internet-gateway
+        # @!attribute [rw] next_hop_hub
+        #   @return [::String]
+        #     [Output Only] The full resource name of the Network Connectivity Center hub that will handle matching packets.
         # @!attribute [rw] next_hop_ilb
         #   @return [::String]
         #     The URL to a forwarding rule of type loadBalancingScheme=INTERNAL that should handle matching packets or the IP address of the forwarding Rule. For example, the following are all valid URLs: - 10.128.0.56 - https://www.googleapis.com/compute/v1/projects/project/regions/region /forwardingRules/forwardingRule - regions/region/forwardingRules/forwardingRule
@@ -24903,6 +24928,10 @@ module Google
         end
 
         # Represents a Nat resource. It enables the VMs within the specified subnetworks to access Internet without external IP addresses. It specifies a list of subnetworks (and the ranges within) that want to use NAT. Customers can also provide the external IPs that would be used for NAT. GCP would auto-allocate ephemeral IPs if no external IPs are provided.
+        # @!attribute [rw] auto_network_tier
+        #   @return [::String]
+        #     The network tier to use when automatically reserving IP addresses. Must be one of: PREMIUM, STANDARD. If not specified, PREMIUM tier will be used.
+        #     Check the AutoNetworkTier enum for the list of possible values.
         # @!attribute [rw] drain_nat_ips
         #   @return [::Array<::String>]
         #     A list of URLs of the IP resources to be drained. These IPs must be valid static external IPs that have been assigned to the NAT. These IPs should be used for updating/patching a NAT only.
@@ -24963,6 +24992,23 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
+          # The network tier to use when automatically reserving IP addresses. Must be one of: PREMIUM, STANDARD. If not specified, PREMIUM tier will be used.
+          module AutoNetworkTier
+            # A value indicating that the enum field is not set.
+            UNDEFINED_AUTO_NETWORK_TIER = 0
+
+            # Public internet quality with fixed bandwidth.
+            FIXED_STANDARD = 310_464_328
+
+            # High quality, Google-grade network tier, support for all networking products.
+            PREMIUM = 399_530_551
+
+            # Public internet quality, only limited support for other networking products.
+            STANDARD = 484_642_493
+
+            # (Output only) Temporary tier for FIXED_STANDARD when fixed standard tier is expired or not configured.
+            STANDARD_OVERRIDES_FIXED_STANDARD = 465_847_234
+          end
 
           module EndpointTypes
             # A value indicating that the enum field is not set.
@@ -29516,6 +29562,9 @@ module Google
         # @!attribute [rw] fingerprint
         #   @return [::String]
         #     Fingerprint of this resource. A hash of the contents stored in this object. This field is used in optimistic locking. This field will be ignored when inserting a TargetHttpProxy. An up-to-date fingerprint must be provided in order to patch/update the TargetHttpProxy; otherwise, the request will fail with error 412 conditionNotMet. To see the latest fingerprint, make a get() request to retrieve the TargetHttpProxy.
+        # @!attribute [rw] http_keep_alive_timeout_sec
+        #   @return [::Integer]
+        #     Specifies how long to keep a connection open, after completing a response, while there is no matching traffic (in seconds). If an HTTP keep-alive is not specified, a default value (610 seconds) will be used. For Global external HTTP(S) load balancer, the minimum allowed value is 5 seconds and the maximum allowed value is 1200 seconds. For Global external HTTP(S) load balancer (classic), this option is not available publicly.
         # @!attribute [rw] id
         #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
@@ -29665,6 +29714,9 @@ module Google
         # @!attribute [rw] fingerprint
         #   @return [::String]
         #     Fingerprint of this resource. A hash of the contents stored in this object. This field is used in optimistic locking. This field will be ignored when inserting a TargetHttpsProxy. An up-to-date fingerprint must be provided in order to patch the TargetHttpsProxy; otherwise, the request will fail with error 412 conditionNotMet. To see the latest fingerprint, make a get() request to retrieve the TargetHttpsProxy.
+        # @!attribute [rw] http_keep_alive_timeout_sec
+        #   @return [::Integer]
+        #     Specifies how long to keep a connection open, after completing a response, while there is no matching traffic (in seconds). If an HTTP keep-alive is not specified, a default value (610 seconds) will be used. For Global external HTTP(S) load balancer, the minimum allowed value is 5 seconds and the maximum allowed value is 1200 seconds. For Global external HTTP(S) load balancer (classic), this option is not available publicly.
         # @!attribute [rw] id
         #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
