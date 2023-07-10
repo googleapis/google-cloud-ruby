@@ -1,5 +1,11 @@
 # Release History
 
+### 0.15.0 (2023-07-10)
+
+#### Features
+
+* add support for Salesforce connections, which are usable only by allowlisted partners ([#22490](https://github.com/googleapis/google-cloud-ruby/issues/22490)) 
+
 ### 0.14.0 (2023-06-06)
 
 #### Features
