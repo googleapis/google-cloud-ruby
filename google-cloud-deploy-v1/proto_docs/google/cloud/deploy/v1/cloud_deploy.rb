@@ -278,6 +278,11 @@ module Google
           #   @return [::String]
           #     Required. Name of the Kubernetes Deployment whose traffic is managed by
           #     the specified HTTPRoute and Service.
+          # @!attribute [rw] route_update_wait_time
+          #   @return [::Google::Protobuf::Duration]
+          #     Optional. The time to wait for route updates to propagate. The maximum
+          #     configurable time is 3 hours, in seconds format. If unspecified, there is
+          #     no wait time.
           class GatewayServiceMesh
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -613,16 +618,16 @@ module Google
         #     Output only. Most recent time at which the `Target` was updated.
         # @!attribute [rw] gke
         #   @return [::Google::Cloud::Deploy::V1::GkeCluster]
-        #     Information specifying a GKE Cluster.
+        #     Optional. Information specifying a GKE Cluster.
         # @!attribute [rw] anthos_cluster
         #   @return [::Google::Cloud::Deploy::V1::AnthosCluster]
-        #     Information specifying an Anthos Cluster.
+        #     Optional. Information specifying an Anthos Cluster.
         # @!attribute [rw] run
         #   @return [::Google::Cloud::Deploy::V1::CloudRunLocation]
-        #     Information specifying a Cloud Run deployment target.
+        #     Optional. Information specifying a Cloud Run deployment target.
         # @!attribute [rw] multi_target
         #   @return [::Google::Cloud::Deploy::V1::MultiTarget]
-        #     Information specifying a multiTarget.
+        #     Optional. Information specifying a multiTarget.
         # @!attribute [rw] etag
         #   @return [::String]
         #     Optional. This checksum is computed by the server based on the value of
