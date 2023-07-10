@@ -84,6 +84,8 @@ module Google
                     initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
+                  default_config.rpcs.move.timeout = 600.0
+
                   default_config.rpcs.set_labels.timeout = 600.0
 
                   default_config
@@ -539,6 +541,85 @@ module Google
               end
 
               ##
+              # Moves the specified address resource.
+              #
+              # @overload move(request, options = nil)
+              #   Pass arguments to `move` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::MoveAddressRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::MoveAddressRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload move(address: nil, project: nil, region: nil, region_addresses_move_request_resource: nil, request_id: nil)
+              #   Pass arguments to `move` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param address [::String]
+              #     Name of the address resource to move.
+              #   @param project [::String]
+              #     Source project ID which the Address is moved from.
+              #   @param region [::String]
+              #     Name of the region for this request.
+              #   @param region_addresses_move_request_resource [::Google::Cloud::Compute::V1::RegionAddressesMoveRequest, ::Hash]
+              #     The body resource for this request
+              #   @param request_id [::String]
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::GenericLRO::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def move request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::MoveAddressRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.move.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.move.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.move.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @addresses_stub.move request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::RegionOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: region_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "region" => request.region
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Sets the labels on an Address. To learn more about labels, read the Labeling Resources documentation.
               #
               # @overload set_labels(request, options = nil)
@@ -768,6 +849,11 @@ module Google
                   #
                   attr_reader :list
                   ##
+                  # RPC-specific configuration for `move`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :move
+                  ##
                   # RPC-specific configuration for `set_labels`
                   # @return [::Gapic::Config::Method]
                   #
@@ -785,6 +871,8 @@ module Google
                     @insert = ::Gapic::Config::Method.new insert_config
                     list_config = parent_rpcs.list if parent_rpcs.respond_to? :list
                     @list = ::Gapic::Config::Method.new list_config
+                    move_config = parent_rpcs.move if parent_rpcs.respond_to? :move
+                    @move = ::Gapic::Config::Method.new move_config
                     set_labels_config = parent_rpcs.set_labels if parent_rpcs.respond_to? :set_labels
                     @set_labels = ::Gapic::Config::Method.new set_labels_config
 

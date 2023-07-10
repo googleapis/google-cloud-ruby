@@ -245,6 +245,7 @@ class ::Google::Cloud::Compute::V1::Routers::Rest::ClientTest < Minitest::Test
     # Create request parameters for a unary method.
     filter = "hello world"
     max_results = 42
+    nat_name = "hello world"
     order_by = "hello world"
     page_token = "hello world"
     project = "hello world"
@@ -266,27 +267,27 @@ class ::Google::Cloud::Compute::V1::Routers::Rest::ClientTest < Minitest::Test
         end
 
         # Use hash object
-        client.get_nat_mapping_info({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success, router: router }) do |_result, response|
+        client.get_nat_mapping_info({ filter: filter, max_results: max_results, nat_name: nat_name, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success, router: router }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.get_nat_mapping_info filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success, router: router do |_result, response|
+        client.get_nat_mapping_info filter: filter, max_results: max_results, nat_name: nat_name, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success, router: router do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.get_nat_mapping_info ::Google::Cloud::Compute::V1::GetNatMappingInfoRoutersRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success, router: router) do |_result, response|
+        client.get_nat_mapping_info ::Google::Cloud::Compute::V1::GetNatMappingInfoRoutersRequest.new(filter: filter, max_results: max_results, nat_name: nat_name, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success, router: router) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.get_nat_mapping_info({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success, router: router }, call_options) do |_result, response|
+        client.get_nat_mapping_info({ filter: filter, max_results: max_results, nat_name: nat_name, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success, router: router }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.get_nat_mapping_info(::Google::Cloud::Compute::V1::GetNatMappingInfoRoutersRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success, router: router), call_options) do |_result, response|
+        client.get_nat_mapping_info(::Google::Cloud::Compute::V1::GetNatMappingInfoRoutersRequest.new(filter: filter, max_results: max_results, nat_name: nat_name, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success, router: router), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
