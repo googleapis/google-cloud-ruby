@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.10.0 (2023-07-10)
+
+#### Features
+
+* added support for batch mode priority 
+* added support for content encryption (DRM) 
+* added support for disabling job processing optimizations 
+* added support for segment template manifest generation with DASH ([#22503](https://github.com/googleapis/google-cloud-ruby/issues/22503)) 
+
 ### 0.9.1 (2023-06-06)
 
 #### Bug Fixes
