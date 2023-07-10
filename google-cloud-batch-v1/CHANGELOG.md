@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.10.1 (2023-07-10)
+
+#### Documentation
+
+* Add image shortcut example for Batch HPC CentOS Image ([#22476](https://github.com/googleapis/google-cloud-ruby/issues/22476)) 
+
 ### 0.10.0 (2023-06-16)
 
 #### Features
