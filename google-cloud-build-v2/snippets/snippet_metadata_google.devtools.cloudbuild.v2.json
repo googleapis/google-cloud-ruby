@@ -530,6 +530,46 @@
           "type": "FULL"
         }
       ]
+    },
+    {
+      "region_tag": "cloudbuild_v2_generated_RepositoryManager_FetchGitRefs_sync",
+      "title": "Snippet for the fetch_git_refs call in the RepositoryManager service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::Build::V2::RepositoryManager::Client#fetch_git_refs. It may require modification in order to execute successfully.",
+      "file": "repository_manager/fetch_git_refs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "fetch_git_refs",
+        "full_name": "::Google::Cloud::Build::V2::RepositoryManager::Client#fetch_git_refs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Build::V2::FetchGitRefsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Build::V2::FetchGitRefsResponse",
+        "client": {
+          "short_name": "RepositoryManager::Client",
+          "full_name": "::Google::Cloud::Build::V2::RepositoryManager::Client"
+        },
+        "method": {
+          "short_name": "FetchGitRefs",
+          "full_name": "google.devtools.cloudbuild.v2.RepositoryManager.FetchGitRefs",
+          "service": {
+            "short_name": "RepositoryManager",
+            "full_name": "google.devtools.cloudbuild.v2.RepositoryManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
     }
   ]
 }
