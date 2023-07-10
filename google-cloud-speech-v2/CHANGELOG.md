@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.6.0 (2023-07-10)
+
+#### Features
+
+* add `model` and `language_codes` fields in `RecognitionConfig` message + enable default `_` recognizer ([#22479](https://github.com/googleapis/google-cloud-ruby/issues/22479)) 
+
 ### 0.5.1 (2023-06-06)
 
 #### Bug Fixes
