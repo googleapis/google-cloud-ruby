@@ -80,6 +80,8 @@
     "snippets/key_management_service/list_key_rings.rb",
     "snippets/key_management_service/mac_sign.rb",
     "snippets/key_management_service/mac_verify.rb",
+    "snippets/key_management_service/raw_decrypt.rb",
+    "snippets/key_management_service/raw_encrypt.rb",
     "snippets/key_management_service/restore_crypto_key_version.rb",
     "snippets/key_management_service/update_crypto_key.rb",
     "snippets/key_management_service/update_crypto_key_primary_version.rb",

@@ -1238,6 +1238,127 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ClientTest < Minites
     end
   end
 
+  def test_raw_encrypt
+    # Create test objects.
+    client_result = ::Google::Cloud::Kms::V1::RawEncryptResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    plaintext = "hello world"
+    additional_authenticated_data = "hello world"
+    plaintext_crc32c = {}
+    additional_authenticated_data_crc32c = {}
+    initialization_vector = "hello world"
+    initialization_vector_crc32c = {}
+
+    raw_encrypt_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ServiceStub.stub :transcode_raw_encrypt_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, raw_encrypt_client_stub do
+        # Create client
+        client = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.raw_encrypt({ name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector: initialization_vector, initialization_vector_crc32c: initialization_vector_crc32c }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.raw_encrypt name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector: initialization_vector, initialization_vector_crc32c: initialization_vector_crc32c do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.raw_encrypt ::Google::Cloud::Kms::V1::RawEncryptRequest.new(name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector: initialization_vector, initialization_vector_crc32c: initialization_vector_crc32c) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.raw_encrypt({ name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector: initialization_vector, initialization_vector_crc32c: initialization_vector_crc32c }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.raw_encrypt(::Google::Cloud::Kms::V1::RawEncryptRequest.new(name: name, plaintext: plaintext, additional_authenticated_data: additional_authenticated_data, plaintext_crc32c: plaintext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector: initialization_vector, initialization_vector_crc32c: initialization_vector_crc32c), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, raw_encrypt_client_stub.call_count
+      end
+    end
+  end
+
+  def test_raw_decrypt
+    # Create test objects.
+    client_result = ::Google::Cloud::Kms::V1::RawDecryptResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    ciphertext = "hello world"
+    additional_authenticated_data = "hello world"
+    initialization_vector = "hello world"
+    tag_length = 42
+    ciphertext_crc32c = {}
+    additional_authenticated_data_crc32c = {}
+    initialization_vector_crc32c = {}
+
+    raw_decrypt_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Kms::V1::KeyManagementService::Rest::ServiceStub.stub :transcode_raw_decrypt_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, raw_decrypt_client_stub do
+        # Create client
+        client = ::Google::Cloud::Kms::V1::KeyManagementService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.raw_decrypt({ name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, initialization_vector: initialization_vector, tag_length: tag_length, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector_crc32c: initialization_vector_crc32c }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.raw_decrypt name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, initialization_vector: initialization_vector, tag_length: tag_length, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector_crc32c: initialization_vector_crc32c do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.raw_decrypt ::Google::Cloud::Kms::V1::RawDecryptRequest.new(name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, initialization_vector: initialization_vector, tag_length: tag_length, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector_crc32c: initialization_vector_crc32c) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.raw_decrypt({ name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, initialization_vector: initialization_vector, tag_length: tag_length, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector_crc32c: initialization_vector_crc32c }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.raw_decrypt(::Google::Cloud::Kms::V1::RawDecryptRequest.new(name: name, ciphertext: ciphertext, additional_authenticated_data: additional_authenticated_data, initialization_vector: initialization_vector, tag_length: tag_length, ciphertext_crc32c: ciphertext_crc32c, additional_authenticated_data_crc32c: additional_authenticated_data_crc32c, initialization_vector_crc32c: initialization_vector_crc32c), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, raw_decrypt_client_stub.call_count
+      end
+    end
+  end
+
   def test_asymmetric_sign
     # Create test objects.
     client_result = ::Google::Cloud::Kms::V1::AsymmetricSignResponse.new
