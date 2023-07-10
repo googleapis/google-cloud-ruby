@@ -135,6 +135,9 @@ module Google
         #
         #     Controls the maximum number of processes allowed to run in a pod. The value
         #     must be greater than or equal to 1024 and less than 4194304.
+        # @!attribute [rw] insecure_kubelet_readonly_port_enabled
+        #   @return [::Boolean]
+        #     Enable or disable Kubelet read only port.
         class NodeKubeletConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -249,7 +252,7 @@ module Google
         #   @return [::Boolean]
         #     Whether the nodes are created as preemptible VM instances. See:
         #     https://cloud.google.com/compute/docs/instances/preemptible for more
-        #     inforamtion about preemptible VM instances.
+        #     information about preemptible VM instances.
         # @!attribute [rw] accelerators
         #   @return [::Array<::Google::Cloud::Container::V1beta1::AcceleratorConfig>]
         #     A list of hardware accelerators to be attached to each node.
@@ -463,6 +466,11 @@ module Google
         #     power of 2)
         #     Example: max_pods_per_node of 30 will result in 32 IPs (/27) when
         #     overprovisioning is disabled.
+        # @!attribute [r] pod_ipv4_range_utilization
+        #   @return [::Float]
+        #     Output only. [Output only] The utilization of the IPv4 range for pod.
+        #     The ratio is Usage/[Total number of IPs in the secondary range],
+        #     Usage=numNodes*numZones*podIPsPerNode.
         class NodeNetworkConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1308,6 +1316,11 @@ module Google
         #     cluster. These pod ranges can be used by new node pools to allocate pod IPs
         #     automatically. Once the range is removed it will not show up in
         #     IPAllocationPolicy.
+        # @!attribute [r] default_pod_ipv4_range_utilization
+        #   @return [::Float]
+        #     Output only. [Output only] The utilization of the cluster default IPv4
+        #     range for pod. The ratio is Usage/[Total number of IPs in the secondary
+        #     range], Usage=numNodes*numZones*podIPsPerNode.
         class IPAllocationPolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2188,6 +2201,9 @@ module Google
         # @!attribute [rw] desired_security_posture_config
         #   @return [::Google::Cloud::Container::V1beta1::SecurityPostureConfig]
         #     Enable/Disable Security Posture API features for the cluster.
+        # @!attribute [rw] desired_network_performance_config
+        #   @return [::Google::Cloud::Container::V1beta1::NetworkConfig::ClusterNetworkPerformanceConfig]
+        #     The desired network performance config.
         # @!attribute [rw] desired_enable_fqdn_network_policy
         #   @return [::Boolean]
         #     Enable/Disable FQDN Network Policy for the cluster.
@@ -2207,7 +2223,22 @@ module Google
         # @!attribute [rw] pod_range_names
         #   @return [::Array<::String>]
         #     Name for pod secondary ipv4 range which has the actual range defined ahead.
+        # @!attribute [r] pod_range_info
+        #   @return [::Array<::Google::Cloud::Container::V1beta1::RangeInfo>]
+        #     Output only. [Output only] Information for additional pod range.
         class AdditionalPodRangesConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # RangeInfo contains the range name and the range utilization by this cluster.
+        # @!attribute [r] range_name
+        #   @return [::String]
+        #     Output only. [Output only] Name of a range.
+        # @!attribute [r] utilization
+        #   @return [::Float]
+        #     Output only. [Output only] The utilization of the range.
+        class RangeInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -3568,6 +3599,10 @@ module Google
           # @!attribute [rw] type
           #   @return [::Google::Cloud::Container::V1beta1::NodePool::PlacementPolicy::Type]
           #     The type of placement.
+          # @!attribute [rw] tpu_topology
+          #   @return [::String]
+          #     TPU placement topology for pod slice node pool.
+          #     https://cloud.google.com/tpu/docs/types-topologies#tpu_topologies
           class PlacementPolicy
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -4027,6 +4062,9 @@ module Google
         #     The image type to use for NAP created node. Please see
         #     https://cloud.google.com/kubernetes-engine/docs/concepts/node-images for
         #     available image types.
+        # @!attribute [rw] insecure_kubelet_readonly_port_enabled
+        #   @return [::Boolean]
+        #     Enable or disable Kubelet read only port.
         class AutoprovisioningNodePoolDefaults
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -4573,12 +4611,33 @@ module Google
         #   @return [::Google::Cloud::Container::V1beta1::GatewayAPIConfig]
         #     GatewayAPIConfig contains the desired config of Gateway API on this
         #     cluster.
+        # @!attribute [rw] network_performance_config
+        #   @return [::Google::Cloud::Container::V1beta1::NetworkConfig::ClusterNetworkPerformanceConfig]
+        #     Network bandwidth tier configuration.
         # @!attribute [rw] enable_fqdn_network_policy
         #   @return [::Boolean]
         #     Whether FQDN Network Policy is enabled on this cluster.
         class NetworkConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Configuration of all network bandwidth tiers
+          # @!attribute [rw] total_egress_bandwidth_tier
+          #   @return [::Google::Cloud::Container::V1beta1::NetworkConfig::ClusterNetworkPerformanceConfig::Tier]
+          #     Specifies the total network bandwidth tier for the NodePool.
+          class ClusterNetworkPerformanceConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Node network tier
+            module Tier
+              # Default value
+              TIER_UNSPECIFIED = 0
+
+              # Higher bandwidth, actual values based on VM size.
+              TIER_1 = 1
+            end
+          end
         end
 
         # GatewayAPIConfig contains the desired config of Gateway API on this cluster.
@@ -4788,6 +4847,9 @@ module Google
 
             # Use CloudDNS for DNS resolution.
             CLOUD_DNS = 2
+
+            # Use KubeDNS for DNS resolution
+            KUBE_DNS = 3
           end
 
           # DNSScope lists the various scopes of access to cluster DNS records.
