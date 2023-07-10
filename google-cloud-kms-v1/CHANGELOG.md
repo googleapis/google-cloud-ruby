@@ -1,5 +1,12 @@
 # Release History
 
+### 0.21.0 (2023-07-10)
+
+#### Features
+
+* Support for AES Galois Counter Mode 
+* Support for raw_encrypt and raw_decrypt RPCs ([#22469](https://github.com/googleapis/google-cloud-ruby/issues/22469)) 
+
 ### 0.20.0 (2023-06-06)
 
 #### Features
