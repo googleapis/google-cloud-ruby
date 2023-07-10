@@ -1,5 +1,15 @@
 # Release History
 
+### 0.23.0 (2023-07-10)
+
+#### Features
+
+* Added a flag for toggling the Kubelet readonly port 
+* Report the utilization of the IPv4 range for a pod 
+* Support for network performance configuration ([#22466](https://github.com/googleapis/google-cloud-ruby/issues/22466)) 
+* Support for the TPU placement topology 
+* Support for using KubeDNS for DNS resolution 
+
 ### 0.22.0 (2023-06-06)
 
 #### Features
