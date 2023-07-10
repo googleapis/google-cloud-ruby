@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.16.0 (2023-07-10)
+
+#### Features
+
+* Support topic model type V2 ([#22482](https://github.com/googleapis/google-cloud-ruby/issues/22482)) 
+
 ### 0.15.0 (2023-06-06)
 
 #### Features
