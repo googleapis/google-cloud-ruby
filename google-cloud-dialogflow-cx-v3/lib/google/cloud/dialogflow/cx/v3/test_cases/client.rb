@@ -1183,7 +1183,8 @@ module Google
               end
 
               ##
-              # Fetches a list of results for a given test case.
+              # Fetches the list of run results for the given test case. A maximum of 100
+              # results are kept for each test case.
               #
               # @overload list_test_case_results(request, options = nil)
               #   Pass arguments to `list_test_case_results` via a request object, either of type

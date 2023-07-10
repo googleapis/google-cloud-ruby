@@ -529,7 +529,7 @@ module Google
                 #   @param options [::Gapic::CallOptions, ::Hash]
                 #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
                 #
-                # @overload export_agent(name: nil, agent_uri: nil, data_format: nil, environment: nil, include_bigquery_export_settings: nil)
+                # @overload export_agent(name: nil, agent_uri: nil, data_format: nil, environment: nil, git_destination: nil, include_bigquery_export_settings: nil)
                 #   Pass arguments to `export_agent` via keyword arguments. Note that at
                 #   least one keyword argument is required. To specify no parameters, or to keep all
                 #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -555,6 +555,8 @@ module Google
                 #     Optional. Environment name. If not set, draft environment is assumed.
                 #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
                 #     ID>/environments/<Environment ID>`.
+                #   @param git_destination [::Google::Cloud::Dialogflow::CX::V3::ExportAgentRequest::GitDestination, ::Hash]
+                #     Optional. The Git branch to export the agent to.
                 #   @param include_bigquery_export_settings [::Boolean]
                 #     Optional. Whether to include BigQuery Export setting.
                 # @yield [result, operation] Access the result along with the TransportOperation object
@@ -629,7 +631,7 @@ module Google
                 #   @param options [::Gapic::CallOptions, ::Hash]
                 #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
                 #
-                # @overload restore_agent(name: nil, agent_uri: nil, agent_content: nil, restore_option: nil)
+                # @overload restore_agent(name: nil, agent_uri: nil, agent_content: nil, git_source: nil, restore_option: nil)
                 #   Pass arguments to `restore_agent` via keyword arguments. Note that at
                 #   least one keyword argument is required. To specify no parameters, or to keep all
                 #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -649,6 +651,8 @@ module Google
                 #     control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
                 #   @param agent_content [::String]
                 #     Uncompressed raw byte content for agent.
+                #   @param git_source [::Google::Cloud::Dialogflow::CX::V3::RestoreAgentRequest::GitSource, ::Hash]
+                #     Setting for restoring from a git branch
                 #   @param restore_option [::Google::Cloud::Dialogflow::CX::V3::RestoreAgentRequest::RestoreOption]
                 #     Agent restore mode. If not specified, `KEEP` is assumed.
                 # @yield [result, operation] Access the result along with the TransportOperation object

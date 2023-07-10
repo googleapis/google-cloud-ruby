@@ -362,6 +362,7 @@ class ::Google::Cloud::Dialogflow::CX::V3::Agents::ClientTest < Minitest::Test
     agent_uri = "hello world"
     data_format = :DATA_FORMAT_UNSPECIFIED
     environment = "hello world"
+    git_destination = {}
     include_bigquery_export_settings = true
 
     export_agent_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
@@ -371,6 +372,7 @@ class ::Google::Cloud::Dialogflow::CX::V3::Agents::ClientTest < Minitest::Test
       assert_equal "hello world", request["agent_uri"]
       assert_equal :DATA_FORMAT_UNSPECIFIED, request["data_format"]
       assert_equal "hello world", request["environment"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::CX::V3::ExportAgentRequest::GitDestination), request["git_destination"]
       assert_equal true, request["include_bigquery_export_settings"]
       refute_nil options
     end
@@ -382,35 +384,35 @@ class ::Google::Cloud::Dialogflow::CX::V3::Agents::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.export_agent({ name: name, agent_uri: agent_uri, data_format: data_format, environment: environment, include_bigquery_export_settings: include_bigquery_export_settings }) do |response, operation|
+      client.export_agent({ name: name, agent_uri: agent_uri, data_format: data_format, environment: environment, git_destination: git_destination, include_bigquery_export_settings: include_bigquery_export_settings }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.export_agent name: name, agent_uri: agent_uri, data_format: data_format, environment: environment, include_bigquery_export_settings: include_bigquery_export_settings do |response, operation|
+      client.export_agent name: name, agent_uri: agent_uri, data_format: data_format, environment: environment, git_destination: git_destination, include_bigquery_export_settings: include_bigquery_export_settings do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.export_agent ::Google::Cloud::Dialogflow::CX::V3::ExportAgentRequest.new(name: name, agent_uri: agent_uri, data_format: data_format, environment: environment, include_bigquery_export_settings: include_bigquery_export_settings) do |response, operation|
+      client.export_agent ::Google::Cloud::Dialogflow::CX::V3::ExportAgentRequest.new(name: name, agent_uri: agent_uri, data_format: data_format, environment: environment, git_destination: git_destination, include_bigquery_export_settings: include_bigquery_export_settings) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.export_agent({ name: name, agent_uri: agent_uri, data_format: data_format, environment: environment, include_bigquery_export_settings: include_bigquery_export_settings }, grpc_options) do |response, operation|
+      client.export_agent({ name: name, agent_uri: agent_uri, data_format: data_format, environment: environment, git_destination: git_destination, include_bigquery_export_settings: include_bigquery_export_settings }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.export_agent(::Google::Cloud::Dialogflow::CX::V3::ExportAgentRequest.new(name: name, agent_uri: agent_uri, data_format: data_format, environment: environment, include_bigquery_export_settings: include_bigquery_export_settings), grpc_options) do |response, operation|
+      client.export_agent(::Google::Cloud::Dialogflow::CX::V3::ExportAgentRequest.new(name: name, agent_uri: agent_uri, data_format: data_format, environment: environment, git_destination: git_destination, include_bigquery_export_settings: include_bigquery_export_settings), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
