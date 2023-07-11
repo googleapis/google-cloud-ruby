@@ -101,8 +101,8 @@ module Google
             #   @return [::Google::Protobuf::Map{::String => ::String}]
             #     Optional. Maps the values extracted from specific fields of the flexible
             #     webhook response into session parameters.
-            #      - Key: session parameter name
-            #      - Value: field path in the webhook response
+            #     - Key: session parameter name
+            #     - Value: field path in the webhook response
             class GenericWebService
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
