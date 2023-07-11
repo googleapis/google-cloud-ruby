@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.10.0 (2023-07-11)
+
+#### Features
+
+* Support for configuring the time to wait for route updates to propagate ([#22511](https://github.com/googleapis/google-cloud-ruby/issues/22511)) 
+* Support resource state change and process aborted log entry types 
+
 ### 0.9.0 (2023-06-23)
 
 #### Features
