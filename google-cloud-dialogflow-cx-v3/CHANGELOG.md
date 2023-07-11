@@ -1,5 +1,13 @@
 # Changelog
 
+### 0.19.0 (2023-07-11)
+
+#### Features
+
+* Support for specifying agent git integration settings 
+* Support for specifying the git branch for export_agent and restore_agent ([#22512](https://github.com/googleapis/google-cloud-ruby/issues/22512)) 
+* The response for export_agent provides the commit SHA 
+
 ### 0.18.0 (2023-06-20)
 
 #### Features
