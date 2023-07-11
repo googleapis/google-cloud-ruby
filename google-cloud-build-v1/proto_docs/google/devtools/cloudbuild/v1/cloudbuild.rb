@@ -51,26 +51,27 @@ module Google
         # @!attribute [rw] source
         #   @return [::Google::Cloud::Build::V1::RepoSource]
         #     Source to build against this trigger.
+        #     Branch and tag names cannot consist of regular expressions.
         class RunBuildTriggerRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Location of the source in an archive file in Google Cloud Storage.
+        # Location of the source in an archive file in Cloud Storage.
         # @!attribute [rw] bucket
         #   @return [::String]
-        #     Google Cloud Storage bucket containing the source (see
+        #     Cloud Storage bucket containing the source (see
         #     [Bucket Name
         #     Requirements](https://cloud.google.com/storage/docs/bucket-naming#requirements)).
         # @!attribute [rw] object
         #   @return [::String]
-        #     Google Cloud Storage object containing the source.
+        #     Cloud Storage object containing the source.
         #
-        #     This object must be a gzipped archive file (`.tar.gz`) containing source to
-        #     build.
+        #     This object must be a zipped (`.zip`) or gzipped archive file (`.tar.gz`)
+        #     containing source to build.
         # @!attribute [rw] generation
         #   @return [::Integer]
-        #     Google Cloud Storage generation for the object. If the generation is
+        #     Cloud Storage generation for the object. If the generation is
         #     omitted, the latest generation will be used.
         class StorageSource
           include ::Google::Protobuf::MessageExts
@@ -157,22 +158,22 @@ module Google
           end
         end
 
-        # Location of the source manifest in Google Cloud Storage.
+        # Location of the source manifest in Cloud Storage.
         # This feature is in Preview; see description
         # [here](https://github.com/GoogleCloudPlatform/cloud-builders/tree/master/gcs-fetcher).
         # @!attribute [rw] bucket
         #   @return [::String]
-        #     Google Cloud Storage bucket containing the source manifest (see [Bucket
+        #     Cloud Storage bucket containing the source manifest (see [Bucket
         #     Name
         #     Requirements](https://cloud.google.com/storage/docs/bucket-naming#requirements)).
         # @!attribute [rw] object
         #   @return [::String]
-        #     Google Cloud Storage object containing the source manifest.
+        #     Cloud Storage object containing the source manifest.
         #
         #     This object must be a JSON file.
         # @!attribute [rw] generation
         #   @return [::Integer]
-        #     Google Cloud Storage generation for the object. If the generation is
+        #     Cloud Storage generation for the object. If the generation is
         #     omitted, the latest generation will be used.
         class StorageSourceManifest
           include ::Google::Protobuf::MessageExts
@@ -182,7 +183,7 @@ module Google
         # Location of the source in a supported storage service.
         # @!attribute [rw] storage_source
         #   @return [::Google::Cloud::Build::V1::StorageSource]
-        #     If provided, get the source from this location in Google Cloud Storage.
+        #     If provided, get the source from this location in Cloud Storage.
         # @!attribute [rw] repo_source
         #   @return [::Google::Cloud::Build::V1::RepoSource]
         #     If provided, get the source from this location in a Cloud Source
@@ -192,7 +193,7 @@ module Google
         #     If provided, get the source from this Git repository.
         # @!attribute [rw] storage_source_manifest
         #   @return [::Google::Cloud::Build::V1::StorageSourceManifest]
-        #     If provided, get the source from this manifest in Google Cloud Storage.
+        #     If provided, get the source from this manifest in Cloud Storage.
         #     This feature is in Preview; see description
         #     [here](https://github.com/GoogleCloudPlatform/cloud-builders/tree/master/gcs-fetcher).
         class Source
@@ -444,7 +445,7 @@ module Google
         # is a single record in the artifact manifest JSON file.
         # @!attribute [rw] location
         #   @return [::String]
-        #     The path of an artifact in a Google Cloud Storage bucket, with the
+        #     The path of an artifact in a Cloud Storage bucket, with the
         #     generation number. For example,
         #     `gs://mybucket/path/to/output.jar#generation`.
         # @!attribute [rw] file_hash
@@ -546,7 +547,7 @@ module Google
         #     successful completion of all build steps.
         # @!attribute [rw] logs_bucket
         #   @return [::String]
-        #     Google Cloud Storage bucket where logs should be written (see
+        #     Cloud Storage bucket where logs should be written (see
         #     [Bucket Name
         #     Requirements](https://cloud.google.com/storage/docs/bucket-naming#requirements)).
         #     Logs file names will be of the format `${logs_bucket}/log-${build_id}.txt`.
@@ -1414,8 +1415,6 @@ module Google
 
         # GitHubEventsConfig describes the configuration of a trigger that creates a
         # build whenever a GitHub event is received.
-        #
-        # This message is experimental.
         # @!attribute [rw] installation_id
         #   @return [::Integer]
         #     The installationID that emits the GitHub event.
@@ -1691,7 +1690,7 @@ module Google
         #     overridden in the build configuration file.
         # @!attribute [rw] log_streaming_option
         #   @return [::Google::Cloud::Build::V1::BuildOptions::LogStreamingOption]
-        #     Option to define build log streaming behavior to Google Cloud
+        #     Option to define build log streaming behavior to Cloud
         #     Storage.
         # @!attribute [rw] worker_pool
         #   @return [::String]
@@ -1757,6 +1756,15 @@ module Google
           end
 
           # Specifies the manner in which the build should be verified, if at all.
+          #
+          # If a verified build is requested, and any part of the process to generate
+          # and upload provenance fails, the build will also fail.
+          #
+          # If the build does not request verification then that process may occur, but
+          # is not guaranteed to. If it does occur and fails, the build will not fail.
+          #
+          # For more information, see [Viewing Build
+          # Provenance](https://cloud.google.com/build/docs/securing-builds/view-build-provenance).
           module VerifyOption
             # Not a verifiable build (the default).
             NOT_VERIFIED = 0
@@ -1798,15 +1806,15 @@ module Google
             ALLOW_LOOSE = 1
           end
 
-          # Specifies the behavior when writing build logs to Google Cloud Storage.
+          # Specifies the behavior when writing build logs to Cloud Storage.
           module LogStreamingOption
             # Service may automatically determine build log streaming behavior.
             STREAM_DEFAULT = 0
 
-            # Build logs should be streamed to Google Cloud Storage.
+            # Build logs should be streamed to Cloud Storage.
             STREAM_ON = 1
 
-            # Build logs should not be streamed to Google Cloud Storage; they will be
+            # Build logs should not be streamed to Cloud Storage; they will be
             # written when the build is completed.
             STREAM_OFF = 2
           end
@@ -1960,6 +1968,9 @@ module Google
 
             # `WorkerPool` is deleted.
             DELETED = 4
+
+            # `WorkerPool` is being updated; new builds cannot be run.
+            UPDATING = 5
           end
         end
 
@@ -2080,8 +2091,8 @@ module Google
         #     `projects/{project}/locations/{location}/workerPools/{workerPool}`.
         # @!attribute [rw] etag
         #   @return [::String]
-        #     Optional. If this is provided, it must match the server's etag on the
-        #     workerpool for the request to be processed.
+        #     Optional. If provided, it must match the server's etag on the workerpool
+        #     for the request to be processed.
         # @!attribute [rw] allow_missing
         #   @return [::Boolean]
         #     If set to true, and the `WorkerPool` is not found, the request will succeed

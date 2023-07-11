@@ -45,11 +45,11 @@ class ::Google::Cloud::Build::V1::CloudBuild::ClientPathsTest < Minitest::Test
         config.credentials = grpc_channel
       end
 
-      path = client.build_trigger_path project: "value0", trigger: "value1"
-      assert_equal "projects/value0/triggers/value1", path
-
       path = client.build_trigger_path project: "value0", location: "value1", trigger: "value2"
       assert_equal "projects/value0/locations/value1/triggers/value2", path
+
+      path = client.build_trigger_path project: "value0", trigger: "value1"
+      assert_equal "projects/value0/triggers/value1", path
     end
   end
 
