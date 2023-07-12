@@ -57,8 +57,7 @@ module Google
       #
       # ## About DatasetService
       #
-      # The service that handles the CRUD of Vertex AI Dataset and its child
-      # resources.
+      # The service that manages Vertex AI Dataset and its child resources.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
