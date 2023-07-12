@@ -295,11 +295,14 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.project_id
-                header_params["project_id"] = request.project_id
+              if request.parent
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)/?$}.match request.parent
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_build.timeout,
@@ -389,14 +392,14 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.project_id
-                header_params["project_id"] = request.project_id
-              end
-              if request.id
-                header_params["id"] = request.id
+              if request.name
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)/builds/[^/]+/?$}.match request.name
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_build.timeout,
@@ -501,11 +504,14 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.project_id
-                header_params["project_id"] = request.project_id
+              if request.parent
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)/?$}.match request.parent
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_builds.timeout,
@@ -592,14 +598,14 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.project_id
-                header_params["project_id"] = request.project_id
-              end
-              if request.id
-                header_params["id"] = request.id
+              if request.name
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)/builds/[^/]+/?$}.match request.name
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.cancel_build.timeout,
@@ -639,7 +645,7 @@ module Google
             #
             # For builds that specify `StorageSource`:
             #
-            # * If the original build pulled source from Google Cloud Storage without
+            # * If the original build pulled source from Cloud Storage without
             # specifying the generation of the object, the new build will use the current
             # object, which may be different from the original build source.
             # * If the original build pulled source from Cloud Storage and specified the
@@ -718,14 +724,14 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.project_id
-                header_params["project_id"] = request.project_id
-              end
-              if request.id
-                header_params["id"] = request.id
+              if request.name
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)/builds/[^/]+/?$}.match request.name
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.retry_build.timeout,
@@ -823,10 +829,13 @@ module Google
 
               header_params = {}
               if request.name
-                header_params["name"] = request.name
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)/builds/[^/]+/?$}.match request.name
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.approve_build.timeout,
@@ -915,11 +924,14 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.project_id
-                header_params["project_id"] = request.project_id
+              if request.parent
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)/?$}.match request.parent
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_build_trigger.timeout,
@@ -1007,14 +1019,14 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.project_id
-                header_params["project_id"] = request.project_id
-              end
-              if request.trigger_id
-                header_params["trigger_id"] = request.trigger_id
+              if request.name
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)/triggers/[^/]+/?$}.match request.name
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_build_trigger.timeout,
@@ -1108,11 +1120,14 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.project_id
-                header_params["project_id"] = request.project_id
+              if request.parent
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)/?$}.match request.parent
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_build_triggers.timeout,
@@ -1201,14 +1216,14 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.project_id
-                header_params["project_id"] = request.project_id
-              end
-              if request.trigger_id
-                header_params["trigger_id"] = request.trigger_id
+              if request.name
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)/triggers/[^/]+/?$}.match request.name
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_build_trigger.timeout,
@@ -1295,14 +1310,14 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.project_id
-                header_params["project_id"] = request.project_id
-              end
-              if request.trigger_id
-                header_params["trigger_id"] = request.trigger_id
+              if request.trigger&.resource_name
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)/triggers/[^/]+/?$}.match request.trigger.resource_name
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_build_trigger.timeout,
@@ -1323,6 +1338,12 @@ module Google
 
             ##
             # Runs a `BuildTrigger` at a particular source revision.
+            #
+            # To run a regional or global trigger, use the POST request
+            # that includes the location endpoint in the path (ex.
+            # v1/projects/\\{projectId}/locations/\\{region}/triggers/\\{triggerId}:run). The
+            # POST request that does not include the location endpoint in the path can
+            # only be used when running global triggers.
             #
             # @overload run_build_trigger(request, options = nil)
             #   Pass arguments to `run_build_trigger` via a request object, either of type
@@ -1348,6 +1369,7 @@ module Google
             #     Required. ID of the trigger.
             #   @param source [::Google::Cloud::Build::V1::RepoSource, ::Hash]
             #     Source to build against this trigger.
+            #     Branch and tag names cannot consist of regular expressions.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -1397,14 +1419,14 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.project_id
-                header_params["project_id"] = request.project_id
-              end
-              if request.trigger_id
-                header_params["trigger_id"] = request.trigger_id
+              if request.name
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)/triggers/[^/]+/?$}.match request.name
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.run_build_trigger.timeout,
@@ -1604,10 +1626,13 @@ module Google
 
               header_params = {}
               if request.parent
-                header_params["parent"] = request.parent
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)/?$}.match request.parent
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_worker_pool.timeout,
@@ -1691,10 +1716,13 @@ module Google
 
               header_params = {}
               if request.name
-                header_params["name"] = request.name
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)/workerPools/[^/]+/?$}.match request.name
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_worker_pool.timeout,
@@ -1736,8 +1764,8 @@ module Google
             #     Format:
             #     `projects/{project}/locations/{location}/workerPools/{workerPool}`.
             #   @param etag [::String]
-            #     Optional. If this is provided, it must match the server's etag on the
-            #     workerpool for the request to be processed.
+            #     Optional. If provided, it must match the server's etag on the workerpool
+            #     for the request to be processed.
             #   @param allow_missing [::Boolean]
             #     If set to true, and the `WorkerPool` is not found, the request will succeed
             #     but no action will be taken on the server.
@@ -1794,10 +1822,13 @@ module Google
 
               header_params = {}
               if request.name
-                header_params["name"] = request.name
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)/workerPools/[^/]+/?$}.match request.name
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_worker_pool.timeout,
@@ -1895,10 +1926,13 @@ module Google
 
               header_params = {}
               if request.worker_pool&.name
-                header_params["worker_pool.name"] = request.worker_pool.name
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)/workerPools/[^/]+/?$}.match request.worker_pool.name
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_worker_pool.timeout,
@@ -1992,10 +2026,13 @@ module Google
 
               header_params = {}
               if request.parent
-                header_params["parent"] = request.parent
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)/?$}.match request.parent
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_worker_pools.timeout,
