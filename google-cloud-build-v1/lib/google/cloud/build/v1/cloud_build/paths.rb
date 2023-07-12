@@ -68,6 +68,14 @@ module Google
             ##
             # Create a fully-qualified BuildTrigger resource string.
             #
+            # @overload build_trigger_path(project:, trigger:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/triggers/{trigger}`
+            #
+            #   @param project [String]
+            #   @param trigger [String]
+            #
             # @overload build_trigger_path(project:, location:, trigger:)
             #   The resource will be in the following format:
             #
@@ -77,27 +85,19 @@ module Google
             #   @param location [String]
             #   @param trigger [String]
             #
-            # @overload build_trigger_path(project:, trigger:)
-            #   The resource will be in the following format:
-            #
-            #   `projects/{project}/triggers/{trigger}`
-            #
-            #   @param project [String]
-            #   @param trigger [String]
-            #
             # @return [::String]
             def build_trigger_path **args
               resources = {
+                "project:trigger" => (proc do |project:, trigger:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+                  "projects/#{project}/triggers/#{trigger}"
+                end),
                 "location:project:trigger" => (proc do |project:, location:, trigger:|
                   raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
                   raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
                   "projects/#{project}/locations/#{location}/triggers/#{trigger}"
-                end),
-                "project:trigger" => (proc do |project:, trigger:|
-                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-
-                  "projects/#{project}/triggers/#{trigger}"
                 end)
               }
 
