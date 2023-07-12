@@ -135,6 +135,9 @@ module Google
         #
         #     Controls the maximum number of processes allowed to run in a pod. The value
         #     must be greater than or equal to 1024 and less than 4194304.
+        # @!attribute [rw] insecure_kubelet_readonly_port_enabled
+        #   @return [::Boolean]
+        #     Enable or disable Kubelet read only port.
         class NodeKubeletConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -457,6 +460,11 @@ module Google
         #     power of 2)
         #     Example: max_pods_per_node of 30 will result in 32 IPs (/27) when
         #     overprovisioning is disabled.
+        # @!attribute [r] pod_ipv4_range_utilization
+        #   @return [::Float]
+        #     Output only. [Output only] The utilization of the IPv4 range for the pod.
+        #     The ratio is Usage/[Total number of IPs in the secondary range],
+        #     Usage=numNodes*numZones*podIPsPerNode.
         class NodeNetworkConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -796,6 +804,9 @@ module Google
         # @!attribute [rw] gke_backup_agent_config
         #   @return [::Google::Cloud::Container::V1::GkeBackupAgentConfig]
         #     Configuration for the Backup for GKE agent addon.
+        # @!attribute [rw] gcs_fuse_csi_driver_config
+        #   @return [::Google::Cloud::Container::V1::GcsFuseCsiDriverConfig]
+        #     Configuration for the Cloud Storage Fuse CSI driver.
         class AddonsConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -961,6 +972,15 @@ module Google
         #   @return [::Boolean]
         #     Whether the GCP Filestore CSI driver is enabled for this cluster.
         class GcpFilestoreCsiDriverConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration for the Cloud Storage Fuse CSI driver.
+        # @!attribute [rw] enabled
+        #   @return [::Boolean]
+        #     Whether the Cloud Storage Fuse CSI driver is enabled for this cluster.
+        class GcsFuseCsiDriverConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1230,6 +1250,11 @@ module Google
         #     cluster. These pod ranges can be used by new node pools to allocate pod IPs
         #     automatically. Once the range is removed it will not show up in
         #     IPAllocationPolicy.
+        # @!attribute [r] default_pod_ipv4_range_utilization
+        #   @return [::Float]
+        #     Output only. [Output only] The utilization of the cluster default IPv4
+        #     range for the pod. The ratio is Usage/[Total number of IPs in the secondary
+        #     range], Usage=numNodes*numZones*podIPsPerNode.
         class IPAllocationPolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1911,7 +1936,22 @@ module Google
         # @!attribute [rw] pod_range_names
         #   @return [::Array<::String>]
         #     Name for pod secondary ipv4 range which has the actual range defined ahead.
+        # @!attribute [r] pod_range_info
+        #   @return [::Array<::Google::Cloud::Container::V1::RangeInfo>]
+        #     Output only. [Output only] Information for additional pod range.
         class AdditionalPodRangesConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # RangeInfo contains the range name and the range utilization by this cluster.
+        # @!attribute [r] range_name
+        #   @return [::String]
+        #     Output only. [Output only] Name of a range.
+        # @!attribute [r] utilization
+        #   @return [::Float]
+        #     Output only. [Output only] The utilization of the range.
+        class RangeInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -3670,6 +3710,9 @@ module Google
         #     The image type to use for NAP created node. Please see
         #     https://cloud.google.com/kubernetes-engine/docs/concepts/node-images for
         #     available image types.
+        # @!attribute [rw] insecure_kubelet_readonly_port_enabled
+        #   @return [::Boolean]
+        #     Enable or disable Kubelet read only port.
         class AutoprovisioningNodePoolDefaults
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -4431,7 +4474,7 @@ module Google
             # Use CloudDNS for DNS resolution.
             CLOUD_DNS = 2
 
-            # Use KubeDNS for DNS resolution
+            # Use KubeDNS for DNS resolution.
             KUBE_DNS = 3
           end
 
@@ -4939,9 +4982,40 @@ module Google
         #   @return [::Google::Cloud::Container::V1::ManagedPrometheusConfig]
         #     Enable Google Cloud Managed Service for Prometheus
         #     in the cluster.
+        # @!attribute [rw] advanced_datapath_observability_config
+        #   @return [::Google::Cloud::Container::V1::AdvancedDatapathObservabilityConfig]
+        #     Configuration of Advanced Datapath Observability features.
         class MonitoringConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # AdvancedDatapathObservabilityConfig specifies configuration of observability
+        # features of advanced datapath.
+        # @!attribute [rw] enable_metrics
+        #   @return [::Boolean]
+        #     Expose flow metrics on nodes
+        # @!attribute [rw] relay_mode
+        #   @return [::Google::Cloud::Container::V1::AdvancedDatapathObservabilityConfig::RelayMode]
+        #     Method used to make Relay available
+        class AdvancedDatapathObservabilityConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Supported Relay modes
+          module RelayMode
+            # Default value. This shouldn't be used.
+            RELAY_MODE_UNSPECIFIED = 0
+
+            # disabled
+            DISABLED = 1
+
+            # exposed via internal load balancer
+            INTERNAL_VPC_LB = 3
+
+            # exposed via external load balancer
+            EXTERNAL_LB = 4
+          end
         end
 
         # NodePoolLoggingConfig specifies logging configuration for nodepools.
