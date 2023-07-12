@@ -468,7 +468,7 @@ module Google
         #     overprovisioning is disabled.
         # @!attribute [r] pod_ipv4_range_utilization
         #   @return [::Float]
-        #     Output only. [Output only] The utilization of the IPv4 range for pod.
+        #     Output only. [Output only] The utilization of the IPv4 range for the pod.
         #     The ratio is Usage/[Total number of IPs in the secondary range],
         #     Usage=numNodes*numZones*podIPsPerNode.
         class NodeNetworkConfig
@@ -1319,7 +1319,7 @@ module Google
         # @!attribute [r] default_pod_ipv4_range_utilization
         #   @return [::Float]
         #     Output only. [Output only] The utilization of the cluster default IPv4
-        #     range for pod. The ratio is Usage/[Total number of IPs in the secondary
+        #     range for the pod. The ratio is Usage/[Total number of IPs in the secondary
         #     range], Usage=numNodes*numZones*podIPsPerNode.
         class IPAllocationPolicy
           include ::Google::Protobuf::MessageExts
@@ -4848,7 +4848,7 @@ module Google
             # Use CloudDNS for DNS resolution.
             CLOUD_DNS = 2
 
-            # Use KubeDNS for DNS resolution
+            # Use KubeDNS for DNS resolution.
             KUBE_DNS = 3
           end
 
@@ -5495,9 +5495,40 @@ module Google
         #   @return [::Google::Cloud::Container::V1beta1::ManagedPrometheusConfig]
         #     Enable Google Cloud Managed Service for Prometheus
         #     in the cluster.
+        # @!attribute [rw] advanced_datapath_observability_config
+        #   @return [::Google::Cloud::Container::V1beta1::AdvancedDatapathObservabilityConfig]
+        #     Configuration of Advanced Datapath Observability features.
         class MonitoringConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # AdvancedDatapathObservabilityConfig specifies configuration of observability
+        # features of advanced datapath.
+        # @!attribute [rw] enable_metrics
+        #   @return [::Boolean]
+        #     Expose flow metrics on nodes
+        # @!attribute [rw] relay_mode
+        #   @return [::Google::Cloud::Container::V1beta1::AdvancedDatapathObservabilityConfig::RelayMode]
+        #     Method used to make Relay available
+        class AdvancedDatapathObservabilityConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Supported Relay modes
+          module RelayMode
+            # Default value. This shouldn't be used.
+            RELAY_MODE_UNSPECIFIED = 0
+
+            # disabled
+            DISABLED = 1
+
+            # exposed via internal load balancer
+            INTERNAL_VPC_LB = 3
+
+            # exposed via external load balancer
+            EXTERNAL_LB = 4
+          end
         end
 
         # NodePoolLoggingConfig specifies logging configuration for nodepools.
