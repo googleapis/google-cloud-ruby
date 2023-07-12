@@ -206,7 +206,7 @@ module Google
             #   @param parent [::String]
             #     Required. The resource name of the Location to create Featurestores.
             #     Format:
-            #     `projects/{project}/locations/{location}'`
+            #     `projects/{project}/locations/{location}`
             #   @param featurestore [::Google::Cloud::AIPlatform::V1::Featurestore, ::Hash]
             #     Required. The Featurestore to create.
             #   @param featurestore_id [::String]
@@ -2466,6 +2466,7 @@ module Google
             #     * `featurestore_id`: Supports = comparisons.
             #
             #     Examples:
+            #
             #     * `description = "foo bar"` --> Any Feature with description exactly equal
             #     to `foo bar`
             #     * `value_type = DOUBLE` --> Features whose type is DOUBLE.

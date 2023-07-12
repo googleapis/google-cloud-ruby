@@ -94,7 +94,8 @@ module Google
         #     Model, if any.
         # @!attribute [rw] pipeline_job
         #   @return [::String]
-        #     This field is populated if the model is produced by a pipeline job.
+        #     Optional. This field is populated if the model is produced by a pipeline
+        #     job.
         # @!attribute [rw] container_spec
         #   @return [::Google::Cloud::AIPlatform::V1::ModelContainerSpec]
         #     Input only. The specification of the container that is to be used when

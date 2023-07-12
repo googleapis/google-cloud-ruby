@@ -37,14 +37,14 @@ module Google
             rpc :CreateTensorboard, ::Google::Cloud::AIPlatform::V1::CreateTensorboardRequest, ::Google::Longrunning::Operation
             # Gets a Tensorboard.
             rpc :GetTensorboard, ::Google::Cloud::AIPlatform::V1::GetTensorboardRequest, ::Google::Cloud::AIPlatform::V1::Tensorboard
-            # Returns a list of monthly active users for a given TensorBoard instance.
-            rpc :ReadTensorboardUsage, ::Google::Cloud::AIPlatform::V1::ReadTensorboardUsageRequest, ::Google::Cloud::AIPlatform::V1::ReadTensorboardUsageResponse
             # Updates a Tensorboard.
             rpc :UpdateTensorboard, ::Google::Cloud::AIPlatform::V1::UpdateTensorboardRequest, ::Google::Longrunning::Operation
             # Lists Tensorboards in a Location.
             rpc :ListTensorboards, ::Google::Cloud::AIPlatform::V1::ListTensorboardsRequest, ::Google::Cloud::AIPlatform::V1::ListTensorboardsResponse
             # Deletes a Tensorboard.
             rpc :DeleteTensorboard, ::Google::Cloud::AIPlatform::V1::DeleteTensorboardRequest, ::Google::Longrunning::Operation
+            # Returns a list of monthly active users for a given TensorBoard instance.
+            rpc :ReadTensorboardUsage, ::Google::Cloud::AIPlatform::V1::ReadTensorboardUsageRequest, ::Google::Cloud::AIPlatform::V1::ReadTensorboardUsageResponse
             # Creates a TensorboardExperiment.
             rpc :CreateTensorboardExperiment, ::Google::Cloud::AIPlatform::V1::CreateTensorboardExperimentRequest, ::Google::Cloud::AIPlatform::V1::TensorboardExperiment
             # Gets a TensorboardExperiment.

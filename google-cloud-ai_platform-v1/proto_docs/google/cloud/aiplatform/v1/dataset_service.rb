@@ -438,6 +438,18 @@ module Google
         end
 
         # Request message for
+        # {::Google::Cloud::AIPlatform::V1::DatasetService::Client#delete_saved_query DatasetService.DeleteSavedQuery}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the SavedQuery to delete.
+        #     Format:
+        #     `projects/{project}/locations/{location}/datasets/{dataset}/savedQueries/{saved_query}`
+        class DeleteSavedQueryRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
         # {::Google::Cloud::AIPlatform::V1::DatasetService::Client#get_annotation_spec DatasetService.GetAnnotationSpec}.
         # @!attribute [rw] name
         #   @return [::String]

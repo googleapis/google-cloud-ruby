@@ -60,6 +60,11 @@
                 "list_saved_queries"
               ]
             },
+            "DeleteSavedQuery": {
+              "methods": [
+                "delete_saved_query"
+              ]
+            },
             "GetAnnotationSpec": {
               "methods": [
                 "get_annotation_spec"
@@ -990,11 +995,6 @@
                 "get_tensorboard"
               ]
             },
-            "ReadTensorboardUsage": {
-              "methods": [
-                "read_tensorboard_usage"
-              ]
-            },
             "UpdateTensorboard": {
               "methods": [
                 "update_tensorboard"
@@ -1008,6 +1008,11 @@
             "DeleteTensorboard": {
               "methods": [
                 "delete_tensorboard"
+              ]
+            },
+            "ReadTensorboardUsage": {
+              "methods": [
+                "read_tensorboard_usage"
               ]
             },
             "CreateTensorboardExperiment": {

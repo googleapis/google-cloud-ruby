@@ -47,57 +47,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for [TensorboardService.GetTensorboardUsage][].
-        # @!attribute [rw] tensorboard
-        #   @return [::String]
-        #     Required. The name of the Tensorboard resource.
-        #     Format:
-        #     `projects/{project}/locations/{location}/tensorboards/{tensorboard}`
-        class ReadTensorboardUsageRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Response message for
-        # {::Google::Cloud::AIPlatform::V1::TensorboardService::Client#read_tensorboard_usage TensorboardService.ReadTensorboardUsage}.
-        # @!attribute [rw] monthly_usage_data
-        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::AIPlatform::V1::ReadTensorboardUsageResponse::PerMonthUsageData}]
-        #     Maps year-month (YYYYMM) string to per month usage data.
-        class ReadTensorboardUsageResponse
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-
-          # Per user usage data.
-          # @!attribute [rw] username
-          #   @return [::String]
-          #     User's username
-          # @!attribute [rw] view_count
-          #   @return [::Integer]
-          #     Number of times the user has read data within the Tensorboard.
-          class PerUserUsageData
-            include ::Google::Protobuf::MessageExts
-            extend ::Google::Protobuf::MessageExts::ClassMethods
-          end
-
-          # Per month usage data
-          # @!attribute [rw] user_usage_data
-          #   @return [::Array<::Google::Cloud::AIPlatform::V1::ReadTensorboardUsageResponse::PerUserUsageData>]
-          #     Usage data for each user in the given month.
-          class PerMonthUsageData
-            include ::Google::Protobuf::MessageExts
-            extend ::Google::Protobuf::MessageExts::ClassMethods
-          end
-
-          # @!attribute [rw] key
-          #   @return [::String]
-          # @!attribute [rw] value
-          #   @return [::Google::Cloud::AIPlatform::V1::ReadTensorboardUsageResponse::PerMonthUsageData]
-          class MonthlyUsageDataEntry
-            include ::Google::Protobuf::MessageExts
-            extend ::Google::Protobuf::MessageExts::ClassMethods
-          end
-        end
-
         # Request message for
         # {::Google::Cloud::AIPlatform::V1::TensorboardService::Client#list_tensorboards TensorboardService.ListTensorboards}.
         # @!attribute [rw] parent
@@ -180,6 +129,58 @@ module Google
         class DeleteTensorboardRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::AIPlatform::V1::TensorboardService::Client#read_tensorboard_usage TensorboardService.ReadTensorboardUsage}.
+        # @!attribute [rw] tensorboard
+        #   @return [::String]
+        #     Required. The name of the Tensorboard resource.
+        #     Format:
+        #     `projects/{project}/locations/{location}/tensorboards/{tensorboard}`
+        class ReadTensorboardUsageRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::AIPlatform::V1::TensorboardService::Client#read_tensorboard_usage TensorboardService.ReadTensorboardUsage}.
+        # @!attribute [rw] monthly_usage_data
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::AIPlatform::V1::ReadTensorboardUsageResponse::PerMonthUsageData}]
+        #     Maps year-month (YYYYMM) string to per month usage data.
+        class ReadTensorboardUsageResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Per user usage data.
+          # @!attribute [rw] username
+          #   @return [::String]
+          #     User's username
+          # @!attribute [rw] view_count
+          #   @return [::Integer]
+          #     Number of times the user has read data within the Tensorboard.
+          class PerUserUsageData
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Per month usage data
+          # @!attribute [rw] user_usage_data
+          #   @return [::Array<::Google::Cloud::AIPlatform::V1::ReadTensorboardUsageResponse::PerUserUsageData>]
+          #     Usage data for each user in the given month.
+          class PerMonthUsageData
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::AIPlatform::V1::ReadTensorboardUsageResponse::PerMonthUsageData]
+          class MonthlyUsageDataEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Request message for

@@ -42,6 +42,10 @@ module Google
         # @!attribute [rw] metadata
         #   @return [::Google::Protobuf::Value]
         #     Required. Additional information about the Dataset.
+        # @!attribute [r] data_item_count
+        #   @return [::Integer]
+        #     Output only. The number of DataItems in this Dataset. Only apply for
+        #     non-structured Dataset.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Timestamp when this Dataset was created.

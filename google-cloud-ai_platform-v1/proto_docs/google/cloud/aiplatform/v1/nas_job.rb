@@ -89,7 +89,7 @@ module Google
           end
         end
 
-        # Represents a NasTrial details along with it's parameters. If there is a
+        # Represents a NasTrial details along with its parameters. If there is a
         # corresponding train NasTrial, the train NasTrial is also returned.
         # @!attribute [r] name
         #   @return [::String]
