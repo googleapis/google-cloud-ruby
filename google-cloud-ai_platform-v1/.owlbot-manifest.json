@@ -330,6 +330,7 @@
     "snippets/Gemfile",
     "snippets/dataset_service/create_dataset.rb",
     "snippets/dataset_service/delete_dataset.rb",
+    "snippets/dataset_service/delete_saved_query.rb",
     "snippets/dataset_service/export_data.rb",
     "snippets/dataset_service/get_annotation_spec.rb",
     "snippets/dataset_service/get_dataset.rb",

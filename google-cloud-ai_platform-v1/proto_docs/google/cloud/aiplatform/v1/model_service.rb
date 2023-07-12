@@ -389,14 +389,6 @@ module Google
           end
         end
 
-        # Response message of
-        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#update_explanation_dataset ModelService.UpdateExplanationDataset}
-        # operation.
-        class UpdateExplanationDatasetResponse
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
         # Details of
         # {::Google::Cloud::AIPlatform::V1::ModelService::Client#export_model ModelService.ExportModel}
         # operation.
@@ -426,6 +418,14 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # Response message of
+        # {::Google::Cloud::AIPlatform::V1::ModelService::Client#update_explanation_dataset ModelService.UpdateExplanationDataset}
+        # operation.
+        class UpdateExplanationDatasetResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Response message of

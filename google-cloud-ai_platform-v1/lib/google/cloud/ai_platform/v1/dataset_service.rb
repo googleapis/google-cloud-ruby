@@ -32,8 +32,7 @@ module Google
     module AIPlatform
       module V1
         ##
-        # The service that handles the CRUD of Vertex AI Dataset and its child
-        # resources.
+        # The service that manages Vertex AI Dataset and its child resources.
         #
         # @example Load this service and instantiate a gRPC client
         #

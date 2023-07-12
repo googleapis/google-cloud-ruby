@@ -27,7 +27,7 @@ module Google
         #   @return [::String]
         #     Required. The resource name of the Location to create Featurestores.
         #     Format:
-        #     `projects/{project}/locations/{location}'`
+        #     `projects/{project}/locations/{location}`
         # @!attribute [rw] featurestore
         #   @return [::Google::Cloud::AIPlatform::V1::Featurestore]
         #     Required. The Featurestore to create.
@@ -850,6 +850,7 @@ module Google
         #     * `featurestore_id`: Supports = comparisons.
         #
         #     Examples:
+        #
         #     * `description = "foo bar"` --> Any Feature with description exactly equal
         #     to `foo bar`
         #     * `value_type = DOUBLE` --> Features whose type is DOUBLE.

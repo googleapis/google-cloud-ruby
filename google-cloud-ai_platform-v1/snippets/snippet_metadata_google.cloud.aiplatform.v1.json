@@ -412,6 +412,46 @@
       ]
     },
     {
+      "region_tag": "aiplatform_v1_generated_DatasetService_DeleteSavedQuery_sync",
+      "title": "Snippet for the delete_saved_query call in the DatasetService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::DatasetService::Client#delete_saved_query. It may require modification in order to execute successfully.",
+      "file": "dataset_service/delete_saved_query.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_saved_query",
+        "full_name": "::Google::Cloud::AIPlatform::V1::DatasetService::Client#delete_saved_query",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::DeleteSavedQueryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DatasetService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::DatasetService::Client"
+        },
+        "method": {
+          "short_name": "DeleteSavedQuery",
+          "full_name": "google.cloud.aiplatform.v1.DatasetService.DeleteSavedQuery",
+          "service": {
+            "short_name": "DatasetService",
+            "full_name": "google.cloud.aiplatform.v1.DatasetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "aiplatform_v1_generated_DatasetService_GetAnnotationSpec_sync",
       "title": "Snippet for the get_annotation_spec call in the DatasetService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::DatasetService::Client#get_annotation_spec. It may require modification in order to execute successfully.",
@@ -6772,46 +6812,6 @@
       ]
     },
     {
-      "region_tag": "aiplatform_v1_generated_TensorboardService_ReadTensorboardUsage_sync",
-      "title": "Snippet for the read_tensorboard_usage call in the TensorboardService service",
-      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::TensorboardService::Client#read_tensorboard_usage. It may require modification in order to execute successfully.",
-      "file": "tensorboard_service/read_tensorboard_usage.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "read_tensorboard_usage",
-        "full_name": "::Google::Cloud::AIPlatform::V1::TensorboardService::Client#read_tensorboard_usage",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::AIPlatform::V1::ReadTensorboardUsageRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Cloud::AIPlatform::V1::ReadTensorboardUsageResponse",
-        "client": {
-          "short_name": "TensorboardService::Client",
-          "full_name": "::Google::Cloud::AIPlatform::V1::TensorboardService::Client"
-        },
-        "method": {
-          "short_name": "ReadTensorboardUsage",
-          "full_name": "google.cloud.aiplatform.v1.TensorboardService.ReadTensorboardUsage",
-          "service": {
-            "short_name": "TensorboardService",
-            "full_name": "google.cloud.aiplatform.v1.TensorboardService"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 41,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
       "region_tag": "aiplatform_v1_generated_TensorboardService_UpdateTensorboard_sync",
       "title": "Snippet for the update_tensorboard call in the TensorboardService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::TensorboardService::Client#update_tensorboard. It may require modification in order to execute successfully.",
@@ -6927,6 +6927,46 @@
         {
           "start": 20,
           "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_TensorboardService_ReadTensorboardUsage_sync",
+      "title": "Snippet for the read_tensorboard_usage call in the TensorboardService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::TensorboardService::Client#read_tensorboard_usage. It may require modification in order to execute successfully.",
+      "file": "tensorboard_service/read_tensorboard_usage.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "read_tensorboard_usage",
+        "full_name": "::Google::Cloud::AIPlatform::V1::TensorboardService::Client#read_tensorboard_usage",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::ReadTensorboardUsageRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::ReadTensorboardUsageResponse",
+        "client": {
+          "short_name": "TensorboardService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::TensorboardService::Client"
+        },
+        "method": {
+          "short_name": "ReadTensorboardUsage",
+          "full_name": "google.cloud.aiplatform.v1.TensorboardService.ReadTensorboardUsage",
+          "service": {
+            "short_name": "TensorboardService",
+            "full_name": "google.cloud.aiplatform.v1.TensorboardService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
           "type": "FULL"
         }
       ]

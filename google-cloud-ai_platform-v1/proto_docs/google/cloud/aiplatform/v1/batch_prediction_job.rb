@@ -47,6 +47,11 @@ module Google
         #                  or
         #                `projects/{project}/locations/{location}/models/{model}@golden`
         #     if no version is specified, the default version will be deployed.
+        #
+        #     The model resource could also be a publisher model.
+        #      Example: `publishers/{publisher}/models/{model}`
+        #                  or
+        #               `projects/{project}/locations/{location}/publishers/{publisher}/models/{model}`
         # @!attribute [r] model_version_id
         #   @return [::String]
         #     Output only. The version ID of the Model that produces the predictions via
