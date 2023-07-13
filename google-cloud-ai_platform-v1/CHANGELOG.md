@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.27.0 (2023-07-13)
+
+#### Features
+
+* Non-structured Datasets report the count of DataItems 
+* Support delete_saved_query RPC ([#22519](https://github.com/googleapis/google-cloud-ruby/issues/22519)) 
+* Support for reserved IP range names for a PipelineJob 
+* Support for the JOB_STATE_PARTIALLY_SUCCEEDED state 
+
 ### 0.26.0 (2023-06-20)
 
 #### Features
