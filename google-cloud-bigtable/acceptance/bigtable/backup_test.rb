@@ -22,11 +22,12 @@ describe Google::Cloud::Bigtable::Table, :bigtable do
   let(:instance_2) { bigtable_instance_2 }
   let(:cluster) { instance.clusters.first }
   let(:table) { bigtable_read_table }
-  let(:backup_id) { "test-backup-#{random_str}" }
+  let(:backup_id) { "test-backup-#{Time.now.to_i}-#{random_str}" }
   let(:now) { Time.now.round 0 }
   let(:expire_time) { now + 60 * 60 * 7 }
   let(:expire_time_2) { now + 60 * 60 * 8 }
-  let(:restore_table_id) { "test-table-#{random_str}" }
+  let(:restore_table_id) { "test-table-#{Time.now.to_i}-#{random_str}" }
+  let(:restore_table_id_2) { "test-table-#{Time.now.to_i}-#{random_str}" }
   let(:service_account) { bigtable.service.credentials.client.issuer }
   let(:roles) { ["bigtable.backups.delete", "bigtable.backups.get"] }
   let(:role) { "roles/bigtable.user" }
@@ -130,13 +131,13 @@ describe Google::Cloud::Bigtable::Table, :bigtable do
       _(restore_job.optimize_table_operation_name).must_include restore_table_id
 
       # restore to another instance
-      restore_job = backup.restore restore_table_id, instance: instance_2
+      restore_job = backup.restore restore_table_id_2, instance: instance_2
       _(restore_job).must_be_kind_of Google::Cloud::Bigtable::Table::RestoreJob
       restore_job.wait_until_done!
       _(restore_job.error).must_be :nil?
       restore_table_2 = restore_job.table
       _(restore_table_2).must_be_kind_of Google::Cloud::Bigtable::Table
-      _(restore_table_2.name).must_equal restore_table_id
+      _(restore_table_2.name).must_equal restore_table_id_2
       _(restore_table_2.instance_id).must_equal instance_2.instance_id
     ensure
       # delete

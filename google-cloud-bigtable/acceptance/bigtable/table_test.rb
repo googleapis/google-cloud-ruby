@@ -22,7 +22,7 @@ describe "Instance Tables", :bigtable do
   let(:cluster_id) { bigtable_cluster_id }
 
   it "create, list all, get table and delete table" do
-    table_id = "test-table-#{random_str}"
+    table_id = "test-table-#{Time.now.to_i}-#{random_str}"
 
     table = bigtable.create_table(instance_id, table_id) do |cfs|
       cfs.add("cf", gc_rule: Google::Cloud::Bigtable::GcRule.max_versions(3))
@@ -45,7 +45,7 @@ describe "Instance Tables", :bigtable do
   end
 
   it "create table with initial splits and granularity" do
-    table_id = "test-table-#{random_str}"
+    table_id = "test-table-#{Time.now.to_i}-#{random_str}"
     initial_splits = ["customer-001", "customer-005", "customer-010"]
 
     table = bigtable.create_table(
@@ -79,7 +79,7 @@ describe "Instance Tables", :bigtable do
   end
 
   it "creates a table with column families" do
-    table_id = "test-table-#{random_str}"
+    table_id = "test-table-#{Time.now.to_i}-#{random_str}"
 
     table = bigtable.create_table(instance_id, table_id) do |cfs|
       cfs.add("cf1") # default service value for GcRule
