@@ -1,5 +1,14 @@
 # Release History
 
+### 0.25.0 (2023-07-13)
+
+#### Features
+
+* Support for advanced datapath observability configs ([#22521](https://github.com/googleapis/google-cloud-ruby/issues/22521)) 
+* Support for Cloud Storage Fuse CSI driver configs 
+* Support for enabling/disabling the Kubelet readonly port 
+* Support for IPv4 range utilization 
+
 ### 0.24.0 (2023-07-10)
 
 #### Features
