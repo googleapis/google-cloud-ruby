@@ -1,5 +1,14 @@
 # Release History
 
+### 0.20.0 (2023-07-13)
+
+#### Features
+
+* Support for the UPDATING WorkerPool state 
+#### Bug Fixes
+
+* Send location routing headers with RPC calls ([#22516](https://github.com/googleapis/google-cloud-ruby/issues/22516)) 
+
 ### 0.19.0 (2023-07-10)
 
 #### Features
