@@ -1,5 +1,11 @@
 # Release History
 
+### 0.24.0 (2023-07-13)
+
+#### Features
+
+* Support for advanced datapath observability configs ([#22520](https://github.com/googleapis/google-cloud-ruby/issues/22520)) 
+
 ### 0.23.0 (2023-07-10)
 
 #### Features
