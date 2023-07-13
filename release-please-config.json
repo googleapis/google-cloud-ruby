@@ -67,6 +67,10 @@
       "component": "google-cloud-alloy_db-v1",
       "version_file": "lib/google/cloud/alloy_db/v1/version.rb"
     },
+    "google-cloud-alloy_db-v1alpha": {
+      "component": "google-cloud-alloy_db-v1alpha",
+      "version_file": "lib/google/cloud/alloy_db/v1alpha/version.rb"
+    },
     "google-cloud-alloy_db-v1beta": {
       "component": "google-cloud-alloy_db-v1beta",
       "version_file": "lib/google/cloud/alloy_db/v1beta/version.rb"
