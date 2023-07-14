@@ -43,7 +43,7 @@ tool "bootstrap" do
   flag :enable_fork, "--fork" do
     desc "Use a fork to open the pull request"
   end
-  
+
   include :exec, e: true
   include :terminal
   include "yoshi-pr-generator"
@@ -61,7 +61,7 @@ tool "bootstrap" do
 
     setup_git
 
-    date = Time.now.utc.strftime("%Y%m%d-%H%M%S")
+    date = Time.now.utc.strftime "%Y%m%d-%H%M%S"
     set :branch_name, "gen/bootstrap-release-#{date}" unless branch_name
     commit_message = "chore: Bootstrap release manifest for new packages"
     yoshi_pr_generator.capture enabled: !git_remote.nil?,
@@ -74,10 +74,9 @@ tool "bootstrap" do
 
   def setup_git
     yoshi_utils.git_ensure_identity
-    if enable_fork
-      set :git_remote, "pull-request-fork" unless git_remote
-      yoshi_utils.gh_ensure_fork remote: git_remote
-    end
+    return unless enable_fork
+    set :git_remote, "pull-request-fork" unless git_remote
+    yoshi_utils.gh_ensure_fork remote: git_remote
   end
 
   def update_manifest_files
@@ -97,7 +96,7 @@ tool "bootstrap" do
         manifest[package] = package_info[package][:version]
         config_packages[package] = {
           "component" => package,
-          "version_file" => package_info[package][:version_file]
+          "version_file" => package_info[package][:version_file],
         }
       end
     end
@@ -114,7 +113,7 @@ tool "bootstrap" do
   end
 
   def add_fillers manifest
-    manifest.keys.each do |key|
+    manifest.each_key do |key|
       manifest["#{key}+FILLER"] = "0.0.0" unless key.end_with? "+FILLER"
     end
     manifest
@@ -131,7 +130,7 @@ tool "bootstrap" do
       logger.info "Getting info for #{package}..."
       package_info[package] = {
         version_file: gem_version_file(package),
-        version: gem_version(package)
+        version: gem_version(package),
       }
     end
     package_info
@@ -149,7 +148,7 @@ tool "bootstrap" do
     func = proc do
       Dir.chdir package do
         spec = Gem::Specification.load "#{package}.gemspec"
-        puts spec.version.to_s
+        puts spec.version
       end
     end
     capture_proc(func, log_level: false).strip

@@ -40,7 +40,7 @@ def run
 end
 
 def update_release_levels
-  timestamp = Time.now.utc.strftime("%Y%m%d-%H%M%S")
+  timestamp = Time.now.utc.strftime "%Y%m%d-%H%M%S"
   branch_name = "pr/update-release-levels-#{timestamp}"
   updated = []
   pr_result = yoshi_pr_generator.capture enabled: !git_remote.nil?,
@@ -69,9 +69,9 @@ end
 def selected_gems
   Dir.chdir context_directory
   Dir.glob("*/.repo-metadata.json")
-    .map { |path| File.dirname path }
-    .find_all { |gem_name| File.file? "#{gem_name}/#{gem_name}.gemspec" }
-    .sort
+     .map { |path| File.dirname path }
+     .find_all { |gem_name| File.file? "#{gem_name}/#{gem_name}.gemspec" }
+     .sort
 end
 
 def update_gem gem_name
@@ -83,9 +83,7 @@ def update_gem gem_name
     return false
   end
   logger.info "Updated repo-metadata for #{gem_name}"
-  File.open "#{gem_name}/.repo-metadata.json", "w" do |file|
-    file.write updated_metadata
-  end
+  File.write "#{gem_name}/.repo-metadata.json", updated_metadata
   true
 end
 

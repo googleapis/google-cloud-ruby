@@ -48,10 +48,9 @@ end
 def setup
   cd context_directory
   yoshi_utils.git_ensure_identity
-  if enable_fork
-    set :git_remote, "pull-request-fork" unless git_remote
-    yoshi_utils.gh_ensure_fork remote: git_remote
-  end
+  return unless enable_fork
+  set :git_remote, "pull-request-fork" unless git_remote
+  yoshi_utils.gh_ensure_fork remote: git_remote
 end
 
 def remove_release_manifest

@@ -50,6 +50,9 @@ jobs:
           - os: windows-latest
             ruby: "3.2"
             task: "--test"
+          - os: ubuntu-latest
+            ruby: "3.2"
+            task: "--rubocop-toplevel"
       fail-fast: false
     runs-on: ${{ matrix.os }}
     steps:

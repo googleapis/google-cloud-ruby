@@ -53,7 +53,7 @@ end
 
 def write_canonical_versions_file
   return unless write_versions
-  File.write write_versions, "#{JSON.pretty_generate(@canonical_versions)}\n"
+  File.write write_versions, "#{JSON.pretty_generate @canonical_versions}\n"
 end
 
 def load_data
@@ -64,7 +64,7 @@ def load_data
   config = JSON.parse File.read "release-please-config.json"
   config["packages"].each do |package, info|
     next if !input_packages.empty? && !input_packages.include?(package)
-    version_path = "#{package}/#{info["version_file"]}"
+    version_path = "#{package}/#{info['version_file']}"
     declared_version = load_declared_version version_path
     canonical_version = load_canonical_version package
     existing_tags = load_existing_tags all_tags, package

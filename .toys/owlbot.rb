@@ -1,3 +1,19 @@
+# frozen_string_literal: true
+
+# Copyright 2021 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 desc "Runs OwlBot for one or more gems."
 
 long_desc \
@@ -96,10 +112,9 @@ end
 
 def setup_git
   yoshi_utils.git_ensure_identity
-  if enable_fork
-    set :git_remote, "pull-request-fork" unless git_remote
-    yoshi_utils.gh_ensure_fork remote: git_remote
-  end
+  return unless enable_fork
+  set :git_remote, "pull-request-fork" unless git_remote
+  yoshi_utils.gh_ensure_fork remote: git_remote
 end
 
 def ensure_docker
@@ -178,7 +193,7 @@ def determine_bazel_target library_path
 end
 
 def run_bazel gem_info
-  gem_info.each do |name, info|
+  gem_info.each_value do |info|
     info[:bazel_targets].each do |library_path, bazel_target|
       exec ["bazel", "build", "//#{library_path}:#{bazel_target}"], chdir: bazel_base_dir
     end
@@ -217,7 +232,7 @@ def run_owlbot gem_info, use_bazel_bin:
   temp_config = File.join TMP_DIR_NAME, OWLBOT_CONFIG_FILE_NAME
   rm_f temp_config
   combined_deep_copy_regex = gem_info.values.map { |info| info[:deep_copy_regexes] }.flatten
-  combined_config = {"deep-copy-regex" => combined_deep_copy_regex}
+  combined_config = { "deep-copy-regex" => combined_deep_copy_regex }
   File.open temp_config, "w" do |file|
     file.puts Psych.dump combined_config
   end
@@ -254,7 +269,7 @@ end
 def process_gems_separate_prs gems, temp_staging_dir
   results = {}
   gems.each_with_index do |name, index|
-    timestamp = Time.now.utc.strftime("%Y%m%d-%H%M%S")
+    timestamp = Time.now.utc.strftime "%Y%m%d-%H%M%S"
     branch_name = "owlbot/#{name}-#{timestamp}"
     message = build_commit_message name
     result = yoshi_pr_generator.capture enabled: !git_remote.nil?,
@@ -270,7 +285,7 @@ def process_gems_separate_prs gems, temp_staging_dir
 end
 
 def process_gems_combined_pr gems, temp_staging_dir
-  timestamp = Time.now.utc.strftime("%Y%m%d-%H%M%S")
+  timestamp = Time.now.utc.strftime "%Y%m%d-%H%M%S"
   branch_name = "owlbot/all-#{timestamp}"
   message = build_commit_message "all gems"
   result = yoshi_pr_generator.capture enabled: !git_remote.nil?,
@@ -297,11 +312,10 @@ def process_single_gem name, temp_staging_dir
   mkdir_p STAGING_DIR_NAME
   mv File.join(temp_staging_dir, name), File.join(STAGING_DIR_NAME, name)
   docker_run "#{POSTPROCESSOR_IMAGE}:#{postprocessor_tag}", "--gem", name
-  if enable_tests
-    cd name do
-      exec ["bundle", "install"]
-      exec ["bundle", "exec", "rake", "ci"]
-    end
+  return unless enable_tests
+  cd name do
+    exec ["bundle", "install"]
+    exec ["bundle", "exec", "rake", "ci"]
   end
 end
 
