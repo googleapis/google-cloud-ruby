@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.5.0 (2023-07-14)
+
+#### Features
+
+* Support filtering resources by type ([#22526](https://github.com/googleapis/google-cloud-ruby/issues/22526)) 
+
 ### 0.4.0 (2023-07-06)
 
 #### Features
