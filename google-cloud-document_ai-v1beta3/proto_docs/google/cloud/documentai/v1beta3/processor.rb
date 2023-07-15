@@ -51,9 +51,9 @@ module Google
         # @!attribute [rw] kms_key_version_name
         #   @return [::String]
         #     The KMS key version with which data is encrypted.
-        # @!attribute [rw] google_managed
+        # @!attribute [r] google_managed
         #   @return [::Boolean]
-        #     Denotes that this `ProcessorVersion` is managed by Google.
+        #     Output only. Denotes that this `ProcessorVersion` is managed by Google.
         # @!attribute [rw] deprecation_info
         #   @return [::Google::Cloud::DocumentAI::V1beta3::ProcessorVersion::DeprecationInfo]
         #     If set, information about the eventual deprecation of this version.

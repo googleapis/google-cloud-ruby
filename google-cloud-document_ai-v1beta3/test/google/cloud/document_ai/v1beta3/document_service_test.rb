@@ -112,6 +112,200 @@ class ::Google::Cloud::DocumentAI::V1beta3::DocumentService::ClientTest < Minite
     end
   end
 
+  def test_import_documents
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    dataset = "hello world"
+    batch_documents_import_configs = [{}]
+
+    import_documents_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :import_documents, name
+      assert_kind_of ::Google::Cloud::DocumentAI::V1beta3::ImportDocumentsRequest, request
+      assert_equal "hello world", request["dataset"]
+      assert_kind_of ::Google::Cloud::DocumentAI::V1beta3::ImportDocumentsRequest::BatchDocumentsImportConfig, request["batch_documents_import_configs"].first
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, import_documents_client_stub do
+      # Create client
+      client = ::Google::Cloud::DocumentAI::V1beta3::DocumentService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.import_documents({ dataset: dataset, batch_documents_import_configs: batch_documents_import_configs }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.import_documents dataset: dataset, batch_documents_import_configs: batch_documents_import_configs do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.import_documents ::Google::Cloud::DocumentAI::V1beta3::ImportDocumentsRequest.new(dataset: dataset, batch_documents_import_configs: batch_documents_import_configs) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.import_documents({ dataset: dataset, batch_documents_import_configs: batch_documents_import_configs }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.import_documents(::Google::Cloud::DocumentAI::V1beta3::ImportDocumentsRequest.new(dataset: dataset, batch_documents_import_configs: batch_documents_import_configs), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, import_documents_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_document
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::DocumentAI::V1beta3::GetDocumentResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    dataset = "hello world"
+    document_id = {}
+    read_mask = {}
+    page_range = {}
+
+    get_document_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_document, name
+      assert_kind_of ::Google::Cloud::DocumentAI::V1beta3::GetDocumentRequest, request
+      assert_equal "hello world", request["dataset"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DocumentAI::V1beta3::DocumentId), request["document_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["read_mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DocumentAI::V1beta3::DocumentPageRange), request["page_range"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_document_client_stub do
+      # Create client
+      client = ::Google::Cloud::DocumentAI::V1beta3::DocumentService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_document({ dataset: dataset, document_id: document_id, read_mask: read_mask, page_range: page_range }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_document dataset: dataset, document_id: document_id, read_mask: read_mask, page_range: page_range do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_document ::Google::Cloud::DocumentAI::V1beta3::GetDocumentRequest.new(dataset: dataset, document_id: document_id, read_mask: read_mask, page_range: page_range) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_document({ dataset: dataset, document_id: document_id, read_mask: read_mask, page_range: page_range }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_document(::Google::Cloud::DocumentAI::V1beta3::GetDocumentRequest.new(dataset: dataset, document_id: document_id, read_mask: read_mask, page_range: page_range), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_document_client_stub.call_rpc_count
+    end
+  end
+
+  def test_batch_delete_documents
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    dataset = "hello world"
+    dataset_documents = {}
+
+    batch_delete_documents_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :batch_delete_documents, name
+      assert_kind_of ::Google::Cloud::DocumentAI::V1beta3::BatchDeleteDocumentsRequest, request
+      assert_equal "hello world", request["dataset"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DocumentAI::V1beta3::BatchDatasetDocuments), request["dataset_documents"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, batch_delete_documents_client_stub do
+      # Create client
+      client = ::Google::Cloud::DocumentAI::V1beta3::DocumentService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.batch_delete_documents({ dataset: dataset, dataset_documents: dataset_documents }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.batch_delete_documents dataset: dataset, dataset_documents: dataset_documents do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.batch_delete_documents ::Google::Cloud::DocumentAI::V1beta3::BatchDeleteDocumentsRequest.new(dataset: dataset, dataset_documents: dataset_documents) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.batch_delete_documents({ dataset: dataset, dataset_documents: dataset_documents }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.batch_delete_documents(::Google::Cloud::DocumentAI::V1beta3::BatchDeleteDocumentsRequest.new(dataset: dataset, dataset_documents: dataset_documents), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, batch_delete_documents_client_stub.call_rpc_count
+    end
+  end
+
   def test_get_dataset_schema
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::DocumentAI::V1beta3::DatasetSchema.new

@@ -106,6 +106,44 @@ module Google
           end
         end
 
+        # Document Identifier.
+        # @!attribute [rw] gcs_managed_doc_id
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::DocumentId::GCSManagedDocumentId]
+        #     A document id within user-managed Cloud Storage.
+        # @!attribute [rw] unmanaged_doc_id
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::DocumentId::UnmanagedDocumentId]
+        #     A document id within unmanaged dataset.
+        # @!attribute [rw] revision_ref
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::RevisionRef]
+        #     Points to a specific revision of the document if set.
+        class DocumentId
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Identifies a document uniquely within the scope of a dataset in the
+          # user-managed Cloud Storage option.
+          # @!attribute [rw] gcs_uri
+          #   @return [::String]
+          #     Required. The Cloud Storage URI where the actual document is stored.
+          # @!attribute [rw] cw_doc_id
+          #   @return [::String]
+          #     Id of the document (indexed) managed by Content Warehouse.
+          class GCSManagedDocumentId
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Identifies a document uniquely within the scope of a dataset in unmanaged
+          # option.
+          # @!attribute [rw] doc_id
+          #   @return [::String]
+          #     Required. The id of the document.
+          class UnmanagedDocumentId
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # Dataset Schema.
         # @!attribute [rw] name
         #   @return [::String]
@@ -118,6 +156,30 @@ module Google
         class DatasetSchema
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Dataset documents that the batch operation will be applied to.
+        # @!attribute [rw] individual_document_ids
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::BatchDatasetDocuments::IndividualDocumentIds]
+        #     Document identifiers.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     A filter matching the documents.
+        #     Follows the same format and restriction as
+        #     [google.cloud.documentai.master.ListDocumentsRequest.filter].
+        class BatchDatasetDocuments
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # List of individual DocumentIds.
+          # @!attribute [rw] document_ids
+          #   @return [::Array<::Google::Cloud::DocumentAI::V1beta3::DocumentId>]
+          #     Required. List of Document IDs indicating where the actual documents are
+          #     stored.
+          class IndividualDocumentIds
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
       end
     end

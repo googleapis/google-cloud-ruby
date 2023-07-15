@@ -117,6 +117,173 @@ class ::Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::ClientTest < 
     end
   end
 
+  def test_import_documents
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    dataset = "hello world"
+    batch_documents_import_configs = [{}]
+
+    import_documents_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::ServiceStub.stub :transcode_import_documents_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, import_documents_client_stub do
+        # Create client
+        client = ::Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.import_documents({ dataset: dataset, batch_documents_import_configs: batch_documents_import_configs }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.import_documents dataset: dataset, batch_documents_import_configs: batch_documents_import_configs do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.import_documents ::Google::Cloud::DocumentAI::V1beta3::ImportDocumentsRequest.new(dataset: dataset, batch_documents_import_configs: batch_documents_import_configs) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.import_documents({ dataset: dataset, batch_documents_import_configs: batch_documents_import_configs }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.import_documents(::Google::Cloud::DocumentAI::V1beta3::ImportDocumentsRequest.new(dataset: dataset, batch_documents_import_configs: batch_documents_import_configs), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, import_documents_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_document
+    # Create test objects.
+    client_result = ::Google::Cloud::DocumentAI::V1beta3::GetDocumentResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    dataset = "hello world"
+    document_id = {}
+    read_mask = {}
+    page_range = {}
+
+    get_document_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::ServiceStub.stub :transcode_get_document_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_document_client_stub do
+        # Create client
+        client = ::Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.get_document({ dataset: dataset, document_id: document_id, read_mask: read_mask, page_range: page_range }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.get_document dataset: dataset, document_id: document_id, read_mask: read_mask, page_range: page_range do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.get_document ::Google::Cloud::DocumentAI::V1beta3::GetDocumentRequest.new(dataset: dataset, document_id: document_id, read_mask: read_mask, page_range: page_range) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.get_document({ dataset: dataset, document_id: document_id, read_mask: read_mask, page_range: page_range }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.get_document(::Google::Cloud::DocumentAI::V1beta3::GetDocumentRequest.new(dataset: dataset, document_id: document_id, read_mask: read_mask, page_range: page_range), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_document_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_delete_documents
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    dataset = "hello world"
+    dataset_documents = {}
+
+    batch_delete_documents_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::ServiceStub.stub :transcode_batch_delete_documents_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_delete_documents_client_stub do
+        # Create client
+        client = ::Google::Cloud::DocumentAI::V1beta3::DocumentService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        client.batch_delete_documents({ dataset: dataset, dataset_documents: dataset_documents }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        client.batch_delete_documents dataset: dataset, dataset_documents: dataset_documents do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        client.batch_delete_documents ::Google::Cloud::DocumentAI::V1beta3::BatchDeleteDocumentsRequest.new(dataset: dataset, dataset_documents: dataset_documents) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        client.batch_delete_documents({ dataset: dataset, dataset_documents: dataset_documents }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        client.batch_delete_documents(::Google::Cloud::DocumentAI::V1beta3::BatchDeleteDocumentsRequest.new(dataset: dataset, dataset_documents: dataset_documents), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_delete_documents_client_stub.call_count
+      end
+    end
+  end
+
   def test_get_dataset_schema
     # Create test objects.
     client_result = ::Google::Cloud::DocumentAI::V1beta3::DatasetSchema.new
