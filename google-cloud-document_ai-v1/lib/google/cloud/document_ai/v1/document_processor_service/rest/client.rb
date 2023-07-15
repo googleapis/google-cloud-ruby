@@ -194,7 +194,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload process_document(inline_document: nil, raw_document: nil, name: nil, skip_human_review: nil, field_mask: nil)
+              # @overload process_document(inline_document: nil, raw_document: nil, gcs_document: nil, name: nil, skip_human_review: nil, field_mask: nil, process_options: nil)
               #   Pass arguments to `process_document` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -203,6 +203,8 @@ module Google
               #     An inline document proto.
               #   @param raw_document [::Google::Cloud::DocumentAI::V1::RawDocument, ::Hash]
               #     A raw document content (bytes).
+              #   @param gcs_document [::Google::Cloud::DocumentAI::V1::GcsDocument, ::Hash]
+              #     A raw document on Google Cloud Storage.
               #   @param name [::String]
               #     Required. The resource name of the
               #     {::Google::Cloud::DocumentAI::V1::Processor Processor} or
@@ -222,6 +224,8 @@ module Google
               #     {::Google::Cloud::DocumentAI::V1::ProcessResponse#document ProcessResponse.document}
               #     output. Only supports top-level document and pages field, so it must be in
               #     the form of `{document_field_name}` or `pages.{page_field_name}`.
+              #   @param process_options [::Google::Cloud::DocumentAI::V1::ProcessOptions, ::Hash]
+              #     Inference-time options for the process API
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::DocumentAI::V1::ProcessResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -278,7 +282,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload batch_process_documents(name: nil, input_documents: nil, document_output_config: nil, skip_human_review: nil)
+              # @overload batch_process_documents(name: nil, input_documents: nil, document_output_config: nil, skip_human_review: nil, process_options: nil)
               #   Pass arguments to `batch_process_documents` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -301,6 +305,8 @@ module Google
               #   @param skip_human_review [::Boolean]
               #     Whether human review should be skipped for this request. Default to
               #     `false`.
+              #   @param process_options [::Google::Cloud::DocumentAI::V1::ProcessOptions, ::Hash]
+              #     Inference-time options for the process API
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -689,11 +695,13 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload train_processor_version(parent: nil, processor_version: nil, document_schema: nil, input_data: nil, base_processor_version: nil)
+              # @overload train_processor_version(custom_document_extraction_options: nil, parent: nil, processor_version: nil, document_schema: nil, input_data: nil, base_processor_version: nil)
               #   Pass arguments to `train_processor_version` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
+              #   @param custom_document_extraction_options [::Google::Cloud::DocumentAI::V1::TrainProcessorVersionRequest::CustomDocumentExtractionOptions, ::Hash]
+              #     Options to control Custom Document Extraction (CDE) Processor.
               #   @param parent [::String]
               #     Required. The parent (project, location and processor) to create the new
               #     version for. Format:
