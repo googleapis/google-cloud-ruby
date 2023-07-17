@@ -162,10 +162,10 @@ module Google
             self.backoff = ->(retries) { sleep retries.to_i }
 
             def initialize options = {} # :nodoc:
-              @max_retries  = (options[:retries]    || Backoff.retries).to_i
-              @http_codes   = (options[:http_codes] || Backoff.http_codes).to_a
-              @reasons      = (options[:reasons]    || Backoff.reasons).to_a
-              @backoff      =  options[:backoff]    || Backoff.backoff
+              @max_retries = (options[:retries] || Backoff.retries).to_i
+              @http_codes = (options[:http_codes] || Backoff.http_codes).to_a
+              @reasons = (options[:reasons] || Backoff.reasons).to_a
+              @backoff = options[:backoff] || Backoff.backoff
             end
 
             def execute # :nodoc:
