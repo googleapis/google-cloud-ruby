@@ -21,6 +21,16 @@ module Google
   module Cloud
     module DocumentAI
       module V1
+        # Options for Process API
+        # @!attribute [rw] ocr_config
+        #   @return [::Google::Cloud::DocumentAI::V1::OcrConfig]
+        #     Only applicable to `OCR_PROCESSOR`. Returns error if set on other
+        #     processor types.
+        class ProcessOptions
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for the
         # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#process_document ProcessDocument}
         # method.
@@ -30,6 +40,9 @@ module Google
         # @!attribute [rw] raw_document
         #   @return [::Google::Cloud::DocumentAI::V1::RawDocument]
         #     A raw document content (bytes).
+        # @!attribute [rw] gcs_document
+        #   @return [::Google::Cloud::DocumentAI::V1::GcsDocument]
+        #     A raw document on Google Cloud Storage.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the
@@ -52,6 +65,9 @@ module Google
         #     {::Google::Cloud::DocumentAI::V1::ProcessResponse#document ProcessResponse.document}
         #     output. Only supports top-level document and pages field, so it must be in
         #     the form of `{document_field_name}` or `pages.{page_field_name}`.
+        # @!attribute [rw] process_options
+        #   @return [::Google::Cloud::DocumentAI::V1::ProcessOptions]
+        #     Inference-time options for the process API
         class ProcessRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -138,6 +154,9 @@ module Google
         #   @return [::Boolean]
         #     Whether human review should be skipped for this request. Default to
         #     `false`.
+        # @!attribute [rw] process_options
+        #   @return [::Google::Cloud::DocumentAI::V1::ProcessOptions]
+        #     Inference-time options for the process API
         class BatchProcessRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -604,6 +623,9 @@ module Google
         # Request message for the
         # {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#train_processor_version TrainProcessorVersion}
         # method.
+        # @!attribute [rw] custom_document_extraction_options
+        #   @return [::Google::Cloud::DocumentAI::V1::TrainProcessorVersionRequest::CustomDocumentExtractionOptions]
+        #     Options to control Custom Document Extraction (CDE) Processor.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent (project, location and processor) to create the new
@@ -639,6 +661,26 @@ module Google
           class InputData
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Options to control the training of the Custom Document Extraction (CDE)
+          # Processor.
+          # @!attribute [rw] training_method
+          #   @return [::Google::Cloud::DocumentAI::V1::TrainProcessorVersionRequest::CustomDocumentExtractionOptions::TrainingMethod]
+          #     Training method to use for CDE training.
+          class CustomDocumentExtractionOptions
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Training Method for CDE. TRAINING_METHOD_UNSPECIFIED will fallback to
+            # MODEL_BASED.
+            module TrainingMethod
+              TRAINING_METHOD_UNSPECIFIED = 0
+
+              MODEL_BASED = 1
+
+              TEMPLATE_BASED = 2
+            end
           end
         end
 
