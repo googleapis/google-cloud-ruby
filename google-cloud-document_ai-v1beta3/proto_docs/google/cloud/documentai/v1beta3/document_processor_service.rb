@@ -40,6 +40,9 @@ module Google
         # @!attribute [rw] raw_document
         #   @return [::Google::Cloud::DocumentAI::V1beta3::RawDocument]
         #     A raw document content (bytes).
+        # @!attribute [rw] gcs_document
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::GcsDocument]
+        #     A raw document on Google Cloud Storage.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the

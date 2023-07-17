@@ -230,6 +230,216 @@ module Google
               end
 
               ##
+              # Import documents into a dataset.
+              #
+              # @overload import_documents(request, options = nil)
+              #   Pass arguments to `import_documents` via a request object, either of type
+              #   {::Google::Cloud::DocumentAI::V1beta3::ImportDocumentsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::DocumentAI::V1beta3::ImportDocumentsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload import_documents(dataset: nil, batch_documents_import_configs: nil)
+              #   Pass arguments to `import_documents` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param dataset [::String]
+              #     Required. The dataset resource name.
+              #     Format:
+              #     projects/\\{project}/locations/\\{location}/processors/\\{processor}/dataset
+              #   @param batch_documents_import_configs [::Array<::Google::Cloud::DocumentAI::V1beta3::ImportDocumentsRequest::BatchDocumentsImportConfig, ::Hash>]
+              #     Required. The Cloud Storage uri containing raw documents that must be
+              #     imported.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def import_documents request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DocumentAI::V1beta3::ImportDocumentsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.import_documents.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::DocumentAI::V1beta3::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.import_documents.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.import_documents.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @document_service_stub.import_documents request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Returns relevant fields present in the requested document.
+              #
+              # @overload get_document(request, options = nil)
+              #   Pass arguments to `get_document` via a request object, either of type
+              #   {::Google::Cloud::DocumentAI::V1beta3::GetDocumentRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::DocumentAI::V1beta3::GetDocumentRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_document(dataset: nil, document_id: nil, read_mask: nil, page_range: nil)
+              #   Pass arguments to `get_document` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param dataset [::String]
+              #     Required. The resource name of the dataset that the document belongs to .
+              #     Format:
+              #     projects/\\{project}/locations/\\{location}/processors/\\{processor}/dataset
+              #   @param document_id [::Google::Cloud::DocumentAI::V1beta3::DocumentId, ::Hash]
+              #     Required. Document identifier.
+              #   @param read_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     If set, only fields listed here will be returned. Otherwise, all fields
+              #     will be returned by default.
+              #   @param page_range [::Google::Cloud::DocumentAI::V1beta3::DocumentPageRange, ::Hash]
+              #     List of pages for which the fields specified in the `read_mask` must
+              #     be served.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::DocumentAI::V1beta3::GetDocumentResponse]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::DocumentAI::V1beta3::GetDocumentResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def get_document request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DocumentAI::V1beta3::GetDocumentRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_document.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::DocumentAI::V1beta3::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_document.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_document.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @document_service_stub.get_document request, options do |result, operation|
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a set of documents.
+              #
+              # @overload batch_delete_documents(request, options = nil)
+              #   Pass arguments to `batch_delete_documents` via a request object, either of type
+              #   {::Google::Cloud::DocumentAI::V1beta3::BatchDeleteDocumentsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::DocumentAI::V1beta3::BatchDeleteDocumentsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload batch_delete_documents(dataset: nil, dataset_documents: nil)
+              #   Pass arguments to `batch_delete_documents` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param dataset [::String]
+              #     Required. The dataset resource name.
+              #     Format:
+              #     projects/\\{project}/locations/\\{location}/processors/\\{processor}/dataset
+              #   @param dataset_documents [::Google::Cloud::DocumentAI::V1beta3::BatchDatasetDocuments, ::Hash]
+              #     Required. Dataset documents input. If given `filter`, all documents
+              #     satisfying the filter will be deleted. If given documentIds, a maximum of
+              #     50 documents can be deleted in a batch. The request will be rejected if
+              #     more than 50 document_ids are provided.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def batch_delete_documents request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DocumentAI::V1beta3::BatchDeleteDocumentsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.batch_delete_documents.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::DocumentAI::V1beta3::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.batch_delete_documents.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.batch_delete_documents.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @document_service_stub.batch_delete_documents request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  return result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Gets the `DatasetSchema` of a `Dataset`.
               #
               # @overload get_dataset_schema(request, options = nil)
@@ -498,6 +708,21 @@ module Google
                   #
                   attr_reader :update_dataset
                   ##
+                  # RPC-specific configuration for `import_documents`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :import_documents
+                  ##
+                  # RPC-specific configuration for `get_document`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_document
+                  ##
+                  # RPC-specific configuration for `batch_delete_documents`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :batch_delete_documents
+                  ##
                   # RPC-specific configuration for `get_dataset_schema`
                   # @return [::Gapic::Config::Method]
                   #
@@ -512,6 +737,12 @@ module Google
                   def initialize parent_rpcs = nil
                     update_dataset_config = parent_rpcs.update_dataset if parent_rpcs.respond_to? :update_dataset
                     @update_dataset = ::Gapic::Config::Method.new update_dataset_config
+                    import_documents_config = parent_rpcs.import_documents if parent_rpcs.respond_to? :import_documents
+                    @import_documents = ::Gapic::Config::Method.new import_documents_config
+                    get_document_config = parent_rpcs.get_document if parent_rpcs.respond_to? :get_document
+                    @get_document = ::Gapic::Config::Method.new get_document_config
+                    batch_delete_documents_config = parent_rpcs.batch_delete_documents if parent_rpcs.respond_to? :batch_delete_documents
+                    @batch_delete_documents = ::Gapic::Config::Method.new batch_delete_documents_config
                     get_dataset_schema_config = parent_rpcs.get_dataset_schema if parent_rpcs.respond_to? :get_dataset_schema
                     @get_dataset_schema = ::Gapic::Config::Method.new get_dataset_schema_config
                     update_dataset_schema_config = parent_rpcs.update_dataset_schema if parent_rpcs.respond_to? :update_dataset_schema

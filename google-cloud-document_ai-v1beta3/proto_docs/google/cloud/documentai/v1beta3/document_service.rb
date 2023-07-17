@@ -41,6 +41,179 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # @!attribute [rw] dataset
+        #   @return [::String]
+        #     Required. The dataset resource name.
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/processors/\\{processor}/dataset
+        # @!attribute [rw] batch_documents_import_configs
+        #   @return [::Array<::Google::Cloud::DocumentAI::V1beta3::ImportDocumentsRequest::BatchDocumentsImportConfig>]
+        #     Required. The Cloud Storage uri containing raw documents that must be
+        #     imported.
+        class ImportDocumentsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Config for importing documents.
+          # Each batch can have its own dataset split type.
+          # @!attribute [rw] dataset_split
+          #   @return [::Google::Cloud::DocumentAI::V1beta3::DatasetSplitType]
+          #     Target dataset split where the documents must be stored.
+          # @!attribute [rw] auto_split_config
+          #   @return [::Google::Cloud::DocumentAI::V1beta3::ImportDocumentsRequest::BatchDocumentsImportConfig::AutoSplitConfig]
+          #     If set, documents will be automatically split into training and test
+          #     split category with the specified ratio.
+          # @!attribute [rw] batch_input_config
+          #   @return [::Google::Cloud::DocumentAI::V1beta3::BatchDocumentsInputConfig]
+          #     The common config to specify a set of documents used as input.
+          class BatchDocumentsImportConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The config for auto-split.
+            # @!attribute [rw] training_split_ratio
+            #   @return [::Float]
+            #     Ratio of training dataset split.
+            class AutoSplitConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+        end
+
+        # Response of the import document operation.
+        class ImportDocumentsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Metadata of the import document operation.
+        # @!attribute [rw] common_metadata
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::CommonOperationMetadata]
+        #     The basic metadata of the long running operation.
+        # @!attribute [rw] individual_import_statuses
+        #   @return [::Array<::Google::Cloud::DocumentAI::V1beta3::ImportDocumentsMetadata::IndividualImportStatus>]
+        #     The list of response details of each document.
+        # @!attribute [rw] import_config_validation_results
+        #   @return [::Array<::Google::Cloud::DocumentAI::V1beta3::ImportDocumentsMetadata::ImportConfigValidationResult>]
+        #     Validation statuses of the batch documents import config.
+        # @!attribute [rw] total_document_count
+        #   @return [::Integer]
+        #     Total number of the documents that are qualified for importing.
+        class ImportDocumentsMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The status of each individual document in the import process.
+          # @!attribute [rw] input_gcs_source
+          #   @return [::String]
+          #     The source Cloud Storage URI of the document.
+          # @!attribute [rw] status
+          #   @return [::Google::Rpc::Status]
+          #     The status of the importing of the document.
+          # @!attribute [rw] output_document_id
+          #   @return [::Google::Cloud::DocumentAI::V1beta3::DocumentId]
+          #     The document id of imported document if it was successful, otherwise
+          #     empty.
+          class IndividualImportStatus
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The validation status of each import config. Status is set to errors if
+          # there is no documents to import in the import_config, or OK if the
+          # operation will try to proceed at least one document.
+          # @!attribute [rw] input_gcs_source
+          #   @return [::String]
+          #     The source Cloud Storage URI specified in the import config.
+          # @!attribute [rw] status
+          #   @return [::Google::Rpc::Status]
+          #     The validation status of import config.
+          class ImportConfigValidationResult
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # @!attribute [rw] dataset
+        #   @return [::String]
+        #     Required. The resource name of the dataset that the document belongs to .
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/processors/\\{processor}/dataset
+        # @!attribute [rw] document_id
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::DocumentId]
+        #     Required. Document identifier.
+        # @!attribute [rw] read_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     If set, only fields listed here will be returned. Otherwise, all fields
+        #     will be returned by default.
+        # @!attribute [rw] page_range
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::DocumentPageRange]
+        #     List of pages for which the fields specified in the `read_mask` must
+        #     be served.
+        class GetDocumentRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] document
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::Document]
+        class GetDocumentResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] dataset
+        #   @return [::String]
+        #     Required. The dataset resource name.
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/processors/\\{processor}/dataset
+        # @!attribute [rw] dataset_documents
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::BatchDatasetDocuments]
+        #     Required. Dataset documents input. If given `filter`, all documents
+        #     satisfying the filter will be deleted. If given documentIds, a maximum of
+        #     50 documents can be deleted in a batch. The request will be rejected if
+        #     more than 50 document_ids are provided.
+        class BatchDeleteDocumentsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response of the delete documents operation.
+        class BatchDeleteDocumentsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] common_metadata
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::CommonOperationMetadata]
+        #     The basic metadata of the long running operation.
+        # @!attribute [rw] individual_batch_delete_statuses
+        #   @return [::Array<::Google::Cloud::DocumentAI::V1beta3::BatchDeleteDocumentsMetadata::IndividualBatchDeleteStatus>]
+        #     The list of response details of each document.
+        # @!attribute [rw] total_document_count
+        #   @return [::Integer]
+        #     Total number of documents deleting from dataset.
+        # @!attribute [rw] error_document_count
+        #   @return [::Integer]
+        #     Total number of documents that failed to be deleted in storage.
+        class BatchDeleteDocumentsMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The status of each individual document in the batch delete process.
+          # @!attribute [rw] document_id
+          #   @return [::Google::Cloud::DocumentAI::V1beta3::DocumentId]
+          #     The document id of the document.
+          # @!attribute [rw] status
+          #   @return [::Google::Rpc::Status]
+          #     The status of deleting the document in storage.
+          class IndividualBatchDeleteStatus
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # Request for `GetDatasetSchema`.
         # @!attribute [rw] name
         #   @return [::String]
@@ -66,6 +239,35 @@ module Google
         class UpdateDatasetSchemaRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Range of pages present in a document.
+        # @!attribute [rw] start
+        #   @return [::Integer]
+        #     First page number (one-based index) to be returned.
+        # @!attribute [rw] end
+        #   @return [::Integer]
+        #     Last page number (one-based index) to be returned.
+        class DocumentPageRange
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Documents belonging to a dataset will be split into different groups
+        # referred to as splits: train, test.
+        module DatasetSplitType
+          # Default value if the enum is not set.
+          # go/protodosdonts#do-include-an-unspecified-value-in-an-enum
+          DATASET_SPLIT_TYPE_UNSPECIFIED = 0
+
+          # Identifies the train documents.
+          DATASET_SPLIT_TRAIN = 1
+
+          # Identifies the test documents.
+          DATASET_SPLIT_TEST = 2
+
+          # Identifies the unassigned documents.
+          DATASET_SPLIT_UNASSIGNED = 3
         end
       end
     end

@@ -202,7 +202,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload process_document(inline_document: nil, raw_document: nil, name: nil, document: nil, skip_human_review: nil, field_mask: nil, process_options: nil)
+            # @overload process_document(inline_document: nil, raw_document: nil, gcs_document: nil, name: nil, document: nil, skip_human_review: nil, field_mask: nil, process_options: nil)
             #   Pass arguments to `process_document` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -211,6 +211,8 @@ module Google
             #     An inline document proto.
             #   @param raw_document [::Google::Cloud::DocumentAI::V1beta3::RawDocument, ::Hash]
             #     A raw document content (bytes).
+            #   @param gcs_document [::Google::Cloud::DocumentAI::V1beta3::GcsDocument, ::Hash]
+            #     A raw document on Google Cloud Storage.
             #   @param name [::String]
             #     Required. The resource name of the
             #     {::Google::Cloud::DocumentAI::V1beta3::Processor Processor} or

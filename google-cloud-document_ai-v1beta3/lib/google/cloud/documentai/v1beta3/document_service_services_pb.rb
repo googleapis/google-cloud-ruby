@@ -35,6 +35,12 @@ module Google
 
             # Updates metadata associated with a dataset.
             rpc :UpdateDataset, ::Google::Cloud::DocumentAI::V1beta3::UpdateDatasetRequest, ::Google::Longrunning::Operation
+            # Import documents into a dataset.
+            rpc :ImportDocuments, ::Google::Cloud::DocumentAI::V1beta3::ImportDocumentsRequest, ::Google::Longrunning::Operation
+            # Returns relevant fields present in the requested document.
+            rpc :GetDocument, ::Google::Cloud::DocumentAI::V1beta3::GetDocumentRequest, ::Google::Cloud::DocumentAI::V1beta3::GetDocumentResponse
+            # Deletes a set of documents.
+            rpc :BatchDeleteDocuments, ::Google::Cloud::DocumentAI::V1beta3::BatchDeleteDocumentsRequest, ::Google::Longrunning::Operation
             # Gets the `DatasetSchema` of a `Dataset`.
             rpc :GetDatasetSchema, ::Google::Cloud::DocumentAI::V1beta3::GetDatasetSchemaRequest, ::Google::Cloud::DocumentAI::V1beta3::DatasetSchema
             # Updates a `DatasetSchema`.

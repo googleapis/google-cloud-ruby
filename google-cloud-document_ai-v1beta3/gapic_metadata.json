@@ -139,6 +139,21 @@
                 "update_dataset"
               ]
             },
+            "ImportDocuments": {
+              "methods": [
+                "import_documents"
+              ]
+            },
+            "GetDocument": {
+              "methods": [
+                "get_document"
+              ]
+            },
+            "BatchDeleteDocuments": {
+              "methods": [
+                "batch_delete_documents"
+              ]
+            },
             "GetDatasetSchema": {
               "methods": [
                 "get_dataset_schema"
