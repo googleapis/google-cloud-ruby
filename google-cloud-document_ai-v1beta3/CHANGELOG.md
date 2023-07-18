@@ -1,5 +1,11 @@
 # Release History
 
+### 0.25.0 (2023-07-18)
+
+#### Features
+
+* added ImportDocuments, GetDocument and BatchDeleteDocuments RPCs for v1beta3 ([#22536](https://github.com/googleapis/google-cloud-ruby/issues/22536)) 
+
 ### 0.24.0 (2023-06-20)
 
 #### Features
