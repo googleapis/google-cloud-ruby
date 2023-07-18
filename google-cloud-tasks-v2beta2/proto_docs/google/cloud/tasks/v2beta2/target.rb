@@ -401,6 +401,340 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # HTTP request.
+        #
+        # The task will be pushed to the worker as an HTTP request. An HTTP request
+        # embodies a url, an http method, headers, body and authorization for the http
+        # task.
+        # @!attribute [rw] url
+        #   @return [::String]
+        #     Required. The full url path that the request will be sent to.
+        #
+        #     This string must begin with either "http://" or "https://". Some examples
+        #     are: `http://acme.com` and `https://acme.com/sales:8080`. Cloud Tasks will
+        #     encode some characters for safety and compatibility. The maximum allowed
+        #     URL length is 2083 characters after encoding.
+        #
+        #     The `Location` header response from a redirect response [`300` - `399`]
+        #     may be followed. The redirect is not counted as a separate attempt.
+        # @!attribute [rw] http_method
+        #   @return [::Google::Cloud::Tasks::V2beta2::HttpMethod]
+        #     The HTTP method to use for the request. The default is POST.
+        # @!attribute [rw] headers
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     HTTP request headers.
+        #
+        #     This map contains the header field names and values.
+        #     Headers can be set when running the
+        #     {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#create_task task is created} or
+        #     {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#buffer_task task is created}.
+        #
+        #     These headers represent a subset of the headers that will accompany the
+        #     task's HTTP request. Some HTTP request headers will be ignored or replaced.
+        #
+        #     A partial list of headers that will be ignored or replaced is:
+        #
+        #     * Any header that is prefixed with "X-CloudTasks-" will be treated
+        #     as service header. Service headers define properties of the task and are
+        #     predefined in CloudTask.
+        #     * Host: This will be computed by Cloud Tasks and derived from
+        #       {::Google::Cloud::Tasks::V2beta2::HttpRequest#url HttpRequest.url}.
+        #     * Content-Length: This will be computed by Cloud Tasks.
+        #     * User-Agent: This will be set to `"Google-Cloud-Tasks"`.
+        #     * `X-Google-*`: Google use only.
+        #     * `X-AppEngine-*`: Google use only.
+        #
+        #     `Content-Type` won't be set by Cloud Tasks. You can explicitly set
+        #     `Content-Type` to a media type when the
+        #      [task is created][google.cloud.tasks.v2beta3.CloudTasks.CreateTask].
+        #      For example, `Content-Type` can be set to `"application/octet-stream"` or
+        #      `"application/json"`.
+        #
+        #     Headers which can have multiple values (according to RFC2616) can be
+        #     specified using comma-separated values.
+        #
+        #     The size of the headers must be less than 80KB.
+        # @!attribute [rw] body
+        #   @return [::String]
+        #     HTTP request body.
+        #
+        #     A request body is allowed only if the
+        #     {::Google::Cloud::Tasks::V2beta2::HttpRequest#http_method HTTP method} is POST,
+        #     PUT, or PATCH. It is an error to set body on a task with an incompatible
+        #     {::Google::Cloud::Tasks::V2beta2::HttpMethod HttpMethod}.
+        # @!attribute [rw] oauth_token
+        #   @return [::Google::Cloud::Tasks::V2beta2::OAuthToken]
+        #     If specified, an
+        #     [OAuth token](https://developers.google.com/identity/protocols/OAuth2)
+        #     will be generated and attached as an `Authorization` header in the HTTP
+        #     request.
+        #
+        #     This type of authorization should generally only be used when calling
+        #     Google APIs hosted on *.googleapis.com.
+        # @!attribute [rw] oidc_token
+        #   @return [::Google::Cloud::Tasks::V2beta2::OidcToken]
+        #     If specified, an
+        #     [OIDC](https://developers.google.com/identity/protocols/OpenIDConnect)
+        #     token will be generated and attached as an `Authorization` header in the
+        #     HTTP request.
+        #
+        #     This type of authorization can be used for many scenarios, including
+        #     calling Cloud Run, or endpoints where you intend to validate the token
+        #     yourself.
+        class HttpRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class HeadersEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # PathOverride.
+        #
+        # Path message defines path override for HTTP targets.
+        # @!attribute [rw] path
+        #   @return [::String]
+        #     The URI path (e.g., /users/1234). Default is an empty string.
+        class PathOverride
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # QueryOverride.
+        #
+        # Query message defines query override for HTTP targets.
+        # @!attribute [rw] query_params
+        #   @return [::String]
+        #     The query parameters (e.g., qparam1=123&qparam2=456). Default is an empty
+        #     string.
+        class QueryOverride
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Uri Override.
+        #
+        # When specified, all the HTTP tasks inside the queue will be partially or
+        # fully overridden depending on the configured values.
+        # @!attribute [rw] scheme
+        #   @return [::Google::Cloud::Tasks::V2beta2::UriOverride::Scheme]
+        #     Scheme override.
+        #
+        #     When specified, the task URI scheme is replaced by the provided value (HTTP
+        #     or HTTPS).
+        # @!attribute [rw] host
+        #   @return [::String]
+        #     Host override.
+        #
+        #     When specified, replaces the host part of the task URL. For example,
+        #     if the task URL is "https://www.google.com," and host value is set to
+        #     "example.net", the overridden URI will be changed to "https://example.net."
+        #     Host value cannot be an empty string (INVALID_ARGUMENT).
+        # @!attribute [rw] port
+        #   @return [::Integer]
+        #     Port override.
+        #
+        #     When specified, replaces the port part of the task URI. For instance,
+        #     for a URI http://www.google.com/foo and port=123, the overridden URI
+        #     becomes http://www.google.com:123/foo. Note that the port value must be a
+        #     positive integer. Setting the port to 0 (Zero) clears the URI port.
+        # @!attribute [rw] path_override
+        #   @return [::Google::Cloud::Tasks::V2beta2::PathOverride]
+        #     URI path.
+        #
+        #     When specified, replaces the existing path of the task URL. Setting the
+        #     path value to an empty string clears the URI path segment.
+        # @!attribute [rw] query_override
+        #   @return [::Google::Cloud::Tasks::V2beta2::QueryOverride]
+        #     URI Query.
+        #
+        #     When specified, replaces the query part of the task URI. Setting the
+        #     query value to an empty string clears the URI query segment.
+        # @!attribute [rw] uri_override_enforce_mode
+        #   @return [::Google::Cloud::Tasks::V2beta2::UriOverride::UriOverrideEnforceMode]
+        #     URI Override Enforce Mode
+        #
+        #     When specified, determines the Target UriOverride mode. If not specified,
+        #     it defaults to ALWAYS.
+        class UriOverride
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The Scheme for an HTTP request. By default, it is HTTPS.
+          module Scheme
+            # Scheme unspecified. Defaults to HTTPS.
+            SCHEME_UNSPECIFIED = 0
+
+            # Convert the scheme to HTTP, e.g., https://www.google.ca will change to
+            # http://www.google.ca.
+            HTTP = 1
+
+            # Convert the scheme to HTTPS, e.g., http://www.google.ca will change to
+            # https://www.google.ca.
+            HTTPS = 2
+          end
+
+          # UriOverrideEnforceMode mode is to define enforcing mode for the override
+          # modes.
+          module UriOverrideEnforceMode
+            # OverrideMode Unspecified. Defaults to ALWAYS.
+            URI_OVERRIDE_ENFORCE_MODE_UNSPECIFIED = 0
+
+            # In the IF_NOT_EXISTS mode, queue-level configuration is only
+            # applied where task-level configuration does not exist.
+            IF_NOT_EXISTS = 1
+
+            # In the ALWAYS mode, queue-level configuration overrides all
+            # task-level configuration
+            ALWAYS = 2
+          end
+        end
+
+        # HTTP target.
+        #
+        # When specified as a [Queue][target_type], all the tasks with [HttpRequest]
+        # will be overridden according to the target.
+        # @!attribute [rw] uri_override
+        #   @return [::Google::Cloud::Tasks::V2beta2::UriOverride]
+        #     Uri override.
+        #
+        #     When specified, overrides the execution Uri for all the tasks in the queue.
+        # @!attribute [rw] http_method
+        #   @return [::Google::Cloud::Tasks::V2beta2::HttpMethod]
+        #     The HTTP method to use for the request.
+        #
+        #     When specified, it overrides
+        #     {::Google::Cloud::Tasks::V2beta2::HttpTarget#http_method HttpRequest} for the
+        #     task. Note that if the value is set to [HttpMethod][GET] the
+        #     [HttpRequest][body] of the task will be ignored at execution time.
+        # @!attribute [rw] header_overrides
+        #   @return [::Array<::Google::Cloud::Tasks::V2beta2::HttpTarget::HeaderOverride>]
+        #     HTTP target headers.
+        #
+        #     This map contains the header field names and values.
+        #     Headers will be set when running the
+        #     {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#create_task task is created} and/or
+        #     {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#buffer_task task is created}.
+        #
+        #     These headers represent a subset of the headers that will accompany the
+        #     task's HTTP request. Some HTTP request headers will be ignored or replaced.
+        #
+        #     A partial list of headers that will be ignored or replaced is:
+        #     * Any header that is prefixed with "X-CloudTasks-" will be treated
+        #     as service header. Service headers define properties of the task and are
+        #     predefined in CloudTask.
+        #     * Host: This will be computed by Cloud Tasks and derived from
+        #       {::Google::Cloud::Tasks::V2beta2::HttpRequest#url HttpRequest.url}.
+        #     * Content-Length: This will be computed by Cloud Tasks.
+        #     * User-Agent: This will be set to `"Google-CloudTasks"`.
+        #     * `X-Google-*`: Google use only.
+        #     * `X-AppEngine-*`: Google use only.
+        #
+        #     `Content-Type` won't be set by Cloud Tasks. You can explicitly set
+        #     `Content-Type` to a media type when the
+        #      [task is created][google.cloud.tasks.v2beta3.CloudTasks.CreateTask].
+        #      For example, `Content-Type` can be set to `"application/octet-stream"` or
+        #      `"application/json"`.
+        #
+        #     Headers which can have multiple values (according to RFC2616) can be
+        #     specified using comma-separated values.
+        #
+        #     The size of the headers must be less than 80KB.
+        #     Queue-level headers to override headers of all the tasks in the queue.
+        # @!attribute [rw] oauth_token
+        #   @return [::Google::Cloud::Tasks::V2beta2::OAuthToken]
+        #     If specified, an
+        #     [OAuth token](https://developers.google.com/identity/protocols/OAuth2)
+        #     will be generated and attached as an `Authorization` header in the HTTP
+        #     request.
+        #
+        #     This type of authorization should generally only be used when calling
+        #     Google APIs hosted on *.googleapis.com.
+        # @!attribute [rw] oidc_token
+        #   @return [::Google::Cloud::Tasks::V2beta2::OidcToken]
+        #     If specified, an
+        #     [OIDC](https://developers.google.com/identity/protocols/OpenIDConnect)
+        #     token will be generated and attached as an `Authorization` header in the
+        #     HTTP request.
+        #
+        #     This type of authorization can be used for many scenarios, including
+        #     calling Cloud Run, or endpoints where you intend to validate the token
+        #     yourself.
+        class HttpTarget
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Defines a header message. A header can have a key and a value.
+          # @!attribute [rw] key
+          #   @return [::String]
+          #     The key of the header.
+          # @!attribute [rw] value
+          #   @return [::String]
+          #     The value of the header.
+          class Header
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Wraps the Header object.
+          # @!attribute [rw] header
+          #   @return [::Google::Cloud::Tasks::V2beta2::HttpTarget::Header]
+          #     header embodying a key and a value.
+          class HeaderOverride
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Contains information needed for generating an
+        # [OAuth token](https://developers.google.com/identity/protocols/OAuth2).
+        # This type of authorization should generally only be used when calling Google
+        # APIs hosted on *.googleapis.com.
+        # @!attribute [rw] service_account_email
+        #   @return [::String]
+        #     [Service account email](https://cloud.google.com/iam/docs/service-accounts)
+        #     to be used for generating OAuth token.
+        #     The service account must be within the same project as the queue. The
+        #     caller must have iam.serviceAccounts.actAs permission for the service
+        #     account.
+        # @!attribute [rw] scope
+        #   @return [::String]
+        #     OAuth scope to be used for generating OAuth access token.
+        #     If not specified, "https://www.googleapis.com/auth/cloud-platform"
+        #     will be used.
+        class OAuthToken
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Contains information needed for generating an
+        # [OpenID Connect
+        # token](https://developers.google.com/identity/protocols/OpenIDConnect).
+        # This type of authorization can be used for many scenarios, including
+        # calling Cloud Run, or endpoints where you intend to validate the token
+        # yourself.
+        # @!attribute [rw] service_account_email
+        #   @return [::String]
+        #     [Service account email](https://cloud.google.com/iam/docs/service-accounts)
+        #     to be used for generating OIDC token.
+        #     The service account must be within the same project as the queue. The
+        #     caller must have iam.serviceAccounts.actAs permission for the service
+        #     account.
+        # @!attribute [rw] audience
+        #   @return [::String]
+        #     Audience to be used when generating OIDC token. If not specified, the URI
+        #     specified in target will be used.
+        class OidcToken
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The HTTP method used to execute the task.
         module HttpMethod
           # HTTP method unspecified
@@ -420,6 +754,12 @@ module Google
 
           # HTTP DELETE
           DELETE = 5
+
+          # HTTP PATCH
+          PATCH = 6
+
+          # HTTP OPTIONS
+          OPTIONS = 7
         end
       end
     end
