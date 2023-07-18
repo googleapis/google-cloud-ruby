@@ -1,5 +1,11 @@
 # Release History
 
+### 0.12.0 (2023-07-18)
+
+#### Features
+
+* Experimental support for reverse scans ([#22453](https://github.com/googleapis/google-cloud-ruby/issues/22453)) 
+
 ### 0.11.0 (2023-06-06)
 
 #### Features
