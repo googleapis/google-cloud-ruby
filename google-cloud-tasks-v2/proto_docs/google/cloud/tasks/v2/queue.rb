@@ -42,7 +42,7 @@ module Google
         #        projects](https://cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects)
         #     * `LOCATION_ID` is the canonical ID for the queue's location.
         #        The list of available locations can be obtained by calling
-        #        [ListLocations][google.cloud.location.Locations.ListLocations].
+        #        `::Google::Cloud::Location::Locations::Client#list_locations`.
         #        For more information, see https://cloud.google.com/about/locations/.
         #     * `QUEUE_ID` can contain letters ([A-Za-z]), numbers ([0-9]), or
         #       hyphens (-). The maximum length is 100 characters.
@@ -105,7 +105,7 @@ module Google
         #   @return [::Google::Cloud::Tasks::V2::Queue::State]
         #     Output only. The state of the queue.
         #
-        #     `state` can only be changed by called
+        #     `state` can only be changed by calling
         #     {::Google::Cloud::Tasks::V2::CloudTasks::Client#pause_queue PauseQueue},
         #     {::Google::Cloud::Tasks::V2::CloudTasks::Client#resume_queue ResumeQueue}, or uploading
         #     [queue.yaml/xml](https://cloud.google.com/appengine/docs/python/config/queueref).
@@ -331,7 +331,7 @@ module Google
         #     A task's retry interval starts at
         #     {::Google::Cloud::Tasks::V2::RetryConfig#min_backoff min_backoff}, then doubles
         #     `max_doublings` times, then increases linearly, and finally
-        #     retries retries at intervals of
+        #     retries at intervals of
         #     {::Google::Cloud::Tasks::V2::RetryConfig#max_backoff max_backoff} up to
         #     {::Google::Cloud::Tasks::V2::RetryConfig#max_attempts max_attempts} times.
         #

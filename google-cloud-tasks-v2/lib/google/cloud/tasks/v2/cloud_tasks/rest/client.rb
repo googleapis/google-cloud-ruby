@@ -19,6 +19,7 @@
 require "google/cloud/errors"
 require "google/cloud/tasks/v2/cloudtasks_pb"
 require "google/cloud/tasks/v2/cloud_tasks/rest/service_stub"
+require "google/cloud/location/rest"
 
 module Google
   module Cloud
@@ -67,61 +68,61 @@ module Google
                                   end
                   default_config = Client::Configuration.new parent_config
 
-                  default_config.rpcs.list_queues.timeout = 10.0
+                  default_config.rpcs.list_queues.timeout = 20.0
                   default_config.rpcs.list_queues.retry_policy = {
                     initial_delay: 0.1, max_delay: 10.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.get_queue.timeout = 10.0
+                  default_config.rpcs.get_queue.timeout = 20.0
                   default_config.rpcs.get_queue.retry_policy = {
                     initial_delay: 0.1, max_delay: 10.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.create_queue.timeout = 10.0
+                  default_config.rpcs.create_queue.timeout = 20.0
 
-                  default_config.rpcs.update_queue.timeout = 10.0
+                  default_config.rpcs.update_queue.timeout = 20.0
 
-                  default_config.rpcs.delete_queue.timeout = 10.0
+                  default_config.rpcs.delete_queue.timeout = 20.0
                   default_config.rpcs.delete_queue.retry_policy = {
                     initial_delay: 0.1, max_delay: 10.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.purge_queue.timeout = 10.0
+                  default_config.rpcs.purge_queue.timeout = 20.0
 
-                  default_config.rpcs.pause_queue.timeout = 10.0
+                  default_config.rpcs.pause_queue.timeout = 20.0
 
-                  default_config.rpcs.resume_queue.timeout = 10.0
+                  default_config.rpcs.resume_queue.timeout = 20.0
 
-                  default_config.rpcs.get_iam_policy.timeout = 10.0
+                  default_config.rpcs.get_iam_policy.timeout = 20.0
                   default_config.rpcs.get_iam_policy.retry_policy = {
                     initial_delay: 0.1, max_delay: 10.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.set_iam_policy.timeout = 10.0
+                  default_config.rpcs.set_iam_policy.timeout = 20.0
 
-                  default_config.rpcs.test_iam_permissions.timeout = 10.0
+                  default_config.rpcs.test_iam_permissions.timeout = 20.0
                   default_config.rpcs.test_iam_permissions.retry_policy = {
                     initial_delay: 0.1, max_delay: 10.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.list_tasks.timeout = 10.0
+                  default_config.rpcs.list_tasks.timeout = 20.0
                   default_config.rpcs.list_tasks.retry_policy = {
                     initial_delay: 0.1, max_delay: 10.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.get_task.timeout = 10.0
+                  default_config.rpcs.get_task.timeout = 20.0
                   default_config.rpcs.get_task.retry_policy = {
                     initial_delay: 0.1, max_delay: 10.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.create_task.timeout = 10.0
+                  default_config.rpcs.create_task.timeout = 20.0
 
-                  default_config.rpcs.delete_task.timeout = 10.0
+                  default_config.rpcs.delete_task.timeout = 20.0
                   default_config.rpcs.delete_task.retry_policy = {
                     initial_delay: 0.1, max_delay: 10.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.run_task.timeout = 10.0
+                  default_config.rpcs.run_task.timeout = 20.0
 
                   default_config
                 end
@@ -187,8 +188,22 @@ module Google
                 @quota_project_id = @config.quota_project
                 @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
+                @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @config.endpoint
+                  config.bindings_override = @config.bindings_override
+                end
+
                 @cloud_tasks_stub = ::Google::Cloud::Tasks::V2::CloudTasks::Rest::ServiceStub.new endpoint: @config.endpoint, credentials: credentials
               end
+
+              ##
+              # Get the associated client for mix-in of the Locations.
+              #
+              # @return [Google::Cloud::Location::Locations::Rest::Client]
+              #
+              attr_reader :location_client
 
               # Service calls
 
@@ -216,11 +231,10 @@ module Google
               #     Required. The location name.
               #     For example: `projects/PROJECT_ID/locations/LOCATION_ID`
               #   @param filter [::String]
-              #     `filter` can be used to specify a subset of queues. Any {::Google::Cloud::Tasks::V2::Queue Queue}
-              #     field can be used as a filter and several operators as supported.
-              #     For example: `<=, <, >=, >, !=, =, :`. The filter syntax is the same as
-              #     described in
-              #     [Stackdriver's Advanced Logs
+              #     `filter` can be used to specify a subset of queues. Any
+              #     {::Google::Cloud::Tasks::V2::Queue Queue} field can be used as a filter and
+              #     several operators as supported. For example: `<=, <, >=, >, !=, =, :`. The
+              #     filter syntax is the same as described in [Stackdriver's Advanced Logs
               #     Filters](https://cloud.google.com/logging/docs/view/advanced_filters).
               #
               #     Sample filter "state: PAUSED".
@@ -233,17 +247,19 @@ module Google
               #     The maximum page size is 9800. If unspecified, the page size will
               #     be the maximum. Fewer queues than requested might be returned,
               #     even if more queues exist; use the
-              #     {::Google::Cloud::Tasks::V2::ListQueuesResponse#next_page_token next_page_token} in the
-              #     response to determine if more queues exist.
+              #     {::Google::Cloud::Tasks::V2::ListQueuesResponse#next_page_token next_page_token}
+              #     in the response to determine if more queues exist.
               #   @param page_token [::String]
               #     A token identifying the page of results to return.
               #
               #     To request the first page results, page_token must be empty. To
               #     request the next page of results, page_token must be the value of
-              #     {::Google::Cloud::Tasks::V2::ListQueuesResponse#next_page_token next_page_token} returned
-              #     from the previous call to {::Google::Cloud::Tasks::V2::CloudTasks::Rest::Client#list_queues ListQueues}
-              #     method. It is an error to switch the value of the
-              #     {::Google::Cloud::Tasks::V2::ListQueuesRequest#filter filter} while iterating through pages.
+              #     {::Google::Cloud::Tasks::V2::ListQueuesResponse#next_page_token next_page_token}
+              #     returned from the previous call to
+              #     {::Google::Cloud::Tasks::V2::CloudTasks::Rest::Client#list_queues ListQueues} method. It is an
+              #     error to switch the value of the
+              #     {::Google::Cloud::Tasks::V2::ListQueuesRequest#filter filter} while iterating
+              #     through pages.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Tasks::V2::Queue>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -354,8 +370,8 @@ module Google
               # Creates a queue.
               #
               # Queues created with this method allow tasks to live for a maximum of 31
-              # days. After a task is 31 days old, the task will be deleted regardless of whether
-              # it was dispatched or not.
+              # days. After a task is 31 days old, the task will be deleted regardless of
+              # whether it was dispatched or not.
               #
               # WARNING: Using this method may have unintended side effects if you are
               # using an App Engine `queue.yaml` or `queue.xml` file to manage your queues.
@@ -385,11 +401,12 @@ module Google
               #
               #     The list of allowed locations can be obtained by calling Cloud
               #     Tasks' implementation of
-              #     [ListLocations][google.cloud.location.Locations.ListLocations].
+              #     `::Google::Cloud::Location::Locations::Rest::Client#list_locations`.
               #   @param queue [::Google::Cloud::Tasks::V2::Queue, ::Hash]
               #     Required. The queue to create.
               #
-              #     [Queue's name][google.cloud.tasks.v2.Queue.name] cannot be the same as an existing queue.
+              #     [Queue's name][google.cloud.tasks.v2.Queue.name] cannot be the same as an
+              #     existing queue.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::Tasks::V2::Queue]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -439,8 +456,8 @@ module Google
               # the queue if it does exist.
               #
               # Queues created with this method allow tasks to live for a maximum of 31
-              # days. After a task is 31 days old, the task will be deleted regardless of whether
-              # it was dispatched or not.
+              # days. After a task is 31 days old, the task will be deleted regardless of
+              # whether it was dispatched or not.
               #
               # WARNING: Using this method may have unintended side effects if you are
               # using an App Engine `queue.yaml` or `queue.xml` file to manage your queues.
@@ -666,9 +683,10 @@ module Google
               #
               # If a queue is paused then the system will stop dispatching tasks
               # until the queue is resumed via
-              # {::Google::Cloud::Tasks::V2::CloudTasks::Rest::Client#resume_queue ResumeQueue}. Tasks can still be added
-              # when the queue is paused. A queue is paused if its
-              # {::Google::Cloud::Tasks::V2::Queue#state state} is {::Google::Cloud::Tasks::V2::Queue::State::PAUSED PAUSED}.
+              # {::Google::Cloud::Tasks::V2::CloudTasks::Rest::Client#resume_queue ResumeQueue}. Tasks can
+              # still be added when the queue is paused. A queue is paused if its
+              # {::Google::Cloud::Tasks::V2::Queue#state state} is
+              # {::Google::Cloud::Tasks::V2::Queue::State::PAUSED PAUSED}.
               #
               # @overload pause_queue(request, options = nil)
               #   Pass arguments to `pause_queue` via a request object, either of type
@@ -735,9 +753,10 @@ module Google
               #
               # This method resumes a queue after it has been
               # {::Google::Cloud::Tasks::V2::Queue::State::PAUSED PAUSED} or
-              # {::Google::Cloud::Tasks::V2::Queue::State::DISABLED DISABLED}. The state of a queue is stored
-              # in the queue's {::Google::Cloud::Tasks::V2::Queue#state state}; after calling this method it
-              # will be set to {::Google::Cloud::Tasks::V2::Queue::State::RUNNING RUNNING}.
+              # {::Google::Cloud::Tasks::V2::Queue::State::DISABLED DISABLED}. The state of a
+              # queue is stored in the queue's {::Google::Cloud::Tasks::V2::Queue#state state};
+              # after calling this method it will be set to
+              # {::Google::Cloud::Tasks::V2::Queue::State::RUNNING RUNNING}.
               #
               # WARNING: Resuming many high-QPS queues at the same time can
               # lead to target overloading. If you are resuming high-QPS
@@ -880,8 +899,8 @@ module Google
               end
 
               ##
-              # Sets the access control policy for a {::Google::Cloud::Tasks::V2::Queue Queue}. Replaces any existing
-              # policy.
+              # Sets the access control policy for a {::Google::Cloud::Tasks::V2::Queue Queue}.
+              # Replaces any existing policy.
               #
               # Note: The Cloud Console does not check queue-level IAM permissions yet.
               # Project-level permissions are required to use the Cloud Console.
@@ -964,9 +983,10 @@ module Google
               end
 
               ##
-              # Returns permissions that a caller has on a {::Google::Cloud::Tasks::V2::Queue Queue}.
-              # If the resource does not exist, this will return an empty set of
-              # permissions, not a [NOT_FOUND][google.rpc.Code.NOT_FOUND] error.
+              # Returns permissions that a caller has on a
+              # {::Google::Cloud::Tasks::V2::Queue Queue}. If the resource does not exist, this
+              # will return an empty set of permissions, not a
+              # [NOT_FOUND][google.rpc.Code.NOT_FOUND] error.
               #
               # Note: This operation is designed to be used for building permission-aware
               # UIs and command-line tools, not for authorization checking. This operation
@@ -1040,10 +1060,10 @@ module Google
               ##
               # Lists the tasks in a queue.
               #
-              # By default, only the {::Google::Cloud::Tasks::V2::Task::View::BASIC BASIC} view is retrieved
-              # due to performance considerations;
-              # {::Google::Cloud::Tasks::V2::ListTasksRequest#response_view response_view} controls the
-              # subset of information which is returned.
+              # By default, only the {::Google::Cloud::Tasks::V2::Task::View::BASIC BASIC} view is
+              # retrieved due to performance considerations;
+              # {::Google::Cloud::Tasks::V2::ListTasksRequest#response_view response_view}
+              # controls the subset of information which is returned.
               #
               # The tasks may be returned in any order. The ordering may change at any
               # time.
@@ -1067,11 +1087,11 @@ module Google
               #     Required. The queue name. For example:
               #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
               #   @param response_view [::Google::Cloud::Tasks::V2::Task::View]
-              #     The response_view specifies which subset of the {::Google::Cloud::Tasks::V2::Task Task} will be
-              #     returned.
+              #     The response_view specifies which subset of the
+              #     {::Google::Cloud::Tasks::V2::Task Task} will be returned.
               #
-              #     By default response_view is {::Google::Cloud::Tasks::V2::Task::View::BASIC BASIC}; not all
-              #     information is retrieved by default because some data, such as
+              #     By default response_view is {::Google::Cloud::Tasks::V2::Task::View::BASIC BASIC};
+              #     not all information is retrieved by default because some data, such as
               #     payloads, might be desirable to return only when needed because
               #     of its large size or because of the sensitivity of data that it
               #     contains.
@@ -1083,8 +1103,8 @@ module Google
               #     Maximum page size.
               #
               #     Fewer tasks than requested might be returned, even if more tasks exist; use
-              #     {::Google::Cloud::Tasks::V2::ListTasksResponse#next_page_token next_page_token} in the response to
-              #     determine if more tasks exist.
+              #     {::Google::Cloud::Tasks::V2::ListTasksResponse#next_page_token next_page_token}
+              #     in the response to determine if more tasks exist.
               #
               #     The maximum page size is 1000. If unspecified, the page size will be the
               #     maximum.
@@ -1093,9 +1113,9 @@ module Google
               #
               #     To request the first page results, page_token must be empty. To
               #     request the next page of results, page_token must be the value of
-              #     {::Google::Cloud::Tasks::V2::ListTasksResponse#next_page_token next_page_token} returned
-              #     from the previous call to {::Google::Cloud::Tasks::V2::CloudTasks::Rest::Client#list_tasks ListTasks}
-              #     method.
+              #     {::Google::Cloud::Tasks::V2::ListTasksResponse#next_page_token next_page_token}
+              #     returned from the previous call to
+              #     {::Google::Cloud::Tasks::V2::CloudTasks::Rest::Client#list_tasks ListTasks} method.
               #
               #     The page token is valid for only 2 hours.
               # @yield [result, operation] Access the result along with the TransportOperation object
@@ -1163,11 +1183,11 @@ module Google
               #     Required. The task name. For example:
               #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
               #   @param response_view [::Google::Cloud::Tasks::V2::Task::View]
-              #     The response_view specifies which subset of the {::Google::Cloud::Tasks::V2::Task Task} will be
-              #     returned.
+              #     The response_view specifies which subset of the
+              #     {::Google::Cloud::Tasks::V2::Task Task} will be returned.
               #
-              #     By default response_view is {::Google::Cloud::Tasks::V2::Task::View::BASIC BASIC}; not all
-              #     information is retrieved by default because some data, such as
+              #     By default response_view is {::Google::Cloud::Tasks::V2::Task::View::BASIC BASIC};
+              #     not all information is retrieved by default because some data, such as
               #     payloads, might be desirable to return only when needed because
               #     of its large size or because of the sensitivity of data that it
               #     contains.
@@ -1249,13 +1269,13 @@ module Google
               #
               #     Task names have the following format:
               #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`.
-              #     The user can optionally specify a task {::Google::Cloud::Tasks::V2::Task#name name}. If a
-              #     name is not specified then the system will generate a random
-              #     unique task id, which will be set in the task returned in the
-              #     {::Google::Cloud::Tasks::V2::Task#name response}.
+              #     The user can optionally specify a task
+              #     {::Google::Cloud::Tasks::V2::Task#name name}. If a name is not specified then
+              #     the system will generate a random unique task id, which will be set in the
+              #     task returned in the {::Google::Cloud::Tasks::V2::Task#name response}.
               #
-              #     If {::Google::Cloud::Tasks::V2::Task#schedule_time schedule_time} is not set or is in the
-              #     past then Cloud Tasks will set it to the current time.
+              #     If {::Google::Cloud::Tasks::V2::Task#schedule_time schedule_time} is not set or
+              #     is in the past then Cloud Tasks will set it to the current time.
               #
               #     Task De-duplication:
               #
@@ -1270,20 +1290,20 @@ module Google
               #     for ~9days after the original task was deleted or executed.
               #
               #     Because there is an extra lookup cost to identify duplicate task
-              #     names, these {::Google::Cloud::Tasks::V2::CloudTasks::Rest::Client#create_task CreateTask} calls have significantly
-              #     increased latency. Using hashed strings for the task id or for
-              #     the prefix of the task id is recommended. Choosing task ids that
-              #     are sequential or have sequential prefixes, for example using a
+              #     names, these {::Google::Cloud::Tasks::V2::CloudTasks::Rest::Client#create_task CreateTask}
+              #     calls have significantly increased latency. Using hashed strings for the
+              #     task id or for the prefix of the task id is recommended. Choosing task ids
+              #     that are sequential or have sequential prefixes, for example using a
               #     timestamp, causes an increase in latency and error rates in all
               #     task commands. The infrastructure relies on an approximately
               #     uniform distribution of task ids to store and serve tasks
               #     efficiently.
               #   @param response_view [::Google::Cloud::Tasks::V2::Task::View]
-              #     The response_view specifies which subset of the {::Google::Cloud::Tasks::V2::Task Task} will be
-              #     returned.
+              #     The response_view specifies which subset of the
+              #     {::Google::Cloud::Tasks::V2::Task Task} will be returned.
               #
-              #     By default response_view is {::Google::Cloud::Tasks::V2::Task::View::BASIC BASIC}; not all
-              #     information is retrieved by default because some data, such as
+              #     By default response_view is {::Google::Cloud::Tasks::V2::Task::View::BASIC BASIC};
+              #     not all information is retrieved by default because some data, such as
               #     payloads, might be desirable to return only when needed because
               #     of its large size or because of the sensitivity of data that it
               #     contains.
@@ -1404,13 +1424,14 @@ module Google
               # Forces a task to run now.
               #
               # When this method is called, Cloud Tasks will dispatch the task, even if
-              # the task is already running, the queue has reached its {::Google::Cloud::Tasks::V2::RateLimits RateLimits} or
-              # is {::Google::Cloud::Tasks::V2::Queue::State::PAUSED PAUSED}.
+              # the task is already running, the queue has reached its
+              # {::Google::Cloud::Tasks::V2::RateLimits RateLimits} or is
+              # {::Google::Cloud::Tasks::V2::Queue::State::PAUSED PAUSED}.
               #
               # This command is meant to be used for manual debugging. For
-              # example, {::Google::Cloud::Tasks::V2::CloudTasks::Rest::Client#run_task RunTask} can be used to retry a failed
-              # task after a fix has been made or to manually force a task to be
-              # dispatched now.
+              # example, {::Google::Cloud::Tasks::V2::CloudTasks::Rest::Client#run_task RunTask} can be used to
+              # retry a failed task after a fix has been made or to manually force a task
+              # to be dispatched now.
               #
               # The dispatched task is returned. That is, the task that is returned
               # contains the [status][Task.status] after the task is dispatched but
@@ -1418,9 +1439,10 @@ module Google
               #
               # If Cloud Tasks receives a successful response from the task's
               # target, then the task will be deleted; otherwise the task's
-              # {::Google::Cloud::Tasks::V2::Task#schedule_time schedule_time} will be reset to the time that
-              # {::Google::Cloud::Tasks::V2::CloudTasks::Rest::Client#run_task RunTask} was called plus the retry delay specified
-              # in the queue's {::Google::Cloud::Tasks::V2::RetryConfig RetryConfig}.
+              # {::Google::Cloud::Tasks::V2::Task#schedule_time schedule_time} will be reset to
+              # the time that {::Google::Cloud::Tasks::V2::CloudTasks::Rest::Client#run_task RunTask} was
+              # called plus the retry delay specified in the queue's
+              # {::Google::Cloud::Tasks::V2::RetryConfig RetryConfig}.
               #
               # {::Google::Cloud::Tasks::V2::CloudTasks::Rest::Client#run_task RunTask} returns
               # [NOT_FOUND][google.rpc.Code.NOT_FOUND] when it is called on a
@@ -1445,11 +1467,11 @@ module Google
               #     Required. The task name. For example:
               #     `projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID`
               #   @param response_view [::Google::Cloud::Tasks::V2::Task::View]
-              #     The response_view specifies which subset of the {::Google::Cloud::Tasks::V2::Task Task} will be
-              #     returned.
+              #     The response_view specifies which subset of the
+              #     {::Google::Cloud::Tasks::V2::Task Task} will be returned.
               #
-              #     By default response_view is {::Google::Cloud::Tasks::V2::Task::View::BASIC BASIC}; not all
-              #     information is retrieved by default because some data, such as
+              #     By default response_view is {::Google::Cloud::Tasks::V2::Task::View::BASIC BASIC};
+              #     not all information is retrieved by default because some data, such as
               #     payloads, might be desirable to return only when needed because
               #     of its large size or because of the sensitivity of data that it
               #     contains.
@@ -1586,6 +1608,13 @@ module Google
                 config_attr :metadata,      nil, ::Hash, nil
                 config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
                 config_attr :quota_project, nil, ::String, nil
+
+                # @private
+                # Overrides for http bindings for the RPCs of this service
+                # are only used when this service is used as mixin, and only
+                # by the host service.
+                # @return [::Hash{::Symbol=>::Array<::Gapic::Rest::GrpcTranscoder::HttpBinding>}]
+                config_attr :bindings_override, {}, ::Hash, nil
 
                 # @private
                 def initialize parent_config = nil
