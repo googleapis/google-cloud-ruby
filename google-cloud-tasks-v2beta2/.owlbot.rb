@@ -15,8 +15,8 @@
 # Remove a spurious link to a class in a different gem.
 # See https://github.com/googleapis/gapic-generator-ruby/issues/824
 paths = [
-  %r{^proto_docs/google/cloud/tasks/[\w/]+\.rb$/},
-  %r{^lib/google/cloud/tasks/[\w/]+/client\.rb$/}
+  %r{^proto_docs/google/cloud/tasks/[\w/]+\.rb$},
+  %r{^lib/google/cloud/tasks/[\w/]+/client\.rb$}
 ]
 OwlBot.modifier path: paths do |content|
   content.gsub(/\{::Google::Cloud::Location::([\w:]+#\w+) \w+\}/,
