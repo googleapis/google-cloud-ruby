@@ -40,10 +40,15 @@ def update_slate project_id:, location:, slate_id:, slate_uri:
     uri: slate_uri
   }
 
-  response = client.update_slate slate: update_slate, update_mask: update_mask
+  operation = client.update_slate slate: update_slate, update_mask: update_mask
+
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  operation.wait_until_done!
 
   # Print the slate name.
-  puts "Updated slate: #{response.name}"
-  puts "Updated uri: #{response.uri}"
+  puts "Updated slate: #{operation.response.name}"
+  puts "Updated uri: #{operation.response.uri}"
 end
 # [END videostitcher_update_slate]

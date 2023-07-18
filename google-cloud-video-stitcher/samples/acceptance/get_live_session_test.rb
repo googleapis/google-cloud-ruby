@@ -21,6 +21,9 @@ describe "#get_live_session", :stitcher_snippet do
     refute_nil slate
     @slate_created = true
 
+    refute_nil live_config
+    @live_config_created = true
+
     refute_nil live_session
     @session_id = live_session.name.split("/").last
 

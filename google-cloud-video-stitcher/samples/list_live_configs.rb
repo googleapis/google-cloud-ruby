@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,38 +12,28 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START videostitcher_create_slate]
+# [START videostitcher_list_live_configs]
 require "google/cloud/video/stitcher"
 
 ##
-# Create a slate
+# List live configs for a given location
 #
 # @param project_id [String] Your Google Cloud project (e.g. "my-project")
 # @param location [String] The location (e.g. "us-central1")
-# @param slate_id [String] Your slate name (e.g. "my-slate")
-# @param slate_uri [String] The URI of an MP4 video with at least one audio track
-#                           (e.g. "https://my-slate-uri/test.mp4")
 #
-def create_slate project_id:, location:, slate_id:, slate_uri:
+def list_live_configs project_id:, location:
   # Create a Video Stitcher client.
   client = Google::Cloud::Video::Stitcher.video_stitcher_service
 
   # Build the resource name of the parent.
   parent = client.location_path project: project_id, location: location
 
-  # Set the slate fields.
-  new_slate = {
-    uri: slate_uri
-  }
+  response = client.list_live_configs parent: parent
 
-  operation = client.create_slate parent: parent, slate_id: slate_id, slate: new_slate
-
-  # The returned object is of type Gapic::Operation. You can use this
-  # object to check the status of an operation, cancel it, or wait
-  # for results. Here is how to block until completion:
-  operation.wait_until_done!
-
-  # Print the slate name.
-  puts "Slate: #{operation.response.name}"
+  puts "Live configs:"
+  # Print out all live configs.
+  response.each do |live_config|
+    puts live_config.name
+  end
 end
-# [END videostitcher_create_slate]
+# [END videostitcher_list_live_configs]

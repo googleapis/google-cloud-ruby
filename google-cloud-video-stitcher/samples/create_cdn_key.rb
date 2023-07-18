@@ -60,9 +60,14 @@ def create_cdn_key project_id:, location:, cdn_key_id:, hostname:, key_name:, pr
                   }
                 end
 
-  response = client.create_cdn_key parent: parent, cdn_key: new_cdn_key, cdn_key_id: cdn_key_id
+  operation = client.create_cdn_key parent: parent, cdn_key: new_cdn_key, cdn_key_id: cdn_key_id
+
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  operation.wait_until_done!
 
   # Print the CDN key name.
-  puts "CDN key: #{response.name}"
+  puts "CDN key: #{operation.response.name}"
 end
 # [END videostitcher_create_cdn_key]

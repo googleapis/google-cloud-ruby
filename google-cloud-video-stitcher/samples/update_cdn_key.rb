@@ -64,9 +64,14 @@ def update_cdn_key project_id:, location:, cdn_key_id:, hostname:, key_name:, pr
                   { paths: ["hostname", "google_cdn_key"] }
                 end
 
-  response = client.update_cdn_key cdn_key: new_cdn_key, update_mask: update_mask
+  operation = client.update_cdn_key cdn_key: new_cdn_key, update_mask: update_mask
+
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  operation.wait_until_done!
 
   # Print the CDN key name.
-  puts "Updated CDN key: #{response.name}"
+  puts "Updated CDN key: #{operation.response.name}"
 end
 # [END videostitcher_update_cdn_key]

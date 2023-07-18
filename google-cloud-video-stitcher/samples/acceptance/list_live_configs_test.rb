@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,9 +14,9 @@
 
 require_relative "helper"
 
-describe "#create_live_session", :stitcher_snippet do
-  it "creates a live session" do
-    sample = SampleLoader.load "create_live_session.rb"
+describe "#list_live_configs", :stitcher_snippet do
+  it "lists the live configs" do
+    sample = SampleLoader.load "list_live_configs.rb"
 
     refute_nil slate
     @slate_created = true
@@ -24,10 +24,8 @@ describe "#create_live_session", :stitcher_snippet do
     refute_nil live_config
     @live_config_created = true
 
-    out, _err = capture_io do
-      sample.run project_id: project_id, location: location_id, live_config_id: live_config_id
+    assert_output(/Live configs:\n#{live_config_name}/) do
+      sample.run project_id: project_id, location: location_id
     end
-
-    assert_match %r{Live session: projects/\S+/locations/#{location_id}/liveSessions/\S+}, out
   end
 end

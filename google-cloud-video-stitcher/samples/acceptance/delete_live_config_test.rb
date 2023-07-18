@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,9 +14,9 @@
 
 require_relative "helper"
 
-describe "#create_live_session", :stitcher_snippet do
-  it "creates a live session" do
-    sample = SampleLoader.load "create_live_session.rb"
+describe "#delete_live_config", :stitcher_snippet do
+  it "deletes a live config" do
+    sample = SampleLoader.load "delete_live_config.rb"
 
     refute_nil slate
     @slate_created = true
@@ -24,10 +24,14 @@ describe "#create_live_session", :stitcher_snippet do
     refute_nil live_config
     @live_config_created = true
 
-    out, _err = capture_io do
+    client.get_live_config name: live_config_name
+
+    assert_output(/Deleted live config/) do
       sample.run project_id: project_id, location: location_id, live_config_id: live_config_id
     end
 
-    assert_match %r{Live session: projects/\S+/locations/#{location_id}/liveSessions/\S+}, out
+    assert_raises Google::Cloud::NotFoundError do
+      client.get_live_config name: live_config_name
+    end
   end
 end

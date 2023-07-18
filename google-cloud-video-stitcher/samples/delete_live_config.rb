@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,38 +12,32 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START videostitcher_create_slate]
+# [START videostitcher_delete_live_config]
 require "google/cloud/video/stitcher"
 
 ##
-# Create a slate
+# Delete a live config
 #
 # @param project_id [String] Your Google Cloud project (e.g. "my-project")
 # @param location [String] The location (e.g. "us-central1")
-# @param slate_id [String] Your slate name (e.g. "my-slate")
-# @param slate_uri [String] The URI of an MP4 video with at least one audio track
-#                           (e.g. "https://my-slate-uri/test.mp4")
+# @param live_config_id [String] Your live config name (e.g. "my-live-config")
 #
-def create_slate project_id:, location:, slate_id:, slate_uri:
+def delete_live_config project_id:, location:, live_config_id:
   # Create a Video Stitcher client.
   client = Google::Cloud::Video::Stitcher.video_stitcher_service
 
-  # Build the resource name of the parent.
-  parent = client.location_path project: project_id, location: location
+  # Build the resource name of the live config.
+  name = client.live_config_path project: project_id, location: location, live_config: live_config_id
 
-  # Set the slate fields.
-  new_slate = {
-    uri: slate_uri
-  }
-
-  operation = client.create_slate parent: parent, slate_id: slate_id, slate: new_slate
+  # Delete the live config.
+  operation = client.delete_live_config name: name
 
   # The returned object is of type Gapic::Operation. You can use this
   # object to check the status of an operation, cancel it, or wait
   # for results. Here is how to block until completion:
   operation.wait_until_done!
 
-  # Print the slate name.
-  puts "Slate: #{operation.response.name}"
+  # Print a success message.
+  puts "Deleted live config"
 end
-# [END videostitcher_create_slate]
+# [END videostitcher_delete_live_config]
