@@ -143,8 +143,9 @@ module Google
               # Service calls
 
               ##
-              # Checks whether a member has a specific permission for a specific resource,
-              # and explains why the member does or does not have that permission.
+              # Checks whether a principal has a specific permission for a specific
+              # resource, and explains why the principal does or does not have that
+              # permission.
               #
               # @overload troubleshoot_iam_policy(request, options = nil)
               #   Pass arguments to `troubleshoot_iam_policy` via a request object, either of type
@@ -162,8 +163,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param access_tuple [::Google::Cloud::PolicyTroubleshooter::V1::AccessTuple, ::Hash]
-              #     The information to use for checking whether a member has a permission for a
-              #     resource.
+              #     The information to use for checking whether a principal has a permission
+              #     for a resource.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::PolicyTroubleshooter::V1::TroubleshootIamPolicyResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

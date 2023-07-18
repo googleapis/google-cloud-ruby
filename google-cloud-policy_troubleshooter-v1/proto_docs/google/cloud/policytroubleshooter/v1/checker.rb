@@ -21,26 +21,28 @@ module Google
   module Cloud
     module PolicyTroubleshooter
       module V1
-        # Request for {::Google::Cloud::PolicyTroubleshooter::V1::IamChecker::Client#troubleshoot_iam_policy TroubleshootIamPolicy}.
+        # Request for
+        # {::Google::Cloud::PolicyTroubleshooter::V1::IamChecker::Client#troubleshoot_iam_policy TroubleshootIamPolicy}.
         # @!attribute [rw] access_tuple
         #   @return [::Google::Cloud::PolicyTroubleshooter::V1::AccessTuple]
-        #     The information to use for checking whether a member has a permission for a
-        #     resource.
+        #     The information to use for checking whether a principal has a permission
+        #     for a resource.
         class TroubleshootIamPolicyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response for {::Google::Cloud::PolicyTroubleshooter::V1::IamChecker::Client#troubleshoot_iam_policy TroubleshootIamPolicy}.
+        # Response for
+        # {::Google::Cloud::PolicyTroubleshooter::V1::IamChecker::Client#troubleshoot_iam_policy TroubleshootIamPolicy}.
         # @!attribute [rw] access
         #   @return [::Google::Cloud::PolicyTroubleshooter::V1::AccessState]
-        #     Indicates whether the member has the specified permission for the specified
-        #     resource, based on evaluating all of the applicable IAM policies.
+        #     Indicates whether the principal has the specified permission for the
+        #     specified resource, based on evaluating all of the applicable IAM policies.
         # @!attribute [rw] explained_policies
         #   @return [::Array<::Google::Cloud::PolicyTroubleshooter::V1::ExplainedPolicy>]
-        #     List of IAM policies that were evaluated to check the member's permissions,
-        #     with annotations to indicate how each policy contributed to the final
-        #     result.
+        #     List of IAM policies that were evaluated to check the principal's
+        #     permissions, with annotations to indicate how each policy contributed to
+        #     the final result.
         #
         #     The list of policies can include the policy for the resource itself. It can
         #     also include policies that are inherited from higher levels of the resource
@@ -48,6 +50,9 @@ module Google
         #
         #     To learn more about the resource hierarchy, see
         #     https://cloud.google.com/iam/help/resource-hierarchy.
+        # @!attribute [rw] errors
+        #   @return [::Array<::Google::Rpc::Status>]
+        #     The general errors contained in the troubleshooting response.
         class TroubleshootIamPolicyResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

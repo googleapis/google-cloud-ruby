@@ -7,9 +7,10 @@ require 'google/protobuf'
 require 'google/cloud/policytroubleshooter/v1/explanations_pb'
 require 'google/api/annotations_pb'
 require 'google/api/client_pb'
+require 'google/rpc/status_pb'
 
 
-descriptor_data = "\n2google/cloud/policytroubleshooter/v1/checker.proto\x12$google.cloud.policytroubleshooter.v1\x1a\x37google/cloud/policytroubleshooter/v1/explanations.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\"g\n\x1cTroubleshootIamPolicyRequest\x12G\n\x0c\x61\x63\x63\x65ss_tuple\x18\x01 \x01(\x0b\x32\x31.google.cloud.policytroubleshooter.v1.AccessTuple\"\xb5\x01\n\x1dTroubleshootIamPolicyResponse\x12\x41\n\x06\x61\x63\x63\x65ss\x18\x01 \x01(\x0e\x32\x31.google.cloud.policytroubleshooter.v1.AccessState\x12Q\n\x12\x65xplained_policies\x18\x02 \x03(\x0b\x32\x35.google.cloud.policytroubleshooter.v1.ExplainedPolicy2\xa9\x02\n\nIamChecker\x12\xc1\x01\n\x15TroubleshootIamPolicy\x12\x42.google.cloud.policytroubleshooter.v1.TroubleshootIamPolicyRequest\x1a\x43.google.cloud.policytroubleshooter.v1.TroubleshootIamPolicyResponse\"\x1f\x82\xd3\xe4\x93\x02\x19\"\x14/v1/iam:troubleshoot:\x01*\x1aW\xca\x41#policytroubleshooter.googleapis.com\xd2\x41.https://www.googleapis.com/auth/cloud-platformB\x96\x02\n(com.google.cloud.policytroubleshooter.v1B\x0fIAMCheckerProtoP\x01Z\\cloud.google.com/go/policytroubleshooter/apiv1/policytroubleshooterpb;policytroubleshooterpb\xf8\x01\x01\xaa\x02$Google.Cloud.PolicyTroubleshooter.V1\xca\x02$Google\\Cloud\\PolicyTroubleshooter\\V1\xea\x02\'Google::Cloud::PolicyTroubleshooter::V1P\x00\x62\x06proto3"
+descriptor_data = "\n2google/cloud/policytroubleshooter/v1/checker.proto\x12$google.cloud.policytroubleshooter.v1\x1a\x37google/cloud/policytroubleshooter/v1/explanations.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x17google/rpc/status.proto\"g\n\x1cTroubleshootIamPolicyRequest\x12G\n\x0c\x61\x63\x63\x65ss_tuple\x18\x01 \x01(\x0b\x32\x31.google.cloud.policytroubleshooter.v1.AccessTuple\"\xd9\x01\n\x1dTroubleshootIamPolicyResponse\x12\x41\n\x06\x61\x63\x63\x65ss\x18\x01 \x01(\x0e\x32\x31.google.cloud.policytroubleshooter.v1.AccessState\x12Q\n\x12\x65xplained_policies\x18\x02 \x03(\x0b\x32\x35.google.cloud.policytroubleshooter.v1.ExplainedPolicy\x12\"\n\x06\x65rrors\x18\x03 \x03(\x0b\x32\x12.google.rpc.Status2\xa9\x02\n\nIamChecker\x12\xc1\x01\n\x15TroubleshootIamPolicy\x12\x42.google.cloud.policytroubleshooter.v1.TroubleshootIamPolicyRequest\x1a\x43.google.cloud.policytroubleshooter.v1.TroubleshootIamPolicyResponse\"\x1f\x82\xd3\xe4\x93\x02\x19\"\x14/v1/iam:troubleshoot:\x01*\x1aW\xca\x41#policytroubleshooter.googleapis.com\xd2\x41.https://www.googleapis.com/auth/cloud-platformB\x96\x02\n(com.google.cloud.policytroubleshooter.v1B\x0fIAMCheckerProtoP\x01Z\\cloud.google.com/go/policytroubleshooter/apiv1/policytroubleshooterpb;policytroubleshooterpb\xf8\x01\x01\xaa\x02$Google.Cloud.PolicyTroubleshooter.V1\xca\x02$Google\\Cloud\\PolicyTroubleshooter\\V1\xea\x02\'Google::Cloud::PolicyTroubleshooter::V1P\x00\x62\x06proto3"
 
 pool = Google::Protobuf::DescriptorPool.generated_pool
 
@@ -25,6 +26,7 @@ rescue TypeError => e
   warn "Warning: Protobuf detected an import path issue while loading generated file #{__FILE__}"
   imports = [
     ["google.cloud.policytroubleshooter.v1.AccessTuple", "google/cloud/policytroubleshooter/v1/explanations.proto"],
+    ["google.rpc.Status", "google/rpc/status.proto"],
   ]
   imports.each do |type_name, expected_filename|
     import_file = pool.lookup(type_name).file_descriptor
