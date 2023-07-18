@@ -50,6 +50,11 @@
                 "resume_queue"
               ]
             },
+            "UploadQueueYaml": {
+              "methods": [
+                "upload_queue_yaml"
+              ]
+            },
             "GetIamPolicy": {
               "methods": [
                 "get_iam_policy"
@@ -108,6 +113,11 @@
             "RunTask": {
               "methods": [
                 "run_task"
+              ]
+            },
+            "BufferTask": {
+              "methods": [
+                "buffer_task"
               ]
             }
           }

@@ -21,6 +21,7 @@ require "gapic/config"
 require "gapic/config/method"
 
 require "google/cloud/tasks/v2beta2/version"
+require "google/cloud/tasks/v2beta2/bindings_override"
 
 require "google/cloud/tasks/v2beta2/cloud_tasks/credentials"
 require "google/cloud/tasks/v2beta2/cloud_tasks/paths"

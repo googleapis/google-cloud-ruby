@@ -115,6 +115,12 @@ module Google
             # [Managing Cloud Tasks Scaling
             # Risks](https://cloud.google.com/tasks/docs/manage-cloud-task-scaling).
             rpc :ResumeQueue, ::Google::Cloud::Tasks::V2beta2::ResumeQueueRequest, ::Google::Cloud::Tasks::V2beta2::Queue
+            # Update queue list by uploading a queue.yaml file.
+            #
+            # The queue.yaml file is supplied in the request body as a YAML encoded
+            # string. This method was added to support gcloud clients versions before
+            # 322.0.0. New clients should use CreateQueue instead of this method.
+            rpc :UploadQueueYaml, ::Google::Cloud::Tasks::V2beta2::UploadQueueYamlRequest, ::Google::Protobuf::Empty
             # Gets the access control policy for a
             # [Queue][google.cloud.tasks.v2beta2.Queue]. Returns an empty policy if the
             # resource exists and does not have a policy set.
@@ -258,6 +264,18 @@ module Google
             # [RunTask][google.cloud.tasks.v2beta2.CloudTasks.RunTask] cannot be called
             # on a [pull task][google.cloud.tasks.v2beta2.PullMessage].
             rpc :RunTask, ::Google::Cloud::Tasks::V2beta2::RunTaskRequest, ::Google::Cloud::Tasks::V2beta2::Task
+            # Creates and buffers a new task without the need to explicitly define a Task
+            # message. The queue must have [HTTP
+            # target][google.cloud.tasks.v2beta2.HttpTarget]. To create the task with a
+            # custom ID, use the following format and set TASK_ID to your desired ID:
+            # projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks/TASK_ID:buffer
+            # To create the task with an automatically generated ID, use the following
+            # format:
+            # projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID/tasks:buffer.
+            # Note: This feature is in its experimental stage. You must request access to
+            # the API through the [Cloud Tasks BufferTask Experiment Signup
+            # form](https://forms.gle/X8Zr5hiXH5tTGFqh8).
+            rpc :BufferTask, ::Google::Cloud::Tasks::V2beta2::BufferTaskRequest, ::Google::Cloud::Tasks::V2beta2::BufferTaskResponse
           end
 
           Stub = Service.rpc_stub_class

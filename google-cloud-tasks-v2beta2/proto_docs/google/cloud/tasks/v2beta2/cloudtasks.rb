@@ -119,7 +119,7 @@ module Google
         #
         #     The list of allowed locations can be obtained by calling Cloud
         #     Tasks' implementation of
-        #     [ListLocations][google.cloud.location.Locations.ListLocations].
+        #     `::Google::Cloud::Location::Locations::Client#list_locations`.
         # @!attribute [rw] queue
         #   @return [::Google::Cloud::Tasks::V2beta2::Queue]
         #     Required. The queue to create.
@@ -194,6 +194,21 @@ module Google
         #     Required. The queue name. For example:
         #     `projects/PROJECT_ID/location/LOCATION_ID/queues/QUEUE_ID`
         class ResumeQueueRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#upload_queue_yaml UploadQueueYaml}.
+        # @!attribute [rw] app_id
+        #   @return [::String]
+        #     Required. The App ID is supplied as an HTTP parameter. Unlike internal
+        #     usage of App ID, it does not include a region prefix. Rather, the App ID
+        #     represents the Project ID against which to make the request.
+        # @!attribute [rw] http_body
+        #   @return [::Google::Api::HttpBody]
+        #     The http body contains the queue.yaml file which used to update queue lists
+        class UploadQueueYamlRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -320,10 +335,10 @@ module Google
         #     that was deleted or completed recently then the call will fail
         #     with [ALREADY_EXISTS][google.rpc.Code.ALREADY_EXISTS].
         #     If the task's queue was created using Cloud Tasks, then another task with
-        #     the same name can't be created for ~1hour after the original task was
+        #     the same name can't be created for ~1 hour after the original task was
         #     deleted or completed. If the task's queue was created using queue.yaml or
         #     queue.xml, then another task with the same name can't be created
-        #     for ~9days after the original task was deleted or completed.
+        #     for ~9 days after the original task was deleted or completed.
         #
         #     Because there is an extra lookup cost to identify duplicate task
         #     names, these {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#create_task CreateTask}
@@ -584,6 +599,40 @@ module Google
         #     IAM](https://cloud.google.com/iam/) permission on the
         #     {::Google::Cloud::Tasks::V2beta2::Task Task} resource.
         class RunTaskRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # LINT.IfChange
+        # Request message for
+        # {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#buffer_task BufferTask}.
+        # @!attribute [rw] queue
+        #   @return [::String]
+        #     Required. The parent queue name. For example:
+        #     projects/PROJECT_ID/locations/LOCATION_ID/queues/QUEUE_ID`
+        #
+        #     The queue must already exist.
+        # @!attribute [rw] task_id
+        #   @return [::String]
+        #     Optional. Task ID for the task being created. If not provided, a random
+        #     task ID is assigned to the task.
+        # @!attribute [rw] body
+        #   @return [::Google::Api::HttpBody]
+        #     Optional. Body of the HTTP request.
+        #
+        #     The body can take any generic value. The value is written to the
+        #     [HttpRequest][payload] of the [Task].
+        class BufferTaskRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::Tasks::V2beta2::CloudTasks::Client#buffer_task BufferTask}.
+        # @!attribute [rw] task
+        #   @return [::Google::Cloud::Tasks::V2beta2::Task]
+        #     The created task.
+        class BufferTaskResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
