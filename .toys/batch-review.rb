@@ -41,7 +41,7 @@ CONFIGS = {
       /\.release-please-manifest\.json$/,
       /\/CHANGELOG\.md$/,
       /\/version\.rb$/,
-      /\/snippets\/snippet_metadata_[\w\.]+\.json$/
+      /\/snippets\/snippet_metadata_[\w\.]+\.json$/,
     ],
   },
   "releases-wrappers" => {
@@ -62,18 +62,18 @@ CONFIGS = {
       /\.release-please-manifest\.json$/,
       /\/CHANGELOG\.md$/,
       /\/version\.rb$/,
-      /\/snippets\/snippet_metadata_[\w\.]+\.json$/
+      /\/snippets\/snippet_metadata_[\w\.]+\.json$/,
     ],
   },
-}
+}.freeze
 
 REPO = "googleapis/google-cloud-ruby"
 BOT_USERS = [
   "yoshi-code-bot",
   "yoshi-automation",
   "gcf-owl-bot[bot]",
-  "release-please[bot]"
-]
+  "release-please[bot]",
+].freeze
 
 desc "Interactive mass code review"
 
@@ -153,8 +153,8 @@ end
 
 def check_automerge pr_data
   if !@automerge_enabled ||
-      @automerge_count_max.positive? && @automerge_count >= @automerge_count_max ||
-      !pr_data.diff_files.all? { |file| @omits.any? { |omit| omit.call file } }
+     (@automerge_count_max.positive? && @automerge_count >= @automerge_count_max) ||
+     !pr_data.diff_files.all? { |file| @omits.any? { |omit| omit.call file } }
     @automerge_count = 1
     return false
   end
@@ -208,7 +208,7 @@ end
 
 def handle_merge pr_data
   get_commit_message pr_data
-  get_commit_detail pr_data if detail_type
+  get_commit_detail if detail_type
   do_approve pr_data
   do_merge pr_data
 end
@@ -259,7 +259,7 @@ def handle_display arg, pr_data
   end
 end
 
-def handle_omit arg, *extra_args
+def handle_omit arg, *extra_args # rubocop:disable Metrics/AbcSize
   case arg
   when /^x/
     @omits = []
@@ -301,9 +301,7 @@ def handle_omit arg, *extra_args
       puts "... added omit for deleted file paths: #{regexp}"
     end
   when /^i/
-    omit = Omit.new "All changes affect indentation only" do |file|
-      file.only_indentation
-    end
+    omit = Omit.new "All changes affect indentation only", &:only_indentation
     @omits << omit
     puts "... added omit for indentation-only diffs"
   else
@@ -324,7 +322,7 @@ def handle_suppress *args
   omit = Omit.new "All changes match given regexes" do |file|
     file.reduce_hunks true do |val, hunk|
       val && hunk.all? do |line|
-        line_without_mark = line[1..-1]
+        line_without_mark = line[1..]
         if line.start_with? "+"
           adds.any? { |regex| regex.match? line_without_mark }
         elsif line.start_with? "-"
@@ -360,7 +358,7 @@ end
 
 def display_filenames pr_data
   pr_data.diff_files.each_with_index do |file, index|
-    write "%3d " % index
+    write format("%3d ", index)
     write file.type, :bold, :yellow
     write " "
     puts file.path
@@ -370,7 +368,7 @@ end
 def display_all_diffs pr_data, force_all: false
   files = pr_data.diff_files
   unless force_all
-    disp_files, omit_files = files.partition { |file| !@omits.any? { |omit| omit.call file } }
+    disp_files, omit_files = files.partition { |file| @omits.none? { |omit| omit.call file } }
   end
   omit_files.each do |file|
     puts "Omitting display of #{file.path}"
@@ -403,11 +401,11 @@ def get_commit_message pr_data
   @commit_message = ask("Message: ", default: @commit_message) if @edit_enabled
 end
 
-def get_commit_detail pr_data
+def get_commit_detail
   return unless @edit_enabled
   case detail_type
   when :shared
-    file = Tempfile.new("commit-default")
+    file = Tempfile.new "commit-default"
     begin
       file.write @commit_detail
       file.rewind
@@ -478,10 +476,11 @@ def paged_api path
 end
 
 def error *messages
-  messages.each { |msg| STDERR.puts msg }
+  messages.each { |msg| $stderr.puts msg }
   exit 1
 end
 
+# Represents a diff output
 class DiffFile
   def initialize text
     @text = text
@@ -528,7 +527,6 @@ class DiffFile
 
   def analyze_changes
     hunk = nil
-    from_path = to_path = nil
     @lines.each do |line|
       if line.start_with? "@@"
         yield hunk if hunk && !hunk.empty?
@@ -551,7 +549,7 @@ class DiffFile
           if pos == minuses.length
             minuses = [line]
             pos = 0
-          elsif pos == 0
+          elsif pos.zero?
             minuses << line
           else
             throw :fail
@@ -570,6 +568,7 @@ class DiffFile
   end
 end
 
+# Represents an omit rule
 class Omit
   def initialize desc, &block
     raise "Block required" unless block
@@ -584,6 +583,7 @@ class Omit
   end
 end
 
+# Represents information about a pull request
 class PrData
   def initialize context, pr_resource
     @context = context
@@ -595,7 +595,10 @@ class PrData
   attr_reader :title
 
   def raw_diff_data
-    @raw_diff_data ||= @context.capture(["curl", "-s", "https://patch-diff.githubusercontent.com/raw/#{REPO}/pull/#{id}.diff"], e: true)
+    @raw_diff_data ||= begin
+      cmd = ["curl", "-s", "https://patch-diff.githubusercontent.com/raw/#{REPO}/pull/#{id}.diff"]
+      @context.capture cmd, e: true
+    end
   end
 
   def diff_files
@@ -603,22 +606,22 @@ class PrData
       "\n#{raw_diff_data.chomp}"
         .split("\ndiff --git ")
         .slice(1..-1)
-        .map{ |text| DiffFile.new("diff --git #{text}\n") }
+        .map { |text| DiffFile.new "diff --git #{text}\n" }
     end
   end
 
   def diff_line_count
-    @diff_line_count ||= raw_diff_data.count("\n")
+    @diff_line_count ||= raw_diff_data.count "\n"
   end
 
   def lib_name
     unless defined? @lib_name
       @lib_name =
         case title
-        when /^\[CHANGE ME\] Re-generated google-cloud-([\w-]+) to pick up changes in the API or client/
-          Regexp.last_match[1]
-        when /^\[CHANGE ME\] Re-generated ([\w-]+) to pick up changes in the API or client/
-          Regexp.last_match[1]
+        when /^\[CHANGE ME\] Re-generated google-cloud-(?<basename>[\w-]+) to pick up changes in the API or client/
+          Regexp.last_match[:basename]
+        when /^\[CHANGE ME\] Re-generated (?<fullname>[\w-]+) to pick up changes in the API or client/
+          Regexp.last_match[:fullname]
         else
           interpret_lib_name
         end
@@ -628,7 +631,7 @@ class PrData
 
   def custom_message message
     if lib_name && message =~ /^(\w+):\s+(\S.*)$/
-      "#{$1}(#{lib_name}): #{$2}"
+      "#{Regexp.last_match[1]}(#{lib_name}): #{Regexp.last_match[2]}"
     else
       message
     end
@@ -639,14 +642,11 @@ class PrData
   def interpret_lib_name
     name = nil
     diff_files.each do |diff_file|
-      if %r{^([^/]+)/} =~ diff_file.path
-        possible_name = Regexp.last_match[1]
-        if name.nil?
-          name = possible_name
-        elsif name != possible_name
-          return nil
-        end
-      else
+      return nil unless %r{^([^/]+)/} =~ diff_file.path
+      possible_name = Regexp.last_match[1]
+      if name.nil?
+        name = possible_name
+      elsif name != possible_name
         return nil
       end
     end

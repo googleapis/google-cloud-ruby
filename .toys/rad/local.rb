@@ -1,3 +1,19 @@
+# frozen_string_literal: true
+
+# Copyright 2021 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 desc "Run cloud-rad locally for testing"
 
 remaining_args :gem_names
@@ -28,10 +44,7 @@ def run_yard gem_name
   Dir.chdir gem_name do
     rm_rf "doc"
     rm_rf ".yardoc"
-    cmd = ["release", "build-rad", "--gem-name", gem_name]
-    cmd << "-#{'q' * (-verbosity)}" if verbosity < 0
-    cmd << "-#{'v' * verbosity}" if verbosity > 0
-    exec_tool cmd
+    exec_tool ["release", "build-rad", "--gem-name", gem_name] + verbosity_flags
   end
 end
 
@@ -53,15 +66,13 @@ end
 def update_docfx_json gem_name
   require "json"
   content = File.read doc_templates_json_path
-  orig_data = JSON.parse! content
   data = JSON.parse! content
   global_metadata = data["build"]["globalMetadata"]
   global_metadata["_appTitle"] = gem_name
   global_metadata["_rootPath"] = "/ruby/docs/reference/#{gem_name}/latest"
-  unless content == data
-    File.open doc_templates_json_path, "w" do |file|
-      file.puts JSON.pretty_generate data
-    end
+  return if content == data
+  File.open doc_templates_json_path, "w" do |file|
+    file.puts JSON.pretty_generate data
   end
 end
 
@@ -86,7 +97,9 @@ end
 
 def output_piper_results
   puts "Stage:", :bold
-  paths = effective_gem_names.map { |gem_name| "googledata/devsite/site-cloud/en/ruby/docs/reference/#{gem_name}/latest" }
+  paths = effective_gem_names.map do |gem_name|
+    "googledata/devsite/site-cloud/en/ruby/docs/reference/#{gem_name}/latest"
+  end
   paths << "googledata/devsite/site-cloud/en/ruby/_book.yaml"
   paths = paths.join ", "
   puts "PATHS: #{paths}"

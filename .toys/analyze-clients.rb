@@ -24,8 +24,8 @@ ANALYSES = {
   outdated_wrappers: "List wrapper gems prioritizing an outdated gapic",
   incomplete_bazel: "List incomplete Ruby bazel configs",
   wrapper_bazel: "List missing Ruby wrapper bazel configs",
-  gapic_ready: "List complete Ruby bazel configs that haven't yet been generated"
-}
+  gapic_ready: "List complete Ruby bazel configs that haven't yet been generated",
+}.freeze
 
 at_least_one desc: "Analyses" do
   flag :all, desc: "Run all analyses except those explicitly disabled"
@@ -91,7 +91,7 @@ def gem_version gem_name
     func = proc do
       Dir.chdir gem_name do
         spec = Gem::Specification.load "#{gem_name}.gemspec"
-        puts spec.version.to_s
+        puts spec.version
       end
     end
     capture_proc(func).strip
@@ -164,7 +164,7 @@ def outdated_wrappers_analysis
       match = /^#{gem_name}-(v\d+)$/.match versioned_name
       ga_versions << match[1] if match
     end
-    expected_version = (ga_versions.empty? ? pre_versions : ga_versions).sort.last
+    expected_version = (ga_versions.empty? ? pre_versions : ga_versions).max
     unless expected_version
       puts "#{gem_name}: No expected version"
       next
@@ -189,7 +189,7 @@ def incomplete_bazel_analysis
   count = 0
   puts "Results:", :cyan
   Dir.chdir googleapis_path do
-    Dir.glob("**/BUILD.bazel") do |build_file|
+    Dir.glob "**/BUILD.bazel" do |build_file|
       content = File.read build_file
       next unless content.include? "ruby_cloud_gapic_library"
       unless content.include?("ruby-cloud-api-id=") &&
@@ -208,7 +208,7 @@ def wrapper_bazel_analysis
   count = 0
   puts "Results:", :cyan
   Dir.chdir googleapis_path do
-    Dir.glob("**/BUILD.bazel") do |build_file|
+    Dir.glob "**/BUILD.bazel" do |build_file|
       dir = File.dirname build_file
       if dir =~ /v\d\w+$/
         wrapper_bazel_path = File.join File.dirname(dir), "BUILD.bazel"
@@ -226,7 +226,7 @@ def gapic_ready_analysis
   count = 0
   puts "Results:", :cyan
   Dir.chdir googleapis_path do
-    Dir.glob("**/BUILD.bazel") do |build_file|
+    Dir.glob "**/BUILD.bazel" do |build_file|
       content = File.read build_file
       next unless content.include?("ruby_cloud_gapic_library") &&
                   content.include?("ruby-cloud-api-id=") &&
