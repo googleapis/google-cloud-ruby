@@ -14,6 +14,7 @@
     "google-cloud-tasks-v2beta3.gemspec",
     "lib/google-cloud-tasks-v2beta3.rb",
     "lib/google/cloud/tasks/v2beta3.rb",
+    "lib/google/cloud/tasks/v2beta3/bindings_override.rb",
     "lib/google/cloud/tasks/v2beta3/cloud_tasks.rb",
     "lib/google/cloud/tasks/v2beta3/cloud_tasks/client.rb",
     "lib/google/cloud/tasks/v2beta3/cloud_tasks/credentials.rb",
@@ -31,6 +32,7 @@
     "proto_docs/README.md",
     "proto_docs/google/api/client.rb",
     "proto_docs/google/api/field_behavior.rb",
+    "proto_docs/google/api/httpbody.rb",
     "proto_docs/google/api/launch_stage.rb",
     "proto_docs/google/api/resource.rb",
     "proto_docs/google/cloud/tasks/v2beta3/cloudtasks.rb",
@@ -48,6 +50,7 @@
     "proto_docs/google/rpc/status.rb",
     "proto_docs/google/type/expr.rb",
     "snippets/Gemfile",
+    "snippets/cloud_tasks/buffer_task.rb",
     "snippets/cloud_tasks/create_queue.rb",
     "snippets/cloud_tasks/create_task.rb",
     "snippets/cloud_tasks/delete_queue.rb",
@@ -71,6 +74,7 @@
     "test/helper.rb"
   ],
   "static": [
-    ".OwlBot.yaml"
+    ".OwlBot.yaml",
+    ".owlbot.rb"
   ]
 }
