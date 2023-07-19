@@ -460,6 +460,14 @@ module Google
         #     power of 2)
         #     Example: max_pods_per_node of 30 will result in 32 IPs (/27) when
         #     overprovisioning is disabled.
+        # @!attribute [rw] additional_node_network_configs
+        #   @return [::Array<::Google::Cloud::Container::V1::AdditionalNodeNetworkConfig>]
+        #     We specify the additional node networks for this node pool using this list.
+        #     Each node network corresponds to an additional interface
+        # @!attribute [rw] additional_pod_network_configs
+        #   @return [::Array<::Google::Cloud::Container::V1::AdditionalPodNetworkConfig>]
+        #     We specify the additional pod networks for this node pool using this list.
+        #     Each pod network corresponds to an additional alias IP range for the node
         # @!attribute [r] pod_ipv4_range_utilization
         #   @return [::Float]
         #     Output only. [Output only] The utilization of the IPv4 range for the pod.
@@ -486,6 +494,36 @@ module Google
               TIER_1 = 1
             end
           end
+        end
+
+        # AdditionalNodeNetworkConfig is the configuration for additional node networks
+        # within the NodeNetworkConfig message
+        # @!attribute [rw] network
+        #   @return [::String]
+        #     Name of the VPC where the additional interface belongs
+        # @!attribute [rw] subnetwork
+        #   @return [::String]
+        #     Name of the subnetwork where the additional interface belongs
+        class AdditionalNodeNetworkConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # AdditionalPodNetworkConfig is the configuration for additional pod networks
+        # within the NodeNetworkConfig message
+        # @!attribute [rw] subnetwork
+        #   @return [::String]
+        #     Name of the subnetwork where the additional pod network belongs
+        # @!attribute [rw] secondary_pod_range
+        #   @return [::String]
+        #     The name of the secondary range on the subnet which provides IP address for
+        #     this pod range
+        # @!attribute [rw] max_pods_per_node
+        #   @return [::Google::Cloud::Container::V1::MaxPodsConstraint]
+        #     The maximum number of pods per node which use this pod network
+        class AdditionalPodNetworkConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A set of Shielded Instance options.
@@ -3243,6 +3281,11 @@ module Google
           # @!attribute [rw] type
           #   @return [::Google::Cloud::Container::V1::NodePool::PlacementPolicy::Type]
           #     The type of placement.
+          # @!attribute [rw] policy_name
+          #   @return [::String]
+          #     If set, refers to the name of a custom resource policy supplied by the
+          #     user. The resource policy must be in the same project and region as the
+          #     node pool. If not found, InvalidArgument error is returned.
           class PlacementPolicy
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -4158,6 +4201,9 @@ module Google
         #   @return [::Google::Cloud::Container::V1::GatewayAPIConfig]
         #     GatewayAPIConfig contains the desired config of Gateway API on this
         #     cluster.
+        # @!attribute [rw] enable_multi_networking
+        #   @return [::Boolean]
+        #     Whether multi-networking is enabled for this cluster.
         # @!attribute [rw] network_performance_config
         #   @return [::Google::Cloud::Container::V1::NetworkConfig::ClusterNetworkPerformanceConfig]
         #     Network bandwidth tier configuration.
