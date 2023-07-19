@@ -1,5 +1,14 @@
 # Release History
 
+### 0.8.0 (2023-07-19)
+
+#### Features
+
+* Include errors in troubleshoot response ([#22548](https://github.com/googleapis/google-cloud-ruby/issues/22548)) 
+#### Documentation
+
+* Update documentation for ToubleshootIamPolicy RPC method 
+
 ### 0.7.1 (2023-06-06)
 
 #### Bug Fixes
