@@ -14,6 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+toys_version! ">= 0.14.7"
+
 desc "Runs various analyses on client status and reports results."
 
 ANALYSES = {
@@ -22,7 +24,6 @@ ANALYSES = {
   gapic_prerelease: "List gapic gems whose service is GA but do not have a 1.0 release",
   wrapper_prerelease: "List wrapper gems whose service is GA but do not have a 1.0 release",
   outdated_wrappers: "List wrapper gems prioritizing an outdated gapic",
-  incomplete_bazel: "List incomplete Ruby bazel configs",
   wrapper_bazel: "List missing Ruby wrapper bazel configs",
   gapic_ready: "List complete Ruby bazel configs that haven't yet been generated",
 }.freeze
@@ -38,6 +39,7 @@ flag :googleapis_repo, "--googleapis-repo=PATH"
 
 include :exec, e: true
 include :terminal
+include :git_cache
 
 def run
   require "repo_info"
@@ -55,14 +57,7 @@ end
 
 def googleapis_path
   return googleapis_repo if googleapis_repo
-  @googleapis_path ||= begin
-    dir = Dir.mktmpdir
-    at_exit { FileUtils.rm_rf dir }
-    Dir.chdir dir do
-      exec ["git", "clone", "--depth=1", "https://github.com/googleapis/googleapis.git"], out: :null, err: :null
-    end
-    File.join dir, "googleapis"
-  end
+  @googleapis_path ||= git_cache.get "https://github.com/googleapis/googleapis.git", update: true
 end
 
 def all_gems
@@ -70,7 +65,7 @@ def all_gems
 end
 
 def all_generated_gems
-  @all_generated_gems ||= Dir.glob("*/synth.py").map { |path| File.dirname path }.sort
+  @all_generated_gems ||= Dir.glob("*/.OwlBot.yaml").map { |path| File.dirname path }.sort
 end
 
 def all_versioned_gems
@@ -82,7 +77,12 @@ def all_wrapper_gems
 end
 
 def expected_wrapper_of gem_name
-  RepoInfo::UNUSUAL_WRAPPERS[gem_name] || gem_name.sub(/-v\d\w*$/, "")
+  transform_gem_name gem_name.sub(/-v\d\w*$/, "")
+end
+
+def transform_gem_name name
+  name = RepoInfo::MULTI_WRAPPERS[name] || name
+  RepoInfo::UNUSUAL_NAMES[name] || name
 end
 
 def gem_version gem_name
@@ -95,6 +95,20 @@ def gem_version gem_name
       end
     end
     capture_proc(func).strip
+  end
+end
+
+def gem_age gem_name
+  now = Time.now.to_i
+  @gem_ages ||= {}
+  @gem_ages[gem_name] ||= begin
+    content = File.read File.join gem_name, "CHANGELOG.md"
+    date = content.scan(/### \d+\.\d+\.\d+ (?:\/ |\()(\d\d\d\d)-(\d\d)-(\d\d)/).last
+    if date
+      (now - Time.new(*date.map(&:to_i)).to_i) / 86_400
+    else
+      0
+    end
   end
 end
 
@@ -114,7 +128,8 @@ def unwrapped_analysis
   count = 0
   puts "Results:", :cyan
   all_versioned_gems.each do |gem_name|
-    unless all_wrapper_gems.include? expected_wrapper_of gem_name
+    expected_wrapper = expected_wrapper_of gem_name
+    unless expected_wrapper.is_a?(Symbol) || all_wrapper_gems.include?(expected_wrapper)
       puts gem_name
       count += 1
     end
@@ -123,33 +138,35 @@ def unwrapped_analysis
 end
 
 def wrapper_prerelease_analysis
-  count = 0
-  puts "Results:", :cyan
-  all_versioned_gems.each do |gem_name|
+  gem_names = all_versioned_gems.map do |gem_name|
     next unless /-v\d+$/.match? gem_name
     wrapper_name = expected_wrapper_of gem_name
-    next unless all_wrapper_gems.include? wrapper_name
-    version = gem_version wrapper_name
-    if version.start_with? "0."
-      puts "#{wrapper_name} #{version}"
-      count += 1
-    end
-  end
-  puts "Total: #{count}", :cyan
+    all_wrapper_gems.include?(wrapper_name) ? wrapper_name : nil
+  end.compact.uniq
+  generic_prerelease_analysis gem_names
 end
 
 def gapic_prerelease_analysis
-  count = 0
-  puts "Results:", :cyan
-  all_versioned_gems.each do |gem_name|
-    next unless /-v\d+$/.match? gem_name
-    version = gem_version gem_name
-    if version.start_with? "0."
-      puts "#{gem_name} #{version}"
-      count += 1
-    end
+  gem_names = all_versioned_gems.find_all { |gem_name| /-v\d+$/.match? gem_name }
+  generic_prerelease_analysis gem_names
+end
+
+def generic_prerelease_analysis gem_names
+  results = []
+  gem_names.each do |name|
+    next if RepoInfo::PINNED_PRERELEASE_GEMS.include? name
+    version = gem_version name
+    next unless version.start_with? "0."
+    age = gem_age name
+    results << [name, version, age] if age && age > 30
   end
-  puts "Total: #{count}", :cyan
+  results.sort_by! { |elem| elem[2] }
+
+  puts "Results:", :cyan
+  results.reverse_each do |(name, version, age)|
+    puts "#{name} #{version} (#{age} days)"
+  end
+  puts "Total: #{results.size}", :cyan
 end
 
 def outdated_wrappers_analysis
@@ -185,38 +202,20 @@ def outdated_wrappers_analysis
   puts "Total: #{count}", :cyan
 end
 
-def incomplete_bazel_analysis
-  count = 0
-  puts "Results:", :cyan
-  Dir.chdir googleapis_path do
-    Dir.glob "**/BUILD.bazel" do |build_file|
-      content = File.read build_file
-      next unless content.include? "ruby_cloud_gapic_library"
-      unless content.include?("ruby-cloud-api-id=") &&
-             content.include?("ruby-cloud-api-shortname=") &&
-             content.include?("ruby_cloud_description") &&
-             content.include?("ruby_cloud_title")
-        puts build_file
-        count += 1
-      end
-    end
-  end
-  puts "Total: #{count}", :cyan
-end
-
 def wrapper_bazel_analysis
   count = 0
   puts "Results:", :cyan
   Dir.chdir googleapis_path do
     Dir.glob "**/BUILD.bazel" do |build_file|
       dir = File.dirname build_file
-      if dir =~ /v\d\w+$/
-        wrapper_bazel_path = File.join File.dirname(dir), "BUILD.bazel"
-        unless File.file? wrapper_bazel_path
-          puts wrapper_bazel_path
-          count += 1
-        end
+      next unless dir =~ /v\d\w+$/
+      wrapper_bazel_path = File.join File.dirname(dir), "BUILD.bazel"
+      if File.file? wrapper_bazel_path
+        content = File.read wrapper_bazel_path
+        next if content.include? "ruby-cloud-wrapper-of="
       end
+      puts wrapper_bazel_path
+      count += 1
     end
   end
   puts "Total: #{count}", :cyan
@@ -228,19 +227,15 @@ def gapic_ready_analysis
   Dir.chdir googleapis_path do
     Dir.glob "**/BUILD.bazel" do |build_file|
       content = File.read build_file
-      next unless content.include?("ruby_cloud_gapic_library") &&
-                  content.include?("ruby-cloud-api-id=") &&
-                  content.include?("ruby-cloud-api-shortname=") &&
-                  content.include?("ruby_cloud_description") &&
-                  content.include?("ruby_cloud_title")
+      next unless content.include? "ruby_cloud_gapic_library"
       match = /ruby-cloud-gem-name=([\w-]+)/.match content
       next unless match
-      gem_name = match[1]
+      gem_name = transform_gem_name match[1]
+      next unless gem_name.is_a? String
       gemspec_path = File.join context_directory, gem_name, "#{gem_name}.gemspec"
-      unless File.file? gemspec_path
-        puts "#{gem_name} (#{File.dirname build_file})"
-        count += 1
-      end
+      next if File.file? gemspec_path
+      puts "#{gem_name} (#{File.dirname build_file})"
+      count += 1
     end
   end
   puts "Total: #{count}", :cyan
