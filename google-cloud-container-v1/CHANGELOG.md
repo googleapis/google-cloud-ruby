@@ -1,5 +1,12 @@
 # Release History
 
+### 0.26.0 (2023-07-19)
+
+#### Features
+
+* Add Multi-networking API ([#22547](https://github.com/googleapis/google-cloud-ruby/issues/22547)) 
+* Add policy_name to PlacementPolicy message within a node pool 
+
 ### 0.25.0 (2023-07-13)
 
 #### Features
