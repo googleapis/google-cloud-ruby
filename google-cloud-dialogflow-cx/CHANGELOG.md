@@ -1,5 +1,15 @@
 # Changelog
 
+### 0.5.0 (2023-07-19)
+
+### ⚠ BREAKING CHANGES
+
+* Bump version to 1.0 ([#22551](https://github.com/googleapis/google-cloud-ruby/issues/22551))
+
+#### Features
+
+* Bump version to 1.0 ([#22551](https://github.com/googleapis/google-cloud-ruby/issues/22551)) 
+
 ### 0.4.0 (2023-03-09)
 
 #### Features
@@ -31,4 +41,3 @@
 #### Features
 
 * Initial generation of google-cloud-dialogflow-cx
-
