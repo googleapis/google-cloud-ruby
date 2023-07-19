@@ -22,7 +22,8 @@ describe "#update_slate", :stitcher_snippet do
     @slate_created = true
 
     out, _err = capture_io do
-      sample.run project_id: project_id, location: location_id, slate_id: slate_id, slate_uri: updated_slate_uri
+      sample.run project_id: project_id, location: location_id,
+                 slate_id: slate_id, slate_uri: updated_slate_uri
     end
 
     slate_id_regex = Regexp.escape slate_id

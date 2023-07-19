@@ -27,7 +27,8 @@ def delete_cdn_key project_id:, location:, cdn_key_id:
   client = Google::Cloud::Video::Stitcher.video_stitcher_service
 
   # Build the resource name of the CDN key.
-  name = client.cdn_key_path project: project_id, location: location, cdn_key: cdn_key_id
+  name = client.cdn_key_path project: project_id, location: location,
+                             cdn_key: cdn_key_id
 
   # Delete the CDN key.
   operation = client.delete_cdn_key name: name

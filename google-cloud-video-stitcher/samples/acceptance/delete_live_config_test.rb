@@ -27,7 +27,8 @@ describe "#delete_live_config", :stitcher_snippet do
     client.get_live_config name: live_config_name
 
     assert_output(/Deleted live config/) do
-      sample.run project_id: project_id, location: location_id, live_config_id: live_config_id
+      sample.run project_id: project_id, location: location_id,
+                 live_config_id: live_config_id
     end
 
     assert_raises Google::Cloud::NotFoundError do

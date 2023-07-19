@@ -22,16 +22,19 @@ require "google/cloud/video/stitcher"
 # @param location [String] The location (e.g. "us-central1")
 # @param cdn_key_id [String] The user-defined CDN key ID
 # @param hostname [String] The hostname to which this CDN key applies
-# @param akamai_token_key [String] Applies to an Akamai CDN key. A base64-encoded string token key.
+# @param akamai_token_key [String] Applies to an Akamai CDN key. A
+#   base64-encoded string token key.
 #
-def create_cdn_key_akamai project_id:, location:, cdn_key_id:, hostname:, akamai_token_key:
+def create_cdn_key_akamai project_id:, location:, cdn_key_id:, hostname:,
+                          akamai_token_key:
   # Create a Video Stitcher client.
   client = Google::Cloud::Video::Stitcher.video_stitcher_service
 
   # Build the resource name of the parent.
   parent = client.location_path project: project_id, location: location
   # Build the path for the CDN key resource.
-  cdn_key_path = client.cdn_key_path project: project_id, location: location, cdn_key: cdn_key_id
+  cdn_key_path = client.cdn_key_path project: project_id, location: location,
+                                     cdn_key: cdn_key_id
 
   # Set the CDN key fields.
   new_cdn_key = {
@@ -42,7 +45,8 @@ def create_cdn_key_akamai project_id:, location:, cdn_key_id:, hostname:, akamai
     }
   }
 
-  operation = client.create_cdn_key parent: parent, cdn_key: new_cdn_key, cdn_key_id: cdn_key_id
+  operation = client.create_cdn_key parent: parent, cdn_key: new_cdn_key,
+                                    cdn_key_id: cdn_key_id
 
   # The returned object is of type Gapic::Operation. You can use this
   # object to check the status of an operation, cancel it, or wait

@@ -27,7 +27,8 @@ def delete_slate project_id:, location:, slate_id:
   client = Google::Cloud::Video::Stitcher.video_stitcher_service
 
   # Build the resource name of the slate.
-  name = client.slate_path project: project_id, location: location, slate: slate_id
+  name = client.slate_path project: project_id, location: location,
+                           slate: slate_id
 
   # Delete the slate.
   operation = client.delete_slate name: name

@@ -41,7 +41,8 @@ def create_vod_session project_id:, location:, source_uri:, ad_tag_uri:
     ad_tracking: Google::Cloud::Video::Stitcher::V1::AdTracking::SERVER
   }
 
-  response = client.create_vod_session parent: parent, vod_session: new_vod_session
+  response = client.create_vod_session parent: parent,
+                                       vod_session: new_vod_session
 
   # Print the VOD session name.
   puts "VOD session: #{response.name}"

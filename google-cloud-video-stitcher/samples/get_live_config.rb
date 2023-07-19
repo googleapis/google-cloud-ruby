@@ -27,7 +27,8 @@ def get_live_config project_id:, location:, live_config_id:
   client = Google::Cloud::Video::Stitcher.video_stitcher_service
 
   # Build the resource name of the live config.
-  name = client.live_config_path project: project_id, location: location, live_config: live_config_id
+  name = client.live_config_path project: project_id, location: location,
+                                 live_config: live_config_id
 
   # Get the live config.
   live_config = client.get_live_config name: name

@@ -25,7 +25,8 @@ describe "#create_live_session", :stitcher_snippet do
     @live_config_created = true
 
     out, _err = capture_io do
-      sample.run project_id: project_id, location: location_id, live_config_id: live_config_id
+      sample.run project_id: project_id, location: location_id,
+                 live_config_id: live_config_id
     end
 
     assert_match %r{Live session: projects/\S+/locations/#{location_id}/liveSessions/\S+}, out

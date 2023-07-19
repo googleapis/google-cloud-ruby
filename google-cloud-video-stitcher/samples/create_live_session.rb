@@ -31,14 +31,17 @@ def create_live_session project_id:, location:, live_config_id:
   parent = client.location_path project: project_id, location: location
 
   # Build the resource name of the live config.
-  live_config_name = client.live_config_path project: project_id, location: location, live_config: live_config_id
+  live_config_name = client.live_config_path project: project_id,
+                                             location: location,
+                                             live_config: live_config_id
 
   # Set the session fields.
   new_live_session = {
     live_config: live_config_name
   }
 
-  response = client.create_live_session parent: parent, live_session: new_live_session
+  response = client.create_live_session parent: parent,
+                                        live_session: new_live_session
 
   # Print the live session name.
   puts "Live session: #{response.name}"

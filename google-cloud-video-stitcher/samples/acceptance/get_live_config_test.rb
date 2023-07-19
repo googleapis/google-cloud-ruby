@@ -25,7 +25,8 @@ describe "#get_live_config", :stitcher_snippet do
     @live_config_created = true
 
     out, _err = capture_io do
-      sample.run project_id: project_id, location: location_id, live_config_id: live_config_id
+      sample.run project_id: project_id, location: location_id,
+                 live_config_id: live_config_id
     end
 
     live_config_id_regex = Regexp.escape live_config_id

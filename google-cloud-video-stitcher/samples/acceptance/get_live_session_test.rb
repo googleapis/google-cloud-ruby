@@ -28,7 +28,8 @@ describe "#get_live_session", :stitcher_snippet do
     @session_id = live_session.name.split("/").last
 
     out, _err = capture_io do
-      sample.run project_id: project_id, location: location_id, session_id: @session_id
+      sample.run project_id: project_id, location: location_id,
+                 session_id: @session_id
     end
 
     assert_match %r{Live session: projects/\S+/locations/#{location_id}/liveSessions/#{@session_id}}, out
