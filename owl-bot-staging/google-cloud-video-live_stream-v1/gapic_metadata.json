@@ -1,0 +1,128 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.video.livestream.v1",
+  "libraryPackage": "::Google::Cloud::Video::LiveStream::V1",
+  "services": {
+    "LivestreamService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client",
+          "rpcs": {
+            "CreateChannel": {
+              "methods": [
+                "create_channel"
+              ]
+            },
+            "ListChannels": {
+              "methods": [
+                "list_channels"
+              ]
+            },
+            "GetChannel": {
+              "methods": [
+                "get_channel"
+              ]
+            },
+            "DeleteChannel": {
+              "methods": [
+                "delete_channel"
+              ]
+            },
+            "UpdateChannel": {
+              "methods": [
+                "update_channel"
+              ]
+            },
+            "StartChannel": {
+              "methods": [
+                "start_channel"
+              ]
+            },
+            "StopChannel": {
+              "methods": [
+                "stop_channel"
+              ]
+            },
+            "CreateInput": {
+              "methods": [
+                "create_input"
+              ]
+            },
+            "ListInputs": {
+              "methods": [
+                "list_inputs"
+              ]
+            },
+            "GetInput": {
+              "methods": [
+                "get_input"
+              ]
+            },
+            "DeleteInput": {
+              "methods": [
+                "delete_input"
+              ]
+            },
+            "UpdateInput": {
+              "methods": [
+                "update_input"
+              ]
+            },
+            "CreateEvent": {
+              "methods": [
+                "create_event"
+              ]
+            },
+            "ListEvents": {
+              "methods": [
+                "list_events"
+              ]
+            },
+            "GetEvent": {
+              "methods": [
+                "get_event"
+              ]
+            },
+            "DeleteEvent": {
+              "methods": [
+                "delete_event"
+              ]
+            },
+            "CreateAsset": {
+              "methods": [
+                "create_asset"
+              ]
+            },
+            "DeleteAsset": {
+              "methods": [
+                "delete_asset"
+              ]
+            },
+            "GetAsset": {
+              "methods": [
+                "get_asset"
+              ]
+            },
+            "ListAssets": {
+              "methods": [
+                "list_assets"
+              ]
+            },
+            "GetPool": {
+              "methods": [
+                "get_pool"
+              ]
+            },
+            "UpdatePool": {
+              "methods": [
+                "update_pool"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
