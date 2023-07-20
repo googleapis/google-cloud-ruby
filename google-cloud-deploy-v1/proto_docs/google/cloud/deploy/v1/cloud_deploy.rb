@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Deploy
       module V1
-        # A `DeliveryPipeline` resource in the Google Cloud Deploy API.
+        # A `DeliveryPipeline` resource in the Cloud Deploy API.
         #
         # A `DeliveryPipeline` defines a pipeline through which a Skaffold
         # configuration can progress.
@@ -38,12 +38,11 @@ module Google
         # @!attribute [rw] annotations
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     User annotations. These attributes can only be set and used by the
-        #     user, and not by Google Cloud Deploy.
+        #     user, and not by Cloud Deploy.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Labels are attributes that can be set and used by both the
-        #     user and by Google Cloud Deploy. Labels must meet the following
-        #     constraints:
+        #     user and by Cloud Deploy. Labels must meet the following constraints:
         #
         #     * Keys and values can contain only lowercase letters, numeric characters,
         #     underscores, and dashes.
@@ -570,7 +569,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A `Target` resource in the Google Cloud Deploy API.
+        # A `Target` resource in the Cloud Deploy API.
         #
         # A `Target` defines a location to which a Skaffold configuration
         # can be deployed.
@@ -590,14 +589,13 @@ module Google
         # @!attribute [rw] annotations
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. User annotations. These attributes can only be set and used by
-        #     the user, and not by Google Cloud Deploy. See
+        #     the user, and not by Cloud Deploy. See
         #     https://google.aip.dev/128#annotations for more details such as format and
         #     size limitations.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. Labels are attributes that can be set and used by both the
-        #     user and by Google Cloud Deploy. Labels must meet the following
-        #     constraints:
+        #     user and by Cloud Deploy. Labels must meet the following constraints:
         #
         #     * Keys and values can contain only lowercase letters, numeric characters,
         #     underscores, and dashes.
@@ -987,7 +985,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A `Release` resource in the Google Cloud Deploy API.
+        # A `Release` resource in the Cloud Deploy API.
         #
         # A `Release` defines a specific Skaffold configuration instance
         # that can be deployed.
@@ -1005,14 +1003,12 @@ module Google
         # @!attribute [rw] annotations
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     User annotations. These attributes can only be set and used by the
-        #     user, and not by Google Cloud Deploy. See
-        #     https://google.aip.dev/128#annotations for more details such as format and
-        #     size limitations.
+        #     user, and not by Cloud Deploy. See https://google.aip.dev/128#annotations
+        #     for more details such as format and size limitations.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Labels are attributes that can be set and used by both the
-        #     user and by Google Cloud Deploy. Labels must meet the following
-        #     constraints:
+        #     user and by Cloud Deploy. Labels must meet the following constraints:
         #
         #     * Keys and values can contain only lowercase letters, numeric characters,
         #     underscores, and dashes.
@@ -1061,8 +1057,8 @@ module Google
         # @!attribute [rw] skaffold_version
         #   @return [::String]
         #     The Skaffold version to use when operating on this release, such as
-        #     "1.20.0". Not all versions are valid; Google Cloud Deploy supports a
-        #     specific set of versions.
+        #     "1.20.0". Not all versions are valid; Cloud Deploy supports a specific set
+        #     of versions.
         #
         #     If unset, the most recent supported Skaffold version will be used.
         # @!attribute [r] target_artifacts
@@ -1128,7 +1124,7 @@ module Google
               FAILURE_CAUSE_UNSPECIFIED = 0
 
               # Cloud Build is not available, either because it is not enabled or
-              # because Google Cloud Deploy has insufficient permissions. See [required
+              # because Cloud Deploy has insufficient permissions. See [required
               # permission](/deploy/docs/cloud-deploy-service-account#required_permissions).
               CLOUD_BUILD_UNAVAILABLE = 1
 
@@ -1136,7 +1132,7 @@ module Google
               # logs.
               EXECUTION_FAILED = 2
 
-              # Cloud Build failed to fulfill Google Cloud Deploy's request. See
+              # Cloud Build failed to fulfill Cloud Deploy's request. See
               # failure_message for additional details.
               CLOUD_BUILD_REQUEST_FAILED = 3
             end
@@ -1439,7 +1435,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A `Rollout` resource in the Google Cloud Deploy API.
+        # A `Rollout` resource in the Cloud Deploy API.
         #
         # A `Rollout` contains information around a specific deployment to a `Target`.
         # @!attribute [rw] name
@@ -1457,14 +1453,12 @@ module Google
         # @!attribute [rw] annotations
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     User annotations. These attributes can only be set and used by the
-        #     user, and not by Google Cloud Deploy. See
-        #     https://google.aip.dev/128#annotations for more details such as format and
-        #     size limitations.
+        #     user, and not by Cloud Deploy. See https://google.aip.dev/128#annotations
+        #     for more details such as format and size limitations.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Labels are attributes that can be set and used by both the
-        #     user and by Google Cloud Deploy. Labels must meet the following
-        #     constraints:
+        #     user and by Cloud Deploy. Labels must meet the following constraints:
         #
         #     * Keys and values can contain only lowercase letters, numeric characters,
         #     underscores, and dashes.
@@ -1630,8 +1624,8 @@ module Google
             # No skaffold verify configuration was found.
             VERIFICATION_CONFIG_NOT_FOUND = 6
 
-            # Cloud Build failed to fulfill Google Cloud Deploy's request. See
-            # failure_message for additional details.
+            # Cloud Build failed to fulfill Cloud Deploy's request. See failure_message
+            # for additional details.
             CLOUD_BUILD_REQUEST_FAILED = 7
           end
         end
@@ -2079,7 +2073,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A `JobRun` resource in the Google Cloud Deploy API.
+        # A `JobRun` resource in the Cloud Deploy API.
         #
         # A `JobRun` contains information of a single `Rollout` job evaluation.
         # @!attribute [rw] name
@@ -2181,7 +2175,7 @@ module Google
             FAILURE_CAUSE_UNSPECIFIED = 0
 
             # Cloud Build is not available, either because it is not enabled or because
-            # Google Cloud Deploy has insufficient permissions. See [Required
+            # Cloud Deploy has insufficient permissions. See [Required
             # permission](/deploy/docs/cloud-deploy-service-account#required_permissions).
             CLOUD_BUILD_UNAVAILABLE = 1
 
@@ -2196,8 +2190,8 @@ module Google
             # canary deployment. Check the Cloud Build logs for more information.
             MISSING_RESOURCES_FOR_CANARY = 4
 
-            # Cloud Build failed to fulfill Google Cloud Deploy's request. See
-            # failure_message for additional details.
+            # Cloud Build failed to fulfill Cloud Deploy's request. See failure_message
+            # for additional details.
             CLOUD_BUILD_REQUEST_FAILED = 5
           end
         end
@@ -2233,7 +2227,7 @@ module Google
             FAILURE_CAUSE_UNSPECIFIED = 0
 
             # Cloud Build is not available, either because it is not enabled or because
-            # Google Cloud Deploy has insufficient permissions. See [required
+            # Cloud Deploy has insufficient permissions. See [required
             # permission](/deploy/docs/cloud-deploy-service-account#required_permissions).
             CLOUD_BUILD_UNAVAILABLE = 1
 
@@ -2247,8 +2241,8 @@ module Google
             # No Skaffold verify configuration was found.
             VERIFICATION_CONFIG_NOT_FOUND = 4
 
-            # Cloud Build failed to fulfill Google Cloud Deploy's request. See
-            # failure_message for additional details.
+            # Cloud Build failed to fulfill Cloud Deploy's request. See failure_message
+            # for additional details.
             CLOUD_BUILD_REQUEST_FAILED = 5
           end
         end
