@@ -24,7 +24,8 @@ describe "#delete_slate", :stitcher_snippet do
     client.get_slate name: slate_name
 
     assert_output(/Deleted slate/) do
-      sample.run project_id: project_id, location: location_id, slate_id: slate_id
+      sample.run project_id: project_id, location: location_id,
+                 slate_id: slate_id
     end
 
     assert_raises Google::Cloud::NotFoundError do

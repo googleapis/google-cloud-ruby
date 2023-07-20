@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,20 +14,25 @@
 
 require_relative "helper"
 
-describe "#update_slate", :stitcher_snippet do
-  it "updates a slate" do
-    sample = SampleLoader.load "update_slate.rb"
+describe "#delete_live_config", :stitcher_snippet do
+  it "deletes a live config" do
+    sample = SampleLoader.load "delete_live_config.rb"
 
     refute_nil slate
     @slate_created = true
 
-    out, _err = capture_io do
+    refute_nil live_config
+    @live_config_created = true
+
+    client.get_live_config name: live_config_name
+
+    assert_output(/Deleted live config/) do
       sample.run project_id: project_id, location: location_id,
-                 slate_id: slate_id, slate_uri: updated_slate_uri
+                 live_config_id: live_config_id
     end
 
-    slate_id_regex = Regexp.escape slate_id
-    assert_match %r{Updated slate: projects/\S+/locations/#{location_id}/slates/#{slate_id_regex}}, out
-    assert_match %r{Updated uri: #{updated_slate_uri}}, out
+    assert_raises Google::Cloud::NotFoundError do
+      client.get_live_config name: live_config_name
+    end
   end
 end

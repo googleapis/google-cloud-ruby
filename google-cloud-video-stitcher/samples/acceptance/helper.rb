@@ -55,6 +55,9 @@ class StitcherSnippetSpec < Minitest::Spec
   let(:vod_uri) { "https://storage.googleapis.com/cloud-samples-data/media/hls-vod/manifest.m3u8" }
   let(:vod_ad_tag_uri) { "https://pubads.g.doubleclick.net/gampad/ads?iu=/21775744923/external/vmap_ad_samples&sz=640x480&cust_params=sample_ar%3Dpreonly&ciu_szs=300x250%2C728x90&gdfp_req=1&ad_rule=1&output=vmap&unviewed_position_start=1&env=vp&impl=s&correlator=" }
 
+  let(:live_config_id) { "my-live-config-test-#{(Time.now.to_f * 1000).to_i}" }
+  let(:live_config_name) { "projects/#{project_id}/locations/#{location_id}/liveConfigs/#{live_config_id}" }
+
   let(:live_uri) { "https://storage.googleapis.com/cloud-samples-data/media/hls-live/manifest.m3u8" }
   let(:live_ad_tag_uri) { "https://pubads.g.doubleclick.net/gampad/ads?iu=/21775744923/external/single_ad_samples&sz=640x480&cust_params=sample_ct%3Dlinear&ciu_szs=300x250%2C728x90&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&impl=s&correlator=" }
 
@@ -62,12 +65,14 @@ class StitcherSnippetSpec < Minitest::Spec
   attr_writer :akamai_cdn_key_created
   attr_writer :cloud_cdn_key_created
   attr_writer :media_cdn_key_created
+  attr_writer :live_config_created
 
   before do
     @slate_created = false
     @akamai_cdn_key_created = false
     @cloud_cdn_key_created = false
     @media_cdn_key_created = false
+    @live_config_created = false
     @session_id = ""
     @ad_tag_detail_id = ""
     @stitch_detail_id = ""
@@ -79,7 +84,8 @@ class StitcherSnippetSpec < Minitest::Spec
       now = (Time.now.to_f * 1000).to_i # Milliseconds, preserves float value for precision
       next if create_time >= (now - DELETION_THRESHOLD_TIME_HOURS_IN_MILLISECONDS)
       begin
-        client.delete_slate name: slate.name.to_s
+        operation = client.delete_slate name: slate.name.to_s
+        operation.wait_until_done!
       rescue Google::Cloud::NotFoundError => e
         puts "Rescued: #{e.inspect}"
       end
@@ -93,7 +99,23 @@ class StitcherSnippetSpec < Minitest::Spec
       now = (Time.now.to_f * 1000).to_i # Milliseconds, preserves float value for precision
       next if create_time >= (now - DELETION_THRESHOLD_TIME_HOURS_IN_MILLISECONDS)
       begin
-        client.delete_cdn_key name: cdn_key.name.to_s
+        operation = client.delete_cdn_key name: cdn_key.name.to_s
+        operation.wait_until_done!
+      rescue Google::Cloud::NotFoundError => e
+        puts "Rescued: #{e.inspect}"
+      end
+    end
+
+    # Remove old live configs in the test project if they exist
+    response = client.list_live_configs parent: location_path
+    response.each do |live_config|
+      tmp = live_config.name.to_s.split "-"
+      create_time = tmp.last.to_i
+      now = (Time.now.to_f * 1000).to_i # Milliseconds, preserves float value for precision
+      next if create_time >= (now - DELETION_THRESHOLD_TIME_HOURS_IN_MILLISECONDS)
+      begin
+        operation = client.delete_live_config name: live_config.name.to_s
+        operation.wait_until_done!
       rescue Google::Cloud::NotFoundError => e
         puts "Rescued: #{e.inspect}"
       end
@@ -101,11 +123,13 @@ class StitcherSnippetSpec < Minitest::Spec
   end
 
   let :slate do
-    client.create_slate(
+    operation = client.create_slate(
       parent: location_path,
       slate_id: slate_id,
       slate: slate_def(slate_uri)
     )
+    operation.wait_until_done!
+    operation.response
   end
 
   let :vod_session do
@@ -115,62 +139,90 @@ class StitcherSnippetSpec < Minitest::Spec
     )
   end
 
+  let :live_config do
+    operation = client.create_live_config(
+      parent: location_path,
+      live_config_id: live_config_id,
+      live_config: live_config_def(live_uri, live_ad_tag_uri, slate_name)
+    )
+    operation.wait_until_done!
+    operation.response
+  end
+
   let :live_session do
     client.create_live_session(
       parent: location_path,
-      live_session: live_session_def(live_uri, live_ad_tag_uri, slate_id)
+      live_session: live_session_def(live_config_name)
     )
   end
 
   let :akamai_cdn_key do
-    client.create_cdn_key(
+    operation = client.create_cdn_key(
       parent: location_path,
       cdn_key_id: akamai_cdn_key_id,
       cdn_key: akamai_cdn_def(akamai_cdn_key_name, hostname, akamai_token_key)
     )
+    operation.wait_until_done!
+    operation.response
   end
 
   let :cloud_cdn_key do
-    client.create_cdn_key(
+    operation = client.create_cdn_key(
       parent: location_path,
       cdn_key_id: cloud_cdn_key_id,
       cdn_key: cloud_cdn_def(cloud_cdn_key_name, hostname, key_name, cloud_cdn_private_key)
     )
+    operation.wait_until_done!
+    operation.response
   end
 
   let :media_cdn_key do
-    client.create_cdn_key(
+    operation = client.create_cdn_key(
       parent: location_path,
       cdn_key_id: media_cdn_key_id,
       cdn_key: media_cdn_def(media_cdn_key_name, hostname, key_name, media_cdn_private_key)
     )
+    operation.wait_until_done!
+    operation.response
   end
 
   after do
     if @slate_created
       begin
-        client.delete_slate name: slate_name
+        operation = client.delete_slate name: slate_name
+        operation.wait_until_done!
       rescue Google::Cloud::NotFoundError, Google::Cloud::FailedPreconditionError => e
         puts "Rescued: #{e.inspect}"
       end
     end
     if @akamai_cdn_key_created
       begin
-        client.delete_cdn_key name: akamai_cdn_key_name
+        operation = client.delete_cdn_key name: akamai_cdn_key_name
+        operation.wait_until_done!
       rescue Google::Cloud::NotFoundError, Google::Cloud::FailedPreconditionError => e
         puts "Rescued: #{e.inspect}"
       end
     end
     if @cloud_cdn_key_created
       begin
-        client.delete_cdn_key name: cloud_cdn_key_name
+        operation = client.delete_cdn_key name: cloud_cdn_key_name
+        operation.wait_until_done!
       rescue Google::Cloud::NotFoundError, Google::Cloud::FailedPreconditionError => e
         puts "Rescued: #{e.inspect}"
       end
     end
     if @media_cdn_key_created
       begin
-        client.delete_cdn_key name: media_cdn_key_name
+        operation = client.delete_cdn_key name: media_cdn_key_name
+        operation.wait_until_done!
+      rescue Google::Cloud::NotFoundError, Google::Cloud::FailedPreconditionError => e
+        puts "Rescued: #{e.inspect}"
+      end
+    end
+    if @live_config_created
+      begin
+        operation = client.delete_live_config name: live_config_name
+        operation.wait_until_done!
       rescue Google::Cloud::NotFoundError, Google::Cloud::FailedPreconditionError => e
         puts "Rescued: #{e.inspect}"
       end
@@ -200,15 +252,19 @@ class StitcherSnippetSpec < Minitest::Spec
     }
   end
 
-  def live_session_def source_uri, ad_tag_uri, slate_id
+  def live_config_def source_uri, ad_tag_uri, slate_name
     {
       source_uri: source_uri,
-      ad_tag_map: {
-        default: {
-          uri: ad_tag_uri
-        }
-      },
-      default_slate_id: slate_id
+      ad_tag_uri: ad_tag_uri,
+      ad_tracking: Google::Cloud::Video::Stitcher::V1::AdTracking::SERVER,
+      stitching_policy: Google::Cloud::Video::Stitcher::V1::LiveConfig::StitchingPolicy::CUT_CURRENT,
+      default_slate: slate_name
+    }
+  end
+
+  def live_session_def live_config_name
+    {
+      live_config: live_config_name
     }
   end
 
@@ -232,7 +288,8 @@ class StitcherSnippetSpec < Minitest::Spec
   def vod_session_def source_uri, ad_tag_uri
     {
       source_uri: source_uri,
-      ad_tag_uri: ad_tag_uri
+      ad_tag_uri: ad_tag_uri,
+      ad_tracking: Google::Cloud::Video::Stitcher::V1::AdTracking::SERVER
     }
   end
 

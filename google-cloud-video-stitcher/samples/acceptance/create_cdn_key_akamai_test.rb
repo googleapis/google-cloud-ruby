@@ -19,7 +19,9 @@ describe "#create_cdn_key_akamai", :stitcher_snippet do
     sample = SampleLoader.load "create_cdn_key_akamai.rb"
 
     out, _err = capture_io do
-      sample.run project_id: project_id, location: location_id, cdn_key_id: akamai_cdn_key_id, hostname: hostname, akamai_token_key: akamai_token_key
+      sample.run project_id: project_id, location: location_id,
+                 cdn_key_id: akamai_cdn_key_id, hostname: hostname,
+                 akamai_token_key: akamai_token_key
     end
     @akamai_cdn_key_created = true
 

@@ -22,7 +22,10 @@ describe "#update_cdn_key", :stitcher_snippet do
     @media_cdn_key_created = true
 
     out, _err = capture_io do
-      sample.run project_id: project_id, location: location_id, cdn_key_id: media_cdn_key_id, hostname: updated_hostname, key_name: key_name, private_key: updated_media_cdn_private_key, is_media_cdn: true
+      sample.run project_id: project_id, location: location_id,
+                 cdn_key_id: media_cdn_key_id, hostname: updated_hostname,
+                 key_name: key_name, private_key: updated_media_cdn_private_key,
+                 is_media_cdn: true
     end
 
     cdn_key_id_regex = Regexp.escape media_cdn_key_id
@@ -36,7 +39,10 @@ describe "#update_cdn_key", :stitcher_snippet do
     @cloud_cdn_key_created = true
 
     out, _err = capture_io do
-      sample.run project_id: project_id, location: location_id, cdn_key_id: cloud_cdn_key_id, hostname: updated_hostname, key_name: key_name, private_key: updated_cloud_cdn_private_key, is_media_cdn: false
+      sample.run project_id: project_id, location: location_id,
+                 cdn_key_id: cloud_cdn_key_id, hostname: updated_hostname,
+                 key_name: key_name, private_key: updated_cloud_cdn_private_key,
+                 is_media_cdn: false
     end
 
     cdn_key_id_regex = Regexp.escape cloud_cdn_key_id

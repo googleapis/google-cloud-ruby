@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,20 +14,18 @@
 
 require_relative "helper"
 
-describe "#update_slate", :stitcher_snippet do
-  it "updates a slate" do
-    sample = SampleLoader.load "update_slate.rb"
+describe "#list_live_configs", :stitcher_snippet do
+  it "lists the live configs" do
+    sample = SampleLoader.load "list_live_configs.rb"
 
     refute_nil slate
     @slate_created = true
 
-    out, _err = capture_io do
-      sample.run project_id: project_id, location: location_id,
-                 slate_id: slate_id, slate_uri: updated_slate_uri
-    end
+    refute_nil live_config
+    @live_config_created = true
 
-    slate_id_regex = Regexp.escape slate_id
-    assert_match %r{Updated slate: projects/\S+/locations/#{location_id}/slates/#{slate_id_regex}}, out
-    assert_match %r{Updated uri: #{updated_slate_uri}}, out
+    assert_output(/Live configs:\n#{live_config_name}/) do
+      sample.run project_id: project_id, location: location_id
+    end
   end
 end

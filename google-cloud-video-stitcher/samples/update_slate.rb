@@ -21,15 +21,16 @@ require "google/cloud/video/stitcher"
 # @param project_id [String] Your Google Cloud project (e.g. "my-project")
 # @param location [String] The location (e.g. "us-central1")
 # @param slate_id [String] Your slate name (e.g. "my-slate")
-# @param slate_uri [String] The URI of an MP4 video with at least one audio track
-#                           (e.g. "https://my-slate-uri/test.mp4")
+# @param slate_uri [String] The URI of an MP4 video with at least one audio
+#   track (e.g. "https://my-slate-uri/test.mp4")
 #
 def update_slate project_id:, location:, slate_id:, slate_uri:
   # Create a Video Stitcher client.
   client = Google::Cloud::Video::Stitcher.video_stitcher_service
 
   # Build the resource name of the slate.
-  name = client.slate_path project: project_id, location: location, slate: slate_id
+  name = client.slate_path project: project_id, location: location,
+                           slate: slate_id
 
   # Set the update mask.
   update_mask = { paths: ["uri"] }
@@ -40,10 +41,15 @@ def update_slate project_id:, location:, slate_id:, slate_uri:
     uri: slate_uri
   }
 
-  response = client.update_slate slate: update_slate, update_mask: update_mask
+  operation = client.update_slate slate: update_slate, update_mask: update_mask
+
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  operation.wait_until_done!
 
   # Print the slate name.
-  puts "Updated slate: #{response.name}"
-  puts "Updated uri: #{response.uri}"
+  puts "Updated slate: #{operation.response.name}"
+  puts "Updated uri: #{operation.response.uri}"
 end
 # [END videostitcher_update_slate]

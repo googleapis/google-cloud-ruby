@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,29 +12,28 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START videostitcher_get_live_session]
+# [START videostitcher_list_live_configs]
 require "google/cloud/video/stitcher"
 
 ##
-# Get a live session. Live sessions are ephemeral resources
-# that expire after a few minutes.
+# List live configs for a given location
 #
 # @param project_id [String] Your Google Cloud project (e.g. "my-project")
 # @param location [String] The location (e.g. "us-central1")
-# @param session_id [String] The live session ID (e.g. "my-live-session-id")
 #
-def get_live_session project_id:, location:, session_id:
+def list_live_configs project_id:, location:
   # Create a Video Stitcher client.
   client = Google::Cloud::Video::Stitcher.video_stitcher_service
 
-  # Build the resource name of the live session.
-  name = client.live_session_path project: project_id, location: location,
-                                  live_session: session_id
+  # Build the resource name of the parent.
+  parent = client.location_path project: project_id, location: location
 
-  # Get the live session.
-  session = client.get_live_session name: name
+  response = client.list_live_configs parent: parent
 
-  # Print the live session name.
-  puts "Live session: #{session.name}"
+  puts "Live configs:"
+  # Print out all live configs.
+  response.each do |live_config|
+    puts live_config.name
+  end
 end
-# [END videostitcher_get_live_session]
+# [END videostitcher_list_live_configs]
