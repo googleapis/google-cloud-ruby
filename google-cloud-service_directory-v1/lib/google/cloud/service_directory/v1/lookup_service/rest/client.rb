@@ -19,6 +19,7 @@
 require "google/cloud/errors"
 require "google/cloud/servicedirectory/v1/lookup_service_pb"
 require "google/cloud/service_directory/v1/lookup_service/rest/service_stub"
+require "google/cloud/location/rest"
 
 module Google
   module Cloud
@@ -135,8 +136,22 @@ module Google
                 @quota_project_id = @config.quota_project
                 @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
+                @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @config.endpoint
+                  config.bindings_override = @config.bindings_override
+                end
+
                 @lookup_service_stub = ::Google::Cloud::ServiceDirectory::V1::LookupService::Rest::ServiceStub.new endpoint: @config.endpoint, credentials: credentials
               end
+
+              ##
+              # Get the associated client for mix-in of the Locations.
+              #
+              # @return [Google::Cloud::Location::Locations::Rest::Client]
+              #
+              attr_reader :location_client
 
               # Service calls
 
@@ -169,22 +184,40 @@ module Google
               #   @param endpoint_filter [::String]
               #     Optional. The filter applied to the endpoints of the resolved service.
               #
-              #     General filter string syntax:
-              #     <field> <operator> <value> (<logical connector>)
-              #     <field> can be "name" or "metadata.<key>" for map field.
-              #     <operator> can be "<, >, <=, >=, !=, =, :". Of which ":" means HAS and is
-              #     roughly the same as "=".
-              #     <value> must be the same data type as the field.
-              #     <logical connector> can be "AND, OR, NOT".
+              #     General `filter` string syntax:
+              #     `<field> <operator> <value> (<logical connector>)`
+              #
+              #     *   `<field>` can be `name`, `address`, `port`, or `annotations.<key>` for
+              #         map field
+              #     *   `<operator>` can be `<`, `>`, `<=`, `>=`, `!=`, `=`, `:`. Of which `:`
+              #         means `HAS`, and is roughly the same as `=`
+              #     *   `<value>` must be the same data type as field
+              #     *   `<logical connector>` can be `AND`, `OR`, `NOT`
               #
               #     Examples of valid filters:
-              #     * "metadata.owner" returns Endpoints that have a label with the
-              #       key "owner", this is the same as "metadata:owner"
-              #     * "metadata.protocol=gRPC" returns Endpoints that have key/value
-              #       "protocol=gRPC"
-              #     * "metadata.owner!=sd AND metadata.foo=bar" returns
-              #       Endpoints that have "owner" field in metadata with a value that is not
-              #       "sd" AND have the key/value foo=bar.
+              #
+              #     *   `annotations.owner` returns endpoints that have a annotation with the
+              #         key `owner`, this is the same as `annotations:owner`
+              #     *   `annotations.protocol=gRPC` returns endpoints that have key/value
+              #         `protocol=gRPC`
+              #     *   `address=192.108.1.105` returns endpoints that have this address
+              #     *   `port>8080` returns endpoints that have port number larger than 8080
+              #     *
+              #     `name>projects/my-project/locations/us-east1/namespaces/my-namespace/services/my-service/endpoints/endpoint-c`
+              #         returns endpoints that have name that is alphabetically later than the
+              #         string, so "endpoint-e" is returned but "endpoint-a" is not
+              #     *
+              #     `name=projects/my-project/locations/us-central1/namespaces/my-namespace/services/my-service/endpoints/ep-1`
+              #          returns the endpoint that has an endpoint_id equal to `ep-1`
+              #     *   `annotations.owner!=sd AND annotations.foo=bar` returns endpoints that
+              #         have `owner` in annotation key but value is not `sd` AND have
+              #         key/value `foo=bar`
+              #     *   `doesnotexist.foo=bar` returns an empty list. Note that endpoint
+              #         doesn't have a field called "doesnotexist". Since the filter does not
+              #         match any endpoint, it returns no results
+              #
+              #     For more information about filtering, see
+              #     [API Filtering](https://aip.dev/160).
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::ServiceDirectory::V1::ResolveServiceResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -314,6 +347,13 @@ module Google
                 config_attr :metadata,      nil, ::Hash, nil
                 config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
                 config_attr :quota_project, nil, ::String, nil
+
+                # @private
+                # Overrides for http bindings for the RPCs of this service
+                # are only used when this service is used as mixin, and only
+                # by the host service.
+                # @return [::Hash{::Symbol=>::Array<::Gapic::Rest::GrpcTranscoder::HttpBinding>}]
+                config_attr :bindings_override, {}, ::Hash, nil
 
                 # @private
                 def initialize parent_config = nil
