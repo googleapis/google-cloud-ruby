@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/servicedirectory/v1beta1/lookup_service_pb"
+require "google/cloud/location"
 
 module Google
   module Cloud
@@ -138,6 +139,12 @@ module Google
               @quota_project_id = @config.quota_project
               @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
               @lookup_service_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::ServiceDirectory::V1beta1::LookupService::Stub,
                 credentials:  credentials,
@@ -146,6 +153,13 @@ module Google
                 interceptors: @config.interceptors
               )
             end
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
 
             # Service calls
 
@@ -172,8 +186,8 @@ module Google
             #   @param name [::String]
             #     Required. The name of the service to resolve.
             #   @param max_endpoints [::Integer]
-            #     Optional. The maximum number of endpoints to return. Defaults to 25. Maximum is 100.
-            #     If a value less than one is specified, the Default is used.
+            #     Optional. The maximum number of endpoints to return. Defaults to 25.
+            #     Maximum is 100. If a value less than one is specified, the Default is used.
             #     If a value greater than the Maximum is specified, the Maximum is used.
             #   @param endpoint_filter [::String]
             #     Optional. The filter applied to the endpoints of the resolved service.
@@ -200,6 +214,9 @@ module Google
             #     `name>projects/my-project/locations/us-east1/namespaces/my-namespace/services/my-service/endpoints/endpoint-c`
             #         returns endpoints that have name that is alphabetically later than the
             #         string, so "endpoint-e" is returned but "endpoint-a" is not
+            #     *
+            #     `name=projects/my-project/locations/us-central1/namespaces/my-namespace/services/my-service/endpoints/ep-1`
+            #          returns the endpoint that has an endpoint_id equal to `ep-1`
             #     *   `metadata.owner!=sd AND metadata.foo=bar` returns endpoints that have
             #         `owner` in annotation key but value is not `sd` AND have key/value
             #          `foo=bar`
