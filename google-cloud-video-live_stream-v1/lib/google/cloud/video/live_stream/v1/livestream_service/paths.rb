@@ -26,6 +26,25 @@ module Google
             # Path helper methods for the LivestreamService API.
             module Paths
               ##
+              # Create a fully-qualified Asset resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/locations/{location}/assets/{asset}`
+              #
+              # @param project [String]
+              # @param location [String]
+              # @param asset [String]
+              #
+              # @return [::String]
+              def asset_path project:, location:, asset:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                "projects/#{project}/locations/#{location}/assets/#{asset}"
+              end
+
+              ##
               # Create a fully-qualified Channel resource string.
               #
               # The resource will be in the following format:
@@ -99,6 +118,42 @@ module Google
                 raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
                 "projects/#{project}/locations/#{location}"
+              end
+
+              ##
+              # Create a fully-qualified Network resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/global/networks/{network}`
+              #
+              # @param project [String]
+              # @param network [String]
+              #
+              # @return [::String]
+              def network_path project:, network:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+                "projects/#{project}/global/networks/#{network}"
+              end
+
+              ##
+              # Create a fully-qualified Pool resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/locations/{location}/pools/{pool}`
+              #
+              # @param project [String]
+              # @param location [String]
+              # @param pool [String]
+              #
+              # @return [::String]
+              def pool_path project:, location:, pool:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+                "projects/#{project}/locations/#{location}/pools/#{pool}"
               end
 
               ##

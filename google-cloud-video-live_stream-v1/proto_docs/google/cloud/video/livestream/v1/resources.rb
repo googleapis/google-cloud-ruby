@@ -431,19 +431,22 @@ module Google
           #     User-defined key/value metadata.
           # @!attribute [rw] input_switch
           #   @return [::Google::Cloud::Video::LiveStream::V1::Event::InputSwitchTask]
-          #     Required. Switches to another input stream.
+          #     Switches to another input stream.
           # @!attribute [rw] ad_break
           #   @return [::Google::Cloud::Video::LiveStream::V1::Event::AdBreakTask]
-          #     Required. Inserts a new ad opportunity.
+          #     Inserts a new ad opportunity.
           # @!attribute [rw] return_to_program
           #   @return [::Google::Cloud::Video::LiveStream::V1::Event::ReturnToProgramTask]
-          #     Required. Stops any running ad break.
+          #     Stops any running ad break.
+          # @!attribute [rw] slate
+          #   @return [::Google::Cloud::Video::LiveStream::V1::Event::SlateTask]
+          #     Inserts a slate.
           # @!attribute [rw] mute
           #   @return [::Google::Cloud::Video::LiveStream::V1::Event::MuteTask]
-          #     Required. Mutes the stream.
+          #     Mutes the stream.
           # @!attribute [rw] unmute
           #   @return [::Google::Cloud::Video::LiveStream::V1::Event::UnmuteTask]
-          #     Required. Unmutes the stream.
+          #     Unmutes the stream.
           # @!attribute [rw] execute_now
           #   @return [::Boolean]
           #     When this field is set to true, the event will be executed at the earliest
@@ -487,6 +490,22 @@ module Google
             #   @return [::Google::Protobuf::Duration]
             #     Duration of an ad opportunity. Must be greater than 0.
             class AdBreakTask
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Inserts a slate.
+            # @!attribute [rw] duration
+            #   @return [::Google::Protobuf::Duration]
+            #     Optional. Duration of the slate. Must be greater than 0 if specified.
+            #     Omit this field for a long running slate.
+            # @!attribute [rw] asset
+            #   @return [::String]
+            #     Slate asset to use for the duration. If its duration is less than the
+            #     duration of the SlateTask, then it will be looped. The slate must be
+            #     represented in the form of:
+            #     `projects/{project}/locations/{location}/assets/{assetId}`.
+            class SlateTask
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
@@ -546,6 +565,96 @@ module Google
 
               # Event was stopped before running for its full duration.
               STOPPED = 6
+            end
+          end
+
+          # An asset represents a video or an image.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     The resource name of the asset, in the form of:
+          #     `projects/{project}/locations/{location}/assets/{assetId}`.
+          # @!attribute [r] create_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The creation time.
+          # @!attribute [r] update_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The update time.
+          # @!attribute [rw] labels
+          #   @return [::Google::Protobuf::Map{::String => ::String}]
+          #     User-defined key/value metadata.
+          # @!attribute [rw] video
+          #   @return [::Google::Cloud::Video::LiveStream::V1::Asset::VideoAsset]
+          #     VideoAsset represents a video.
+          # @!attribute [rw] image
+          #   @return [::Google::Cloud::Video::LiveStream::V1::Asset::ImageAsset]
+          #     ImageAsset represents an image.
+          # @!attribute [rw] crc32c
+          #   @return [::String]
+          #     Based64-encoded CRC32c checksum of the asset file. For more information,
+          #     see the crc32c checksum of the [Cloud Storage Objects
+          #     resource](https://cloud.google.com/storage/docs/json_api/v1/objects).
+          #     If crc32c is omitted or left empty when the asset is created, this field is
+          #     filled by the crc32c checksum of the Cloud Storage object indicated by
+          #     [VideoAsset.uri] or [ImageAsset.uri].
+          #     If crc32c is set, the asset can't be created if the crc32c value does not
+          #     match with the crc32c checksum of the Cloud Storage object indicated by
+          #     [VideoAsset.uri] or [ImageAsset.uri].
+          # @!attribute [r] state
+          #   @return [::Google::Cloud::Video::LiveStream::V1::Asset::State]
+          #     Output only. The state of the asset resource.
+          # @!attribute [r] error
+          #   @return [::Google::Rpc::Status]
+          #     Output only. Only present when `state` is `ERROR`. The reason for the error
+          #     state of the asset.
+          class Asset
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # VideoAsset represents a video. The supported formats are MP4, MPEG-TS, and
+            # FLV. The supported video codec is H264. The supported audio codecs are
+            # AAC, AC3, MP2, and MP3.
+            # @!attribute [rw] uri
+            #   @return [::String]
+            #     Cloud Storage URI of the video. The format is `gs://my-bucket/my-object`.
+            class VideoAsset
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Image represents an image. The supported format is JPEG.
+            # @!attribute [rw] uri
+            #   @return [::String]
+            #     Cloud Storage URI of the image. The format is `gs://my-bucket/my-object`.
+            class ImageAsset
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::String]
+            class LabelsEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # State of the asset resource.
+            module State
+              # State is not specified.
+              STATE_UNSPECIFIED = 0
+
+              # The asset is being created.
+              CREATING = 1
+
+              # The asset is ready for use.
+              ACTIVE = 2
+
+              # The asset is being deleted.
+              DELETING = 3
+
+              # The asset has an error.
+              ERROR = 4
             end
           end
 
@@ -644,6 +753,55 @@ module Google
             #     - `cenc` - AES-CTR subsample
             #     - `cbcs`- AES-CBC subsample pattern
             class MpegCommonEncryption
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+
+          # Pool resource defines the configuration of Live Stream pools for a specific
+          # location. Currently we support only one pool resource per project per
+          # location. After the creation of the first input, a default pool is created
+          # automatically at "projects/\\{project}/locations/\\{location}/pools/default".
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     The resource name of the pool, in the form of:
+          #     `projects/{project}/locations/{location}/pools/{poolId}`.
+          # @!attribute [r] create_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The creation time.
+          # @!attribute [r] update_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The update time.
+          # @!attribute [rw] labels
+          #   @return [::Google::Protobuf::Map{::String => ::String}]
+          #     User-defined key/value metadata.
+          # @!attribute [rw] network_config
+          #   @return [::Google::Cloud::Video::LiveStream::V1::Pool::NetworkConfig]
+          #     Network configuration for the pool.
+          class Pool
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Defines the network configuration for the pool.
+            # @!attribute [rw] peered_network
+            #   @return [::String]
+            #     peered_network is the network resource URL of the network that is peered
+            #     to the service provider network. Must be of the format
+            #     projects/NETWORK_PROJECT_NUMBER/global/networks/NETWORK_NAME, where
+            #     NETWORK_PROJECT_NUMBER is the project number of the Cloud project that
+            #     holds your VPC network and NETWORK_NAME is the name of your VPC network.
+            #     If peered_network is omitted or empty, the pool will use endpoints that
+            #     are publicly available.
+            class NetworkConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::String]
+            class LabelsEntry
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
