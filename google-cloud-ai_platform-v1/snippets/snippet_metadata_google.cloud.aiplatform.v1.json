@@ -6532,6 +6532,286 @@
       ]
     },
     {
+      "region_tag": "aiplatform_v1_generated_ScheduleService_CreateSchedule_sync",
+      "title": "Snippet for the create_schedule call in the ScheduleService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::ScheduleService::Client#create_schedule. It may require modification in order to execute successfully.",
+      "file": "schedule_service/create_schedule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_schedule",
+        "full_name": "::Google::Cloud::AIPlatform::V1::ScheduleService::Client#create_schedule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::CreateScheduleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::Schedule",
+        "client": {
+          "short_name": "ScheduleService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::ScheduleService::Client"
+        },
+        "method": {
+          "short_name": "CreateSchedule",
+          "full_name": "google.cloud.aiplatform.v1.ScheduleService.CreateSchedule",
+          "service": {
+            "short_name": "ScheduleService",
+            "full_name": "google.cloud.aiplatform.v1.ScheduleService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_ScheduleService_DeleteSchedule_sync",
+      "title": "Snippet for the delete_schedule call in the ScheduleService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::ScheduleService::Client#delete_schedule. It may require modification in order to execute successfully.",
+      "file": "schedule_service/delete_schedule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_schedule",
+        "full_name": "::Google::Cloud::AIPlatform::V1::ScheduleService::Client#delete_schedule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::DeleteScheduleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ScheduleService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::ScheduleService::Client"
+        },
+        "method": {
+          "short_name": "DeleteSchedule",
+          "full_name": "google.cloud.aiplatform.v1.ScheduleService.DeleteSchedule",
+          "service": {
+            "short_name": "ScheduleService",
+            "full_name": "google.cloud.aiplatform.v1.ScheduleService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 48,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_ScheduleService_GetSchedule_sync",
+      "title": "Snippet for the get_schedule call in the ScheduleService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::ScheduleService::Client#get_schedule. It may require modification in order to execute successfully.",
+      "file": "schedule_service/get_schedule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_schedule",
+        "full_name": "::Google::Cloud::AIPlatform::V1::ScheduleService::Client#get_schedule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::GetScheduleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::Schedule",
+        "client": {
+          "short_name": "ScheduleService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::ScheduleService::Client"
+        },
+        "method": {
+          "short_name": "GetSchedule",
+          "full_name": "google.cloud.aiplatform.v1.ScheduleService.GetSchedule",
+          "service": {
+            "short_name": "ScheduleService",
+            "full_name": "google.cloud.aiplatform.v1.ScheduleService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_ScheduleService_ListSchedules_sync",
+      "title": "Snippet for the list_schedules call in the ScheduleService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::ScheduleService::Client#list_schedules. It may require modification in order to execute successfully.",
+      "file": "schedule_service/list_schedules.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_schedules",
+        "full_name": "::Google::Cloud::AIPlatform::V1::ScheduleService::Client#list_schedules",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::ListSchedulesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::ListSchedulesResponse",
+        "client": {
+          "short_name": "ScheduleService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::ScheduleService::Client"
+        },
+        "method": {
+          "short_name": "ListSchedules",
+          "full_name": "google.cloud.aiplatform.v1.ScheduleService.ListSchedules",
+          "service": {
+            "short_name": "ScheduleService",
+            "full_name": "google.cloud.aiplatform.v1.ScheduleService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_ScheduleService_PauseSchedule_sync",
+      "title": "Snippet for the pause_schedule call in the ScheduleService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::ScheduleService::Client#pause_schedule. It may require modification in order to execute successfully.",
+      "file": "schedule_service/pause_schedule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "pause_schedule",
+        "full_name": "::Google::Cloud::AIPlatform::V1::ScheduleService::Client#pause_schedule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::PauseScheduleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "ScheduleService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::ScheduleService::Client"
+        },
+        "method": {
+          "short_name": "PauseSchedule",
+          "full_name": "google.cloud.aiplatform.v1.ScheduleService.PauseSchedule",
+          "service": {
+            "short_name": "ScheduleService",
+            "full_name": "google.cloud.aiplatform.v1.ScheduleService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_ScheduleService_ResumeSchedule_sync",
+      "title": "Snippet for the resume_schedule call in the ScheduleService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::ScheduleService::Client#resume_schedule. It may require modification in order to execute successfully.",
+      "file": "schedule_service/resume_schedule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "resume_schedule",
+        "full_name": "::Google::Cloud::AIPlatform::V1::ScheduleService::Client#resume_schedule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::ResumeScheduleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "ScheduleService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::ScheduleService::Client"
+        },
+        "method": {
+          "short_name": "ResumeSchedule",
+          "full_name": "google.cloud.aiplatform.v1.ScheduleService.ResumeSchedule",
+          "service": {
+            "short_name": "ScheduleService",
+            "full_name": "google.cloud.aiplatform.v1.ScheduleService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_ScheduleService_UpdateSchedule_sync",
+      "title": "Snippet for the update_schedule call in the ScheduleService service",
+      "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::ScheduleService::Client#update_schedule. It may require modification in order to execute successfully.",
+      "file": "schedule_service/update_schedule.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_schedule",
+        "full_name": "::Google::Cloud::AIPlatform::V1::ScheduleService::Client#update_schedule",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::UpdateScheduleRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::Schedule",
+        "client": {
+          "short_name": "ScheduleService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::ScheduleService::Client"
+        },
+        "method": {
+          "short_name": "UpdateSchedule",
+          "full_name": "google.cloud.aiplatform.v1.ScheduleService.UpdateSchedule",
+          "service": {
+            "short_name": "ScheduleService",
+            "full_name": "google.cloud.aiplatform.v1.ScheduleService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "aiplatform_v1_generated_SpecialistPoolService_CreateSpecialistPool_sync",
       "title": "Snippet for the create_specialist_pool call in the SpecialistPoolService service",
       "description": "This is an auto-generated example demonstrating basic usage of Google::Cloud::AIPlatform::V1::SpecialistPoolService::Client#create_specialist_pool. It may require modification in order to execute successfully.",
