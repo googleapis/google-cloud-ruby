@@ -359,6 +359,10 @@ module Google
         # @!attribute [rw] sole_tenant_config
         #   @return [::Google::Cloud::Container::V1beta1::SoleTenantConfig]
         #     Parameters for node pools to be backed by shared sole tenant node groups.
+        # @!attribute [rw] host_maintenance_policy
+        #   @return [::Google::Cloud::Container::V1beta1::HostMaintenancePolicy]
+        #     HostMaintenancePolicy contains the desired maintenance policy for the
+        #     Google Compute Engine hosts.
         class NodeConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -466,6 +470,14 @@ module Google
         #     power of 2)
         #     Example: max_pods_per_node of 30 will result in 32 IPs (/27) when
         #     overprovisioning is disabled.
+        # @!attribute [rw] additional_node_network_configs
+        #   @return [::Array<::Google::Cloud::Container::V1beta1::AdditionalNodeNetworkConfig>]
+        #     We specify the additional node networks for this node pool using this list.
+        #     Each node network corresponds to an additional interface
+        # @!attribute [rw] additional_pod_network_configs
+        #   @return [::Array<::Google::Cloud::Container::V1beta1::AdditionalPodNetworkConfig>]
+        #     We specify the additional pod networks for this node pool using this list.
+        #     Each pod network corresponds to an additional alias IP range for the node
         # @!attribute [r] pod_ipv4_range_utilization
         #   @return [::Float]
         #     Output only. [Output only] The utilization of the IPv4 range for the pod.
@@ -496,6 +508,36 @@ module Google
               TIER_1 = 1
             end
           end
+        end
+
+        # AdditionalNodeNetworkConfig is the configuration for additional node networks
+        # within the NodeNetworkConfig message
+        # @!attribute [rw] network
+        #   @return [::String]
+        #     Name of the VPC where the additional interface belongs
+        # @!attribute [rw] subnetwork
+        #   @return [::String]
+        #     Name of the subnetwork where the additional interface belongs
+        class AdditionalNodeNetworkConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # AdditionalPodNetworkConfig is the configuration for additional pod networks
+        # within the NodeNetworkConfig message
+        # @!attribute [rw] subnetwork
+        #   @return [::String]
+        #     Name of the subnetwork where the additional pod network belongs
+        # @!attribute [rw] secondary_pod_range
+        #   @return [::String]
+        #     The name of the secondary range on the subnet which provides IP address for
+        #     this pod range
+        # @!attribute [rw] max_pods_per_node
+        #   @return [::Google::Cloud::Container::V1beta1::MaxPodsConstraint]
+        #     The maximum number of pods per node which use this pod network
+        class AdditionalPodNetworkConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A set of Shielded Instance options.
@@ -666,6 +708,36 @@ module Google
               # Anti-affinity operator.
               NOT_IN = 2
             end
+          end
+        end
+
+        # HostMaintenancePolicy contains the maintenance policy for the hosts on which
+        # the GKE VMs run on.
+        # @!attribute [rw] maintenance_interval
+        #   @return [::Google::Cloud::Container::V1beta1::HostMaintenancePolicy::MaintenanceInterval]
+        #     Specifies the frequency of planned maintenance events.
+        class HostMaintenancePolicy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Allows selecting how infrastructure upgrades should be applied to the
+          # cluster or node pool.
+          module MaintenanceInterval
+            # The maintenance interval is not explicitly specified.
+            MAINTENANCE_INTERVAL_UNSPECIFIED = 0
+
+            # Nodes are eligible to receive infrastructure and hypervisor updates as
+            # they become available.  This may result in more maintenance operations
+            # (live migrations or terminations) for the node than the PERIODIC option.
+            AS_NEEDED = 1
+
+            # Nodes receive infrastructure and hypervisor updates on a periodic basis,
+            # minimizing the number of maintenance operations (live migrations or
+            # terminations) on an individual VM.  This may mean underlying VMs will
+            # take longer to receive an update than if it was configured for
+            # AS_NEEDED.  Security updates will still be applied as soon
+            # as they are available.
+            PERIODIC = 2
           end
         end
 
@@ -1958,6 +2030,10 @@ module Google
         # @!attribute [rw] logging_config
         #   @return [::Google::Cloud::Container::V1beta1::NodePoolLoggingConfig]
         #     Logging configuration for node pools.
+        # @!attribute [rw] host_maintenance_policy
+        #   @return [::Google::Cloud::Container::V1beta1::HostMaintenancePolicy]
+        #     HostMaintenancePolicy contains the desired maintenance policy for the
+        #     Google Compute Engine hosts.
         class NodeConfigDefaults
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2213,6 +2289,10 @@ module Google
         # @!attribute [rw] desired_k8s_beta_apis
         #   @return [::Google::Cloud::Container::V1beta1::K8sBetaAPIConfig]
         #     Beta APIs enabled for cluster.
+        # @!attribute [rw] desired_host_maintenance_policy
+        #   @return [::Google::Cloud::Container::V1beta1::HostMaintenancePolicy]
+        #     HostMaintenancePolicy contains the desired maintenance policy for the
+        #     Google Compute Engine hosts.
         class ClusterUpdate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3603,6 +3683,11 @@ module Google
           #   @return [::String]
           #     TPU placement topology for pod slice node pool.
           #     https://cloud.google.com/tpu/docs/types-topologies#tpu_topologies
+          # @!attribute [rw] policy_name
+          #   @return [::String]
+          #     If set, refers to the name of a custom resource policy supplied by the
+          #     user. The resource policy must be in the same project and region as the
+          #     node pool. If not found, InvalidArgument error is returned.
           class PlacementPolicy
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -4611,6 +4696,9 @@ module Google
         #   @return [::Google::Cloud::Container::V1beta1::GatewayAPIConfig]
         #     GatewayAPIConfig contains the desired config of Gateway API on this
         #     cluster.
+        # @!attribute [rw] enable_multi_networking
+        #   @return [::Boolean]
+        #     Whether multi-networking is enabled for this cluster.
         # @!attribute [rw] network_performance_config
         #   @return [::Google::Cloud::Container::V1beta1::NetworkConfig::ClusterNetworkPerformanceConfig]
         #     Network bandwidth tier configuration.
