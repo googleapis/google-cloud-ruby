@@ -569,6 +569,12 @@ module Google
         # @!attribute [rw] ordinal_position
         #   @return [::Integer]
         #     The ordinal position of the column in the table.
+        # @!attribute [rw] precision
+        #   @return [::Integer]
+        #     Column precision.
+        # @!attribute [rw] scale
+        #   @return [::Integer]
+        #     Column scale.
         class MysqlColumn
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
