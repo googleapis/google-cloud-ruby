@@ -191,7 +191,7 @@ module Google
         #     `Content-Type` to a media type when the
         #      {::Google::Cloud::Tasks::V2beta3::CloudTasks::Client#create_task task is created}.
         #      For example,`Content-Type` can be set to `"application/octet-stream"` or
-        #      `"application/json"`. The default value is set to "application/json"`.
+        #      `"application/json"`. The default value is set to `"application/json"`.
         #
         #     * User-Agent: This will be set to `"Google-Cloud-Tasks"`.
         #
