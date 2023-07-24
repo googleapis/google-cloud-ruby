@@ -23,6 +23,18 @@ require "gapic/grpc/service_stub"
 require "google/cloud/video/live_stream/v1/livestream_service"
 
 class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::ClientPathsTest < Minitest::Test
+  def test_asset_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.asset_path project: "value0", location: "value1", asset: "value2"
+      assert_equal "projects/value0/locations/value1/assets/value2", path
+    end
+  end
+
   def test_channel_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do
@@ -68,6 +80,30 @@ class ::Google::Cloud::Video::LiveStream::V1::LivestreamService::ClientPathsTest
 
       path = client.location_path project: "value0", location: "value1"
       assert_equal "projects/value0/locations/value1", path
+    end
+  end
+
+  def test_network_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.network_path project: "value0", network: "value1"
+      assert_equal "projects/value0/global/networks/value1", path
+    end
+  end
+
+  def test_pool_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Video::LiveStream::V1::LivestreamService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.pool_path project: "value0", location: "value1", pool: "value2"
+      assert_equal "projects/value0/locations/value1/pools/value2", path
     end
   end
 
