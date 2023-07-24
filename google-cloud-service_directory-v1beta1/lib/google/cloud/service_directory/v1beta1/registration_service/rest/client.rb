@@ -19,6 +19,7 @@
 require "google/cloud/errors"
 require "google/cloud/servicedirectory/v1beta1/registration_service_pb"
 require "google/cloud/service_directory/v1beta1/registration_service/rest/service_stub"
+require "google/cloud/location/rest"
 
 module Google
   module Cloud
@@ -149,8 +150,22 @@ module Google
                 @quota_project_id = @config.quota_project
                 @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
+                @location_client = Google::Cloud::Location::Locations::Rest::Client.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @config.endpoint
+                  config.bindings_override = @config.bindings_override
+                end
+
                 @registration_service_stub = ::Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Rest::ServiceStub.new endpoint: @config.endpoint, credentials: credentials
               end
+
+              ##
+              # Get the associated client for mix-in of the Locations.
+              #
+              # @return [Google::Cloud::Location::Locations::Rest::Client]
+              #
+              attr_reader :location_client
 
               # Service calls
 
@@ -246,19 +261,21 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The resource name of the project and location whose namespaces you'd like
-              #     to list.
+              #     Required. The resource name of the project and location whose namespaces
+              #     you'd like to list.
               #   @param page_size [::Integer]
               #     Optional. The maximum number of items to return.
               #   @param page_token [::String]
-              #     Optional. The next_page_token value returned from a previous List request, if any.
+              #     Optional. The next_page_token value returned from a previous List request,
+              #     if any.
               #   @param filter [::String]
               #     Optional. The filter to list results by.
               #
               #     General `filter` string syntax:
               #     `<field> <operator> <value> (<logical connector>)`
               #
-              #     *   `<field>` can be `name` or `labels.<key>` for map field
+              #     *   `<field>` can be `name`, `labels.<key>` for map field, or
+              #     `attributes.<field>` for attributes field
               #     *   `<operator>` can be `<`, `>`, `<=`, `>=`, `!=`, `=`, `:`. Of which `:`
               #         means `HAS`, and is roughly the same as `=`
               #     *   `<value>` must be the same data type as field
@@ -277,6 +294,8 @@ module Google
               #     *   `doesnotexist.foo=bar` returns an empty list. Note that namespace
               #         doesn't have a field called "doesnotexist". Since the filter does not
               #         match any namespaces, it returns no results
+              #     *   `attributes.managed_registration=true` returns namespaces that are
+              #         managed by a GCP product or service
               #
               #     For more information about filtering, see
               #     [API Filtering](https://aip.dev/160).
@@ -649,6 +668,9 @@ module Google
               #     *   `doesnotexist.foo=bar` returns an empty list. Note that service
               #         doesn't have a field called "doesnotexist". Since the filter does not
               #         match any services, it returns no results
+              #     *   `attributes.managed_registration=true` returns services that are
+              #     managed
+              #         by a GCP product or service
               #
               #     For more information about filtering, see
               #     [API Filtering](https://aip.dev/160).
@@ -999,8 +1021,8 @@ module Google
               #     General `filter` string syntax:
               #     `<field> <operator> <value> (<logical connector>)`
               #
-              #     *   `<field>` can be `name`, `address`, `port`, or `metadata.<key>` for map
-              #         field
+              #     *   `<field>` can be `name`, `address`, `port`, `metadata.<key>` for map
+              #         field, or `attributes.<field>` for attributes field
               #     *   `<operator>` can be `<`, `>`, `<=`, `>=`, `!=`, `=`, `:`. Of which `:`
               #         means `HAS`, and is roughly the same as `=`
               #     *   `<value>` must be the same data type as field
@@ -1024,6 +1046,8 @@ module Google
               #     *   `doesnotexist.foo=bar` returns an empty list. Note that endpoint
               #         doesn't have a field called "doesnotexist". Since the filter does not
               #         match any endpoints, it returns no results
+              #     *   `attributes.kubernetes_resource_type=KUBERNETES_RESOURCE_TYPE_CLUSTER_
+              #         IP` returns endpoints with the corresponding kubernetes_resource_type
               #
               #     For more information about filtering, see
               #     [API Filtering](https://aip.dev/160).
@@ -1270,7 +1294,7 @@ module Google
               end
 
               ##
-              # Gets the IAM Policy for a resource (namespace or service only).
+              # Gets the IAM Policy for a resource
               #
               # @overload get_iam_policy(request, options = nil)
               #   Pass arguments to `get_iam_policy` via a request object, either of type
@@ -1336,7 +1360,7 @@ module Google
               end
 
               ##
-              # Sets the IAM Policy for a resource (namespace or service only).
+              # Sets the IAM Policy for a resource
               #
               # @overload set_iam_policy(request, options = nil)
               #   Pass arguments to `set_iam_policy` via a request object, either of type
@@ -1410,7 +1434,8 @@ module Google
               end
 
               ##
-              # Tests IAM permissions for a resource (namespace or service only).
+              # Tests IAM permissions for a resource (namespace, service  or
+              # service workload only).
               #
               # @overload test_iam_permissions(request, options = nil)
               #   Pass arguments to `test_iam_permissions` via a request object, either of type
@@ -1564,6 +1589,13 @@ module Google
                 config_attr :metadata,      nil, ::Hash, nil
                 config_attr :retry_policy,  nil, ::Hash, ::Proc, nil
                 config_attr :quota_project, nil, ::String, nil
+
+                # @private
+                # Overrides for http bindings for the RPCs of this service
+                # are only used when this service is used as mixin, and only
+                # by the host service.
+                # @return [::Hash{::Symbol=>::Array<::Gapic::Rest::GrpcTranscoder::HttpBinding>}]
+                config_attr :bindings_override, {}, ::Hash, nil
 
                 # @private
                 def initialize parent_config = nil

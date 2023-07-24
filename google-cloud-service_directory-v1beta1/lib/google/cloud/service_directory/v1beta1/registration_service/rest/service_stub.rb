@@ -1072,6 +1072,14 @@ module Google
                                                             ["resource", %r{^projects/[^/]+/locations/[^/]+/namespaces/[^/]+/services/[^/]+/?$}, false]
                                                           ]
                                                         )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1beta1/{resource}:getIamPolicy",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["resource", %r{^projects/[^/]+/locations/[^/]+/namespaces/[^/]+/workloads/[^/]+/?$}, false]
+                                                          ]
+                                                        )
                 transcoder.transcode request_pb
               end
 
@@ -1102,6 +1110,14 @@ module Google
                                                             ["resource", %r{^projects/[^/]+/locations/[^/]+/namespaces/[^/]+/services/[^/]+/?$}, false]
                                                           ]
                                                         )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1beta1/{resource}:setIamPolicy",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["resource", %r{^projects/[^/]+/locations/[^/]+/namespaces/[^/]+/workloads/[^/]+/?$}, false]
+                                                          ]
+                                                        )
                 transcoder.transcode request_pb
               end
 
@@ -1130,6 +1146,14 @@ module Google
                                                           body: "*",
                                                           matches: [
                                                             ["resource", %r{^projects/[^/]+/locations/[^/]+/namespaces/[^/]+/services/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/v1beta1/{resource}:testIamPermissions",
+                                                          body: "*",
+                                                          matches: [
+                                                            ["resource", %r{^projects/[^/]+/locations/[^/]+/namespaces/[^/]+/workloads/[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

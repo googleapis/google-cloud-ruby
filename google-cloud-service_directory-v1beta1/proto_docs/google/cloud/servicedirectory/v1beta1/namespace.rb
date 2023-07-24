@@ -39,6 +39,10 @@ module Google
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The timestamp when the namespace was last updated.
+        # @!attribute [r] uid
+        #   @return [::String]
+        #     Output only. A globally unique identifier (in UUID4 format) for this
+        #     namespace.
         class Namespace
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
