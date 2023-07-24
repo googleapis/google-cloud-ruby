@@ -1255,6 +1255,92 @@ module Google
           end
         end
 
+        # GitRepoSource describes a repo and ref of a code repository.
+        # @!attribute [rw] uri
+        #   @return [::String]
+        #     The URI of the repo (e.g. https://github.com/user/repo.git).
+        #     Either `uri` or `repository` can be specified and is required.
+        # @!attribute [rw] repository
+        #   @return [::String]
+        #     The connected repository resource name, in the format
+        #     `projects/*/locations/*/connections/*/repositories/*`. Either `uri` or
+        #     `repository` can be specified and is required.
+        # @!attribute [rw] ref
+        #   @return [::String]
+        #     The branch or tag to use. Must start with "refs/" (required).
+        # @!attribute [rw] repo_type
+        #   @return [::Google::Cloud::Build::V1::GitFileSource::RepoType]
+        #     See RepoType below.
+        # @!attribute [rw] github_enterprise_config
+        #   @return [::String]
+        #     The full resource name of the github enterprise config.
+        #     Format:
+        #     `projects/{project}/locations/{location}/githubEnterpriseConfigs/{id}`.
+        #     `projects/{project}/githubEnterpriseConfigs/{id}`.
+        class GitRepoSource
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # GitFileSource describes a file within a (possibly remote) code repository.
+        # @!attribute [rw] path
+        #   @return [::String]
+        #     The path of the file, with the repo root as the root of the path.
+        # @!attribute [rw] uri
+        #   @return [::String]
+        #     The URI of the repo.
+        #     Either uri or repository can be specified.
+        #     If unspecified, the repo from which the trigger invocation originated is
+        #     assumed to be the repo from which to read the specified path.
+        # @!attribute [rw] repository
+        #   @return [::String]
+        #     The fully qualified resource name of the Repos API repository.
+        #     Either URI or repository can be specified.
+        #     If unspecified, the repo from which the trigger invocation originated is
+        #     assumed to be the repo from which to read the specified path.
+        # @!attribute [rw] repo_type
+        #   @return [::Google::Cloud::Build::V1::GitFileSource::RepoType]
+        #     See RepoType above.
+        # @!attribute [rw] revision
+        #   @return [::String]
+        #     The branch, tag, arbitrary ref, or SHA version of the repo to use when
+        #     resolving the filename (optional).
+        #     This field respects the same syntax/resolution as described here:
+        #     https://git-scm.com/docs/gitrevisions
+        #     If unspecified, the revision from which the trigger invocation originated
+        #     is assumed to be the revision from which to read the specified path.
+        # @!attribute [rw] github_enterprise_config
+        #   @return [::String]
+        #     The full resource name of the github enterprise config.
+        #     Format:
+        #     `projects/{project}/locations/{location}/githubEnterpriseConfigs/{id}`.
+        #     `projects/{project}/githubEnterpriseConfigs/{id}`.
+        class GitFileSource
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The type of the repo, since it may not be explicit from the `repo` field
+          # (e.g from a URL).
+          module RepoType
+            # The default, unknown repo type. Don't use it, instead use one of
+            # the other repo types.
+            UNKNOWN = 0
+
+            # A Google Cloud Source Repositories-hosted repo.
+            CLOUD_SOURCE_REPOSITORIES = 1
+
+            # A GitHub-hosted repo not necessarily on "github.com" (i.e. GitHub
+            # Enterprise).
+            GITHUB = 2
+
+            # A Bitbucket Server-hosted repo.
+            BITBUCKET_SERVER = 3
+
+            # A GitLab-hosted repo.
+            GITLAB = 4
+          end
+        end
+
         # Configuration for an automated build in response to source repository
         # changes.
         # @!attribute [rw] resource_name
@@ -1320,6 +1406,9 @@ module Google
         #   @return [::String]
         #     Path, from the source root, to the build configuration file
         #     (i.e. cloudbuild.yaml).
+        # @!attribute [rw] git_file_source
+        #   @return [::Google::Cloud::Build::V1::GitFileSource]
+        #     The file source describing the local or remote Build template.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time when the trigger was created.
@@ -1354,6 +1443,14 @@ module Google
         # @!attribute [rw] filter
         #   @return [::String]
         #     Optional. A Common Expression Language string.
+        # @!attribute [rw] source_to_build
+        #   @return [::Google::Cloud::Build::V1::GitRepoSource]
+        #     The repo and ref of the repository from which to build. This field
+        #     is used only for those triggers that do not respond to SCM events.
+        #     Triggers that respond to such events build source at whatever commit
+        #     caused the event.
+        #     This field is currently only used by Webhook, Pub/Sub, Manual, and Cron
+        #     triggers.
         # @!attribute [rw] service_account
         #   @return [::String]
         #     The service account used for all user-controlled operations including
@@ -1881,6 +1978,71 @@ module Google
         # ReceiveTriggerWebhookResponse [Experimental] is the response object for the
         # ReceiveTriggerWebhook method.
         class ReceiveTriggerWebhookResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Optional. The full resource name for the GitHubEnterpriseConfig
+        #     For example:
+        #     "projects/\\{$project_id}/locations/\\{$location_id}/githubEnterpriseConfigs/\\{$config_id}"
+        # @!attribute [rw] host_url
+        #   @return [::String]
+        #     The URL of the github enterprise host the configuration is for.
+        # @!attribute [rw] app_id
+        #   @return [::Integer]
+        #     Required. The GitHub app id of the Cloud Build app on the GitHub Enterprise
+        #     server.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Time when the installation was associated with the project.
+        # @!attribute [rw] webhook_key
+        #   @return [::String]
+        #     The key that should be attached to webhook calls to the ReceiveWebhook
+        #     endpoint.
+        # @!attribute [rw] peered_network
+        #   @return [::String]
+        #     Optional. The network to be used when reaching out to the GitHub
+        #     Enterprise server. The VPC network must be enabled for private
+        #     service connection. This should be set if the GitHub Enterprise server is
+        #     hosted on-premises and not reachable by public internet.
+        #     If this field is left empty, no network peering will occur and calls to
+        #     the GitHub Enterprise server will be made over the public internet.
+        #     Must be in the format
+        #     `projects/{project}/global/networks/{network}`, where \\{project}
+        #     is a project number or id and \\{network} is the name of a
+        #     VPC network in the project.
+        # @!attribute [rw] secrets
+        #   @return [::Google::Cloud::Build::V1::GitHubEnterpriseSecrets]
+        #     Names of secrets in Secret Manager.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     Name to display for this config.
+        # @!attribute [rw] ssl_ca
+        #   @return [::String]
+        #     Optional. SSL certificate to use for requests to GitHub Enterprise.
+        class GitHubEnterpriseConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # GitHubEnterpriseSecrets represents the names of all necessary secrets in
+        # Secret Manager for a GitHub Enterprise server.
+        # Format is: projects/<project number>/secrets/<secret name>.
+        # @!attribute [rw] private_key_version_name
+        #   @return [::String]
+        #     The resource name for the private key secret version.
+        # @!attribute [rw] webhook_secret_version_name
+        #   @return [::String]
+        #     The resource name for the webhook secret secret version in Secret Manager.
+        # @!attribute [rw] oauth_secret_version_name
+        #   @return [::String]
+        #     The resource name for the OAuth secret secret version in Secret Manager.
+        # @!attribute [rw] oauth_client_id_version_name
+        #   @return [::String]
+        #     The resource name for the OAuth client ID secret version in Secret Manager.
+        class GitHubEnterpriseSecrets
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
