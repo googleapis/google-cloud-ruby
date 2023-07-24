@@ -21,6 +21,7 @@ require "gapic/config"
 require "gapic/config/method"
 
 require "google/cloud/service_directory/v1/version"
+require "google/cloud/service_directory/v1/bindings_override"
 
 require "google/cloud/service_directory/v1/registration_service/credentials"
 require "google/cloud/service_directory/v1/registration_service/paths"
