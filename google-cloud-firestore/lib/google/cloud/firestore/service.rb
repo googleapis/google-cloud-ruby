@@ -52,7 +52,9 @@ module Google
               config.endpoint = host if host
               config.lib_name = "gccl"
               config.lib_version = Google::Cloud::Firestore::VERSION
-              config.metadata = { "google-cloud-resource-prefix": "projects/#{@project}/databases/#{@database}" }
+              config.metadata = { "google-cloud-resource-prefix": "projects/#{@project}/databases/#{@database}",
+                                  "x-goog-request-params": "project_id=#{@project}&database_id=#{@database}"
+              }
             end
           end
         end
