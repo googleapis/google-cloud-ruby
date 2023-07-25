@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.28.0 (2023-07-25)
+
+#### Features
+
+* support ScheduleService 
+
 ### 0.27.0 (2023-07-13)
 
 #### Features
