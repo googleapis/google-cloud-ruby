@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.6.0 (2023-07-25)
+
+#### Features
+
+* support asset resource service and poll service 
+
 ### 0.5.1 (2023-06-06)
 
 #### Bug Fixes
