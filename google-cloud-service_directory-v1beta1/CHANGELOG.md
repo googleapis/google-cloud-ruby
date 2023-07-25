@@ -1,5 +1,11 @@
 # Release History
 
+### 0.12.0 (2023-07-25)
+
+#### Features
+
+* support location client 
+
 ### 0.11.1 (2023-06-06)
 
 #### Bug Fixes
