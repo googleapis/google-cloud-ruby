@@ -1,5 +1,14 @@
 # Release History
 
+### 0.25.0 (2023-07-25)
+
+#### Features
+
+* add enable_multi_networking to NetworkConfig 
+* add policy_name to PlacementPolicy message within a node pool 
+* add support for AdditionalPodNetworkConfig and AdditionalNodeNetworkConfig 
+* add support for HostMaintenancePolicy 
+
 ### 0.24.0 (2023-07-13)
 
 #### Features
