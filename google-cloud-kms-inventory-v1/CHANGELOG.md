@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.6.0 (2023-07-25)
+
+#### Features
+
+* support more algorithm in CryptoKeyVersionAlgorithm 
+
 ### 0.5.0 (2023-07-14)
 
 #### Features
