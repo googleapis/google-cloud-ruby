@@ -1,5 +1,11 @@
 # Release History
 
+### 0.22.0 (2023-07-25)
+
+#### Features
+
+* support more algorithm in CryptoKeyVersionAlgorithm 
+
 ### 0.21.0 (2023-07-10)
 
 #### Features
