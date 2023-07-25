@@ -1,5 +1,12 @@
 # Release History
 
+### 0.8.0 (2023-07-25)
+
+#### Features
+
+* add uid in Endpoint 
+* support location service  
+
 ### 0.7.1 (2023-06-06)
 
 #### Bug Fixes
