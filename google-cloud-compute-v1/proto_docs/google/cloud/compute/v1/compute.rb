@@ -2982,7 +2982,7 @@ module Google
         #     [Output Only] Creation timestamp in RFC3339 text format.
         # @!attribute [rw] custom_response_headers
         #   @return [::Array<::String>]
-        #     Headers that the HTTP/S load balancer should add to proxied responses.
+        #     Headers that the Application Load Balancer should add to proxied responses.
         # @!attribute [rw] description
         #   @return [::String]
         #     An optional textual description of the resource; provided by the client when the resource is created.
@@ -6898,6 +6898,9 @@ module Google
 
             # The group picks zones for creating VM instances to fulfill the requested number of VMs within present resource constraints and to maximize utilization of unused zonal reservations. Recommended for batch workloads that do not require high availability.
             ANY = 64_972
+
+            # The group creates all VM instances within a single zone. The zone is selected based on the present resource constraints and to maximize utilization of unused zonal reservations. Recommended for batch workloads with heavy interprocess communication.
+            ANY_SINGLE_ZONE = 61_100_880
 
             # The group prioritizes acquisition of resources, scheduling VMs in zones where resources are available while distributing VMs as evenly as possible across selected zones to minimize the impact of zonal failure. Recommended for highly available serving workloads.
             BALANCED = 468_409_608
@@ -12983,7 +12986,7 @@ module Google
         #     Check the ReplacementMethod enum for the list of possible values.
         # @!attribute [rw] type
         #   @return [::String]
-        #     The type of update process. You can specify either PROACTIVE so that the instance group manager proactively executes actions in order to bring instances to their target versions or OPPORTUNISTIC so that no action is proactively executed but the update will be performed as part of other actions (for example, resizes or recreateInstances calls).
+        #     The type of update process. You can specify either PROACTIVE so that the MIG automatically updates VMs to the latest configurations or OPPORTUNISTIC so that you can select the VMs that you want to update.
         #     Check the Type enum for the list of possible values.
         class InstanceGroupManagerUpdatePolicy
           include ::Google::Protobuf::MessageExts
@@ -13032,14 +13035,14 @@ module Google
             SUBSTITUTE = 280_924_314
           end
 
-          # The type of update process. You can specify either PROACTIVE so that the instance group manager proactively executes actions in order to bring instances to their target versions or OPPORTUNISTIC so that no action is proactively executed but the update will be performed as part of other actions (for example, resizes or recreateInstances calls).
+          # The type of update process. You can specify either PROACTIVE so that the MIG automatically updates VMs to the latest configurations or OPPORTUNISTIC so that you can select the VMs that you want to update.
           # Additional supported values which may be not listed in the enum directly due to technical reasons:
           # PROACTIVE
           module Type
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
 
-            # No action is being proactively performed in order to bring this IGM to its target version distribution (regardless of whether this distribution is expressed using instanceTemplate or versions field).
+            # MIG will apply new configurations to existing VMs only when you selectively target specific or all VMs to be updated.
             OPPORTUNISTIC = 429_530_089
           end
         end
@@ -21514,6 +21517,30 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for ResourcePolicies.Patch. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] resource_policy
+        #   @return [::String]
+        #     Id of the resource policy to patch.
+        # @!attribute [rw] resource_policy_resource
+        #   @return [::Google::Cloud::Compute::V1::ResourcePolicy]
+        #     The body resource for this request
+        # @!attribute [rw] update_mask
+        #   @return [::String]
+        #     update_mask indicates fields to be updated as part of this request.
+        class PatchResourcePolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for Routers.Patch. See the method description for details.
         # @!attribute [rw] project
         #   @return [::String]
@@ -22751,6 +22778,9 @@ module Google
         # @!attribute [rw] dimensions
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     The map holding related quota dimensions.
+        # @!attribute [rw] future_limit
+        #   @return [::Float]
+        #     Future quota limit being rolled out. The limit's unit depends on the quota type or metric.
         # @!attribute [rw] limit
         #   @return [::Float]
         #     Current effective quota limit. The limit's unit depends on the quota type or metric.
@@ -22760,6 +22790,10 @@ module Google
         # @!attribute [rw] metric_name
         #   @return [::String]
         #     The Compute Engine quota metric name.
+        # @!attribute [rw] rollout_status
+        #   @return [::String]
+        #     Rollout status of the future quota limit.
+        #     Check the RolloutStatus enum for the list of possible values.
         class QuotaExceededInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -22771,6 +22805,18 @@ module Google
           class DimensionsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Rollout status of the future quota limit.
+          module RolloutStatus
+            # A value indicating that the enum field is not set.
+            UNDEFINED_ROLLOUT_STATUS = 0
+
+            # IN_PROGRESS - A rollout is in process which will change the limit value to future limit.
+            IN_PROGRESS = 469_193_735
+
+            # ROLLOUT_STATUS_UNSPECIFIED - Rollout status is not specified. The default value.
+            ROLLOUT_STATUS_UNSPECIFIED = 26_864_568
           end
         end
 
@@ -25608,6 +25654,9 @@ module Google
         #   @return [::String]
         #     Specifies the termination action for the instance.
         #     Check the InstanceTerminationAction enum for the list of possible values.
+        # @!attribute [rw] local_ssd_recovery_timeout
+        #   @return [::Google::Cloud::Compute::V1::Duration]
+        #     Specifies the maximum amount of time a Local Ssd Vm should wait while recovery of the Local Ssd state is attempted. Its value should be in between 0 and 168 hours with hour granularity and the default value being 1 hour.
         # @!attribute [rw] location_hint
         #   @return [::String]
         #     An opaque location hint used to place the instance close to other resources. This field is for use by internal tools that use the public API.
@@ -26457,6 +26506,9 @@ module Google
         end
 
         # [Output Only] A connection connected to this service attachment.
+        # @!attribute [rw] consumer_network
+        #   @return [::String]
+        #     The url of the consumer network.
         # @!attribute [rw] endpoint
         #   @return [::String]
         #     The url of a connected endpoint.
