@@ -46,6 +46,7 @@
     "proto_docs/google/api/metric.rb",
     "proto_docs/google/api/monitored_resource.rb",
     "proto_docs/google/api/monitoring.rb",
+    "proto_docs/google/api/policy.rb",
     "proto_docs/google/api/quota.rb",
     "proto_docs/google/api/resource.rb",
     "proto_docs/google/api/service.rb",
