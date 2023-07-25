@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.7.0 (2023-07-25)
+
+#### Features
+
+* Add precision and scale to MysqlColumn 
+
 ### 0.6.0 (2023-06-06)
 
 #### Features
