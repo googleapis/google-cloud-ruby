@@ -11,7 +11,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
-    "ruby-cloud-description": "google-cloud-confidential_computing is the official client library for the Confidential Computing API.",
+    "ruby-cloud-description": "Attestation verifier for Confidential Space.",
     "ruby-cloud-product-url": "https://cloud.google.com/confidential-computing",
     "library_type": "GAPIC_MANUAL"
 }
