@@ -376,6 +376,11 @@ module Google
         #     A shell script to be executed in the step.
         #
         #     When script is provided, the user cannot specify the entrypoint or args.
+        # @!attribute [rw] automap_substitutions
+        #   @return [::Boolean]
+        #     Option to include built-in and custom substitutions as env variables
+        #     for this build step. This option will override the global option
+        #     in BuildOption.
         class BuildStep
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1785,6 +1790,10 @@ module Google
         #
         #     NOTE: this is always enabled for triggered builds and cannot be
         #     overridden in the build configuration file.
+        # @!attribute [rw] automap_substitutions
+        #   @return [::Boolean]
+        #     Option to include built-in and custom substitutions as env variables
+        #     for all build steps.
         # @!attribute [rw] log_streaming_option
         #   @return [::Google::Cloud::Build::V1::BuildOptions::LogStreamingOption]
         #     Option to define build log streaming behavior to Cloud
