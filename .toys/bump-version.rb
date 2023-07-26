@@ -16,17 +16,8 @@
 
 desc "A tool that creates a release that just bumps a library version"
 
-remaining_args :inputs do
-  desc "Gems to release"
-  long_desc \
-    "The remaining arguments specify which gems to release.",
-    "",
-    "Each argument should have the form `gem-name[:VERSION[:CHANGELOG]]` " \
-    "where VERSION is one of the words `major`, `minor`, or `patch`, or a " \
-    "specific version x.y.z, and CHANGELOG is a custom changelog entry to " \
-    "use for the release. (Be sure to quote the argument if the changelog " \
-    "entry includes spaces.) If version and/or changelog are not specified, " \
-    "they default to the settings implied by other flags."
+remaining_args :gem_names do
+  desc "Names of the gems to release"
 end
 
 flag :git_remote, "--remote=NAME" do
@@ -35,26 +26,20 @@ end
 flag :enable_fork, "--fork" do
   desc "Use a fork to open the pull request"
 end
-flag :default_changelog_entry, "--changelog-entry=MESSAGE" do
-  desc "Custom default changelog entry"
-  long_desc \
-    "Specifies a default changelog entry for new releases opened.",
-    "",
-    "Be sure to quote the argument if the desired entry includes whitespace. " \
-    "You can include the special strings $NAME and/or $VERSION which will be " \
-    "replaced by gem name and version, respectively.",
-    "",
-    "Default is `Bump version to $VERSION`."
-  default "Bump version to $VERSION"
-end
 flag :approval_token, "--approval-token" do
   default ENV["APPROVAL_GITHUB_TOKEN"]
   desc "GitHub token for adding labels to pull requests"
 end
-at_most_one desc: "Type of version bump (defaults to major)" do
-  flag :major, desc: "Bump major version by default"
-  flag :minor, desc: "Bump minor version by default"
-  flag :patch, desc: "Bump patch version by default"
+flag :changelog_entry, "--changelog-entry=MESSAGE" do
+  desc "Custom changelog entry"
+  long_desc \
+    "Specifies a changelog entry for new releases opened. Be sure to quote " \
+    "the argument if the desired entry includes whitespace."
+end
+all_required do
+  flag :gem_version, "--version=VERSION" do
+    desc "Use the specified gem version"
+  end
 end
 
 include :fileutils
@@ -64,113 +49,97 @@ include "yoshi-pr-generator"
 
 def run
   setup
-  labels = ["autorelease: pending"]
-  pr_body = "Release proposed by bump-version tool"
-  gem_data.each do |(gem_name, gem_version, changelog_entry)|
-    message = "chore(main): release #{gem_name} #{gem_version}"
-    branch_name = "bump/#{gem_name}"
-    result = yoshi_pr_generator.capture enabled: !git_remote.nil?,
-                                        remote: git_remote,
-                                        branch_name: branch_name,
-                                        labels: labels,
-                                        approval_token: approval_token,
-                                        pr_body: pr_body,
-                                        commit_message: message do
-      bump_release_manifest gem_name, gem_version
-      bump_gem_version gem_name, gem_version
-      bump_changelog gem_name, gem_version, changelog_entry
-    end
-    puts "Pull request for #{gem_name} #{gem_version}: #{result}", :bold
-  end
+  verify_version
+  pr_number = open_change_pr
+  process_change_pr pr_number if git_remote
 end
 
 def setup
+  require "json"
   cd context_directory
   yoshi_utils.git_ensure_identity
-  return unless enable_fork
-  set :git_remote, "pull-request-fork" unless git_remote
-  yoshi_utils.gh_ensure_fork remote: git_remote
+  if enable_fork
+    set :git_remote, "pull-request-fork" unless git_remote
+    yoshi_utils.gh_ensure_fork remote: git_remote
+  end
+  set :changelog_entry, "Bump version to #{gem_version}" unless changelog_entry
 end
 
-def gem_data
-  @gem_data ||= inputs.map do |input|
-    name, version_bump, changelog_entry = input.split ":", 3
-    next unless name
-    version_bump = interpret_version_bump version_bump
-    version = determine_next_version name, version_bump
-    changelog_entry ||= interpret_default_changelog_entry name, version
-    [name, version, changelog_entry]
-  end.compact
-end
-
-def interpret_version_bump version_bump
-  case version_bump
-  when "major"
-    :major
-  when "minor"
-    :minor
-  when "patch"
-    :patch
-  when /^\d+\.\d+\.\d+$/
-    version_bump
-  when nil
-    if minor
-      :minor
-    elsif patch
-      :patch
-    else
-      :major
+def verify_version
+  manifest_data = JSON.parse File.read ".release-please-manifest.json"
+  gem_names.each do |gem_name|
+    cur_version = manifest_data[gem_name]
+    raise "Gem not found in manifest: #{gem_name}" unless cur_version
+    if Gem::Version.new(cur_version) >= Gem::Version.new(gem_version)
+      raise "Backwards version bump: #{gem_name}: #{cur_version} -> #{gem_version}"
     end
-  else
-    raise "Unrecognized version: #{version_bump}"
   end
 end
 
-def determine_next_version gem_name, version_bump
-  cur_version = cur_manifest_data[gem_name]
-  raise "Gem not found in manifest: #{gem_name}" unless cur_version
-  return version_bump unless version_bump.is_a? Symbol
-  cur_major, cur_minor, cur_patch = cur_version.split(".").map(&:to_i)
-  case version_bump
-  when :patch
-    cur_patch += 1
-  when :minor
-    cur_patch = 0
-    cur_minor += 1
-  when :major
-    cur_patch = cur_minor = 0
-    cur_major += 1
+def open_change_pr
+  timestamp = Time.now.utc.strftime "%Y%m%d-%H%M%S"
+  salt = format "%06d", rand(1_000_000)
+  branch_name = "bump/#{timestamp}-#{rand}"
+  message = "feat: #{changelog_entry}"
+  pr_body = "Trivial change via bump-version tool"
+  result = yoshi_pr_generator.capture enabled: !git_remote.nil?,
+                                      remote: git_remote,
+                                      branch_name: branch_name,
+                                      pr_body: pr_body,
+                                      commit_message: message do
+    gem_names.each do |gem_name|
+      changelog_path = File.join gem_name, "CHANGELOG.md"
+      content = File.read changelog_path
+      File.write changelog_path, "#{content}\n"
+    end
   end
-  "#{cur_major}.#{cur_minor}.#{cur_patch}"
+  puts "Pull request: #{result}", :bold
+  result
 end
 
-def interpret_default_changelog_entry name, version
-  return "Bump version to #{version}" unless default_changelog_entry
-  default_changelog_entry.gsub("$NAME", name).gsub("$VERSION", version)
+def process_change_pr pr_number
+  gh_with_token(approval_token || gh_cur_token) do
+    approve_pr pr_number
+    wait_for_pr_checks pr_number
+    merge_pr pr_number
+    label_pr pr_number
+  end
 end
 
-def cur_manifest_data
-  require "json"
-  @cur_manifest_data ||= JSON.parse File.read ".release-please-manifest.json"
+def approve_pr pr_number
+  cmd = [
+    "gh", "pr", "review", pr_number,
+    "--approve",
+    "--body", "Auto-approved by bump-version"
+  ]
+  exec cmd
+  puts "Pull request #{pr_number} approved"
 end
 
-def bump_release_manifest gem_name, gem_version
-  content = File.read ".release-please-manifest.json"
-  content.sub!(/\n  "#{gem_name}": "\d+\.\d+\.\d+",\n/, "\n  \"#{gem_name}\": \"#{gem_version}\",\n")
-  File.write ".release-please-manifest.json", content
+def wait_for_pr_checks pr_number
+  puts "Waiting for #{pr_number} checks..."
+  exec ["pr", "checks", pr_number, "--watch", "--interval=10", "--required"]
+  puts "Checks finished for #{pr_number}"
 end
 
-def bump_gem_version gem_name, gem_version
-  version_path = File.join gem_name, "lib", *gem_name.split("-"), "version.rb"
-  content = File.read version_path
-  content.sub!(/VERSION = "\d+\.\d+\.\d+"/, "VERSION = \"#{gem_version}\"")
-  File.write version_path, content
+def merge_pr pr_number
+  cmd = [
+    "gh", "pr", "merge", pr_number,
+    "--auto",
+    "--squash",
+    "--delete-branch",
+    "--subject", "feat: #{changelog_entry}",
+    "--body", "Release-As: #{gem_version}\n"
+  ]
+  exec cmd
+  puts "Pull request #{pr_number} merged"
 end
 
-def bump_changelog gem_name, gem_version, changelog_entry
-  changelog_path = File.join gem_name, "CHANGELOG.md"
-  content = File.read changelog_path
-  cur_date = Time.now.strftime "%Y-%m-%d"
-  content.sub!(/\A\s*(#[^\n]+)\n/, "\\1\n\n### #{gem_version} (#{cur_date})\n\n* #{changelog_entry}\n")
-  File.write changelog_path, content
+def label_pr
+  cmd = [
+    "gh", "issue", "edit", pr_number,
+    "--add-label", "release-please:force-run"
+  ]
+  exec cmd
+  puts "Triggered release-please on #{pr_number}"
 end
