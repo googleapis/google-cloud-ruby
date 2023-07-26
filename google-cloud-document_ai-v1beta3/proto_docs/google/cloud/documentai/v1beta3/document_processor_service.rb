@@ -993,8 +993,6 @@ module Google
         # {::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client#import_processor_version ImportProcessorVersion}
         # method. Requirements:
         #
-        # - The source processor version and destination processor
-        # must be in the same location.
         # - The Document AI [Service
         # Agent](https://cloud.google.com/iam/docs/service-agents) of the destination
         # project must have [Document AI Editor
@@ -1004,12 +1002,16 @@ module Google
         # The destination project is specified as part of the
         # {::Google::Cloud::DocumentAI::V1beta3::ImportProcessorVersionRequest#parent parent}
         # field. The source project is specified as part of the
-        # {::Google::Cloud::DocumentAI::V1beta3::ImportProcessorVersionRequest#processor_version_source source}
-        # field.
+        # [source][ImportProcessorVersionRequest.processor_version_source or
+        # ImportProcessorVersionRequest.external_processor_version_source] field.
         # @!attribute [rw] processor_version_source
         #   @return [::String]
         #     The source processor version to import from. The source processor version
         #     and destination processor need to be in the same environment and region.
+        # @!attribute [rw] external_processor_version_source
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::ImportProcessorVersionRequest::ExternalProcessorVersionSource]
+        #     The source processor version to import from, and can be from different
+        #     environment and region than the destination processor.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The destination processor name to create the processor version
@@ -1018,6 +1020,20 @@ module Google
         class ImportProcessorVersionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The external source processor version.
+          # @!attribute [rw] processor_version
+          #   @return [::String]
+          #     Required. The processor version name. Format:
+          #     `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`
+          # @!attribute [rw] service_endpoint
+          #   @return [::String]
+          #     Optional. The Document AI service endpoint. For example,
+          #     'https://us-documentai.googleapis.com'
+          class ExternalProcessorVersionSource
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # The response message for the

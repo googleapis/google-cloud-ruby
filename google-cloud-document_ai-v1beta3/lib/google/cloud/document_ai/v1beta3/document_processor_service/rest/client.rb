@@ -1724,7 +1724,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload import_processor_version(processor_version_source: nil, parent: nil)
+              # @overload import_processor_version(processor_version_source: nil, external_processor_version_source: nil, parent: nil)
               #   Pass arguments to `import_processor_version` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1732,6 +1732,9 @@ module Google
               #   @param processor_version_source [::String]
               #     The source processor version to import from. The source processor version
               #     and destination processor need to be in the same environment and region.
+              #   @param external_processor_version_source [::Google::Cloud::DocumentAI::V1beta3::ImportProcessorVersionRequest::ExternalProcessorVersionSource, ::Hash]
+              #     The source processor version to import from, and can be from different
+              #     environment and region than the destination processor.
               #   @param parent [::String]
               #     Required. The destination processor name to create the processor version
               #     in. Format:
