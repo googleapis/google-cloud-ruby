@@ -1,5 +1,11 @@
 # Release History
 
+### 0.8.0 (2023-07-26)
+
+#### Features
+
+* support method_policies and field_policies 
+
 ### 0.7.0 (2023-06-27)
 
 #### Features
