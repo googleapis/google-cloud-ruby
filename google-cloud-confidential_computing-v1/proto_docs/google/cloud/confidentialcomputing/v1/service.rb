@@ -73,6 +73,13 @@ module Google
         #   @return [::Google::Cloud::ConfidentialComputing::V1::TpmAttestation]
         #     Required. The TPM-specific data provided by the attesting platform, used to
         #     populate any of the claims regarding platform state.
+        # @!attribute [rw] confidential_space_info
+        #   @return [::Google::Cloud::ConfidentialComputing::V1::ConfidentialSpaceInfo]
+        #     Optional. Optional information related to the Confidential Space TEE.
+        # @!attribute [rw] token_options
+        #   @return [::Google::Cloud::ConfidentialComputing::V1::TokenOptions]
+        #     Optional. A collection of optional, workload-specified claims that modify
+        #     the token output.
         class VerifyAttestationRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -94,6 +101,21 @@ module Google
         #   @return [::Array<::String>]
         #     Same as id_tokens, but as a string.
         class GcpCredentials
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Options to modify claims in the token to generate custom-purpose tokens.
+        # @!attribute [rw] audience
+        #   @return [::String]
+        #     Optional. Optional string to issue the token with a custom audience claim.
+        #     Required if one or more nonces are specified.
+        # @!attribute [rw] nonce
+        #   @return [::Array<::String>]
+        #     Optional. Optional parameter to place one or more nonces in the eat_nonce
+        #     claim in the output token. The minimum size for JSON-encoded EATs is 10
+        #     bytes and the maximum size is 74 bytes.
+        class TokenOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -152,6 +174,70 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
           end
+        end
+
+        # ConfidentialSpaceInfo contains information related to the Confidential Space
+        # TEE.
+        # @!attribute [rw] signed_entities
+        #   @return [::Array<::Google::Cloud::ConfidentialComputing::V1::SignedEntity>]
+        #     Optional. A list of signed entities containing container image signatures
+        #     that can be used for server-side signature verification.
+        class ConfidentialSpaceInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # SignedEntity represents an OCI image object containing everything necessary
+        # to verify container image signatures.
+        # @!attribute [rw] container_image_signatures
+        #   @return [::Array<::Google::Cloud::ConfidentialComputing::V1::ContainerImageSignature>]
+        #     Optional. A list of container image signatures attached to an OCI image
+        #     object.
+        class SignedEntity
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # ContainerImageSignature holds necessary metadata to verify a container image
+        # signature.
+        # @!attribute [rw] payload
+        #   @return [::String]
+        #     Required. The binary signature payload following the SimpleSigning format
+        #     https://github.com/sigstore/cosign/blob/main/specs/SIGNATURE_SPEC.md#simple-signing.
+        #     This payload includes the container image digest.
+        # @!attribute [rw] signature
+        #   @return [::String]
+        #     Required. A signature over the payload.
+        #     The container image digest is incorporated into the signature as follows:
+        #     1. Generate a SimpleSigning format payload that includes the container
+        #     image digest.
+        #     2. Generate a signature over SHA256 digest of the payload.
+        #     The signature generation process can be represented as follows:
+        #     `Sign(sha256(SimpleSigningPayload(sha256(Image Manifest))))`
+        # @!attribute [rw] public_key
+        #   @return [::String]
+        #     Required. An associated public key used to verify the signature.
+        # @!attribute [rw] sig_alg
+        #   @return [::Google::Cloud::ConfidentialComputing::V1::SigningAlgorithm]
+        #     Required. The algorithm used to produce the container image signature.
+        class ContainerImageSignature
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # SigningAlgorithm enumerates all the supported signing algorithms.
+        module SigningAlgorithm
+          # Unspecified signing algorithm.
+          SIGNING_ALGORITHM_UNSPECIFIED = 0
+
+          # RSASSA-PSS with a SHA256 digest.
+          RSASSA_PSS_SHA256 = 1
+
+          # RSASSA-PKCS1 v1.5 with a SHA256 digest.
+          RSASSA_PKCS1V15_SHA256 = 2
+
+          # ECDSA on the P-256 Curve with a SHA256 digest.
+          ECDSA_P256_SHA256 = 3
         end
       end
     end

@@ -241,7 +241,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload verify_attestation(challenge: nil, gcp_credentials: nil, tpm_attestation: nil)
+              # @overload verify_attestation(challenge: nil, gcp_credentials: nil, tpm_attestation: nil, confidential_space_info: nil, token_options: nil)
               #   Pass arguments to `verify_attestation` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -256,6 +256,11 @@ module Google
               #   @param tpm_attestation [::Google::Cloud::ConfidentialComputing::V1::TpmAttestation, ::Hash]
               #     Required. The TPM-specific data provided by the attesting platform, used to
               #     populate any of the claims regarding platform state.
+              #   @param confidential_space_info [::Google::Cloud::ConfidentialComputing::V1::ConfidentialSpaceInfo, ::Hash]
+              #     Optional. Optional information related to the Confidential Space TEE.
+              #   @param token_options [::Google::Cloud::ConfidentialComputing::V1::TokenOptions, ::Hash]
+              #     Optional. A collection of optional, workload-specified claims that modify
+              #     the token output.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::ConfidentialComputing::V1::VerifyAttestationResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "google-cloud-confidential_computing-v1 is the official client library for the Confidential Computing V1 API. Note that google-cloud-confidential_computing-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-confidential_computing instead. See the readme for more details."
-  gem.summary       = "API Client library for the Confidential Computing V1 API"
+  gem.description   = "Attestation verifier for Confidential Space. Note that google-cloud-confidential_computing-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-confidential_computing instead. See the readme for more details."
+  gem.summary       = "Attestation verifier for Confidential Space."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
