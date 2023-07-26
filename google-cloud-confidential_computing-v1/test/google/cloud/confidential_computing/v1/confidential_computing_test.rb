@@ -118,6 +118,8 @@ class ::Google::Cloud::ConfidentialComputing::V1::ConfidentialComputing::ClientT
     challenge = "hello world"
     gcp_credentials = {}
     tpm_attestation = {}
+    confidential_space_info = {}
+    token_options = {}
 
     verify_attestation_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :verify_attestation, name
@@ -125,6 +127,8 @@ class ::Google::Cloud::ConfidentialComputing::V1::ConfidentialComputing::ClientT
       assert_equal "hello world", request["challenge"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ConfidentialComputing::V1::GcpCredentials), request["gcp_credentials"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ConfidentialComputing::V1::TpmAttestation), request["tpm_attestation"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ConfidentialComputing::V1::ConfidentialSpaceInfo), request["confidential_space_info"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::ConfidentialComputing::V1::TokenOptions), request["token_options"]
       refute_nil options
     end
 
@@ -135,31 +139,31 @@ class ::Google::Cloud::ConfidentialComputing::V1::ConfidentialComputing::ClientT
       end
 
       # Use hash object
-      client.verify_attestation({ challenge: challenge, gcp_credentials: gcp_credentials, tpm_attestation: tpm_attestation }) do |response, operation|
+      client.verify_attestation({ challenge: challenge, gcp_credentials: gcp_credentials, tpm_attestation: tpm_attestation, confidential_space_info: confidential_space_info, token_options: token_options }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.verify_attestation challenge: challenge, gcp_credentials: gcp_credentials, tpm_attestation: tpm_attestation do |response, operation|
+      client.verify_attestation challenge: challenge, gcp_credentials: gcp_credentials, tpm_attestation: tpm_attestation, confidential_space_info: confidential_space_info, token_options: token_options do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.verify_attestation ::Google::Cloud::ConfidentialComputing::V1::VerifyAttestationRequest.new(challenge: challenge, gcp_credentials: gcp_credentials, tpm_attestation: tpm_attestation) do |response, operation|
+      client.verify_attestation ::Google::Cloud::ConfidentialComputing::V1::VerifyAttestationRequest.new(challenge: challenge, gcp_credentials: gcp_credentials, tpm_attestation: tpm_attestation, confidential_space_info: confidential_space_info, token_options: token_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.verify_attestation({ challenge: challenge, gcp_credentials: gcp_credentials, tpm_attestation: tpm_attestation }, grpc_options) do |response, operation|
+      client.verify_attestation({ challenge: challenge, gcp_credentials: gcp_credentials, tpm_attestation: tpm_attestation, confidential_space_info: confidential_space_info, token_options: token_options }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.verify_attestation(::Google::Cloud::ConfidentialComputing::V1::VerifyAttestationRequest.new(challenge: challenge, gcp_credentials: gcp_credentials, tpm_attestation: tpm_attestation), grpc_options) do |response, operation|
+      client.verify_attestation(::Google::Cloud::ConfidentialComputing::V1::VerifyAttestationRequest.new(challenge: challenge, gcp_credentials: gcp_credentials, tpm_attestation: tpm_attestation, confidential_space_info: confidential_space_info, token_options: token_options), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
