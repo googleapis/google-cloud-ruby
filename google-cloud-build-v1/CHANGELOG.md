@@ -1,5 +1,12 @@
 # Release History
 
+### 0.21.0 (2023-07-26)
+
+#### Features
+
+* support git_file_source and git_repo_source 
+* support github_enterprise_config_path  
+
 ### 0.20.0 (2023-07-13)
 
 #### Features
