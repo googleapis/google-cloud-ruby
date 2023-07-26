@@ -90,6 +90,11 @@ def run
   require "json"
   require "set"
 
+  # Temporary hack to allow minitest-rg 5.2.0 to work in minitest 5.19 or
+  # later. This should be removed if we have a better solution or decide to
+  # drop rg.
+  ENV["MT_COMPAT"] = "true"
+
   set :failures_report, true if github_event_name == "schedule"
   set :failures_report, FAILURES_REPORT_PATH if failures_report == true
 
