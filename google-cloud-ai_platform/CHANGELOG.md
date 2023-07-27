@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.4.0 (2023-07-27)
+
+#### Features
+
+* support schedule service 
+
 ### 0.3.0 (2023-06-16)
 
 #### Features
