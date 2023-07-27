@@ -1,5 +1,11 @@
 # Release History
 
+### 2.4.0 (2023-07-27)
+
+#### Features
+
+* support patch with resource policy 
+
 ### 2.3.0 (2023-07-10)
 
 #### Features
