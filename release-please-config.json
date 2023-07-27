@@ -415,6 +415,10 @@
       "component": "google-cloud-data_catalog-v1",
       "version_file": "lib/google/cloud/data_catalog/v1/version.rb"
     },
+    "google-cloud-data_catalog-v1beta1": {
+      "component": "google-cloud-data_catalog-v1beta1",
+      "version_file": "lib/google/cloud/data_catalog/v1beta1/version.rb"
+    },
     "google-cloud-data_fusion": {
       "component": "google-cloud-data_fusion",
       "version_file": "lib/google/cloud/data_fusion/version.rb"
