@@ -5,6 +5,9 @@ on:
       gems:
         description: "Gems to bump (required)"
         required: true
+      version:
+        description: "Version to bump to (required)"
+        required: true
       args:
         description: "Extra command line arguments"
         required: false
@@ -28,4 +31,7 @@ jobs:
           gem install --no-document toys
       - name: execute
         run: |
-          toys bump-version -v --fork ${{ github.event.inputs.args }} -- ${{ github.event.inputs.gems }}
+          toys bump-version -v --fork \
+            --version "${{ github.event.inputs.version }}" \
+            ${{ github.event.inputs.args }} -- \
+            ${{ github.event.inputs.gems }}
