@@ -860,7 +860,8 @@ module Google
         #     Required. The measurement protocol secret to update.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     The list of fields to be updated. Omitted fields will not be updated.
+        #     Required. The list of fields to be updated. Omitted fields will not be
+        #     updated.
         class UpdateMeasurementProtocolSecretRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

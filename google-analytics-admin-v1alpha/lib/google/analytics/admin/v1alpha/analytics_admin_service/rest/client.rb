@@ -2570,7 +2570,8 @@ module Google
               #   @param measurement_protocol_secret [::Google::Analytics::Admin::V1alpha::MeasurementProtocolSecret, ::Hash]
               #     Required. The measurement protocol secret to update.
               #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-              #     The list of fields to be updated. Omitted fields will not be updated.
+              #     Required. The list of fields to be updated. Omitted fields will not be
+              #     updated.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Analytics::Admin::V1alpha::MeasurementProtocolSecret]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
