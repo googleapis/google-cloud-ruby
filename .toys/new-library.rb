@@ -153,8 +153,9 @@ def gem_version_file
 end
 
 def add_fillers manifest
-  manifest.keys.each do |key|
-    manifest["#{key}+FILLER"] = "0.0.0" unless key.end_with? "+FILLER"
+  non_filler_keys = manifest.keys.filter { |k| !k.end_with? '+FILLER' }
+  non_filler_keys.each do |key|
+    manifest["#{key}+FILLER"] = "0.0.0"
   end
   manifest
 end
