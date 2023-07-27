@@ -26,7 +26,7 @@ describe Google::Cloud::PubSub::Service do
   # Values below are hardcoded in Service.
   let(:lib_name) { "gccl" }
   let(:lib_version) { Google::Cloud::PubSub::VERSION }
-  let(:metadata) { { "google-cloud-resource-prefix": "projects/#{project}" } }
+  let(:expected_metadata) { { "google-cloud-resource-prefix": "projects/#{project}" } }
 
   let(:subscriber_default_config) do
     Google::Cloud::PubSub::V1::Subscriber::Client.new do |config|
@@ -62,7 +62,7 @@ describe Google::Cloud::PubSub::Service do
           _(config.endpoint).must_equal endpoint
           _(config.lib_name).must_equal lib_name
           _(config.lib_version).must_equal lib_version
-          _(config.metadata).must_equal metadata
+          _(config.metadata).must_equal expected_metadata
           assert_config_rpcs_equals subscriber_default_config.rpcs, 16, config.rpcs
         end
       end
@@ -82,7 +82,7 @@ describe Google::Cloud::PubSub::Service do
           _(config.endpoint).must_equal endpoint_2
           _(config.lib_name).must_equal lib_name
           _(config.lib_version).must_equal lib_version
-          _(config.metadata).must_equal metadata
+          _(config.metadata).must_equal expected_metadata
           assert_config_rpcs_equals subscriber_default_config.rpcs, 16, config.rpcs, timeout: timeout
         end
       end
@@ -102,7 +102,7 @@ describe Google::Cloud::PubSub::Service do
           _(config.endpoint).must_equal endpoint
           _(config.lib_name).must_equal lib_name
           _(config.lib_version).must_equal lib_version
-          _(config.metadata).must_equal metadata
+          _(config.metadata).must_equal expected_metadata
           assert_config_rpcs_equals publisher_default_config.rpcs, 9, config.rpcs
         end
       end
@@ -122,7 +122,7 @@ describe Google::Cloud::PubSub::Service do
           _(config.endpoint).must_equal endpoint_2
           _(config.lib_name).must_equal lib_name
           _(config.lib_version).must_equal lib_version
-          _(config.metadata).must_equal metadata
+          _(config.metadata).must_equal expected_metadata
           assert_config_rpcs_equals publisher_default_config.rpcs, 9, config.rpcs, timeout: timeout
         end
       end
@@ -142,7 +142,7 @@ describe Google::Cloud::PubSub::Service do
           _(config.endpoint).must_equal endpoint
           _(config.lib_name).must_equal lib_name
           _(config.lib_version).must_equal lib_version
-          _(config.metadata).must_equal metadata
+          _(config.metadata).must_equal expected_metadata
           assert_config_rpcs_equals iam_policy_default_config.rpcs, 3, config.rpcs
         end
       end
@@ -162,7 +162,7 @@ describe Google::Cloud::PubSub::Service do
           _(config.endpoint).must_equal endpoint_2
           _(config.lib_name).must_equal lib_name
           _(config.lib_version).must_equal lib_version
-          _(config.metadata).must_equal metadata
+          _(config.metadata).must_equal expected_metadata
           assert_config_rpcs_equals iam_policy_default_config.rpcs, 3, config.rpcs, timeout: timeout
         end
       end
@@ -182,7 +182,7 @@ describe Google::Cloud::PubSub::Service do
           _(config.endpoint).must_equal endpoint
           _(config.lib_name).must_equal lib_name
           _(config.lib_version).must_equal lib_version
-          _(config.metadata).must_equal metadata
+          _(config.metadata).must_equal expected_metadata
           assert_config_rpcs_equals schema_service_default_config.rpcs, 10, config.rpcs
         end
       end
@@ -202,7 +202,7 @@ describe Google::Cloud::PubSub::Service do
           _(config.endpoint).must_equal endpoint_2
           _(config.lib_name).must_equal lib_name
           _(config.lib_version).must_equal lib_version
-          _(config.metadata).must_equal metadata
+          _(config.metadata).must_equal expected_metadata
           assert_config_rpcs_equals schema_service_default_config.rpcs, 10, config.rpcs, timeout: timeout
         end
       end
