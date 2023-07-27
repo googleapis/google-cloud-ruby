@@ -1,5 +1,11 @@
 # Release History
 
+### 0.26.0 (2023-07-27)
+
+#### Features
+
+* support external_processor_version_source 
+
 ### 0.25.0 (2023-07-18)
 
 #### Features
