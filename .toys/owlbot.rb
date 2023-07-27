@@ -315,7 +315,10 @@ def process_single_gem name, temp_staging_dir
   return unless enable_tests
   cd name do
     exec ["bundle", "install"]
-    exec ["bundle", "exec", "rake", "ci"]
+    # The MT_COMPAT environment variable is a temporary hack to allow
+    # minitest-rg 5.2.0 to work in minitest 5.19 or later. This should be
+    # removed if we have a better solution or decide to drop rg.
+    exec ["bundle", "exec", "rake", "ci"], env: { "MT_COMPAT" => "true" }
   end
 end
 
