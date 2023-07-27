@@ -51,7 +51,8 @@ module Google
         #     Use `default_branch` as the branch ID, to list documents under the default
         #     branch.
         #
-        #     If the caller does not have permission to list [Documents][]s under this
+        #     If the caller does not have permission to list
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::Document Document}s under this
         #     branch, regardless of whether or not this branch exists, a
         #     `PERMISSION_DENIED` error is returned.
         # @!attribute [rw] page_size

@@ -51,8 +51,7 @@ module Google
         #
         #     * `document` is the default model for regular dataStores.
         #     * `search-history` is the default model for
-        #     [IndustryVertical.SITE_SEARCH][google.cloud.discoveryengine.v1beta.IndustryVertical.SITE_SEARCH]
-        #     dataStores.
+        #     [IndustryVertical.SITE_SEARCH][] dataStores.
         # @!attribute [rw] user_pseudo_id
         #   @return [::String]
         #     A unique identifier for tracking visitors. For example, this could be
@@ -69,6 +68,12 @@ module Google
         #
         #     The field must be a UTF-8 encoded string with a length limit of 128
         #     characters. Otherwise, an `INVALID_ARGUMENT` error is returned.
+        # @!attribute [rw] include_tail_suggestions
+        #   @return [::Boolean]
+        #     Indicates if tail suggestions should be returned if there are no
+        #     suggestions that match the full query. Even if set to true, if there are
+        #     suggestions that match the full query, those are returned and no
+        #     tail suggestions are returned.
         class CompleteQueryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -81,6 +86,12 @@ module Google
         #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::CompleteQueryResponse::QuerySuggestion>]
         #     Results of the matched query suggestions. The result list is ordered and
         #     the first result is a top suggestion.
+        # @!attribute [rw] tail_match_triggered
+        #   @return [::Boolean]
+        #     True if the returned suggestions are all tail suggestions.
+        #
+        #     For tail matching to be triggered, include_tail_suggestions in the request
+        #     must be true and there must be no suggestions that match the full query.
         class CompleteQueryResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

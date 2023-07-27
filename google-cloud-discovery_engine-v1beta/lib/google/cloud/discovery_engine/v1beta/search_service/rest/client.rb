@@ -153,7 +153,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload search(serving_config: nil, branch: nil, query: nil, page_size: nil, page_token: nil, offset: nil, filter: nil, order_by: nil, user_info: nil, facet_specs: nil, boost_spec: nil, params: nil, query_expansion_spec: nil, spell_correction_spec: nil, user_pseudo_id: nil, content_search_spec: nil, safe_search: nil, user_labels: nil)
+              # @overload search(serving_config: nil, branch: nil, query: nil, image_query: nil, page_size: nil, page_token: nil, offset: nil, filter: nil, order_by: nil, user_info: nil, facet_specs: nil, boost_spec: nil, params: nil, query_expansion_spec: nil, spell_correction_spec: nil, user_pseudo_id: nil, content_search_spec: nil, safe_search: nil, user_labels: nil)
               #   Pass arguments to `search` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -171,10 +171,12 @@ module Google
               #     documents under the default branch.
               #   @param query [::String]
               #     Raw search query.
+              #   @param image_query [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::ImageQuery, ::Hash]
+              #     Raw image query.
               #   @param page_size [::Integer]
               #     Maximum number of {::Google::Cloud::DiscoveryEngine::V1beta::Document Document}s
               #     to return. If unspecified, defaults to a reasonable value. The maximum
-              #     allowed value is 100. Values above 100 will be coerced to 100.
+              #     allowed value is 100. Values above 100 are coerced to 100.
               #
               #     If this field is negative, an  `INVALID_ARGUMENT`  is returned.
               #   @param page_token [::String]
@@ -202,16 +204,17 @@ module Google
               #
               #     If this field is unrecognizable, an  `INVALID_ARGUMENT`  is returned.
               #   @param order_by [::String]
-              #     The order in which documents are returned. Document can be ordered by
+              #     The order in which documents are returned. Documents can be ordered by
               #     a field in an {::Google::Cloud::DiscoveryEngine::V1beta::Document Document}
-              #     object. Leave it unset if ordered by relevance. OrderBy expression is
+              #     object. Leave it unset if ordered by relevance. `order_by` expression is
               #     case-sensitive.
               #
-              #     If this field is unrecognizable, an  `INVALID_ARGUMENT`  is returned.
+              #     If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
               #   @param user_info [::Google::Cloud::DiscoveryEngine::V1beta::UserInfo, ::Hash]
               #     Information about the end user.
-              #     Highly recommended for analytics. The user_agent string in UserInfo will
-              #     be used to deduce device_type for analytics.
+              #     Highly recommended for analytics.
+              #     {::Google::Cloud::DiscoveryEngine::V1beta::UserInfo#user_agent UserInfo.user_agent}
+              #     is used to deduce `device_type` for analytics.
               #   @param facet_specs [::Array<::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::FacetSpec, ::Hash>]
               #     Facet specifications for faceted search. If empty, no facets are returned.
               #
@@ -231,10 +234,10 @@ module Google
               #       which enables image searching.
               #   @param query_expansion_spec [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::QueryExpansionSpec, ::Hash]
               #     The query expansion specification that specifies the conditions under which
-              #     query expansion will occur.
+              #     query expansion occurs.
               #   @param spell_correction_spec [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::SpellCorrectionSpec, ::Hash]
               #     The spell correction specification that specifies the mode under
-              #     which spell correction will take effect.
+              #     which spell correction takes effect.
               #   @param user_pseudo_id [::String]
               #     A unique identifier for tracking visitors. For example, this could be
               #     implemented with an HTTP cookie, which should be able to uniquely identify
@@ -251,11 +254,10 @@ module Google
               #     The field must be a UTF-8 encoded string with a length limit of 128
               #     characters. Otherwise, an  `INVALID_ARGUMENT`  error is returned.
               #   @param content_search_spec [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::ContentSearchSpec, ::Hash]
-              #     The content search spec that configs the desired behavior of content
-              #     search.
+              #     A specification for configuring the behavior of content search.
               #   @param safe_search [::Boolean]
               #     Whether to turn on safe search. This is only supported for
-              #     [ContentConfig.PUBLIC_WEBSITE][].
+              #     website search.
               #   @param user_labels [::Hash{::String => ::String}]
               #     The user labels applied to a resource must meet the following requirements:
               #

@@ -255,7 +255,8 @@ module Google
               #     Use `default_branch` as the branch ID, to list documents under the default
               #     branch.
               #
-              #     If the caller does not have permission to list [Documents][]s under this
+              #     If the caller does not have permission to list
+              #     {::Google::Cloud::DiscoveryEngine::V1beta::Document Document}s under this
               #     branch, regardless of whether or not this branch exists, a
               #     `PERMISSION_DENIED` error is returned.
               #   @param page_size [::Integer]
@@ -601,7 +602,7 @@ module Google
               #     `false`, {::Google::Cloud::DiscoveryEngine::V1beta::Document#id Document.id}s
               #     have to be specified using
               #     {::Google::Cloud::DiscoveryEngine::V1beta::ImportDocumentsRequest#id_field id_field},
-              #     otherwises, documents without IDs will fail to be imported.
+              #     otherwise, documents without IDs fail to be imported.
               #
               #     Only set this field when using
               #     {::Google::Cloud::DiscoveryEngine::V1beta::GcsSource GcsSource} or
@@ -621,12 +622,12 @@ module Google
               #     {::Google::Cloud::DiscoveryEngine::V1beta::BigQuerySource BigQuerySource} it is
               #     the column name of the BigQuery table where the unique ids are stored.
               #
-              #     The values of the JSON field or the BigQuery column will be used as the
+              #     The values of the JSON field or the BigQuery column are used as the
               #     {::Google::Cloud::DiscoveryEngine::V1beta::Document#id Document.id}s. The JSON
               #     field or the BigQuery column must be of string type, and the values must be
               #     set as valid strings conform to
               #     [RFC-1034](https://tools.ietf.org/html/rfc1034) with 1-63 characters.
-              #     Otherwise, documents without valid IDs will fail to be imported.
+              #     Otherwise, documents without valid IDs fail to be imported.
               #
               #     Only set this field when using
               #     {::Google::Cloud::DiscoveryEngine::V1beta::GcsSource GcsSource} or
