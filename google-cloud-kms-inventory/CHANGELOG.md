@@ -7,3 +7,4 @@
 * Initial generation of google-cloud-kms-inventory ([#20611](https://github.com/googleapis/google-cloud-ruby/issues/20611)) 
 
 ## Release History
+

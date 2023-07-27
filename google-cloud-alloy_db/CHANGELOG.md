@@ -7,3 +7,4 @@
 * Initial generation of google-cloud-alloy_db ([#20988](https://github.com/googleapis/google-cloud-ruby/issues/20988)) 
 
 ## Release History
+

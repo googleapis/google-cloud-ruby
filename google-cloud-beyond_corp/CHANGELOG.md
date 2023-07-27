@@ -5,3 +5,4 @@
 #### Features
 
 * Initial generation of google-cloud-beyond_corp ([#18961](https://github.com/googleapis/google-cloud-ruby/issues/18961)) 
+
