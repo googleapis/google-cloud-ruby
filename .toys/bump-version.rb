@@ -128,7 +128,6 @@ end
 def merge_pr pr_number
   cmd = [
     "gh", "pr", "merge", pr_number,
-    "--disable-auto",
     "--squash",
     "--delete-branch",
     "--subject", "feat: #{changelog_entry}",
@@ -138,7 +137,7 @@ def merge_pr pr_number
   puts "Pull request #{pr_number} merged"
 end
 
-def label_pr
+def label_pr pr_number
   cmd = [
     "gh", "issue", "edit", pr_number,
     "--add-label", "release-please:force-run"
