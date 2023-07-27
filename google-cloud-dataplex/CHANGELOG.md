@@ -35,3 +35,4 @@
 #### Features
 
 * Initial generation of google-cloud-dataplex
+
