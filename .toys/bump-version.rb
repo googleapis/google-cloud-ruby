@@ -121,7 +121,7 @@ end
 
 def wait_for_pr_checks pr_number
   puts "Waiting for #{pr_number} checks..."
-  exec ["gh", "pr", "checks", pr_number, "--watch", "--interval=60"]
+  exec ["gh", "pr", "checks", pr_number, "--watch", "--interval=60", "--required"]
   puts "Checks finished for #{pr_number}"
 end
 
