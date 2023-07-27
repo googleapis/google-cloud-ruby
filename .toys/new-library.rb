@@ -63,6 +63,11 @@ include :git_cache
 include "yoshi-pr-generator"
 
 def run
+  # Temporary hack to allow minitest-rg 5.2.0 to work in minitest 5.19 or
+  # later. This should be removed if we have a better solution or decide to
+  # drop rg.
+  ENV["MT_COMPAT"] = "true"
+
   setup
   set :branch_name, "gen/#{gem_name}" unless branch_name
   commit_message = "feat: Initial generation of #{gem_name}"
