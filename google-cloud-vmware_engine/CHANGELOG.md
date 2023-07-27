@@ -13,3 +13,4 @@
 * Initial generation of google-cloud-vmware_engine ([#19828](https://github.com/googleapis/google-cloud-ruby/issues/19828)) 
 
 ## Release History
+

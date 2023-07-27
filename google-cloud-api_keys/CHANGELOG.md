@@ -11,3 +11,4 @@
 #### Features
 
 * Initial generation of google-cloud-api_keys ([#19033](https://github.com/googleapis/google-cloud-ruby/issues/19033))
+

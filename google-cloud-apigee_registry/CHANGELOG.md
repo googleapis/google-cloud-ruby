@@ -17,3 +17,4 @@
 #### Features
 
 * Initial generation of google-cloud-apigee_registry
+

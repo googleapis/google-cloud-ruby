@@ -7,3 +7,4 @@
 * Initial generation of google-cloud-bigquery-analytics_hub ([#19261](https://github.com/googleapis/google-cloud-ruby/issues/19261)) 
 
 ## Release History
+
