@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.3.0 (2023-07-27)
+
+#### Features
+
+* support confidential_space_info and token_options 
+
 ### 0.2.0 (2023-06-06)
 
 #### Features
