@@ -66,6 +66,9 @@ def setup
 end
 
 def verify_version
+  unless gem_version =~ /^\d+\.\d+\.\d+$/
+    raise "Bad version format: #{gem_version}"
+  end
   manifest_data = JSON.parse File.read ".release-please-manifest.json"
   gem_names.each do |gem_name|
     cur_version = manifest_data[gem_name]
@@ -118,7 +121,7 @@ end
 
 def wait_for_pr_checks pr_number
   puts "Waiting for #{pr_number} checks..."
-  exec ["pr", "checks", pr_number, "--watch", "--interval=10", "--required"]
+  exec ["gh", "pr", "checks", pr_number, "--watch", "--interval=10", "--required"]
   puts "Checks finished for #{pr_number}"
 end
 
