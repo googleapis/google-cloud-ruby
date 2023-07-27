@@ -37,6 +37,10 @@ module Google
         #   @return [::Boolean]
         #     Notify the server that the client enables batch write flow control by
         #     requesting RateLimitInfo from MutateRowsResponse.
+        # @!attribute [rw] last_scanned_row_responses
+        #   @return [::Boolean]
+        #     Notify the server that the client supports the last_scanned_row field
+        #     in ReadRowsResponse for long-running sparse scans.
         class FeatureFlags
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
