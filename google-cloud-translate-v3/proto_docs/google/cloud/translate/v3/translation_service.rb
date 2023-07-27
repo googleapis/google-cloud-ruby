@@ -503,9 +503,9 @@ module Google
         #
         #     For a DocumentInputConfig.gcs_uri provided document, the output file will
         #     have a name according to its URI. For example: an input file with URI:
-        #     "gs://a/b/c.[extension]" stored in a gcs_destination bucket with name
+        #     `gs://a/b/c.[extension]` stored in a gcs_destination bucket with name
         #     "my_bucket" will have an output URI:
-        #     "gs://my_bucket/a_b_c_[trg]_translations.[ext]", where
+        #     `gs://my_bucket/a_b_c_[trg]_translations.[ext]`, where
         #     - [trg] corresponds to the translated file's language code,
         #     - [ext] corresponds to the translated file's extension according to its
         #     mime type.
@@ -513,7 +513,7 @@ module Google
         #
         #     If the document was directly provided through the request, then the
         #     output document will have the format:
-        #     "gs://my_bucket/translated_document_[trg]_translations.[ext], where
+        #     `gs://my_bucket/translated_document_[trg]_translations.[ext]`, where
         #     - [trg] corresponds to the translated file's language code,
         #     - [ext] corresponds to the translated file's extension according to its
         #     mime type.
@@ -522,7 +522,7 @@ module Google
         #     translation will be equal to the default output URI but have
         #     `glossary_translations` instead of `translations`. For the previous
         #     example, its glossary URI would be:
-        #     "gs://my_bucket/a_b_c_[trg]_glossary_translations.[ext]".
+        #     `gs://my_bucket/a_b_c_[trg]_glossary_translations.[ext]`.
         #
         #     Thus the max number of output files will be 2 (Translated document,
         #     Glossary translated document).
@@ -1291,15 +1291,15 @@ module Google
         #
         #     The naming format of translation output files follows (for target
         #     language code [trg]): `translation_output`:
-        #     gs://translation_output/a_b_c_[trg]_translation.[extension]
+        #     `gs://translation_output/a_b_c_[trg]_translation.[extension]`
         #     `glossary_translation_output`:
-        #     gs://translation_test/a_b_c_[trg]_glossary_translation.[extension] The
+        #     `gs://translation_test/a_b_c_[trg]_glossary_translation.[extension]`. The
         #     output document will maintain the same file format as the input document.
         #
         #     The naming format of error output files follows (for target language code
-        #     [trg]): `error_output`: gs://translation_test/a_b_c_[trg]_errors.txt
+        #     [trg]): `error_output`: `gs://translation_test/a_b_c_[trg]_errors.txt`
         #     `glossary_error_output`:
-        #     gs://translation_test/a_b_c_[trg]_glossary_translation.txt The error
+        #     `gs://translation_test/a_b_c_[trg]_glossary_translation.txt`. The error
         #     output is a txt file containing error details.
         class BatchDocumentOutputConfig
           include ::Google::Protobuf::MessageExts
