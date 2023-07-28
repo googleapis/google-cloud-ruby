@@ -30,7 +30,7 @@ class ::Google::Cloud::Dataplex::V1::DataTaxonomyService::ClientPathsTest < Mini
         config.credentials = grpc_channel
       end
 
-      path = client.data_attribute_path project: "value0", location: "value1", dataTaxonomy: "value2", data_attribute_id: "value3"
+      path = client.data_attribute_path project: "value0", location: "value1", data_taxonomy: "value2", data_attribute_id: "value3"
       assert_equal "projects/value0/locations/value1/dataTaxonomies/value2/attributes/value3", path
     end
   end

@@ -21,70 +21,66 @@ module Google
   module Cloud
     module Dataplex
       module V1
-        module DataScanService
-          # Path helper methods for the DataScanService API.
+        module DataTaxonomyService
+          # Path helper methods for the DataTaxonomyService API.
           module Paths
             ##
-            # Create a fully-qualified DataScan resource string.
+            # Create a fully-qualified DataAttribute resource string.
             #
             # The resource will be in the following format:
             #
-            # `projects/{project}/locations/{location}/dataScans/{dataScan}`
+            # `projects/{project}/locations/{location}/dataTaxonomies/{data_taxonomy}/attributes/{data_attribute_id}`
             #
             # @param project [String]
             # @param location [String]
-            # @param dataScan [String]
+            # @param data_taxonomy [String]
+            # @param data_attribute_id [String]
             #
             # @return [::String]
-            def data_scan_path project:, location:, dataScan:
+            def data_attribute_path project:, location:, data_taxonomy:, data_attribute_id:
               raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "data_taxonomy cannot contain /" if data_taxonomy.to_s.include? "/"
 
-              "projects/#{project}/locations/#{location}/dataScans/#{dataScan}"
+              "projects/#{project}/locations/#{location}/dataTaxonomies/#{data_taxonomy}/attributes/#{data_attribute_id}"
             end
 
             ##
-            # Create a fully-qualified DataScanJob resource string.
+            # Create a fully-qualified DataAttributeBinding resource string.
             #
             # The resource will be in the following format:
             #
-            # `projects/{project}/locations/{location}/dataScans/{dataScan}/jobs/{job}`
+            # `projects/{project}/locations/{location}/dataAttributeBindings/{data_attribute_binding_id}`
             #
             # @param project [String]
             # @param location [String]
-            # @param dataScan [String]
-            # @param job [String]
+            # @param data_attribute_binding_id [String]
             #
             # @return [::String]
-            def data_scan_job_path project:, location:, dataScan:, job:
+            def data_attribute_binding_path project:, location:, data_attribute_binding_id:
               raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-              raise ::ArgumentError, "dataScan cannot contain /" if dataScan.to_s.include? "/"
 
-              "projects/#{project}/locations/#{location}/dataScans/#{dataScan}/jobs/#{job}"
+              "projects/#{project}/locations/#{location}/dataAttributeBindings/#{data_attribute_binding_id}"
             end
 
             ##
-            # Create a fully-qualified Entity resource string.
+            # Create a fully-qualified DataTaxonomy resource string.
             #
             # The resource will be in the following format:
             #
-            # `projects/{project}/locations/{location}/lakes/{lake}/zones/{zone}/entities/{entity}`
+            # `projects/{project}/locations/{location}/dataTaxonomies/{data_taxonomy_id}`
             #
             # @param project [String]
             # @param location [String]
-            # @param lake [String]
-            # @param zone [String]
-            # @param entity [String]
+            # @param data_taxonomy_id [String]
             #
             # @return [::String]
-            def entity_path project:, location:, lake:, zone:, entity:
+            def data_taxonomy_path project:, location:, data_taxonomy_id:
               raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-              raise ::ArgumentError, "lake cannot contain /" if lake.to_s.include? "/"
-              raise ::ArgumentError, "zone cannot contain /" if zone.to_s.include? "/"
 
-              "projects/#{project}/locations/#{location}/lakes/#{lake}/zones/#{zone}/entities/#{entity}"
+              "projects/#{project}/locations/#{location}/dataTaxonomies/#{data_taxonomy_id}"
             end
 
             ##
@@ -102,25 +98,6 @@ module Google
               raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}"
-            end
-
-            ##
-            # Create a fully-qualified Table resource string.
-            #
-            # The resource will be in the following format:
-            #
-            # `projects/{project}/datasets/{dataset}/tables/{table}`
-            #
-            # @param project [String]
-            # @param dataset [String]
-            # @param table [String]
-            #
-            # @return [::String]
-            def table_path project:, dataset:, table:
-              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ::ArgumentError, "dataset cannot contain /" if dataset.to_s.include? "/"
-
-              "projects/#{project}/datasets/#{dataset}/tables/#{table}"
             end
 
             extend self

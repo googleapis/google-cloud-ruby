@@ -688,7 +688,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload list_data_scan_jobs(parent: nil, page_size: nil, page_token: nil)
+              # @overload list_data_scan_jobs(parent: nil, page_size: nil, page_token: nil, filter: nil)
               #   Pass arguments to `list_data_scan_jobs` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -708,6 +708,24 @@ module Google
               #     Provide this to retrieve the subsequent page. When paginating, all other
               #     parameters provided to `ListDataScanJobs` must match the call that provided
               #     the page token.
+              #   @param filter [::String]
+              #     Optional. An expression for filtering the results of the ListDataScanJobs
+              #     request.
+              #
+              #     If unspecified, all datascan jobs will be returned. Multiple filters can be
+              #     applied (with `AND`, `OR` logical operators). Filters are case-sensitive.
+              #
+              #     Allowed fields are:
+              #
+              #     - `start_time`
+              #     - `end_time`
+              #
+              #     `start_time` and `end_time` expect RFC-3339 formatted strings (e.g.
+              #     2018-10-08T18:30:00-07:00).
+              #
+              #     For instance, 'start_time > 2018-10-08T00:00:00.123456789Z AND end_time <
+              #     2018-10-09T00:00:00.123456789Z' limits results to DataScanJobs between
+              #     specified start and end times.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Dataplex::V1::DataScanJob>]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]

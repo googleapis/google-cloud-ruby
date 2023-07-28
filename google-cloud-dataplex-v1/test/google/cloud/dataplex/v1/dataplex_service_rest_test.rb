@@ -1411,6 +1411,8 @@ class ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ClientTest < Minites
 
     # Create request parameters for a unary method.
     name = "hello world"
+    labels = {}
+    args = {}
 
     run_task_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -1426,27 +1428,27 @@ class ::Google::Cloud::Dataplex::V1::DataplexService::Rest::ClientTest < Minites
         end
 
         # Use hash object
-        client.run_task({ name: name }) do |_result, response|
+        client.run_task({ name: name, labels: labels, args: args }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.run_task name: name do |_result, response|
+        client.run_task name: name, labels: labels, args: args do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.run_task ::Google::Cloud::Dataplex::V1::RunTaskRequest.new(name: name) do |_result, response|
+        client.run_task ::Google::Cloud::Dataplex::V1::RunTaskRequest.new(name: name, labels: labels, args: args) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.run_task({ name: name }, call_options) do |_result, response|
+        client.run_task({ name: name, labels: labels, args: args }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.run_task(::Google::Cloud::Dataplex::V1::RunTaskRequest.new(name: name), call_options) do |_result, response|
+        client.run_task(::Google::Cloud::Dataplex::V1::RunTaskRequest.new(name: name, labels: labels, args: args), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
