@@ -937,6 +937,11 @@
                 "raw_predict"
               ]
             },
+            "ServerStreamingPredict": {
+              "methods": [
+                "server_streaming_predict"
+              ]
+            },
             "Explain": {
               "methods": [
                 "explain"
