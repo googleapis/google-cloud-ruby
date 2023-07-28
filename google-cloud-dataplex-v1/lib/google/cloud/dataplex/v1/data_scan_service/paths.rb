@@ -104,6 +104,25 @@ module Google
               "projects/#{project}/locations/#{location}"
             end
 
+            ##
+            # Create a fully-qualified Table resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/datasets/{dataset}/tables/{table}`
+            #
+            # @param project [String]
+            # @param dataset [String]
+            # @param table [String]
+            #
+            # @return [::String]
+            def table_path project:, dataset:, table:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "dataset cannot contain /" if dataset.to_s.include? "/"
+
+              "projects/#{project}/datasets/#{dataset}/tables/#{table}"
+            end
+
             extend self
           end
         end

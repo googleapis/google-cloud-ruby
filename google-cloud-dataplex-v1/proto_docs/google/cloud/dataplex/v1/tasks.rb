@@ -363,9 +363,27 @@ module Google
         # @!attribute [r] message
         #   @return [::String]
         #     Output only. Additional information about the current state.
+        # @!attribute [r] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Output only. User-defined labels for the task.
+        # @!attribute [r] trigger
+        #   @return [::Google::Cloud::Dataplex::V1::Job::Trigger]
+        #     Output only. Job execution trigger.
+        # @!attribute [r] execution_spec
+        #   @return [::Google::Cloud::Dataplex::V1::Task::ExecutionSpec]
+        #     Output only. Spec related to how a task is executed.
         class Job
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           module Service
             # Service used to run the job is unspecified.
@@ -396,6 +414,19 @@ module Google
 
             # The job was cancelled outside of Dataplex.
             ABORTED = 6
+          end
+
+          # Job execution trigger.
+          module Trigger
+            # The trigger is unspecified.
+            TRIGGER_UNSPECIFIED = 0
+
+            # The job was triggered by Dataplex based on trigger spec from task
+            # definition.
+            TASK_CONFIG = 1
+
+            # The job was triggered by the explicit call of Task API.
+            RUN_REQUEST = 2
           end
         end
       end

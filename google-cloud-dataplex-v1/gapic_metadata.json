@@ -228,6 +228,90 @@
         }
       }
     },
+    "DataTaxonomyService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dataplex::V1::DataTaxonomyService::Client",
+          "rpcs": {
+            "CreateDataTaxonomy": {
+              "methods": [
+                "create_data_taxonomy"
+              ]
+            },
+            "UpdateDataTaxonomy": {
+              "methods": [
+                "update_data_taxonomy"
+              ]
+            },
+            "DeleteDataTaxonomy": {
+              "methods": [
+                "delete_data_taxonomy"
+              ]
+            },
+            "ListDataTaxonomies": {
+              "methods": [
+                "list_data_taxonomies"
+              ]
+            },
+            "GetDataTaxonomy": {
+              "methods": [
+                "get_data_taxonomy"
+              ]
+            },
+            "CreateDataAttributeBinding": {
+              "methods": [
+                "create_data_attribute_binding"
+              ]
+            },
+            "UpdateDataAttributeBinding": {
+              "methods": [
+                "update_data_attribute_binding"
+              ]
+            },
+            "DeleteDataAttributeBinding": {
+              "methods": [
+                "delete_data_attribute_binding"
+              ]
+            },
+            "ListDataAttributeBindings": {
+              "methods": [
+                "list_data_attribute_bindings"
+              ]
+            },
+            "GetDataAttributeBinding": {
+              "methods": [
+                "get_data_attribute_binding"
+              ]
+            },
+            "CreateDataAttribute": {
+              "methods": [
+                "create_data_attribute"
+              ]
+            },
+            "UpdateDataAttribute": {
+              "methods": [
+                "update_data_attribute"
+              ]
+            },
+            "DeleteDataAttribute": {
+              "methods": [
+                "delete_data_attribute"
+              ]
+            },
+            "ListDataAttributes": {
+              "methods": [
+                "list_data_attributes"
+              ]
+            },
+            "GetDataAttribute": {
+              "methods": [
+                "get_data_attribute"
+              ]
+            }
+          }
+        }
+      }
+    },
     "DataScanService": {
       "clients": {
         "grpc": {

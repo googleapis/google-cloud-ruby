@@ -462,6 +462,7 @@ class ::Google::Cloud::Dataplex::V1::DataScanService::Rest::ClientTest < Minites
     parent = "hello world"
     page_size = 42
     page_token = "hello world"
+    filter = "hello world"
 
     list_data_scan_jobs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -477,27 +478,27 @@ class ::Google::Cloud::Dataplex::V1::DataScanService::Rest::ClientTest < Minites
         end
 
         # Use hash object
-        client.list_data_scan_jobs({ parent: parent, page_size: page_size, page_token: page_token }) do |_result, response|
+        client.list_data_scan_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.list_data_scan_jobs parent: parent, page_size: page_size, page_token: page_token do |_result, response|
+        client.list_data_scan_jobs parent: parent, page_size: page_size, page_token: page_token, filter: filter do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.list_data_scan_jobs ::Google::Cloud::Dataplex::V1::ListDataScanJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |_result, response|
+        client.list_data_scan_jobs ::Google::Cloud::Dataplex::V1::ListDataScanJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.list_data_scan_jobs({ parent: parent, page_size: page_size, page_token: page_token }, call_options) do |_result, response|
+        client.list_data_scan_jobs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.list_data_scan_jobs(::Google::Cloud::Dataplex::V1::ListDataScanJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token), call_options) do |_result, response|
+        client.list_data_scan_jobs(::Google::Cloud::Dataplex::V1::ListDataScanJobsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
