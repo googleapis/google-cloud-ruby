@@ -1,5 +1,11 @@
 # Release History
 
+### 0.22.0 (2023-07-28)
+
+#### Features
+
+* support automap_substitutions flag 
+
 ### 0.21.0 (2023-07-26)
 
 #### Features
