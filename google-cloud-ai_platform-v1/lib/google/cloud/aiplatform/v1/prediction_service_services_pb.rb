@@ -47,6 +47,9 @@ module Google
             # [DeployedModel][google.cloud.aiplatform.v1.DeployedModel] that served this
             # prediction.
             rpc :RawPredict, ::Google::Cloud::AIPlatform::V1::RawPredictRequest, ::Google::Api::HttpBody
+            # Perform a server-side streaming online prediction request for Vertex
+            # LLM streaming.
+            rpc :ServerStreamingPredict, ::Google::Cloud::AIPlatform::V1::StreamingPredictRequest, stream(::Google::Cloud::AIPlatform::V1::StreamingPredictResponse)
             # Perform an online explanation.
             #
             # If
