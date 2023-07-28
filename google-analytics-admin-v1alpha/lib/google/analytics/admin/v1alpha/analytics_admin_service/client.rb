@@ -3353,7 +3353,8 @@ module Google
             #   @param measurement_protocol_secret [::Google::Analytics::Admin::V1alpha::MeasurementProtocolSecret, ::Hash]
             #     Required. The measurement protocol secret to update.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     The list of fields to be updated. Omitted fields will not be updated.
+            #     Required. The list of fields to be updated. Omitted fields will not be
+            #     updated.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Analytics::Admin::V1alpha::MeasurementProtocolSecret]
