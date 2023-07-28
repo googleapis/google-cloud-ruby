@@ -177,10 +177,38 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Predeploy contains the predeploy job configuration information.
+        # @!attribute [rw] actions
+        #   @return [::Array<::String>]
+        #     Optional. A sequence of skaffold custom actions to invoke during execution
+        #     of the predeploy job.
+        class Predeploy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Postdeploy contains the postdeploy job configuration information.
+        # @!attribute [rw] actions
+        #   @return [::Array<::String>]
+        #     Optional. A sequence of skaffold custom actions to invoke during execution
+        #     of the postdeploy job.
+        class Postdeploy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Standard represents the standard deployment strategy.
         # @!attribute [rw] verify
         #   @return [::Boolean]
         #     Whether to verify a deployment.
+        # @!attribute [rw] predeploy
+        #   @return [::Google::Cloud::Deploy::V1::Predeploy]
+        #     Optional. Configuration for the predeploy job. If this is not configured,
+        #     predeploy job will not be present.
+        # @!attribute [rw] postdeploy
+        #   @return [::Google::Cloud::Deploy::V1::Postdeploy]
+        #     Optional. Configuration for the postdeploy job. If this is not configured,
+        #     postdeploy job will not be present.
         class Standard
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -214,6 +242,14 @@ module Google
         # @!attribute [rw] verify
         #   @return [::Boolean]
         #     Whether to run verify tests after each percentage deployment.
+        # @!attribute [rw] predeploy
+        #   @return [::Google::Cloud::Deploy::V1::Predeploy]
+        #     Optional. Configuration for the predeploy job of the first phase. If this
+        #     is not configured, predeploy job will not be present.
+        # @!attribute [rw] postdeploy
+        #   @return [::Google::Cloud::Deploy::V1::Postdeploy]
+        #     Optional. Configuration for the postdeploy job of the last phase. If this
+        #     is not configured, postdeploy job will not be present.
         class CanaryDeployment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -249,6 +285,14 @@ module Google
           # @!attribute [rw] verify
           #   @return [::Boolean]
           #     Whether to run verify tests after the deployment.
+          # @!attribute [rw] predeploy
+          #   @return [::Google::Cloud::Deploy::V1::Predeploy]
+          #     Optional. Configuration for the predeploy job of this phase. If this is
+          #     not configured, predeploy job will not be present for this phase.
+          # @!attribute [rw] postdeploy
+          #   @return [::Google::Cloud::Deploy::V1::Postdeploy]
+          #     Optional. Configuration for the postdeploy job of this phase. If this is
+          #     not configured, postdeploy job will not be present for this phase.
           class PhaseConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -724,6 +768,12 @@ module Google
 
             # Use for deployment verification.
             VERIFY = 3
+
+            # Use for predeploy job execution.
+            PREDEPLOY = 4
+
+            # Use for postdeploy job execution.
+            POSTDEPLOY = 5
           end
         end
 
@@ -1125,7 +1175,7 @@ module Google
 
               # Cloud Build is not available, either because it is not enabled or
               # because Cloud Deploy has insufficient permissions. See [required
-              # permission](/deploy/docs/cloud-deploy-service-account#required_permissions).
+              # permission](https://cloud.google.com/deploy/docs/cloud-deploy-service-account#required_permissions).
               CLOUD_BUILD_UNAVAILABLE = 1
 
               # The render operation did not complete successfully; check Cloud Build
@@ -1135,6 +1185,11 @@ module Google
               # Cloud Build failed to fulfill Cloud Deploy's request. See
               # failure_message for additional details.
               CLOUD_BUILD_REQUEST_FAILED = 3
+
+              # The render operation did not complete successfully because the custom
+              # action required for predeploy or postdeploy was not found in the
+              # skaffold configuration. See failure_message for additional details.
+              CUSTOM_ACTION_NOT_FOUND = 5
             end
           end
 
@@ -1605,7 +1660,7 @@ module Google
 
             # Cloud Build is not available, either because it is not enabled or because
             # Cloud Deploy has insufficient permissions. See [required
-            # permission](/deploy/docs/cloud-deploy-service-account#required_permissions).
+            # permission](https://cloud.google.com/deploy/docs/cloud-deploy-service-account#required_permissions).
             CLOUD_BUILD_UNAVAILABLE = 1
 
             # The deploy operation did not complete successfully; check Cloud Build
@@ -1723,6 +1778,14 @@ module Google
         # @!attribute [r] verify_job
         #   @return [::Google::Cloud::Deploy::V1::Job]
         #     Output only. The verify Job. Runs after a deploy if the deploy succeeds.
+        # @!attribute [r] predeploy_job
+        #   @return [::Google::Cloud::Deploy::V1::Job]
+        #     Output only. The predeploy Job. This is the predeploy job in the phase.
+        #     This is the first job of the phase.
+        # @!attribute [r] postdeploy_job
+        #   @return [::Google::Cloud::Deploy::V1::Job]
+        #     Output only. The postdeploy Job. This is the postdeploy job in the phase.
+        #     This is the last job of the phase.
         class DeploymentJobs
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1761,6 +1824,12 @@ module Google
         # @!attribute [r] verify_job
         #   @return [::Google::Cloud::Deploy::V1::VerifyJob]
         #     Output only. A verify Job.
+        # @!attribute [r] predeploy_job
+        #   @return [::Google::Cloud::Deploy::V1::PredeployJob]
+        #     Output only. A predeploy Job.
+        # @!attribute [r] postdeploy_job
+        #   @return [::Google::Cloud::Deploy::V1::PostdeployJob]
+        #     Output only. A postdeploy Job.
         # @!attribute [r] create_child_rollout_job
         #   @return [::Google::Cloud::Deploy::V1::CreateChildRolloutJob]
         #     Output only. A createChildRollout Job.
@@ -1810,6 +1879,24 @@ module Google
 
         # A verify Job.
         class VerifyJob
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A predeploy Job.
+        # @!attribute [r] actions
+        #   @return [::Array<::String>]
+        #     Output only. The custom actions that the predeploy Job executes.
+        class PredeployJob
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A postdeploy Job.
+        # @!attribute [r] actions
+        #   @return [::Array<::String>]
+        #     Output only. The custom actions that the postdeploy Job executes.
+        class PostdeployJob
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -2109,6 +2196,12 @@ module Google
         # @!attribute [r] verify_job_run
         #   @return [::Google::Cloud::Deploy::V1::VerifyJobRun]
         #     Output only. Information specific to a verify `JobRun`.
+        # @!attribute [r] predeploy_job_run
+        #   @return [::Google::Cloud::Deploy::V1::PredeployJobRun]
+        #     Output only. Information specific to a predeploy `JobRun`.
+        # @!attribute [r] postdeploy_job_run
+        #   @return [::Google::Cloud::Deploy::V1::PostdeployJobRun]
+        #     Output only. Information specific to a postdeploy `JobRun`.
         # @!attribute [r] create_child_rollout_job_run
         #   @return [::Google::Cloud::Deploy::V1::CreateChildRolloutJobRun]
         #     Output only. Information specific to a createChildRollout `JobRun`.
@@ -2176,7 +2269,7 @@ module Google
 
             # Cloud Build is not available, either because it is not enabled or because
             # Cloud Deploy has insufficient permissions. See [Required
-            # permission](/deploy/docs/cloud-deploy-service-account#required_permissions).
+            # permission](https://cloud.google.com/deploy/docs/cloud-deploy-service-account#required_permissions).
             CLOUD_BUILD_UNAVAILABLE = 1
 
             # The deploy operation did not complete successfully; check Cloud Build
@@ -2228,7 +2321,7 @@ module Google
 
             # Cloud Build is not available, either because it is not enabled or because
             # Cloud Deploy has insufficient permissions. See [required
-            # permission](/deploy/docs/cloud-deploy-service-account#required_permissions).
+            # permission](https://cloud.google.com/deploy/docs/cloud-deploy-service-account#required_permissions).
             CLOUD_BUILD_UNAVAILABLE = 1
 
             # The verify operation did not complete successfully; check Cloud Build
@@ -2244,6 +2337,88 @@ module Google
             # Cloud Build failed to fulfill Cloud Deploy's request. See failure_message
             # for additional details.
             CLOUD_BUILD_REQUEST_FAILED = 5
+          end
+        end
+
+        # PredeployJobRun contains information specific to a predeploy `JobRun`.
+        # @!attribute [r] build
+        #   @return [::String]
+        #     Output only. The resource name of the Cloud Build `Build` object that is
+        #     used to execute the custom actions associated with the predeploy Job.
+        #     Format is projects/\\{project}/locations/\\{location}/builds/\\{build}.
+        # @!attribute [r] failure_cause
+        #   @return [::Google::Cloud::Deploy::V1::PredeployJobRun::FailureCause]
+        #     Output only. The reason the predeploy failed. This will always be
+        #     unspecified while the predeploy is in progress or if it succeeded.
+        # @!attribute [r] failure_message
+        #   @return [::String]
+        #     Output only. Additional information about the predeploy failure, if
+        #     available.
+        class PredeployJobRun
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Well-known predeploy failures.
+          module FailureCause
+            # No reason for failure is specified.
+            FAILURE_CAUSE_UNSPECIFIED = 0
+
+            # Cloud Build is not available, either because it is not enabled or because
+            # Cloud Deploy has insufficient permissions. See [required
+            # permission](https://cloud.google.com/deploy/docs/cloud-deploy-service-account#required_permissions).
+            CLOUD_BUILD_UNAVAILABLE = 1
+
+            # The predeploy operation did not complete successfully; check Cloud Build
+            # logs.
+            EXECUTION_FAILED = 2
+
+            # The predeploy build did not complete within the alloted time.
+            DEADLINE_EXCEEDED = 3
+
+            # Cloud Build failed to fulfill Cloud Deploy's request. See failure_message
+            # for additional details.
+            CLOUD_BUILD_REQUEST_FAILED = 4
+          end
+        end
+
+        # PostdeployJobRun contains information specific to a postdeploy `JobRun`.
+        # @!attribute [r] build
+        #   @return [::String]
+        #     Output only. The resource name of the Cloud Build `Build` object that is
+        #     used to execute the custom actions associated with the postdeploy Job.
+        #     Format is projects/\\{project}/locations/\\{location}/builds/\\{build}.
+        # @!attribute [r] failure_cause
+        #   @return [::Google::Cloud::Deploy::V1::PostdeployJobRun::FailureCause]
+        #     Output only. The reason the postdeploy failed. This will always be
+        #     unspecified while the postdeploy is in progress or if it succeeded.
+        # @!attribute [r] failure_message
+        #   @return [::String]
+        #     Output only. Additional information about the postdeploy failure, if
+        #     available.
+        class PostdeployJobRun
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Well-known postdeploy failures.
+          module FailureCause
+            # No reason for failure is specified.
+            FAILURE_CAUSE_UNSPECIFIED = 0
+
+            # Cloud Build is not available, either because it is not enabled or because
+            # Cloud Deploy has insufficient permissions. See [required
+            # permission](https://cloud.google.com/deploy/docs/cloud-deploy-service-account#required_permissions).
+            CLOUD_BUILD_UNAVAILABLE = 1
+
+            # The postdeploy operation did not complete successfully; check Cloud Build
+            # logs.
+            EXECUTION_FAILED = 2
+
+            # The postdeploy build did not complete within the alloted time.
+            DEADLINE_EXCEEDED = 3
+
+            # Cloud Build failed to fulfill Cloud Deploy's request. See failure_message
+            # for additional details.
+            CLOUD_BUILD_REQUEST_FAILED = 4
           end
         end
 
