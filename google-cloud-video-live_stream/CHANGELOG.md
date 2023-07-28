@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.0.0 (2023-07-28)
+
+#### Features
+
+* Bump version to 1.0.0 
+
 ### 0.3.0 (2023-03-09)
 
 #### Features
@@ -29,4 +35,3 @@
 #### Features
 
 * Initial generation of google-cloud-video-live_stream
-
