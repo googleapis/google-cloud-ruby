@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.11.0 (2023-07-28)
+
+#### Features
+
+* support predeploy and postdeploy actions 
+
 ### 0.10.0 (2023-07-11)
 
 #### Features
