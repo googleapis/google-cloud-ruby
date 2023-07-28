@@ -1,5 +1,11 @@
 # Release History
 
+### 0.17.3 (2023-07-28)
+
+#### Documentation
+
+* clarified where ordering_key will be written if write_metadata is set ([#22601](https://github.com/googleapis/google-cloud-ruby/issues/22601)) 
+
 ### 0.17.2 (2023-06-27)
 
 #### Documentation
