@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.29.0 (2023-07-28)
+
+#### Features
+
+* support server_streaming_predict 
+* support Tensor type 
+
 ### 0.28.0 (2023-07-25)
 
 #### Features
