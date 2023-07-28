@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.0.0 (2023-07-28)
+
+#### Features
+
+* Bump version to 1.0.0 
+
 ### 0.2.0 (2022-07-01)
 
 #### Features
@@ -11,4 +17,3 @@
 #### Features
 
 * Initial generation of google-cloud-bigquery-migration
-
