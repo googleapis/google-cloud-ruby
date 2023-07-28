@@ -8,7 +8,7 @@
     "name": "certificatemanager",
     "name_pretty": "Certificate Manager API",
     "product_documentation": "https://cloud.google.com/certificate-manager",
-    "release_level": "preview",
+    "release_level": "stable",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Certificate Manager lets you acquire and manage Transport Layer Security (TLS) (SSL) certificates for use with classic external HTTP(S) load balancers in Google Cloud.",
