@@ -1,5 +1,15 @@
 # Release History
 
+### 0.22.0 (2023-07-28)
+
+### ⚠ BREAKING CHANGES
+
+* update the `ReportingAttributionModel` enum
+
+#### Bug Fixes
+
+* update the `ReportingAttributionModel` enum 
+
 ### 0.21.0 (2023-06-23)
 
 #### Features
