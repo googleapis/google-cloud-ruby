@@ -1,5 +1,11 @@
 # Release History
 
+### 0.13.0 (2023-07-28)
+
+#### Features
+
+* add last_scanned_row_key feature 
+
 ### 0.12.0 (2023-07-18)
 
 #### Features
