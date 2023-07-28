@@ -57,7 +57,7 @@ module Google
         #     quality.
         #
         #     The field must be a UTF-8 encoded string with a length limit of 128
-        #     characters. Otherwise, an INVALID_ARGUMENT error is returned.
+        #     characters. Otherwise, an `INVALID_ARGUMENT` error is returned.
         #
         #     The field should not contain PII or user-data. We recommend to use Google
         #     Analytics [Client
@@ -111,20 +111,20 @@ module Google
         #
         #     The value must be one of:
         #
-        #     * [PredictResponse.attribution_token][] for events that are the result of
+        #     * {::Google::Cloud::DiscoveryEngine::V1beta::RecommendResponse#attribution_token RecommendResponse.attribution_token} for events that are the result of
         #     {::Google::Cloud::DiscoveryEngine::V1beta::RecommendationService::Client#recommend RecommendationService.Recommend}.
         #     * {::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse#attribution_token SearchResponse.attribution_token} for events that are the result of
         #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchService::Client#search SearchService.Search}.
-        #     * [CompleteQueryResponse.attribution_token][] for events that are the
-        #     result of
-        #     {::Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Client#complete_query CompletionService.CompleteQuery}.
         #
         #     This token enables us to accurately attribute page view or conversion
         #     completion back to the event and the particular predict response containing
         #     this clicked/purchased product. If user clicks on product K in the
-        #     recommendation results, pass [PredictResponse.attribution_token][] as a URL
-        #     parameter to product K's page. When recording events on product K's page,
-        #     log the [PredictResponse.attribution_token][] to this field.
+        #     recommendation results, pass
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::RecommendResponse#attribution_token RecommendResponse.attribution_token}
+        #     as a URL parameter to product K's page. When recording events on product
+        #     K's page, log the
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::RecommendResponse#attribution_token RecommendResponse.attribution_token}
+        #     to this field.
         # @!attribute [rw] filter
         #   @return [::String]
         #     The filter syntax consists of an expression language for constructing a
@@ -142,10 +142,11 @@ module Google
         #     to https://google.aip.dev/160#filtering.
         #
         #     The value must be a UTF-8 encoded string with a length limit of 1,000
-        #     characters. Otherwise, an INVALID_ARGUMENT error is returned.
+        #     characters. Otherwise, an `INVALID_ARGUMENT` error is returned.
         # @!attribute [rw] documents
         #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::DocumentInfo>]
-        #     List of Documents associated with this user event.
+        #     List of {::Google::Cloud::DiscoveryEngine::V1beta::Document Document}s
+        #     associated with this user event.
         #
         #     This field is optional except for the following event types:
         #
@@ -167,12 +168,14 @@ module Google
         #     Panel metadata associated with this user event.
         # @!attribute [rw] search_info
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchInfo]
-        #     Search API details related to the event.
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchService::Client#search SearchService.Search}
+        #     details related to the event.
         #
         #     This field should be set for `search` event.
         # @!attribute [rw] completion_info
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::CompletionInfo]
-        #     CompleteQuery API details related to the event.
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::CompletionService::Client#complete_query CompletionService.CompleteQuery}
+        #     details related to the event.
         #
         #     This field should be set for `search` event when autocomplete function is
         #     enabled and the user clicks a suggestion for search.
@@ -212,7 +215,7 @@ module Google
         #     * For number attributes, at most 400 values are allowed.
         #
         #     For product recommendations, an example of extra user information is
-        #     ` traffic_channel`, which is how a user arrives at the site. Users can
+        #     `traffic_channel`, which is how a user arrives at the site. Users can
         #     arrive
         #     at the site by coming to the site directly, coming through Google
         #     search, or in other ways.
@@ -240,7 +243,7 @@ module Google
         #
         #     This should be kept the same for all user events triggered from the same
         #     pageview. For example, an item detail page view could trigger multiple
-        #     events as the user is browsing the page. The `pageViewId` property should
+        #     events as the user is browsing the page. The `pageview_id` property should
         #     be kept the same for all these events so that they can be grouped together
         #     properly.
         #
@@ -256,10 +259,10 @@ module Google
         #
         #     Category pages include special pages such as sales or promotions. For
         #     instance, a special sale page may have the category hierarchy:
-        #     "pageCategory" : "Sales > 2017 Black Friday Deals".
+        #     `"pageCategory" : "Sales > 2017 Black Friday Deals"`.
         #
         #     Required for `view-category-page` events. Other event types should not set
-        #     this field. Otherwise, an INVALID_ARGUMENT error is returned.
+        #     this field. Otherwise, an `INVALID_ARGUMENT` error is returned.
         # @!attribute [rw] uri
         #   @return [::String]
         #     Complete URL (window.location.href) of the user's current page.
@@ -289,14 +292,14 @@ module Google
         #     for definition.
         #
         #     The value must be a UTF-8 encoded string with a length limit of 5,000
-        #     characters. Otherwise, an INVALID_ARGUMENT error is returned.
+        #     characters. Otherwise, an `INVALID_ARGUMENT` error is returned.
         #
         #     At least one of
         #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchInfo#search_query search_query}
         #     or
         #     {::Google::Cloud::DiscoveryEngine::V1beta::PageInfo#page_category PageInfo.page_category}
         #     is required for `search` events. Other event types should not set this
-        #     field. Otherwise, an INVALID_ARGUMENT error is returned.
+        #     field. Otherwise, an `INVALID_ARGUMENT` error is returned.
         # @!attribute [rw] order_by
         #   @return [::String]
         #     The order in which products are returned, if applicable.
@@ -306,10 +309,10 @@ module Google
         #     for definition and syntax.
         #
         #     The value must be a UTF-8 encoded string with a length limit of 1,000
-        #     characters. Otherwise, an INVALID_ARGUMENT error is returned.
+        #     characters. Otherwise, an `INVALID_ARGUMENT` error is returned.
         #
         #     This can only be set for `search` events. Other event types should not set
-        #     this field. Otherwise, an INVALID_ARGUMENT error is returned.
+        #     this field. Otherwise, an `INVALID_ARGUMENT` error is returned.
         # @!attribute [rw] offset
         #   @return [::Integer]
         #     An integer that specifies the current offset for pagination (the 0-indexed
@@ -319,10 +322,10 @@ module Google
         #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest#offset SearchRequest.offset}
         #     for definition.
         #
-        #     If this field is negative, an INVALID_ARGUMENT is returned.
+        #     If this field is negative, an `INVALID_ARGUMENT` is returned.
         #
         #     This can only be set for `search` events. Other event types should not set
-        #     this field. Otherwise, an INVALID_ARGUMENT error is returned.
+        #     this field. Otherwise, an `INVALID_ARGUMENT` error is returned.
         class SearchInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -332,10 +335,12 @@ module Google
         # clicked completion info.
         # @!attribute [rw] selected_suggestion
         #   @return [::String]
-        #     End user selected [CompleteQueryResponse.CompletionResult.suggestion][].
+        #     End user selected
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::CompleteQueryResponse::QuerySuggestion#suggestion CompleteQueryResponse.QuerySuggestion.suggestion}.
         # @!attribute [rw] selected_position
         #   @return [::Integer]
-        #     End user selected [CompleteQueryResponse.CompletionResult.suggestion][]
+        #     End user selected
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::CompleteQueryResponse::QuerySuggestion#suggestion CompleteQueryResponse.QuerySuggestion.suggestion}
         #     position, starting from 0.
         class CompletionInfo
           include ::Google::Protobuf::MessageExts
@@ -398,10 +403,11 @@ module Google
         # Detailed document information associated with a user event.
         # @!attribute [rw] id
         #   @return [::String]
-        #     Required. The Document resource ID.
+        #     The {::Google::Cloud::DiscoveryEngine::V1beta::Document Document} resource ID.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The Document resource full name, of the form:
+        #     The {::Google::Cloud::DiscoveryEngine::V1beta::Document Document} resource
+        #     full name, of the form:
         #     `projects/{project_id}/locations/{location}/collections/{collection_id}/dataStores/{data_store_id}/branches/{branch_id}/documents/{document_id}`
         # @!attribute [rw] quantity
         #   @return [::Integer]
@@ -452,11 +458,13 @@ module Google
         #   @return [::Google::Protobuf::Duration]
         #     The media progress time in seconds, if applicable.
         #     For example, if the end user has finished 90 seconds of a playback video,
-        #     then [MediaInfo.media_progress_duration.seconds][Duration.seconds] should
-        #     be set to 90.
+        #     then
+        #     {::Google::Protobuf::Duration#seconds MediaInfo.media_progress_duration.seconds}
+        #     should be set to 90.
         # @!attribute [rw] media_progress_percentage
         #   @return [::Float]
-        #     Media progress should be computed using only the media_progress_duration
+        #     Media progress should be computed using only the
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::MediaInfo#media_progress_duration media_progress_duration}
         #     relative to the media total length.
         #
         #     This value must be between `[0, 1.0]` inclusive.

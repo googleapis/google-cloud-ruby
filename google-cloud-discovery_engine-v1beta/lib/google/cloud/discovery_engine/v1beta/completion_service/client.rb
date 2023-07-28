@@ -162,7 +162,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload complete_query(data_store: nil, query: nil, query_model: nil, user_pseudo_id: nil)
+            # @overload complete_query(data_store: nil, query: nil, query_model: nil, user_pseudo_id: nil, include_tail_suggestions: nil)
             #   Pass arguments to `complete_query` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -191,8 +191,7 @@ module Google
             #
             #     * `document` is the default model for regular dataStores.
             #     * `search-history` is the default model for
-            #     [IndustryVertical.SITE_SEARCH][google.cloud.discoveryengine.v1beta.IndustryVertical.SITE_SEARCH]
-            #     dataStores.
+            #     [IndustryVertical.SITE_SEARCH][] dataStores.
             #   @param user_pseudo_id [::String]
             #     A unique identifier for tracking visitors. For example, this could be
             #     implemented with an HTTP cookie, which should be able to uniquely identify
@@ -208,6 +207,11 @@ module Google
             #
             #     The field must be a UTF-8 encoded string with a length limit of 128
             #     characters. Otherwise, an `INVALID_ARGUMENT` error is returned.
+            #   @param include_tail_suggestions [::Boolean]
+            #     Indicates if tail suggestions should be returned if there are no
+            #     suggestions that match the full query. Even if set to true, if there are
+            #     suggestions that match the full query, those are returned and no
+            #     tail suggestions are returned.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DiscoveryEngine::V1beta::CompleteQueryResponse]

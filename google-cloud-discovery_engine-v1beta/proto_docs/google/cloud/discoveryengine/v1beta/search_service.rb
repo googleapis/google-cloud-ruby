@@ -40,11 +40,14 @@ module Google
         # @!attribute [rw] query
         #   @return [::String]
         #     Raw search query.
+        # @!attribute [rw] image_query
+        #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::ImageQuery]
+        #     Raw image query.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Maximum number of {::Google::Cloud::DiscoveryEngine::V1beta::Document Document}s
         #     to return. If unspecified, defaults to a reasonable value. The maximum
-        #     allowed value is 100. Values above 100 will be coerced to 100.
+        #     allowed value is 100. Values above 100 are coerced to 100.
         #
         #     If this field is negative, an  `INVALID_ARGUMENT`  is returned.
         # @!attribute [rw] page_token
@@ -76,17 +79,18 @@ module Google
         #     If this field is unrecognizable, an  `INVALID_ARGUMENT`  is returned.
         # @!attribute [rw] order_by
         #   @return [::String]
-        #     The order in which documents are returned. Document can be ordered by
+        #     The order in which documents are returned. Documents can be ordered by
         #     a field in an {::Google::Cloud::DiscoveryEngine::V1beta::Document Document}
-        #     object. Leave it unset if ordered by relevance. OrderBy expression is
+        #     object. Leave it unset if ordered by relevance. `order_by` expression is
         #     case-sensitive.
         #
-        #     If this field is unrecognizable, an  `INVALID_ARGUMENT`  is returned.
+        #     If this field is unrecognizable, an `INVALID_ARGUMENT` is returned.
         # @!attribute [rw] user_info
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::UserInfo]
         #     Information about the end user.
-        #     Highly recommended for analytics. The user_agent string in UserInfo will
-        #     be used to deduce device_type for analytics.
+        #     Highly recommended for analytics.
+        #     {::Google::Cloud::DiscoveryEngine::V1beta::UserInfo#user_agent UserInfo.user_agent}
+        #     is used to deduce `device_type` for analytics.
         # @!attribute [rw] facet_specs
         #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::FacetSpec>]
         #     Facet specifications for faceted search. If empty, no facets are returned.
@@ -110,11 +114,11 @@ module Google
         # @!attribute [rw] query_expansion_spec
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::QueryExpansionSpec]
         #     The query expansion specification that specifies the conditions under which
-        #     query expansion will occur.
+        #     query expansion occurs.
         # @!attribute [rw] spell_correction_spec
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::SpellCorrectionSpec]
         #     The spell correction specification that specifies the mode under
-        #     which spell correction will take effect.
+        #     which spell correction takes effect.
         # @!attribute [rw] user_pseudo_id
         #   @return [::String]
         #     A unique identifier for tracking visitors. For example, this could be
@@ -133,12 +137,11 @@ module Google
         #     characters. Otherwise, an  `INVALID_ARGUMENT`  error is returned.
         # @!attribute [rw] content_search_spec
         #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::ContentSearchSpec]
-        #     The content search spec that configs the desired behavior of content
-        #     search.
+        #     A specification for configuring the behavior of content search.
         # @!attribute [rw] safe_search
         #   @return [::Boolean]
         #     Whether to turn on safe search. This is only supported for
-        #     [ContentConfig.PUBLIC_WEBSITE][].
+        #     website search.
         # @!attribute [rw] user_labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     The user labels applied to a resource must meet the following requirements:
@@ -162,6 +165,16 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
+          # Specifies the image query input.
+          # @!attribute [rw] image_bytes
+          #   @return [::String]
+          #     Base64 encoded image bytes. Supported image formats: JPEG, PNG, and
+          #     BMP.
+          class ImageQuery
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # A facet specification to perform faceted search.
           # @!attribute [rw] facet_key
           #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::FacetSpec::FacetKey]
@@ -170,7 +183,7 @@ module Google
           #   @return [::Integer]
           #     Maximum of facet values that should be returned for this facet. If
           #     unspecified, defaults to 20. The maximum allowed value is 300. Values
-          #     above 300 will be coerced to 300.
+          #     above 300 are coerced to 300.
           #
           #     If this field is negative, an  `INVALID_ARGUMENT`  is returned.
           # @!attribute [rw] excluded_filter_keys
@@ -207,15 +220,15 @@ module Google
           #   @return [::Boolean]
           #     Enables dynamic position for this facet. If set to true, the position of
           #     this facet among all facets in the response is determined automatically.
-          #     It will be ordered together with dynamic facets if dynamic
-          #     facets is enabled. If set to false, the position of this facet in the
-          #     response will be the same as in the request, and it will be ranked before
+          #     If dynamic facets are enabled, it is ordered together.
+          #     If set to false, the position of this facet in the
+          #     response is the same as in the request, and it is ranked before
           #     the facets with dynamic position enable and all dynamic facets.
           #
           #     For example, you may always want to have rating facet returned in
           #     the response, but it's not necessarily to always display the rating facet
           #     at the top. In that case, you can set enable_dynamic_position to true so
-          #     that the position of rating facet in response will be determined
+          #     that the position of rating facet in response is determined
           #     automatically.
           #
           #     Another example, assuming you have the following facets in the request:
@@ -226,13 +239,13 @@ module Google
           #
           #     * "brands", enable_dynamic_position = false
           #
-          #     And also you have a dynamic facets enable, which will generate a facet
-          #     'gender'. Then the final order of the facets in the response can be
+          #     And also you have a dynamic facets enabled, which generates a facet
+          #     `gender`. Then the final order of the facets in the response can be
           #     ("price", "brands", "rating", "gender") or ("price", "brands", "gender",
           #     "rating") depends on how API orders "gender" and "rating" facets.
-          #     However, notice that "price" and "brands" will always be
-          #     ranked at 1st and 2nd position since their enable_dynamic_position are
-          #     false.
+          #     However, notice that "price" and "brands" are always
+          #     ranked at first and second position because their enable_dynamic_position
+          #     is false.
           class FacetSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -245,7 +258,7 @@ module Google
             #     which the facet values are computed. Facet key is case-sensitive.
             # @!attribute [rw] intervals
             #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::Interval>]
-            #     Set only if values should be bucketized into intervals. Must be set
+            #     Set only if values should be bucketed into intervals. Must be set
             #     for facets with numerical values. Must not be set for facet with text
             #     values. Maximum number of intervals is 30.
             # @!attribute [rw] restricted_values
@@ -253,22 +266,22 @@ module Google
             #     Only get facet for the given restricted values. Only supported on
             #     textual fields. For example, suppose "category" has three values
             #     "Action > 2022", "Action > 2021" and "Sci-Fi > 2022". If set
-            #     "restricted_values" to "Action > 2022", the "category" facet will only
-            #     contain "Action > 2022". Only supported on textual fields. Maximum
+            #     "restricted_values" to "Action > 2022", the "category" facet only
+            #     contains "Action > 2022". Only supported on textual fields. Maximum
             #     is 10.
             # @!attribute [rw] prefixes
             #   @return [::Array<::String>]
             #     Only get facet values that start with the given string prefix. For
             #     example, suppose "category" has three values "Action > 2022",
             #     "Action > 2021" and "Sci-Fi > 2022". If set "prefixes" to "Action", the
-            #     "category" facet will only contain "Action > 2022" and "Action > 2021".
+            #     "category" facet only contains "Action > 2022" and "Action > 2021".
             #     Only supported on textual fields. Maximum is 10.
             # @!attribute [rw] contains
             #   @return [::Array<::String>]
             #     Only get facet values that contains the given strings. For example,
             #     suppose "category" has three values "Action > 2022",
             #     "Action > 2021" and "Sci-Fi > 2022". If set "contains" to "2022", the
-            #     "category" facet will only contain "Action > 2022" and "Sci-Fi > 2022".
+            #     "category" facet only contains "Action > 2022" and "Sci-Fi > 2022".
             #     Only supported on textual fields. Maximum is 10.
             # @!attribute [rw] case_insensitive
             #   @return [::Boolean]
@@ -405,15 +418,14 @@ module Google
             end
           end
 
-          # The specification that configs the desired behavior of the UCS content
-          # search.
+          # A specification for configuring the behavior of content search.
           # @!attribute [rw] snippet_spec
           #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::ContentSearchSpec::SnippetSpec]
-          #     If there is no snippet spec provided, there will be no snippet in the
-          #     search result.
+          #     If `snippetSpec` is not specified, snippets are not included in the
+          #     search response.
           # @!attribute [rw] summary_spec
           #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::ContentSearchSpec::SummarySpec]
-          #     If there is no summary spec provided, there will be no summary in the
+          #     If `summarySpec` is not specified, summaries are not included in the
           #     search response.
           # @!attribute [rw] extractive_content_spec
           #   @return [::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::ContentSearchSpec::ExtractiveContentSpec]
@@ -423,68 +435,123 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
-            # The specification that configs the snippet in the search results.
+            # A specification for configuring snippets in a search response.
             # @!attribute [rw] max_snippet_count
             #   @return [::Integer]
-            #     Max number of snippets returned in each search result.
-            #
-            #     A snippet is an infomartive summary of a content with highlighting for
-            #     UI rendering.
-            #
-            #     If the matching snippets is less than the max_snippet_count, return all
-            #     of the snippets; otherwise, return the max_snippet_count.
-            #
-            #     At most 5 snippets will be returned for each SearchResult.
+            #     [DEPRECATED] This field is deprecated. To control snippet return, use
+            #     `return_snippet` field. For backwards compatibility, we will return
+            #     snippet if max_snippet_count > 0.
             # @!attribute [rw] reference_only
             #   @return [::Boolean]
-            #     if true, only snippet reference is returned.
+            #     [DEPRECATED] This field is deprecated and will have no affect on the
+            #     snippet.
+            # @!attribute [rw] return_snippet
+            #   @return [::Boolean]
+            #     If `true`, then return snippet. If no snippet can be generated, we
+            #     return "No snippet is available for this page." A `snippet_status` with
+            #     `SUCCESS` or `NO_SNIPPET_AVAILABLE` will also be returned.
             class SnippetSpec
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
-            # The specification that configs the summary in the search response.
+            # A specification for configuring a summary returned in a search
+            # response.
             # @!attribute [rw] summary_result_count
             #   @return [::Integer]
-            #     The number of top results the summary should be generated from.
-            #     If the number of returned results is less than summary_result_count,
-            #     then the summary would be derived from all the results; otherwise, the
-            #     summary would be derived from the top results.
+            #     The number of top results to generate the summary from. If the number
+            #     of results returned is less than `summaryResultCount`, the summary is
+            #     generated from all of the results.
             #
-            #     At most 5 results can be used for generating summary.
+            #     At most five results can be used to generate a summary.
+            # @!attribute [rw] include_citations
+            #   @return [::Boolean]
+            #     Specifies whether to include citations in the summary. The default
+            #     value is `false`.
+            #
+            #     When this field is set to `true`, summaries include in-line citation
+            #     numbers.
+            #
+            #     Example summary including citations:
+            #
+            #     BigQuery is Google Cloud's fully managed and completely serverless
+            #     enterprise data warehouse [1]. BigQuery supports all data types, works
+            #     across clouds, and has built-in machine learning and business
+            #     intelligence, all within a unified platform [2, 3].
+            #
+            #     The citation numbers refer to the returned search results and are
+            #     1-indexed. For example, [1] means that the sentence is attributed to
+            #     the first search result. [2, 3] means that the sentence is attributed
+            #     to both the second and third search results.
+            # @!attribute [rw] ignore_adversarial_query
+            #   @return [::Boolean]
+            #     Specifies whether to filter out adversarial queries. The default value
+            #     is `false`.
+            #
+            #     Google employs search-query classification to detect adversarial
+            #     queries. No summary is returned if the search query is classified as an
+            #     adversarial query. For example, a user might ask a question regarding
+            #     negative comments about the company or submit a query designed to
+            #     generate unsafe, policy-violating output. If this field is set to
+            #     `true`, we skip generating summaries for adversarial queries and return
+            #     fallback messages instead.
+            # @!attribute [rw] ignore_non_summary_seeking_query
+            #   @return [::Boolean]
+            #     Specifies whether to filter out queries that are not summary-seeking.
+            #     The default value is `false`.
+            #
+            #     Google employs search-query classification to detect summary-seeking
+            #     queries. No summary is returned if the search query is classified as a
+            #     non-summary seeking query. For example, `why is the sky blue` and `Who
+            #     is the best soccer player in the world?` are summary-seeking queries,
+            #     but `SFO airport` and `world cup 2026` are not. They are most likely
+            #     navigational queries. If this field is set to `true`, we skip
+            #     generating summaries for non-summary seeking queries and return
+            #     fallback messages instead.
             class SummarySpec
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
-            # The specification that configs the extractive content in search results.
+            # A specification for configuring the extractive content in a search
+            # response.
             # @!attribute [rw] max_extractive_answer_count
             #   @return [::Integer]
-            #     The max number of extractive answers returned in each search result.
+            #     The maximum number of extractive answers returned in each search
+            #     result.
             #
             #     An extractive answer is a verbatim answer extracted from the original
-            #     document, which provides precise and contextually relevant answer to
+            #     document, which provides a precise and contextually relevant answer to
             #     the search query.
             #
             #     If the number of matching answers is less than the
-            #     extractive_answer_count, return all of the answers; otherwise, return
-            #     the extractive_answer_count.
+            #     `max_extractive_answer_count`, return all of the answers. Otherwise,
+            #     return the `max_extractive_answer_count`.
             #
-            #     At most 5 answers will be returned for each SearchResult.
+            #     At most one answer is returned for each
+            #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::SearchResult SearchResult}.
             # @!attribute [rw] max_extractive_segment_count
             #   @return [::Integer]
             #     The max number of extractive segments returned in each search result.
+            #     Only applied if the
+            #     [DataStore][google.cloud.discoveryengine.v1beta.DataStore] is set to
+            #     [DataStore.ContentConfig.CONTENT_REQUIRED][google.cloud.discoveryengine.v1beta.DataStore.ContentConfig.CONTENT_REQUIRED]
+            #     or
+            #     [DataStore.solution_types][google.cloud.discoveryengine.v1beta.DataStore.solution_types]
+            #     is
+            #     [SOLUTION_TYPE_CHAT][google.cloud.discoveryengine.v1beta.SolutionType.SOLUTION_TYPE_CHAT].
             #
             #     An extractive segment is a text segment extracted from the original
-            #     document which is relevant to the search query and in general more
-            #     verbose than an extrative answer. The segment could then be used as
+            #     document that is relevant to the search query, and, in general, more
+            #     verbose than an extractive answer. The segment could then be used as
             #     input for LLMs to generate summaries and answers.
             #
-            #     If the number of matching segments is less than the
-            #     max_extractive_segment_count, return all of the segments; otherwise,
-            #     return the max_extractive_segment_count.
+            #     If the number of matching segments is less than
+            #     `max_extractive_segment_count`, return all of the segments. Otherwise,
+            #     return the `max_extractive_segment_count`.
             #
-            #     Currently one segment will be returned for each SearchResult.
+            #     Currently one segment is returned for each
+            #     {::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::SearchResult SearchResult}.
             class ExtractiveContentSpec
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -620,6 +687,9 @@ module Google
           # @!attribute [rw] refinement_attributes
           #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::GuidedSearchResult::RefinementAttribute>]
           #     A list of ranked refinement attributes.
+          # @!attribute [rw] follow_up_questions
+          #   @return [::Array<::String>]
+          #     Suggested follow-up questions.
           class GuidedSearchResult
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -641,9 +711,40 @@ module Google
           # @!attribute [rw] summary_text
           #   @return [::String]
           #     The summary content.
+          # @!attribute [rw] summary_skipped_reasons
+          #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1beta::SearchResponse::Summary::SummarySkippedReason>]
+          #     Additional summary-skipped reasons. This provides the reason for ignored
+          #     cases. If nothing is skipped, this field is not set.
           class Summary
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # An Enum for summary-skipped reasons.
+            module SummarySkippedReason
+              # Default value. The summary skipped reason is not specified.
+              SUMMARY_SKIPPED_REASON_UNSPECIFIED = 0
+
+              # The adversarial query ignored case.
+              #
+              # Only populated when
+              # {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::ContentSearchSpec::SummarySpec#ignore_adversarial_query SummarySpec.ignore_adversarial_query}
+              # is set to `true`.
+              ADVERSARIAL_QUERY_IGNORED = 1
+
+              # The non-summary seeking query ignored case.
+              #
+              # Only populated when
+              # {::Google::Cloud::DiscoveryEngine::V1beta::SearchRequest::ContentSearchSpec::SummarySpec#ignore_non_summary_seeking_query SummarySpec.ignore_non_summary_seeking_query}
+              # is set to `true`.
+              NON_SUMMARY_SEEKING_QUERY_IGNORED = 2
+
+              # The out-of-domain query ignored case.
+              #
+              # Google skips the summary if there are no high-relevance search results.
+              # For example, the data store contains facts about company A but the
+              # user query is asking questions about company B.
+              OUT_OF_DOMAIN_QUERY_IGNORED = 3
+            end
           end
         end
       end

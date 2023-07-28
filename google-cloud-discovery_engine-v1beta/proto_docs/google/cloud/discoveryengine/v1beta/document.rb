@@ -26,14 +26,12 @@ module Google
         # @!attribute [rw] struct_data
         #   @return [::Google::Protobuf::Struct]
         #     The structured JSON data for the document. It should conform to the
-        #     registered
-        #     [Schema.schema][google.cloud.discoveryengine.v1beta.Schema.schema] or an
+        #     registered {::Google::Cloud::DiscoveryEngine::V1beta::Schema Schema} or an
         #     `INVALID_ARGUMENT` error is thrown.
         # @!attribute [rw] json_data
         #   @return [::String]
         #     The JSON string representation of the document. It should conform to the
-        #     registered
-        #     [Schema.schema][google.cloud.discoveryengine.v1beta.Schema.schema] or an
+        #     registered {::Google::Cloud::DiscoveryEngine::V1beta::Schema Schema} or an
         #     `INVALID_ARGUMENT` error is thrown.
         # @!attribute [rw] name
         #   @return [::String]

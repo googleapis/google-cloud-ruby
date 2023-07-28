@@ -738,7 +738,28 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/v1beta/{name}/operations",
                                                           matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/collections/[^/]+/dataStores/[^/]+/siteSearchEngine/targetSites/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1beta/{name}/operations",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/collections/[^/]+/dataStores/[^/]+/siteSearchEngine/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1beta/{name}/operations",
+                                                          matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/collections/[^/]+/dataStores/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1beta/{name}/operations",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/collections/[^/]+/engines/[^/]+/?$}, false]
                                                           ]
                                                         )
                                                         .with_bindings(
@@ -823,6 +844,27 @@ module Google
                                                           uri_template: "/v1beta/{name}",
                                                           matches: [
                                                             ["name", %r{^projects/[^/]+/locations/[^/]+/collections/[^/]+/dataStores/[^/]+/schemas/[^/]+/operations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1beta/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/collections/[^/]+/dataStores/[^/]+/siteSearchEngine/operations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1beta/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/collections/[^/]+/dataStores/[^/]+/siteSearchEngine/targetSites/operations/[^/]+/?$}, false]
+                                                          ]
+                                                        )
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/v1beta/{name}",
+                                                          matches: [
+                                                            ["name", %r{^projects/[^/]+/locations/[^/]+/collections/[^/]+/engines/[^/]+/operations/[^/]+/?$}, false]
                                                           ]
                                                         )
                                                         .with_bindings(
