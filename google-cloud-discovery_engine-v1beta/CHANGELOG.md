@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.4.0 (2023-07-28)
+
+#### Features
+
+* add include_tail_suggestions to query 
+* support conversational search service 
+
 ### 0.3.0 (2023-06-20)
 
 #### Features
