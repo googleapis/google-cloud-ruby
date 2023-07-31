@@ -23,11 +23,11 @@ module Google
       module V1beta1
         # Detailed counts on the entry's usage.
         # Caveats:
-        #   - Only BigQuery tables have usage stats
-        #   - The usage stats only include BigQuery query jobs
-        #   - The usage stats might be underestimated, e.g. wildcard table references
-        #     are not yet counted in usage computation
-        #     https://cloud.google.com/bigquery/docs/querying-wildcard-tables
+        # - Only BigQuery tables have usage stats
+        # - The usage stats only include BigQuery query jobs
+        # - The usage stats might be underestimated, e.g. wildcard table references
+        # are not yet counted in usage computation
+        # https://cloud.google.com/bigquery/docs/querying-wildcard-tables
         # @!attribute [rw] total_completions
         #   @return [::Float]
         #     The number of times that the underlying entry was successfully used.
