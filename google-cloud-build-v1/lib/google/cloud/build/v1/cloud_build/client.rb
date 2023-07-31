@@ -1257,7 +1257,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload update_build_trigger(project_id: nil, trigger_id: nil, trigger: nil)
+            # @overload update_build_trigger(project_id: nil, trigger_id: nil, trigger: nil, update_mask: nil)
             #   Pass arguments to `update_build_trigger` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1268,6 +1268,10 @@ module Google
             #     Required. ID of the `BuildTrigger` to update.
             #   @param trigger [::Google::Cloud::Build::V1::BuildTrigger, ::Hash]
             #     Required. `BuildTrigger` to update.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Update mask for the resource. If this is set,
+            #     the server will only update the fields specified in the field mask.
+            #     Otherwise, a full update of the mutable resource fields will be performed.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Build::V1::BuildTrigger]
