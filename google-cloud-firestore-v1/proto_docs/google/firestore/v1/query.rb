@@ -387,6 +387,12 @@ module Google
           # @!attribute [rw] count
           #   @return [::Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation::Count]
           #     Count aggregator.
+          # @!attribute [rw] sum
+          #   @return [::Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation::Sum]
+          #     Sum aggregator.
+          # @!attribute [rw] avg
+          #   @return [::Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation::Avg]
+          #     Average aggregator.
           # @!attribute [rw] alias
           #   @return [::String]
           #     Optional. Optional name of the field to store the result of the
@@ -452,6 +458,54 @@ module Google
             #
             #     * Must be greater than zero when present.
             class Count
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Sum of the values of the requested field.
+            #
+            # * Only numeric values will be aggregated. All non-numeric values
+            # including `NULL` are skipped.
+            #
+            # * If the aggregated values contain `NaN`, returns `NaN`. Infinity math
+            # follows IEEE-754 standards.
+            #
+            # * If the aggregated value set is empty, returns 0.
+            #
+            # * Returns a 64-bit integer if all aggregated numbers are integers and the
+            # sum result does not overflow. Otherwise, the result is returned as a
+            # double. Note that even if all the aggregated values are integers, the
+            # result is returned as a double if it cannot fit within a 64-bit signed
+            # integer. When this occurs, the returned value will lose precision.
+            #
+            # * When underflow occurs, floating-point aggregation is non-deterministic.
+            # This means that running the same query repeatedly without any changes to
+            # the underlying values could produce slightly different results each
+            # time. In those cases, values should be stored as integers over
+            # floating-point numbers.
+            # @!attribute [rw] field
+            #   @return [::Google::Cloud::Firestore::V1::StructuredQuery::FieldReference]
+            #     The field to aggregate on.
+            class Sum
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Average of the values of the requested field.
+            #
+            # * Only numeric values will be aggregated. All non-numeric values
+            # including `NULL` are skipped.
+            #
+            # * If the aggregated values contain `NaN`, returns `NaN`. Infinity math
+            # follows IEEE-754 standards.
+            #
+            # * If the aggregated value set is empty, returns `NULL`.
+            #
+            # * Always returns the result as a double.
+            # @!attribute [rw] field
+            #   @return [::Google::Cloud::Firestore::V1::StructuredQuery::FieldReference]
+            #     The field to aggregate on.
+            class Avg
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
