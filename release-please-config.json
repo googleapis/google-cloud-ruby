@@ -923,6 +923,10 @@
       "component": "google-cloud-phishing_protection-v1beta1",
       "version_file": "lib/google/cloud/phishing_protection/v1beta1/version.rb"
     },
+    "google-cloud-policy_simulator-v1": {
+      "component": "google-cloud-policy_simulator-v1",
+      "version_file": "lib/google/cloud/policy_simulator/v1/version.rb"
+    },
     "google-cloud-policy_troubleshooter": {
       "component": "google-cloud-policy_troubleshooter",
       "version_file": "lib/google/cloud/policy_troubleshooter/version.rb"
