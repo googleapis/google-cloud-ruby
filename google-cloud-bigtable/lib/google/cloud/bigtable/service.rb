@@ -49,12 +49,15 @@ module Google
         # @param timeout [Integer]
         #   The default timeout, in seconds, for calls made through this client.
         #
-        def initialize project_id, credentials, host: nil, host_admin: nil, timeout: nil
+        def initialize project_id, credentials, host: nil, host_admin: nil, timeout: nil,
+                       channel_selection: nil, channel_count: nil
           @project_id = project_id
           @credentials = credentials
           @host = host
           @host_admin = host_admin
           @timeout = timeout
+          @channel_selection = channel_selection
+          @channel_count = channel_count
         end
 
         def instances
@@ -90,6 +93,8 @@ module Google
             config.timeout = timeout if timeout
             config.endpoint = host if host
             config.lib_name = "gccl"
+            config.channel_pool.channel_selection = @channel_selection
+            config.channel_pool.channel_count = 10
             config.lib_version = Google::Cloud::Bigtable::VERSION
             config.metadata = { "google-cloud-resource-prefix": "projects/#{@project_id}" }
           end

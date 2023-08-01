@@ -1,3 +1,6 @@
 source "https://rubygems.org"
 
 gemspec
+
+
+gem "gapic-common", path: "/Users/diptanshu/Desktop/github/gapic-generator-ruby/gapic-common"

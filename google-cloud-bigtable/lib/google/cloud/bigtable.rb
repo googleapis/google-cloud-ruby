@@ -76,7 +76,9 @@ module Google
                    scope: nil,
                    endpoint: nil,
                    endpoint_admin: nil,
-                   timeout: nil
+                   timeout: nil,
+                   channel_selection: nil,
+                   channel_count: nil
         project_id    ||= default_project_id
         scope         ||= configure.scope
         timeout       ||= configure.timeout
@@ -91,7 +93,8 @@ module Google
         raise ArgumentError, "project_id is missing" if project_id.empty?
 
         service = Bigtable::Service.new \
-          project_id, credentials, host: endpoint, host_admin: endpoint_admin, timeout: timeout
+          project_id, credentials, host: endpoint, host_admin: endpoint_admin, timeout: timeout,
+          channel_selection: channel_selection, channel_count: channel_count
         Bigtable::Project.new service
       end
 
