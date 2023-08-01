@@ -48,12 +48,12 @@ module Google
         #   @return [::Google::Cloud::Dialogflow::V2::QueryInput]
         #     Required. The input specification. It can be set to:
         #
-        #     1.  an audio config
-        #         which instructs the speech recognizer how to process the speech audio,
+        #     1. an audio config which instructs the speech recognizer how to process
+        #     the speech audio,
         #
-        #     2.  a conversational query in the form of text, or
+        #     2. a conversational query in the form of text, or
         #
-        #     3.  an event that specifies which intent to trigger.
+        #     3. an event that specifies which intent to trigger.
         # @!attribute [rw] output_audio_config
         #   @return [::Google::Cloud::Dialogflow::V2::OutputAudioConfig]
         #     Instructs the speech synthesizer how to generate the output
@@ -233,16 +233,14 @@ module Google
         #     map, associative array, symbol table, dictionary, or JSON object
         #     composed of a collection of (MapKey, MapValue) pairs:
         #
-        #     -   MapKey type: string
-        #     -   MapKey value: parameter name
-        #     -   MapValue type:
-        #         -   If parameter's entity type is a composite entity: map
-        #         -   Else: depending on parameter value type, could be one of string,
-        #             number, boolean, null, list or map
-        #     -   MapValue value:
-        #         -   If parameter's entity type is a composite entity:
-        #             map from composite entity property names to property values
-        #         -   Else: parameter value
+        #     * MapKey type: string
+        #     * MapKey value: parameter name
+        #     * MapValue type: If parameter's entity type is a composite entity then use
+        #     map, otherwise, depending on the parameter value type, it could be one of
+        #     string, number, boolean, null, list or map.
+        #     * MapValue value: If parameter's entity type is a composite entity then use
+        #     map from composite entity property names to property values, otherwise,
+        #     use parameter value.
         # @!attribute [rw] all_required_params_present
         #   @return [::Boolean]
         #     This field is set to:
@@ -370,12 +368,12 @@ module Google
         #   @return [::Google::Cloud::Dialogflow::V2::QueryInput]
         #     Required. The input specification. It can be set to:
         #
-        #     1.  an audio config which instructs the speech recognizer how to process
-        #         the speech audio,
+        #     1. an audio config which instructs the speech recognizer how to process
+        #     the speech audio,
         #
-        #     2.  a conversational query in the form of text, or
+        #     2. a conversational query in the form of text, or
         #
-        #     3.  an event that specifies which intent to trigger.
+        #     3. an event that specifies which intent to trigger.
         # @!attribute [rw] single_utterance
         #   @return [::Boolean]
         #     Please use
@@ -630,7 +628,6 @@ module Google
           end
         end
 
-        # ============================================================================
         # Auxiliary proto messages.
         #
         # Represents the natural language text to be processed.
@@ -665,16 +662,14 @@ module Google
         #     map, associative array, symbol table, dictionary, or JSON object
         #     composed of a collection of (MapKey, MapValue) pairs:
         #
-        #     -   MapKey type: string
-        #     -   MapKey value: parameter name
-        #     -   MapValue type:
-        #         -   If parameter's entity type is a composite entity: map
-        #         -   Else: depending on parameter value type, could be one of string,
-        #             number, boolean, null, list or map
-        #     -   MapValue value:
-        #         -   If parameter's entity type is a composite entity:
-        #             map from composite entity property names to property values
-        #         -   Else: parameter value
+        #     * MapKey type: string
+        #     * MapKey value: parameter name
+        #     * MapValue type: If parameter's entity type is a composite entity then use
+        #     map, otherwise, depending on the parameter value type, it could be one of
+        #     string, number, boolean, null, list or map.
+        #     * MapValue value: If parameter's entity type is a composite entity then use
+        #     map from composite entity property names to property values, otherwise,
+        #     use parameter value.
         # @!attribute [rw] language_code
         #   @return [::String]
         #     Required. The language of this query. See [Language
