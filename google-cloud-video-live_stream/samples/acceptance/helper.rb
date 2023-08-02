@@ -54,7 +54,7 @@ class LiveStreamSnippetSpec < Minitest::Spec
 
   let(:pool_id) { "default" } # only 1 pool supported per location
   let(:pool_name) { "projects/#{project_id}/locations/#{location_id}/pools/#{pool_id}" }
-  let(:update_pool_peer_network) { "projects/#{project_id}/global/networks/default" }
+  let(:update_pool_peer_network) { "" }
 
   attr_writer :channel_created_started
   attr_writer :channel_created_stopped

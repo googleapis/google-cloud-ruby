@@ -15,6 +15,7 @@
 require_relative "helper"
 
 describe "#update_pool", :live_stream_snippet do
+  focus
   it "updates the pool" do
     sample = SampleLoader.load "update_pool.rb"
 
