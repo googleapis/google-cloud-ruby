@@ -19,6 +19,8 @@ describe "#update_pool", :live_stream_snippet do
     sample = SampleLoader.load "update_pool.rb"
 
     out, _err = capture_io do
+      # Pool updates take a long time to run, so the test updates the peered
+      # network with the same value to decrease this time.
       sample.run project_id: project_id, location: location_id, pool_id: pool_id, peered_network: update_pool_peer_network
     end
 

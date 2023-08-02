@@ -15,7 +15,7 @@
 source "https://rubygems.org"
 
 master = ENV["GOOGLE_CLOUD_SAMPLES_TEST"] == "master"
-
+gem "grpc", "1.55.0"
 gem "google-cloud-video-live_stream", path: master ? "../../google-cloud-video-live_stream" : nil
 
 group :test do
