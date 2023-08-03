@@ -351,6 +351,10 @@
       "component": "google-cloud-cloud_dms-v1",
       "version_file": "lib/google/cloud/cloud_dms/v1/version.rb"
     },
+    "google-cloud-commerce-consumer-procurement-v1": {
+      "component": "google-cloud-commerce-consumer-procurement-v1",
+      "version_file": "lib/google/cloud/commerce/consumer/procurement/v1/version.rb"
+    },
     "google-cloud-compute": {
       "component": "google-cloud-compute",
       "version_file": "lib/google/cloud/compute/version.rb"
