@@ -195,7 +195,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload search_catalog(scope: nil, query: nil, page_size: nil, page_token: nil, order_by: nil)
+              # @overload search_catalog(scope: nil, query: nil, page_size: nil, page_token: nil, order_by: nil, admin_search: nil)
               #   Pass arguments to `search_catalog` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -251,6 +251,12 @@ module Google
               #     `default`.
               #
               #     If this parameter is omitted, it defaults to the descending `relevance`.
+              #   @param admin_search [::Boolean]
+              #     Optional. If set, uses searchAll permission granted on organizations from
+              #     `include_org_ids` and projects from `include_project_ids` instead of the
+              #     fine grained per resource permissions when filtering the search results.
+              #     The only allowed `order_by` criteria for admin_search mode is `default`.
+              #     Using this flags guarantees a full recall of the search results.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Cloud::DataCatalog::V1::SearchCatalogResponse]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
