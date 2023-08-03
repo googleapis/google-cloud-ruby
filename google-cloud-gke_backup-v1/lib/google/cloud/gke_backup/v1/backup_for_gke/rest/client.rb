@@ -651,11 +651,11 @@ module Google
               #     The client-provided short name for the Backup resource.
               #     This name must:
               #
-              #      - be between 1 and 63 characters long (inclusive)
-              #      - consist of only lower-case ASCII letters, numbers, and dashes
-              #      - start with a lower-case letter
-              #      - end with a lower-case letter or number
-              #      - be unique within the set of Backups in this BackupPlan
+              #     - be between 1 and 63 characters long (inclusive)
+              #     - consist of only lower-case ASCII letters, numbers, and dashes
+              #     - start with a lower-case letter
+              #     - end with a lower-case letter or number
+              #     - be unique within the set of Backups in this BackupPlan
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1161,11 +1161,11 @@ module Google
               #     Required. The client-provided short name for the RestorePlan resource.
               #     This name must:
               #
-              #      - be between 1 and 63 characters long (inclusive)
-              #      - consist of only lower-case ASCII letters, numbers, and dashes
-              #      - start with a lower-case letter
-              #      - end with a lower-case letter or number
-              #      - be unique within the set of RestorePlans in this location
+              #     - be between 1 and 63 characters long (inclusive)
+              #     - consist of only lower-case ASCII letters, numbers, and dashes
+              #     - start with a lower-case letter
+              #     - end with a lower-case letter or number
+              #     - be unique within the set of RestorePlans in this location
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
@@ -1525,11 +1525,11 @@ module Google
               #     Required. The client-provided short name for the Restore resource.
               #     This name must:
               #
-              #      - be between 1 and 63 characters long (inclusive)
-              #      - consist of only lower-case ASCII letters, numbers, and dashes
-              #      - start with a lower-case letter
-              #      - end with a lower-case letter or number
-              #      - be unique within the set of Restores in this RestorePlan.
+              #     - be between 1 and 63 characters long (inclusive)
+              #     - consist of only lower-case ASCII letters, numbers, and dashes
+              #     - start with a lower-case letter
+              #     - end with a lower-case letter or number
+              #     - be unique within the set of Restores in this RestorePlan.
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Gapic::Operation]
               # @yieldparam operation [::Gapic::Rest::TransportOperation]
