@@ -100,6 +100,9 @@ module Google
 
               # Page ID for a Google+ Page.
               PLUS_PAGE = 6
+
+              # List of strings parameter.
+              LIST = 7
             end
           end
 
@@ -616,11 +619,16 @@ module Google
           #     `projects/{project_id}/locations/{location_id}/transferConfigs/{config_id}`.
           # @!attribute [rw] requested_time_range
           #   @return [::Google::Cloud::Bigquery::DataTransfer::V1::StartManualTransferRunsRequest::TimeRange]
-          #     Time range for the transfer runs that should be started.
+          #     A time_range start and end timestamp for historical data files or reports
+          #     that are scheduled to be transferred by the scheduled transfer run.
+          #     requested_time_range must be a past time and cannot include future time
+          #     values.
           # @!attribute [rw] requested_run_time
           #   @return [::Google::Protobuf::Timestamp]
-          #     Specific run_time for a transfer run to be started. The
-          #     requested_run_time must not be in the future.
+          #     A run_time timestamp for historical data files or reports
+          #     that are scheduled to be transferred by the scheduled transfer run.
+          #     requested_run_time must be a past time and cannot include future time
+          #     values.
           class StartManualTransferRunsRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
