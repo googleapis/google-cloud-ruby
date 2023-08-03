@@ -8,7 +8,7 @@
     "name": "cloudcommerceconsumerprocurement",
     "name_pretty": "Cloud Commerce Consumer Procurement V1 API",
     "product_documentation": "https://cloud.google.com/marketplace/docs/",
-    "release_level": "unreleased",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Enables consumers to procure products served by Cloud Marketplace platform. Note that google-cloud-commerce-consumer-procurement-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-commerce-consumer-procurement instead. See the readme for more details.",
