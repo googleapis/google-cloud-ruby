@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.2.1 (2023-08-03)
+
+#### Documentation
+
+* Improve documentation for admin services ([#22664](https://github.com/googleapis/google-cloud-ruby/issues/22664)) 
+
 ### 0.2.0 (2023-03-09)
 
 #### Features
