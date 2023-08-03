@@ -432,7 +432,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
-              # @overload list_jobs(parent: nil, filter: nil, page_size: nil, page_token: nil)
+              # @overload list_jobs(parent: nil, filter: nil, order_by: nil, page_size: nil, page_token: nil)
               #   Pass arguments to `list_jobs` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -441,6 +441,9 @@ module Google
               #     Parent path.
               #   @param filter [::String]
               #     List filter.
+              #   @param order_by [::String]
+              #     Optional. Sort results. Supported are "name", "name desc", "create_time",
+              #     and "create_time desc".
               #   @param page_size [::Integer]
               #     Page size.
               #   @param page_token [::String]
