@@ -827,6 +827,10 @@
       "component": "google-cloud-monitoring-v3",
       "version_file": "lib/google/cloud/monitoring/v3/version.rb"
     },
+    "google-cloud-netapp-v1": {
+      "component": "google-cloud-netapp-v1",
+      "version_file": "lib/google/cloud/netapp/v1/version.rb"
+    },
     "google-cloud-network_connectivity": {
       "component": "google-cloud-network_connectivity",
       "version_file": "lib/google/cloud/network_connectivity/version.rb"
