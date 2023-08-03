@@ -242,6 +242,12 @@ module Google
 
           # Sensitive action notifications
           NOTIFICATION_TYPE_SENSITIVE_ACTIONS = 2
+
+          # General security MSA
+          NOTIFICATION_TYPE_SECURITY_MSA = 3
+
+          # Threat horizons MSA
+          NOTIFICATION_TYPE_THREAT_HORIZONS = 4
         end
       end
     end
