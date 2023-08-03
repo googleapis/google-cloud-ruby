@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.10.2 (2023-08-03)
+
+#### Documentation
+
+* Add documentation for "order_by" field in list_jobs API ([#22672](https://github.com/googleapis/google-cloud-ruby/issues/22672)) 
+
 ### 0.10.1 (2023-07-10)
 
 #### Documentation
