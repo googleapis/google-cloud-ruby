@@ -34,10 +34,15 @@ module Google
           #     Required. The entity kind to which this index applies.
           # @!attribute [rw] ancestor
           #   @return [::Google::Cloud::Datastore::Admin::V1::Index::AncestorMode]
-          #     Required. The index's ancestor mode.  Must not be ANCESTOR_MODE_UNSPECIFIED.
+          #     Required. The index's ancestor mode.  Must not be
+          #     ANCESTOR_MODE_UNSPECIFIED.
           # @!attribute [rw] properties
           #   @return [::Array<::Google::Cloud::Datastore::Admin::V1::Index::IndexedProperty>]
           #     Required. An ordered sequence of property names and their index attributes.
+          #
+          #     Requires:
+          #
+          #     * A maximum of 100 properties.
           # @!attribute [r] state
           #   @return [::Google::Cloud::Datastore::Admin::V1::Index::State]
           #     Output only. The state of the index.
@@ -51,7 +56,8 @@ module Google
             #     Required. The property name to index.
             # @!attribute [rw] direction
             #   @return [::Google::Cloud::Datastore::Admin::V1::Index::Direction]
-            #     Required. The indexed property's direction.  Must not be DIRECTION_UNSPECIFIED.
+            #     Required. The indexed property's direction.  Must not be
+            #     DIRECTION_UNSPECIFIED.
             class IndexedProperty
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
