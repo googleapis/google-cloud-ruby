@@ -635,6 +635,7 @@ class ::Google::Cloud::Build::V1::CloudBuild::Rest::ClientTest < Minitest::Test
     project_id = "hello world"
     trigger_id = "hello world"
     trigger = {}
+    update_mask = {}
 
     update_build_trigger_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -650,27 +651,27 @@ class ::Google::Cloud::Build::V1::CloudBuild::Rest::ClientTest < Minitest::Test
         end
 
         # Use hash object
-        client.update_build_trigger({ project_id: project_id, trigger_id: trigger_id, trigger: trigger }) do |_result, response|
+        client.update_build_trigger({ project_id: project_id, trigger_id: trigger_id, trigger: trigger, update_mask: update_mask }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.update_build_trigger project_id: project_id, trigger_id: trigger_id, trigger: trigger do |_result, response|
+        client.update_build_trigger project_id: project_id, trigger_id: trigger_id, trigger: trigger, update_mask: update_mask do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.update_build_trigger ::Google::Cloud::Build::V1::UpdateBuildTriggerRequest.new(project_id: project_id, trigger_id: trigger_id, trigger: trigger) do |_result, response|
+        client.update_build_trigger ::Google::Cloud::Build::V1::UpdateBuildTriggerRequest.new(project_id: project_id, trigger_id: trigger_id, trigger: trigger, update_mask: update_mask) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.update_build_trigger({ project_id: project_id, trigger_id: trigger_id, trigger: trigger }, call_options) do |_result, response|
+        client.update_build_trigger({ project_id: project_id, trigger_id: trigger_id, trigger: trigger, update_mask: update_mask }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.update_build_trigger(::Google::Cloud::Build::V1::UpdateBuildTriggerRequest.new(project_id: project_id, trigger_id: trigger_id, trigger: trigger), call_options) do |_result, response|
+        client.update_build_trigger(::Google::Cloud::Build::V1::UpdateBuildTriggerRequest.new(project_id: project_id, trigger_id: trigger_id, trigger: trigger, update_mask: update_mask), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

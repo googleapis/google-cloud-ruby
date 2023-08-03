@@ -1753,6 +1753,11 @@ module Google
         # @!attribute [rw] trigger
         #   @return [::Google::Cloud::Build::V1::BuildTrigger]
         #     Required. `BuildTrigger` to update.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Update mask for the resource. If this is set,
+        #     the server will only update the fields specified in the field mask.
+        #     Otherwise, a full update of the mutable resource fields will be performed.
         class UpdateBuildTriggerRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
