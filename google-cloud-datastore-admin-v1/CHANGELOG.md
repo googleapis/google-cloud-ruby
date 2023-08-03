@@ -1,5 +1,11 @@
 # Release History
 
+### 0.9.1 (2023-08-03)
+
+#### Documentation
+
+* Improve documentation for admin services ([#22665](https://github.com/googleapis/google-cloud-ruby/issues/22665)) 
+
 ### 0.9.0 (2023-06-06)
 
 #### Features
