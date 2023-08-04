@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.6.1 (2023-08-04)
+
+#### Documentation
+
+* Improve documentation format ([#22687](https://github.com/googleapis/google-cloud-ruby/issues/22687)) 
+
 ### 0.6.0 (2023-07-25)
 
 #### Features
