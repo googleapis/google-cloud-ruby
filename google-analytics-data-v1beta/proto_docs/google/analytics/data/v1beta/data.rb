@@ -21,8 +21,8 @@ module Google
   module Analytics
     module Data
       module V1beta
-        # A contiguous set of days: startDate, startDate + 1, ..., endDate. Requests
-        # are allowed up to 4 date ranges.
+        # A contiguous set of days: `startDate`, `startDate + 1`, ..., `endDate`.
+        # Requests are allowed up to 4 date ranges.
         # @!attribute [rw] start_date
         #   @return [::String]
         #     The inclusive start date for the query in the format `YYYY-MM-DD`. Cannot
@@ -46,8 +46,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A contiguous set of minutes: startMinutesAgo, startMinutesAgo + 1, ...,
-        # endMinutesAgo. Requests are allowed up to 2 minute ranges.
+        # A contiguous set of minutes: `startMinutesAgo`, `startMinutesAgo + 1`, ...,
+        # `endMinutesAgo`. Requests are allowed up to 2 minute ranges.
         # @!attribute [rw] start_minutes_ago
         #   @return [::Integer]
         #     The inclusive start minute for the query as a number of minutes before now.
@@ -466,7 +466,7 @@ module Google
         #     single pivot requests.
         #
         #     The product of the `limit` for each `pivot` in a `RunPivotReportRequest`
-        #     must not exceed 100,000. For example, a two pivot request with `limit:
+        #     must not exceed 250,000. For example, a two pivot request with `limit:
         #     1000` in each pivot will fail because the product is `1,000,000`.
         # @!attribute [rw] metric_aggregations
         #   @return [::Array<::Google::Analytics::Data::V1beta::MetricAggregation>]
@@ -622,6 +622,18 @@ module Google
         #   @return [::Boolean]
         #     If true, indicates some buckets of dimension combinations are rolled into
         #     "(other)" row. This can happen for high cardinality reports.
+        #
+        #     The metadata parameter dataLossFromOtherRow is populated based on the
+        #     aggregated data table used in the report. The parameter will be accurately
+        #     populated regardless of the filters and limits in the report.
+        #
+        #     For example, the (other) row could be dropped from the report because the
+        #     request contains a filter on sessionSource = google. This parameter will
+        #     still be populated if data loss from other row was present in the input
+        #     aggregate data used to generate this report.
+        #
+        #     To learn more, see [About the (other) row and data
+        #     sampling](https://support.google.com/analytics/answer/13208658#reports).
         # @!attribute [rw] schema_restriction_response
         #   @return [::Google::Analytics::Data::V1beta::ResponseMetaData::SchemaRestrictionResponse]
         #     Describes the schema restrictions actively enforced in creating this
@@ -824,13 +836,13 @@ module Google
         # Exhausted errors.
         # @!attribute [rw] tokens_per_day
         #   @return [::Google::Analytics::Data::V1beta::QuotaStatus]
-        #     Standard Analytics Properties can use up to 25,000 tokens per day;
-        #     Analytics 360 Properties can use 250,000 tokens per day. Most requests
+        #     Standard Analytics Properties can use up to 200,000 tokens per day;
+        #     Analytics 360 Properties can use 2,000,000 tokens per day. Most requests
         #     consume fewer than 10 tokens.
         # @!attribute [rw] tokens_per_hour
         #   @return [::Google::Analytics::Data::V1beta::QuotaStatus]
-        #     Standard Analytics Properties can use up to 5,000 tokens per hour;
-        #     Analytics 360 Properties can use 50,000 tokens per hour. An API request
+        #     Standard Analytics Properties can use up to 40,000 tokens per hour;
+        #     Analytics 360 Properties can use 400,000 tokens per hour. An API request
         #     consumes a single number of tokens, and that number is deducted from all of
         #     the hourly, daily, and per project hourly quotas.
         # @!attribute [rw] concurrent_requests
@@ -850,9 +862,9 @@ module Google
         #     thresholded dimensions.
         # @!attribute [rw] tokens_per_project_per_hour
         #   @return [::Google::Analytics::Data::V1beta::QuotaStatus]
-        #     Analytics Properties can use up to 25% of their tokens per project per
-        #     hour. This amounts to standard Analytics Properties can use up to 1,250
-        #     tokens per project per hour, and Analytics 360 Properties can use 12,500
+        #     Analytics Properties can use up to 35% of their tokens per project per
+        #     hour. This amounts to standard Analytics Properties can use up to 14,000
+        #     tokens per project per hour, and Analytics 360 Properties can use 140,000
         #     tokens per project per hour. An API request consumes a single number of
         #     tokens, and that number is deducted from all of the hourly, daily, and per
         #     project hourly quotas.
