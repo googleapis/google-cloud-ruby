@@ -172,12 +172,12 @@ module Google
 
         # Represents the query input. It can contain either:
         #
-        # 1.  An audio config which
-        #     instructs the speech recognizer how to process the speech audio.
+        # 1. An audio config which instructs the speech recognizer how to process the
+        # speech audio.
         #
-        # 2.  A conversational query in the form of text,.
+        # 2. A conversational query in the form of text.
         #
-        # 3.  An event that specifies which intent to trigger.
+        # 3. An event that specifies which intent to trigger.
         # @!attribute [rw] audio_config
         #   @return [::Google::Cloud::Dialogflow::V2::InputAudioConfig]
         #     Instructs the speech recognizer how to process the speech audio.
