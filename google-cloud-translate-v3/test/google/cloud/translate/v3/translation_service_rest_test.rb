@@ -256,6 +256,7 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
     customized_attribution = "hello world"
     is_translate_native_pdf_only = true
     enable_shadow_removal_native_pdf = true
+    enable_rotation_correction = true
 
     translate_document_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -271,27 +272,27 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
         end
 
         # Use hash object
-        client.translate_document({ parent: parent, source_language_code: source_language_code, target_language_code: target_language_code, document_input_config: document_input_config, document_output_config: document_output_config, model: model, glossary_config: glossary_config, labels: labels, customized_attribution: customized_attribution, is_translate_native_pdf_only: is_translate_native_pdf_only, enable_shadow_removal_native_pdf: enable_shadow_removal_native_pdf }) do |_result, response|
+        client.translate_document({ parent: parent, source_language_code: source_language_code, target_language_code: target_language_code, document_input_config: document_input_config, document_output_config: document_output_config, model: model, glossary_config: glossary_config, labels: labels, customized_attribution: customized_attribution, is_translate_native_pdf_only: is_translate_native_pdf_only, enable_shadow_removal_native_pdf: enable_shadow_removal_native_pdf, enable_rotation_correction: enable_rotation_correction }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.translate_document parent: parent, source_language_code: source_language_code, target_language_code: target_language_code, document_input_config: document_input_config, document_output_config: document_output_config, model: model, glossary_config: glossary_config, labels: labels, customized_attribution: customized_attribution, is_translate_native_pdf_only: is_translate_native_pdf_only, enable_shadow_removal_native_pdf: enable_shadow_removal_native_pdf do |_result, response|
+        client.translate_document parent: parent, source_language_code: source_language_code, target_language_code: target_language_code, document_input_config: document_input_config, document_output_config: document_output_config, model: model, glossary_config: glossary_config, labels: labels, customized_attribution: customized_attribution, is_translate_native_pdf_only: is_translate_native_pdf_only, enable_shadow_removal_native_pdf: enable_shadow_removal_native_pdf, enable_rotation_correction: enable_rotation_correction do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.translate_document ::Google::Cloud::Translate::V3::TranslateDocumentRequest.new(parent: parent, source_language_code: source_language_code, target_language_code: target_language_code, document_input_config: document_input_config, document_output_config: document_output_config, model: model, glossary_config: glossary_config, labels: labels, customized_attribution: customized_attribution, is_translate_native_pdf_only: is_translate_native_pdf_only, enable_shadow_removal_native_pdf: enable_shadow_removal_native_pdf) do |_result, response|
+        client.translate_document ::Google::Cloud::Translate::V3::TranslateDocumentRequest.new(parent: parent, source_language_code: source_language_code, target_language_code: target_language_code, document_input_config: document_input_config, document_output_config: document_output_config, model: model, glossary_config: glossary_config, labels: labels, customized_attribution: customized_attribution, is_translate_native_pdf_only: is_translate_native_pdf_only, enable_shadow_removal_native_pdf: enable_shadow_removal_native_pdf, enable_rotation_correction: enable_rotation_correction) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.translate_document({ parent: parent, source_language_code: source_language_code, target_language_code: target_language_code, document_input_config: document_input_config, document_output_config: document_output_config, model: model, glossary_config: glossary_config, labels: labels, customized_attribution: customized_attribution, is_translate_native_pdf_only: is_translate_native_pdf_only, enable_shadow_removal_native_pdf: enable_shadow_removal_native_pdf }, call_options) do |_result, response|
+        client.translate_document({ parent: parent, source_language_code: source_language_code, target_language_code: target_language_code, document_input_config: document_input_config, document_output_config: document_output_config, model: model, glossary_config: glossary_config, labels: labels, customized_attribution: customized_attribution, is_translate_native_pdf_only: is_translate_native_pdf_only, enable_shadow_removal_native_pdf: enable_shadow_removal_native_pdf, enable_rotation_correction: enable_rotation_correction }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.translate_document(::Google::Cloud::Translate::V3::TranslateDocumentRequest.new(parent: parent, source_language_code: source_language_code, target_language_code: target_language_code, document_input_config: document_input_config, document_output_config: document_output_config, model: model, glossary_config: glossary_config, labels: labels, customized_attribution: customized_attribution, is_translate_native_pdf_only: is_translate_native_pdf_only, enable_shadow_removal_native_pdf: enable_shadow_removal_native_pdf), call_options) do |_result, response|
+        client.translate_document(::Google::Cloud::Translate::V3::TranslateDocumentRequest.new(parent: parent, source_language_code: source_language_code, target_language_code: target_language_code, document_input_config: document_input_config, document_output_config: document_output_config, model: model, glossary_config: glossary_config, labels: labels, customized_attribution: customized_attribution, is_translate_native_pdf_only: is_translate_native_pdf_only, enable_shadow_removal_native_pdf: enable_shadow_removal_native_pdf, enable_rotation_correction: enable_rotation_correction), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
@@ -379,6 +380,8 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
     glossaries = {}
     format_conversions = {}
     customized_attribution = "hello world"
+    enable_shadow_removal_native_pdf = true
+    enable_rotation_correction = true
 
     batch_translate_document_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -394,27 +397,27 @@ class ::Google::Cloud::Translate::V3::TranslationService::Rest::ClientTest < Min
         end
 
         # Use hash object
-        client.batch_translate_document({ parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, input_configs: input_configs, output_config: output_config, models: models, glossaries: glossaries, format_conversions: format_conversions, customized_attribution: customized_attribution }) do |_result, response|
+        client.batch_translate_document({ parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, input_configs: input_configs, output_config: output_config, models: models, glossaries: glossaries, format_conversions: format_conversions, customized_attribution: customized_attribution, enable_shadow_removal_native_pdf: enable_shadow_removal_native_pdf, enable_rotation_correction: enable_rotation_correction }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        client.batch_translate_document parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, input_configs: input_configs, output_config: output_config, models: models, glossaries: glossaries, format_conversions: format_conversions, customized_attribution: customized_attribution do |_result, response|
+        client.batch_translate_document parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, input_configs: input_configs, output_config: output_config, models: models, glossaries: glossaries, format_conversions: format_conversions, customized_attribution: customized_attribution, enable_shadow_removal_native_pdf: enable_shadow_removal_native_pdf, enable_rotation_correction: enable_rotation_correction do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        client.batch_translate_document ::Google::Cloud::Translate::V3::BatchTranslateDocumentRequest.new(parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, input_configs: input_configs, output_config: output_config, models: models, glossaries: glossaries, format_conversions: format_conversions, customized_attribution: customized_attribution) do |_result, response|
+        client.batch_translate_document ::Google::Cloud::Translate::V3::BatchTranslateDocumentRequest.new(parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, input_configs: input_configs, output_config: output_config, models: models, glossaries: glossaries, format_conversions: format_conversions, customized_attribution: customized_attribution, enable_shadow_removal_native_pdf: enable_shadow_removal_native_pdf, enable_rotation_correction: enable_rotation_correction) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        client.batch_translate_document({ parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, input_configs: input_configs, output_config: output_config, models: models, glossaries: glossaries, format_conversions: format_conversions, customized_attribution: customized_attribution }, call_options) do |_result, response|
+        client.batch_translate_document({ parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, input_configs: input_configs, output_config: output_config, models: models, glossaries: glossaries, format_conversions: format_conversions, customized_attribution: customized_attribution, enable_shadow_removal_native_pdf: enable_shadow_removal_native_pdf, enable_rotation_correction: enable_rotation_correction }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        client.batch_translate_document(::Google::Cloud::Translate::V3::BatchTranslateDocumentRequest.new(parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, input_configs: input_configs, output_config: output_config, models: models, glossaries: glossaries, format_conversions: format_conversions, customized_attribution: customized_attribution), call_options) do |_result, response|
+        client.batch_translate_document(::Google::Cloud::Translate::V3::BatchTranslateDocumentRequest.new(parent: parent, source_language_code: source_language_code, target_language_codes: target_language_codes, input_configs: input_configs, output_config: output_config, models: models, glossaries: glossaries, format_conversions: format_conversions, customized_attribution: customized_attribution, enable_shadow_removal_native_pdf: enable_shadow_removal_native_pdf, enable_rotation_correction: enable_rotation_correction), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
