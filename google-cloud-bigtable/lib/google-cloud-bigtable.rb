@@ -171,4 +171,6 @@ Google::Cloud.configure.add_config! :bigtable do |config|
   config.add_field! :emulator_host, default_emulator, match: String, allow_nil: true
   config.add_field! :endpoint, "bigtable.googleapis.com", match: String
   config.add_field! :endpoint_admin, "bigtableadmin.googleapis.com", match: String
+  config.add_field! :channel_selection, :least_loaded, match: Symbol
+  config.add_field! :channel_count, 1, match: Integer
 end

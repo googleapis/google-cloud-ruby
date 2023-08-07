@@ -94,7 +94,7 @@ module Google
             config.endpoint = host if host
             config.lib_name = "gccl"
             config.channel_pool.channel_selection = @channel_selection
-            config.channel_pool.channel_count = 10
+            config.channel_pool.channel_count = @channel_count
             config.lib_version = Google::Cloud::Bigtable::VERSION
             config.metadata = { "google-cloud-resource-prefix": "projects/#{@project_id}" }
           end
