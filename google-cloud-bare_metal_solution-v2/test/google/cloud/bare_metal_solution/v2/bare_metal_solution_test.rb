@@ -239,6 +239,66 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::ClientTest < Mi
     end
   end
 
+  def test_rename_instance
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::BareMetalSolution::V2::Instance.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    new_instance_id = "hello world"
+
+    rename_instance_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :rename_instance, name
+      assert_kind_of ::Google::Cloud::BareMetalSolution::V2::RenameInstanceRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["new_instance_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, rename_instance_client_stub do
+      # Create client
+      client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.rename_instance({ name: name, new_instance_id: new_instance_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.rename_instance name: name, new_instance_id: new_instance_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.rename_instance ::Google::Cloud::BareMetalSolution::V2::RenameInstanceRequest.new(name: name, new_instance_id: new_instance_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.rename_instance({ name: name, new_instance_id: new_instance_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.rename_instance(::Google::Cloud::BareMetalSolution::V2::RenameInstanceRequest.new(name: name, new_instance_id: new_instance_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, rename_instance_client_stub.call_rpc_count
+    end
+  end
+
   def test_reset_instance
     # Create GRPC objects.
     grpc_response = ::Google::Longrunning::Operation.new
@@ -428,6 +488,132 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::ClientTest < Mi
     end
   end
 
+  def test_enable_interactive_serial_console
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    enable_interactive_serial_console_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :enable_interactive_serial_console, name
+      assert_kind_of ::Google::Cloud::BareMetalSolution::V2::EnableInteractiveSerialConsoleRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, enable_interactive_serial_console_client_stub do
+      # Create client
+      client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.enable_interactive_serial_console({ name: name }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.enable_interactive_serial_console name: name do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.enable_interactive_serial_console ::Google::Cloud::BareMetalSolution::V2::EnableInteractiveSerialConsoleRequest.new(name: name) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.enable_interactive_serial_console({ name: name }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.enable_interactive_serial_console(::Google::Cloud::BareMetalSolution::V2::EnableInteractiveSerialConsoleRequest.new(name: name), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, enable_interactive_serial_console_client_stub.call_rpc_count
+    end
+  end
+
+  def test_disable_interactive_serial_console
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    disable_interactive_serial_console_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :disable_interactive_serial_console, name
+      assert_kind_of ::Google::Cloud::BareMetalSolution::V2::DisableInteractiveSerialConsoleRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, disable_interactive_serial_console_client_stub do
+      # Create client
+      client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.disable_interactive_serial_console({ name: name }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.disable_interactive_serial_console name: name do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.disable_interactive_serial_console ::Google::Cloud::BareMetalSolution::V2::DisableInteractiveSerialConsoleRequest.new(name: name) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.disable_interactive_serial_console({ name: name }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.disable_interactive_serial_console(::Google::Cloud::BareMetalSolution::V2::DisableInteractiveSerialConsoleRequest.new(name: name), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, disable_interactive_serial_console_client_stub.call_rpc_count
+    end
+  end
+
   def test_detach_lun
     # Create GRPC objects.
     grpc_response = ::Google::Longrunning::Operation.new
@@ -438,12 +624,14 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::ClientTest < Mi
     # Create request parameters for a unary method.
     instance = "hello world"
     lun = "hello world"
+    skip_reboot = true
 
     detach_lun_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :detach_lun, name
       assert_kind_of ::Google::Cloud::BareMetalSolution::V2::DetachLunRequest, request
       assert_equal "hello world", request["instance"]
       assert_equal "hello world", request["lun"]
+      assert_equal true, request["skip_reboot"]
       refute_nil options
     end
 
@@ -454,35 +642,35 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::ClientTest < Mi
       end
 
       # Use hash object
-      client.detach_lun({ instance: instance, lun: lun }) do |response, operation|
+      client.detach_lun({ instance: instance, lun: lun, skip_reboot: skip_reboot }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.detach_lun instance: instance, lun: lun do |response, operation|
+      client.detach_lun instance: instance, lun: lun, skip_reboot: skip_reboot do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.detach_lun ::Google::Cloud::BareMetalSolution::V2::DetachLunRequest.new(instance: instance, lun: lun) do |response, operation|
+      client.detach_lun ::Google::Cloud::BareMetalSolution::V2::DetachLunRequest.new(instance: instance, lun: lun, skip_reboot: skip_reboot) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.detach_lun({ instance: instance, lun: lun }, grpc_options) do |response, operation|
+      client.detach_lun({ instance: instance, lun: lun, skip_reboot: skip_reboot }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.detach_lun(::Google::Cloud::BareMetalSolution::V2::DetachLunRequest.new(instance: instance, lun: lun), grpc_options) do |response, operation|
+      client.detach_lun(::Google::Cloud::BareMetalSolution::V2::DetachLunRequest.new(instance: instance, lun: lun, skip_reboot: skip_reboot), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -490,6 +678,193 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::ClientTest < Mi
 
       # Verify method calls
       assert_equal 5, detach_lun_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_ssh_keys
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::BareMetalSolution::V2::ListSSHKeysResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_ssh_keys_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_ssh_keys, name
+      assert_kind_of ::Google::Cloud::BareMetalSolution::V2::ListSSHKeysRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_ssh_keys_client_stub do
+      # Create client
+      client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_ssh_keys({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_ssh_keys parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_ssh_keys ::Google::Cloud::BareMetalSolution::V2::ListSSHKeysRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_ssh_keys({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_ssh_keys(::Google::Cloud::BareMetalSolution::V2::ListSSHKeysRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_ssh_keys_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_ssh_key
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::BareMetalSolution::V2::SSHKey.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    ssh_key = {}
+    ssh_key_id = "hello world"
+
+    create_ssh_key_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_ssh_key, name
+      assert_kind_of ::Google::Cloud::BareMetalSolution::V2::CreateSSHKeyRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::BareMetalSolution::V2::SSHKey), request["ssh_key"]
+      assert_equal "hello world", request["ssh_key_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_ssh_key_client_stub do
+      # Create client
+      client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_ssh_key({ parent: parent, ssh_key: ssh_key, ssh_key_id: ssh_key_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_ssh_key parent: parent, ssh_key: ssh_key, ssh_key_id: ssh_key_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_ssh_key ::Google::Cloud::BareMetalSolution::V2::CreateSSHKeyRequest.new(parent: parent, ssh_key: ssh_key, ssh_key_id: ssh_key_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_ssh_key({ parent: parent, ssh_key: ssh_key, ssh_key_id: ssh_key_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_ssh_key(::Google::Cloud::BareMetalSolution::V2::CreateSSHKeyRequest.new(parent: parent, ssh_key: ssh_key, ssh_key_id: ssh_key_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_ssh_key_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_ssh_key
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_ssh_key_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_ssh_key, name
+      assert_kind_of ::Google::Cloud::BareMetalSolution::V2::DeleteSSHKeyRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_ssh_key_client_stub do
+      # Create client
+      client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_ssh_key({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_ssh_key name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_ssh_key ::Google::Cloud::BareMetalSolution::V2::DeleteSSHKeyRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_ssh_key({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_ssh_key(::Google::Cloud::BareMetalSolution::V2::DeleteSSHKeyRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_ssh_key_client_stub.call_rpc_count
     end
   end
 
@@ -682,6 +1057,129 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::ClientTest < Mi
 
       # Verify method calls
       assert_equal 5, update_volume_client_stub.call_rpc_count
+    end
+  end
+
+  def test_rename_volume
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::BareMetalSolution::V2::Volume.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    new_volume_id = "hello world"
+
+    rename_volume_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :rename_volume, name
+      assert_kind_of ::Google::Cloud::BareMetalSolution::V2::RenameVolumeRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["new_volume_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, rename_volume_client_stub do
+      # Create client
+      client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.rename_volume({ name: name, new_volume_id: new_volume_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.rename_volume name: name, new_volume_id: new_volume_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.rename_volume ::Google::Cloud::BareMetalSolution::V2::RenameVolumeRequest.new(name: name, new_volume_id: new_volume_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.rename_volume({ name: name, new_volume_id: new_volume_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.rename_volume(::Google::Cloud::BareMetalSolution::V2::RenameVolumeRequest.new(name: name, new_volume_id: new_volume_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, rename_volume_client_stub.call_rpc_count
+    end
+  end
+
+  def test_evict_volume
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    evict_volume_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :evict_volume, name
+      assert_kind_of ::Google::Cloud::BareMetalSolution::V2::EvictVolumeRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, evict_volume_client_stub do
+      # Create client
+      client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.evict_volume({ name: name }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.evict_volume name: name do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.evict_volume ::Google::Cloud::BareMetalSolution::V2::EvictVolumeRequest.new(name: name) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.evict_volume({ name: name }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.evict_volume(::Google::Cloud::BareMetalSolution::V2::EvictVolumeRequest.new(name: name), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, evict_volume_client_stub.call_rpc_count
     end
   end
 
@@ -1000,6 +1498,312 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::ClientTest < Mi
     end
   end
 
+  def test_create_volume_snapshot
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::BareMetalSolution::V2::VolumeSnapshot.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    volume_snapshot = {}
+
+    create_volume_snapshot_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_volume_snapshot, name
+      assert_kind_of ::Google::Cloud::BareMetalSolution::V2::CreateVolumeSnapshotRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::BareMetalSolution::V2::VolumeSnapshot), request["volume_snapshot"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_volume_snapshot_client_stub do
+      # Create client
+      client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_volume_snapshot({ parent: parent, volume_snapshot: volume_snapshot }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_volume_snapshot parent: parent, volume_snapshot: volume_snapshot do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_volume_snapshot ::Google::Cloud::BareMetalSolution::V2::CreateVolumeSnapshotRequest.new(parent: parent, volume_snapshot: volume_snapshot) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_volume_snapshot({ parent: parent, volume_snapshot: volume_snapshot }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_volume_snapshot(::Google::Cloud::BareMetalSolution::V2::CreateVolumeSnapshotRequest.new(parent: parent, volume_snapshot: volume_snapshot), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_volume_snapshot_client_stub.call_rpc_count
+    end
+  end
+
+  def test_restore_volume_snapshot
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    volume_snapshot = "hello world"
+
+    restore_volume_snapshot_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :restore_volume_snapshot, name
+      assert_kind_of ::Google::Cloud::BareMetalSolution::V2::RestoreVolumeSnapshotRequest, request
+      assert_equal "hello world", request["volume_snapshot"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, restore_volume_snapshot_client_stub do
+      # Create client
+      client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.restore_volume_snapshot({ volume_snapshot: volume_snapshot }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.restore_volume_snapshot volume_snapshot: volume_snapshot do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.restore_volume_snapshot ::Google::Cloud::BareMetalSolution::V2::RestoreVolumeSnapshotRequest.new(volume_snapshot: volume_snapshot) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.restore_volume_snapshot({ volume_snapshot: volume_snapshot }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.restore_volume_snapshot(::Google::Cloud::BareMetalSolution::V2::RestoreVolumeSnapshotRequest.new(volume_snapshot: volume_snapshot), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, restore_volume_snapshot_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_volume_snapshot
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_volume_snapshot_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_volume_snapshot, name
+      assert_kind_of ::Google::Cloud::BareMetalSolution::V2::DeleteVolumeSnapshotRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_volume_snapshot_client_stub do
+      # Create client
+      client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_volume_snapshot({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_volume_snapshot name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_volume_snapshot ::Google::Cloud::BareMetalSolution::V2::DeleteVolumeSnapshotRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_volume_snapshot({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_volume_snapshot(::Google::Cloud::BareMetalSolution::V2::DeleteVolumeSnapshotRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_volume_snapshot_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_volume_snapshot
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::BareMetalSolution::V2::VolumeSnapshot.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_volume_snapshot_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_volume_snapshot, name
+      assert_kind_of ::Google::Cloud::BareMetalSolution::V2::GetVolumeSnapshotRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_volume_snapshot_client_stub do
+      # Create client
+      client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_volume_snapshot({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_volume_snapshot name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_volume_snapshot ::Google::Cloud::BareMetalSolution::V2::GetVolumeSnapshotRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_volume_snapshot({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_volume_snapshot(::Google::Cloud::BareMetalSolution::V2::GetVolumeSnapshotRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_volume_snapshot_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_volume_snapshots
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::BareMetalSolution::V2::ListVolumeSnapshotsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_volume_snapshots_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_volume_snapshots, name
+      assert_kind_of ::Google::Cloud::BareMetalSolution::V2::ListVolumeSnapshotsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_volume_snapshots_client_stub do
+      # Create client
+      client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_volume_snapshots({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_volume_snapshots parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_volume_snapshots ::Google::Cloud::BareMetalSolution::V2::ListVolumeSnapshotsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_volume_snapshots({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_volume_snapshots(::Google::Cloud::BareMetalSolution::V2::ListVolumeSnapshotsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_volume_snapshots_client_stub.call_rpc_count
+    end
+  end
+
   def test_get_lun
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::BareMetalSolution::V2::Lun.new
@@ -1122,6 +1926,69 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::ClientTest < Mi
 
       # Verify method calls
       assert_equal 5, list_luns_client_stub.call_rpc_count
+    end
+  end
+
+  def test_evict_lun
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    evict_lun_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :evict_lun, name
+      assert_kind_of ::Google::Cloud::BareMetalSolution::V2::EvictLunRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, evict_lun_client_stub do
+      # Create client
+      client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.evict_lun({ name: name }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.evict_lun name: name do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.evict_lun ::Google::Cloud::BareMetalSolution::V2::EvictLunRequest.new(name: name) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.evict_lun({ name: name }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.evict_lun(::Google::Cloud::BareMetalSolution::V2::EvictLunRequest.new(name: name), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, evict_lun_client_stub.call_rpc_count
     end
   end
 
@@ -1314,6 +2181,632 @@ class ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::ClientTest < Mi
 
       # Verify method calls
       assert_equal 5, update_nfs_share_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_nfs_share
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    nfs_share = {}
+
+    create_nfs_share_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_nfs_share, name
+      assert_kind_of ::Google::Cloud::BareMetalSolution::V2::CreateNfsShareRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::BareMetalSolution::V2::NfsShare), request["nfs_share"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_nfs_share_client_stub do
+      # Create client
+      client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_nfs_share({ parent: parent, nfs_share: nfs_share }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_nfs_share parent: parent, nfs_share: nfs_share do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_nfs_share ::Google::Cloud::BareMetalSolution::V2::CreateNfsShareRequest.new(parent: parent, nfs_share: nfs_share) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_nfs_share({ parent: parent, nfs_share: nfs_share }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_nfs_share(::Google::Cloud::BareMetalSolution::V2::CreateNfsShareRequest.new(parent: parent, nfs_share: nfs_share), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_nfs_share_client_stub.call_rpc_count
+    end
+  end
+
+  def test_rename_nfs_share
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::BareMetalSolution::V2::NfsShare.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    new_nfsshare_id = "hello world"
+
+    rename_nfs_share_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :rename_nfs_share, name
+      assert_kind_of ::Google::Cloud::BareMetalSolution::V2::RenameNfsShareRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["new_nfsshare_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, rename_nfs_share_client_stub do
+      # Create client
+      client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.rename_nfs_share({ name: name, new_nfsshare_id: new_nfsshare_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.rename_nfs_share name: name, new_nfsshare_id: new_nfsshare_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.rename_nfs_share ::Google::Cloud::BareMetalSolution::V2::RenameNfsShareRequest.new(name: name, new_nfsshare_id: new_nfsshare_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.rename_nfs_share({ name: name, new_nfsshare_id: new_nfsshare_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.rename_nfs_share(::Google::Cloud::BareMetalSolution::V2::RenameNfsShareRequest.new(name: name, new_nfsshare_id: new_nfsshare_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, rename_nfs_share_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_nfs_share
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_nfs_share_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_nfs_share, name
+      assert_kind_of ::Google::Cloud::BareMetalSolution::V2::DeleteNfsShareRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_nfs_share_client_stub do
+      # Create client
+      client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_nfs_share({ name: name }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_nfs_share name: name do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_nfs_share ::Google::Cloud::BareMetalSolution::V2::DeleteNfsShareRequest.new(name: name) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_nfs_share({ name: name }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_nfs_share(::Google::Cloud::BareMetalSolution::V2::DeleteNfsShareRequest.new(name: name), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_nfs_share_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_provisioning_quotas
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::BareMetalSolution::V2::ListProvisioningQuotasResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_provisioning_quotas_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_provisioning_quotas, name
+      assert_kind_of ::Google::Cloud::BareMetalSolution::V2::ListProvisioningQuotasRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_provisioning_quotas_client_stub do
+      # Create client
+      client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_provisioning_quotas({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_provisioning_quotas parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_provisioning_quotas ::Google::Cloud::BareMetalSolution::V2::ListProvisioningQuotasRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_provisioning_quotas({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_provisioning_quotas(::Google::Cloud::BareMetalSolution::V2::ListProvisioningQuotasRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_provisioning_quotas_client_stub.call_rpc_count
+    end
+  end
+
+  def test_submit_provisioning_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::BareMetalSolution::V2::SubmitProvisioningConfigResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    provisioning_config = {}
+    email = "hello world"
+
+    submit_provisioning_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :submit_provisioning_config, name
+      assert_kind_of ::Google::Cloud::BareMetalSolution::V2::SubmitProvisioningConfigRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::BareMetalSolution::V2::ProvisioningConfig), request["provisioning_config"]
+      assert_equal "hello world", request["email"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, submit_provisioning_config_client_stub do
+      # Create client
+      client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.submit_provisioning_config({ parent: parent, provisioning_config: provisioning_config, email: email }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.submit_provisioning_config parent: parent, provisioning_config: provisioning_config, email: email do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.submit_provisioning_config ::Google::Cloud::BareMetalSolution::V2::SubmitProvisioningConfigRequest.new(parent: parent, provisioning_config: provisioning_config, email: email) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.submit_provisioning_config({ parent: parent, provisioning_config: provisioning_config, email: email }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.submit_provisioning_config(::Google::Cloud::BareMetalSolution::V2::SubmitProvisioningConfigRequest.new(parent: parent, provisioning_config: provisioning_config, email: email), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, submit_provisioning_config_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_provisioning_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::BareMetalSolution::V2::ProvisioningConfig.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_provisioning_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_provisioning_config, name
+      assert_kind_of ::Google::Cloud::BareMetalSolution::V2::GetProvisioningConfigRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_provisioning_config_client_stub do
+      # Create client
+      client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_provisioning_config({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_provisioning_config name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_provisioning_config ::Google::Cloud::BareMetalSolution::V2::GetProvisioningConfigRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_provisioning_config({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_provisioning_config(::Google::Cloud::BareMetalSolution::V2::GetProvisioningConfigRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_provisioning_config_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_provisioning_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::BareMetalSolution::V2::ProvisioningConfig.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    provisioning_config = {}
+    email = "hello world"
+
+    create_provisioning_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_provisioning_config, name
+      assert_kind_of ::Google::Cloud::BareMetalSolution::V2::CreateProvisioningConfigRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::BareMetalSolution::V2::ProvisioningConfig), request["provisioning_config"]
+      assert_equal "hello world", request["email"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_provisioning_config_client_stub do
+      # Create client
+      client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_provisioning_config({ parent: parent, provisioning_config: provisioning_config, email: email }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_provisioning_config parent: parent, provisioning_config: provisioning_config, email: email do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_provisioning_config ::Google::Cloud::BareMetalSolution::V2::CreateProvisioningConfigRequest.new(parent: parent, provisioning_config: provisioning_config, email: email) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_provisioning_config({ parent: parent, provisioning_config: provisioning_config, email: email }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_provisioning_config(::Google::Cloud::BareMetalSolution::V2::CreateProvisioningConfigRequest.new(parent: parent, provisioning_config: provisioning_config, email: email), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_provisioning_config_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_provisioning_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::BareMetalSolution::V2::ProvisioningConfig.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    provisioning_config = {}
+    update_mask = {}
+    email = "hello world"
+
+    update_provisioning_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_provisioning_config, name
+      assert_kind_of ::Google::Cloud::BareMetalSolution::V2::UpdateProvisioningConfigRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::BareMetalSolution::V2::ProvisioningConfig), request["provisioning_config"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal "hello world", request["email"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_provisioning_config_client_stub do
+      # Create client
+      client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_provisioning_config({ provisioning_config: provisioning_config, update_mask: update_mask, email: email }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_provisioning_config provisioning_config: provisioning_config, update_mask: update_mask, email: email do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_provisioning_config ::Google::Cloud::BareMetalSolution::V2::UpdateProvisioningConfigRequest.new(provisioning_config: provisioning_config, update_mask: update_mask, email: email) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_provisioning_config({ provisioning_config: provisioning_config, update_mask: update_mask, email: email }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_provisioning_config(::Google::Cloud::BareMetalSolution::V2::UpdateProvisioningConfigRequest.new(provisioning_config: provisioning_config, update_mask: update_mask, email: email), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_provisioning_config_client_stub.call_rpc_count
+    end
+  end
+
+  def test_rename_network
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::BareMetalSolution::V2::Network.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    new_network_id = "hello world"
+
+    rename_network_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :rename_network, name
+      assert_kind_of ::Google::Cloud::BareMetalSolution::V2::RenameNetworkRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["new_network_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, rename_network_client_stub do
+      # Create client
+      client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.rename_network({ name: name, new_network_id: new_network_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.rename_network name: name, new_network_id: new_network_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.rename_network ::Google::Cloud::BareMetalSolution::V2::RenameNetworkRequest.new(name: name, new_network_id: new_network_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.rename_network({ name: name, new_network_id: new_network_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.rename_network(::Google::Cloud::BareMetalSolution::V2::RenameNetworkRequest.new(name: name, new_network_id: new_network_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, rename_network_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_os_images
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::BareMetalSolution::V2::ListOSImagesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_os_images_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_os_images, name
+      assert_kind_of ::Google::Cloud::BareMetalSolution::V2::ListOSImagesRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_os_images_client_stub do
+      # Create client
+      client = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_os_images({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_os_images parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_os_images ::Google::Cloud::BareMetalSolution::V2::ListOSImagesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_os_images({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_os_images(::Google::Cloud::BareMetalSolution::V2::ListOSImagesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_os_images_client_stub.call_rpc_count
     end
   end
 
