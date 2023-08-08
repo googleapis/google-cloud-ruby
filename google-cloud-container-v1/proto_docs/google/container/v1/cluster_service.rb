@@ -5119,6 +5119,24 @@ module Google
 
             # kube-controller-manager
             CONTROLLER_MANAGER = 5
+
+            # Storage
+            STORAGE = 7
+
+            # Horizontal Pod Autoscaling
+            HPA = 8
+
+            # Pod
+            POD = 9
+
+            # DaemonSet
+            DAEMONSET = 10
+
+            # Deployment
+            DEPLOYMENT = 11
+
+            # Statefulset
+            STATEFULSET = 12
           end
         end
 
