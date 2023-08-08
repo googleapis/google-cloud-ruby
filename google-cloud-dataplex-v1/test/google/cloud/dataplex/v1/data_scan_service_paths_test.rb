@@ -70,16 +70,4 @@ class ::Google::Cloud::Dataplex::V1::DataScanService::ClientPathsTest < Minitest
       assert_equal "projects/value0/locations/value1", path
     end
   end
-
-  def test_table_path
-    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
-      client = ::Google::Cloud::Dataplex::V1::DataScanService::Client.new do |config|
-        config.credentials = grpc_channel
-      end
-
-      path = client.table_path project: "value0", dataset: "value1", table: "value2"
-      assert_equal "projects/value0/datasets/value1/tables/value2", path
-    end
-  end
 end
