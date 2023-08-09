@@ -37,15 +37,15 @@ class BigtableServiceWithMock < Google::Cloud::Bigtable::Service
     mocked_tables || super
   end
 
-  def client
-    mocked_client || super
+  def client table_path, app_profile_id
+    mocked_client
   end
 end
 
 class MockBigtable < Minitest::Spec
   let(:project_id) { "test" }
   let(:credentials) do
-    OpenStruct.new(client: OpenStruct.new(updater_proc: proc {}))
+    OpenStruct.new(client: OpenStruct.new(updat er_proc: proc {}))
   end
   let(:service) { BigtableServiceWithMock.new(project_id, credentials) }
   let(:bigtable) { Google::Cloud::Bigtable::Project.new(service) }

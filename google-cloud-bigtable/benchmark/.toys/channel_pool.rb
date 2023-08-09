@@ -17,12 +17,12 @@
 desc "Run channel pool benchmarking"
 
 flag :instance_id, "--instance_id=INSTANCE_ID" do |f|
-  f.default "temp-diptanshu"
+  f.default "temp-instance"
   f.accept String
   f.desc "Instance id of the bigtable"
 end
 flag :table_name, "--table_name=TABLE_NAME" do |f|
-  f.default "test-1"
+  f.default "table-1"
   f.accept String
   f.desc "Bigtable name"
 end
@@ -42,7 +42,7 @@ def run
   queries = 10000
   (1..50).each_with_index do |idx|
     total_time = 0
-    samples = 10
+    samples = 1
     (1..samples).each do
       total_time += channel_pool_benchmark queries, idx
     end
@@ -54,7 +54,7 @@ end
 def channel_pool_benchmark queries, channel_count
   @start_time = Time.now
   bigtable = Google::Cloud::Bigtable.new channel_count: channel_count
-  table = bigtable.table "temp-diptanshu", "test-3", perform_lookup: true
+  table = bigtable.table instance_id, table_name, perform_lookup: true
   table.read_row SecureRandom.hex(4).to_s
   futures = []
   (1..queries).each do

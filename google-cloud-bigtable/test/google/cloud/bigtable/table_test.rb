@@ -65,7 +65,7 @@ describe Google::Cloud::Bigtable::Table, :mock_bigtable do
 
   describe "#helpers" do
     let(:table) do
-      Google::Cloud::Bigtable::Table.new(Object.new, Object.new, view: :NAME_ONLY)
+      Google::Cloud::Bigtable::Table.new(table_grpc, bigtable.service, view: :NAME_ONLY)
     end
 
     it "create mutation entry instance" do

@@ -6,6 +6,7 @@ gem "google-cloud-bigtable-admin-v2", path: "../google-cloud-bigtable-admin-v2"
 gem "google-cloud-bigtable-v2", path: "../google-cloud-bigtable-v2"
 gem "google-cloud-core", path: "../google-cloud-core"
 gem "google-cloud-errors", path: "../google-cloud-errors"
+gem "gapic-common", path: "/Users/diptanshu/Desktop/github/gapic-generator-ruby/gapic-common"
 
 gem "minitest-reporters", "~> 1.5.0", require: false
 gem "rake"

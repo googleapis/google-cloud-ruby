@@ -77,6 +77,7 @@ module Google
           @service = service
           raise ArgumentError, "view must not be nil" if view.nil?
           @loaded_views = Set[view]
+          @service.client path, app_profile_id
         end
 
         ##
