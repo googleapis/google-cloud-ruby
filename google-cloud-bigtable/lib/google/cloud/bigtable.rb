@@ -81,16 +81,14 @@ module Google
                    endpoint: nil,
                    endpoint_admin: nil,
                    timeout: nil,
-                   channel_selection: nil,
-                   channel_count: nil
-        project_id    ||= default_project_id
-        scope         ||= configure.scope
-        timeout       ||= configure.timeout
+                   channel_selection: configure.channel_selection,
+                   channel_count: configure.channel_count
+        project_id ||= default_project_id
+        scope ||= configure.scope
+        timeout ||= configure.timeout
         emulator_host ||= configure.emulator_host
-        endpoint      ||= configure.endpoint
+        endpoint ||= configure.endpoint
         endpoint_admin ||= configure.endpoint_admin
-        channel_selection ||= configure.channel_selection
-        channel_count ||= configure.channel_count
 
         return new_with_emulator project_id, emulator_host, timeout if emulator_host
 
@@ -98,9 +96,10 @@ module Google
         project_id = resolve_project_id project_id, credentials
         raise ArgumentError, "project_id is missing" if project_id.empty?
 
-        service = Bigtable::Service.new \
-          project_id, credentials, host: endpoint, host_admin: endpoint_admin, timeout: timeout,
-          channel_selection: channel_selection, channel_count: channel_count
+        service = Bigtable::Service.new project_id, credentials, host: endpoint,
+                                        host_admin: endpoint_admin, timeout: timeout,
+                                        channel_selection: channel_selection,
+                                        channel_count: channel_count
         Bigtable::Project.new service
       end
 

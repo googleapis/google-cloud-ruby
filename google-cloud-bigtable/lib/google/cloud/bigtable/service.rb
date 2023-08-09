@@ -20,6 +20,7 @@ require "google/cloud/bigtable/errors"
 require "google/cloud/bigtable/credentials"
 require "google/cloud/bigtable/v2"
 require "google/cloud/bigtable/admin/v2"
+require "google/cloud/bigtable/convert"
 
 module Google
   module Cloud
@@ -58,6 +59,7 @@ module Google
           @timeout = timeout
           @channel_selection = channel_selection
           @channel_count = channel_count
+          # To be updated with a LRU hash once gapic-common a new version of gapic-common is released.
           @bigtable_clients = {}
         end
 
@@ -89,25 +91,20 @@ module Google
 
         def client table_path, app_profile_id
           return mocked_client if mocked_client
-          client_id = "#{table_path}_#{app_profile_id}"
-          unless @bigtable_clients.key? client_id
-            @bigtable_clients[client_id] = V2::Bigtable::Client.new do |config|
-              config.credentials = credentials if credentials
-              config.timeout = timeout if timeout
-              config.endpoint = host if host
-              config.lib_name = "gccl"
-              config.lib_version = Google::Cloud::Bigtable::VERSION
-              config.metadata = { "google-cloud-resource-prefix": "projects/#{@project_id}" }
-              config.channel_pool.channel_selection = @channel_selection
-              config.channel_pool.channel_count = @channel_count
-              request, options = get_ping_and_warm_request table_path, app_profile_id
-              priming_proc = proc do |channel|
-                channel.call_rpc :ping_and_warm, request, options: options
-              end
-              config.channel_pool.on_channel_create = priming_proc
+          @bigtable_clients["#{table_path}_#{app_profile_id}"] ||= V2::Bigtable::Client.new do |config|
+            config.credentials = credentials if credentials
+            config.timeout = timeout if timeout
+            config.endpoint = host if host
+            config.lib_name = "gccl"
+            config.lib_version = Google::Cloud::Bigtable::VERSION
+            config.metadata = { "google-cloud-resource-prefix": "projects/#{@project_id}" }
+            config.channel_pool.channel_selection = @channel_selection
+            config.channel_pool.channel_count = @channel_count
+            request, options = Convert.ping_and_warm_request table_path, app_profile_id, timeout
+            config.channel_pool.on_channel_create = proc do |channel|
+              channel.call_rpc :ping_and_warm, request, options: options
             end
           end
-          @bigtable_clients[client_id]
         end
         attr_accessor :mocked_client
 
@@ -878,40 +875,6 @@ module Google
                                                            instance: instance_id,
                                                            cluster:  cluster_id,
                                                            backup:   backup_id
-        end
-
-        ##
-        # Creates the request object and call options for Ping and Warm RPC.
-        #
-        def get_ping_and_warm_request table_path, app_profile_id
-          require "google/bigtable/v2/bigtable_pb"
-          require "gapic/protobuf"
-          require "gapic/call_options"
-          require "gapic/headers"
-
-          request = {
-            name: instance_path(table_path.split("/")[3]),
-            app_profile_id: app_profile_id
-          }
-          request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigtable::V2::PingAndWarmRequest
-
-          options = ::Gapic::CallOptions.new
-          options.timeout = timeout if timeout
-          header_params = {}
-          if request.name &&
-            %r{^projects/[^/]+/instances/[^/]+/?$}.match?(request.name)
-            header_params["name"] = request.name
-          end
-          if request.app_profile_id && !request.app_profile_id.empty?
-            header_params["app_profile_id"] = request.app_profile_id
-          end
-          request_params_header = URI.encode_www_form header_params
-          options.metadata[:"x-goog-request-params"] = request_params_header
-          options.metadata[:"x-goog-api-client"] = ::Gapic::Headers.x_goog_api_client \
-            lib_name: "gccl", lib_version: ::Google::Cloud::Bigtable::VERSION,
-            gapic_version: ::Google::Cloud::Bigtable::V2::VERSION
-          options.metadata[:"google-cloud-resource-prefix"] = "projects/#{@project_id}"
-          [request, options]
         end
 
         ##

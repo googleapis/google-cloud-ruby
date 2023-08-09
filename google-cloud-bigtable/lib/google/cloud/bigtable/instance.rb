@@ -521,15 +521,12 @@ module Google
           ensure_service!
 
           view ||= :SCHEMA_VIEW
-          table = if perform_lookup
-                    grpc = service.get_table instance_id, table_id, view: view
-                    Table.from_grpc grpc, service, view: view
-                  else
-                    Table.from_path service.table_path(instance_id, table_id), service
-                  end
-
-          table.app_profile_id = app_profile_id
-          table
+          if perform_lookup
+            grpc = service.get_table instance_id, table_id, view: view
+            Table.from_grpc grpc, service, view: view, app_profile_id: app_profile_id
+          else
+            Table.from_path service.table_path(instance_id, table_id), service, app_profile_id: app_profile_id
+          end
         rescue Google::Cloud::NotFoundError
           nil
         end

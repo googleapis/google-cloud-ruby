@@ -122,4 +122,24 @@ describe Google::Cloud::Bigtable::Convert, :mock_bigtable do
       _(data).must_equal "\x00\x00\x00\x00\x00\x00\x00\x01".encode "ASCII-8BIT"
     end
   end
+
+  describe "returns ping_and_warm request object and call options" do
+    let(:instance_id) { "test-instance" }
+
+    it "returns correct objects" do
+      table_id = "temp_table"
+      table_path = "projects/#{project_id}/instances/#{instance_id}/tables/#{table_id}"
+      app_profile_id = "my-app-profile"
+      timeout = 20
+
+      request, options = Google::Cloud::Bigtable::Convert.ping_and_warm_request table_path, app_profile_id, timeout
+
+      _(request).must_be_kind_of ::Google::Cloud::Bigtable::V2::PingAndWarmRequest
+      _(request.name).must_equal "projects/#{project_id}/instances/#{instance_id}"
+      _(request.app_profile_id).must_equal "my-app-profile"
+
+      _(options.timeout).must_equal timeout
+      _(options.metadata[:"google-cloud-resource-prefix"]).must_equal "projects/#{project_id}"
+    end
+  end
 end

@@ -25,6 +25,7 @@ require "ostruct"
 require "grpc"
 require "google/cloud/bigtable"
 require "google/cloud/bigtable/project"
+require "google/bigtable/v2/bigtable_pb"
 
 class BigtableServiceWithMock < Google::Cloud::Bigtable::Service
   attr_accessor :mocked_instances, :mocked_tables, :mocked_client
@@ -38,15 +39,13 @@ class BigtableServiceWithMock < Google::Cloud::Bigtable::Service
   end
 
   def client table_path, app_profile_id
-    mocked_client
+    mocked_client || super
   end
 end
 
 class MockBigtable < Minitest::Spec
   let(:project_id) { "test" }
-  let(:credentials) do
-    OpenStruct.new(client: OpenStruct.new(updat er_proc: proc {}))
-  end
+  let(:credentials) { :this_channel_is_insecure }
   let(:service) { BigtableServiceWithMock.new(project_id, credentials) }
   let(:bigtable) { Google::Cloud::Bigtable::Project.new(service) }
 

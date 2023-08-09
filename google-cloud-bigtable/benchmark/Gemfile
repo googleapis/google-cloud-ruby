@@ -14,8 +14,8 @@
 
 source "https://rubygems.org"
 
-gem "google-cloud-bigtable", path: "../"
 gem "concurrent-ruby"
 gem "gapic-common", path: "/Users/diptanshu/Desktop/github/gapic-generator-ruby/gapic-common"
-gem "grpc", "1.52.0"
+gem "google-cloud-bigtable", path: "../"
 gem "google-cloud-bigtable-v2", path: "../../google-cloud-bigtable-v2"
+gem "grpc", "1.52.0"
