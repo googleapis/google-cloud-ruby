@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -24,37 +24,59 @@ module Google
         # Represents the metadata from a long-running operation.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     The time the operation was created.
+        #     Output only. The time the operation was created.
         # @!attribute [r] end_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     The time the operation finished running.
+        #     Output only. The time the operation finished running.
         # @!attribute [r] target
         #   @return [::String]
-        #     Server-defined resource path for the target of the operation.
+        #     Output only. Server-defined resource path for the target of the operation.
         # @!attribute [r] verb
         #   @return [::String]
-        #     Name of the action executed by the operation.
+        #     Output only. Name of the action executed by the operation.
         # @!attribute [r] status_message
         #   @return [::String]
-        #     Human-readable status of the operation, if any.
+        #     Output only. Human-readable status of the operation, if any.
         # @!attribute [r] requested_cancellation
         #   @return [::Boolean]
-        #     Identifies whether the user requested the cancellation
+        #     Output only. Identifies whether the user requested the cancellation
         #     of the operation. Operations that have been successfully cancelled
-        #     have [Operation.error][] value with a [google.rpc.Status.code][] of 1,
-        #     corresponding to `Code.CANCELLED`.
+        #     have [Operation.error][] value with a
+        #     {::Google::Rpc::Status#code google.rpc.Status.code} of 1, corresponding to
+        #     `Code.CANCELLED`.
         # @!attribute [r] api_version
         #   @return [::String]
-        #     API version used with the operation.
+        #     Output only. API version used with the operation.
         class OperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message from resetting a server.
-        class ResetInstanceResponse
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
+        # Performance tier of the Volume.
+        module VolumePerformanceTier
+          # Value is not specified.
+          VOLUME_PERFORMANCE_TIER_UNSPECIFIED = 0
+
+          # Regular volumes, shared aggregates.
+          VOLUME_PERFORMANCE_TIER_SHARED = 1
+
+          # Assigned aggregates.
+          VOLUME_PERFORMANCE_TIER_ASSIGNED = 2
+
+          # High throughput aggregates.
+          VOLUME_PERFORMANCE_TIER_HT = 3
+        end
+
+        # The possible values for a workload profile.
+        module WorkloadProfile
+          # The workload profile is in an unknown state.
+          WORKLOAD_PROFILE_UNSPECIFIED = 0
+
+          # The workload profile is generic.
+          WORKLOAD_PROFILE_GENERIC = 1
+
+          # The workload profile is hana.
+          WORKLOAD_PROFILE_HANA = 2
         end
       end
     end
