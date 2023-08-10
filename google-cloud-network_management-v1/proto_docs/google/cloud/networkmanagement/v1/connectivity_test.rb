@@ -25,7 +25,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Unique name of the resource using the form:
-        #         `projects/{project_id}/locations/global/connectivityTests/{test_id}`
+        #         `projects/{project_id}/locations/global/connectivityTests/{test}`
         # @!attribute [rw] description
         #   @return [::String]
         #     The user-supplied description of the Connectivity Test.
@@ -140,6 +140,17 @@ module Google
         # @!attribute [rw] cloud_sql_instance
         #   @return [::String]
         #     A [Cloud SQL](https://cloud.google.com/sql) instance URI.
+        # @!attribute [rw] cloud_function
+        #   @return [::Google::Cloud::NetworkManagement::V1::Endpoint::CloudFunctionEndpoint]
+        #     A [Cloud Function](https://cloud.google.com/functions).
+        # @!attribute [rw] app_engine_version
+        #   @return [::Google::Cloud::NetworkManagement::V1::Endpoint::AppEngineVersionEndpoint]
+        #     An [App Engine](https://cloud.google.com/appengine) [service
+        #     version](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions).
+        # @!attribute [rw] cloud_run_revision
+        #   @return [::Google::Cloud::NetworkManagement::V1::Endpoint::CloudRunRevisionEndpoint]
+        #     A [Cloud Run](https://cloud.google.com/run)
+        #     [revision](https://cloud.google.com/run/docs/reference/rest/v1/namespaces.revisions/get)
         # @!attribute [rw] network
         #   @return [::String]
         #     A Compute Engine network URI.
@@ -162,6 +173,38 @@ module Google
         class Endpoint
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Wrapper for Cloud Function attributes.
+          # @!attribute [rw] uri
+          #   @return [::String]
+          #     A [Cloud Function](https://cloud.google.com/functions) name.
+          class CloudFunctionEndpoint
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Wrapper for the App Engine service version attributes.
+          # @!attribute [rw] uri
+          #   @return [::String]
+          #     An [App Engine](https://cloud.google.com/appengine) [service
+          #     version](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions)
+          #     name.
+          class AppEngineVersionEndpoint
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Wrapper for Cloud Run revision attributes.
+          # @!attribute [rw] uri
+          #   @return [::String]
+          #     A [Cloud Run](https://cloud.google.com/run)
+          #     [revision](https://cloud.google.com/run/docs/reference/rest/v1/namespaces.revisions/get)
+          #     URI. The format is:
+          #     projects/\\{project}/locations/\\{location}/revisions/\\{revision}
+          class CloudRunRevisionEndpoint
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # The type definition of an endpoint's network. Use one of the
           # following choices:

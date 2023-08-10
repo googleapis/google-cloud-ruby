@@ -89,6 +89,9 @@ module Google
         # @!attribute [rw] vpn_tunnel
         #   @return [::Google::Cloud::NetworkManagement::V1::VpnTunnelInfo]
         #     Display information of a Compute Engine VPN tunnel.
+        # @!attribute [rw] vpc_connector
+        #   @return [::Google::Cloud::NetworkManagement::V1::VpcConnectorInfo]
+        #     Display information of a VPC connector.
         # @!attribute [rw] deliver
         #   @return [::Google::Cloud::NetworkManagement::V1::DeliverInfo]
         #     Display information of the final state "deliver" and reason.
@@ -113,6 +116,15 @@ module Google
         # @!attribute [rw] cloud_sql_instance
         #   @return [::Google::Cloud::NetworkManagement::V1::CloudSQLInstanceInfo]
         #     Display information of a Cloud SQL instance.
+        # @!attribute [rw] cloud_function
+        #   @return [::Google::Cloud::NetworkManagement::V1::CloudFunctionInfo]
+        #     Display information of a Cloud Function.
+        # @!attribute [rw] app_engine_version
+        #   @return [::Google::Cloud::NetworkManagement::V1::AppEngineVersionInfo]
+        #     Display information of an App Engine service version.
+        # @!attribute [rw] cloud_run_revision
+        #   @return [::Google::Cloud::NetworkManagement::V1::CloudRunRevisionInfo]
+        #     Display information of a Cloud Run revision.
         class Step
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -145,6 +157,18 @@ module Google
             # A CloudSQLInstanceInfo is populated with starting instance information.
             START_FROM_CLOUD_SQL_INSTANCE = 22
 
+            # Initial state: packet originating from a Cloud Function.
+            # A CloudFunctionInfo is populated with starting function information.
+            START_FROM_CLOUD_FUNCTION = 23
+
+            # Initial state: packet originating from an App Engine service version.
+            # An AppEngineVersionInfo is populated with starting version information.
+            START_FROM_APP_ENGINE_VERSION = 25
+
+            # Initial state: packet originating from a Cloud Run revision.
+            # A CloudRunRevisionInfo is populated with starting revision information.
+            START_FROM_CLOUD_RUN_REVISION = 26
+
             # Config checking state: verify ingress firewall rule.
             APPLY_INGRESS_FIREWALL_RULE = 4
 
@@ -175,6 +199,9 @@ module Google
 
             # Forwarding state: arriving at a Cloud VPN tunnel.
             ARRIVE_AT_VPN_TUNNEL = 13
+
+            # Forwarding state: arriving at a VPC connector.
+            ARRIVE_AT_VPC_CONNECTOR = 24
 
             # Transition state: packet header translated.
             NAT = 14
@@ -307,6 +334,12 @@ module Google
             # [Implied
             # rules](https://cloud.google.com/vpc/docs/firewalls#default_firewall_rules).
             IMPLIED_VPC_FIREWALL_RULE = 3
+
+            # Implicit firewall rules that are managed by serverless VPC access to
+            # allow ingress access. They are not visible in the Google Cloud console.
+            # For details, see [VPC connector's implicit
+            # rules](https://cloud.google.com/functions/docs/networking/connecting-vpc#restrict-access).
+            SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE = 4
           end
         end
 
@@ -896,6 +929,17 @@ module Google
             # Packet was dropped because the Cloud SQL instance has neither a private
             # nor a public IP address.
             CLOUD_SQL_INSTANCE_NO_IP_ADDRESS = 21
+
+            # Packet could be dropped because the Cloud function is not in an active
+            # status.
+            CLOUD_FUNCTION_NOT_ACTIVE = 22
+
+            # Packet could be dropped because no VPC connector is set.
+            VPC_CONNECTOR_NOT_SET = 23
+
+            # Packet could be dropped because the VPC connector is not in a running
+            # state.
+            VPC_CONNECTOR_NOT_RUNNING = 24
           end
         end
 
@@ -939,6 +983,75 @@ module Google
         #   @return [::String]
         #     Region in which the Cloud SQL instance is running.
         class CloudSQLInstanceInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # For display only. Metadata associated with a Cloud Function.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     Name of a Cloud Function.
+        # @!attribute [rw] uri
+        #   @return [::String]
+        #     URI of a Cloud Function.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Location in which the Cloud Function is deployed.
+        # @!attribute [rw] version_id
+        #   @return [::Integer]
+        #     Latest successfully deployed version id of the Cloud Function.
+        class CloudFunctionInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # For display only. Metadata associated with a Cloud Run revision.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     Name of a Cloud Run revision.
+        # @!attribute [rw] uri
+        #   @return [::String]
+        #     URI of a Cloud Run revision.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Location in which this revision is deployed.
+        # @!attribute [rw] service_uri
+        #   @return [::String]
+        #     URI of Cloud Run service this revision belongs to.
+        class CloudRunRevisionInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # For display only. Metadata associated with an App Engine version.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     Name of an App Engine version.
+        # @!attribute [rw] uri
+        #   @return [::String]
+        #     URI of an App Engine version.
+        # @!attribute [rw] runtime
+        #   @return [::String]
+        #     Runtime of the App Engine version.
+        # @!attribute [rw] environment
+        #   @return [::String]
+        #     App Engine execution environment for a version.
+        class AppEngineVersionInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # For display only. Metadata associated with a VPC connector.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     Name of a VPC connector.
+        # @!attribute [rw] uri
+        #   @return [::String]
+        #     URI of a VPC connector.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Location in which the VPC connector is deployed.
+        class VpcConnectorInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
