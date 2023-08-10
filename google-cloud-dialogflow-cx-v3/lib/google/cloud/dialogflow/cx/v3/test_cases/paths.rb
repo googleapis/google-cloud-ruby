@@ -198,24 +198,50 @@ module Google
               ##
               # Create a fully-qualified TransitionRouteGroup resource string.
               #
-              # The resource will be in the following format:
+              # @overload transition_route_group_path(project:, location:, agent:, flow:, transition_route_group:)
+              #   The resource will be in the following format:
               #
-              # `projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/transitionRouteGroups/{transition_route_group}`
+              #   `projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/transitionRouteGroups/{transition_route_group}`
               #
-              # @param project [String]
-              # @param location [String]
-              # @param agent [String]
-              # @param flow [String]
-              # @param transition_route_group [String]
+              #   @param project [String]
+              #   @param location [String]
+              #   @param agent [String]
+              #   @param flow [String]
+              #   @param transition_route_group [String]
+              #
+              # @overload transition_route_group_path(project:, location:, agent:, transition_route_group:)
+              #   The resource will be in the following format:
+              #
+              #   `projects/{project}/locations/{location}/agents/{agent}/transitionRouteGroups/{transition_route_group}`
+              #
+              #   @param project [String]
+              #   @param location [String]
+              #   @param agent [String]
+              #   @param transition_route_group [String]
               #
               # @return [::String]
-              def transition_route_group_path project:, location:, agent:, flow:, transition_route_group:
-                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-                raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-                raise ::ArgumentError, "agent cannot contain /" if agent.to_s.include? "/"
-                raise ::ArgumentError, "flow cannot contain /" if flow.to_s.include? "/"
+              def transition_route_group_path **args
+                resources = {
+                  "agent:flow:location:project:transition_route_group" => (proc do |project:, location:, agent:, flow:, transition_route_group:|
+                    raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                    raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                    raise ::ArgumentError, "agent cannot contain /" if agent.to_s.include? "/"
+                    raise ::ArgumentError, "flow cannot contain /" if flow.to_s.include? "/"
 
-                "projects/#{project}/locations/#{location}/agents/#{agent}/flows/#{flow}/transitionRouteGroups/#{transition_route_group}"
+                    "projects/#{project}/locations/#{location}/agents/#{agent}/flows/#{flow}/transitionRouteGroups/#{transition_route_group}"
+                  end),
+                  "agent:location:project:transition_route_group" => (proc do |project:, location:, agent:, transition_route_group:|
+                    raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                    raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                    raise ::ArgumentError, "agent cannot contain /" if agent.to_s.include? "/"
+
+                    "projects/#{project}/locations/#{location}/agents/#{agent}/transitionRouteGroups/#{transition_route_group}"
+                  end)
+                }
+
+                resource = resources[args.keys.sort.join(":")]
+                raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+                resource.call(**args)
               end
 
               ##
