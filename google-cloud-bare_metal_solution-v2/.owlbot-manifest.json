@@ -60,6 +60,7 @@
     "proto_docs/google/protobuf/field_mask.rb",
     "proto_docs/google/protobuf/timestamp.rb",
     "proto_docs/google/rpc/status.rb",
+    "proto_docs/google/type/expr.rb",
     "snippets/Gemfile",
     "snippets/bare_metal_solution/create_nfs_share.rb",
     "snippets/bare_metal_solution/create_provisioning_config.rb",
