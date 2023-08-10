@@ -90,6 +90,10 @@ module Google
         # @!attribute [r] oidc_claims_token
         #   @return [::String]
         #     Output only. Same as claims_token, but as a string.
+        # @!attribute [r] partial_errors
+        #   @return [::Array<::Google::Rpc::Status>]
+        #     Output only. A list of messages that carry the partial error details
+        #     related to VerifyAttestation.
         class VerifyAttestationResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
