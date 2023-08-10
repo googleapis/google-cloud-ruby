@@ -168,6 +168,8 @@ module Google
             rpc :UpdateGoogleSignalsSettings, ::Google::Analytics::Admin::V1alpha::UpdateGoogleSignalsSettingsRequest, ::Google::Analytics::Admin::V1alpha::GoogleSignalsSettings
             # Creates a conversion event with the specified attributes.
             rpc :CreateConversionEvent, ::Google::Analytics::Admin::V1alpha::CreateConversionEventRequest, ::Google::Analytics::Admin::V1alpha::ConversionEvent
+            # Updates a conversion event with the specified attributes.
+            rpc :UpdateConversionEvent, ::Google::Analytics::Admin::V1alpha::UpdateConversionEventRequest, ::Google::Analytics::Admin::V1alpha::ConversionEvent
             # Retrieve a single conversion event.
             rpc :GetConversionEvent, ::Google::Analytics::Admin::V1alpha::GetConversionEventRequest, ::Google::Analytics::Admin::V1alpha::ConversionEvent
             # Deletes a conversion event in a property.

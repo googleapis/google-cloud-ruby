@@ -2496,6 +2496,66 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     end
   end
 
+  def test_update_conversion_event
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::ConversionEvent.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    conversion_event = {}
+    update_mask = {}
+
+    update_conversion_event_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_conversion_event, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::UpdateConversionEventRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::ConversionEvent), request["conversion_event"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_conversion_event_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_conversion_event({ conversion_event: conversion_event, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_conversion_event conversion_event: conversion_event, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_conversion_event ::Google::Analytics::Admin::V1alpha::UpdateConversionEventRequest.new(conversion_event: conversion_event, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_conversion_event({ conversion_event: conversion_event, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_conversion_event(::Google::Analytics::Admin::V1alpha::UpdateConversionEventRequest.new(conversion_event: conversion_event, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_conversion_event_client_stub.call_rpc_count
+    end
+  end
+
   def test_get_conversion_event
     # Create GRPC objects.
     grpc_response = ::Google::Analytics::Admin::V1alpha::ConversionEvent.new

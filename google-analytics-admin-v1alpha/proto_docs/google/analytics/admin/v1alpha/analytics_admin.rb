@@ -941,6 +941,22 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for UpdateConversionEvent RPC
+        # @!attribute [rw] conversion_event
+        #   @return [::Google::Analytics::Admin::V1alpha::ConversionEvent]
+        #     Required. The conversion event to update.
+        #     The `name` field is used to identify the settings to be updated.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The list of fields to be updated. Field names must be in snake
+        #     case (e.g., "field_to_update"). Omitted fields will not be updated. To
+        #     replace the entire entity, use one path with the string "*" to match all
+        #     fields.
+        class UpdateConversionEventRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for GetConversionEvent RPC
         # @!attribute [rw] name
         #   @return [::String]

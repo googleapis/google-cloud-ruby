@@ -3903,6 +3903,97 @@ module Google
             end
 
             ##
+            # Updates a conversion event with the specified attributes.
+            #
+            # @overload update_conversion_event(request, options = nil)
+            #   Pass arguments to `update_conversion_event` via a request object, either of type
+            #   {::Google::Analytics::Admin::V1alpha::UpdateConversionEventRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Analytics::Admin::V1alpha::UpdateConversionEventRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_conversion_event(conversion_event: nil, update_mask: nil)
+            #   Pass arguments to `update_conversion_event` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param conversion_event [::Google::Analytics::Admin::V1alpha::ConversionEvent, ::Hash]
+            #     Required. The conversion event to update.
+            #     The `name` field is used to identify the settings to be updated.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Required. The list of fields to be updated. Field names must be in snake
+            #     case (e.g., "field_to_update"). Omitted fields will not be updated. To
+            #     replace the entire entity, use one path with the string "*" to match all
+            #     fields.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Analytics::Admin::V1alpha::ConversionEvent]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Analytics::Admin::V1alpha::ConversionEvent]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::UpdateConversionEventRequest.new
+            #
+            #   # Call the update_conversion_event method.
+            #   result = client.update_conversion_event request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::ConversionEvent.
+            #   p result
+            #
+            def update_conversion_event request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Analytics::Admin::V1alpha::UpdateConversionEventRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_conversion_event.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.conversion_event&.name
+                header_params["conversion_event.name"] = request.conversion_event.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_conversion_event.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_conversion_event.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @analytics_admin_service_stub.call_rpc :update_conversion_event, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Retrieve a single conversion event.
             #
             # @overload get_conversion_event(request, options = nil)
@@ -11689,6 +11780,11 @@ module Google
                 #
                 attr_reader :create_conversion_event
                 ##
+                # RPC-specific configuration for `update_conversion_event`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_conversion_event
+                ##
                 # RPC-specific configuration for `get_conversion_event`
                 # @return [::Gapic::Config::Method]
                 #
@@ -12181,6 +12277,8 @@ module Google
                   @update_google_signals_settings = ::Gapic::Config::Method.new update_google_signals_settings_config
                   create_conversion_event_config = parent_rpcs.create_conversion_event if parent_rpcs.respond_to? :create_conversion_event
                   @create_conversion_event = ::Gapic::Config::Method.new create_conversion_event_config
+                  update_conversion_event_config = parent_rpcs.update_conversion_event if parent_rpcs.respond_to? :update_conversion_event
+                  @update_conversion_event = ::Gapic::Config::Method.new update_conversion_event_config
                   get_conversion_event_config = parent_rpcs.get_conversion_event if parent_rpcs.respond_to? :get_conversion_event
                   @get_conversion_event = ::Gapic::Config::Method.new get_conversion_event_config
                   delete_conversion_event_config = parent_rpcs.delete_conversion_event if parent_rpcs.respond_to? :delete_conversion_event
