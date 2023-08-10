@@ -20,6 +20,7 @@ require "google/cloud/errors"
 require "google/cloud/baremetalsolution/v2/baremetalsolution_pb"
 require "google/cloud/bare_metal_solution/v2/bare_metal_solution/rest/service_stub"
 require "google/cloud/location/rest"
+require "google/iam/v1/rest"
 
 module Google
   module Cloud
@@ -153,6 +154,12 @@ module Google
                   config.bindings_override = @config.bindings_override
                 end
 
+                @iam_policy_client = Google::Iam::V1::IAMPolicy::Rest::Client.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @config.endpoint
+                end
+
                 @bare_metal_solution_stub = ::Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Rest::ServiceStub.new endpoint: @config.endpoint, credentials: credentials
               end
 
@@ -169,6 +176,13 @@ module Google
               # @return [Google::Cloud::Location::Locations::Rest::Client]
               #
               attr_reader :location_client
+
+              ##
+              # Get the associated client for mix-in of the IAMPolicy.
+              #
+              # @return [Google::Iam::V1::IAMPolicy::Rest::Client]
+              #
+              attr_reader :iam_policy_client
 
               # Service calls
 
