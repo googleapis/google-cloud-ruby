@@ -210,6 +210,11 @@
                 "create_conversion_event"
               ]
             },
+            "UpdateConversionEvent": {
+              "methods": [
+                "update_conversion_event"
+              ]
+            },
             "GetConversionEvent": {
               "methods": [
                 "get_conversion_event"
