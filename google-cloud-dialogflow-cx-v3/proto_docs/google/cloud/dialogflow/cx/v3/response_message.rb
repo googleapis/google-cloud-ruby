@@ -81,6 +81,9 @@ module Google
           #   @return [::Google::Cloud::Dialogflow::CX::V3::ResponseMessage::TelephonyTransferCall]
           #     A signal that the client should transfer the phone call connected to
           #     this agent to a third-party endpoint.
+          # @!attribute [rw] response_type
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::ResponseMessage::ResponseType]
+          #     Response type.
           # @!attribute [rw] channel
           #   @return [::String]
           #     The channel which the response is associated with. Clients can specify the
@@ -237,6 +240,27 @@ module Google
             class TelephonyTransferCall
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Represents different response types.
+            module ResponseType
+              # Not specified.
+              RESPONSE_TYPE_UNSPECIFIED = 0
+
+              # The response is from an [entry
+              # prompt][google.cloud.dialogflow.cx.v3.Page.entry_fulfillment] in the
+              # page.
+              ENTRY_PROMPT = 1
+
+              # The response is from [form-filling
+              # prompt][google.cloud.dialogflow.cx.v3.Form.Parameter.fill_behavior] in
+              # the page.
+              PARAMETER_PROMPT = 2
+
+              # The response is from a [transition
+              # route][google.cloud.dialogflow.cx.v3.TransitionRoute] or an [event
+              # handler][EventHandler] in the page or flow or transition route group.
+              HANDLER_PROMPT = 3
             end
           end
         end

@@ -138,7 +138,10 @@ module Google
           #     defined in the page have higher priority than those defined in the flow.
           #
           #     Format:`projects/<Project ID>/locations/<Location ID>/agents/<Agent
-          #     ID>/flows/<Flow ID>/transitionRouteGroups/<TransitionRouteGroup ID>`.
+          #     ID>/flows/<Flow ID>/transitionRouteGroups/<TransitionRouteGroup ID>`
+          #     or `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+          #     ID>/transitionRouteGroups/<TransitionRouteGroup ID>` for agent-level
+          #     groups.
           # @!attribute [rw] nlu_settings
           #   @return [::Google::Cloud::Dialogflow::CX::V3::NluSettings]
           #     NLU related settings of the flow.
@@ -385,6 +388,10 @@ module Google
           # @!attribute [rw] import_option
           #   @return [::Google::Cloud::Dialogflow::CX::V3::ImportFlowRequest::ImportOption]
           #     Flow import mode. If not specified, `KEEP` is assumed.
+          # @!attribute [rw] flow_import_strategy
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::FlowImportStrategy]
+          #     Optional. Specifies the import strategy used when resolving resource
+          #     conflicts.
           class ImportFlowRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -404,6 +411,19 @@ module Google
               # not available.
               FALLBACK = 2
             end
+          end
+
+          # The flow import strategy used for resource conflict resolution associated
+          # with an {::Google::Cloud::Dialogflow::CX::V3::ImportFlowRequest ImportFlowRequest}.
+          # @!attribute [rw] global_import_strategy
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::ImportStrategy]
+          #     Optional. Import strategy for resource conflict resolution, applied
+          #     globally throughout the flow. It will be applied for all display name
+          #     conflicts in the imported content. If not specified, 'CREATE_NEW' is
+          #     assumed.
+          class FlowImportStrategy
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
           # The response message for
