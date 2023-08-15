@@ -35,14 +35,14 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.cloud.workflows.v1.Workflows'
 
-            # Lists Workflows in a given project and location.
+            # Lists workflows in a given project and location.
             # The default order is not specified.
             rpc :ListWorkflows, ::Google::Cloud::Workflows::V1::ListWorkflowsRequest, ::Google::Cloud::Workflows::V1::ListWorkflowsResponse
-            # Gets details of a single Workflow.
+            # Gets details of a single workflow.
             rpc :GetWorkflow, ::Google::Cloud::Workflows::V1::GetWorkflowRequest, ::Google::Cloud::Workflows::V1::Workflow
             # Creates a new workflow. If a workflow with the specified name already
             # exists in the specified project and location, the long running operation
-            # will return [ALREADY_EXISTS][google.rpc.Code.ALREADY_EXISTS] error.
+            # returns a [ALREADY_EXISTS][google.rpc.Code.ALREADY_EXISTS] error.
             rpc :CreateWorkflow, ::Google::Cloud::Workflows::V1::CreateWorkflowRequest, ::Google::Longrunning::Operation
             # Deletes a workflow with the specified name.
             # This method also cancels and deletes all running executions of the
@@ -50,8 +50,8 @@ module Google
             rpc :DeleteWorkflow, ::Google::Cloud::Workflows::V1::DeleteWorkflowRequest, ::Google::Longrunning::Operation
             # Updates an existing workflow.
             # Running this method has no impact on already running executions of the
-            # workflow. A new revision of the workflow may be created as a result of a
-            # successful update operation. In that case, such revision will be used
+            # workflow. A new revision of the workflow might be created as a result of a
+            # successful update operation. In that case, the new revision is used
             # in new workflow executions.
             rpc :UpdateWorkflow, ::Google::Cloud::Workflows::V1::UpdateWorkflowRequest, ::Google::Longrunning::Operation
           end
