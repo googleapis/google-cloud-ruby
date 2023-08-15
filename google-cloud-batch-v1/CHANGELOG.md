@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.10.3 (2023-08-15)
+
+#### Documentation
+
+* Clarify Batch API proto doc about pubsub notifications ([#22749](https://github.com/googleapis/google-cloud-ruby/issues/22749)) 
+
 ### 0.10.2 (2023-08-03)
 
 #### Documentation
