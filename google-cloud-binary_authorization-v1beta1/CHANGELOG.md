@@ -1,5 +1,16 @@
 # Release History
 
+### 0.9.0 (2023-08-15)
+
+#### Features
+
+* Added ContinuousValidationEvent::ContinuousValidationPodEvent::ImageDetails#check_results 
+* Added ContinuousValidationEvent::ContinuousValidationPodEvent#policy_name 
+* Added ContinuousValidationEvent#config_error_event ([#22780](https://github.com/googleapis/google-cloud-ruby/issues/22780)) 
+#### Bug Fixes
+
+* BREAKING: Removed ContinuousValidationEvent#unsupported_policy_event which was never used 
+
 ### 0.8.0 (2023-06-06)
 
 #### Features
