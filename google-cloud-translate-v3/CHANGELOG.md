@@ -1,5 +1,11 @@
 # Release History
 
+### 0.8.0 (2023-08-15)
+
+#### Features
+
+* Added shadow removal and rotation correction options to Document Translation and Batch Document Translation API ([#22748](https://github.com/googleapis/google-cloud-ruby/issues/22748)) 
+
 ### 0.7.3 (2023-08-03)
 
 #### Documentation
