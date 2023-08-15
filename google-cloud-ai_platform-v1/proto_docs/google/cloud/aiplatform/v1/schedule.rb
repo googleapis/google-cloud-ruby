@@ -37,9 +37,9 @@ module Google
         #     {::Google::Cloud::AIPlatform::V1::PipelineService::Client#create_pipeline_job PipelineService.CreatePipelineJob}.
         #     CreatePipelineJobRequest.parent field is required (format:
         #     projects/\\{project}/locations/\\{location}).
-        # @!attribute [r] name
+        # @!attribute [rw] name
         #   @return [::String]
-        #     Output only. The resource name of the Schedule.
+        #     Immutable. The resource name of the Schedule.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Required. User provided name of the Schedule.
