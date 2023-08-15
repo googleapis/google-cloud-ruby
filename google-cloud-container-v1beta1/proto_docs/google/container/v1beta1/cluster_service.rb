@@ -1432,9 +1432,23 @@ module Google
         #   @return [::Google::Cloud::Container::V1beta1::BinaryAuthorization::EvaluationMode]
         #     Mode of operation for binauthz policy evaluation. If unspecified, defaults
         #     to DISABLED.
+        # @!attribute [rw] policy_bindings
+        #   @return [::Array<::Google::Cloud::Container::V1beta1::BinaryAuthorization::PolicyBinding>]
+        #     Optional. Binauthz policies that apply to this cluster.
         class BinaryAuthorization
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Binauthz policy that applies to this cluster.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     The relative resource name of the binauthz platform policy to audit. GKE
+          #     platform policies have the following format:
+          #     `projects/{project_number}/platforms/gke/policies/{policy_id}`.
+          class PolicyBinding
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # Binary Authorization mode of operation.
           module EvaluationMode
@@ -1448,6 +1462,13 @@ module Google
             # project's singleton policy. This is equivalent to setting the
             # enabled boolean to true.
             PROJECT_SINGLETON_POLICY_ENFORCE = 2
+
+            # Use Binary Authorization with the policies specified in policy_bindings.
+            POLICY_BINDINGS = 5
+
+            # Use Binary Authorization with the policies specified in policy_bindings,
+            # and also with the project's singleton policy in enforcement mode.
+            POLICY_BINDINGS_AND_PROJECT_SINGLETON_POLICY_ENFORCE = 6
           end
         end
 
