@@ -80,6 +80,9 @@ module Google
         #     The endpoint information in an intermediate state may differ with the
         #     initial input, as it might be modified by state like NAT,
         #     or Connection Proxy.
+        # @!attribute [rw] google_service
+        #   @return [::Google::Cloud::NetworkManagement::V1::GoogleServiceInfo]
+        #     Display information of a Google service
         # @!attribute [rw] forwarding_rule
         #   @return [::Google::Cloud::NetworkManagement::V1::ForwardingRuleInfo]
         #     Display information of a Compute Engine forwarding rule.
@@ -142,6 +145,12 @@ module Google
             # Initial state: packet originating from the internet.
             # The endpoint information is populated.
             START_FROM_INTERNET = 2
+
+            # Initial state: packet originating from a Google service. Some Google
+            # services, such as health check probers or Identity Aware Proxy use
+            # special routes, outside VPC routing configuration to reach Compute Engine
+            # Instances.
+            START_FROM_GOOGLE_SERVICE = 27
 
             # Initial state: packet originating from a VPC or on-premises network
             # with internal source IP.
@@ -340,6 +349,16 @@ module Google
             # For details, see [VPC connector's implicit
             # rules](https://cloud.google.com/functions/docs/networking/connecting-vpc#restrict-access).
             SERVERLESS_VPC_ACCESS_MANAGED_FIREWALL_RULE = 4
+
+            # Global network firewall policy rule.
+            # For details, see [Network firewall
+            # policies](https://cloud.google.com/vpc/docs/network-firewall-policies).
+            NETWORK_FIREWALL_POLICY_RULE = 5
+
+            # Regional network firewall policy rule.
+            # For details, see [Regional network firewall
+            # policies](https://cloud.google.com/firewall/docs/regional-firewall-policies).
+            NETWORK_REGIONAL_FIREWALL_POLICY_RULE = 6
           end
         end
 
@@ -350,15 +369,18 @@ module Google
         # @!attribute [rw] next_hop_type
         #   @return [::Google::Cloud::NetworkManagement::V1::RouteInfo::NextHopType]
         #     Type of next hop.
+        # @!attribute [rw] route_scope
+        #   @return [::Google::Cloud::NetworkManagement::V1::RouteInfo::RouteScope]
+        #     Indicates where route is applicable.
         # @!attribute [rw] display_name
         #   @return [::String]
-        #     Name of a Compute Engine route.
+        #     Name of a route.
         # @!attribute [rw] uri
         #   @return [::String]
-        #     URI of a Compute Engine route.
-        #     Dynamic route from cloud router does not have a URI.
+        #     URI of a route.
+        #     Dynamic, peering static and peering dynamic routes do not have an URI.
         #     Advertised route from Google Cloud VPC to on-premises network also does
-        #     not have a URI.
+        #     not have an URI.
         # @!attribute [rw] dest_ip_range
         #   @return [::String]
         #     Destination IP range of the route.
@@ -367,13 +389,31 @@ module Google
         #     Next hop of the route.
         # @!attribute [rw] network_uri
         #   @return [::String]
-        #     URI of a Compute Engine network.
+        #     URI of a Compute Engine network. NETWORK routes only.
         # @!attribute [rw] priority
         #   @return [::Integer]
         #     Priority of the route.
         # @!attribute [rw] instance_tags
         #   @return [::Array<::String>]
         #     Instance tags of the route.
+        # @!attribute [rw] src_ip_range
+        #   @return [::String]
+        #     Source IP address range of the route. Policy based routes only.
+        # @!attribute [rw] dest_port_ranges
+        #   @return [::Array<::String>]
+        #     Destination port ranges of the route. Policy based routes only.
+        # @!attribute [rw] src_port_ranges
+        #   @return [::Array<::String>]
+        #     Source port ranges of the route. Policy based routes only.
+        # @!attribute [rw] protocols
+        #   @return [::Array<::String>]
+        #     Protocols of the route. Policy based routes only.
+        # @!attribute [rw] ncc_hub_uri
+        #   @return [::String]
+        #     URI of a NCC Hub. NCC_HUB routes only.
+        # @!attribute [rw] ncc_spoke_uri
+        #   @return [::String]
+        #     URI of a NCC Spoke. NCC_HUB routes only.
         class RouteInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -401,6 +441,9 @@ module Google
 
             # A dynamic route received from peering network.
             PEERING_DYNAMIC = 6
+
+            # Policy based route.
+            POLICY_BASED = 7
           end
 
           # Type of next hop:
@@ -446,6 +489,59 @@ module Google
             # [router appliance
             # instance](https://cloud.google.com/network-connectivity/docs/network-connectivity-center/concepts/ra-overview).
             NEXT_HOP_ROUTER_APPLIANCE = 11
+
+            # Next hop is an NCC hub.
+            NEXT_HOP_NCC_HUB = 12
+          end
+
+          # Indicates where routes are applicable.
+          module RouteScope
+            # Unspecified scope. Default value.
+            ROUTE_SCOPE_UNSPECIFIED = 0
+
+            # Route is applicable to packets in Network.
+            NETWORK = 1
+
+            # Route is applicable to packets using NCC Hub's routing table.
+            NCC_HUB = 2
+          end
+        end
+
+        # For display only. Details of a Google Service sending packets to a
+        # VPC network. Although the source IP might be a publicly routable address,
+        # some Google Services use special routes within Google production
+        # infrastructure to reach Compute Engine Instances.
+        # https://cloud.google.com/vpc/docs/routes#special_return_paths
+        # @!attribute [rw] source_ip
+        #   @return [::String]
+        #     Source IP address.
+        # @!attribute [rw] google_service_type
+        #   @return [::Google::Cloud::NetworkManagement::V1::GoogleServiceInfo::GoogleServiceType]
+        #     Recognized type of a Google Service.
+        class GoogleServiceInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Recognized type of a Google Service.
+          module GoogleServiceType
+            # Unspecified Google Service. Includes most of Google APIs and services.
+            GOOGLE_SERVICE_TYPE_UNSPECIFIED = 0
+
+            # Identity aware proxy.
+            # https://cloud.google.com/iap/docs/using-tcp-forwarding
+            IAP = 1
+
+            # One of two services sharing IP ranges:
+            # * Load Balancer proxy
+            # * Centralized Health Check prober
+            # https://cloud.google.com/load-balancing/docs/firewall-rules
+            GFE_PROXY_OR_HEALTH_CHECK_PROBER = 2
+
+            # Connectivity from Cloud DNS to forwarding targets or alternate name
+            # servers that use private routing.
+            # https://cloud.google.com/dns/docs/zones/forwarding-zones#firewall-rules
+            # https://cloud.google.com/dns/docs/policies#firewall-rules
+            CLOUD_DNS = 3
           end
         end
 
@@ -527,6 +623,9 @@ module Google
 
             # Target Pool as the load balancer's backend.
             TARGET_POOL = 2
+
+            # Target Instance as the load balancer's backend.
+            TARGET_INSTANCE = 3
           end
         end
 
@@ -667,6 +766,9 @@ module Google
         # @!attribute [rw] destination_network_uri
         #   @return [::String]
         #     URI of the network where this packet is sent to.
+        # @!attribute [rw] source_agent_uri
+        #   @return [::String]
+        #     URI of the source telemetry agent this packet originates from.
         class EndpointInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -702,6 +804,21 @@ module Google
 
             # Target is a Cloud SQL instance.
             CLOUD_SQL_INSTANCE = 5
+
+            # Target is a published service that uses [Private Service
+            # Connect](https://cloud.google.com/vpc/docs/configure-private-service-connect-services).
+            PSC_PUBLISHED_SERVICE = 6
+
+            # Target is all Google APIs that use [Private Service
+            # Connect](https://cloud.google.com/vpc/docs/configure-private-service-connect-apis).
+            PSC_GOOGLE_API = 7
+
+            # Target is a VPC-SC that uses [Private Service
+            # Connect](https://cloud.google.com/vpc/docs/configure-private-service-connect-apis).
+            PSC_VPC_SC = 8
+
+            # Target is a serverless network endpoint group.
+            SERVERLESS_NEG = 9
           end
         end
 
@@ -738,6 +855,12 @@ module Google
 
             # Forwarded to a Cloud SQL instance.
             CLOUD_SQL_INSTANCE = 6
+
+            # Forwarded to a VPC network in another project.
+            ANOTHER_PROJECT = 7
+
+            # Forwarded to an NCC Hub.
+            NCC_HUB = 8
           end
         end
 
@@ -821,6 +944,30 @@ module Google
 
             # Aborted because the test scenario is not supported.
             UNSUPPORTED = 15
+
+            # Aborted because the source and destination resources have no common IP
+            # version.
+            MISMATCHED_IP_VERSION = 16
+
+            # Aborted because the connection between the control plane and the node of
+            # the source cluster is initiated by the node and managed by the
+            # Konnectivity proxy.
+            GKE_KONNECTIVITY_PROXY_UNSUPPORTED = 17
+
+            # Aborted because expected resource configuration was missing.
+            RESOURCE_CONFIG_NOT_FOUND = 18
+
+            # Aborted because a PSC endpoint selection for the Google-managed service
+            # is ambiguous (several PSC endpoints satisfy test input).
+            GOOGLE_MANAGED_SERVICE_AMBIGUOUS_PSC_ENDPOINT = 19
+
+            # Aborted because tests with a PSC-based Cloud SQL instance as a source are
+            # not supported.
+            SOURCE_PSC_CLOUD_SQL_UNSUPPORTED = 20
+
+            # Aborted because tests with a forwarding rule as a source are not
+            # supported.
+            SOURCE_FORWARDING_RULE_UNSUPPORTED = 21
           end
         end
 
@@ -885,6 +1032,10 @@ module Google
             # Forwarding rule's protocol and ports do not match the packet header.
             FORWARDING_RULE_MISMATCH = 11
 
+            # Packet could be dropped because it was sent from a different region
+            # to a regional forwarding without global access.
+            FORWARDING_RULE_REGION_MISMATCH = 25
+
             # Forwarding rule does not have backends configured.
             FORWARDING_RULE_NO_INSTANCES = 12
 
@@ -897,6 +1048,12 @@ module Google
             # Packet is sent from or to a Compute Engine instance that is not in a
             # running state.
             INSTANCE_NOT_RUNNING = 14
+
+            # Packet sent from or to a GKE cluster that is not in running state.
+            GKE_CLUSTER_NOT_RUNNING = 27
+
+            # Packet sent from or to a Cloud SQL instance that is not in running state.
+            CLOUD_SQL_INSTANCE_NOT_RUNNING = 28
 
             # The type of traffic is blocked and the user cannot configure a firewall
             # rule to enable it. See [Always blocked
@@ -926,11 +1083,44 @@ module Google
             # network and the Google Managed Services Network.
             GOOGLE_MANAGED_SERVICE_NO_PEERING = 20
 
+            # Packet was dropped because the Google-managed service uses Private
+            # Service Connect (PSC), but the PSC endpoint is not found in the project.
+            GOOGLE_MANAGED_SERVICE_NO_PSC_ENDPOINT = 38
+
+            # Packet was dropped because the GKE cluster uses Private Service Connect
+            # (PSC), but the PSC endpoint is not found in the project.
+            GKE_PSC_ENDPOINT_MISSING = 36
+
             # Packet was dropped because the Cloud SQL instance has neither a private
             # nor a public IP address.
             CLOUD_SQL_INSTANCE_NO_IP_ADDRESS = 21
 
-            # Packet could be dropped because the Cloud function is not in an active
+            # Packet was dropped because a GKE cluster private endpoint is
+            # unreachable from a region different from the cluster's region.
+            GKE_CONTROL_PLANE_REGION_MISMATCH = 30
+
+            # Packet sent from a public GKE cluster control plane to a private
+            # IP address.
+            PUBLIC_GKE_CONTROL_PLANE_TO_PRIVATE_DESTINATION = 31
+
+            # Packet was dropped because there is no route from a GKE cluster
+            # control plane to a destination network.
+            GKE_CONTROL_PLANE_NO_ROUTE = 32
+
+            # Packet sent from a Cloud SQL instance to an external IP address is not
+            # allowed. The Cloud SQL instance is not configured to send packets to
+            # external IP addresses.
+            CLOUD_SQL_INSTANCE_NOT_CONFIGURED_FOR_EXTERNAL_TRAFFIC = 33
+
+            # Packet sent from a Cloud SQL instance with only a public IP address to a
+            # private IP address.
+            PUBLIC_CLOUD_SQL_INSTANCE_TO_PRIVATE_DESTINATION = 34
+
+            # Packet was dropped because there is no route from a Cloud SQL
+            # instance to a destination network.
+            CLOUD_SQL_INSTANCE_NO_ROUTE = 35
+
+            # Packet could be dropped because the Cloud Function is not in an active
             # status.
             CLOUD_FUNCTION_NOT_ACTIVE = 22
 
@@ -940,6 +1130,20 @@ module Google
             # Packet could be dropped because the VPC connector is not in a running
             # state.
             VPC_CONNECTOR_NOT_RUNNING = 24
+
+            # The Private Service Connect endpoint is in a project that is not approved
+            # to connect to the service.
+            PSC_CONNECTION_NOT_ACCEPTED = 26
+
+            # Packet sent from a Cloud Run revision that is not ready.
+            CLOUD_RUN_REVISION_NOT_READY = 29
+
+            # Packet was dropped inside Private Service Connect service producer.
+            DROPPED_INSIDE_PSC_SERVICE_PRODUCER = 37
+
+            # Packet sent to a load balancer, which requires a proxy-only subnet and
+            # the subnet is not found.
+            LOAD_BALANCER_HAS_NO_PROXY_SUBNET = 39
           end
         end
 
@@ -1054,6 +1258,45 @@ module Google
         class VpcConnectorInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Type of a load balancer. For more information, see [Summary of Google Cloud
+        # load
+        # balancers](https://cloud.google.com/load-balancing/docs/load-balancing-overview#summary-of-google-cloud-load-balancers).
+        module LoadBalancerType
+          # Forwarding rule points to a different target than a load balancer or a
+          # load balancer type is unknown.
+          LOAD_BALANCER_TYPE_UNSPECIFIED = 0
+
+          # Global external HTTP(S) load balancer.
+          HTTPS_ADVANCED_LOAD_BALANCER = 1
+
+          # Global external HTTP(S) load balancer (classic)
+          HTTPS_LOAD_BALANCER = 2
+
+          # Regional external HTTP(S) load balancer.
+          REGIONAL_HTTPS_LOAD_BALANCER = 3
+
+          # Internal HTTP(S) load balancer.
+          INTERNAL_HTTPS_LOAD_BALANCER = 4
+
+          # External SSL proxy load balancer.
+          SSL_PROXY_LOAD_BALANCER = 5
+
+          # External TCP proxy load balancer.
+          TCP_PROXY_LOAD_BALANCER = 6
+
+          # Internal regional TCP proxy load balancer.
+          INTERNAL_TCP_PROXY_LOAD_BALANCER = 7
+
+          # External TCP/UDP Network load balancer.
+          NETWORK_LOAD_BALANCER = 8
+
+          # Target-pool based external TCP/UDP Network load balancer.
+          LEGACY_NETWORK_LOAD_BALANCER = 9
+
+          # Internal TCP/UDP load balancer.
+          TCP_UDP_INTERNAL_LOAD_BALANCER = 10
         end
       end
     end
