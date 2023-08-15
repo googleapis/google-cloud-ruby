@@ -44,6 +44,11 @@
               "methods": [
                 "update_ssh_public_key"
               ]
+            },
+            "SignSshPublicKey": {
+              "methods": [
+                "sign_ssh_public_key"
+              ]
             }
           }
         }
