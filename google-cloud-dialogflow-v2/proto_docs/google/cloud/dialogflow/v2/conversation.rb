@@ -321,6 +321,10 @@ module Google
           #   @return [::String]
           #     The name of the answer record. Format:
           #     "projects/<Project ID>/answerRecords/<Answer Record ID>"
+          # @!attribute [rw] baseline_model_version
+          #   @return [::String]
+          #     The baseline model version used to generate this summary. It is empty if
+          #     a baseline model was not used to generate this summary.
           class Summary
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -410,6 +414,10 @@ module Google
           #     The summary content that is divided into sections. The key is the
           #     section's name and the value is the section's content. There is no
           #     specific format for the key or value.
+          # @!attribute [rw] baseline_model_version
+          #   @return [::String]
+          #     The baseline model version used to generate this summary. It is empty if
+          #     a baseline model was not used to generate this summary.
           class Summary
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

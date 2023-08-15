@@ -156,6 +156,13 @@ module Google
         #     "Host", "Content-Length", "Connection", "From", "User-Agent",
         #     "Accept-Encoding", "If-Modified-Since", "If-None-Match", "X-Forwarded-For",
         #     etc.
+        # @!attribute [rw] platform
+        #   @return [::String]
+        #     The platform of the virtual agent response messages.
+        #
+        #     If not empty, only emits messages from this platform in the response.
+        #     Valid values are the enum names of
+        #     {::Google::Cloud::Dialogflow::V2::Intent::Message#platform platform}.
         class QueryParameters
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
