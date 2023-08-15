@@ -1,5 +1,12 @@
 # Release History
 
+### 0.26.0 (2023-08-15)
+
+#### Features
+
+* add APIs for GKE OOTB metrics packages ([#22753](https://github.com/googleapis/google-cloud-ruby/issues/22753)) 
+* Support for configuring a container's binary authorization policies ([#22774](https://github.com/googleapis/google-cloud-ruby/issues/22774)) 
+
 ### 0.25.0 (2023-07-25)
 
 #### Features
