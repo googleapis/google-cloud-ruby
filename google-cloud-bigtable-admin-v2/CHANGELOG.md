@@ -1,5 +1,11 @@
 # Release History
 
+### 0.17.0 (2023-08-15)
+
+#### Features
+
+* Support for the copy_backup RPC ([#22783](https://github.com/googleapis/google-cloud-ruby/issues/22783)) 
+
 ### 0.16.3 (2023-08-04)
 
 #### Documentation
