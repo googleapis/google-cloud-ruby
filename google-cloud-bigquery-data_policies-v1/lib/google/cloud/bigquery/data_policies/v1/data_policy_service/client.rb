@@ -669,9 +669,10 @@ module Google
               #     are associated with. Currently filter only supports
               #     "policy<span></span>_tag" based filtering and OR based predicates. Sample
               #     filter can be "policy<span></span>_tag:
-              #     `'projects/1/locations/us/taxonomies/2/policyTags/3'`". You may use
-              #     wildcard such as "policy<span></span>_tag:
-              #     `'projects/1/locations/us/taxonomies/2/*'`".
+              #     projects/1/locations/us/taxonomies/2/policyTags/3".
+              #     You may also use wildcard such as "policy<span></span>_tag:
+              #     projects/1/locations/us/taxonomies/2*". Please note that OR predicates
+              #     cannot be used with wildcard filters.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Bigquery::DataPolicies::V1::DataPolicy>]
