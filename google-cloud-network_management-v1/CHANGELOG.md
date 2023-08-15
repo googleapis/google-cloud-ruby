@@ -1,5 +1,22 @@
 # Changelog
 
+### 0.8.0 (2023-08-15)
+
+#### Features
+
+* Add `CloudFunctionEndpoint`, `AppEngineVersionEndpoint`, `CloudRunRevisionEndpoint` endpoints ([#22762](https://github.com/googleapis/google-cloud-ruby/issues/22762)) 
+* Add support for `CloudFunctionInfo`, `CloudRunRevisionInfo`, `AppEngineVersionInfo`, `VpcConnectorInfo` 
+* A step in a forwarding path can be a Google Service 
+* Added route scope, IP and port ranges, protocols, and NCC URIs to RouteInfo 
+* Connectivity test runs now return probing details ([#22767](https://github.com/googleapis/google-cloud-ruby/issues/22767)) 
+* Endpoint now includes forwarding rule and load balancer info 
+* Support additional abort cause types and drop cause types 
+* Support additional states for packet trace steps 
+* Support additional target types for DeliverInfo and ForwardInfo 
+* Support for EndpointInfo#source_agent_uri 
+* Support for POLICY_BASED route type 
+* Support for TARGET_INSTANCE load balancer backend type 
+
 ### 0.7.0 (2023-06-27)
 
 #### Features
