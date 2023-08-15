@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.4.0 (2023-08-15)
+
+#### Features
+
+* Add a new field `partial_errors` to `VerifyAttestationResponse` proto ([#22763](https://github.com/googleapis/google-cloud-ruby/issues/22763)) 
+* Mark all fields `Optional` for `ContainerImageSignagure` proto ([#22744](https://github.com/googleapis/google-cloud-ruby/issues/22744)) 
+
 ### 0.3.0 (2023-07-27)
 
 #### Features
