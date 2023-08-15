@@ -76,6 +76,7 @@
     "snippets/bigtable_instance_admin/update_cluster.rb",
     "snippets/bigtable_instance_admin/update_instance.rb",
     "snippets/bigtable_table_admin/check_consistency.rb",
+    "snippets/bigtable_table_admin/copy_backup.rb",
     "snippets/bigtable_table_admin/create_backup.rb",
     "snippets/bigtable_table_admin/create_table.rb",
     "snippets/bigtable_table_admin/create_table_from_snapshot.rb",
