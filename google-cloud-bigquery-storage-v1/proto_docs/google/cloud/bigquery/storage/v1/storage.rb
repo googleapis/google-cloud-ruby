@@ -264,6 +264,17 @@ module Google
           #
           #     Currently, field name can only be top-level column name, can't be a struct
           #     field path like 'foo.bar'.
+          # @!attribute [rw] default_missing_value_interpretation
+          #   @return [::Google::Cloud::Bigquery::Storage::V1::AppendRowsRequest::MissingValueInterpretation]
+          #     Optional. Default missing value interpretation for all columns in the
+          #     table. When a value is specified on an `AppendRowsRequest`, it is applied
+          #     to all requests on the connection from that point forward, until a
+          #     subsequent `AppendRowsRequest` sets it to a different value.
+          #     `missing_value_interpretation` can override
+          #     `default_missing_value_interpretation`. For example, if you want to write
+          #     `NULL` instead of using default values for some columns, you can set
+          #     `default_missing_value_interpretation` to `DEFAULT_VALUE` and at the same
+          #     time, set `missing_value_interpretations` to `NULL_VALUE` on those columns.
           class AppendRowsRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -521,7 +532,8 @@ module Google
               # There is an encryption error while using customer-managed encryption key.
               CMEK_ENCRYPTION_ERROR = 12
 
-              # Key Management Service (KMS) service returned an error.
+              # Key Management Service (KMS) service returned an error, which can be
+              # retried.
               KMS_SERVICE_ERROR = 13
 
               # Permission denied while using customer-managed encryption key.
