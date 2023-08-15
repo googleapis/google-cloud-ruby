@@ -1,5 +1,11 @@
 # Release History
 
+### 0.9.0 (2023-08-15)
+
+#### Features
+
+* Support for the sign_ssh_public_key RPC ([#22776](https://github.com/googleapis/google-cloud-ruby/issues/22776)) 
+
 ### 0.8.0 (2023-06-06)
 
 #### Features
