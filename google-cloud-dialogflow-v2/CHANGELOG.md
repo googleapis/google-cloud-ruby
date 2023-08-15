@@ -1,5 +1,12 @@
 # Release History
 
+### 0.27.0 (2023-08-15)
+
+#### Features
+
+* Query parameters no include the platform of virtual agent response messages 
+* Support for the baseline model version used to generate a summary ([#22775](https://github.com/googleapis/google-cloud-ruby/issues/22775)) 
+
 ### 0.26.2 (2023-08-04)
 
 #### Documentation
